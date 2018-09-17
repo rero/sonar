@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2019 RERO.
+#
+# Swiss Open Access Repository is free software; you can redistribute it
+# and/or modify it under the terms of the MIT License; see LICENSE file for
+# more details.
+
+set -e
+
+# Clean redis
+pipenv run invenio shell --no-term-title -c "import redis; redis.StrictRedis.from_url(app.config['CACHE_REDIS_URL']).flushall(); print('Cache cleared')"
+pipenv run invenio db destroy --yes-i-know
+pipenv run invenio db init create
+pipenv run invenio index destroy --force --yes-i-know
+pipenv run invenio index init --force
+pipenv run invenio index queue init purge
+
+# Create admin role to restrict access
+pipenv run invenio roles create admin
+pipenv run invenio roles create user
+pipenv run invenio roles create librarian
+pipenv run invenio access allow superuser-access role admin
+
+# Create admin user and assign admin role
+pipenv run invenio users create admin@sonar.ch --password 123456 --active
+pipenv run invenio roles add admin@sonar.ch admin

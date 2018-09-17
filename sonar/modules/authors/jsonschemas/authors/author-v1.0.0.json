@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "https://sonar.ch/schemas/authors/author-v1.0.0.json",
+  "additionalProperties": false,
+  "title": "My site v1.0.0",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "default": "https://sonar.ch/schemas/authors/author-v1.0.0.json"
+    },
+    "pid": {
+      "description": "Invenio record identifier (integer).",
+      "type": "integer"
+    },
+    "name": {
+      "description": "Author name.",
+      "type": "string"
+    },
+    "organization": {
+      "description": "Organization the author belongs to.",
+      "type": "string"
+    }
+  },
+  "required": ["pid", "name", "$schema"]
+}

@@ -1,0 +1,45 @@
+{# -*- coding: utf-8 -*-
+
+  This file is part of Invenio.
+  Copyright (C) 2017-2018 CERN.
+
+  Invenio is free software; you can redistribute it and/or modify it
+  under the terms of the MIT License; see LICENSE file for more details.
+#}
+
+{%- extends config.BASE_TEMPLATE %}
+
+{%- block page_body %}
+  <div class="row">
+    <div class="col-sm-12 col-lg-4 text-justify px-4">
+      <h2 class="mb-4">{{_('The project')}}</h2>
+      <p>{{_('The SONAR project aims to create a scholarly archive that collects, promotes and preserves the publications of authors affiliated with Swiss public research institutions.')}}</p>
+      <p>{{_('Further info on the project page')}} <a href="https://sonar.ch/project" target="_blank">sonar.ch</a>.</p>
+    </div>
+    <div class="col-sm-12 col-lg-4 px-4 mt-5 mt-lg-0">
+        <h2 class="mb-4">{{_('Institution views (test)')}}</h2>
+        <a href="{{ url_for('sonar.index', ir='usi') }}">Università della Svizzera italiana</a>
+    </div>
+    <div class="col-sm-12 col-lg-4 px-4 mt-5 mt-lg-0">
+        <h2 class="mb-4">{{_('Follow us')}}</h2>
+        <div class="row align-items-center">
+          <div class="col-2">
+            <i class="fa fa-link fa-2x"></i>
+          </div>
+          <div class="col-10">{{_('Project website on')}} <a href="https://sonar.ch" target="_blank">sonar.ch</a></div>
+        </div>
+        <div class="row align-items-center mt-3">
+          <div class="col-2">
+            <i class="fa fa-github fa-2x"></i>
+          </div>
+          <div class="col-10">{{_('Source code on')}} <a href="https://github.com/rero/sonar" target="_blank">Github</a></div>
+        </div>
+        <div class="row align-items-center mt-3">
+          <div class="col-2">
+            <i class="fa fa-twitter fa-2x"></i>
+          </div>
+          <div class="col-10"> <a href="https://twitter.com/sonardotch" target="_blank">Twitter</a></div>
+        </div>
+    </div>
+  </div>
+{%- endblock %}

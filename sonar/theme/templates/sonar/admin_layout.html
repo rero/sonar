@@ -1,0 +1,69 @@
+{# -*- coding: utf-8 -*-
+
+  This file is part of Invenio.
+  Copyright (C) 2015-2018 CERN.
+
+  Invenio is free software; you can redistribute it and/or modify it
+  under the terms of the MIT License; see LICENSE file for more details.
+#}
+
+{% macro menu_icon(item) -%}
+{% set icon_type = item.get_icon_type() %}
+{%- if icon_type %}
+  {% set icon_value = item.get_icon_value() %}
+  {% if icon_type == 'glyph' %}
+    <i class="glyphicon {{ icon_value }}"></i>
+  {% elif icon_type == 'fa' %}
+    <i class="fa {{ icon_value }}"></i>
+  {% elif icon_type == 'image' %}
+    <img src="{{ url_for('static', filename=icon_value) }}" alt="menu image">
+  {% elif icon_type == 'image-url' %}
+    <img src="item.icon_value" alt="menu image">
+  {% endif %}
+{% endif %}
+{%- endmacro %}
+
+{% macro menu_overwrite() %}
+  {%- for item in admin_view.admin.menu()|sort(attribute='name') %}
+    {%- if item.is_category() -%}
+      {% set children = item.get_children() %}
+      {%- if children %}
+        {% set class_name = item.get_class_name() %}
+        {%- if item.is_active(admin_view) %}
+        <li class="treeview active">
+        {% else -%}
+        <li class="treeview">
+        {%- endif %}
+          <a href="#">
+            {% if item.class_name %}<i class="{{ item.class_name }}"></i> {% endif %}
+            <span>{{ item.name }}</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+          {%- for child in children|sort(attribute='name') -%}
+            {% set class_name = child.get_class_name() %}
+            {%- if child.is_active(admin_view) %}
+            <li class="active">
+            {% else %}
+            <li>
+            {%- endif %}
+              <a href="{{ child.get_url() }}">{{ menu_icon(child) }}{{ child.name }}</a>
+            </li>
+          {%- endfor %}
+          </ul>
+        </li>
+      {% endif %}
+    {%- else %}
+      {%- if item.is_accessible() and item.is_visible() -%}
+        {% set class_name = item.get_class_name() %}
+        {%- if item.is_active(admin_view) %}
+        <li class="active">
+        {%- else %}
+        <li>
+        {%- endif %}
+          <a href="{{ item.get_url() }}">{{ menu_icon(item) }}{{ item.name }}</a>
+        </li>
+      {%- endif -%}
+    {% endif -%}
+  {% endfor %}
+{% endmacro %}

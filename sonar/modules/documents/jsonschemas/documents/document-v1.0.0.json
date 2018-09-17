@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "https://sonar.ch/schemas/documents/document-v1.0.0.json",
+  "additionalProperties": false,
+  "title": "Schema for document",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "default": "https://sonar.ch/schemas/documents/document-v1.0.0.json"
+    },
+    "pid": {
+      "title": "Document identifier",
+      "type": "integer"
+    },
+    "title": {
+      "title": "Title",
+      "description": "Required document title",
+      "type": "string"
+    },
+    "author": {
+      "type": "object",
+      "properties": {
+        "$ref": {
+          "type": "string"
+        }
+      },
+      "required": ["$ref"]
+    }
+  },
+  "required": ["pid", "title"]
+}
