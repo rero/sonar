@@ -1,37 +1,11 @@
-## Welcome to GitHub Pages
+#  Swiss Open Access Repository
 
-You can use the [editor on GitHub](https://github.com/rero/sonar/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+SONAR is an archive of scholarly publications. It intends to collect, promote and preserve the publications of authors affiliated with Swiss public research institutions.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+It acts as an aggregator, by bringing together the content and metadata of existing platforms and servers, including the institutional repositories (IR) of Swiss institutions of higher education, as well as international subject repositories. It also operates as a content disseminator: both to Swiss IRs and to the Web at large, namely to search engines of scholarly literature such as Google Scholar and Microsoft Academic.
 
-### Markdown
+Besides the automated harvesting service, interested Swiss universities can subscribe to an outsourced institutional repository service so that their author can directly deposit publications in SONAR.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+SONAR contributes to the Swiss national Open Access strategy and its action plan, lead by swissuniversities.
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/rero/sonar/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Web site: [sonar.ch](https://sonar.ch)
