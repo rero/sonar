@@ -37,7 +37,7 @@ BABEL_DEFAULT_LANGUAGE = 'en'
 BABEL_DEFAULT_TIMEZONE = 'Europe/Zurich'
 #: Other supported languages (do not include the default language in list).
 I18N_LANGUAGES = [
-    # ('fr', _('French'))
+    ('fr', _('French'))
 ]
 
 # Base templates

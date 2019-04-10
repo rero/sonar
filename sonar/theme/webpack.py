@@ -19,6 +19,7 @@ theme = WebpackBundle(
         'sonar-theme': './scss/sonar/theme.scss',
     },
     dependencies={
-        # add any additional npm dependencies here...
+        'bootstrap': '^4.3',
+        'font-awesome': '^4.0'
     }
 )

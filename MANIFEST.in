@@ -47,3 +47,13 @@ recursive-include sonar *.json *.html *.js *.scss
 recursive-include sonar *.png *.jpg *.svg
 recursive-include docker *.cfg *.conf *.crt *.ini *.key *.pem *.sh
 recursive-include tests *.py
+
+# added by check_manifest.py
+include *.html
+include *.inv
+include *.js
+include *.lock
+recursive-include _sources *.txt
+recursive-include _static *.css
+recursive-include _static *.js
+recursive-include _static *.png
