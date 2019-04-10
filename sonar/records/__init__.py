@@ -7,7 +7,9 @@
 # more details.
 
 
-"""SONAR is a future archive of scholarly publications. It intends to collect, promote and preserve the publications of authors affiliated with Swiss public research institutions"""
+"""SONAR is a future archive of scholarly publications. It intends to collect,
+    promote and preserve the publications of authors affiliated with Swiss
+    public research institutions."""
 
 from __future__ import absolute_import, print_function
 
