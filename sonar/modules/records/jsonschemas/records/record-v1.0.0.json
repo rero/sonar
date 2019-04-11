@@ -11,7 +11,7 @@
     },
     "pid": {
       "description": "Invenio record identifier (integer).",
-      "type": "number"
+      "type": "integer"
     },
     "keywords": {
       "description": "Free text keywords.",
@@ -24,6 +24,9 @@
       "description": "When the record is published",
       "type": "string",
       "format": "date-time"
+    },
+    "owner": {
+      "type": "integer"
     },
     "contributors": {
       "description": "Contributors in order of importance.",

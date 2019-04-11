@@ -41,11 +41,11 @@ setup(
             'sonar = invenio_app.cli:cli',
         ],
         'invenio_base.apps': [
-            'sonar_records = sonar.records:SwissOpenAccessRepository',
+            'sonar_records = sonar.modules.records:SwissOpenAccessRepository',
         ],
         'invenio_base.blueprints': [
             'sonar = sonar.theme.views:blueprint',
-            'sonar_records = sonar.records.views:blueprint',
+            'sonar_records = sonar.modules.records.views:blueprint',
         ],
         'invenio_assets.webpack': [
             'sonar_theme = sonar.theme.webpack:theme',
@@ -57,14 +57,22 @@ setup(
             'messages = sonar',
         ],
         'invenio_base.api_apps': [
-            'sonar = sonar.records:SwissOpenAccessRepository',
+            'sonar = sonar.modules.records:SwissOpenAccessRepository',
          ],
         'invenio_jsonschemas.schemas': [
-            'sonar = sonar.records.jsonschemas'
+            'sonar = sonar.modules.records.jsonschemas'
         ],
         'invenio_search.mappings': [
-            'records = sonar.records.mappings'
+            'records = sonar.modules.records.mappings'
         ],
+        'invenio_pidstore.minters': [
+            'record_id = \
+                sonar.modules.records.api:record_id_minter'
+        ],
+        'invenio_pidstore.fetchers': [
+            'record_id = sonar.modules.records'
+            '.api:record_id_fetcher'
+        ]
     },
     classifiers=[
         'Environment :: Web Environment',

@@ -1,0 +1,37 @@
+[
+    {
+        "title": "Record 1", 
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris egestas faucibus purus, vitae fermentum nunc volutpat eget. Sed quis laoreet dolor, et ornare ligula. Nam dignissim eleifend neque, nec tincidunt felis porttitor quis. Integer in nisi nisi. Praesent vitae dignissim est. Curabitur molestie elementum semper. Nunc ac diam nulla. Nulla mollis diam eget quam mollis, id aliquet nibh tempor.",
+        "contributors": [
+            {"name": "Horace Okuneva"}
+        ]
+    },
+    {
+        "title": "Record 2", 
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris egestas faucibus purus, vitae fermentum nunc volutpat eget. Sed quis laoreet dolor, et ornare ligula. Nam dignissim eleifend neque, nec tincidunt felis porttitor quis. Integer in nisi nisi. Praesent vitae dignissim est. Curabitur molestie elementum semper. Nunc ac diam nulla. Nulla mollis diam eget quam mollis, id aliquet nibh tempor.",
+        "contributors": [
+            {"name": "Bruce Johnston"}
+        ]
+    },
+    {
+        "title": "Record 3", 
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris egestas faucibus purus, vitae fermentum nunc volutpat eget. Sed quis laoreet dolor, et ornare ligula. Nam dignissim eleifend neque, nec tincidunt felis porttitor quis. Integer in nisi nisi. Praesent vitae dignissim est. Curabitur molestie elementum semper. Nunc ac diam nulla. Nulla mollis diam eget quam mollis, id aliquet nibh tempor.",
+        "contributors": [
+            {"name": "Wanda Monahan"}
+        ]
+    },
+    {
+        "title": "Record 4", 
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris egestas faucibus purus, vitae fermentum nunc volutpat eget. Sed quis laoreet dolor, et ornare ligula. Nam dignissim eleifend neque, nec tincidunt felis porttitor quis. Integer in nisi nisi. Praesent vitae dignissim est. Curabitur molestie elementum semper. Nunc ac diam nulla. Nulla mollis diam eget quam mollis, id aliquet nibh tempor.",
+        "contributors": [
+            {"name": "Leonel Watsica"}
+        ]
+    },
+    {
+        "title": "Record 5", 
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris egestas faucibus purus, vitae fermentum nunc volutpat eget. Sed quis laoreet dolor, et ornare ligula. Nam dignissim eleifend neque, nec tincidunt felis porttitor quis. Integer in nisi nisi. Praesent vitae dignissim est. Curabitur molestie elementum semper. Nunc ac diam nulla. Nulla mollis diam eget quam mollis, id aliquet nibh tempor.",
+        "contributors": [
+            {"name": "Kaela Gibson"}
+        ]
+    }
+]

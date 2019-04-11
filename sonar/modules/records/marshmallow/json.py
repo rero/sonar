@@ -41,6 +41,7 @@ class MetadataSchemaV1(StrictKeysMixin):
     keywords = fields.List(SanitizedUnicode(), many=True)
     publication_date = DateString()
     contributors = Nested(ContributorSchemaV1, many=True, required=True)
+    owner = fields.Integer()
 
 
 class RecordSchemaV1(StrictKeysMixin):

@@ -23,23 +23,23 @@ def _(x):
 RECORDS_REST_ENDPOINTS = {
     'recid': dict(
         pid_type='recid',
-        pid_minter='recid',
-        pid_fetcher='recid',
+        pid_minter='record_id',
+        pid_fetcher='record_id',
         default_endpoint_prefix=True,
         search_class=RecordsSearch,
         indexer_class=RecordIndexer,
         search_index='records',
         search_type=None,
         record_serializers={
-            'application/json': ('sonar.records.serializers'
+            'application/json': ('sonar.modules.records.serializers'
                                  ':json_v1_response'),
         },
         search_serializers={
-            'application/json': ('sonar.records.serializers'
+            'application/json': ('sonar.modules.records.serializers'
                                  ':json_v1_search'),
         },
         record_loaders={
-            'application/json': ('sonar.records.loaders'
+            'application/json': ('sonar.modules.records.loaders'
                                  ':json_v1'),
         },
         list_route='/records/',
@@ -57,8 +57,8 @@ RECORDS_REST_ENDPOINTS = {
 """REST API for sonar."""
 
 RECORDS_UI_ENDPOINTS = {
-    'recid': {
-        'pid_type': 'recid',
+    'record': {
+        'pid_type': 'record',
         'route': '/records/<pid_value>',
         'template': 'records/record.html',
     },

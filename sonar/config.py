@@ -64,6 +64,8 @@ THEME_FRONTPAGE_TITLE = _('Swiss Open Access Repository')
 #: Frontpage template.
 THEME_FRONTPAGE_TEMPLATE = 'sonar/frontpage.html'
 
+THEME_SEARCHBAR = False
+
 #: Theme logo
 THEME_LOGO = 'images/sonar-logo.svg'
 

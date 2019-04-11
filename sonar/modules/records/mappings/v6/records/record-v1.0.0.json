@@ -25,6 +25,9 @@
           "type": "date",
           "format": "date"
         },
+        "owner": {
+          "type": "integer"
+        },
         "contributors": {
           "type": "object",
           "properties": {

@@ -13,23 +13,27 @@
 
 /*
 @import "~bootstrap/scss/bootstrap";
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
 
-// Font Variables
-$roboto: 'Roboto Condensed', sans-serif;   
-
-// Styles
-body {
-  font-family: $roboto;
-  font-weight: normal;
-}
-h1, h2, h3, h4, h5, h6 {
-  font-family: $roboto;
-  font-weight: normal;
+// CSS code to allow `ng-csp="no-inline-css"`
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak,
+.ng-hide:not(.ng-hide-animate) {
+  display: none !important;
 }
 
-.button {
-  font-family: $roboto;
-  font-weight: bold;
+ng\:form {
+  display: block;
+}
+
+.ng-animate-shim {
+  visibility:hidden;
+}
+
+.ng-anchor {
+  position:absolute;
 }
 */
