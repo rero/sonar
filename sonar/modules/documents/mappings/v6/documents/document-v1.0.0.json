@@ -1,0 +1,41 @@
+{
+  "mappings": {
+    "document-v1.0.0": {
+      "date_detection": false,
+      "numeric_detection": false,
+      "properties": {
+        "$schema": {
+          "type": "text",
+          "index": false
+        },
+        "title": {
+          "type": "text",
+          "copy_to": "suggest_title"
+        },
+        "suggest_title": {
+          "type": "completion"
+        },
+        "pid": {
+          "type": "keyword"
+        },
+        "author": {
+          "type": "object",
+          "properties": {
+            "pid": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "text"
+            }
+          }
+        },
+        "_created": {
+          "type": "date"
+        },
+        "_updated": {
+          "type": "date"
+        }
+      }
+    }
+  }
+}

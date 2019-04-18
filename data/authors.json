@@ -1,0 +1,22 @@
+[
+    {
+        "$schema": "https://sonar.ch/schemas/authors/author-v1.0.0.json",
+        "name": "Frederic Mohr",
+        "organization": "RERO"
+    },
+    {
+        "$schema": "https://sonar.ch/schemas/authors/author-v1.0.0.json",
+        "name": "Evelyn White",
+        "organization": "RERO"
+    },
+    {
+        "$schema": "https://sonar.ch/schemas/authors/author-v1.0.0.json",
+        "name": "Marlon Abbott",
+        "organization": "RERO"
+    },
+    {
+        "$schema": "https://sonar.ch/schemas/authors/author-v1.0.0.json",
+        "name": "Lucile Schowalter",
+        "organization": "RERO"
+    }
+]

@@ -6,12 +6,17 @@
 # and/or modify it under the terms of the MIT License; see LICENSE file for
 # more details.
 
-"""Version information for Swiss Open Access Repository.
-
-This file is imported by ``sonar.__init__``,
-and parsed by ``setup.py``.
-"""
+"""Document loaders."""
 
 from __future__ import absolute_import, print_function
 
-__version__ = '0.0.1'
+from invenio_records_rest.loaders.marshmallow import json_patch_loader, \
+    marshmallow_loader
+
+from ..marshmallow import DocumentMetadataSchemaV1
+
+json_v1 = marshmallow_loader(DocumentMetadataSchemaV1)
+
+__all__ = (
+    'json_v1',
+)

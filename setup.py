@@ -41,11 +41,11 @@ setup(
             'sonar = invenio_app.cli:cli',
         ],
         'invenio_base.apps': [
-            'sonar_records = sonar.modules.records:SwissOpenAccessRepository',
+            'documents = sonar.modules.documents:Documents'
         ],
         'invenio_base.blueprints': [
             'sonar = sonar.theme.views:blueprint',
-            'sonar_records = sonar.modules.records.views:blueprint',
+            'documents = sonar.modules.documents.views:blueprint'
         ],
         'invenio_assets.webpack': [
             'sonar_theme = sonar.theme.webpack:theme',
@@ -57,21 +57,31 @@ setup(
             'messages = sonar',
         ],
         'invenio_base.api_apps': [
-            'sonar = sonar.modules.records:SwissOpenAccessRepository',
+            'documents = sonar.modules.documents:Documents',
+            'authors = sonar.modules.authors:Authors'
          ],
         'invenio_jsonschemas.schemas': [
-            'sonar = sonar.modules.records.jsonschemas'
+            'documents = sonar.modules.documents.jsonschemas',
+            'authors = sonar.modules.authors.jsonschemas'
         ],
         'invenio_search.mappings': [
-            'records = sonar.modules.records.mappings'
+            'documents = sonar.modules.documents.mappings',
+            'authors = sonar.modules.authors.mappings'
         ],
         'invenio_pidstore.minters': [
-            'record_id = \
-                sonar.modules.records.api:record_id_minter'
+            'document_id = \
+                sonar.modules.documents.minters:document_pid_minter',
+            'author_id = \
+                sonar.modules.authors.minters:author_pid_minter'
         ],
         'invenio_pidstore.fetchers': [
-            'record_id = sonar.modules.records'
-            '.api:record_id_fetcher'
+            'document_id = \
+                sonar.modules.documents.fetchers:document_pid_fetcher',
+            'author_id = \
+                sonar.modules.authors.fetchers:author_pid_fetcher'
+        ],
+        "invenio_records.jsonresolver": [
+            "author = sonar.modules.documents.jsonresolvers" 
         ]
     },
     classifiers=[
@@ -85,4 +95,10 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Development Status :: 3 - Alpha',
     ],
+    setup_requires=[
+        'pytest-runner>=3.0.0,<5',
+    ],
+    tests_require=[
+        'pytest-invenio>=1.0.0,<1.1.0',
+    ]
 )

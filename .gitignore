@@ -63,3 +63,6 @@ target/
 
 # Vim swapfiles
 .*.sw?
+
+# Virtual studio pref
+.vscode

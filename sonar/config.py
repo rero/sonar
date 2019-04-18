@@ -18,6 +18,14 @@ from __future__ import absolute_import, print_function
 
 from datetime import timedelta
 
+from invenio_indexer.api import RecordIndexer
+from invenio_records_rest.facets import terms_filter
+from invenio_records_rest.utils import allow_all, check_elasticsearch
+from invenio_search import RecordsSearch
+
+from sonar.modules.authors.api import AuthorRecord
+from sonar.modules.documents.api import DocumentRecord
+
 
 def _(x):
     """Identity function used to trigger string extraction."""
@@ -157,3 +165,139 @@ OAISERVER_ID_PREFIX = 'oai:sonar.ch:'
 
 #: Switches off incept of redirects by Flask-DebugToolbar.
 DEBUG_TB_INTERCEPT_REDIRECTS = False
+
+PIDSTORE_RECID_FIELD = 'pid'
+
+SEARCH_UI_SEARCH_INDEX = 'documents'
+SEARCH_UI_SEARCH_API = '/api/documents/'
+SEARCH_UI_JSTEMPLATE_RESULTS = 'templates/documents/results.html'
+
+RECORDS_UI_ENDPOINTS = {
+    'document': {
+        'pid_type': 'doc',
+        'route': '/documents/<pid_value>',
+        'template': 'documents/record.html',
+    },
+}
+"""Records UI for sonar."""
+
+RECORDS_REST_ENDPOINTS = {
+    'doc': dict(
+        pid_type='doc',
+        pid_minter='document_id',
+        pid_fetcher='document_id',
+        default_endpoint_prefix=True,
+        record_class=DocumentRecord,
+        search_class=RecordsSearch,
+        indexer_class=RecordIndexer,
+        search_index='documents',
+        search_type=None,
+        record_serializers={
+            'application/json': ('sonar.modules.documents.serializers'
+                                 ':json_v1_response'),
+        },
+        search_serializers={
+            'application/json': ('sonar.modules.documents.serializers'
+                                 ':json_v1_search'),
+        },
+        record_loaders={
+            'application/json': ('sonar.modules.documents.loaders'
+                                 ':json_v1'),
+        },
+        list_route='/documents/',
+        item_route='/documents/<pid(doc):pid_value>',
+        default_media_type='application/json',
+        max_result_window=10000,
+        error_handlers=dict(),
+        create_permission_factory_imp=allow_all,
+        read_permission_factory_imp=check_elasticsearch,
+        update_permission_factory_imp=allow_all,
+        delete_permission_factory_imp=allow_all,
+        list_permission_factory_imp=allow_all
+    ),
+    'auth': dict(
+        pid_type='auth',
+        pid_minter='author_id',
+        pid_fetcher='author_id',
+        default_endpoint_prefix=True,
+        record_class=AuthorRecord,
+        search_class=RecordsSearch,
+        indexer_class=RecordIndexer,
+        search_index='authors',
+        search_type=None,
+        record_serializers={
+            'application/json': ('sonar.modules.authors.serializers'
+                                 ':json_v1_response'),
+        },
+        search_serializers={
+            'application/json': ('sonar.modules.authors.serializers'
+                                 ':json_v1_search'),
+        },
+        record_loaders={
+            'application/json': ('sonar.modules.authors.loaders'
+                                 ':json_v1'),
+        },
+        list_route='/authors/',
+        item_route='/authors/<pid(auth):pid_value>',
+        default_media_type='application/json',
+        max_result_window=10000,
+        error_handlers=dict(),
+        create_permission_factory_imp=allow_all,
+        read_permission_factory_imp=check_elasticsearch,
+        update_permission_factory_imp=allow_all,
+        delete_permission_factory_imp=allow_all,
+        list_permission_factory_imp=allow_all
+    )
+}
+"""REST API for my-site."""
+
+RECORDS_REST_SORT_OPTIONS = dict(
+    documents=dict(
+        bestmatch=dict(
+            title=_('Best match'),
+            fields=['_score'],
+            default_order='desc',
+            order=1,
+        ),
+        mostrecent=dict(
+            title=_('Most recent'),
+            fields=['-_created'],
+            default_order='asc',
+            order=2,
+        ),
+    ),
+    authors=dict(
+        bestmatch=dict(
+            title=_('Best match'),
+            fields=['_score'],
+            default_order='desc',
+            order=1,
+        ),
+        mostrecent=dict(
+            title=_('Most recent'),
+            fields=['-_created'],
+            default_order='asc',
+            order=2,
+        ),
+    )
+)
+"""Setup sorting options."""
+
+
+RECORDS_REST_DEFAULT_SORT = dict(
+    documents=dict(
+        query='bestmatch',
+        noquery='mostrecent',
+    ),
+    authors=dict(
+        query='bestmatch',
+        noquery='mostrecent',
+    )
+)
+"""Set default sorting options."""
+
+SONAR_ENDPOINTS_ENABLED = True
+"""Enable/disable automatic endpoint registration."""
+
+JSONSCHEMAS_RESOLVE_SCHEMA = False
+JSONSCHEMAS_REPLACE_REFS = True

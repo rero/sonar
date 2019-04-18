@@ -6,12 +6,10 @@
 # and/or modify it under the terms of the MIT License; see LICENSE file for
 # more details.
 
-"""Version information for Swiss Open Access Repository.
-
-This file is imported by ``sonar.__init__``,
-and parsed by ``setup.py``.
-"""
+"""Schemas for marshmallow."""
 
 from __future__ import absolute_import, print_function
 
-__version__ = '0.0.1'
+from .json import DocumentMetadataSchemaV1, DocumentSchemaV1
+
+__all__ = ('DocumentMetadataSchemaV1', 'DocumentSchemaV1',)

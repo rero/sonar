@@ -57,3 +57,30 @@ recursive-include _sources *.txt
 recursive-include _static *.css
 recursive-include _static *.js
 recursive-include _static *.png
+
+# added by check_manifest.py
+include *.py
+include *.txt
+include cli
+recursive-include cli *.py
+recursive-include data *.json
+recursive-include docs *.DS_Store
+recursive-include sonar *.html
+recursive-include sonar *.json
+recursive-include sonar *.py
+
+# added by check_manifest.py
+include cli
+recursive-include cli *.py
+recursive-include data *.json
+recursive-include sonar *.html
+recursive-include sonar *.json
+recursive-include sonar *.py
+
+# added by check_manifest.py
+include cli
+recursive-include cli *.py
+recursive-include data *.json
+recursive-include sonar *.html
+recursive-include sonar *.json
+recursive-include sonar *.py

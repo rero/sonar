@@ -17,9 +17,15 @@ pipenv run invenio index destroy --force --yes-i-know
 pipenv run invenio index init --force
 pipenv run invenio index queue init purge
 
-# Create fake records
-pipenv run invenio records create --pid-minter record_id $(pipenv --where)/data/records.json
-pipenv run invenio index reindex -t recid --yes-i-know
+# Create authors
+pipenv run invenio records create --pid-minter author_id $(pipenv --where)/data/authors.json
+
+# Create documents
+pipenv run invenio records create --pid-minter document_id $(pipenv --where)/data/documents.json
+
+# Reindex data
+pipenv run invenio index reindex -t doc --yes-i-know
+pipenv run invenio index reindex -t auth --yes-i-know
 pipenv run invenio index run
 
 # Create admin role to rectict access
