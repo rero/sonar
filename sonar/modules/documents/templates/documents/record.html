@@ -38,13 +38,9 @@
 {%- endmacro %}
 
 {%- block page_body %}
-<div class="container">
-  <h2>{{record.title}}</h2>
-  <div class="panel panel-default">
-    <ul class="list-group">
-      {{ record_content(record) }}
-    </ul>
-  </div>
-</div>
+<h2>{{record.title}}</h2>
+<ul class="list-group">
+  {{ record_content(record) }}
+</ul>
 {%- endblock %}
 

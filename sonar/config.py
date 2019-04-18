@@ -53,13 +53,13 @@ I18N_LANGUAGES = [
 #: Global base template.
 BASE_TEMPLATE = 'sonar/page.html'
 #: Cover page base template (used for e.g. login/sign-up).
-COVER_TEMPLATE = 'invenio_theme/page_cover.html'
+COVER_TEMPLATE = 'sonar/page_cover.html'
 #: Footer base template.
-FOOTER_TEMPLATE = 'invenio_theme/footer.html'
+FOOTER_TEMPLATE = 'sonar/footer.html'
 #: Header base template.
-HEADER_TEMPLATE = 'invenio_theme/header.html'
+HEADER_TEMPLATE = 'sonar/header.html'
 #: Settings base template.
-SETTINGS_TEMPLATE = 'invenio_theme/page_settings.html'
+SETTINGS_TEMPLATE = 'sonar/page_settings.html'
 
 # Theme configuration
 # ===================
@@ -72,7 +72,11 @@ THEME_FRONTPAGE_TITLE = _('Swiss Open Access Repository')
 #: Frontpage template.
 THEME_FRONTPAGE_TEMPLATE = 'sonar/frontpage.html'
 
-THEME_SEARCHBAR = False
+THEME_HEADER_TEMPLATE = 'sonar/header.html'
+THEME_FOOTER_TEMPLATE = 'sonar/footer.html'
+THEME_HEADER_LOGIN_TEMPLATE = 'sonar/header_login.html'
+
+THEME_SEARCHBAR = True
 
 #: Theme logo
 THEME_LOGO = 'images/sonar-logo.svg'
@@ -299,5 +303,7 @@ RECORDS_REST_DEFAULT_SORT = dict(
 SONAR_ENDPOINTS_ENABLED = True
 """Enable/disable automatic endpoint registration."""
 
-JSONSCHEMAS_RESOLVE_SCHEMA = False
+JSONSCHEMAS_RESOLVE_SCHEMA = True
 JSONSCHEMAS_REPLACE_REFS = True
+
+SEARCH_UI_SEARCH_TEMPLATE = 'sonar/search.html'

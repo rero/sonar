@@ -1,0 +1,32 @@
+{# -*- coding: utf-8 -*-
+
+  This file is part of Invenio.
+  Copyright (C) 2015-2018 CERN.
+
+  Invenio is free software; you can redistribute it and/or modify it
+  under the terms of the MIT License; see LICENSE file for more details.
+#}
+
+<footer id="footer" class="bg-light mt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col py-5">
+        {%- if config.I18N_LANGUAGES %}
+          <form id="language-code-form" class="form-inline lang-select"
+              action="{{ url_for('invenio_i18n.set_lang')}}"
+              method="POST">
+            <label class="mr-3" for="lang-code">{{ _('Language:') }}</label>
+            <select id="lang-code" class="form-control" name="lang_code">
+              {% for l in current_i18n.get_locales() %}
+                <option {% if current_i18n.language == l.language %}selected {% endif %}value="{{ l.language }}">{{ l.get_display_name() }}</option>
+              {% endfor %}
+            </select>
+          </form>
+        {%- endif %}
+      </div>
+      <div class="col py-5 text-right">
+        {% trans link="https://rero.ch" %}Powered by <a href="{{link}}">RERO</a>{% endtrans %}
+      </div>
+    </div>
+  </div>
+</footer>

@@ -8,11 +8,12 @@
 
 
 // Check out https://github.com/inveniosoftware/invenio-theme/blob/master/invenio_theme/assets/scss/invenio_theme
-@import "variables";
-@import "../invenio_theme/styles";
+// @import "variables";
+// @import "../invenio_theme/styles";
 
-/*
+@import "variables";
 @import "~bootstrap/scss/bootstrap";
+@import '~font-awesome/scss/font-awesome.scss';
 
 // CSS code to allow `ng-csp="no-inline-css"`
 [ng\:cloak],
@@ -36,4 +37,3 @@ ng\:form {
 .ng-anchor {
   position:absolute;
 }
-*/

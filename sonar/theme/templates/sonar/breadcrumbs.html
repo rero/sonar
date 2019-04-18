@@ -1,0 +1,28 @@
+{# -*- coding: utf-8 -*-
+
+  This file is part of Invenio.
+  Copyright (C) 2015-2018 CERN.
+
+  Invenio is free software; you can redistribute it and/or modify it
+  under the terms of the MIT License; see LICENSE file for more details.
+#}
+{%- if breadcrumbs|length > 1 %}
+<div class="container">
+  <ul class="breadcrumb" itemprop="breadcrumb">
+    {%- for breadcrumb in breadcrumbs %}
+    {%- if loop.last %}
+    <li class="active">
+      {{ breadcrumb.text|safe }}
+    </li>
+    {%- else %}
+    <li>
+      <a href="{{ breadcrumb.url }}"
+         class="navtrail">
+        {{ breadcrumb.text|safe }}
+      </a>
+    </li>
+    {%- endif %}
+    {%- endfor %}
+  </ul>
+</div>
+{%- endif %}

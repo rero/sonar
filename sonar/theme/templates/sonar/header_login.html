@@ -1,0 +1,40 @@
+{# -*- coding: utf-8 -*-
+
+  This file is part of Invenio.
+  Copyright (C) 2015-2018 CERN.
+
+  Invenio is free software; you can redistribute it and/or modify it
+  under the terms of the MIT License; see LICENSE file for more details.
+#}
+
+{%- if config.ACCOUNTS %}
+<ul class="navbar-nav">
+  {%- if not current_user.is_authenticated %}
+  <li class="nav-item">
+      <a class="nav-link" href="{{url_for_security('login', next=request.path)}}">
+        <i class="fa fa-lock fa-lg"></i> {{_('Log in')}}
+      </a>
+  </li>
+    {% if security.registerable %}
+    <li class="nav-item">
+      <a class="nav-link" href="{{url_for_security('register')}}">
+        <i class="fa fa-sign-in fa-lg"></i> {{_('Sign up')}}
+      </a>
+    </li>
+    {% endif %}
+  {% else %}
+    {%- if config.USERPROFILES %}
+      <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('invenio_userprofiles.profile')}}">
+            <i class="fa fa-user fa-lg"></i> {{current_user.email}}
+          </a>
+      </li>
+    {% endif %}
+    <li class="nav-item">
+        <a href="{{url_for_security('logout')}}" class="nav-link">
+          <i class="fa fa-power-off fa-lg"></i>
+        </a>
+    </li>
+  {% endif %}
+</ul>
+{%- endif %}

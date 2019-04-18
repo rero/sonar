@@ -1,0 +1,15 @@
+{# -*- coding: utf-8 -*-
+
+  This file is part of Invenio.
+  Copyright (C) 2015-2018 CERN.
+
+  Invenio is free software; you can redistribute it and/or modify it
+  under the terms of the MIT License; see LICENSE file for more details.
+#}
+{{ webpack['manifest.js']}}
+{{ webpack['vendor.js']}}
+{{ webpack['base.js']}}
+{{ webpack['i18n_app.js']}}
+
+{# assets "invenio_theme_js" %}<script src="{{ ASSET_URL }}"></script>{% endassets #}
+{# i18n assets #}

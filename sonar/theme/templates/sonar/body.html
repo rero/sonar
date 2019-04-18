@@ -1,0 +1,20 @@
+{# -*- coding: utf-8 -*-
+
+  This file is part of Invenio.
+  Copyright (C) 2015-2018 CERN.
+
+  Invenio is free software; you can redistribute it and/or modify it
+  under the terms of the MIT License; see LICENSE file for more details.
+#}
+<div class="container-fluid">
+{%- block title %}
+  {%- if title %}
+  <div class="page-header">
+    <h1>{{ title }}</h1>
+  </div>
+  {%- endif %}
+{%- endblock title %}
+{%- block body %}
+  {{ body }}
+{%- endblock body %}
+</div>
