@@ -9,14 +9,14 @@
 
 <footer id="footer" class="bg-light mt-5">
   <div class="container">
-    <div class="row">
-      <div class="col py-5">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-6 col-sm-6 py-2 py-sm-5">
         {%- if config.I18N_LANGUAGES %}
           <form id="language-code-form" class="form-inline lang-select"
               action="{{ url_for('invenio_i18n.set_lang')}}"
               method="POST">
-            <label class="mr-3" for="lang-code">{{ _('Language:') }}</label>
-            <select id="lang-code" class="form-control" name="lang_code">
+            <label class="mr-3 d-none d-sm-block" for="lang-code">{{ _('Language:') }}</label>
+            <select id="lang-code" class="form-control mt-2 mt-sm-0" name="lang_code">
               {% for l in current_i18n.get_locales() %}
                 <option {% if current_i18n.language == l.language %}selected {% endif %}value="{{ l.language }}">{{ l.get_display_name() }}</option>
               {% endfor %}
@@ -24,7 +24,7 @@
           </form>
         {%- endif %}
       </div>
-      <div class="col py-5 text-right">
+      <div class="col-12 col-sm-6 py-2 py-sm-5 text-center text-sm-right">
         {% trans link="https://rero.ch" %}Powered by <a href="{{link}}">RERO</a>{% endtrans %}
       </div>
     </div>

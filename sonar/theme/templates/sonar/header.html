@@ -6,42 +6,45 @@
   Invenio is free software; you can redistribute it and/or modify it
   under the terms of the MIT License; see LICENSE file for more details.
 #}
+
 <header>
-    {%- block navbar %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            {%- block brand %}
-                <a class="navbar-brand mr-5 py-4" href="/">
-                {%- if config.THEME_LOGO %}
-                    <img src="{{ url_for('static', filename=config.THEME_LOGO)}}" alt="{{_(config.THEME_SITENAME)}}" height="70" />
-                {%- else %}
-                    {{_(config.THEME_SITENAME)}}
-                {%- endif %}
-                </a>
-            {%- endblock %}
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    {%- if config.THEME_SEARCHBAR %}
-                    <form class="form-inline my-2 my-lg-0 ml-5 mr-auto" action="{{config.THEME_SEARCH_ENDPOINT}}" role="search">
-                        <input class="form-control mr-sm-2" type="search" placeholder="{{_('Search')}}" aria-label="Search" name="query">
-                        <button class="btn btn-secondary my-2 my-sm-0 text-light" type="submit">{{_('Search')}}</button>
-                    </form>
-                    {% endif %}
-                    {%- include config.THEME_HEADER_LOGIN_TEMPLATE %}
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa fa-bars fa-lg p-2"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        {%- include 'sonar/header_login.html' %}
+      </div>
+    </div>
+  </nav>
+  {%- block navbar %}
+    <div class="bg-primary p-4">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-12 col-sm-6 text-center text-sm-left">
+            <a class="navbar-brand py-4" href="/">
+            {%- if config.THEME_LOGO %}
+              <img src="{{ url_for('static', filename='images/sonar-logo.svg')}}" alt="{{_(config.THEME_SITENAME)}}" height="60" />
+            {%- else %}
+              {{_(config.THEME_SITENAME)}}
+            {%- endif %}
+            </a>
+          </div>
+          {%- if config.THEME_SEARCHBAR %}
+            <div class="col-12 col-sm-6 text-right">
+              <form class="justify-content-end" action="{{config.THEME_SEARCH_ENDPOINT}}" role="search">
+                <div class="d-flex flex-row align-items-center">
+                  <input class="form-control form-control-lg mr-2" type="search" placeholder="{{_('Search')}}" aria-label="Search" name="query">
+                  <button class="btn btn-secondary btn-lg my-2 my-sm-0 text-light" type="submit">
+                    <i class="fa fa-search"></i>
+                  </button>
                 </div>
+              </form>
+            </div>
+          {% endif %}
         </div>
-    </nav>
-    {%- endblock navbar %}
-        
-    {%- block flashmessages %}
-        {%- from "sonar/macros/messages.html" import flashed_messages with context -%}
-        {{ flashed_messages() }}
-    {%- endblock %}
-        
-    {%- block breadcrumbs %}
-        {%- include "sonar/breadcrumbs.html" %}
-    {%- endblock breadcrumbs %}
+      </div>
+    </div>
+  {%- endblock navbar %}
 </header>

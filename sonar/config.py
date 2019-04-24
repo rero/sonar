@@ -54,10 +54,6 @@ I18N_LANGUAGES = [
 BASE_TEMPLATE = 'sonar/page.html'
 #: Cover page base template (used for e.g. login/sign-up).
 COVER_TEMPLATE = 'sonar/page_cover.html'
-#: Footer base template.
-FOOTER_TEMPLATE = 'sonar/footer.html'
-#: Header base template.
-HEADER_TEMPLATE = 'sonar/header.html'
 #: Settings base template.
 SETTINGS_TEMPLATE = 'sonar/page_settings.html'
 
@@ -71,13 +67,6 @@ THEME_FRONTPAGE = True
 THEME_FRONTPAGE_TITLE = _('Swiss Open Access Repository')
 #: Frontpage template.
 THEME_FRONTPAGE_TEMPLATE = 'sonar/frontpage.html'
-
-THEME_HEADER_TEMPLATE = 'sonar/header.html'
-THEME_FOOTER_TEMPLATE = 'sonar/footer.html'
-THEME_HEADER_LOGIN_TEMPLATE = 'sonar/header_login.html'
-
-THEME_SEARCHBAR = True
-
 #: Theme logo
 THEME_LOGO = 'images/sonar-logo.svg'
 
@@ -174,7 +163,21 @@ PIDSTORE_RECID_FIELD = 'pid'
 
 SEARCH_UI_SEARCH_INDEX = 'documents'
 SEARCH_UI_SEARCH_API = '/api/documents/'
-SEARCH_UI_JSTEMPLATE_RESULTS = 'templates/documents/results.html'
+SEARCH_UI_SEARCH_TEMPLATE = 'sonar/search.html'
+
+SEARCH_UI_JSTEMPLATE_RESULTS = 'templates/documents/search_ui/results.html'
+SEARCH_UI_JSTEMPLATE_COUNT = 'templates/documents/search_ui/count.html'
+SEARCH_UI_JSTEMPLATE_PAGINATION = 'templates/documents/search_ui/'\
+                                  'pagination.html'
+SEARCH_UI_JSTEMPLATE_SORT_ORDER = 'templates/documents/search_ui/'\
+                                  'sort_order.html'
+SEARCH_UI_JSTEMPLATE_SELECT_BOX = 'templates/documents/search_ui/'\
+                                  'select_box.html'
+SEARCH_UI_JSTEMPLATE_LOADING = 'templates/documents/search_ui/loading.html'
+
+SECURITY_LOGIN_USER_TEMPLATE = 'sonar/accounts/login.html'
+SECURITY_FORGOT_PASSWORD_TEMPLATE = 'sonar/accounts/forgot_password.html'
+SECURITY_REGISTER_USER_TEMPLATE = 'sonar/accounts/signup.html'
 
 RECORDS_UI_ENDPOINTS = {
     'document': {
@@ -305,5 +308,3 @@ SONAR_ENDPOINTS_ENABLED = True
 
 JSONSCHEMAS_RESOLVE_SCHEMA = True
 JSONSCHEMAS_REPLACE_REFS = True
-
-SEARCH_UI_SEARCH_TEMPLATE = 'sonar/search.html'

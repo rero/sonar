@@ -16,9 +16,12 @@ theme = WebpackBundle(
     __name__,
     'assets',
     entry={
-        'sonar-theme': './scss/sonar/theme.scss',
+        'app': './js/app.js',
+        'sonar-theme': './scss/sonar/theme.scss'
     },
     dependencies={
+        'popper.js': '^1.15',
+        'jquery': '^3.2',
         'bootstrap': '^4.3',
         'font-awesome': '^4.0'
     }

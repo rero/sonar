@@ -8,19 +8,19 @@
 #}
 
 {%- if config.ACCOUNTS %}
-<ul class="navbar-nav">
+<ul class="navbar-nav ml-auto">
   {%- if not current_user.is_authenticated %}
-  <li class="nav-item">
+    <li class="nav-item">
       <a class="nav-link" href="{{url_for_security('login', next=request.path)}}">
         <i class="fa fa-lock fa-lg"></i> {{_('Log in')}}
       </a>
-  </li>
-    {% if security.registerable %}
-    <li class="nav-item">
-      <a class="nav-link" href="{{url_for_security('register')}}">
-        <i class="fa fa-sign-in fa-lg"></i> {{_('Sign up')}}
-      </a>
     </li>
+    {% if security.registerable %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for_security('register')}}">
+          <i class="fa fa-sign-in fa-lg"></i> {{_('Sign up')}}
+        </a>
+      </li>
     {% endif %}
   {% else %}
     {%- if config.USERPROFILES %}

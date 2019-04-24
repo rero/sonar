@@ -66,3 +66,6 @@ target/
 
 # Virtual studio pref
 .vscode
+
+# MAC
+.DS_Store
