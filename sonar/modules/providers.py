@@ -1,21 +1,24 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2019 RERO.
+# Copyright (C) 2018 CERN.
+# Copyright (C) 2018 RERO.
 #
-# Swiss Open Access Repository is free software; you can redistribute it
-# and/or modify it under the terms of the MIT License; see LICENSE file for
-# more details.
+# Invenio-Circulation is free software; you can redistribute it and/or modify
+# it under the terms of the MIT License; see LICENSE file for more details.
 
-"""Document PID providers."""
+"""Record providers."""
 
+from __future__ import absolute_import, print_function
+
+from invenio_pidstore.errors import PIDDoesNotExistError
 from invenio_pidstore.models import PIDStatus
 from invenio_pidstore.providers.recordid import RecordIdProvider
 
 
-class DocumentIdProvider(RecordIdProvider):
-    """Document identifier provider."""
+class Provider(RecordIdProvider):
+    """Record provider."""
 
-    pid_type = 'doc'
+    pid_type = None
     """Type of persistent identifier."""
 
     pid_provider = None

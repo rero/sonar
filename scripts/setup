@@ -28,8 +28,10 @@ pipenv run invenio index reindex -t doc --yes-i-know
 pipenv run invenio index reindex -t auth --yes-i-know
 pipenv run invenio index run
 
-# Create admin role to rectict access
+# Create admin role to restrict access
 pipenv run invenio roles create admin
+pipenv run invenio roles create user
+pipenv run invenio roles create librarian
 pipenv run invenio access allow superuser-access role admin
 
 # Create admin user and assign admin role

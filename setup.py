@@ -70,15 +70,15 @@ setup(
         ],
         'invenio_pidstore.minters': [
             'document_id = \
-                sonar.modules.documents.minters:document_pid_minter',
+                sonar.modules.documents.api:document_pid_minter',
             'author_id = \
-                sonar.modules.authors.minters:author_pid_minter'
+                sonar.modules.authors.api:author_pid_minter'
         ],
         'invenio_pidstore.fetchers': [
             'document_id = \
-                sonar.modules.documents.fetchers:document_pid_fetcher',
+                sonar.modules.documents.api:document_pid_fetcher',
             'author_id = \
-                sonar.modules.authors.fetchers:author_pid_fetcher'
+                sonar.modules.authors.api:author_pid_fetcher'
         ],
         "invenio_records.jsonresolver": [
             "author = sonar.modules.documents.jsonresolvers" 
