@@ -36,7 +36,6 @@ class SonarRecord(Record):
             data["$schema"] = current_jsonschemas.path_to_url(
                 '{0}s/{0}-v1.0.0.json'.format(cls.schema))
 
-        print(data)
         cls.minter(id_, data)
 
         return super(SonarRecord, cls).create(data=data, id_=id_, **kwargs)

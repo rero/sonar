@@ -40,6 +40,9 @@ setup(
         'console_scripts': [
             'sonar = invenio_app.cli:cli',
         ],
+        'flask.commands': [
+            'fixtures = sonar.modules.cli:fixtures'
+        ],
         'invenio_base.apps': [
             'documents = sonar.modules.documents:Documents'
         ],
@@ -81,7 +84,7 @@ setup(
                 sonar.modules.authors.api:author_pid_fetcher'
         ],
         "invenio_records.jsonresolver": [
-            "author = sonar.modules.documents.jsonresolvers" 
+            "author = sonar.modules.authors.jsonresolvers" 
         ]
     },
     classifiers=[

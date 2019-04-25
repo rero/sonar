@@ -17,17 +17,6 @@ pipenv run invenio index destroy --force --yes-i-know
 pipenv run invenio index init --force
 pipenv run invenio index queue init purge
 
-# Create authors
-pipenv run invenio records create --pid-minter author_id $(pipenv --where)/data/authors.json
-
-# Create documents
-pipenv run invenio records create --pid-minter document_id $(pipenv --where)/data/documents.json
-
-# Reindex data
-pipenv run invenio index reindex -t doc --yes-i-know
-pipenv run invenio index reindex -t auth --yes-i-know
-pipenv run invenio index run
-
 # Create admin role to restrict access
 pipenv run invenio roles create admin
 pipenv run invenio roles create user

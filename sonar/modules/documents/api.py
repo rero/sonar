@@ -10,6 +10,8 @@
 
 from functools import partial
 
+from flask import current_app
+
 from ..api import SonarRecord
 from ..fetchers import id_fetcher
 from ..minters import id_minter
@@ -34,3 +36,17 @@ class DocumentRecord(SonarRecord):
     fetcher = document_pid_fetcher
     provider = DocumentProvider
     schema = 'document'
+
+    @classmethod
+    def create(cls, data, id_=None, **kwargs):
+        """Create a document record."""
+        if 'author_id' in data:
+            data['author'] = {
+                '$ref': 'https://{}/api/authors/{}'.format(
+                            current_app.config.get('JSONSCHEMAS_HOST'),
+                            data['author_id'])
+            }
+
+            del data['author_id']
+
+        return super(DocumentRecord, cls).create(data, id_=id_, **kwargs)

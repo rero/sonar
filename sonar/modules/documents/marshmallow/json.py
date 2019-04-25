@@ -22,6 +22,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     pid = PersistentIdentifier()
     title = SanitizedUnicode(required=True, validate=validate.Length(min=3))
     created = fields.Str(dump_only=True)
+    author_id = fields.Int()
 
 
 class DocumentSchemaV1(StrictKeysMixin):
