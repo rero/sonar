@@ -33,7 +33,7 @@ def fixtures(type, infile, *args):
 
     with click.progressbar(json.load(infile)) as records:
         for record in records:
-            r = requests.post('{}/{}/'.format(
+            r = requests.post('{}{}/'.format(
                 current_app.config.get('API_BASE_URL'), type),
                 json=record,
                 verify=False,

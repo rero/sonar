@@ -85,3 +85,6 @@ recursive-include data *.json
 recursive-include sonar *.html
 recursive-include sonar *.json
 recursive-include sonar *.py
+
+# added by check_manifest.py
+recursive-include sonar *.html

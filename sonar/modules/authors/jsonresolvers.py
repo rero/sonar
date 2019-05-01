@@ -21,7 +21,7 @@ def author_resolver(pid):
     """Resolve referenced author."""
     resolver = Resolver(pid_type='auth', object_type="rec",
                         getter=Record.get_record)
-    _, record = resolver.resolve(str(pid))
+    _, record = resolver.resolve(pid)
 
     del record['$schema']
     return record
