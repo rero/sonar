@@ -14,6 +14,14 @@
         <i class="fa fa-bars fa-lg p-2"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        {% set irs = [ 'sonar', 'usi' ] %}
+        <ul class="navbar-nav mr-auto">
+        {% for ir in irs %}
+          <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('sonar.index', ir=ir) }}">{{ ir|upper }}</a>
+          </li>
+        {% endfor %}
+        </ul>
         {%- include 'sonar/header_login.html' %}
       </div>
     </div>
@@ -23,9 +31,9 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-12 col-sm-6 text-center text-sm-left">
-            <a class="navbar-brand py-4" href="/">
+            <a class="navbar-brand py-4" href="{{ url_for('sonar.index', ir=g.ir|default('sonar')) }}">
             {%- if config.THEME_LOGO %}
-              <img src="{{ url_for('static', filename='images/sonar-logo.svg')}}" alt="{{_(config.THEME_SITENAME)}}" height="60" />
+              <img src="{{ url_for('static', filename='images/' ~ g.ir|default('sonar') ~ '-logo.svg')}}" alt="{{_(config.THEME_SITENAME)}}" height="60" />
             {%- else %}
               {{_(config.THEME_SITENAME)}}
             {%- endif %}
@@ -33,7 +41,7 @@
           </div>
           {%- if config.THEME_SEARCHBAR %}
             <div class="col-12 col-sm-6 text-right">
-              <form class="justify-content-end" action="{{config.THEME_SEARCH_ENDPOINT}}" role="search">
+              <form class="justify-content-end" action="{{ url_for('sonar.search', ir=g.ir|default('sonar')) }}" role="search">
                 <div class="d-flex flex-row align-items-center">
                   <input class="form-control form-control-lg mr-2" type="search" placeholder="{{_('Search')}}" aria-label="Search" name="q">
                   <button class="btn btn-secondary btn-lg my-2 my-sm-0 text-light" type="submit">
