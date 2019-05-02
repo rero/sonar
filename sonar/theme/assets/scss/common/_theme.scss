@@ -1,0 +1,35 @@
+.bg-ir {
+    background-color: $bg-ir;
+}
+
+img.logo {
+    width: 100%;
+    max-height: 150px;
+}
+
+.text-ir {
+    @extend .text-light
+}
+
+// CSS code to allow `ng-csp="no-inline-css"`
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak,
+.ng-hide:not(.ng-hide-animate) {
+  display: none !important;
+}
+
+ng\:form {
+  display: block;
+}
+
+.ng-animate-shim {
+  visibility:hidden;
+}
+
+.ng-anchor {
+  position:absolute;
+}

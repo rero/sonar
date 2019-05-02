@@ -22,18 +22,18 @@ blueprint = Blueprint(
     __name__,
     template_folder='templates',
     static_folder='static',
-    url_prefix='/<ir>'
+    url_prefix='/organization/<ir>'
 )
 
 @blueprint.url_defaults
 def add_ir(endpoint, values):
-    values.setdefault('ir', '')
+    values.setdefault('ir', 'sonar')
 
 @blueprint.url_value_preprocessor
 def pull_ir(endpoint, values):
     g.ir = values.pop('ir')
 
-@blueprint.route('')
+@blueprint.route('/')
 def index():
     return render_template('sonar/frontpage.html')
 

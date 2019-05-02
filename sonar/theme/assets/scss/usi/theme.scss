@@ -15,25 +15,8 @@
 @import "~bootstrap/scss/bootstrap";
 @import '~font-awesome/scss/font-awesome.scss';
 
-// CSS code to allow `ng-csp="no-inline-css"`
-[ng\:cloak],
-[ng-cloak],
-[data-ng-cloak],
-[x-ng-cloak],
-.ng-cloak,
-.x-ng-cloak,
-.ng-hide:not(.ng-hide-animate) {
-  display: none !important;
+.text-ir {
+  color: $primary !important;
 }
 
-ng\:form {
-  display: block;
-}
-
-.ng-animate-shim {
-  visibility:hidden;
-}
-
-.ng-anchor {
-  position:absolute;
-}
+@import "../common/theme";

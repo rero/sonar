@@ -40,7 +40,7 @@
 {%- block page_body %}
 <h2>{{record.title}}</h2>
 <ul class="list-group">
-  {{ record_content(record) }}
+  {{ record_content(record.replace_refs()) }}
 </ul>
 {%- endblock %}
 
