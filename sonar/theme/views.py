@@ -15,7 +15,7 @@ this file.
 
 from __future__ import absolute_import, print_function
 
-from flask import Blueprint, render_template, g
+from flask import Blueprint, g, render_template
 
 blueprint = Blueprint(
     'sonar',
@@ -25,18 +25,26 @@ blueprint = Blueprint(
     url_prefix='/organization/<ir>'
 )
 
+
 @blueprint.url_defaults
 def add_ir(endpoint, values):
+    """Add default ir parameter."""
     values.setdefault('ir', 'sonar')
+
 
 @blueprint.url_value_preprocessor
 def pull_ir(endpoint, values):
+    """Add ir parameter to global variables."""
     g.ir = values.pop('ir')
+
 
 @blueprint.route('/')
 def index():
+    """IR (and SONAR) home view."""
     return render_template('sonar/frontpage.html')
+
 
 @blueprint.route('/search')
 def search():
+    """IR search results."""
     return render_template('sonar/search.html')
