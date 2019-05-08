@@ -1,10 +1,23 @@
+@import '~font-awesome/scss/font-awesome.scss';
+@import "~bootstrap/scss/bootstrap";
+
+/* roboto-condensed-regular - latin */
+@font-face {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Condensed'), local('RobotoCondensed-Regular'),
+       url('../../fonts/roboto-condensed-v17-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('../../fonts/roboto-condensed-v17-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
 .bg-ir {
     background-color: $bg-ir;
 }
 
 img.logo {
     width: 100%;
-    max-height: 150px;
+    max-height: 90px;
 }
 
 .text-ir {

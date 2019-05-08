@@ -21,30 +21,5 @@ blueprint = Blueprint(
     'sonar',
     __name__,
     template_folder='templates',
-    static_folder='static',
-    url_prefix='/organization/<ir>'
+    static_folder='static'
 )
-
-
-@blueprint.url_defaults
-def add_ir(endpoint, values):
-    """Add default ir parameter."""
-    values.setdefault('ir', 'sonar')
-
-
-@blueprint.url_value_preprocessor
-def pull_ir(endpoint, values):
-    """Add ir parameter to global variables."""
-    g.ir = values.pop('ir')
-
-
-@blueprint.route('/')
-def index():
-    """IR (and SONAR) home view."""
-    return render_template('sonar/frontpage.html')
-
-
-@blueprint.route('/search')
-def search():
-    """IR search results."""
-    return render_template('sonar/search.html')

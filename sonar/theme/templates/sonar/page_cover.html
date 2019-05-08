@@ -23,14 +23,13 @@
   {% block page_header %}
     <div class="container">
       <div class="row justify-content-center">
-        
-        <div class="col-12 col-md-6 text-center">
+        <div class="col-12 col-lg-6 text-center">
           {%- block brand %}
             {%- if config.THEME_LOGO %}
               <a href="/">
-                <img class="text-center masthead-brand"
+                <img class="text-center logo"
                   src="{{ url_for('static', filename=config.THEME_LOGO)}}"
-                  alt="{{ _(config.THEME_SITENAME) }}" width="250px"/>
+                  alt="{{ _(config.THEME_SITENAME) }}" height="70" />
               </a>
             {%- elif config.THEME_SITENAME %}
               <a href="/" class="text-center masthead-brand">
@@ -54,9 +53,7 @@
     <div class="container">
       <div class="row justify-content-center">
         {% block panel %}
-          <div class="col-12 col-md-6">
-            
-
+          <div class="col-12 col-lg-6">
             <div class="card">
               <div class="card-body">
               {% block panel_content %}
