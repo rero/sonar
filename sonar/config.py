@@ -146,6 +146,7 @@ SESSION_COOKIE_SECURE = True
 #: route correct hosts to the application.
 APP_ALLOWED_HOSTS = ['sonar.ch', 'localhost', '127.0.0.1']
 
+
 # OAI-PMH
 # =======
 OAISERVER_ID_PREFIX = 'oai:sonar.ch:'

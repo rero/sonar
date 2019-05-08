@@ -88,3 +88,6 @@ recursive-include sonar *.py
 
 # added by check_manifest.py
 recursive-include sonar *.html
+
+recursive-include sonar *.woff
+recursive-include sonar *.woff2
