@@ -6,8 +6,6 @@
 # and/or modify it under the terms of the MIT License; see LICENSE file for
 # more details.
 
-"""SONAR Modules."""
+"""SONAR specific configuration."""
 
-from .ext import Sonar
-
-__all__ = ('Sonar')
+SONAR_FIXTURES_API_URL = 'https://localhost:5000/api/'
