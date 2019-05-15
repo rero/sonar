@@ -55,6 +55,7 @@ setup(
         ],
         'invenio_config.module': [
             'sonar = sonar.config',
+            'sonar-modules = sonar.modules.config'
         ],
         'invenio_i18n.translations': [
             'messages = sonar',
