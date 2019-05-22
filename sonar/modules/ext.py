@@ -6,7 +6,7 @@
 # the terms of the MIT License; see LICENSE file for more details.
 
 
-"""SONAR modules extension."""
+"""Document extension."""
 
 from __future__ import absolute_import, print_function
 
@@ -14,7 +14,7 @@ from . import config
 
 
 class Sonar(object):
-    """Sonar extension."""
+    """SONAR extension."""
 
     def __init__(self, app=None):
         """Extension initialization."""
@@ -24,12 +24,10 @@ class Sonar(object):
     def init_app(self, app):
         """Flask application initialization."""
         self.init_config(app)
-        app.extensions['sonar'] = self
+        app.extensions['sonar_app'] = self
 
     def init_config(self, app):
         """Initialize configuration."""
-        # Use theme's base template if theme is installed
-        print('asdf')
         for k in dir(config):
-            if k.startswith('SONAR_'):
+            if k.startswith('SONAR_APP_'):
                 app.config.setdefault(k, getattr(config, k))

@@ -6,6 +6,13 @@
 # and/or modify it under the terms of the MIT License; see LICENSE file for
 # more details.
 
-"""SONAR configuration."""
+"""Test SONAR fetchers."""
 
-SONAR_APP_API_URL = 'https://localhost:5000/api/'
+import pytest
+
+from sonar.modules.documents.api import DocumentRecord
+
+
+def test_id_fetcher():
+    """Test id fetcher."""
+    assert DocumentRecord.fetcher('1', {'pid': '1'}).pid_value == '1'

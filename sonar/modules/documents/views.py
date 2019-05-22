@@ -48,7 +48,11 @@ def index():
 @blueprint.route('/search')
 def search():
     """IR search results."""
-    return render_template('sonar/search.html')
+    search_hidden_params = {'institution': g.ir} \
+        if 'ir' in g and g.ir != 'sonar' else None
+
+    return render_template('sonar/search.html',
+                           search_hidden_params=search_hidden_params)
 
 
 def detail(pid, record, template=None, **kwargs):

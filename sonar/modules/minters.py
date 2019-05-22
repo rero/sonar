@@ -13,13 +13,13 @@ from __future__ import absolute_import, print_function, unicode_literals
 
 def id_minter(record_uuid, data, provider, pid_key='pid', object_type='rec'):
     """SONAR minter."""
-    if pid_key in data:
-        return data[pid_key]
-
+    # Create persistent identifier
     provider = provider.create(
         object_type=object_type,
-        object_uuid=record_uuid)
+        object_uuid=record_uuid,
+        pid_value=data.get(pid_key))
+
     pid = provider.pid
-    data[pid_key] = int(pid.pid_value)
+    data[pid_key] = pid.pid_value
 
     return pid

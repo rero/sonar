@@ -8,21 +8,63 @@
           "type": "text",
           "index": false
         },
-        "title": {
-          "type": "text",
-          "copy_to": "suggest_title"
-        },
-        "suggest_title": {
-          "type": "completion"
-        },
         "pid": {
           "type": "keyword"
         },
-        "author": {
+        "title": {
+          "type": "text"
+        },
+        "abstracts": {
+          "type": "text"
+        },
+        "subjects": {
+          "type": "text",
+          "copy_to": "facet_subjects"
+        },
+        "identifiers": {
+          "type": "object",
+          "properties": {
+            "reroID": {
+              "type": "keyword"
+            },
+            "bnfID": {
+              "type": "keyword"
+            },
+            "isbn": {
+              "type": "keyword"
+            }
+          }
+        },
+        "languages": {
+          "type": "object",
+          "properties": {
+            "language": {
+              "type": "keyword"
+            }
+          }
+        },
+        "is_part_of": {
+          "type": "text"
+        },
+        "authors": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "text"
+            }
+          }
+        },
+        "extent": {
+          "type": "keyword"
+        },
+        "notes": {
+          "type": "text"
+        },
+        "institution": {
           "type": "object",
           "properties": {
             "pid": {
-              "type": "integer"
+              "type": "keyword"
             },
             "name": {
               "type": "text"

@@ -7,7 +7,3 @@
 # more details.
 
 """SONAR Modules."""
-
-from .ext import Sonar
-
-__all__ = ('Sonar')

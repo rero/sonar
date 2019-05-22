@@ -6,13 +6,15 @@
 # the terms of the MIT License; see LICENSE file for more details.
 
 
-"""Author extension."""
+"""Document extension."""
 
 from __future__ import absolute_import, print_function
 
+from . import config
+
 
 class Documents(object):
-    """My site extension."""
+    """SONAR documents extension."""
 
     def __init__(self, app=None):
         """Extension initialization."""
@@ -22,20 +24,10 @@ class Documents(object):
     def init_app(self, app):
         """Flask application initialization."""
         self.init_config(app)
-        app.extensions['sonar-authors'] = self
+        app.extensions['sonar_documents'] = self
 
     def init_config(self, app):
-        """Initialize configuration.
-
-        Override configuration variables with the values in this package.
-        """
-        # for k in dir(config):
-        #    if k.startswith('AUTHORS_'):
-        #        app.config.setdefault(k, getattr(config, k))
-        #    else:
-        #        for n in ['RECORDS_REST_ENDPOINTS', 'RECORDS_REST_FACETS',
-        #                  'RECORDS_REST_SORT_OPTIONS',
-        #                  'RECORDS_REST_DEFAULT_SORT']:
-        #            if k == n:
-        #                app.config.setdefault(n, {})
-        #                app.config[n].update(getattr(config, k))
+        """Initialize configuration."""
+        for k in dir(config):
+            if k.startswith('SONAR_DOCUMENTS_'):
+                app.config.setdefault(k, getattr(config, k))

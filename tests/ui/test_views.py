@@ -6,6 +6,13 @@
 # and/or modify it under the terms of the MIT License; see LICENSE file for
 # more details.
 
-"""SONAR configuration."""
+"""Test SONAR views."""
 
-SONAR_APP_API_URL = 'https://localhost:5000/api/'
+import pytest
+from flask import url_for
+
+
+def test_error(client):
+    """Test error page"""
+    with pytest.raises(Exception):
+        assert client.get(url_for('sonar.error'))

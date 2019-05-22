@@ -5,11 +5,10 @@
 # My site is free software; you can redistribute it and/or modify it under
 # the terms of the MIT License; see LICENSE file for more details.
 
-
-"""Invenio digital library framework."""
+"""Schemas for marshmallow."""
 
 from __future__ import absolute_import, print_function
 
-from .ext import Authors
+from .json import InstitutionMetadataSchemaV1, InstitutionSchemaV1
 
-__all__ = ('Authors', )
+__all__ = ('InstitutionMetadataSchemaV1', 'InstitutionSchemaV1',)

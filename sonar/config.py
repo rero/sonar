@@ -21,10 +21,9 @@ from datetime import timedelta
 from invenio_indexer.api import RecordIndexer
 from invenio_records_rest.facets import terms_filter
 from invenio_records_rest.utils import allow_all, check_elasticsearch
-from invenio_search import RecordsSearch
 
-from sonar.modules.authors.api import AuthorRecord
-from sonar.modules.documents.api import DocumentRecord
+from sonar.modules.documents.api import DocumentRecord, DocumentSearch
+from sonar.modules.institutions.api import InstitutionRecord, InstitutionSearch
 
 
 def _(x):
@@ -201,7 +200,7 @@ RECORDS_REST_ENDPOINTS = {
         pid_fetcher='document_id',
         default_endpoint_prefix=True,
         record_class=DocumentRecord,
-        search_class=RecordsSearch,
+        search_class=DocumentSearch,
         indexer_class=RecordIndexer,
         search_index='documents',
         search_type=None,
@@ -228,30 +227,30 @@ RECORDS_REST_ENDPOINTS = {
         delete_permission_factory_imp=allow_all,
         list_permission_factory_imp=allow_all
     ),
-    'auth': dict(
-        pid_type='auth',
-        pid_minter='author_id',
-        pid_fetcher='author_id',
+    'inst': dict(
+        pid_type='inst',
+        pid_minter='institution_id',
+        pid_fetcher='institution_id',
         default_endpoint_prefix=True,
-        record_class=AuthorRecord,
-        search_class=RecordsSearch,
+        record_class=InstitutionRecord,
+        search_class=InstitutionSearch,
         indexer_class=RecordIndexer,
-        search_index='authors',
+        search_index='institutions',
         search_type=None,
         record_serializers={
-            'application/json': ('sonar.modules.authors.serializers'
+            'application/json': ('sonar.modules.institutions.serializers'
                                  ':json_v1_response'),
         },
         search_serializers={
-            'application/json': ('sonar.modules.authors.serializers'
+            'application/json': ('sonar.modules.institutions.serializers'
                                  ':json_v1_search'),
         },
         record_loaders={
-            'application/json': ('sonar.modules.authors.loaders'
+            'application/json': ('sonar.modules.institutions.loaders'
                                  ':json_v1'),
         },
-        list_route='/authors/',
-        item_route='/authors/<pid(auth):pid_value>',
+        list_route='/institutions/',
+        item_route='/institutions/<pid(inst):pid_value>',
         default_media_type='application/json',
         max_result_window=10000,
         error_handlers=dict(),
@@ -262,52 +261,16 @@ RECORDS_REST_ENDPOINTS = {
         list_permission_factory_imp=allow_all
     )
 }
-"""REST API for my-site."""
+"""REST endpoints."""
 
-RECORDS_REST_SORT_OPTIONS = dict(
-    documents=dict(
-        bestmatch=dict(
-            title=_('Best match'),
-            fields=['_score'],
-            default_order='desc',
-            order=1,
-        ),
-        mostrecent=dict(
-            title=_('Most recent'),
-            fields=['-_created'],
-            default_order='asc',
-            order=2,
-        ),
-    ),
-    authors=dict(
-        bestmatch=dict(
-            title=_('Best match'),
-            fields=['_score'],
-            default_order='desc',
-            order=1,
-        ),
-        mostrecent=dict(
-            title=_('Most recent'),
-            fields=['-_created'],
-            default_order='asc',
-            order=2,
-        ),
+RECORDS_REST_FACETS = {
+    'documents': dict(
+        filters={
+            _('institution'): terms_filter('institution.pid')
+        }
     )
-)
-"""Setup sorting options."""
-
-
-RECORDS_REST_DEFAULT_SORT = dict(
-    documents=dict(
-        query='bestmatch',
-        noquery='mostrecent',
-    ),
-    authors=dict(
-        query='bestmatch',
-        noquery='mostrecent',
-    )
-)
-"""Set default sorting options."""
+}
+"""REST search facets."""
 
 SONAR_ENDPOINTS_ENABLED = True
 """Enable/disable automatic endpoint registration."""
