@@ -6,6 +6,4 @@
 # and/or modify it under the terms of the MIT License; see LICENSE file for
 # more details.
 
-"""SONAR configuration."""
-
-SONAR_APP_API_URL = 'https://localhost:5000/api/'
+"""DOJSON transformations."""

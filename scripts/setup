@@ -26,3 +26,8 @@ pipenv run invenio access allow superuser-access role admin
 # Create admin user and assign admin role
 pipenv run invenio users create admin@sonar.ch --password 123456 --active
 pipenv run invenio roles add admin@sonar.ch admin
+
+# Import fixtures
+pipenv run invenio fixtures institutions import
+pipenv run invenio fixtures documents import hevs
+pipenv run invenio fixtures documents import usi

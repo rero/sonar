@@ -1,6 +1,6 @@
 {
   "mappings": {
-    "author-v1.0.0": {
+    "institution-v1.0.0": {
       "date_detection": false,
       "numeric_detection": false,
       "properties": {
@@ -12,9 +12,6 @@
           "type": "keyword"
         },
         "name": {
-          "type": "text"
-        },
-        "organization": {
           "type": "text"
         },
         "_created": {

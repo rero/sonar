@@ -17,7 +17,8 @@ def test_simple_flow(client):
     """Test simple flow using REST API."""
     headers = [('Content-Type', 'application/json')]
     data = {
-            'title': 'The title of the record '
+            'title': 'The title of the record',
+            'abstracts': ['Record summary']
         }
     url = 'https://localhost:5000/documents/'
 

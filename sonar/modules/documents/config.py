@@ -6,6 +6,11 @@
 # and/or modify it under the terms of the MIT License; see LICENSE file for
 # more details.
 
-"""SONAR configuration."""
+"""SONAR documents configuration."""
 
-SONAR_APP_API_URL = 'https://localhost:5000/api/'
+SONAR_DOCUMENTS_RERO_DOC_URL = 'http://doc.rero.ch/search'
+
+SONAR_DOCUMENTS_INSTITUTIONS_MAP = dict(
+    usi='ticino.unisi',
+    hevs='valais.hevs'
+)

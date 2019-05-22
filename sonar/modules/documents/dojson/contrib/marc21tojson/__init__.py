@@ -6,6 +6,8 @@
 # and/or modify it under the terms of the MIT License; see LICENSE file for
 # more details.
 
-"""SONAR configuration."""
+"""MARC21 RERO to JSON."""
 
-SONAR_APP_API_URL = 'https://localhost:5000/api/'
+from .model import marc21tojson
+
+__all__ = ('marc21tojson')

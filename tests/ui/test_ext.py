@@ -6,6 +6,12 @@
 # and/or modify it under the terms of the MIT License; see LICENSE file for
 # more details.
 
-"""SONAR configuration."""
+"""Test SONAR extension."""
 
-SONAR_APP_API_URL = 'https://localhost:5000/api/'
+from sonar.modules.ext import Sonar
+
+
+def test_init(app):
+    """Test extension constructor."""
+    sonar = Sonar(app)
+    assert isinstance(sonar, Sonar)

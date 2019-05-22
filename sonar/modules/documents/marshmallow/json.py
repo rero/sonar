@@ -20,17 +20,18 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     """Schema for the document metadata."""
 
     pid = PersistentIdentifier()
-    title = SanitizedUnicode(required=True, validate=validate.Length(min=3))
-    created = fields.Str(dump_only=True)
-    author_id = fields.Int()
+    title = SanitizedUnicode(required=True)
+    abstracts = fields.List(fields.Str())
+    authors = fields.Dict(dump_only=True)
+    institution = fields.Dict(dump_only=True)
 
 
 class DocumentSchemaV1(StrictKeysMixin):
     """Document schema."""
 
     metadata = fields.Nested(DocumentMetadataSchemaV1)
-    created = fields.Str(dump_only=True)
-    revision = fields.Integer(dump_only=True)
-    updated = fields.Str(dump_only=True)
-    links = fields.Dict(dump_only=True)
+    # created = fields.Str(dump_only=True)
+    # revision = fields.Integer(dump_only=True)
+    # updated = fields.Str(dump_only=True)
+    # links = fields.Dict(dump_only=True)
     id = PersistentIdentifier()

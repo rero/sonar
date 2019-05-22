@@ -6,7 +6,9 @@
 # and/or modify it under the terms of the MIT License; see LICENSE file for
 # more details.
 
-"""SONAR is a future archive of scholarly publications. It intends to collect, promote and preserve the publications of authors affiliated with Swiss public research institutions"""
+"""SONAR is a future archive of scholarly publications. It intends to collect,
+promote and preserve the publications of authors affiliated with Swiss public
+research institutions"""
 
 import os
 
@@ -55,37 +57,38 @@ setup(
         ],
         'invenio_config.module': [
             'sonar = sonar.config',
-            'sonar-modules = sonar.modules.config'
+            'sonar_app = sonar.modules.config',
+            'sonar_documents = sonar.modules.documents.config'
         ],
         'invenio_i18n.translations': [
             'messages = sonar',
         ],
         'invenio_base.api_apps': [
             'documents = sonar.modules.documents:Documents',
-            'authors = sonar.modules.authors:Authors'
+            'institutions = sonar.modules.institutions:Institutions'
          ],
         'invenio_jsonschemas.schemas': [
             'documents = sonar.modules.documents.jsonschemas',
-            'authors = sonar.modules.authors.jsonschemas'
+            'institutions = sonar.modules.institutions.jsonschemas'
         ],
         'invenio_search.mappings': [
             'documents = sonar.modules.documents.mappings',
-            'authors = sonar.modules.authors.mappings'
+            'institutions = sonar.modules.institutions.mappings'
         ],
         'invenio_pidstore.minters': [
             'document_id = \
                 sonar.modules.documents.api:document_pid_minter',
-            'author_id = \
-                sonar.modules.authors.api:author_pid_minter'
+            'institution_id = \
+                sonar.modules.institutions.api:institution_pid_minter'
         ],
         'invenio_pidstore.fetchers': [
             'document_id = \
                 sonar.modules.documents.api:document_pid_fetcher',
-            'author_id = \
-                sonar.modules.authors.api:author_pid_fetcher'
+            'institution_id = \
+                sonar.modules.institutions.api:institution_pid_fetcher'
         ],
         "invenio_records.jsonresolver": [
-            "author = sonar.modules.authors.jsonresolvers" 
+            "institution = sonar.modules.institutions.jsonresolvers"
         ]
     },
     classifiers=[

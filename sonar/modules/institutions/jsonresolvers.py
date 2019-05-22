@@ -6,7 +6,7 @@
 # and/or modify it under the terms of the MIT License; see LICENSE file for
 # more details.
 
-"""Author resolver."""
+"""Institution resolver."""
 
 from __future__ import absolute_import, print_function
 
@@ -16,10 +16,10 @@ from invenio_records.api import Record
 
 
 # the host corresponds to the config value for the key JSONSCHEMAS_HOST
-@jsonresolver.route('/api/authors/<pid>', host='sonar.ch')
-def author_resolver(pid):
-    """Resolve referenced author."""
-    resolver = Resolver(pid_type='auth', object_type="rec",
+@jsonresolver.route('/api/institutions/<pid>', host='sonar.ch')
+def institution_resolver(pid):
+    """Resolve referenced institution."""
+    resolver = Resolver(pid_type='inst', object_type="rec",
                         getter=Record.get_record)
     _, record = resolver.resolve(pid)
 
