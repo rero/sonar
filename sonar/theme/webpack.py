@@ -17,6 +17,7 @@ theme = WebpackBundle(
     'assets',
     entry={
         'app': './js/app.js',
+        'search_ui': './js/search_ui.js',
         'sonar-theme': './scss/sonar/theme.scss',
         'usi-theme': './scss/usi/theme.scss'
     },

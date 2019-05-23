@@ -183,8 +183,8 @@ SECURITY_REGISTER_USER_TEMPLATE = 'sonar/accounts/signup.html'
 RECORDS_UI_ENDPOINTS = {
     'document': {
         'pid_type': 'doc',
-        'route': '/documents/<pid_value>',
-        'template': 'documents/record.html',
+        'route': '/organization/<ir>/documents/<pid_value>',
+        'view_imp': 'sonar.modules.documents.views:detail'
     },
 }
 """Records UI for sonar."""
