@@ -8,7 +8,7 @@
 -->
 
 <div ng-repeat="record in vm.invenioSearchResults.hits.hits track by $index">
-  <h4><a target="_self" ng-href="/documents/{{ record.id }}">{{ record.metadata.title }}</a></h4>
+  <h4><a target="_self" ng-href="/organization/{{config.ir}}/documents/{{ record.id }}">{{ record.metadata.title }}</a></h4>
   <p><i>Created at {{ record.created }}</i></p>
   <hr />
 </div>

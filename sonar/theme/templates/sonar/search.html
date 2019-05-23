@@ -8,20 +8,24 @@
 
 {%- block javascript %}
   {{ super() }}
-  {{ webpack['search_ui_app.js'] }}
+  {{ webpack['search_ui.js'] }}
   {# assets "invenio_search_ui_search_js" %}<script src="{{ ASSET_URL }}"></script>{% endassets #}
 {%- endblock javascript %}
 
 {%- block body_inner %}
 <div id="invenio-search">
-  <invenio-search
-   search-endpoint="{{ config.SEARCH_UI_SEARCH_API }}"
-   search-extra-params='{% if search_extra_params %}{{search_extra_params|tojson}}{% endif %}'
-   search-hidden-params='{% if search_hidden_params %}{{search_hidden_params|tojson}}{% endif %}'
-   search-headers='{"Accept": "{{ config.SEARCH_UI_SEARCH_MIMETYPE|default('application/json')}}"}'
-  >
-  {{super()}}
-  </invenio-search>
+    <invenio-config ir="{{g.ir|default('sonar')}}">
+        <invenio-search
+     
+        search-endpoint="{{ config.SEARCH_UI_SEARCH_API }}"
+        search-extra-params='{% if search_extra_params %}{{search_extra_params|tojson}}{% endif %}'
+        search-hidden-params='{% if search_hidden_params %}{{search_hidden_params|tojson}}{% endif %}'
+        search-headers='{"Accept": "{{ config.SEARCH_UI_SEARCH_MIMETYPE|default('application/json')}}"}'
+       >    
+           {{super()}}
+       </invenio-search>
+
+    </invenio-config>
 </div>
 {%- endblock body_inner %}
 

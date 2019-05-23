@@ -51,7 +51,7 @@ def search():
     return render_template('sonar/search.html')
 
 
-@blueprint.route('/detail/<pid>')
-def detail():
+def detail(pid, record, template=None, **kwargs):
     """Search details."""
-    return render_template('sonar/search.html')
+    g.ir = kwargs.get('ir')
+    return render_template('documents/record.html', pid=pid, record=record)
