@@ -23,3 +23,9 @@ blueprint = Blueprint(
     template_folder='templates',
     static_folder='static'
 )
+
+
+@blueprint.route('/error')
+def error():
+    """Error to generate exception for test purposes."""
+    raise Exception('this is an error for test purposes')

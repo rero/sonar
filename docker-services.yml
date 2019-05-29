@@ -26,6 +26,7 @@ services:
       - "INVENIO_SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://sonar:sonar@db/sonar"
       - "INVENIO_WSGI_PROXIES=2"
       - "INVENIO_RATELIMIT_STORAGE_URL=redis://cache:6379/3"
+      - "INVENIO_SENTRY_DSN=https://6e70ccb6529b44e89d744baecdc5f1aa:9af170e7213546a0b22449f5f8a97458@sentrydev.test.rero.ch:8443/7"
   lb:
     build: ./docker/haproxy/
     image: sonar-lb
