@@ -57,6 +57,11 @@ COVER_TEMPLATE = 'sonar/page_cover.html'
 #: Settings base template.
 SETTINGS_TEMPLATE = 'sonar/page_settings.html'
 
+# Logging
+# =======
+LOGGING_SENTRY_LEVEL = "ERROR"
+LOGGING_SENTRY_CELERY = True
+
 # Theme configuration
 # ===================
 #: Site name
