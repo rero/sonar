@@ -15,6 +15,10 @@
 .. image:: https://img.shields.io/coveralls/rero/sonar.svg
         :target: https://coveralls.io/r/rero/sonar
 
+.. image:: https://img.shields.io/github/tag/rero/sonar.svg
+        :alt: Release Number
+        :target: https://github.com/rero/sonar/releases/latest
+
 .. image:: https://img.shields.io/github/license/rero/sonar.svg
         :target: https://github.com/rero/sonar/blob/master/LICENSE
 
