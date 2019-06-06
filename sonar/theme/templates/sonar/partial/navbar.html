@@ -71,7 +71,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languageDropdown">
                         {% for l in current_i18n.get_locales() %}
-                            <a class="dropdown-item" href="#">{{ l.get_display_name()|capitalize }}</a>
+                            <a class="dropdown-item" href="{{ url_for('invenio_i18n.set_lang', lang_code=l.language) }}">{{ l.get_display_name()|capitalize }}</a>
                         {% endfor %}
                         </div>
                     </li>
