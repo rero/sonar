@@ -15,11 +15,21 @@
           "type": "text"
         },
         "abstracts": {
-          "type": "text"
+          "type": "object",
+          "properties": {
+            "abstract": {
+              "type": "text"
+            }
+          }
         },
         "subjects": {
-          "type": "text",
-          "copy_to": "facet_subjects"
+          "type": "object",
+          "properties": {
+            "subjects": {
+              "type": "text",
+              "copy_to": "facet_subjects"
+            }
+          }
         },
         "facet_subjects": {
           "type": "keyword"
@@ -39,12 +49,7 @@
           }
         },
         "languages": {
-          "type": "object",
-          "properties": {
-            "language": {
-              "type": "keyword"
-            }
-          }
+          "type": "keyword"
         },
         "is_part_of": {
           "type": "text"

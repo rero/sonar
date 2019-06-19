@@ -9,3 +9,11 @@
 """SONAR configuration."""
 
 SONAR_APP_API_URL = 'https://localhost:5000/api/'
+
+SONAR_APP_LANGUAGE_MAP = {
+    "fre": "fr",
+    "ger": "de",
+    "eng": "en",
+    "ita": "it",
+    "spa": "es",
+}

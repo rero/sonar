@@ -13,6 +13,7 @@ import sys
 
 import requests
 from dojson import Overdo, utils
+from flask import current_app
 
 marc21tojson = Overdo()
 
@@ -33,6 +34,17 @@ def remove_punctuation(data):
     except Exception:
         pass
     return data
+
+
+def get_locale_from_language(language):
+    """Get locale for the given language."""
+    locales = current_app.config.get('SONAR_APP_LANGUAGE_MAP')
+
+    if(language not in locales):
+        raise Exception('Locale not found for language {language}'
+                        .format(language=language))
+
+    return locales[language]
 
 
 def get_mef_person_link(id, key, value):
@@ -150,7 +162,7 @@ def marc21_to_languages(self, key, value):
     languages: 008 and 041 [$a, repetitive]
     """
     language = value.strip()[35:38]
-    to_return = [{'language': language}]
+    to_return = [get_locale_from_language(language)]
     return to_return
 
 
@@ -175,7 +187,7 @@ def marc21_to_translatedFrom(self, key, value):
 
     languages = []
     for lang in unique_lang:
-        languages.append({'language': lang})
+        languages.append(get_locale_from_language(lang))
 
     self['languages'] = languages
     translated = value.get('h')
@@ -327,7 +339,10 @@ def marc21_to_abstracts(self, key, value):
 
     abstract: [520$a repetitive]
     """
-    return ', '.join(utils.force_list(value.get('a')))
+    return {
+        'language': get_locale_from_language(value.get('9')),
+        'abstract': value.get('a')
+    }
 
 
 @marc21tojson.over('identifiers', '^020..')
@@ -380,6 +395,7 @@ def marc21_to_is_part_of(self, key, value):
 
 
 @marc21tojson.over('subjects', '^6....')
+@utils.for_each_value
 @utils.ignore_value
 def marc21_to_subjects(self, key, value):
     """Get subjects.
@@ -387,4 +403,7 @@ def marc21_to_subjects(self, key, value):
     subjects: 6xx [duplicates could exist between several vocabularies,
         if possible deduplicate]
     """
-    return value.get('a').split(' ; ')
+    return {
+        'language': get_locale_from_language(value.get('9')),
+        'subjects': value.get('a').split(' ; ')
+    }

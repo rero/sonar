@@ -18,7 +18,7 @@ def test_simple_flow(client):
     headers = [('Content-Type', 'application/json')]
     data = {
             'title': 'The title of the record',
-            'abstracts': ['Record summary']
+            'abstracts': [{'abstract': 'Record summary', 'language': 'fr'}]
         }
     url = 'https://localhost:5000/documents/'
 

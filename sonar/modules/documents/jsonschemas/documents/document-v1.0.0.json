@@ -26,8 +26,23 @@
       "type": "array",
       "minItems": 1,
       "items": {
-        "type": "string",
-        "minLength": 3
+        "type": "object",
+        "required": [
+          "language", "abstract"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "language": {
+            "title": "Language",
+            "description": "Language of abstract",
+            "type": "string"
+          },
+          "abstract": {
+            "title": "Abstract",
+            "description": "Abstract",
+            "type": "string"
+          }
+        }
       }
     },
     "identifiers": {
@@ -65,33 +80,14 @@
       "uniqueItems": true,
       "minItems": 1,
       "items": {
-        "type": "object",
-        "required": [
-          "language"
-        ],
-        "properties": {
-          "language": {
-            "title": "Language",
-            "description": "Required. Language of the resource, primary or not.",
-            "type": "string",
-            "default": "fre",
-            "validationMessage": "Required. Language of the resource, primary or not.",
-            "enum": [
-              "fre",
-              "ger",
-              "eng",
-              "ita",
-              "spa",
-              "ara",
-              "chi",
-              "lat",
-              "heb",
-              "jpn",
-              "por",
-              "rus"
-            ]
-          }
-        }
+        "type": "string",
+        "enum": [
+          "fr",
+          "de",
+          "en",
+          "it",
+          "sp"
+        ]
       }
     },
     "authors": {
@@ -163,8 +159,23 @@
       "type": "array",
       "minItems": 1,
       "items": {
-        "type": "string",
-        "minLength": 1
+        "type": "object",
+        "required": [
+          "language", "subjects"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "language": {
+            "title": "Language",
+            "description": "Language of subject",
+            "type": "string"
+          },
+          "subjects": {
+            "title": "Subjects",
+            "description": "List of subjects",
+            "type": "array"
+          }
+        }
       }
     },
     "notes": {
