@@ -549,17 +549,14 @@ def test_marc21_to_subjects():
 
     marc21xml = """
     <record>
-      <datafield tag="600" ind1=" " ind2=" ">
-        <subfield code="a">subjects 600</subfield>
-      </datafield>
       <datafield tag="666" ind1=" " ind2=" ">
-        <subfield code="a">subjects 666</subfield>
+        <subfield code="a">subject 1 ; subject 2</subfield>
       </datafield>
     </record>
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('subjects') == ['subjects 600', 'subjects 666']
+    assert data.get('subjects') == ['subject 1', 'subject 2']
 
 
 def test_marc21_to_pid():

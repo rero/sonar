@@ -42,7 +42,7 @@
           {%- if sort_options %}
             <div class="row align-items-center">
               <div class="col d-none d-sm-block text-right">
-                  Sort by:
+                  {{ _('Sort by') }}
               </div>
               <div class="col">
                 {%- block search_sort_select scoped %}
@@ -68,28 +68,32 @@
         {%- endblock search_sort %}
     </div>
   </div>
-  <div class="mt-5">
-    <invenio-search-loading
-      template="{{ url_for('static', filename=config.SEARCH_UI_JSTEMPLATE_LOADING) }}"
-      message="{{ _('Loading...') }}">
-    </invenio-search-loading>
-    <invenio-search-results
-      template="{{ url_for('static', filename=config.SEARCH_UI_JSTEMPLATE_RESULTS) }}">
-    </invenio-search-results>
-    <invenio-search-error
-      template="{{ url_for('static', filename=config.SEARCH_UI_JSTEMPLATE_ERROR) }}"
-      message="{{ _('Search failed.') }}">
-    </invenio-search-error>
-    <invenio-search-range
-      options='{{ config.SEARCH_UI_JSTEMPLATE_RANGE_OPTIONS | tojson }}'
-      template="{{ url_for('static', filename=config.SEARCH_UI_JSTEMPLATE_RANGE) }}">
-    </invenio-search-range>
-    <invenio-search-facets
-      template="{{ url_for('static', filename=config.SEARCH_UI_JSTEMPLATE_FACETS) }}">
-    </invenio-search-facets>
-    <invenio-search-pagination
-      template="{{ url_for('static', filename=config.SEARCH_UI_JSTEMPLATE_PAGINATION) }}"
-    >
-    </invenio-search-pagination>
+  <div class="row mt-5">
+    <div class="col-md-3">
+      <invenio-search-facets
+        template="{{ url_for('static', filename=config.SEARCH_UI_JSTEMPLATE_FACETS) }}">
+      </invenio-search-facets>
+    </div>
+    <div class="col-md-9">
+      <invenio-search-loading
+        template="{{ url_for('static', filename=config.SEARCH_UI_JSTEMPLATE_LOADING) }}"
+        message="{{ _('Loading...') }}">
+      </invenio-search-loading>
+      <invenio-search-results
+        template="{{ url_for('static', filename=config.SEARCH_UI_JSTEMPLATE_RESULTS) }}">
+      </invenio-search-results>
+      <invenio-search-error
+        template="{{ url_for('static', filename=config.SEARCH_UI_JSTEMPLATE_ERROR) }}"
+        message="{{ _('Search failed.') }}">
+      </invenio-search-error>
+      <invenio-search-range
+        options='{{ config.SEARCH_UI_JSTEMPLATE_RANGE_OPTIONS | tojson }}'
+        template="{{ url_for('static', filename=config.SEARCH_UI_JSTEMPLATE_RANGE) }}">
+      </invenio-search-range>
+      <invenio-search-pagination
+        template="{{ url_for('static', filename=config.SEARCH_UI_JSTEMPLATE_PAGINATION) }}"
+      >
+      </invenio-search-pagination>
+    </div>
   </div>
 {%- endblock page_body -%}
