@@ -21,7 +21,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
 
     pid = PersistentIdentifier()
     title = SanitizedUnicode(required=True)
-    abstracts = fields.List(fields.Str())
+    abstracts = fields.List(fields.Dict())
     authors = fields.Dict(dump_only=True)
     institution = fields.Dict(dump_only=True)
 

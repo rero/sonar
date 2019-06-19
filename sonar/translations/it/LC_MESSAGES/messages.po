@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.0.1\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2019-07-22 13:54+0200\n"
+"POT-Creation-Date: 2019-07-22 16:12+0200\n"
 "PO-Revision-Date: 2019-07-15 17:09+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: it\n"
@@ -61,6 +61,38 @@ msgstr "Migliori risultati"
 #: sonar/config.py:304
 msgid "Most recent"
 msgstr "Più recenti"
+
+#: sonar/modules/documents/templates/documents/record.html:58
+msgid "Authors"
+msgstr "Autori"
+
+#: sonar/modules/documents/templates/documents/record.html:63
+msgid "Abstract"
+msgstr "Astratto"
+
+#: sonar/modules/documents/templates/documents/record.html:70
+msgid "Physical description"
+msgstr "Descrizione fisica"
+
+#: sonar/modules/documents/templates/documents/record.html:75
+msgid "Subject"
+msgstr "Soggetto"
+
+#: sonar/modules/documents/templates/documents/record.html:80
+msgid "Language"
+msgstr "Lingua"
+
+#: sonar/modules/documents/templates/documents/record.html:85
+msgid "Notes"
+msgstr "Note"
+
+#: sonar/modules/documents/templates/documents/record.html:91
+msgid "ISBN"
+msgstr "ISBN"
+
+#: sonar/modules/documents/templates/documents/record.html:97
+msgid "Permalink"
+msgstr "Collegamento permanente"
 
 #: sonar/theme/templates/sonar/401.html:13
 msgid "Unauthorized"
@@ -198,12 +230,12 @@ msgstr ""
 
 #: sonar/theme/templates/sonar/accounts/forgot_password.html:28
 #: sonar/theme/templates/sonar/accounts/login.html:16
-#: sonar/theme/templates/sonar/accounts/signup.html:44
+#: sonar/theme/templates/sonar/accounts/signup.html:49
 msgid "Log In"
 msgstr "Accedi"
 
 #: sonar/theme/templates/sonar/accounts/forgot_password.html:30
-#: sonar/theme/templates/sonar/accounts/login.html:34
+#: sonar/theme/templates/sonar/accounts/login.html:39
 #: sonar/theme/templates/sonar/accounts/signup.html:28
 #: sonar/theme/templates/sonar/oauth/signup.html:38
 msgid "Sign Up"
@@ -214,11 +246,12 @@ msgid "Log in to account"
 msgstr "Accedi al tuo account"
 
 #: sonar/theme/templates/sonar/accounts/login.html:24
+#: sonar/theme/templates/sonar/accounts/login.html:30
 #, python-format
 msgid "Sign-in with %(type)s"
 msgstr ""
 
-#: sonar/theme/templates/sonar/accounts/login.html:32
+#: sonar/theme/templates/sonar/accounts/login.html:37
 msgid "Forgot password?"
 msgstr "Hai dimenticato la password?"
 
@@ -228,6 +261,7 @@ msgid "Sign up for a %(sitename)s account"
 msgstr "Iscriviti per avere un account %(sitename)s!"
 
 #: sonar/theme/templates/sonar/accounts/signup.html:36
+#: sonar/theme/templates/sonar/accounts/signup.html:42
 #: sonar/theme/templates/sonar/oauth/signup.html:25
 #, python-format
 msgid "Sign-up with %(type)s"

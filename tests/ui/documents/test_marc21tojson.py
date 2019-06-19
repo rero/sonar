@@ -182,7 +182,7 @@ def test_marc21_to_titlesProper():
     assert data.get('titlesProper') == ['proper title', 'other proper title']
 
 
-def test_marc21_to_languages():
+def test_marc21_to_languages(app):
     """Test dojson marc21languages."""
 
     marc21xml = """
@@ -198,7 +198,13 @@ def test_marc21_to_languages():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('languages') == [{'language': 'ara'}, {'language': 'eng'}]
+    assert data.get('languages') == [{
+        'code': 'ara',
+        'name': 'العربية'
+    }, {
+        'code': 'eng',
+        'name': 'English'
+    }]
     assert data.get('translatedFrom') == ['ita']
 
     marc21xml = """
@@ -216,11 +222,16 @@ def test_marc21_to_languages():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('languages') == [
-        {'language': 'ara'},
-        {'language': 'eng'},
-        {'language': 'fre'}
-    ]
+    assert data.get('languages') == [{
+        'code': 'ara',
+        'name': 'العربية'
+    }, {
+        'code': 'eng',
+        'name': 'English'
+    }, {
+        'code': 'fre',
+        'name': 'Français'
+    }]
     assert data.get('translatedFrom') == ['ita', 'ger']
 
     marc21xml = """
@@ -235,7 +246,13 @@ def test_marc21_to_languages():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('languages') == [{'language': 'ara'}, {'language': 'eng'}]
+    assert data.get('languages') == [{
+        'code': 'ara',
+        'name': 'العربية'
+    }, {
+        'code': 'eng',
+        'name': 'English'
+    }]
     assert 'translatedFrom' not in data
 
 
@@ -470,13 +487,17 @@ def test_marc21_to_abstract():
     marc21xml = """
     <record>
       <datafield tag="520" ind1=" " ind2=" ">
+        <subfield code="9">eng</subfield>
         <subfield code="a">This book is about</subfield>
       </datafield>
     </record>
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('abstracts') == ["This book is about"]
+    assert data.get('abstracts') == [{
+        'language': 'eng',
+        'value': 'This book is about'
+    }]
 
 
 def test_marc21_to_identifiers():
@@ -549,14 +570,22 @@ def test_marc21_to_subjects():
 
     marc21xml = """
     <record>
-      <datafield tag="666" ind1=" " ind2=" ">
+      <datafield tag="695" ind1=" " ind2=" ">
+        <subfield code="9">eng</subfield>
         <subfield code="a">subject 1 ; subject 2</subfield>
+      </datafield>
+      <datafield tag="695" ind1=" " ind2=" ">
+        <subfield code="9">fre</subfield>
+        <subfield code="a">sujet 1 ; sujet 2</subfield>
       </datafield>
     </record>
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('subjects') == ['subject 1', 'subject 2']
+    assert data.get('subjects') == [
+        {'language': 'eng', 'value': ['subject 1', 'subject 2']},
+        {'language': 'fre', 'value': ['sujet 1', 'sujet 2']},
+    ]
 
 
 def test_marc21_to_pid():

@@ -278,13 +278,13 @@ RECORDS_REST_FACETS = {
     'documents': dict(
         aggs=dict(
             institution=dict(terms=dict(field='institution.pid')),
-            language=dict(terms=dict(field='languages.language')),
+            language=dict(terms=dict(field='languages.name')),
             author=dict(terms=dict(field='facet_authors')),
             subject=dict(terms=dict(field='facet_subjects'))
         ),
         filters={
             _('institution'): terms_filter('institution.pid'),
-            _('language'): terms_filter('languages.language'),
+            _('language'): terms_filter('languages.name'),
             _('author'): terms_filter('facet_authors'),
             _('subject'): terms_filter('facet_subjects'),
         }
