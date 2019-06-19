@@ -12,7 +12,7 @@
 # released.
 pipenv check --ignore 36759 --ignore 36810 && \
 pipenv run pydocstyle sonar tests docs && \
-pipenv run isort -rc -c -df && \
+pipenv run isort -rc -c -df --multi-line=3 --trailing-comma --force-grid-wrap=0 --use-parentheses --line-width=79 && \
 pipenv run check-manifest --ignore ".travis-*,docs/_build*" && \
 pipenv run sphinx-build -qnNW docs docs/_build/html && \
 pipenv run test

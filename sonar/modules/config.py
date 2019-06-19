@@ -8,4 +8,4 @@
 
 """SONAR configuration."""
 
-SONAR_APP_API_URL = 'https://localhost:5000/api/'
+SONAR_APP_API_URL = "https://localhost:5000/api/"

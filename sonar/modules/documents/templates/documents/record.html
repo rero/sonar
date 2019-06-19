@@ -9,38 +9,92 @@
 
 {%- extends config.RECORDS_UI_BASE_TEMPLATE %}
 
+{% from 'sonar/macros/macro.html' import dl %}
+
 {%- macro record_content(data) %}
-  {% for key, value in data.items() recursive %}
-    <li class="list-group-item">
-    {% if value is mapping %}
-        <strong>{{ key }}:</strong>
-        <ul class="list-group">{{ loop(value.items()) }}</ul>
-    {% elif value is iterable and value is not string %}
-        <strong>{{ key }}:</strong>
-        <ol>
-        {% for item in value %}
-          <li>
-          {% if item is mapping %}
-            <ul class="list-group">
-              {{ record_content(item) }}
-            </ul>
-          {% else %}
-            {{ item }}
-          {% endif %}
-          </li>
-        {% endfor %}
-        </ol>
-    {% else %}
-      <strong>{{ key }}:</strong> {{ value }}
-    {% endif %}
+{% for key, value in data.items() recursive %}
+<li class="list-group-item">
+  {% if value is mapping %}
+  <strong>{{ key }}:</strong>
+  <ul class="list-group">{{ loop(value.items()) }}</ul>
+  {% elif value is iterable and value is not string %}
+  <strong>{{ key }}:</strong>
+  <ol>
+    {% for item in value %}
+    <li>
+      {% if item is mapping %}
+      <ul class="list-group">
+        {{ record_content(item) }}
+      </ul>
+      {% else %}
+      {{ item }}
+      {% endif %}
     </li>
-  {% endfor %}
+    {% endfor %}
+  </ol>
+  {% else %}
+  <strong>{{ key }}:</strong> {{ value }}
+  {% endif %}
+</li>
+{% endfor %}
 {%- endmacro %}
 
 {%- block page_body %}
-<h2>{{record.title}}</h2>
+<!--
 <ul class="list-group">
   {{ record_content(record.replace_refs()) }}
 </ul>
-{%- endblock %}
+  -->
+{% set record = record.replace_refs() %}
+<h1 class="text-primary">{{record.title}}</h1>
+{% if record.institution %}
+<h5 class="text-secondary">{{record.institution.name}}</h5>
+{% endif %}
 
+<section class="mt-3">
+  <dl class="row">
+    <!-- AUTHORS -->
+    {% if record.authors|length > 0 %}
+    {{ dl(_('Authors'), record.authors | authors_format) }}
+    {% endif %}
+
+    <!-- ABSTRACTS -->
+    {% if record.abstracts|length > 0 %}
+    {{ dl(_('Abstract'), record.abstracts | translate_content(current_i18n.language) | nl2br ) }}
+    {% endif %}
+
+    <!-- PHYSICAL DESCRIPTION -->
+    {% if record.extent or record.otherMaterialCharacteristics or record.formats %}
+    {% set formats = ', '.join(record.formats) %}
+    {% set description = ', '.join([record.extent, record.otherMaterialCharacteristics, formats]|select) %}
+    {{ dl(_('Physical description'), description) }}
+    {% endif %}
+
+    <!-- SUBJECTS -->
+    {% if record.subjects|length > 0 %}
+    {{ dl(_('Subject'), record.subjects | translate_content(current_i18n.language) | join(', ')) }}
+    {% endif %}
+
+    <!-- LANGUAGE -->
+    {% if record.languages|length > 0 %}
+    {{ dl(_('Language'), record.languages[0] | translate_language(current_i18n.language)) }}
+    {% endif %}
+
+    <!-- NOTES -->
+    {% if record.notes|length > 0 %}
+    {{ dl(_('Notes'), record.notes | join("\n") | nl2br) }}
+    {% endif %}
+
+    <!-- IDENTIFIERS -->
+    {% if record.identifiers %}
+    {% if record.identifiers.isbn %}
+    {{ dl(_('ISBN'), record.identifiers.isbn) }}
+    {% endif %}
+    {% endif %}
+
+    <!-- PERMANENT LINK -->
+    {% set link = url_for('invenio_records_ui.document', pid_value=record.pid, ir=ir, _external=True) %}
+    {{ dl(_('Permalink'), '<a href="' + link + '">' + link + '</a>') }}
+  </dl>
+</section>
+{%- endblock %}

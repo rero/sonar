@@ -8,41 +8,39 @@
 
 """Test CLI for importing documents."""
 
-import click
-import pytest
-from click.exceptions import ClickException
+import pytest  # pylint: disable=unused-import
 from click.testing import CliRunner
-from pytest_invenio.fixtures import script_info
 
 import sonar.modules.documents.cli as Cli
 from sonar.modules.institutions.api import InstitutionRecord
 
 
-def test_import_documents(app, script_info):
+def test_import_documents(app, script_info):  # pylint: disable=unused-argument
     """Test import documents."""
     runner = CliRunner()
 
-    result = runner.invoke(Cli.import_documents, ['test'], obj=script_info)
-    assert result.output.find(
-        'Institution record not found in database') != -1
+    result = runner.invoke(Cli.import_documents, ["test"], obj=script_info)
+    assert result.output.find("Institution record not found in database") != -1
 
-    InstitutionRecord.create({
-        "pid": "test",
-        "name": "Test"
-    }, dbcommit=True)
+    InstitutionRecord.create({"pid": "test", "name": "Test"}, dbcommit=True)
 
-    result = runner.invoke(Cli.import_documents, ['test'], obj=script_info)
-    assert result.output.find(
-        'Institution map for "test" not found in configuration') != -1
+    result = runner.invoke(Cli.import_documents, ["test"], obj=script_info)
+    assert (
+        result.output.find(
+            'Institution map for "test" not found in configuration'
+        )
+        != -1
+    )
 
-    result = runner.invoke(Cli.import_documents, ['usi'], obj=script_info)
+    result = runner.invoke(Cli.import_documents, ["usi"], obj=script_info)
     assert result.exit_code == 1
 
-    InstitutionRecord.create({
-        "pid": "usi",
-        "name": "Università della Svizzera italiana"
-    }, dbcommit=True)
+    InstitutionRecord.create(
+        {"pid": "usi", "name": "Università della Svizzera italiana"},
+        dbcommit=True,
+    )
 
     result = runner.invoke(
-        Cli.import_documents, ['usi', '--pages=1'], obj=script_info)
+        Cli.import_documents, ["usi", "--pages=1"], obj=script_info
+    )
     assert result.exit_code == 0

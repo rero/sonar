@@ -10,10 +10,12 @@
 
 from __future__ import absolute_import, print_function
 
-from invenio_records_rest.schemas import Nested, StrictKeysMixin
-from invenio_records_rest.schemas.fields import DateString, \
-    PersistentIdentifier, SanitizedUnicode
-from marshmallow import fields, missing, validate
+from invenio_records_rest.schemas import StrictKeysMixin
+from invenio_records_rest.schemas.fields import (
+    PersistentIdentifier,
+    SanitizedUnicode,
+)
+from marshmallow import fields
 
 
 class DocumentMetadataSchemaV1(StrictKeysMixin):
@@ -21,7 +23,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
 
     pid = PersistentIdentifier()
     title = SanitizedUnicode(required=True)
-    abstracts = fields.List(fields.Str())
+    abstracts = fields.Dict()
     authors = fields.Dict(dump_only=True)
     institution = fields.Dict(dump_only=True)
 

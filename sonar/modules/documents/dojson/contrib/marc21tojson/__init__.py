@@ -10,4 +10,4 @@
 
 from .model import marc21tojson
 
-__all__ = ('marc21tojson')
+__all__ = "marc21tojson"

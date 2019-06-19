@@ -8,20 +8,19 @@
 
 """Test CLI for importing documents."""
 
-import click
 from click.testing import CliRunner
-from pytest_invenio.fixtures import script_info
 
 import sonar.modules.institutions.cli as Cli
 from sonar.modules.institutions.api import InstitutionRecord
 
 
-def test_import_institutions(app, script_info):
+def test_import_institutions(
+    app, script_info
+):  # pylint: disable=unused-argument
     """Test import institutions."""
-    InstitutionRecord.create({
-        "pid": "usi",
-        "name": "Università della Svizzera italiana"
-    })
+    InstitutionRecord.create(
+        {"pid": "usi", "name": "Università della Svizzera italiana"}
+    )
 
     runner = CliRunner()
 

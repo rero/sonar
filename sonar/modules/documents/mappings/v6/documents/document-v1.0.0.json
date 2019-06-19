@@ -15,11 +15,41 @@
           "type": "text"
         },
         "abstracts": {
-          "type": "text"
+          "type": "object",
+          "properties": {
+            "eng": {
+              "type": "text",
+              "analyzer": "english"
+            },
+            "fre": {
+              "type": "text",
+              "analyzer": "french"
+            },
+            "ger": {
+              "type": "text",
+              "analyzer": "german"
+            }
+          }
         },
         "subjects": {
-          "type": "text",
-          "copy_to": "facet_subjects"
+          "type": "object",
+          "properties": {
+            "eng": {
+              "type": "text",
+              "analyzer": "english",
+              "copy_to": "facet_subjects"
+            },
+            "fre": {
+              "type": "text",
+              "analyzer": "french",
+              "copy_to": "facet_subjects"
+            },
+            "ger": {
+              "type": "text",
+              "analyzer": "german",
+              "copy_to": "facet_subjects"
+            }
+          }
         },
         "facet_subjects": {
           "type": "keyword"
@@ -39,12 +69,7 @@
           }
         },
         "languages": {
-          "type": "object",
-          "properties": {
-            "language": {
-              "type": "keyword"
-            }
-          }
+          "type": "keyword"
         },
         "is_part_of": {
           "type": "text"

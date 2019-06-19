@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.0.1\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2019-06-19 12:13+0200\n"
+"POT-Creation-Date: 2019-06-21 15:10+0200\n"
 "PO-Revision-Date: 2019-06-13 10:45+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -34,22 +34,6 @@ msgstr "Swiss Open Access Repository"
 msgid "Welcome to Swiss Open Access Repository!"
 msgstr "Willkommen im Swiss Open Access Repository!"
 
-#: sonar/config.py:277
-msgid "institution"
-msgstr "Institution"
-
-#: sonar/config.py:278
-msgid "language"
-msgstr "Sprache"
-
-#: sonar/config.py:279
-msgid "author"
-msgstr "Autor"
-
-#: sonar/config.py:280
-msgid "subject"
-msgstr "Stichwort"
-
 #: sonar/config.py:289
 msgid "Best match"
 msgstr "Beste Übereinstimmung"
@@ -57,6 +41,38 @@ msgstr "Beste Übereinstimmung"
 #: sonar/config.py:295
 msgid "Most recent"
 msgstr "Neueste"
+
+#: sonar/modules/documents/templates/documents/record.html:58
+msgid "Authors"
+msgstr "Autoren"
+
+#: sonar/modules/documents/templates/documents/record.html:63
+msgid "Abstract"
+msgstr "Zusammenfassung"
+
+#: sonar/modules/documents/templates/documents/record.html:70
+msgid "Physical description"
+msgstr "Physische Beschreibung"
+
+#: sonar/modules/documents/templates/documents/record.html:75
+msgid "Subject"
+msgstr "Subjekt"
+
+#: sonar/modules/documents/templates/documents/record.html:80
+msgid "Language"
+msgstr "Sprache"
+
+#: sonar/modules/documents/templates/documents/record.html:85
+msgid "Notes"
+msgstr "Notizen"
+
+#: sonar/modules/documents/templates/documents/record.html:91
+msgid "ISBN"
+msgstr "ISBN"
+
+#: sonar/modules/documents/templates/documents/record.html:97
+msgid "Permalink"
+msgstr "Permalink"
 
 #: sonar/theme/templates/sonar/401.html:13
 msgid "Unauthorized"
@@ -233,4 +249,3 @@ msgstr "Zurück zu SONAR"
 #: sonar/theme/templates/sonar/partial/navbar.html:44
 msgid "Log in"
 msgstr "Einloggen"
-
