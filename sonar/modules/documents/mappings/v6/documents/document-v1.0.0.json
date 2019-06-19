@@ -15,11 +15,16 @@
           "type": "text"
         },
         "abstracts": {
-          "type": "text"
+          "type": "object"
         },
         "subjects": {
-          "type": "text",
-          "copy_to": "facet_subjects"
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "text",
+              "copy_to": "facet_subjects"
+            }
+          }
         },
         "facet_subjects": {
           "type": "keyword"
@@ -41,7 +46,7 @@
         "languages": {
           "type": "object",
           "properties": {
-            "language": {
+            "name": {
               "type": "keyword"
             }
           }

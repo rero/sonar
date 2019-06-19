@@ -12,26 +12,29 @@ import re
 import sys
 
 import requests
+from babel import Locale
 from dojson import Overdo, utils
+from flask import current_app
 
 marc21tojson = Overdo()
 
 
 def remove_punctuation(data):
     """Remove punctuation from data."""
-    try:
-        if data[-1:] == ',':
-            data = data[:-1]
-        if data[-2:] == ' :':
-            data = data[:-2]
-        if data[-2:] == ' ;':
-            data = data[:-2]
-        if data[-2:] == ' /':
-            data = data[:-2]
-        if data[-2:] == ' -':
-            data = data[:-2]
-    except Exception:
-        pass
+    if not isinstance(data, str):
+        return data
+
+    if data[-1:] == ',':
+        data = data[:-1]
+    if data[-2:] == ' :':
+        data = data[:-2]
+    if data[-2:] == ' ;':
+        data = data[:-2]
+    if data[-2:] == ' /':
+        data = data[:-2]
+    if data[-2:] == ' -':
+        data = data[:-2]
+
     return data
 
 
@@ -150,7 +153,12 @@ def marc21_to_languages(self, key, value):
     languages: 008 and 041 [$a, repetitive]
     """
     language = value.strip()[35:38]
-    to_return = [{'language': language}]
+    code = current_app.config.get('SONAR_APP_LANGUAGES_MAP')[language]
+
+    to_return = [{
+        'code': language,
+        'name': Locale(code).get_language_name().capitalize()
+    }]
     return to_return
 
 
@@ -165,7 +173,7 @@ def marc21_to_translatedFrom(self, key, value):
     languages = self.get('languages', [])
     unique_lang = []
     if languages != []:
-        unique_lang.append(languages[0]['language'])
+        unique_lang.append(languages[0]['code'])
 
     language = value.get('a')
     if language:
@@ -175,7 +183,11 @@ def marc21_to_translatedFrom(self, key, value):
 
     languages = []
     for lang in unique_lang:
-        languages.append({'language': lang})
+        code = current_app.config.get('SONAR_APP_LANGUAGES_MAP')[lang]
+        languages.append({
+            'code': lang,
+            'name': Locale(code).get_language_name().capitalize()
+        })
 
     self['languages'] = languages
     translated = value.get('h')
@@ -327,7 +339,10 @@ def marc21_to_abstracts(self, key, value):
 
     abstract: [520$a repetitive]
     """
-    return ', '.join(utils.force_list(value.get('a')))
+    return {
+        'language': value.get('9'),
+        'value': ', '.join(utils.force_list(value.get('a')))
+    }
 
 
 @marc21tojson.over('identifiers', '^020..')
@@ -380,6 +395,7 @@ def marc21_to_is_part_of(self, key, value):
 
 
 @marc21tojson.over('subjects', '^6....')
+@utils.for_each_value
 @utils.ignore_value
 def marc21_to_subjects(self, key, value):
     """Get subjects.
@@ -387,4 +403,4 @@ def marc21_to_subjects(self, key, value):
     subjects: 6xx [duplicates could exist between several vocabularies,
         if possible deduplicate]
     """
-    return value.get('a').split(' ; ')
+    return dict(language=value.get('9'), value=value.get('a').split(' ; '))

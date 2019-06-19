@@ -41,3 +41,57 @@ def test_detail(app, client):
 
     # assert isinstance(views.detail('1', record, ir='sonar'), str)
     assert client.get('/organization/sonar/documents/1').status_code == 200
+
+
+def test_authors_format():
+    """Test author format filter."""
+    authors = [{'name': 'John Newby'}, {'name': 'Kevin Doner'}]
+
+    assert views.authors_format(authors) == 'John Newby ; Kevin Doner'
+
+
+def test_nl2br():
+    """Test nl2br conversion."""
+    text = 'Multiline text\nMultiline text'
+    assert views.nl2br(text) == 'Multiline text<br>Multiline text'
+
+
+def test_translate_content(app):
+    """Test content item translation."""
+    assert views.translate_content([], 'fr') is None
+
+    records = [{
+        'language': 'eng',
+        'value': 'Summary of content'
+    }, {
+        'language': 'fre',
+        'value': 'Résumé du contenu'
+    }]
+    assert views.translate_content(records, 'fr') == 'Résumé du contenu'
+    assert views.translate_content(records, 'de') == 'Summary of content'
+    assert views.translate_content(records, 'pt') == 'Summary of content'
+
+    with pytest.raises(Exception) as e:
+        views.translate_content(records, 'de', 'not_existing_key')
+    assert str(
+        e.value
+    ) == 'Value key "not_existing_key" in {record} does not exist'.format(
+        record=records[0])
+
+
+def test_get_code_from_bibliographic_language(app):
+    """Test bibliographic language code to alpha 2 code conversion."""
+    assert views.get_language_from_bibliographic_code('ger') == 'de'
+
+    with pytest.raises(Exception) as e:
+        views.get_language_from_bibliographic_code('zzz')
+    assert str(e.value) == 'Language code not found for "zzz"'
+
+
+def test_get_bibliographic_code_from_language(app):
+    """Test bibliographic language code to alpha 2 code conversion."""
+    with pytest.raises(Exception) as e:
+        views.get_bibliographic_code_from_language("zz")
+    assert str(e.value) == 'Language code not found for "zz"'
+
+    assert views.get_bibliographic_code_from_language('de') == 'ger'

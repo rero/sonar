@@ -17,9 +17,11 @@ def test_simple_flow(client):
     """Test simple flow using REST API."""
     headers = [('Content-Type', 'application/json')]
     data = {
-            'title': 'The title of the record',
-            'abstracts': ['Record summary']
-        }
+        'title': 'The title of the record',
+        'abstracts': [
+            {'language': 'fre', 'value': 'Record summary'}
+        ],
+    }
     url = 'https://localhost:5000/documents/'
 
     # create a record
