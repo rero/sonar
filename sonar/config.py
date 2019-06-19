@@ -44,7 +44,8 @@ BABEL_DEFAULT_LANGUAGE = 'en'
 BABEL_DEFAULT_TIMEZONE = 'Europe/Zurich'
 #: Other supported languages (do not include the default language in list).
 I18N_LANGUAGES = [
-    ('fr', _('French'))
+    ('fr', _('French')),
+    ('de', _('German'))
 ]
 
 # Base templates
@@ -179,6 +180,7 @@ SEARCH_UI_JSTEMPLATE_SORT_ORDER = 'templates/documents/search_ui/'\
 SEARCH_UI_JSTEMPLATE_SELECT_BOX = 'templates/documents/search_ui/'\
                                   'select_box.html'
 SEARCH_UI_JSTEMPLATE_LOADING = 'templates/documents/search_ui/loading.html'
+SEARCH_UI_JSTEMPLATE_FACETS = 'templates/documents/search_ui/facets.html'
 
 SECURITY_LOGIN_USER_TEMPLATE = 'sonar/accounts/login.html'
 SECURITY_FORGOT_PASSWORD_TEMPLATE = 'sonar/accounts/forgot_password.html'
@@ -265,12 +267,47 @@ RECORDS_REST_ENDPOINTS = {
 
 RECORDS_REST_FACETS = {
     'documents': dict(
+        aggs=dict(
+            institution=dict(terms=dict(field='institution.pid')),
+            language=dict(terms=dict(field='languages.language')),
+            author=dict(terms=dict(field='facet_authors')),
+            subject=dict(terms=dict(field='facet_subjects'))
+        ),
         filters={
-            _('institution'): terms_filter('institution.pid')
+            _('institution'): terms_filter('institution.pid'),
+            _('language'): terms_filter('languages.language'),
+            _('author'): terms_filter('facet_authors'),
+            _('subject'): terms_filter('facet_subjects'),
         }
     )
 }
 """REST search facets."""
+
+RECORDS_REST_SORT_OPTIONS = dict(
+    documents=dict(
+        bestmatch=dict(
+            title=_('Best match'),
+            fields=['_score'],
+            default_order='desc',
+            order=2,
+        ),
+        mostrecent=dict(
+            title=_('Most recent'),
+            fields=['-_created'],
+            default_order='asc',
+            order=1,
+        ),
+    )
+)
+"""Setup sorting options."""
+
+RECORDS_REST_DEFAULT_SORT = dict(
+    documents=dict(
+        query='bestmatch',
+        noquery='mostrecent',
+    ),
+)
+"""Set default sorting options."""
 
 SONAR_ENDPOINTS_ENABLED = True
 """Enable/disable automatic endpoint registration."""

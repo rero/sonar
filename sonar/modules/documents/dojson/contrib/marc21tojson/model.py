@@ -380,7 +380,6 @@ def marc21_to_is_part_of(self, key, value):
 
 
 @marc21tojson.over('subjects', '^6....')
-@utils.for_each_value
 @utils.ignore_value
 def marc21_to_subjects(self, key, value):
     """Get subjects.
@@ -388,4 +387,4 @@ def marc21_to_subjects(self, key, value):
     subjects: 6xx [duplicates could exist between several vocabularies,
         if possible deduplicate]
     """
-    return value.get('a')
+    return value.get('a').split(' ; ')

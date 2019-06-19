@@ -21,6 +21,9 @@
           "type": "text",
           "copy_to": "facet_subjects"
         },
+        "facet_subjects": {
+          "type": "keyword"
+        },
         "identifiers": {
           "type": "object",
           "properties": {
@@ -50,9 +53,13 @@
           "type": "object",
           "properties": {
             "name": {
-              "type": "text"
+              "type": "text",
+              "copy_to": "facet_authors"
             }
           }
+        },
+        "facet_authors": {
+          "type": "keyword"
         },
         "extent": {
           "type": "keyword"
@@ -67,7 +74,7 @@
               "type": "keyword"
             },
             "name": {
-              "type": "text"
+              "type": "keyword"
             }
           }
         },
