@@ -26,6 +26,7 @@ RUN pip install . && \
     invenio webpack create && \
     # --unsafe needed because we are running as root
     invenio webpack install --unsafe && \
-    invenio webpack build
+    invenio webpack build &&  \
+    python ./setup.py compile_catalog
 
 ENTRYPOINT [ "bash", "-c"]
