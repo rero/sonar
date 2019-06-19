@@ -177,7 +177,7 @@ def marc21_to_translatedFrom(self, key, value):
     languages = self.get('languages', [])
     unique_lang = []
     if languages != []:
-        unique_lang.append(languages[0]['language'])
+        unique_lang.append(languages[0])
 
     language = value.get('a')
     if language:
@@ -187,7 +187,7 @@ def marc21_to_translatedFrom(self, key, value):
 
     languages = []
     for lang in unique_lang:
-        languages.append(get_locale_from_language(lang))
+        languages.append(lang)
 
     self['languages'] = languages
     translated = value.get('h')

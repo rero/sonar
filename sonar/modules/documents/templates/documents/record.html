@@ -47,7 +47,9 @@
   -->
   {% set record = record.replace_refs() %}
   <h1 class="text-primary">{{record.title}}</h1>
+  {% if record.institution %}
   <h5 class="text-secondary">{{record.institution.name}}</h5>
+  {% endif %}
   
   <section class="mt-3">
     <dl class="row">
@@ -74,7 +76,9 @@
     {% endif %}
 
     <!-- LANGUAGE -->
-    {{ dl(_('Language'), record.languages[0] | translate_language(current_i18n.language)) }}
+    {% if record.languages|length > 0 %}
+      {{ dl(_('Language'), record.languages[0] | translate_language(current_i18n.language)) }}
+    {% endif %}
 
     <!-- NOTES -->
     {% if record.notes|length > 0 %}

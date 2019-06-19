@@ -182,7 +182,7 @@ def test_marc21_to_titlesProper():
     assert data.get('titlesProper') == ['proper title', 'other proper title']
 
 
-def test_marc21_to_languages():
+def test_marc21_to_languages(app):
     """Test dojson marc21languages."""
 
     marc21xml = """
@@ -198,7 +198,7 @@ def test_marc21_to_languages():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('languages') == [{'language': 'ara'}, {'language': 'eng'}]
+    assert data.get('languages') == ['ar', 'en']
     assert data.get('translatedFrom') == ['ita']
 
     marc21xml = """
@@ -216,12 +216,8 @@ def test_marc21_to_languages():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('languages') == [
-        {'language': 'ara'},
-        {'language': 'eng'},
-        {'language': 'fre'}
-    ]
-    assert data.get('translatedFrom') == ['ita', 'ger']
+    assert data.get('languages') == ['ara', 'en', 'fr']
+    assert data.get('translatedFrom') == ['it', 'de']
 
     marc21xml = """
     <record>
@@ -235,7 +231,7 @@ def test_marc21_to_languages():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('languages') == [{'language': 'ara'}, {'language': 'eng'}]
+    assert data.get('languages') == ['ar', 'en']
     assert 'translatedFrom' not in data
 
 
@@ -544,7 +540,7 @@ def test_marc21_to_is_part_of():
     assert data.get('is_part_of') == 'Stuart Hall : critical dialogues'
 
 
-def test_marc21_to_subjects():
+def test_marc21_to_subjects(app):
     """Test dojson subjects."""
 
     marc21xml = """

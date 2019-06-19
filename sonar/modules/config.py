@@ -16,4 +16,5 @@ SONAR_APP_LANGUAGE_MAP = {
     "eng": "en",
     "ita": "it",
     "spa": "es",
+    "ara": "ar"
 }
