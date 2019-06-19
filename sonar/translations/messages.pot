@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.0.1\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2019-06-06 12:05+0200\n"
+"POT-Creation-Date: 2019-07-08 15:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,6 +31,22 @@ msgstr ""
 
 #: sonar/config.py:95
 msgid "Welcome to Swiss Open Access Repository!"
+msgstr ""
+
+#: sonar/config.py:277
+msgid "institution"
+msgstr ""
+
+#: sonar/config.py:278
+msgid "language"
+msgstr ""
+
+#: sonar/config.py:279
+msgid "author"
+msgstr ""
+
+#: sonar/config.py:280
+msgid "subject"
 msgstr ""
 
 #: sonar/config.py:289
@@ -78,10 +94,6 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: sonar/theme/templates/sonar/footer.html:19
-msgid "Language:"
-msgstr ""
-
 #: sonar/theme/templates/sonar/footer.html:32
 msgid "Help"
 msgstr ""
@@ -107,34 +119,38 @@ msgstr ""
 msgid "Advanced search"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:57
-msgid "The project"
+#: sonar/theme/templates/sonar/frontpage.html:51
+msgid "Software under development!"
 msgstr ""
 
 #: sonar/theme/templates/sonar/frontpage.html:58
+msgid "The project"
+msgstr ""
+
+#: sonar/theme/templates/sonar/frontpage.html:59
 msgid ""
 "The SONAR project aims to create a scholarly archive that collects, "
 "promotes and preserves the publications of authors affiliated with Swiss "
 "public research institutions."
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:59
+#: sonar/theme/templates/sonar/frontpage.html:60
 msgid "Further info on the project page"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:62
+#: sonar/theme/templates/sonar/frontpage.html:63
 msgid "Institution views (test)"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:66
+#: sonar/theme/templates/sonar/frontpage.html:67
 msgid "Follow us"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:71
+#: sonar/theme/templates/sonar/frontpage.html:72
 msgid "Project website on"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:77
+#: sonar/theme/templates/sonar/frontpage.html:78
 msgid "Source code on"
 msgstr ""
 

@@ -1,4 +1,4 @@
-# French translations for sonar.
+# German translations for sonar.
 # Copyright (C) 2019 RERO
 # This file is distributed under the same license as the sonar project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
@@ -8,11 +8,11 @@ msgstr ""
 "Project-Id-Version: sonar 0.0.1\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
 "POT-Creation-Date: 2019-07-08 15:59+0200\n"
-"PO-Revision-Date: 2019-06-06 11:09+0200\n"
+"PO-Revision-Date: 2019-06-13 10:45+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: fr\n"
-"Language-Team: fr <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,7 +32,7 @@ msgstr "Swiss Open Access Repository"
 
 #: sonar/config.py:95
 msgid "Welcome to Swiss Open Access Repository!"
-msgstr "Bienvenue sur Swiss Open Access Repository"
+msgstr "Willkommen im Swiss Open Access Repository!"
 
 #: sonar/config.py:277
 msgid "institution"
@@ -40,93 +40,93 @@ msgstr "Institution"
 
 #: sonar/config.py:278
 msgid "language"
-msgstr "Langue"
+msgstr "Sprache"
 
 #: sonar/config.py:279
 msgid "author"
-msgstr "Author"
+msgstr "Autor"
 
 #: sonar/config.py:280
 msgid "subject"
-msgstr "Mot-clé"
+msgstr "Stichwort"
 
 #: sonar/config.py:289
 msgid "Best match"
-msgstr "Meilleure correspondance"
+msgstr "Beste Übereinstimmung"
 
 #: sonar/config.py:295
 msgid "Most recent"
-msgstr "Les plus récents"
+msgstr "Neueste"
 
 #: sonar/theme/templates/sonar/401.html:13
 msgid "Unauthorized"
-msgstr "Non autorisé"
+msgstr "Nicht autorisiert"
 
 #: sonar/theme/templates/sonar/401.html:14
 msgid "You need to be authenticated to view this page."
-msgstr "Vous devez être authentifié pour voir cette page."
+msgstr "Sie müssen authentifiziert sein, um diese Seite anzuzeigen."
 
 #: sonar/theme/templates/sonar/403.html:13
 msgid "Permission required"
-msgstr "Permission requise"
+msgstr "Genehmigung erforderlich"
 
 #: sonar/theme/templates/sonar/403.html:14
 msgid "You do not have sufficient permissions to view this page."
-msgstr "Vous n'avez pas suffisamment de permissions pour voir cette page."
+msgstr "Du hast nicht genügend Berechtigungen, um diese Seite anzuzeigen."
 
 #: sonar/theme/templates/sonar/404.html:13
 msgid "Page not found"
-msgstr "Page non trouvée"
+msgstr "Seite nicht gefunden"
 
 #: sonar/theme/templates/sonar/404.html:14
 msgid "The page you are looking for could not be found."
-msgstr "La page que vous recherchez n'a pas pu être trouvée."
+msgstr "Die gesuchte Seite konnte nicht gefunden werden."
 
 #: sonar/theme/templates/sonar/500.html:13
 msgid "Internal server error"
-msgstr "Erreur interne du serveur"
+msgstr "Interner Serverfehler"
 
 #: sonar/theme/templates/sonar/500.html:15
 msgid "Error identifier"
-msgstr "Identifiant d'erreur"
+msgstr "Fehleridentifikationsnummer"
 
 #: sonar/theme/templates/sonar/admin_header.html:72
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:8
 msgid "Logout"
-msgstr "Déconnexion"
+msgstr "Abmeldung"
 
 #: sonar/theme/templates/sonar/footer.html:32
 msgid "Help"
-msgstr "Aide"
+msgstr "Hilfe"
 
 #: sonar/theme/templates/sonar/footer.html:35
 msgid "About"
-msgstr "A propos"
+msgstr "Über uns"
 
 #: sonar/theme/templates/sonar/footer.html:38
 msgid "Contact"
-msgstr "Contact"
+msgstr "Kontakt"
 
 #: sonar/theme/templates/sonar/footer.html:43
 #, python-format
 msgid "Powered by <a href=\"%(link)s\" target=\"_blank\">RERO</a>"
-msgstr "Réalisé par <a href=\"%(link)s\" target=\"_blank\">RERO</a>"
+msgstr "Angetrieben von <a href=\"%(link)s\" target=\"_blank\">RERO</a>"
 
 #: sonar/theme/templates/sonar/frontpage.html:33
 msgid "Search publications, authors, projects, ..."
-msgstr "Recherche de publications, auteurs, projets, ..."
+msgstr "Suche nach Publikationen, Autoren, Projekten, ..."
 
 #: sonar/theme/templates/sonar/frontpage.html:35
 msgid "Advanced search"
-msgstr "Recherche avancée"
+msgstr "Erweiterte Suche"
 
 #: sonar/theme/templates/sonar/frontpage.html:51
 msgid "Software under development!"
-msgstr "Logiciel en cours de développement&#x202F;!"
+msgstr "Software in Entwicklung!"
 
 #: sonar/theme/templates/sonar/frontpage.html:58
 msgid "The project"
-msgstr "Le projet"
+msgstr "Das Projekt"
 
 #: sonar/theme/templates/sonar/frontpage.html:59
 msgid ""
@@ -134,29 +134,30 @@ msgid ""
 "promotes and preserves the publications of authors affiliated with Swiss "
 "public research institutions."
 msgstr ""
-"Le projet SONAR a pour but de créer une archive scientifique qui "
-"recueille, promeut et préserve les publications des auteurs affiliés aux "
-"institutions publiques suisses de recherche."
+"Das SONAR-Projekt zielt darauf ab, ein wissenschaftliches Archiv zu "
+"schaffen, das Folgendes sammelt, fördert und bewahrt die Publikationen "
+"von mit der Schweiz verbundenen Autoren öffentliche "
+"Forschungseinrichtungen."
 
 #: sonar/theme/templates/sonar/frontpage.html:60
 msgid "Further info on the project page"
-msgstr "Plus d'informations sur la page du projet"
+msgstr "Weitere Informationen auf der Projektseite"
 
 #: sonar/theme/templates/sonar/frontpage.html:63
 msgid "Institution views (test)"
-msgstr "Vues institutionelles (test)"
+msgstr "Institutsansichten (Test)"
 
 #: sonar/theme/templates/sonar/frontpage.html:67
 msgid "Follow us"
-msgstr "Suivez-nous"
+msgstr "Folgen Sie uns"
 
 #: sonar/theme/templates/sonar/frontpage.html:72
 msgid "Project website on"
-msgstr "Site web du projet sur"
+msgstr "Projekt-Website auf"
 
 #: sonar/theme/templates/sonar/frontpage.html:78
 msgid "Source code on"
-msgstr "Code source sur"
+msgstr "Sourcecode auf github"
 
 #: sonar/theme/templates/sonar/page.html:34
 #: sonar/theme/templates/sonar/page_admin.html:34
@@ -165,70 +166,70 @@ msgstr "Invenio"
 
 #: sonar/theme/templates/sonar/page_settings.html:19
 msgid "Settings"
-msgstr "Réglages"
+msgstr "Einstellungen"
 
 #: sonar/theme/templates/sonar/search.html:45
 msgid "Sort by"
-msgstr "Trier par"
+msgstr "Sortiert nach"
 
 #: sonar/theme/templates/sonar/search.html:80
 msgid "Loading..."
-msgstr "Chargement..."
+msgstr "Ladung..."
 
 #: sonar/theme/templates/sonar/search.html:87
 msgid "Search failed."
-msgstr "Echec de la recherche."
+msgstr "Suche fehlgeschlagen."
 
 #: sonar/theme/templates/sonar/accounts/forgot_password.html:11
 #: sonar/theme/templates/sonar/accounts/forgot_password.html:21
 msgid "Reset Password"
-msgstr "Réinitialiser le mot de passe"
+msgstr "Passwort zurücksetzen"
 
 #: sonar/theme/templates/sonar/accounts/forgot_password.html:17
 msgid ""
 "Enter your email address below and we will send you a link to reset your "
 "password."
 msgstr ""
-"Entrez votre adresse email ci-dessous et nous vous enverrons un lien pour"
-" réinitialiser votre mot de passe."
+"Geben Sie unten Ihre E-Mail-Adresse ein und wir senden Ihnen einen Link, "
+"um Ihr Passwort zurückzusetzen."
 
 #: sonar/theme/templates/sonar/accounts/forgot_password.html:28
 #: sonar/theme/templates/sonar/accounts/login.html:16
 #: sonar/theme/templates/sonar/accounts/signup.html:31
 msgid "Log In"
-msgstr "Identification"
+msgstr "Einloggen"
 
 #: sonar/theme/templates/sonar/accounts/forgot_password.html:30
 #: sonar/theme/templates/sonar/accounts/login.html:24
 #: sonar/theme/templates/sonar/accounts/signup.html:25
 msgid "Sign Up"
-msgstr "S'inscrire"
+msgstr "Registrieren"
 
 #: sonar/theme/templates/sonar/accounts/login.html:9
 msgid "Log in to account"
-msgstr "Connectez-vous à votre compte"
+msgstr "Melden Sie sich bei Ihrem Konto an"
 
 #: sonar/theme/templates/sonar/accounts/login.html:22
 msgid "Forgot password?"
-msgstr "Mot de passe oublié?"
+msgstr "Passwort vergessen?"
 
 #: sonar/theme/templates/sonar/accounts/signup.html:10
 msgid "Sign up for a %(sitename)s account!"
-msgstr "Inscrivez-vous pour un compte %(sitename)s!"
+msgstr "Melde dich für ein %(sitename)s-Konto an!"
 
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:5
 msgid "Profile"
-msgstr "Profile"
+msgstr "Profil"
 
 #: sonar/theme/templates/sonar/partial/navbar.html:26
 msgid "Search"
-msgstr "Recherche"
+msgstr "Suche"
 
 #: sonar/theme/templates/sonar/partial/navbar.html:36
 msgid "Back to SONAR"
-msgstr "Retour à SONAR"
+msgstr "Zurück zu SONAR"
 
 #: sonar/theme/templates/sonar/partial/navbar.html:44
 msgid "Log in"
-msgstr "Identification"
+msgstr "Einloggen"
 
