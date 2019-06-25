@@ -16,6 +16,16 @@
           <button type="submit" class="btn btn-secondary btn-lg btn-block text-light"><i class="fa fa-sign-in"></i> {{_('Log In')}}</button>
           {%- endwith %}
         </form>
+        <hr class="my-5">
+        <div class="row">
+          <div class="col">
+            <a href="{{ url_for('invenio_oauthclient.login', remote_app='orcid') }}"
+              class="btn btn-outline-primary btn-block">
+              {% trans type='ORCID' %}Sign-in with {{ type }}{% endtrans %}
+            </a>
+          </div>
+          <div class="col"></div>
+        </div>
       </div>
     </div>
     <div class="mt-2 text-right">

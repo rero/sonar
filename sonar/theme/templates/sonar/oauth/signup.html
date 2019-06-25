@@ -1,0 +1,44 @@
+{# -*- coding: utf-8 -*-
+
+  This file is part of Invenio.
+  Copyright (C) 2015-2018 CERN.
+
+  Invenio is free software; you can redistribute it and/or modify it
+  under the terms of the MIT License; see LICENSE file for more details.
+#}
+
+{%- extends config.OAUTHCLIENT_SETTINGS_TEMPLATE %}
+
+{% from "invenio_oauthclient/_macros.html" import render_field, form_errors %}
+
+{% block page_body %}
+<div class="row justify-content-center">
+    {%- block signup_panel %}
+    <div class="col-md-6">
+        {%- block signup_header %}
+        {%- block signup_app_icon %}
+        {% if app_icon -%}
+        <span class="pull-right"><i class="{{ app_icon }} fa-5x"></i></span>
+        {%- endif %}
+        {%- endblock %}
+        <h3>
+            {% trans type=app_title %}Sign-up with {{ type }}{% endtrans %}
+        </h3>
+        <p>{{ _('Fill in your details to complete your registration. You only have to do this once.') }}</p>
+        <hr />
+        {% endblock %}
+        {%- block signup_form %}
+        <form name="edit" method="post" role="form">
+            {{ form_errors(form) }}
+            {{ form.hidden_tag() }}
+            {{ render_field(form.profile.full_name) }}
+            {{ render_field(form.profile.username) }}
+            {{ render_field(form.email) }}
+            <button type="submit" class="btn btn-secondary btn-lg btn-block text-light"><i class="fa fa-edit"></i>
+                {{ _('Sign Up') }}</button>
+        </form>
+        {%- endblock %}
+    </div>
+    {%- endblock %}
+</div>
+{% endblock %}
