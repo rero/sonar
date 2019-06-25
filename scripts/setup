@@ -31,3 +31,10 @@ pipenv run invenio roles add admin@sonar.ch admin
 pipenv run invenio fixtures institutions import
 pipenv run invenio fixtures documents import hevs
 pipenv run invenio fixtures documents import usi
+
+# Dump translations
+pipenv run python ./setup.py compile_catalog
+
+# Build assets
+pipenv run invenio collect -v
+pipenv run invenio webpack buildall
