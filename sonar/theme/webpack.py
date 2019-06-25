@@ -14,17 +14,17 @@ from flask_webpackext import WebpackBundle
 
 theme = WebpackBundle(
     __name__,
-    'assets',
+    "assets",
     entry={
-        'app': './js/app.js',
-        'search_ui': './js/search_ui.js',
-        'sonar-theme': './scss/sonar/theme.scss',
-        'usi-theme': './scss/usi/theme.scss'
+        "app": "./js/app.js",
+        "search_ui": "./js/search_ui.js",
+        "sonar-theme": "./scss/sonar/theme.scss",
+        "usi-theme": "./scss/usi/theme.scss",
     },
     dependencies={
-        'popper.js': '^1.15',
-        'jquery': '^3.2',
-        'bootstrap': '^4.3',
-        'font-awesome': '^4.0'
-    }
+        "popper.js": "^1.15",
+        "jquery": "^3.2",
+        "bootstrap": "^4.3",
+        "font-awesome": "^4.0",
+    },
 )

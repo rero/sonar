@@ -4,30 +4,32 @@
       <a href="#" class="page-link" ng-click="paginationHelper.changePage(1)" aria-label="First">
         <span aria-hidden="true">
           <i class="fa fa-angle-double-left"></i>
-        <span>
+          <span>
       </a>
     </li>
     <li class="page-item" ng-class="paginationHelper.getPrevClass()">
-      <a href="#" class="page-link" ng-click="paginationHelper.changePage(paginationHelper.previous())" aria-label="Previous">
+      <a href="#" class="page-link" ng-click="paginationHelper.changePage(paginationHelper.previous())"
+        aria-label="Previous">
         <span aria-hidden="true">
-            <i class="fa fa-angle-left"></i>
+          <i class="fa fa-angle-left"></i>
         </span>
       </a>
     </li>
     <li class="page-item" ng-class="paginationHelper.getPageClass(page.value)" ng-repeat="page in paginatePages">
-      <a href="#" class="page-link" ng-click="paginationHelper.changePage(page.value)" alt="{{ page.title }}">{{ page.value }}</a>
+      <a href="#" class="page-link" ng-click="paginationHelper.changePage(page.value)"
+        alt="{{ page.title }}">{{ page.value }}</a>
     </li>
     <li class="page-item" ng-class="paginationHelper.getNextClass()">
       <a href="#" class="page-link" ng-click="paginationHelper.changePage(paginationHelper.next())" aria-label="Next">
         <span aria-hidden="true">
-            <i class="fa fa-angle-right"></i>
+          <i class="fa fa-angle-right"></i>
         </span>
       </a>
     </li>
     <li class="page-item" ng-show="showGoToFirstLast" ng-class="paginationHelper.getLastClass()">
       <a href="#" class="page-link" ng-click="paginationHelper.changePage(paginationHelper.total())" aria-label="Last">
         <span aria-hidden="true">
-            <i class="fa fa-angle-double-right"></i>
+          <i class="fa fa-angle-double-right"></i>
         </span>
       </a>
     </li>

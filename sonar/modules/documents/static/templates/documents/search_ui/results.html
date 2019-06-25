@@ -8,11 +8,13 @@
 -->
 
 <div ng-repeat="record in vm.invenioSearchResults.hits.hits track by $index">
-  <p class="m-0"><i>{{record.metadata.institution.name}}</i></p>
-  <h2 class="mb-3"><a target="_self" ng-href="/organization/{{config.ir}}/documents/{{ record.id }}">{{ record.metadata.title }}</a></h2>
-  <p><span class="badge badge-secondary text-light mr-2 p-2" ng-repeat="author in record.metadata.authors">{{author.name}}</span></p>
+  <p class="m-0"><i>{{ record.metadata.institution.name }}</i></p>
+  <h2 class="mb-3"><a target="_self"
+      ng-href="/organization/{{ config.ir }}/documents/{{ record.id }}">{{ record.metadata.title }}</a></h2>
+  <p><span class="badge badge-secondary text-light mr-2 p-2"
+      ng-repeat="author in record.metadata.authors">{{ author.name }}</span></p>
   <p class="text-justify">
-    {{record.metadata.abstracts[0]}}
+    {{ record.metadata.abstracts[0] }}
   </p>
   <hr />
 </div>

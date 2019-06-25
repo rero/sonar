@@ -18,5 +18,6 @@ from .institutions.cli import institutions
 def fixtures():
     """Fixtures management commands."""
 
+
 fixtures.add_command(documents)
 fixtures.add_command(institutions)

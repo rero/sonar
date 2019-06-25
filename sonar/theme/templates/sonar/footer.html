@@ -10,37 +10,21 @@
 <footer id="footer" class="bg-light mt-5">
   <div class="container">
     <div class="row justify-content-center align-items-center">
-      {#
-      <div class="col-6 col-sm-6 py-2 py-sm-5">
-        {%- if config.I18N_LANGUAGES %}
-          <form id="language-code-form" class="form-inline lang-select"
-              action="{{ url_for('invenio_i18n.set_lang')}}"
-              method="POST">
-            <label class="mr-3 d-none d-sm-block" for="lang-code">{{ _('Language:') }}</label>
-            <select id="lang-code" class="form-control mt-2 mt-sm-0" name="lang_code">
-              {% for l in current_i18n.get_locales() %}
-                <option {% if current_i18n.language == l.language %}selected {% endif %}value="{{ l.language }}">{{ l.get_display_name() }}</option>
-              {% endfor %}
-            </select>
-          </form>
-        {%- endif %}
-      </div>
-      #}
       <div class="col-12 col-sm-6 py-2 py-sm-5 text-center text-sm-left">
         <div class="d-flex flex-row">
           <div>
-              <a href="#">{{_('Help')}}</a>
+            <a href="#">{{ _('Help') }}</a>
           </div>
           <div class="ml-3">
-              <a href="#">{{_('About')}}</a>
+            <a href="#">{{ _('About') }}</a>
           </div>
           <div class="ml-3">
-              <a href="#">{{_('Contact')}}</a>
+            <a href="#">{{ _('Contact') }}</a>
           </div>
         </div>
       </div>
       <div class="col-12 col-sm-6 py-2 py-sm-5 text-center text-sm-right">
-        {% trans link="https://www.rero.ch" %}Powered by <a href="{{link}}" target="_blank">RERO</a>{% endtrans %}
+        {% trans link="https://www.rero.ch" %}Powered by <a href="{{ link }}" target="_blank">RERO</a>{% endtrans %}
       </div>
     </div>
   </div>

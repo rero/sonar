@@ -26,7 +26,7 @@ class SonarRecord(Record):
     minter = None
     fetcher = None
     provider = None
-    object_type = 'rec'
+    object_type = "rec"
     schema = None
 
     @classmethod
@@ -38,15 +38,16 @@ class SonarRecord(Record):
         if not id_:
             id_ = uuid4()
 
-        if '$schema' not in data:
+        if "$schema" not in data:
             data["$schema"] = current_jsonschemas.path_to_url(
-                '{schema}s/{schema}-v1.0.0.json'.format(schema=cls.schema))
+                "{schema}s/{schema}-v1.0.0.json".format(schema=cls.schema)
+            )
 
         cls.minter(id_, data)
 
         record = super(SonarRecord, cls).create(data=data, id_=id_, **kwargs)
 
-        if(dbcommit):
+        if dbcommit:
             record.dbcommit()
 
         return record
@@ -57,12 +58,10 @@ class SonarRecord(Record):
         assert cls.provider
         try:
             persistent_identifier = PersistentIdentifier.get(
-                cls.provider.pid_type,
-                pid
+                cls.provider.pid_type, pid
             )
             return super(SonarRecord, cls).get_record(
-                persistent_identifier.object_uuid,
-                with_deleted=with_deleted
+                persistent_identifier.object_uuid, with_deleted=with_deleted
             )
         except NoResultFound:
             return None
@@ -72,10 +71,9 @@ class SonarRecord(Record):
     @classmethod
     def get_ref_link(cls, type, id):
         """Get $ref link for the given type of record."""
-        return 'https://{host}/api/{type}/{id}'.format(
-            host=current_app.config.get('JSONSCHEMAS_HOST'),
-            type=type,
-            id=id)
+        return "https://{host}/api/{type}/{id}".format(
+            host=current_app.config.get("JSONSCHEMAS_HOST"), type=type, id=id
+        )
 
     def dbcommit(self):
         """Commit changes to db."""
@@ -88,4 +86,4 @@ class SonarSearch(RecordsSearch):
     class Meta:
         """Search only on item index."""
 
-        index = 'records'
+        index = "records"

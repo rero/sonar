@@ -17,9 +17,7 @@ from ..providers import Provider
 
 # provider
 InstitutionProvider = type(
-    'InstitutionProvider',
-    (Provider,),
-    dict(pid_type='inst')
+    "InstitutionProvider", (Provider,), dict(pid_type="inst")
 )
 # minter
 institution_pid_minter = partial(id_minter, provider=InstitutionProvider)
@@ -33,7 +31,7 @@ class InstitutionSearch(SonarSearch):
     class Meta:
         """Search only on item index."""
 
-        index = 'institutions'
+        index = "institutions"
         doc_types = []
 
 
@@ -43,4 +41,4 @@ class InstitutionRecord(SonarRecord):
     minter = institution_pid_minter
     fetcher = institution_pid_fetcher
     provider = InstitutionProvider
-    schema = 'institution'
+    schema = "institution"

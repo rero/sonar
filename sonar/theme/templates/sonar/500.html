@@ -10,8 +10,8 @@
 {% extends config.THEME_ERROR_TEMPLATE %}
 
 {% block message %}
-  <h1><i class="fa fa-flash"></i> {{_('Internal server error')}}</h1>
-  {% if g.sentry_event_id %}
-  <p><small class="text-muted">{{_('Error identifier')}}: {{ g.sentry_event_id }}</small></p>
-  {% endif %}
+<h1><i class="fa fa-flash"></i> {{ _('Internal server error') }}</h1>
+{% if g.sentry_event_id %}
+<p><small class="text-muted">{{ _('Error identifier') }}: {{ g.sentry_event_id }}</small></p>
+{% endif %}
 {% endblock message %}

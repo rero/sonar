@@ -1,45 +1,42 @@
 <div ng-init="tree=[];tree_more=[]" ng-repeat="aggr in orderedAggs track by $index">
-    <div ng-if="aggr.value.buckets.length > 0 || getValues(aggr.key)" class="card bg-light mb-2">
-      <div class="card-body">
-        <h5 class="card-title">{{ aggr.key }}</h5>
-        <ul class="list-unstyled my-1" ng-init="values = getValues(aggr.key)" ng-repeat="item in aggr.value.buckets">
-          <li>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" ng-checked="values.indexOf(item.key) > -1" ng-click="handleClick(aggr.key, item.key)" />
-                <label class="form-check-label">
-                    {{ item.key }} ({{ item.doc_count }})
-                    <small>
-                            <a
-                                ng-init="tree_more[item.key] = false; tree[item.key] = (values.indexOf(item.key) > -1) ? true : false"
-                                ng-model="tree[item.key]"
-                                ng-show="tree_more[item.key]"
-                                ng-click="tree[item.key]=!tree[item.key]"
-                            >{{ (tree[item.key]) ? '-' : '+' }}
-                            </a>
-                        </small>
-                </label>
+  <div ng-if="aggr.value.buckets.length > 0 || getValues(aggr.key)" class="card bg-light mb-2">
+    <div class="card-body">
+      <h5 class="card-title">{{ aggr.key }}</h5>
+      <ul class="list-unstyled my-1" ng-init="values = getValues(aggr.key)" ng-repeat="item in aggr.value.buckets">
+        <li>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" ng-checked="values.indexOf(item.key) > -1"
+              ng-click="handleClick(aggr.key, item.key)" />
+            <label class="form-check-label">
+              {{ item.key }} ({{ item.doc_count }})
+              <small>
+                <a ng-init="tree_more[item.key] = false; tree[item.key] = (values.indexOf(item.key) > -1) ? true : false"
+                  ng-model="tree[item.key]" ng-show="tree_more[item.key]"
+                  ng-click="tree[item.key]=!tree[item.key]">{{ (tree[item.key]) ? '-' : '+' }}
+                </a>
+              </small>
+            </label>
+          </div>
+          <div ng-show="tree[item.key] === true" ng-repeat="(subKey, subValue) in item">
+            <div ng-if="['doc_count', 'key'].indexOf(subKey) === -1">
+              <ul ng-init="tree_more[item.key] = true; subValues = getValues(subKey)"
+                ng-repeat="subFacets in subValue.buckets">
+                <li>
+                  <input ng-init="tree[item.key] = (subValues.indexOf(subFacets.key) > -1 || tree[item.key])"
+                    type="checkbox" ng-checked="subValues.indexOf(subFacets.key) > -1"
+                    ng-click="handleClick(subKey, subFacets.key)" /> {{ subFacets.key }} ({{ subFacets.doc_count }})
+                </li>
+              </ul>
             </div>
-            <div ng-show="tree[item.key] === true" ng-repeat="(subKey, subValue) in item">
-              <div ng-if="['doc_count', 'key'].indexOf(subKey) === -1">
-                <ul ng-init="tree_more[item.key] = true; subValues = getValues(subKey)" ng-repeat="subFacets in subValue.buckets">
-                  <li>
-                    <input
-                      ng-init="tree[item.key] = (subValues.indexOf(subFacets.key) > -1 || tree[item.key])"
-                      type="checkbox"
-                      ng-checked="subValues.indexOf(subFacets.key) > -1"
-                      ng-click="handleClick(subKey, subFacets.key)" /> {{ subFacets.key }} ({{ subFacets.doc_count }})
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <!-- Show previously selected facets with zero results at the bottom -->
-        <ul class="list-unstyled" ng-repeat="selectedValue in getValues(aggr.key)">
-          <li ng-if="(aggr.value.buckets | filter:{key:selectedValue}:true).length == 0">
-            <input type="checkbox" checked ng-click="handleClick(aggr.key, selectedValue)" /> {{ selectedValue }} (0)
-          </li>
-        </ul>
-      </div>
+          </div>
+        </li>
+      </ul>
+      <!-- Show previously selected facets with zero results at the bottom -->
+      <ul class="list-unstyled" ng-repeat="selectedValue in getValues(aggr.key)">
+        <li ng-if="(aggr.value.buckets | filter:{key:selectedValue}:true).length == 0">
+          <input type="checkbox" checked ng-click="handleClick(aggr.key, selectedValue)" /> {{ selectedValue }} (0)
+        </li>
+      </ul>
     </div>
   </div>
+</div>

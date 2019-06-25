@@ -22,7 +22,7 @@ class Institutions(object):
     def init_app(self, app):
         """Flask application initialization."""
         self.init_config(app)
-        app.extensions['sonar_institutions'] = self
+        app.extensions["sonar_institutions"] = self
 
     def init_config(self, app):
         """Initialize configuration.

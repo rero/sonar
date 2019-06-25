@@ -8,9 +8,6 @@
 
 """SONAR documents configuration."""
 
-SONAR_DOCUMENTS_RERO_DOC_URL = 'http://doc.rero.ch/search'
+SONAR_DOCUMENTS_RERO_DOC_URL = "http://doc.rero.ch/search"
 
-SONAR_DOCUMENTS_INSTITUTIONS_MAP = dict(
-    usi='ticino.unisi',
-    hevs='valais.hevs'
-)
+SONAR_DOCUMENTS_INSTITUTIONS_MAP = dict(usi="ticino.unisi", hevs="valais.hevs")

@@ -13,75 +13,82 @@
 
 {% block header %}
 <div class="bg-ir p-4">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-8 col-xs-6 col-lg-4 py-3 py-sm-5">
-            <a href="{{ url_for('documents.index', ir=g.ir|default('sonar')) }}">
-                {%- if config.THEME_LOGO %}
-                  <img src="{{ url_for('static', filename='images/' ~ g.ir|default('sonar') ~ '-logo.svg')}}" alt="{{_(config.THEME_SITENAME)}}" class="logo"/>
-                {%- else %}
-                  {{_(config.THEME_SITENAME)}}
-                {%- endif %}
-            </a>
-        </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-8 col-xs-6 col-lg-4 py-3 py-sm-5">
+        <a href="{{ url_for('documents.index', ir=g.ir|default('sonar')) }}">
+          {%- if config.THEME_LOGO %}
+          <img src="{{ url_for('static', filename='images/' ~ g.ir|default('sonar') ~ '-logo.svg') }}"
+            alt="{{ _(config.THEME_SITENAME) }}" class="logo" />
+          {%- else %}
+          {{ _(config.THEME_SITENAME) }}
+          {%- endif %}
+        </a>
       </div>
-      <div class="row justify-content-center">
-          <div class="col-sm-12 col-lg-8 text-right my-4">
-            <form class="justify-content-end" action="{{ url_for('documents.search', ir=g.ir|default('sonar')) }}" role="search">
-              <div class="row">
-                <div class="col-12 col-sm-11">
-                    <input class="form-control form-control-lg mr-2" type="search" placeholder="{{_('Search publications, authors, projects, ...')}}" aria-label="Search" name="q">
-                    <div class="text-right mt-2 mr-2">
-                      <a href="#" class="text-light"><u>> {{_('Advanced search')}}</u></a>
-                    </div>
-                </div>
-                <div class="col-2 col-sm-1 d-none d-sm-block">
-                  <button class="btn btn-link btn-lg" type="submit">
-                    <i class="fa fa-search fa-lg text-ir"></i>
-                  </button>
-                </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-lg-8 text-right my-4">
+        <form class="justify-content-end" action="{{ url_for('documents.search', ir=g.ir|default('sonar')) }}"
+          role="search">
+          <div class="row">
+            <div class="col-12 col-sm-11">
+              <input class="form-control form-control-lg mr-2" type="search"
+                placeholder="{{ _('Search publications, authors, projects, ...') }}" aria-label="Search" name="q">
+              <div class="text-right mt-2 mr-2">
+                <a href="#" class="text-light"><u>> {{ _('Advanced search') }}</u></a>
               </div>
-            </form>
+            </div>
+            <div class="col-2 col-sm-1 d-none d-sm-block">
+              <button class="btn btn-link btn-lg" type="submit">
+                <i class="fa fa-search fa-lg text-ir"></i>
+              </button>
+            </div>
           </div>
-        </div>
+        </form>
+      </div>
     </div>
   </div>
-  <div class="bg-secondary text-light text-center py-3">
-    <h5 class="m-0">Software under development !</h6>
-  </div>
+</div>
+<div class="bg-secondary text-light text-center py-3">
+  <h5 class="m-0">Software under development !</h5>
+</div>
 {% endblock %}
 
 {%- block page_body %}
-  <div class="row">
-    <div class="col-sm-12 col-lg-4 pr-5">
-      <h3 class="mb-4">{{_('The project')}}</h2>
-      <p>{{_('The SONAR project aims to create a scholarly archive that collects, promotes and preserves the publications of authors affiliated with Swiss public research institutions.')}}</p>
-      <p>{{_('Further info on the project page')}} <a href="https://sonar.ch/project" target="_blank">sonar.ch</a>.</p>
-    </div>
-    <div class="col-sm-12 col-lg-4 px-5 mt-5 mt-lg-0">
-        <h3 class="mb-4">{{_('Institution views (test)')}}</h2>
-        <a href="{{ url_for('documents.index', ir='usi') }}">Università della Svizzera italiana</a>
-    </div>
-    <div class="col-sm-12 col-lg-4 pl-5 mt-5 mt-lg-0">
-        <h3 class="mb-4">{{_('Follow us')}}</h2>
-        <div class="row align-items-center">
-          <div class="col-2">
-            <i class="fa fa-globe fa-2x"></i>
-          </div>
-          <div class="col-10">{{_('Project website on')}} <a href="https://sonar.ch" target="_blank">sonar.ch</a></div>
-        </div>
-        <div class="row align-items-center mt-3">
-          <div class="col-2">
-            <i class="fa fa-github fa-2x"></i>
-          </div>
-          <div class="col-10">{{_('Source code on')}} <a href="https://github.com/rero/sonar" target="_blank">Github</a></div>
-        </div>
-        <div class="row align-items-center mt-3">
-          <div class="col-2">
-            <i class="fa fa-twitter fa-2x"></i>
-          </div>
-          <div class="col-10"> <a href="https://twitter.com/sonardotch" target="_blank">Twitter</a></div>
-        </div>
-    </div>
+<div class="row">
+  <div class="col-sm-12 col-lg-4 pr-5">
+    <h3 class="mb-4">{{ _('The project') }}</h2>
+      <p>
+        {{ _('The SONAR project aims to create a scholarly archive that collects, promotes and preserves the publications of authors affiliated with Swiss public research institutions.' )}}
+      </p>
+      <p>{{ _('Further info on the project page') }} <a href="https://sonar.ch/project" target="_blank">sonar.ch</a>.
+      </p>
   </div>
+  <div class="col-sm-12 col-lg-4 px-5 mt-5 mt-lg-0">
+    <h3 class="mb-4">{{ _('Institution views (test)') }}</h2>
+      <a href="{{ url_for('documents.index', ir='usi') }}">Università della Svizzera italiana</a>
+  </div>
+  <div class="col-sm-12 col-lg-4 pl-5 mt-5 mt-lg-0">
+    <h3 class="mb-4">{{ _('Follow us') }}</h2>
+      <div class="row align-items-center">
+        <div class="col-2">
+          <i class="fa fa-globe fa-2x"></i>
+        </div>
+        <div class="col-10">{{ _('Project website on') }} <a href="https://sonar.ch" target="_blank">sonar.ch</a></div>
+      </div>
+      <div class="row align-items-center mt-3">
+        <div class="col-2">
+          <i class="fa fa-github fa-2x"></i>
+        </div>
+        <div class="col-10">{{ _('Source code on') }} <a href="https://github.com/rero/sonar" target="_blank">Github</a>
+        </div>
+      </div>
+      <div class="row align-items-center mt-3">
+        <div class="col-2">
+          <i class="fa fa-twitter fa-2x"></i>
+        </div>
+        <div class="col-10"> <a href="https://twitter.com/sonardotch" target="_blank">Twitter</a></div>
+      </div>
+  </div>
+</div>
 {%- endblock %}

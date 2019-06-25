@@ -7,28 +7,30 @@
 <div class="col-12 col-lg-6">
   <div class="card card-light text-dark">
     <div class="card-body p-3 p-lg-5">
-      <h4 class="text-center mb-4">{% trans sitename=config.ACCOUNTS_SITENAME %}Sign up for a {{ sitename }} account!{% endtrans %}</h3>
+      <h4 class="text-center mb-4">
+        {% trans sitename=config.ACCOUNTS_SITENAME %}Sign up for a {{ sitename }} account !{% endtrans %}</h3>
         {%- with form = register_user_form %}
-          <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
-            {{ form_errors(form) }}
-            {{ form.hidden_tag() }}
-            {%- block registration_form_fields scoped %}
-            {{ render_field(form.email, icon="glyphicon glyphicon-user", autofocus=True, errormsg=False) }}
-            {{ render_field(form.password, icon="glyphicon glyphicon-lock", errormsg=False) }}
-            {%- if form.password_confirm %}
-              {{ render_field(form.password_confirm, icon="glyphicon glyphicon-lock", errormsg=False) }}
-            {%- endif %}
-            {%- endblock registration_form_fields %}
-            {%- if form.recaptcha %}
-              <div class="form-group form-group-lg">{{ form.recaptcha() }}</div>
-            {%- endif %}
-            <button type="submit" class="btn btn-secondary btn-lg btn-block text-light"><i class="fa fa-edit"></i> {{ _('Sign Up') }}</button>
-          </form>
+        <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
+          {{ form_errors(form) }}
+          {{ form.hidden_tag() }}
+          {%- block registration_form_fields scoped %}
+          {{ render_field(form.email, icon="glyphicon glyphicon-user", autofocus=True, errormsg=False) }}
+          {{ render_field(form.password, icon="glyphicon glyphicon-lock", errormsg=False) }}
+          {%- if form.password_confirm %}
+          {{ render_field(form.password_confirm, icon="glyphicon glyphicon-lock", errormsg=False) }}
+          {%- endif %}
+          {%- endblock registration_form_fields %}
+          {%- if form.recaptcha %}
+          <div class="form-group form-group-lg">{{ form.recaptcha() }}</div>
+          {%- endif %}
+          <button type="submit" class="btn btn-secondary btn-lg btn-block text-light"><i class="fa fa-edit"></i>
+            {{ _('Sign Up') }}</button>
+        </form>
         {%- endwith %}
     </div>
   </div>
   <div class="mt-2 text-right">
-      <a href="{{ url_for_security('login') }}" class="text-light">{{ _('Log In') }}</a>
+    <a href="{{ url_for_security('login') }}" class="text-light">{{ _('Log In') }}</a>
   </div>
 </div>
 {% endblock panel %}

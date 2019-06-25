@@ -18,11 +18,7 @@ from ..minters import id_minter
 from ..providers import Provider
 
 # provider
-DocumentProvider = type(
-    'DocumentProvider',
-    (Provider,),
-    dict(pid_type='doc')
-)
+DocumentProvider = type("DocumentProvider", (Provider,), dict(pid_type="doc"))
 # minter
 document_pid_minter = partial(id_minter, provider=DocumentProvider)
 # fetcher
@@ -35,7 +31,7 @@ class DocumentSearch(SonarSearch):
     class Meta:
         """Search only on item index."""
 
-        index = 'documents'
+        index = "documents"
         doc_types = []
 
 
@@ -45,4 +41,4 @@ class DocumentRecord(SonarRecord):
     minter = document_pid_minter
     fetcher = document_pid_fetcher
     provider = DocumentProvider
-    schema = 'document'
+    schema = "document"

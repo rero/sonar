@@ -17,15 +17,18 @@ from sonar.modules.institutions.api import InstitutionRecord
 
 def test_institution_resolver(client):
     """Test institution resolver."""
-    InstitutionRecord.create({
-        "pid": "usi",
-        "name": "Università della Svizzera italiana"
-    })
+    InstitutionRecord.create(
+        {"pid": "usi", "name": "Università della Svizzera italiana"}
+    )
 
-    record = DocumentRecord.create({
-        "title": "The title of the record",
-        "institution": {"$ref": "https://sonar.ch/api/institutions/usi"}
-    })
+    record = DocumentRecord.create(
+        {
+            "title": "The title of the record",
+            "institution": {"$ref": "https://sonar.ch/api/institutions/usi"},
+        }
+    )
 
-    assert record.replace_refs().get('institution')['name'] == 'Università ' \
-        'della Svizzera italiana'
+    assert (
+        record.replace_refs().get("institution")["name"] == "Università "
+        "della Svizzera italiana"
+    )

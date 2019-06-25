@@ -13,66 +13,65 @@
 {%- set body_css_classes=['cover-page', 'bg-primary'] %}
 
 {%- block body %}
-  {%- block browserupgrade %}
-    <!--[if lt IE 8]>
+{%- block browserupgrade %}
+<!--[if lt IE 8]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-  {%- endblock browserupgrade %}
+{%- endblock browserupgrade %}
 
-  <div class="site-wrapper mt-5 text-light">
+<div class="site-wrapper mt-5 text-light">
   {% block page_header %}
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-12 col-lg-6 text-center">
-          {%- block brand %}
-            {%- if config.THEME_LOGO %}
-              <a href="/">
-                <img class="text-center logo"
-                  src="{{ url_for('static', filename=config.THEME_LOGO)}}"
-                  alt="{{ _(config.THEME_SITENAME) }}" height="70" />
-              </a>
-            {%- elif config.THEME_SITENAME %}
-              <a href="/" class="text-center masthead-brand">
-                {{ _(config.THEME_SITENAME) }}
-              </a>
-            {% endif %}
-          {%- endblock %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-6 text-center">
+        {%- block brand %}
+        {%- if config.THEME_LOGO %}
+        <a href="/">
+          <img class="text-center logo" src="{{ url_for('static', filename=config.THEME_LOGO) }}"
+            alt="{{ _(config.THEME_SITENAME) }}" height="70" />
+        </a>
+        {%- elif config.THEME_SITENAME %}
+        <a href="/" class="text-center masthead-brand">
+          {{ _(config.THEME_SITENAME) }}
+        </a>
+        {% endif %}
+        {%- endblock %}
 
-          <div class="mt-5">
-            {%- block flashmessages %}
-              {%- from "invenio_theme/macros/messages.html" import flashed_messages with context -%}
-              {{ flashed_messages() }}
-            {%- endblock flashmessages %}
-          </div>
+        <div class="mt-5">
+          {%- block flashmessages %}
+          {%- from "invenio_theme/macros/messages.html" import flashed_messages with context -%}
+          {{ flashed_messages() }}
+          {%- endblock flashmessages %}
         </div>
       </div>
     </div>
-  {% endblock page_header%}
-  
-  {%- block page_body %}
-    <div class="container">
-      <div class="row justify-content-center">
-        {% block panel %}
-          <div class="col-12 col-lg-6">
-            <div class="card">
-              <div class="card-body">
-              {% block panel_content %}
-                <h1 class="text-center">{{ panel_title }}</h3>
-              {% endblock panel_content %}
-              </div>
-            </div>
-          </div>
-        {% endblock panel %}
-      </div>
-    </div>
-  {%- endblock page_body %}
   </div>
+  {% endblock page_header%}
 
-  {%- block javascript %}
-    {% include config.THEME_JAVASCRIPT_TEMPLATE %}
-  {% endblock javascript %}
+  {%- block page_body %}
+  <div class="container">
+    <div class="row justify-content-center">
+      {% block panel %}
+      <div class="col-12 col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            {% block panel_content %}
+            <h1 class="text-center">{{ panel_title }}</h3>
+              {% endblock panel_content %}
+          </div>
+        </div>
+      </div>
+      {% endblock panel %}
+    </div>
+  </div>
+  {%- endblock page_body %}
+</div>
 
-  {%- block trackingcode %}
-    {% include config.THEME_TRACKINGCODE_TEMPLATE %}
-  {% endblock %}
+{%- block javascript %}
+{% include config.THEME_JAVASCRIPT_TEMPLATE %}
+{% endblock javascript %}
+
+{%- block trackingcode %}
+{% include config.THEME_TRACKINGCODE_TEMPLATE %}
+{% endblock %}
 {%- endblock body %}

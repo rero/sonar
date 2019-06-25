@@ -17,16 +17,17 @@ from sonar.modules.documents.dojson.contrib.marc21tojson import marc21tojson
 
 def test_remove_punctuation():
     """Test remove punctuation from string."""
-    assert model.remove_punctuation(
-            'lorem ipsum - / ; :,') == 'lorem ipsum'
+    assert model.remove_punctuation("lorem ipsum - / ; :,") == "lorem ipsum"
 
 
 def test_get_mef_person_link():
     """Test getting MEF link."""
-    assert model.get_mef_person_link(None, '', '') is None
+    assert model.get_mef_person_link(None, "", "") is None
 
-    assert model.get_mef_person_link(
-            '(RERO)A012327677', '', '')[:28] == 'https://mef.rero.ch/api/mef/'
+    assert (
+        model.get_mef_person_link("(RERO)A012327677", "", "")[:28]
+        == "https://mef.rero.ch/api/mef/"
+    )
 
 
 def test_marc21_to_type():
@@ -48,7 +49,7 @@ def test_marc21_to_type():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('type') == 'book'
+    assert data.get("type") == "book"
 
     marc21xml = """
     <record>
@@ -57,7 +58,7 @@ def test_marc21_to_type():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('type') == 'journal'
+    assert data.get("type") == "journal"
 
     marc21xml = """
     <record>
@@ -66,7 +67,7 @@ def test_marc21_to_type():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('type') == 'article'
+    assert data.get("type") == "article"
 
     marc21xml = """
     <record>
@@ -75,7 +76,7 @@ def test_marc21_to_type():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('type') == 'score'
+    assert data.get("type") == "score"
     marc21xml = """
     <record>
         <leader>00501nda a2200133 a 4500</leader>
@@ -83,7 +84,7 @@ def test_marc21_to_type():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('type') == 'score'
+    assert data.get("type") == "score"
 
     marc21xml = """
     <record>
@@ -92,7 +93,7 @@ def test_marc21_to_type():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('type') == 'sound'
+    assert data.get("type") == "sound"
     marc21xml = """
     <record>
         <leader>00501nja a2200133 a 4500</leader>
@@ -100,7 +101,7 @@ def test_marc21_to_type():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('type') == 'sound'
+    assert data.get("type") == "sound"
 
     marc21xml = """
     <record>
@@ -109,7 +110,7 @@ def test_marc21_to_type():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('type') == 'video'
+    assert data.get("type") == "video"
 
 
 def test_marc21_to_title():
@@ -127,7 +128,7 @@ def test_marc21_to_title():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('title') == 'main title : subtitle'
+    assert data.get("title") == "main title : subtitle"
     # subfields $a $c
     marc21xml = """
     <record>
@@ -139,7 +140,7 @@ def test_marc21_to_title():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('title') == 'main title'
+    assert data.get("title") == "main title"
     # subfield $a
     marc21xml = """
     <record>
@@ -150,7 +151,7 @@ def test_marc21_to_title():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('title') == 'main title'
+    assert data.get("title") == "main title"
 
 
 def test_marc21_to_titlesProper():
@@ -165,7 +166,7 @@ def test_marc21_to_titlesProper():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('titlesProper') == ['proper title']
+    assert data.get("titlesProper") == ["proper title"]
 
     marc21xml = """
     <record>
@@ -179,7 +180,7 @@ def test_marc21_to_titlesProper():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('titlesProper') == ['proper title', 'other proper title']
+    assert data.get("titlesProper") == ["proper title", "other proper title"]
 
 
 def test_marc21_to_languages():
@@ -198,8 +199,8 @@ def test_marc21_to_languages():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('languages') == [{'language': 'ara'}, {'language': 'eng'}]
-    assert data.get('translatedFrom') == ['ita']
+    assert data.get("languages") == [{"language": "ara"}, {"language": "eng"}]
+    assert data.get("translatedFrom") == ["ita"]
 
     marc21xml = """
     <record>
@@ -216,12 +217,12 @@ def test_marc21_to_languages():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('languages') == [
-        {'language': 'ara'},
-        {'language': 'eng'},
-        {'language': 'fre'}
+    assert data.get("languages") == [
+        {"language": "ara"},
+        {"language": "eng"},
+        {"language": "fre"},
     ]
-    assert data.get('translatedFrom') == ['ita', 'ger']
+    assert data.get("translatedFrom") == ["ita", "ger"]
 
     marc21xml = """
     <record>
@@ -235,8 +236,8 @@ def test_marc21_to_languages():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('languages') == [{'language': 'ara'}, {'language': 'eng'}]
-    assert 'translatedFrom' not in data
+    assert data.get("languages") == [{"language": "ara"}, {"language": "eng"}]
+    assert "translatedFrom" not in data
 
 
 def test_marc21_to_authors():
@@ -262,24 +263,21 @@ def test_marc21_to_authors():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    authors = data.get('authors')
+    authors = data.get("authors")
     assert authors == [
         {
-            'name': 'Jean-Paul II',
-            'type': 'person',
-            'date': '1954-',
-            'qualifier': 'Pape'
+            "name": "Jean-Paul II",
+            "type": "person",
+            "date": "1954-",
+            "qualifier": "Pape",
         },
         {
-            'name': 'Dumont, Jean',
-            'type': 'person',
-            'date': '1921-2014',
-            'qualifier': 'Historien'
+            "name": "Dumont, Jean",
+            "type": "person",
+            "date": "1921-2014",
+            "qualifier": "Historien",
         },
-        {
-            'name': 'RERO',
-            'type': 'organisation'
-        }
+        {"name": "RERO", "type": "organisation"},
     ]
     marc21xml = """
     <record>
@@ -302,18 +300,15 @@ def test_marc21_to_authors():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    authors = data.get('authors')
+    authors = data.get("authors")
     assert authors == [
         {
-            'name': 'Jean-Paul II',
-            'type': 'person',
-            'date': '1954-',
-            'qualifier': 'Pape'
+            "name": "Jean-Paul II",
+            "type": "person",
+            "date": "1954-",
+            "qualifier": "Pape",
         },
-        {
-            'name': 'RERO',
-            'type': 'organisation'
-        }
+        {"name": "RERO", "type": "organisation"},
     ]
 
 
@@ -331,13 +326,10 @@ def test_marc21_to_publishers_publicationDate():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('publishers') == [
-        {
-            'place': ['Lausanne'],
-            'name': ['Payot'],
-        }
+    assert data.get("publishers") == [
+        {"place": ["Lausanne"], "name": ["Payot"]}
     ]
-    assert data.get('publicationYear') == 2015
+    assert data.get("publicationYear") == 2015
 
     marc21xml = """
     <record>
@@ -351,13 +343,10 @@ def test_marc21_to_publishers_publicationDate():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('publishers') == [
-        {
-            'place': ['Paris', 'Lausanne'],
-            'name': ['Payot'],
-        }
+    assert data.get("publishers") == [
+        {"place": ["Paris", "Lausanne"], "name": ["Payot"]}
     ]
-    assert data.get('publicationYear') == 1920
+    assert data.get("publicationYear") == 1920
 
     marc21xml = """
     <record>
@@ -372,18 +361,12 @@ def test_marc21_to_publishers_publicationDate():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('publishers') == [
-        {
-            'place': ['Paris'],
-            'name': ['Champion']
-        },
-        {
-            'place': ['Genève'],
-            'name': ['Droz']
-        }
+    assert data.get("publishers") == [
+        {"place": ["Paris"], "name": ["Champion"]},
+        {"place": ["Genève"], "name": ["Droz"]},
     ]
-    assert data.get('freeFormedPublicationDate') == '1912-1955'
-    assert data.get('publicationYear') == 1912
+    assert data.get("freeFormedPublicationDate") == "1912-1955"
+    assert data.get("publicationYear") == 1912
 
 
 def test_marc21_to_description():
@@ -410,9 +393,9 @@ def test_marc21_to_description():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('extent') == '116 p.'
-    assert data.get('otherMaterialCharacteristics') == 'ill.'
-    assert data.get('formats') == ['22 cm']
+    assert data.get("extent") == "116 p."
+    assert data.get("otherMaterialCharacteristics") == "ill."
+    assert data.get("formats") == ["22 cm"]
 
     marc21xml = """
     <record>
@@ -431,9 +414,9 @@ def test_marc21_to_description():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('extent') == '116 p.'
-    assert data.get('otherMaterialCharacteristics') == 'ill.'
-    assert data.get('formats') == ['22 cm', '12 x 15']
+    assert data.get("extent") == "116 p."
+    assert data.get("otherMaterialCharacteristics") == "ill."
+    assert data.get("formats") == ["22 cm", "12 x 15"]
 
 
 def test_marc21_to_series():
@@ -452,15 +435,9 @@ def test_marc21_to_series():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('series') == [
-        {
-            'name': 'Collection One',
-            'number': '5'
-        },
-        {
-            'name': 'Collection Two',
-            'number': '123'
-        }
+    assert data.get("series") == [
+        {"name": "Collection One", "number": "5"},
+        {"name": "Collection Two", "number": "123"},
     ]
 
 
@@ -476,7 +453,7 @@ def test_marc21_to_abstract():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('abstracts') == ["This book is about"]
+    assert data.get("abstracts") == ["This book is about"]
 
 
 def test_marc21_to_identifiers():
@@ -490,7 +467,7 @@ def test_marc21_to_identifiers():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('identifiers') is None
+    assert data.get("identifiers") is None
 
     marc21xml = """
     <record>
@@ -504,9 +481,9 @@ def test_marc21_to_identifiers():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('identifiers') == {
-        'reroID': 'R123456789',
-        'isbn': '9782370550163'
+    assert data.get("identifiers") == {
+        "reroID": "R123456789",
+        "isbn": "9782370550163",
     }
 
 
@@ -525,7 +502,7 @@ def test_marc21_to_notes():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('notes') == ['note 1', 'note 2']
+    assert data.get("notes") == ["note 1", "note 2"]
 
 
 def test_marc21_to_is_part_of():
@@ -541,7 +518,7 @@ def test_marc21_to_is_part_of():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('is_part_of') == 'Stuart Hall : critical dialogues'
+    assert data.get("is_part_of") == "Stuart Hall : critical dialogues"
 
 
 def test_marc21_to_subjects():
@@ -556,7 +533,7 @@ def test_marc21_to_subjects():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('subjects') == ['subject 1', 'subject 2']
+    assert data.get("subjects") == ["subject 1", "subject 2"]
 
 
 def test_marc21_to_pid():
@@ -568,4 +545,4 @@ def test_marc21_to_pid():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('pid') == '4316'
+    assert data.get("pid") == "4316"

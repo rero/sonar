@@ -11,4 +11,4 @@ from __future__ import absolute_import, print_function
 
 from .json import InstitutionMetadataSchemaV1, InstitutionSchemaV1
 
-__all__ = ('InstitutionMetadataSchemaV1', 'InstitutionSchemaV1',)
+__all__ = ("InstitutionMetadataSchemaV1", "InstitutionSchemaV1")

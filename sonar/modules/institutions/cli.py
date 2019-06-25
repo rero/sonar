@@ -27,13 +27,14 @@ def institutions():
     """Institutions CLI commands."""
 
 
-@institutions.command('import')
+@institutions.command("import")
 @with_appcontext
 def import_institutions():
     """Import institutions from JSON file."""
-    institution_file = './data/institutions.json'
-    click.secho('Importing institution from {file}'.format(
-        file=institution_file))
+    institution_file = "./data/institutions.json"
+    click.secho(
+        "Importing institution from {file}".format(file=institution_file)
+    )
 
     indexer = RecordIndexer()
 
@@ -42,10 +43,10 @@ def import_institutions():
         for record in records:
             try:
                 # Check existence in DB
-                db_record = InstitutionRecord.get_record_by_pid(record['pid'])
+                db_record = InstitutionRecord.get_record_by_pid(record["pid"])
 
                 if db_record:
-                    raise ClickException('Record already exists in DB')
+                    raise ClickException("Record already exists in DB")
 
                 # Register record to DB
                 db_record = InstitutionRecord.create(record)
@@ -54,7 +55,11 @@ def import_institutions():
                 indexer.index(db_record)
             except Exception as error:
                 click.secho(
-                    'Institution {institution} could not be imported: {error}'
-                    .format(institution=record, error=str(error)), fg='red')
+                    "Institution {institution} could not "
+                    "be imported: {error}".format(
+                        institution=record, error=str(error)
+                    ),
+                    fg="red",
+                )
 
-    click.secho('Finished', fg='green')
+    click.secho("Finished", fg="green")

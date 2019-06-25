@@ -15,4 +15,4 @@ from sonar.modules.documents.api import DocumentRecord
 
 def test_id_fetcher():
     """Test id fetcher."""
-    assert DocumentRecord.fetcher('1', {'pid': '1'}).pid_value == '1'
+    assert DocumentRecord.fetcher("1", {"pid": "1"}).pid_value == "1"

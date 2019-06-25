@@ -16,12 +16,13 @@ from invenio_records.api import Record
 
 
 # the host corresponds to the config value for the key JSONSCHEMAS_HOST
-@jsonresolver.route('/api/institutions/<pid>', host='sonar.ch')
+@jsonresolver.route("/api/institutions/<pid>", host="sonar.ch")
 def institution_resolver(pid):
     """Resolve referenced institution."""
-    resolver = Resolver(pid_type='inst', object_type="rec",
-                        getter=Record.get_record)
+    resolver = Resolver(
+        pid_type="inst", object_type="rec", getter=Record.get_record
+    )
     _, record = resolver.resolve(pid)
 
-    del record['$schema']
+    del record["$schema"]
     return record

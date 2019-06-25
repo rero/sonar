@@ -15,4 +15,4 @@ from flask import url_for
 def test_error(client):
     """Test error page"""
     with pytest.raises(Exception):
-        assert client.get(url_for('sonar.error'))
+        assert client.get(url_for("sonar.error"))

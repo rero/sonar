@@ -24,10 +24,10 @@ class Documents(object):
     def init_app(self, app):
         """Flask application initialization."""
         self.init_config(app)
-        app.extensions['sonar_documents'] = self
+        app.extensions["sonar_documents"] = self
 
     def init_config(self, app):
         """Initialize configuration."""
         for k in dir(config):
-            if k.startswith('SONAR_DOCUMENTS_'):
+            if k.startswith("SONAR_DOCUMENTS_"):
                 app.config.setdefault(k, getattr(config, k))

@@ -32,9 +32,9 @@ def documents():
     """Documents CLI commands."""
 
 
-@documents.command('import')
-@click.argument('institution')
-@click.option('--pages', '-p', required=True, type=int, default=10)
+@documents.command("import")
+@click.argument("institution")
+@click.option("--pages", "-p", required=True, type=int, default=10)
 @with_appcontext
 def import_documents(institution, pages):
     """Import documents from RERO doc.
@@ -42,53 +42,64 @@ def import_documents(institution, pages):
     institution: String institution filter for retreiving documents
     pages: Number of pages to import
     """
-    url = current_app.config.get('SONAR_DOCUMENTS_RERO_DOC_URL')
+    url = current_app.config.get("SONAR_DOCUMENTS_RERO_DOC_URL")
 
     click.secho(
         'Importing {pages} pages of records for "{institution}" '
-        'from {url}'.format(pages=pages, institution=institution, url=url))
+        "from {url}".format(pages=pages, institution=institution, url=url)
+    )
 
     # Get institution record from database
     institution_record = InstitutionRecord.get_record_by_pid(institution)
 
     if not institution_record:
-        raise ClickException('Institution record not found in database')
+        raise ClickException("Institution record not found in database")
 
     institution_ref_link = InstitutionRecord.get_ref_link(
-        'institutions', institution_record['pid'])
+        "institutions", institution_record["pid"]
+    )
 
     # mapping between institution key and RERO doc filter
     institution_map = current_app.config.get(
-            'SONAR_DOCUMENTS_INSTITUTIONS_MAP')
+        "SONAR_DOCUMENTS_INSTITUTIONS_MAP"
+    )
 
     if not institution_map:
-        raise ClickException('Institution map not found in configuration')
+        raise ClickException("Institution map not found in configuration")
 
     if institution not in institution_map:
         raise ClickException(
             'Institution map for "{institution}" not found in configuration, '
-            'keys available {keys}'.format(
-                institution=institution,
-                keys=institution_map.keys()))
+            "keys available {keys}".format(
+                institution=institution, keys=institution_map.keys()
+            )
+        )
 
     key = institution_map[institution]
     current_page = 1
 
     indexer = RecordIndexer()
 
-    while(current_page <= pages):
-        click.echo('Importing records {start} to {end}... '.format(
-            start=(current_page*10-9), end=(current_page*10)), nl=False)
+    while current_page <= pages:
+        click.echo(
+            "Importing records {start} to {end}... ".format(
+                start=(current_page * 10 - 9), end=(current_page * 10)
+            ),
+            nl=False,
+        )
 
         # Read Marc21 data for current page
         response = requests.get(
-            '{url}?of=xm&jrec={first_record}&c=NAVSITE.{institution}'
-            .format(url=url,
-                    first_record=(current_page*10-9),
-                    institution=key.upper()), stream=True)
+            "{url}?of=xm&jrec={first_record}&c=NAVSITE.{institution}".format(
+                url=url,
+                first_record=(current_page * 10 - 9),
+                institution=key.upper(),
+            ),
+            stream=True,
+        )
         response.raw.decode_content = True
 
-        if(response.status_code != 200):
+        if response.status_code != 200:
             raise ClickException('Request to "{url}" failed'.format(url=url))
 
         ids = []
@@ -101,7 +112,7 @@ def import_documents(institution, pages):
             record = marc21tojson.do(record)
 
             # Add institution
-            record['institution'] = {'$ref': institution_ref_link}
+            record["institution"] = {"$ref": institution_ref_link}
 
             # Register record to DB
             db_record = DocumentRecord.create(record)
@@ -116,6 +127,6 @@ def import_documents(institution, pages):
 
         current_page += 1
 
-        click.secho('Done', fg='green', nl=True)
+        click.secho("Done", fg="green", nl=True)
 
-    click.secho('Finished', fg='green')
+    click.secho("Finished", fg="green")

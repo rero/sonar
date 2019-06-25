@@ -24,10 +24,10 @@ class Sonar(object):
     def init_app(self, app):
         """Flask application initialization."""
         self.init_config(app)
-        app.extensions['sonar_app'] = self
+        app.extensions["sonar_app"] = self
 
     def init_config(self, app):
         """Initialize configuration."""
         for k in dir(config):
-            if k.startswith('SONAR_APP_'):
+            if k.startswith("SONAR_APP_"):
                 app.config.setdefault(k, getattr(config, k))

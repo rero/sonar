@@ -1,9 +1,7 @@
 <div class="mt-1" ng-show="vm.invenioSearchResults.hits.total != undefined">
   <strong>
     <i>
-      <ng-pluralize
-        count="vm.invenioSearchResults.hits.total"
-        when="{'0': 'No results.',
+      <ng-pluralize count="vm.invenioSearchResults.hits.total" when="{'0': 'No results.',
           'one': 'Found 1 result.',
           'other': 'Found {} results.'}">
       </ng-pluralize>

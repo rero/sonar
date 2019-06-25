@@ -15,18 +15,18 @@ from invenio_search import current_search
 
 def test_simple_flow(client):
     """Test simple flow using REST API."""
-    headers = [('Content-Type', 'application/json')]
+    headers = [("Content-Type", "application/json")]
     data = {
-            'title': 'The title of the record',
-            'abstracts': ['Record summary']
-        }
-    url = 'https://localhost:5000/documents/'
+        "title": "The title of the record",
+        "abstracts": ["Record summary"],
+    }
+    url = "https://localhost:5000/documents/"
 
     # create a record
     response = client.post(url, data=json.dumps(data), headers=headers)
     assert response.status_code == 201
-    current_search.flush_and_refresh('documents')
+    current_search.flush_and_refresh("documents")
 
     # retrieve record
-    res = client.get('https://localhost:5000/documents/1')
+    res = client.get("https://localhost:5000/documents/1")
     assert res.status_code == 200

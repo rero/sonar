@@ -45,23 +45,23 @@ class Provider(BaseProvider):
         :param kwargs: You specify the pid_value.
         """
         # PID value not already exists, generating a new one
-        if not kwargs.get('pid_value'):
-            kwargs['pid_value'] = str(RecordIdentifier.next())
+        if not kwargs.get("pid_value"):
+            kwargs["pid_value"] = str(RecordIdentifier.next())
 
-        kwargs.setdefault('status', cls.default_status)
+        kwargs.setdefault("status", cls.default_status)
         if object_type and object_uuid:
-            kwargs['status'] = PIDStatus.REGISTERED
+            kwargs["status"] = PIDStatus.REGISTERED
 
         try:
             # Try to retreive PID
-            return cls.get(kwargs['pid_value'], cls.pid_type)
+            return cls.get(kwargs["pid_value"], cls.pid_type)
         except PIDDoesNotExistError:
             # Set default status
-            kwargs.setdefault('status', cls.default_status)
+            kwargs.setdefault("status", cls.default_status)
 
             # if record is registered, change PID status
             if object_type and object_uuid:
-                kwargs['status'] = PIDStatus.REGISTERED
+                kwargs["status"] = PIDStatus.REGISTERED
 
             # Call base provider
             return super(Provider, cls).create(

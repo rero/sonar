@@ -18,14 +18,11 @@ from __future__ import absolute_import, print_function
 from flask import Blueprint, g, render_template
 
 blueprint = Blueprint(
-    'sonar',
-    __name__,
-    template_folder='templates',
-    static_folder='static'
+    "sonar", __name__, template_folder="templates", static_folder="static"
 )
 
 
-@blueprint.route('/error')
+@blueprint.route("/error")
 def error():
     """Error to generate exception for test purposes."""
-    raise Exception('this is an error for test purposes')
+    raise Exception("this is an error for test purposes")
