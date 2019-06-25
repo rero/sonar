@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.0.1\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2019-07-16 07:35+0200\n"
+"POT-Creation-Date: 2019-07-22 13:54+0200\n"
 "PO-Revision-Date: 2019-06-13 10:45+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 
-#: sonar/config.py:47
+#: sonar/config.py:49
 msgid "French"
 msgstr "Français"
 
-#: sonar/config.py:48
+#: sonar/config.py:50
 msgid "German"
 msgstr "Deutsch"
 
-#: sonar/config.py:49
+#: sonar/config.py:51
 msgid "Italian"
 msgstr "Italiano"
 
-#: sonar/config.py:69 sonar/config.py:73
+#: sonar/config.py:71 sonar/config.py:75
 msgid "Swiss Open Access Repository"
 msgstr "Swiss Open Access Repository"
 
-#: sonar/config.py:96
+#: sonar/config.py:98
 msgid "Welcome to Swiss Open Access Repository!"
 msgstr "Willkommen im Swiss Open Access Repository!"
 
-#: sonar/config.py:278
+#: sonar/config.py:286
 msgid "institution"
 msgstr "Institution"
 
-#: sonar/config.py:279
+#: sonar/config.py:287
 msgid "language"
 msgstr "Sprache"
 
-#: sonar/config.py:280
+#: sonar/config.py:288
 msgid "author"
 msgstr "Autor"
 
-#: sonar/config.py:281
+#: sonar/config.py:289
 msgid "subject"
 msgstr "Stichwort"
 
-#: sonar/config.py:290
+#: sonar/config.py:298
 msgid "Best match"
 msgstr "Beste Übereinstimmung"
 
-#: sonar/config.py:296
+#: sonar/config.py:304
 msgid "Most recent"
 msgstr "Neueste"
 
@@ -199,13 +199,14 @@ msgstr ""
 
 #: sonar/theme/templates/sonar/accounts/forgot_password.html:28
 #: sonar/theme/templates/sonar/accounts/login.html:16
-#: sonar/theme/templates/sonar/accounts/signup.html:31
+#: sonar/theme/templates/sonar/accounts/signup.html:44
 msgid "Log In"
 msgstr "Einloggen"
 
 #: sonar/theme/templates/sonar/accounts/forgot_password.html:30
-#: sonar/theme/templates/sonar/accounts/login.html:24
-#: sonar/theme/templates/sonar/accounts/signup.html:25
+#: sonar/theme/templates/sonar/accounts/login.html:34
+#: sonar/theme/templates/sonar/accounts/signup.html:28
+#: sonar/theme/templates/sonar/oauth/signup.html:38
 msgid "Sign Up"
 msgstr "Registrieren"
 
@@ -213,14 +214,33 @@ msgstr "Registrieren"
 msgid "Log in to account"
 msgstr "Melden Sie sich bei Ihrem Konto an"
 
-#: sonar/theme/templates/sonar/accounts/login.html:22
+#: sonar/theme/templates/sonar/accounts/login.html:24
+#, python-format
+msgid "Sign-in with %(type)s"
+msgstr "Anmelden mit %(type)s"
+
+#: sonar/theme/templates/sonar/accounts/login.html:32
 msgid "Forgot password?"
 msgstr "Passwort vergessen?"
 
-#: sonar/theme/templates/sonar/accounts/signup.html:10
+#: sonar/theme/templates/sonar/accounts/signup.html:11
 #, python-format
-msgid "Sign up for a %(sitename)s account!"
+msgid "Sign up for a %(sitename)s account"
 msgstr "Melde dich für ein %(sitename)s-Konto an!"
+
+#: sonar/theme/templates/sonar/accounts/signup.html:36
+#: sonar/theme/templates/sonar/oauth/signup.html:25
+#, python-format
+msgid "Sign-up with %(type)s"
+msgstr "Anmelden mit %(type)s"
+
+#: sonar/theme/templates/sonar/oauth/signup.html:27
+msgid ""
+"Fill in your details to complete your registration. You only have to do "
+"this once."
+msgstr ""
+"Füllen Sie Ihre Daten aus, um Ihre Registrierung abzuschließen. Du musst "
+"das nur einmal machen."
 
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:5
 msgid "Profile"
@@ -237,4 +257,8 @@ msgstr "Zurück zu SONAR"
 #: sonar/theme/templates/sonar/partial/navbar.html:44
 msgid "Log in"
 msgstr "Einloggen"
+
+#: sonar/theme/templates/sonar/partial/navbar.html:50
+msgid "Sign up"
+msgstr "Registrieren"
 

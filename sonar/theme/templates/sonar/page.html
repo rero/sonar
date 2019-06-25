@@ -91,7 +91,7 @@
 
           {%- block flashmessages %}
             {%- from "sonar/macros/messages.html" import flashed_messages with context -%}
-            {{ flashed_messages() }}
+            <div class="my-5">{{ flashed_messages() }}</div>
           {%- endblock %}
 
           {%- block page_body %}{%- endblock page_body %}

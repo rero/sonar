@@ -41,24 +41,21 @@
             <ul class="navbar-nav ml-auto">
                 {%- if not current_user.is_authenticated %}
                     <li class="nav-item px-3 d-none d-lg-block">
-                        <a class="nav-link" href="{{url_for_security('login', next=request.path)}}" title="{{_('Log in')}}">
-                            <i class="fa fa-lock fa-lg"></i>
+                        <a class="nav-link" href="{{url_for_security('login', next=request.path)}}" title="{{ _('Log in') }}">
+                            <i class="fa fa-lock"></i>
                         </a>
                     </li>
-                    {#
                     {% if security.registerable %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for_security('register')}}">
-                        <i class="fa fa-sign-in fa-lg"></i> {{_('Sign up')}}
-                        </a>
+                        <a class="nav-link text-uppercase" href="{{ url_for_security('register') }}">{{ _('Sign up') }}</a>
                     </li>
                     {% endif %}
-                    #}
                 {% else %}
                     <li class="nav-item dropdown d-none d-lg-block px-3">
                     {% with dropdownId='userLinkDropdown' %}
-                        <a class="nav-link" href="#" id="{{dropdownId}}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-user"></i>
+                        <a class="nav-link text-uppercase" href="#" id="{{ dropdownId }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user mr-2"></i>
+                            {{ current_user.profile.full_name if current_user.profile.full_name else current_user.email }}
                         </a>
                         {% include 'sonar/partial/dropdown_user.html' %}
                     {% endwith %}

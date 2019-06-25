@@ -16,9 +16,11 @@ You overwrite and set instance-specific configuration by either:
 
 from __future__ import absolute_import, print_function
 
+import os
 from datetime import timedelta
 
 from invenio_indexer.api import RecordIndexer
+from invenio_oauthclient.contrib import orcid
 from invenio_records_rest.facets import terms_filter
 from invenio_records_rest.utils import allow_all, check_elasticsearch
 
@@ -102,6 +104,12 @@ ACCOUNTS_SESSION_REDIS_URL = 'redis://localhost:6379/1'
 #: proxies) removes these headers again before sending the response to the
 #: client. Set to False, in case of doubt.
 ACCOUNTS_USERINFO_HEADERS = True
+
+
+# User profiles
+# =============
+USERPROFILES_EXTEND_SECURITY_FORMS = True
+
 
 # Celery configuration
 # ====================
@@ -315,3 +323,34 @@ SONAR_ENDPOINTS_ENABLED = True
 
 JSONSCHEMAS_RESOLVE_SCHEMA = True
 JSONSCHEMAS_REPLACE_REFS = True
+
+
+# OAUTH
+# =====
+OAUTHCLIENT_REMOTE_APPS = dict(orcid=orcid.REMOTE_APP)
+
+ORCID_DOMAIN = 'sandbox.orcid.org'
+
+OAUTHCLIENT_REMOTE_APPS['orcid']['signup_handler']['info'] = \
+    'sonar.modules.oauth.orcid:account_info'
+OAUTHCLIENT_REMOTE_APPS['orcid']['signup_handler']['setup'] = \
+    'sonar.modules.oauth.orcid:account_setup'
+OAUTHCLIENT_REMOTE_APPS['orcid']['params'].update(
+    dict(
+        base_url='https://pub.{domain}/'.format(domain=ORCID_DOMAIN),
+        access_token_url='https://pub.{domain}/oauth/token'.format(
+            domain=ORCID_DOMAIN
+        ),
+        authorize_url='https://{domain}/oauth/authorize#show_login'.format(
+            domain=ORCID_DOMAIN
+        ),
+    )
+)
+
+OAUTHCLIENT_SIGNUP_TEMPLATE = 'sonar/oauth/signup.html'
+
+# Must be set as environment variable
+ORCID_APP_CREDENTIALS = dict(
+    consumer_key=os.environ.get('ORCID_CONSUMER_KEY', ''),
+    consumer_secret=os.environ.get('ORCID_CONSUMER_SECRET', ''),
+)
