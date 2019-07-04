@@ -7,6 +7,13 @@
 # more details.
 
 FROM nginx
+
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
+        libxml2 \
+        libxml2-dev \
+        libxmlsec1 \
+        libxmlsec1-dev
+
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY conf.d/* /etc/nginx/conf.d/
 COPY test.key /etc/ssl/private/test.key

@@ -354,3 +354,24 @@ ORCID_APP_CREDENTIALS = dict(
     consumer_key=os.environ.get('ORCID_CONSUMER_KEY', ''),
     consumer_secret=os.environ.get('ORCID_CONSUMER_SECRET', ''),
 )
+
+# Shibboleth authentication
+# =========================
+SHIBBOLETH_SERVICE_PROVIDER = dict(
+    strict=True,
+    debug=True,
+    entity_id='https://sonar.ch/shibboleth'
+)
+
+SHIBBOLETH_IDENTITY_PROVIDERS = dict(
+    eduidtest=dict(
+        entity_id='https://test.eduid.ch/idp/shibboleth',
+        title='SWITCH edu-ID test',
+        sso_url='https://login.test.eduid.ch/idp/profile/SAML2/Redirect/SSO',
+        mappings=dict(
+            email='urn:oid:0.9.2342.19200300.100.1.3',
+            full_name='urn:oid:2.5.4.3',
+            user_unique_id='urn:oid:2.16.756.1.2.5.1.1.1',
+        )
+    )
+)
