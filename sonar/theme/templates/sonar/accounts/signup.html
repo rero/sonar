@@ -36,7 +36,12 @@
             {% trans type='ORCID' %}Sign-up with {{ type }}{% endtrans %}
           </a>
         </div>
-        <div class="col"></div>
+        <div class="col">
+          <a href="{{ url_for('shibboleth_authenticator.login', remote_app='eduidtest') }}"
+            class="btn btn-outline-primary btn-block">
+            {% trans type='SWITCH edu-ID' %}Sign-up with {{ type }}{% endtrans %}
+          </a>
+        </div>
       </div>
     </div>
   </div>

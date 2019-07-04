@@ -14,5 +14,8 @@
 # Invenio usually needs.
 
 FROM inveniosoftware/centos7-python:3.6
+
+RUN yum -y install libxml2-devel xmlsec1-devel xmlsec1-openssl-devel libtool-ltdl-devel
+
 COPY Pipfile Pipfile.lock ./
 RUN pipenv install --deploy --system

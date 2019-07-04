@@ -46,11 +46,15 @@ setup(
             'fixtures = sonar.modules.cli:fixtures'
         ],
         'invenio_base.apps': [
-            'documents = sonar.modules.documents:Documents'
+            'documents = sonar.modules.documents:Documents',
+            'shibboleth_authenticator = \
+                sonar.modules.shibboleth_authenticator:ShibbolethAuthenticator',
         ],
         'invenio_base.blueprints': [
             'sonar = sonar.theme.views:blueprint',
-            'documents = sonar.modules.documents.views:blueprint'
+            'documents = sonar.modules.documents.views:blueprint',
+            'shibboleth_authenticator = \
+                sonar.modules.shibboleth_authenticator.views.client:blueprint',
         ],
         'invenio_assets.webpack': [
             'sonar_theme = sonar.theme.webpack:theme',
@@ -58,7 +62,9 @@ setup(
         'invenio_config.module': [
             'sonar = sonar.config',
             'sonar_app = sonar.modules.config',
-            'sonar_documents = sonar.modules.documents.config'
+            'sonar_documents = sonar.modules.documents.config',
+            'shibboleth_authenticator = \
+                sonar.modules.shibboleth_authenticator.config',
         ],
         'invenio_i18n.translations': [
             'messages = sonar',

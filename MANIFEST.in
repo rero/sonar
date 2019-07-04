@@ -91,3 +91,6 @@ recursive-include sonar *.html
 
 recursive-include sonar *.woff
 recursive-include sonar *.woff2
+
+include tests/ui/shibboleth_authenticator/data/valid_saml_response
+recursive-include data *.crt
