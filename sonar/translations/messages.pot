@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.0.1\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2019-07-08 15:59+0200\n"
+"POT-Creation-Date: 2019-07-16 07:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,35 +25,39 @@ msgstr ""
 msgid "German"
 msgstr ""
 
-#: sonar/config.py:68 sonar/config.py:72
+#: sonar/config.py:49
+msgid "Italian"
+msgstr ""
+
+#: sonar/config.py:69 sonar/config.py:73
 msgid "Swiss Open Access Repository"
 msgstr ""
 
-#: sonar/config.py:95
+#: sonar/config.py:96
 msgid "Welcome to Swiss Open Access Repository!"
 msgstr ""
 
-#: sonar/config.py:277
+#: sonar/config.py:278
 msgid "institution"
 msgstr ""
 
-#: sonar/config.py:278
+#: sonar/config.py:279
 msgid "language"
 msgstr ""
 
-#: sonar/config.py:279
+#: sonar/config.py:280
 msgid "author"
 msgstr ""
 
-#: sonar/config.py:280
+#: sonar/config.py:281
 msgid "subject"
 msgstr ""
 
-#: sonar/config.py:289
+#: sonar/config.py:290
 msgid "Best match"
 msgstr ""
 
-#: sonar/config.py:295
+#: sonar/config.py:296
 msgid "Most recent"
 msgstr ""
 
