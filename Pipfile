@@ -16,6 +16,7 @@ lxml = ">=3.5.0,<4.2.6"
 orcid = "*"
 python-slugify = "*"
 python3-saml = "*"
+xmltodict = "*"
 
 [dev-packages]
 Flask-Debugtoolbar = ">=0.10.1"
@@ -33,6 +34,7 @@ pytest-mock = ">=1.6.0"
 pytest-pep8 = ">=1.0.6"
 pytest-random-order = ">=0.5.4"
 pytest-runner = ">=3.0.0,<5"
+docutils = "==0.15"
 
 [requires]
 python_version = "3.6"

@@ -21,7 +21,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
         libxml2 \
         libxml2-dev \
         libxmlsec1 \
-        libxmlsec1-dev
+        libxmlsec1-dev \
+        xpdf
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY conf.d/* /etc/nginx/conf.d/

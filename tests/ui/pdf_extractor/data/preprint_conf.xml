@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 /opt/grobid/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<encodingDesc>
+			<appInfo>
+				<application version="0.5.5" ident="GROBID" when="2019-07-18T13:51+0000">
+					<ref target="https://github.com/kermitt2/grobid">GROBID - A machine learning software for extracting information from scholarly documents</ref>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">SwissLink: High-Precision, Context-Free Entity Linking Exploiting Unambiguous Labels</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Roman</forename><surname>Prokofyev</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">eXascale Infolab</orgName>
+								<orgName type="institution">University of Fribourg</orgName>
+								<address>
+									<country key="CH">Switzerland</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Michael</forename><surname>Luggen</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">eXascale Infolab</orgName>
+								<orgName type="institution">University of Fribourg</orgName>
+								<address>
+									<country key="CH">Switzerland</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Djellel</forename><forename type="middle">Eddine</forename><surname>Difallah</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">eXascale Infolab</orgName>
+								<orgName type="institution">University of Fribourg</orgName>
+								<address>
+									<country key="CH">Switzerland</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Philippe</forename><surname>Cudré-Mauroux</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">eXascale Infolab</orgName>
+								<orgName type="institution">University of Fribourg</orgName>
+								<address>
+									<country key="CH">Switzerland</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">SwissLink: High-Precision, Context-Free Entity Linking Exploiting Unambiguous Labels</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/nnnnnnn.nnnnnnn</idno>
+					<note>ACM Reference format: Roman Prokofyev, Michael Luggen, Djellel Eddine Difallah, and Philippe Cudré-Mauroux. 2017. SwissLink: High-Precision, Context-Free Entity Link-ing Exploiting Unambiguous Labels. In Proceedings of SEMANTiCS, , 2017, 8 pages. https://doi.org/10.1145/nnnnnnn.nnnnnnn</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Entity Linking</term>
+					<term>Manual annotations</term>
+					<term>Machine learning</term>
+				</keywords>
+			</textClass>
+			<abstract>
+				<p>Webpages are an abundant source of textual information with manually annotated entity links, and are often used as a source of training data for a wide variety of machine learning NLP tasks. However, manual annotations such as those found on Wikipedia are sparse, noisy, and biased towards popular entities. Existing entity linking systems deal with those issues by relying on simple statistics extracted from the data. While such statistics can effectively deal with noisy annotations, they introduce bias towards head entities and are ineffective for long tail (e.g., unpopular) entities. In this work, we first analyze statistical properties linked to manual annotations by studying a large annotated corpus composed of all English Wikipedia webpages, in addition to all pages from the Com-monCrawl containing English Wikipedia annotations. We then propose and evaluate a series of entity linking approaches, with the explicit goal of creating highly-accurate (precision &gt; 95%) and broad annotated corpuses for machine learning tasks. Our results show that our best approach achieves maximal-precision at usable recall levels, and outperforms both state-of-the-art entity-linking systems and human annotators.</p>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+	</text>
+</TEI>

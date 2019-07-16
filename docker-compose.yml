@@ -46,3 +46,7 @@ services:
     extends:
       file: docker-services.yml
       service: es
+  grobid:
+    extends:
+      file: docker-services.yml
+      service: grobid

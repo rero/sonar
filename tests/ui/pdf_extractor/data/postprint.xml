@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 /opt/grobid/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<encodingDesc>
+			<appInfo>
+				<application version="0.5.5" ident="GROBID" when="2019-07-18T13:53+0000">
+					<ref target="https://github.com/kermitt2/grobid">GROBID - A machine learning software for extracting information from scholarly documents</ref>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">High-harmonic generation in quantum spin systems</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+				<date type="published" when="2019">2019</date>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Shintaro</forename><surname>Takayoshi</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Max Planck Institute for the Physics of Complex Systems</orgName>
+								<address>
+									<postCode>01187</postCode>
+									<settlement>Dresden</settlement>
+									<country key="DE">Germany</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Department of Quantum Matter Physics</orgName>
+								<orgName type="institution">University of Geneva</orgName>
+								<address>
+									<postCode>1211</postCode>
+									<settlement>Geneva</settlement>
+									<country key="CH">Switzerland</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Yuta</forename><surname>Murakami</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="department">Department of Physics</orgName>
+								<orgName type="institution">University of Fribourg</orgName>
+								<address>
+									<postCode>1700</postCode>
+									<settlement>Fribourg</settlement>
+									<country key="CH">Switzerland</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Philipp</forename><surname>Werner</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="department">Department of Physics</orgName>
+								<orgName type="institution">University of Fribourg</orgName>
+								<address>
+									<postCode>1700</postCode>
+									<settlement>Fribourg</settlement>
+									<country key="CH">Switzerland</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">High-harmonic generation in quantum spin systems</title>
+					</analytic>
+					<monogr>
+						<title level="j" type="main">PHYSICAL REVIEW B</title>
+						<imprint>
+							<biblScope unit="volume">99</biblScope>
+							<biblScope unit="page">184303</biblScope>
+							<date type="published" when="2019">2019</date>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1103/PhysRevB.99.184303</idno>
+					<note type="submission">(Received 22 January 2019; revised manuscript received 8 April 2019; published 20 May 2019)</note>
+					<note>Editors&apos; Suggestion</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<profileDesc>
+			<abstract>
+				<p>We theoretically study the high-harmonic generation (HHG) in one-dimensional spin systems. While in electronic systems the driving by ac electric fields produces radiation from the dynamics of excited charges, we consider here the situation where spin systems excited by a magnetic field pulse generate radiation via a time-dependent magnetization. Specifically, we study the magnetic dipole radiation in two types of ferromagnetic spin chain models, the Ising model with static longitudinal field and the XXZ model, and reveal the structure of the spin HHG and its relation to spin excitations. For weak laser amplitude, a peak structure appears which can be explained by time-dependent perturbation theory. With increasing amplitude, plateaus with well-defined cutoff energies emerge. In the Ising model with longitudinal field, the thresholds of the multiple plateaus in the radiation spectra can be explained by the annihilation of multiple magnons. In the XXZ model, which retains the Z 2 symmetry, the laser magnetic field can induce a phase transition of the ground state when it exceeds a critical value, which results in a drastic change of the spin excitation character. As a consequence, the first cutoff energy in the HHG spectrum changes from a single-magnon to a two-magnon energy at this transition. Our results demonstrate the possibility of generating high-harmonic radiation from magnetically ordered materials and the usefulness of high-harmonic signals for extracting information on the spin excitation spectrum.</p>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+	</text>
+</TEI>

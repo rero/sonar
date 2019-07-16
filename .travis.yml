@@ -55,7 +55,7 @@ python:
 
 before_install:
   - sudo apt-get update
-  - sudo apt-get install -y libxml2 libxml2-dev libxmlsec1 libxmlsec1-dev
+  - sudo apt-get install -y libxml2 libxml2-dev libxmlsec1 libxmlsec1-dev xpdf
   # Stop default travis services
   - "sudo service mysql stop"
   - "sudo service postgresql stop"

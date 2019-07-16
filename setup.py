@@ -61,6 +61,11 @@ setup(
             'documents = sonar.modules.documents.views:blueprint',
             'shibboleth_authenticator = \
                 sonar.modules.shibboleth_authenticator.views.client:blueprint',
+            'pdf_extractor = \
+                sonar.modules.pdf_extractor.views.client:blueprint'
+        ],
+        'invenio_base.api_blueprints': [
+            'pdf_extractor = sonar.modules.pdf_extractor.views.api:blueprint'
         ],
         'invenio_assets.webpack': [
             'sonar_theme = sonar.theme.webpack:theme',
@@ -71,6 +76,7 @@ setup(
             'sonar_documents = sonar.modules.documents.config',
             'shibboleth_authenticator = \
                 sonar.modules.shibboleth_authenticator.config',
+            'pdf_extractor = sonar.modules.pdf_extractor.config',
         ],
         'invenio_i18n.translations': [
             'messages = sonar',
