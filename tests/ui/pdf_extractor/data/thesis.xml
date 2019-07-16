@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 /opt/grobid/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="it">
+		<encodingDesc>
+			<appInfo>
+				<application version="0.5.5" ident="GROBID" when="2019-07-18T13:53+0000">
+					<ref target="https://github.com/kermitt2/grobid">GROBID - A machine learning software for extracting information from scholarly documents</ref>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Three essays in labor economics</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Elena</forename><surname>Gentili</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department" key="dep1">Faculty of Economics Università della Svizzera Italiana</orgName>
+								<orgName type="department" key="dep2">External member</orgName>
+								<orgName type="institution">Queen Mary University of London</orgName>
+								<address>
+									<region>London, UK)</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><roleName>Prof</roleName><forename type="middle">Francesco</forename><surname>Fasani</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department" key="dep1">Faculty of Economics Università della Svizzera Italiana</orgName>
+								<orgName type="department" key="dep2">External member</orgName>
+								<orgName type="institution">Queen Mary University of London</orgName>
+								<address>
+									<region>London, UK)</region>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Three essays in labor economics</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<note type="submission">Thesis submitted for the degree of Doctor of Philosophy in Economics Lugano, January 2019</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Doctoral committee: Prof Fabrizio Mazzonna</term>
+					<term>Università della Svizzera Italiana (Lugano</term>
+					<term>CH)</term>
+					<term>Supervisor Prof Giovanni Pica</term>
+					<term>Università della Svizzera Italiana (Lugano</term>
+					<term>CH)</term>
+					<term>Internal memeber</term>
+				</keywords>
+			</textClass>
+			<abstract/>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="it">
+	</text>
+</TEI>

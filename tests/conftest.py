@@ -9,6 +9,8 @@
 """Common pytest fixtures and plugins."""
 
 import pytest
+from flask import url_for
+from flask_security.utils import encrypt_password
 
 
 @pytest.fixture(scope='module', autouse=True)
@@ -31,3 +33,24 @@ def app_config(app_config):
                  )))
 
     return app_config
+
+
+@pytest.fixture()
+def create_user(app):
+    """Create user in database."""
+    datastore = app.extensions['security'].datastore
+    datastore.create_user(email='john.doe@test.com',
+                          password=encrypt_password('123456'),
+                          active=True)
+    datastore.commit()
+
+
+@pytest.fixture()
+def logged_user_client(create_user, client):
+    """Log in user."""
+    response = client.post(url_for('security.login'),
+                           data=dict(email='john.doe@test.com',
+                                     password='123456'))
+    assert response.status_code == 302
+
+    return client

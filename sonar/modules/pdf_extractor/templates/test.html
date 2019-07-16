@@ -1,0 +1,40 @@
+{# -*- coding: utf-8 -*-
+  Swiss Open Access Repository
+  Copyright (C) 2019 RERO
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published by
+  the Free Software Foundation, version 3 of the License.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#}
+
+{%- extends config.RECORDS_UI_BASE_TEMPLATE %}
+
+{%- block page_body %}
+<h1>PDF metadata extraction</h1>
+<form id="pdfForm">
+    <input type="file" class="form-control-file my-4" id="file">
+    <button type="submit" id="metadata" class="btn btn-primary">Extract metadata</button>
+    <button type="submit" id="fulltext" class="btn btn-primary">Extract full-text</button>
+    <i id="loading" class="fa fa-spinner fa-spin fa-lg ml-4 d-none"></i>
+    <div id="error" class="alert alert-danger my-4 d-none"></div>
+    <pre id="result" class="my-4 bg-light border-dark p-4 d-none"></pre>
+</form>
+{%- endblock %}
+
+{%- block javascript %}
+{{ super() }}
+<script src="{{ url_for('static', filename='pdf_extractor/test.js') }}"></script>
+{%- endblock javascript %}
+
+{% block css %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='pdf_extractor/test.css') }}"/>
+{% endblock %}

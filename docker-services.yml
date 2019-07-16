@@ -89,3 +89,8 @@ services:
     command: --broker=amqp://guest:guest@mq:5672/ --broker_api=http://guest:guest@mq:15672/api/
     ports:
       - "5555:5555"
+  grobid:
+    image: lfoppiano/grobid:0.5.5
+    ports:
+      - "8070:8070"
+      - "8071:8071"

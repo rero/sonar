@@ -44,10 +44,14 @@ recursive-include docs *.txt
 recursive-include docs Makefile
 recursive-include sonar *.gitkeep
 recursive-include sonar *.po *.pot *.mo
-recursive-include sonar *.json *.html *.js *.scss
+recursive-include sonar *.json *.html *.js *.scss *.css
 recursive-include sonar *.png *.jpg *.svg
 recursive-include docker *.cfg *.conf *.crt *.ini *.key *.pem *.sh
 recursive-include tests *.py
+recursive-include tests *.doc
+recursive-include tests *.json
+recursive-include tests *.pdf
+recursive-include tests *.xml
 
 # added by check_manifest.py
 include *.html
