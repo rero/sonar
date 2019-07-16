@@ -86,10 +86,11 @@ def import_documents(institution, pages):
             .format(url=url,
                     first_record=(current_page*10-9),
                     institution=key.upper()), stream=True)
-        response.raw.decode_content = True
 
-        if(response.status_code != 200):
+        if response.status_code != 200:
             raise ClickException('Request to "{url}" failed'.format(url=url))
+
+        response.raw.decode_content = True
 
         ids = []
 
