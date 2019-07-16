@@ -8,17 +8,14 @@
 
 """Test CLI for importing documents."""
 
-import click
-import pytest
-from click.exceptions import ClickException
+import requests
 from click.testing import CliRunner
-from pytest_invenio.fixtures import script_info
 
 import sonar.modules.documents.cli as Cli
 from sonar.modules.institutions.api import InstitutionRecord
 
 
-def test_import_documents(app, script_info):
+def test_import_documents(app, script_info, monkeypatch):
     """Test import documents."""
     runner = CliRunner()
 
@@ -30,6 +27,17 @@ def test_import_documents(app, script_info):
         "pid": "test",
         "name": "Test"
     }, dbcommit=True)
+
+    app.config.update(SONAR_DOCUMENTS_INSTITUTIONS_MAP=None)
+
+    result = runner.invoke(Cli.import_documents, ['test'], obj=script_info)
+    assert result.output.find(
+        'Institution map not found in configuration') != -1
+
+    app.config.update(SONAR_DOCUMENTS_INSTITUTIONS_MAP=dict(
+        usi='ticino.unisi',
+        hevs='valais.hevs'
+    ))
 
     result = runner.invoke(Cli.import_documents, ['test'], obj=script_info)
     assert result.output.find(
@@ -46,3 +54,18 @@ def test_import_documents(app, script_info):
     result = runner.invoke(
         Cli.import_documents, ['usi', '--pages=1'], obj=script_info)
     assert result.exit_code == 0
+
+    class MockResponse():
+        """Mock response."""
+        def __init__(self):
+            self.status_code = 500
+
+    def mock_get(*args, **kwargs):
+        return MockResponse()
+
+    monkeypatch.setattr(requests, 'get', mock_get)
+
+    result = runner.invoke(
+        Cli.import_documents, ['usi', '--pages=1'], obj=script_info)
+    assert result.exit_code == 1
+    assert result.output.find('failed') != -1

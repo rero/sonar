@@ -9,6 +9,7 @@
 """Test marc21 to json converter."""
 
 import pytest
+import requests
 from dojson.contrib.marc21.utils import create_record
 
 import sonar.modules.documents.dojson.contrib.marc21tojson.model as model
@@ -21,12 +22,34 @@ def test_remove_punctuation():
             'lorem ipsum - / ; :,') == 'lorem ipsum'
 
 
-def test_get_mef_person_link():
+def test_get_mef_person_link(monkeypatch):
     """Test getting MEF link."""
     assert model.get_mef_person_link(None, '', '') is None
 
     assert model.get_mef_person_link(
             '(RERO)A012327677', '', '')[:28] == 'https://mef.rero.ch/api/mef/'
+
+    class MockResponse():
+        """Mock response."""
+        def __init__(self):
+            self.status_code = 200
+
+        @staticmethod
+        def json():
+            return {}
+
+    mock_response = MockResponse()
+
+    def mock_get(*args, **kwargs):
+        return mock_response
+
+    monkeypatch.setattr(requests, 'get', mock_get)
+    assert not model.get_mef_person_link('(RERO)A012327677', '', '')
+
+    mock_response.status_code = 500
+
+    monkeypatch.setattr(requests, 'get', mock_get)
+    assert not model.get_mef_person_link('(RERO)A012327677', '', '')
 
 
 def test_marc21_to_type():
@@ -256,8 +279,52 @@ def test_marc21_to_languages(app):
     assert 'translatedFrom' not in data
 
 
-def test_marc21_to_authors():
+def test_marc21_to_authors(monkeypatch):
     """Test dojson marc21_to_authors."""
+
+    monkeypatch.setattr(
+        'sonar.modules.documents.dojson.contrib.marc21tojson.model.'
+        'get_mef_person_link',
+        lambda *args: 'link_to_reference')
+
+    marc21xml = """
+    <record>
+      <datafield tag="100" ind1=" " ind2=" ">
+        <subfield code="0">123456</subfield>
+        <subfield code="a">Jean-Paul</subfield>
+        <subfield code="b">II</subfield>
+        <subfield code="c">Pape</subfield>
+        <subfield code="d">1954-</subfield>
+      </datafield>
+      <datafield tag="700" ind1=" " ind2=" ">
+        <subfield code="a">Dumont, Jean</subfield>
+        <subfield code="c">Historien</subfield>
+        <subfield code="d">1921-2014</subfield>
+      </datafield>
+      <datafield tag="710" ind1=" " ind2=" ">
+        <subfield code="a">RERO</subfield>
+      </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    authors = data.get('authors')
+    assert authors == [
+        {
+            '$ref': 'link_to_reference',
+            'type': 'person'
+        },
+        {
+            'name': 'Dumont, Jean',
+            'type': 'person',
+            'date': '1921-2014',
+            'qualifier': 'Historien'
+        },
+        {
+            'name': 'RERO',
+            'type': 'organisation'
+        }
+    ]
 
     marc21xml = """
     <record>
