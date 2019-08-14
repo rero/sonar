@@ -39,12 +39,16 @@
             <a class="navbar-brand" href="{{ url_for('documents.index', ir=g.ir|default('sonar')) }}">
                 <img src="{{ url_for('static', filename='images/' ~ g.ir|default('sonar') ~ '-logo.svg')}}" height="50" class="d-inline-block align-top mr-3 my-4" alt="">
             </a>
-            <form action="{{ url_for('documents.search', ir=g.ir|default('sonar')) }}" class="form-inline my-2 my-lg-0 ml-lg-5">
-                <input name="q" class="form-control mr-sm-2" type="search" placeholder="{{_('Search')}}" aria-label="{{_('Search')}}" value="{{ request.args.get('q', '') }}">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
-                    <i class="fa fa-search"></i>
-                </button>
-            </form>
+                {% if not admin %}
+                <form action="{{ url_for('documents.search', ir=g.ir|default('sonar')) }}" class="form-inline my-2 my-lg-0 ml-lg-5">
+                    <input name="q" class="form-control mr-sm-2" type="search" placeholder="{{_('Search')}}" aria-label="{{_('Search')}}" value="{{ request.args.get('q', '') }}">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+                {% else %}
+                    <span class="navbar-text text-secondary">{{ _('Administration')|upper }}</span>
+                {% endif %}
             {% endif %}
             {% if g.ir|default('sonar') != 'sonar' %}
                 <ul class="navbar-nav mr-auto ml-4">

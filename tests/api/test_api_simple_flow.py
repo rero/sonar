@@ -19,9 +19,13 @@
 
 import json
 
+import mock
 from invenio_search import current_search
+from utils import VerifyRecordPermissionPatch
 
 
+@mock.patch('invenio_records_rest.views.verify_record_permission',
+            mock.MagicMock(return_value=VerifyRecordPermissionPatch))
 def test_simple_flow(client):
     """Test simple flow using REST API."""
     headers = [('Content-Type', 'application/json')]

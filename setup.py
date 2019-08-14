@@ -52,9 +52,7 @@ setup(
             'fixtures = sonar.modules.cli:fixtures'
         ],
         'invenio_base.apps': [
-            'documents = sonar.modules.documents:Documents',
-            'shibboleth_authenticator = \
-                sonar.modules.shibboleth_authenticator:ShibbolethAuthenticator',
+            'sonar = sonar.modules:Sonar'
         ],
         'invenio_base.blueprints': [
             'sonar = sonar.theme.views:blueprint',
@@ -83,7 +81,8 @@ setup(
         ],
         'invenio_base.api_apps': [
             'documents = sonar.modules.documents:Documents',
-            'institutions = sonar.modules.institutions:Institutions'
+            'institutions = sonar.modules.institutions:Institutions',
+            'sonar = sonar.modules:Sonar'
         ],
         'invenio_jsonschemas.schemas': [
             'documents = sonar.modules.documents.jsonschemas',
