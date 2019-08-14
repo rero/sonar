@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2019 RERO.
+# Swiss Open Access Repository
+# Copyright (C) 2019 RERO
 #
-# Swiss Open Access Repository is free software; you can redistribute it
-# and/or modify it under the terms of the MIT License; see LICENSE file for
-# more details.
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, version 3 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
 
 # Ignoring false positive 36759 (reporting invenio-admin v1.0.1). This can be
 # removed when https://github.com/pyupio/safety-db/pull/2274 is merged and
