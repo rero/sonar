@@ -27,3 +27,15 @@ from invenio_app.factory import create_ui
 def create_app():
     """Create test app."""
     return create_ui
+
+
+@pytest.fixture(scope='module')
+def user_fixture(app):
+    """Create user in database."""
+    with app.app_context():
+        datastore = app.extensions['security'].datastore
+        datastore.create_user(email='john.doe@test.com',
+                              password='123456',
+                              active=True)
+        datastore.commit()
+    return app

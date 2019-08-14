@@ -17,10 +17,16 @@
 
 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="{{dropdownId}}">
     <h6 class="dropdown-header">{{current_user.email}}</h6>
-{%- if config.USERPROFILES %}
+    {%- if config.USERPROFILES %}
     <a class="dropdown-item" href="{{ url_for('invenio_userprofiles.profile')}}">
         {{_('Profile')}}
     </a>
-{% endif %}
+    {% endif %}
+    {% if has_admin_access() %}
+    <a class="dropdown-item" href="{{ url_for('admin.index')}}">
+        {{_('Administration')}}
+    </a>
+    {% endif %}
+
     <a class="dropdown-item" href="{{url_for_security('logout')}}">{{_('Logout')}}</a>
 </div>

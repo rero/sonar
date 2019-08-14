@@ -31,10 +31,12 @@ from datetime import timedelta
 from invenio_indexer.api import RecordIndexer
 from invenio_oauthclient.contrib import orcid
 from invenio_records_rest.facets import terms_filter
-from invenio_records_rest.utils import allow_all, check_elasticsearch
 
 from sonar.modules.documents.api import DocumentRecord, DocumentSearch
 from sonar.modules.institutions.api import InstitutionRecord, InstitutionSearch
+from sonar.modules.permissions import can_create_record_factory, \
+    can_delete_record_factory, can_list_record_factory, \
+    can_read_record_factory, can_update_record_factory
 from sonar.modules.users.api import UserRecord, UserSearch
 
 
@@ -87,6 +89,8 @@ THEME_FRONTPAGE_TITLE = _('Swiss Open Access Repository')
 THEME_FRONTPAGE_TEMPLATE = 'sonar/frontpage.html'
 #: Theme logo
 THEME_LOGO = 'images/sonar-logo.svg'
+
+THEME_ERROR_TEMPLATE = 'sonar/page_error.html'
 
 # Email configuration
 # ===================
@@ -242,11 +246,11 @@ RECORDS_REST_ENDPOINTS = {
         default_media_type='application/json',
         max_result_window=10000,
         error_handlers=dict(),
-        create_permission_factory_imp=allow_all,
-        read_permission_factory_imp=check_elasticsearch,
-        update_permission_factory_imp=allow_all,
-        delete_permission_factory_imp=allow_all,
-        list_permission_factory_imp=allow_all
+        create_permission_factory_imp=can_create_record_factory,
+        read_permission_factory_imp=can_read_record_factory,
+        update_permission_factory_imp=can_update_record_factory,
+        delete_permission_factory_imp=can_delete_record_factory,
+        list_permission_factory_imp=can_list_record_factory
     ),
     'inst': dict(
         pid_type='inst',
@@ -275,11 +279,11 @@ RECORDS_REST_ENDPOINTS = {
         default_media_type='application/json',
         max_result_window=10000,
         error_handlers=dict(),
-        create_permission_factory_imp=allow_all,
-        read_permission_factory_imp=check_elasticsearch,
-        update_permission_factory_imp=allow_all,
-        delete_permission_factory_imp=allow_all,
-        list_permission_factory_imp=allow_all
+        create_permission_factory_imp=can_create_record_factory,
+        read_permission_factory_imp=can_read_record_factory,
+        update_permission_factory_imp=can_update_record_factory,
+        delete_permission_factory_imp=can_delete_record_factory,
+        list_permission_factory_imp=can_list_record_factory
     ),
     'user': dict(
         pid_type='user',
@@ -308,11 +312,11 @@ RECORDS_REST_ENDPOINTS = {
         default_media_type='application/json',
         max_result_window=10000,
         error_handlers=dict(),
-        create_permission_factory_imp=allow_all,
-        read_permission_factory_imp=check_elasticsearch,
-        update_permission_factory_imp=allow_all,
-        delete_permission_factory_imp=allow_all,
-        list_permission_factory_imp=allow_all
+        create_permission_factory_imp=can_create_record_factory,
+        read_permission_factory_imp=can_read_record_factory,
+        update_permission_factory_imp=can_update_record_factory,
+        delete_permission_factory_imp=can_delete_record_factory,
+        list_permission_factory_imp=can_list_record_factory
     )
 }
 """REST endpoints."""
@@ -420,3 +424,8 @@ SHIBBOLETH_IDENTITY_PROVIDERS = dict(
 )
 
 WEBPACKEXT_PROJECT = 'sonar.theme.webpack:project'
+
+# Admin layout
+# =========================
+ADMIN_BASE_TEMPLATE = 'sonar/page_admin.html'
+ADMIN_PERMISSION_FACTORY = 'sonar.modules.permissions.admin_permission_factory'

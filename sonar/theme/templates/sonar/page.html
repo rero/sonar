@@ -79,7 +79,7 @@
     {%- endblock head %}
   </head>
   <body ng-csp {% if body_css_classes %} class="{{ body_css_classes|join(' ') }}"{% endif %}{% if g.ln %} lang="{{ g.ln.split('_', 1)[0]|safe }}"{% if rtl_direction %} {{ rtl_direction|safe }}{% endif %}{% endif %} itemscope itemtype="http://schema.org/WebPage" data-spy="scroll" data-target=".scrollspy-target">
-    {%- block body %}
+    {%- block outer_body %}
       {%- block browserupgrade %}
         <!--[if lt IE 8]>
           <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -102,7 +102,7 @@
             <div class="my-5">{{ flashed_messages() }}</div>
           {%- endblock %}
 
-          {%- block page_body %}{%- endblock page_body %}
+          {%- block body %}{%- endblock body %}
         </div>
           
         {% include 'sonar/footer.html' %}
@@ -115,6 +115,6 @@
       {%- block trackingcode %}
         {% include config.THEME_TRACKINGCODE_TEMPLATE %}
       {%- endblock %}
-    {%- endblock body %}
+    {%- endblock outer_body %}
   </body>
 </html>

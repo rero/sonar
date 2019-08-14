@@ -20,7 +20,7 @@
 {%- set html_css_classes=['cover-page'] %}
 {%- set body_css_classes=['cover-page', 'bg-primary'] %}
 
-{%- block body %}
+{%- block outer_body %}
   {%- block browserupgrade %}
     <!--[if lt IE 8]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -57,7 +57,7 @@
     </div>
   {% endblock page_header%}
   
-  {%- block page_body %}
+  {%- block body %}
     <div class="container">
       <div class="row justify-content-center">
         {% block panel %}
@@ -73,7 +73,7 @@
         {% endblock panel %}
       </div>
     </div>
-  {%- endblock page_body %}
+  {%- endblock body %}
   </div>
 
   {%- block javascript %}
@@ -83,4 +83,4 @@
   {%- block trackingcode %}
     {% include config.THEME_TRACKINGCODE_TEMPLATE %}
   {% endblock %}
-{%- endblock body %}
+{%- endblock outer_body %}

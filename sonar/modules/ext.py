@@ -20,7 +20,14 @@
 
 from __future__ import absolute_import, print_function
 
+from sonar.modules.permissions import has_admin_access
+
 from . import config
+
+
+def utility_processor():
+    """Dictionary for checking admin access."""
+    return dict(has_admin_access=has_admin_access)
 
 
 class Sonar(object):
@@ -35,6 +42,8 @@ class Sonar(object):
         """Flask application initialization."""
         self.init_config(app)
         app.extensions['sonar_app'] = self
+
+        app.context_processor(utility_processor)
 
     def init_config(self, app):
         """Initialize configuration."""
