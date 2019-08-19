@@ -21,6 +21,7 @@ from uuid import uuid4
 
 from flask import current_app
 from invenio_db import db
+from invenio_indexer.api import RecordIndexer
 from invenio_jsonschemas import current_jsonschemas
 from invenio_pidstore.errors import PIDDoesNotExistError
 from invenio_pidstore.models import PersistentIdentifier
@@ -89,6 +90,10 @@ class SonarRecord(Record):
     def dbcommit(self):
         """Commit changes to db."""
         db.session.commit()
+
+    def reindex(self):
+        """Reindex record."""
+        RecordIndexer().index(self)
 
 
 class SonarSearch(RecordsSearch):
