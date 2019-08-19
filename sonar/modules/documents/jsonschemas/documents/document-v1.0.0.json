@@ -83,8 +83,7 @@
           "title": "ISBN",
           "description": "ISBN of the resource.",
           "type": "string",
-          "pattern": "^97[8|9][0-9]{10}$",
-          "validationMessage": "Should be a valid ISBN-13 without dashes."
+          "pattern": "^97[8|9][0-9]{10}$"
         }
       }
     },
@@ -111,7 +110,6 @@
             "description": "Bibligraphic code of language.",
             "type": "string",
             "default": "fre",
-            "validationMessage": "Bibliographic language code is required.",
             "enum": [
               "fre",
               "ger",

@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "https://sonar.ch/schemas/users/user-v1.0.0.json",
+  "additionalProperties": false,
+  "title": "SONAR user v1.0.0",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "default": "https://sonar.ch/schemas/users/user-v1.0.0.json"
+    },
+    "pid": {
+      "title": "User identifier",
+      "description": "User persistent identifier.",
+      "type": "string"
+    },
+    "user_id": {
+      "title": "User account identifier",
+      "description": "User account identifier.",
+      "type": "integer"
+    },
+    "first_name": {
+      "title": "First name",
+      "type": "string",
+      "minLength": 2
+    },
+    "last_name": {
+      "title": "Last name",
+      "type": "string",
+      "minLength": 2
+    },
+    "birth_date": {
+      "title": "Date of birth",
+      "type": "string",
+      "format": "date",
+      "pattern": "\\d{4}-((0[1-9])|(1[0-2]))-(((0[1-9])|[1-2][0-9])|(3[0-1]))$"
+    },
+    "email": {
+      "title": "Email",
+      "type": "string",
+      "format": "email",
+      "pattern": "^.*@.*\\..*$",
+      "minLength": 6
+    },
+    "street": {
+      "title": "Street",
+      "description": "Street and number of the address, separated by a coma.",
+      "type": "string",
+      "minLength": 4
+    },
+    "postal_code": {
+      "title": "Postal code",
+      "type": "string",
+      "minLength": 4
+    },
+    "city": {
+      "title": "City",
+      "type": "string",
+      "minLength": 3
+    },
+    "phone": {
+      "title": "Phone number",
+      "description": "Phone number with the international prefix, without spaces.",
+      "type": "string",
+      "pattern": "^\\+[0-9]*$"
+    },
+    "institution": {
+      "title": "Institution",
+      "description": "Institution linked to user.",
+      "type": "object",
+      "properties": {
+        "$ref": {
+          "title": "Institution URI",
+          "type": "string",
+          "pattern": "^https://sonar.ch/api/institutions/.*?$"
+        }
+      },
+      "required": ["$ref"]
+    },
+    "roles": {
+      "title": "Role",
+      "description": "Define the roles of the user.",
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "type": "string",
+        "enum": [
+          "superadmin",
+          "admin",
+          "moderator",
+          "user"
+        ]
+      }
+    }
+  },
+  "required": ["pid", "first_name", "last_name", "email", "roles", "$schema"]
+}

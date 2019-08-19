@@ -108,3 +108,4 @@ recursive-include data *.crt
 # added by check_manifest.py
 recursive-include sonar *.babelrc
 recursive-include sonar *.eslintignore
+recursive-include tests *.json

@@ -17,9 +17,15 @@
 
 """Test SONAR api."""
 
-import pytest
+from flask import url_for
+from invenio_app.factory import create_api
+from invenio_indexer import current_record_to_index
+from invenio_indexer.api import RecordIndexer
+from invenio_search import current_search
 
 from sonar.modules.documents.api import DocumentRecord
+
+create_app = create_api
 
 
 def test_create(app):
@@ -64,3 +70,30 @@ def test_dbcommit(app):
     })
 
     record.dbcommit()
+    assert DocumentRecord.get_record_by_pid(
+        '1')['title'] == 'The title of the record'
+
+
+def test_reindex(app, db, client):
+    """Test record reindex."""
+    record = DocumentRecord.create({
+        "pid": "100",
+        "title": "The title of the record"
+    })
+    db.session.commit()
+
+    indexer = RecordIndexer()
+    indexer.index(record)
+
+    index_name, doc_type = current_record_to_index(record)
+    current_search.flush_and_refresh(index_name)
+
+    headers = [('Content-Type', 'application/json')]
+
+    url = url_for('invenio_records_rest.doc_item', pid_value='100')
+
+    response = client.get(url, headers=headers)
+    data = response.json
+
+    assert response.status_code == 200
+    assert data['metadata']['title'] == 'The title of the record'

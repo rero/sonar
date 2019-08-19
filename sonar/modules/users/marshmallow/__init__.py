@@ -15,19 +15,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""SONAR CLI commands."""
+"""Schemas for marshmallow."""
 
-import click
+from __future__ import absolute_import, print_function
 
-from .documents.cli import documents
-from .institutions.cli import institutions
-from .users.cli import users
+from .json import UserMetadataSchemaV1, UserSchemaV1
 
-
-@click.group()
-def fixtures():
-    """Fixtures management commands."""
-
-fixtures.add_command(documents)
-fixtures.add_command(institutions)
-fixtures.add_command(users)
+__all__ = ('UserMetadataSchemaV1', 'UserSchemaV1',)

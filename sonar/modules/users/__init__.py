@@ -15,19 +15,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""SONAR CLI commands."""
 
-import click
+"""User init script."""
 
-from .documents.cli import documents
-from .institutions.cli import institutions
-from .users.cli import users
-
-
-@click.group()
-def fixtures():
-    """Fixtures management commands."""
-
-fixtures.add_command(documents)
-fixtures.add_command(institutions)
-fixtures.add_command(users)
+from __future__ import absolute_import, print_function

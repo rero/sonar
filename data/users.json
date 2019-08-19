@@ -1,0 +1,39 @@
+[
+  {
+    "first_name": "Jorg",
+    "last_name": "Mueller",
+    "email": "rero.sonar+superadmin@gmail.com",
+    "password": "123456",
+    "roles": ["superadmin"]
+  },
+  {
+    "first_name": "Elia",
+    "last_name": "Rossi",
+    "email": "rero.sonar+admin@gmail.com",
+    "password": "123456",
+    "roles": ["admin"],
+    "institution": {
+      "$ref": "https://sonar.ch/api/institutions/usi"
+    }
+  },
+  {
+    "first_name": "Emanuele",
+    "last_name": "Fiorentini",
+    "email": "rero.sonar+moderator@gmail.com",
+    "password": "123456",
+    "roles": ["moderator"],
+    "institution": {
+      "$ref": "https://sonar.ch/api/institutions/usi"
+    }
+  },
+  {
+    "first_name": "Jules",
+    "last_name": "Brochu",
+    "email": "rero.sonar+user@gmail.com",
+    "password": "123456",
+    "roles": ["user"],
+    "institution": {
+      "$ref": "https://sonar.ch/api/institutions/usi"
+    }
+  }
+]

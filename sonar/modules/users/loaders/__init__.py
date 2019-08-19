@@ -15,19 +15,18 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""SONAR CLI commands."""
+"""Loaders for users."""
 
-import click
+from __future__ import absolute_import, print_function
 
-from .documents.cli import documents
-from .institutions.cli import institutions
-from .users.cli import users
+from invenio_records_rest.loaders.marshmallow import json_patch_loader, \
+    marshmallow_loader
 
+from ..marshmallow import UserMetadataSchemaV1
 
-@click.group()
-def fixtures():
-    """Fixtures management commands."""
+#: JSON loader using Marshmallow for data validation.
+json_v1 = marshmallow_loader(UserMetadataSchemaV1)
 
-fixtures.add_command(documents)
-fixtures.add_command(institutions)
-fixtures.add_command(users)
+__all__ = (
+    'json_v1',
+)

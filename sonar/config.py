@@ -35,6 +35,7 @@ from invenio_records_rest.utils import allow_all, check_elasticsearch
 
 from sonar.modules.documents.api import DocumentRecord, DocumentSearch
 from sonar.modules.institutions.api import InstitutionRecord, InstitutionSearch
+from sonar.modules.users.api import UserRecord, UserSearch
 
 
 def _(x):
@@ -271,6 +272,39 @@ RECORDS_REST_ENDPOINTS = {
         },
         list_route='/institutions/',
         item_route='/institutions/<pid(inst):pid_value>',
+        default_media_type='application/json',
+        max_result_window=10000,
+        error_handlers=dict(),
+        create_permission_factory_imp=allow_all,
+        read_permission_factory_imp=check_elasticsearch,
+        update_permission_factory_imp=allow_all,
+        delete_permission_factory_imp=allow_all,
+        list_permission_factory_imp=allow_all
+    ),
+    'user': dict(
+        pid_type='user',
+        pid_minter='user_id',
+        pid_fetcher='user_id',
+        default_endpoint_prefix=True,
+        record_class=UserRecord,
+        search_class=UserSearch,
+        indexer_class=RecordIndexer,
+        search_index='users',
+        search_type=None,
+        record_serializers={
+            'application/json': ('sonar.modules.users.serializers'
+                                 ':json_v1_response'),
+        },
+        search_serializers={
+            'application/json': ('sonar.modules.users.serializers'
+                                 ':json_v1_search'),
+        },
+        record_loaders={
+            'application/json': ('sonar.modules.users.loaders'
+                                 ':json_v1'),
+        },
+        list_route='/users/',
+        item_route='/users/<pid(user):pid_value>',
         default_media_type='application/json',
         max_result_window=10000,
         error_handlers=dict(),

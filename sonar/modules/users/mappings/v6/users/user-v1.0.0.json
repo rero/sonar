@@ -1,0 +1,63 @@
+{
+  "mappings": {
+    "user-v1.0.0": {
+      "date_detection": false,
+      "numeric_detection": false,
+      "properties": {
+        "$schema": {
+          "type": "keyword"
+        },
+        "pid": {
+          "type": "keyword"
+        },
+        "user_id": {
+          "type": "keyword"
+        },
+        "first_name": {
+          "type": "text"
+        },
+        "last_name": {
+          "type": "text"
+        },
+        "birth_date": {
+          "type": "date"
+        },
+        "email": {
+          "type": "keyword"
+        },
+        "street": {
+          "type": "text"
+        },
+        "postal_code": {
+          "type": "keyword"
+        },
+        "city": {
+          "type": "text"
+        },
+        "phone": {
+          "type": "keyword"
+        },
+        "roles": {
+          "type": "keyword"
+        },
+        "institution": {
+          "type": "object",
+          "properties": {
+            "pid": {
+              "type": "keyword"
+            },
+            "name": {
+              "type": "text"
+            }
+          }
+        },
+        "_created": {
+          "type": "date"
+        },
+        "_updated": {
+          "type": "date"
+        }
+      }
+    }
+  }
+}
