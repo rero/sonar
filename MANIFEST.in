@@ -104,3 +104,7 @@ recursive-include sonar *.woff2
 
 include tests/ui/shibboleth_authenticator/data/valid_saml_response
 recursive-include data *.crt
+
+# added by check_manifest.py
+recursive-include sonar *.babelrc
+recursive-include sonar *.eslintignore

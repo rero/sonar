@@ -55,7 +55,7 @@ def get_mef_person_link(id, key, value):
     mef_url = None
     if id:
         identifier = id[1:].split(')')
-        url = "{mef}/?q={org}.{org}_pid:{pid}".format(
+        url = "{mef}/?q={org}.pid:{pid}".format(
             mef="https://{host}/api/mef".format(host=DEV_HOST),
             org=identifier[0].lower(),
             pid=identifier[1]
