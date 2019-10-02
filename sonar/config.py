@@ -384,3 +384,5 @@ SHIBBOLETH_IDENTITY_PROVIDERS = dict(
         )
     )
 )
+
+WEBPACKEXT_PROJECT = 'sonar.theme.webpack:project'

@@ -19,7 +19,15 @@
 
 from __future__ import absolute_import, print_function
 
-from flask_webpackext import WebpackBundle
+from flask_webpackext import WebpackBundle, WebpackBundleProject
+from pywebpack import bundles_from_entry_point
+
+project = WebpackBundleProject(
+    'sonar.theme',
+    project_folder='webpack_assets',
+    config_path='build/config.json',
+    bundles=bundles_from_entry_point('invenio_assets.webpack'),
+)
 
 theme = WebpackBundle(
     __name__,
