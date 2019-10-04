@@ -4,7 +4,12 @@
     "last_name": "Mueller",
     "email": "rero.sonar+superadmin@gmail.com",
     "password": "123456",
-    "roles": ["superadmin"]
+    "roles": ["superadmin"],
+    "birth_date": "1978-03-09",
+    "street": "Sonnenbergstr 39",
+    "postal_code": "6544",
+    "city": "Braggio",
+    "phone": "+41916658961"
   },
   {
     "first_name": "Elia",
@@ -12,6 +17,11 @@
     "email": "rero.sonar+admin@gmail.com",
     "password": "123456",
     "roles": ["admin"],
+    "birth_date": "1971-12-01",
+    "street": "Brunnacherstrasse 112",
+    "postal_code": "5330",
+    "city": "Zurzach",
+    "phone": "+41625037543",
     "institution": {
       "$ref": "https://sonar.ch/api/institutions/usi"
     }
@@ -22,6 +32,11 @@
     "email": "rero.sonar+moderator@gmail.com",
     "password": "123456",
     "roles": ["moderator"],
+    "birth_date": "1964-10-10",
+    "street": "Lichtmattstrasse 123",
+    "postal_code": "5736",
+    "city": "Burg",
+    "phone": "+41627676171",
     "institution": {
       "$ref": "https://sonar.ch/api/institutions/usi"
     }
@@ -32,6 +47,11 @@
     "email": "rero.sonar+user@gmail.com",
     "password": "123456",
     "roles": ["user"],
+    "birth_date": "1984-04-20",
+    "street": "Rasenstrasse 2",
+    "postal_code": "4577",
+    "city": "Hessigkofen",
+    "phone": "+41323666556",
     "institution": {
       "$ref": "https://sonar.ch/api/institutions/usi"
     }

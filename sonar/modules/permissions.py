@@ -17,12 +17,17 @@
 
 """Project permissions management."""
 
-from flask_principal import ActionNeed
+from functools import wraps
+
+from flask import abort
+from flask_login import current_user
+from flask_principal import ActionNeed, RoleNeed
 from invenio_access import Permission
 from invenio_records_rest.utils import check_elasticsearch
 
 superuser_access_permission = Permission(ActionNeed('superuser-access'))
-admin_access_permission = Permission(ActionNeed('admin-access'))
+admin_access_permission = Permission(RoleNeed('librarian'), RoleNeed('admin'))
+moderator_access_permission = Permission(ActionNeed('admin-access'))
 
 
 def has_admin_access():
@@ -30,14 +35,15 @@ def has_admin_access():
 
     This function is used in app context and can be called in all templates.
     """
-    return admin_access_permission.can()
+    return moderator_access_permission.can()
 
 
-def admin_permission_factory(admin_view):
-    """Admin permission factory."""
-    if admin_view.name in ['Home']:
-        return admin_access_permission
-    return superuser_access_permission
+def has_super_admin_access():
+    """Check if current user has access to super admin panel.
+
+    This function is used in app context and can be called in all templates.
+    """
+    return superuser_access_permission.can()
 
 
 def can_list_record_factory(**kwargs):
@@ -63,3 +69,23 @@ def can_update_record_factory(**kwargs):
 def can_delete_record_factory(**kwargs):
     """Factory to check if a record can be deleted."""
     return admin_access_permission
+
+
+def can_access_manage_view(func):
+    """Check if user has access to admin views."""
+    @wraps(func)
+    def decorated_view(*args, **kwargs):
+        if not current_user.is_authenticated:
+            abort(401)
+        else:
+            if has_admin_access():
+                return func(*args, **kwargs)
+
+            abort(403)
+
+    return decorated_view
+
+
+def admin_permission_factory(admin_view):
+    """Admin permission factory."""
+    return superuser_access_permission

@@ -15,25 +15,17 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""JS/CSS Webpack bundles for theme."""
+"""Test SONAR api views."""
 
-from __future__ import absolute_import, print_function
+from invenio_app.factory import create_api
 
-from flask_webpackext import WebpackBundle
+create_app = create_api
 
-theme = WebpackBundle(
-    __name__,
-    'assets',
-    entry={
-        'app': './js/app.js',
-        'search_ui': './js/search_ui.js',
-        'sonar-theme': './scss/sonar/theme.scss',
-        'usi-theme': './scss/usi/theme.scss'
-    },
-    dependencies={
-        'popper.js': '^1.15',
-        'jquery': '^3.2',
-        'bootstrap': '^4.3',
-        'font-awesome': '^4.0'
-    }
-)
+
+def test_json_schema_form(client):
+    """Test JSON schema form api."""
+    res = client.get('/schemaform/documents')
+    assert res.status_code == 200
+
+    res = client.get('/schemaform/not_existing')
+    assert res.status_code == 404

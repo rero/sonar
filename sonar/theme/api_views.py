@@ -24,30 +24,37 @@ this file.
 
 from __future__ import absolute_import, print_function
 
-from flask import Blueprint, redirect, render_template, url_for
+import re
 
-from sonar.modules.permissions import can_access_manage_view
+from flask import Blueprint, abort, jsonify
+from invenio_jsonschemas import current_jsonschemas
+from invenio_jsonschemas.errors import JSONSchemaNotFound
 
 blueprint = Blueprint(
-    'sonar',
-    __name__,
-    template_folder='templates',
-    static_folder='static'
+    'api_sonar',
+    __name__
 )
 
 
-@blueprint.route('/error')
-def error():
-    """Error to generate exception for test purposes."""
-    raise Exception('this is an error for test purposes')
+@blueprint.route('/schemaform/<document_type>')
+def schemaform(document_type):
+    """Return schema and form options for the editor."""
+    doc_type = document_type
+    doc_type = re.sub('ies$', 'y', doc_type)
+    doc_type = re.sub('s$', '', doc_type)
+    data = {}
+    schema = None
+    schema_name = None
+    try:
+        current_jsonschemas.get_schema.cache_clear()
+        schema_name = '{}/{}-v1.0.0.json'.format(document_type, doc_type)
+        schema = current_jsonschemas.get_schema(schema_name)
+        data['schema'] = schema
 
+        form = current_jsonschemas.get_schema(
+            'form_{}/{}-v1.0.0.json'.format(document_type, doc_type))
+        data['layout'] = form
+    except JSONSchemaNotFound:
+        abort(404)
 
-@blueprint.route('/manage/')
-@blueprint.route('/manage/<path:path>')
-@can_access_manage_view
-def manage(path=None):
-    """Admin access page integrating angular ui."""
-    if not path:
-        return redirect(url_for('sonar.manage', path='records/documents'))
-
-    return render_template('sonar/manage.html')
+    return jsonify(data)

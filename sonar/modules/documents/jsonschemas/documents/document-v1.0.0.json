@@ -132,7 +132,7 @@
       "title": "Authors",
       "description": "Author(s) of the resource. Can be either persons or organisations.",
       "type": "array",
-      "minItems": 0,
+      "minItems": 1,
       "items": {
         "type": "object",
         "required": [
@@ -226,7 +226,11 @@
             "title": "Subjects list",
             "description": "A list of subjects.",
             "type": "array",
-            "minLength": 1
+            "minLength": 1,
+            "items": {
+              "type": "string",
+              "title": "Subject"
+            }
           }
         }
       }
@@ -242,12 +246,14 @@
       }
     },
     "institution": {
-      "title": "Institution",
-      "description": "Institution linked to document.",
+      "title": "Organization",
+      "description": "Organization linked to document.",
       "type": "object",
       "properties": {
         "$ref": {
-          "type": "string"
+          "title": "Organization",
+          "type": "string",
+          "pattern": "^https://sonar.ch/api/institutions/.*?$"
         }
       },
       "required": ["$ref"]

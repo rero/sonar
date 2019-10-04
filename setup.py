@@ -63,10 +63,15 @@ setup(
                 sonar.modules.pdf_extractor.views.client:blueprint'
         ],
         'invenio_base.api_blueprints': [
+            'sonar = sonar.theme.api_views:blueprint',
             'pdf_extractor = sonar.modules.pdf_extractor.views.api:blueprint'
         ],
         'invenio_assets.webpack': [
-            'sonar_theme = sonar.theme.webpack:theme',
+            'sonar_theme = sonar.theme.webpack:theme'
+        ],
+        'invenio_assets.bundles': [
+            'admin_ui_js = sonar.bundles:admin_ui_js',
+            'admin_ui_css = sonar.bundles:admin_ui_css'
         ],
         'invenio_config.module': [
             'sonar = sonar.config',

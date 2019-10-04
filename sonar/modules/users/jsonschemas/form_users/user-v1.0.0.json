@@ -1,0 +1,68 @@
+[
+  {
+    "type": "fieldset",
+    "notitle": true,
+    "nomenu": true,
+    "items": [ "last_name" ]
+  },
+  {
+    "type": "fieldset",
+    "notitle": true,
+    "nomenu": true,
+    "items": [ "first_name" ]
+  },
+  {
+    "type": "fieldset",
+    "notitle": true,
+    "nomenu": true,
+    "items": [ "email" ]
+  },
+  {
+    "type": "fieldset",
+    "notitle": true,
+    "nomenu": true,
+    "items": [
+      {
+        "key": "institution.$ref",
+        "type": "select",
+        "remoteRecordType": "institutions"
+      }
+    ]
+  },
+  {
+    "type": "fieldset",
+    "notitle": true,
+    "nomenu": true,
+    "items": [ "phone" ]
+  },
+  {
+    "type": "fieldset",
+    "notitle": true,
+    "nomenu": true,
+    "items": [ "birth_date" ]
+  },
+  {
+    "type": "fieldset",
+    "notitle": true,
+    "nomenu": true,
+    "items": [ "street" ]
+  },
+  {
+    "type": "fieldset",
+    "notitle": true,
+    "nomenu": true,
+    "items": [ "postal_code" ]
+  },
+  {
+    "type": "fieldset",
+    "notitle": true,
+    "nomenu": true,
+    "items": [ "city" ]
+  },
+  {
+    "type": "fieldset",
+    "notitle": true,
+    "nomenu": true,
+    "items": [ "roles" ]
+  }
+]

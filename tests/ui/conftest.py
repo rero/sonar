@@ -20,6 +20,9 @@
 from __future__ import absolute_import, print_function
 
 import pytest
+from flask_principal import ActionNeed
+from invenio_access.models import ActionUsers, Role
+from invenio_accounts.ext import hash_password
 from invenio_app.factory import create_ui
 
 
@@ -35,7 +38,44 @@ def user_fixture(app):
     with app.app_context():
         datastore = app.extensions['security'].datastore
         datastore.create_user(email='john.doe@test.com',
-                              password='123456',
+                              password=hash_password('123456'),
                               active=True)
         datastore.commit()
     return app
+
+
+@pytest.fixture()
+def admin_user_fixture(app, db, user_fixture):
+    """User with admin access."""
+    datastore = app.extensions['security'].datastore
+    user = datastore.find_user(email='john.doe@test.com')
+
+    admin = Role(name='admin')
+    admin.users.append(user)
+
+    db.session.add(admin)
+    db.session.commit()
+
+    db.session.add(ActionUsers.allow(ActionNeed('admin-access'), user=user))
+    db.session.commit()
+
+    return user
+
+
+@pytest.fixture()
+def superadmin_user_fixture(app, db, user_fixture):
+    """User with admin access."""
+    datastore = app.extensions['security'].datastore
+    user = datastore.find_user(email='john.doe@test.com')
+
+    admin = Role(name='superadmin')
+    admin.users.append(user)
+
+    db.session.add(admin)
+    db.session.commit()
+
+    db.session.add(ActionUsers.allow(ActionNeed('superuser-access'),
+                                     user=user))
+    db.session.commit()
+
+    return user

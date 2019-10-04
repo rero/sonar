@@ -19,9 +19,53 @@
 
 import pytest
 from flask import url_for
+from flask_principal import ActionNeed
+from invenio_access.models import ActionUsers, Role
 
 
 def test_error(client):
     """Test error page"""
     with pytest.raises(Exception):
         assert client.get(url_for('sonar.error'))
+
+
+def test_admin_record_page(app, db, user_fixture):
+    """Test admin page redirection to defaults."""
+    datastore = app.extensions['security'].datastore
+    user = datastore.find_user(email='john.doe@test.com')
+
+    admin = Role(name='admin')
+    admin.users.append(user)
+
+    db.session.add(admin)
+    db.session.commit()
+
+    with app.test_client() as client:
+        if user:
+            file_url = url_for('sonar.manage')
+
+            res = client.get(file_url)
+            assert res.status_code == 401
+
+            # Login as user
+            with client.session_transaction() as sess:
+                sess['user_id'] = user.id
+                sess['_fresh'] = True
+
+            res = client.get(file_url)
+            assert res.status_code == 403
+
+            db.session.add(
+                ActionUsers.allow(ActionNeed('admin-access'), user=user))
+            db.session.commit()
+
+            file_url = url_for('sonar.manage')
+
+            res = client.get(file_url)
+            assert res.status_code == 302
+            assert '/records/documents' in res.location
+
+            file_url = url_for('sonar.manage', path='records/documents')
+            res = client.get(file_url)
+            assert res.status_code == 200
+            assert '<admin-root>' in str(res.data)

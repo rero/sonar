@@ -174,6 +174,39 @@ SESSION_COOKIE_SECURE = True
 #: route correct hosts to the application.
 APP_ALLOWED_HOSTS = ['sonar.ch', 'localhost', '127.0.0.1']
 
+APP_DEFAULT_SECURE_HEADERS = {
+    'force_https': True,
+    'force_https_permanent': False,
+    'force_file_save': False,
+    'frame_options': 'sameorigin',
+    'frame_options_allow_from': None,
+    'strict_transport_security': True,
+    'strict_transport_security_preload': False,
+    'strict_transport_security_max_age': 31556926,  # One year in seconds
+    'strict_transport_security_include_subdomains': True,
+    'content_security_policy': {
+        'default-src': ["'self'"],
+        'object-src': ["'none'"],
+        'style-src': [
+            "'self'",
+            "'unsafe-inline'",
+            'https://cdnjs.cloudflare.com',
+            'https://fonts.googleapis.com'
+        ],
+        'font-src': [
+            "'self'",
+            "'unsafe-inline'",
+            'https://cdnjs.cloudflare.com',
+            'https://fonts.gstatic.com'
+        ]
+    },
+    'content_security_policy_report_uri': None,
+    'content_security_policy_report_only': False,
+    'session_cookie_secure': True,
+    'session_cookie_http_only': True
+}
+"""Talisman default Secure Headers configuration."""
+
 
 # OAI-PMH
 # =======
@@ -230,17 +263,17 @@ RECORDS_REST_ENDPOINTS = {
         search_index='documents',
         search_type=None,
         record_serializers={
-            'application/json': ('sonar.modules.documents.serializers'
+            'application/json': ('invenio_records_rest.serializers'
                                  ':json_v1_response'),
         },
         search_serializers={
-            'application/json': ('sonar.modules.documents.serializers'
+            'application/json': ('invenio_records_rest.serializers'
                                  ':json_v1_search'),
         },
-        record_loaders={
-            'application/json': ('sonar.modules.documents.loaders'
-                                 ':json_v1'),
-        },
+        # record_loaders={
+        #     'application/json': ('sonar.modules.documents.loaders'
+        #                          ':json_v1'),
+        # },
         list_route='/documents/',
         item_route='/documents/<pid(doc):pid_value>',
         default_media_type='application/json',
@@ -263,17 +296,17 @@ RECORDS_REST_ENDPOINTS = {
         search_index='institutions',
         search_type=None,
         record_serializers={
-            'application/json': ('sonar.modules.institutions.serializers'
+            'application/json': ('invenio_records_rest.serializers'
                                  ':json_v1_response'),
         },
         search_serializers={
-            'application/json': ('sonar.modules.institutions.serializers'
+            'application/json': ('invenio_records_rest.serializers'
                                  ':json_v1_search'),
         },
-        record_loaders={
-            'application/json': ('sonar.modules.institutions.loaders'
-                                 ':json_v1'),
-        },
+        # record_loaders={
+        #     'application/json': ('sonar.modules.institutions.loaders'
+        #                          ':json_v1'),
+        # },
         list_route='/institutions/',
         item_route='/institutions/<pid(inst):pid_value>',
         default_media_type='application/json',
@@ -296,17 +329,17 @@ RECORDS_REST_ENDPOINTS = {
         search_index='users',
         search_type=None,
         record_serializers={
-            'application/json': ('sonar.modules.users.serializers'
+            'application/json': ('invenio_records_rest.serializers'
                                  ':json_v1_response'),
         },
         search_serializers={
-            'application/json': ('sonar.modules.users.serializers'
+            'application/json': ('invenio_records_rest.serializers'
                                  ':json_v1_search'),
         },
-        record_loaders={
-            'application/json': ('sonar.modules.users.loaders'
-                                 ':json_v1'),
-        },
+        # record_loaders={
+        #     'application/json': ('sonar.modules.users.loaders'
+        #                          ':json_v1'),
+        # },
         list_route='/users/',
         item_route='/users/<pid(user):pid_value>',
         default_media_type='application/json',
@@ -423,9 +456,11 @@ SHIBBOLETH_IDENTITY_PROVIDERS = dict(
     )
 )
 
-WEBPACKEXT_PROJECT = 'sonar.theme.webpack:project'
-
 # Admin layout
 # =========================
 ADMIN_BASE_TEMPLATE = 'sonar/page_admin.html'
 ADMIN_PERMISSION_FACTORY = 'sonar.modules.permissions.admin_permission_factory'
+
+REST_ENABLE_CORS = True
+"""Enable CORS to make it possible to do request to API from other
+applications."""
