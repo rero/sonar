@@ -33,3 +33,5 @@ SONAR_APP_LANGUAGES_MAP = dict(
     por='pt',
     rus='ru'
 )
+
+SONAR_APP_ENABLE_CORS = True

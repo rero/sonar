@@ -22,8 +22,13 @@
         {{_('Profile')}}
     </a>
     {% endif %}
-    {% if has_admin_access() %}
+    {% if has_super_admin_access() %}
     <a class="dropdown-item" href="{{ url_for('admin.index')}}">
+        {{_('Super administration')}}
+    </a>
+    {% endif %}
+    {% if has_admin_access() %}
+    <a class="dropdown-item" href="{{ url_for('sonar.manage')}}">
         {{_('Administration')}}
     </a>
     {% endif %}

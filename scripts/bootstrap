@@ -18,9 +18,20 @@
 
 set -e
 
+local=false
+while test $# -gt 0; do
+    case "$1" in
+        --local)
+            local=true
+            shift
+            ;;
+    esac
+done
+
 
 script_path=$(dirname "$0")
 pipfile_lock_path="$script_path/../Pipfile.lock"
+cwd=`pwd`
 
 if [ ! -f $pipfile_lock_path ]; then
     echo "'Pipfile.lock' not found. Generating via 'pipenv lock --dev'..."
@@ -31,8 +42,36 @@ fi
 pipenv sync --dev
 # Install application code and entrypoints from 'setup.py'
 pipenv run pip install -e $script_path/..
-# Build assets
+# Build webpack assets
 pipenv run invenio collect -v
-pipenv run invenio webpack buildall
 
+assets_folder=$(pipenv run invenio shell --no-term-title -c "print(app.config.get('WEBPACKEXT_PROJECT_BUILDDIR'))")
 
+if ! $local; then
+    pipenv run invenio webpack buildall
+else
+    pipenv run invenio webpack create
+    pipenv run invenio webpack install
+    cd $assets_folder
+    if ! npm link @rero/sonar-ui; then
+        echo "ERROR: npm link failed"
+        exit 1
+    fi
+    cd ${cwd}
+    pipenv run invenio webpack build
+fi
+
+# Build assets
+# Get static folder
+static_folder=$(pipenv run invenio shell --no-term-title -c "print('static_folder:%s' % app.static_folder)"|grep static_folder| cut -d: -f2-)
+
+# Create package.json
+pipenv run invenio npm
+
+# install the npm dependencies
+virtualenv_path=`pipenv --venv`
+pipenv run npm install --prefix "${virtualenv_path}" --silent -g node-sass@4.9.0 clean-css@3.4.19 uglify-js@2.7.3 requirejs@2.2.0
+pipenv run npm install --prefix "${static_folder}"
+
+# build the web assets
+pipenv run invenio assets build

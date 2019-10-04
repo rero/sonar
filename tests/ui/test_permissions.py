@@ -18,28 +18,49 @@
 """Test SONAR permissions."""
 
 from flask import url_for
-from flask_principal import ActionNeed
-from invenio_access.models import ActionUsers
+from invenio_accounts.testutils import login_user_via_view
 
-from sonar.modules.permissions import has_admin_access
+from sonar.modules.documents.api import DocumentRecord
+from sonar.modules.permissions import can_create_record_factory, \
+    can_delete_record_factory, can_list_record_factory, \
+    can_read_record_factory, can_update_record_factory
 
 
-def test_has_admin_access(app, db, user_fixture):
-    """Test error page"""
-    datastore = app.extensions['security'].datastore
-    user = datastore.find_user(email='john.doe@test.com')
+def test_has_admin_access(app, db, client, admin_user_fixture):
+    """Test if user has an admin access."""
+    user = admin_user_fixture
 
-    file_url = url_for('admin.index')
-    with app.test_client() as client:
-        if user:
-            # Login as user
-            with client.session_transaction() as sess:
-                sess['user_id'] = user.id
-                sess['_fresh'] = True
+    login_user_via_view(client, email=user.email, password='123456')
 
-            db.session.add(
-                ActionUsers.allow(ActionNeed('admin-access'), user=user))
-            db.session.commit()
+    res = client.get(url_for('sonar.manage', path='records/documents'))
+    assert res.status_code == 200
 
-            res = client.get(file_url)
-            assert res.status_code == 200
+
+def test_has_super_admin_access(app, db, client, superadmin_user_fixture):
+    """Test if user has a super admin access."""
+    login_user_via_view(client,
+                        email=superadmin_user_fixture.email,
+                        password='123456')
+
+    res = client.get(url_for('admin.index'))
+    assert res.status_code == 200
+
+
+def test_can_list_record_factory(app, client, admin_user_fixture):
+    """Test is user can list record."""
+    login_user_via_view(client,
+                        email=admin_user_fixture.email,
+                        password='123456')
+
+    assert can_list_record_factory()
+    assert can_create_record_factory()
+    assert can_update_record_factory()
+    assert can_delete_record_factory()
+
+    record = DocumentRecord.create(
+        {
+            "pid": "2",
+            "title": "The title of the record"
+        }, dbcommit=True)
+
+    assert can_read_record_factory(record)

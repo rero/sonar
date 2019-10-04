@@ -65,17 +65,16 @@
       "pattern": "^\\+[0-9]*$"
     },
     "institution": {
-      "title": "Institution",
-      "description": "Institution linked to user.",
+      "title": "Organization",
+      "description": "Organization linked to user.",
       "type": "object",
       "properties": {
         "$ref": {
-          "title": "Institution URI",
+          "title": "Organization",
           "type": "string",
           "pattern": "^https://sonar.ch/api/institutions/.*?$"
         }
-      },
-      "required": ["$ref"]
+      }
     },
     "roles": {
       "title": "Role",
@@ -95,5 +94,5 @@
       }
     }
   },
-  "required": ["pid", "first_name", "last_name", "email", "roles", "$schema"]
+  "required": ["first_name", "last_name", "email", "roles", "$schema"]
 }

@@ -31,7 +31,6 @@ class InstitutionMetadataSchemaV1(StrictKeysMixin):
 
     pid = PersistentIdentifier()
     name = SanitizedUnicode(required=True)
-    key = SanitizedUnicode(required=True)
 
 
 class InstitutionSchemaV1(StrictKeysMixin):

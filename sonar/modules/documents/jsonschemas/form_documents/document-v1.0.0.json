@@ -1,0 +1,356 @@
+[
+  {
+    "type": "fieldset",
+    "notitle": true,
+    "nomenu": true,
+    "items": [
+      "title"
+    ]
+  },
+  {
+    "type": "fieldset",
+    "notitle": true,
+    "nomenu": true,
+    "items": [
+      {
+        "key": "institution.$ref",
+        "type": "select",
+        "remoteRecordType": "institutions"
+      }
+    ]
+  },
+  {
+    "type": "fieldset",
+    "title": "Authors",
+    "show": true,
+    "nomenu": true,
+    "items": [
+      {
+        "key": "authors",
+        "notitle": true,
+        "description": "",
+        "items": [
+          {
+            "type": "fieldset",
+            "items": [
+              {
+                "key": "authors[].type",
+                "type": "select",
+                "condition": {
+                  "functionBody": "{var author = model.authors[arrayIndices[0]]; return author.date === undefined &&  author.qualifier === undefined;}"
+                },
+                "titleMap": [
+                  {
+                    "value": "person",
+                    "name": "Person"
+                  },
+                  {
+                    "value": "organisation",
+                    "name": "Organisation"
+                  }
+                ]
+              },
+              {
+                "title": "Person's or organisation's name.",
+                "key": "authors[].name",
+                "description": ""
+              },
+              {
+                "key": "authors[].date",
+                "title": "Date of birth - date of death",
+                "description": "",
+                "condition": {
+                  "functionBody": "{return model.authors[arrayIndices[0]].type === 'person';}"
+                }
+              },
+              {
+                "key": "authors[].qualifier",
+                "title": "Title and other designation associated with person",
+                "description": "",
+                "condition": {
+                  "functionBody": "{return model.authors[arrayIndices[0]].type === 'person';}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "fieldset",
+    "title": "Languages",
+    "nomenu": true,
+    "items": [
+      {
+        "key": "languages",
+        "notitle": true,
+        "description": "",
+        "validationMessage": {
+          "uniqueItems": "Language value should be unique!"
+        },
+        "items": [
+          {
+            "type": "fieldset",
+            "items": [
+              {
+                "key": "languages[].code",
+                "title": "Language",
+                "titleMap": [
+                  {
+                    "value": "ara",
+                    "name": "Arabic"
+                  },
+                  {
+                    "value": "chi",
+                    "name": "Chinese"
+                  },
+                  {
+                    "value": "eng",
+                    "name": "English"
+                  },
+                  {
+                    "value": "fre",
+                    "name": "French"
+                  },
+                  {
+                    "value": "ger",
+                    "name": "German"
+                  },
+                  {
+                    "value": "heb",
+                    "name": "Hebrew"
+                  },
+                  {
+                    "value": "ita",
+                    "name": "Italian"
+                  },
+                  {
+                    "value": "jpn",
+                    "name": "Japanese"
+                  },
+                  {
+                    "value": "lat",
+                    "name": "Latin"
+                  },
+                  {
+                    "value": "por",
+                    "name": "Portuguese"
+                  },
+                  {
+                    "value": "rus",
+                    "name": "Russian"
+                  },
+                  {
+                    "value": "spa",
+                    "name": "Spanish"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "fieldset",
+    "title": "Abstracts",
+    "nomenu": true,
+    "items": [
+      {
+        "notitle": true,
+        "type": "array",
+        "description": "",
+        "items": [
+          {
+            "type": "fieldset",
+            "items": [
+              {
+                "key": "abstracts[].language",
+                "title": "Language",
+                "titleMap": [
+                  {
+                    "value": "ara",
+                    "name": "Arabic"
+                  },
+                  {
+                    "value": "chi",
+                    "name": "Chinese"
+                  },
+                  {
+                    "value": "eng",
+                    "name": "English"
+                  },
+                  {
+                    "value": "fre",
+                    "name": "French"
+                  },
+                  {
+                    "value": "ger",
+                    "name": "German"
+                  },
+                  {
+                    "value": "heb",
+                    "name": "Hebrew"
+                  },
+                  {
+                    "value": "ita",
+                    "name": "Italian"
+                  },
+                  {
+                    "value": "jpn",
+                    "name": "Japanese"
+                  },
+                  {
+                    "value": "lat",
+                    "name": "Latin"
+                  },
+                  {
+                    "value": "por",
+                    "name": "Portuguese"
+                  },
+                  {
+                    "value": "rus",
+                    "name": "Russian"
+                  },
+                  {
+                    "value": "spa",
+                    "name": "Spanish"
+                  }
+                ]
+              },
+              {
+                "key": "abstracts[].value",
+                "title": "Content",
+                "type": "textarea"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "fieldset",
+    "title": "Identifiers",
+    "nomenu": true,
+    "items": [
+      {
+        "key": "identifiers.reroID"
+      },
+      {
+        "key": "identifiers.bnfID"
+      },
+      {
+        "key": "identifiers.isbn"
+      }
+    ]
+  },
+  {
+    "type": "fieldset",
+    "notitle": true,
+    "nomenu": true,
+    "show": true,
+    "items": [
+      {
+        "key": "extent"
+      }
+    ]
+  },
+  {
+    "type": "fieldset",
+    "notitle": true,
+    "nomenu": true,
+    "items": [
+      {
+        "key": "is_part_of"
+      }
+    ]
+  },
+  {
+    "type": "fieldset",
+    "title": "Subjects",
+    "nomenu": true,
+    "items": [
+      {
+        "notitle": true,
+        "type": "array",
+        "description": "",
+        "items": [
+          {            
+            "type": "fieldset",
+            "notitle": true,
+            "items": [
+              {
+                "key": "subjects[].language",
+                "title": "Language",
+                "description": "",
+                "titleMap": [
+                  {
+                    "value": "ara",
+                    "name": "Arabic"
+                  },
+                  {
+                    "value": "chi",
+                    "name": "Chinese"
+                  },
+                  {
+                    "value": "eng",
+                    "name": "English"
+                  },
+                  {
+                    "value": "fre",
+                    "name": "French"
+                  },
+                  {
+                    "value": "ger",
+                    "name": "German"
+                  },
+                  {
+                    "value": "heb",
+                    "name": "Hebrew"
+                  },
+                  {
+                    "value": "ita",
+                    "name": "Italian"
+                  },
+                  {
+                    "value": "jpn",
+                    "name": "Japanese"
+                  },
+                  {
+                    "value": "lat",
+                    "name": "Latin"
+                  },
+                  {
+                    "value": "por",
+                    "name": "Portuguese"
+                  },
+                  {
+                    "value": "rus",
+                    "name": "Russian"
+                  },
+                  {
+                    "value": "spa",
+                    "name": "Spanish"
+                  }
+                ]
+              },
+              {
+                "type": "array",
+                "notitle": true,
+                "description": "",
+                "items": [
+                  {
+                    "key": "subjects[].value[]"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

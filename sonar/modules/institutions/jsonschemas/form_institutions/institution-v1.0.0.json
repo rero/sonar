@@ -1,0 +1,14 @@
+[
+  {
+    "type": "fieldset",
+    "notitle": true,
+    "nomenu": true,
+    "items": [ "name" ]
+  },
+  {
+    "type": "fieldset",
+    "notitle": true,
+    "nomenu": true,
+    "items": [ "pid" ]
+  }
+]

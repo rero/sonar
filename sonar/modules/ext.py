@@ -15,19 +15,19 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 """Document extension."""
 
 from __future__ import absolute_import, print_function
 
-from sonar.modules.permissions import has_admin_access
+from sonar.modules.permissions import has_admin_access, has_super_admin_access
 
 from . import config
 
 
 def utility_processor():
     """Dictionary for checking admin access."""
-    return dict(has_admin_access=has_admin_access)
+    return dict(has_admin_access=has_admin_access,
+                has_super_admin_access=has_super_admin_access)
 
 
 class Sonar(object):
@@ -42,6 +42,10 @@ class Sonar(object):
         """Flask application initialization."""
         self.init_config(app)
         app.extensions['sonar_app'] = self
+
+        if app.config['SONAR_APP_ENABLE_CORS']:
+            from flask_cors import CORS
+            CORS(app)
 
         app.context_processor(utility_processor)
 
