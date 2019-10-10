@@ -129,11 +129,5 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
         'Development Status :: 3 - Alpha',
-    ],
-    setup_requires=[
-        'pytest-runner>=3.0.0,<5',
-    ],
-    tests_require=[
-        'pytest-invenio>=1.0.0,<1.1.0',
     ]
 )
