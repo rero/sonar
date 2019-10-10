@@ -64,7 +64,8 @@ setup(
         ],
         'invenio_base.api_blueprints': [
             'sonar = sonar.theme.api_views:blueprint',
-            'pdf_extractor = sonar.modules.pdf_extractor.views.api:blueprint'
+            'pdf_extractor = sonar.modules.pdf_extractor.views.api:blueprint',
+            'deposits = sonar.modules.deposits.rest:blueprint'
         ],
         'invenio_assets.webpack': [
             'sonar_theme = sonar.theme.webpack:theme'
@@ -92,12 +93,14 @@ setup(
         'invenio_jsonschemas.schemas': [
             'documents = sonar.modules.documents.jsonschemas',
             'institutions = sonar.modules.institutions.jsonschemas',
-            'users = sonar.modules.users.jsonschemas'
+            'users = sonar.modules.users.jsonschemas',
+            'deposits = sonar.modules.deposits.jsonschemas'
         ],
         'invenio_search.mappings': [
             'documents = sonar.modules.documents.mappings',
             'institutions = sonar.modules.institutions.mappings',
-            'users = sonar.modules.users.mappings'
+            'users = sonar.modules.users.mappings',
+            'deposits = sonar.modules.deposits.mappings'
         ],
         'invenio_pidstore.minters': [
             'document_id = \
@@ -105,7 +108,9 @@ setup(
             'institution_id = \
                 sonar.modules.institutions.api:institution_pid_minter',
             'user_id = \
-                sonar.modules.users.api:user_pid_minter'
+                sonar.modules.users.api:user_pid_minter',
+            'deposit_id = \
+                sonar.modules.deposits.api:deposit_pid_minter'
         ],
         'invenio_pidstore.fetchers': [
             'document_id = \
@@ -113,10 +118,13 @@ setup(
             'institution_id = \
                 sonar.modules.institutions.api:institution_pid_fetcher',
             'user_id = \
-                sonar.modules.users.api:user_pid_fetcher'
+                sonar.modules.users.api:user_pid_fetcher',
+            'deposit_id = \
+                sonar.modules.deposits.api:deposit_pid_fetcher'
         ],
         "invenio_records.jsonresolver": [
-            "institution = sonar.modules.institutions.jsonresolvers"
+            "institution = sonar.modules.institutions.jsonresolvers",
+            "user = sonar.modules.users.jsonresolvers"
         ]
     },
     classifiers=[

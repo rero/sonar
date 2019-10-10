@@ -32,30 +32,50 @@ def create_app():
     return create_ui
 
 
-@pytest.fixture(scope='module')
-def user_fixture(app):
-    """Create user in database."""
-    with app.app_context():
-        datastore = app.extensions['security'].datastore
-        datastore.create_user(email='john.doe@test.com',
-                              password=hash_password('123456'),
-                              active=True)
-        datastore.commit()
-    return app
+@pytest.fixture()
+def user_without_role_fixture(app, db):
+    """Create user in database without role."""
+    datastore = app.extensions['security'].datastore
+    user = db.create_user(email='user-without-role@test.com',
+                          password=hash_password('123456'),
+                          active=True)
+    db.session.commit()
+
+    return user
 
 
 @pytest.fixture()
-def admin_user_fixture(app, db, user_fixture):
-    """User with admin access."""
+def user_fixture(app, db):
+    """Create user in database."""
     datastore = app.extensions['security'].datastore
-    user = datastore.find_user(email='john.doe@test.com')
-
-    admin = Role(name='admin')
-    admin.users.append(user)
-
-    db.session.add(admin)
+    user = datastore.create_user(email='user@test.com',
+                                 password=hash_password('123456'),
+                                 active=True)
     db.session.commit()
 
+    role = Role(name='user')
+    role.users.append(user)
+
+    db.session.add(role)
+    db.session.add(ActionUsers.allow(ActionNeed('user-access'), user=user))
+    db.session.commit()
+
+    return user
+
+
+@pytest.fixture()
+def admin_user_fixture(app, db):
+    """User with admin access."""
+    datastore = app.extensions['security'].datastore
+    user = datastore.create_user(email='admin@test.com',
+                                 password=hash_password('123456'),
+                                 active=True)
+    datastore.commit()
+
+    role = Role(name='admin')
+    role.users.append(user)
+
+    db.session.add(role)
     db.session.add(ActionUsers.allow(ActionNeed('admin-access'), user=user))
     db.session.commit()
 
@@ -63,17 +83,18 @@ def admin_user_fixture(app, db, user_fixture):
 
 
 @pytest.fixture()
-def superadmin_user_fixture(app, db, user_fixture):
+def superadmin_user_fixture(app, db):
     """User with admin access."""
     datastore = app.extensions['security'].datastore
-    user = datastore.find_user(email='john.doe@test.com')
-
-    admin = Role(name='superadmin')
-    admin.users.append(user)
-
-    db.session.add(admin)
+    user = datastore.create_user(email='superadmin@test.com',
+                                 password=hash_password('123456'),
+                                 active=True)
     db.session.commit()
 
+    role = Role(name='superadmin')
+    role.users.append(user)
+
+    db.session.add(role)
     db.session.add(ActionUsers.allow(ActionNeed('superuser-access'),
                                      user=user))
     db.session.commit()

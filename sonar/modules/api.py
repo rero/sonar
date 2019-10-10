@@ -25,12 +25,12 @@ from invenio_indexer.api import RecordIndexer
 from invenio_jsonschemas import current_jsonschemas
 from invenio_pidstore.errors import PIDDoesNotExistError
 from invenio_pidstore.models import PersistentIdentifier
-from invenio_records.api import Record
+from invenio_records_files.api import FilesMixin, Record
 from invenio_search.api import RecordsSearch
 from sqlalchemy.orm.exc import NoResultFound
 
 
-class SonarRecord(Record):
+class SonarRecord(Record, FilesMixin):
     """SONAR Record."""
 
     minter = None
@@ -40,7 +40,12 @@ class SonarRecord(Record):
     schema = None
 
     @classmethod
-    def create(cls, data, id_=None, dbcommit=False, **kwargs):
+    def create(cls,
+               data,
+               id_=None,
+               dbcommit=False,
+               with_bucket=False,
+               **kwargs):
         """Create a new record."""
         assert cls.minter
         assert cls.schema
@@ -54,9 +59,12 @@ class SonarRecord(Record):
 
         cls.minter(id_, data)
 
-        record = super(SonarRecord, cls).create(data=data, id_=id_, **kwargs)
+        record = super(SonarRecord, cls).create(data=data,
+                                                with_bucket=with_bucket,
+                                                id_=id_,
+                                                **kwargs)
 
-        if(dbcommit):
+        if (dbcommit):
             record.dbcommit()
 
         return record
@@ -67,13 +75,10 @@ class SonarRecord(Record):
         assert cls.provider
         try:
             persistent_identifier = PersistentIdentifier.get(
-                cls.provider.pid_type,
-                pid
-            )
-            return super(SonarRecord, cls).get_record(
-                persistent_identifier.object_uuid,
-                with_deleted=with_deleted
-            )
+                cls.provider.pid_type, pid)
+            return super(SonarRecord,
+                         cls).get_record(persistent_identifier.object_uuid,
+                                         with_deleted=with_deleted)
         except NoResultFound:
             return None
         except PIDDoesNotExistError:
@@ -83,9 +88,7 @@ class SonarRecord(Record):
     def get_ref_link(cls, type, id):
         """Get $ref link for the given type of record."""
         return 'https://{host}/api/{type}/{id}'.format(
-            host=current_app.config.get('JSONSCHEMAS_HOST'),
-            type=type,
-            id=id)
+            host=current_app.config.get('JSONSCHEMAS_HOST'), type=type, id=id)
 
     def dbcommit(self):
         """Commit changes to db."""

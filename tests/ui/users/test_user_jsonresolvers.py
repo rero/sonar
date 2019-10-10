@@ -15,27 +15,24 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""SONAR configuration."""
+"""Test users jsonresolvers."""
 
-SONAR_APP_API_URL = 'https://localhost:5000/api/'
+from sonar.modules.deposits.api import DepositRecord
+from sonar.modules.users.api import UserRecord
 
-SONAR_APP_LANGUAGES_MAP = dict(
-    fre='fr',
-    ger='de',
-    eng='en',
-    ita='it',
-    spa='sp',
-    ara='ar',
-    chi='zh',
-    lat='la',
-    heb='iw',
-    jpn='ja',
-    por='pt',
-    rus='ru'
-)
 
-SONAR_APP_ENABLE_CORS = True
+def test_user_resolver(app):
+    """Test user resolver."""
+    UserRecord.create({
+        'pid': '1',
+        'last_name': 'Brochu',
+        'first_name': 'Jules',
+        'email': 'admin@test.com',
+        'roles': ['user']
+    })
 
-SONAR_APP_DISABLE_PERMISSION_CHECKS = False
-"""Disable permission checks during API calls. Useful when API is test from
-command line or progams like postman."""
+    record = DepositRecord.create({
+        'user': {'$ref': 'https://sonar.ch/api/users/1'}
+    }, with_bucket=False)
+
+    assert record.replace_refs().get('user')['email'] == 'admin@test.com'

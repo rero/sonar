@@ -1,0 +1,38 @@
+{
+  "mappings": {
+    "deposit-v1.0.0": {
+      "date_detection": false,
+      "numeric_detection": false,
+      "properties": {
+        "$schema": {
+          "type": "text",
+          "index": false
+        },
+        "pid": {
+          "type": "keyword"
+        },
+        "user": {
+          "type": "object"
+        },
+        "status": {
+          "type": "keyword"
+        },
+        "step": {
+          "type": "keyword"
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "contributors": {
+          "type": "object"
+        },
+        "projects": {
+          "type": "object"
+        },
+        "diffusion": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

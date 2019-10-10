@@ -15,27 +15,21 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""SONAR configuration."""
+"""Test CLI for deposits."""
+import os
 
-SONAR_APP_API_URL = 'https://localhost:5000/api/'
+from click.testing import CliRunner
 
-SONAR_APP_LANGUAGES_MAP = dict(
-    fre='fr',
-    ger='de',
-    eng='en',
-    ita='it',
-    spa='sp',
-    ara='ar',
-    chi='zh',
-    lat='la',
-    heb='iw',
-    jpn='ja',
-    por='pt',
-    rus='ru'
-)
+import sonar.modules.deposits.cli as cli
 
-SONAR_APP_ENABLE_CORS = True
 
-SONAR_APP_DISABLE_PERMISSION_CHECKS = False
-"""Disable permission checks during API calls. Useful when API is test from
-command line or progams like postman."""
+def test_create(app, script_info):
+    """Test create location."""
+    runner = CliRunner()
+
+    directory = os.path.join(app.instance_path, 'files')
+
+    os.mkdir(directory, 0o755)
+
+    result = runner.invoke(cli.create, obj=script_info)
+    assert 'Location #1 created successfully' in result.output

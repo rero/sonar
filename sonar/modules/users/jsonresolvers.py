@@ -15,27 +15,22 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""SONAR configuration."""
+"""User resolver."""
 
-SONAR_APP_API_URL = 'https://localhost:5000/api/'
+from __future__ import absolute_import, print_function
 
-SONAR_APP_LANGUAGES_MAP = dict(
-    fre='fr',
-    ger='de',
-    eng='en',
-    ita='it',
-    spa='sp',
-    ara='ar',
-    chi='zh',
-    lat='la',
-    heb='iw',
-    jpn='ja',
-    por='pt',
-    rus='ru'
-)
+import jsonresolver
+from invenio_pidstore.resolver import Resolver
+from invenio_records.api import Record
 
-SONAR_APP_ENABLE_CORS = True
 
-SONAR_APP_DISABLE_PERMISSION_CHECKS = False
-"""Disable permission checks during API calls. Useful when API is test from
-command line or progams like postman."""
+# the host corresponds to the config value for the key JSONSCHEMAS_HOST
+@jsonresolver.route('/api/users/<pid>', host='sonar.ch')
+def institution_resolver(pid):
+    """Resolve referenced user."""
+    resolver = Resolver(pid_type='user', object_type="rec",
+                        getter=Record.get_record)
+    _, record = resolver.resolve(pid)
+
+    del record['$schema']
+    return record

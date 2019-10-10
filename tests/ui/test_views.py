@@ -19,8 +19,9 @@
 
 import pytest
 from flask import url_for
-from flask_principal import ActionNeed
-from invenio_access.models import ActionUsers, Role
+from invenio_accounts.testutils import login_user_via_session
+
+from sonar.modules.users.api import UserRecord
 
 
 def test_error(client):
@@ -29,43 +30,75 @@ def test_error(client):
         assert client.get(url_for('sonar.error'))
 
 
-def test_admin_record_page(app, db, user_fixture):
+def test_admin_record_page(app, admin_user_fixture):
     """Test admin page redirection to defaults."""
-    datastore = app.extensions['security'].datastore
-    user = datastore.find_user(email='john.doe@test.com')
-
-    admin = Role(name='admin')
-    admin.users.append(user)
-
-    db.session.add(admin)
-    db.session.commit()
-
     with app.test_client() as client:
-        if user:
-            file_url = url_for('sonar.manage')
+        file_url = url_for('sonar.manage')
 
-            res = client.get(file_url)
-            assert res.status_code == 401
+        res = client.get(file_url)
+        assert res.status_code == 401
 
-            # Login as user
-            with client.session_transaction() as sess:
-                sess['user_id'] = user.id
-                sess['_fresh'] = True
+        login_user_via_session(client, email=admin_user_fixture.email)
 
-            res = client.get(file_url)
-            assert res.status_code == 403
+        file_url = url_for('sonar.manage')
 
-            db.session.add(
-                ActionUsers.allow(ActionNeed('admin-access'), user=user))
-            db.session.commit()
+        res = client.get(file_url)
+        assert res.status_code == 302
+        assert '/records/documents' in res.location
 
-            file_url = url_for('sonar.manage')
+        file_url = url_for('sonar.manage', path='records/documents')
+        res = client.get(file_url)
+        assert res.status_code == 200
+        assert '<admin-root>' in str(res.data)
 
-            res = client.get(file_url)
-            assert res.status_code == 302
-            assert '/records/documents' in res.location
 
-            file_url = url_for('sonar.manage', path='records/documents')
-            res = client.get(file_url)
-            assert res.status_code == 200
-            assert '<admin-root>' in str(res.data)
+def test_logged_user(app, client, monkeypatch):
+    """Test logged user page."""
+    url = url_for('sonar.logged_user')
+
+    monkeypatch.setattr(
+        'sonar.modules.users.api.UserRecord.get_user_by_current_user', lambda *
+        args: None)
+
+    res = client.get(url)
+    assert b'{}' in res.data
+
+    user = UserRecord.create({
+        'pid': '1',
+        'email': 'admin@test.com',
+        'first_name': 'Jules',
+        'last_name': 'Brochu',
+        'roles': ['user'],
+        'institution': {
+            '$ref': 'https://sonar.ch/api/institutions/usi'
+        }
+    })
+
+    # Mock get current user because data are not indexed to ES.
+    monkeypatch.setattr(
+        'sonar.modules.users.api.UserRecord.get_user_by_current_user', lambda *
+        args: user)
+
+    user = UserRecord.create({
+        'pid': '1',
+        'email': 'admin@test.com',
+        'first_name': 'Jules',
+        'last_name': 'Brochu',
+        'roles': ['user'],
+        'institution': {
+            'pid': 'usi',
+            'name': 'Università della Svizzera italiana'
+        }
+    })
+
+    # Mock replace references because data are not indexed to ES.
+    monkeypatch.setattr(
+        'sonar.modules.users.api.UserRecord.replace_refs', lambda *
+        args: user)
+
+    res = client.get(url)
+    assert b'"email":"admin@test.com"' in res.data
+
+    res = client.get(url + '?resolve=1')
+    assert b'"email":"admin@test.com"' in res.data
+    assert b'"pid":"usi"' in res.data
