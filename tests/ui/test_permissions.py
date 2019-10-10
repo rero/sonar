@@ -23,7 +23,8 @@ from invenio_accounts.testutils import login_user_via_view
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.permissions import can_create_record_factory, \
     can_delete_record_factory, can_list_record_factory, \
-    can_read_record_factory, can_update_record_factory
+    can_read_record_factory, can_update_record_factory, \
+    files_permission_factory
 
 
 def test_has_admin_access(app, db, client, admin_user_fixture):
@@ -64,3 +65,11 @@ def test_can_list_record_factory(app, client, admin_user_fixture):
         }, dbcommit=True)
 
     assert can_read_record_factory(record)
+
+
+def test_files_permission_factory(client, admin_user_fixture):
+    """Test files permission factory."""
+    login_user_via_view(client,
+                        email=admin_user_fixture.email,
+                        password='123456')
+    assert files_permission_factory().can()

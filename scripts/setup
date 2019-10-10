@@ -40,3 +40,4 @@ pipenv run invenio fixtures institutions import
 pipenv run invenio fixtures users import $(pipenv --where)/data/users.json
 pipenv run invenio fixtures documents import hevs
 pipenv run invenio fixtures documents import usi
+pipenv run invenio fixtures deposits create

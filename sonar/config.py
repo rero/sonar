@@ -464,3 +464,6 @@ ADMIN_PERMISSION_FACTORY = 'sonar.modules.permissions.admin_permission_factory'
 REST_ENABLE_CORS = True
 """Enable CORS to make it possible to do request to API from other
 applications."""
+
+FILES_REST_PERMISSION_FACTORY = \
+    'sonar.modules.permissions.files_permission_factory'

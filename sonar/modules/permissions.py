@@ -26,8 +26,10 @@ from invenio_access import Permission
 from invenio_records_rest.utils import check_elasticsearch
 
 superuser_access_permission = Permission(ActionNeed('superuser-access'))
-admin_access_permission = Permission(RoleNeed('librarian'), RoleNeed('admin'))
+admin_access_permission = Permission(RoleNeed('moderator'), RoleNeed('admin'))
 moderator_access_permission = Permission(ActionNeed('admin-access'))
+user_access_permission = Permission(RoleNeed('user'),
+                                    RoleNeed('moderator'), RoleNeed('admin'))
 
 
 def has_admin_access():
@@ -89,3 +91,8 @@ def can_access_manage_view(func):
 def admin_permission_factory(admin_view):
     """Admin permission factory."""
     return superuser_access_permission
+
+
+def files_permission_factory(*kwargs):
+    """Files rest permission factory."""
+    return user_access_permission
