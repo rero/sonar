@@ -15,27 +15,17 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""SONAR configuration."""
+"""Test deposits utils."""
 
-SONAR_APP_API_URL = 'https://localhost:5000/api/'
+import pytest
 
-SONAR_APP_LANGUAGES_MAP = dict(
-    fre='fr',
-    ger='de',
-    eng='en',
-    ita='it',
-    spa='sp',
-    ara='ar',
-    chi='zh',
-    lat='la',
-    heb='iw',
-    jpn='ja',
-    por='pt',
-    rus='ru'
-)
+from sonar.modules.deposits.utils import change_filename_extension
 
-SONAR_APP_ENABLE_CORS = True
 
-SONAR_APP_DISABLE_PERMISSION_CHECKS = False
-"""Disable permission checks during API calls. Useful when API is test from
-command line or progams like postman."""
+def test_change_filename_extension(app):
+    """Test change filename extension."""
+    with pytest.raises(Exception) as e:
+        change_filename_extension('test', 'txt')
+    assert str(e.value) == 'test is not a valid filename'
+
+    assert change_filename_extension('test.pdf', 'txt') == 'test.txt'

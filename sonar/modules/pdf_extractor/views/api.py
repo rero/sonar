@@ -19,13 +19,10 @@
 
 from __future__ import absolute_import, print_function
 
-import re
-import subprocess
-import tempfile
-
 from flask import Blueprint, jsonify, request
 
 from sonar.modules.pdf_extractor.pdf_extractor import PDFExtractor
+from sonar.modules.pdf_extractor.utils import extract_text_from_content
 
 blueprint = Blueprint('pdf_extractor',
                       __name__,
@@ -62,19 +59,8 @@ def full_text():
         # Get the file posted
         pdf_file = request.files['file']
 
-        # Temporary file path
-        file = tempfile.gettempdir() + '/' + pdf_file.filename
-
-        # Temporary store file content
-        pdf_file.save(file)
-
-        # Process pdf text extraction
-        text = subprocess.check_output(
-            'pdftotext -enc UTF-8 {file} -'.format(file=file), shell=True)
-        text = text.decode('utf_8')
-
-        # Remove carriage returns
-        text = re.sub('[\r\n\f]+', ' ', text)
+        # Extract full-text
+        text = extract_text_from_content(pdf_file.read())
 
         return jsonify(text=text)
     except Exception as exception:

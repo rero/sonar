@@ -15,27 +15,12 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""SONAR configuration."""
+"""Mappings.
 
-SONAR_APP_API_URL = 'https://localhost:5000/api/'
+Mappings define how records and their fields will be indexed in Elasticsearch.
+The provided record-v1.0.0.json file is an example of how to index records
+in Elasticsearch. You need to provide one mapping per major version of
+Elasticsearch you want to support.
+"""
 
-SONAR_APP_LANGUAGES_MAP = dict(
-    fre='fr',
-    ger='de',
-    eng='en',
-    ita='it',
-    spa='sp',
-    ara='ar',
-    chi='zh',
-    lat='la',
-    heb='iw',
-    jpn='ja',
-    por='pt',
-    rus='ru'
-)
-
-SONAR_APP_ENABLE_CORS = True
-
-SONAR_APP_DISABLE_PERMISSION_CHECKS = False
-"""Disable permission checks during API calls. Useful when API is test from
-command line or progams like postman."""
+from __future__ import absolute_import, print_function

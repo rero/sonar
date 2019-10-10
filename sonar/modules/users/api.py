@@ -54,3 +54,32 @@ class UserRecord(SonarRecord):
     fetcher = user_pid_fetcher
     provider = UserProvider
     schema = 'user'
+
+    @classmethod
+    def get_user_by_current_user(cls, user):
+        """Get patron by user."""
+        if hasattr(user, 'email'):
+            return cls.get_user_by_email(email=user.email)
+
+        return None
+
+    @classmethod
+    def get_user_by_email(cls, email):
+        """Get patron by email."""
+        pid_value = cls.get_pid_by_email(email)
+        if pid_value:
+            return cls.get_record_by_pid(pid_value)
+
+        return None
+
+    @classmethod
+    def get_pid_by_email(cls, email):
+        """Get uuid pid by email."""
+        result = UserSearch().filter(
+            'term',
+            email=email
+        ).source(includes='pid').scan()
+        try:
+            return next(result).pid
+        except StopIteration:
+            return None

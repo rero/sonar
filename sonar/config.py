@@ -32,6 +32,7 @@ from invenio_indexer.api import RecordIndexer
 from invenio_oauthclient.contrib import orcid
 from invenio_records_rest.facets import terms_filter
 
+from sonar.modules.deposits.api import DepositRecord, DepositSearch
 from sonar.modules.documents.api import DocumentRecord, DocumentSearch
 from sonar.modules.institutions.api import InstitutionRecord, InstitutionSearch
 from sonar.modules.permissions import can_create_record_factory, \
@@ -252,7 +253,8 @@ RECORDS_UI_ENDPOINTS = {
 """Records UI for sonar."""
 
 RECORDS_REST_ENDPOINTS = {
-    'doc': dict(
+    'doc':
+    dict(
         pid_type='doc',
         pid_minter='document_id',
         pid_fetcher='document_id',
@@ -283,9 +285,9 @@ RECORDS_REST_ENDPOINTS = {
         read_permission_factory_imp=can_read_record_factory,
         update_permission_factory_imp=can_update_record_factory,
         delete_permission_factory_imp=can_delete_record_factory,
-        list_permission_factory_imp=can_list_record_factory
-    ),
-    'inst': dict(
+        list_permission_factory_imp=can_list_record_factory),
+    'inst':
+    dict(
         pid_type='inst',
         pid_minter='institution_id',
         pid_fetcher='institution_id',
@@ -316,9 +318,9 @@ RECORDS_REST_ENDPOINTS = {
         read_permission_factory_imp=can_read_record_factory,
         update_permission_factory_imp=can_update_record_factory,
         delete_permission_factory_imp=can_delete_record_factory,
-        list_permission_factory_imp=can_list_record_factory
-    ),
-    'user': dict(
+        list_permission_factory_imp=can_list_record_factory),
+    'user':
+    dict(
         pid_type='user',
         pid_minter='user_id',
         pid_fetcher='user_id',
@@ -349,8 +351,37 @@ RECORDS_REST_ENDPOINTS = {
         read_permission_factory_imp=can_read_record_factory,
         update_permission_factory_imp=can_update_record_factory,
         delete_permission_factory_imp=can_delete_record_factory,
-        list_permission_factory_imp=can_list_record_factory
-    )
+        list_permission_factory_imp=can_list_record_factory),
+    'depo':
+    dict(
+        pid_type='depo',
+        pid_minter='deposit_id',
+        pid_fetcher='deposit_id',
+        default_endpoint_prefix=True,
+        record_class=DepositRecord,
+        search_class=DepositSearch,
+        indexer_class=RecordIndexer,
+        search_index='deposits',
+        search_type=None,
+        record_serializers={
+            'application/json': ('invenio_records_rest.serializers'
+                                 ':json_v1_response'),
+        },
+        search_serializers={
+            'application/json': ('invenio_records_rest.serializers'
+                                 ':json_v1_search'),
+        },
+        list_route='/deposits/',
+        item_route='/deposits/<pid(depo, record_class="sonar.modules.deposits'\
+        '.api:DepositRecord"):pid_value>',
+        default_media_type='application/json',
+        max_result_window=10000,
+        error_handlers=dict(),
+        create_permission_factory_imp=can_create_record_factory,
+        read_permission_factory_imp=can_read_record_factory,
+        update_permission_factory_imp=can_update_record_factory,
+        delete_permission_factory_imp=can_delete_record_factory,
+        list_permission_factory_imp=can_list_record_factory)
 }
 """REST endpoints."""
 
@@ -397,6 +428,12 @@ RECORDS_REST_DEFAULT_SORT = dict(
     ),
 )
 """Set default sorting options."""
+
+RECORDS_FILES_REST_ENDPOINTS = {
+    'RECORDS_REST_ENDPOINTS': {
+        'depo': '/files'
+    }
+}
 
 SONAR_ENDPOINTS_ENABLED = True
 """Enable/disable automatic endpoint registration."""

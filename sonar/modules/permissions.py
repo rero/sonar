@@ -19,7 +19,7 @@
 
 from functools import wraps
 
-from flask import abort
+from flask import abort, current_app
 from flask_login import current_user
 from flask_principal import ActionNeed, RoleNeed
 from invenio_access import Permission
@@ -31,12 +31,18 @@ moderator_access_permission = Permission(ActionNeed('admin-access'))
 user_access_permission = Permission(RoleNeed('user'),
                                     RoleNeed('moderator'), RoleNeed('admin'))
 
+# Allow access without permission check
+allow_access = type('Allow', (), {'can': lambda self: True})()
+
 
 def has_admin_access():
     """Check if current user has access to admin panel.
 
     This function is used in app context and can be called in all templates.
     """
+    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
+        return allow_access
+
     return moderator_access_permission.can()
 
 
@@ -45,12 +51,15 @@ def has_super_admin_access():
 
     This function is used in app context and can be called in all templates.
     """
+    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
+        return allow_access
+
     return superuser_access_permission.can()
 
 
 def can_list_record_factory(**kwargs):
     """Factory to check if a ressource can be listed."""
-    return type('Allow', (), {'can': lambda self: True})()
+    return allow_access
 
 
 def can_read_record_factory(record):
@@ -60,16 +69,25 @@ def can_read_record_factory(record):
 
 def can_create_record_factory(**kwargs):
     """Factory to check if a record can be created."""
+    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
+        return allow_access
+
     return admin_access_permission
 
 
 def can_update_record_factory(**kwargs):
     """Factory to check if a record can be updated."""
+    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
+        return allow_access
+
     return admin_access_permission
 
 
 def can_delete_record_factory(**kwargs):
     """Factory to check if a record can be deleted."""
+    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
+        return allow_access
+
     return admin_access_permission
 
 
@@ -90,9 +108,15 @@ def can_access_manage_view(func):
 
 def admin_permission_factory(admin_view):
     """Admin permission factory."""
+    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
+        return allow_access
+
     return superuser_access_permission
 
 
 def files_permission_factory(*kwargs):
     """Files rest permission factory."""
+    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
+        return allow_access
+
     return user_access_permission

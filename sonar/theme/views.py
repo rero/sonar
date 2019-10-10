@@ -24,9 +24,12 @@ this file.
 
 from __future__ import absolute_import, print_function
 
-from flask import Blueprint, redirect, render_template, url_for
+from flask import Blueprint, jsonify, redirect, render_template, request, \
+    url_for
+from flask_login import current_user
 
 from sonar.modules.permissions import can_access_manage_view
+from sonar.modules.users.api import UserRecord
 
 blueprint = Blueprint(
     'sonar',
@@ -51,3 +54,19 @@ def manage(path=None):
         return redirect(url_for('sonar.manage', path='records/documents'))
 
     return render_template('sonar/manage.html')
+
+
+@blueprint.route('/logged-user/', methods=['GET'])
+def logged_user():
+    """Current logged user informations in JSON."""
+    user = UserRecord.get_user_by_current_user(current_user)
+
+    if user and 'resolve' in request.args:
+        user = user.replace_refs()
+
+    data = {}
+
+    if user:
+        data['metadata'] = user
+
+    return jsonify(data)
