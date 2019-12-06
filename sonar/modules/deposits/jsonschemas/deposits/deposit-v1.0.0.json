@@ -46,7 +46,7 @@
     },
     "metadata": {
       "type": "object",
-      "required": ["document_type", "languages", "title"],
+      "required": ["languages", "title"],
       "propertiesOrder": [ "document_type", "languages", "title", "publication_date", "journal", "abstracts", "etc" ],
       "properties": {
         "document_type": {
@@ -125,12 +125,12 @@
             "volume": {
               "title": "Volume",
               "description": "Volume of the journal.",
-              "type": "integer"
+              "type": "string"
             },
             "number": {
               "title": "Number",
               "description": "Number of the journal.",
-              "type": "integer"
+              "type": "string"
             },
             "pages": {
               "title": "Pages",
@@ -154,6 +154,7 @@
         },
         "etc": {
           "title": "ETC.",
+          "default": "",
           "type": "string"
         }
       }
