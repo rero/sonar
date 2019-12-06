@@ -18,6 +18,7 @@ python-slugify = "*"
 python3-saml = "*"
 xmltodict = "*"
 marshmallow = "<=3.0.0b6"
+pycountry = "*"
 
 [dev-packages]
 Flask-Debugtoolbar = ">=0.10.1"

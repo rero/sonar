@@ -27,6 +27,8 @@ from invenio_db import db
 from invenio_rest import ContentNegotiatedMethodView
 
 from sonar.modules.deposits.api import DepositRecord
+from sonar.modules.pdf_extractor.pdf_extractor import PDFExtractor
+from sonar.modules.pdf_extractor.utils import format_extracted_data
 
 
 class FilesResource(ContentNegotiatedMethodView):
@@ -63,16 +65,28 @@ class FilesResource(ContentNegotiatedMethodView):
         # deposit.files[text_key]['file_type'] = 'full-text'
         # deposit.commit()
 
+        file_content = BytesIO(request.get_data())
+
         # Store document
-        deposit.files[key] = BytesIO(request.get_data())
+        deposit.files[key] = file_content
         deposit.files[key]['label'] = re.search(r'(.*)\..*$', key).group(1)
         deposit.files[key]['embargo'] = False
         deposit.files[key]['embargoDate'] = None
         deposit.files[key]['expect'] = False
         deposit.files[key]['category'] = request.args['type']
         deposit.files[key]['file_type'] = 'file'
-        deposit.commit()
 
+        # Extract data from pdf and populate deposit
+        if request.args['type'] == 'main':
+            pdf_extractor = PDFExtractor()
+            pdf_metadata = format_extracted_data(
+                pdf_extractor.process_raw(request.get_data()))
+
+            # deposit.populate_with_pdf_metadata(
+            #     pdf_metadata, "Deposit #{pid}".format(pid=pid))
+            deposit.files[key]['pdf_metadata'] = pdf_metadata
+
+        deposit.commit()
         db.session.commit()
 
         return make_response(jsonify(deposit.files[key].dumps()))
@@ -105,7 +119,6 @@ class FileResource(ContentNegotiatedMethodView):
 
 files_view = FilesResource.as_view('files')
 file_view = FileResource.as_view('file')
-
 
 blueprint = Blueprint('deposits', __name__, url_prefix='/deposits/<pid>/')
 blueprint.add_url_rule('/custom-files/<key>', view_func=file_view)

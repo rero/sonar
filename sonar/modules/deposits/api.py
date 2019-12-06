@@ -51,11 +51,7 @@ class DepositRecord(SonarRecord):
     schema = 'deposit'
 
     @classmethod
-    def create(cls,
-               data,
-               id_=None,
-               dbcommit=False,
-               with_bucket=True,
+    def create(cls, data, id_=None, dbcommit=False, with_bucket=True,
                **kwargs):
         """Create deposit record."""
         record = super(DepositRecord, cls).create(data,
@@ -64,3 +60,33 @@ class DepositRecord(SonarRecord):
                                                   with_bucket=with_bucket,
                                                   **kwargs)
         return record
+
+    def populate_with_pdf_metadata(self, pdf_metadata, default_title=None):
+        """Update data for record."""
+        self['metadata'] = {}
+
+        if 'title' in pdf_metadata:
+            self['metadata']['title'] = pdf_metadata['title']
+        else:
+            self['metadata']['title'] = default_title
+
+        if 'languages' in pdf_metadata:
+            self['metadata']['languages'] = pdf_metadata['languages']
+
+        if 'authors' in pdf_metadata:
+            if 'contributors' not in self:
+                self['contributors'] = []
+
+            for author in pdf_metadata['authors']:
+                self['contributors'].append({'name': author['name']})
+
+        if 'abstract' in pdf_metadata:
+            if 'abstracts' not in self['metadata']:
+                self['metadata']['abstracts'] = []
+
+            self['metadata']['abstracts'].append(pdf_metadata['abstract'])
+
+        if 'journal' in pdf_metadata:
+            self['metadata']['journal'] = pdf_metadata['journal']
+
+        return self
