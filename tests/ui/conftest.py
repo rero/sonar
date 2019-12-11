@@ -36,9 +36,9 @@ def create_app():
 def user_without_role_fixture(app, db):
     """Create user in database without role."""
     datastore = app.extensions['security'].datastore
-    user = db.create_user(email='user-without-role@test.com',
-                          password=hash_password('123456'),
-                          active=True)
+    user = datastore.create_user(email='user-without-role@test.com',
+                                 password=hash_password('123456'),
+                                 active=True)
     db.session.commit()
 
     return user

@@ -17,12 +17,14 @@
 
 """Test SONAR api."""
 
+import pytest
 from flask import url_for
 from invenio_app.factory import create_api
 from invenio_indexer import current_record_to_index
 from invenio_indexer.api import RecordIndexer
 from invenio_search import current_search
 
+from sonar.modules.api import SonarRecord
 from sonar.modules.documents.api import DocumentRecord
 
 create_app = create_api
@@ -30,15 +32,13 @@ create_app = create_api
 
 def test_create(app):
     """Test creating a record."""
-    DocumentRecord.create({
-        "pid": "1",
-        "title": "The title of the record"
-    })
+    DocumentRecord.create({"pid": "1", "title": "The title of the record"})
 
     DocumentRecord.create({
         "pid": "2",
         "title": "The title of the record"
-    }, dbcommit=True)
+    },
+                          dbcommit=True)
 
 
 def test_get_ref_link(app):
@@ -65,9 +65,7 @@ def test_get_record_by_pid(app):
 
 def test_dbcommit(app):
     """Test record commit to db."""
-    record = DocumentRecord.create({
-        "title": "The title of the record"
-    })
+    record = DocumentRecord.create({"title": "The title of the record"})
 
     record.dbcommit()
     assert DocumentRecord.get_record_by_pid(
@@ -97,3 +95,28 @@ def test_reindex(app, db, client):
 
     assert response.status_code == 200
     assert data['metadata']['title'] == 'The title of the record'
+
+
+def test_get_pid_by_ref_link(app):
+    """Test resolving PID by the given reference link."""
+    with pytest.raises(Exception) as e:
+        SonarRecord.get_pid_by_ref_link('falsy-link')
+    assert str(e.value) == 'falsy-link is not a valid ref link'
+
+    pid = SonarRecord.get_pid_by_ref_link(
+        'https://sonar.ch/api/institutions/usi')
+    assert pid == 'usi'
+
+
+def test_get_record_by_ref_link(app):
+    """Test getting a record by a reference link."""
+    DocumentRecord.create({
+        "pid": "1",
+        "title": "The title of the record"
+    },
+                          dbcommit=True)
+
+    record = DocumentRecord.get_record_by_ref_link(
+        'https://sonar.ch/api/documents/1')
+    assert record['pid'] == '1'
+    assert record['title'] == 'The title of the record'

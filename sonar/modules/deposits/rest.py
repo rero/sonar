@@ -22,13 +22,16 @@ from __future__ import absolute_import, print_function
 import re
 from io import BytesIO
 
-from flask import Blueprint, abort, jsonify, make_response, request
+from flask import Blueprint, abort, current_app, jsonify, make_response, \
+    request
 from invenio_db import db
 from invenio_rest import ContentNegotiatedMethodView
 
 from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.pdf_extractor.pdf_extractor import PDFExtractor
 from sonar.modules.pdf_extractor.utils import format_extracted_data
+from sonar.modules.users.api import UserRecord
+from sonar.utils import send_email
 
 
 class FilesResource(ContentNegotiatedMethodView):
@@ -120,6 +123,45 @@ class FileResource(ContentNegotiatedMethodView):
 files_view = FilesResource.as_view('files')
 file_view = FileResource.as_view('file')
 
-blueprint = Blueprint('deposits', __name__, url_prefix='/deposits/<pid>/')
+blueprint = Blueprint('deposits',
+                      __name__,
+                      url_prefix='/deposits/<pid>/',
+                      template_folder='templates')
 blueprint.add_url_rule('/custom-files/<key>', view_func=file_view)
 blueprint.add_url_rule('/custom-files', view_func=files_view)
+
+
+@blueprint.route('/publish', methods=['POST'])
+def publish(pid=None):
+    """Publish a deposit or send a message for review."""
+    deposit = DepositRecord.get_record_by_pid(pid)
+
+    if not deposit or deposit[
+            'step'] != DepositRecord.STEP_DIFFUSION or deposit[
+                'status'] != DepositRecord.STATUS_IN_PROGRESS:
+        abort(400)
+
+    user = UserRecord.get_record_by_ref_link(deposit['user']['$ref'])
+
+    # Deposit can be validated directly
+    if user.is_granted(UserRecord.ROLE_MODERATOR):
+        deposit['status'] = DepositRecord.STATUS_VALIDATED
+    else:
+        deposit['status'] = DepositRecord.STATUS_TO_VALIDATE
+
+        moderators_emails = user.get_moderators_emails()
+
+        if moderators_emails:
+            # Send an email to validators
+            send_email(
+                moderators_emails, 'Deposit to validate', 'email/validation', {
+                    'deposit': deposit,
+                    'user': user,
+                    'link': current_app.config.get('SONAR_APP_ANGULAR_URL')
+                })
+
+    deposit.commit()
+    deposit.reindex()
+    db.session.commit()
+
+    return make_response()

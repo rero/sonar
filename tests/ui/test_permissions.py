@@ -21,34 +21,66 @@ from flask import url_for
 from invenio_accounts.testutils import login_user_via_view
 
 from sonar.modules.documents.api import DocumentRecord
-from sonar.modules.permissions import can_create_record_factory, \
-    can_delete_record_factory, can_list_record_factory, \
-    can_read_record_factory, can_update_record_factory, \
-    files_permission_factory
+from sonar.modules.permissions import admin_permission_factory, \
+    can_create_record_factory, can_delete_record_factory, \
+    can_list_record_factory, can_read_record_factory, \
+    can_update_record_factory, files_permission_factory, has_admin_access, \
+    has_super_admin_access
 
 
-def test_has_admin_access(app, db, client, admin_user_fixture):
+def test_has_admin_access(app, db, client, user_without_role_fixture,
+                          admin_user_fixture):
     """Test if user has an admin access."""
-    user = admin_user_fixture
 
-    login_user_via_view(client, email=user.email, password='123456')
+    app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
+    assert has_admin_access()
 
-    res = client.get(url_for('sonar.manage', path='records/documents'))
-    assert res.status_code == 200
+    app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
+    login_user_via_view(client,
+                        email=user_without_role_fixture.email,
+                        password='123456')
+
+    assert not has_admin_access()
+
+    login_user_via_view(client,
+                        email=admin_user_fixture.email,
+                        password='123456')
+
+    assert not has_admin_access()
 
 
-def test_has_super_admin_access(app, db, client, superadmin_user_fixture):
+def test_has_super_admin_access(app, db, client, user_without_role_fixture,
+                                superadmin_user_fixture):
     """Test if user has a super admin access."""
+    app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
+    assert has_super_admin_access()
+
+    app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
+    login_user_via_view(client,
+                        email=user_without_role_fixture.email,
+                        password='123456')
+
+    assert not has_super_admin_access()
+
     login_user_via_view(client,
                         email=superadmin_user_fixture.email,
                         password='123456')
 
-    res = client.get(url_for('admin.index'))
-    assert res.status_code == 200
+    assert not has_super_admin_access()
 
 
-def test_can_list_record_factory(app, client, admin_user_fixture):
+def test_permissions_factories(app, client, user_without_role_fixture,
+                               admin_user_fixture):
     """Test is user can list record."""
+    app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
+
+    assert can_list_record_factory()
+    assert can_create_record_factory()
+    assert can_update_record_factory()
+    assert can_delete_record_factory()
+
+    app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
+
     login_user_via_view(client,
                         email=admin_user_fixture.email,
                         password='123456')
@@ -67,9 +99,25 @@ def test_can_list_record_factory(app, client, admin_user_fixture):
     assert can_read_record_factory(record)
 
 
-def test_files_permission_factory(client, admin_user_fixture):
+def test_files_permission_factory(app, client, admin_user_fixture):
     """Test files permission factory."""
+    app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
+    assert files_permission_factory().can()
+
+    app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
     login_user_via_view(client,
                         email=admin_user_fixture.email,
                         password='123456')
     assert files_permission_factory().can()
+
+
+def test_admin_permission_factory(app, client, superadmin_user_fixture):
+    """Test factory for admin access permission."""
+    app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
+    assert admin_permission_factory(None).can()
+
+    app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
+    login_user_via_view(client,
+                        email=superadmin_user_fixture.email,
+                        password='123456')
+    assert admin_permission_factory(None).can()

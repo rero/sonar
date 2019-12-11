@@ -45,6 +45,12 @@ class DepositSearch(SonarSearch):
 class DepositRecord(SonarRecord):
     """Deposit record class."""
 
+    STEP_DIFFUSION = 'diffusion'
+
+    STATUS_IN_PROGRESS = 'in progress'
+    STATUS_VALIDATED = 'validated'
+    STATUS_TO_VALIDATE = 'to validate'
+
     minter = deposit_pid_minter
     fetcher = deposit_pid_fetcher
     provider = DepositProvider
