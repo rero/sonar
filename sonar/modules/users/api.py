@@ -17,8 +17,9 @@
 
 """User Api."""
 
-
 from functools import partial
+
+from elasticsearch_dsl.query import Q
 
 from ..api import SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
@@ -26,11 +27,7 @@ from ..minters import id_minter
 from ..providers import Provider
 
 # provider
-UserProvider = type(
-    'UserProvider',
-    (Provider,),
-    dict(pid_type='user')
-)
+UserProvider = type('UserProvider', (Provider, ), dict(pid_type='user'))
 # minter
 user_pid_minter = partial(id_minter, provider=UserProvider)
 # fetcher
@@ -46,9 +43,41 @@ class UserSearch(SonarSearch):
         index = 'users'
         doc_types = []
 
+    def get_moderators(self, institution_pid=None):
+        """Get moderators corresponding to institution.
+
+        If no institution provided, return moderators not associated with
+        institutions.
+        """
+        filter_roles = []
+        roles = UserRecord.get_all_roles_for_role(UserRecord.ROLE_MODERATOR)
+        for role in roles:
+            filter_roles.append(Q('term', roles=role))
+
+        query = self.query(
+            'bool',
+            filter=[Q('bool', should=filter_roles, minimum_should_match=1)])
+
+        if institution_pid:
+            query = query.filter('term', institution__pid=institution_pid)
+
+        return query.source(includes=['pid', 'email']).scan()
+
 
 class UserRecord(SonarRecord):
     """User record class."""
+
+    ROLE_USER = 'user'
+    ROLE_MODERATOR = 'moderator'
+    ROLE_ADMIN = 'admin'
+    ROLE_SUPERADMIN = 'superadmin'
+
+    ROLES_HIERARCHY = {
+        ROLE_USER: [],
+        ROLE_MODERATOR: [ROLE_USER],
+        ROLE_ADMIN: [ROLE_MODERATOR, ROLE_USER],
+        ROLE_SUPERADMIN: [ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER],
+    }
 
     minter = user_pid_minter
     fetcher = user_pid_fetcher
@@ -57,11 +86,8 @@ class UserRecord(SonarRecord):
 
     @classmethod
     def get_user_by_current_user(cls, user):
-        """Get patron by user."""
-        if hasattr(user, 'email'):
-            return cls.get_user_by_email(email=user.email)
-
-        return None
+        """Get user by current logged user."""
+        return cls.get_user_by_email(email=user.email)
 
     @classmethod
     def get_user_by_email(cls, email):
@@ -76,10 +102,51 @@ class UserRecord(SonarRecord):
     def get_pid_by_email(cls, email):
         """Get uuid pid by email."""
         result = UserSearch().filter(
-            'term',
-            email=email
-        ).source(includes='pid').scan()
+            'term', email=email).source(includes='pid').scan()
         try:
             return next(result).pid
         except StopIteration:
             return None
+
+    @classmethod
+    def get_reachable_roles(cls, role):
+        """Get list of roles depending on role hierarchy."""
+        if role not in UserRecord.ROLES_HIERARCHY:
+            return []
+
+        roles = UserRecord.ROLES_HIERARCHY[role]
+        roles.append(role)
+        return roles
+
+    @classmethod
+    def get_all_roles_for_role(cls, role):
+        """The list of roles covering given role based on the hierarchy."""
+        roles = [role]
+        for key in UserRecord.ROLES_HIERARCHY:
+            if role in UserRecord.ROLES_HIERARCHY[key] and key not in roles:
+                roles.append(key)
+
+        return roles
+
+    def get_moderators_emails(self):
+        """Get the list of moderators emails."""
+        institution_pid = None
+
+        if 'institution' in self:
+            institution_pid = UserRecord.get_pid_by_ref_link(
+                self['institution']['$ref'])
+
+        moderators = UserSearch().get_moderators(institution_pid)
+
+        return [result['email'] for result in moderators]
+
+    def is_granted(self, role_to_check):
+        """Check if user has at least the role passed in argument."""
+        if 'roles' not in self:
+            return False
+
+        for role in self['roles']:
+            if role_to_check in self.get_reachable_roles(role):
+                return True
+
+        return False

@@ -17,6 +17,7 @@
 
 """API for manipulating records."""
 
+import re
 from uuid import uuid4
 
 from flask import current_app
@@ -89,6 +90,21 @@ class SonarRecord(Record, FilesMixin):
         """Get $ref link for the given type of record."""
         return 'https://{host}/api/{type}/{id}'.format(
             host=current_app.config.get('JSONSCHEMAS_HOST'), type=type, id=id)
+
+    @classmethod
+    def get_pid_by_ref_link(cls, link):
+        """Return the PID corresponding to the ref link given."""
+        result = re.match(r'.*\/(.*)$', link)
+
+        if result is None:
+            raise Exception('{link} is not a valid ref link'.format(link=link))
+
+        return result.group(1)
+
+    @classmethod
+    def get_record_by_ref_link(cls, link):
+        """Get a record by its ref link."""
+        return cls.get_record_by_pid(cls.get_pid_by_ref_link(link))
 
     def dbcommit(self):
         """Commit changes to db."""

@@ -41,7 +41,7 @@ def has_admin_access():
     This function is used in app context and can be called in all templates.
     """
     if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
-        return allow_access
+        return True
 
     return moderator_access_permission.can()
 
@@ -52,7 +52,7 @@ def has_super_admin_access():
     This function is used in app context and can be called in all templates.
     """
     if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
-        return allow_access
+        return True
 
     return superuser_access_permission.can()
 

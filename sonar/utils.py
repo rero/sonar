@@ -15,30 +15,22 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""SONAR configuration."""
+"""Utils for application."""
 
-SONAR_APP_API_URL = 'https://localhost:5000/api/'
+from flask import current_app
+from invenio_mail.api import TemplatedMessage
 
-SONAR_APP_ANGULAR_URL = 'https://localhost:5000/manage/'
-"""Link to angular integrated app root."""
 
-SONAR_APP_LANGUAGES_MAP = dict(
-    fre='fr',
-    ger='de',
-    eng='en',
-    ita='it',
-    spa='sp',
-    ara='ar',
-    chi='zh',
-    lat='la',
-    heb='iw',
-    jpn='ja',
-    por='pt',
-    rus='ru'
-)
+def send_email(recipients, subject, template, ctx=None, **kwargs):
+    """Send email."""
+    lang = kwargs.get('lang', 'en')
 
-SONAR_APP_ENABLE_CORS = True
+    template = '{template}.{lang}.txt'.format(template=template, lang=lang)
 
-SONAR_APP_DISABLE_PERMISSION_CHECKS = False
-"""Disable permission checks during API calls. Useful when API is test from
-command line or progams like postman."""
+    msg = TemplatedMessage(
+        template_body=template,
+        sender=current_app.config.get('SECURITY_EMAIL_SENDER'),
+        recipients=recipients,
+        subject=subject,
+        ctx=ctx)
+    current_app.extensions['mail'].send(msg)

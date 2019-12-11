@@ -109,3 +109,5 @@ recursive-include data *.crt
 recursive-include sonar *.babelrc
 recursive-include sonar *.eslintignore
 recursive-include tests *.json
+
+recursive-include sonar *.txt

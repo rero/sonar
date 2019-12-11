@@ -399,6 +399,14 @@ RECORDS_REST_FACETS = {
             _('author'): terms_filter('facet_authors'),
             _('subject'): terms_filter('facet_subjects'),
         }
+    ),
+    'deposits': dict(
+        aggs=dict(
+            status=dict(terms=dict(field='status'))
+        ),
+        filters={
+            _('status'): terms_filter('status')
+        }
     )
 }
 """REST search facets."""
