@@ -20,6 +20,7 @@
 from __future__ import absolute_import, print_function
 
 import re
+from datetime import datetime
 from io import BytesIO
 
 from flask import Blueprint, abort, current_app, jsonify, make_response, \
@@ -160,8 +161,73 @@ def publish(pid=None):
                     'link': current_app.config.get('SONAR_APP_ANGULAR_URL')
                 })
 
+    deposit.log_action(user, 'submit')
+
     deposit.commit()
     deposit.reindex()
     db.session.commit()
 
     return make_response()
+
+
+@blueprint.route('/review', methods=['POST'])
+def review(pid=None):
+    """Review a deposit and change the deposit status depending on action."""
+    deposit = DepositRecord.get_record_by_pid(pid)
+
+    if not deposit or deposit['status'] != DepositRecord.STATUS_TO_VALIDATE:
+        abort(400)
+
+    payload = request.get_json()
+
+    if not payload:
+        abort(400)
+
+    if 'action' not in payload or 'user' not in payload or payload[
+            'action'] not in [
+                DepositRecord.REVIEW_ACTION_APPROVE,
+                DepositRecord.REVIEW_ACTION_REJECT,
+                DepositRecord.REVIEW_ACTION_ASK_FOR_CHANGES
+            ]:
+        abort(400)
+
+    user = UserRecord.get_record_by_pid(payload['user'])
+
+    if not user or not user.is_moderator:
+        abort(403)
+
+    subject = None
+    status = None
+
+    # TODO: Translate subjects
+    if payload['action'] == DepositRecord.REVIEW_ACTION_APPROVE:
+        subject = 'Deposit approval'
+        status = DepositRecord.STATUS_VALIDATED
+    elif payload['action'] == DepositRecord.REVIEW_ACTION_REJECT:
+        subject = 'Deposit rejection'
+        status = DepositRecord.STATUS_REJECTED
+    else:
+        subject = 'Ask for changes on deposit'
+        status = DepositRecord.STATUS_IN_PROGRESS
+
+    deposit_user = UserRecord.get_record_by_ref_link(deposit['user']['$ref'])
+
+    deposit['status'] = status
+    deposit.log_action(user, payload['action'], payload['comment'])
+
+    send_email(
+        [deposit_user['email']], subject,
+        'email/{action}'.format(action=payload['action']), {
+            'deposit': deposit,
+            'deposit_user': deposit_user,
+            'user': user,
+            'date': datetime.now().strftime('%d.%m.%Y %H:%M:%S'),
+            'comment': payload['comment'],
+            'link': current_app.config.get('SONAR_APP_ANGULAR_URL')
+        })
+
+    deposit.commit()
+    deposit.reindex()
+    db.session.commit()
+
+    return make_response(jsonify(deposit))

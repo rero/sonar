@@ -1,0 +1,17 @@
+Hi {{ deposit_user.first_name }},
+
+Your deposit "{{ deposit.metadata.title }}" has been approved by a moderator ({{ user.first_name }} {{ user.last_name }}).
+
+{{ _('ID') }}: {{ deposit.pid }}
+{{ _('Date') }}: {{ date }}
+{{ _('Authors') }}: {% for author in deposit.contributors %}{% if loop.index != 1 %}, {% endif %}{{ author.name }}{% endfor %}
+{% if comment %}
+{{ _('Moderator comment') }}:
+==================
+{{ comment }}
+==================
+{% endif %}
+
+The deposit will be published shortly on SONAR application.
+
+Thank you for your submission!

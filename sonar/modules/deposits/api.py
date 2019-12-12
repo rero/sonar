@@ -17,6 +17,7 @@
 
 """Deposit API."""
 
+from datetime import datetime
 from functools import partial
 
 from ..api import SonarRecord, SonarSearch
@@ -50,6 +51,11 @@ class DepositRecord(SonarRecord):
     STATUS_IN_PROGRESS = 'in progress'
     STATUS_VALIDATED = 'validated'
     STATUS_TO_VALIDATE = 'to validate'
+    STATUS_REJECTED = 'rejected'
+
+    REVIEW_ACTION_APPROVE = 'approve'
+    REVIEW_ACTION_REJECT = 'reject'
+    REVIEW_ACTION_ASK_FOR_CHANGES = 'ask-for-changes'
 
     minter = deposit_pid_minter
     fetcher = deposit_pid_fetcher
@@ -96,3 +102,21 @@ class DepositRecord(SonarRecord):
             self['metadata']['journal'] = pdf_metadata['journal']
 
         return self
+
+    def log_action(self, user, action, comment=None):
+        """Log intervention into deposit."""
+        if 'logs' not in self:
+            self['logs'] = []
+
+        log = {
+            'user': user,
+            'date': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'action': action
+        }
+
+        if comment:
+            log['comment'] = comment
+
+        self['logs'].append(log)
+
+        return log

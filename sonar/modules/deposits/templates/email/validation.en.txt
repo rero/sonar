@@ -6,4 +6,4 @@ Title of the deposit: {{ deposit.metadata.title }}
 
 You can review this deposit by following this link:
 
-{{ link }}records/deposits?status=to%20validate
+{{ link }}records/deposits?q={{ deposit.metadata.title }}

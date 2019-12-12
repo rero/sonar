@@ -124,3 +124,20 @@ def test_is_granted(app):
 
     del user['roles']
     assert not user.is_granted(UserRecord.ROLE_MODERATOR)
+
+
+def test_is_role_property():
+    """Test if user is in a particular role."""
+    user = UserRecord.create(
+        {
+            'last_name': 'Doe',
+            'first_name': 'John',
+            'email': 'john.doe@rero.ch',
+            'roles': [UserRecord.ROLE_MODERATOR]
+        },
+        dbcommit=True)
+
+    assert user.is_user
+    assert user.is_moderator
+    assert not user.is_admin
+    assert not user.is_super_admin
