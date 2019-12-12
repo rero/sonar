@@ -1,0 +1,17 @@
+Hi {{ deposit_user.first_name }},
+
+A moderator ({{ user.first_name }} {{ user.last_name }}) requests changes on your deposit "{{ deposit.metadata.title }}".
+
+{{ _('ID') }}: {{ deposit.pid }}
+{{ _('Date') }}: {{ date }}
+{{ _('Authors') }}: {% for author in deposit.contributors %}{% if loop.index != 1 %}, {% endif %}{{ author.name }}{% endfor %}
+{% if comment %}
+{{ _('Moderator comment') }}:
+==================
+{{ comment }}
+==================
+{% endif %}
+
+You can follow this link to make changes to your deposit:
+
+{{ link }}deposit/{{ deposit.pid }}/create

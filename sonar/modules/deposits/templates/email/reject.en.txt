@@ -1,0 +1,15 @@
+Hi {{ deposit_user.first_name }},
+
+We are sorry to inform that your deposit "{{ deposit.metadata.title }}" has been rejected by a moderator ({{ user.first_name }} {{ user.last_name }}).
+
+{{ _('ID') }}: {{ deposit.pid }}
+{{ _('Date') }}: {{ date }}
+{{ _('Authors') }}: {% for author in deposit.contributors %}{% if loop.index != 1 %}, {% endif %}{{ author.name }}{% endfor %}
+{% if comment %}
+{{ _('Moderator comment') }}:
+==================
+{{ comment }}
+==================
+{% endif %}
+
+Thank you for your understanding.

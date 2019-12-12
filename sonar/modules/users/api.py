@@ -114,7 +114,7 @@ class UserRecord(SonarRecord):
         if role not in UserRecord.ROLES_HIERARCHY:
             return []
 
-        roles = UserRecord.ROLES_HIERARCHY[role]
+        roles = UserRecord.ROLES_HIERARCHY[role].copy()
         roles.append(role)
         return roles
 
@@ -150,3 +150,23 @@ class UserRecord(SonarRecord):
                 return True
 
         return False
+
+    @property
+    def is_moderator(self):
+        """Check if a user a moderator."""
+        return self.is_granted(UserRecord.ROLE_MODERATOR)
+
+    @property
+    def is_user(self):
+        """Check if a user a standard user."""
+        return self.is_granted(UserRecord.ROLE_USER)
+
+    @property
+    def is_admin(self):
+        """Check if a user an administrator."""
+        return self.is_granted(UserRecord.ROLE_ADMIN)
+
+    @property
+    def is_super_admin(self):
+        """Check if a user a super administrator."""
+        return self.is_granted(UserRecord.ROLE_SUPERADMIN)

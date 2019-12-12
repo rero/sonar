@@ -44,20 +44,55 @@
       "type": "string",
       "enum": ["create", "metadata", "contributors", "projects", "diffusion"]
     },
+    "logs": {
+      "title": "Logs",
+      "description": "Log interventions during process.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["user", "action", "date"],
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "$ref": {
+                "type": "string",
+                "pattern": "^https://sonar.ch/api/users/.*?$"
+              }
+            }
+          },
+          "action": {
+            "type": "string",
+            "enum": ["submit", "approve", "reject", "ask-for-changes"]
+          },
+          "date": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "metadata": {
       "type": "object",
       "required": ["languages", "title"],
-      "propertiesOrder": [ "document_type", "languages", "title", "publication_date", "journal", "abstracts", "etc" ],
+      "propertiesOrder": [
+        "document_type",
+        "languages",
+        "title",
+        "publication_date",
+        "journal",
+        "abstracts",
+        "etc"
+      ],
       "properties": {
         "document_type": {
           "title": "Type of document",
           "description": "Type of document",
           "type": "string",
           "default": "preprint",
-          "enum": [
-            "preprint",
-            "postprint"
-          ]
+          "enum": ["preprint", "postprint"]
         },
         "languages": {
           "title": "Languages",
@@ -169,7 +204,7 @@
         "title": "Contributor",
         "type": "object",
         "required": ["name"],
-        "propertiesOrder": [ "name", "affiliation", "orcid" ],
+        "propertiesOrder": ["name", "affiliation", "orcid"],
         "properties": {
           "name": {
             "title": "Name",
@@ -197,7 +232,13 @@
         "title": "Project",
         "type": "object",
         "required": ["name", "start_date"],
-        "propertiesOrder": [ "name", "start_date", "end_date", "funding_organisation", "related_persons" ],
+        "propertiesOrder": [
+          "name",
+          "start_date",
+          "end_date",
+          "funding_organisation",
+          "related_persons"
+        ],
         "properties": {
           "name": {
             "title": "Name",
@@ -232,7 +273,7 @@
             "items": {
               "type": "object",
               "required": ["type", "name"],
-              "propertiesOrder": [ "type", "name", "affiliation", "orcid" ],
+              "propertiesOrder": ["type", "name", "affiliation", "orcid"],
               "properties": {
                 "type": {
                   "title": "Type",
