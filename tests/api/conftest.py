@@ -40,8 +40,7 @@ def user_fixture(app, db):
     """Create user in database."""
     data = {
         'email': 'user@rero.ch',
-        'first_name': 'John',
-        'last_name': 'Doe',
+        'full_name': 'John Doe',
         'roles': ['user']
     }
 
@@ -57,8 +56,7 @@ def moderator_fixture(app, db):
     """Create moderator in database."""
     data = {
         'email': 'moderator@rero.ch',
-        'first_name': 'John',
-        'last_name': 'Doe',
+        'full_name': 'John Doe',
         'roles': ['moderator']
     }
 

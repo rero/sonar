@@ -66,8 +66,7 @@ def test_logged_user(app, client, monkeypatch):
     user = UserRecord.create({
         'pid': '1',
         'email': 'admin@test.com',
-        'first_name': 'Jules',
-        'last_name': 'Brochu',
+        'full_name': 'Jules Brochu',
         'roles': ['user'],
         'institution': {
             '$ref': 'https://sonar.ch/api/institutions/usi'
@@ -82,8 +81,7 @@ def test_logged_user(app, client, monkeypatch):
     user = UserRecord.create({
         'pid': '1',
         'email': 'admin@test.com',
-        'first_name': 'Jules',
-        'last_name': 'Brochu',
+        'full_name': 'Jules Brochu',
         'roles': ['user'],
         'institution': {
             'pid': 'usi',

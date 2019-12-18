@@ -52,6 +52,7 @@ class DepositRecord(SonarRecord):
     STATUS_VALIDATED = 'validated'
     STATUS_TO_VALIDATE = 'to validate'
     STATUS_REJECTED = 'rejected'
+    STATUS_ASK_FOR_CHANGES = 'ask for changes'
 
     REVIEW_ACTION_APPROVE = 'approve'
     REVIEW_ACTION_REJECT = 'reject'

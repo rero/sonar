@@ -1,9 +1,9 @@
 Hi,
 
-A deposit (#{{ deposit.pid }}) has been submitted by {{ user.first_name }} {{ user.last_name }}.
+A deposit (#{{ deposit.pid }}) has been submitted by {{ user.full_name }}.
 
 Title of the deposit: {{ deposit.metadata.title }}
 
 You can review this deposit by following this link:
 
-{{ link }}records/deposits?q={{ deposit.metadata.title }}
+{{ link }}records/deposits?q=&pid={{ deposit.pid }}

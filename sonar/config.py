@@ -58,11 +58,8 @@ BABEL_DEFAULT_LANGUAGE = 'en'
 #: Default time zone
 BABEL_DEFAULT_TIMEZONE = 'Europe/Zurich'
 #: Other supported languages (do not include the default language in list).
-I18N_LANGUAGES = [
-    ('fr', _('French')),
-    ('de', _('German')),
-    ('it', _('Italian'))
-]
+I18N_LANGUAGES = [('fr', _('French')), ('de', _('German')),
+                  ('it', _('Italian'))]
 
 # Base templates
 # ==============
@@ -110,8 +107,7 @@ COLLECT_STORAGE = 'flask_collect.storage.file'
 #: Email address used as sender of account registration emails.
 SECURITY_EMAIL_SENDER = SUPPORT_EMAIL
 #: Email subject for account registration emails.
-SECURITY_EMAIL_SUBJECT_REGISTER = _(
-    "Welcome to Swiss Open Access Repository!")
+SECURITY_EMAIL_SUBJECT_REGISTER = _("Welcome to Swiss Open Access Repository!")
 #: Redis session storage URL.
 ACCOUNTS_SESSION_REDIS_URL = 'redis://localhost:6379/1'
 #: Enable session/user id request tracing. This feature will add X-Session-ID
@@ -120,11 +116,9 @@ ACCOUNTS_SESSION_REDIS_URL = 'redis://localhost:6379/1'
 #: client. Set to False, in case of doubt.
 ACCOUNTS_USERINFO_HEADERS = True
 
-
 # User profiles
 # =============
 USERPROFILES_EXTEND_SECURITY_FORMS = True
-
 
 # Celery configuration
 # ====================
@@ -189,15 +183,11 @@ APP_DEFAULT_SECURE_HEADERS = {
         'default-src': ["'self'"],
         'object-src': ["'none'"],
         'style-src': [
-            "'self'",
-            "'unsafe-inline'",
-            'https://cdnjs.cloudflare.com',
+            "'self'", "'unsafe-inline'", 'https://cdnjs.cloudflare.com',
             'https://fonts.googleapis.com'
         ],
         'font-src': [
-            "'self'",
-            "'unsafe-inline'",
-            'https://cdnjs.cloudflare.com',
+            "'self'", "'unsafe-inline'", 'https://cdnjs.cloudflare.com',
             'https://fonts.gstatic.com'
         ]
     },
@@ -207,7 +197,6 @@ APP_DEFAULT_SECURE_HEADERS = {
     'session_cookie_http_only': True
 }
 """Talisman default Secure Headers configuration."""
-
 
 # OAI-PMH
 # =======
@@ -386,69 +375,59 @@ RECORDS_REST_ENDPOINTS = {
 """REST endpoints."""
 
 RECORDS_REST_FACETS = {
-    'documents': dict(
-        aggs=dict(
-            institution=dict(terms=dict(field='institution.pid')),
-            language=dict(terms=dict(field='languages.name')),
-            author=dict(terms=dict(field='facet_authors')),
-            subject=dict(terms=dict(field='facet_subjects'))
-        ),
-        filters={
-            _('institution'): terms_filter('institution.pid'),
-            _('language'): terms_filter('languages.name'),
-            _('author'): terms_filter('facet_authors'),
-            _('subject'): terms_filter('facet_subjects'),
-        }
-    ),
-    'deposits': dict(
-        aggs=dict(
-            status=dict(terms=dict(field='status'))
-        ),
-        filters={
-            _('status'): terms_filter('status')
-        }
-    )
+    'documents':
+    dict(aggs=dict(institution=dict(terms=dict(field='institution.pid')),
+                   language=dict(terms=dict(field='languages.name')),
+                   author=dict(terms=dict(field='facet_authors')),
+                   subject=dict(terms=dict(field='facet_subjects'))),
+         filters={
+             _('institution'): terms_filter('institution.pid'),
+             _('language'): terms_filter('languages.name'),
+             _('author'): terms_filter('facet_authors'),
+             _('subject'): terms_filter('facet_subjects'),
+         }),
+    'deposits':
+    dict(aggs=dict(status=dict(terms=dict(field='status')),
+                   user=dict(terms=dict(field='user.full_name.keyword')),
+                   contributor=dict(terms=dict(field='facet_contributors'))),
+         filters={
+             _('pid'): terms_filter('pid'),
+             _('status'): terms_filter('status'),
+             _('user'): terms_filter('user.full_name.keyword'),
+             _('contributor'): terms_filter('facet_contributors'),
+         })
 }
 """REST search facets."""
 
-RECORDS_REST_SORT_OPTIONS = dict(
-    documents=dict(
-        bestmatch=dict(
-            title=_('Best match'),
-            fields=['_score'],
-            default_order='desc',
-            order=2,
-        ),
-        mostrecent=dict(
-            title=_('Most recent'),
-            fields=['-_created'],
-            default_order='asc',
-            order=1,
-        ),
-    )
-)
+RECORDS_REST_SORT_OPTIONS = dict(documents=dict(
+    bestmatch=dict(
+        title=_('Best match'),
+        fields=['_score'],
+        default_order='desc',
+        order=2,
+    ),
+    mostrecent=dict(
+        title=_('Most recent'),
+        fields=['-_created'],
+        default_order='asc',
+        order=1,
+    ),
+))
 """Setup sorting options."""
 
-RECORDS_REST_DEFAULT_SORT = dict(
-    documents=dict(
-        query='bestmatch',
-        noquery='mostrecent',
-    ),
-)
+RECORDS_REST_DEFAULT_SORT = dict(documents=dict(
+    query='bestmatch',
+    noquery='mostrecent',
+), )
 """Set default sorting options."""
 
-RECORDS_FILES_REST_ENDPOINTS = {
-    'RECORDS_REST_ENDPOINTS': {
-        'depo': '/files'
-    }
-}
+RECORDS_FILES_REST_ENDPOINTS = {'RECORDS_REST_ENDPOINTS': {'depo': '/files'}}
 
 SONAR_ENDPOINTS_ENABLED = True
 """Enable/disable automatic endpoint registration."""
 
 JSONSCHEMAS_RESOLVE_SCHEMA = True
 JSONSCHEMAS_REPLACE_REFS = True
-
 
 # OAUTH
 # =====
@@ -464,13 +443,10 @@ OAUTHCLIENT_REMOTE_APPS['orcid']['params'].update(
     dict(
         base_url='https://pub.{domain}/'.format(domain=ORCID_DOMAIN),
         access_token_url='https://pub.{domain}/oauth/token'.format(
-            domain=ORCID_DOMAIN
-        ),
+            domain=ORCID_DOMAIN),
         authorize_url='https://{domain}/oauth/authorize#show_login'.format(
-            domain=ORCID_DOMAIN
-        ),
-    )
-)
+            domain=ORCID_DOMAIN),
+    ))
 
 OAUTHCLIENT_SIGNUP_TEMPLATE = 'sonar/oauth/signup.html'
 
@@ -482,24 +458,19 @@ ORCID_APP_CREDENTIALS = dict(
 
 # Shibboleth authentication
 # =========================
-SHIBBOLETH_SERVICE_PROVIDER = dict(
-    strict=True,
-    debug=True,
-    entity_id='https://sonar.ch/shibboleth'
-)
+SHIBBOLETH_SERVICE_PROVIDER = dict(strict=True,
+                                   debug=True,
+                                   entity_id='https://sonar.ch/shibboleth')
 
-SHIBBOLETH_IDENTITY_PROVIDERS = dict(
-    eduidtest=dict(
-        entity_id='https://test.eduid.ch/idp/shibboleth',
-        title='SWITCH edu-ID test',
-        sso_url='https://login.test.eduid.ch/idp/profile/SAML2/Redirect/SSO',
-        mappings=dict(
-            email='urn:oid:0.9.2342.19200300.100.1.3',
-            full_name='urn:oid:2.5.4.3',
-            user_unique_id='urn:oid:2.16.756.1.2.5.1.1.1',
-        )
-    )
-)
+SHIBBOLETH_IDENTITY_PROVIDERS = dict(eduidtest=dict(
+    entity_id='https://test.eduid.ch/idp/shibboleth',
+    title='SWITCH edu-ID test',
+    sso_url='https://login.test.eduid.ch/idp/profile/SAML2/Redirect/SSO',
+    mappings=dict(
+        email='urn:oid:0.9.2342.19200300.100.1.3',
+        full_name='urn:oid:2.5.4.3',
+        user_unique_id='urn:oid:2.16.756.1.2.5.1.1.1',
+    )))
 
 # Admin layout
 # =========================

@@ -36,7 +36,7 @@
       "description": "Status of the deposit.",
       "type": "string",
       "default": "in progress",
-      "enum": ["in progress", "to validate", "validated", "rejected"]
+      "enum": ["in progress", "to validate", "validated", "rejected", "ask for changes"]
     },
     "step": {
       "title": "Step",

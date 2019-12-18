@@ -24,7 +24,16 @@
           "type": "object"
         },
         "contributors": {
-          "type": "object"
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "text",
+              "copy_to": "facet_contributors"
+            }
+          }
+        },
+        "facet_contributors": {
+          "type": "keyword"
         },
         "projects": {
           "type": "object"
