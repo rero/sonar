@@ -139,7 +139,10 @@ def publish(pid=None):
 
     if not deposit or deposit[
             'step'] != DepositRecord.STEP_DIFFUSION or deposit[
-                'status'] != DepositRecord.STATUS_IN_PROGRESS:
+                'status'] not in [
+                    DepositRecord.STATUS_IN_PROGRESS,
+                    DepositRecord.STATUS_ASK_FOR_CHANGES
+                ]:
         abort(400)
 
     user = UserRecord.get_record_by_ref_link(deposit['user']['$ref'])
@@ -208,7 +211,7 @@ def review(pid=None):
         status = DepositRecord.STATUS_REJECTED
     else:
         subject = 'Ask for changes on deposit'
-        status = DepositRecord.STATUS_IN_PROGRESS
+        status = DepositRecord.STATUS_ASK_FOR_CHANGES
 
     deposit_user = UserRecord.get_record_by_ref_link(deposit['user']['$ref'])
 

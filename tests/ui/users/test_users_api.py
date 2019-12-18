@@ -28,8 +28,7 @@ def test_get_moderators(app):
     """Test search for moderators."""
     user = UserRecord.create(
         {
-            'last_name': 'Doe',
-            'first_name': 'John',
+            'full_name': 'John Doe',
             'email': 'john.doe@rero.ch',
             'roles': [UserRecord.ROLE_MODERATOR]
         },
@@ -55,8 +54,7 @@ def test_get_user_by_current_user(app, client, admin_user_fixture):
 
     user = UserRecord.create(
         {
-            'last_name': 'Doe',
-            'first_name': 'John',
+            'full_name': 'John Doe',
             'email': 'admin@test.com',
             'roles': [UserRecord.ROLE_MODERATOR]
         },
@@ -85,8 +83,7 @@ def test_get_moderators_emails(app):
     """Test getting list of moderators emails."""
     user = UserRecord.create(
         {
-            'last_name': 'Doe',
-            'first_name': 'John',
+            'full_name': 'John Doe',
             'email': 'john.doe@rero.ch',
             'roles': [UserRecord.ROLE_MODERATOR]
         },
@@ -110,8 +107,7 @@ def test_is_granted(app):
     """Test if user is granted with a role."""
     user = UserRecord.create(
         {
-            'last_name': 'Doe',
-            'first_name': 'John',
+            'full_name': 'John Doe',
             'email': 'john.doe@rero.ch',
             'roles': [UserRecord.ROLE_MODERATOR]
         },
@@ -130,8 +126,7 @@ def test_is_role_property():
     """Test if user is in a particular role."""
     user = UserRecord.create(
         {
-            'last_name': 'Doe',
-            'first_name': 'John',
+            'full_name': 'John Doe',
             'email': 'john.doe@rero.ch',
             'roles': [UserRecord.ROLE_MODERATOR]
         },

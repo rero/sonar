@@ -3,13 +3,7 @@
     "type": "fieldset",
     "notitle": true,
     "nomenu": true,
-    "items": [ "last_name" ]
-  },
-  {
-    "type": "fieldset",
-    "notitle": true,
-    "nomenu": true,
-    "items": [ "first_name" ]
+    "items": [ "full_name" ]
   },
   {
     "type": "fieldset",

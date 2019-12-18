@@ -30,8 +30,7 @@ class UserMetadataSchemaV1(StrictKeysMixin):
 
     pid = PersistentIdentifier()
     user_id = fields.Integer()
-    first_name = SanitizedUnicode(required=True)
-    last_name = SanitizedUnicode(required=True)
+    full_name = SanitizedUnicode(required=True)
     birth_date = fields.DateTime()
     email = SanitizedUnicode(required=True)
     street = SanitizedUnicode()

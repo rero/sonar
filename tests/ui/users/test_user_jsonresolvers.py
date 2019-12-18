@@ -25,8 +25,7 @@ def test_user_resolver(app):
     """Test user resolver."""
     UserRecord.create({
         'pid': '1',
-        'last_name': 'Brochu',
-        'first_name': 'Jules',
+        'full_name': 'Jules Brochu',
         'email': 'admin@test.com',
         'roles': ['user']
     })

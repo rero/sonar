@@ -13,11 +13,8 @@
         "user_id": {
           "type": "keyword"
         },
-        "first_name": {
-          "type": "text"
-        },
-        "last_name": {
-          "type": "text"
+        "full_name": {
+          "type": "keyword"
         },
         "birth_date": {
           "type": "date"

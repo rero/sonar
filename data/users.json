@@ -1,7 +1,6 @@
 [
   {
-    "first_name": "Jorg",
-    "last_name": "Mueller",
+    "full_name": "Jorg Mueller",
     "email": "rero.sonar+superadmin@gmail.com",
     "password": "123456",
     "roles": ["superadmin"],
@@ -12,8 +11,7 @@
     "phone": "+41916658961"
   },
   {
-    "first_name": "Elia",
-    "last_name": "Rossi",
+    "full_name": "Elia Rossi",
     "email": "rero.sonar+admin@gmail.com",
     "password": "123456",
     "roles": ["admin"],
@@ -27,8 +25,7 @@
     }
   },
   {
-    "first_name": "Emanuele",
-    "last_name": "Fiorentini",
+    "full_name": "Emanuele Fiorentini",
     "email": "rero.sonar+moderator@gmail.com",
     "password": "123456",
     "roles": ["moderator"],
@@ -42,8 +39,7 @@
     }
   },
   {
-    "first_name": "Jules",
-    "last_name": "Brochu",
+    "full_name": "Jules Brochu",
     "email": "rero.sonar+user@gmail.com",
     "password": "123456",
     "roles": ["user"],
