@@ -27,7 +27,7 @@ admin_ui_js = NpmBundle(
     'node_modules/@rero/sonar-ui/dist/admin/main.js',
     output='admin_ui.%(version)s.js',
     npm={
-        '@rero/sonar-ui': '~0.0.1'
+        '@rero/sonar-ui': '~0.1.1'
     }
 )
 
@@ -35,6 +35,6 @@ admin_ui_css = NpmBundle(
     'node_modules/@rero/sonar-ui/dist/admin/styles.css',
     output='admin_ui.%(version)s.css',
     npm={
-        '@rero/sonar-ui': '~0.0.1'
+        '@rero/sonar-ui': '~0.1.1'
     }
 )
