@@ -49,7 +49,8 @@ setup(
             'sonar = invenio_app.cli:cli',
         ],
         'flask.commands': [
-            'fixtures = sonar.modules.cli:fixtures'
+            'fixtures = sonar.modules.cli:fixtures',
+            'utils = sonar.modules.cli:utils'
         ],
         'invenio_base.apps': [
             'sonar = sonar.modules:Sonar'
@@ -97,6 +98,9 @@ setup(
             'institutions = sonar.modules.institutions.mappings',
             'users = sonar.modules.users.mappings',
             'deposits = sonar.modules.deposits.mappings'
+        ],
+        'invenio_search.templates': [
+            'base-record = sonar.es_templates:list_es_templates'
         ],
         'invenio_pidstore.minters': [
             'document_id = \

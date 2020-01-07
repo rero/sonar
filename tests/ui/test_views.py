@@ -66,3 +66,4 @@ def test_logged_user(app, client, admin_user_fixture_with_db):
 
     res = client.get(url + '?resolve=1')
     assert b'"email":"admin@test.com"' in res.data
+    assert b'"pid":"org"' in res.data

@@ -21,93 +21,43 @@
 
 # Check manifest will not automatically add these two files:
 
-include .dockerignore
-include .editorconfig
-include .tx/config
-include *.rst
-include *.sh
-include *.yml
-include babel.ini
-include docker/haproxy/Dockerfile
-include docker/nginx/Dockerfile
-include docker/postgres/Dockerfile
-include Dockerfile
-include Dockerfile.base
-include LICENSE
-include Pipfile
-include pytest.ini
-include scripts/bootstrap
-include scripts/console
-include scripts/server
-include scripts/setup
-include scripts/update
-include scripts/fixtures
-prune docs/_build
-recursive-include docs *.bat
-recursive-include docs *.py
-recursive-include docs *.rst
-recursive-include docs *.txt
-recursive-include docs Makefile
-recursive-include sonar *.gitkeep
-recursive-include sonar *.po *.pot *.mo
-recursive-include sonar *.json *.html *.js *.scss *.css
-recursive-include sonar *.png *.jpg *.svg
-recursive-include docker *.cfg *.conf *.crt *.ini *.key *.pem *.sh
-recursive-include tests *.py
-recursive-include tests *.doc
-recursive-include tests *.json
-recursive-include tests *.pdf
-recursive-include tests *.xml
+exclude sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
 
-# added by check_manifest.py
 include *.html
 include *.inv
 include *.js
 include *.lock
-recursive-include _sources *.txt
-recursive-include _static *.css
-recursive-include _static *.js
-recursive-include _static *.png
-
-# added by check_manifest.py
 include *.py
+include *.rst
+include *.sh
 include *.txt
-include cli
-recursive-include cli *.py
-recursive-include data *.json
-recursive-include docs *.DS_Store
-recursive-include sonar *.html
-recursive-include sonar *.json
-recursive-include sonar *.py
-
-# added by check_manifest.py
-include cli
-recursive-include cli *.py
-recursive-include data *.json
-recursive-include sonar *.html
-recursive-include sonar *.json
-recursive-include sonar *.py
-
-# added by check_manifest.py
-include cli
-recursive-include cli *.py
-recursive-include data *.json
-recursive-include sonar *.html
-recursive-include sonar *.json
-recursive-include sonar *.py
-
-# added by check_manifest.py
-recursive-include sonar *.html
-
-recursive-include sonar *.woff
-recursive-include sonar *.woff2
-
+include *.yml
+include .dockerignore
+include .editorconfig
+include .tx/config
+include Dockerfile
+include Dockerfile.base
+include LICENSE
+include Pipfile
+include babel.ini
+include docker/haproxy/Dockerfile
+include docker/nginx/Dockerfile
+include docker/postgres/Dockerfile
+include pytest.ini
+include scripts/bootstrap
+include scripts/console
+include scripts/fixtures
+include scripts/server
+include scripts/setup
+include scripts/update
 include tests/ui/shibboleth_authenticator/data/valid_saml_response
-recursive-include data *.crt
 
-# added by check_manifest.py
-recursive-include sonar *.babelrc
-recursive-include sonar *.eslintignore
-recursive-include tests *.json
+prune docs/_build
 
-recursive-include sonar *.txt
+recursive-include _sources *.txt
+recursive-include _static *.css *.js *.png
+recursive-include data *.crt *.json
+recursive-include docker *.cfg *.conf *.crt *.ini *.key *.pem *.sh
+recursive-include docs *.bat *.py *.rst *.txt Makefile
+recursive-include sonar *.babelrc *.eslintignore *.gitkeep *.json *.html *.js *.scss *.css *.png *.jpg *.svg *.po *.pot *.mo *.py *.txt *.woff *.woff2
+recursive-include tests *.doc *.json *.pdf *.py *.xml

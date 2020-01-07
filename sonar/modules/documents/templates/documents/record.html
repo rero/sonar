@@ -60,50 +60,99 @@
 {% endif %}
 
 <section class="mt-3">
-  <dl class="row">
-    <!-- AUTHORS -->
-    {% if record.authors|length > 0 %}
-    {{ dl(_('Authors'), record.authors | authors_format) }}
-    {% endif %}
+  <article class="">
+    <dl class="row mb-0">
+      <!-- AUTHORS -->
+      {% if record.authors %}
+      {{ dl(_('Author'), record.pid | authors_format(current_i18n.language, viewcode)) }}
+      {% endif %}
 
-    <!-- ABSTRACTS -->
-    {% if record.abstracts|length > 0 %}
-    {{ dl(_('Abstract'), record.abstracts | translate_content(current_i18n.language) | nl2br ) }}
-    {% endif %}
+      <!-- EDITION STATEMENT-->
+      {% if record.editionStatement %}
+      {{ dl_list(_('Edition'), record.editionStatement | edition_format) }}
+      {% endif %}
 
-    <!-- PHYSICAL DESCRIPTION -->
-    {% if record.extent or record.otherMaterialCharacteristics or record.formats %}
-    {% set formats = ', '.join(record.formats) %}
-    {% set description = ', '.join([record.extent, record.otherMaterialCharacteristics, formats]|select) %}
-    {{ dl(_('Physical description'), description) }}
-    {% endif %}
+      <!-- PUBLICATION STATEMENT -->
+      {% for provision_activity in record.provisionActivity %}
+      {{ dl_dict(_(provision_activity.type), provision_activity|create_publication_statement ) }}
+      {% endfor %}
 
-    <!-- SUBJECTS -->
-    {% if record.subjects|length > 0 %}
-    {{ dl(_('Subject'), record.subjects | translate_content(current_i18n.language) | join(', ')) }}
-    {% endif %}
+      <!-- COPYRIGHT DATE -->
+      {% if record.copyrightDate %}
+      {{ dl(_('Copyright date'), record.copyrightDate|join(', ')) }}
+      {% endif %}
 
-    <!-- LANGUAGE -->
-    {% if record.languages|length > 0 %}
-    {{ dl(_('Language'), record.languages[0].name) }}
-    {% endif %}
+      <!-- ABSTRACT -->
+      {% if record.abstracts|length > 0 %}
+      {{ dl(_('Abstract'), record.abstracts|abstracts_format|nl2br) }}
+      {% endif %}
 
-    <!-- NOTES -->
-    {% if record.notes|length > 0 %}
-    {{ dl(_('Notes'), record.notes | join('\n') | nl2br) }}
-    {% endif %}
+      <!-- PHYSICAL DESCRIPTION -->
+      {% if record.extent or record.otherMaterialCharacteristics or record.formats %}
+      {% set formats = ', '.join(record.formats) %}
+      {% set description = ', '.join([record.extent, record.otherMaterialCharacteristics, formats]|select) %}
+      {{ dl(_('Physical description'), description) }}
+      {% endif %}
 
-    <!-- IDENTIFIERS -->
-    {% if record.identifiers %}
-    {% if record.identifiers.isbn %}
-    {{ dl(_('ISBN'), record.identifiers.isbn) }}
-    {% endif %}
-    {% endif %}
+      <!-- ADDITIONAL MATERIALS -->
+      {% if record.additionalMaterials %}
+      {{ dl(_('Additional Materials'), record.additionalMaterials) }}
+      {% endif %}
 
-    <!-- PERMANENT LINK -->
-    {% set link = url_for('invenio_records_ui.document', pid_value=record.pid, ir=g.ir|default('sonar'), _external=True) %}
-    {{ dl(_('Permalink'), '<a href="' + link + '">' + link + '</a>') }}
-  </dl>
+      <!-- SERIES -->
+      {% if record.series|length > 0 %}
+      {{ dl(_('Series'), record.series|series_format) }}
+      {% endif %}
+
+      <!-- UNIFORM TITLE -->
+      {% if record.titlesProper|length > 0 %}
+      {{ dl(_('Uniform title'), record.titlesProper|join('; ')) }}
+      {% endif %}
+
+      <!-- IS PART OF -->
+      {% if record.is_part_of %}
+      {{ dl(_('Is part of'), record.is_part_of) }}
+      {% endif %}
+
+      <!-- SUBJECTS -->
+      {% if record.subjects|length > 0 %}
+      {{ dl(_('Abstract'), record.subjects|subjects_format|nl2br) }}
+      {% endif %}
+
+      <!-- NOTES -->
+      {% if record.notes|length > 0 %}
+      {{ dl(_('Notes'), record.notes|abstracts_format|nl2br) }}
+      {% endif %}
+
+      {% if record.identifiedBy|identifiedby_format|length > 0 %}
+      <dt class="col-sm-2">
+        {{ _('Identifier') }}:
+      </dt>
+      <dd class="col-sm-10">
+        <ul class="list-unstyled mb-0">
+          {% for identifier in record.identifiedBy|identifiedby_format %}
+          <li>
+            {{ identifier.value }}
+            <small class="badge badge-secondary text-uppercase text-light">{{ identifier.type }}</small>
+            {% endfor %}
+          </li>
+        </ul>
+      </dd>
+      {% endif %}
+
+      {% if record.language|language_format(current_i18n.language)|length > 0 %}
+      {{ dl(_('Language'), record.language|language_format(current_i18n.language)) }}
+      {% endif %}
+
+      {% if record.source %}
+      {{ dl(_('Source'), '<a href="'+ record.source +'" target="_blank">'+ record.source +'</a>') }}
+      {% endif %}
+
+      <!-- PERMANENT LINK -->
+      {% set link = url_for('invenio_records_ui.document', pid_value=record.pid, ir=g.ir|default('sonar'), _external=True) %}
+      {{ dl(_('Permalink'), '<a href="' + link + '">' + link + '</a>') }}
+    </dl>
+  </article>
 </section>
 {%- endblock %}
 

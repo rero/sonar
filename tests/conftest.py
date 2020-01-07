@@ -21,6 +21,42 @@ import pytest
 from flask import url_for
 from flask_security.utils import encrypt_password
 
+from sonar.modules.documents.api import DocumentRecord
+from sonar.modules.institutions.api import InstitutionRecord
+
+
+@pytest.fixture(scope='module')
+def es(appctx):
+    """Setup and teardown all registered Elasticsearch indices.
+
+    Scope: module
+    This fixture will create all registered indexes in Elasticsearch and remove
+    once done. Fixtures that perform changes (e.g. index or remove documents),
+    should used the function-scoped :py:data:`es_clear` fixture to leave the
+    indexes clean for the following tests.
+    """
+    from invenio_search.errors import IndexAlreadyExistsError
+    from invenio_search import current_search, current_search_client
+
+    try:
+        list(current_search.put_templates())
+    except IndexAlreadyExistsError:
+        current_search_client.indices.delete_template('*')
+        list(current_search.put_templates())
+
+    try:
+        list(current_search.create())
+    except IndexAlreadyExistsError:
+        list(current_search.delete(ignore=[404]))
+        list(current_search.create())
+    current_search_client.indices.refresh()
+
+    try:
+        yield current_search_client
+    finally:
+        current_search_client.indices.delete(index='*')
+        current_search_client.indices.delete_template('*')
+
 
 @pytest.fixture(scope='module', autouse=True)
 def app_config(app_config):
@@ -63,3 +99,112 @@ def logged_user_client(create_user, client):
     assert response.status_code == 302
 
     return client
+
+
+@pytest.fixture()
+def organization_fixture(app, db):
+    """Create an organization."""
+    data = {'pid': 'org', 'name': 'Fake organization'}
+
+    organization = InstitutionRecord.create(data, dbcommit=True)
+    organization.reindex()
+    db.session.commit()
+    return organization
+
+
+@pytest.fixture()
+def document_fixture(app, db, organization_fixture):
+    """Create a document."""
+    data = {
+        "pid":
+        "10000",
+        "identifiedBy": [{
+            "value": "urn:nbn:ch:rero-006-108713",
+            "type": "bf:Urn"
+        }, {
+            "value": "oai:doc.rero.ch:20050302172954-WU",
+            "type": "bf:Identifier"
+        }],
+        "language": [{
+            "value": "eng",
+            "type": "bf:Language"
+        }],
+        "authors": [{
+            "type": "person",
+            "name": "Mancini, Loriano",
+            "date": "1975-03-23",
+            "qualifier": "Librarian"
+        }, {
+            "type": "person",
+            "name": "Ronchetti, Elvezio"
+        }, {
+            "type": "person",
+            "name": "Trojani, Fabio"
+        }],
+        "title":
+        "Title of the document",
+        "extent":
+        "103 p",
+        "abstracts": ["Abstract of the document"],
+        "subjects": [{
+            "language": "eng",
+            "value": ["Time series models", "GARCH models"]
+        }],
+        "provisionActivity": [{
+            'type':
+            'bf:Manufacture',
+            'statement': [{
+                'label': [{
+                    'value': 'Bienne'
+                }],
+                'type': 'bf:Place'
+            }, {
+                'label': [{
+                    'value': 'Impr. Weber'
+                }],
+                'type': 'bf:Agent'
+            }, {
+                'label': [{
+                    'value': '[2006]'
+                }],
+                'type': 'Date'
+            }, {
+                'label': [{
+                    'value': 'Lausanne'
+                }],
+                'type': 'bf:Place'
+            }, {
+                'label': [{
+                    'value': 'Rippone'
+                }],
+                'type': 'bf:Place'
+            }, {
+                'label': [{
+                    'value': 'Impr. Coustaud'
+                }],
+                'type': 'bf:Agent'
+            }]
+        }],
+        "editionStatement": [{
+            "editionDesignation": [{
+                "value": "Di 3 ban"
+            }, {
+                "value": "第3版",
+                "language": "chi-hani"
+            }],
+            "responsibility": [{
+                "value": "Zeng Lingliang zhu bian"
+            }, {
+                "value": "曾令良主编",
+                "language": "chi-hani"
+            }]
+        }],
+        "institution": {
+            "$ref": "https://sonar.ch/api/institutions/org"
+        }
+    }
+
+    document = DocumentRecord.create(data, dbcommit=True)
+    document.reindex()
+    db.session.commit()
+    return document

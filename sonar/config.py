@@ -377,13 +377,19 @@ RECORDS_REST_ENDPOINTS = {
 RECORDS_REST_FACETS = {
     'documents':
     dict(aggs=dict(institution=dict(terms=dict(field='institution.pid')),
-                   language=dict(terms=dict(field='languages.name')),
-                   author=dict(terms=dict(field='facet_authors')),
+                   language=dict(terms=dict(field='language.value')),
+                   author__en=dict(terms=dict(field='facet_authors_en')),
+                   author__fr=dict(terms=dict(field='facet_authors_fr')),
+                   author__de=dict(terms=dict(field='facet_authors_de')),
+                   author__it=dict(terms=dict(field='facet_authors_it')),
                    subject=dict(terms=dict(field='facet_subjects'))),
          filters={
              _('institution'): terms_filter('institution.pid'),
-             _('language'): terms_filter('languages.name'),
-             _('author'): terms_filter('facet_authors'),
+             _('language'): terms_filter('language.value'),
+             _('author__en'): terms_filter('facet_authors_en'),
+             _('author__fr'): terms_filter('facet_authors_fr'),
+             _('author__de'): terms_filter('facet_authors_de'),
+             _('author__it'): terms_filter('facet_authors_it'),
              _('subject'): terms_filter('facet_subjects'),
          }),
     'deposits':
