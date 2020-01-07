@@ -21,7 +21,7 @@
   <p><span class="badge badge-secondary text-light mr-2 p-2"
       ng-repeat="author in record.metadata.authors">{{ author.name }}</span></p>
   <p class="text-justify" ng-repeat="abstract in record.metadata.abstracts" ng-if="$first">
-    {{ abstract.value }}
+    {{ abstract }}
   </p>
   <hr />
 </div>

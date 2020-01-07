@@ -106,15 +106,21 @@ def superadmin_user_fixture(app, db):
 
 
 @pytest.fixture()
-def admin_user_fixture_with_db(app, db, admin_user_fixture):
+def admin_user_fixture_with_db(app, db, admin_user_fixture,
+                               organization_fixture):
     """Create user in database."""
-    db_user = UserRecord.create({
-        'pid': '10000',
-        'email': admin_user_fixture.email,
-        'full_name': 'Jules Brochu',
-        'roles': ['admin'],
-        'user_id': admin_user_fixture.id
-    }, dbcommit=True)
+    db_user = UserRecord.create(
+        {
+            'pid': '10000',
+            'email': admin_user_fixture.email,
+            'full_name': 'Jules Brochu',
+            'roles': ['admin'],
+            'user_id': admin_user_fixture.id,
+            'institution': {
+                '$ref': 'https://sonar.ch/api/institutions/org'
+            }
+        },
+        dbcommit=True)
     db_user.reindex()
     db.session.commit()
 

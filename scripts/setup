@@ -23,7 +23,7 @@ pipenv run invenio shell --no-term-title -c "import redis; redis.StrictRedis.fro
 pipenv run invenio db destroy --yes-i-know
 pipenv run invenio db init create
 pipenv run invenio index destroy --force --yes-i-know
-pipenv run invenio index init --force
+pipenv run invenio utils es-init --force # To take templates into account
 pipenv run invenio index queue init purge
 
 # Create admin role to restrict access

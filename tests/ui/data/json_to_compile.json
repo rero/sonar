@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Test schema for compilation",
+  "type": "object",
+  "definitions": {
+    "language": {
+      "title": "Language value",
+      "type": "string",
+      "enum": [
+        "fre",
+        "eng",
+        "ger"
+      ]
+    }
+  },
+  "required": [
+    "test"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "test": {
+      "title": "Test",
+      "type": "string",
+      "$ref": "#/definitions/language"
+    }
+  }
+}

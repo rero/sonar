@@ -68,7 +68,7 @@ def logged_user():
     data = {}
 
     if user:
-        data['metadata'] = user
+        data['metadata'] = user.dumps()
         data['metadata']['is_super_admin'] = user.is_super_admin
         data['metadata']['is_admin'] = user.is_admin
         data['metadata']['is_moderator'] = user.is_moderator

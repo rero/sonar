@@ -1,0 +1,26 @@
+{
+  "index_patterns": "*",
+  "settings": {
+    "analysis": {
+      "tokenizer": {
+        "char_group_tokenizer": {
+          "type": "char_group",
+          "tokenize_on_chars": [
+            "whitespace",
+            "punctuation"
+          ]
+        }
+      },
+      "analyzer": {
+        "global_lowercase_asciifolding": {
+          "type": "custom",
+          "tokenizer": "char_group_tokenizer",
+          "filter": [
+            "lowercase",
+            "asciifolding"
+          ]
+        }
+      }
+    }
+  }
+}

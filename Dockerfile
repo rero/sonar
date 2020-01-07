@@ -36,6 +36,10 @@ RUN pip install . && \
     # --unsafe needed because we are running as root
     invenio webpack install --unsafe && \
     invenio webpack build &&  \
-    python ./setup.py compile_catalog
+    invenio utils compile-json ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json -o ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json && \
+    python ./setup.py compile_catalog && \
+    pip install . && \
+    mkdir ${INVENIO_INSTANCE_PATH}/static/sonar-ui && \
+    cp ${INVENIO_INSTANCE_PATH}/assets/node_modules/@rero/sonar-ui/dist/sonar/* ${INVENIO_INSTANCE_PATH}/static/sonar-ui
 
 ENTRYPOINT [ "bash", "-c"]

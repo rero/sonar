@@ -38,25 +38,112 @@ def test_index(client):
 def test_search(app, client):
     """Test search."""
     assert isinstance(views.search(), str)
-    assert client.get(
-        url_for('invenio_search_ui.search')).status_code == 200
+    assert client.get(url_for('invenio_search_ui.search')).status_code == 200
 
 
 def test_detail(app, client):
     """Test document detail page."""
-    record = DocumentRecord.create({
-        "title": "The title of the record"
-    }, dbcommit=True)
+    record = DocumentRecord.create({"title": "The title of the record"},
+                                   dbcommit=True)
 
     # assert isinstance(views.detail('1', record, ir='sonar'), str)
     assert client.get('/organization/sonar/documents/1').status_code == 200
 
 
-def test_authors_format():
+def test_authors_format(document_fixture):
     """Test author format filter."""
-    authors = [{'name': 'John Newby'}, {'name': 'Kevin Doner'}]
+    assert views.authors_format(
+        '10000', 'en'
+    ) == 'Mancini, Loriano, Librarian, 1975-03-23; Ronchetti, Elvezio; ' \
+         'Trojani, Fabio'
 
-    assert views.authors_format(authors) == 'John Newby ; Kevin Doner'
+
+def test_publishers_format():
+    """Test publishers format."""
+    result = 'Foo; place1; place2: Foo; Bar'
+    assert result == views.publishers_format([{
+        'name': ['Foo']
+    }, {
+        'place': ['place1', 'place2'],
+        'name': ['Foo', 'Bar']
+    }])
+
+
+def test_series_format():
+    """Test series format."""
+    result = 'serie 1; serie 2, 2018'
+    assert result == views.series_format([{
+        'name': 'serie 1'
+    }, {
+        'name': 'serie 2',
+        'number': '2018'
+    }])
+
+
+def test_abstracts_format():
+    """Test series format."""
+    result = 'line1\nline2\nline3'
+    assert result == views.abstracts_format(['line1\n\n\nline2', 'line3'])
+
+
+def test_subjects_format(document_fixture):
+    """Test subjects format."""
+    assert views.subjects_format(
+        document_fixture['subjects']) == 'Time series models ; GARCH models'
+
+
+def test_identifiedby_format():
+    """Test identifiedBy format."""
+    identifiedby = [{
+        'type': 'bf:Local',
+        'source': 'RERO',
+        'value': 'R008745599'
+    }, {
+        'type': 'bf:Isbn',
+        'value': '9782844267788'
+    }, {
+        'type': 'bf:Local',
+        'source': 'BNF',
+        'value': 'FRBNF452959040000002'
+    }, {
+        'type': 'uri',
+        'value': 'http://catalogue.bnf.fr/ark:/12148/cb45295904f'
+    }]
+    results = [{
+        'type': 'Isbn',
+        'value': '9782844267788'
+    }, {
+        'type': 'uri',
+        'value': 'http://catalogue.bnf.fr/ark:/12148/cb45295904f'
+    }]
+    assert results == views.identifiedby_format(identifiedby)
+
+
+def test_language_format(app):
+    """Test language format."""
+    language = [{
+        'type': 'bf:Language',
+        'value': 'ger'
+    }, {
+        'type': 'bf:Language',
+        'value': 'fre'
+    }]
+    results = 'ger, fre'
+    assert results == views.language_format(language, 'en')
+
+    language = 'fre'
+    results = 'fre'
+    assert results == views.language_format(language, 'en')
+
+
+def test_create_publication_statement(document_fixture):
+    """Test create publication statement."""
+    publication_statement = views.create_publication_statement(
+        document_fixture['provisionActivity'][0])
+    assert publication_statement
+    assert publication_statement[
+        'default'] == 'Bienne : Impr. Weber, [2006] ; Lausanne ; Rippone : ' \
+                      'Impr. Coustaud'
 
 
 def test_nl2br():
@@ -65,27 +152,11 @@ def test_nl2br():
     assert views.nl2br(text) == 'Multiline text<br>Multiline text'
 
 
-def test_translate_content(app):
-    """Test content item translation."""
-    assert views.translate_content([], 'fr') is None
-
-    records = [{
-        'language': 'eng',
-        'value': 'Summary of content'
-    }, {
-        'language': 'fre',
-        'value': 'Résumé du contenu'
-    }]
-    assert views.translate_content(records, 'fr') == 'Résumé du contenu'
-    assert views.translate_content(records, 'de') == 'Summary of content'
-    assert views.translate_content(records, 'pt') == 'Summary of content'
-
-    with pytest.raises(Exception) as e:
-        views.translate_content(records, 'de', 'not_existing_key')
-    assert str(
-        e.value
-    ) == 'Value key "not_existing_key" in {record} does not exist'.format(
-        record=records[0])
+def test_edition_format(document_fixture):
+    """Test edition format."""
+    edition_format = views.edition_format(document_fixture['editionStatement'])
+    assert len(edition_format) == 2
+    assert edition_format[0] == 'Di 3 ban / Zeng Lingliang zhu bian'
 
 
 def test_get_code_from_bibliographic_language(app):

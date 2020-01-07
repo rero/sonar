@@ -19,7 +19,15 @@
 
 from __future__ import absolute_import, print_function
 
+import re
+
 from flask import Blueprint, current_app, g, render_template
+from flask_babelex import gettext as _
+
+from sonar.modules.documents.api import DocumentRecord
+
+from .utils import edition_format_text, localized_data_name, \
+    publication_statement_text, series_format_text
 
 blueprint = Blueprint('documents',
                       __name__,
@@ -69,47 +77,126 @@ def detail(pid, record, template=None, **kwargs):
 
 
 @blueprint.app_template_filter()
-def authors_format(authors):
-    """Format authors for template."""
-    output = []
-    for author in authors:
-        output.append(author['name'])
-
-    return ' ; '.join(output)
-
-
-@blueprint.app_template_filter()
 def nl2br(string):
     r"""Replace \n to <br>."""
     return string.replace('\n', '<br>')
 
 
 @blueprint.app_template_filter()
-def translate_content(records, locale, value_key='value'):
-    """Translate record data for the given locale."""
-    if not records:
-        return None
+def authors_format(pid, language='en', viewcode='sonar'):
+    """Format authors for template in given language."""
+    doc = DocumentRecord.get_record_by_pid(pid)
+    doc = doc.replace_refs()
+    output = []
+    for author in doc.get('authors', []):
+        line = []
+        name = localized_data_name(data=author, language=language)
+        line.append(name)
+        qualifier = author.get('qualifier')
+        if qualifier:
+            line.append(qualifier)
+        date = author.get('date')
+        if date:
+            line.append(date)
 
-    lang = get_bibliographic_code_from_language(locale)
+        line = ', '.join(str(x) for x in line)
 
-    found = [
-        abstract for abstract in records
-        if abstract['language'] == lang
-    ]
+        output.append(line)
 
-    record = None
+    return '; '.join(output)
 
-    if found:
-        record = found[0]
-    else:
-        record = records[0]
 
-    if value_key not in record:
-        raise Exception(
-            'Value key "{value_key}" in {record} does not exist'.format(
-                value_key=value_key, record=record))
+@blueprint.app_template_filter()
+def edition_format(editions):
+    """Format edition for template."""
+    output = []
+    for edition in editions:
+        languages = edition_format_text(edition)
+        if languages:
+            output.append(languages['default'])
+            del languages['default']
+            for key, value in languages.items():
+                output.append(value)
+    return output
 
-    return record[value_key]
+
+@blueprint.app_template_filter()
+def publishers_format(publishers):
+    """Format publishers for template."""
+    output = []
+    for publisher in publishers:
+        line = []
+        places = publisher.get('place', [])
+        if places:
+            line.append('; '.join(str(x) for x in places) + ': ')
+        names = publisher.get('name')
+        line.append('; '.join(str(x) for x in names))
+        output.append(''.join(str(x) for x in line))
+    return '; '.join(str(x) for x in output)
+
+
+@blueprint.app_template_filter()
+def series_format(series):
+    """Format series for template."""
+    output = []
+    for serie in series:
+        output.append(series_format_text(serie))
+    return '; '.join(str(x) for x in output)
+
+
+@blueprint.app_template_filter()
+def abstracts_format(abstracts):
+    """Format abstracts for template."""
+    output = []
+    for abstract in abstracts:
+        output.append(re.sub(r'\n+', '\n', abstract))
+    return '\n'.join(str(x) for x in output)
+
+
+@blueprint.app_template_filter()
+def subjects_format(subjects):
+    """Format subjects for template."""
+    output = []
+    for subject in subjects:
+        output.append(' ; '.join(subject['value']))
+    return '\n'.join(str(x) for x in output)
+
+
+@blueprint.app_template_filter()
+def create_publication_statement(provision_activity):
+    """Create publication statement from place, agent and date values."""
+    return publication_statement_text(provision_activity)
+
+
+@blueprint.app_template_filter()
+def identifiedby_format(identifiedby):
+    """Format identifiedby for template."""
+    output = []
+    for identifier in identifiedby:
+        status = identifier.get('status')
+        id_type = identifier.get('type')
+        if (not status or status == 'valid') and id_type != 'bf:Local':
+            if id_type.find(':') != -1:
+                id_type = id_type.split(':')[1]
+            output.append({'type': id_type, 'value': identifier.get('value')})
+    return output
+
+
+@blueprint.app_template_filter()
+def language_format(langs_list, language_interface):
+    """Converts language code to langauge name.
+
+    langs_list: a code or a list of language codes
+    language_interface: the code of the language of the interface
+    Returns a comma separated list of language names.
+    """
+    output = []
+    if isinstance(langs_list, str):
+        langs_list = [{'type': 'bf:Language', 'value': langs_list}]
+    for lang in langs_list:
+        language_code = lang.get('value')
+        output.append(_(language_code))
+    return ", ".join(output)
 
 
 def get_language_from_bibliographic_code(language_code):
