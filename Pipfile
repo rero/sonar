@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 Babel = ">=2.4.0"
 Flask-BabelEx = ">=0.9.3"
-invenio = {version = "==3.2.0a9",extras = ["base", "metadata", "files", "postgresql", "auth", "elasticsearch6" ]}
+invenio = {version = "==3.2.0",extras = ["base", "metadata", "files", "postgresql", "auth", "elasticsearch6" ]}
 # TODO: remove this contraint once it is solved in invenio
 raven = {version = ">=6.0",extras = ["flask"]}
 uwsgi = ">=2.0"
