@@ -49,7 +49,7 @@ def test_admin_record_page(app, admin_user_fixture):
         file_url = url_for('sonar.manage', path='records/documents')
         res = client.get(file_url)
         assert res.status_code == 200
-        assert '<admin-root>' in str(res.data)
+        assert '<sonar-root>' in str(res.data)
 
 
 def test_logged_user(app, client, monkeypatch):
