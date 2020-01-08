@@ -71,8 +71,8 @@ setup(
             'sonar_theme = sonar.theme.webpack:theme'
         ],
         'invenio_assets.bundles': [
-            'admin_ui_js = sonar.bundles:admin_ui_js',
-            'admin_ui_css = sonar.bundles:admin_ui_css'
+            'sonar_ui_js = sonar.bundles:sonar_ui_js',
+            'sonar_ui_css = sonar.bundles:sonar_ui_css'
         ],
         'invenio_config.module': [
             'sonar = sonar.config',
