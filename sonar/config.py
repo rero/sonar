@@ -182,6 +182,11 @@ APP_DEFAULT_SECURE_HEADERS = {
     'content_security_policy': {
         'default-src': ["'self'"],
         'object-src': ["'none'"],
+        'script-src': [
+            "'self'", "'unsafe-inline'", 'https://code.jquery.com',
+            'https://cdnjs.cloudflare.com',
+            'https://stackpath.bootstrapcdn.com'
+        ],
         'style-src': [
             "'self'", "'unsafe-inline'", 'https://cdnjs.cloudflare.com',
             'https://fonts.googleapis.com'
@@ -212,21 +217,6 @@ OAISERVER_ID_PREFIX = 'oai:sonar.ch:'
 DEBUG_TB_INTERCEPT_REDIRECTS = False
 
 PIDSTORE_RECID_FIELD = 'pid'
-
-SEARCH_UI_SEARCH_INDEX = 'documents'
-SEARCH_UI_SEARCH_API = '/api/documents/'
-SEARCH_UI_SEARCH_TEMPLATE = 'sonar/search.html'
-
-SEARCH_UI_JSTEMPLATE_RESULTS = 'templates/documents/search_ui/results.html'
-SEARCH_UI_JSTEMPLATE_COUNT = 'templates/documents/search_ui/count.html'
-SEARCH_UI_JSTEMPLATE_PAGINATION = 'templates/documents/search_ui/'\
-                                  'pagination.html'
-SEARCH_UI_JSTEMPLATE_SORT_ORDER = 'templates/documents/search_ui/'\
-                                  'sort_order.html'
-SEARCH_UI_JSTEMPLATE_SELECT_BOX = 'templates/documents/search_ui/'\
-                                  'select_box.html'
-SEARCH_UI_JSTEMPLATE_LOADING = 'templates/documents/search_ui/loading.html'
-SEARCH_UI_JSTEMPLATE_FACETS = 'templates/documents/search_ui/facets.html'
 
 SECURITY_LOGIN_USER_TEMPLATE = 'sonar/accounts/login.html'
 SECURITY_FORGOT_PASSWORD_TEMPLATE = 'sonar/accounts/forgot_password.html'

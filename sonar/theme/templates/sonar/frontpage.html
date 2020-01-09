@@ -35,7 +35,7 @@
       </div>
       <div class="row justify-content-center">
           <div class="col-sm-12 col-lg-8 text-right my-4">
-            <form class="justify-content-end" action="{{ url_for('documents.search', ir=g.ir|default('sonar')) }}" role="search">
+            <form class="justify-content-end" action="{{ url_for('documents.search', ir=g.ir|default('sonar'), resource_type='documents') }}" role="search">
               <div class="row">
                 <div class="col-12 col-sm-11">
                     <input class="form-control form-control-lg mr-2" type="search" placeholder="{{_('Search publications, authors, projects, ...')}}" aria-label="Search" name="q">

@@ -1,26 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Admin</title>
+    <title>{{ _("SONAR administration") }}</title>
     <base href="/manage" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
-    {{ webpack["sonar-theme.css"] }}
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap"
-      rel="stylesheet"
-    />
+    {{
+      webpack["sonar-theme.css"]
+    }}
   </head>
 
   <body>
     <sonar-root></sonar-root>
-    {% assets "sonar_ui_js" %}
-    <script src="{{ ASSET_URL }}"></script>
-    {% endassets %}
+    <script src="/static/sonar-ui/runtime.js?{{ ui_version }}"></script>
+    <script src="/static/sonar-ui/polyfills.js?{{ ui_version }}"></script>
+    <script src="/static/sonar-ui/main.js?{{ ui_version }}"></script>
   </body>
 </html>

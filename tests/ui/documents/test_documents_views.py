@@ -38,7 +38,8 @@ def test_index(client):
 def test_search(app, client):
     """Test search."""
     assert isinstance(views.search(), str)
-    assert client.get(url_for('invenio_search_ui.search')).status_code == 200
+    assert client.get(
+        '/organization/sonar/search/documents').status_code == 200
 
 
 def test_detail(app, client):

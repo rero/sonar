@@ -27,9 +27,10 @@ from . import config
 
 
 def utility_processor():
-    """Dictionary for checking admin access."""
+    """Dictionary for passing data to templates."""
     return dict(has_admin_access=has_admin_access,
-                has_super_admin_access=has_super_admin_access)
+                has_super_admin_access=has_super_admin_access,
+                ui_version=config.SONAR_APP_UI_VERSION)
 
 
 class Sonar(object):
