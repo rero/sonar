@@ -37,18 +37,18 @@
           {%- endfor %}
         {%- endif %}
       {%- endblock head_meta %}
-      
+
       {%- block head_title %}
         {%- set title = title or _(config.THEME_SITENAME) or _('Invenio') %}
         <title>{{title}}</title>
       {%- endblock head_title %}
-      
+
       {%- block head_links %}
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"/>
         {%- if keywords %}
           <link rel="canonical" href="{{ canonical_url }}"/>
         {% endif %}
-        
+
         {%- block head_links_langs %}
           {%- if alternate_urls %}
             {%- for alt_ln, alternate_url in alternate_urls.items() %}
@@ -56,16 +56,16 @@
             {%- endfor %}
           {%- endif %}
         {%- endblock %}
-        
+
         {%- block head_apple_icons %}
           {%- for size in [144, 114, 72, 57] %}
             {%- set icon_name = 'apple-touch-icon-%d-precomposed.png' | format(size) %}
             <link rel="apple-touch-icon-precomposed" sizes="{{ size }}x{{ size }}" href="{{ url_for('static', filename=icon_name) }}"/>
           {%- endfor %}
         {%- endblock head_apple_icons %}
-  
+
       {%- endblock head_links %}
-    
+
       {%- block css %}
         {{ webpack[g.ir|default('sonar') ~ '-theme.css'] }}
         {# assets "invenio_theme_css" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets #}
@@ -75,7 +75,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
       {%- endblock css %}
-    
+
     {%- endblock head %}
 
     <base href="/">
@@ -87,13 +87,13 @@
           <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
       {%- endblock browserupgrade %}
-        
+
       {%- block body_inner %}
           <header>
-              {% include 'sonar/partial/navbar.html' %}            
+              {% include 'sonar/partial/navbar.html' %}
               {%- block header %}{%- endblock header %}
           </header>
-          
+
         <div class="container my-5">
           {%- block breadcrumbs %}
             {%- include "sonar/breadcrumbs.html" %}
@@ -106,14 +106,14 @@
 
           {%- block body %}{%- endblock body %}
         </div>
-          
+
         {% include 'sonar/footer.html' %}
       {%- endblock body_inner %}
-        
+
       {%- block javascript %}
         {% include 'sonar/javascript.html' %}
       {%- endblock javascript %}
-        
+
       {%- block trackingcode %}
         {% include config.THEME_TRACKINGCODE_TEMPLATE %}
       {%- endblock %}

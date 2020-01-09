@@ -21,12 +21,13 @@ from __future__ import absolute_import, print_function
 
 from flask_webpackext import WebpackBundle
 
+from sonar.modules.config import SONAR_APP_UI_VERSION
+
 theme = WebpackBundle(
     __name__,
     'assets',
     entry={
         'app': './js/app.js',
-        'search_ui': './js/search_ui.js',
         'sonar-theme': './scss/sonar/theme.scss',
         'usi-theme': './scss/usi/theme.scss'
     },
@@ -35,6 +36,6 @@ theme = WebpackBundle(
         'jquery': '^3.2',
         'bootstrap': '^4.3',
         'font-awesome': '^4.0',
-        '@rero/sonar-ui': '~0.1.2'
+        '@rero/sonar-ui': SONAR_APP_UI_VERSION
     }
 )
