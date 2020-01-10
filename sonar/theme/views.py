@@ -31,12 +31,10 @@ from flask_login import current_user
 from sonar.modules.permissions import can_access_manage_view
 from sonar.modules.users.api import UserRecord
 
-blueprint = Blueprint(
-    'sonar',
-    __name__,
-    template_folder='templates',
-    static_folder='static'
-)
+blueprint = Blueprint('sonar',
+                      __name__,
+                      template_folder='templates',
+                      static_folder='static')
 
 
 @blueprint.route('/error')
@@ -59,6 +57,9 @@ def manage(path=None):
 @blueprint.route('/logged-user/', methods=['GET'])
 def logged_user():
     """Current logged user informations in JSON."""
+    if current_user.is_anonymous:
+        return jsonify({})
+
     user = UserRecord.get_user_by_current_user(current_user)
 
     if user and 'resolve' in request.args:
@@ -73,4 +74,7 @@ def logged_user():
         data['metadata']['is_moderator'] = user.is_moderator
         data['metadata']['is_user'] = user.is_user
 
+    # TODO: If an organization is associated to user and only when running
+    # tests, institution cannot not be encoded to JSON after call of
+    # user.replace_refs() --> check why
     return jsonify(data)

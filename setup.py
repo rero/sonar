@@ -70,10 +70,6 @@ setup(
         'invenio_assets.webpack': [
             'sonar_theme = sonar.theme.webpack:theme'
         ],
-        'invenio_assets.bundles': [
-            'sonar_ui_js = sonar.bundles:sonar_ui_js',
-            'sonar_ui_css = sonar.bundles:sonar_ui_css'
-        ],
         'invenio_config.module': [
             'sonar = sonar.config',
             'sonar_app = sonar.modules.config',

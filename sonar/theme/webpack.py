@@ -34,6 +34,7 @@ theme = WebpackBundle(
         'popper.js': '^1.15',
         'jquery': '^3.2',
         'bootstrap': '^4.3',
-        'font-awesome': '^4.0'
+        'font-awesome': '^4.0',
+        '@rero/sonar-ui': '~0.1.2'
     }
 )

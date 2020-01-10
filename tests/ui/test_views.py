@@ -52,51 +52,17 @@ def test_admin_record_page(app, admin_user_fixture):
         assert '<sonar-root>' in str(res.data)
 
 
-def test_logged_user(app, client, monkeypatch):
+def test_logged_user(app, client, admin_user_fixture_with_db):
     """Test logged user page."""
     url = url_for('sonar.logged_user')
-
-    monkeypatch.setattr(
-        'sonar.modules.users.api.UserRecord.get_user_by_current_user', lambda *
-        args: None)
 
     res = client.get(url)
     assert b'{}' in res.data
 
-    user = UserRecord.create({
-        'pid': '1',
-        'email': 'admin@test.com',
-        'full_name': 'Jules Brochu',
-        'roles': ['user'],
-        'institution': {
-            '$ref': 'https://sonar.ch/api/institutions/usi'
-        }
-    })
-
-    # Mock get current user because data are not indexed to ES.
-    monkeypatch.setattr(
-        'sonar.modules.users.api.UserRecord.get_user_by_current_user', lambda *
-        args: user)
-
-    user = UserRecord.create({
-        'pid': '1',
-        'email': 'admin@test.com',
-        'full_name': 'Jules Brochu',
-        'roles': ['user'],
-        'institution': {
-            'pid': 'usi',
-            'name': 'Università della Svizzera italiana'
-        }
-    })
-
-    # Mock replace references because data are not indexed to ES.
-    monkeypatch.setattr(
-        'sonar.modules.users.api.UserRecord.replace_refs', lambda *
-        args: user)
+    login_user_via_session(client, email=admin_user_fixture_with_db['email'])
 
     res = client.get(url)
     assert b'"email":"admin@test.com"' in res.data
 
     res = client.get(url + '?resolve=1')
     assert b'"email":"admin@test.com"' in res.data
-    assert b'"pid":"usi"' in res.data

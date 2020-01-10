@@ -24,6 +24,9 @@ from flask_principal import ActionNeed
 from invenio_access.models import ActionUsers, Role
 from invenio_accounts.ext import hash_password
 from invenio_app.factory import create_ui
+from invenio_search import current_search
+
+from sonar.modules.users.api import UserRecord
 
 
 @pytest.fixture(scope='module')
@@ -100,3 +103,21 @@ def superadmin_user_fixture(app, db):
     db.session.commit()
 
     return user
+
+
+@pytest.fixture()
+def admin_user_fixture_with_db(app, db, admin_user_fixture):
+    """Create user in database."""
+    db_user = UserRecord.create({
+        'pid': '10000',
+        'email': admin_user_fixture.email,
+        'full_name': 'Jules Brochu',
+        'roles': ['admin'],
+        'user_id': admin_user_fixture.id
+    }, dbcommit=True)
+    db_user.reindex()
+    db.session.commit()
+
+    current_search.flush_and_refresh('users')
+
+    return db_user

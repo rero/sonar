@@ -1,25 +1,26 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
+  <head>
     <title>Admin</title>
-    <base href="/manage">
+    <base href="/manage" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+    {{ webpack["sonar-theme.css"] }}
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    {% assets "sonar_ui_css" %}
-    <link href="{{ ASSET_URL }}" rel="stylesheet">
-    {% endassets %}
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
-</head>
-
-<body>
+  <body>
     <sonar-root></sonar-root>
     {% assets "sonar_ui_js" %}
     <script src="{{ ASSET_URL }}"></script>
     {% endassets %}
-</body>
-
+  </body>
 </html>

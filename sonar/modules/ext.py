@@ -19,6 +19,8 @@
 
 from __future__ import absolute_import, print_function
 
+from flask_assets import Bundle, Environment
+
 from sonar.modules.permissions import has_admin_access, has_super_admin_access
 
 from . import config
@@ -46,6 +48,15 @@ class Sonar(object):
         if app.config['SONAR_APP_ENABLE_CORS']:
             from flask_cors import CORS
             CORS(app)
+
+        # Register assets for sonar-ui
+        assets = Environment(app)
+        assets.register(
+            'sonar_ui_js',
+            Bundle('sonar-ui/runtime.js',
+                   'sonar-ui/polyfills.js',
+                   'sonar-ui/main.js',
+                   output='sonar_ui.%(version)s.js'))
 
         app.context_processor(utility_processor)
 

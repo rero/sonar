@@ -26,7 +26,7 @@ from invenio_records.api import Record
 
 # the host corresponds to the config value for the key JSONSCHEMAS_HOST
 @jsonresolver.route('/api/users/<pid>', host='sonar.ch')
-def institution_resolver(pid):
+def user_resolver(pid):
     """Resolve referenced user."""
     resolver = Resolver(pid_type='user', object_type="rec",
                         getter=Record.get_record)

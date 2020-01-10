@@ -7,8 +7,8 @@ name = "pypi"
 Babel = ">=2.4.0"
 Flask-BabelEx = ">=0.9.3"
 invenio = {version = "==3.2.0",extras = ["base", "metadata", "files", "postgresql", "auth", "elasticsearch6" ]}
-# TODO: remove this contraint once it is solved in invenio
-raven = {version = ">=6.0",extras = ["flask"]}
+# TODO: should be installed by invenio-logging but's not the case. Remove this when it's solved by invenio.
+sentry-sdk = ">=0.14"
 uwsgi = ">=2.0"
 uwsgitop = ">=0.11"
 uwsgi-tools = ">=1.1.1"
