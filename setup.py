@@ -53,7 +53,9 @@ setup(
             'utils = sonar.modules.cli:utils'
         ],
         'invenio_base.apps': [
-            'sonar = sonar.modules:Sonar'
+            'sonar = sonar.modules:Sonar',
+            'shibboleth_authenticator = \
+                sonar.modules.shibboleth_authenticator:ShibbolethAuthenticator',
         ],
         'invenio_base.blueprints': [
             'sonar = sonar.theme.views:blueprint',
