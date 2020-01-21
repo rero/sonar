@@ -49,11 +49,13 @@ def extract_text_from_file(file):
 
 
 def format_extracted_data(data):
-    """Format the extracted metadata from PDF."""
+    """Format the metadata extracted by Grobid service."""
     formatted_data = {}
-    if '#text' in data['teiHeader']['fileDesc']['titleStmt']['title']:
-        formatted_data['title'] = data['teiHeader']['fileDesc']['titleStmt'][
-            'title']['#text']
+
+    # Get title
+    title = data['teiHeader']['fileDesc']['titleStmt']['title'].get('#text')
+    if title:
+        formatted_data['title'] = title
 
     if data['text']['@xml:lang']:
         language = pycountry.languages.get(alpha_2=data['text']['@xml:lang'])
@@ -63,43 +65,36 @@ def format_extracted_data(data):
             else:
                 formatted_data['languages'] = [language.alpha_3]
 
-    if 'analytic' in data['teiHeader']['fileDesc']['sourceDesc'][
-            'biblStruct'] and data['teiHeader']['fileDesc']['sourceDesc'][
-                'biblStruct']['analytic'] and 'author' in data['teiHeader'][
-                    'fileDesc']['sourceDesc']['biblStruct']['analytic']:
-        authors = data['teiHeader']['fileDesc']['sourceDesc']['biblStruct'][
-            'analytic']['author']
-        if not isinstance(authors, list):
-            authors = [authors]
+    authors = data['teiHeader']['fileDesc']['sourceDesc']['biblStruct'].get(
+        'analytic', {}).get('author')
 
-        formatted_data['authors'] = []
+    if authors:
+        authors = force_list(authors)
+
         for author in authors:
-            if 'persName' in author:
-                new_author = {}
+            if author.get('persName'):
+                name = []
+                surname = author['persName'].get('surname')
 
-                if 'surname' in author['persName']:
-                    new_author['name'] = author['persName']['surname']
+                if surname:
+                    name.append(surname)
 
-                if not isinstance(author['persName']['forename'], list):
-                    author['persName']['forename'] = [
-                        author['persName']['forename']
-                    ]
+                forenames = author['persName'].get('forename', [])
+                forenames = force_list(forenames)
 
-                for forename in author['persName']['forename']:
-                    new_author[
-                        'name'] = forename['#text'] + ' ' + new_author['name']
+                name = name + [forename['#text'] for forename in forenames]
 
-                formatted_data['authors'].append(new_author)
+                formatted_data.setdefault('authors',
+                                          []).append({'name': ' '.join(name)})
 
-    if data['teiHeader']['fileDesc']['sourceDesc']['biblStruct']['monogr'][
-            'imprint']:
-        imprint = data['teiHeader']['fileDesc']['sourceDesc']['biblStruct'][
-            'monogr']['imprint']
-        if 'publisher' in imprint:
+    imprint = data['teiHeader']['fileDesc']['sourceDesc']['biblStruct'][
+        'monogr'].get('imprint', {})
+
+    if imprint:
+        if imprint.get('publisher'):
             formatted_data['journal'] = {'name': imprint['publisher']}
 
-            if not isinstance(imprint['biblScope'], list):
-                imprint['biblScope'] = [imprint['biblScope']]
+            imprint['biblScope'] = force_list(imprint['biblScope'])
 
             for item in imprint['biblScope']:
                 if item['@unit'] in ['page', 'volume', 'number']:
@@ -111,9 +106,16 @@ def format_extracted_data(data):
                         key] = item['#text'] if '#text' in item else item[
                             '@from'] + '-' + item['@to']
 
-    if 'abstract' in data['teiHeader']['profileDesc'] and data['teiHeader'][
-            'profileDesc']['abstract']:
-        formatted_data['abstract'] = data['teiHeader']['profileDesc'][
-            'abstract']['p']
+    abstract = data['teiHeader']['profileDesc'].get('abstract')
+    if abstract:
+        formatted_data['abstract'] = abstract['p']
 
     return formatted_data
+
+
+def force_list(data):
+    """Force input data to be a list."""
+    if not isinstance(data, list):
+        return [data]
+
+    return data

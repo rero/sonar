@@ -21,14 +21,16 @@ from __future__ import absolute_import, print_function
 
 from flask_assets import Bundle, Environment
 
-from sonar.modules.permissions import has_admin_access, has_super_admin_access
+from sonar.modules.permissions import has_admin_access, \
+    has_super_admin_access, has_user_access
 
 from . import config
 
 
 def utility_processor():
     """Dictionary for passing data to templates."""
-    return dict(has_admin_access=has_admin_access,
+    return dict(has_user_access=has_user_access,
+                has_admin_access=has_admin_access,
                 has_super_admin_access=has_super_admin_access,
                 ui_version=config.SONAR_APP_UI_VERSION)
 

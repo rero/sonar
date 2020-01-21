@@ -27,7 +27,7 @@
         {{_('Super administration')}}
     </a>
     {% endif %}
-    {% if has_admin_access() %}
+    {% if has_user_access() %}
     <a class="dropdown-item" href="{{ url_for('sonar.manage')}}">
         {{_('Administration')}}
     </a>
