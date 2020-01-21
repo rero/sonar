@@ -50,6 +50,8 @@ def _(x):
 # =============
 #: Storage for ratelimiter.
 RATELIMIT_STORAGE_URL = 'redis://localhost:6379/3'
+#: Disable rate limit to avoid 429 http error
+RATELIMIT_ENABLED = False
 
 # I18N
 # ====
