@@ -17,7 +17,6 @@
 
 """Test SONAR permissions."""
 
-from flask import url_for
 from invenio_accounts.testutils import login_user_via_view
 
 from sonar.modules.documents.api import DocumentRecord
@@ -25,10 +24,31 @@ from sonar.modules.permissions import admin_permission_factory, \
     can_create_record_factory, can_delete_record_factory, \
     can_list_record_factory, can_read_record_factory, \
     can_update_record_factory, files_permission_factory, has_admin_access, \
-    has_super_admin_access
+    has_super_admin_access, has_user_access
 
 
-def test_has_admin_access(app, db, client, user_without_role_fixture,
+def test_has_user_access(app, client, user_without_role_fixture,
+                         user_fixture):
+    """Test if user has an admin access."""
+
+    app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
+    assert has_user_access()
+
+    app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
+    login_user_via_view(client,
+                        email=user_without_role_fixture.email,
+                        password='123456')
+
+    assert not has_user_access()
+
+    login_user_via_view(client,
+                        email=user_fixture.email,
+                        password='123456')
+
+    assert not has_user_access()
+
+
+def test_has_admin_access(app, client, user_without_role_fixture,
                           admin_user_fixture):
     """Test if user has an admin access."""
 
@@ -49,7 +69,7 @@ def test_has_admin_access(app, db, client, user_without_role_fixture,
     assert not has_admin_access()
 
 
-def test_has_super_admin_access(app, db, client, user_without_role_fixture,
+def test_has_super_admin_access(app, client, user_without_role_fixture,
                                 superadmin_user_fixture):
     """Test if user has a super admin access."""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
@@ -69,8 +89,7 @@ def test_has_super_admin_access(app, db, client, user_without_role_fixture,
     assert not has_super_admin_access()
 
 
-def test_permissions_factories(app, client, user_without_role_fixture,
-                               admin_user_fixture):
+def test_permissions_factories(app, client, admin_user_fixture):
     """Test is user can list record."""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
 
