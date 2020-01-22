@@ -66,7 +66,6 @@ setup(
                 sonar.modules.pdf_extractor.views.client:blueprint'
         ],
         'invenio_base.api_blueprints': [
-            'sonar = sonar.theme.api_views:blueprint',
             'pdf_extractor = sonar.modules.pdf_extractor.views.api:blueprint',
             'deposits = sonar.modules.deposits.rest:blueprint'
         ],
