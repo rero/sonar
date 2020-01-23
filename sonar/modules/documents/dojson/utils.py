@@ -177,6 +177,7 @@ class SonarMarc21Overdo(SonarOverdo):
     date_type_from_008 = ''
     langs_from_041_a = []
     langs_from_041_h = []
+    unique_languages = []
     alternate_graphic = {}
     country = None
     cantons = []
@@ -277,6 +278,8 @@ class SonarMarc21Overdo(SonarOverdo):
         self.lang_from_008 = ''
         self.langs_from_041_a = []
         self.langs_from_041_h = []
+        self.unique_languages = []
+
         try:
             self.lang_from_008 = self.field_008_data[35:38]
         except Exception:

@@ -321,12 +321,7 @@ def test_marc21_to_language():
     )
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('language') == [
-        {
-            'type': 'bf:Language',
-            'value': 'ara'
-        }
-    ]
+    assert not data.get('language')
 
 
 # authors: loop:

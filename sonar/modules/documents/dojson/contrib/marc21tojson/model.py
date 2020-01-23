@@ -137,28 +137,28 @@ def marc21_to_pid(self, key, value):
     return pid
 
 
-@marc21tojson.over('language', '^008')
+@marc21tojson.over('language', '^041')
 @utils.ignore_value
 def marc21_to_language(self, key, value):
     """Get languages.
 
     languages: 008 and 041 [$a, repetitive]
     """
-    lang_codes = []
     language = self.get('language', [])
-    if marc21tojson.lang_from_008:
+    if marc21tojson.lang_from_008 and marc21tojson.lang_from_008 not in \
+            marc21tojson.unique_languages:
         language.append({
             'value': marc21tojson.lang_from_008,
             'type': 'bf:Language'
         })
-        lang_codes.append(marc21tojson.lang_from_008)
+        marc21tojson.unique_languages.append(marc21tojson.lang_from_008)
     for lang_value in marc21tojson.langs_from_041_a:
-        if lang_value not in lang_codes:
+        if lang_value not in marc21tojson.unique_languages:
             language.append({
                 'value': lang_value.strip(),
                 'type': 'bf:Language'
             })
-            lang_codes.append(lang_value)
+            marc21tojson.unique_languages.append(lang_value)
     # if not language:
     #     error_print('ERROR LANGUAGE:', marc21tojson.bib_id, 'set to "und"')
     #     language = [{'value': 'und', 'type': 'bf:Language'}]
