@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "fbc43ec46db64015760d8bf93e3981cf0280e5f423900ddca338cb9454ef7862"
+            "sha256": "9d1b27bc22f1ee75ca13cfd3cfa13df25a1b985e35e084c4c070e28565eaab54"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -654,6 +654,11 @@
                 "sha256:fcd9ec4a89e0e68d09a9b9a638ee625e260ef98d6bc9d7aa172ec3969a95933f"
             ],
             "version": "==1.0.2"
+        },
+        "invenio-oaiharvester": {
+            "editable": true,
+            "git": "https://github.com/inveniosoftware/invenio-oaiharvester.git",
+            "ref": "fe55e095a8e78b36cfad875f752f2facc2908bae"
         },
         "invenio-oaiserver": {
             "hashes": [
@@ -1334,6 +1339,13 @@
             ],
             "index": "pypi",
             "version": "==0.14.1"
+        },
+        "sickle": {
+            "hashes": [
+                "sha256:c0841b4df5edea33d2da01e893b3feadb1a8eacd2ca4dab9248e6047455ba14a",
+                "sha256:efdfa46c40cd34b3550f11b59c607ff0bd63adbc074efaa8b4dd662108269a2f"
+            ],
+            "version": "==0.6.5"
         },
         "simplejson": {
             "hashes": [

@@ -19,29 +19,39 @@
 
 from __future__ import absolute_import, print_function
 
-from invenio_records_rest.schemas import Nested, StrictKeysMixin
-from invenio_records_rest.schemas.fields import DateString, \
-    PersistentIdentifier, SanitizedUnicode
-from marshmallow import fields, missing, validate
+from invenio_records_rest.schemas import StrictKeysMixin
+from invenio_records_rest.schemas.fields import PersistentIdentifier, \
+    SanitizedUnicode
+from marshmallow import fields
 
 
 class DocumentMetadataSchemaV1(StrictKeysMixin):
     """Schema for the document metadata."""
 
     pid = PersistentIdentifier()
-    title = SanitizedUnicode(required=True)
+    type = SanitizedUnicode()
+    title = fields.List(fields.Dict())
     is_part_of = SanitizedUnicode()
     abstracts = fields.List(fields.Dict())
-    authors = fields.Dict(dump_only=True)
+    authors = fields.List(fields.Dict())
     institution = fields.Dict(dump_only=True)
+    _files = fields.Dict(dump_only=True)
+    language = fields.List(fields.Dict())
+    copyrightDate = fields.List(fields.String())
+    editionStatement = fields.List(fields.Dict())
+    provisionActivity = fields.List(fields.Dict())
+    extent = SanitizedUnicode()
+    otherMaterialCharacteristics = SanitizedUnicode()
+    formats = fields.Dict()
+    additionalMaterials = SanitizedUnicode()
+    series = fields.List(fields.Dict())
+    notes = fields.List(fields.String())
+    identifiedBy = fields.List(fields.Dict())
+    subjects = fields.List(fields.Dict())
 
 
 class DocumentSchemaV1(StrictKeysMixin):
     """Document schema."""
 
     metadata = fields.Nested(DocumentMetadataSchemaV1)
-    # created = fields.Str(dump_only=True)
-    # revision = fields.Integer(dump_only=True)
-    # updated = fields.Str(dump_only=True)
-    # links = fields.Dict(dump_only=True)
-    id = PersistentIdentifier()
+    links = fields.Dict(dump_only=True)

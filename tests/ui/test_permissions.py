@@ -27,8 +27,7 @@ from sonar.modules.permissions import admin_permission_factory, \
     has_super_admin_access, has_user_access
 
 
-def test_has_user_access(app, client, user_without_role_fixture,
-                         user_fixture):
+def test_has_user_access(app, client, user_without_role_fixture, user_fixture):
     """Test if user has an admin access."""
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
@@ -41,9 +40,7 @@ def test_has_user_access(app, client, user_without_role_fixture,
 
     assert not has_user_access()
 
-    login_user_via_view(client,
-                        email=user_fixture.email,
-                        password='123456')
+    login_user_via_view(client, email=user_fixture.email, password='123456')
 
     assert not has_user_access()
 
@@ -89,7 +86,8 @@ def test_has_super_admin_access(app, client, user_without_role_fixture,
     assert not has_super_admin_access()
 
 
-def test_permissions_factories(app, client, admin_user_fixture):
+def test_permissions_factories(app, client, admin_user_fixture,
+                               document_fixture):
     """Test is user can list record."""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
 
@@ -108,14 +106,7 @@ def test_permissions_factories(app, client, admin_user_fixture):
     assert can_create_record_factory()
     assert can_update_record_factory()
     assert can_delete_record_factory()
-
-    record = DocumentRecord.create(
-        {
-            "pid": "2",
-            "title": "The title of the record"
-        }, dbcommit=True)
-
-    assert can_read_record_factory(record)
+    assert can_read_record_factory(document_fixture)
 
 
 def test_files_permission_factory(app, client, admin_user_fixture):

@@ -17,7 +17,7 @@
 
 {%- extends config.RECORDS_UI_BASE_TEMPLATE %}
 
-{% from 'sonar/macros/macro.html' import dl %}
+{% from 'sonar/macros/macro.html' import dl, dl_dict, dl_list %}
 
 {%- macro record_content(data) %}
   {% for key, value in data.items() recursive %}
@@ -48,13 +48,11 @@
 {%- endmacro %}
 
 {%- block body %}
-<!--
-<ul class="list-group">
+<!-- <ul class="list-group">
   {{ record_content(record.replace_refs()) }}
-</ul>
-  -->
+</ul> -->
 {% set record = record.replace_refs() %}
-<h1 class="text-primary">{{ record.title }}</h1>
+<h1 class="text-primary">{{ record.title[0] | title_format(current_i18n.language) }}</h1>
 {% if record.institution %}
 <h5 class="text-secondary">{{ record.institution.name }}</h5>
 {% endif %}
@@ -64,12 +62,12 @@
     <dl class="row mb-0">
       <!-- AUTHORS -->
       {% if record.authors %}
-      {{ dl(_('Author'), record.pid | authors_format(current_i18n.language, viewcode)) }}
+      {{ dl(_('Authors'), record.pid|authors_format(current_i18n.language, viewcode)) }}
       {% endif %}
 
       <!-- EDITION STATEMENT-->
       {% if record.editionStatement %}
-      {{ dl_list(_('Edition'), record.editionStatement | edition_format) }}
+      {{ dl_list(_('Edition'), record.editionStatement|edition_format) }}
       {% endif %}
 
       <!-- PUBLICATION STATEMENT -->
@@ -111,17 +109,28 @@
 
       <!-- SUBJECTS -->
       {% if record.subjects|length > 0 %}
-      {{ dl(_('Abstract'), record.subjects|subjects_format|nl2br) }}
+      {{ dl(_('Subjects'), record.subjects|subjects_format|nl2br) }}
       {% endif %}
 
       <!-- NOTES -->
       {% if record.notes|length > 0 %}
-      {{ dl(_('Notes'), record.notes|abstracts_format|nl2br) }}
+      <dt class="col-sm-2">
+        {{ _('Notes') }}:
+      </dt>
+      <dd class="col-sm-10">
+        <ul class="list-unstyled mb-0">
+          {% for note in record.notes %}
+          <li>
+            {{ note }}
+          </li>
+          {% endfor %}
+        </ul>
+      </dd>
       {% endif %}
 
       {% if record.identifiedBy|identifiedby_format|length > 0 %}
       <dt class="col-sm-2">
-        {{ _('Identifier') }}:
+        {{ _('Identifiers') }}:
       </dt>
       <dd class="col-sm-10">
         <ul class="list-unstyled mb-0">
@@ -129,24 +138,43 @@
           <li>
             {{ identifier.value }}
             <small class="badge badge-secondary text-uppercase text-light">{{ identifier.type }}</small>
-            {% endfor %}
           </li>
+          {% endfor %}
         </ul>
       </dd>
       {% endif %}
 
-      {% if record.language|language_format(current_i18n.language)|length > 0 %}
-      {{ dl(_('Language'), record.language|language_format(current_i18n.language)) }}
-      {% endif %}
-
-      {% if record.source %}
-      {{ dl(_('Source'), '<a href="'+ record.source +'" target="_blank">'+ record.source +'</a>') }}
+      {% if record.language %}
+      <dt class="col-sm-2">
+        {{ _('Languages') }}:
+      </dt>
+      <dd class="col-sm-10">
+        <ul class="list-unstyled mb-0">
+          {% for language in record.language %}
+          <li>
+            {{ _('lang-' + language.value) }}
+          </li>
+          {% endfor %}
+        </ul>
+      </dd>
       {% endif %}
 
       <!-- PERMANENT LINK -->
       {% set link = url_for('invenio_records_ui.document', pid_value=record.pid, ir=g.ir|default('sonar'), _external=True) %}
       {{ dl(_('Permalink'), '<a href="' + link + '">' + link + '</a>') }}
     </dl>
+
+    {% if record._files %}
+      <hr>
+      <h5>{{ _('Files') }}</h5>
+      <ul>
+      {% for file in record._files %}
+        <li>
+          <a href="/api/documents/{{ record.pid }}/files/{{ file.key }}" target="_blank">{{ file.key }}</a>
+        </li>
+      {% endfor %}
+      </ul>
+    {% endif %}
   </article>
 </section>
 {%- endblock %}

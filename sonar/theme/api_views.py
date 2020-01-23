@@ -37,9 +37,14 @@ blueprint = Blueprint('api_sonar', __name__)
 def prepare_jsonschema(schema):
     """Json schema prep."""
     schema = copy.deepcopy(schema)
-    if schema.get('$schema'):
-        del schema['$schema']
-    schema['required'].remove('pid')
+
+    del schema['$schema']
+
+    if 'pid' in schema.get('required', []):
+        schema['required'].remove('pid')
+
+    del schema['properties']['$schema']
+
     return schema
 
 

@@ -18,114 +18,113 @@
 """Documents CLI commands."""
 
 import json
-from functools import partial
 
 import click
-import requests
 from click.exceptions import ClickException
-from dojson.contrib.marc21.utils import create_record, split_stream
 from flask import current_app
 from flask.cli import with_appcontext
 from invenio_db import db
-from invenio_indexer.api import RecordIndexer
-from invenio_records import Record
-
-from sonar.modules.documents.dojson.contrib.marc21tojson import marc21tojson
-from sonar.modules.institutions.api import InstitutionRecord
-
-from .api import DocumentRecord
+from invenio_oaiharvester.cli import harvest, oaiharvester
+from invenio_oaiharvester.models import OAIHarvestConfig
 
 
-@click.group()
-def documents():
-    """Documents CLI commands."""
+@oaiharvester.group()
+def config():
+    """Configs commands for OAI harvesting."""
 
 
-@documents.command('import')
-@click.argument('institution')
-@click.option('--pages', '-p', required=True, type=int, default=10)
+@config.command('create')
+@click.argument('config_file', type=click.File('r'))
 @with_appcontext
-def import_documents(institution, pages):
-    """Import documents from RERO doc.
+def oai_config_create(config_file):
+    """Creates configurations for OAI harvesting.
 
-    institution: String institution filter for retreiving documents
-    pages: Number of pages to import
+    :param config_file: File containing a list of sources to harvest.
     """
-    url = current_app.config.get('SONAR_DOCUMENTS_RERO_DOC_URL')
-
     click.secho(
-        'Importing {pages} pages of records for "{institution}" '
-        'from {url}'.format(pages=pages, institution=institution, url=url))
+        '\nCreating configurations for OAI harvesting from file "{file}"...'.
+        format(file=config_file.name))
 
-    # Get institution record from database
-    institution_record = InstitutionRecord.get_record_by_pid(institution)
+    sources = json.load(config_file)
 
-    if not institution_record:
-        raise ClickException('Institution record not found in database')
+    if not sources or not isinstance(sources, list):
+        raise ClickException('Configurations file cannot be parsed')
 
-    institution_ref_link = InstitutionRecord.get_ref_link(
-        'institutions', institution_record['pid'])
+    for source in sources:
+        try:
+            configuration = OAIHarvestConfig.query.filter_by(
+                name=source['key']).first()
 
-    # mapping between institution key and RERO doc filter
-    institution_map = current_app.config.get(
-            'SONAR_DOCUMENTS_INSTITUTIONS_MAP')
+            if configuration:
+                raise Exception(
+                    'Config already registered for "{name}"'.format(
+                        name=source['key']))
 
-    if not institution_map:
-        raise ClickException('Institution map not found in configuration')
-
-    if institution not in institution_map:
-        raise ClickException(
-            'Institution map for "{institution}" not found in configuration, '
-            'keys available {keys}'.format(
-                institution=institution,
-                keys=institution_map.keys()))
-
-    key = institution_map[institution]
-    current_page = 1
-
-    indexer = RecordIndexer()
-
-    while(current_page <= pages):
-        click.echo('Importing records {start} to {end}... '.format(
-            start=(current_page*10-9), end=(current_page*10)), nl=False)
-
-        # Read Marc21 data for current page
-        response = requests.get(
-            '{url}?of=xm&jrec={first_record}&c=NAVSITE.{institution}'
-            .format(url=url,
-                    first_record=(current_page*10-9),
-                    institution=key.upper()), stream=True)
-
-        if response.status_code != 200:
-            raise ClickException('Request to "{url}" failed'.format(url=url))
-
-        response.raw.decode_content = True
-
-        ids = []
-
-        for data in split_stream(response.raw):
-            # Convert from Marc XML to JSON
-            record = create_record(data)
-
-            # Transform JSON
-            record = marc21tojson.do(record)
-
-            # Add institution
-            record['institution'] = {'$ref': institution_ref_link}
-
-            # Register record to DB
-            db_record = DocumentRecord.create(record)
+            configuration = OAIHarvestConfig(
+                name=source['key'],
+                baseurl=source['url'],
+                metadataprefix=source['metadataprefix'],
+                setspecs=source['setspecs'],
+                comment=source['comment'])
+            configuration.save()
             db.session.commit()
 
-            # Add ID for bulk index in elasticsearch
-            ids.append(str(db_record.id))
+            click.secho('Created configuration for "{name}"'.format(
+                name=source['key']),
+                        fg='green')
+        except Exception as exception:
+            click.secho(str(exception), fg='yellow')
 
-        # index and process queue in elasticsearch
-        indexer.bulk_index(ids)
-        indexer.process_bulk_queue()
+    click.secho('Done', fg='green')
 
-        current_page += 1
 
-        click.secho('Done', fg='green', nl=True)
+@config.command('list')
+@with_appcontext
+def oai_config_info():
+    """List infos for tasks."""
+    oais = OAIHarvestConfig.query.all()
+    for oai in oais:
+        click.secho('\n' + oai.name, underline=True)
+        click.echo('\tlastrun       : ', nl=False)
+        click.echo(oai.lastrun)
+        click.echo('\tbaseurl       : ' + oai.baseurl)
+        click.echo('\tmetadataprefix: ' + oai.metadataprefix)
+        click.echo('\tcomment       : ' + oai.comment)
+        click.echo('\tsetspecs      : ' + oai.setspecs)
 
-    click.secho('Finished', fg='green')
+
+@oaiharvester.command('harvest-all')
+@click.option('-m',
+              '--max',
+              type=int,
+              default=None,
+              help='Maximum of records to harvest (optional).')
+@click.option('-k',
+              '--enqueue',
+              is_flag=True,
+              default=False,
+              help="Enqueue harvesting and return immediately.")
+@with_appcontext
+@click.pass_context
+def oai_config_harvest_all(ctx, max, enqueue):
+    """Harvesting data for the set and the configuration.
+
+    :param ctx: App context.
+    :param max: Max records to harvest for each sources.
+    :param enqueue: Enqueue process or return immediately.
+    """
+    with current_app.app_context():
+        sources = OAIHarvestConfig.query.all()
+
+    arguments = []
+
+    if max:
+        arguments.append('max={max}'.format(max=max))
+
+    for source in sources:
+        name = source.name
+        ctx.invoke(harvest,
+                   name=name,
+                   arguments=arguments,
+                   enqueue=enqueue,
+                   quiet=True)

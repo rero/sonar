@@ -19,6 +19,12 @@
   ],
   "additionalProperties": false,
   "properties": {
+    "$schema": {
+      "title": "Schema",
+      "description": "Schema to validate document against.",
+      "type": "string",
+      "default": "https://sonar.ch/schema/documents/document-v1.0.0.json"
+    },
     "pid": {
       "title": "PID",
       "type": "string"

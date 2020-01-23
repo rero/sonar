@@ -24,6 +24,8 @@ import traceback
 import click
 from dojson import Overdo, utils
 
+from sonar.modules.institutions.api import InstitutionRecord
+
 
 def error_print(*args):
     """Error printing to sdterr."""
@@ -90,6 +92,9 @@ def remove_trailing_punctuation(
     punctuation characters needing one or more preceding space(s)
     in order to be removed.
     """
+    punctuation = punctuation.replace('.', r'\.').replace('-', r'\-')
+    spaced_punctuation = \
+        spaced_punctuation.replace('.', r'\.').replace('-', r'\-')
     return re.sub(
         r'([{0}]|\s+[{1}])$'.format(punctuation, spaced_punctuation),
         '',
@@ -178,6 +183,7 @@ class SonarMarc21Overdo(SonarOverdo):
     langs_from_041_a = []
     langs_from_041_h = []
     unique_languages = []
+    registererd_organizations = []
     alternate_graphic = {}
     country = None
     cantons = []
@@ -239,6 +245,28 @@ class SonarMarc21Overdo(SonarOverdo):
             except Exception:
                 script_dir = ''
         return tag, link, script_code, script_dir
+
+    @staticmethod
+    def create_institution(institution_key):
+        """Create institution if not existing and return it.
+
+        :param str institution_key: Key (PID) of the institution.
+        """
+        if not institution_key:
+            raise Exception('Not key provided')
+
+        # Get institution record from database
+        organization = InstitutionRecord.get_record_by_pid(institution_key)
+
+        if not organization:
+            # Create organization record
+            organization = InstitutionRecord.create(
+                {
+                    'pid': institution_key,
+                    'name': institution_key
+                },
+                dbcommit=True)
+            organization.reindex()
 
     def init_country(self):
         """Initialization country (008 and 044)."""

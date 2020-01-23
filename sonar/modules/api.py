@@ -18,10 +18,13 @@
 """API for manipulating records."""
 
 import re
+from io import BytesIO
 from uuid import uuid4
 
+import requests
 from flask import current_app
 from invenio_db import db
+from invenio_files_rest.helpers import compute_md5_checksum
 from invenio_indexer.api import RecordIndexer
 from invenio_jsonschemas import current_jsonschemas
 from invenio_pidstore.errors import PIDDoesNotExistError
@@ -29,6 +32,9 @@ from invenio_pidstore.models import PersistentIdentifier
 from invenio_records_files.api import FilesMixin, Record
 from invenio_search.api import RecordsSearch
 from sqlalchemy.orm.exc import NoResultFound
+
+from sonar.modules.deposits.utils import change_filename_extension
+from sonar.modules.pdf_extractor.utils import extract_text_from_content
 
 
 class SonarRecord(Record, FilesMixin):
@@ -65,7 +71,7 @@ class SonarRecord(Record, FilesMixin):
                                                 id_=id_,
                                                 **kwargs)
 
-        if (dbcommit):
+        if dbcommit:
             record.dbcommit()
 
         return record
@@ -86,10 +92,12 @@ class SonarRecord(Record, FilesMixin):
             return None
 
     @classmethod
-    def get_ref_link(cls, type, id):
+    def get_ref_link(cls, record_type, record_id):
         """Get $ref link for the given type of record."""
         return 'https://{host}/api/{type}/{id}'.format(
-            host=current_app.config.get('JSONSCHEMAS_HOST'), type=type, id=id)
+            host=current_app.config.get('JSONSCHEMAS_HOST'),
+            type=record_type,
+            id=record_id)
 
     @classmethod
     def get_pid_by_ref_link(cls, link):
@@ -106,13 +114,67 @@ class SonarRecord(Record, FilesMixin):
         """Get a record by its ref link."""
         return cls.get_record_by_pid(cls.get_pid_by_ref_link(link))
 
-    def dbcommit(self):
+    @staticmethod
+    def dbcommit():
         """Commit changes to db."""
         db.session.commit()
 
     def reindex(self):
         """Reindex record."""
         RecordIndexer().index(self)
+
+    def add_file_from_url(self, url, key, **kwargs):
+        """Add file to record by getting data from given url.
+
+        :param str url: External URL of the file
+        :param str key: File key
+
+        for kwargs, see add_file method below.
+        """
+        self.add_file(requests.get(url).content, key, **kwargs)
+
+    def add_file(self, data, key, **kwargs):
+        """Create file and add it to record.
+
+        :param data: Binary data of file
+        :param str key: File key
+
+        kwargs may contain some additional data such as: file label, file type,
+        order.
+        """
+        if not current_app.config.get('SONAR_DOCUMENTS_IMPORT_FILES'):
+            return
+
+        # If file with the same key exists and checksum is the same as the
+        # registered file, we don't do anything
+        checksum = compute_md5_checksum(BytesIO(data))
+        if key in self.files and checksum == self.files[key].file.checksum:
+            return
+
+        # Create the file
+        self.files[key] = BytesIO(data)
+        self.files[key]['label'] = kwargs.get('label', key)
+        self.files[key]['type'] = kwargs.get('type', 'file')
+        self.files[key]['order'] = kwargs.get('order', 1)
+
+        # Try to extract full text from file data, and generate a warning if
+        # it's not possible. For several cases, file is locked against fulltext
+        # copy.
+        if current_app.config.get(
+                'SONAR_DOCUMENTS_EXTRACT_FULLTEXT_ON_IMPORT'
+        ) and self.files[key].mimetype == 'application/pdf':
+            try:
+                fulltext = extract_text_from_content(data)
+
+                key = change_filename_extension(key, 'txt')
+                self.files[key] = BytesIO(fulltext.encode())
+                self.files[key]['type'] = 'fulltext'
+            except Exception as exception:
+                current_app.logger.warning(
+                    'Error during fulltext extraction of {file} of record '
+                    '{record}: {error}'.format(file=key,
+                                               error=exception,
+                                               record=self['identifiedBy']))
 
 
 class SonarSearch(RecordsSearch):

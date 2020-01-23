@@ -37,6 +37,9 @@ SONAR_APP_LANGUAGES_MAP = dict(
     rus='ru'
 )
 
+SONAR_APP_PREFERRED_LANGUAGES = ['eng', 'fre', 'ger', 'ita']
+"""Order of preferred languages for displaying value in views."""
+
 SONAR_APP_ENABLE_CORS = True
 
 SONAR_APP_DISABLE_PERMISSION_CHECKS = False

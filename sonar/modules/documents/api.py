@@ -19,19 +19,13 @@
 
 from functools import partial
 
-from flask import current_app
-
 from ..api import SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
 from ..minters import id_minter
 from ..providers import Provider
 
 # provider
-DocumentProvider = type(
-    'DocumentProvider',
-    (Provider,),
-    dict(pid_type='doc')
-)
+DocumentProvider = type('DocumentProvider', (Provider, ), dict(pid_type='doc'))
 # minter
 document_pid_minter = partial(id_minter, provider=DocumentProvider)
 # fetcher
@@ -55,3 +49,20 @@ class DocumentRecord(SonarRecord):
     fetcher = document_pid_fetcher
     provider = DocumentProvider
     schema = 'document'
+
+    @classmethod
+    def get_record_by_identifier(cls, identifiers):
+        """Get a record by its identifier.
+
+        :param list identifiers: List of identifiers
+        """
+        for identifier in identifiers:
+            if identifier['type'] == 'bf:Identifier':
+                results = list(DocumentSearch().filter(
+                    'term', identifiedBy__value=identifier['value']).source(
+                        includes=['pid']))
+
+                if results:
+                    return cls.get_record_by_pid(results[0]['pid'])
+
+        return None

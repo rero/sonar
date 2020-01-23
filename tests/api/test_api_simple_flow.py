@@ -26,19 +26,19 @@ from utils import VerifyRecordPermissionPatch
 
 @mock.patch('invenio_records_rest.views.verify_record_permission',
             mock.MagicMock(return_value=VerifyRecordPermissionPatch))
-def test_simple_flow(client):
+def test_simple_flow(client, document_json_fixture):
     """Test simple flow using REST API."""
     headers = [('Content-Type', 'application/json')]
-    data = {
-        'title': 'The title of the record'
-    }
-    url = 'https://localhost:5000/documents/'
 
     # create a record
-    response = client.post(url, data=json.dumps(data), headers=headers)
+    response = client.post('https://localhost:5000/documents/',
+                           data=json.dumps(document_json_fixture),
+                           headers=headers)
     assert response.status_code == 201
     current_search.flush_and_refresh('documents')
 
     # retrieve record
     res = client.get('https://localhost:5000/documents/1')
     assert res.status_code == 200
+    assert response.json['metadata']['title'][0]['mainTitle'][0][
+        'value'] == 'Title of the document'

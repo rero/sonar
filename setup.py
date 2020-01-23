@@ -50,10 +50,12 @@ setup(
         ],
         'flask.commands': [
             'fixtures = sonar.modules.cli:fixtures',
+            'documents = sonar.modules.documents.cli:oaiharvester',
             'utils = sonar.modules.cli:utils'
         ],
         'invenio_base.apps': [
             'sonar = sonar.modules:Sonar',
+            'documents = sonar.modules.documents:Documents',
             'shibboleth_authenticator = \
                 sonar.modules.shibboleth_authenticator:ShibbolethAuthenticator',
         ],
@@ -127,6 +129,9 @@ setup(
         "invenio_records.jsonresolver": [
             "institution = sonar.modules.institutions.jsonresolvers",
             "user = sonar.modules.users.jsonresolvers"
+        ],
+        'invenio_celery.tasks' : [
+            'documents = sonar.modules.documents.tasks'
         ]
     },
     classifiers=[

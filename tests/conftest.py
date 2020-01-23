@@ -17,9 +17,14 @@
 
 """Common pytest fixtures and plugins."""
 
+import os
+import tempfile
+
 import pytest
 from flask import url_for
 from flask_security.utils import encrypt_password
+from invenio_files_rest.models import Location
+from invenio_search import current_search
 
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.institutions.api import InstitutionRecord
@@ -113,8 +118,8 @@ def organization_fixture(app, db):
 
 
 @pytest.fixture()
-def document_fixture(app, db, organization_fixture):
-    """Create a document."""
+def document_json_fixture(app, db, organization_fixture):
+    """JSON document fixture."""
     data = {
         "pid":
         "10000",
@@ -141,11 +146,20 @@ def document_fixture(app, db, organization_fixture):
             "type": "person",
             "name": "Trojani, Fabio"
         }],
-        "title":
-        "Title of the document",
+        'title': [{
+            'type':
+            'bf:Title',
+            'mainTitle': [{
+                'language': 'eng',
+                'value': 'Title of the document'
+            }]
+        }],
         "extent":
         "103 p",
-        "abstracts": ["Abstract of the document"],
+        "abstracts": [{
+            "language": "eng",
+            "value": "Abstract of the document"
+        }],
         "subjects": [{
             "language": "eng",
             "value": ["Time series models", "GARCH models"]
@@ -204,7 +218,32 @@ def document_fixture(app, db, organization_fixture):
         }
     }
 
-    document = DocumentRecord.create(data, dbcommit=True)
-    document.reindex()
+    return data
+
+
+@pytest.fixture()
+def document_fixture(app, db, document_json_fixture, bucket_location_fixture):
+    """Create a document."""
+    document = DocumentRecord.create(document_json_fixture,
+                                     dbcommit=True,
+                                     with_bucket=True)
     db.session.commit()
+    document.reindex()
+
+    current_search.flush_and_refresh('documents')
+
     return document
+
+
+@pytest.fixture()
+def bucket_location_fixture(app, db):
+    """Create a default location for managing files."""
+    tmppath = tempfile.mkdtemp()
+    db.session.add(Location(name='default', uri=tmppath, default=True))
+    db.session.commit()
+
+
+@pytest.fixture()
+def pdf_file():
+    """Return test PDF file path."""
+    return os.path.dirname(os.path.abspath(__file__)) + '/data/test.pdf'

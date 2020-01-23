@@ -79,6 +79,41 @@ def nl2br(string):
 
 
 @blueprint.app_template_filter()
+def title_format(title, language):
+    """Format title for template.
+
+    :param list title: List of titles.
+    :param str language: Language to retreive title from.
+    """
+    language = get_bibliographic_code_from_language(language)
+
+    preferred_languages = get_preferred_languages(language)
+
+    def get_value(items):
+        """Return the value for the given language."""
+        if not items:
+            return None
+
+        for preferred_language in preferred_languages:
+            for item in items:
+                if item['language'] == preferred_language:
+                    return item['value']
+
+        return items[0]['value']
+
+    output = []
+    main_title = get_value(title.get('mainTitle', []))
+    if main_title:
+        output.append(main_title)
+
+    subtitle = get_value(title.get('subtitle', []))
+    if subtitle:
+        output.append(subtitle)
+
+    return " : ".join(output)
+
+
+@blueprint.app_template_filter()
 def authors_format(pid, language='en', viewcode='sonar'):
     """Format authors for template in given language."""
     doc = DocumentRecord.get_record_by_pid(pid)
@@ -145,8 +180,8 @@ def abstracts_format(abstracts):
     """Format abstracts for template."""
     output = []
     for abstract in abstracts:
-        output.append(re.sub(r'\n+', '\n', abstract))
-    return '\n'.join(str(x) for x in output)
+        output.append(re.sub(r'\n+', '\n', abstract['value']))
+    return '\n\n'.join(str(x) for x in output)
 
 
 @blueprint.app_template_filter()
@@ -176,23 +211,6 @@ def identifiedby_format(identifiedby):
                 id_type = id_type.split(':')[1]
             output.append({'type': id_type, 'value': identifier.get('value')})
     return output
-
-
-@blueprint.app_template_filter()
-def language_format(langs_list, language_interface):
-    """Converts language code to langauge name.
-
-    langs_list: a code or a list of language codes
-    language_interface: the code of the language of the interface
-    Returns a comma separated list of language names.
-    """
-    output = []
-    if isinstance(langs_list, str):
-        langs_list = [{'type': 'bf:Language', 'value': langs_list}]
-    for lang in langs_list:
-        language_code = lang.get('value')
-        output.append(_(language_code))
-    return ", ".join(output)
 
 
 def get_language_from_bibliographic_code(language_code):
@@ -228,3 +246,17 @@ def get_bibliographic_code_from_language(language_code):
 
     raise Exception('Language code not found for "{language_code}"'.format(
         language_code=language_code))
+
+
+def get_preferred_languages(force_language=None):
+    """Get the ordered list of preferred languages.
+
+    :param forceLanguage: String, force a language to be the first.
+    """
+    preferred_languages = current_app.config.get(
+        'SONAR_APP_PREFERRED_LANGUAGES', []).copy()
+
+    if force_language:
+        preferred_languages.insert(0, force_language)
+
+    return list(dict.fromkeys(preferred_languages))

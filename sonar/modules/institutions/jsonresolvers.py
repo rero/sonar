@@ -32,5 +32,7 @@ def institution_resolver(pid):
                         getter=Record.get_record)
     _, record = resolver.resolve(pid)
 
-    del record['$schema']
+    if record.get('$schema'):
+        del record['$schema']
+
     return record
