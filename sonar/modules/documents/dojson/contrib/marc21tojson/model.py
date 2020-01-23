@@ -22,10 +22,12 @@ import re
 
 import requests
 from dojson import utils
+from flask import current_app
 
 from sonar.modules.documents.dojson.utils import SonarMarc21Overdo, \
     error_print, get_field_items, get_field_link_data, get_year_from_date, \
     not_repetitive, remove_trailing_punctuation
+from sonar.modules.institutions.api import InstitutionRecord
 
 marc21tojson = SonarMarc21Overdo()
 
@@ -48,6 +50,7 @@ def get_language_script(script):
         'kore': ('kor', ),
         'zyyy': ('chi', )
     }
+
     if script in languages_scripts:
         languages = ([marc21tojson.lang_from_008] +
                      marc21tojson.langs_from_041_a +
@@ -90,51 +93,28 @@ def get_person_link(bibid, id, key, value):
     return mef_link
 
 
-@marc21tojson.over('type', 'leader')
-def marc21_to_type(self, key, value):
-    """
-    Get document type.
-
-    Books: LDR/6-7: am
-    Journals: LDR/6-7: as
-    Articles: LDR/6-7: aa + add field 773 (journal title)
-    Scores: LDR/6: c|d
-    Videos: LDR/6: g + 007/0: m|v
-    Sounds: LDR/6: i|j
-    E-books (imported from Cantook)
-    """
-    type = 'other'
-    type_of_record = value[6]
-    bibliographic_level = value[7]
-    if type_of_record == 'a':
-        if bibliographic_level == 'm':
-            type = 'book'
-        elif bibliographic_level == 's':
-            type = 'journal'
-        elif bibliographic_level == 'a':
-            type = 'article'
-    elif type_of_record in ['c', 'd']:
-        type = 'score'
-    elif type_of_record in ['i', 'j']:
-        type = 'sound'
-    elif type_of_record == 'g':
-        type = 'video'
-        # Todo 007
-    return type
-
-
-@marc21tojson.over('pid', '^001')
+@marc21tojson.over('type', '^980')
 @utils.ignore_value
-def marc21_to_pid(self, key, value):
-    """Get pid.
+def marc21_to_type_and_institution(self, key, value):
+    """Get document type and institution from 980 field."""
+    institution = value.get('b')
+    document_type = value.get('a')
 
-    If 001 starts with 'REROILS:' save as pid.
-    """
-    pid = None
-    value = value.strip().split(':')
-    if value[0] == 'REROILS':
-        pid = value[1]
-    return pid
+    if institution:
+        institution = institution.lower()
+
+        if institution not in marc21tojson.registererd_organizations:
+            marc21tojson.create_institution(institution)
+            marc21tojson.registererd_organizations.append(institution)
+
+        self['institution'] = {
+            '$ref': InstitutionRecord.get_ref_link('institutions', institution)
+        }
+
+    if document_type:
+        self['type'] = document_type.lower()
+
+    return None
 
 
 @marc21tojson.over('language', '^041')
@@ -162,24 +142,55 @@ def marc21_to_language(self, key, value):
     # if not language:
     #     error_print('ERROR LANGUAGE:', marc21tojson.bib_id, 'set to "und"')
     #     language = [{'value': 'und', 'type': 'bf:Language'}]
+
     return language or None
 
 
 @marc21tojson.over('title', '^245..')
+@utils.for_each_value
 @utils.ignore_value
-def marc21_to_title(self, key, value):
-    """Get title.
+def marc21_to_title_245(self, key, value):
+    """Get title."""
+    main_title = value.get('a')
+    language = value.get('9', 'eng')
+    subtitle = value.get('b')
 
-    title: 245$a
-    without the punctuaction. If there's a $b, then 245$a : $b without the " /"
-    """
-    data = not_repetitive(marc21tojson.bib_id, key, value, 'a')
-    main_title = remove_trailing_punctuation(data)
-    sub_title = not_repetitive(marc21tojson.bib_id, key, value, 'b')
-    if sub_title:
-        main_title += ' : ' + ' : '.join(
-            utils.force_list(remove_trailing_punctuation(sub_title)))
-    return main_title
+    if not main_title:
+        return None
+
+    title = {
+        'type': 'bf:Title',
+        'mainTitle': [{
+            'value': main_title,
+            'language': language
+        }]
+    }
+
+    if subtitle:
+        title['subtitle'] = [{'value': subtitle, 'language': language}]
+
+    return title
+
+
+@marc21tojson.over('title', '^246..')
+@utils.for_each_value
+@utils.ignore_value
+def marc21_to_title_246(self, key, value):
+    """Get title."""
+    main_title = value.get('a')
+    language = value.get('9', 'eng')
+
+    if not main_title:
+        return None
+
+    title = self.get('title', [{'type': 'bf:Title', 'mainTitle': []}])
+
+    # Add title 246 to last title in mainTitle propert
+    title[-1]['mainTitle'].append({'value': main_title, 'language': language})
+
+    self['title'] = title
+
+    return None
 
 
 @marc21tojson.over('authors', '[17][01]0..')
@@ -287,10 +298,10 @@ def marc21_to_edition_statement(self, key, value):
     return edition_data or None
 
 
-@marc21tojson.over('provisionActivity', '^264.[ 0-3]')
+@marc21tojson.over('provisionActivity', '^(260..|264.[ 0-3])')
 @utils.for_each_value
 @utils.ignore_value
-def marc21_to_provisionActivity(self, key, value):
+def marc21_to_provision_activity(self, key, value):
     """Get publisher data.
 
     publisher.name: 264 [$b repetitive] (without the , but keep the ;)
@@ -317,7 +328,7 @@ def marc21_to_provisionActivity(self, key, value):
                     'language':
                     get_language_script(alt_gr['script'])
                 })
-            except Exception as err:
+            except Exception:
                 pass
             return agent_data
 
@@ -354,6 +365,8 @@ def marc21_to_provisionActivity(self, key, value):
         '2': 'bf:Distribution',
         '3': 'bf:Manufacture'
     }
+    if key[:3] == '260':
+        ind2 = '1'
     publication = {
         'type': type_per_ind2[ind2],
         'statement': [],
@@ -389,7 +402,7 @@ def marc21_to_provisionActivity(self, key, value):
                 'language':
                 get_language_script(alt_gr['script'])
             })
-        except Exception as err:
+        except Exception:
             pass
 
         publication['statement'].append(date)
@@ -445,15 +458,20 @@ def marc21_to_series(self, key, value):
 @marc21tojson.over('abstracts', '^520..')
 @utils.for_each_value
 @utils.ignore_value
-def marc21_to_abstracts(self, key, value):
-    """Get abstracts.
+def marc21_to_abstract(self, key, value):
+    """Get abstract."""
+    abstract = value.get('a')
+    language = value.get('9', 'eng')
 
-    abstract: [520$a repetitive]
-    """
-    abstracts = None
-    if value.get('a'):
-        abstracts = ', '.join(utils.force_list(value.get('a')))
-    return abstracts
+    if not abstract:
+        return None
+
+    abstracts_data = self.get('abstracts', [])
+    abstracts_data.append({'value': abstract, 'language': language})
+
+    self['abstracts'] = abstracts_data
+
+    return None
 
 
 @marc21tojson.over('identifiedBy', '^020..')
@@ -598,6 +616,7 @@ def marc21_to_identifiedBy_from_field_024(self, key, value):
         }
     }
 
+    identifiedBy = self.get('identifiedBy', [])
     identifier = {}
     subfield_a = not_repetitive(marc21tojson.bib_id,
                                 key,
@@ -660,7 +679,6 @@ def marc21_to_identifiedBy_from_field_024(self, key, value):
                     'value': subfield_a,
                     'type': 'bf:Identifier'
                 })
-        identifiedBy = self.get('identifiedBy', [])
         if not identifier.get('type'):
             identifier['type'] = 'bf:Identifier'
         identifiedBy.append(identifier)
@@ -773,7 +791,7 @@ def marc21_to_is_part_of(self, key, value):
         return not_repetitive(marc21tojson.bib_id, key, value, 't')
 
 
-@marc21tojson.over('subjects', '^6....')
+@marc21tojson.over('subjects', '^695..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_subjects(self, key, value):
@@ -782,4 +800,51 @@ def marc21_to_subjects(self, key, value):
     subjects: 6xx [duplicates could exist between several vocabularies,
         if possible deduplicate]
     """
+    if not value.get('9'):
+        return None
+
     return dict(language=value.get('9'), value=value.get('a').split(' ; '))
+
+
+@marc21tojson.over('files', '^856..')
+@utils.for_each_value
+@utils.ignore_value
+def marc21_to_files(self, key, value):
+    """Get files."""
+    key = value.get('f')
+    url = value.get('u')
+    size = int(value.get('s', 0))
+    mime_type = value.get('q', 'text/plain')
+
+    if not key or not url:
+        return None
+
+    # TODO: Check why this type of file exists. Real example with rerodoc ID
+    # 29085
+    if mime_type == 'pdt/download':
+        current_app.logger.warning(
+            'File {file} for record {record} has a strange pdt/download mime '
+            'type, skipping import of file...'.format(
+                file=key, record=self['identifiedBy']))
+        return None
+
+    url = url.strip()
+
+    # Retreive file order
+    # If order not set we put a value to 99 for easily point theses files
+    order = 99
+    if value.get('y'):
+        match = re.search(r'order:([0-9]+)$', value.get('y'))
+        if match:
+            order = int(match.group(1))
+
+    data = {
+        'key': key,
+        'url': url,
+        'label': value.get('z', key),
+        'type': 'file',
+        'order': order,
+        'size': size
+    }
+
+    return data

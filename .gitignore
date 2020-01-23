@@ -74,3 +74,6 @@ target/
 
 # Generated JSON schema
 sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
+
+# Celery
+celerybeat-schedule

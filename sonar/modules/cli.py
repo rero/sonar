@@ -27,8 +27,6 @@ from invenio_search.cli import es_version_check
 from invenio_search.proxies import current_search
 
 from .deposits.cli import deposits
-from .documents.cli import documents
-from .institutions.cli import institutions
 from .users.cli import users
 
 
@@ -37,8 +35,6 @@ def fixtures():
     """Fixtures management commands."""
 
 
-fixtures.add_command(documents)
-fixtures.add_command(institutions)
 fixtures.add_command(users)
 fixtures.add_command(deposits)
 

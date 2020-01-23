@@ -76,6 +76,8 @@ SETTINGS_TEMPLATE = 'sonar/page_settings.html'
 # =======
 LOGGING_SENTRY_LEVEL = "ERROR"
 LOGGING_SENTRY_CELERY = True
+LOGGING_FS_LEVEL = "WARNING"
+LOGGING_FS_LOGFILE = '{instance_path}/app.log'
 
 # Theme configuration
 # ===================
@@ -238,134 +240,131 @@ RECORDS_UI_ENDPOINTS = {
 
 RECORDS_REST_ENDPOINTS = {
     'doc':
-    dict(
-        pid_type='doc',
-        pid_minter='document_id',
-        pid_fetcher='document_id',
-        default_endpoint_prefix=True,
-        record_class=DocumentRecord,
-        search_class=DocumentSearch,
-        indexer_class=RecordIndexer,
-        search_index='documents',
-        search_type=None,
-        record_serializers={
-            'application/json': ('invenio_records_rest.serializers'
-                                 ':json_v1_response'),
-        },
-        search_serializers={
-            'application/json': ('invenio_records_rest.serializers'
-                                 ':json_v1_search'),
-        },
-        # record_loaders={
-        #     'application/json': ('sonar.modules.documents.loaders'
-        #                          ':json_v1'),
-        # },
-        list_route='/documents/',
-        item_route='/documents/<pid(doc):pid_value>',
-        default_media_type='application/json',
-        max_result_window=10000,
-        error_handlers=dict(),
-        create_permission_factory_imp=can_create_record_factory,
-        read_permission_factory_imp=can_read_record_factory,
-        update_permission_factory_imp=can_update_record_factory,
-        delete_permission_factory_imp=can_delete_record_factory,
-        list_permission_factory_imp=can_list_record_factory),
+    dict(pid_type='doc',
+         pid_minter='document_id',
+         pid_fetcher='document_id',
+         default_endpoint_prefix=True,
+         record_class=DocumentRecord,
+         search_class=DocumentSearch,
+         indexer_class=RecordIndexer,
+         search_index='documents',
+         search_type=None,
+         record_serializers={
+             'application/json': ('sonar.modules.documents.serializers'
+                                  ':json_v1_response'),
+         },
+         search_serializers={
+             'application/json': ('sonar.modules.documents.serializers'
+                                  ':json_v1_search'),
+         },
+         record_loaders={
+             'application/json': ('sonar.modules.documents.loaders'
+                                  ':json_v1'),
+         },
+         list_route='/documents/',
+         item_route='/documents/<pid(doc, record_class="sonar.modules.'
+         'documents.api:DocumentRecord"):pid_value>',
+         default_media_type='application/json',
+         max_result_window=10000,
+         error_handlers=dict(),
+         create_permission_factory_imp=can_create_record_factory,
+         read_permission_factory_imp=can_read_record_factory,
+         update_permission_factory_imp=can_update_record_factory,
+         delete_permission_factory_imp=can_delete_record_factory,
+         list_permission_factory_imp=can_list_record_factory),
     'inst':
-    dict(
-        pid_type='inst',
-        pid_minter='institution_id',
-        pid_fetcher='institution_id',
-        default_endpoint_prefix=True,
-        record_class=InstitutionRecord,
-        search_class=InstitutionSearch,
-        indexer_class=RecordIndexer,
-        search_index='institutions',
-        search_type=None,
-        record_serializers={
-            'application/json': ('invenio_records_rest.serializers'
-                                 ':json_v1_response'),
-        },
-        search_serializers={
-            'application/json': ('invenio_records_rest.serializers'
-                                 ':json_v1_search'),
-        },
-        # record_loaders={
-        #     'application/json': ('sonar.modules.institutions.loaders'
-        #                          ':json_v1'),
-        # },
-        list_route='/institutions/',
-        item_route='/institutions/<pid(inst):pid_value>',
-        default_media_type='application/json',
-        max_result_window=10000,
-        error_handlers=dict(),
-        create_permission_factory_imp=can_create_record_factory,
-        read_permission_factory_imp=can_read_record_factory,
-        update_permission_factory_imp=can_update_record_factory,
-        delete_permission_factory_imp=can_delete_record_factory,
-        list_permission_factory_imp=can_list_record_factory),
+    dict(pid_type='inst',
+         pid_minter='institution_id',
+         pid_fetcher='institution_id',
+         default_endpoint_prefix=True,
+         record_class=InstitutionRecord,
+         search_class=InstitutionSearch,
+         indexer_class=RecordIndexer,
+         search_index='institutions',
+         search_type=None,
+         record_serializers={
+             'application/json': ('sonar.modules.institutions.serializers'
+                                  ':json_v1_response'),
+         },
+         search_serializers={
+             'application/json': ('sonar.modules.institutions.serializers'
+                                  ':json_v1_search'),
+         },
+         record_loaders={
+             'application/json': ('sonar.modules.institutions.loaders'
+                                  ':json_v1'),
+         },
+         list_route='/institutions/',
+         item_route='/institutions/<pid(inst):pid_value>',
+         default_media_type='application/json',
+         max_result_window=10000,
+         error_handlers=dict(),
+         create_permission_factory_imp=can_create_record_factory,
+         read_permission_factory_imp=can_read_record_factory,
+         update_permission_factory_imp=can_update_record_factory,
+         delete_permission_factory_imp=can_delete_record_factory,
+         list_permission_factory_imp=can_list_record_factory),
     'user':
-    dict(
-        pid_type='user',
-        pid_minter='user_id',
-        pid_fetcher='user_id',
-        default_endpoint_prefix=True,
-        record_class=UserRecord,
-        search_class=UserSearch,
-        indexer_class=RecordIndexer,
-        search_index='users',
-        search_type=None,
-        record_serializers={
-            'application/json': ('invenio_records_rest.serializers'
-                                 ':json_v1_response'),
-        },
-        search_serializers={
-            'application/json': ('invenio_records_rest.serializers'
-                                 ':json_v1_search'),
-        },
-        # record_loaders={
-        #     'application/json': ('sonar.modules.users.loaders'
-        #                          ':json_v1'),
-        # },
-        list_route='/users/',
-        item_route='/users/<pid(user):pid_value>',
-        default_media_type='application/json',
-        max_result_window=10000,
-        error_handlers=dict(),
-        create_permission_factory_imp=can_create_record_factory,
-        read_permission_factory_imp=can_read_record_factory,
-        update_permission_factory_imp=can_update_record_factory,
-        delete_permission_factory_imp=can_delete_record_factory,
-        list_permission_factory_imp=can_list_record_factory),
+    dict(pid_type='user',
+         pid_minter='user_id',
+         pid_fetcher='user_id',
+         default_endpoint_prefix=True,
+         record_class=UserRecord,
+         search_class=UserSearch,
+         indexer_class=RecordIndexer,
+         search_index='users',
+         search_type=None,
+         record_serializers={
+             'application/json': ('sonar.modules.users.serializers'
+                                  ':json_v1_response'),
+         },
+         search_serializers={
+             'application/json': ('sonar.modules.users.serializers'
+                                  ':json_v1_search'),
+         },
+         record_loaders={
+             'application/json': ('sonar.modules.users.loaders'
+                                  ':json_v1'),
+         },
+         list_route='/users/',
+         item_route='/users/<pid(user):pid_value>',
+         default_media_type='application/json',
+         max_result_window=10000,
+         error_handlers=dict(),
+         create_permission_factory_imp=can_create_record_factory,
+         read_permission_factory_imp=can_read_record_factory,
+         update_permission_factory_imp=can_update_record_factory,
+         delete_permission_factory_imp=can_delete_record_factory,
+         list_permission_factory_imp=can_list_record_factory),
     'depo':
-    dict(
-        pid_type='depo',
-        pid_minter='deposit_id',
-        pid_fetcher='deposit_id',
-        default_endpoint_prefix=True,
-        record_class=DepositRecord,
-        search_class=DepositSearch,
-        indexer_class=RecordIndexer,
-        search_index='deposits',
-        search_type=None,
-        record_serializers={
-            'application/json': ('invenio_records_rest.serializers'
-                                 ':json_v1_response'),
-        },
-        search_serializers={
-            'application/json': ('invenio_records_rest.serializers'
-                                 ':json_v1_search'),
-        },
-        list_route='/deposits/',
-        item_route='/deposits/<pid(depo, record_class="sonar.modules.deposits'\
-        '.api:DepositRecord"):pid_value>',
-        default_media_type='application/json',
-        max_result_window=10000,
-        error_handlers=dict(),
-        create_permission_factory_imp=can_create_record_factory,
-        read_permission_factory_imp=can_read_record_factory,
-        update_permission_factory_imp=can_update_record_factory,
-        delete_permission_factory_imp=can_delete_record_factory,
-        list_permission_factory_imp=can_list_record_factory)
+    dict(pid_type='depo',
+         pid_minter='deposit_id',
+         pid_fetcher='deposit_id',
+         default_endpoint_prefix=True,
+         record_class=DepositRecord,
+         search_class=DepositSearch,
+         indexer_class=RecordIndexer,
+         search_index='deposits',
+         search_type=None,
+         record_serializers={
+             'application/json': ('invenio_records_rest.serializers'
+                                  ':json_v1_response'),
+         },
+         search_serializers={
+             'application/json': ('invenio_records_rest.serializers'
+                                  ':json_v1_search'),
+         },
+         list_route='/deposits/',
+         item_route='/deposits/<pid(depo, record_class="sonar.modules.deposits'
+         '.api:DepositRecord"):pid_value>',
+         default_media_type='application/json',
+         max_result_window=10000,
+         error_handlers=dict(),
+         create_permission_factory_imp=can_create_record_factory,
+         read_permission_factory_imp=can_read_record_factory,
+         update_permission_factory_imp=can_update_record_factory,
+         delete_permission_factory_imp=can_delete_record_factory,
+         list_permission_factory_imp=can_list_record_factory)
 }
 """REST endpoints."""
 
@@ -422,7 +421,12 @@ RECORDS_REST_DEFAULT_SORT = dict(documents=dict(
 ), )
 """Set default sorting options."""
 
-RECORDS_FILES_REST_ENDPOINTS = {'RECORDS_REST_ENDPOINTS': {'depo': '/files'}}
+RECORDS_FILES_REST_ENDPOINTS = {
+    'RECORDS_REST_ENDPOINTS': {
+        'doc': '/files',
+        'depo': '/files'
+    }
+}
 
 SONAR_ENDPOINTS_ENABLED = True
 """Enable/disable automatic endpoint registration."""
@@ -484,3 +488,9 @@ applications."""
 
 FILES_REST_PERMISSION_FACTORY = \
     'sonar.modules.permissions.files_permission_factory'
+
+# Database
+# =========================
+DB_VERSIONING = False
+# DB versioning is disabled globally, because of performances during documents
+# importation.

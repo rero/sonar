@@ -40,8 +40,6 @@ def publication_statement_text(provision_activity):
     statement_with_language = {'default': ''}
     statement_type = None
 
-    print(provision_activity['statement'])
-
     for statement in provision_activity['statement']:
         labels = statement['label']
 
@@ -52,7 +50,6 @@ def publication_statement_text(provision_activity):
                 statement_with_language[language] = ''
 
             if statement_with_language[language]:
-                print(statement_type, statement['type'])
                 if statement_type == statement['type']:
                     statement_with_language[language] += punctuation[
                         statement_type

@@ -19,10 +19,7 @@
     "street": "Brunnacherstrasse 112",
     "postal_code": "5330",
     "city": "Zurzach",
-    "phone": "+41625037543",
-    "institution": {
-      "$ref": "https://sonar.ch/api/institutions/usi"
-    }
+    "phone": "+41625037543"
   },
   {
     "full_name": "Emanuele Fiorentini",
@@ -33,10 +30,7 @@
     "street": "Lichtmattstrasse 123",
     "postal_code": "5736",
     "city": "Burg",
-    "phone": "+41627676171",
-    "institution": {
-      "$ref": "https://sonar.ch/api/institutions/usi"
-    }
+    "phone": "+41627676171"
   },
   {
     "full_name": "Jules Brochu",
@@ -47,9 +41,6 @@
     "street": "Rasenstrasse 2",
     "postal_code": "4577",
     "city": "Hessigkofen",
-    "phone": "+41323666556",
-    "institution": {
-      "$ref": "https://sonar.ch/api/institutions/usi"
-    }
+    "phone": "+41323666556"
   }
 ]

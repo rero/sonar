@@ -17,9 +17,8 @@
 
 """SONAR documents configuration."""
 
-SONAR_DOCUMENTS_RERO_DOC_URL = 'http://doc.rero.ch/search'
+SONAR_DOCUMENTS_IMPORT_FILES = True
+"""Import files associated with the document."""
 
-SONAR_DOCUMENTS_INSTITUTIONS_MAP = dict(
-    usi='ticino.unisi',
-    hevs='valais.hevs'
-)
+SONAR_DOCUMENTS_EXTRACT_FULLTEXT_ON_IMPORT = True
+"""Automatically extract fulltext when a file is imported."""

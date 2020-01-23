@@ -42,13 +42,50 @@ def test_search(app, client):
         '/organization/sonar/search/documents').status_code == 200
 
 
-def test_detail(app, client):
+def test_detail(app, client, document_fixture):
     """Test document detail page."""
-    record = DocumentRecord.create({"title": "The title of the record"},
-                                   dbcommit=True)
+    assert client.get('/organization/sonar/documents/10000').status_code == 200
 
-    # assert isinstance(views.detail('1', record, ir='sonar'), str)
-    assert client.get('/organization/sonar/documents/1').status_code == 200
+
+def test_title_format(document_fixture):
+    """Test title format for display it in template."""
+    # No title
+    assert views.title_format({'mainTitle': [], 'subtitle': []}, 'en') == ''
+
+    # Take the first one as fallback
+    assert views.title_format(
+        {'mainTitle': [{
+            'language': 'spa',
+            'value': 'Title ES'
+        }]}, 'fr') == 'Title ES'
+
+    title = {
+        'mainTitle': [{
+            'language': 'ger',
+            'value': 'Title DE'
+        }, {
+            'language': 'eng',
+            'value': 'Title EN'
+        }, {
+            'language': 'fre',
+            'value': 'Title FR'
+        }],
+        'subtitle': [{
+            'language': 'ita',
+            'value': 'Subtitle IT'
+        }, {
+            'language': 'fre',
+            'value': 'Subtitle FR'
+        }, {
+            'language': 'eng',
+            'value': 'Subtitle EN'
+        }]
+    }
+
+    assert views.title_format(title, 'en') == 'Title EN : Subtitle EN'
+    assert views.title_format(title, 'fr') == 'Title FR : Subtitle FR'
+    assert views.title_format(title, 'de') == 'Title DE : Subtitle EN'
+    assert views.title_format(title, 'it') == 'Title EN : Subtitle IT'
 
 
 def test_authors_format(document_fixture):
@@ -83,8 +120,16 @@ def test_series_format():
 
 def test_abstracts_format():
     """Test series format."""
-    result = 'line1\nline2\nline3'
-    assert result == views.abstracts_format(['line1\n\n\nline2', 'line3'])
+    abstracts = [{
+        'language': 'eng',
+        'value': 'Abstract'
+    }, {
+        'language': 'fre',
+        'value': 'Résumé'
+    }]
+
+    result = 'Abstract\n\nRésumé'
+    assert result == views.abstracts_format(abstracts)
 
 
 def test_subjects_format(document_fixture):
@@ -118,23 +163,6 @@ def test_identifiedby_format():
         'value': 'http://catalogue.bnf.fr/ark:/12148/cb45295904f'
     }]
     assert results == views.identifiedby_format(identifiedby)
-
-
-def test_language_format(app):
-    """Test language format."""
-    language = [{
-        'type': 'bf:Language',
-        'value': 'ger'
-    }, {
-        'type': 'bf:Language',
-        'value': 'fre'
-    }]
-    results = 'ger, fre'
-    assert results == views.language_format(language, 'en')
-
-    language = 'fre'
-    results = 'fre'
-    assert results == views.language_format(language, 'en')
 
 
 def test_create_publication_statement(document_fixture):
@@ -176,3 +204,9 @@ def test_get_bibliographic_code_from_language(app):
     assert str(e.value) == 'Language code not found for "zz"'
 
     assert views.get_bibliographic_code_from_language('de') == 'ger'
+
+
+def test_get_preferred_languages(app):
+    """Test getting the list of prefererred languages."""
+    assert views.get_preferred_languages() == ['eng', 'fre', 'ger', 'ita']
+    assert views.get_preferred_languages('fre') == ['fre', 'eng', 'ger', 'ita']

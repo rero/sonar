@@ -1,310 +1,352 @@
-# -*- coding: utf-8 -*-
-#
-# Swiss Open Access Repository
-# Copyright (C) 2019 RERO
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as published by
-# the Free Software Foundation, version 3 of the License.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-# Dockerfile that builds a fully functional image of your app.
-#
-# Note: It is important to keep the commands in this file in sync with your
-# boostrap script located in ./scripts/bootstrap.
-#
-# In order to increase the build speed, we are extending this image from a base
-# image (built with Dockerfile.base) which only includes your Python
-# dependencies.
+# Translations template for sonar.
+# Copyright (C) 2020 RERO
+# This file is distributed under the same license as the sonar project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: sonar 0.0.1\n"
+"Project-Id-Version: sonar 0.2.2\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2019-07-22 16:12+0200\n"
+"POT-Creation-Date: 2020-02-04 15:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.7.0\n"
+"Generated-By: Babel 2.8.0\n"
 
-#: sonar/config.py:49
+#: sonar/config.py:63
 msgid "French"
 msgstr ""
 
-#: sonar/config.py:50
+#: sonar/config.py:63
 msgid "German"
 msgstr ""
 
-#: sonar/config.py:51
+#: sonar/config.py:64
 msgid "Italian"
 msgstr ""
 
-#: sonar/config.py:71 sonar/config.py:75
+#: sonar/config.py:83 sonar/config.py:87
 msgid "Swiss Open Access Repository"
 msgstr ""
 
-#: sonar/config.py:98
+#: sonar/config.py:112
 msgid "Welcome to Swiss Open Access Repository!"
 msgstr ""
 
-#: sonar/config.py:286
+#: sonar/config.py:379
 msgid "institution"
 msgstr ""
 
-#: sonar/config.py:287
+#: sonar/config.py:380
 msgid "language"
 msgstr ""
 
-#: sonar/config.py:288
-msgid "author"
+#: sonar/config.py:381
+msgid "author__en"
 msgstr ""
 
-#: sonar/config.py:289
+#: sonar/config.py:382
+msgid "author__fr"
+msgstr ""
+
+#: sonar/config.py:383
+msgid "author__de"
+msgstr ""
+
+#: sonar/config.py:384
+msgid "author__it"
+msgstr ""
+
+#: sonar/config.py:385
 msgid "subject"
 msgstr ""
 
-#: sonar/config.py:298
+#: sonar/config.py:392
+msgid "pid"
+msgstr ""
+
+#: sonar/config.py:393
+msgid "status"
+msgstr ""
+
+#: sonar/config.py:394
+msgid "user"
+msgstr ""
+
+#: sonar/config.py:395
+msgid "contributor"
+msgstr ""
+
+#: sonar/config.py:402
 msgid "Best match"
 msgstr ""
 
-#: sonar/config.py:304
+#: sonar/config.py:408
 msgid "Most recent"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:58
+#: sonar/modules/documents/templates/documents/record.html:65
 msgid "Authors"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:63
-msgid "Abstract"
-msgstr ""
-
 #: sonar/modules/documents/templates/documents/record.html:70
-msgid "Physical description"
-msgstr ""
-
-#: sonar/modules/documents/templates/documents/record.html:75
-msgid "Subject"
+msgid "Edition"
 msgstr ""
 
 #: sonar/modules/documents/templates/documents/record.html:80
-msgid "Language"
+msgid "Copyright date"
 msgstr ""
 
 #: sonar/modules/documents/templates/documents/record.html:85
-msgid "Notes"
+msgid "Abstract"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:91
-msgid "ISBN"
+#: sonar/modules/documents/templates/documents/record.html:92
+msgid "Physical description"
 msgstr ""
 
 #: sonar/modules/documents/templates/documents/record.html:97
+msgid "Additional Materials"
+msgstr ""
+
+#: sonar/modules/documents/templates/documents/record.html:102
+msgid "Series"
+msgstr ""
+
+#: sonar/modules/documents/templates/documents/record.html:107
+msgid "Is part of"
+msgstr ""
+
+#: sonar/modules/documents/templates/documents/record.html:112
+msgid "Subjects"
+msgstr ""
+
+#: sonar/modules/documents/templates/documents/record.html:117
+msgid "Notes"
+msgstr ""
+
+#: sonar/modules/documents/templates/documents/record.html:122
+msgid "Identifier"
+msgstr ""
+
+#: sonar/modules/documents/templates/documents/record.html:137
+msgid "Language"
+msgstr ""
+
+#: sonar/modules/documents/templates/documents/record.html:142
 msgid "Permalink"
 msgstr ""
 
-#: sonar/theme/templates/sonar/401.html:13
-msgid "Unauthorized"
+#: sonar/modules/documents/templates/documents/record.html:147
+msgid "Files"
 msgstr ""
 
-#: sonar/theme/templates/sonar/401.html:14
-msgid "You need to be authenticated to view this page."
-msgstr ""
-
-#: sonar/theme/templates/sonar/403.html:13
-msgid "Permission required"
-msgstr ""
-
-#: sonar/theme/templates/sonar/403.html:14
-msgid "You do not have sufficient permissions to view this page."
-msgstr ""
-
-#: sonar/theme/templates/sonar/404.html:13
-msgid "Page not found"
-msgstr ""
-
-#: sonar/theme/templates/sonar/404.html:14
-msgid "The page you are looking for could not be found."
-msgstr ""
-
-#: sonar/theme/templates/sonar/500.html:13
-msgid "Internal server error"
-msgstr ""
-
-#: sonar/theme/templates/sonar/500.html:15
-msgid "Error identifier"
-msgstr ""
-
-#: sonar/theme/templates/sonar/admin_header.html:72
-#: sonar/theme/templates/sonar/partial/dropdown_user.html:8
-msgid "Logout"
-msgstr ""
-
-#: sonar/theme/templates/sonar/footer.html:32
+#: sonar/theme/templates/sonar/footer.html:40
 msgid "Help"
 msgstr ""
 
-#: sonar/theme/templates/sonar/footer.html:35
+#: sonar/theme/templates/sonar/footer.html:43
 msgid "About"
 msgstr ""
 
-#: sonar/theme/templates/sonar/footer.html:38
+#: sonar/theme/templates/sonar/footer.html:46
 msgid "Contact"
 msgstr ""
 
-#: sonar/theme/templates/sonar/footer.html:43
+#: sonar/theme/templates/sonar/footer.html:51
 #, python-format
 msgid "Powered by <a href=\"%(link)s\" target=\"_blank\">RERO</a>"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:33
+#: sonar/theme/templates/sonar/frontpage.html:41
 msgid "Search publications, authors, projects, ..."
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:35
+#: sonar/theme/templates/sonar/frontpage.html:43
 msgid "Advanced search"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:51
+#: sonar/theme/templates/sonar/frontpage.html:59
 msgid "Software under development!"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:58
+#: sonar/theme/templates/sonar/frontpage.html:66
 msgid "The project"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:59
+#: sonar/theme/templates/sonar/frontpage.html:67
 msgid ""
 "The SONAR project aims to create a scholarly archive that collects, "
 "promotes and preserves the publications of authors affiliated with Swiss "
 "public research institutions."
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:60
+#: sonar/theme/templates/sonar/frontpage.html:68
 msgid "Further info on the project page"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:63
+#: sonar/theme/templates/sonar/frontpage.html:71
 msgid "Institution views (test)"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:67
+#: sonar/theme/templates/sonar/frontpage.html:75
 msgid "Follow us"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:72
+#: sonar/theme/templates/sonar/frontpage.html:80
 msgid "Project website on"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:78
+#: sonar/theme/templates/sonar/frontpage.html:86
 msgid "Source code on"
 msgstr ""
 
-#: sonar/theme/templates/sonar/page.html:34
-#: sonar/theme/templates/sonar/page_admin.html:34
+#: sonar/theme/templates/sonar/manage.html:4
+msgid "SONAR administration"
+msgstr ""
+
+#: sonar/theme/templates/sonar/page.html:42
 msgid "Invenio"
 msgstr ""
 
-#: sonar/theme/templates/sonar/page_settings.html:19
+#: sonar/theme/templates/sonar/page_settings.html:27
 msgid "Settings"
 msgstr ""
 
-#: sonar/theme/templates/sonar/search.html:45
-msgid "Sort by"
-msgstr ""
-
-#: sonar/theme/templates/sonar/search.html:80
-msgid "Loading..."
-msgstr ""
-
-#: sonar/theme/templates/sonar/search.html:87
-msgid "Search failed."
-msgstr ""
-
-#: sonar/theme/templates/sonar/accounts/forgot_password.html:11
-#: sonar/theme/templates/sonar/accounts/forgot_password.html:21
+#: sonar/theme/templates/sonar/accounts/forgot_password.html:28
+#: sonar/theme/templates/sonar/accounts/forgot_password.html:38
+#: sonar/theme/templates/sonar/accounts/reset_password.html:20
+#: sonar/theme/templates/sonar/accounts/reset_password.html:30
 msgid "Reset Password"
 msgstr ""
 
-#: sonar/theme/templates/sonar/accounts/forgot_password.html:17
+#: sonar/theme/templates/sonar/accounts/forgot_password.html:34
 msgid ""
 "Enter your email address below and we will send you a link to reset your "
 "password."
 msgstr ""
 
-#: sonar/theme/templates/sonar/accounts/forgot_password.html:28
-#: sonar/theme/templates/sonar/accounts/login.html:16
-#: sonar/theme/templates/sonar/accounts/signup.html:49
+#: sonar/theme/templates/sonar/accounts/forgot_password.html:45
+#: sonar/theme/templates/sonar/accounts/login.html:33
+#: sonar/theme/templates/sonar/accounts/reset_password.html:37
+#: sonar/theme/templates/sonar/accounts/signup.html:65
 msgid "Log In"
 msgstr ""
 
-#: sonar/theme/templates/sonar/accounts/forgot_password.html:30
-#: sonar/theme/templates/sonar/accounts/login.html:39
-#: sonar/theme/templates/sonar/accounts/signup.html:28
-#: sonar/theme/templates/sonar/oauth/signup.html:38
+#: sonar/theme/templates/sonar/accounts/forgot_password.html:47
+#: sonar/theme/templates/sonar/accounts/login.html:56
+#: sonar/theme/templates/sonar/accounts/reset_password.html:39
+#: sonar/theme/templates/sonar/accounts/signup.html:44
+#: sonar/theme/templates/sonar/oauth/signup.html:46
 msgid "Sign Up"
 msgstr ""
 
-#: sonar/theme/templates/sonar/accounts/login.html:9
+#: sonar/theme/templates/sonar/accounts/login.html:26
 msgid "Log in to account"
 msgstr ""
 
-#: sonar/theme/templates/sonar/accounts/login.html:24
-#: sonar/theme/templates/sonar/accounts/login.html:30
+#: sonar/theme/templates/sonar/accounts/login.html:41
+#: sonar/theme/templates/sonar/accounts/login.html:47
 #, python-format
 msgid "Sign-in with %(type)s"
 msgstr ""
 
-#: sonar/theme/templates/sonar/accounts/login.html:37
+#: sonar/theme/templates/sonar/accounts/login.html:54
 msgid "Forgot password?"
 msgstr ""
 
-#: sonar/theme/templates/sonar/accounts/signup.html:11
+#: sonar/theme/templates/sonar/accounts/signup.html:27
 #, python-format
 msgid "Sign up for a %(sitename)s account"
 msgstr ""
 
-#: sonar/theme/templates/sonar/accounts/signup.html:36
-#: sonar/theme/templates/sonar/accounts/signup.html:42
-#: sonar/theme/templates/sonar/oauth/signup.html:25
+#: sonar/theme/templates/sonar/accounts/signup.html:52
+#: sonar/theme/templates/sonar/accounts/signup.html:58
+#: sonar/theme/templates/sonar/oauth/signup.html:33
 #, python-format
 msgid "Sign-up with %(type)s"
 msgstr ""
 
-#: sonar/theme/templates/sonar/oauth/signup.html:27
+#: sonar/theme/templates/sonar/oauth/signup.html:35
 msgid ""
 "Fill in your details to complete your registration. You only have to do "
 "this once."
 msgstr ""
 
-#: sonar/theme/templates/sonar/partial/dropdown_user.html:5
+#: sonar/theme/templates/sonar/partial/dropdown_user.html:22
 msgid "Profile"
 msgstr ""
 
-#: sonar/theme/templates/sonar/partial/navbar.html:26
-msgid "Search"
+#: sonar/theme/templates/sonar/partial/dropdown_user.html:27
+msgid "Super administration"
 msgstr ""
 
-#: sonar/theme/templates/sonar/partial/navbar.html:36
-msgid "Back to SONAR"
+#: sonar/theme/templates/sonar/partial/dropdown_user.html:32
+#: sonar/theme/templates/sonar/partial/navbar.html:50
+msgid "Administration"
+msgstr ""
+
+#: sonar/theme/templates/sonar/partial/dropdown_user.html:36
+msgid "Logout"
 msgstr ""
 
 #: sonar/theme/templates/sonar/partial/navbar.html:44
+msgid "Search"
+msgstr ""
+
+#: sonar/theme/templates/sonar/partial/navbar.html:57
+msgid "Back to SONAR"
+msgstr ""
+
+#: sonar/theme/templates/sonar/partial/navbar.html:65
 msgid "Log in"
 msgstr ""
 
-#: sonar/theme/templates/sonar/partial/navbar.html:50
+#: sonar/theme/templates/sonar/partial/navbar.html:71
 msgid "Sign up"
 msgstr ""
+
+#: sonar/translations/manual_translations.txt:17
+msgid "bf:Publication"
+msgstr "Publication"
+
+#: sonar/translations/manual_translations.txt:18
+msgid "bf:Manufacture"
+msgstr "Manufacture"
+
+#: sonar/translations/manual_translations.txt:19
+msgid "bf:Distribution"
+msgstr "Distribution"
+
+#: sonar/translations/manual_translations.txt:20
+msgid "bf:Production"
+msgstr "Production"
+
+#: sonar/translations/manual_translations.txt:21
+msgid "bf:Place"
+msgstr "Place"
+
+#: sonar/translations/manual_translations.txt:22
+msgid "Date"
+msgstr "Date"
+
+#: sonar/translations/manual_translations.txt:24
+msgid "lang-eng"
+msgstr "English"
+
+#: sonar/translations/manual_translations.txt:25
+msgid "lang-fre"
+msgstr "French"
+
+#: sonar/translations/manual_translations.txt:26
+msgid "German"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:27
+msgid "lang-ita"
+msgstr "Italian"
 

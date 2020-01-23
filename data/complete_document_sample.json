@@ -1,0 +1,162 @@
+{
+  "identifiedBy": [
+    {
+      "value": "urn:nbn:ch:rero-006-108713",
+      "type": "bf:Urn"
+    },
+    {
+      "value": "oai:doc.rero.ch:20050302172954-WU",
+      "type": "bf:Identifier"
+    }
+  ],
+  "language": [
+    {
+      "value": "eng",
+      "type": "bf:Language"
+    }
+  ],
+  "authors": [
+    {
+      "type": "person",
+      "name": "Mancini, Loriano",
+      "date": "1975-03-23",
+      "qualifier": "Librarian"
+    },
+    {
+      "type": "person",
+      "name": "Ronchetti, Elvezio"
+    },
+    {
+      "type": "person",
+      "name": "Trojani, Fabio"
+    }
+  ],
+  "title": [
+    {
+      "type": "bf:Title",
+      "mainTitle": [
+        {
+          "language": "eng",
+          "value": "Title of the document"
+        }
+      ],
+      "subtitle": [
+        {
+          "language": "eng",
+          "value": "Subtitle"
+        }
+      ]
+    }
+  ],
+  "extent": "103 p",
+  "abstracts": [
+    {
+      "language": "eng",
+      "value": "Abstract of the document"
+    }
+  ],
+  "subjects": [
+    {
+      "language": "eng",
+      "value": [
+        "Time series models",
+        "GARCH models"
+      ]
+    }
+  ],
+  "provisionActivity": [
+    {
+      "type": "bf:Manufacture",
+      "statement": [
+        {
+          "label": [
+            {
+              "value": "Bienne"
+            }
+          ],
+          "type": "bf:Place"
+        },
+        {
+          "label": [
+            {
+              "value": "Impr. Weber"
+            }
+          ],
+          "type": "bf:Agent"
+        },
+        {
+          "label": [
+            {
+              "value": "[2006]"
+            }
+          ],
+          "type": "Date"
+        },
+        {
+          "label": [
+            {
+              "value": "Lausanne"
+            }
+          ],
+          "type": "bf:Place"
+        },
+        {
+          "label": [
+            {
+              "value": "Rippone"
+            }
+          ],
+          "type": "bf:Place"
+        },
+        {
+          "label": [
+            {
+              "value": "Impr. Coustaud"
+            }
+          ],
+          "type": "bf:Agent"
+        }
+      ]
+    }
+  ],
+  "editionStatement": [
+    {
+      "editionDesignation": [
+        {
+          "value": "Di 3 ban"
+        },
+        {
+          "value": "第3版",
+          "language": "chi-hani"
+        }
+      ],
+      "responsibility": [
+        {
+          "value": "Zeng Lingliang zhu bian"
+        },
+        {
+          "value": "曾令良主编",
+          "language": "chi-hani"
+        }
+      ]
+    }
+  ],
+  "is_part_of": "Is part of",
+  "copyrightDate": [
+    "© 1971"
+  ],
+  "series": [
+    {
+    "name": "Collection One",
+    "number": "5"
+    },
+    {
+    "name": "Collection Two",
+    "number": "123"
+    }
+  ],
+  "notes": ["Note 1", "Note 2"],
+  "institution": {
+    "$ref": "https://sonar.ch/api/institutions/org"
+  }
+}

@@ -17,24 +17,12 @@
 
 """Test institutions jsonresolvers."""
 
-import pytest
-from flask import url_for
 
-from sonar.modules.documents.api import DocumentRecord
-from sonar.modules.institutions.api import InstitutionRecord
-
-
-def test_institution_resolver(client):
+def test_institution_resolver(document_fixture):
     """Test institution resolver."""
-    InstitutionRecord.create({
-        "pid": "usi",
-        "name": "Università della Svizzera italiana"
-    })
+    assert document_fixture['institution'].get('$ref')
+    assert document_fixture['institution'][
+        '$ref'] == 'https://sonar.ch/api/institutions/org'
 
-    record = DocumentRecord.create({
-        "title": "The title of the record",
-        "institution": {"$ref": "https://sonar.ch/api/institutions/usi"}
-    })
-
-    assert record.replace_refs().get('institution')['name'] == 'Università ' \
-        'della Svizzera italiana'
+    assert document_fixture.replace_refs().get(
+        'institution')['name'] == 'Fake organization'

@@ -1,0 +1,10 @@
+[
+  {
+    "key": "fake",
+    "name": "domain",
+    "url": "http://some.domain.com/oai2d",
+    "metadataprefix": "marcxml",
+    "comment": "",
+    "setspecs": "fake-set"
+  }
+]

@@ -18,6 +18,41 @@
 
 set -e
 
+# Size of data to create
+size="minimal"
+import=false
+local=false
+documents_api_url="https://localhost:5000/api/documents/"
+
+while test $# -gt 0; do
+    case "$1" in
+        --minimal)
+            size="minimal"
+            ;;
+        --small)
+            size="small"
+            ;;
+        --full)
+            size="full"
+            ;;
+        --local)
+            local=true
+            ;;
+        --import)
+            import=true
+            ;;
+        --documents-api-url)
+            # Shift to next value for getting option value
+            shift
+            documents_api_url=$1
+            ;;
+        *) echo "Option $1 not recognized" ;;
+    esac
+    shift
+done
+
+printf "\nSize of setup is set to \"$size\"\n\n"
+
 # Clean redis
 pipenv run invenio shell --no-term-title -c "import redis; redis.StrictRedis.from_url(app.config['CACHE_REDIS_URL']).flushall(); print('Cache cleared')"
 pipenv run invenio db destroy --yes-i-know
@@ -35,9 +70,25 @@ pipenv run invenio access allow superuser-access role superadmin
 pipenv run invenio access allow admin-access role admin
 pipenv run invenio access allow admin-access role moderator
 
-# Import fixtures
-pipenv run invenio fixtures institutions import
-pipenv run invenio fixtures users import $(pipenv --where)/data/users.json
-pipenv run invenio fixtures documents import hevs
-pipenv run invenio fixtures documents import usi
+# Create a default location for depositing files
 pipenv run invenio fixtures deposits create
+
+# Create configuration for RERODOC OAI harvesting
+pipenv run invenio oaiharvester config create data/rerodoc_oai_sources.json
+
+# Create users
+pipenv run invenio fixtures users import $(pipenv --where)/data/users.json
+
+# Create document sample
+if $local; then
+    curl -L -H 'Content-Type:application/json' --data-binary "@./data/complete_document_sample.json" -XPOST $documents_api_url --insecure
+fi
+
+# Import rerodoc data
+if $import; then
+    case "$size" in
+        full) pipenv run invenio oaiharvester harvest-all ;;
+        small) pipenv run invenio oaiharvester harvest-all --max 100 ;;
+        *) pipenv run invenio oaiharvester harvest-all --max 10 ;;
+    esac
+fi

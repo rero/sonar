@@ -15,66 +15,65 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Test CLI for importing documents."""
+"""Test documents CLI commands."""
 
-import requests
+import pytest
 from click.testing import CliRunner
+from invenio_oaiharvester.models import OAIHarvestConfig
 
 import sonar.modules.documents.cli as Cli
-from sonar.modules.institutions.api import InstitutionRecord
 
 
-def test_import_documents(app, script_info, monkeypatch):
-    """Test import documents."""
+def test_oai_config_create(app, script_info):
+    """Test create configuration for harvesting."""
     runner = CliRunner()
 
-    result = runner.invoke(Cli.import_documents, ['test'], obj=script_info)
-    assert result.output.find(
-        'Institution record not found in database') != -1
+    # Test create configuration
+    result = runner.invoke(Cli.oai_config_create,
+                           ['./tests/ui/documents/data/oai_sources.json'],
+                           obj=script_info)
+    assert result.output.find('Created configuration for "fake"') != -1
 
-    InstitutionRecord.create({
-        "pid": "test",
-        "name": "Test"
-    }, dbcommit=True)
+    # Test already created configurations
+    result = runner.invoke(Cli.oai_config_create,
+                           ['./tests/ui/documents/data/oai_sources.json'],
+                           obj=script_info)
+    assert result.output.find('Config already registered for "fake"') != -1
 
-    app.config.update(SONAR_DOCUMENTS_INSTITUTIONS_MAP=None)
-
-    result = runner.invoke(Cli.import_documents, ['test'], obj=script_info)
-    assert result.output.find(
-        'Institution map not found in configuration') != -1
-
-    app.config.update(SONAR_DOCUMENTS_INSTITUTIONS_MAP=dict(
-        usi='ticino.unisi',
-        hevs='valais.hevs'
-    ))
-
-    result = runner.invoke(Cli.import_documents, ['test'], obj=script_info)
-    assert result.output.find(
-        'Institution map for "test" not found in configuration') != -1
-
-    result = runner.invoke(Cli.import_documents, ['usi'], obj=script_info)
-    assert result.exit_code == 1
-
-    InstitutionRecord.create({
-        "pid": "usi",
-        "name": "Università della Svizzera italiana"
-    }, dbcommit=True)
-
+    # Test error on configuration JSON file
     result = runner.invoke(
-        Cli.import_documents, ['usi', '--pages=1'], obj=script_info)
-    assert result.exit_code == 0
+        Cli.oai_config_create,
+        ['./tests/ui/documents/data/oai_sources_error.json'],
+        obj=script_info)
+    assert result.output.find('Configurations file cannot be parsed') != -1
 
-    class MockResponse():
-        """Mock response."""
-        def __init__(self):
-            self.status_code = 500
 
-    def mock_get(*args, **kwargs):
-        return MockResponse()
+def test_oai_config_info(app, script_info):
+    """Test list configurations."""
+    runner = CliRunner()
 
-    monkeypatch.setattr(requests, 'get', mock_get)
+    # Create configurations
+    runner.invoke(Cli.oai_config_create,
+                  ['./tests/ui/documents/data/oai_sources.json'],
+                  obj=script_info)
 
-    result = runner.invoke(
-        Cli.import_documents, ['usi', '--pages=1'], obj=script_info)
-    assert result.exit_code == 1
-    assert result.output.find('failed') != -1
+    # List configurations
+    result = runner.invoke(Cli.oai_config_info, obj=script_info)
+    assert result.output.startswith('\nfake')
+
+
+def test_oai_config_harvest_all(app, db, script_info):
+    """Test harvest all."""
+    runner = CliRunner()
+
+    # Create configurations
+    configuration = OAIHarvestConfig(name='fake',
+                                     baseurl='http://some.domain.com/oai2d',
+                                     metadataprefix='marcxml',
+                                     setspecs='fake-set')
+    configuration.save()
+    db.session.commit()
+
+    result = runner.invoke(Cli.oai_config_harvest_all, ['--max', '1'],
+                           obj=script_info)
+    assert result.output == ''

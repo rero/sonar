@@ -19,6 +19,12 @@
 
 from __future__ import absolute_import, print_function
 
+from invenio_indexer.signals import before_record_index
+from invenio_oaiharvester.signals import oaiharvest_finished
+
+from sonar.modules.documents.receivers import populate_fulltext_field, \
+    transform_harvested_records
+
 from . import config
 
 
@@ -34,6 +40,13 @@ class Documents(object):
         """Flask application initialization."""
         self.init_config(app)
         app.extensions['sonar_documents'] = self
+
+        # Connect to oaiharvester signal
+        oaiharvest_finished.connect(transform_harvested_records, weak=False)
+
+        # Connect to record index signal, to modify record before indexing.
+        before_record_index.connect(populate_fulltext_field,
+                                    weak=False)
 
     def init_config(self, app):
         """Initialize configuration."""

@@ -17,6 +17,7 @@
 
 """Test SONAR api."""
 
+import mock
 import pytest
 from flask import url_for
 from invenio_app.factory import create_api
@@ -30,15 +31,12 @@ from sonar.modules.documents.api import DocumentRecord
 create_app = create_api
 
 
-def test_create(app):
+def test_create(app, document_json_fixture):
     """Test creating a record."""
-    DocumentRecord.create({"pid": "1", "title": "The title of the record"})
-
-    DocumentRecord.create({
-        "pid": "2",
-        "title": "The title of the record"
-    },
-                          dbcommit=True)
+    DocumentRecord.create(document_json_fixture)
+    assert DocumentRecord.get_record_by_pid('10000')['pid'] == '10000'
+    DocumentRecord.create(document_json_fixture, dbcommit=True)
+    assert DocumentRecord.get_record_by_pid('10000')['pid'] == '10000'
 
 
 def test_get_ref_link(app):
@@ -47,37 +45,30 @@ def test_get_ref_link(app):
         '/api/document/1'
 
 
-def test_get_record_by_pid(app):
+def test_get_record_by_pid(app, document_json_fixture):
     """Test get record by PID."""
-    assert DocumentRecord.get_record_by_pid('ABCD') is None
+    assert DocumentRecord.get_record_by_pid('10000') is None
 
-    record = DocumentRecord.create({
-        "pid": "ABCD",
-        "title": "The title of the record"
-    })
+    record = DocumentRecord.create(document_json_fixture)
 
-    assert DocumentRecord.get_record_by_pid('ABCD')['pid'] == 'ABCD'
+    assert DocumentRecord.get_record_by_pid('10000')['pid'] == '10000'
 
     record.delete()
 
-    assert DocumentRecord.get_record_by_pid('ABCD') is None
+    assert DocumentRecord.get_record_by_pid('10000') is None
 
 
-def test_dbcommit(app):
+def test_dbcommit(app, document_json_fixture):
     """Test record commit to db."""
-    record = DocumentRecord.create({"title": "The title of the record"})
-
+    record = DocumentRecord.create(document_json_fixture)
     record.dbcommit()
-    assert DocumentRecord.get_record_by_pid(
-        '1')['title'] == 'The title of the record'
+
+    assert DocumentRecord.get_record_by_pid('10000')['pid'] == '10000'
 
 
-def test_reindex(app, db, client):
+def test_reindex(app, db, client, document_json_fixture):
     """Test record reindex."""
-    record = DocumentRecord.create({
-        "pid": "100",
-        "title": "The title of the record"
-    })
+    record = DocumentRecord.create(document_json_fixture)
     db.session.commit()
 
     indexer = RecordIndexer()
@@ -88,13 +79,13 @@ def test_reindex(app, db, client):
 
     headers = [('Content-Type', 'application/json')]
 
-    url = url_for('invenio_records_rest.doc_item', pid_value='100')
+    url = url_for('invenio_records_rest.doc_item', pid_value='10000')
 
     response = client.get(url, headers=headers)
     data = response.json
 
     assert response.status_code == 200
-    assert data['metadata']['title'] == 'The title of the record'
+    assert data['metadata']['pid'] == '10000'
 
 
 def test_get_pid_by_ref_link(app):
@@ -104,19 +95,63 @@ def test_get_pid_by_ref_link(app):
     assert str(e.value) == 'falsy-link is not a valid ref link'
 
     pid = SonarRecord.get_pid_by_ref_link(
-        'https://sonar.ch/api/institutions/usi')
-    assert pid == 'usi'
+        'https://sonar.ch/api/documents/10000')
+    assert pid == '10000'
 
 
-def test_get_record_by_ref_link(app):
+def test_get_record_by_ref_link(app, document_fixture):
     """Test getting a record by a reference link."""
-    DocumentRecord.create({
-        "pid": "1",
-        "title": "The title of the record"
-    },
-                          dbcommit=True)
 
     record = DocumentRecord.get_record_by_ref_link(
-        'https://sonar.ch/api/documents/1')
-    assert record['pid'] == '1'
-    assert record['title'] == 'The title of the record'
+        'https://sonar.ch/api/documents/10000')
+    assert record['pid'] == '10000'
+
+
+def test_add_file_from_url(app, document_fixture):
+    """Test add file to document by giving its URL."""
+    document_fixture.add_file_from_url(
+        'http://doc.rero.ch/record/328028/files/nor_irc.pdf', 'test.pdf')
+
+    assert len(document_fixture.files) == 2
+    assert document_fixture.files['test.pdf']['label'] == 'test.pdf'
+
+
+@mock.patch('sonar.modules.api.extract_text_from_content')
+def test_add_file(mock_extract, app, pdf_file, document_fixture):
+    """Test add file to document."""
+    with open(pdf_file, 'rb') as file:
+        content = file.read()
+
+    mock_extract.return_value = 'Fulltext content'
+
+    # Successful file add
+    document_fixture.add_file(content, 'test1.pdf')
+    assert document_fixture.files['test1.pdf']
+    assert document_fixture.files['test1.txt']
+
+    # Test already existing files
+    document_fixture.add_file(content, 'test1.pdf', size=4242167)
+    assert len(document_fixture.files) == 2
+
+    # Importing files is disabled
+    app.config['SONAR_DOCUMENTS_IMPORT_FILES'] = False
+    document_fixture.add_file(b'Hello, World', 'test3.pdf')
+    assert 'test3.pdf' not in document_fixture.files
+
+    # Extracting fulltext is disabled
+    app.config['SONAR_DOCUMENTS_IMPORT_FILES'] = True
+    app.config['SONAR_DOCUMENTS_EXTRACT_FULLTEXT_ON_IMPORT'] = False
+    document_fixture.add_file(b'Hello, World', 'test4.pdf')
+    assert document_fixture.files['test4.pdf']
+    assert 'test4.txt' not in document_fixture.files
+
+    # Test exception when extracting fulltext
+    app.config['SONAR_DOCUMENTS_EXTRACT_FULLTEXT_ON_IMPORT'] = True
+
+    def exception_side_effect(data):
+        raise Exception("Fulltext extraction error")
+
+    mock_extract.side_effect = exception_side_effect
+    document_fixture.add_file(content, 'test5.pdf')
+    assert document_fixture.files['test5.pdf']
+    assert 'test5.txt' not in document_fixture.files

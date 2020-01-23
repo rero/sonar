@@ -25,6 +25,9 @@
   },
   "mappings": {
     "document-v1.0.0": {
+      "_source": {
+        "excludes": ["fulltext"]
+      },
       "date_detection": false,
       "numeric_detection": false,
       "properties": {
@@ -34,6 +37,9 @@
         },
         "pid": {
           "type": "keyword"
+        },
+        "fulltext": {
+          "type": "text"
         },
         "institution": {
           "type": "object",
@@ -45,34 +51,6 @@
               "type": "keyword"
             }
           }
-        },
-        "title": {
-          "type": "text",
-          "analyzer": "global_lowercase_asciifolding",
-          "copy_to": "autocomplete_title",
-          "fields": {
-            "eng": {
-              "type": "text",
-              "analyzer": "english"
-            },
-            "fre": {
-              "type": "text",
-              "analyzer": "french"
-            },
-            "ger": {
-              "type": "text",
-              "analyzer": "german"
-            },
-            "ita": {
-              "type": "text",
-              "analyzer": "italian"
-            }
-          }
-        },
-        "autocomplete_title": {
-          "type": "text",
-          "analyzer": "autocomplete",
-          "search_analyzer": "standard"
         },
         "type": {
           "type": "keyword"
@@ -270,10 +248,6 @@
             }
           }
         },
-        "publisherStatement": {
-          "type": "keyword",
-          "index": false
-        },
         "extent": {
           "type": "text",
           "analyzer": "global_lowercase_asciifolding"
@@ -342,28 +316,6 @@
             }
           }
         },
-        "abstracts": {
-          "type": "text",
-          "analyzer": "global_lowercase_asciifolding",
-          "fields": {
-            "eng": {
-              "type": "text",
-              "analyzer": "english"
-            },
-            "fre": {
-              "type": "text",
-              "analyzer": "french"
-            },
-            "ger": {
-              "type": "text",
-              "analyzer": "german"
-            },
-            "ita": {
-              "type": "text",
-              "analyzer": "italian"
-            }
-          }
-        },
         "identifiedBy": {
           "type": "object",
           "properties": {
@@ -401,76 +353,6 @@
         },
         "facet_subjects": {
           "type": "keyword"
-        },
-        "holdings": {
-          "type": "object",
-          "properties": {
-            "pid": {
-              "type": "keyword"
-            },
-            "call_number": {
-              "type": "keyword"
-            },
-            "location": {
-              "type": "object",
-              "properties": {
-                "pid": {
-                  "type": "keyword"
-                },
-                "name": {
-                  "type": "text"
-                }
-              }
-            },
-            "circulation_category": {
-              "type": "object",
-              "properties": {
-                "pid": {
-                  "type": "keyword"
-                },
-                "name": {
-                  "type": "text"
-                }
-              }
-            },
-            "organisation": {
-              "type": "object",
-              "properties": {
-                "organisation_pid": {
-                  "type": "keyword"
-                },
-                "library_pid": {
-                  "type": "keyword"
-                },
-                "organisation_library": {
-                  "type": "keyword"
-                }
-              }
-            },
-            "items": {
-              "type": "object",
-              "properties": {
-                "pid": {
-                  "type": "keyword"
-                },
-                "barcode": {
-                  "type": "keyword"
-                },
-                "call_number": {
-                  "type": "keyword"
-                },
-                "status": {
-                  "type": "keyword"
-                },
-                "available": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        },
-        "available": {
-          "type": "boolean"
         },
         "harvested": {
           "type": "boolean"
