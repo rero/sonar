@@ -222,6 +222,7 @@ PIDSTORE_RECID_FIELD = 'pid'
 
 SECURITY_LOGIN_USER_TEMPLATE = 'sonar/accounts/login.html'
 SECURITY_FORGOT_PASSWORD_TEMPLATE = 'sonar/accounts/forgot_password.html'
+SECURITY_RESET_PASSWORD_TEMPLATE = 'sonar/accounts/reset_password.html'
 SECURITY_REGISTER_USER_TEMPLATE = 'sonar/accounts/signup.html'
 
 RECORDS_UI_ENDPOINTS = {
