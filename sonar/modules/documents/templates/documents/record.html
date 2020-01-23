@@ -104,11 +104,6 @@
       {{ dl(_('Series'), record.series|series_format) }}
       {% endif %}
 
-      <!-- UNIFORM TITLE -->
-      {% if record.titlesProper|length > 0 %}
-      {{ dl(_('Uniform title'), record.titlesProper|join('; ')) }}
-      {% endif %}
-
       <!-- IS PART OF -->
       {% if record.is_part_of %}
       {{ dl(_('Is part of'), record.is_part_of) }}

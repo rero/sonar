@@ -74,28 +74,6 @@
           "analyzer": "autocomplete",
           "search_analyzer": "standard"
         },
-        "titlesProper": {
-          "type": "text",
-          "analyzer": "global_lowercase_asciifolding",
-          "fields": {
-            "eng": {
-              "type": "text",
-              "analyzer": "english"
-            },
-            "fre": {
-              "type": "text",
-              "analyzer": "french"
-            },
-            "ger": {
-              "type": "text",
-              "analyzer": "german"
-            },
-            "ita": {
-              "type": "text",
-              "analyzer": "italian"
-            }
-          }
-        },
         "type": {
           "type": "keyword"
         },
@@ -131,9 +109,6 @@
               "analyzer": "italian"
             }
           }
-        },
-        "translatedFrom": {
-          "type": "keyword"
         },
         "authors": {
           "type": "object",

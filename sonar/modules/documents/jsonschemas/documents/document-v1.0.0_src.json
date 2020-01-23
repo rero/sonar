@@ -995,17 +995,6 @@
       "type": "string",
       "minLength": 1
     },
-    "titlesProper": {
-      "title": "Proper or uniformed titles",
-      "description": "Uniform title, a related or an analytical title that is controlled by an authority file or list, used as an added access point.",
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "title": "Proper or uniformed title",
-        "type": "string",
-        "minLength": 1
-      }
-    },
     "is_part_of": {
       "title": "Is part of",
       "description": "Title of the host document.",
@@ -1040,17 +1029,6 @@
             "$ref": "#/definitions/language"
           }
         }
-      }
-    },
-    "translatedFrom": {
-      "title": "Translated from",
-      "description": "Language from which a resource is translated.",
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "type": "string",
-        "minLength": 2,
-        "validationMessage": "Should be in the ISO 639 format, with 3 characters, ie <code>eng</code> for English."
       }
     },
     "authors": {
