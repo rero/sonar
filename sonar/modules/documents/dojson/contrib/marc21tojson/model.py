@@ -182,17 +182,6 @@ def marc21_to_title(self, key, value):
     return main_title
 
 
-@marc21tojson.over('titlesProper', '^730..')
-@utils.for_each_value
-@utils.ignore_value
-def marc21_to_titlesProper(self, key, value):
-    """Test dojson marc21titlesProper.
-
-    titleProper: 730$a
-    """
-    return not_repetitive(marc21tojson.bib_id, key, value, 'a')
-
-
 @marc21tojson.over('authors', '[17][01]0..')
 @utils.for_each_value
 @utils.ignore_value
