@@ -14,10 +14,15 @@
     }
   },
   "required": [
+    "pid",
     "test"
   ],
   "additionalProperties": false,
   "properties": {
+    "pid": {
+      "title": "PID",
+      "type": "string"
+    },
     "test": {
       "title": "Test",
       "type": "string",
