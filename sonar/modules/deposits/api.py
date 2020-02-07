@@ -20,6 +20,8 @@
 from datetime import datetime
 from functools import partial
 
+from sonar.modules.documents.api import DocumentRecord
+
 from ..api import SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
 from ..minters import id_minter
@@ -121,3 +123,71 @@ class DepositRecord(SonarRecord):
         self['logs'].append(log)
 
         return log
+
+    def create_document(self):
+        """Create document from deposit."""
+        metadata = {
+            'title': [{
+                'type':
+                'bf:Title',
+                'mainTitle': [{
+                    'language': self['metadata']['languages'][0],
+                    'value': self['metadata']['title']
+                }]
+            }],
+            'type':
+            self['metadata']['document_type'],
+            'language': [{
+                'type': 'bf:Language',
+                'value': language
+            } for language in self['metadata']['languages']],
+        }
+
+        for contributor in self['contributors']:
+            author = {'type': 'person', 'name': contributor['name']}
+            if contributor.get('affiliation'):
+                author['qualifier'] = contributor['affiliation']
+
+            metadata.get('authors', []).append(author)
+
+        if self['metadata'].get('etc'):
+            self['extent'] = self['metadata']['etc']
+
+        for key, abstract in enumerate(self['metadata']['abstracts']):
+            metadata.get('abstracts', []).append({
+                'language':
+                self['metadata']['languages'][key]
+                if self['metadata']['languages'][key] else 'eng',
+                'value':
+                abstract
+            })
+
+        document = DocumentRecord.create(metadata,
+                                         dbcommit=True,
+                                         with_bucket=True)
+
+        current_order = 2
+        for file in self.files:
+            with file.file.storage().open() as pdf_file:
+                content = pdf_file.read()
+
+                if file.get('category', 'main') == 'main':
+                    order = 1
+                else:
+                    order = current_order
+                    current_order += 1
+
+                document.add_file(
+                    content, file['key'], **{
+                        'label': file.get('label', file['key']),
+                        'order': order
+                    })
+
+        document.commit()
+        document.reindex()
+
+        self['document'] = {
+            '$ref': DocumentRecord.get_ref_link('documents', document['pid'])
+        }
+
+        return document

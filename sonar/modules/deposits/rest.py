@@ -61,18 +61,8 @@ class FilesResource(ContentNegotiatedMethodView):
 
         key = request.args['key']
 
-        # Store full-text in a file
-        # text_key = change_filename_extension(key, 'txt')
-        # deposit.files[text_key] = BytesIO(
-        #     extract_text_from_content(request.get_data()).encode())
-        # deposit.files[text_key]['category'] = request.args['type']
-        # deposit.files[text_key]['file_type'] = 'full-text'
-        # deposit.commit()
-
-        file_content = BytesIO(request.get_data())
-
         # Store document
-        deposit.files[key] = file_content
+        deposit.files[key] = BytesIO(request.get_data())
         deposit.files[key]['label'] = re.search(r'(.*)\..*$', key).group(1)
         deposit.files[key]['embargo'] = False
         deposit.files[key]['embargoDate'] = None
@@ -150,6 +140,9 @@ def publish(pid=None):
     # Deposit can be validated directly
     if user.is_granted(UserRecord.ROLE_MODERATOR):
         deposit['status'] = DepositRecord.STATUS_VALIDATED
+
+        # Create document based on deposit
+        deposit.create_document()
     else:
         deposit['status'] = DepositRecord.STATUS_TO_VALIDATE
 
@@ -206,6 +199,9 @@ def review(pid=None):
     if payload['action'] == DepositRecord.REVIEW_ACTION_APPROVE:
         subject = 'Deposit approval'
         status = DepositRecord.STATUS_VALIDATED
+
+        # Create document based on deposit
+        deposit.create_document()
     elif payload['action'] == DepositRecord.REVIEW_ACTION_REJECT:
         subject = 'Deposit rejection'
         status = DepositRecord.STATUS_REJECTED

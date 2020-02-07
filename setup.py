@@ -128,7 +128,8 @@ setup(
         ],
         "invenio_records.jsonresolver": [
             "institution = sonar.modules.institutions.jsonresolvers",
-            "user = sonar.modules.users.jsonresolvers"
+            "user = sonar.modules.users.jsonresolvers",
+            "document = sonar.modules.documents.jsonresolvers"
         ],
         'invenio_celery.tasks' : [
             'documents = sonar.modules.documents.tasks'

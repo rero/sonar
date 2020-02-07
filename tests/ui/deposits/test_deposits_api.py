@@ -41,3 +41,11 @@ def test_populate_with_pdf_metadata(app):
         del pdf_metadata['title']
         deposit.populate_with_pdf_metadata(pdf_metadata, 'Default title')
         assert deposit['metadata']['title'] == 'Default title'
+
+
+def test_create_document(app, deposit_fixture):
+    """Test create document based on it."""
+    document = deposit_fixture.create_document()
+    assert document['title'][0]['mainTitle'][0][
+        'value'] == 'High-harmonic generation in quantum spin systems'
+    assert len(document.files) == 4
