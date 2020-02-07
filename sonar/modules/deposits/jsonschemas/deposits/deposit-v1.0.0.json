@@ -316,6 +316,20 @@
           "enum": ["Rights reserved"]
         }
       }
+    },
+    "document": {
+      "title": "Document",
+      "description": "Document created on basis of this deposit.",
+      "type": "object",
+      "properties": {
+        "$ref": {
+          "type": "string",
+          "pattern": "^https://sonar.ch/api/documents/.*?$"
+        }
+      },
+      "required": [
+        "$ref"
+      ]
     }
   }
 }

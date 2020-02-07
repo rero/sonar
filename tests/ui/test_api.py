@@ -130,7 +130,7 @@ def test_add_file(mock_extract, app, pdf_file, document_fixture):
     assert document_fixture.files['test1.txt']
 
     # Test already existing files
-    document_fixture.add_file(content, 'test1.pdf', size=4242167)
+    document_fixture.add_file(content, 'test1.pdf')
     assert len(document_fixture.files) == 2
 
     # Importing files is disabled

@@ -19,8 +19,18 @@
 
 import json
 
+from sonar.modules.deposits.rest import FilesResource
 
-def test_publish(client, db, user_fixture, moderator_fixture, deposit_fixture):
+
+def test_get(app, deposit_fixture):
+    """Test get a deposit by its ID."""
+    response = FilesResource.get(deposit_fixture['pid'])
+    assert response.status_code == 200
+    assert len(response.json) == 2
+
+
+def test_publish(client, db, db_user_fixture, db_moderator_fixture,
+                 deposit_fixture):
     """Test publishing a deposit."""
     url = 'https://localhost:5000/deposits/{pid}/publish'.format(
         pid=deposit_fixture['pid'])
@@ -39,15 +49,16 @@ def test_publish(client, db, user_fixture, moderator_fixture, deposit_fixture):
     # Test the publication by a moderator
     deposit_fixture['status'] = 'in progress'
     deposit_fixture.commit()
-    user_fixture['roles'] = ['moderator']
-    user_fixture.commit()
+    db_user_fixture['roles'] = ['moderator']
+    db_user_fixture.commit()
     db.session.commit()
 
     response = client.post(url, data={})
     assert response.status_code == 200
 
 
-def test_review(client, db, user_fixture, moderator_fixture, deposit_fixture):
+def test_review(client, db, db_user_fixture, db_moderator_fixture,
+                deposit_fixture):
     """Test reviewing a deposit."""
     url = 'https://localhost:5000/deposits/{pid}/review'.format(
         pid=deposit_fixture['pid'])
@@ -83,7 +94,7 @@ def test_review(client, db, user_fixture, moderator_fixture, deposit_fixture):
                            data=json.dumps({
                                'action': 'approve',
                                'comment': None,
-                               'user': user_fixture['pid']
+                               'user': db_user_fixture['pid']
                            }),
                            headers=headers)
     assert response.status_code == 403
@@ -93,7 +104,7 @@ def test_review(client, db, user_fixture, moderator_fixture, deposit_fixture):
                            data=json.dumps({
                                'action': 'approve',
                                'comment': None,
-                               'user': moderator_fixture['pid']
+                               'user': db_moderator_fixture['pid']
                            }),
                            headers=headers)
     assert response.status_code == 200
@@ -106,7 +117,7 @@ def test_review(client, db, user_fixture, moderator_fixture, deposit_fixture):
                            data=json.dumps({
                                'action': 'reject',
                                'comment': 'Sorry deposit is not valid',
-                               'user': moderator_fixture['pid']
+                               'user': db_moderator_fixture['pid']
                            }),
                            headers=headers)
     assert response.status_code == 200
@@ -119,7 +130,7 @@ def test_review(client, db, user_fixture, moderator_fixture, deposit_fixture):
                            data=json.dumps({
                                'action': 'ask-for-changes',
                                'comment': None,
-                               'user': moderator_fixture['pid']
+                               'user': db_moderator_fixture['pid']
                            }),
                            headers=headers)
     assert response.status_code == 200

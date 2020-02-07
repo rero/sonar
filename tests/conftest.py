@@ -19,15 +19,21 @@
 
 import os
 import tempfile
+from io import BytesIO
 
 import pytest
 from flask import url_for
+from flask_principal import ActionNeed
 from flask_security.utils import encrypt_password
+from invenio_access.models import ActionUsers, Role
+from invenio_accounts.ext import hash_password
 from invenio_files_rest.models import Location
 from invenio_search import current_search
 
+from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.institutions.api import InstitutionRecord
+from sonar.modules.users.api import UserRecord
 
 
 @pytest.fixture(scope='module')
@@ -118,33 +124,159 @@ def organization_fixture(app, db):
 
 
 @pytest.fixture()
+def db_user_fixture(app, db):
+    """Create user in database."""
+    data = {
+        'email': 'user@rero.ch',
+        'full_name': 'John Doe',
+        'roles': ['user']
+    }
+
+    user = UserRecord.create(data, dbcommit=True)
+    user.reindex()
+    db.session.commit()
+
+    return user
+
+
+@pytest.fixture()
+def db_moderator_fixture(app, db):
+    """Create moderator in database."""
+    data = {
+        'email': 'moderator@rero.ch',
+        'full_name': 'John Doe',
+        'roles': ['moderator']
+    }
+
+    user = UserRecord.create(data, dbcommit=True)
+    user.reindex()
+    db.session.commit()
+
+    return user
+
+
+@pytest.fixture()
+def user_without_role_fixture(app, db):
+    """Create user in database without role."""
+    datastore = app.extensions['security'].datastore
+    user = datastore.create_user(email='user-without-role@test.com',
+                                 password=hash_password('123456'),
+                                 active=True)
+    db.session.commit()
+
+    return user
+
+
+@pytest.fixture()
+def user_fixture(app, db):
+    """Create user in database."""
+    datastore = app.extensions['security'].datastore
+    user = datastore.create_user(email='user@test.com',
+                                 password=hash_password('123456'),
+                                 active=True)
+    db.session.commit()
+
+    role = Role(name='user')
+    role.users.append(user)
+
+    db.session.add(role)
+    db.session.add(ActionUsers.allow(ActionNeed('user-access'), user=user))
+    db.session.commit()
+
+    return user
+
+
+@pytest.fixture()
+def admin_user_fixture(app, db):
+    """User with admin access."""
+    datastore = app.extensions['security'].datastore
+    user = datastore.create_user(email='admin@test.com',
+                                 password=hash_password('123456'),
+                                 active=True)
+    datastore.commit()
+
+    role = Role(name='admin')
+    role.users.append(user)
+
+    db.session.add(role)
+    db.session.add(ActionUsers.allow(ActionNeed('admin-access'), user=user))
+    db.session.commit()
+
+    return user
+
+
+@pytest.fixture()
+def superadmin_user_fixture(app, db):
+    """User with admin access."""
+    datastore = app.extensions['security'].datastore
+    user = datastore.create_user(email='superadmin@test.com',
+                                 password=hash_password('123456'),
+                                 active=True)
+    db.session.commit()
+
+    role = Role(name='superadmin')
+    role.users.append(user)
+
+    db.session.add(role)
+    db.session.add(ActionUsers.allow(ActionNeed('superuser-access'),
+                                     user=user))
+    db.session.commit()
+
+    return user
+
+
+@pytest.fixture()
+def admin_user_fixture_with_db(app, db, admin_user_fixture,
+                               organization_fixture):
+    """Create user in database."""
+    db_user = UserRecord.create(
+        {
+            'pid': '10000',
+            'email': admin_user_fixture.email,
+            'full_name': 'Jules Brochu',
+            'roles': ['admin'],
+            'user_id': admin_user_fixture.id,
+            'institution': {
+                '$ref': 'https://sonar.ch/api/institutions/org'
+            }
+        },
+        dbcommit=True)
+    db_user.reindex()
+    db.session.commit()
+
+    current_search.flush_and_refresh('users')
+
+    return db_user
+
+
+@pytest.fixture()
 def document_json_fixture(app, db, organization_fixture):
     """JSON document fixture."""
     data = {
-        "pid":
-        "10000",
-        "identifiedBy": [{
-            "value": "urn:nbn:ch:rero-006-108713",
-            "type": "bf:Urn"
+        'pid':
+        '10000',
+        'identifiedBy': [{
+            'value': 'urn:nbn:ch:rero-006-108713',
+            'type': 'bf:Urn'
         }, {
-            "value": "oai:doc.rero.ch:20050302172954-WU",
-            "type": "bf:Identifier"
+            'value': 'oai:doc.rero.ch:20050302172954-WU',
+            'type': 'bf:Identifier'
         }],
-        "language": [{
-            "value": "eng",
-            "type": "bf:Language"
+        'language': [{
+            'value': 'eng',
+            'type': 'bf:Language'
         }],
-        "authors": [{
-            "type": "person",
-            "name": "Mancini, Loriano",
-            "date": "1975-03-23",
-            "qualifier": "Librarian"
+        'authors': [{
+            'type': 'person',
+            'name': 'Mancini, Loriano',
+            'date': '1975-03-23',
+            'qualifier': 'Librarian'
         }, {
-            "type": "person",
-            "name": "Ronchetti, Elvezio"
+            'type': 'person',
+            'name': 'Ronchetti, Elvezio'
         }, {
-            "type": "person",
-            "name": "Trojani, Fabio"
+            'type': 'person',
+            'name': 'Trojani, Fabio'
         }],
         'title': [{
             'type':
@@ -154,17 +286,17 @@ def document_json_fixture(app, db, organization_fixture):
                 'value': 'Title of the document'
             }]
         }],
-        "extent":
-        "103 p",
-        "abstracts": [{
-            "language": "eng",
-            "value": "Abstract of the document"
+        'extent':
+        '103 p',
+        'abstracts': [{
+            'language': 'eng',
+            'value': 'Abstract of the document'
         }],
-        "subjects": [{
-            "language": "eng",
-            "value": ["Time series models", "GARCH models"]
+        'subjects': [{
+            'language': 'eng',
+            'value': ['Time series models', 'GARCH models']
         }],
-        "provisionActivity": [{
+        'provisionActivity': [{
             'type':
             'bf:Manufacture',
             'statement': [{
@@ -199,22 +331,22 @@ def document_json_fixture(app, db, organization_fixture):
                 'type': 'bf:Agent'
             }]
         }],
-        "editionStatement": [{
-            "editionDesignation": [{
-                "value": "Di 3 ban"
+        'editionStatement': [{
+            'editionDesignation': [{
+                'value': 'Di 3 ban'
             }, {
-                "value": "第3版",
-                "language": "chi-hani"
+                'value': '第3版',
+                'language': 'chi-hani'
             }],
-            "responsibility": [{
-                "value": "Zeng Lingliang zhu bian"
+            'responsibility': [{
+                'value': 'Zeng Lingliang zhu bian'
             }, {
-                "value": "曾令良主编",
-                "language": "chi-hani"
+                'value': '曾令良主编',
+                'language': 'chi-hani'
             }]
         }],
-        "institution": {
-            "$ref": "https://sonar.ch/api/institutions/org"
+        'institution': {
+            '$ref': 'https://sonar.ch/api/institutions/org'
         }
     }
 
@@ -233,6 +365,91 @@ def document_fixture(app, db, document_json_fixture, bucket_location_fixture):
     current_search.flush_and_refresh('documents')
 
     return document
+
+
+@pytest.fixture()
+def deposit_fixture(app, db, db_user_fixture, pdf_file,
+                    bucket_location_fixture):
+    """Deposit fixture."""
+    deposit_json = {
+        '$schema':
+        'https://sonar.ch/schemas/deposits/deposit-v1.0.0.json',
+        '_bucket':
+        '03e5e909-2fce-479e-a697-657e1392cc72',
+        'contributors': [{
+            'affiliation': 'RERO',
+            'name': 'Takayoshi Shintaro',
+            'orcid': 'ORCID NUMBER'
+        }, {
+            'name': 'Murakami Yuta'
+        }, {
+            'name': 'Werner Philipp'
+        }],
+        'metadata': {
+            'abstracts': ['Abstract of the document'],
+            'document_type': 'preprint',
+            'etc': 'ETC field',
+            'journal': {
+                'name': 'American Physical Society (APS)',
+                'pages': '184303',
+                'volume': '99'
+            },
+            'languages': ['eng'],
+            'publication_date': {
+                'type': 'simple',
+                'value': '2020-02-14'
+            },
+            'title': 'High-harmonic generation in quantum spin systems'
+        },
+        'projects': [{
+            'end_date':
+            '2020-02-29',
+            'funding_organisation':
+            'Swiss Universities',
+            'name':
+            'Project name',
+            'related_persons': [{
+                'affiliation': 'RERO',
+                'name': 'John Dow',
+                'type': 'principal investigator'
+            }],
+            'start_date':
+            '2020-02-01'
+        }],
+        'status':
+        'in progress',
+        'step':
+        'diffusion',
+        'user': {
+            '$ref':
+            'https://sonar.ch/api/users/{pid}'.format(
+                pid=db_user_fixture['pid'])
+        }
+    }
+
+    deposit = DepositRecord.create(deposit_json,
+                                   dbcommit=True,
+                                   with_bucket=True)
+
+    with open(pdf_file, 'rb') as file:
+        content = file.read()
+
+    deposit.files['main.pdf'] = BytesIO(content)
+    deposit.files['main.pdf']['label'] = 'Main file'
+    deposit.files['main.pdf']['category'] = 'main'
+    deposit.files['main.pdf']['file_type'] = 'file'
+
+    deposit.files['additional.pdf'] = BytesIO(content)
+    deposit.files['additional.pdf']['label'] = 'Additional file 1'
+    deposit.files['additional.pdf']['category'] = 'additional'
+    deposit.files['additional.pdf']['file_type'] = 'file'
+
+    db.session.commit()
+    deposit.reindex()
+
+    current_search.flush_and_refresh('deposits')
+
+    return deposit
 
 
 @pytest.fixture()
