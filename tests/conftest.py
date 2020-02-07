@@ -444,8 +444,9 @@ def deposit_fixture(app, db, db_user_fixture, pdf_file,
     deposit.files['additional.pdf']['category'] = 'additional'
     deposit.files['additional.pdf']['file_type'] = 'file'
 
-    db.session.commit()
+    deposit.commit()
     deposit.reindex()
+    db.session.commit()
 
     current_search.flush_and_refresh('deposits')
 
