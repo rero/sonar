@@ -134,3 +134,29 @@ def test_review(client, db, db_user_fixture, db_moderator_fixture,
                            }),
                            headers=headers)
     assert response.status_code == 200
+
+
+def test_extract_metadata(app, client, deposit_fixture):
+    """Test PDF metadata extraction."""
+    url = 'https://localhost:5000/deposits/{pid}/extract-pdf-metadata'.format(
+        pid=deposit_fixture['pid'])
+
+    headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
+
+    response = client.get(url, headers=headers)
+    assert response.status_code == 200
+    assert response.json[
+        'title'] == 'High-harmonic generation in quantum spin systems'
+
+    deposit_fixture.files['main.pdf'].remove()
+    response = client.get(url, headers=headers)
+    assert response.status_code == 500
+
+    response = client.get(
+        'https://localhost:5000/deposits/{pid}/extract-pdf-metadata'.format(
+            pid='not-existing'),
+        headers=headers)
+    assert response.status_code == 400

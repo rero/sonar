@@ -70,16 +70,6 @@ class FilesResource(ContentNegotiatedMethodView):
         deposit.files[key]['category'] = request.args['type']
         deposit.files[key]['file_type'] = 'file'
 
-        # Extract data from pdf and populate deposit
-        if request.args['type'] == 'main':
-            pdf_extractor = PDFExtractor()
-            pdf_metadata = format_extracted_data(
-                pdf_extractor.process_raw(request.get_data()))
-
-            # deposit.populate_with_pdf_metadata(
-            #     pdf_metadata, "Deposit #{pid}".format(pid=pid))
-            deposit.files[key]['pdf_metadata'] = pdf_metadata
-
         deposit.commit()
         db.session.commit()
 
@@ -230,3 +220,30 @@ def review(pid=None):
     db.session.commit()
 
     return make_response(jsonify(deposit))
+
+
+@blueprint.route('/extract-pdf-metadata', methods=['GET'])
+def extract_metadata(pid=None):
+    """Publish a deposit or send a message for review."""
+    deposit = DepositRecord.get_record_by_pid(pid)
+
+    if not deposit:
+        abort(400)
+
+    main_file = [
+        file for file in deposit.files if file['category'] == 'main' and
+        file.mimetype == 'application/pdf'
+    ]
+
+    if not main_file:
+        abort(500)
+
+    # Get file content
+    with main_file[0].file.storage().open() as pdf_file:
+        content = pdf_file.read()
+
+    # Extract data from pdf
+    pdf_extractor = PDFExtractor()
+    pdf_metadata = format_extracted_data(pdf_extractor.process_raw(content))
+
+    return make_response(jsonify(pdf_metadata))
