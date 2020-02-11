@@ -137,9 +137,7 @@ class PDFExtractor:
                                            files={
                                                'input':
                                                (file, open(file, 'rb'),
-                                                'application/pdf'),
-                                               'consolidateHeader':
-                                               '1'
+                                                'application/pdf')
                                            })
 
         if status != 200:

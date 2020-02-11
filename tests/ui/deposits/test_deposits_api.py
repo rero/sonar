@@ -26,8 +26,8 @@ from sonar.modules.pdf_extractor.utils import format_extracted_data
 
 def test_populate_with_pdf_metadata(app):
     """Test populate deposit with metadata."""
-    json_file = os.path.dirname(
-        os.path.abspath(__file__)) + '/data/extracted_data.json'
+    json_file = os.path.dirname(os.path.abspath(
+        __file__)) + '/../pdf_extractor/data/extracted_data.json'
 
     with open(json_file, 'rb') as file:
         pdf_metadata = format_extracted_data(json.load(file))

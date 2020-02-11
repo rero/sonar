@@ -34,39 +34,50 @@
           "analytic": {
             "author": [
               {
-                "persName": {
-                  "forename": {
-                    "#text": "Kay",
-                    "@type": "first"
+                "affiliation": [
+                  {
+                    "@key": "aff4",
+                    "address": {
+                      "country": {
+                        "#text": "Switzerland",
+                        "@key": "CH"
+                      },
+                      "postCode": "1015",
+                      "settlement": "Lausanne"
+                    },
+                    "orgName": {
+                      "#text": "Swiss Institute of Bioinformatics",
+                      "@type": "institution"
+                    }
                   },
-                  "surname": "Helfricht"
-                }
-              },
-              {
-                "persName": {
-                  "forename": {
-                    "#text": "Matthias",
-                    "@type": "first"
-                  },
-                  "surname": "Huss"
-                }
-              },
-              {
+                  {
+                    "@key": "aff5",
+                    "address": {
+                      "country": {
+                        "#text": "Switzerland",
+                        "@key": "CH"
+                      },
+                      "postCode": "1015",
+                      "settlement": "Lausanne"
+                    },
+                    "orgName": [
+                      {
+                        "#text": "Department of Ecology and Evolution",
+                        "@type": "department"
+                      },
+                      {
+                        "#text": "University of Lausanne",
+                        "@type": "institution"
+                      }
+                    ]
+                  }
+                ],
                 "persName": {
                   "forename": {
                     "#text": "Andrea",
                     "@type": "first"
                   },
-                  "surname": "Fischer"
-                }
-              },
-              {
-                "persName": {
-                  "forename": {
-                    "#text": "Jan-Christoph",
-                    "@type": "first"
-                  },
-                  "surname": "Otto"
+                  "surname": "Komljenovic"
                 }
               },
               {
@@ -74,45 +85,39 @@
                   "@key": "aff0",
                   "address": {
                     "country": {
-                      "#text": "Germany",
-                      "@key": "DE"
+                      "#text": "Switzerland",
+                      "@key": "CH"
                     },
-                    "settlement": "Nuremberg"
+                    "postCode": "1015",
+                    "settlement": "Lausanne"
                   },
-                  "orgName": {
-                    "#text": "University of Erlangen",
-                    "@type": "institution"
-                  }
-                }
-              },
-              {
-                "affiliation": {
-                  "@key": "aff1",
-                  "address": {
-                    "country": {
-                      "#text": "United States",
-                      "@key": "US"
+                  "orgName": [
+                    {
+                      "#text": "Institute of Bioengineering",
+                      "@type": "department"
+                    },
+                    {
+                      "#text": "Laboratory of Integrative Systems Physiology",
+                      "@type": "laboratory"
+                    },
+                    {
+                      "#text": "École Polytechnique Fédérale de Lausanne",
+                      "@type": "institution"
                     }
-                  },
-                  "orgName": {
-                    "#text": "University of Alaska System",
-                    "@type": "institution"
-                  }
-                }
-              },
-              {
-                "affiliation": {
-                  "@key": "aff2",
-                  "address": {
-                    "country": {
-                      "#text": "Germany",
-                      "@key": "DE"
+                  ]
+                },
+                "persName": {
+                  "forename": [
+                    {
+                      "#text": "Maroun",
+                      "@type": "first"
+                    },
+                    {
+                      "#text": "Bou",
+                      "@type": "middle"
                     }
-                  },
-                  "orgName": {
-                    "#text": "University of Erlangen-Nuremberg",
-                    "@type": "institution"
-                  }
+                  ],
+                  "surname": "Sleiman"
                 }
               }
             ],
