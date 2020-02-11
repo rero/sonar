@@ -19,6 +19,10 @@ python3-saml = "*"
 xmltodict = "*"
 marshmallow = "<=3.0.0b6"
 pycountry = "*"
+# TODO: try to remove it when werkzeug will be fixed.
+werkzeug = "==0.16.0"
+# TODO: check why we need this.
+flask-login = "<0.5"
 
 [dev-packages]
 Flask-Debugtoolbar = ">=0.10.1"
