@@ -36,6 +36,14 @@ def test_format_extracted_data(app):
         assert 'title' in formatted_data
         assert formatted_data['title'] == 'Calibrated Ice Thickness Estimate' \
             ' for All Glaciers in Austria'
+        assert len(formatted_data['authors']) == 2
+        assert formatted_data['authors'] == [{
+            'affiliation': 'Swiss Institute of Bioinformatics',
+            'name': 'Komljenovic Andrea'
+        }, {
+            'affiliation': 'École Polytechnique Fédérale de Lausanne',
+            'name': 'Sleiman Maroun Bou'
+        }]
 
         # Test authors
         extracted_data['teiHeader']['fileDesc']['sourceDesc']['biblStruct'][

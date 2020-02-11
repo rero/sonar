@@ -66,13 +66,15 @@ def format_extracted_data(data):
             else:
                 formatted_data['languages'] = [language.alpha_3]
 
-    authors = data['teiHeader']['fileDesc']['sourceDesc']['biblStruct'].get(
-        'analytic', {}).get('author')
+    analytic = data['teiHeader']['fileDesc']['sourceDesc']['biblStruct'].get(
+        'analytic', {})
 
-    if authors:
-        authors = force_list(authors)
+    if analytic and analytic.get('author'):
+        authors = force_list(analytic.get('author'))
 
         for author in authors:
+            author_data = {}
+
             if author.get('persName'):
                 name = []
                 surname = author['persName'].get('surname')
@@ -85,8 +87,20 @@ def format_extracted_data(data):
 
                 name = name + [forename['#text'] for forename in forenames]
 
-                formatted_data.setdefault('authors',
-                                          []).append({'name': ' '.join(name)})
+                author_data['name'] = ' '.join(name)
+
+            if author_data.get('name'):
+                affiliations = force_list(author.get('affiliation', []))
+
+                if affiliations:
+                    affiliation = affiliations[0]
+                    organisations = force_list(affiliation.get('orgName', []))
+
+                    for organisation in organisations:
+                        if organisation.get('@type') == 'institution':
+                            author_data['affiliation'] = organisation['#text']
+
+            formatted_data.setdefault('authors', []).append(author_data)
 
     imprint = data['teiHeader']['fileDesc']['sourceDesc']['biblStruct'][
         'monogr'].get('imprint', {})
