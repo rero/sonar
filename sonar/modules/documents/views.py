@@ -213,6 +213,26 @@ def identifiedby_format(identifiedby):
     return output
 
 
+@blueprint.app_template_filter()
+def files_by_type(files, file_type='file'):
+    """Return only files corresponding to type.
+
+    :param files: List of files associated with record
+    :param file_type: Type of the files to return.
+    :return Filtered list
+    """
+    return [file for file in files if file['type'] == file_type]
+
+
+@blueprint.app_template_filter()
+def file_size(size):
+    """Return file size human readable.
+
+    :param size: integer representing the size of the file.
+    """
+    return str(round(size/(1024*1024), 2)) + 'Mb'
+
+
 def get_language_from_bibliographic_code(language_code):
     """Return language code from bibliographic language.
 

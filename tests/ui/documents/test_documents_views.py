@@ -18,10 +18,8 @@
 """Test documents views."""
 
 import pytest
-from flask import g, url_for
 
 import sonar.modules.documents.views as views
-from sonar.modules.documents.api import DocumentRecord
 
 
 def test_pull_ir(app):
@@ -210,3 +208,41 @@ def test_get_preferred_languages(app):
     """Test getting the list of prefererred languages."""
     assert views.get_preferred_languages() == ['eng', 'fre', 'ger', 'ita']
     assert views.get_preferred_languages('fre') == ['fre', 'eng', 'ger', 'ita']
+
+
+def test_file_size(app):
+    """Test converting file size to a human readable size."""
+    assert views.file_size(2889638) == '2.76Mb'
+
+
+def test_files_by_type(app):
+    """Test filtering files with a specific type."""
+    files = [{
+        'bucket': '18126249-6eb7-4fa5-b0b5-f8599e3c2bf0',
+        'checksum': 'md5:e73223fe5c54532ebfd3e101cb6527ce',
+        'file_id': 'd953c07c-5e7f-4636-bc81-3627f947c494',
+        'key': '1_2004ECO001.pdf',
+        'label': 'Texte intégral',
+        'mime_type': 'application/pdf',
+        'order': 1,
+        'size': 2889638,
+        'type': 'file',
+        'version_id': '1c9705d3-8a9c-489e-adaf-d7d741b205ba'
+    }, {
+        'bucket': '18126249-6eb7-4fa5-b0b5-f8599e3c2bf0',
+        'checksum': 'md5:519bd9463e54f681d73861e7e17e2050',
+        'file_id': '722264a3-b6d4-459c-a88d-2aca6fe34a0e',
+        'key': '1_2004ECO001.txt',
+        'mime_type': 'text/plain',
+        'size': 160659,
+        'type': 'fulltext',
+        'version_id': '1194512e-7c99-42e1-b320-a15ccb2ac946'
+    }]
+
+    filtered_files = views.files_by_type(files)
+    assert len(filtered_files) == 1
+    assert filtered_files[0][
+        'file_id'] == 'd953c07c-5e7f-4636-bc81-3627f947c494'
+
+    filtered_files = views.files_by_type(files, 'fake')
+    assert not filtered_files

@@ -20,31 +20,31 @@
 {% from 'sonar/macros/macro.html' import dl, dl_dict, dl_list %}
 
 {%- macro record_content(data) %}
-  {% for key, value in data.items() recursive %}
-    <li class="list-group-item">
-    {% if value is mapping %}
-        <strong>{{ key }}:</strong>
-        <ul class="list-group">{{ loop(value.items()) }}</ul>
-    {% elif value is iterable and value is not string %}
-        <strong>{{ key }}:</strong>
-        <ol>
-        {% for item in value %}
-          <li>
-          {% if item is mapping %}
-            <ul class="list-group">
-              {{ record_content(item) }}
-            </ul>
-          {% else %}
-            {{ item }}
-          {% endif %}
-          </li>
-        {% endfor %}
-        </ol>
-    {% else %}
-      <strong>{{ key }}:</strong> {{ value }}
-    {% endif %}
+{% for key, value in data.items() recursive %}
+<li class="list-group-item">
+  {% if value is mapping %}
+  <strong>{{ key }}:</strong>
+  <ul class="list-group">{{ loop(value.items()) }}</ul>
+  {% elif value is iterable and value is not string %}
+  <strong>{{ key }}:</strong>
+  <ol>
+    {% for item in value %}
+    <li>
+      {% if item is mapping %}
+      <ul class="list-group">
+        {{ record_content(item) }}
+      </ul>
+      {% else %}
+      {{ item }}
+      {% endif %}
     </li>
-  {% endfor %}
+    {% endfor %}
+  </ol>
+  {% else %}
+  <strong>{{ key }}:</strong> {{ value }}
+  {% endif %}
+</li>
+{% endfor %}
 {%- endmacro %}
 
 {%- block body %}
@@ -164,18 +164,62 @@
       {{ dl(_('Permalink'), '<a href="' + link + '">' + link + '</a>') }}
     </dl>
 
-    {% if record._files %}
-      <hr>
-      <h5>{{ _('Files') }}</h5>
-      <ul>
-      {% for file in record._files %}
-        <li>
-          <a href="/api/documents/{{ record.pid }}/files/{{ file.key }}" target="_blank">{{ file.key }}</a>
-        </li>
-      {% endfor %}
-      </ul>
+    {% set pdfs = record._files | files_by_type %}
+    {% if pdfs %}
+    <h5 class="mt-5">{{ _('Files') }}</h5>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>{{ _('File') }}</th>
+          <th>{{ _('Size') }}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for file in pdfs %}
+        <tr>
+          <td>{{ file.key }}</td>
+          <td>{{ file.size | file_size }}</td>
+          <td class="text-right">
+            {% if file['mime_type'] == 'application/pdf' %}
+            <a href="/documents/{{ record.pid }}/preview/{{ file.key }}"
+              class="btn btn-secondary btn-sm text-light previewLink"><i class="fa fa-eye"></i>
+              {{ _('Preview') }}</a>
+            {% endif %}
+            <a href="/documents/{{ record.pid }}/files/{{ file.key }}" target="_blank"
+              class="btn btn-secondary btn-sm text-light"><i class="fa fa-download"></i> {{ _('Download') }}</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <iframe class="preview-iframe" id="preview-iframe" width="100%" height="500" src=""
+      style="border: none; display: none;"></iframe>
+
     {% endif %}
   </article>
 </section>
 {%- endblock %}
 
+{% block javascript %}
+{{super()}}
+<script>
+  $(document).ready(function () {
+    var $iframe = $('#preview-iframe');
+
+    $('.previewLink').click(function (event) {
+      event.preventDefault();
+      var link = $(this).attr('href')
+
+      if (link == $iframe.attr('src')) {
+        $iframe.attr('src', '').hide(500);
+        return;
+      }
+
+      $iframe.attr('src', $(this).attr('href')).show(500);
+    });
+  });
+</script>
+{% endblock javascript %}
