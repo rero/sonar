@@ -200,7 +200,9 @@ APP_DEFAULT_SECURE_HEADERS = {
         'font-src': [
             "'self'", "'unsafe-inline'", 'https://cdnjs.cloudflare.com',
             'https://fonts.gstatic.com'
-        ]
+        ],
+        'img-src': ["'self'", "data:"]
+        # To allow PDF previewer to create left navigation.
     },
     'content_security_policy_report_uri': None,
     'content_security_policy_report_only': False,
@@ -235,6 +237,18 @@ RECORDS_UI_ENDPOINTS = {
         'route': '/organization/<ir>/documents/<pid_value>',
         'view_imp': 'sonar.modules.documents.views:detail'
     },
+    'doc_previewer': {
+        'pid_type': 'doc',
+        'route': '/documents/<pid_value>/preview/<filename>',
+        'view_imp': 'invenio_previewer.views:preview',
+        'record_class': 'sonar.modules.documents.api:DocumentRecord'
+    },
+    'doc_files': {
+        'pid_type': 'doc',
+        'route': '/documents/<pid_value>/files/<filename>',
+        'view_imp': 'invenio_records_files.utils:file_download_ui',
+        'record_class': 'invenio_records_files.api:Record'
+    }
 }
 """Records UI for sonar."""
 
