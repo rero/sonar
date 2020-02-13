@@ -201,7 +201,7 @@ APP_DEFAULT_SECURE_HEADERS = {
             "'self'", "'unsafe-inline'", 'https://cdnjs.cloudflare.com',
             'https://fonts.gstatic.com'
         ],
-        'img-src': ["'self'", "data:"]
+        'img-src': ["'self'", "data:", "blob:"]
         # To allow PDF previewer to create left navigation.
     },
     'content_security_policy_report_uri': None,
@@ -246,6 +246,18 @@ RECORDS_UI_ENDPOINTS = {
     'doc_files': {
         'pid_type': 'doc',
         'route': '/documents/<pid_value>/files/<filename>',
+        'view_imp': 'invenio_records_files.utils:file_download_ui',
+        'record_class': 'invenio_records_files.api:Record'
+    },
+    'depo_previewer': {
+        'pid_type': 'depo',
+        'route': '/deposits/<pid_value>/preview/<filename>',
+        'view_imp': 'invenio_previewer.views:preview',
+        'record_class': 'sonar.modules.deposits.api:DepositRecord'
+    },
+    'depo_files': {
+        'pid_type': 'depo',
+        'route': '/deposits/<pid_value>/files/<filename>',
         'view_imp': 'invenio_records_files.utils:file_download_ui',
         'record_class': 'invenio_records_files.api:Record'
     }
