@@ -22,9 +22,9 @@ from __future__ import absolute_import, print_function
 import re
 
 from flask import Blueprint, current_app, g, render_template
-from flask_babelex import gettext as _
 
 from sonar.modules.documents.api import DocumentRecord
+from sonar.modules.utils import change_filename_extension
 
 from .utils import edition_format_text, localized_data_name, \
     publication_statement_text, series_format_text
@@ -231,6 +231,35 @@ def file_size(size):
     :param size: integer representing the size of the file.
     """
     return str(round(size/(1024*1024), 2)) + 'Mb'
+
+
+@blueprint.app_template_filter()
+def file_title(file):
+    """Return file label or key if label not exists.
+
+    :param file: File to get title from.
+    """
+    if file.get('label'):
+        return file['label']
+
+    return file['key']
+
+
+@blueprint.app_template_filter()
+def thumbnail(file, files):
+    """Get thumbnail from file.
+
+    :param file: Dict of file from which thumbnail will be returned.
+    :param files: Liste of files of the record.
+    """
+    key = change_filename_extension(file['key'], 'jpg')
+
+    matches = [file for file in files if file['key'] == key]
+
+    if not matches:
+        return None
+
+    return matches[0]
 
 
 def get_language_from_bibliographic_code(language_code):

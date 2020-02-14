@@ -24,6 +24,7 @@ from invenio_app.factory import create_api
 from invenio_indexer import current_record_to_index
 from invenio_indexer.api import RecordIndexer
 from invenio_search import current_search
+from six import BytesIO
 
 from sonar.modules.api import SonarRecord
 from sonar.modules.documents.api import DocumentRecord
@@ -112,7 +113,7 @@ def test_add_file_from_url(app, document_fixture):
     document_fixture.add_file_from_url(
         'http://doc.rero.ch/record/328028/files/nor_irc.pdf', 'test.pdf')
 
-    assert len(document_fixture.files) == 2
+    assert len(document_fixture.files) == 3
     assert document_fixture.files['test.pdf']['label'] == 'test.pdf'
 
 
@@ -131,17 +132,17 @@ def test_add_file(mock_extract, app, pdf_file, document_fixture):
 
     # Test already existing files
     document_fixture.add_file(content, 'test1.pdf')
-    assert len(document_fixture.files) == 2
+    assert len(document_fixture.files) == 3
 
     # Importing files is disabled
     app.config['SONAR_DOCUMENTS_IMPORT_FILES'] = False
-    document_fixture.add_file(b'Hello, World', 'test3.pdf')
+    document_fixture.add_file(content, 'test3.pdf')
     assert 'test3.pdf' not in document_fixture.files
 
     # Extracting fulltext is disabled
     app.config['SONAR_DOCUMENTS_IMPORT_FILES'] = True
     app.config['SONAR_DOCUMENTS_EXTRACT_FULLTEXT_ON_IMPORT'] = False
-    document_fixture.add_file(b'Hello, World', 'test4.pdf')
+    document_fixture.add_file(content, 'test4.pdf')
     assert document_fixture.files['test4.pdf']
     assert 'test4.txt' not in document_fixture.files
 
@@ -155,3 +156,47 @@ def test_add_file(mock_extract, app, pdf_file, document_fixture):
     document_fixture.add_file(content, 'test5.pdf')
     assert document_fixture.files['test5.pdf']
     assert 'test5.txt' not in document_fixture.files
+
+
+def test_get_main_file(document_with_file):
+    """Test getting the main file of a record."""
+    # Test getting file with order 1
+    assert document_with_file.get_main_file().key == 'test1.pdf'
+
+    # Test if file have order 1 but not right type
+    document_with_file.files['test1.pdf']['type'] = 'fake'
+    assert not document_with_file.get_main_file()
+
+    # Test if no files have order 1
+    document_with_file.files['test1.pdf']['order'] = 2
+    document_with_file.files['test1.pdf']['type'] = 'file'
+    assert document_with_file.get_main_file().key == 'test1.pdf'
+
+    for file in document_with_file.files:
+        file.remove()
+
+    assert not document_with_file.get_main_file()
+
+
+def test_create_thumbnail(document_fixture, pdf_file):
+    """Test create a thumbnail for document's file."""
+    # No file associated with record, implies no thumbnail creation
+    document_fixture.create_thumbnail()
+
+    with open(pdf_file, 'rb') as file:
+        content = file.read()
+
+    document_fixture.files['test.pdf'] = BytesIO(content)
+
+    # Successful thumbail creation
+    document_fixture.create_thumbnail(document_fixture.files['test.pdf'])
+    assert len(document_fixture.files) == 2
+    assert document_fixture.files['test.jpg']
+
+    document_fixture.files['test.pdf'].remove()
+    document_fixture.files['test.jpg'].remove()
+
+    # Failed creation of thumbnail
+    document_fixture.files['test.txt'] = BytesIO(b'Hello, World')
+    document_fixture.create_thumbnail(document_fixture.files['test.txt'])
+    assert len(document_fixture.files) == 1
