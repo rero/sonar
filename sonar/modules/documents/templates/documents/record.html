@@ -17,186 +17,161 @@
 
 {%- extends config.RECORDS_UI_BASE_TEMPLATE %}
 
-{% from 'sonar/macros/macro.html' import dl, dl_dict, dl_list %}
-
-{%- macro record_content(data) %}
-{% for key, value in data.items() recursive %}
-<li class="list-group-item">
-  {% if value is mapping %}
-  <strong>{{ key }}:</strong>
-  <ul class="list-group">{{ loop(value.items()) }}</ul>
-  {% elif value is iterable and value is not string %}
-  <strong>{{ key }}:</strong>
-  <ol>
-    {% for item in value %}
-    <li>
-      {% if item is mapping %}
-      <ul class="list-group">
-        {{ record_content(item) }}
-      </ul>
-      {% else %}
-      {{ item }}
-      {% endif %}
-    </li>
-    {% endfor %}
-  </ol>
-  {% else %}
-  <strong>{{ key }}:</strong> {{ value }}
-  {% endif %}
-</li>
-{% endfor %}
-{%- endmacro %}
+{% from 'sonar/macros/macro.html' import dl, dl_dict, dl_list, thumbnail %}
 
 {%- block body %}
-<!-- <ul class="list-group">
-  {{ record_content(record.replace_refs()) }}
-</ul> -->
 {% set record = record.replace_refs() %}
-<h1 class="text-primary">{{ record.title[0] | title_format(current_i18n.language) }}</h1>
+{% set title = record.title[0] | title_format(current_i18n.language) %}
+
+<h1 class="text-primary">{{ title }}</h1>
 {% if record.institution %}
 <h5 class="text-secondary">{{ record.institution.name }}</h5>
 {% endif %}
 
 <section class="mt-3">
   <article class="">
-    <dl class="row mb-0">
-      <!-- AUTHORS -->
-      {% if record.authors %}
-      {{ dl(_('Authors'), record.pid|authors_format(current_i18n.language, viewcode)) }}
+    <div class="row">
+      {% set main_file = record._files | files_by_type | first %}
+      {% if main_file %}
+      {{ thumbnail('documents', record.pid, main_file, record._files, 'col-sm-3') }}
       {% endif %}
+      <div class="col">
+        <dl class="row mb-0">
+          <!-- AUTHORS -->
+          {% if record.authors %}
+          {{ dl(_('Authors'), record.pid|authors_format(current_i18n.language, viewcode)) }}
+          {% endif %}
 
-      <!-- EDITION STATEMENT-->
-      {% if record.editionStatement %}
-      {{ dl_list(_('Edition'), record.editionStatement|edition_format) }}
+          <!-- EDITION STATEMENT-->
+          {% if record.editionStatement %}
+          {{ dl_list(_('Edition'), record.editionStatement|edition_format) }}
+          {% endif %}
+
+          <!-- PUBLICATION STATEMENT -->
+          {% for provision_activity in record.provisionActivity %}
+          {{ dl_dict(_(provision_activity.type), provision_activity|create_publication_statement ) }}
+          {% endfor %}
+
+          <!-- COPYRIGHT DATE -->
+          {% if record.copyrightDate %}
+          {{ dl(_('Copyright date'), record.copyrightDate|join(', ')) }}
+          {% endif %}
+
+          <!-- ABSTRACT -->
+          {% if record.abstracts|length > 0 %}
+          {{ dl(_('Abstract'), record.abstracts|abstracts_format|nl2br) }}
+          {% endif %}
+
+          <!-- PHYSICAL DESCRIPTION -->
+          {% if record.extent or record.otherMaterialCharacteristics or record.formats %}
+          {% set formats = ', '.join(record.formats) %}
+          {% set description = ', '.join([record.extent, record.otherMaterialCharacteristics, formats]|select) %}
+          {{ dl(_('Physical description'), description) }}
+          {% endif %}
+
+          <!-- ADDITIONAL MATERIALS -->
+          {% if record.additionalMaterials %}
+          {{ dl(_('Additional Materials'), record.additionalMaterials) }}
+          {% endif %}
+
+          <!-- SERIES -->
+          {% if record.series|length > 0 %}
+          {{ dl(_('Series'), record.series|series_format) }}
+          {% endif %}
+
+          <!-- IS PART OF -->
+          {% if record.is_part_of %}
+          {{ dl(_('Is part of'), record.is_part_of) }}
+          {% endif %}
+
+          <!-- SUBJECTS -->
+          {% if record.subjects|length > 0 %}
+          {{ dl(_('Subjects'), record.subjects|subjects_format|nl2br) }}
+          {% endif %}
+
+          <!-- NOTES -->
+          {% if record.notes|length > 0 %}
+          <dt class="col-sm-2">
+            {{ _('Notes') }}:
+          </dt>
+          <dd class="col-sm-10">
+            <ul class="list-unstyled mb-0">
+              {% for note in record.notes %}
+              <li>
+                {{ note }}
+              </li>
+              {% endfor %}
+            </ul>
+          </dd>
+          {% endif %}
+
+          {% if record.identifiedBy|identifiedby_format|length > 0 %}
+          <dt class="col-sm-2">
+            {{ _('Identifiers') }}:
+          </dt>
+          <dd class="col-sm-10">
+            <ul class="list-unstyled mb-0">
+              {% for identifier in record.identifiedBy|identifiedby_format %}
+              <li>
+                {{ identifier.value }}
+                <small class="badge badge-secondary text-uppercase text-light">{{ identifier.type }}</small>
+              </li>
+              {% endfor %}
+            </ul>
+          </dd>
+          {% endif %}
+
+          {% if record.language %}
+          <dt class="col-sm-2">
+            {{ _('Languages') }}:
+          </dt>
+          <dd class="col-sm-10">
+            <ul class="list-unstyled mb-0">
+              {% for language in record.language %}
+              <li>
+                {{ _('lang-' + language.value) }}
+              </li>
+              {% endfor %}
+            </ul>
+          </dd>
+          {% endif %}
+
+          <!-- PERMANENT LINK -->
+          {% set link = url_for('invenio_records_ui.document', pid_value=record.pid, ir=g.ir|default('sonar'), _external=True) %}
+          {{ dl(_('Permalink'), '<a href="' + link + '">' + link + '</a>') }}
+        </dl>
+      </div>
+    </div>
+
+    {% set files = record._files | files_by_type %}
+    {% if files %}
+    <h5 class="mt-5">{{ _('Other files') }}</h5>
+
+    <div class="row">
+      {% for file in files %}
+      {% if loop.index > 1 %}
+      {{ thumbnail('documents', record.pid, file, record._files, 'col-sm-2') }}
       {% endif %}
-
-      <!-- PUBLICATION STATEMENT -->
-      {% for provision_activity in record.provisionActivity %}
-      {{ dl_dict(_(provision_activity.type), provision_activity|create_publication_statement ) }}
       {% endfor %}
+    </div>
 
-      <!-- COPYRIGHT DATE -->
-      {% if record.copyrightDate %}
-      {{ dl(_('Copyright date'), record.copyrightDate|join(', ')) }}
-      {% endif %}
-
-      <!-- ABSTRACT -->
-      {% if record.abstracts|length > 0 %}
-      {{ dl(_('Abstract'), record.abstracts|abstracts_format|nl2br) }}
-      {% endif %}
-
-      <!-- PHYSICAL DESCRIPTION -->
-      {% if record.extent or record.otherMaterialCharacteristics or record.formats %}
-      {% set formats = ', '.join(record.formats) %}
-      {% set description = ', '.join([record.extent, record.otherMaterialCharacteristics, formats]|select) %}
-      {{ dl(_('Physical description'), description) }}
-      {% endif %}
-
-      <!-- ADDITIONAL MATERIALS -->
-      {% if record.additionalMaterials %}
-      {{ dl(_('Additional Materials'), record.additionalMaterials) }}
-      {% endif %}
-
-      <!-- SERIES -->
-      {% if record.series|length > 0 %}
-      {{ dl(_('Series'), record.series|series_format) }}
-      {% endif %}
-
-      <!-- IS PART OF -->
-      {% if record.is_part_of %}
-      {{ dl(_('Is part of'), record.is_part_of) }}
-      {% endif %}
-
-      <!-- SUBJECTS -->
-      {% if record.subjects|length > 0 %}
-      {{ dl(_('Subjects'), record.subjects|subjects_format|nl2br) }}
-      {% endif %}
-
-      <!-- NOTES -->
-      {% if record.notes|length > 0 %}
-      <dt class="col-sm-2">
-        {{ _('Notes') }}:
-      </dt>
-      <dd class="col-sm-10">
-        <ul class="list-unstyled mb-0">
-          {% for note in record.notes %}
-          <li>
-            {{ note }}
-          </li>
-          {% endfor %}
-        </ul>
-      </dd>
-      {% endif %}
-
-      {% if record.identifiedBy|identifiedby_format|length > 0 %}
-      <dt class="col-sm-2">
-        {{ _('Identifiers') }}:
-      </dt>
-      <dd class="col-sm-10">
-        <ul class="list-unstyled mb-0">
-          {% for identifier in record.identifiedBy|identifiedby_format %}
-          <li>
-            {{ identifier.value }}
-            <small class="badge badge-secondary text-uppercase text-light">{{ identifier.type }}</small>
-          </li>
-          {% endfor %}
-        </ul>
-      </dd>
-      {% endif %}
-
-      {% if record.language %}
-      <dt class="col-sm-2">
-        {{ _('Languages') }}:
-      </dt>
-      <dd class="col-sm-10">
-        <ul class="list-unstyled mb-0">
-          {% for language in record.language %}
-          <li>
-            {{ _('lang-' + language.value) }}
-          </li>
-          {% endfor %}
-        </ul>
-      </dd>
-      {% endif %}
-
-      <!-- PERMANENT LINK -->
-      {% set link = url_for('invenio_records_ui.document', pid_value=record.pid, ir=g.ir|default('sonar'), _external=True) %}
-      {{ dl(_('Permalink'), '<a href="' + link + '">' + link + '</a>') }}
-    </dl>
-
-    {% set pdfs = record._files | files_by_type %}
-    {% if pdfs %}
-    <h5 class="mt-5">{{ _('Files') }}</h5>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th>{{ _('File') }}</th>
-          <th>{{ _('Size') }}</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for file in pdfs %}
-        <tr>
-          <td>{{ file.key }}</td>
-          <td>{{ file.size | file_size }}</td>
-          <td class="text-right">
-            {% if file['mime_type'] == 'application/pdf' %}
-            <a href="/documents/{{ record.pid }}/preview/{{ file.key }}"
-              class="btn btn-secondary btn-sm text-light previewLink"><i class="fa fa-eye"></i>
-              {{ _('Preview') }}</a>
-            {% endif %}
-            <a href="/documents/{{ record.pid }}/files/{{ file.key }}" target="_blank"
-              class="btn btn-secondary btn-sm text-light"><i class="fa fa-download"></i> {{ _('Download') }}</a>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-
-    <iframe class="preview-iframe" id="preview-iframe" width="100%" height="500" src=""
-      style="border: none; display: none;"></iframe>
+    <!-- Preview modal -->
+    <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="preview-title">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <iframe class="preview-iframe" id="preview-iframe" width="100%" height="800" src=""
+              style="border: none;"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
 
     {% endif %}
   </article>
@@ -208,17 +183,18 @@
 <script>
   $(document).ready(function () {
     var $iframe = $('#preview-iframe');
+    var $previewTitle = $('#preview-title');
 
     $('.previewLink').click(function (event) {
       event.preventDefault();
       var link = $(this).attr('href')
 
-      if (link == $iframe.attr('src')) {
-        $iframe.attr('src', '').hide(500);
-        return;
+      if (link !== $iframe.attr('src')) {
+        $iframe.attr('src', $(this).attr('href'));
+        $previewTitle.text($(this).data('title'));
       }
 
-      $iframe.attr('src', $(this).attr('href')).show(500);
+      $('#previewModal').modal('show')
     });
   });
 </script>

@@ -22,3 +22,6 @@ SONAR_DOCUMENTS_IMPORT_FILES = True
 
 SONAR_DOCUMENTS_EXTRACT_FULLTEXT_ON_IMPORT = True
 """Automatically extract fulltext when a file is imported."""
+
+SONAR_DOCUMENTS_GENERATE_THUMBNAIL = True
+"""Automatically generate a thumbnail when a file is imported."""

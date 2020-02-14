@@ -61,4 +61,4 @@ recursive-include data *.crt *.json
 recursive-include docker *.cfg *.conf *.crt *.ini *.key *.pem *.sh
 recursive-include docs *.bat *.py *.rst *.txt Makefile
 recursive-include sonar *.babelrc *.eslintignore *.gitkeep *.json *.html *.js *.scss *.css *.png *.jpg *.svg *.po *.pot *.mo *.py *.txt *.woff *.woff2
-recursive-include tests *.doc *.json *.pdf *.py *.xml
+recursive-include tests *.doc *.json *.pdf *.py *.xml *.jpg
