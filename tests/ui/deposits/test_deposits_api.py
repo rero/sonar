@@ -48,4 +48,4 @@ def test_create_document(app, deposit_fixture):
     document = deposit_fixture.create_document()
     assert document['title'][0]['mainTitle'][0][
         'value'] == 'High-harmonic generation in quantum spin systems'
-    assert len(document.files) == 4
+    assert len(document.files) == 6

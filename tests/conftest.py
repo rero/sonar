@@ -368,6 +368,20 @@ def document_fixture(app, db, document_json_fixture, bucket_location_fixture):
 
 
 @pytest.fixture()
+def document_with_file(app, db, document_fixture, pdf_file):
+    """Create a document with a file associated."""
+    with open(pdf_file, 'rb') as file:
+        content = file.read()
+
+    document_fixture.add_file(content, 'test1.pdf', order=1)
+
+    document_fixture.commit()
+    db.session.commit()
+
+    return document_fixture
+
+
+@pytest.fixture()
 def deposit_fixture(app, db, db_user_fixture, pdf_file,
                     bucket_location_fixture):
     """Deposit fixture."""
@@ -465,3 +479,10 @@ def bucket_location_fixture(app, db):
 def pdf_file():
     """Return test PDF file path."""
     return os.path.dirname(os.path.abspath(__file__)) + '/data/test.pdf'
+
+
+@pytest.fixture(autouse=True)
+def mock_thumbnail_creation(monkeypatch):
+    """Mock thumbnail creation for all tests."""
+    monkeypatch.setattr('sonar.modules.utils.Image.make_blob', lambda *args:
+                        b'Fake thumbnail image content')

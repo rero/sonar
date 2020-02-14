@@ -32,7 +32,7 @@ from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.pdf_extractor.pdf_extractor import PDFExtractor
 from sonar.modules.pdf_extractor.utils import format_extracted_data
 from sonar.modules.users.api import UserRecord
-from sonar.utils import send_email
+from sonar.modules.utils import send_email
 
 
 class FilesResource(ContentNegotiatedMethodView):

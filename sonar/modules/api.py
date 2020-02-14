@@ -33,8 +33,9 @@ from invenio_records_files.api import FilesMixin, Record
 from invenio_search.api import RecordsSearch
 from sqlalchemy.orm.exc import NoResultFound
 
-from sonar.modules.deposits.utils import change_filename_extension
 from sonar.modules.pdf_extractor.utils import extract_text_from_content
+from sonar.modules.utils import change_filename_extension, \
+    create_thumbnail_from_file
 
 
 class SonarRecord(Record, FilesMixin):
@@ -157,6 +158,10 @@ class SonarRecord(Record, FilesMixin):
         self.files[key]['type'] = kwargs.get('type', 'file')
         self.files[key]['order'] = kwargs.get('order', 1)
 
+        # Create thumbnail
+        if current_app.config.get('SONAR_DOCUMENTS_GENERATE_THUMBNAIL'):
+            self.create_thumbnail(self.files[key])
+
         # Try to extract full text from file data, and generate a warning if
         # it's not possible. For several cases, file is locked against fulltext
         # copy.
@@ -175,6 +180,53 @@ class SonarRecord(Record, FilesMixin):
                     '{record}: {error}'.format(file=key,
                                                error=exception,
                                                record=self['identifiedBy']))
+
+    def create_thumbnail(self, file=None):
+        """Create a thumbnail for record.
+
+        This is done by getting the file with order 1 or the first file
+        instead.
+
+        :param file: File from which thumbnail is created.
+        """
+        # If not file passed, try to get the main file
+        if not file:
+            file = self.get_main_file()
+
+        # No file found, we don't do anything
+        if not file:
+            return
+
+        try:
+            # Create thumbnail
+            image_blob = create_thumbnail_from_file(
+                file.file.uri, file.mimetype)
+
+            thumbnail_key = change_filename_extension(file['key'], 'jpg')
+
+            # Store thumbnail in record's files
+            self.files[thumbnail_key] = BytesIO(image_blob)
+            self.files[thumbnail_key]['type'] = 'thumbnail'
+        except Exception as exception:
+            current_app.logger.warning(
+                'Error during thumbnail generation of {file} of record '
+                '{record}: {error}'.format(file=file['key'],
+                                           error=exception,
+                                           record=self.get(
+                                               'identifiedBy', self['pid'])))
+
+    def get_main_file(self):
+        """Get the main file of record."""
+        files = [file for file in self.files if file['type'] == 'file']
+
+        if not files:
+            return None
+
+        for file in files:
+            if file.get('type') == 'file' and file.get('order') == 1:
+                return file
+
+        return files[0]
 
 
 class SonarSearch(RecordsSearch):
