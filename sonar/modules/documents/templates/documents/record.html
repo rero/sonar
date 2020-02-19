@@ -135,6 +135,19 @@
           </dd>
           {% endif %}
 
+          <!-- OTHER EDITION -->
+          {% if record.otherEdition %}
+          <dt class="col-sm-2">
+            {{ _('Other editions') }}:
+          </dt>
+          <dd class="col-sm-10">
+            {% for otherEdition in record.otherEdition %}
+            <p class="m-0">{{ _(otherEdition.publicNote) }} : <a href="{{ otherEdition.document.electronicLocator }}"
+                target="_blank">{{ otherEdition.document.electronicLocator }}</a></p>
+            {% endfor %}
+          </dd>
+          {% endif %}
+
           <!-- PERMANENT LINK -->
           {% set link = url_for('invenio_records_ui.document', pid_value=record.pid, ir=g.ir|default('sonar'), _external=True) %}
           {{ dl(_('Permalink'), '<a href="' + link + '">' + link + '</a>') }}

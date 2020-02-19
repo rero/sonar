@@ -362,6 +362,22 @@
         },
         "_updated": {
           "type": "date"
+        },
+        "otherEdition": {
+          "type": "object",
+          "properties": {
+            "document": {
+              "type": "object",
+              "properties": {
+                "electronicLocator": {
+                  "type": "keyword"
+                }
+              }
+            },
+            "publicNote": {
+              "type": "text"
+            }
+          }
         }
       }
     }
