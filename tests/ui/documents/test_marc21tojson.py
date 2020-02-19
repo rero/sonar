@@ -2354,3 +2354,75 @@ def test_marc21_to_files():
     assert data.get('files')[0]['url'] == 'http://some.url/file.pdf'
     assert data.get('files')[0]['label'] == 'Dépliant de l\'exposition'
     assert data.get('files')[0]['order'] == 1
+
+
+def test_marc21_to_other_edition():
+    """Test other edition extraction."""
+    # One other edition
+    marc21xml = """
+    <record>
+        <datafield tag="775" ind1=" " ind2=" ">
+            <subfield code="o">http://domain.com/url</subfield>
+            <subfield code="g">version publiée</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('otherEdition') == [{
+        'document': {
+            'electronicLocator': 'http://domain.com/url'
+        },
+        'publicNote': 'version publiée'
+    }]
+
+    # Multiple other editions
+    marc21xml = """
+    <record>
+        <datafield tag="775" ind1=" " ind2=" ">
+            <subfield code="o">http://domain.com/url</subfield>
+            <subfield code="g">version publiée</subfield>
+        </datafield>
+        <datafield tag="775" ind1=" " ind2=" ">
+            <subfield code="o">http://domain.com/url-2</subfield>
+            <subfield code="g">version publiée</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('otherEdition') == [{
+        'document': {
+            'electronicLocator': 'http://domain.com/url'
+        },
+        'publicNote': 'version publiée'
+    }, {
+        'document': {
+            'electronicLocator': 'http://domain.com/url-2'
+        },
+        'publicNote': 'version publiée'
+    }]
+
+    # No electronic location
+    marc21xml = """
+    <record>
+        <datafield tag="775" ind1=" " ind2=" ">
+            <subfield code="g">version publiée</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('otherEdition')
+
+    # No public note
+    marc21xml = """
+    <record>
+        <datafield tag="775" ind1=" " ind2=" ">
+            <subfield code="o">http://domain.com/url</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('otherEdition')
