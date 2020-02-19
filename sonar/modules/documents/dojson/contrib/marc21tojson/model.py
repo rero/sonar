@@ -848,3 +848,22 @@ def marc21_to_files(self, key, value):
     }
 
     return data
+
+
+@marc21tojson.over('otherEdition', '^775..')
+@utils.for_each_value
+@utils.ignore_value
+def marc21_to_other_edition(self, key, value):
+    """Get other edition."""
+    electronic_locator = value.get('o')
+    public_note = value.get('g')
+
+    if not electronic_locator or not public_note:
+        return None
+
+    return {
+        'document': {
+            'electronicLocator': electronic_locator
+        },
+        'publicNote': public_note
+    }

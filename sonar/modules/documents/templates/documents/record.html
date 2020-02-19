@@ -20,31 +20,31 @@
 {% from 'sonar/macros/macro.html' import dl, dl_dict, dl_list %}
 
 {%- macro record_content(data) %}
-  {% for key, value in data.items() recursive %}
-    <li class="list-group-item">
-    {% if value is mapping %}
-        <strong>{{ key }}:</strong>
-        <ul class="list-group">{{ loop(value.items()) }}</ul>
-    {% elif value is iterable and value is not string %}
-        <strong>{{ key }}:</strong>
-        <ol>
-        {% for item in value %}
-          <li>
-          {% if item is mapping %}
-            <ul class="list-group">
-              {{ record_content(item) }}
-            </ul>
-          {% else %}
-            {{ item }}
-          {% endif %}
-          </li>
-        {% endfor %}
-        </ol>
-    {% else %}
-      <strong>{{ key }}:</strong> {{ value }}
-    {% endif %}
+{% for key, value in data.items() recursive %}
+<li class="list-group-item">
+  {% if value is mapping %}
+  <strong>{{ key }}:</strong>
+  <ul class="list-group">{{ loop(value.items()) }}</ul>
+  {% elif value is iterable and value is not string %}
+  <strong>{{ key }}:</strong>
+  <ol>
+    {% for item in value %}
+    <li>
+      {% if item is mapping %}
+      <ul class="list-group">
+        {{ record_content(item) }}
+      </ul>
+      {% else %}
+      {{ item }}
+      {% endif %}
     </li>
-  {% endfor %}
+    {% endfor %}
+  </ol>
+  {% else %}
+  <strong>{{ key }}:</strong> {{ value }}
+  {% endif %}
+</li>
+{% endfor %}
 {%- endmacro %}
 
 {%- block body %}
@@ -159,23 +159,35 @@
       </dd>
       {% endif %}
 
+      <!-- OTHER EDITION -->
+      {% if record.otherEdition %}
+      <dt class="col-sm-2">
+        {{ _('Other editions') }}:
+      </dt>
+      <dd class="col-sm-10">
+        {% for otherEdition in record.otherEdition %}
+        <p class="m-0">{{ _(otherEdition.publicNote) }} : <a href="{{ otherEdition.document.electronicLocator }}"
+            target="_blank">{{ otherEdition.document.electronicLocator }}</a></p>
+        {% endfor %}
+      </dd>
+      {% endif %}
+
       <!-- PERMANENT LINK -->
       {% set link = url_for('invenio_records_ui.document', pid_value=record.pid, ir=g.ir|default('sonar'), _external=True) %}
       {{ dl(_('Permalink'), '<a href="' + link + '">' + link + '</a>') }}
     </dl>
 
     {% if record._files %}
-      <hr>
-      <h5>{{ _('Files') }}</h5>
-      <ul>
+    <hr>
+    <h5>{{ _('Files') }}</h5>
+    <ul>
       {% for file in record._files %}
-        <li>
-          <a href="/api/documents/{{ record.pid }}/files/{{ file.key }}" target="_blank">{{ file.key }}</a>
-        </li>
+      <li>
+        <a href="/api/documents/{{ record.pid }}/files/{{ file.key }}" target="_blank">{{ file.key }}</a>
+      </li>
       {% endfor %}
-      </ul>
+    </ul>
     {% endif %}
   </article>
 </section>
 {%- endblock %}
-
