@@ -293,8 +293,11 @@ def document_json_fixture(app, db, organization_fixture):
             'value': 'Abstract of the document'
         }],
         'subjects': [{
-            'language': 'eng',
-            'value': ['Time series models', 'GARCH models']
+            'label': {
+                'language': 'eng',
+                'value': ['Time series models', 'GARCH models']
+            },
+            'source': 'RERO'
         }],
         'provisionActivity': [{
             'type':

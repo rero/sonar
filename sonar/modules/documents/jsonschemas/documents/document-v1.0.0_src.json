@@ -1618,34 +1618,42 @@
     },
     "subjects": {
       "title": "Subject",
-      "description": "Subject of the resource.",
       "type": "array",
-      "additionalProperties": false,
       "items": {
         "type": "object",
+        "required": ["label"],
         "additionalProperties": false,
-        "required": [
-          "language",
-          "value"
-        ],
         "properties": {
-          "language": {
-            "title": "Subject language",
-            "description": "Language of subject.",
-            "type": "string",
-            "$ref": "#/definitions/language",
-            "minLength": 1
-          },
-          "value": {
-            "title": "Subjects list",
-            "description": "A list of subjects.",
-            "type": "array",
-            "minLength": 1,
-            "items": {
-              "type": "string",
-              "title": "Subject",
-              "minLength": 1
+          "label": {
+            "title": "Label",
+            "type": "object",
+            "required": ["value"],
+            "additionalProperties": false,
+            "properties": {
+              "language": {
+                "title": "Language",
+                "$ref": "#/definitions/language",
+                "type": "string",
+                "minLength": 1
+              },
+              "value": {
+                "title": "Value",
+                "description": "A list of keywords.",
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "title": "Subject",
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
             }
+          },
+          "source": {
+            "title": "Source",
+            "description": "Source of heading or term.",
+            "type": "string",
+            "minLength": 1
           }
         }
       }

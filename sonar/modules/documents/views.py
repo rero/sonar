@@ -185,12 +185,31 @@ def abstracts_format(abstracts):
 
 
 @blueprint.app_template_filter()
-def subjects_format(subjects):
-    """Format subjects for template."""
-    output = []
+def subjects_format(subjects, language):
+    """Format subjects for template.
+
+    :param subjects: Subject object list.
+    :param language: Current language of the interface.
+    """
+    language = get_bibliographic_code_from_language(language)
+
+    items = []
     for subject in subjects:
-        output.append(' ; '.join(subject['value']))
-    return '\n'.join(str(x) for x in output)
+        item = {}
+
+        # Has source
+        if subject.get('source'):
+            item['source'] = subject['source']
+
+        # Add only subjects for current language or subjects without language
+        if not subject['label'].get(
+                'language') or subject['label']['language'] == language:
+            item['value'] = ' ; '.join(subject['label']['value'])
+
+        if item:
+            items.append(item)
+
+    return items
 
 
 @blueprint.app_template_filter()
