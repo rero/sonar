@@ -18,37 +18,25 @@
 
 set -e
 
-script_path=$(dirname "$0")
-pipfile_lock_path="$script_path/../Pipfile.lock"
-cwd=`pwd`
+tarball=$1
 
-if [ ! -f $pipfile_lock_path ]; then
-    echo "'Pipfile.lock' not found. Generating via 'pipenv lock --dev'..."
-    pipenv lock --dev
+# Remove installed package
+rm -rf ${assets_folder}/node_modules/@rero
+
+if test -z "$tarball"; then
+    echo 'No tarball file provided, standard installation from package.json'
+    pipenv run invenio webpack create
 fi
 
-# Installs all packages specified in Pipfile.lock
-pipenv sync --dev
-
-# Install application code and entrypoints from 'setup.py'
-pipenv run pip install -e $script_path/..
-
-# Collect static files
-pipenv run invenio collect -v
+# Install dependencies
+pipenv run invenio webpack install $tarball
 
 # Store folder path
 assets_folder=$(pipenv run invenio shell --no-term-title -c "print(app.config.get('WEBPACKEXT_PROJECT_BUILDDIR'))")
 static_folder=$(pipenv run invenio shell --no-term-title -c "print('static_folder:%s' % app.static_folder)"|grep static_folder| cut -d: -f2-)
 
-# Remove installed RERO packages (in case they was installed with pack)
-rm -rf ${assets_folder}/node_modules/@rero
-
-# Build webpack assets
-pipenv run invenio webpack buildall
-
 # Copy sonar-ui files to static folder to use it with flask-assets
 mkdir -p ${static_folder}/sonar-ui
 cp -R ${assets_folder}/node_modules/@rero/sonar-ui/dist/sonar/* ${static_folder}/sonar-ui
 
-# Compile json schema
-pipenv run invenio utils compile-json ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json -o ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
+echo "Install UI finished!"
