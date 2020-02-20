@@ -1895,17 +1895,58 @@ def test_marc21_to_subjects():
         <subfield code="9">fre</subfield>
         <subfield code="a">sujet 1 ; sujet 2</subfield>
       </datafield>
+      <datafield tag="600" ind1=" " ind2=" ">
+        <subfield code="2">rero</subfield>
+        <subfield code="a">subject 600 1 ; subject 600 2</subfield>
+      </datafield>
     </record>
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('subjects') == [{
-        'language': 'eng',
-        'value': ['subject 1', 'subject 2']
-    }, {
-        'language': 'fre',
-        'value': ['sujet 1', 'sujet 2']
-    }]
+    assert data.get('subjects') == [
+        {
+            'label': {
+                'language': 'eng',
+                'value': ['subject 1', 'subject 2']
+            }
+        },
+        {
+            'label': {
+                'language': 'fre',
+                'value': ['sujet 1', 'sujet 2']
+            }
+        },
+        {
+            'label': {
+                'value': ['subject 600 1', 'subject 600 2']
+            },
+            'source': 'rero'
+        }
+    ]
+
+    # 600 without source
+    marc21xml = """
+    <record>
+      <datafield tag="600" ind1=" " ind2=" ">
+        <subfield code="a">subject 600 1 ; subject 600 2</subfield>
+      </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('subjects')
+
+    # 695 without language
+    marc21xml = """
+    <record>
+      <datafield tag="695" ind1=" " ind2=" ">
+        <subfield code="a">subject 1 ; subject 2</subfield>
+      </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('subjects')
 
 
 def test_marc21_to_identifiedby_from_020():

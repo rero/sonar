@@ -114,7 +114,21 @@
 
       <!-- SUBJECTS -->
       {% if record.subjects|length > 0 %}
-      {{ dl(_('Subjects'), record.subjects|subjects_format|nl2br) }}
+      <dt class="col-sm-2">
+        {{ _('Subjects') }}:
+      </dt>
+      <dd class="col-sm-10">
+        <ul class="list-unstyled mb-0">
+          {% for subject in record.subjects|subjects_format(current_i18n.language) %}
+          <li>
+            {{ subject.value }}
+            {% if subject.source %}
+            <small class="badge badge-secondary text-uppercase text-light">{{ subject.source }}</small>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </dd>
       {% endif %}
 
       <!-- NOTES -->

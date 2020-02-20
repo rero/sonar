@@ -134,8 +134,35 @@ def test_abstracts_format():
 
 def test_subjects_format(document_fixture):
     """Test subjects format."""
-    assert views.subjects_format(
-        document_fixture['subjects']) == 'Time series models ; GARCH models'
+    subjects = [{
+        'label': {
+            'value': ['subject 1', 'subject 2'],
+            'language': 'eng'
+        }
+    }, {
+        'label': {
+            'value': ['sujet 1', 'sujet 2'],
+            'language': 'fre'
+        }
+    }, {
+        'label': {
+            'value': ['subject with source 1', 'subject with source 2']
+        },
+        'source': 'RERO'
+    }]
+
+    assert views.subjects_format(subjects, 'en') == [{
+        'value':
+        'subject 1 ; subject 2'
+    }, {
+        'value': 'subject with source 1 ; subject with source 2',
+        'source': 'RERO'
+    }]
+
+    assert views.subjects_format(subjects, 'de') == [{
+        'value': 'subject with source 1 ; subject with source 2',
+        'source': 'RERO'
+    }]
 
 
 def test_identifiedby_format():

@@ -347,9 +347,20 @@
         "subjects": {
           "type": "object",
           "properties": {
-            "value": {
-              "type": "text",
-              "copy_to": "facet_subjects"
+            "label": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "text",
+                  "copy_to": "facet_subjects"
+                },
+                "language": {
+                  "type": "keyword"
+                }
+              }
+            },
+            "source": {
+              "type": "keyword"
             }
           }
         },
