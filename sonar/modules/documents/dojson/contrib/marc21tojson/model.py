@@ -791,19 +791,32 @@ def marc21_to_is_part_of(self, key, value):
         return not_repetitive(marc21tojson.bib_id, key, value, 't')
 
 
-@marc21tojson.over('subjects', '^695..')
+@marc21tojson.over('subjects', '^600..|695..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_subjects(self, key, value):
-    """Get subjects.
+    """Get subjects."""
+    subjects = {
+        'label': {
+            'value': value.get('a').split(' ; ')
+        }
+    }
 
-    subjects: 6xx [duplicates could exist between several vocabularies,
-        if possible deduplicate]
-    """
-    if not value.get('9'):
-        return None
+    # If field is 695 and no language is available
+    if key == '695__':
+        if not value.get('9'):
+            return None
 
-    return dict(language=value.get('9'), value=value.get('a').split(' ; '))
+        subjects['label']['language'] = value.get('9')
+
+    # If field is 600 and no source is available
+    if key == '600__':
+        if not value.get('2'):
+            return None
+
+        subjects['source'] = value.get('2')
+
+    return subjects
 
 
 @marc21tojson.over('files', '^856..')
