@@ -46,4 +46,4 @@ SONAR_APP_DISABLE_PERMISSION_CHECKS = False
 """Disable permission checks during API calls. Useful when API is test from
 command line or progams like postman."""
 
-SONAR_APP_UI_VERSION = '0.1.4'
+SONAR_APP_UI_VERSION = '0.1.7'
