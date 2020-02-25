@@ -144,7 +144,7 @@
     </div>
 
     {% set files = record._files | files_by_type %}
-    {% if files %}
+    {% if files and files | length > 1 %}
     <h5 class="mt-5">{{ _('Other files') }}</h5>
 
     <div class="row">
