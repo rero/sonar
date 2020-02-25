@@ -24,6 +24,8 @@ werkzeug = "==0.16.0"
 # TODO: check why we need this.
 flask-login = "<0.5"
 invenio-oaiharvester = {editable = true,ref = "v1.0.0a4",git = "https://github.com/inveniosoftware/invenio-oaiharvester.git"}
+# Forced version for security reason
+bleach = ">=3.1.1"
 
 [dev-packages]
 Flask-Debugtoolbar = ">=0.10.1"
