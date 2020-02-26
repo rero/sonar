@@ -132,6 +132,7 @@ class SonarRecord(Record, FilesMixin):
 
         for kwargs, see add_file method below.
         """
+        kwargs['url'] = url
         self.add_file(requests.get(url).content, key, **kwargs)
 
     def add_file(self, data, key, **kwargs):
@@ -141,7 +142,7 @@ class SonarRecord(Record, FilesMixin):
         :param str key: File key
 
         kwargs may contain some additional data such as: file label, file type,
-        order.
+        order and url.
         """
         if not current_app.config.get('SONAR_DOCUMENTS_IMPORT_FILES'):
             return
@@ -157,6 +158,10 @@ class SonarRecord(Record, FilesMixin):
         self.files[key]['label'] = kwargs.get('label', key)
         self.files[key]['type'] = kwargs.get('type', 'file')
         self.files[key]['order'] = kwargs.get('order', 1)
+
+        # Store external file URL
+        if kwargs.get('url'):
+            self.files[key]['external_url'] = kwargs['url']
 
         # Create thumbnail
         if current_app.config.get('SONAR_DOCUMENTS_GENERATE_THUMBNAIL'):

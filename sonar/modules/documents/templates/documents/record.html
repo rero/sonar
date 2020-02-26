@@ -27,13 +27,12 @@
 {% if record.institution %}
 <h5 class="text-secondary">{{ record.institution.name }}</h5>
 {% endif %}
-
 <section class="mt-3">
   <article class="">
     <div class="row">
       {% set main_file = record._files | files_by_type | first %}
       {% if main_file %}
-      {{ thumbnail('documents', record.pid, main_file, record._files, 'col-sm-3') }}
+      {{ thumbnail('documents', record, main_file, 'col-sm-3') }}
       {% endif %}
       <div class="col">
         <dl class="row mb-0">
@@ -150,31 +149,30 @@
     <div class="row">
       {% for file in files %}
       {% if loop.index > 1 %}
-      {{ thumbnail('documents', record.pid, file, record._files, 'col-sm-2') }}
+      {{ thumbnail('documents', record, file, 'col-sm-2 mb-4') }}
       {% endif %}
       {% endfor %}
     </div>
+    {% endif %}
+  </article>
 
-    <!-- Preview modal -->
-    <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="preview-title">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <iframe class="preview-iframe" id="preview-iframe" width="100%" height="800" src=""
-              style="border: none;"></iframe>
-          </div>
+  <!-- Preview modal -->
+  <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="preview-title">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <iframe class="preview-iframe" id="preview-iframe" width="100%" height="800" src=""
+            style="border: none;"></iframe>
         </div>
       </div>
     </div>
-
-    {% endif %}
-  </article>
+  </div>
 </section>
 {%- endblock %}
 

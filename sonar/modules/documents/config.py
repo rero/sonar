@@ -25,3 +25,6 @@ SONAR_DOCUMENTS_EXTRACT_FULLTEXT_ON_IMPORT = True
 
 SONAR_DOCUMENTS_GENERATE_THUMBNAIL = True
 """Automatically generate a thumbnail when a file is imported."""
+
+SONAR_DOCUMENTS_INSTITUTIONS_EXTERNAL_FILES = ['csal']
+"""Display external files URL for these institutions."""
