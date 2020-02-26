@@ -62,21 +62,35 @@
 {% endif %}
 {% endmacro %}
 
-{% macro thumbnail(resource_type, pid, file, files, class = '') %}
-{% set thumbnail = file | thumbnail(files) %}
+{% macro thumbnail(resource_type, record, file, class = '') %}
+{% set thumbnail = file | thumbnail(record._files) %}
 {% if thumbnail %}
 {% set file_title = file | file_title %}
+{% set externalUrl = record | has_external_urls_for_files %}
 <div class="text-center {{ class }}">
-  <a href="/{{ resource_type }}/{{ pid }}/preview/{{ file.key }}" data-title="{{ file_title }}" class="previewLink">
-    <img src="/{{ resource_type }}/{{ pid }}/files/{{ thumbnail.key }}" class="img-thumbnail img-fluid"
+  {% if externalUrl %}
+  {% if file.external_url %}
+  <a href="{{ file.external_url }}" target="_blank">
+    <img src="/{{ resource_type }}/{{ record.pid }}/files/{{ thumbnail.key }}" class="img-thumbnail img-fluid"
       alt="{{ file_title }}">
   </a>
+  {% endif %}
+  {% else %}
+  <a href="/{{ resource_type }}/{{ record.pid }}/preview/{{ file.key }}" data-title="{{ file_title }}"
+    class="previewLink">
+    <img src="/{{ resource_type }}/{{ record.pid }}/files/{{ thumbnail.key }}" class="img-thumbnail img-fluid"
+      alt="{{ file_title }}">
+  </a>
+  {% endif %}
   <p class="my-1 small">{{ file_title }}</p>
+  {% if not externalUrl %}
   <p class="m-0">
-    <a href="/{{ resource_type }}/{{ pid }}/preview/{{ file.key }}" data-title="{{ file_title }}" class="previewLink"><i
-        class="fa fa-eye mr-2"></i></a>
-    <a href="/{{ resource_type }}/{{ pid }}/files/{{ file.key }}" target="_blank"><i class="fa fa-download"></i></a>
+    <a href="/{{ resource_type }}/{{ record.pid }}/preview/{{ file.key }}" data-title="{{ file_title }}"
+      class="previewLink"><i class="fa fa-eye mr-2"></i></a>
+    <a href="/{{ resource_type }}/{{ record.pid }}/files/{{ file.key }}" target="_blank"><i
+        class="fa fa-download"></i></a>
   </p>
+  {% endif %}
 </div>
 {% endif %}
 {% endmacro %}

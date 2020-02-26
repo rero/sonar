@@ -230,7 +230,7 @@ def file_size(size):
 
     :param size: integer representing the size of the file.
     """
-    return str(round(size/(1024*1024), 2)) + 'Mb'
+    return str(round(size / (1024 * 1024), 2)) + 'Mb'
 
 
 @blueprint.app_template_filter()
@@ -260,6 +260,17 @@ def thumbnail(file, files):
         return None
 
     return matches[0]
+
+
+@blueprint.app_template_filter()
+def has_external_urls_for_files(record):
+    """Check if files point to external website.
+
+    :param record: Current record.
+    """
+    return record.get('institution', {}).get('pid') and record['institution'][
+        'pid'] in current_app.config.get(
+            'SONAR_DOCUMENTS_INSTITUTIONS_EXTERNAL_FILES')
 
 
 def get_language_from_bibliographic_code(language_code):

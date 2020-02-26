@@ -334,3 +334,29 @@ def test_thumbnail():
     }]
 
     assert not views.thumbnail(files[0], files)
+
+
+def test_has_external_urls_for_files(app):
+    """Test if record has to point files to external URL or not."""
+    assert views.has_external_urls_for_files({
+        'pid': 1,
+        'institution': {
+            'pid': 'csal'
+        }
+    })
+
+    assert not views.has_external_urls_for_files({
+        'pid': 1,
+        'institution': {
+            'pid': 'unisi'
+        }
+    })
+
+    assert not views.has_external_urls_for_files({
+        'pid': 1,
+        'institution': {}
+    })
+
+    assert not views.has_external_urls_for_files({
+        'pid': 1
+    })
