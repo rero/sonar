@@ -2426,3 +2426,54 @@ def test_marc21_to_other_edition():
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
     assert not data.get('otherEdition')
+
+
+def test_marc21_to_specific_collection():
+    """Test extracting collection from file 982."""
+    # Extract collection OK
+    marc21xml = """
+    <record>
+        <datafield tag="982" ind1=" " ind2=" ">
+            <subfield code="a">Treize étoiles</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('specificCollections') == ['Treize étoiles']
+
+    # Multiple collections
+    marc21xml = """
+    <record>
+        <datafield tag="982" ind1=" " ind2=" ">
+            <subfield code="a">Collection 1</subfield>
+        </datafield>
+        <datafield tag="982" ind1=" " ind2=" ">
+            <subfield code="a">Collection 2</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('specificCollections') == ['Collection 1', 'Collection 2']
+
+    # No code a
+    marc21xml = """
+    <record>
+        <datafield tag="982" ind1=" " ind2=" ">
+            <subfield code="b">Treize étoiles</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('specificCollections')
+
+    # Not field 982
+    marc21xml = """
+    <record>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('specificCollections')
