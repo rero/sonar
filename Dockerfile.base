@@ -24,7 +24,7 @@
 
 FROM inveniosoftware/centos7-python:3.6
 
-RUN yum -y install libxml2-devel xmlsec1-devel xmlsec1-openssl-devel libtool-ltdl-devel xpdf
+RUN yum -y install libxml2-devel xmlsec1-devel xmlsec1-openssl-devel libtool-ltdl-devel xpdf ghostscript ImageMagick
 
 COPY Pipfile Pipfile.lock ./
 RUN pipenv install --deploy --system
