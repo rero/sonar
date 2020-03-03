@@ -867,3 +867,11 @@ def marc21_to_other_edition(self, key, value):
         },
         'publicNote': public_note
     }
+
+
+@marc21tojson.over('specificCollections', '^982..')
+@utils.for_each_value
+@utils.ignore_value
+def marc21_to_specific_collection(self, key, value):
+    """Extract collection for record."""
+    return value.get('a')
