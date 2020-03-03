@@ -26,7 +26,9 @@
   "mappings": {
     "document-v1.0.0": {
       "_source": {
-        "excludes": ["fulltext"]
+        "excludes": [
+          "fulltext"
+        ]
       },
       "date_detection": false,
       "numeric_detection": false,
@@ -378,6 +380,9 @@
               "type": "text"
             }
           }
+        },
+        "specificCollections": {
+          "type": "keyword"
         }
       }
     }

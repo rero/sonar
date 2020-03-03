@@ -36,6 +36,11 @@
       {% endif %}
       <div class="col">
         <dl class="row mb-0">
+          <!-- COLLECTION SPECIFIQUE -->
+          {% if record.specificCollections %}
+          {{ dl_list(_('Specific collections'), record.specificCollections) }}
+          {% endif %}
+
           <!-- AUTHORS -->
           {% if record.authors %}
           {{ dl(_('Authors'), record.pid|authors_format(current_i18n.language, viewcode)) }}

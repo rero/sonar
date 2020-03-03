@@ -1015,7 +1015,11 @@
             "title": "Type",
             "description": "Type of the file",
             "type": "string",
-            "enum": ["file", "fulltext", "thumbnail"],
+            "enum": [
+              "file",
+              "fulltext",
+              "thumbnail"
+            ],
             "default": "file",
             "minLength": 1
           },
@@ -1117,7 +1121,10 @@
             "minItems": 1,
             "items": {
               "type": "object",
-              "required": ["value", "language"],
+              "required": [
+                "value",
+                "language"
+              ],
               "additionalProperties": false,
               "properties": {
                 "value": {
@@ -1140,7 +1147,10 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["value", "language"],
+              "required": [
+                "value",
+                "language"
+              ],
               "additionalProperties": false,
               "properties": {
                 "value": {
@@ -1501,7 +1511,10 @@
       "items": {
         "title": "Abstract item",
         "type": "object",
-        "required": ["value", "language"],
+        "required": [
+          "value",
+          "language"
+        ],
         "additionalProperties": false,
         "properties": {
           "value": {
@@ -1677,13 +1690,18 @@
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["document", "publicNote"],
+        "required": [
+          "document",
+          "publicNote"
+        ],
         "additionalProperties": false,
         "properties": {
           "document": {
             "title": "Document",
             "type": "object",
-            "required": ["electronicLocator"],
+            "required": [
+              "electronicLocator"
+            ],
             "additionalProperties": false,
             "properties": {
               "electronicLocator": {
@@ -1699,6 +1717,15 @@
             "minLength": 1
           }
         }
+      }
+    },
+    "specificCollections": {
+      "title": "Collection",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
       }
     }
   }
