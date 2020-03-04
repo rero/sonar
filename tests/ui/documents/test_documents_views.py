@@ -86,14 +86,6 @@ def test_title_format(document_fixture):
     assert views.title_format(title, 'it') == 'Title EN : Subtitle IT'
 
 
-def test_authors_format(document_fixture):
-    """Test author format filter."""
-    assert views.authors_format(
-        '10000', 'en'
-    ) == 'Mancini, Loriano, Librarian, 1975-03-23; Ronchetti, Elvezio; ' \
-         'Trojani, Fabio'
-
-
 def test_publishers_format():
     """Test publishers format."""
     result = 'Foo; place1; place2: Foo; Bar'
@@ -204,13 +196,6 @@ def test_nl2br():
     """Test nl2br conversion."""
     text = 'Multiline text\nMultiline text'
     assert views.nl2br(text) == 'Multiline text<br>Multiline text'
-
-
-def test_edition_format(document_fixture):
-    """Test edition format."""
-    edition_format = views.edition_format(document_fixture['editionStatement'])
-    assert len(edition_format) == 2
-    assert edition_format[0] == 'Di 3 ban / Zeng Lingliang zhu bian'
 
 
 def test_get_code_from_bibliographic_language(app):
@@ -379,11 +364,23 @@ def test_has_external_urls_for_files(app):
         }
     })
 
-    assert not views.has_external_urls_for_files({
-        'pid': 1,
-        'institution': {}
-    })
+    assert not views.has_external_urls_for_files({'pid': 1, 'institution': {}})
 
-    assert not views.has_external_urls_for_files({
-        'pid': 1
-    })
+    assert not views.has_external_urls_for_files({'pid': 1})
+
+
+def test_part_of_format():
+    """Test part of format for displaying."""
+    assert views.part_of_format({
+        'document': {
+            'title': 'Mehr oder weniger Staat?'
+        },
+        'numberingYear': '2015',
+        'numberingVolume': '28',
+        'numberingIssue': '2',
+        'numberingPages': '469-480'
+    }) == 'Mehr oder weniger Staat?, 2015, vol. 28, no. 2, p. 469-480'
+
+    assert views.part_of_format({
+        'numberingYear': '2015',
+    }) == '2015'

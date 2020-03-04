@@ -24,8 +24,8 @@ def test_get_record_by_identifier(app, document_fixture):
     """Test getting record by its identifier."""
     # Record found
     record = DocumentRecord.get_record_by_identifier([{
-        'value': 'oai:doc.rero.ch:20050302172954-WU',
-        'type': 'bf:Identifier'
+        'value': '111111',
+        'type': 'bf:Local'
     }])
     assert record['pid'] == '10000'
 

@@ -135,7 +135,7 @@ class DepositRecord(SonarRecord):
                     'value': self['metadata']['title']
                 }]
             }],
-            'type':
+            'documentType':
             self['metadata']['document_type'],
             'language': [{
                 'type': 'bf:Language',

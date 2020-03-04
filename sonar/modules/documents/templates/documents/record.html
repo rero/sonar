@@ -25,7 +25,7 @@
 
 <h1 class="text-primary">{{ title }}</h1>
 {% if record.institution %}
-<h5 class="text-secondary">{{ record.institution.name }}</h5>
+<h5 class="text-secondary">{{ _(record.institution.name) }}</h5>
 {% endif %}
 <section class="mt-3">
   <article class="">
@@ -41,14 +41,34 @@
           {{ dl_list(_('Specific collections'), record.specificCollections) }}
           {% endif %}
 
-          <!-- AUTHORS -->
-          {% if record.authors %}
-          {{ dl(_('Authors'), record.pid|authors_format(current_i18n.language, viewcode)) }}
+          <!-- CONTRIBUTORS-->
+          {% if record.contribution|length > 0 %}
+          <dt class="col-sm-3">
+            {{ _('Contributions') }}:
+          </dt>
+          <dd class="col-sm-9">
+            <ul class="list-unstyled mb-0">
+              {% for contribution in record.contribution %}
+              <li>
+                <small class="badge badge-secondary text-uppercase text-light">{{ _(contribution.agent.type) }}</small>
+                {{ contribution.agent.preferred_name }}
+                {% for role in contribution.role %}
+                <small class="badge badge-light text-uppercase">{{ _(role) }}</small>
+                {% endfor %}
+              </li>
+              {% endfor %}
+            </ul>
+          </dd>
+          {% endif %}
+
+          <!-- DOCUMENT TYPE -->
+          {% if record.documentType %}
+          {{ dl(_('Document type'), _(record.documentType)) }}
           {% endif %}
 
           <!-- EDITION STATEMENT-->
           {% if record.editionStatement %}
-          {{ dl_list(_('Edition'), record.editionStatement|edition_format) }}
+          {{ dl(_('Edition'), record.editionStatement.editionDesignation.value ~ ' / ' ~ record.editionStatement.responsibility.value) }}
           {% endif %}
 
           <!-- PUBLICATION STATEMENT -->
@@ -84,16 +104,25 @@
           {% endif %}
 
           <!-- IS PART OF -->
-          {% if record.is_part_of %}
-          {{ dl(_('Is part of'), record.is_part_of) }}
+          {% if record.partOf %}
+          <dt class="col-sm-3">
+            {{ _('Is part of') }}:
+          </dt>
+          <dd class="col-sm-9">
+            <ul class="list-unstyled mb-0">
+              {% for item in record.partOf %}
+              <li>{{ item | part_of_format }}</li>
+              {% endfor %}
+            </ul>
+          </dd>
           {% endif %}
 
           <!-- SUBJECTS -->
           {% if record.subjects|length > 0 %}
-          <dt class="col-sm-2">
+          <dt class="col-sm-3">
             {{ _('Subjects') }}:
           </dt>
-          <dd class="col-sm-10">
+          <dd class="col-sm-9">
             <ul class="list-unstyled mb-0">
               {% for subject in record.subjects|subjects_format(current_i18n.language) %}
               <li>
@@ -109,10 +138,10 @@
 
           <!-- NOTES -->
           {% if record.notes|length > 0 %}
-          <dt class="col-sm-2">
+          <dt class="col-sm-3">
             {{ _('Notes') }}:
           </dt>
-          <dd class="col-sm-10">
+          <dd class="col-sm-9">
             <ul class="list-unstyled mb-0">
               {% for note in record.notes %}
               <li>
@@ -123,11 +152,27 @@
           </dd>
           {% endif %}
 
+          <!-- CONTENT NOTES -->
+          {% if record.contentNote|length > 0 %}
+          <dt class="col-sm-3">
+            {{ _('Contains') }}:
+          </dt>
+          <dd class="col-sm-9">
+            <ul class="list-unstyled mb-0">
+              {% for note in record.contentNote %}
+              <li>
+                {{ note }}
+              </li>
+              {% endfor %}
+            </ul>
+          </dd>
+          {% endif %}
+
           {% if record.identifiedBy|identifiedby_format|length > 0 %}
-          <dt class="col-sm-2">
+          <dt class="col-sm-3">
             {{ _('Identifiers') }}:
           </dt>
-          <dd class="col-sm-10">
+          <dd class="col-sm-9">
             <ul class="list-unstyled mb-0">
               {% for identifier in record.identifiedBy|identifiedby_format %}
               <li>
@@ -140,10 +185,10 @@
           {% endif %}
 
           {% if record.language %}
-          <dt class="col-sm-2">
+          <dt class="col-sm-3">
             {{ _('Languages') }}:
           </dt>
-          <dd class="col-sm-10">
+          <dd class="col-sm-9">
             <ul class="list-unstyled mb-0">
               {% for language in record.language %}
               <li>
@@ -154,17 +199,30 @@
           </dd>
           {% endif %}
 
+          {% if record.dissertation %}
+          {% if record.dissertation.degree %}
+          {{ dl(_('Thesis note'), record.dissertation.degree) }}
+          {% endif %}
+          {% if record.dissertation.note %}
+          {{ dl_list(_('Jury note'), record.dissertation.note) }}
+          {% endif %}
+          {% endif %}
+
           <!-- OTHER EDITION -->
           {% if record.otherEdition %}
-          <dt class="col-sm-2">
+          <dt class="col-sm-3">
             {{ _('Other editions') }}:
           </dt>
-          <dd class="col-sm-10">
+          <dd class="col-sm-9">
             {% for otherEdition in record.otherEdition %}
             <p class="m-0">{{ _(otherEdition.publicNote) }} : <a href="{{ otherEdition.document.electronicLocator }}"
                 target="_blank">{{ otherEdition.document.electronicLocator }}</a></p>
             {% endfor %}
           </dd>
+          {% endif %}
+
+          {% if record.usageAndAccessPolicy %}
+          {{ dl_list(_('Usage and access policy'), record.usageAndAccessPolicy) }}
           {% endif %}
 
           <!-- PERMANENT LINK -->
@@ -181,7 +239,7 @@
     <div class="row">
       {% for file in files %}
       {% if loop.index > 1 %}
-      {{ thumbnail('documents', record, file, 'col-sm-2 mb-4') }}
+      {{ thumbnail('documents', record, file, 'col-sm-3 mb-4') }}
       {% endif %}
       {% endfor %}
     </div>

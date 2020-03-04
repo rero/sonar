@@ -54,7 +54,7 @@
             }
           }
         },
-        "type": {
+        "documentType": {
           "type": "keyword"
         },
         "language": {
@@ -68,113 +68,14 @@
             }
           }
         },
-        "is_part_of": {
-          "type": "text",
-          "analyzer": "global_lowercase_asciifolding",
-          "fields": {
-            "eng": {
-              "type": "text",
-              "analyzer": "english"
-            },
-            "fre": {
-              "type": "text",
-              "analyzer": "french"
-            },
-            "ger": {
-              "type": "text",
-              "analyzer": "german"
-            },
-            "ita": {
-              "type": "text",
-              "analyzer": "italian"
-            }
-          }
-        },
-        "authors": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "text",
-              "analyzer": "global_lowercase_asciifolding",
-              "copy_to": [
-                "facet_authors_en",
-                "facet_authors_fr",
-                "facet_authors_de",
-                "facet_authors_it"
-              ]
-            },
-            "name_en": {
-              "type": "text",
-              "analyzer": "global_lowercase_asciifolding",
-              "copy_to": "facet_authors_en"
-            },
-            "name_fr": {
-              "type": "text",
-              "analyzer": "global_lowercase_asciifolding",
-              "copy_to": "facet_authors_fr"
-            },
-            "name_de": {
-              "type": "text",
-              "analyzer": "global_lowercase_asciifolding",
-              "copy_to": "facet_authors_de"
-            },
-            "name_it": {
-              "type": "text",
-              "analyzer": "global_lowercase_asciifolding",
-              "copy_to": "facet_authors_it"
-            },
-            "variant_name": {
-              "type": "text",
-              "analyzer": "global_lowercase_asciifolding"
-            },
-            "type": {
-              "type": "keyword"
-            },
-            "date": {
-              "type": "keyword"
-            },
-            "qualifier": {
-              "type": "keyword"
-            },
-            "pid": {
-              "type": "keyword"
-            }
-          }
-        },
-        "facet_authors_en": {
-          "type": "keyword"
-        },
-        "facet_authors_fr": {
-          "type": "keyword"
-        },
-        "facet_authors_de": {
-          "type": "keyword"
-        },
-        "facet_authors_it": {
-          "type": "keyword"
-        },
-        "copyrightDate": {
-          "type": "text"
-        },
         "editionStatement": {
           "type": "object",
           "properties": {
-            "_text": {
-              "properties": {
-                "default": {
-                  "type": "text"
-                }
-              }
-            },
             "editionDesignation": {
               "type": "object",
               "properties": {
                 "value": {
-                  "type": "text",
-                  "analyzer": "global_lowercase_asciifolding"
-                },
-                "language": {
-                  "type": "keyword"
+                  "type": "text"
                 }
               }
             },
@@ -182,11 +83,7 @@
               "type": "object",
               "properties": {
                 "value": {
-                  "type": "text",
-                  "analyzer": "global_lowercase_asciifolding"
-                },
-                "language": {
-                  "type": "keyword"
+                  "type": "text"
                 }
               }
             }
@@ -195,43 +92,24 @@
         "provisionActivity": {
           "type": "object",
           "properties": {
-            "place": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "text"
-                },
-                "canton": {
-                  "type": "text"
-                },
-                "country": {
-                  "type": "text"
-                }
-              }
+            "type": {
+              "type": "keyword"
             },
             "statement": {
               "type": "object",
               "properties": {
                 "type": {
-                  "type": "text"
+                  "type": "keyword"
                 },
                 "label": {
                   "type": "object",
                   "properties": {
                     "value": {
-                      "type": "text",
-                      "analyzer": "global_lowercase_asciifolding"
-                    },
-                    "language": {
-                      "type": "keyword"
+                      "type": "text"
                     }
                   }
                 }
               }
-            },
-            "note": {
-              "type": "text",
-              "analyzer": "global_lowercase_asciifolding"
             },
             "startDate": {
               "type": "date",
@@ -240,13 +118,6 @@
             "endDate": {
               "type": "date",
               "format": "yyyy"
-            },
-            "_text": {
-              "properties": {
-                "default": {
-                  "type": "text"
-                }
-              }
             }
           }
         },
@@ -394,6 +265,127 @@
         },
         "specificCollections": {
           "type": "keyword"
+        },
+        "classification": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "keyword"
+            },
+            "classificationPortion": {
+              "type": "text"
+            }
+          }
+        },
+        "contentNote": {
+          "type": "text"
+        },
+        "dissertation": {
+          "type": "object",
+          "properties": {
+            "degree": {
+              "type": "text"
+            },
+            "notes": {
+              "type": "text"
+            }
+          }
+        },
+        "usageAndAccessPolicy": {
+          "type": "text"
+        },
+        "contribution": {
+          "type": "object",
+          "properties": {
+            "agent": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "keyword"
+                },
+                "preferred_named": {
+                  "type": "text"
+                },
+                "identifiedBy": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "keyword"
+                    },
+                    "source": {
+                      "type": "keyword"
+                    },
+                    "value": {
+                      "type": "text"
+                    }
+                  }
+                },
+                "date_of_birth": {
+                  "type": "keyword"
+                },
+                "date_of_death": {
+                  "type": "keyword"
+                },
+                "place": {
+                  "type": "text"
+                },
+                "date": {
+                  "type": "keyword"
+                },
+                "number": {
+                  "type": "keyword"
+                }
+              }
+            },
+            "role": {
+              "type": "text"
+            },
+            "affiliation": {
+              "type": "text"
+            },
+            "controlledAffiliation": {
+              "type": "text"
+            }
+          }
+        },
+        "partOf": {
+          "type": "object",
+          "properties": {
+            "numberingYear": {
+              "type": "text"
+            },
+            "numberingVolume": {
+              "type": "text"
+            },
+            "numberingIssue": {
+              "type": "text"
+            },
+            "numberingPages": {
+              "type": "text"
+            },
+            "document": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "text"
+                },
+                "publication": {
+                  "type": "object",
+                  "properties": {
+                    "startDate": {
+                      "type": "text"
+                    },
+                    "statement": {
+                      "type": "text"
+                    }
+                  }
+                },
+                "contribution": {
+                  "type": "text"
+                }
+              }
+            }
+          }
         }
       }
     }

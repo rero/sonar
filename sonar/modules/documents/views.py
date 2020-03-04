@@ -22,12 +22,11 @@ from __future__ import absolute_import, print_function
 import re
 
 from flask import Blueprint, current_app, g, render_template
+from flask_babelex import gettext as _
 
-from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.utils import change_filename_extension
 
-from .utils import edition_format_text, localized_data_name, \
-    publication_statement_text, series_format_text
+from .utils import publication_statement_text, series_format_text
 
 blueprint = Blueprint('documents',
                       __name__,
@@ -111,44 +110,6 @@ def title_format(title, language):
         output.append(subtitle)
 
     return " : ".join(output)
-
-
-@blueprint.app_template_filter()
-def authors_format(pid, language='en', viewcode='sonar'):
-    """Format authors for template in given language."""
-    doc = DocumentRecord.get_record_by_pid(pid)
-    doc = doc.replace_refs()
-    output = []
-    for author in doc.get('authors', []):
-        line = []
-        name = localized_data_name(data=author, language=language)
-        line.append(name)
-        qualifier = author.get('qualifier')
-        if qualifier:
-            line.append(qualifier)
-        date = author.get('date')
-        if date:
-            line.append(date)
-
-        line = ', '.join(str(x) for x in line)
-
-        output.append(line)
-
-    return '; '.join(output)
-
-
-@blueprint.app_template_filter()
-def edition_format(editions):
-    """Format edition for template."""
-    output = []
-    for edition in editions:
-        languages = edition_format_text(edition)
-        if languages:
-            output.append(languages['default'])
-            del languages['default']
-            for key, value in languages.items():
-                output.append(value)
-    return output
 
 
 @blueprint.app_template_filter()
@@ -287,9 +248,36 @@ def has_external_urls_for_files(record):
 
     :param record: Current record.
     """
-    return record.get('institution', {}).get('pid') and record['institution'][
-        'pid'] in current_app.config.get(
+    return record.get('institution', {}).get(
+        'pid') and record['institution']['pid'] in current_app.config.get(
             'SONAR_DOCUMENTS_INSTITUTIONS_EXTERNAL_FILES')
+
+
+@blueprint.app_template_filter()
+def part_of_format(part_of):
+    """Format partOf property for display.
+
+    :param part_of: Object representing partOf property
+    """
+    items = []
+    if part_of.get('document', {}).get('title'):
+        items.append(part_of['document']['title'])
+
+    items.append(part_of['numberingYear'])
+
+    if 'numberingVolume' in part_of:
+        items.append('{label} {value}'.format(
+            label=_('vol.'), value=part_of['numberingVolume']))
+
+    if 'numberingIssue' in part_of:
+        items.append('{label} {value}'.format(label=_('no.'),
+                                              value=part_of['numberingIssue']))
+
+    if 'numberingPages' in part_of:
+        items.append('{label} {value}'.format(label=_('p.'),
+                                              value=part_of['numberingPages']))
+
+    return ', '.join(items)
 
 
 def get_language_from_bibliographic_code(language_code):

@@ -261,22 +261,23 @@ def document_json_fixture(app, db, organization_fixture):
         }, {
             'value': 'oai:doc.rero.ch:20050302172954-WU',
             'type': 'bf:Identifier'
+        }, {
+            'value': '111111',
+            'type': 'bf:Local'
         }],
         'language': [{
             'value': 'eng',
             'type': 'bf:Language'
         }],
-        'authors': [{
-            'type': 'person',
-            'name': 'Mancini, Loriano',
-            'date': '1975-03-23',
-            'qualifier': 'Librarian'
-        }, {
-            'type': 'person',
-            'name': 'Ronchetti, Elvezio'
-        }, {
-            'type': 'person',
-            'name': 'Trojani, Fabio'
+        'contribution': [{
+            'agent': {
+                'type': 'bf:Person',
+                'preferred_name': 'John, Doe',
+                'date_of_birth': '1960',
+                'date_of_death': '2000'
+            },
+            'role': ['cre'],
+            'affiliation': 'Institute for Research'
         }],
         'title': [{
             'type':
@@ -334,20 +335,14 @@ def document_json_fixture(app, db, organization_fixture):
                 'type': 'bf:Agent'
             }]
         }],
-        'editionStatement': [{
-            'editionDesignation': [{
+        'editionStatement': {
+            'editionDesignation': {
                 'value': 'Di 3 ban'
-            }, {
-                'value': '第3版',
-                'language': 'chi-hani'
-            }],
-            'responsibility': [{
+            },
+            'responsibility': {
                 'value': 'Zeng Lingliang zhu bian'
-            }, {
-                'value': '曾令良主编',
-                'language': 'chi-hani'
-            }]
-        }],
+            }
+        },
         'institution': {
             '$ref': 'https://sonar.ch/api/institutions/org'
         }
@@ -404,7 +399,7 @@ def deposit_fixture(app, db, db_user_fixture, pdf_file,
         }],
         'metadata': {
             'abstracts': ['Abstract of the document'],
-            'document_type': 'preprint',
+            'document_type': 'coar:c_816b',
             'etc': 'ETC field',
             'journal': {
                 'name': 'American Physical Society (APS)',

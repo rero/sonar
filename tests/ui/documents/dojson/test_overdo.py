@@ -15,8 +15,15 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""MARC21 RERO to JSON."""
+"""Test base overdo."""
 
-from .model import marc21tojson
+from sonar.modules.documents.dojson.overdo import Overdo
 
-__all__ = ('marc21tojson')
+
+def test_not_repetitve():
+    """Test the function not_repetetive."""
+    data = Overdo.not_repetitive({'sub': ('first', 'second')}, 'sub')
+    assert data == 'first'
+
+    data = Overdo.not_repetitive({'sub': 'only'}, 'sub', '')
+    assert data == 'only'

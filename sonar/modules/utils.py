@@ -92,3 +92,23 @@ def get_switch_aai_providers():
         providers.append(provider)
 
     return providers
+
+
+def remove_trailing_punctuation(data,
+                                punctuation=',',
+                                spaced_punctuation=':;/-'):
+    """Remove trailing punctuation from data.
+
+    The punctuation parameter list the
+    punctuation characters to be removed
+    (preceded by a space or not).
+
+    The spaced_punctuation parameter list the
+    punctuation characters needing one or more preceding space(s)
+    in order to be removed.
+    """
+    punctuation = punctuation.replace('.', r'\.').replace('-', r'\-')
+    spaced_punctuation = \
+        spaced_punctuation.replace('.', r'\.').replace('-', r'\-')
+    return re.sub(r'([{0}]|\s+[{1}])$'.format(punctuation, spaced_punctuation),
+                  '', data.rstrip()).rstrip()

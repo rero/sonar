@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: sonar 0.2.2\n"
+"Project-Id-Version: sonar 0.3.2\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2020-03-13 10:55+0100\n"
-"PO-Revision-Date: 2020-03-13 10:17+0100\n"
+"POT-Creation-Date: 2020-03-17 10:11+0100\n"
+"PO-Revision-Date: 2020-03-11 12:17+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
 "Language-Team: en <LL@li.org>\n"
@@ -38,123 +38,143 @@ msgstr ""
 msgid "Welcome to Swiss Open Access Repository!"
 msgstr ""
 
-#: sonar/config.py:409
+#: sonar/config.py:406
 msgid "institution"
 msgstr ""
 
-#: sonar/config.py:410
+#: sonar/config.py:407
 msgid "language"
 msgstr ""
 
-#: sonar/config.py:411
-msgid "author__en"
-msgstr ""
-
-#: sonar/config.py:412
-msgid "author__fr"
-msgstr ""
-
-#: sonar/config.py:413
-msgid "author__de"
-msgstr ""
-
-#: sonar/config.py:414
-msgid "author__it"
-msgstr ""
-
-#: sonar/config.py:415
+#: sonar/config.py:408
 msgid "subject"
 msgstr ""
 
-#: sonar/config.py:416
+#: sonar/config.py:409
 msgid "specific_collections"
 msgstr ""
 
-#: sonar/config.py:423
+#: sonar/config.py:410
+msgid "document_type"
+msgstr ""
+
+#: sonar/config.py:417
 msgid "pid"
 msgstr ""
 
-#: sonar/config.py:424
+#: sonar/config.py:418
 msgid "status"
 msgstr ""
 
-#: sonar/config.py:425
+#: sonar/config.py:419
 msgid "user"
 msgstr ""
 
-#: sonar/config.py:426
+#: sonar/config.py:420
 msgid "contributor"
 msgstr ""
 
-#: sonar/config.py:433
+#: sonar/config.py:427
 msgid "Best match"
 msgstr ""
 
-#: sonar/config.py:439
+#: sonar/config.py:433
 msgid "Most recent"
+msgstr ""
+
+#: sonar/modules/documents/views.py:270
+msgid "vol."
+msgstr ""
+
+#: sonar/modules/documents/views.py:273
+msgid "no."
+msgstr ""
+
+#: sonar/modules/documents/views.py:277
+msgid "p."
 msgstr ""
 
 #: sonar/modules/documents/templates/documents/record.html:37
 msgid "Specific collections"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:42
-msgid "Authors"
-msgstr ""
-
-#: sonar/modules/documents/templates/documents/record.html:47
-msgid "Edition"
-msgstr ""
-
-#: sonar/modules/documents/templates/documents/record.html:57
-msgid "Copyright date"
+#: sonar/modules/documents/templates/documents/record.html:43
+msgid "Contributions"
 msgstr ""
 
 #: sonar/modules/documents/templates/documents/record.html:62
+msgid "Document type"
+msgstr ""
+
+#: sonar/modules/documents/templates/documents/record.html:67
+msgid "Edition"
+msgstr ""
+
+#: sonar/modules/documents/templates/documents/record.html:77
+msgid "Copyright date"
+msgstr ""
+
+#: sonar/modules/documents/templates/documents/record.html:82
 msgid "Abstract"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:69
+#: sonar/modules/documents/templates/documents/record.html:89
 msgid "Physical description"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:74
+#: sonar/modules/documents/templates/documents/record.html:94
 msgid "Additional Materials"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:79
+#: sonar/modules/documents/templates/documents/record.html:99
 msgid "Series"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:84
+#: sonar/modules/documents/templates/documents/record.html:105
 msgid "Is part of"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:90
+#: sonar/modules/documents/templates/documents/record.html:119
 msgid "Subjects"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:109
+#: sonar/modules/documents/templates/documents/record.html:138
 msgid "Notes"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:124
+#: sonar/modules/documents/templates/documents/record.html:154
+msgid "Contains"
+msgstr ""
+
+#: sonar/modules/documents/templates/documents/record.html:169
 msgid "Identifiers"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:140
+#: sonar/modules/documents/templates/documents/record.html:185
 msgid "Languages"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:156
+#: sonar/modules/documents/templates/documents/record.html:200
+msgid "Thesis note"
+msgstr ""
+
+#: sonar/modules/documents/templates/documents/record.html:203
+msgid "Jury note"
+msgstr ""
+
+#: sonar/modules/documents/templates/documents/record.html:210
 msgid "Other editions"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:168
+#: sonar/modules/documents/templates/documents/record.html:221
+msgid "Usage and access policy"
+msgstr ""
+
+#: sonar/modules/documents/templates/documents/record.html:226
 msgid "Permalink"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:175
+#: sonar/modules/documents/templates/documents/record.html:233
 msgid "Other files"
 msgstr ""
 
@@ -346,30 +366,142 @@ msgid "bf:Place"
 msgstr "Place"
 
 #: sonar/translations/manual_translations.txt:22
+msgid "bf:Person"
+msgstr "Person"
+
+#: sonar/translations/manual_translations.txt:23
+msgid "bf:Meeting"
+msgstr "Meeting"
+
+#: sonar/translations/manual_translations.txt:24
+msgid "bf:Organization"
+msgstr "Organization"
+
+#: sonar/translations/manual_translations.txt:25
+msgid "bf:Local"
+msgstr "Local"
+
+#: sonar/translations/manual_translations.txt:26
 msgid "Date"
 msgstr "Date"
 
-#: sonar/translations/manual_translations.txt:24
+#: sonar/translations/manual_translations.txt:29
 msgid "lang-eng"
 msgstr "English"
 
-#: sonar/translations/manual_translations.txt:25
+#: sonar/translations/manual_translations.txt:30
 msgid "lang-fre"
 msgstr "French"
 
-#: sonar/translations/manual_translations.txt:26
+#: sonar/translations/manual_translations.txt:31
 msgid "lang-ger"
 msgstr "German"
 
-#: sonar/translations/manual_translations.txt:27
+#: sonar/translations/manual_translations.txt:32
 msgid "lang-ita"
 msgstr "Italian"
 
-#: sonar/translations/manual_translations.txt:30
+#: sonar/translations/manual_translations.txt:35
 msgid "eduidtest"
 msgstr "SWITCH edu-ID test"
 
-#: sonar/translations/manual_translations.txt:31
+#: sonar/translations/manual_translations.txt:36
 msgid "eduid"
 msgstr "SWITCH edu-ID"
+
+#: sonar/translations/manual_translations.txt:39
+msgid "dgs"
+msgstr "Degree supervisor"
+
+#: sonar/translations/manual_translations.txt:40
+msgid "prt"
+msgstr "Printer"
+
+#: sonar/translations/manual_translations.txt:41
+msgid "cre"
+msgstr "Creator"
+
+#: sonar/translations/manual_translations.txt:42
+msgid "edt"
+msgstr "Editor"
+
+#: sonar/translations/manual_translations.txt:43
+msgid "ctb"
+msgstr "Contributor"
+
+#: sonar/translations/manual_translations.txt:46
+msgid "csal"
+msgstr "National licenses"
+
+#: sonar/translations/manual_translations.txt:47
+msgid "unisi"
+msgstr "University of Lugano"
+
+#: sonar/translations/manual_translations.txt:48
+msgid "unifr"
+msgstr "University of Fribourg"
+
+#: sonar/translations/manual_translations.txt:51
+msgid "coar:c_816b"
+msgstr "Preprint"
+
+#: sonar/translations/manual_translations.txt:52
+msgid "coar:c_6501"
+msgstr "Journal article"
+
+#: sonar/translations/manual_translations.txt:53
+msgid "coar:c_3248"
+msgstr "Book part"
+
+#: sonar/translations/manual_translations.txt:54
+msgid "coar:c_5794"
+msgstr "Conference paper"
+
+#: sonar/translations/manual_translations.txt:55
+msgid "coar:c_2f33"
+msgstr "Book"
+
+#: sonar/translations/manual_translations.txt:56
+msgid "coar:c_bdcc"
+msgstr "Master thesis"
+
+#: sonar/translations/manual_translations.txt:57
+msgid "coar:c_7a1f"
+msgstr "Bachelor thesis"
+
+#: sonar/translations/manual_translations.txt:58
+msgid "coar:c_46ec"
+msgstr "Thesis"
+
+#: sonar/translations/manual_translations.txt:59
+msgid "coar:c_db06"
+msgstr "Doctoral thesis"
+
+#: sonar/translations/manual_translations.txt:60
+msgid "coar:c_12cc"
+msgstr "Cartographic material"
+
+#: sonar/translations/manual_translations.txt:61
+msgid "coar:c_18ws"
+msgstr "Research report"
+
+#: sonar/translations/manual_translations.txt:62
+msgid "coar:c_2fe3"
+msgstr "Newspaper"
+
+#: sonar/translations/manual_translations.txt:63
+msgid "coar:c_0640"
+msgstr "Journal"
+
+#: sonar/translations/manual_translations.txt:64
+msgid "coar:c_18cc"
+msgstr "Sound"
+
+#: sonar/translations/manual_translations.txt:65
+msgid "coar:c_ecc8"
+msgstr "Still image"
+
+#: sonar/translations/manual_translations.txt:66
+msgid "coar:c_18cw"
+msgstr "Musical notation"
 

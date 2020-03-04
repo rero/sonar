@@ -15,20 +15,18 @@
       "type": "bf:Language"
     }
   ],
-  "authors": [
+  "contribution": [
     {
-      "type": "person",
-      "name": "Mancini, Loriano",
-      "date": "1975-03-23",
-      "qualifier": "Librarian"
-    },
-    {
-      "type": "person",
-      "name": "Ronchetti, Elvezio"
-    },
-    {
-      "type": "person",
-      "name": "Trojani, Fabio"
+      "agent": {
+        "type": "bf:Person",
+        "preferred_name": "John, Doe",
+        "date_of_birth": "1960",
+        "date_of_death": "2000"
+      },
+      "role": [
+        "cre"
+      ],
+      "affiliation": "Institute for Research"
     }
   ],
   "title": [
@@ -119,43 +117,31 @@
       ]
     }
   ],
-  "editionStatement": [
-    {
-      "editionDesignation": [
-        {
-          "value": "Di 3 ban"
-        },
-        {
-          "value": "第3版",
-          "language": "chi-hani"
-        }
-      ],
-      "responsibility": [
-        {
-          "value": "Zeng Lingliang zhu bian"
-        },
-        {
-          "value": "曾令良主编",
-          "language": "chi-hani"
-        }
-      ]
+  "editionStatement": {
+    "editionDesignation": {
+      "value": "Di 3 ban"
+    },
+    "responsibility": {
+      "value": "Zeng Lingliang zhu bian"
     }
-  ],
-  "is_part_of": "Is part of",
+  },
   "copyrightDate": [
     "© 1971"
   ],
   "series": [
     {
-    "name": "Collection One",
-    "number": "5"
+      "name": "Collection One",
+      "number": "5"
     },
     {
-    "name": "Collection Two",
-    "number": "123"
+      "name": "Collection Two",
+      "number": "123"
     }
   ],
-  "notes": ["Note 1", "Note 2"],
+  "notes": [
+    "Note 1",
+    "Note 2"
+  ],
   "institution": {
     "$ref": "https://sonar.ch/api/institutions/org"
   }
