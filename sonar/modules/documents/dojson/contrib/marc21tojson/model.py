@@ -474,299 +474,140 @@ def marc21_to_abstract(self, key, value):
     return None
 
 
+@marc21tojson.over('identifiedBy', '001')
+@utils.ignore_value
+def marc21_to_identified_by_from_001(self, key, value):
+    """Get identifier from field 001."""
+    identified_by = self.get('identifiedBy', [])
+
+    identified_by.append({
+        'type': 'bf:Local',
+        'source': 'RERO DOC',
+        'value': value
+    })
+
+    return identified_by
+
+
 @marc21tojson.over('identifiedBy', '^020..')
 @utils.ignore_value
-def marc21_to_identifiedBy_from_field_020(self, key, value):
+def marc21_to_identified_by_from_020(self, key, value):
     """Get identifier from field 020."""
+    identified_by = self.get('identifiedBy', [])
 
-    def build_identifier_from(subfield_data, status=None):
-        subfield_data = subfield_data.strip()
-        identifier = {'value': subfield_data}
-        subfield_c = not_repetitive(marc21tojson.bib_id,
-                                    key,
-                                    value,
-                                    'c',
-                                    default='').strip()
-        if subfield_c:
-            identifier['acquisitionTerms'] = subfield_c
-        if value.get('q'):  # $q is repetitive
-            identifier['qualifier'] = \
-                ', '.join(utils.force_list(value.get('q')))
+    if not value.get('a'):
+        return None
 
-        match = re.search(r'^(.+?)\s*\((.+)\)$', subfield_data)
-        if match:
-            # match.group(2) : parentheses content
-            identifier['qualifier'] = ', '.join(
-                filter(None, [match.group(2),
-                              identifier.get('qualifier', '')]))
-            # value without parenthesis and parentheses content
-            identifier['value'] = match.group(1)
-        if status:
-            identifier['status'] = status
-        identifier['type'] = 'bf:Isbn'
-        identifiedBy.append(identifier)
+    identified_by.append({
+        'type': 'bf:Isbn',
+        'value': value.get('a')
+    })
 
-    identifiedBy = self.get('identifiedBy', [])
-    subfield_a = not_repetitive(marc21tojson.bib_id, key, value, 'a')
-    if subfield_a:
-        build_identifier_from(subfield_a)
-    subfields_z = value.get('z')
-    if subfields_z:
-        for subfield_z in utils.force_list(subfields_z):
-            build_identifier_from(subfield_z, status='invalid or cancelled')
-    return identifiedBy or None
+    return identified_by
 
 
-@marc21tojson.over('identifiedBy', '^022..')
+@marc21tojson.over('identifiedBy', '^0247.')
 @utils.ignore_value
-def marc21_to_identifiedBy_from_field_022(self, key, value):
-    """Get identifier from field 022."""
-    status_for = {'m': 'cancelled', 'y': 'invalid'}
-    type_for = {
-        'a': 'bf:Issn',
-        'l': 'bf:IssnL',
-        'm': 'bf:IssnL',
-        'y': 'bf:Issn'
-    }
-
-    identifiedBy = self.get('identifiedBy', [])
-    for subfield_code in ['a', 'l', 'm', 'y']:
-        subfields_data = value.get(subfield_code)
-        if subfields_data:
-            if isinstance(subfields_data, str):
-                subfields_data = [subfields_data]
-            for subfield_data in subfields_data:
-                subfield_data = subfield_data.strip()
-                identifier = {}
-                identifier['type'] = type_for[subfield_code]
-                identifier['value'] = subfield_data
-                if subfield_code in status_for:
-                    identifier['status'] = status_for[subfield_code]
-                identifiedBy.append(identifier)
-    return identifiedBy or None
-
-
-@marc21tojson.over('identifiedBy', '^024..')
-@utils.ignore_value
-def marc21_to_identifiedBy_from_field_024(self, key, value):
+def marc21_to_identified_by_from_024(self, key, value):
     """Get identifier from field 024."""
+    identified_by = self.get('identifiedBy', [])
 
-    def populate_acquisitionTerms_note_qualifier(identifier):
-        subfield_c = not_repetitive(marc21tojson.bib_id,
-                                    key,
-                                    value,
-                                    'c',
-                                    default='').strip()
-        if subfield_c:
-            identifier['acquisitionTerms'] = subfield_c
-        subfield_d = not_repetitive(marc21tojson.bib_id,
-                                    key,
-                                    value,
-                                    'd',
-                                    default='').strip()
-        if subfield_d:
-            identifier['note'] = subfield_d
-        if value.get('q'):  # $q is repetitive
-            identifier['qualifier'] = \
-                ', '.join(utils.force_list(value.get('q')))
+    if not value.get('a') or value.get('2') != 'urn':
+        return None
 
-    subfield_2_regexp = {
-        'doi': {
-            'type': 'bf:Doi'
-        },
-        'urn': {
-            'type': 'bf:Urn'
-        },
-        'nipo': {
-            'type': 'bf:Local',
-            'source': 'NIPO'
-        },
-        'danacode': {
-            'type': 'bf:Local',
-            'source': 'danacode'
-        },
-        'vd18': {
-            'type': 'bf:Local',
-            'source': 'vd18'
-        },
-        'gtin-14': {
-            'type': 'bf:Gtin14Number'
-        }
-    }
+    identified_by.append({
+        'type': 'bf:Urn',
+        'value': value.get('a')
+    })
 
-    type_for_ind1 = {
-        '0': {
-            'type': 'bf:Isrc'
-        },
-        '1': {
-            'type': 'bf:Upc'
-        },
-        '2': {
-            'pattern': r'^(M|9790|979-0)',
-            'matching_type': 'bf:Ismn'
-        },
-        '3': {
-            'pattern': r'^97',
-            'matching_type': 'bf:Ean'
-        },
-        '8': {
-            # 33 chars example: 0000-0002-A3B1-0000-0-0000-0000-2
-            'pattern': r'^(.{24}|.{26}|(.{4}-){4}.-(.{4}\-){2}.)$',
-            'matching_type': 'bf:Isan'
-        }
-    }
-
-    identifiedBy = self.get('identifiedBy', [])
-    identifier = {}
-    subfield_a = not_repetitive(marc21tojson.bib_id,
-                                key,
-                                value,
-                                'a',
-                                default='').strip()
-    subfield_2 = not_repetitive(marc21tojson.bib_id,
-                                key,
-                                value,
-                                '2',
-                                default='').strip()
-    if subfield_a:
-        if re.search(r'permalink\.snl\.ch', subfield_a, re.IGNORECASE):
-            identifier.update({
-                'value': subfield_a,
-                'type': 'uri',
-                'source': 'SNL'
-            })
-        elif re.search(r'bnf\.fr/ark', subfield_a, re.IGNORECASE):
-            identifier.update({
-                'value': subfield_a,
-                'type': 'uri',
-                'source': 'BNF'
-            })
-        elif subfield_2:
-            identifier['value'] = subfield_a
-            populate_acquisitionTerms_note_qualifier(identifier)
-            for pattern in subfield_2_regexp:
-                if re.search(pattern, subfield_2, re.IGNORECASE):
-                    identifier.update(subfield_2_regexp[pattern])
-        else:  # without subfield $2
-            ind1 = key[3]  # indicateur_1
-            if ind1 in ('0', '1', '2', '3', '8'):
-                populate_acquisitionTerms_note_qualifier(identifier)
-                match = re.search(r'^(.+?)\s*\((.*)\)$', subfield_a)
-                if match:
-                    # match.group(2) : parentheses content
-                    identifier['qualifier'] = ', '.join(
-                        filter(
-                            None,
-                            [match.group(2),
-                             identifier.get('qualifier', '')]))
-                    # value without parenthesis and parentheses content
-                    identifier['value'] = match.group(1)
-                else:
-                    identifier['value'] = subfield_a
-                if 'type' in type_for_ind1[ind1]:  # ind1 0,1
-                    identifier['type'] = type_for_ind1[ind1]['type']
-                else:  # ind1 in (2, 3, 8)
-                    data = subfield_a
-                    if ind1 == '8':
-                        data = identifier['value']
-                    if re.search(type_for_ind1[ind1]['pattern'], data):
-                        identifier['type'] = \
-                            type_for_ind1[ind1]['matching_type']
-                    else:
-                        identifier['type'] = 'bf:Identifier'
-            else:  # ind1 not in (0, 1, 2, 3, 8)
-                identifier.update({
-                    'value': subfield_a,
-                    'type': 'bf:Identifier'
-                })
-        if not identifier.get('type'):
-            identifier['type'] = 'bf:Identifier'
-        identifiedBy.append(identifier)
-    return identifiedBy or None
+    return identified_by
 
 
-@marc21tojson.over('identifiedBy', '^028..')
+@marc21tojson.over('identifiedBy', '^027..')
 @utils.ignore_value
-def marc21_to_identifiedBy_from_field_028(self, key, value):
-    """Get identifier from field 028."""
-    type_for_ind1 = {
-        '0': 'bf:AudioIssueNumber',
-        '1': 'bf:MatrixNumber',
-        '2': 'bf:MusicPlate',
-        '3': 'bf:MusicPublisherNumber',
-        '4': 'bf:VideoRecordingNumber',
-        '5': 'bf:PublisherNumber',
-        '6': 'bf:MusicDistributorNumber'
-    }
+def marc21_to_identified_by_from_027(self, key, value):
+    """Get identifier from field 027."""
+    identified_by = self.get('identifiedBy', [])
 
-    identifier = {}
-    subfield_a = not_repetitive(marc21tojson.bib_id,
-                                key,
-                                value,
-                                'a',
-                                default='').strip()
-    if subfield_a:
-        identifier['value'] = subfield_a
-        if value.get('q'):  # $q is repetitive
-            identifier['qualifier'] = \
-                ', '.join(utils.force_list(value.get('q')))
-        subfield_b = not_repetitive(marc21tojson.bib_id,
-                                    key,
-                                    value,
-                                    'b',
-                                    default='').strip()
-        if subfield_b:
-            identifier['source'] = subfield_b
-        # key[3] is the indicateur_1
-        identifier['type'] = type_for_ind1.get(key[3], 'bf:Identifier')
-        identifiedBy = self.get('identifiedBy', [])
-        identifiedBy.append(identifier)
-    return identifiedBy or None
+    if not value.get('a'):
+        return None
+
+    identified_by.append({
+        'type': 'bf:Strn',
+        'value': value.get('a')
+    })
+
+    return identified_by
 
 
 @marc21tojson.over('identifiedBy', '^035..')
 @utils.ignore_value
-def marc21_to_identifiedBy_from_field_035(self, key, value):
+def marc21_to_identified_by_from_035(self, key, value):
     """Get identifier from field 035."""
-    subfield_a = not_repetitive(marc21tojson.bib_id,
-                                key,
-                                value,
-                                'a',
-                                default='').strip()
-    if subfield_a:
-        identifier = {
-            'value': subfield_a,
-            'type': 'bf:Local',
-            'source': 'RERO'
-        }
-        identifiedBy = self.get('identifiedBy', [])
-        identifiedBy.append(identifier)
-    return identifiedBy or None
+    identified_by = self.get('identifiedBy', [])
+
+    if not value.get('a'):
+        return None
+
+    identified_by.append({
+        'type': 'bf:Local',
+        'source': 'RERO',
+        'value': value.get('a')
+    })
+
+    return identified_by
 
 
-@marc21tojson.over('identifiedBy', '^930..')
+@marc21tojson.over('identifiedBy', '^037..')
 @utils.ignore_value
-def marc21_to_identifiedBy_from_field_930(self, key, value):
-    """Get identifier from field 930."""
-    subfield_a = not_repetitive(marc21tojson.bib_id,
-                                key,
-                                value,
-                                'a',
-                                default='').strip()
-    if subfield_a:
-        identifier = {}
-        match = re.search(r'^\((.+?)\)\s*(.*)$', subfield_a)
-        if match:
-            # match.group(1) : parentheses content
-            identifier['source'] = match.group(1)
-            # value without parenthesis and parentheses content
-            identifier['value'] = match.group(2)
-        else:
-            identifier['value'] = subfield_a
-        identifier['type'] = 'bf:Local'
-        identifiedBy = self.get('identifiedBy', [])
-        identifiedBy.append(identifier)
-    return identifiedBy or None
+def marc21_to_identified_by_from_037(self, key, value):
+    """Get identifier from field 037."""
+    identified_by = self.get('identifiedBy', [])
+
+    if not value.get('a'):
+        return None
+
+    identified_by.append({
+        'type': 'bf:Local',
+        'source': 'Swissbib',
+        'value': value.get('a').replace('swissbib.ch:', '').strip()
+    })
+
+    return identified_by
+
+
+@marc21tojson.over('identifiedBy', '^088..')
+@utils.ignore_value
+def marc21_to_identified_by_from_088(self, key, value):
+    """Get identifier from field 088."""
+    identified_by = self.get('identifiedBy', [])
+
+    if not value.get('a'):
+        return None
+
+    identified_by.append({
+        'type': 'bf:ReportNumber',
+        'value': value.get('a')
+    })
+
+    return identified_by
+
+
+@marc21tojson.over('identifiedBy', '^091..')
+@utils.ignore_value
+def marc21_to_identified_by_from_091(self, key, value):
+    """Get identifier from field 091."""
+    identified_by = self.get('identifiedBy', [])
+
+    if not value.get('a') or value.get('b') != 'pmid':
+        return None
+
+    identified_by.append({
+        'type': 'pmid',
+        'value': value.get('a')
+    })
+
+    return identified_by
 
 
 @marc21tojson.over('notes', '^500..')
