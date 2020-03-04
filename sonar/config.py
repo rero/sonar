@@ -399,21 +399,15 @@ RECORDS_REST_FACETS = {
     dict(aggs=dict(
         institution=dict(terms=dict(field='institution.pid')),
         language=dict(terms=dict(field='language.value')),
-        author__en=dict(terms=dict(field='facet_authors_en')),
-        author__fr=dict(terms=dict(field='facet_authors_fr')),
-        author__de=dict(terms=dict(field='facet_authors_de')),
-        author__it=dict(terms=dict(field='facet_authors_it')),
         subject=dict(terms=dict(field='facet_subjects')),
-        specific_collections=dict(terms=dict(field='specificCollections'))),
+        specific_collections=dict(terms=dict(field='specificCollections')),
+        document_type=dict(terms=dict(field='documentType'))),
          filters={
              _('institution'): terms_filter('institution.pid'),
              _('language'): terms_filter('language.value'),
-             _('author__en'): terms_filter('facet_authors_en'),
-             _('author__fr'): terms_filter('facet_authors_fr'),
-             _('author__de'): terms_filter('facet_authors_de'),
-             _('author__it'): terms_filter('facet_authors_it'),
              _('subject'): terms_filter('facet_subjects'),
              _('specific_collections'): terms_filter('specificCollections'),
+             _('document_type'): terms_filter('documentType')
          }),
     'deposits':
     dict(aggs=dict(status=dict(terms=dict(field='status')),

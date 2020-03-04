@@ -22,7 +22,7 @@ import time
 from dojson.contrib.marc21.utils import create_record
 
 from .api import DocumentRecord
-from .dojson.contrib.marc21tojson.model import marc21tojson
+from .dojson.rerodoc.model import marc21tojson
 from .tasks import import_records
 
 CHUNK_SIZE = 100

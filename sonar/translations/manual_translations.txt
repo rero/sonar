@@ -13,14 +13,19 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# provisionActivity
+# BF types
 _('bf:Publication')
 _('bf:Manufacture')
 _('bf:Distribution')
 _('bf:Production')
 _('bf:Place')
+_('bf:Person')
+_('bf:Meeting')
+_('bf:Organization')
+_('bf:Local')
 _('Date')
 
+# Languages
 _('lang-eng')
 _('lang-fre')
 _('lang-ger')
@@ -29,3 +34,33 @@ _('lang-ita')
 # SWITCHaai providers
 _('eduidtest')
 _('eduid')
+
+# Contributor roles
+_('dgs')
+_('prt')
+_('cre')
+_('edt')
+_('ctb')
+
+# Institutions
+_('csal')
+_('unisi')
+_('unifr')
+
+# Document types
+_('coar:c_816b')
+_('coar:c_6501')
+_('coar:c_3248')
+_('coar:c_5794')
+_('coar:c_2f33')
+_('coar:c_bdcc')
+_('coar:c_7a1f')
+_('coar:c_46ec')
+_('coar:c_db06')
+_('coar:c_12cc')
+_('coar:c_18ws')
+_('coar:c_2fe3')
+_('coar:c_0640')
+_('coar:c_18cc')
+_('coar:c_ecc8')
+_('coar:c_18cw')

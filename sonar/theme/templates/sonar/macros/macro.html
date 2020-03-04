@@ -16,20 +16,20 @@
 #}
 
 {% macro dl(title, content) %}
-<dt class="col-sm-2">
+<dt class="col-sm-3">
   {{ title }}:
 </dt>
-<dd class="col-sm-10">
+<dd class="col-sm-9">
   {{ content|safe }}
 </dd>
 {% endmacro %}
 
 {% macro dl_dict(name, dict_or_string) %}
 {% if dict_or_string %}
-<dt class="col-sm-2">
+<dt class="col-sm-3">
   {{ name }}:
 </dt>
-<dd class="col-sm-10">
+<dd class="col-sm-9">
   {% if dict_or_string is string %}
   {{ dict_or_string }}
   {% else %}
@@ -45,10 +45,10 @@
 
 {% macro dl_list(name, list_or_string) %}
 {% if list_or_string %}
-<dt class="col-sm-2">
+<dt class="col-sm-3">
   {{ name }}:
 </dt>
-<dd class="col-sm-10">
+<dd class="col-sm-9">
   {% if list_or_string is string %}
   {{ list_or_string }}
   {% else %}

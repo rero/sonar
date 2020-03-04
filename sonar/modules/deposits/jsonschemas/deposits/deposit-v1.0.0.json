@@ -91,8 +91,8 @@
           "title": "Type of document",
           "description": "Type of document",
           "type": "string",
-          "default": "preprint",
-          "enum": ["preprint", "postprint"]
+          "default": "coar:c_816b",
+          "enum": ["coar:c_816b", "coar:c_6501"]
         },
         "languages": {
           "title": "Languages",
