@@ -1567,7 +1567,10 @@
               "bf:Upc",
               "bf:Urn",
               "bf:VideoRecordingNumber",
-              "uri"
+              "bf:Strn",
+              "bf:ReportNumber",
+              "uri",
+              "pmid"
             ],
             "minLength": 1
           },
