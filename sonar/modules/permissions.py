@@ -130,4 +130,5 @@ def files_permission_factory(*kwargs):
     if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
         return allow_access
 
-    return user_access_permission
+    # TODO: Add checks for accessing files and buckets
+    return allow_access
