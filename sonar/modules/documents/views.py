@@ -26,8 +26,8 @@ from flask import Blueprint, current_app, g, render_template
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.utils import change_filename_extension
 
-from .utils import edition_format_text, localized_data_name, \
-    publication_statement_text, series_format_text
+from .utils import localized_data_name, publication_statement_text, \
+    series_format_text
 
 blueprint = Blueprint('documents',
                       __name__,
@@ -135,20 +135,6 @@ def authors_format(pid, language='en', viewcode='sonar'):
         output.append(line)
 
     return '; '.join(output)
-
-
-@blueprint.app_template_filter()
-def edition_format(editions):
-    """Format edition for template."""
-    output = []
-    for edition in editions:
-        languages = edition_format_text(edition)
-        if languages:
-            output.append(languages['default'])
-            del languages['default']
-            for key, value in languages.items():
-                output.append(value)
-    return output
 
 
 @blueprint.app_template_filter()

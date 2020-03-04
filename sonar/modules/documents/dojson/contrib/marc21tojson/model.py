@@ -259,7 +259,6 @@ def marc21_to_copyright_date(self, key, value):
 
 
 @marc21tojson.over('editionStatement', '^250..')
-@utils.for_each_value
 @utils.ignore_value
 def marc21_to_edition_statement(self, key, value):
     """Get edition statement data.
@@ -267,35 +266,17 @@ def marc21_to_edition_statement(self, key, value):
     editionDesignation: 250 [$a non repetitive] (without trailing /)
     responsibility: 250 [$b non repetitive]
     """
-    key_per_code = {'a': 'editionDesignation', 'b': 'responsibility'}
+    if not value.get('a') or not value.get('b'):
+        return None
 
-    def build_edition_data(code, label, index, link):
-        data = [{'value': remove_trailing_punctuation(label)}]
-        try:
-            alt_gr = marc21tojson.alternate_graphic['250'][link]
-            subfield = \
-                marc21tojson.get_subfields(alt_gr['field'])[index]
-            data.append({
-                'value': remove_trailing_punctuation(subfield),
-                'language': get_language_script(alt_gr['script'])
-            })
-        except Exception as err:
-            pass
-        return data
-
-    tag_link, link = get_field_link_data(value)
-    items = get_field_items(value)
-    index = 1
-    edition_data = {}
-    subfield_selection = {'a', 'b'}
-    for blob_key, blob_value in items:
-        if blob_key in subfield_selection:
-            subfield_selection.remove(blob_key)
-            edition_data[key_per_code[blob_key]] = \
-                build_edition_data(blob_key, blob_value, index, link)
-        if blob_key != '__order__':
-            index += 1
-    return edition_data or None
+    return {
+        'editionDesignation': {
+            'value': value.get('a')
+        },
+        'responsibility': {
+            'value': value.get('b')
+        },
+    }
 
 
 @marc21tojson.over('provisionActivity', '^(260..|264.[ 0-3])')

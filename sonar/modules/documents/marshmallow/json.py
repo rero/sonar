@@ -38,7 +38,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     _files = fields.Dict(dump_only=True)
     language = fields.List(fields.Dict())
     copyrightDate = fields.List(fields.String())
-    editionStatement = fields.List(fields.Dict())
+    editionStatement = fields.Dict()
     provisionActivity = fields.List(fields.Dict())
     extent = SanitizedUnicode()
     otherMaterialCharacteristics = SanitizedUnicode()

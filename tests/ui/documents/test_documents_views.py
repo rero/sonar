@@ -206,13 +206,6 @@ def test_nl2br():
     assert views.nl2br(text) == 'Multiline text<br>Multiline text'
 
 
-def test_edition_format(document_fixture):
-    """Test edition format."""
-    edition_format = views.edition_format(document_fixture['editionStatement'])
-    assert len(edition_format) == 2
-    assert edition_format[0] == 'Di 3 ban / Zeng Lingliang zhu bian'
-
-
 def test_get_code_from_bibliographic_language(app):
     """Test bibliographic language code to alpha 2 code conversion."""
     assert views.get_language_from_bibliographic_code('ger') == 'de'

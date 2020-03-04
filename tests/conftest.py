@@ -334,20 +334,14 @@ def document_json_fixture(app, db, organization_fixture):
                 'type': 'bf:Agent'
             }]
         }],
-        'editionStatement': [{
-            'editionDesignation': [{
+        'editionStatement': {
+            'editionDesignation': {
                 'value': 'Di 3 ban'
-            }, {
-                'value': '第3版',
-                'language': 'chi-hani'
-            }],
-            'responsibility': [{
+            },
+            'responsibility': {
                 'value': 'Zeng Lingliang zhu bian'
-            }, {
-                'value': '曾令良主编',
-                'language': 'chi-hani'
-            }]
-        }],
+            }
+        },
         'institution': {
             '$ref': 'https://sonar.ch/api/institutions/org'
         }

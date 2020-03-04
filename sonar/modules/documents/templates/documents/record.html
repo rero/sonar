@@ -48,7 +48,7 @@
 
           <!-- EDITION STATEMENT-->
           {% if record.editionStatement %}
-          {{ dl_list(_('Edition'), record.editionStatement|edition_format) }}
+          {{ dl(_('Edition'), record.editionStatement.editionDesignation.value ~ ' / ' ~ record.editionStatement.responsibility.value) }}
           {% endif %}
 
           <!-- PUBLICATION STATEMENT -->
@@ -90,10 +90,10 @@
 
           <!-- SUBJECTS -->
           {% if record.subjects|length > 0 %}
-          <dt class="col-sm-2">
+          <dt class="col-sm-3">
             {{ _('Subjects') }}:
           </dt>
-          <dd class="col-sm-10">
+          <dd class="col-sm-9">
             <ul class="list-unstyled mb-0">
               {% for subject in record.subjects|subjects_format(current_i18n.language) %}
               <li>
@@ -109,10 +109,10 @@
 
           <!-- NOTES -->
           {% if record.notes|length > 0 %}
-          <dt class="col-sm-2">
+          <dt class="col-sm-3">
             {{ _('Notes') }}:
           </dt>
-          <dd class="col-sm-10">
+          <dd class="col-sm-9">
             <ul class="list-unstyled mb-0">
               {% for note in record.notes %}
               <li>
@@ -124,10 +124,10 @@
           {% endif %}
 
           {% if record.identifiedBy|identifiedby_format|length > 0 %}
-          <dt class="col-sm-2">
+          <dt class="col-sm-3">
             {{ _('Identifiers') }}:
           </dt>
-          <dd class="col-sm-10">
+          <dd class="col-sm-9">
             <ul class="list-unstyled mb-0">
               {% for identifier in record.identifiedBy|identifiedby_format %}
               <li>
@@ -140,10 +140,10 @@
           {% endif %}
 
           {% if record.language %}
-          <dt class="col-sm-2">
+          <dt class="col-sm-3">
             {{ _('Languages') }}:
           </dt>
-          <dd class="col-sm-10">
+          <dd class="col-sm-9">
             <ul class="list-unstyled mb-0">
               {% for language in record.language %}
               <li>
@@ -156,10 +156,10 @@
 
           <!-- OTHER EDITION -->
           {% if record.otherEdition %}
-          <dt class="col-sm-2">
+          <dt class="col-sm-3">
             {{ _('Other editions') }}:
           </dt>
-          <dd class="col-sm-10">
+          <dd class="col-sm-9">
             {% for otherEdition in record.otherEdition %}
             <p class="m-0">{{ _(otherEdition.publicNote) }} : <a href="{{ otherEdition.document.electronicLocator }}"
                 target="_blank">{{ otherEdition.document.electronicLocator }}</a></p>

@@ -159,22 +159,11 @@
         "editionStatement": {
           "type": "object",
           "properties": {
-            "_text": {
-              "properties": {
-                "default": {
-                  "type": "text"
-                }
-              }
-            },
             "editionDesignation": {
               "type": "object",
               "properties": {
                 "value": {
-                  "type": "text",
-                  "analyzer": "global_lowercase_asciifolding"
-                },
-                "language": {
-                  "type": "keyword"
+                  "type": "text"
                 }
               }
             },
@@ -182,11 +171,7 @@
               "type": "object",
               "properties": {
                 "value": {
-                  "type": "text",
-                  "analyzer": "global_lowercase_asciifolding"
-                },
-                "language": {
-                  "type": "keyword"
+                  "type": "text"
                 }
               }
             }
