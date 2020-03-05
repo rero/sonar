@@ -1331,45 +1331,16 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
+        "required": ["type"],
         "properties": {
           "type": {
             "title": "Type",
             "type": "string",
             "enum": [
               "bf:Publication",
-              "bf:Manufacture",
-              "bf:Distribution",
-              "bf:Production"
+              "bf:Manufacture"
             ],
             "minLength": 1
-          },
-          "place": {
-            "title": "Country and/or canton of the provision activity",
-            "type": "array",
-            "minItems": 1,
-            "items": {
-              "type": "object",
-              "required": [
-                "country"
-              ],
-              "properties": {
-                "type": {
-                  "const": "bf:Place"
-                },
-                "country": {
-                  "title": "Country",
-                  "type": "string",
-                  "$ref": "#/definitions/country",
-                  "minLength": 1
-                },
-                "canton": {
-                  "title": "Canton",
-                  "type": "string",
-                  "$ref": "#/definitions/canton",
-                  "minLength": 1
-                }
-              }
-            }
           },
           "statement": {
             "title": "Statement of place and/or agent and/or date of the provision activity",
@@ -1399,24 +1370,12 @@
                         "title": "Place and/or agent name and/or date",
                         "type": "string",
                         "minLength": 1
-                      },
-                      "language": {
-                        "title": "Language",
-                        "type": "string",
-                        "$ref": "#/definitions/language_script",
-                        "minLength": 1
                       }
                     }
                   }
                 }
               }
             }
-          },
-          "note": {
-            "title": "Note",
-            "description": "Note.",
-            "type": "string",
-            "minLength": 1
           },
           "startDate": {
             "title": "Start date of publication",

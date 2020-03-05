@@ -25,8 +25,8 @@ from dojson import utils
 from flask import current_app
 
 from sonar.modules.documents.dojson.utils import SonarMarc21Overdo, \
-    error_print, get_field_items, get_field_link_data, get_year_from_date, \
-    not_repetitive, remove_trailing_punctuation
+    error_print, get_field_items, get_field_link_data, not_repetitive, \
+    remove_trailing_punctuation
 from sonar.modules.institutions.api import InstitutionRecord
 
 marc21tojson = SonarMarc21Overdo()
@@ -298,115 +298,115 @@ def marc21_to_edition_statement(self, key, value):
     return edition_data or None
 
 
-@marc21tojson.over('provisionActivity', '^(260..|264.[ 0-3])')
+@marc21tojson.over('provisionActivity', '^260..')
 @utils.for_each_value
 @utils.ignore_value
-def marc21_to_provision_activity(self, key, value):
-    """Get publisher data.
+def marc21_to_provision_activity_field_260(self, key, value):
+    """Get provision activity data from field 260."""
+    provision_activity = self.get('provisionActivity', [])
 
-    publisher.name: 264 [$b repetitive] (without the , but keep the ;)
-    publisher.place: 264 [$a repetitive] (without the : but keep the ;)
-    publicationDate: 264 [$c repetitive] (but take only the first one)
-    """
+    # Only if there is a date
+    if value.get('c'):
+        publication = {'type': 'bf:Publication', 'statement': []}
 
-    def build_statement(field_value, ind2):
-        def build_agent_data(code, label, index, link):
-            type_per_code = {'a': 'bf:Place', 'b': 'bf:Agent'}
-            agent_data = {
-                'type': type_per_code[code],
+        # Place
+        if value.get('a'):
+            publication['statement'].append({
+                'type': 'bf:Place',
                 'label': [{
-                    'value': remove_trailing_punctuation(label)
+                    'value': value.get('a')
                 }]
-            }
-            try:
-                alt_gr = marc21tojson.alternate_graphic['264'][link]
-                subfield = \
-                    marc21tojson.get_subfields(alt_gr['field'])[index]
-                agent_data['label'].append({
-                    'value':
-                    remove_trailing_punctuation(subfield),
-                    'language':
-                    get_language_script(alt_gr['script'])
-                })
-            except Exception:
-                pass
-            return agent_data
-
-        # function build_statement start here
-        tag_link, link = get_field_link_data(field_value)
-        items = get_field_items(field_value)
-        statement = []
-        index = 1
-        for blob_key, blob_value in items:
-            if blob_key in ('a', 'b'):
-                agent_data = build_agent_data(blob_key, blob_value, index,
-                                              link)
-                statement.append(agent_data)
-            if blob_key != '__order__':
-                index += 1
-        return statement
-
-    def build_place():
-        place = {}
-        if marc21tojson.cantons:
-            place['canton'] = marc21tojson.cantons[0]
-        if marc21tojson.country:
-            place['country'] = marc21tojson.country
-        if place:
-            place['type'] = 'bf:Place'
-        return place
-
-    # the function marc21_to_provisionActivity start here
-    ind2 = key[4]
-    type_per_ind2 = {
-        ' ': 'bf:Publication',
-        '0': 'bf:Production',
-        '1': 'bf:Publication',
-        '2': 'bf:Distribution',
-        '3': 'bf:Manufacture'
-    }
-    if key[:3] == '260':
-        ind2 = '1'
-    publication = {
-        'type': type_per_ind2[ind2],
-        'statement': [],
-    }
-
-    subfields_c = utils.force_list(value.get('c'))
-    if ind2 in (' ', '1'):
-        start_date = get_year_from_date(marc21tojson.date1_from_008)
-        if start_date:
-            publication['startDate'] = start_date
-        end_date = get_year_from_date(marc21tojson.date2_from_008)
-        if end_date:
-            publication['endDate'] = end_date
-        if (marc21tojson.date_type_from_008 == 'q' or
-                marc21tojson.date_type_from_008 == 'n'):
-            publication['note'] = 'Date(s) incertaine(s) ou inconnue(s)'
-        place = build_place()
-        if place:
-            publication['place'] = [place]
-    publication['statement'] = build_statement(value, ind2)
-    if subfields_c:
-        subfield_c = subfields_c[0]
-        date = {'label': [{'value': subfield_c}], 'type': 'Date'}
-
-        tag_link, link = get_field_link_data(value)
-        try:
-            alt_gr = marc21tojson.alternate_graphic['264'][link]
-            subfield = \
-                marc21tojson.get_subfields(alt_gr['field'], code='c')
-            date['label'].append({
-                'value':
-                subfield[0],
-                'language':
-                get_language_script(alt_gr['script'])
             })
-        except Exception:
-            pass
 
-        publication['statement'].append(date)
-    return publication or None
+        # Agent
+        if value.get('b'):
+            publication['statement'].append({
+                'type': 'bf:Agent',
+                'label': [{
+                    'value': remove_trailing_punctuation(value.get('b'))
+                }]
+            })
+
+        years = value.get('c').split('-')
+
+        # Start date
+        if years:
+            publication['startDate'] = years[0]
+
+            publication['statement'].append({
+                'type': 'Date',
+                'label': [{
+                    'value': value.get('c')
+                }]
+            })
+
+        # End date
+        if len(years) > 1:
+            publication['endDate'] = years[1]
+
+        provision_activity.append(publication)
+
+    # Manufacture
+    if value.get('e') or value.get('f'):
+        manufacture = {'type': 'bf:Manufacture', 'statement': []}
+
+        if value.get('e'):
+            manufacture['statement'].append({
+                'type': 'bf:Place',
+                'label': [{
+                    'value': remove_trailing_punctuation(value.get('e'))
+                }]
+            })
+
+        if value.get('f'):
+            manufacture['statement'].append({
+                'type': 'bf:Agent',
+                'label': [{
+                    'value': value.get('f')
+                }]
+            })
+
+        provision_activity.append(manufacture)
+
+    # Re-assign provision activity
+    if provision_activity:
+        self['provisionActivity'] = provision_activity
+
+    return None
+
+
+@marc21tojson.over('provisionActivity', '^269..')
+@utils.ignore_value
+def marc21_to_provision_activity_field_269(self, key, value):
+    """Get provision activity data from field 269."""
+    provisition_activity = self.get('provisionActivity', [])
+
+    # No date, skipping
+    if not value.get('c'):
+        return None
+
+    def get_publication():
+        """Get stored publication."""
+        for key, item in enumerate(provisition_activity):
+            if item['type'] == 'bf:Publication':
+                return provisition_activity.pop(key)
+
+        return {'type': 'bf:Publication', 'startDate': None}
+
+    publication = get_publication()
+
+    # Assign start date
+    years = value.get('c').split('-')
+    if years:
+        publication['startDate'] = years[0]
+
+    # Inject publiction into provision activity
+    provisition_activity.append(publication)
+
+    # Re-assign provisionActivity
+    self['provisionActivity'] = provisition_activity
+
+    return None
 
 
 @marc21tojson.over('formats', '^300..')
@@ -796,11 +796,7 @@ def marc21_to_is_part_of(self, key, value):
 @utils.ignore_value
 def marc21_to_subjects(self, key, value):
     """Get subjects."""
-    subjects = {
-        'label': {
-            'value': value.get('a').split(' ; ')
-        }
-    }
+    subjects = {'label': {'value': value.get('a').split(' ; ')}}
 
     # If field is 695 and no language is available
     if key == '695__':

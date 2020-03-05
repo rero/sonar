@@ -23,6 +23,7 @@ import traceback
 
 import click
 from dojson import Overdo, utils
+from flask import current_app
 
 from sonar.modules.institutions.api import InstitutionRecord
 
@@ -78,10 +79,9 @@ def get_field_items(value):
     return utils.iteritems(value)
 
 
-def remove_trailing_punctuation(
-        data,
-        punctuation=',',
-        spaced_punctuation=':;/-'):
+def remove_trailing_punctuation(data,
+                                punctuation=',',
+                                spaced_punctuation=':;/-'):
     """Remove trailing punctuation from data.
 
     The punctuation parameter list the
@@ -95,10 +95,8 @@ def remove_trailing_punctuation(
     punctuation = punctuation.replace('.', r'\.').replace('-', r'\-')
     spaced_punctuation = \
         spaced_punctuation.replace('.', r'\.').replace('-', r'\-')
-    return re.sub(
-        r'([{0}]|\s+[{1}])$'.format(punctuation, spaced_punctuation),
-        '',
-        data.rstrip()).rstrip()
+    return re.sub(r'([{0}]|\s+[{1}])$'.format(punctuation, spaced_punctuation),
+                  '', data.rstrip()).rstrip()
 
 
 class SonarOverdo(Overdo):
@@ -113,17 +111,16 @@ class SonarOverdo(Overdo):
 
     def __init__(self, bases=None, entry_point_group=None):
         """Sonaroverdo init."""
-        super(SonarOverdo, self).__init__(
-            bases=bases, entry_point_group=entry_point_group)
+        super(SonarOverdo, self).__init__(bases=bases,
+                                          entry_point_group=entry_point_group)
 
     def do(self, blob, ignore_missing=True, exception_handlers=None):
         """Translate blob values and instantiate new model instance."""
         self.blob_record = blob
-        result = super(SonarOverdo, self).do(
-            blob,
-            ignore_missing=ignore_missing,
-            exception_handlers=exception_handlers
-        )
+        result = super(SonarOverdo,
+                       self).do(blob,
+                                ignore_missing=ignore_missing,
+                                exception_handlers=exception_handlers)
         return result
 
     def get_fields(self, tag=None):
@@ -190,8 +187,8 @@ class SonarMarc21Overdo(SonarOverdo):
 
     def __init__(self, bases=None, entry_point_group=None):
         """SonarMarc21Overdo init."""
-        super(SonarMarc21Overdo, self).__init__(
-            bases=bases, entry_point_group=entry_point_group)
+        super(SonarMarc21Overdo,
+              self).__init__(bases=bases, entry_point_group=entry_point_group)
         self.count = 0
 
     def do(self, blob, ignore_missing=True, exception_handlers=None):
@@ -218,14 +215,16 @@ class SonarMarc21Overdo(SonarOverdo):
             self.init_lang()
             self.init_country()
             self.init_alternate_graphic()
-            result = super(SonarMarc21Overdo, self).do(
-                blob,
-                ignore_missing=ignore_missing,
-                exception_handlers=exception_handlers
-            )
+            result = super(SonarMarc21Overdo,
+                           self).do(blob,
+                                    ignore_missing=ignore_missing,
+                                    exception_handlers=exception_handlers)
         except Exception as err:
             error_print('ERROR:', self.bib_id, self.count, err)
             traceback.print_exc()
+
+        self.verify(result)
+
         return result
 
     @staticmethod
@@ -293,6 +292,7 @@ class SonarMarc21Overdo(SonarOverdo):
 
     def init_lang(self):
         """Initialization languages (008 and 041)."""
+
         def init_lang_from(fields_041, code):
             """Construct list of language codes from data."""
             langs_from_041 = []
@@ -326,6 +326,7 @@ class SonarMarc21Overdo(SonarOverdo):
         link code (from $6) of the linked field. The language script is
         extracted from $6 and used to qualify the alternate graphic value.
         """
+
         def get_script_from_lang(asian=False):
             """Initialization of alternate graphic representation."""
             script_per_lang_asia = {
@@ -396,9 +397,34 @@ class SonarMarc21Overdo(SonarOverdo):
                     tag_data[link] = link_data
                     self.alternate_graphic[tag] = tag_data
             except Exception as exp:
-                click.secho(
-                    'Error in init_alternate_graphic: {error}'.format(
-                        error=exp
-                    ),
-                    fg='red'
-                )
+                click.secho('Error in init_alternate_graphic: {error}'.format(
+                    error=exp),
+                            fg='red')
+
+    def verify(self, result):
+        """Verify record data integrity after processing.
+
+        :param result: Record data
+        """
+
+        def is_pa_optional():
+            """Check if record types make provision activity optional."""
+            types = self.blob_record.get('980__')
+
+            if not types:
+                return False
+
+            if types.get('a') != 'POSTPRINT':
+                return False
+
+            if types.get('f') not in ['ART_JOURNAL', 'ART_INPROC']:
+                return False
+
+            return True
+
+        # Check if provision activity is set, but it's optional depending
+        # on record types
+        if 'provisionActivity' not in result and not is_pa_optional():
+            current_app.logger.warning(
+                'No provision activity found in record {record}'.format(
+                    record=result))

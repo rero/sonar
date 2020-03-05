@@ -22,6 +22,7 @@ from __future__ import absolute_import, print_function
 import os
 
 import mock
+import pytest
 from dojson.contrib.marc21.utils import create_record
 from utils import mock_response
 
@@ -57,6 +58,9 @@ def test_marc21_to_type_and_institution(app):
             <subfield code="a">BOOK</subfield>
             <subfield code="b">BAAGE</subfield>
         </datafield>
+        <datafield tag="269" ind1=" " ind2=" ">
+            <subfield code="c">1966</subfield>
+        </datafield>
     </record>
     """
     marc21json = create_record(marc21xml)
@@ -72,6 +76,9 @@ def test_marc21_to_type_and_institution(app):
         <datafield tag="980" ind1=" " ind2=" ">
             <subfield code="a">BOOK</subfield>
         </datafield>
+        <datafield tag="269" ind1=" " ind2=" ">
+            <subfield code="c">1966</subfield>
+        </datafield>
     </record>
     """
     marc21json = create_record(marc21xml)
@@ -84,6 +91,9 @@ def test_marc21_to_type_and_institution(app):
     <record>
         <datafield tag="980" ind1=" " ind2=" ">
             <subfield code="b">BAAGE</subfield>
+        </datafield>
+        <datafield tag="269" ind1=" " ind2=" ">
+            <subfield code="c">1966</subfield>
         </datafield>
     </record>
     """
@@ -596,686 +606,233 @@ def test_marc21copyrightdate():
     assert data.get('copyrightDate') == ['© 1971 [extra 1973]']
 
 
-def test_marc21_to_provision_activity_manufacture_date():
-    """Test dojson publication statement.
-    - 1 manufacture place and 1 agent, 1 manufacture date
-    """
-
+def test_marc21_to_provision_activity_field_260(app):
+    """Test provision activity with field 260."""
+    # OK
     marc21xml = """
-      <record>
-        <controlfield tag=
-          "008">070518s20062010sz ||| |  ||||00|  |fre d</controlfield>
-        <datafield tag="041" ind1="0" ind2=" ">
-          <subfield code="a">fre</subfield>
-          <subfield code="a">ger</subfield>
+    <record>
+        <datafield tag="260" ind1=" " ind2=" ">
+            <subfield code="a">Lausanne</subfield>
+            <subfield code="c">1798-1799</subfield>
+            <subfield code="b">Bulletin officiel du Directoire,</subfield>
+            <subfield code="e">Lausanne :</subfield>
+            <subfield code="f">Henri Vincent</subfield>
         </datafield>
-        <datafield tag="260" ind1=" " ind2="3">
-          <subfield code="a">Bienne :</subfield>
-          <subfield code="b">Impr. Weber</subfield>
-          <subfield code="c">[2006]</subfield>
-        </datafield>
-        <datafield tag="260" ind1=" " ind2="4">
-          <subfield code="c">© 2006</subfield>
-        </datafield>
-      </record>
+    </record>
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
     assert data.get('provisionActivity') == [{
-        'type':
-        'bf:Publication',
-        'statement': [{
-            'type': 'bf:Place',
-            'label': [{
-                'value': 'Bienne'
-            }]
-        }, {
-            'type': 'bf:Agent',
-            'label': [{
-                'value': 'Impr. Weber'
-            }]
-        }, {
-            'label': [{
-                'value': '[2006]'
+        "type":
+        "bf:Publication",
+        "startDate":
+        "1798",
+        "endDate":
+        "1799",
+        "statement": [{
+            "label": [{
+                "value": "Lausanne"
             }],
-            'type': 'Date'
-        }],
-        'startDate':
-        '2006',
-        'endDate':
-        '2010',
-        'place': [{
-            'country': 'sz',
-            'type': 'bf:Place'
+            "type": "bf:Place"
+        }, {
+            "label": [{
+                "value": "Bulletin officiel du Directoire"
+            }],
+            "type":
+            "bf:Agent"
+        }, {
+            "label": [{
+                "value": "1798-1799"
+            }],
+            "type": "Date"
         }]
     }, {
-        'type':
-        'bf:Publication',
-        'statement': [{
-            'label': [{
-                'value': '© 2006'
+        "type":
+        "bf:Manufacture",
+        "statement": [{
+            "label": [{
+                "value": "Lausanne"
             }],
-            'type': 'Date'
-        }],
-        'startDate':
-        '2006',
-        'endDate':
-        '2010',
-        'place': [{
-            'country': 'sz',
-            'type': 'bf:Place'
+            "type": "bf:Place"
+        }, {
+            "label": [{
+                "value": "Henri Vincent"
+            }],
+            "type": "bf:Agent"
         }]
     }]
 
-
-def test_marc21_to_provision_activity_canton():
-    """Test dojson publication statement.
-    - get canton from field 044
-    - 3 publication places and 3 agents from one field 264
-    """
-
+    # No start date --> throw error
     marc21xml = """
-      <record>
-        <controlfield tag=
-          "008">070518s20062010sz ||| |  ||||00|  |fre d</controlfield>
-        <datafield tag="041" ind1="0" ind2=" ">
-          <subfield code="a">fre</subfield>
-          <subfield code="a">ger</subfield>
+    <record>
+        <datafield tag="260" ind1=" " ind2=" ">
+            <subfield code="a">Lausanne</subfield>
+            <subfield code="b">Bulletin officiel du Directoire,</subfield>
         </datafield>
-        <datafield tag="044" ind1=" " ind2=" ">
-          <subfield code="a">sz</subfield>
-          <subfield code="c">ch-be</subfield>
-        </datafield>
-        <datafield tag="260" ind1=" " ind2="1">
-          <subfield code="a">Biel/Bienne :</subfield>
-          <subfield code="b">Centre PasquArt ;</subfield>
-          <subfield code="a">Nürnberg :</subfield>
-          <subfield code="b">Verlag für Moderne Kunst ;</subfield>
-          <subfield code="a">Manchester :</subfield>
-          <subfield code="b">distrib. in the United Kingdom [etc.],</subfield>
-          <subfield code="c">[2006-2010]</subfield>
-        </datafield>
-        <datafield tag="260" ind1=" " ind2="3">
-          <subfield code="a">Bienne :</subfield>
-          <subfield code="b">Impr. Weber</subfield>
-        </datafield>
-        <datafield tag="260" ind1=" " ind2="4">
-          <subfield code="c">© 2006</subfield>
-        </datafield>
-      </record>
+    </record>
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
+    assert not data.get('provisionActivity')
 
+    # No provision activity and wrong type --> throw error
+    marc21xml = """
+    <record></record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('provisionActivity')
+
+    # No provision activity and right types --> ok provision activity is not
+    # mandatory
+    marc21xml = """
+    <record>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="a">POSTPRINT</subfield>
+            <subfield code="f">ART_JOURNAL</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('provisionActivity')
+
+    # Without end date
+    marc21xml = """
+    <record>
+        <datafield tag="260" ind1=" " ind2=" ">
+            <subfield code="a">Lausanne</subfield>
+            <subfield code="c">1798</subfield>
+            <subfield code="b">Bulletin officiel du Directoire,</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('provisionActivity')[0]['startDate'] == '1798'
+    assert 'endDate' not in data.get('provisionActivity')[0]
+
+
+def test_marc21_to_provision_activity_field_269(app):
+    """Test provision activity with field 269."""
+    # One field
+    marc21xml = """
+    <record>
+        <datafield tag="269" ind1=" " ind2=" ">
+            <subfield code="c">1966</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
     assert data.get('provisionActivity') == [{
-        'type':
-        'bf:Publication',
-        'statement': [{
-            'type': 'bf:Place',
-            'label': [{
-                'value': 'Biel/Bienne'
-            }]
-        }, {
-            'type': 'bf:Agent',
-            'label': [{
-                'value': 'Centre PasquArt'
-            }]
-        }, {
-            'type': 'bf:Place',
-            'label': [{
-                'value': 'Nürnberg'
-            }]
-        }, {
-            'type': 'bf:Agent',
-            'label': [{
-                'value': 'Verlag für Moderne Kunst'
-            }]
-        }, {
-            'type': 'bf:Place',
-            'label': [{
-                'value': 'Manchester'
-            }]
-        }, {
-            'type':
-            'bf:Agent',
-            'label': [{
-                'value': 'distrib. in the United Kingdom [etc.]'
-            }]
-        }, {
-            'label': [{
-                'value': '[2006-2010]'
+        'startDate': '1966',
+        'type': 'bf:Publication'
+    }]
+
+    # One field with start and end date
+    marc21xml = """
+    <record>
+        <datafield tag="269" ind1=" " ind2=" ">
+            <subfield code="c">1966-1999</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('provisionActivity') == [{
+        'startDate': '1966',
+        'type': 'bf:Publication'
+    }]
+
+    # Multiple fields
+    marc21xml = """
+    <record>
+        <datafield tag="269" ind1=" " ind2=" ">
+            <subfield code="c">1966</subfield>
+        </datafield>
+        <datafield tag="269" ind1=" " ind2=" ">
+            <subfield code="c">2005</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('provisionActivity') == [{
+        'startDate': '2005',
+        'type': 'bf:Publication'
+    }]
+
+    # No field $c
+    marc21xml = """
+    <record>
+        <datafield tag="269" ind1=" " ind2=" ">
+            <subfield code="d">1966</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('provisionActivity')
+
+
+def test_marc21_to_provision_activity_all():
+    """Test provision activity with both 260 and 269 fields."""
+    marc21xml = """
+    <record>
+        <datafield tag="260" ind1=" " ind2=" ">
+            <subfield code="a">Lausanne</subfield>
+            <subfield code="c">1798-1799</subfield>
+            <subfield code="b">Bulletin officiel du Directoire,</subfield>
+            <subfield code="e">Lausanne :</subfield>
+            <subfield code="f">Henri Vincent</subfield>
+        </datafield>
+        <datafield tag="269" ind1=" " ind2=" ">
+            <subfield code="c">1700</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('provisionActivity') == [{
+        "type":
+        "bf:Manufacture",
+        "statement": [{
+            "label": [{
+                "value": "Lausanne"
             }],
-            'type': 'Date'
-        }],
-        'startDate':
-        '2006',
-        'endDate':
-        '2010',
-        'place': [{
-            'canton': 'be',
-            'country': 'sz',
-            'type': 'bf:Place'
+            "type": "bf:Place"
+        }, {
+            "label": [{
+                "value": "Henri Vincent"
+            }],
+            "type": "bf:Agent"
         }]
     }, {
-        'type':
-        'bf:Publication',
-        'statement': [{
-            'type': 'bf:Place',
-            'label': [{
-                'value': 'Bienne'
-            }]
-        }, {
-            'type': 'bf:Agent',
-            'label': [{
-                'value': 'Impr. Weber'
-            }]
-        }],
-        'startDate':
-        '2006',
-        'endDate':
-        '2010',
-        'place': [{
-            'canton': 'be',
-            'country': 'sz',
-            'type': 'bf:Place'
-        }]
-    }, {
-        'type':
-        'bf:Publication',
-        'statement': [{
-            'label': [{
-                'value': '© 2006'
+        "type":
+        "bf:Publication",
+        "startDate":
+        "1700",
+        "endDate":
+        "1799",
+        "statement": [{
+            "label": [{
+                "value": "Lausanne"
             }],
-            'type': 'Date'
-        }],
-        'startDate':
-        '2006',
-        'endDate':
-        '2010',
-        'place': [{
-            'canton': 'be',
-            'country': 'sz',
-            'type': 'bf:Place'
+            "type": "bf:Place"
+        }, {
+            "label": [{
+                "value": "Bulletin officiel du Directoire"
+            }],
+            "type":
+            "bf:Agent"
+        }, {
+            "label": [{
+                "value": "1798-1799"
+            }],
+            "type": "Date"
         }]
     }]
-
-
-def test_marc21_to_provision_activity_1_place_2_agents():
-    """Test dojson publication statement.
-    - 1 publication place and 2 agents from one field 264
-    """
-
-    marc21xml = """
-      <record>
-        <controlfield tag=
-          "008">940202m19699999fr |||||| ||||00|| |fre d</controlfield>
-        <datafield tag="260" ind1=" " ind2="1">
-          <subfield code="a">[Paris] :</subfield>
-          <subfield code="b">Desclée de Brouwer [puis]</subfield>
-          <subfield code="b">Etudes augustiniennes,</subfield>
-          <subfield code="c">1969-</subfield>
-        </datafield>
-      </record>
-     """
-    marc21json = create_record(marc21xml)
-    data = marc21tojson.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        'type':
-        'bf:Publication',
-        'place': [{
-            'country': 'fr',
-            'type': 'bf:Place'
-        }],
-        'statement': [{
-            'label': [{
-                'value': '[Paris]'
-            }],
-            'type': 'bf:Place'
-        }, {
-            'label': [{
-                'value': 'Desclée de Brouwer [puis]'
-            }],
-            'type': 'bf:Agent'
-        }, {
-            'label': [{
-                'value': 'Etudes augustiniennes'
-            }],
-            'type': 'bf:Agent'
-        }, {
-            'label': [{
-                'value': '1969-'
-            }],
-            'type': 'Date'
-        }],
-        'startDate':
-        '1969'
-    }]
-
-
-def test_marc21_to_provision_activity_unknown_place_2_agents():
-    """Test dojson publication statement.
-    - unknown place and 2 agents from one field 264
-    """
-    marc21xml = """
-      <record>
-      <controlfield tag=
-        "008">960525s1968    be |||||| ||||00|| |fre d</controlfield>
-      <datafield tag="260" ind1=" " ind2="1">
-        <subfield code="a">[Lieu de publication non identifié] :</subfield>
-        <subfield code="b">Labor :</subfield>
-        <subfield code="b">Nathan,</subfield>
-        <subfield code="c">1968</subfield>
-      </datafield>
-      </record>
-    """
-    marc21json = create_record(marc21xml)
-    data = marc21tojson.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        'type':
-        'bf:Publication',
-        'place': [{
-            'country': 'be',
-            'type': 'bf:Place'
-        }],
-        'statement': [{
-            'label': [{
-                'value': '[Lieu de publication non identifié]'
-            }],
-            'type':
-            'bf:Place'
-        }, {
-            'label': [{
-                'value': 'Labor'
-            }],
-            'type': 'bf:Agent'
-        }, {
-            'label': [{
-                'value': 'Nathan'
-            }],
-            'type': 'bf:Agent'
-        }, {
-            'label': [{
-                'value': '1968'
-            }],
-            'type': 'Date'
-        }],
-        'startDate':
-        '1968'
-    }]
-    assert create_publication_statement(data.get('provisionActivity')[0]) == {
-        'default': '[Lieu de publication non identifié] : Labor, Nathan, 1968'
-    }
-
-
-def test_marc21_to_provision_activity_3_places_dann_2_agents():
-    """Test dojson publication statement.
-    - 3 places and 2 agents from one field 264
-    - 2 places with [dann] prefix
-    """
-    marc21xml = """
-      <record>
-      <controlfield tag=
-        "008">000927m19759999gw |||||| ||||00|  |ger d</controlfield>
-      <datafield tag="260" ind1=" " ind2="1">
-        <subfield code="a">Hamm (Westf.) ;</subfield>
-        <subfield code="a">[dann] Herzberg ;</subfield>
-        <subfield code="a">[dann] Nordhausen :</subfield>
-        <subfield code="b">T. Bautz,</subfield>
-        <subfield code="c">1975-</subfield>
-      </datafield>
-      </record>
-    """
-    marc21json = create_record(marc21xml)
-    data = marc21tojson.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        'type':
-        'bf:Publication',
-        'place': [{
-            'country': 'gw',
-            'type': 'bf:Place'
-        }],
-        'statement': [{
-            'label': [{
-                'value': 'Hamm (Westf.)'
-            }],
-            'type': 'bf:Place'
-        }, {
-            'label': [{
-                'value': '[dann] Herzberg'
-            }],
-            'type': 'bf:Place'
-        }, {
-            'label': [{
-                'value': '[dann] Nordhausen'
-            }],
-            'type': 'bf:Place'
-        }, {
-            'label': [{
-                'value': 'T. Bautz'
-            }],
-            'type': 'bf:Agent'
-        }, {
-            'label': [{
-                'value': '1975-'
-            }],
-            'type': 'Date'
-        }],
-        'startDate':
-        '1975'
-    }]
-    assert create_publication_statement(data.get('provisionActivity')[0]) == {
-        'default':
-        'Hamm (Westf.) ; [dann] Herzberg ; [dann] Nordhausen : ' +
-        'T. Bautz, 1975-'
-    }
-
-
-def test_marc21_to_provision_activity_2_places_1_agent():
-    """Test dojson publication statement.
-    - 2 publication places and 1 agents from one field 264
-    """
-
-    marc21xml = """
-      <record>
-      <controlfield tag=
-        "008">960525s1966    sz |||||| ||||00|| |fre d</controlfield>
-      <datafield tag="260" ind1=" " ind2="1">
-        <subfield code="a">[Louvain] ;</subfield>
-        <subfield code="a">[Paris] :</subfield>
-        <subfield code="b">[éditeur non identifié],</subfield>
-        <subfield code="c">[1966]</subfield>
-      </datafield>
-      </record>
-    """
-    marc21json = create_record(marc21xml)
-    data = marc21tojson.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        'type':
-        'bf:Publication',
-        'place': [{
-            'country': 'sz',
-            'type': 'bf:Place'
-        }],
-        'statement': [{
-            'label': [{
-                'value': '[Louvain]'
-            }],
-            'type': 'bf:Place'
-        }, {
-            'label': [{
-                'value': '[Paris]'
-            }],
-            'type': 'bf:Place'
-        }, {
-            'label': [{
-                'value': '[éditeur non identifié]'
-            }],
-            'type': 'bf:Agent'
-        }, {
-            'label': [{
-                'value': '[1966]'
-            }],
-            'type': 'Date'
-        }],
-        'startDate':
-        '1966'
-    }]
-    assert create_publication_statement(data.get('provisionActivity')[0]) == {
-        'default': '[Louvain] ; [Paris] : [éditeur non identifié], [1966]'
-    }
-
-
-def test_marc21_to_provision_activity_1_place_1_agent_reprint_date():
-    """Test dojson publication statement.
-    - 1 place and 1 agent from one field 264
-    - reprint date in 008
-    """
-    marc21xml = """
-      <record>
-      <controlfield tag=
-        "008">000918r17581916xxu|||||| ||||00|| |eng d</controlfield>
-      <datafield tag="041" ind1="0" ind2=" ">
-        <subfield code="a">eng</subfield>
-        <subfield code="a">fre</subfield>
-      </datafield>
-      <datafield tag="260" ind1=" " ind2="1">
-        <subfield code="a">Washington :</subfield>
-        <subfield code="b">Carnegie Institution of Washington,</subfield>
-        <subfield code="c">1916</subfield>
-      </datafield>
-      </record>
-    """
-    marc21json = create_record(marc21xml)
-    data = marc21tojson.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        'type':
-        'bf:Publication',
-        'place': [{
-            'country': 'xxu',
-            'type': 'bf:Place'
-        }],
-        'statement': [{
-            'label': [{
-                'value': 'Washington'
-            }],
-            'type': 'bf:Place'
-        }, {
-            'label': [{
-                'value': 'Carnegie Institution of Washington'
-            }],
-            'type':
-            'bf:Agent'
-        }, {
-            'label': [{
-                'value': '1916'
-            }],
-            'type': 'Date'
-        }],
-        'startDate':
-        '1758',
-        'endDate':
-        '1916'
-    }]
-
-
-def test_marc21_to_provision_activity_1_place_1_agent_uncertain_date():
-    """Test dojson publication statement.
-    - 1 place and 1 agent from one field 264
-    - uncertain date
-    """
-    marc21xml = """
-      <record>
-      <controlfield tag=
-        "008">160126q1941    fr ||| |  ||||00|  |fre d</controlfield>
-      <datafield tag="260" ind1=" " ind2="1">
-        <subfield code="a">Aurillac :</subfield>
-        <subfield code="b">Impr. moderne,</subfield>
-        <subfield code="c">[1941?]</subfield>
-      </datafield>
-      </record>
-    """
-    marc21json = create_record(marc21xml)
-    data = marc21tojson.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        'type':
-        'bf:Publication',
-        'place': [{
-            'country': 'fr',
-            'type': 'bf:Place'
-        }],
-        'statement': [{
-            'label': [{
-                'value': 'Aurillac'
-            }],
-            'type': 'bf:Place'
-        }, {
-            'label': [{
-                'value': 'Impr. moderne'
-            }],
-            'type': 'bf:Agent'
-        }, {
-            'label': [{
-                'value': '[1941?]'
-            }],
-            'type': 'Date'
-        }],
-        'note':
-        'Date(s) incertaine(s) ou inconnue(s)',
-        'startDate':
-        '1941'
-    }]
-    assert create_publication_statement(data.get('provisionActivity')[0]) == {
-        'default': 'Aurillac : Impr. moderne, [1941?]'
-    }
-
-
-def test_marc21_to_provision_activity_1_place_1_agent_chi_hani():
-    """Test dojson publication statement.
-    - 1 place and 1 agent from one field 264
-    - extract data from the linked 880 from 3 fields 880
-    """
-    marc21xml = """
-      <record>
-      <controlfield tag=
-        "008">180323s2017    cc ||| |  ||||00|  |chi d</controlfield>
-      <datafield tag="260" ind1=" " ind2="1">
-        <subfield code="6">880-04</subfield>
-        <subfield code="a">Beijing :</subfield>
-        <subfield code="b">Beijing da xue chu ban she,</subfield>
-        <subfield code="c">2017</subfield>
-      </datafield>
-      <datafield tag="880" ind1=" " ind2="1">
-        <subfield code="6">264-04/$1</subfield>
-        <subfield code="a">北京 :</subfield>
-        <subfield code="b">北京大学出版社,</subfield>
-        <subfield code="c">2017</subfield>
-      </datafield>
-      <datafield tag="880" ind1="1" ind2=" ">
-        <subfield code="6">100-01/$1</subfield>
-        <subfield code="a">余锋</subfield>
-      </datafield>
-      <datafield tag="880" ind1="1" ind2="0">
-        <subfield code="6">245-02/$1</subfield>
-        <subfield code="a">中国娱乐法 /</subfield>
-        <subfield code="c">余锋著</subfield>
-      </datafield>
-      </record>
-    """
-    marc21json = create_record(marc21xml)
-    data = marc21tojson.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        'type':
-        'bf:Publication',
-        'place': [{
-            'country': 'cc',
-            'type': 'bf:Place'
-        }],
-        'statement': [{
-            'label': [{
-                'value': 'Beijing'
-            }, {
-                'value': '北京',
-                'language': 'chi-hani'
-            }],
-            'type':
-            'bf:Place'
-        }, {
-            'label': [{
-                'value': 'Beijing da xue chu ban she'
-            }, {
-                'value': '北京大学出版社',
-                'language': 'chi-hani'
-            }],
-            'type':
-            'bf:Agent'
-        }, {
-            'label': [{
-                'value': '2017'
-            }, {
-                'language': 'chi-hani',
-                'value': '2017'
-            }],
-            'type':
-            'Date'
-        }],
-        'startDate':
-        '2017'
-    }]
-    assert create_publication_statement(data.get('provisionActivity')[0]) == {
-        'chi-hani': '北京 : 北京大学出版社, 2017',
-        'default': 'Beijing : Beijing da xue chu ban she, 2017'
-    }
-    marc21xml = """
-      <record>
-      <controlfield tag=
-        "008">180323s2017    cc ||| |  ||||00|  |eng d</controlfield>
-      <datafield tag="260" ind1=" " ind2="1">
-        <subfield code="6">880-04</subfield>
-        <subfield code="a">Beijing :</subfield>
-        <subfield code="b">Beijing da xue chu ban she,</subfield>
-        <subfield code="c">2017</subfield>
-      </datafield>
-      <datafield tag="880" ind1=" " ind2="1">
-        <subfield code="6">264-04/$1</subfield>
-        <subfield code="a">北京 :</subfield>
-        <subfield code="b">北京大学出版社,</subfield>
-        <subfield code="c">2017</subfield>
-      </datafield>
-      <datafield tag="880" ind1="1" ind2=" ">
-        <subfield code="6">100-01/$1</subfield>
-        <subfield code="a">余锋</subfield>
-      </datafield>
-      <datafield tag="880" ind1="1" ind2="0">
-        <subfield code="6">245-02/$1</subfield>
-        <subfield code="a">中国娱乐法 /</subfield>
-        <subfield code="c">余锋著</subfield>
-      </datafield>
-      </record>
-    """
-    marc21json = create_record(marc21xml)
-    data = marc21tojson.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        'type':
-        'bf:Publication',
-        'place': [{
-            'country': 'cc',
-            'type': 'bf:Place'
-        }],
-        'statement': [{
-            'label': [{
-                'value': 'Beijing'
-            }, {
-                'value': '北京',
-                'language': 'und-hani'
-            }],
-            'type':
-            'bf:Place'
-        }, {
-            'label': [{
-                'value': 'Beijing da xue chu ban she'
-            }, {
-                'value': '北京大学出版社',
-                'language': 'und-hani'
-            }],
-            'type':
-            'bf:Agent'
-        }, {
-            'label': [{
-                'value': '2017'
-            }, {
-                'language': 'und-hani',
-                'value': '2017'
-            }],
-            'type':
-            'Date'
-        }],
-        'startDate':
-        '2017'
-    }]
-    assert create_publication_statement(data.get('provisionActivity')[0]) == {
-        'und-hani': '北京 : 北京大学出版社, 2017',
-        'default': 'Beijing : Beijing da xue chu ban she, 2017'
-    }
 
 
 def test_marc21_to_edition_statement_one_field_250():
@@ -1459,241 +1016,6 @@ def test_marc21_to_edition_statement_with_one_bad_field_250():
             'value': 'Edition'
         }]
     }]
-
-
-def test_marc21_to_provision_activity_1_place_1_agent_ara_arab():
-    """Test dojson publication statement.
-    - 1 place and 1 agent from one field 264
-    - extract data from the linked 880
-    """
-    marc21xml = """
-      <record>
-      <controlfield tag=
-        "008">150617s2014    ua ||| |  ||||00|  |ara d</controlfield>
-      <datafield tag="264" ind1=" " ind2="1">
-        <subfield code="6">880-01</subfield>
-        <subfield code="a">al-Qāhirah :</subfield>
-        <subfield code="b">Al-Hayʾat al-ʿāmmah li quṣūr al-thaqāfah,</subfield>
-        <subfield code="c">2014</subfield>
-      </datafield>
-      <datafield tag="880" ind1=" " ind2="1">
-        <subfield code="6">264-01/(3/r</subfield>
-        <subfield code="a">القاهرة :</subfield>
-        <subfield code="b">الهيئة العامة لقصور الثقافة,</subfield>
-        <subfield code="c">2014</subfield>
-      </datafield>
-      </record>
-    """
-    marc21json = create_record(marc21xml)
-    data = marc21tojson.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        'type':
-        'bf:Publication',
-        'place': [{
-            'country': 'ua',
-            'type': 'bf:Place'
-        }],
-        'statement': [{
-            'label': [{
-                'value': 'al-Qāhirah'
-            }, {
-                'value': 'القاهرة',
-                'language': 'ara-arab'
-            }],
-            'type':
-            'bf:Place'
-        }, {
-            'label': [{
-                'value': 'Al-Hayʾat al-ʿāmmah li quṣūr al-thaqāfah'
-            }, {
-                'value': 'الهيئة العامة لقصور الثقافة',
-                'language': 'ara-arab'
-            }],
-            'type':
-            'bf:Agent'
-        }, {
-            'label': [{
-                'value': '2014'
-            }, {
-                'value': '2014',
-                'language': 'ara-arab'
-            }],
-            'type':
-            'Date'
-        }],
-        'startDate':
-        '2014'
-    }]
-    assert create_publication_statement(data.get('provisionActivity')[0]) == {
-        'ara-arab':
-        'القاهرة : الهيئة العامة لقصور الثقافة, 2014',
-        'default':
-        'al-Qāhirah : Al-Hayʾat al-ʿāmmah li quṣūr al-thaqāfah,' + ' 2014'
-    }
-
-
-def test_marc21_to_provision_activity_2_places_2_agents_rus_cyrl():
-    """Test dojson publication statement.
-    - 2 places and 2 agents from one field 264
-    - extract data from the linked 880 from 3 fields 880
-    """
-    marc21xml = """
-      <record>
-        <controlfield tag=
-          "008">170626s2017    ru ||| |  ||||00|  |rus d</controlfield>
-        <datafield tag="264" ind1=" " ind2="1">
-          <subfield code="6">880-02</subfield>
-          <subfield code="a">Ierusalim :</subfield>
-          <subfield code="b">Gesharim ;</subfield>
-          <subfield code="a">Moskva :</subfield>
-          <subfield code="b">Mosty Kulʹtury,</subfield>
-          <subfield code="c">2017</subfield>
-        </datafield>
-        <datafield tag="264" ind1=" " ind2="4">
-          <subfield code="c">©2017</subfield>
-        </datafield>
-        <datafield tag="880" ind1=" " ind2="1">
-          <subfield code="6">264-02/(N</subfield>
-          <subfield code="a">Иерусалим :</subfield>
-          <subfield code="b">Гешарим ;</subfield>
-          <subfield code="a">Москва :</subfield>
-          <subfield code="b">Мосты Культуры,</subfield>
-          <subfield code="c">2017</subfield>
-        </datafield>
-        <datafield tag="880" ind1="1" ind2=" ">
-          <subfield code="6">490-03/(N</subfield>
-          <subfield code="a">Прошлый век. Воспоминания</subfield>
-        </datafield>
-        <datafield tag="880" ind1="1" ind2="0">
-          <subfield code="6">245-01/(N</subfield>
-          <subfield code="a">Воспоминания бабушки :</subfield>
-          <subfield code=
-              "b">очерки культурной истории евреев России в XIX в. /</subfield>
-          <subfield code="c">Полина Венгерова</subfield>
-        </datafield>
-      </record>
-    """
-    marc21json = create_record(marc21xml)
-    data = marc21tojson.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        'type':
-        'bf:Publication',
-        'place': [{
-            'country': 'ru',
-            'type': 'bf:Place'
-        }],
-        'statement': [{
-            'label': [{
-                'value': 'Ierusalim'
-            }, {
-                'value': 'Иерусалим',
-                'language': 'rus-cyrl'
-            }],
-            'type':
-            'bf:Place'
-        }, {
-            'label': [{
-                'value': 'Gesharim'
-            }, {
-                'value': 'Гешарим',
-                'language': 'rus-cyrl'
-            }],
-            'type':
-            'bf:Agent'
-        }, {
-            'label': [{
-                'value': 'Moskva'
-            }, {
-                'value': 'Москва',
-                'language': 'rus-cyrl'
-            }],
-            'type':
-            'bf:Place'
-        }, {
-            'label': [{
-                'value': 'Mosty Kulʹtury'
-            }, {
-                'value': 'Мосты Культуры',
-                'language': 'rus-cyrl'
-            }],
-            'type':
-            'bf:Agent'
-        }, {
-            'label': [{
-                'value': '2017'
-            }, {
-                'language': 'rus-cyrl',
-                'value': '2017'
-            }],
-            'type':
-            'Date'
-        }],
-        'startDate':
-        '2017'
-    }]
-    assert create_publication_statement(data.get('provisionActivity')[0]) == {
-        'default': 'Ierusalim : Gesharim ; Moskva : Mosty Kulʹtury, 2017',
-        'rus-cyrl': 'Иерусалим : Гешарим ; Москва : Мосты Культуры, 2017'
-    }
-
-
-def test_marc21_to_provision_activity_exceptions(capsys):
-    """Test dojson publication statement.
-    - exceptions
-    """
-    marc21xml = """
-      <record>
-        <controlfield tag=
-          "008">170626s2017    ru ||| |  ||||00|  |</controlfield>
-        <datafield tag="264" ind1=" " ind2="1">
-          <subfield code="6">880-02</subfield>
-          <subfield code="a">Ierusalim :</subfield>
-        </datafield>
-        <datafield tag="880" ind1=" " ind2="1">
-          <subfield code="6">264-02/(N</subfield>
-          <subfield code="a">Иерусалим :</subfield>
-        </datafield>
-      </record>
-    """
-    marc21json = create_record(marc21xml)
-    data = marc21tojson.do(marc21json)
-    out, err = capsys.readouterr()
-    assert data.get('provisionActivity') == [{
-        'type':
-        'bf:Publication',
-        'place': [{
-            'country': 'ru',
-            'type': 'bf:Place'
-        }],
-        'statement': [
-            {
-                'label': [{
-                    'value': 'Ierusalim'
-                }, {
-                    'value': 'Иерусалим',
-                    'language': 'und-zyyy'
-                }],
-                'type':
-                'bf:Place'
-            },
-        ],
-        'startDate':
-        '2017'
-    }]
-    assert err.strip() == ('WARNING LANGUAGE SCRIPTS:\t???\tzyyy\t008:'
-                           '\t\t041$a:\t[]\t041$h:\t[]')
-
-    marc21xml = """
-      <record>
-        <datafield tag="044" ind1=" " ind2=" ">
-          <subfield code="c">chbe</subfield>
-        </datafield>
-      </record>
-    """
-    marc21json = create_record(marc21xml)
-    data = marc21tojson.do(marc21json)
-    out, err = capsys.readouterr()
-    assert err.strip() == 'ERROR INIT CANTONS:\t???\tchbe'
 
 
 # extent: 300$a (the first one if many)
@@ -1903,26 +1225,22 @@ def test_marc21_to_subjects():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('subjects') == [
-        {
-            'label': {
-                'language': 'eng',
-                'value': ['subject 1', 'subject 2']
-            }
-        },
-        {
-            'label': {
-                'language': 'fre',
-                'value': ['sujet 1', 'sujet 2']
-            }
-        },
-        {
-            'label': {
-                'value': ['subject 600 1', 'subject 600 2']
-            },
-            'source': 'rero'
+    assert data.get('subjects') == [{
+        'label': {
+            'language': 'eng',
+            'value': ['subject 1', 'subject 2']
         }
-    ]
+    }, {
+        'label': {
+            'language': 'fre',
+            'value': ['sujet 1', 'sujet 2']
+        }
+    }, {
+        'label': {
+            'value': ['subject 600 1', 'subject 600 2']
+        },
+        'source': 'rero'
+    }]
 
     # 600 without source
     marc21xml = """

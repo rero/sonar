@@ -24,18 +24,18 @@ from .dojson.contrib.marc21tojson.model import remove_trailing_punctuation
 
 def localized_data_name(data, language):
     """Get localized name."""
-    return data.get(
-        'name_{language}'.format(language=language),
-        data.get('name', '')
-    )
+    return data.get('name_{language}'.format(language=language),
+                    data.get('name', ''))
 
 
 def publication_statement_text(provision_activity):
     """Create publication statement from place, agent and date values."""
-    punctuation = {
-        'bf:Place': ' ; ',
-        'bf:Agent': ', '
-    }
+    # Only if provision activity is imported from field 269 (no statement,
+    # but start date)
+    if 'statement' not in provision_activity:
+        return provision_activity['startDate']
+
+    punctuation = {'bf:Place': ' ; ', 'bf:Agent': ', '}
 
     statement_with_language = {'default': ''}
     statement_type = None
@@ -52,8 +52,7 @@ def publication_statement_text(provision_activity):
             if statement_with_language[language]:
                 if statement_type == statement['type']:
                     statement_with_language[language] += punctuation[
-                        statement_type
-                    ]
+                        statement_type]
                 else:
                     if statement['type'] == 'bf:Place':
                         statement_with_language[language] += ' ; '
