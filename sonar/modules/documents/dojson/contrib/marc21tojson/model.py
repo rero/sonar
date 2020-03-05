@@ -888,3 +888,11 @@ def marc21_to_other_edition(self, key, value):
 def marc21_to_specific_collection(self, key, value):
     """Extract collection for record."""
     return value.get('a')
+
+
+@marc21tojson.over('contentNote', '^505..')
+@utils.for_each_value
+@utils.ignore_value
+def marc21_to_content_note(self, key, value):
+    """Extract collection for record."""
+    return value.get('a')

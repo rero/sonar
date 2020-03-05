@@ -394,6 +394,9 @@
         },
         "specificCollections": {
           "type": "keyword"
+        },
+        "contentNote": {
+          "type": "text"
         }
       }
     }

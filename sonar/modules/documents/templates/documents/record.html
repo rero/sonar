@@ -123,6 +123,22 @@
           </dd>
           {% endif %}
 
+          <!-- CONTENT NOTES -->
+          {% if record.contentNote|length > 0 %}
+          <dt class="col-sm-2">
+            {{ _('Contains') }}:
+          </dt>
+          <dd class="col-sm-10">
+            <ul class="list-unstyled mb-0">
+              {% for note in record.contentNote %}
+              <li>
+                {{ note }}
+              </li>
+              {% endfor %}
+            </ul>
+          </dd>
+          {% endif %}
+
           {% if record.identifiedBy|identifiedby_format|length > 0 %}
           <dt class="col-sm-2">
             {{ _('Identifiers') }}:
