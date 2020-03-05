@@ -1735,6 +1735,27 @@
         "type": "string",
         "minLength": 1
       }
+    },
+    "classification": {
+      "title": "Classification",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Classification",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "minLength": 1,
+            "enum": ["bf:ClassificationUdc", "bf:ClassificationDdc"]
+          },
+          "classificationPortion": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
     }
   }
 }

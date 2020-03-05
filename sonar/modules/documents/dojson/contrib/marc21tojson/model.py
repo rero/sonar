@@ -888,3 +888,31 @@ def marc21_to_other_edition(self, key, value):
 def marc21_to_specific_collection(self, key, value):
     """Extract collection for record."""
     return value.get('a')
+
+
+@marc21tojson.over('classification', '^080..')
+@utils.for_each_value
+@utils.ignore_value
+def marc21_to_classification_field_080(self, key, value):
+    """Get classification data from field 080."""
+    if not value.get('a'):
+        return None
+
+    return {
+        'type': 'bf:ClassificationUdc',
+        'classificationPortion': value.get('a')
+    }
+
+
+@marc21tojson.over('classification', '^084..')
+@utils.for_each_value
+@utils.ignore_value
+def marc21_to_classification_field_084(self, key, value):
+    """Get classification data from field 084."""
+    if not value.get('a') or value.get('2') != 'ddc':
+        return None
+
+    return {
+        'type': 'bf:ClassificationDdc',
+        'classificationPortion': value.get('a')
+    }
