@@ -394,6 +394,9 @@
         },
         "specificCollections": {
           "type": "keyword"
+        },
+        "usageAndAccessPolicy": {
+          "type": "text"
         }
       }
     }

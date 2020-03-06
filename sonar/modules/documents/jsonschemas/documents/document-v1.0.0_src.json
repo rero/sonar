@@ -1735,6 +1735,16 @@
         "type": "string",
         "minLength": 1
       }
+    },
+    "usageAndAccessPolicy": {
+      "title": "Usage and access policies",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Usage and access policy",
+        "type": "string",
+        "minLength": 1
+      }
     }
   }
 }

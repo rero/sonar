@@ -2518,3 +2518,51 @@ def test_marc21_to_specific_collection():
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
     assert not data.get('specificCollections')
+
+
+def test_marc21_to_usage_and_access_policy():
+    """Test extracting usage and access policy."""
+    # OK
+    marc21xml = """
+    <record>
+        <datafield tag="540" ind1=" " ind2=" ">
+            <subfield code="a">Springer-Verlag Berlin</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('usageAndAccessPolicy') == ['Springer-Verlag Berlin']
+
+    # Multiple
+    marc21xml = """
+    <record>
+        <datafield tag="540" ind1=" " ind2=" ">
+            <subfield code="a">Usage 1</subfield>
+        </datafield>
+        <datafield tag="540" ind1=" " ind2=" ">
+            <subfield code="a">Usage 2</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('usageAndAccessPolicy') == ['Usage 1', 'Usage 2']
+
+    # Without $a
+    marc21xml = """
+    <record>
+        <datafield tag="540" ind1=" " ind2=" "></datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('usageAndAccessPolicy')
+
+    # Without 540
+    marc21xml = """
+    <record></record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('usageAndAccessPolicy')

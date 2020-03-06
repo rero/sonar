@@ -167,6 +167,10 @@
           </dd>
           {% endif %}
 
+          {% if record.usageAndAccessPolicy %}
+          {{ dl_list(_('Usage and access policy'), record.usageAndAccessPolicy) }}
+          {% endif %}
+
           <!-- PERMANENT LINK -->
           {% set link = url_for('invenio_records_ui.document', pid_value=record.pid, ir=g.ir|default('sonar'), _external=True) %}
           {{ dl(_('Permalink'), '<a href="' + link + '">' + link + '</a>') }}
