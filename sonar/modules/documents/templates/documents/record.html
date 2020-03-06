@@ -154,6 +154,15 @@
           </dd>
           {% endif %}
 
+          {% if record.dissertation %}
+          {% if record.dissertation.degree %}
+          {{ dl(_('Thesis note'), record.dissertation.degree) }}
+          {% endif %}
+          {% if record.dissertation.note %}
+          {{ dl_list(_('Jury note'), record.dissertation.note) }}
+          {% endif %}
+          {% endif %}
+
           <!-- OTHER EDITION -->
           {% if record.otherEdition %}
           <dt class="col-sm-2">

@@ -1735,6 +1735,29 @@
         "type": "string",
         "minLength": 1
       }
+    },
+    "dissertation": {
+      "title": "Dissertation",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["degree"],
+      "properties": {
+        "degree": {
+          "title": "Degree",
+          "type": "string",
+          "minLength": 1
+        },
+        "note": {
+          "title": "Notes",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "title": "Note",
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
     }
   }
 }

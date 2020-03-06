@@ -796,11 +796,7 @@ def marc21_to_is_part_of(self, key, value):
 @utils.ignore_value
 def marc21_to_subjects(self, key, value):
     """Get subjects."""
-    subjects = {
-        'label': {
-            'value': value.get('a').split(' ; ')
-        }
-    }
+    subjects = {'label': {'value': value.get('a').split(' ; ')}}
 
     # If field is 695 and no language is available
     if key == '695__':
@@ -888,3 +884,36 @@ def marc21_to_other_edition(self, key, value):
 def marc21_to_specific_collection(self, key, value):
     """Extract collection for record."""
     return value.get('a')
+
+
+@marc21tojson.over('dissertation', '^502..')
+@utils.ignore_value
+def marc21_to_dissertation_field_502(self, key, value):
+    """Extract dissertation degree."""
+    if not value.get('a'):
+        return None
+
+    dissertation = self.get('dissertation', {})
+    dissertation['degree'] = value.get('a')
+
+    self['dissertation'] = dissertation
+
+    return None
+
+
+@marc21tojson.over('dissertation', '^508..')
+@utils.ignore_value
+def marc21_to_dissertation_field_508(self, key, value):
+    """Extract dissertation note."""
+    if not value.get('a'):
+        return None
+
+    dissertation = self.get('dissertation', {})
+
+    note = dissertation.get('note', [])
+    note.append(value.get('a'))
+    dissertation['note'] = note
+
+    self['dissertation'] = dissertation
+
+    return None

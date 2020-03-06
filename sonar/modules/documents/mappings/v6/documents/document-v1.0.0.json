@@ -394,6 +394,17 @@
         },
         "specificCollections": {
           "type": "keyword"
+        },
+        "dissertation": {
+          "type": "object",
+          "properties": {
+            "degree": {
+              "type": "text"
+            },
+            "notes": {
+              "type": "text"
+            }
+          }
         }
       }
     }

@@ -1903,26 +1903,22 @@ def test_marc21_to_subjects():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('subjects') == [
-        {
-            'label': {
-                'language': 'eng',
-                'value': ['subject 1', 'subject 2']
-            }
-        },
-        {
-            'label': {
-                'language': 'fre',
-                'value': ['sujet 1', 'sujet 2']
-            }
-        },
-        {
-            'label': {
-                'value': ['subject 600 1', 'subject 600 2']
-            },
-            'source': 'rero'
+    assert data.get('subjects') == [{
+        'label': {
+            'language': 'eng',
+            'value': ['subject 1', 'subject 2']
         }
-    ]
+    }, {
+        'label': {
+            'language': 'fre',
+            'value': ['sujet 1', 'sujet 2']
+        }
+    }, {
+        'label': {
+            'value': ['subject 600 1', 'subject 600 2']
+        },
+        'source': 'rero'
+    }]
 
     # 600 without source
     marc21xml = """
@@ -2518,3 +2514,104 @@ def test_marc21_to_specific_collection():
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
     assert not data.get('specificCollections')
+
+
+def test_marc21_to_dissertation_field_502():
+    """Test extracting dissertation degree from field 502."""
+    # OK
+    marc21xml = """
+    <record>
+        <datafield tag="502" ind1=" " ind2=" ">
+            <subfield code="a">Thèse de doctorat</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('dissertation') == {'degree': 'Thèse de doctorat'}
+
+    # Multiple --> keep always last value
+    marc21xml = """
+    <record>
+        <datafield tag="502" ind1=" " ind2=" ">
+            <subfield code="a">Thèse de doctorat</subfield>
+        </datafield>
+        <datafield tag="502" ind1=" " ind2=" ">
+            <subfield code="a">Last degree</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('dissertation') == {'degree': 'Last degree'}
+
+    # Without $a
+    marc21xml = """
+    <record>
+        <datafield tag="502" ind1=" " ind2=" "></datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('dissertation')
+
+
+def test_marc21_to_dissertation_field_508():
+    """Test extracting dissertation notes from field 508."""
+    # OK
+    marc21xml = """
+    <record>
+        <datafield tag="508" ind1=" " ind2=" ">
+            <subfield code="a">Magna cum laude</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('dissertation') == {'note': ['Magna cum laude']}
+
+    # Multiple
+    marc21xml = """
+    <record>
+        <datafield tag="508" ind1=" " ind2=" ">
+            <subfield code="a">Note 1</subfield>
+        </datafield>
+        <datafield tag="508" ind1=" " ind2=" ">
+            <subfield code="a">Note 2</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('dissertation') == {'note': ['Note 1', 'Note 2']}
+
+    # Without $a
+    marc21xml = """
+    <record>
+        <datafield tag="508" ind1=" " ind2=" "></datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('dissertation')
+
+
+def test_marc21_to_dissertation_all():
+    """Test extracting dissertation notes and degree."""
+    # OK
+    marc21xml = """
+    <record>
+        <datafield tag="502" ind1=" " ind2=" ">
+            <subfield code="a">Thèse de doctorat</subfield>
+        </datafield>
+        <datafield tag="508" ind1=" " ind2=" ">
+            <subfield code="a">Magna cum laude</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('dissertation') == {
+        'degree': 'Thèse de doctorat',
+        'note': ['Magna cum laude']
+    }
