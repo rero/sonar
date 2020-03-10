@@ -22,14 +22,6 @@ from __future__ import absolute_import, print_function
 from .dojson.contrib.marc21tojson.model import remove_trailing_punctuation
 
 
-def localized_data_name(data, language):
-    """Get localized name."""
-    return data.get(
-        'name_{language}'.format(language=language),
-        data.get('name', '')
-    )
-
-
 def publication_statement_text(provision_activity):
     """Create publication statement from place, agent and date values."""
     punctuation = {

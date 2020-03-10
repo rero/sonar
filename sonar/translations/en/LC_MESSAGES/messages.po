@@ -1,34 +1,18 @@
-# -*- coding: utf-8 -*-
+# English translations for sonar.
+# Copyright (C) 2020 RERO
+# This file is distributed under the same license as the sonar project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
 #
-# Swiss Open Access Repository
-# Copyright (C) 2019 RERO
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as published
-# by
-# the Free Software Foundation, version 3 of the License.
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU Affero General Public License for more details.
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-# Dockerfile that builds a fully functional image of your app.
-# Note: It is important to keep the commands in this file in sync with your
-# boostrap script located in ./scripts/bootstrap.
-# In order to increase the build speed, we are extending this image from a
-# base
-# image (built with Dockerfile.base) which only includes your Python
-# dependencies.
 msgid ""
 msgstr ""
-"Project-Id-Version: sonar 0.0.1\n"
+"Project-Id-Version: sonar 0.3.2\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
 "POT-Creation-Date: 2020-03-11 12:35+0100\n"
-"PO-Revision-Date: 2019-06-06 11:09+0200\n"
+"PO-Revision-Date: 2020-03-11 12:17+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: fr\n"
-"Language-Team: fr <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -325,39 +309,39 @@ msgstr ""
 
 #: sonar/translations/manual_translations.txt:17
 msgid "bf:Publication"
-msgstr ""
+msgstr "Publication"
 
 #: sonar/translations/manual_translations.txt:18
 msgid "bf:Manufacture"
-msgstr ""
+msgstr "Manufacture"
 
 #: sonar/translations/manual_translations.txt:19
 msgid "bf:Distribution"
-msgstr ""
+msgstr "Distribution"
 
 #: sonar/translations/manual_translations.txt:20
 msgid "bf:Production"
-msgstr ""
+msgstr "Production"
 
 #: sonar/translations/manual_translations.txt:21
 msgid "bf:Place"
-msgstr ""
+msgstr "Place"
 
 #: sonar/translations/manual_translations.txt:22
 msgid "bf:Person"
-msgstr ""
+msgstr "Person"
 
 #: sonar/translations/manual_translations.txt:23
 msgid "bf:Meeting"
-msgstr ""
+msgstr "Meeting"
 
 #: sonar/translations/manual_translations.txt:24
 msgid "bf:Organization"
-msgstr ""
+msgstr "Organization"
 
 #: sonar/translations/manual_translations.txt:25
 msgid "bf:Local"
-msgstr ""
+msgstr "Local"
 
 #: sonar/translations/manual_translations.txt:26
 msgid "Date"
@@ -365,19 +349,19 @@ msgstr ""
 
 #: sonar/translations/manual_translations.txt:29
 msgid "lang-eng"
-msgstr ""
+msgstr "English"
 
 #: sonar/translations/manual_translations.txt:30
 msgid "lang-fre"
-msgstr ""
+msgstr "French"
 
 #: sonar/translations/manual_translations.txt:31
 msgid "lang-ger"
-msgstr ""
+msgstr "German"
 
 #: sonar/translations/manual_translations.txt:32
 msgid "lang-ita"
-msgstr ""
+msgstr "Italian"
 
 #: sonar/translations/manual_translations.txt:35
 msgid "dgs"

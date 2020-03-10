@@ -17,10 +17,8 @@
 
 """SONAR MARC21 model definition."""
 
-import os
 import re
 
-import requests
 from dojson import utils
 from flask import current_app
 
@@ -63,34 +61,6 @@ def get_language_script(script):
                     marc21tojson.langs_from_041_a, '041$h:',
                     marc21tojson.langs_from_041_h)
     return '-'.join(['und', script])
-
-
-def get_person_link(bibid, id, key, value):
-    """Get MEF person link."""
-    # https://mef.test.rero.ch/api/mef/?q=rero.rero_pid:A012327677
-    prod_host = 'mef.rero.ch'
-    test_host = 'mef.test.rero.ch'
-    mef_url = 'https://{host}/api/mef/'.format(host=test_host)
-    if os.environ.get('RERO_ILS_MEF_URL'):
-        mef_url = os.environ.get('RERO_ILS_MEF_URL')
-    mef_link = None
-    try:
-        identifier = id[1:].split(')')
-        url = "{mef}/?q={org}.pid:{pid}".format(mef=mef_url,
-                                                org=identifier[0].lower(),
-                                                pid=identifier[1])
-        request = requests.get(url=url)
-        if request.status_code == requests.codes.ok:
-            data = request.json()
-            hits = data.get('hits', {}).get('hits')
-            if hits:
-                mef_link = hits[0].get('links').get('self')
-                mef_link = mef_link.replace(test_host, prod_host)
-        else:
-            error_print('ERROR MEF REQUEST:', bibid, url, request.status_code)
-    except Exception:
-        error_print('WARNING NOT MEF REF:', bibid, id, key, value)
-    return mef_link
 
 
 @marc21tojson.over('type', '^980')
@@ -191,54 +161,6 @@ def marc21_to_title_246(self, key, value):
     self['title'] = title
 
     return None
-
-
-@marc21tojson.over('authors', '[17][01]0..')
-@utils.for_each_value
-@utils.ignore_value
-def marc21_to_author(self, key, value):
-    """Get author.
-
-    authors: loop:
-    authors.name: 100$a [+ 100$b if it exists] or
-        [700$a (+$b if it exists) repetitive] or
-        [ 710$a repetitive (+$b if it exists, repetitive)]
-    authors.date: 100 $d or 700 $d (facultatif)
-    authors.qualifier: 100 $c or 700 $c (facultatif)
-    authors.type: if 100 or 700 then person, if 710 then organisation
-    """
-    if not key[4] == '2':
-        author = {}
-        author['type'] = 'person'
-        if value.get('0'):
-            refs = utils.force_list(value.get('0'))
-            for ref in refs:
-                ref = get_person_link(marc21tojson.bib_id, ref, key, value)
-                if ref:
-                    author['$ref'] = ref
-        # we do not have a $ref
-        if not author.get('$ref'):
-            author['name'] = ''
-            if value.get('a'):
-                data = not_repetitive(marc21tojson.bib_id, key, value, 'a')
-                author['name'] = remove_trailing_punctuation(data)
-            author_subs = utils.force_list(value.get('b'))
-            if author_subs:
-                for author_sub in author_subs:
-                    author['name'] += ' ' + \
-                        remove_trailing_punctuation(author_sub)
-            if key[:3] == '710':
-                author['type'] = 'organisation'
-            else:
-                if value.get('c'):
-                    data = not_repetitive(marc21tojson.bib_id, key, value, 'c')
-                    author['qualifier'] = remove_trailing_punctuation(data)
-                if value.get('d'):
-                    data = not_repetitive(marc21tojson.bib_id, key, value, 'd')
-                    author['date'] = remove_trailing_punctuation(data)
-        return author
-    else:
-        return None
 
 
 @marc21tojson.over('copyrightDate', '^264.4')
@@ -498,10 +420,7 @@ def marc21_to_identified_by_from_020(self, key, value):
     if not value.get('a'):
         return None
 
-    identified_by.append({
-        'type': 'bf:Isbn',
-        'value': value.get('a')
-    })
+    identified_by.append({'type': 'bf:Isbn', 'value': value.get('a')})
 
     return identified_by
 
@@ -515,10 +434,7 @@ def marc21_to_identified_by_from_024(self, key, value):
     if not value.get('a') or value.get('2') != 'urn':
         return None
 
-    identified_by.append({
-        'type': 'bf:Urn',
-        'value': value.get('a')
-    })
+    identified_by.append({'type': 'bf:Urn', 'value': value.get('a')})
 
     return identified_by
 
@@ -532,10 +448,7 @@ def marc21_to_identified_by_from_027(self, key, value):
     if not value.get('a'):
         return None
 
-    identified_by.append({
-        'type': 'bf:Strn',
-        'value': value.get('a')
-    })
+    identified_by.append({'type': 'bf:Strn', 'value': value.get('a')})
 
     return identified_by
 
@@ -568,9 +481,12 @@ def marc21_to_identified_by_from_037(self, key, value):
         return None
 
     identified_by.append({
-        'type': 'bf:Local',
-        'source': 'Swissbib',
-        'value': value.get('a').replace('swissbib.ch:', '').strip()
+        'type':
+        'bf:Local',
+        'source':
+        'Swissbib',
+        'value':
+        value.get('a').replace('swissbib.ch:', '').strip()
     })
 
     return identified_by
@@ -585,10 +501,7 @@ def marc21_to_identified_by_from_088(self, key, value):
     if not value.get('a'):
         return None
 
-    identified_by.append({
-        'type': 'bf:ReportNumber',
-        'value': value.get('a')
-    })
+    identified_by.append({'type': 'bf:ReportNumber', 'value': value.get('a')})
 
     return identified_by
 
@@ -602,10 +515,7 @@ def marc21_to_identified_by_from_091(self, key, value):
     if not value.get('a') or value.get('b') != 'pmid':
         return None
 
-    identified_by.append({
-        'type': 'pmid',
-        'value': value.get('a')
-    })
+    identified_by.append({'type': 'pmid', 'value': value.get('a')})
 
     return identified_by
 
@@ -637,11 +547,7 @@ def marc21_to_is_part_of(self, key, value):
 @utils.ignore_value
 def marc21_to_subjects(self, key, value):
     """Get subjects."""
-    subjects = {
-        'label': {
-            'value': value.get('a').split(' ; ')
-        }
-    }
+    subjects = {'label': {'value': value.get('a').split(' ; ')}}
 
     # If field is 695 and no language is available
     if key == '695__':
@@ -729,3 +635,146 @@ def marc21_to_other_edition(self, key, value):
 def marc21_to_specific_collection(self, key, value):
     """Extract collection for record."""
     return value.get('a')
+
+
+@marc21tojson.over('contribution', '^100..')
+@utils.ignore_value
+def marc21_to_contribution_field_100(self, key, value):
+    """Extract contribution from field 100."""
+    if not value.get('a'):
+        return None
+
+    contribution = self.get('contribution', [])
+
+    data = {
+        'agent': {
+            'type': 'bf:Person',
+            'preferred_name': value.get('a')
+        },
+        'role': ['cre']
+    }
+
+    # Affiliation
+    if value.get('u'):
+        data['affiliation'] = value.get('u')
+        affiliations = marc21tojson.get_affiliations(value.get('u'))
+        if affiliations:
+            data['controlledAffiliation'] = affiliations
+
+    # Date of birth - date of death
+    date_of_birth, date_of_death = marc21tojson.extract_date(value.get('d'))
+
+    if date_of_birth:
+        data['agent']['date_of_birth'] = date_of_birth
+
+    if date_of_death:
+        data['agent']['date_of_death'] = date_of_death
+
+    contribution.append(data)
+    self['contribution'] = contribution
+
+    return None
+
+
+@marc21tojson.over('contribution', '^700..')
+@utils.for_each_value
+@utils.ignore_value
+def marc21_to_contribution_field_700(self, key, value):
+    """Extract contribution from field 100."""
+    if not value.get('a'):
+        return None
+
+    contribution = self.get('contribution', [])
+
+    role = marc21tojson.get_contributor_role(value.get('e'))
+
+    if not role:
+        raise Exception('No role found for contributor {contribution}'.format(
+            contribution=value))
+
+    data = {
+        'agent': {
+            'type': 'bf:Person',
+            'preferred_name': value.get('a')
+        },
+        'role': [role]
+    }
+
+    # Affiliation
+    if value.get('u'):
+        data['affiliation'] = value.get('u')
+
+        affiliations = marc21tojson.get_affiliations(value.get('u'))
+        if affiliations:
+            data['controlledAffiliation'] = affiliations
+
+    # Date of birth - date of death
+    date_of_birth, date_of_death = marc21tojson.extract_date(value.get('d'))
+
+    if date_of_birth:
+        data['agent']['date_of_birth'] = date_of_birth
+
+    if date_of_death:
+        data['agent']['date_of_death'] = date_of_death
+
+    contribution.append(data)
+    self['contribution'] = contribution
+
+    return None
+
+
+@marc21tojson.over('contribution', '^710..')
+@utils.for_each_value
+@utils.ignore_value
+def marc21_to_contribution_field_710(self, key, value):
+    """Extract contribution from field 710."""
+    if not value.get('a'):
+        return None
+
+    contribution = self.get('contribution', [])
+    contribution.append({
+        'agent': {
+            'type': 'bf:Organization',
+            'preferred_name': value.get('a')
+        },
+        'role': ['ctb']
+    })
+    self['contribution'] = contribution
+
+    return None
+
+
+@marc21tojson.over('contribution', '^711..')
+@utils.for_each_value
+@utils.ignore_value
+def marc21_to_contribution_field_711(self, key, value):
+    """Extract contribution from field 711."""
+    if not value.get('a'):
+        return None
+
+    contribution = self.get('contribution', [])
+
+    data = {
+        'agent': {
+            'type': 'bf:Meeting',
+            'preferred_name': value.get('a')
+        },
+        'role': ['cre']
+    }
+
+    # Place
+    if value.get('c'):
+        data['agent']['place'] = value.get('c')
+
+    # Date
+    if value.get('d'):
+        data['agent']['date'] = value.get('d')
+
+    # Number
+    if value.get('n'):
+        data['agent']['number'] = value.get('n')
+
+    contribution.append(data)
+    self['contribution'] = contribution
+
+    return None

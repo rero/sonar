@@ -19,15 +19,11 @@
 
 from __future__ import absolute_import, print_function
 
-import os
-
-import mock
+import pytest
 from dojson.contrib.marc21.utils import create_record
 from utils import mock_response
 
 from sonar.modules.documents.dojson.contrib.marc21tojson import marc21tojson
-from sonar.modules.documents.dojson.contrib.marc21tojson.model import \
-    get_person_link
 from sonar.modules.documents.dojson.utils import not_repetitive
 from sonar.modules.documents.views import create_publication_statement
 
@@ -45,6 +41,30 @@ def test_not_repetetive(capsys):
     assert data == 'only'
     out, err = capsys.readouterr()
     assert err == ""
+
+
+def test_get_affiliations():
+    """Test getting controlled affiliations."""
+    affiliation = '''
+    Institute for Research in Biomedicine (IRB), Faculty of Biomedical
+    Sciences, Università della Svizzera italiana, Switzerland - Graduate
+    School for Cellular and Biomedical Sciences, University of Bern, c/o
+    Theodor Kocher Institute, Freiestrasse 1, P.O. Box 938, CH-3000 Bern 9,
+    Switzerland
+    '''
+    affiliations = marc21tojson.get_affiliations(affiliation)
+    assert affiliations == [
+        'Uni of Bern and Hospital', 'Uni of Italian Switzerland'
+    ]
+
+    affiliations = marc21tojson.get_affiliations(None)
+    assert not affiliations
+
+
+def test_load_affiliations():
+    """Test load affiliations from file."""
+    marc21tojson.load_affiliations()
+    assert len(marc21tojson.affiliations) == 77
 
 
 def test_marc21_to_type_and_institution(app):
@@ -463,110 +483,6 @@ def test_marc21_to_language():
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
     assert not data.get('language')
-
-
-# authors: loop:
-# authors.name: 100$a [+ 100$b if it exists] or
-#   [700$a (+$b if it exists) repetitive] or
-#   [ 710$a repetitive (+$b if it exists, repetitive)]
-# authors.date: 100 $d or 700 $d (facultatif)
-# authors.qualifier: 100 $c or 700 $c (facultatif)
-# authors.type: if 100 or 700 then person, if 710 then organisation
-@mock.patch('requests.get')
-def test_marc21_to_authors(mock_get):
-    """Test dojson marc21_to_authors."""
-
-    marc21xml = """
-    <record>
-      <datafield tag="100" ind1=" " ind2=" ">
-        <subfield code="a">Jean-Paul</subfield>
-        <subfield code="b">II</subfield>
-        <subfield code="c">Pape</subfield>
-        <subfield code="d">1954-</subfield>
-      </datafield>
-      <datafield tag="700" ind1=" " ind2=" ">
-        <subfield code="a">Dumont, Jean</subfield>
-        <subfield code="c">Historien</subfield>
-        <subfield code="d">1921-2014</subfield>
-      </datafield>
-      <datafield tag="710" ind1=" " ind2=" ">
-        <subfield code="a">RERO</subfield>
-      </datafield>
-    </record>
-    """
-    marc21json = create_record(marc21xml)
-    data = marc21tojson.do(marc21json)
-    authors = data.get('authors')
-    assert authors == [{
-        'name': 'Jean-Paul II',
-        'type': 'person',
-        'date': '1954-',
-        'qualifier': 'Pape'
-    }, {
-        'name': 'Dumont, Jean',
-        'type': 'person',
-        'date': '1921-2014',
-        'qualifier': 'Historien'
-    }, {
-        'name': 'RERO',
-        'type': 'organisation'
-    }]
-    marc21xml = """
-    <record>
-      <datafield tag="100" ind1=" " ind2=" ">
-        <subfield code="a">Jean-Paul</subfield>
-        <subfield code="b">II</subfield>
-        <subfield code="c">Pape</subfield>
-        <subfield code="d">1954-</subfield>
-      </datafield>
-      <datafield tag="700" ind1=" " ind2="2">
-        <subfield code="a">Dumont, Jean</subfield>
-        <subfield code="c">Historien</subfield>
-        <subfield code="d">1921-2014</subfield>
-      </datafield>
-      <datafield tag="710" ind1=" " ind2=" ">
-        <subfield code="a">RERO</subfield>
-        <subfield code="c">Martigny</subfield>
-        <subfield code="d">1971</subfield>
-      </datafield>
-    """
-    marc21json = create_record(marc21xml)
-    data = marc21tojson.do(marc21json)
-    authors = data.get('authors')
-    assert authors == [{
-        'name': 'Jean-Paul II',
-        'type': 'person',
-        'date': '1954-',
-        'qualifier': 'Pape'
-    }, {
-        'name': 'RERO',
-        'type': 'organisation'
-    }]
-
-    marc21xml = """
-    <record>
-      <datafield tag="100" ind1=" " ind2=" ">
-        <subfield code="0">(RERO)XXXXXXXX</subfield>
-      </datafield>
-    </record>
-    """
-    mock_get.return_value = mock_response(
-        json_data={
-            'hits': {
-                'hits': [{
-                    'links': {
-                        'self': 'https://mef.rero.ch/api/rero/XXXXXXXX'
-                    }
-                }]
-            }
-        })
-    marc21json = create_record(marc21xml)
-    data = marc21tojson.do(marc21json)
-    authors = data.get('authors')
-    assert authors == [{
-        '$ref': 'https://mef.rero.ch/api/rero/XXXXXXXX',
-        'type': 'person'
-    }]
 
 
 # Copyright Date: [264 _4 $c non repetitive]
@@ -1903,26 +1819,22 @@ def test_marc21_to_subjects():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('subjects') == [
-        {
-            'label': {
-                'language': 'eng',
-                'value': ['subject 1', 'subject 2']
-            }
-        },
-        {
-            'label': {
-                'language': 'fre',
-                'value': ['sujet 1', 'sujet 2']
-            }
-        },
-        {
-            'label': {
-                'value': ['subject 600 1', 'subject 600 2']
-            },
-            'source': 'rero'
+    assert data.get('subjects') == [{
+        'label': {
+            'language': 'eng',
+            'value': ['subject 1', 'subject 2']
         }
-    ]
+    }, {
+        'label': {
+            'language': 'fre',
+            'value': ['sujet 1', 'sujet 2']
+        }
+    }, {
+        'label': {
+            'value': ['subject 600 1', 'subject 600 2']
+        },
+        'source': 'rero'
+    }]
 
     # 600 without source
     marc21xml = """
@@ -2146,9 +2058,12 @@ def test_marc21_to_identified_by_from_037():
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
     assert data.get('identifiedBy') == [{
-        'type': 'bf:Local',
-        'source': 'Swissbib',
-        'value': '(NATIONALLICENCE)springer-10.1007/s00209-014-1344-0'
+        'type':
+        'bf:Local',
+        'source':
+        'Swissbib',
+        'value':
+        '(NATIONALLICENCE)springer-10.1007/s00209-014-1344-0'
     }]
 
     # Without code $a
@@ -2209,10 +2124,7 @@ def test_marc21_to_identified_by_from_091():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('identifiedBy') == [{
-        'type': 'pmid',
-        'value': '24638240'
-    }]
+    assert data.get('identifiedBy') == [{'type': 'pmid', 'value': '24638240'}]
 
     # Without code $a
     marc21xml = """
@@ -2304,9 +2216,12 @@ def test_marc21_to_identified_by_full():
         'source': 'RERO',
         'value': 'R008966083'
     }, {
-        'type': 'bf:Local',
-        'source': 'Swissbib',
-        'value': '(NATIONALLICENCE)springer-10.1007/s00209-014-1344-0'
+        'type':
+        'bf:Local',
+        'source':
+        'Swissbib',
+        'value':
+        '(NATIONALLICENCE)springer-10.1007/s00209-014-1344-0'
     }, {
         'type': 'bf:ReportNumber',
         'value': '25'
@@ -2314,51 +2229,6 @@ def test_marc21_to_identified_by_full():
         'type': 'pmid',
         'value': '24638240'
     }]
-
-
-@mock.patch('requests.get')
-def test_get_person_link(mock_get, capsys):
-    """Test get mef person link"""
-    mock_get.return_value = mock_response(
-        json_data={'hits': {
-            'hits': [{
-                'links': {
-                    'self': 'mocked_url'
-                }
-            }]
-        }})
-    mef_url = get_person_link(bibid='1',
-                              id='(RERO)A003945843',
-                              key='100..',
-                              value={'0': '(RERO)A003945843'})
-    assert mef_url == 'mocked_url'
-
-    os.environ['RERO_ILS_MEF_URL'] = 'https://mefdev.test.rero.ch/api/mef'
-    mef_url = get_person_link(bibid='1',
-                              id='(RERO)A003945843',
-                              key='100..',
-                              value={'0': '(RERO)A003945843'})
-    assert mef_url == 'mocked_url'
-
-    mock_get.return_value = mock_response(status=400)
-    mef_url = get_person_link(bibid='1',
-                              id='(RERO)A123456789',
-                              key='100..',
-                              value={'0': '(RERO)A123456789'})
-    assert not mef_url
-    out, err = capsys.readouterr()
-    assert err == "ERROR MEF REQUEST:\t1\t" + \
-        'https://mefdev.test.rero.ch/api/mef/?q=rero.pid:A123456789\t400\t\n'
-
-    mock_get.return_value = mock_response(status=400)
-    mef_url = get_person_link(bibid='1',
-                              id='X123456789',
-                              key='100..',
-                              value={'0': 'X123456789'})
-    assert not mef_url
-    out, err = capsys.readouterr()
-    assert err == 'WARNING NOT MEF REF:\t1\tX123456789\t100..\t' + \
-        "{'0': 'X123456789'}\t\n"
 
 
 def test_marc21_to_files():
@@ -2508,3 +2378,374 @@ def test_marc21_to_specific_collection():
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
     assert not data.get('specificCollections')
+
+
+def test_marc21_to_contribution_field_100():
+    """Test extracting contribution from field 100."""
+    # OK
+    marc21xml = """
+    <record>
+        <datafield tag="100" ind1=" " ind2=" ">
+            <subfield code="a">Romagnani, Andrea</subfield>
+            <subfield code="d">1980-2010</subfield>
+            <subfield code="u">University of Bern, Switzerland</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('contribution') == [{
+        'agent': {
+            'type': 'bf:Person',
+            'preferred_name': 'Romagnani, Andrea',
+            'date_of_birth': '1980',
+            'date_of_death': '2010'
+        },
+        'role': ['cre'],
+        'affiliation':
+        'University of Bern, Switzerland',
+        'controlledAffiliation': ['Uni of Bern and Hospital']
+    }]
+
+    # Not $a
+    marc21xml = """
+    <record>
+        <datafield tag="100" ind1=" " ind2=" ">
+            <subfield code="d">1980-2010</subfield>
+            <subfield code="u">University of Bern, Switzerland</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('contribution')
+
+    # Date does not match
+    marc21xml = """
+    <record>
+        <datafield tag="100" ind1=" " ind2=" ">
+            <subfield code="a">Romagnani, Andrea</subfield>
+            <subfield code="d">zzzz</subfield>
+            <subfield code="u">University of Bern, Switzerland</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    with pytest.raises(Exception) as exception:
+        data = marc21tojson.do(marc21json)
+    assert str(exception.value) == 'Date "zzzz" is not recognized'
+
+    # Only birth date
+    marc21xml = """
+    <record>
+        <datafield tag="100" ind1=" " ind2=" ">
+            <subfield code="a">Romagnani, Andrea</subfield>
+            <subfield code="d">1980-</subfield>
+            <subfield code="u">University of Bern, Switzerland</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('contribution') == [{
+        'agent': {
+            'type': 'bf:Person',
+            'preferred_name': 'Romagnani, Andrea',
+            'date_of_birth': '1980'
+        },
+        'role': ['cre'],
+        'affiliation':
+        'University of Bern, Switzerland',
+        'controlledAffiliation': ['Uni of Bern and Hospital']
+    }]
+
+    # Only birth date, variant 2
+    marc21xml = """
+    <record>
+        <datafield tag="100" ind1=" " ind2=" ">
+            <subfield code="a">Romagnani, Andrea</subfield>
+            <subfield code="d">1980</subfield>
+            <subfield code="u">University of Bern, Switzerland</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('contribution') == [{
+        'agent': {
+            'type': 'bf:Person',
+            'preferred_name': 'Romagnani, Andrea',
+            'date_of_birth': '1980'
+        },
+        'role': ['cre'],
+        'affiliation':
+        'University of Bern, Switzerland',
+        'controlledAffiliation': ['Uni of Bern and Hospital']
+    }]
+
+    # Only birth date, variant 3
+    marc21xml = """
+    <record>
+        <datafield tag="100" ind1=" " ind2=" ">
+            <subfield code="a">Romagnani, Andrea</subfield>
+            <subfield code="d">1980-04-04</subfield>
+            <subfield code="u">University of Bern, Switzerland</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('contribution') == [{
+        'agent': {
+            'type': 'bf:Person',
+            'preferred_name': 'Romagnani, Andrea',
+            'date_of_birth': '1980-04-04'
+        },
+        'role': ['cre'],
+        'affiliation':
+        'University of Bern, Switzerland',
+        'controlledAffiliation': ['Uni of Bern and Hospital']
+    }]
+
+
+def test_marc21_to_contribution_field_700():
+    """Test extracting contribution from field 700."""
+    # OK
+    marc21xml = """
+    <record>
+        <datafield tag="700" ind1=" " ind2=" ">
+            <subfield code="a">Piguet, Etienne</subfield>
+            <subfield code="d">1980-2010</subfield>
+            <subfield code="e">Dir.</subfield>
+            <subfield code="u">University of Bern, Switzerland</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('contribution') == [{
+        'agent': {
+            'type': 'bf:Person',
+            'preferred_name': 'Piguet, Etienne',
+            'date_of_birth': '1980',
+            'date_of_death': '2010'
+        },
+        'role': ['dgs'],
+        'affiliation':
+        'University of Bern, Switzerland',
+        'controlledAffiliation': ['Uni of Bern and Hospital']
+    }]
+
+    # Not $a
+    marc21xml = """
+    <record>
+        <datafield tag="700" ind1=" " ind2=" ">
+            <subfield code="d">1980-2010</subfield>
+            <subfield code="e">Dir.</subfield>
+            <subfield code="u">University of Bern, Switzerland</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('contribution')
+
+    # Only birth date
+    marc21xml = """
+    <record>
+        <datafield tag="700" ind1=" " ind2=" ">
+            <subfield code="a">Piguet, Etienne</subfield>
+            <subfield code="d">1980-</subfield>
+            <subfield code="e">Dir.</subfield>
+            <subfield code="u">University of Bern, Switzerland</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('contribution') == [{
+        'agent': {
+            'type': 'bf:Person',
+            'preferred_name': 'Piguet, Etienne',
+            'date_of_birth': '1980'
+        },
+        'role': ['dgs'],
+        'affiliation':
+        'University of Bern, Switzerland',
+        'controlledAffiliation': ['Uni of Bern and Hospital']
+    }]
+
+    # Role from field 980, but not existing
+    marc21xml = """
+    <record>
+        <datafield tag="700" ind1=" " ind2=" ">
+            <subfield code="a">Piguet, Etienne</subfield>
+            <subfield code="d">1980-</subfield>
+            <subfield code="u">University of Bern, Switzerland</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    with pytest.raises(Exception) as exception:
+        data = marc21tojson.do(marc21json)
+    assert str(exception.value).startswith('No role found for contributor')
+
+    # Role from field 980, but 980 is not mapped
+    marc21xml = """
+    <record>
+        <datafield tag="700" ind1=" " ind2=" ">
+            <subfield code="a">Piguet, Etienne</subfield>
+        </datafield>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="a">NOT EXISTING</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    with pytest.raises(Exception) as exception:
+        data = marc21tojson.do(marc21json)
+    assert str(exception.value).startswith('No role found for contributor')
+
+    # Role from field 980, but $a is not existing
+    marc21xml = """
+    <record>
+        <datafield tag="700" ind1=" " ind2=" ">
+            <subfield code="a">Piguet, Etienne</subfield>
+        </datafield>
+        <datafield tag="980" ind1=" " ind2=" ">
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    with pytest.raises(Exception) as exception:
+        data = marc21tojson.do(marc21json)
+    assert str(exception.value).startswith('No role found for contributor')
+
+    # Role from field 980, found 'cre'
+    marc21xml = """
+    <record>
+        <datafield tag="700" ind1=" " ind2=" ">
+            <subfield code="a">Piguet, Etienne</subfield>
+        </datafield>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="a">POSTPRINT</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('contribution')[0]['role'] == ['cre']
+
+    # Role from field 980, found 'ctb'
+    marc21xml = """
+    <record>
+        <datafield tag="700" ind1=" " ind2=" ">
+            <subfield code="a">Piguet, Etienne</subfield>
+        </datafield>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="a">BOOK</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('contribution')[0]['role'] == ['ctb']
+
+    # Role 'prt' found
+    marc21xml = """
+    <record>
+        <datafield tag="700" ind1=" " ind2=" ">
+            <subfield code="a">Piguet, Etienne</subfield>
+            <subfield code="e">Libr./Impr.</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('contribution')[0]['role'] == ['prt']
+
+    # Role for joint author
+    marc21xml = """
+    <record>
+        <datafield tag="700" ind1=" " ind2=" ">
+            <subfield code="a">Piguet, Etienne</subfield>
+            <subfield code="e">joint author</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('contribution')[0]['role'] == ['cre']
+
+
+def test_marc21_to_contribution_field_710():
+    """Test extracting contribution from field 710."""
+    # OK
+    marc21xml = """
+    <record>
+        <datafield tag="710" ind1=" " ind2=" ">
+            <subfield code="a">Musée d'art et d'histoire</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('contribution') == [{
+        'agent': {
+            'type': 'bf:Organization',
+            'preferred_name': 'Musée d\'art et d\'histoire'
+        },
+        'role': ['ctb'],
+    }]
+
+    # No $a
+    marc21xml = """
+    <record>
+        <datafield tag="710" ind1=" " ind2=" ">
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('contribution')
+
+
+def test_marc21_to_contribution_field_711():
+    """Test extracting contribution from field 711."""
+    # OK
+    marc21xml = """
+    <record>
+        <datafield tag="711" ind1=" " ind2=" ">
+            <subfield code="a">Theologisches Forum Christentum</subfield>
+            <subfield code="c">Stuttgart-Hohenheim</subfield>
+            <subfield code="d">2004</subfield>
+            <subfield code="n">2</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('contribution') == [{
+        'agent': {
+            'type': 'bf:Meeting',
+            'preferred_name': 'Theologisches Forum Christentum',
+            'place': 'Stuttgart-Hohenheim',
+            'date': '2004',
+            'number': '2'
+        },
+        'role': ['cre'],
+    }]
+
+    # Not $a
+    marc21xml = """
+    <record>
+        <datafield tag="711" ind1=" " ind2=" ">
+            <subfield code="c">Stuttgart-Hohenheim</subfield>
+            <subfield code="d">2004</subfield>
+            <subfield code="n">2</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('contribution')

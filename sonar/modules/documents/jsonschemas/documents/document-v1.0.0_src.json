@@ -1208,62 +1208,6 @@
         }
       }
     },
-    "authors": {
-      "title": "Authors",
-      "description": "Author(s) of the resource. Can be either persons or organisations.",
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "additionalProperties": false,
-        "properties": {
-          "$ref": {
-            "title": "MEF person ref",
-            "type": "string",
-            "pattern": "^https://mef.rero.ch/api/mef/.*?$",
-            "minLength": 1
-          },
-          "pid": {
-            "title": "pid",
-            "description": "Corresponding pid of the MEF record.",
-            "type": "string",
-            "minLength": 1
-          },
-          "name": {
-            "title": "Name",
-            "description": "Person's or organisation's name.",
-            "type": "string",
-            "minLength": 1
-          },
-          "type": {
-            "title": "Type",
-            "description": "Identify if the author is a person or an organisation.",
-            "type": "string",
-            "enum": [
-              "person",
-              "organisation"
-            ],
-            "default": "person",
-            "minLength": 1
-          },
-          "date": {
-            "title": "Date",
-            "description": "Information about the birth and the death of a person. Helpful to disambiguate people.",
-            "type": "string",
-            "minLength": 1
-          },
-          "qualifier": {
-            "title": "Qualifier",
-            "description": "Information about the person, ie her profession. Helpful to disambiguate people.",
-            "type": "string",
-            "minLength": 1
-          }
-        }
-      }
-    },
     "copyrightDate": {
       "title": "Copyright Date",
       "type": "array",
@@ -1737,6 +1681,113 @@
       "items": {
         "type": "string",
         "minLength": 1
+      }
+    },
+    "contribution": {
+      "title": "Contributions",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Contribution",
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role"],
+        "properties": {
+          "agent": {
+            "title": "Agent",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "title": "Type",
+                "type": "string",
+                "minLength": 1,
+                "enum": ["bf:Person", "bf:Organization", "bf:Meeting", "bf:Local"]
+              },
+              "preferred_name": {
+                "title": "Preferred name",
+                "type": "string",
+                "minLength": 1
+              },
+              "identifiedBy": {
+                "title": "Identified by",
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["type", "source", "value"],
+                "properties": {
+                  "type": {
+                    "title": "Type",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "source": {
+                    "title": "Source",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "value": {
+                    "title": "Value",
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "date_of_birth": {
+                "title": "Date of birth",
+                "type": "string",
+                "minLength": 4,
+                "maxLength": 4
+              },
+              "date_of_death": {
+                "title": "Date of death",
+                "type": "string",
+                "minLength": 4,
+                "maxLength": 4
+              },
+              "place": {
+                "title": "Place",
+                "type": "string",
+                "minLength": 1
+              },
+              "date": {
+                "title": "Date",
+                "type": "string",
+                "minLength": 1
+              },
+              "number": {
+                "title": "Number",
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "role": {
+            "title": "Roles",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "title": "Role",
+              "type": "string",
+              "minLength": 1,
+              "enum": ["dgs", "prt", "cre", "edt", "ctb"]
+            }
+          },
+          "affiliation": {
+            "title": "Affiliation",
+            "type": "string",
+            "minLength": 1
+          },
+          "controlledAffiliation": {
+            "title": "Controlled affiliations",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "title": "Controlled affiliation",
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
       }
     }
   }

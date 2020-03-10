@@ -17,9 +17,10 @@
 
 """Dojson utils."""
 
+import csv
+import os
 import re
 import sys
-import traceback
 
 import click
 from dojson import Overdo, utils
@@ -78,10 +79,9 @@ def get_field_items(value):
     return utils.iteritems(value)
 
 
-def remove_trailing_punctuation(
-        data,
-        punctuation=',',
-        spaced_punctuation=':;/-'):
+def remove_trailing_punctuation(data,
+                                punctuation=',',
+                                spaced_punctuation=':;/-'):
     """Remove trailing punctuation from data.
 
     The punctuation parameter list the
@@ -95,10 +95,8 @@ def remove_trailing_punctuation(
     punctuation = punctuation.replace('.', r'\.').replace('-', r'\-')
     spaced_punctuation = \
         spaced_punctuation.replace('.', r'\.').replace('-', r'\-')
-    return re.sub(
-        r'([{0}]|\s+[{1}])$'.format(punctuation, spaced_punctuation),
-        '',
-        data.rstrip()).rstrip()
+    return re.sub(r'([{0}]|\s+[{1}])$'.format(punctuation, spaced_punctuation),
+                  '', data.rstrip()).rstrip()
 
 
 class SonarOverdo(Overdo):
@@ -113,17 +111,16 @@ class SonarOverdo(Overdo):
 
     def __init__(self, bases=None, entry_point_group=None):
         """Sonaroverdo init."""
-        super(SonarOverdo, self).__init__(
-            bases=bases, entry_point_group=entry_point_group)
+        super(SonarOverdo, self).__init__(bases=bases,
+                                          entry_point_group=entry_point_group)
 
     def do(self, blob, ignore_missing=True, exception_handlers=None):
         """Translate blob values and instantiate new model instance."""
         self.blob_record = blob
-        result = super(SonarOverdo, self).do(
-            blob,
-            ignore_missing=ignore_missing,
-            exception_handlers=exception_handlers
-        )
+        result = super(SonarOverdo,
+                       self).do(blob,
+                                ignore_missing=ignore_missing,
+                                exception_handlers=exception_handlers)
         return result
 
     def get_fields(self, tag=None):
@@ -187,45 +184,41 @@ class SonarMarc21Overdo(SonarOverdo):
     alternate_graphic = {}
     country = None
     cantons = []
+    affiliations = []
 
     def __init__(self, bases=None, entry_point_group=None):
         """SonarMarc21Overdo init."""
-        super(SonarMarc21Overdo, self).__init__(
-            bases=bases, entry_point_group=entry_point_group)
+        super(SonarMarc21Overdo,
+              self).__init__(bases=bases, entry_point_group=entry_point_group)
         self.count = 0
 
     def do(self, blob, ignore_missing=True, exception_handlers=None):
         """Translate blob values and instantiate new model instance."""
         self.count += 1
         result = None
+        self.blob_record = blob
         try:
-            self.blob_record = blob
-            try:
-                self.bib_id = self.get_fields(tag='001')[0]['data']
-            except Exception as err:
-                self.bib_id = '???'
-            self.field_008_data = ''
-            self.date1_from_008 = None
-            self.date2_from_008 = None
-            self.date_type_from_008 = ''
-            fields_008 = self.get_fields(tag='008')
-            if fields_008:
-                self.field_008_data = self.get_control_field_data(
-                    fields_008[0]).rstrip()
-                self.date1_from_008 = self.field_008_data[7:11]
-                self.date2_from_008 = self.field_008_data[11:15]
-                self.date_type_from_008 = self.field_008_data[6]
-            self.init_lang()
-            self.init_country()
-            self.init_alternate_graphic()
-            result = super(SonarMarc21Overdo, self).do(
-                blob,
-                ignore_missing=ignore_missing,
-                exception_handlers=exception_handlers
-            )
+            self.bib_id = self.get_fields(tag='001')[0]['data']
         except Exception as err:
-            error_print('ERROR:', self.bib_id, self.count, err)
-            traceback.print_exc()
+            self.bib_id = '???'
+        self.field_008_data = ''
+        self.date1_from_008 = None
+        self.date2_from_008 = None
+        self.date_type_from_008 = ''
+        fields_008 = self.get_fields(tag='008')
+        if fields_008:
+            self.field_008_data = self.get_control_field_data(
+                fields_008[0]).rstrip()
+            self.date1_from_008 = self.field_008_data[7:11]
+            self.date2_from_008 = self.field_008_data[11:15]
+            self.date_type_from_008 = self.field_008_data[6]
+        self.init_lang()
+        self.init_country()
+        self.init_alternate_graphic()
+        result = super(SonarMarc21Overdo,
+                       self).do(blob,
+                                ignore_missing=ignore_missing,
+                                exception_handlers=exception_handlers)
         return result
 
     @staticmethod
@@ -268,6 +261,107 @@ class SonarMarc21Overdo(SonarOverdo):
                 dbcommit=True)
             organization.reindex()
 
+    @staticmethod
+    def extract_date(date=None):
+        """Try to extract date of birth and date of death from field.
+
+        :param date: String, date to parse
+        :returns: Tuple containing date of birth and date of death
+        """
+        if not date:
+            return (None, None)
+
+        # Match a full date
+        match = re.search(r'^([0-9]{4}-[0-9]{2}-[0-9]{2})$', date)
+        if match:
+            return (match.group(1), None)
+
+        # Match these value: "1980-2010"
+        match = re.search(r'^([0-9]{4})-([0-9]{4})$', date)
+        if match:
+            return (match.group(1), match.group(2))
+
+        # Match these value: "1980-" or "1980"
+        match = re.search(r'^([0-9]{4})-?', date)
+        if match:
+            return (match.group(1), None)
+
+        raise Exception('Date "{date}" is not recognized'.format(date=date))
+
+    def get_affiliations(self, full_affiliation):
+        """Get controlled affiliations list based on reference CSV file.
+
+        :param full_affiliation: String representing complete affiliation
+        """
+        if not full_affiliation:
+            return []
+
+        if not self.affiliations:
+            self.load_affiliations()
+
+        full_affiliation = full_affiliation.lower()
+
+        controlled_affiliations = []
+
+        for affiliations in self.affiliations:
+            for affiliation in affiliations:
+                if affiliation.lower() in full_affiliation:
+                    controlled_affiliations.append(affiliations[0])
+                    break
+
+        return controlled_affiliations
+
+    @staticmethod
+    def load_affiliations():
+        """Load affiliations from reference file."""
+        csv_file = os.path.dirname(
+            __file__) + '/../../../../data/affiliations.csv'
+
+        SonarMarc21Overdo.affiliations = []
+
+        with open(csv_file, 'r') as file:
+            reader = csv.reader(file, delimiter='\t')
+            for row in reader:
+                affiliation = []
+                for index, value in enumerate(row):
+                    if index > 0 and value:
+                        affiliation.append(value)
+
+                if affiliation:
+                    SonarMarc21Overdo.affiliations.append(affiliation)
+
+    def get_contributor_role(self, role_700=None):
+        """Return contributor role.
+
+        :param role_700: String, role found in field 700$e
+        :returns: String containing the mapped role or None
+        """
+        if role_700 in ['Dir.', 'Codir.']:
+            return 'dgs'
+
+        if role_700 == 'Libr./Impr.':
+            return 'prt'
+
+        if role_700 == 'joint author':
+            return 'cre'
+
+        if not role_700:
+            doc_type = self.blob_record.get('980__', {}).get('a')
+
+            if not doc_type:
+                return None
+
+            if doc_type in ['PREPRINT', 'POSTPRINT', 'DISSERTATION', 'REPORT']:
+                return 'cre'
+
+            if doc_type in [
+                    'BOOK', 'THESIS', 'MAP', 'JOURNAL', 'PARTITION', 'AUDIO',
+                    'IMAGE'
+            ]:
+                return 'ctb'
+
+        return None
+
     def init_country(self):
         """Initialization country (008 and 044)."""
         self.country = None
@@ -293,6 +387,7 @@ class SonarMarc21Overdo(SonarOverdo):
 
     def init_lang(self):
         """Initialization languages (008 and 041)."""
+
         def init_lang_from(fields_041, code):
             """Construct list of language codes from data."""
             langs_from_041 = []
@@ -326,6 +421,7 @@ class SonarMarc21Overdo(SonarOverdo):
         link code (from $6) of the linked field. The language script is
         extracted from $6 and used to qualify the alternate graphic value.
         """
+
         def get_script_from_lang(asian=False):
             """Initialization of alternate graphic representation."""
             script_per_lang_asia = {
@@ -396,9 +492,6 @@ class SonarMarc21Overdo(SonarOverdo):
                     tag_data[link] = link_data
                     self.alternate_graphic[tag] = tag_data
             except Exception as exp:
-                click.secho(
-                    'Error in init_alternate_graphic: {error}'.format(
-                        error=exp
-                    ),
-                    fg='red'
-                )
+                click.secho('Error in init_alternate_graphic: {error}'.format(
+                    error=exp),
+                            fg='red')

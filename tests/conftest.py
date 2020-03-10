@@ -266,17 +266,15 @@ def document_json_fixture(app, db, organization_fixture):
             'value': 'eng',
             'type': 'bf:Language'
         }],
-        'authors': [{
-            'type': 'person',
-            'name': 'Mancini, Loriano',
-            'date': '1975-03-23',
-            'qualifier': 'Librarian'
-        }, {
-            'type': 'person',
-            'name': 'Ronchetti, Elvezio'
-        }, {
-            'type': 'person',
-            'name': 'Trojani, Fabio'
+        'contribution': [{
+            'agent': {
+                'type': 'bf:Person',
+                'preferred_name': 'John, Doe',
+                'date_of_birth': '1960',
+                'date_of_death': '2000'
+            },
+            'role': ['cre'],
+            'affiliation': 'Institute for Research'
         }],
         'title': [{
             'type':

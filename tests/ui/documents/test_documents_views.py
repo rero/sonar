@@ -86,14 +86,6 @@ def test_title_format(document_fixture):
     assert views.title_format(title, 'it') == 'Title EN : Subtitle IT'
 
 
-def test_authors_format(document_fixture):
-    """Test author format filter."""
-    assert views.authors_format(
-        '10000', 'en'
-    ) == 'Mancini, Loriano, Librarian, 1975-03-23; Ronchetti, Elvezio; ' \
-         'Trojani, Fabio'
-
-
 def test_publishers_format():
     """Test publishers format."""
     result = 'Foo; place1; place2: Foo; Bar'

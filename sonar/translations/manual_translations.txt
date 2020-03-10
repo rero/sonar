@@ -13,15 +13,27 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# provisionActivity
+# BF types
 _('bf:Publication')
 _('bf:Manufacture')
 _('bf:Distribution')
 _('bf:Production')
 _('bf:Place')
+_('bf:Person')
+_('bf:Meeting')
+_('bf:Organization')
+_('bf:Local')
 _('Date')
 
+# Languages
 _('lang-eng')
 _('lang-fre')
 _('lang-ger')
 _('lang-ita')
+
+# Contributor roles
+_('dgs')
+_('prt')
+_('cre')
+_('edt')
+_('ctb')

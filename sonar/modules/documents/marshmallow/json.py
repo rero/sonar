@@ -33,7 +33,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     title = fields.List(fields.Dict())
     is_part_of = SanitizedUnicode()
     abstracts = fields.List(fields.Dict())
-    authors = fields.List(fields.Dict())
+    contribution = fields.List(fields.Dict())
     institution = fields.Dict(dump_only=True)
     _files = fields.Dict(dump_only=True)
     language = fields.List(fields.Dict())

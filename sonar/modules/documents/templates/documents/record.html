@@ -41,9 +41,24 @@
           {{ dl_list(_('Specific collections'), record.specificCollections) }}
           {% endif %}
 
-          <!-- AUTHORS -->
-          {% if record.authors %}
-          {{ dl(_('Authors'), record.pid|authors_format(current_i18n.language, viewcode)) }}
+          <!-- CONTRIBUTORS-->
+          {% if record.contribution|length > 0 %}
+          <dt class="col-sm-2">
+            {{ _('Contributions') }}:
+          </dt>
+          <dd class="col-sm-10">
+            <ul class="list-unstyled mb-0">
+              {% for contribution in record.contribution %}
+              <li>
+                <small class="badge badge-secondary text-uppercase text-light">{{ _(contribution.agent.type) }}</small>
+                {{ contribution.agent.preferred_name }}
+                {% for role in contribution.role %}
+                <small class="badge badge-light text-uppercase">{{ _(role) }}</small>
+                {% endfor %}
+              </li>
+              {% endfor %}
+            </ul>
+          </dd>
           {% endif %}
 
           <!-- EDITION STATEMENT-->

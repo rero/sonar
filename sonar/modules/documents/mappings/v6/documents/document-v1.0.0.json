@@ -90,69 +90,6 @@
             }
           }
         },
-        "authors": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "text",
-              "analyzer": "global_lowercase_asciifolding",
-              "copy_to": [
-                "facet_authors_en",
-                "facet_authors_fr",
-                "facet_authors_de",
-                "facet_authors_it"
-              ]
-            },
-            "name_en": {
-              "type": "text",
-              "analyzer": "global_lowercase_asciifolding",
-              "copy_to": "facet_authors_en"
-            },
-            "name_fr": {
-              "type": "text",
-              "analyzer": "global_lowercase_asciifolding",
-              "copy_to": "facet_authors_fr"
-            },
-            "name_de": {
-              "type": "text",
-              "analyzer": "global_lowercase_asciifolding",
-              "copy_to": "facet_authors_de"
-            },
-            "name_it": {
-              "type": "text",
-              "analyzer": "global_lowercase_asciifolding",
-              "copy_to": "facet_authors_it"
-            },
-            "variant_name": {
-              "type": "text",
-              "analyzer": "global_lowercase_asciifolding"
-            },
-            "type": {
-              "type": "keyword"
-            },
-            "date": {
-              "type": "keyword"
-            },
-            "qualifier": {
-              "type": "keyword"
-            },
-            "pid": {
-              "type": "keyword"
-            }
-          }
-        },
-        "facet_authors_en": {
-          "type": "keyword"
-        },
-        "facet_authors_fr": {
-          "type": "keyword"
-        },
-        "facet_authors_de": {
-          "type": "keyword"
-        },
-        "facet_authors_it": {
-          "type": "keyword"
-        },
         "copyrightDate": {
           "type": "text"
         },
@@ -394,6 +331,60 @@
         },
         "specificCollections": {
           "type": "keyword"
+        },
+        "contribution": {
+          "type": "object",
+          "properties": {
+            "agent": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "keyword"
+                },
+                "preferred_named": {
+                  "type": "text"
+                },
+                "identifiedBy": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "keyword"
+                    },
+                    "source": {
+                      "type": "keyword"
+                    },
+                    "value": {
+                      "type": "text"
+                    }
+                  }
+                },
+                "date_of_birth": {
+                  "type": "keyword"
+                },
+                "date_of_death": {
+                  "type": "keyword"
+                },
+                "place": {
+                  "type": "text"
+                },
+                "date": {
+                  "type": "keyword"
+                },
+                "number": {
+                  "type": "keyword"
+                }
+              }
+            },
+            "role": {
+              "type": "text"
+            },
+            "affiliation": {
+              "type": "text"
+            },
+            "controlledAffiliation": {
+              "type": "text"
+            }
+          }
         }
       }
     }

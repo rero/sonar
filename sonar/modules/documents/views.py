@@ -23,11 +23,10 @@ import re
 
 from flask import Blueprint, current_app, g, render_template
 
-from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.utils import change_filename_extension
 
-from .utils import edition_format_text, localized_data_name, \
-    publication_statement_text, series_format_text
+from .utils import edition_format_text, publication_statement_text, \
+    series_format_text
 
 blueprint = Blueprint('documents',
                       __name__,
@@ -111,30 +110,6 @@ def title_format(title, language):
         output.append(subtitle)
 
     return " : ".join(output)
-
-
-@blueprint.app_template_filter()
-def authors_format(pid, language='en', viewcode='sonar'):
-    """Format authors for template in given language."""
-    doc = DocumentRecord.get_record_by_pid(pid)
-    doc = doc.replace_refs()
-    output = []
-    for author in doc.get('authors', []):
-        line = []
-        name = localized_data_name(data=author, language=language)
-        line.append(name)
-        qualifier = author.get('qualifier')
-        if qualifier:
-            line.append(qualifier)
-        date = author.get('date')
-        if date:
-            line.append(date)
-
-        line = ', '.join(str(x) for x in line)
-
-        output.append(line)
-
-    return '; '.join(output)
 
 
 @blueprint.app_template_filter()
