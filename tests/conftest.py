@@ -404,7 +404,7 @@ def deposit_fixture(app, db, db_user_fixture, pdf_file,
         }],
         'metadata': {
             'abstracts': ['Abstract of the document'],
-            'document_type': 'preprint',
+            'document_type': 'coar:c_816b',
             'etc': 'ETC field',
             'journal': {
                 'name': 'American Physical Society (APS)',

@@ -31,6 +31,27 @@ from sonar.modules.institutions.api import InstitutionRecord
 
 marc21tojson = SonarMarc21Overdo()
 
+TYPE_MAPPINGS = {
+    'PREPRINT|': 'coar:c_816b',
+    'POSTPRINT|ART_JOURNAL': 'coar:c_6501',
+    'POSTPRINT|ART_INBOOK': 'coar:c_3248',
+    'POSTPRINT|ART_INPROC': 'coar:c_5794',
+    'BOOK|': 'coar:c_2f33',
+    'DISSERTATION|DISS_MASTER': 'coar:c_bdcc',
+    'DISSERTATION|DISS_BACHELOR': 'coar:c_7a1f',
+    'DISSERTATION|DISS_CONT_EDU': 'coar:c_46ec',
+    'THESIS|TH_PHD': 'coar:c_db06',
+    'THESIS|TH_HABILIT': 'coar:c_46ec',
+    'MAP|': 'coar:c_12cc',
+    'REPORT|': 'coar:c_18ws',
+    'NEWSPAPER|': 'coar:c_2fe3',
+    'JOURNAL|': 'coar:c_0640',
+    'PRINT_MEDIA|': 'coar:c_2fe3',
+    'AUDIO|': 'coar:c_18cc',
+    'IMAGE|': 'coar:c_ecc8',
+    'PARTITION|': 'coar:c_18cw'
+}
+
 
 def get_language_script(script):
     """Build the language script code.
@@ -97,11 +118,9 @@ def get_person_link(bibid, id, key, value):
 @utils.ignore_value
 def marc21_to_type_and_institution(self, key, value):
     """Get document type and institution from 980 field."""
-    institution = value.get('b')
-    document_type = value.get('a')
-
-    if institution:
-        institution = institution.lower()
+    # institution
+    if value.get('b'):
+        institution = value.get('b').lower()
 
         if institution not in marc21tojson.registererd_organizations:
             marc21tojson.create_institution(institution)
@@ -111,8 +130,16 @@ def marc21_to_type_and_institution(self, key, value):
             '$ref': InstitutionRecord.get_ref_link('institutions', institution)
         }
 
-    if document_type:
-        self['type'] = document_type.lower()
+    # get doc type by mapping
+    key = value.get('a', '') + '|' + value.get('f', '')
+    if key not in TYPE_MAPPINGS:
+        current_app.logger.warning(
+            'Document type not found in mapping for type "{type}"'.format(
+                type=key))
+        return None
+
+    # Store types to records
+    self['documentType'] = TYPE_MAPPINGS[key]
 
     return None
 
@@ -796,11 +823,7 @@ def marc21_to_is_part_of(self, key, value):
 @utils.ignore_value
 def marc21_to_subjects(self, key, value):
     """Get subjects."""
-    subjects = {
-        'label': {
-            'value': value.get('a').split(' ; ')
-        }
-    }
+    subjects = {'label': {'value': value.get('a').split(' ; ')}}
 
     # If field is 695 and no language is available
     if key == '695__':

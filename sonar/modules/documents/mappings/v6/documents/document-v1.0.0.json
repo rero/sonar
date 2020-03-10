@@ -54,7 +54,7 @@
             }
           }
         },
-        "type": {
+        "documentType": {
           "type": "keyword"
         },
         "language": {

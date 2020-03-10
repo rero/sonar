@@ -46,6 +46,11 @@
           {{ dl(_('Authors'), record.pid|authors_format(current_i18n.language, viewcode)) }}
           {% endif %}
 
+          <!-- DOCUMENT TYPE -->
+          {% if record.documentType %}
+          {{ dl(_('Document type'), _(record.documentType)) }}
+          {% endif %}
+
           <!-- EDITION STATEMENT-->
           {% if record.editionStatement %}
           {{ dl_list(_('Edition'), record.editionStatement|edition_format) }}

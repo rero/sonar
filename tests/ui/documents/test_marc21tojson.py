@@ -50,6 +50,19 @@ def test_not_repetetive(capsys):
 def test_marc21_to_type_and_institution(app):
     """Test type and institution."""
 
+    # Type only
+    marc21xml = """
+    <record>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="a">BOOK</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('documentType') == 'coar:c_2f33'
+    assert not data.get('institution')
+
     # Type and institution
     marc21xml = """
     <record>
@@ -61,23 +74,27 @@ def test_marc21_to_type_and_institution(app):
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('type') == 'book'
+    assert data.get('documentType') == 'coar:c_2f33'
     assert data.get('institution') == {
         '$ref': 'https://sonar.ch/api/institutions/baage'
     }
 
-    # Type only
+    # Type, subtype and institution
     marc21xml = """
     <record>
         <datafield tag="980" ind1=" " ind2=" ">
-            <subfield code="a">BOOK</subfield>
+            <subfield code="a">POSTPRINT</subfield>
+            <subfield code="b">BAAGE</subfield>
+            <subfield code="f">ART_JOURNAL</subfield>
         </datafield>
     </record>
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('type') == 'book'
-    assert not data.get('institution')
+    assert data.get('documentType') == 'coar:c_6501'
+    assert data.get('institution') == {
+        '$ref': 'https://sonar.ch/api/institutions/baage'
+    }
 
     # Institution only
     marc21xml = """
@@ -89,7 +106,7 @@ def test_marc21_to_type_and_institution(app):
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert not data.get('type')
+    assert not data.get('documentType')
     assert data.get('institution') == {
         '$ref': 'https://sonar.ch/api/institutions/baage'
     }
@@ -1903,26 +1920,22 @@ def test_marc21_to_subjects():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('subjects') == [
-        {
-            'label': {
-                'language': 'eng',
-                'value': ['subject 1', 'subject 2']
-            }
-        },
-        {
-            'label': {
-                'language': 'fre',
-                'value': ['sujet 1', 'sujet 2']
-            }
-        },
-        {
-            'label': {
-                'value': ['subject 600 1', 'subject 600 2']
-            },
-            'source': 'rero'
+    assert data.get('subjects') == [{
+        'label': {
+            'language': 'eng',
+            'value': ['subject 1', 'subject 2']
         }
-    ]
+    }, {
+        'label': {
+            'language': 'fre',
+            'value': ['sujet 1', 'sujet 2']
+        }
+    }, {
+        'label': {
+            'value': ['subject 600 1', 'subject 600 2']
+        },
+        'source': 'rero'
+    }]
 
     # 600 without source
     marc21xml = """
