@@ -1170,12 +1170,6 @@
         }
       }
     },
-    "is_part_of": {
-      "title": "Is part of",
-      "description": "Title of the host document.",
-      "type": "string",
-      "minLength": 1
-    },
     "language": {
       "title": "Language",
       "description": "List of languages for the resource.",
@@ -1737,6 +1731,76 @@
       "items": {
         "type": "string",
         "minLength": 1
+      }
+    },
+    "partOf": {
+      "title": "Is part of",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Is part of",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "numberingYear": {
+            "title": "Numbering year",
+            "type": "string",
+            "minLength": 1
+          },
+          "numberingVolume": {
+            "title": "Numbering volume",
+            "type": "string",
+            "minLength": 1
+          },
+          "numberingIssue": {
+            "title": "Numbering issue",
+            "type": "string",
+            "minLength": 1
+          },
+          "numberingPages": {
+            "title": "Numbering pages",
+            "type": "string",
+            "minLength": 1
+          },
+          "document": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "title": {
+                "title": "Title",
+                "type": "string",
+                "minLength": 1
+              },
+              "publication": {
+                "title": "Publication",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "startDate": {
+                    "title": "Start date",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "statement": {
+                    "title": "Statement",
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "contribution": {
+                "title": "Contributions",
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "title": "Contribution",
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

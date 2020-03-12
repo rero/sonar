@@ -498,10 +498,7 @@ def marc21_to_identified_by_from_020(self, key, value):
     if not value.get('a'):
         return None
 
-    identified_by.append({
-        'type': 'bf:Isbn',
-        'value': value.get('a')
-    })
+    identified_by.append({'type': 'bf:Isbn', 'value': value.get('a')})
 
     return identified_by
 
@@ -515,10 +512,7 @@ def marc21_to_identified_by_from_024(self, key, value):
     if not value.get('a') or value.get('2') != 'urn':
         return None
 
-    identified_by.append({
-        'type': 'bf:Urn',
-        'value': value.get('a')
-    })
+    identified_by.append({'type': 'bf:Urn', 'value': value.get('a')})
 
     return identified_by
 
@@ -532,10 +526,7 @@ def marc21_to_identified_by_from_027(self, key, value):
     if not value.get('a'):
         return None
 
-    identified_by.append({
-        'type': 'bf:Strn',
-        'value': value.get('a')
-    })
+    identified_by.append({'type': 'bf:Strn', 'value': value.get('a')})
 
     return identified_by
 
@@ -568,9 +559,12 @@ def marc21_to_identified_by_from_037(self, key, value):
         return None
 
     identified_by.append({
-        'type': 'bf:Local',
-        'source': 'Swissbib',
-        'value': value.get('a').replace('swissbib.ch:', '').strip()
+        'type':
+        'bf:Local',
+        'source':
+        'Swissbib',
+        'value':
+        value.get('a').replace('swissbib.ch:', '').strip()
     })
 
     return identified_by
@@ -585,10 +579,7 @@ def marc21_to_identified_by_from_088(self, key, value):
     if not value.get('a'):
         return None
 
-    identified_by.append({
-        'type': 'bf:ReportNumber',
-        'value': value.get('a')
-    })
+    identified_by.append({'type': 'bf:ReportNumber', 'value': value.get('a')})
 
     return identified_by
 
@@ -602,10 +593,7 @@ def marc21_to_identified_by_from_091(self, key, value):
     if not value.get('a') or value.get('b') != 'pmid':
         return None
 
-    identified_by.append({
-        'type': 'pmid',
-        'value': value.get('a')
-    })
+    identified_by.append({'type': 'pmid', 'value': value.get('a')})
 
     return identified_by
 
@@ -621,27 +609,12 @@ def marc21_to_notes(self, key, value):
     return not_repetitive(marc21tojson.bib_id, key, value, 'a')
 
 
-@marc21tojson.over('is_part_of', '^773..')
-@utils.ignore_value
-def marc21_to_is_part_of(self, key, value):
-    """Get  is_part_of.
-
-    is_part_of: [773$t repetitive]
-    """
-    if not self.get('is_part_of', None):
-        return not_repetitive(marc21tojson.bib_id, key, value, 't')
-
-
 @marc21tojson.over('subjects', '^600..|695..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_subjects(self, key, value):
     """Get subjects."""
-    subjects = {
-        'label': {
-            'value': value.get('a').split(' ; ')
-        }
-    }
+    subjects = {'label': {'value': value.get('a').split(' ; ')}}
 
     # If field is 695 and no language is available
     if key == '695__':
@@ -729,3 +702,61 @@ def marc21_to_other_edition(self, key, value):
 def marc21_to_specific_collection(self, key, value):
     """Extract collection for record."""
     return value.get('a')
+
+
+@marc21tojson.over('partOf', '^773..')
+@utils.for_each_value
+@utils.ignore_value
+def marc21_to_part_of(self, key, value):
+    """Extract related document for record."""
+    if not value.get('g'):
+        return None
+
+    # Split value for getting numbering values
+    numbering = value.get('g').split('/')
+
+    # Numbering year
+    data = {'numberingYear': numbering[0]}
+
+    # Volume
+    if len(numbering) > 1 and numbering[1]:
+        data['numberingVolume'] = numbering[1]
+
+    # Issue
+    if len(numbering) > 2 and numbering[2]:
+        data['numberingIssue'] = numbering[2]
+
+    # Pages
+    if len(numbering) > 3 and numbering[3]:
+        data['numberingPages'] = numbering[3]
+
+    document = {}
+
+    # Title is found
+    if value.get('t'):
+        document['title'] = value.get('t')
+
+    # Contribution
+    if value.get('c'):
+        contributors = []
+        for contributor in value.get('c').split(';'):
+            contributors.append(contributor)
+
+        if contributors:
+            document['contribution'] = contributors
+
+    # Publication based on document sub type
+    sub_type = marc21tojson.blob_record.get('980__', {}).get('f')
+    if value.get('d') or sub_type == 'ART_INBOOK':
+        document['publication'] = {}
+
+        if value.get('d'):
+            document['publication']['statement'] = value.get('d')
+
+        if sub_type == 'ART_INBOOK':
+            document['publication']['startDate'] = numbering[0]
+
+    if document:
+        data['document'] = document
+
+    return data

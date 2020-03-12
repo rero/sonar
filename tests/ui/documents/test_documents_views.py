@@ -379,11 +379,23 @@ def test_has_external_urls_for_files(app):
         }
     })
 
-    assert not views.has_external_urls_for_files({
-        'pid': 1,
-        'institution': {}
-    })
+    assert not views.has_external_urls_for_files({'pid': 1, 'institution': {}})
 
-    assert not views.has_external_urls_for_files({
-        'pid': 1
-    })
+    assert not views.has_external_urls_for_files({'pid': 1})
+
+
+def test_part_of_format():
+    """Test part of format for displaying."""
+    assert views.part_of_format({
+        'document': {
+            'title': 'Mehr oder weniger Staat?'
+        },
+        'numberingYear': '2015',
+        'numberingVolume': '28',
+        'numberingIssue': '2',
+        'numberingPages': '469-480'
+    }) == 'Mehr oder weniger Staat?, 2015, vol. 28, no. 2, p. 469-480'
+
+    assert views.part_of_format({
+        'numberingYear': '2015',
+    }) == '2015'

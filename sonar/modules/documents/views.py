@@ -22,6 +22,7 @@ from __future__ import absolute_import, print_function
 import re
 
 from flask import Blueprint, current_app, g, render_template
+from flask_babelex import gettext as _
 
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.utils import change_filename_extension
@@ -287,9 +288,36 @@ def has_external_urls_for_files(record):
 
     :param record: Current record.
     """
-    return record.get('institution', {}).get('pid') and record['institution'][
-        'pid'] in current_app.config.get(
+    return record.get('institution', {}).get(
+        'pid') and record['institution']['pid'] in current_app.config.get(
             'SONAR_DOCUMENTS_INSTITUTIONS_EXTERNAL_FILES')
+
+
+@blueprint.app_template_filter()
+def part_of_format(part_of):
+    """Format partOf property for display.
+
+    :param part_of: Object representing partOf property
+    """
+    items = []
+    if part_of.get('document', {}).get('title'):
+        items.append(part_of['document']['title'])
+
+    items.append(part_of['numberingYear'])
+
+    if 'numberingVolume' in part_of:
+        items.append('{label} {value}'.format(
+            label=_('vol.'), value=part_of['numberingVolume']))
+
+    if 'numberingIssue' in part_of:
+        items.append('{label} {value}'.format(label=_('no.'),
+                                              value=part_of['numberingIssue']))
+
+    if 'numberingPages' in part_of:
+        items.append('{label} {value}'.format(label=_('p.'),
+                                              value=part_of['numberingPages']))
+
+    return ', '.join(items)
 
 
 def get_language_from_bibliographic_code(language_code):

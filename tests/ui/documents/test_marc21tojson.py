@@ -1863,23 +1863,6 @@ def test_marc21_to_notes():
     assert data.get('notes') == ['note 1', 'note 2']
 
 
-# is_part_of 773$t
-def test_marc21_to_is_part_of():
-    """Test dojson is_part_of."""
-
-    marc21xml = """
-    <record>
-      <datafield tag="773" ind1="1" ind2=" ">
-        <subfield code="t">Stuart Hall : critical dialogues</subfield>
-        <subfield code="g">411</subfield>
-      </datafield>
-    </record>
-    """
-    marc21json = create_record(marc21xml)
-    data = marc21tojson.do(marc21json)
-    assert data.get('is_part_of') == 'Stuart Hall : critical dialogues'
-
-
 # subjects: 6xx [duplicates could exist between several vocabularies,
 # if possible deduplicate]
 def test_marc21_to_subjects():
@@ -2508,3 +2491,166 @@ def test_marc21_to_specific_collection():
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
     assert not data.get('specificCollections')
+
+
+def test_marc21_to_part_of():
+    """Test extracting is part of from field 773."""
+    # With sub type of ART INBOOK
+    marc21xml = """
+    <record>
+        <datafield tag="773" ind1=" " ind2=" ">
+            <subfield code="c">Belser, Eva Maria</subfield>
+            <subfield code="t">Mehr oder weniger Staat?</subfield>
+            <subfield code="g">2015///</subfield>
+            <subfield code="d">Stämpfli Verlag, Bern</subfield>
+        </datafield>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="f">ART_INBOOK</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('partOf') == [{
+        'numberingYear': '2015',
+        'document': {
+            'title': 'Mehr oder weniger Staat?',
+            'contribution': ['Belser, Eva Maria'],
+            'publication': {
+                'statement': 'Stämpfli Verlag, Bern',
+                'startDate': '2015'
+            }
+        }
+    }]
+
+    # With sub type is not ART INBOOK
+    marc21xml = """
+    <record>
+        <datafield tag="773" ind1=" " ind2=" ">
+            <subfield code="t">Optics Express</subfield>
+            <subfield code="g">2020/28/6/8200-8210</subfield>
+            <subfield code="d">Optical Society of America</subfield>
+        </datafield>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="f">ART_JOURNAL</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('partOf') == [{
+        'numberingYear': '2020',
+        'numberingVolume': '28',
+        'numberingIssue': '6',
+        'numberingPages': '8200-8210',
+        'document': {
+            'title': 'Optics Express',
+            'publication': {
+                'statement': 'Optical Society of America'
+            }
+        }
+    }]
+
+    # Without $g
+    marc21xml = """
+    <record>
+        <datafield tag="773" ind1=" " ind2=" ">
+            <subfield code="c">Belser, Eva Maria</subfield>
+            <subfield code="t">Mehr oder weniger Staat?</subfield>
+            <subfield code="d">Stämpfli Verlag, Bern</subfield>
+        </datafield>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="f">ART_INBOOK</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('partOf')
+
+    # Without numbering year
+    marc21xml = """
+    <record>
+        <datafield tag="773" ind1=" " ind2=" ">
+            <subfield code="c">Belser, Eva Maria</subfield>
+            <subfield code="g"></subfield>
+            <subfield code="t">Mehr oder weniger Staat?</subfield>
+            <subfield code="d">Stämpfli Verlag, Bern</subfield>
+        </datafield>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="f">ART_INBOOK</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('partOf')
+
+    # Without title
+    marc21xml = """
+    <record>
+        <datafield tag="773" ind1=" " ind2=" ">
+            <subfield code="c">Belser, Eva Maria</subfield>
+            <subfield code="g">2015///</subfield>
+            <subfield code="d">Stämpfli Verlag, Bern</subfield>
+        </datafield>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="f">ART_INBOOK</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('partOf') == [{
+        'numberingYear': '2015',
+        'document': {
+            'contribution': ['Belser, Eva Maria'],
+            'publication': {
+                'startDate': '2015',
+                'statement': 'Stämpfli Verlag, Bern'
+            }
+        }
+    }]
+
+    # Without $c
+    marc21xml = """
+    <record>
+        <datafield tag="773" ind1=" " ind2=" ">
+            <subfield code="t">Mehr oder weniger Staat?</subfield>
+            <subfield code="g">2015///</subfield>
+            <subfield code="d">Stämpfli Verlag, Bern</subfield>
+        </datafield>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="f">ART_INBOOK</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('partOf') == [{
+        'numberingYear': '2015',
+        'document': {
+            'title': 'Mehr oder weniger Staat?',
+            'publication': {
+                'statement': 'Stämpfli Verlag, Bern',
+                'startDate': '2015'
+            }
+        }
+    }]
+
+    # Without document
+    marc21xml = """
+    <record>
+        <datafield tag="773" ind1=" " ind2=" ">
+            <subfield code="g">2015///</subfield>
+        </datafield>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="f">ART_JOURNAL</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('partOf') == [{
+        'numberingYear': '2015'
+    }]

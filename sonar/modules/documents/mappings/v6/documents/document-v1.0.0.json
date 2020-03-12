@@ -68,28 +68,6 @@
             }
           }
         },
-        "is_part_of": {
-          "type": "text",
-          "analyzer": "global_lowercase_asciifolding",
-          "fields": {
-            "eng": {
-              "type": "text",
-              "analyzer": "english"
-            },
-            "fre": {
-              "type": "text",
-              "analyzer": "french"
-            },
-            "ger": {
-              "type": "text",
-              "analyzer": "german"
-            },
-            "ita": {
-              "type": "text",
-              "analyzer": "italian"
-            }
-          }
-        },
         "authors": {
           "type": "object",
           "properties": {
@@ -394,6 +372,45 @@
         },
         "specificCollections": {
           "type": "keyword"
+        },
+        "partOf": {
+          "type": "object",
+          "properties": {
+            "numberingYear": {
+              "type": "text"
+            },
+            "numberingVolume": {
+              "type": "text"
+            },
+            "numberingIssue": {
+              "type": "text"
+            },
+            "numberingPages": {
+              "type": "text"
+            },
+            "document": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "text"
+                },
+                "publication": {
+                  "type": "object",
+                  "properties": {
+                    "startDate": {
+                      "type": "text"
+                    },
+                    "statement": {
+                      "type": "text"
+                    }
+                  }
+                },
+                "contribution": {
+                  "type": "text"
+                }
+              }
+            }
+          }
         }
       }
     }
