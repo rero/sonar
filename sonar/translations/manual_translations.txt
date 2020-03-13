@@ -25,3 +25,7 @@ _('lang-eng')
 _('lang-fre')
 _('lang-ger')
 _('lang-ita')
+
+# SWITCHaai providers
+_('eduidtest')
+_('eduid')

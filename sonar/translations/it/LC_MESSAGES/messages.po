@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.0.1\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2020-03-13 10:27+0100\n"
+"POT-Creation-Date: 2020-03-13 10:55+0100\n"
 "PO-Revision-Date: 2019-07-15 17:09+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: it\n"
@@ -267,12 +267,12 @@ msgstr ""
 #: sonar/theme/templates/sonar/accounts/forgot_password.html:35
 #: sonar/theme/templates/sonar/accounts/login.html:30
 #: sonar/theme/templates/sonar/accounts/reset_password.html:27
-#: sonar/theme/templates/sonar/accounts/signup.html:56
+#: sonar/theme/templates/sonar/accounts/signup.html:53
 msgid "Log In"
 msgstr ""
 
 #: sonar/theme/templates/sonar/accounts/forgot_password.html:36
-#: sonar/theme/templates/sonar/accounts/login.html:51
+#: sonar/theme/templates/sonar/accounts/login.html:48
 #: sonar/theme/templates/sonar/accounts/reset_password.html:28
 #: sonar/theme/templates/sonar/accounts/signup.html:36
 #: sonar/theme/templates/sonar/oauth/signup.html:38
@@ -284,12 +284,11 @@ msgid "Log in to account"
 msgstr ""
 
 #: sonar/theme/templates/sonar/accounts/login.html:37
-#: sonar/theme/templates/sonar/accounts/login.html:43
 #, python-format
 msgid "Sign-in with %(type)s"
 msgstr ""
 
-#: sonar/theme/templates/sonar/accounts/login.html:50
+#: sonar/theme/templates/sonar/accounts/login.html:47
 msgid "Forgot password?"
 msgstr ""
 
@@ -299,7 +298,6 @@ msgid "Sign up for a %(sitename)s account"
 msgstr ""
 
 #: sonar/theme/templates/sonar/accounts/signup.html:43
-#: sonar/theme/templates/sonar/accounts/signup.html:49
 #: sonar/theme/templates/sonar/oauth/signup.html:26
 #, python-format
 msgid "Sign-up with %(type)s"
@@ -344,6 +342,10 @@ msgstr ""
 msgid "Sign up"
 msgstr ""
 
+#: sonar/theme/templates/sonar/partial/switch_aai_dropdown.html:4
+msgid "Signup with SWITCHaai"
+msgstr ""
+
 #: sonar/translations/manual_translations.txt:17
 msgid "bf:Publication"
 msgstr ""
@@ -382,5 +384,13 @@ msgstr ""
 
 #: sonar/translations/manual_translations.txt:27
 msgid "lang-ita"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:30
+msgid "eduidtest"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:31
+msgid "eduid"
 msgstr ""
 

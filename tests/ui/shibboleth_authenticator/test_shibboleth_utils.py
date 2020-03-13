@@ -23,11 +23,12 @@ from sonar.modules.shibboleth_authenticator.utils import get_account_info, \
     get_safe_redirect_target, prepare_flask_request
 
 
-def test_accountinfo(app, valid_user_dict, valid_attributes):
+def test_accountinfo(app, valid_attributes):
     """Test get_account_info."""
     # Test valid result.
     res = get_account_info(valid_attributes, 'idp')
-    assert res == valid_user_dict
+    assert res
+    assert res['user']['email'] == 'john.doe@test.com'
 
     # Test invalid remote app.
     with pytest.raises(KeyError):
