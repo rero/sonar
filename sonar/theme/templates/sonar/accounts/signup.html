@@ -53,10 +53,7 @@
           </a>
         </div>
         <div class="col">
-          <a href="{{ url_for('shibboleth_authenticator.login', remote_app='eduidtest') }}"
-            class="btn btn-outline-primary btn-block">
-            {% trans type='SWITCH edu-ID' %}Sign-up with {{ type }}{% endtrans %}
-          </a>
+          {% include 'sonar/partial/switch_aai_dropdown.html' %}
         </div>
       </div>
     </div>

@@ -77,3 +77,18 @@ def send_email(recipients, subject, template, ctx=None, **kwargs):
         subject=subject,
         ctx=ctx)
     current_app.extensions['mail'].send(msg)
+
+
+def get_switch_aai_providers():
+    """Return the list of available SWITCHaai providers."""
+    providers = []
+    for provider, data in current_app.config.get(
+            'SHIBBOLETH_IDENTITY_PROVIDERS').items():
+        # Don't take providers flagged as dev in production mode
+        if current_app.config.get('ENV') != 'development' and data.get(
+                'dev', False):
+            continue
+
+        providers.append(provider)
+
+    return providers

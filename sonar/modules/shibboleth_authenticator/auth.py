@@ -58,7 +58,7 @@ def init_saml_auth(req, remote_app):
         private_key = content_file.read()
 
     with open(
-            './data/shibboleth/{remote_app}/idp.crt'.format(
+            './data/idp_certificates/{remote_app}.crt'.format(
                 remote_app=remote_app), 'r') as content_file:
         idp_cert = content_file.read()
 

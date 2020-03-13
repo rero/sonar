@@ -46,22 +46,6 @@ def logged_user_fixture(app, client, user_fixture):
 
 
 @pytest.fixture(scope='module')
-def valid_user_dict():
-    """Fixture for valid user dictionary."""
-    return dict(
-        user=dict(
-            email='john.doe@test.com',
-            profile=dict(
-                full_name='John Doe',
-                username='john-doe',
-            ),
-        ),
-        external_id='1',
-        external_method='idp',
-    )
-
-
-@pytest.fixture(scope='module')
 def valid_attributes():
     """Fixture for valid attributes return by shibboleth."""
     return {

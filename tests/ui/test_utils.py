@@ -23,7 +23,7 @@ import mock
 import pytest
 
 from sonar.modules.utils import change_filename_extension, \
-    create_thumbnail_from_file
+    create_thumbnail_from_file, get_switch_aai_providers
 
 
 def test_change_filename_extension(app):
@@ -59,3 +59,19 @@ def test_create_thumbnail_from_file():
     file = os.path.dirname(__file__) + '/data/sample.jpg'
     assert create_thumbnail_from_file(
         file, 'image/jpeg').startswith(b'Fake thumbnail image content')
+
+
+def test_get_switch_aai_providers(app):
+    """Test getting the list of SWITCHaai providers."""
+    # Full list of providers
+    app.config.update(SHIBBOLETH_IDENTITY_PROVIDERS={'idp': {}, 'idpdev': {}})
+    assert get_switch_aai_providers() == ['idp', 'idpdev']
+
+    # Removes providers containing dev
+    app.config.update(SHIBBOLETH_IDENTITY_PROVIDERS={
+        'idp': {},
+        'idpdev': {
+            'dev': True
+        }
+    })
+    assert get_switch_aai_providers() == ['idp']

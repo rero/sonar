@@ -19,6 +19,7 @@
 
 from __future__ import absolute_import, print_function
 
+from random import randrange
 from urllib.parse import urlparse
 
 import uritools
@@ -49,7 +50,10 @@ def get_account_info(attributes, remote_app):
     return dict(
         user=dict(
             email=email,
-            profile=dict(full_name=full_name, username=slugify(full_name)),
+            profile=dict(full_name=full_name,
+                         username="{slug}-{random}".format(
+                             slug=slugify(full_name),
+                             random=str(randrange(1000)))),
         ),
         external_id=external_id,
         external_method=remote_app,
