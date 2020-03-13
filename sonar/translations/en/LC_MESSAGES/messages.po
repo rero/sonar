@@ -1,33 +1,17 @@
-# -*- coding: utf-8 -*-
+# English translations for sonar.
+# Copyright (C) 2020 RERO
+# This file is distributed under the same license as the sonar project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
 #
-# Swiss Open Access Repository
-# Copyright (C) 2019 RERO
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as published
-# by
-# the Free Software Foundation, version 3 of the License.
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU Affero General Public License for more details.
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-# Dockerfile that builds a fully functional image of your app.
-# Note: It is important to keep the commands in this file in sync with your
-# boostrap script located in ./scripts/bootstrap.
-# In order to increase the build speed, we are extending this image from a
-# base
-# image (built with Dockerfile.base) which only includes your Python
-# dependencies.
 msgid ""
 msgstr ""
-"Project-Id-Version: sonar 0.0.1\n"
+"Project-Id-Version: sonar 0.2.2\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
 "POT-Creation-Date: 2020-03-13 10:27+0100\n"
-"PO-Revision-Date: 2019-06-13 10:45+0200\n"
+"PO-Revision-Date: 2020-03-13 10:17+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: de\n"
-"Language-Team: de <LL@li.org>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -213,10 +197,6 @@ msgid ""
 "promotes and preserves the publications of authors affiliated with Swiss "
 "public research institutions."
 msgstr ""
-"Das SONAR-Projekt zielt darauf ab, ein wissenschaftliches Archiv zu "
-"schaffen, das Folgendes sammelt, fördert und bewahrt die Publikationen "
-"von mit der Schweiz verbundenen Autoren öffentliche "
-"Forschungseinrichtungen."
 
 #: sonar/theme/templates/sonar/frontpage.html:61
 msgid "Further info on the project page"
@@ -262,8 +242,6 @@ msgid ""
 "Enter your email address below and we will send you a link to reset your "
 "password."
 msgstr ""
-"Geben Sie unten Ihre E-Mail-Adresse ein und wir senden Ihnen einen Link, "
-"um Ihr Passwort zurückzusetzen."
 
 #: sonar/theme/templates/sonar/accounts/forgot_password.html:35
 #: sonar/theme/templates/sonar/accounts/login.html:30
@@ -311,8 +289,6 @@ msgid ""
 "Fill in your details to complete your registration. You only have to do "
 "this once."
 msgstr ""
-"Füllen Sie Ihre Daten aus, um Ihre Registrierung abzuschließen. Du musst "
-"das nur einmal machen."
 
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:21
 msgid "Profile"
@@ -349,41 +325,41 @@ msgstr ""
 
 #: sonar/translations/manual_translations.txt:17
 msgid "bf:Publication"
-msgstr ""
+msgstr "Publication"
 
 #: sonar/translations/manual_translations.txt:18
 msgid "bf:Manufacture"
-msgstr ""
+msgstr "Manufacture"
 
 #: sonar/translations/manual_translations.txt:19
 msgid "bf:Distribution"
-msgstr ""
+msgstr "Distribution"
 
 #: sonar/translations/manual_translations.txt:20
 msgid "bf:Production"
-msgstr ""
+msgstr "Production"
 
 #: sonar/translations/manual_translations.txt:21
 msgid "bf:Place"
-msgstr ""
+msgstr "Place"
 
 #: sonar/translations/manual_translations.txt:22
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #: sonar/translations/manual_translations.txt:24
 msgid "lang-eng"
-msgstr ""
+msgstr "English"
 
 #: sonar/translations/manual_translations.txt:25
 msgid "lang-fre"
-msgstr ""
+msgstr "French"
 
 #: sonar/translations/manual_translations.txt:26
 msgid "lang-ger"
-msgstr ""
+msgstr "German"
 
 #: sonar/translations/manual_translations.txt:27
 msgid "lang-ita"
-msgstr ""
+msgstr "Italian"
 
