@@ -146,6 +146,11 @@ CELERY_BEAT_SCHEDULE = {
 CELERY_BROKER_HEARTBEAT = 0
 #: Disable sending heartbeat events
 
+# Indexer
+# ========
+#: Bulk index request timeout
+INDEXER_BULK_REQUEST_TIMEOUT = 60
+
 # Database
 # ========
 #: Database URI including user and password
