@@ -29,7 +29,7 @@ theme = WebpackBundle(
     entry={
         'app': './js/app.js',
         'sonar-theme': './scss/sonar/theme.scss',
-        'usi-theme': './scss/usi/theme.scss'
+        'unisi-theme': './scss/unisi/theme.scss'
     },
     dependencies={
         'popper.js': '^1.15',
