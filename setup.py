@@ -50,7 +50,9 @@ setup(
         ],
         'flask.commands': [
             'fixtures = sonar.modules.cli:fixtures',
-            'documents = sonar.modules.documents.cli:oaiharvester',
+            'documents = sonar.modules.documents.cli.documents:documents',
+            'oaiharvester = \
+                sonar.modules.documents.cli.oaiharvester:oaiharvester',
             'utils = sonar.modules.cli:utils'
         ],
         'invenio_base.apps': [
