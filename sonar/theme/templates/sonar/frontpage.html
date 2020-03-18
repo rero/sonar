@@ -61,17 +61,13 @@
 {% endblock %}
 
 {%- block body %}
-  <div class="row">
-    <div class="col-sm-12 col-lg-4 pr-5">
+  <div class="row justify-content-between">
+    <div class="col-12 col-lg-5 pr-5">
       <h3 class="mb-4">{{_('The project')}}</h2>
       <p>{{_('The SONAR project aims to create a scholarly archive that collects, promotes and preserves the publications of authors affiliated with Swiss public research institutions.')}}</p>
       <p>{{_('Further info on the project page')}} <a href="https://sonar.ch/project" target="_blank">sonar.ch</a>.</p>
     </div>
-    <div class="col-sm-12 col-lg-4 px-5 mt-5 mt-lg-0">
-        <h3 class="mb-4">{{_('Institution views (test)')}}</h2>
-        <a href="{{ url_for('documents.index', ir='usi') }}">Università della Svizzera italiana</a>
-    </div>
-    <div class="col-sm-12 col-lg-4 pl-5 mt-5 mt-lg-0">
+    <div class="col-12 col-lg-4 pl-lg-0 mt-5 mt-lg-0">
         <h3 class="mb-4">{{_('Follow us')}}</h2>
         <div class="row align-items-center">
           <div class="col-2">
