@@ -68,6 +68,8 @@
 {% set file_title = file | file_title %}
 {% set externalUrl = record | has_external_urls_for_files %}
 <div class="text-center {{ class }}">
+  {% set restricted = file | is_file_restricted(record) %}
+  {% if not restricted.restricted %}
   {% if externalUrl %}
   {% if file.external_url %}
   <a href="{{ file.external_url }}" target="_blank">
@@ -90,6 +92,15 @@
     <a href="/{{ resource_type }}/{{ record.pid }}/files/{{ file.key }}" target="_blank"><i
         class="fa fa-download"></i></a>
   </p>
+  {% endif %}
+  {% else %}
+  <img src="{{ url_for('static', filename='images/restricted.png') }}" alt="{{ file.key }}" class="mt-5" />
+  <p class="my-1 small">{{ file_title }}</p>
+  {% if restricted.date %}
+  <span class="badge badge-secondary text-light mt-2">
+    {{ _('Public access from') }} {{ restricted.date.strftime('%d/%m/%Y') }}
+  </span>
+  {% endif %}
   {% endif %}
 </div>
 {% endif %}
