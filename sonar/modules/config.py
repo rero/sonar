@@ -47,3 +47,9 @@ SONAR_APP_DISABLE_PERMISSION_CHECKS = False
 command line or progams like postman."""
 
 SONAR_APP_UI_VERSION = '0.1.11'
+
+SONAR_APP_INTERNAL_IPS = ['127.0.0.1']
+"""Internal IPs for accessing files."""
+
+SONAR_APP_DEFAULT_ORGANISATION = 'sonar'
+"""Default organisation key."""

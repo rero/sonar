@@ -58,7 +58,6 @@ def update_file_permissions(permissions_file, chunk_size):
         indexer.bulk_index(ids)
         indexer.process_bulk_queue()
 
-    click.secho(permissions_file.name)
     try:
         with open(permissions_file.name, 'r') as file:
             reader = csv.reader(file, delimiter=';')

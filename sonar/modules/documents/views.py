@@ -20,8 +20,9 @@
 from __future__ import absolute_import, print_function
 
 import re
+from datetime import datetime
 
-from flask import Blueprint, current_app, g, render_template
+from flask import Blueprint, current_app, g, render_template, request
 from flask_babelex import gettext as _
 
 from sonar.modules.utils import change_filename_extension
@@ -280,6 +281,45 @@ def part_of_format(part_of):
     return ', '.join(items)
 
 
+@blueprint.app_template_filter()
+def is_file_restricted(file, record):
+    """Check if current file can be displayed.
+
+    :param file: File dict
+    :param record: Current record
+    :returns object containing result and possibly embargo date
+    """
+    restricted = {'restricted': False, 'date': None}
+
+    try:
+        embargo_date = datetime.strptime(file.get('embargo_date'), '%Y-%m-%d')
+    except Exception:
+        embargo_date = None
+
+    # Store embargo date if greater than now
+    if embargo_date and embargo_date > datetime.now():
+        restricted['restricted'] = True
+        restricted['date'] = embargo_date
+
+    # File is restricted by institution
+    if file.get('restricted'):
+        if file['restricted'] in ['rero', 'internal']:
+            result = request.remote_addr not in current_app.config.get(
+                'SONAR_APP_INTERNAL_IPS')
+            restricted['restricted'] = result
+        else:
+            # compare with current organisation
+            organisation = get_current_organisation()
+            restricted['restricted'] = organisation == current_app.config.get(
+                'SONAR_APP_DEFAULT_ORGANISATION'
+            ) or organisation != record['institution']['pid']
+
+    if not restricted['restricted']:
+        restricted['date'] = None
+
+    return restricted
+
+
 def get_language_from_bibliographic_code(language_code):
     """Return language code from bibliographic language.
 
@@ -327,3 +367,15 @@ def get_preferred_languages(force_language=None):
         preferred_languages.insert(0, force_language)
 
     return list(dict.fromkeys(preferred_languages))
+
+
+def get_current_organisation():
+    """Return current organisation by globals or query parameter."""
+    organisation = request.args.get('view')
+    if organisation:
+        return organisation
+
+    if g.get('ir'):
+        return g.ir
+
+    return None

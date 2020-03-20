@@ -42,3 +42,13 @@ def test_simple_flow(client, document_json_fixture):
     assert res.status_code == 200
     assert response.json['metadata']['title'][0]['mainTitle'][0][
         'value'] == 'Title of the document'
+
+
+def test_add_files_restrictions(client, document_with_file):
+    """Test adding file restrictions before dumping object."""
+    res = client.get('https://localhost:5000/documents/10000')
+    assert res.status_code == 200
+    assert res.json['metadata']['_files'][0]['restricted'] == {
+        'restricted': False,
+        'date': None
+    }

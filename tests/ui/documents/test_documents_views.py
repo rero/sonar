@@ -17,6 +17,8 @@
 
 """Test documents views."""
 
+import datetime
+
 import pytest
 
 import sonar.modules.documents.views as views
@@ -384,3 +386,105 @@ def test_part_of_format():
     assert views.part_of_format({
         'numberingYear': '2015',
     }) == '2015'
+
+
+def test_is_file_restricted(app):
+    """Test if a file is restricted by embargo date and/or institution."""
+    views.pull_ir(None, {'ir': 'sonar'})
+
+    record = {'institution': {'pid': 'unisi'}}
+
+    # No restricution and no embargo date
+    assert views.is_file_restricted({}, {}) == {
+        'date': None,
+        'restricted': False
+    }
+
+    # Restricted by internal, but IP is allowed
+    with app.test_request_context(environ_base={'REMOTE_ADDR': '127.0.0.1'}):
+        assert views.is_file_restricted({'restricted': 'internal'}, {}) == {
+            'date': None,
+            'restricted': False
+        }
+
+    # Restricted by internal, but IP is not allowed
+    with app.test_request_context(environ_base={'REMOTE_ADDR': '10.1.2.3'}):
+        assert views.is_file_restricted({'restricted': 'internal'}, {}) == {
+            'date': None,
+            'restricted': True
+        }
+
+    # Restricted by institution and current institution don't match
+    assert views.is_file_restricted({'restricted': 'institution'}, record) == {
+        'date': None,
+        'restricted': True
+    }
+
+    # Restricted by institution and current institution match
+    views.pull_ir(None, {'ir': 'unisi'})
+    assert views.is_file_restricted({'restricted': 'institution'}, record) == {
+        'date': None,
+        'restricted': False
+    }
+
+    # Restricted by embargo date only, but embargo date is in the past
+    assert views.is_file_restricted({'embargo_date': '2020-01-01'}, {}) == {
+        'date': None,
+        'restricted': False
+    }
+
+    # Restricted by embargo date only and embargo date is in the future
+    with app.test_request_context(environ_base={'REMOTE_ADDR': '10.1.2.3'}):
+        assert views.is_file_restricted({'embargo_date': '2021-01-01'},
+                                        {}) == {
+                                            'date': datetime.datetime(
+                                                2021, 1, 1, 0, 0),
+                                            'restricted': True
+                                        }
+
+    # Restricted by embargo date and institution
+    views.pull_ir(None, {'ir': 'sonar'})
+    with app.test_request_context(environ_base={'REMOTE_ADDR': '10.1.2.3'}):
+        assert views.is_file_restricted(
+            {
+                'embargo_date': '2021-01-01',
+                'restricted': 'institution'
+            }, record) == {
+                'restricted': True,
+                'date': datetime.datetime(2021, 1, 1, 0, 0)
+            }
+
+    # Restricted by embargo date but internal IP gives access
+    with app.test_request_context(environ_base={'REMOTE_ADDR': '127.0.0.1'}):
+        assert views.is_file_restricted(
+            {
+                'embargo_date': '2021-01-01',
+                'restricted': 'internal'
+            }, {}) == {
+                'date': None,
+                'restricted': False
+            }
+
+
+def test_get_current_organisation(app):
+    """Test get current organisation."""
+    # No globals and no args
+    assert views.get_current_organisation() == 'sonar'
+
+    # Default globals and no args
+    views.pull_ir(None, {'ir': 'sonar'})
+    assert views.get_current_organisation() == 'sonar'
+
+    # Organisation globals and no args
+    views.pull_ir(None, {'ir': 'unisi'})
+    assert views.get_current_organisation() == 'unisi'
+
+    # Args is global
+    with app.test_request_context() as req:
+        req.request.args = {'view': 'sonar'}
+        assert views.get_current_organisation() == 'sonar'
+
+    # Args has organisation view
+    with app.test_request_context() as req:
+        req.request.args = {'view': 'unisi'}
+        assert views.get_current_organisation() == 'unisi'

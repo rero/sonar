@@ -22,7 +22,9 @@ from __future__ import absolute_import, print_function
 from invenio_records_rest.schemas import StrictKeysMixin
 from invenio_records_rest.schemas.fields import PersistentIdentifier, \
     SanitizedUnicode
-from marshmallow import fields
+from marshmallow import fields, pre_dump
+
+from sonar.modules.documents.views import is_file_restricted
 
 
 class DocumentMetadataSchemaV1(StrictKeysMixin):
@@ -48,6 +50,29 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     notes = fields.List(fields.String())
     identifiedBy = fields.List(fields.Dict())
     subjects = fields.List(fields.Dict())
+
+    @pre_dump
+    def add_files_restrictions(self, item):
+        """Add restrictions to file before dumping data.
+
+        :param item: Item object to process
+        :returns: Modified item
+        """
+        if not item.get('_files'):
+            return item
+
+        for key, file in enumerate(item['_files']):
+            if file['type'] == 'file':
+                restricted = is_file_restricted(file, item)
+
+                # Format date before serialization
+                if restricted.get('date'):
+                    restricted['date'] = restricted['date'].strftime(
+                        '%Y-%m-%d')
+
+                item['_files'][key]['restricted'] = restricted
+
+        return item
 
 
 class DocumentSchemaV1(StrictKeysMixin):
