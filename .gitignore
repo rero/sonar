@@ -65,6 +65,7 @@ target/
 
 # Virtual studio pref
 .vscode
+*.code-workspace
 
 # MAC
 .DS_Store

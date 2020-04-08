@@ -1,7 +1,7 @@
 <div class="dropdown">
   <button class="btn btn-outline-primary btn-block dropdown-toggle" type="button" id="dropdownMenuButton"
     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {{ _('Signup with SWITCHaai') }}
+    {{ label | default(_('Sign-up with SWITCHaai')) }}
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     {% for provider in aai_providers() %}

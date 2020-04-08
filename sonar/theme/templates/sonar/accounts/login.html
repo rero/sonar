@@ -42,7 +42,9 @@
             </a>
           </div>
           <div class="col">
+            {% with label = _('Sign-in with SWITCHaai') %}
             {% include 'sonar/partial/switch_aai_dropdown.html' %}
+            {% endwith %}
           </div>
         </div>
       </div>

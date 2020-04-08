@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.0.1\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2020-03-17 10:11+0100\n"
+"POT-Creation-Date: 2020-04-08 10:33+0200\n"
 "PO-Revision-Date: 2019-06-13 10:45+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -54,59 +54,59 @@ msgstr ""
 msgid "Welcome to Swiss Open Access Repository!"
 msgstr ""
 
-#: sonar/config.py:406
+#: sonar/config.py:411
 msgid "institution"
 msgstr ""
 
-#: sonar/config.py:407
+#: sonar/config.py:412
 msgid "language"
 msgstr ""
 
-#: sonar/config.py:408
+#: sonar/config.py:413
 msgid "subject"
 msgstr ""
 
-#: sonar/config.py:409
+#: sonar/config.py:414
 msgid "specific_collections"
 msgstr ""
 
-#: sonar/config.py:410
+#: sonar/config.py:415
 msgid "document_type"
 msgstr ""
 
-#: sonar/config.py:417
+#: sonar/config.py:422
 msgid "pid"
 msgstr ""
 
-#: sonar/config.py:418
+#: sonar/config.py:423
 msgid "status"
 msgstr ""
 
-#: sonar/config.py:419
+#: sonar/config.py:424
 msgid "user"
 msgstr ""
 
-#: sonar/config.py:420
+#: sonar/config.py:425
 msgid "contributor"
 msgstr ""
 
-#: sonar/config.py:427
+#: sonar/config.py:432
 msgid "Best match"
 msgstr ""
 
-#: sonar/config.py:433
+#: sonar/config.py:438
 msgid "Most recent"
 msgstr ""
 
-#: sonar/modules/documents/views.py:270
+#: sonar/modules/documents/views.py:271
 msgid "vol."
 msgstr ""
 
-#: sonar/modules/documents/views.py:273
+#: sonar/modules/documents/views.py:274
 msgid "no."
 msgstr ""
 
-#: sonar/modules/documents/views.py:277
+#: sonar/modules/documents/views.py:278
 msgid "p."
 msgstr ""
 
@@ -194,19 +194,15 @@ msgstr ""
 msgid "Other files"
 msgstr ""
 
-#: sonar/theme/templates/sonar/footer.html:40
+#: sonar/theme/templates/sonar/footer.html:24
 msgid "Help"
 msgstr ""
 
-#: sonar/theme/templates/sonar/footer.html:43
-msgid "About"
+#: sonar/theme/templates/sonar/footer.html:27
+msgid "Project and contact"
 msgstr ""
 
-#: sonar/theme/templates/sonar/footer.html:46
-msgid "Contact"
-msgstr ""
-
-#: sonar/theme/templates/sonar/footer.html:51
+#: sonar/theme/templates/sonar/footer.html:32
 #, python-format
 msgid "Powered by <a href=\"%(link)s\" target=\"_blank\">RERO</a>"
 msgstr ""
@@ -215,42 +211,34 @@ msgstr ""
 msgid "Search publications, authors, projects, ..."
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:38
-msgid "Advanced search"
-msgstr ""
-
-#: sonar/theme/templates/sonar/frontpage.html:54
+#: sonar/theme/templates/sonar/frontpage.html:51
 msgid "Software under development!"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:59
+#: sonar/theme/templates/sonar/frontpage.html:56
 msgid "The project"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:60
+#: sonar/theme/templates/sonar/frontpage.html:57
 msgid ""
 "The SONAR project aims to create a scholarly archive that collects, "
 "promotes and preserves the publications of authors affiliated with Swiss "
 "public research institutions."
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:61
+#: sonar/theme/templates/sonar/frontpage.html:58
 msgid "Further info on the project page"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:64
-msgid "Institution views (test)"
-msgstr ""
-
-#: sonar/theme/templates/sonar/frontpage.html:68
+#: sonar/theme/templates/sonar/frontpage.html:61
 msgid "Follow us"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:73
+#: sonar/theme/templates/sonar/frontpage.html:66
 msgid "Project website on"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:79
+#: sonar/theme/templates/sonar/frontpage.html:72
 msgid "Source code on"
 msgstr ""
 
@@ -287,7 +275,7 @@ msgid "Log In"
 msgstr ""
 
 #: sonar/theme/templates/sonar/accounts/forgot_password.html:36
-#: sonar/theme/templates/sonar/accounts/login.html:48
+#: sonar/theme/templates/sonar/accounts/login.html:50
 #: sonar/theme/templates/sonar/accounts/reset_password.html:28
 #: sonar/theme/templates/sonar/accounts/signup.html:36
 #: sonar/theme/templates/sonar/oauth/signup.html:38
@@ -303,7 +291,11 @@ msgstr ""
 msgid "Sign-in with %(type)s"
 msgstr ""
 
-#: sonar/theme/templates/sonar/accounts/login.html:47
+#: sonar/theme/templates/sonar/accounts/login.html:41
+msgid "Sign-in with SWITCHaai"
+msgstr ""
+
+#: sonar/theme/templates/sonar/accounts/login.html:49
 msgid "Forgot password?"
 msgstr ""
 
@@ -316,6 +308,10 @@ msgstr ""
 #: sonar/theme/templates/sonar/oauth/signup.html:26
 #, python-format
 msgid "Sign-up with %(type)s"
+msgstr ""
+
+#: sonar/theme/templates/sonar/macros/macro.html:101
+msgid "Public access from"
 msgstr ""
 
 #: sonar/theme/templates/sonar/oauth/signup.html:28
@@ -358,7 +354,7 @@ msgid "Sign up"
 msgstr ""
 
 #: sonar/theme/templates/sonar/partial/switch_aai_dropdown.html:4
-msgid "Signup with SWITCHaai"
+msgid "Sign-up with SWITCHaai"
 msgstr ""
 
 #: sonar/translations/manual_translations.txt:17
@@ -520,4 +516,3 @@ msgstr ""
 #: sonar/translations/manual_translations.txt:66
 msgid "coar:c_18cw"
 msgstr ""
-
