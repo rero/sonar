@@ -20,6 +20,7 @@
 import re
 
 from flask import current_app
+from invenio_i18n.ext import current_i18n
 from invenio_mail.api import TemplatedMessage
 from wand.color import Color
 from wand.image import Image
@@ -112,3 +113,8 @@ def remove_trailing_punctuation(data,
         spaced_punctuation.replace('.', r'\.').replace('-', r'\-')
     return re.sub(r'([{0}]|\s+[{1}])$'.format(punctuation, spaced_punctuation),
                   '', data.rstrip()).rstrip()
+
+
+def get_current_language():
+    """Return the current selected locale."""
+    return current_i18n.locale.language

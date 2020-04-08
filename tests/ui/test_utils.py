@@ -19,11 +19,11 @@
 
 import os
 
-import mock
 import pytest
 
 from sonar.modules.utils import change_filename_extension, \
-    create_thumbnail_from_file, get_switch_aai_providers
+    create_thumbnail_from_file, get_current_language, \
+    get_switch_aai_providers
 
 
 def test_change_filename_extension(app):
@@ -75,3 +75,11 @@ def test_get_switch_aai_providers(app):
         }
     })
     assert get_switch_aai_providers() == ['idp']
+
+
+def test_get_current_language(app):
+    """Test getting the current language."""
+    assert get_current_language() == 'en'
+
+    with app.test_request_context(headers=[('Accept-Language', 'fr')]):
+        assert get_current_language() == 'fr'

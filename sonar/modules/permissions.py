@@ -132,3 +132,11 @@ def files_permission_factory(*kwargs):
 
     # TODO: Add checks for accessing files and buckets
     return allow_access
+
+
+def wiki_edit_permission():
+    """Wiki edition permission.
+
+    :return: true if the logged user has the admin role.
+    """
+    return has_admin_access()

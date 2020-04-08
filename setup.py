@@ -87,6 +87,7 @@ setup(
         ],
         'invenio_i18n.translations': [
             'messages = sonar',
+            'messages_wiki = flask_wiki'
         ],
         'invenio_base.api_apps': [
             'documents = sonar.modules.documents:Documents',
