@@ -19,6 +19,8 @@ python3-saml = "*"
 xmltodict = "*"
 marshmallow = "<=3.0.0b6"
 pycountry = "*"
+flask-wiki = {git = "https://github.com/rero/flask-wiki.git"}
+markdown-captions = "*"
 # TODO: try to remove it when werkzeug will be fixed.
 werkzeug = "==0.16.0"
 # TODO: check why we need this.

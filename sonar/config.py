@@ -37,8 +37,9 @@ from sonar.modules.documents.api import DocumentRecord, DocumentSearch
 from sonar.modules.institutions.api import InstitutionRecord, InstitutionSearch
 from sonar.modules.permissions import can_create_record_factory, \
     can_delete_record_factory, can_list_record_factory, \
-    can_read_record_factory, can_update_record_factory
+    can_read_record_factory, can_update_record_factory, wiki_edit_permission
 from sonar.modules.users.api import UserRecord, UserSearch
+from sonar.modules.utils import get_current_language
 
 
 def _(x):
@@ -535,3 +536,15 @@ FILES_REST_PERMISSION_FACTORY = \
 DB_VERSIONING = False
 # DB versioning is disabled globally, because of performances during documents
 # importation.
+
+# WIKI
+# ====
+WIKI_CONTENT_DIR = './wiki'
+WIKI_URL_PREFIX = '/help'
+WIKI_LANGUAGES = ['en', 'fr', 'de', 'it']
+WIKI_CURRENT_LANGUAGE = get_current_language
+WIKI_UPLOAD_FOLDER = os.path.join(WIKI_CONTENT_DIR, 'files')
+WIKI_BASE_TEMPLATE = 'sonar/page_wiki.html'
+WIKI_EDIT_VIEW_PERMISSION = wiki_edit_permission
+WIKI_EDIT_UI_PERMISSION = wiki_edit_permission
+WIKI_MARKDOWN_EXTENSIONS = set(('extra', ))
