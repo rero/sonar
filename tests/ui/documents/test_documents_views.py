@@ -414,7 +414,7 @@ def test_is_file_restricted(app):
             'restricted': True
         }
 
-    # Restricted by institution and current institution don't match
+    # Restricted by institution and organisation is global
     assert views.is_file_restricted({'restricted': 'institution'}, record) == {
         'date': None,
         'restricted': True
@@ -426,6 +426,21 @@ def test_is_file_restricted(app):
         'date': None,
         'restricted': False
     }
+
+    # Restricted by institution and record don't have institution
+    assert views.is_file_restricted({'restricted': 'institution'}, {}) == {
+        'date': None,
+        'restricted': True
+    }
+
+    # Restricted by institution and institution don't match
+    assert views.is_file_restricted({'restricted': 'institution'},
+                                    {'institution': {
+                                        'pid': 'some-org'
+                                    }}) == {
+                                        'date': None,
+                                        'restricted': True
+                                    }
 
     # Restricted by embargo date only, but embargo date is in the past
     assert views.is_file_restricted({'embargo_date': '2020-01-01'}, {}) == {

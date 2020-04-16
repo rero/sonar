@@ -289,6 +289,35 @@ def is_file_restricted(file, record):
     :param record: Current record
     :returns object containing result and possibly embargo date
     """
+
+    def is_restricted_by_scope(file):
+        """File is restricted by scope (internal, rero or institution).
+
+        :param file: File object.
+        """
+        # File is restricted by internal IPs
+        if file['restricted'] == 'internal':
+            return request.remote_addr not in current_app.config.get(
+                'SONAR_APP_INTERNAL_IPS')
+
+        # File is restricted by organisation
+        organisation = get_current_organisation()
+
+        # We are in global organisation, so restriction is active
+        if organisation == current_app.config.get(
+                'SONAR_APP_DEFAULT_ORGANISATION'):
+            return True
+
+        # No organisation in record, restriction is active
+        if not record.get('institution'):
+            return True
+
+        # Record organisation is different from current organisation
+        if organisation != record['institution']['pid']:
+            return True
+
+        return False
+
     restricted = {'restricted': False, 'date': None}
 
     try:
@@ -303,16 +332,7 @@ def is_file_restricted(file, record):
 
     # File is restricted by institution
     if file.get('restricted'):
-        if file['restricted'] in ['rero', 'internal']:
-            result = request.remote_addr not in current_app.config.get(
-                'SONAR_APP_INTERNAL_IPS')
-            restricted['restricted'] = result
-        else:
-            # compare with current organisation
-            organisation = get_current_organisation()
-            restricted['restricted'] = organisation == current_app.config.get(
-                'SONAR_APP_DEFAULT_ORGANISATION'
-            ) or organisation != record['institution']['pid']
+        restricted['restricted'] = is_restricted_by_scope(file)
 
     if not restricted['restricted']:
         restricted['date'] = None

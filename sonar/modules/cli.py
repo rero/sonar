@@ -23,8 +23,10 @@ import sys
 import click
 import jsonref
 from flask.cli import with_appcontext
+from invenio_jsonschemas import current_jsonschemas
 from invenio_search.cli import es_version_check
 from invenio_search.proxies import current_search
+from jsonref import JsonLoader
 
 from .deposits.cli import deposits
 from .users.cli import users
@@ -68,11 +70,28 @@ def es_init(force):
 @utils.command()
 @click.argument('src_json_file', type=click.File('r'))
 @click.option('-o', '--output', 'output', type=click.File('w'), default=None)
+@with_appcontext
 def compile_json(src_json_file, output):
     """Compile source json file (resolve $ref)."""
     click.secho('Compile json file (resolve $ref): ', fg='green', nl=False)
     click.secho(src_json_file.name)
-    data = jsonref.load(src_json_file)
+
+    data = jsonref.load(src_json_file, loader=CustomJsonLoader())
     if not output:
         output = sys.stdout
     json.dump(data, fp=output, indent=2)
+
+
+class CustomJsonLoader(JsonLoader):
+    """Custom JSON ref loader."""
+
+    def __call__(self, uri, **kwargs):
+        """Method invoked when an uri has to be resolved.
+
+        If URI is present in registered JSON schemas list, it resolves in the
+        common schemas, else lets the loader from jsonref do the job.
+        """
+        if uri in current_jsonschemas.list_schemas():
+            return current_jsonschemas.get_schema(uri)
+
+        return super(CustomJsonLoader, self).__call__(uri, *kwargs)

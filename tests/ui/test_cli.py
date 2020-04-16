@@ -31,7 +31,8 @@ def test_compile_json(app, script_info):
                            ['./tests/ui/data/json_to_compile.json'],
                            obj=script_info)
 
-    assert result.output.find('#/definitions/language') == -1
+    assert result.output.find('language-v1.0.0.json') == -1
+    assert result.output.find('#/definitions/someDefinition') == -1
 
 
 def test_es_init(app, script_info, es_clear):

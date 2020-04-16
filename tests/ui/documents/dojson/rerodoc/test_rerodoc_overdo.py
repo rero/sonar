@@ -23,31 +23,6 @@ from sonar.modules.documents.dojson.rerodoc.overdo import Overdo
 from sonar.modules.institutions.api import InstitutionRecord
 
 
-def test_get_affiliations():
-    """Test getting controlled affiliations."""
-    affiliation = '''
-    Institute for Research in Biomedicine (IRB), Faculty of Biomedical
-    Sciences, Università della Svizzera italiana, Switzerland - Graduate
-    School for Cellular and Biomedical Sciences, University of Bern, c/o
-    Theodor Kocher Institute, Freiestrasse 1, P.O. Box 938, CH-3000 Bern 9,
-    Switzerland
-    '''
-    overdo = Overdo()
-    affiliations = overdo.get_affiliations(affiliation)
-    assert affiliations == [
-        'Uni of Bern and Hospital', 'Uni of Italian Switzerland'
-    ]
-
-    affiliations = overdo.get_affiliations(None)
-    assert not affiliations
-
-
-def test_load_affiliations():
-    """Test load affiliations from file."""
-    Overdo.load_affiliations()
-    assert len(Overdo.affiliations) == 77
-
-
 def test_create_institution(app):
     """Test create institution."""
     Overdo.create_institution('test')

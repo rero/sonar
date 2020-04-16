@@ -17,6 +17,8 @@
 
 """Document Api."""
 
+import csv
+import os
 from functools import partial
 
 from ..api import SonarRecord, SonarSearch
@@ -49,6 +51,50 @@ class DocumentRecord(SonarRecord):
     fetcher = document_pid_fetcher
     provider = DocumentProvider
     schema = 'document'
+    affiliations = []
+
+    @staticmethod
+    def load_affiliations():
+        """Load affiliations from reference file."""
+        csv_file = os.path.dirname(
+            __file__) + '/../../../data/affiliations.csv'
+
+        DocumentRecord.affiliations = []
+
+        with open(csv_file, 'r') as file:
+            reader = csv.reader(file, delimiter='\t')
+            for row in reader:
+                affiliation = []
+                for index, value in enumerate(row):
+                    if index > 0 and value:
+                        affiliation.append(value)
+
+                if affiliation:
+                    DocumentRecord.affiliations.append(affiliation)
+
+    @staticmethod
+    def get_affiliations(full_affiliation):
+        """Get controlled affiliations list based on reference CSV file.
+
+        :param full_affiliation: String representing complete affiliation
+        """
+        if not full_affiliation:
+            return []
+
+        if not DocumentRecord.affiliations:
+            DocumentRecord.load_affiliations()
+
+        full_affiliation = full_affiliation.lower()
+
+        controlled_affiliations = []
+
+        for affiliations in DocumentRecord.affiliations:
+            for affiliation in affiliations:
+                if affiliation.lower() in full_affiliation:
+                    controlled_affiliations.append(affiliations[0])
+                    break
+
+        return controlled_affiliations
 
     @classmethod
     def get_record_by_identifier(cls, identifiers):

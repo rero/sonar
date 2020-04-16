@@ -108,8 +108,7 @@ def update_file_permissions(permissions_file, chunk_size):
                                 'Access restricted to {status} for file '
                                 '{record}'.format(status=matches.group(1),
                                                   record=row))
-                            record_file['restricted'] = matches.group(
-                                1).lower()
+                            record_file['restricted'] = 'internal'
                         else:
                             record_file['restricted'] = 'institution'
                     else:

@@ -38,11 +38,16 @@ def test_format_extracted_data(app):
             ' for All Glaciers in Austria'
         assert len(formatted_data['authors']) == 2
         assert formatted_data['authors'] == [{
-            'affiliation': 'Swiss Institute of Bioinformatics',
-            'name': 'Komljenovic Andrea'
+            'affiliation':
+            'Swiss Institute of Bioinformatics, Lausanne, Switzerland',
+            'name': 'Komljenovic, Andrea'
         }, {
-            'affiliation': 'École Polytechnique Fédérale de Lausanne',
-            'name': 'Sleiman Maroun Bou'
+            'affiliation':
+            'Institute of Bioengineering, Laboratory of Integrative Systems '
+            'Physiology, École Polytechnique Fédérale de Lausanne, Lausanne, '
+            'Lausanne, Switzerland',
+            'name':
+            'Sleiman, Maroun Bou'
         }]
 
         # Test authors
@@ -64,5 +69,6 @@ def test_format_extracted_data(app):
                 'fileDesc']['sourceDesc']['biblStruct']['monogr']['imprint'][
                     'biblScope'][0]
         formatted_data = format_extracted_data(extracted_data)
-        assert formatted_data['journal']['name'] == 'Frontiers Media SA'
-        assert formatted_data['journal']['volume'] == '7'
+        assert formatted_data['publication'][
+            'publishedIn'] == 'Frontiers in Earth Science'
+        assert formatted_data['publication']['volume'] == '7'

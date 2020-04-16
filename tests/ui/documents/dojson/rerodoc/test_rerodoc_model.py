@@ -564,7 +564,22 @@ def test_marc21_to_provision_activity_field_269(app):
         'type': 'bf:Publication'
     }]
 
-    # One field with start and end date
+    # One field with full date
+    marc21xml = """
+    <record>
+        <datafield tag="269" ind1=" " ind2=" ">
+            <subfield code="c">1966-01-01</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('provisionActivity') == [{
+        'startDate': '1966-01-01',
+        'type': 'bf:Publication'
+    }]
+
+    # Date does not match "YYYY" OR "YYYY-MM-DD"
     marc21xml = """
     <record>
         <datafield tag="269" ind1=" " ind2=" ">
@@ -574,10 +589,7 @@ def test_marc21_to_provision_activity_field_269(app):
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        'startDate': '1966',
-        'type': 'bf:Publication'
-    }]
+    assert not data.get('provisionActivity')
 
     # Multiple fields
     marc21xml = """

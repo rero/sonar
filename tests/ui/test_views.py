@@ -30,22 +30,27 @@ def test_error(client):
         assert client.get(url_for('sonar.error'))
 
 
-def test_admin_record_page(app, admin_user_fixture):
+def test_admin_record_page(app, admin_user_fixture, user_without_role_fixture):
     """Test admin page redirection to defaults."""
     with app.test_client() as client:
         file_url = url_for('sonar.manage')
 
+        # User is not logged
         res = client.get(file_url)
         assert res.status_code == 401
 
+        # User is logged, but is not allowed to access the page.
+        login_user_via_session(client, email=user_without_role_fixture.email)
+        res = client.get(file_url)
+        assert res.status_code == 403
+
+        # OK, but redirected to the default page
         login_user_via_session(client, email=admin_user_fixture.email)
-
-        file_url = url_for('sonar.manage')
-
         res = client.get(file_url)
         assert res.status_code == 302
         assert '/records/documents' in res.location
 
+        # OK
         file_url = url_for('sonar.manage', path='records/documents')
         res = client.get(file_url)
         assert res.status_code == 200

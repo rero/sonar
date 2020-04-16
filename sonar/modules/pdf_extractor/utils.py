@@ -85,41 +85,81 @@ def format_extracted_data(data):
                 forenames = author['persName'].get('forename', [])
                 forenames = force_list(forenames)
 
-                name = name + [forename['#text'] for forename in forenames]
+                if forenames:
+                    name.append(' '.join(
+                        [forename['#text'] for forename in forenames]))
 
-                author_data['name'] = ' '.join(name)
+                if len(name) > 1:
+                    author_data['name'] = ', '.join(name)
 
             if author_data.get('name'):
+                author_data['affiliation'] = '[Unknown]'
+
                 affiliations = force_list(author.get('affiliation', []))
 
                 if affiliations:
-                    affiliation = affiliations[0]
-                    organisations = force_list(affiliation.get('orgName', []))
+                    author_affiliation = []
 
+                    # Append organisation data
+                    organisations = force_list(affiliations[0].get(
+                        'orgName', []))
                     for organisation in organisations:
-                        if organisation.get('@type') == 'institution':
-                            author_data['affiliation'] = organisation['#text']
+                        author_affiliation.append(organisation['#text'])
 
-            formatted_data.setdefault('authors', []).append(author_data)
+                    # Append settlement
+                    if affiliations[0].get('address', {}).get('settlement'):
+                        author_affiliation.append(
+                            affiliations[0]['address']['settlement'])
 
-    imprint = data['teiHeader']['fileDesc']['sourceDesc']['biblStruct'][
-        'monogr'].get('imprint', {})
+                    # Append region
+                    if affiliations[0].get('address', {}).get('region'):
+                        author_affiliation.append(
+                            affiliations[0]['address']['region'])
 
-    if imprint:
-        if imprint.get('publisher'):
-            formatted_data['journal'] = {'name': imprint['publisher']}
+                    # Append country
+                    if affiliations[0].get('address', {}).get('country'):
+                        author_affiliation.append(
+                            affiliations[0]['address']['country']['#text'])
 
-            imprint['biblScope'] = force_list(imprint['biblScope'])
+                    # Store affiliation in author data
+                    if author_affiliation:
+                        author_data['affiliation'] = ', '.join(
+                            author_affiliation)
 
-            for item in imprint['biblScope']:
-                if item['@unit'] in ['page', 'volume', 'number']:
-                    key = item['@unit']
-                    if key == 'page':
-                        key = 'pages'
+            if author_data:
+                formatted_data.setdefault('authors', []).append(author_data)
 
-                    formatted_data['journal'][
-                        key] = item['#text'] if '#text' in item else item[
-                            '@from'] + '-' + item['@to']
+    # Publication
+    monogr = data['teiHeader']['fileDesc']['sourceDesc']['biblStruct'][
+        'monogr']
+
+    publication = {}
+
+    if monogr.get('title'):
+        monogr['title'] = force_list(monogr['title'])
+        publication['publishedIn'] = monogr['title'][0]['#text']
+
+    if monogr.get('imprint', {}).get('biblScope'):
+        if monogr['imprint'].get('publisher'):
+            publication['publisher'] = monogr['imprint']['publisher']
+
+        monogr['imprint']['biblScope'] = force_list(
+            monogr['imprint']['biblScope'])
+
+        for item in monogr['imprint']['biblScope']:
+            if item['@unit'] in ['page', 'volume', 'number']:
+                key = item['@unit']
+                if key == 'page':
+                    key = 'pages'
+
+                publication[key] = item['#text'] if '#text' in item else item[
+                    '@from'] + '-' + item['@to']
+
+        if monogr['imprint'].get('date').get('@when'):
+            publication['year'] = monogr['imprint']['date']['@when']
+
+    if publication:
+        formatted_data['publication'] = publication
 
     abstract = data['teiHeader']['profileDesc'].get('abstract')
     if abstract:

@@ -159,6 +159,13 @@ class SonarRecord(Record, FilesMixin):
         self.files[key]['type'] = kwargs.get('type', 'file')
         self.files[key]['order'] = kwargs.get('order', 1)
 
+        # Embargo
+        if kwargs.get('restricted'):
+            self.files[key]['restricted'] = kwargs['restricted']
+
+        if kwargs.get('embargo_date'):
+            self.files[key]['embargo_date'] = kwargs['embargo_date']
+
         # Store external file URL
         if kwargs.get('url'):
             self.files[key]['external_url'] = kwargs['url']

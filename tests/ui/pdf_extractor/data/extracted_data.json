@@ -88,6 +88,7 @@
                       "#text": "Switzerland",
                       "@key": "CH"
                     },
+                    "region": "Lausanne",
                     "postCode": "1015",
                     "settlement": "Lausanne"
                   },

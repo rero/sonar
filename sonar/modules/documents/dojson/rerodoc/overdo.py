@@ -17,8 +17,6 @@
 
 """Overdo specialized class for RERODOC DOJSON transformation."""
 
-import csv
-import os
 import re
 
 from flask import current_app
@@ -30,7 +28,6 @@ from sonar.modules.institutions.api import InstitutionRecord
 class Overdo(BaseOverdo):
     """Overdo specialized class for RERODOC DOJSON transformation."""
 
-    affiliations = []
     registererd_organizations = []
 
     @staticmethod
@@ -86,25 +83,6 @@ class Overdo(BaseOverdo):
 
         raise Exception('Date "{date}" is not recognized'.format(date=date))
 
-    @staticmethod
-    def load_affiliations():
-        """Load affiliations from reference file."""
-        csv_file = os.path.dirname(
-            __file__) + '/../../../../../data/affiliations.csv'
-
-        Overdo.affiliations = []
-
-        with open(csv_file, 'r') as file:
-            reader = csv.reader(file, delimiter='\t')
-            for row in reader:
-                affiliation = []
-                for index, value in enumerate(row):
-                    if index > 0 and value:
-                        affiliation.append(value)
-
-                if affiliation:
-                    Overdo.affiliations.append(affiliation)
-
     def do(self, blob, ignore_missing=True, exception_handlers=None):
         """Do transformation."""
         result = super(Overdo, self).do(blob,
@@ -115,29 +93,6 @@ class Overdo(BaseOverdo):
         self.verify(result)
 
         return result
-
-    def get_affiliations(self, full_affiliation):
-        """Get controlled affiliations list based on reference CSV file.
-
-        :param full_affiliation: String representing complete affiliation
-        """
-        if not full_affiliation:
-            return []
-
-        if not self.affiliations:
-            self.load_affiliations()
-
-        full_affiliation = full_affiliation.lower()
-
-        controlled_affiliations = []
-
-        for affiliations in self.affiliations:
-            for affiliation in affiliations:
-                if affiliation.lower() in full_affiliation:
-                    controlled_affiliations.append(affiliations[0])
-                    break
-
-        return controlled_affiliations
 
     def get_contributor_role(self, role_700=None):
         """Return contributor role.
