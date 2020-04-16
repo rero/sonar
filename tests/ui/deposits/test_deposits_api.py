@@ -17,35 +17,96 @@
 
 """Test API for deposits."""
 
-import json
-import os
-
-from sonar.modules.deposits.api import DepositRecord
-from sonar.modules.pdf_extractor.utils import format_extracted_data
-
-
-def test_populate_with_pdf_metadata(app):
-    """Test populate deposit with metadata."""
-    json_file = os.path.dirname(os.path.abspath(
-        __file__)) + '/../pdf_extractor/data/extracted_data.json'
-
-    with open(json_file, 'rb') as file:
-        pdf_metadata = format_extracted_data(json.load(file))
-
-        deposit = DepositRecord({})
-        deposit.populate_with_pdf_metadata(pdf_metadata)
-        assert deposit['metadata']['title'] == 'Calibrated Ice Thickness ' \
-            'Estimate for All Glaciers in Austria'
-
-        # With default title
-        del pdf_metadata['title']
-        deposit.populate_with_pdf_metadata(pdf_metadata, 'Default title')
-        assert deposit['metadata']['title'] == 'Default title'
-
 
 def test_create_document(app, deposit_fixture):
     """Test create document based on it."""
     document = deposit_fixture.create_document()
-    assert document['title'][0]['mainTitle'][0][
-        'value'] == 'High-harmonic generation in quantum spin systems'
+
+    assert document['documentType'] == 'coar:c_816b'
+
+    assert document['title'] == [{
+        'type':
+        'bf:Title',
+        'mainTitle': [{
+            'language': 'eng',
+            'value': 'Title of the document'
+        }, {
+            'language': 'fre',
+            'value': 'Titre du document'
+        }],
+        'subtitle': [{
+            'language': 'eng',
+            'value': 'Subtitle of the document'
+        }]
+    }]
+
+    assert document['language'] == [{'value': 'eng', 'type': 'bf:Language'}]
+
+    assert document['provisionActivity'] == [{
+        'type': 'bf:Publication',
+        'startDate': '2020-01-01'
+    }]
+
+    assert document['partOf'] == [{
+        'numberingYear': '2019',
+        'numberingPages': '1-12',
+        'document': {
+            'title': 'Journal',
+            'contribution': ['Denson, Edward', 'Worth, James'],
+            'publication': {
+                'statement': 'Publisher'
+            }
+        },
+        'numberingVolume': '12',
+        'numberingIssue': '2'
+    }]
+
+    assert document['otherEdition'] == [{
+        'document': {
+            'electronicLocator': 'https://some.url/document.pdf'
+        },
+        'publicNote': 'Published version'
+    }]
+
+    assert document['specificCollections'] == ['Collection 1', 'Collection 2']
+
+    assert document['classification'] == [{
+        'type': 'bf:ClassificationUdc',
+        'classificationPortion': '543'
+    }]
+
+    assert document['abstracts'] == [{
+        'language': 'eng',
+        'value': 'Abstract of the document'
+    }, {
+        'language': 'fre',
+        'value': 'Résumé du document'
+    }]
+
+    assert document['subjects'] == [{
+        'label': {
+            'language': 'eng',
+            'value': ['Subject 1', 'Subject 2']
+        }
+    }, {
+        'label': {
+            'language': 'fre',
+            'value': ['Sujet 1', 'Sujet 2']
+        }
+    }]
+
+    assert document['contribution'] == [{
+        'affiliation':
+        'University of Bern, Switzerland',
+        'agent': {
+            'preferred_name': 'Takayoshi, Shintaro',
+            'type': 'bf:Person'
+        },
+        'controlledAffiliation': ['Uni of Bern and Hospital'],
+        'role': ['ctb']
+    }]
+
+    assert document.files['main.pdf']['restricted'] == 'institution'
+    assert document.files['main.pdf']['embargo_date'] == '2021-01-01'
+
     assert len(document.files) == 6

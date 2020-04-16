@@ -64,11 +64,8 @@ class FilesResource(ContentNegotiatedMethodView):
         # Store document
         deposit.files[key] = BytesIO(request.get_data())
         deposit.files[key]['label'] = re.search(r'(.*)\..*$', key).group(1)
-        deposit.files[key]['embargo'] = False
-        deposit.files[key]['embargoDate'] = None
-        deposit.files[key]['expect'] = False
         deposit.files[key]['category'] = request.args['type']
-        deposit.files[key]['file_type'] = 'file'
+        deposit.files[key]['type'] = 'file'
 
         deposit.commit()
         db.session.commit()
@@ -95,8 +92,14 @@ class FileResource(ContentNegotiatedMethodView):
         for item in json.items():
             deposit.files[key][item[0]] = item[1]
 
-        deposit.commit()
-        db.session.commit()
+        if not deposit.files[key].get('embargoDate'):
+            deposit.files[key].data.pop('embargoDate')
+
+        try:
+            deposit.commit()
+            db.session.commit()
+        except Exception:
+            abort(400)
 
         return make_response(jsonify(deposit.files[key].dumps()))
 
@@ -177,7 +180,7 @@ def review(pid=None):
             ]:
         abort(400)
 
-    user = UserRecord.get_record_by_pid(payload['user'])
+    user = UserRecord.get_record_by_ref_link(payload['user']['$ref'])
 
     if not user or not user.is_moderator:
         abort(403)
@@ -199,10 +202,13 @@ def review(pid=None):
         subject = 'Ask for changes on deposit'
         status = DepositRecord.STATUS_ASK_FOR_CHANGES
 
-    deposit_user = UserRecord.get_record_by_ref_link(deposit['user']['$ref'])
-
     deposit['status'] = status
-    deposit.log_action(user, payload['action'], payload['comment'])
+
+    # Log action
+    deposit.log_action(payload['user'], payload['action'], payload['comment'])
+
+    # Load user who creates the deposit
+    deposit_user = UserRecord.get_record_by_ref_link(deposit['user']['$ref'])
 
     send_email(
         [deposit_user['email']], subject,
@@ -231,8 +237,8 @@ def extract_metadata(pid=None):
         abort(400)
 
     main_file = [
-        file for file in deposit.files if file['category'] == 'main' and
-        file.mimetype == 'application/pdf'
+        file for file in deposit.files
+        if file['category'] == 'main' and file.mimetype == 'application/pdf'
     ]
 
     if not main_file:

@@ -3,13 +3,13 @@
   "title": "Test schema for compilation",
   "type": "object",
   "definitions": {
-    "language": {
-      "title": "Language value",
+    "someDefinition": {
+      "title": "Fake definition",
       "type": "string",
       "enum": [
-        "fre",
-        "eng",
-        "ger"
+        "a",
+        "b",
+        "c"
       ]
     }
   },
@@ -32,7 +32,16 @@
     "test": {
       "title": "Test",
       "type": "string",
-      "$ref": "#/definitions/language"
+      "$ref": "language-v1.0.0.json"
+    },
+    "test2": {
+      "title": "Test 2",
+      "$ref": "#/definitions/someDefinition"
+    },
+    "test3": {
+      "title": "Test 3",
+      "type": "string",
+      "$ref": "unknown-v1.0.0.json"
     }
   }
 }

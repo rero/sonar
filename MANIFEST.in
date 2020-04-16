@@ -22,6 +22,7 @@
 # Check manifest will not automatically add these two files:
 
 exclude sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
+exclude sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json
 
 include *.html
 include *.inv

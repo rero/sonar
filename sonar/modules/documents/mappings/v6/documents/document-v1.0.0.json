@@ -112,12 +112,10 @@
               }
             },
             "startDate": {
-              "type": "date",
-              "format": "yyyy"
+              "type": "date"
             },
             "endDate": {
-              "type": "date",
-              "format": "yyyy"
+              "type": "date"
             }
           }
         },

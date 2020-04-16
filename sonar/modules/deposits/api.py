@@ -76,36 +76,6 @@ class DepositRecord(SonarRecord):
                                                   **kwargs)
         return record
 
-    def populate_with_pdf_metadata(self, pdf_metadata, default_title=None):
-        """Update data for record."""
-        self['metadata'] = {}
-
-        if 'title' in pdf_metadata:
-            self['metadata']['title'] = pdf_metadata['title']
-        else:
-            self['metadata']['title'] = default_title
-
-        if 'languages' in pdf_metadata:
-            self['metadata']['languages'] = pdf_metadata['languages']
-
-        if 'authors' in pdf_metadata:
-            if 'contributors' not in self:
-                self['contributors'] = []
-
-            for author in pdf_metadata['authors']:
-                self['contributors'].append({'name': author['name']})
-
-        if 'abstract' in pdf_metadata:
-            if 'abstracts' not in self['metadata']:
-                self['metadata']['abstracts'] = []
-
-            self['metadata']['abstracts'].append(pdf_metadata['abstract'])
-
-        if 'journal' in pdf_metadata:
-            self['metadata']['journal'] = pdf_metadata['journal']
-
-        return self
-
     def log_action(self, user, action, comment=None):
         """Log intervention into deposit."""
         if 'logs' not in self:
@@ -126,41 +96,139 @@ class DepositRecord(SonarRecord):
 
     def create_document(self):
         """Create document from deposit."""
-        metadata = {
-            'title': [{
-                'type':
-                'bf:Title',
-                'mainTitle': [{
-                    'language': self['metadata']['languages'][0],
-                    'value': self['metadata']['title']
-                }]
-            }],
-            'documentType':
-            self['metadata']['document_type'],
-            'language': [{
-                'type': 'bf:Language',
-                'value': language
-            } for language in self['metadata']['languages']],
-        }
+        metadata = {}
 
-        for contributor in self['contributors']:
-            author = {'type': 'person', 'name': contributor['name']}
-            if contributor.get('affiliation'):
-                author['qualifier'] = contributor['affiliation']
+        # Document type
+        metadata['documentType'] = self['metadata']['documentType']
 
-            metadata.get('authors', []).append(author)
+        # Language
+        language = self['metadata'].get('language', 'eng')
 
-        if self['metadata'].get('etc'):
-            self['extent'] = self['metadata']['etc']
+        # Title
+        metadata['title'] = [{
+            'type':
+            'bf:Title',
+            'mainTitle': [{
+                'language': language,
+                'value': self['metadata']['title']
+            }]
+        }]
 
-        for key, abstract in enumerate(self['metadata']['abstracts']):
-            metadata.get('abstracts', []).append({
+        # Subtitle
+        if self['metadata'].get('subtitle'):
+            metadata['title'][0]['subtitle'] = [{
                 'language':
-                self['metadata']['languages'][key]
-                if self['metadata']['languages'][key] else 'eng',
+                language,
                 'value':
-                abstract
+                self['metadata']['subtitle']
+            }]
+
+        # Other title
+        if self['metadata'].get('otherLanguageTitle', {}).get('title'):
+            metadata['title'][0]['mainTitle'].append({
+                'language':
+                self['metadata']['otherLanguageTitle'].get(
+                    'language', language),
+                'value':
+                self['metadata']['otherLanguageTitle']['title']
             })
+
+        # Languages
+        metadata['language'] = [{
+            'value': language,
+            'type': 'bf:Language'
+        }]
+
+        # Document date
+        if self['metadata'].get('documentDate'):
+            metadata['provisionActivity'] = [{
+                'type':
+                'bf:Publication',
+                'startDate':
+                self['metadata']['documentDate']
+            }]
+
+        # Published in
+        part_of = {
+            'numberingYear': self['metadata']['publication']['year'],
+            'numberingPages': self['metadata']['publication']['pages'],
+            'document': {
+                'title': self['metadata']['publication']['publishedIn']
+            }
+        }
+        if self['metadata']['publication'].get('volume'):
+            part_of['numberingVolume'] = self['metadata']['publication'][
+                'volume']
+
+        if self['metadata']['publication'].get('number'):
+            part_of['numberingIssue'] = self['metadata']['publication'][
+                'number']
+
+        if self['metadata']['publication'].get('editors'):
+            part_of['document']['contribution'] = self['metadata'][
+                'publication']['editors']
+
+        if self['metadata']['publication'].get('publisher'):
+            part_of['document']['publication'] = {
+                'statement': self['metadata']['publication']['publisher']
+            }
+
+        metadata['partOf'] = [part_of]
+
+        # Other electronic versions
+        if self['metadata'].get('otherElectronicVersions'):
+            metadata['otherEdition'] = [{
+                'document': {
+                    'electronicLocator': link['url']
+                },
+                'publicNote': link['type']
+            } for link in self['metadata']['otherElectronicVersions']]
+
+        # Specific collections
+        if self['metadata'].get('specificCollections'):
+            metadata['specificCollections'] = self['metadata'][
+                'specificCollections']
+
+        # Classification
+        metadata['classification'] = [{
+            'type':
+            'bf:ClassificationUdc',
+            'classificationPortion':
+            self['metadata']['classification']
+        }]
+
+        # Abstracts
+        if self['metadata'].get('abstracts'):
+            metadata['abstracts'] = [{
+                'language': abstract.get('language', language),
+                'value': abstract['abstract']
+            } for abstract in self['metadata']['abstracts']]
+
+        # Subjects
+        if self['metadata'].get('subjects'):
+            metadata['subjects'] = [{
+                'label': {
+                    'language': subject.get('language', language),
+                    'value': subject['subjects']
+                }
+            } for subject in self['metadata']['subjects']]
+
+        # Contributors
+        metadata['contribution'] = [{
+            'agent': {
+                'type': 'bf:Person',
+                'preferred_name': contributor['name']
+            },
+            'role': ['ctb'],
+            'affiliation': contributor['affiliation']
+        } for contributor in self['contributors']]
+
+        # Resolve controlled affiliations
+        for contributor in metadata['contribution']:
+            affiliations = DocumentRecord.get_affiliations(
+                contributor['affiliation'])
+            if affiliations:
+                contributor['controlledAffiliation'] = affiliations
 
         document = DocumentRecord.create(metadata,
                                          dbcommit=True,
@@ -177,11 +245,18 @@ class DepositRecord(SonarRecord):
                     order = current_order
                     current_order += 1
 
-                document.add_file(
-                    content, file['key'], **{
-                        'label': file.get('label', file['key']),
-                        'order': order
-                    })
+                kwargs = {
+                    'label': file.get('label', file['key']),
+                    'order': order
+                }
+
+                if file.get('embargo', False) and file.get('embargoDate'):
+                    kwargs['embargo_date'] = file['embargoDate']
+
+                if file.get('exceptInInstitution'):
+                    kwargs['restricted'] = 'institution'
+
+                document.add_file(content, file['key'], **kwargs)
 
         document.commit()
         document.reindex()

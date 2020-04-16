@@ -49,6 +49,6 @@ def test_add_files_restrictions(client, document_with_file):
     res = client.get('https://localhost:5000/documents/10000')
     assert res.status_code == 200
     assert res.json['metadata']['_files'][0]['restricted'] == {
-        'restricted': False,
-        'date': None
+        'restricted': True,
+        'date': '2021-01-01'
     }

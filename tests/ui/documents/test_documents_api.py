@@ -35,3 +35,27 @@ def test_get_record_by_identifier(app, document_fixture):
         'type': 'bf:Identifier'
     }])
     assert not record
+
+
+def test_get_affiliations():
+    """Test getting controlled affiliations."""
+    affiliation = '''
+    Institute for Research in Biomedicine (IRB), Faculty of Biomedical
+    Sciences, Università della Svizzera italiana, Switzerland - Graduate
+    School for Cellular and Biomedical Sciences, University of Bern, c/o
+    Theodor Kocher Institute, Freiestrasse 1, P.O. Box 938, CH-3000 Bern 9,
+    Switzerland
+    '''
+    affiliations = DocumentRecord.get_affiliations(affiliation)
+    assert affiliations == [
+        'Uni of Bern and Hospital', 'Uni of Italian Switzerland'
+    ]
+
+    affiliations = DocumentRecord.get_affiliations(None)
+    assert not affiliations
+
+
+def test_load_affiliations():
+    """Test load affiliations from file."""
+    DocumentRecord.load_affiliations()
+    assert len(DocumentRecord.affiliations) == 77

@@ -31,7 +31,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     """Schema for the document metadata."""
 
     pid = PersistentIdentifier()
-    type = SanitizedUnicode()
+    documentType = SanitizedUnicode()
     title = fields.List(fields.Dict())
     partOf = fields.List(fields.Dict())
     abstracts = fields.List(fields.Dict())
@@ -50,6 +50,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     notes = fields.List(fields.String())
     identifiedBy = fields.List(fields.Dict())
     subjects = fields.List(fields.Dict())
+    classification = fields.List(fields.Dict())
 
     @pre_dump
     def add_files_restrictions(self, item):

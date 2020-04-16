@@ -20,6 +20,7 @@
 import json
 
 from sonar.modules.deposits.rest import FilesResource
+from sonar.modules.users.api import UserRecord
 
 
 def test_get(app, deposit_fixture):
@@ -27,6 +28,86 @@ def test_get(app, deposit_fixture):
     response = FilesResource.get(deposit_fixture['pid'])
     assert response.status_code == 200
     assert len(response.json) == 2
+
+
+def test_post(client, deposit_fixture):
+    """Test post file in deposit."""
+    # Test non existing deposit
+    url = '/deposits/10000/custom-files?key=1.pdf&type=additional'.format(
+        pid=deposit_fixture['pid'])
+    response = client.post(url)
+    assert response.status_code == 400
+
+    # Test non existing "key" paremeter
+    url = '/deposits/{pid}/custom-files?type=additional'.format(
+        pid=deposit_fixture['pid'])
+    response = client.post(url)
+    assert response.status_code == 400
+
+    # Test non existing "type" paremeter
+    url = '/deposits/{pid}/custom-files?key=1.pdf'.format(
+        pid=deposit_fixture['pid'])
+    response = client.post(url)
+    assert response.status_code == 400
+
+    # Test type not in "main" or "additional"
+    url = '/deposits/{pid}/custom-files?key=1.pdf&type=fake'.format(
+        pid=deposit_fixture['pid'])
+    response = client.post(url)
+    assert response.status_code == 400
+
+    # OK
+    url = '/deposits/{pid}/custom-files?key=1.pdf&type=additional'.format(
+        pid=deposit_fixture['pid'])
+    response = client.post(url)
+    assert response.status_code == 200
+    assert response.content_type == 'application/json'
+    assert response.json['key'] == '1.pdf'
+
+
+def test_file_put(client, deposit_fixture):
+    """Test putting metadata on existing file."""
+    url = '/deposits/{pid}/custom-files/{key}'
+
+    # Non existing deposit
+    response = client.put(url.format(pid=10000, key='main.pdf'))
+    assert response.status_code == 400
+
+    # Non existing file
+    response = client.put(
+        url.format(pid=deposit_fixture['pid'], key='fake.pdf'))
+    assert response.status_code == 400
+
+    # OK
+    response = client.put(url.format(pid=deposit_fixture['pid'],
+                                     key='main.pdf'),
+                          data=json.dumps({'label': 'Updated label'}),
+                          headers={'Content-Type': 'application/json'})
+    assert response.status_code == 200
+    assert response.json['label'] == 'Updated label'
+
+    # With embargo date
+    response = client.put(url.format(pid=deposit_fixture['pid'],
+                                     key='main.pdf'),
+                          data=json.dumps({'embargoDate': '2021-01-01'}),
+                          headers={'Content-Type': 'application/json'})
+    assert response.status_code == 200
+    assert response.json['embargoDate'] == '2021-01-01'
+
+    # With wrong embargo date
+    response = client.put(url.format(pid=deposit_fixture['pid'],
+                                     key='main.pdf'),
+                          data=json.dumps({'embargoDate': '2021'}),
+                          headers={'Content-Type': 'application/json'})
+    assert response.status_code == 400
+
+    # Removing embargo date
+    response = client.put(url.format(pid=deposit_fixture['pid'],
+                                     key='main.pdf'),
+                          data=json.dumps({'embargoDate': None}),
+                          headers={'Content-Type': 'application/json'})
+    assert response.status_code == 200
+    assert not response.json.get('embargoDate')
 
 
 def test_publish(client, db, db_user_fixture, db_moderator_fixture,
@@ -94,7 +175,11 @@ def test_review(client, db, db_user_fixture, db_moderator_fixture,
                            data=json.dumps({
                                'action': 'approve',
                                'comment': None,
-                               'user': db_user_fixture['pid']
+                               'user': {
+                                   '$ref':
+                                   UserRecord.get_ref_link(
+                                       'users', db_user_fixture['pid'])
+                               }
                            }),
                            headers=headers)
     assert response.status_code == 403
@@ -104,7 +189,11 @@ def test_review(client, db, db_user_fixture, db_moderator_fixture,
                            data=json.dumps({
                                'action': 'approve',
                                'comment': None,
-                               'user': db_moderator_fixture['pid']
+                               'user': {
+                                   '$ref':
+                                   UserRecord.get_ref_link(
+                                       'users', db_moderator_fixture['pid'])
+                               }
                            }),
                            headers=headers)
     assert response.status_code == 200
@@ -117,7 +206,11 @@ def test_review(client, db, db_user_fixture, db_moderator_fixture,
                            data=json.dumps({
                                'action': 'reject',
                                'comment': 'Sorry deposit is not valid',
-                               'user': db_moderator_fixture['pid']
+                               'user': {
+                                   '$ref':
+                                   UserRecord.get_ref_link(
+                                       'users', db_moderator_fixture['pid'])
+                               }
                            }),
                            headers=headers)
     assert response.status_code == 200
@@ -130,7 +223,11 @@ def test_review(client, db, db_user_fixture, db_moderator_fixture,
                            data=json.dumps({
                                'action': 'ask-for-changes',
                                'comment': None,
-                               'user': db_moderator_fixture['pid']
+                               'user': {
+                                   '$ref':
+                                   UserRecord.get_ref_link(
+                                       'users', db_moderator_fixture['pid'])
+                               }
                            }),
                            headers=headers)
     assert response.status_code == 200

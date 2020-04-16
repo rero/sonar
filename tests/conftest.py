@@ -152,6 +152,8 @@ def db_moderator_fixture(app, db):
     user.reindex()
     db.session.commit()
 
+    current_search.flush_and_refresh('users')
+
     return user
 
 
@@ -371,7 +373,11 @@ def document_with_file(app, db, document_fixture, pdf_file):
     with open(pdf_file, 'rb') as file:
         content = file.read()
 
-    document_fixture.add_file(content, 'test1.pdf', order=1)
+    document_fixture.add_file(content,
+                              'test1.pdf',
+                              order=1,
+                              restricted='insitution',
+                              embargo_date='2021-01-01')
 
     document_fixture.commit()
     db.session.commit()
@@ -389,45 +395,54 @@ def deposit_fixture(app, db, db_user_fixture, pdf_file,
         '_bucket':
         '03e5e909-2fce-479e-a697-657e1392cc72',
         'contributors': [{
-            'affiliation': 'RERO',
-            'name': 'Takayoshi Shintaro',
-            'orcid': 'ORCID NUMBER'
-        }, {
-            'name': 'Murakami Yuta'
-        }, {
-            'name': 'Werner Philipp'
+            'affiliation': 'University of Bern, Switzerland',
+            'name': 'Takayoshi, Shintaro'
         }],
         'metadata': {
-            'abstracts': ['Abstract of the document'],
-            'document_type': 'coar:c_816b',
-            'etc': 'ETC field',
-            'journal': {
-                'name': 'American Physical Society (APS)',
-                'pages': '184303',
-                'volume': '99'
+            'documentType':
+            'coar:c_816b',
+            'title':
+            'Title of the document',
+            'subtitle':
+            'Subtitle of the document',
+            'otherLanguageTitle': {
+                'language': 'fre',
+                'title': 'Titre du document'
             },
-            'languages': ['eng'],
-            'publication_date': {
-                'type': 'simple',
-                'value': '2020-02-14'
+            'language': 'eng',
+            'documentDate':
+            '2020-01-01',
+            'publication': {
+                'publishedIn': 'Journal',
+                'year': '2019',
+                'volume': '12',
+                'number': '2',
+                'pages': '1-12',
+                'editors': ['Denson, Edward', 'Worth, James'],
+                'publisher': 'Publisher'
             },
-            'title': 'High-harmonic generation in quantum spin systems'
-        },
-        'projects': [{
-            'end_date':
-            '2020-02-29',
-            'funding_organisation':
-            'Swiss Universities',
-            'name':
-            'Project name',
-            'related_persons': [{
-                'affiliation': 'RERO',
-                'name': 'John Dow',
-                'type': 'principal investigator'
+            'otherElectronicVersions': [{
+                'type': 'Published version',
+                'url': 'https://some.url/document.pdf'
             }],
-            'start_date':
-            '2020-02-01'
-        }],
+            'specificCollections': ['Collection 1', 'Collection 2'],
+            'classification':
+            '543',
+            'abstracts': [{
+                'language': 'eng',
+                'abstract': 'Abstract of the document'
+            }, {
+                'language': 'fre',
+                'abstract': 'Résumé du document'
+            }],
+            'subjects': [{
+                'language': 'eng',
+                'subjects': ['Subject 1', 'Subject 2']
+            }, {
+                'language': 'fre',
+                'subjects': ['Sujet 1', 'Sujet 2']
+            }]
+        },
         'status':
         'in progress',
         'step':
@@ -449,12 +464,17 @@ def deposit_fixture(app, db, db_user_fixture, pdf_file,
     deposit.files['main.pdf'] = BytesIO(content)
     deposit.files['main.pdf']['label'] = 'Main file'
     deposit.files['main.pdf']['category'] = 'main'
-    deposit.files['main.pdf']['file_type'] = 'file'
+    deposit.files['main.pdf']['type'] = 'file'
+    deposit.files['main.pdf']['embargo'] = True
+    deposit.files['main.pdf']['embargoDate'] = '2021-01-01'
+    deposit.files['main.pdf']['exceptInInstitution'] = True
 
     deposit.files['additional.pdf'] = BytesIO(content)
     deposit.files['additional.pdf']['label'] = 'Additional file 1'
     deposit.files['additional.pdf']['category'] = 'additional'
-    deposit.files['additional.pdf']['file_type'] = 'file'
+    deposit.files['additional.pdf']['type'] = 'file'
+    deposit.files['additional.pdf']['embargo'] = False
+    deposit.files['additional.pdf']['exceptInInstitution'] = False
 
     deposit.commit()
     deposit.reindex()

@@ -22,6 +22,7 @@ import re
 from dojson import utils
 from flask import current_app
 
+from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.dojson.rerodoc.overdo import Overdo
 from sonar.modules.institutions.api import InstitutionRecord
 from sonar.modules.utils import remove_trailing_punctuation
@@ -267,9 +268,13 @@ def marc21_to_provision_activity_field_269(self, key, value):
     publication = get_publication()
 
     # Assign start date
-    years = value.get('c').split('-')
-    if years:
-        publication['startDate'] = years[0]
+    match = re.search(r'^[0-9]{4}(-[0-9]{2}-[0-9]{2})?$', value.get('c'))
+
+    # Date does not match "YYYY" or "YYYY-MM-DD"
+    if not match:
+        return None
+
+    publication['startDate'] = value.get('c')
 
     # Inject publiction into provision activity
     provisition_activity.append(publication)
@@ -685,7 +690,7 @@ def marc21_to_contribution_field_100(self, key, value):
     # Affiliation
     if value.get('u'):
         data['affiliation'] = value.get('u')
-        affiliations = marc21tojson.get_affiliations(value.get('u'))
+        affiliations = DocumentRecord.get_affiliations(value.get('u'))
         if affiliations:
             data['controlledAffiliation'] = affiliations
 
@@ -731,8 +736,7 @@ def marc21_to_contribution_field_700(self, key, value):
     # Affiliation
     if value.get('u'):
         data['affiliation'] = value.get('u')
-
-        affiliations = marc21tojson.get_affiliations(value.get('u'))
+        affiliations = DocumentRecord.get_affiliations(value.get('u'))
         if affiliations:
             data['controlledAffiliation'] = affiliations
 

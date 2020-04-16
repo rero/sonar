@@ -98,7 +98,8 @@ setup(
             'documents = sonar.modules.documents.jsonschemas',
             'institutions = sonar.modules.institutions.jsonschemas',
             'users = sonar.modules.users.jsonschemas',
-            'deposits = sonar.modules.deposits.jsonschemas'
+            'deposits = sonar.modules.deposits.jsonschemas',
+            'common = sonar.common.jsonschemas'
         ],
         'invenio_search.mappings': [
             'documents = sonar.modules.documents.mappings',

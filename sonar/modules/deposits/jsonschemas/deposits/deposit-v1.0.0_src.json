@@ -1,0 +1,481 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "https://sonar.ch/schemas/deposits/deposit-v1.0.0.json",
+  "title": "SONAR deposit v1.0.0",
+  "type": "object",
+  "required": [
+    "pid"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "default": "https://sonar.ch/schemas/deposits/deposit-v1.0.0.json"
+    },
+    "pid": {
+      "title": "Identifier",
+      "type": "string",
+      "minLength": 1
+    },
+    "_bucket": {
+      "title": "Bucket UUID",
+      "type": "string",
+      "minLength": 1
+    },
+    "_files": {
+      "title": "Files",
+      "description": "List of files attached to the record.",
+      "type": "array",
+      "items": {
+        "title": "File item",
+        "description": "Describes the information of a single file in the record.",
+        "additionalProperties": false,
+        "properties": {
+          "bucket": {
+            "title": "Bucket UUID",
+            "type": "string",
+            "minLength": 1
+          },
+          "file_id": {
+            "title": "File UUID",
+            "type": "string",
+            "minLength": 1
+          },
+          "version_id": {
+            "title": "Version UUID",
+            "type": "string",
+            "minLength": 1
+          },
+          "key": {
+            "title": "Key",
+            "type": "string",
+            "minLength": 1
+          },
+          "checksum": {
+            "title": "Checksum",
+            "description": "MD5 checksum of the file.",
+            "type": "string",
+            "minLength": 1
+          },
+          "size": {
+            "title": "Size",
+            "description": "Size of the file in bytes.",
+            "type": "integer"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string",
+            "minLength": 1
+          },
+          "category": {
+            "title": "Type",
+            "type": "string",
+            "enum": [
+              "main",
+              "additional"
+            ],
+            "default": "main"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string",
+            "enum": [
+              "file",
+              "fulltext",
+              "thumbnail"
+            ],
+            "default": "file"
+          },
+          "embargo": {
+            "title": "Embargo",
+            "type": "boolean",
+            "default": false
+          },
+          "embargoDate": {
+            "title": "Embargo date",
+            "type": "string",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}?$"
+          },
+          "exceptInInstitution": {
+            "title": "Except within institution",
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "required": [
+          "bucket",
+          "file_id",
+          "version_id",
+          "key"
+        ],
+        "type": "object"
+      }
+    },
+    "user": {
+      "title": "User",
+      "type": "object",
+      "required": [
+        "$ref"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "$ref": {
+          "title": "User",
+          "type": "string",
+          "pattern": "^https://sonar.ch/api/users/.*?$",
+          "minLength": 1
+        }
+      }
+    },
+    "status": {
+      "title": "Status",
+      "type": "string",
+      "default": "in progress",
+      "enum": [
+        "in progress",
+        "to validate",
+        "validated",
+        "rejected",
+        "ask for changes"
+      ]
+    },
+    "step": {
+      "title": "Step",
+      "description": "Current cataloguing step.",
+      "type": "string",
+      "enum": [
+        "create",
+        "metadata",
+        "contributors",
+        "projects",
+        "diffusion"
+      ]
+    },
+    "logs": {
+      "title": "Logs",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Log",
+        "type": "object",
+        "required": [
+          "user",
+          "action",
+          "date"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "user": {
+            "title": "User",
+            "type": "object",
+            "properties": {
+              "$ref": {
+                "title": "User",
+                "type": "string",
+                "pattern": "^https://sonar.ch/api/users/.*?$",
+                "minLength": 1
+              }
+            }
+          },
+          "action": {
+            "title": "Action",
+            "type": "string",
+            "enum": [
+              "submit",
+              "approve",
+              "reject",
+              "ask-for-changes"
+            ]
+          },
+          "date": {
+            "title": "Date",
+            "type": "string",
+            "minLength": 1
+          },
+          "comment": {
+            "title": "Comment",
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "required": [
+        "language",
+        "title",
+        "documentType",
+        "classification"
+      ],
+      "propertiesOrder": [
+        "documentType",
+        "title",
+        "subtitle",
+        "otherLanguageTitle",
+        "language",
+        "documentDate",
+        "publication",
+        "otherElectronicVersions",
+        "specificCollections",
+        "classification",
+        "abstracts",
+        "subjects"
+      ],
+      "properties": {
+        "documentType": {
+          "$ref": "type-v1.0.0.json"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string",
+          "minLength": 1
+        },
+        "subtitle": {
+          "title": "Subtitle",
+          "type": "string",
+          "minLength": 1
+        },
+        "otherLanguageTitle": {
+          "title": "Title in other language",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "title": {
+              "title": "Title",
+              "type": "string",
+              "minLength": 1
+            },
+            "language": {
+              "$ref": "language-v1.0.0.json"
+            }
+          }
+        },
+        "language": {
+          "$ref": "language-v1.0.0.json"
+        },
+        "documentDate": {
+          "title": "Document date",
+          "description": "This field corresponds to the exact publication date of the article, if known.",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[0-9]{4}(-[0-9]{2}-[0-9]{2})?$",
+          "template": {
+            "type": "date"
+          }
+        },
+        "publication": {
+          "title": "Publication",
+          "type": "object",
+          "required": [
+            "publishedIn",
+            "year",
+            "pages"
+          ],
+          "additionalProperties": false,
+          "propertiesOrder": [
+            "publishedIn",
+            "year",
+            "volume",
+            "number",
+            "pages",
+            "editors",
+            "publisher"
+          ],
+          "properties": {
+            "publishedIn": {
+              "title": "Published in",
+              "type": "string",
+              "minLength": 1
+            },
+            "year": {
+              "title": "Year",
+              "type": "string",
+              "minLength": 1
+            },
+            "volume": {
+              "title": "Volume",
+              "type": "string",
+              "minLength": 1
+            },
+            "number": {
+              "title": "Number",
+              "type": "string",
+              "minLength": 1
+            },
+            "pages": {
+              "title": "Pages",
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[0-9]+(-[0-9]+)?$"
+            },
+            "editors": {
+              "title": "Editors",
+              "description": "In the format \"Last name, First name\". For example, \"Doe, John\"",
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[^,]+, [^,]+$"
+              }
+            },
+            "publisher": {
+              "title": "Publisher",
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "otherElectronicVersions": {
+          "title": "Other electronic versions",
+          "type": "array",
+          "items": {
+            "title": "Other electronic version",
+            "type": "object",
+            "required": [
+              "type",
+              "url"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "title": "Type",
+                "type": "string",
+                "minLength": 1
+              },
+              "url": {
+                "title": "URL",
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^https?://.+"
+              }
+            }
+          }
+        },
+        "specificCollections": {
+          "title": "Specific collections",
+          "description": "The names of the institution's specific/patrimonial collections to which this document belongs",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "classification": {
+          "$ref": "classification-v1.0.0.json"
+        },
+        "abstracts": {
+          "title": "Abstracts",
+          "type": "array",
+          "items": {
+            "title": "Abstract",
+            "type": "object",
+            "required": [
+              "language",
+              "abstract"
+            ],
+            "additionalProperties": false,
+            "propertiesOrder": ["language", "abstract"],
+            "properties": {
+              "language": {
+                "$ref": "language-v1.0.0.json"
+              },
+              "abstract": {
+                "title": "Abstract",
+                "type": "string",
+                "minLength": 1,
+                "template": {
+                  "type": "textarea",
+                  "rows": 3
+                }
+              }
+            }
+          }
+        },
+        "subjects": {
+          "title": "Subjects",
+          "type": "array",
+          "items": {
+            "title": "Subject",
+            "type": "object",
+            "required": [
+              "language",
+              "subjects"
+            ],
+            "additionalProperties": false,
+            "propertiesOrder": ["language", "subjects"],
+            "properties": {
+              "language": {
+                "$ref": "language-v1.0.0.json"
+              },
+              "subjects": {
+                "title": "Subjects",
+                "type": "array",
+                "minItems": 1,
+                "default": [],
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "contributors": {
+      "title": "Contributors",
+      "type": "array",
+      "minItems": 1,
+      "default": [
+        {}
+      ],
+      "items": {
+        "title": "Contributor",
+        "type": "object",
+        "required": [
+          "name",
+          "affiliation"
+        ],
+        "propertiesOrder": [
+          "name",
+          "affiliation"
+        ],
+        "properties": {
+          "name": {
+            "title": "Name",
+            "description": "Last name, first name, ex: Doe, John",
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^,]+, [^,]+$"
+          },
+          "affiliation": {
+            "title": "Affiliation",
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "diffusion": {
+      "type": "object",
+      "properties": {}
+    },
+    "document": {
+      "title": "Document",
+      "description": "Document created on basis of this deposit.",
+      "type": "object",
+      "required": [
+        "$ref"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "$ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^https://sonar.ch/api/documents/.*?$"
+        }
+      }
+    }
+  }
+}
