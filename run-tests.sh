@@ -16,7 +16,9 @@
 # Ignoring false positive 36759 (reporting invenio-admin v1.0.1). This can be
 # removed when https://github.com/pyupio/safety-db/pull/2274 is merged and
 # released.
-pipenv check --ignore 36759 --ignore 36810 --ignore 36382 && \
+
+# TODO: Use pipenv check when it will be available again
+pipenv run safety check && \
 pipenv run pydocstyle sonar tests docs && \
 pipenv run isort -rc -c -df && \
 pipenv run check-manifest --ignore ".travis-*,docs/_build*" && \
