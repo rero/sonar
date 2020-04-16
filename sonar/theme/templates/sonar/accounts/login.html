@@ -39,6 +39,7 @@
             <a href="{{ url_for('invenio_oauthclient.login', remote_app='orcid') }}"
               class="btn btn-outline-primary btn-block">
               {% trans type='ORCID' %}Sign-in with {{ type }}{% endtrans %}
+              <img src="{{ url_for('static', filename='images/orcid.svg')}}" alt="ORCID" width="20">
             </a>
           </div>
           <div class="col">
