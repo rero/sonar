@@ -56,8 +56,7 @@ class DocumentRecord(SonarRecord):
     @staticmethod
     def load_affiliations():
         """Load affiliations from reference file."""
-        csv_file = os.path.dirname(
-            __file__) + '/../../../data/affiliations.csv'
+        csv_file = './data/affiliations.csv'
 
         DocumentRecord.affiliations = []
 
