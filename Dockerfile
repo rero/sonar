@@ -37,6 +37,7 @@ RUN pip install . && \
     invenio webpack install --unsafe && \
     invenio webpack build &&  \
     invenio utils compile-json ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json -o ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json && \
+    invenio utils compile-json ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json -o ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json && \
     python ./setup.py compile_catalog && \
     pip install . && \
     mkdir ${INVENIO_INSTANCE_PATH}/static/sonar-ui && \
