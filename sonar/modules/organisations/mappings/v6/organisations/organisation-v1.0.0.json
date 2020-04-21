@@ -1,6 +1,6 @@
 {
   "mappings": {
-    "institution-v1.0.0": {
+    "organisation-v1.0.0": {
       "date_detection": false,
       "numeric_detection": false,
       "properties": {

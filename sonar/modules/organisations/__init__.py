@@ -15,24 +15,11 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Institution resolver."""
+
+"""Invenio digital library framework."""
 
 from __future__ import absolute_import, print_function
 
-import jsonresolver
-from invenio_pidstore.resolver import Resolver
-from invenio_records.api import Record
+from .ext import Organisations
 
-
-# the host corresponds to the config value for the key JSONSCHEMAS_HOST
-@jsonresolver.route('/api/institutions/<pid>', host='sonar.ch')
-def institution_resolver(pid):
-    """Resolve referenced institution."""
-    resolver = Resolver(pid_type='inst', object_type="rec",
-                        getter=Record.get_record)
-    _, record = resolver.resolve(pid)
-
-    if record.get('$schema'):
-        del record['$schema']
-
-    return record
+__all__ = ('Organisations', )

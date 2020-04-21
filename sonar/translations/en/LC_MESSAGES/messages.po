@@ -39,7 +39,7 @@ msgid "Welcome to Swiss Open Access Repository!"
 msgstr ""
 
 #: sonar/config.py:411
-msgid "institution"
+msgid "organisation"
 msgstr ""
 
 #: sonar/config.py:412
@@ -371,7 +371,7 @@ msgstr "Meeting"
 
 #: sonar/translations/manual_translations.txt:24
 msgid "bf:Organization"
-msgstr "Organization"
+msgstr "Organisation"
 
 #: sonar/translations/manual_translations.txt:25
 msgid "bf:Local"

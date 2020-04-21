@@ -253,8 +253,8 @@ class DepositRecord(SonarRecord):
                 if file.get('embargo', False) and file.get('embargoDate'):
                     kwargs['embargo_date'] = file['embargoDate']
 
-                if file.get('exceptInInstitution'):
-                    kwargs['restricted'] = 'institution'
+                if file.get('exceptInOrganisation'):
+                    kwargs['restricted'] = 'organisation'
 
                 document.add_file(content, file['key'], **kwargs)
 

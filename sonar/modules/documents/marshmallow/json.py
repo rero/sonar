@@ -36,7 +36,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     partOf = fields.List(fields.Dict())
     abstracts = fields.List(fields.Dict())
     contribution = fields.List(fields.Dict())
-    institution = fields.Dict(dump_only=True)
+    organisation = fields.Dict(dump_only=True)
     _files = fields.Dict(dump_only=True)
     language = fields.List(fields.Dict())
     copyrightDate = fields.List(fields.String())

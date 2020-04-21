@@ -32,7 +32,7 @@ from invenio_search import current_search
 
 from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.documents.api import DocumentRecord
-from sonar.modules.institutions.api import InstitutionRecord
+from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.users.api import UserRecord
 
 
@@ -113,14 +113,14 @@ def logged_user_client(create_user, client):
 
 
 @pytest.fixture()
-def organization_fixture(app, db):
-    """Create an organization."""
-    data = {'pid': 'org', 'name': 'Fake organization'}
+def organisation_fixture(app, db):
+    """Create an organisation."""
+    data = {'pid': 'org', 'name': 'Fake organisation'}
 
-    organization = InstitutionRecord.create(data, dbcommit=True)
-    organization.reindex()
+    organisation = OrganisationRecord.create(data, dbcommit=True)
+    organisation.reindex()
     db.session.commit()
-    return organization
+    return organisation
 
 
 @pytest.fixture()
@@ -229,7 +229,7 @@ def superadmin_user_fixture(app, db):
 
 @pytest.fixture()
 def admin_user_fixture_with_db(app, db, admin_user_fixture,
-                               organization_fixture):
+                               organisation_fixture):
     """Create user in database."""
     db_user = UserRecord.create(
         {
@@ -238,8 +238,8 @@ def admin_user_fixture_with_db(app, db, admin_user_fixture,
             'full_name': 'Jules Brochu',
             'roles': ['admin'],
             'user_id': admin_user_fixture.id,
-            'institution': {
-                '$ref': 'https://sonar.ch/api/institutions/org'
+            'organisation': {
+                '$ref': 'https://sonar.ch/api/organisations/org'
             }
         },
         dbcommit=True)
@@ -252,7 +252,7 @@ def admin_user_fixture_with_db(app, db, admin_user_fixture,
 
 
 @pytest.fixture()
-def document_json_fixture(app, db, organization_fixture):
+def document_json_fixture(app, db, organisation_fixture):
     """JSON document fixture."""
     data = {
         'pid':
@@ -345,8 +345,8 @@ def document_json_fixture(app, db, organization_fixture):
                 'value': 'Zeng Lingliang zhu bian'
             }
         },
-        'institution': {
-            '$ref': 'https://sonar.ch/api/institutions/org'
+        'organisation': {
+            '$ref': 'https://sonar.ch/api/organisations/org'
         }
     }
 
@@ -467,14 +467,14 @@ def deposit_fixture(app, db, db_user_fixture, pdf_file,
     deposit.files['main.pdf']['type'] = 'file'
     deposit.files['main.pdf']['embargo'] = True
     deposit.files['main.pdf']['embargoDate'] = '2021-01-01'
-    deposit.files['main.pdf']['exceptInInstitution'] = True
+    deposit.files['main.pdf']['exceptInOrganisation'] = True
 
     deposit.files['additional.pdf'] = BytesIO(content)
     deposit.files['additional.pdf']['label'] = 'Additional file 1'
     deposit.files['additional.pdf']['category'] = 'additional'
     deposit.files['additional.pdf']['type'] = 'file'
     deposit.files['additional.pdf']['embargo'] = False
-    deposit.files['additional.pdf']['exceptInInstitution'] = False
+    deposit.files['additional.pdf']['exceptInOrganisation'] = False
 
     deposit.commit()
     deposit.reindex()

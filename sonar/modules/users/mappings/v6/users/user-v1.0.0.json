@@ -37,7 +37,7 @@
         "roles": {
           "type": "keyword"
         },
-        "institution": {
+        "organisation": {
           "type": "object",
           "properties": {
             "pid": {

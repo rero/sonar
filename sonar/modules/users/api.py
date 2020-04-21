@@ -43,11 +43,11 @@ class UserSearch(SonarSearch):
         index = 'users'
         doc_types = []
 
-    def get_moderators(self, institution_pid=None):
-        """Get moderators corresponding to institution.
+    def get_moderators(self, organisation_pid=None):
+        """Get moderators corresponding to organisation.
 
-        If no institution provided, return moderators not associated with
-        institutions.
+        If no organisation provided, return moderators not associated with
+        organisations.
         """
         filter_roles = []
         roles = UserRecord.get_all_roles_for_role(UserRecord.ROLE_MODERATOR)
@@ -58,8 +58,8 @@ class UserSearch(SonarSearch):
             'bool',
             filter=[Q('bool', should=filter_roles, minimum_should_match=1)])
 
-        if institution_pid:
-            query = query.filter('term', institution__pid=institution_pid)
+        if organisation_pid:
+            query = query.filter('term', organisation__pid=organisation_pid)
 
         return query.source(includes=['pid', 'email']).scan()
 
@@ -130,13 +130,13 @@ class UserRecord(SonarRecord):
 
     def get_moderators_emails(self):
         """Get the list of moderators emails."""
-        institution_pid = None
+        organisation_pid = None
 
-        if 'institution' in self:
-            institution_pid = UserRecord.get_pid_by_ref_link(
-                self['institution']['$ref'])
+        if 'organisation' in self:
+            organisation_pid = UserRecord.get_pid_by_ref_link(
+                self['organisation']['$ref'])
 
-        moderators = UserSearch().get_moderators(institution_pid)
+        moderators = UserSearch().get_moderators(organisation_pid)
 
         return [result['email'] for result in moderators]
 

@@ -24,7 +24,7 @@ from flask import current_app
 
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.dojson.rerodoc.overdo import Overdo
-from sonar.modules.institutions.api import InstitutionRecord
+from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.utils import remove_trailing_punctuation
 
 marc21tojson = Overdo()
@@ -53,18 +53,19 @@ TYPE_MAPPINGS = {
 
 @marc21tojson.over('type', '^980')
 @utils.ignore_value
-def marc21_to_type_and_institution(self, key, value):
-    """Get document type and institution from 980 field."""
-    # institution
+def marc21_to_type_and_organisation(self, key, value):
+    """Get document type and organisation from 980 field."""
+    # organisation
     if value.get('b'):
-        institution = value.get('b').lower()
+        organisation = value.get('b').lower()
 
-        if institution not in marc21tojson.registererd_organizations:
-            marc21tojson.create_institution(institution)
-            marc21tojson.registererd_organizations.append(institution)
+        if organisation not in marc21tojson.registererd_organisations:
+            marc21tojson.create_organisation(organisation)
+            marc21tojson.registererd_organisations.append(organisation)
 
-        self['institution'] = {
-            '$ref': InstitutionRecord.get_ref_link('institutions', institution)
+        self['organisation'] = {
+            '$ref': OrganisationRecord.get_ref_link('organisations',
+                                                    organisation)
         }
 
     # get doc type by mapping

@@ -33,7 +33,7 @@ blueprint = Blueprint('documents',
                       __name__,
                       template_folder='templates',
                       static_folder='static',
-                      url_prefix='/organization/<ir>')
+                      url_prefix='/organisation/<ir>')
 """Blueprint used for loading templates and static assets
 
 The sole purpose of this blueprint is to ensure that Invenio can find the
@@ -249,9 +249,9 @@ def has_external_urls_for_files(record):
 
     :param record: Current record.
     """
-    return record.get('institution', {}).get(
-        'pid') and record['institution']['pid'] in current_app.config.get(
-            'SONAR_DOCUMENTS_INSTITUTIONS_EXTERNAL_FILES')
+    return record.get('organisation', {}).get(
+        'pid') and record['organisation']['pid'] in current_app.config.get(
+            'SONAR_DOCUMENTS_ORGANISATIONS_EXTERNAL_FILES')
 
 
 @blueprint.app_template_filter()
@@ -291,7 +291,7 @@ def is_file_restricted(file, record):
     """
 
     def is_restricted_by_scope(file):
-        """File is restricted by scope (internal, rero or institution).
+        """File is restricted by scope (internal, rero or organisation).
 
         :param file: File object.
         """
@@ -309,11 +309,11 @@ def is_file_restricted(file, record):
             return True
 
         # No organisation in record, restriction is active
-        if not record.get('institution'):
+        if not record.get('organisation'):
             return True
 
         # Record organisation is different from current organisation
-        if organisation != record['institution']['pid']:
+        if organisation != record['organisation']['pid']:
             return True
 
         return False
@@ -330,7 +330,7 @@ def is_file_restricted(file, record):
         restricted['restricted'] = True
         restricted['date'] = embargo_date
 
-    # File is restricted by institution
+    # File is restricted by organisation
     if file.get('restricted'):
         restricted['restricted'] = is_restricted_by_scope(file)
 

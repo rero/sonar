@@ -42,7 +42,7 @@ _('cre')
 _('edt')
 _('ctb')
 
-# Institutions
+# Organisations
 _('csal')
 _('unisi')
 _('unifr')
