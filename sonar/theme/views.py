@@ -74,7 +74,7 @@ def logged_user():
         data['metadata']['is_moderator'] = user.is_moderator
         data['metadata']['is_user'] = user.is_user
 
-    # TODO: If an organization is associated to user and only when running
-    # tests, institution cannot not be encoded to JSON after call of
+    # TODO: If an organisation is associated to user and only when running
+    # tests, organisation cannot not be encoded to JSON after call of
     # user.replace_refs() --> check why
     return jsonify(data)

@@ -22,35 +22,35 @@ import re
 from flask import current_app
 
 from sonar.modules.documents.dojson.overdo import Overdo as BaseOverdo
-from sonar.modules.institutions.api import InstitutionRecord
+from sonar.modules.organisations.api import OrganisationRecord
 
 
 class Overdo(BaseOverdo):
     """Overdo specialized class for RERODOC DOJSON transformation."""
 
-    registererd_organizations = []
+    registererd_organisations = []
 
     @staticmethod
-    def create_institution(institution_key):
-        """Create institution if not existing and return it.
+    def create_organisation(organisation_key):
+        """Create organisation if not existing and return it.
 
-        :param str institution_key: Key (PID) of the institution.
+        :param str organisation_key: Key (PID) of the organisation.
         """
-        if not institution_key:
+        if not organisation_key:
             raise Exception('No key provided')
 
-        # Get institution record from database
-        organization = InstitutionRecord.get_record_by_pid(institution_key)
+        # Get organisation record from database
+        organisation = OrganisationRecord.get_record_by_pid(organisation_key)
 
-        if not organization:
-            # Create organization record
-            organization = InstitutionRecord.create(
+        if not organisation:
+            # Create organisation record
+            organisation = OrganisationRecord.create(
                 {
-                    'pid': institution_key,
-                    'name': institution_key
+                    'pid': organisation_key,
+                    'name': organisation_key
                 },
                 dbcommit=True)
-            organization.reindex()
+            organisation.reindex()
 
     @staticmethod
     def extract_date(date=None):

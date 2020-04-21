@@ -91,19 +91,19 @@ setup(
         ],
         'invenio_base.api_apps': [
             'documents = sonar.modules.documents:Documents',
-            'institutions = sonar.modules.institutions:Institutions',
+            'organisations = sonar.modules.organisations:Organisations',
             'sonar = sonar.modules:Sonar'
         ],
         'invenio_jsonschemas.schemas': [
             'documents = sonar.modules.documents.jsonschemas',
-            'institutions = sonar.modules.institutions.jsonschemas',
+            'organisations = sonar.modules.organisations.jsonschemas',
             'users = sonar.modules.users.jsonschemas',
             'deposits = sonar.modules.deposits.jsonschemas',
             'common = sonar.common.jsonschemas'
         ],
         'invenio_search.mappings': [
             'documents = sonar.modules.documents.mappings',
-            'institutions = sonar.modules.institutions.mappings',
+            'organisations = sonar.modules.organisations.mappings',
             'users = sonar.modules.users.mappings',
             'deposits = sonar.modules.deposits.mappings'
         ],
@@ -113,8 +113,8 @@ setup(
         'invenio_pidstore.minters': [
             'document_id = \
                 sonar.modules.documents.api:document_pid_minter',
-            'institution_id = \
-                sonar.modules.institutions.api:institution_pid_minter',
+            'organisation_id = \
+                sonar.modules.organisations.api:organisation_pid_minter',
             'user_id = \
                 sonar.modules.users.api:user_pid_minter',
             'deposit_id = \
@@ -123,15 +123,15 @@ setup(
         'invenio_pidstore.fetchers': [
             'document_id = \
                 sonar.modules.documents.api:document_pid_fetcher',
-            'institution_id = \
-                sonar.modules.institutions.api:institution_pid_fetcher',
+            'organisation_id = \
+                sonar.modules.organisations.api:organisation_pid_fetcher',
             'user_id = \
                 sonar.modules.users.api:user_pid_fetcher',
             'deposit_id = \
                 sonar.modules.deposits.api:deposit_pid_fetcher'
         ],
         "invenio_records.jsonresolver": [
-            "institution = sonar.modules.institutions.jsonresolvers",
+            "organisation = sonar.modules.organisations.jsonresolvers",
             "user = sonar.modules.users.jsonresolvers",
             "document = sonar.modules.documents.jsonresolvers"
         ],

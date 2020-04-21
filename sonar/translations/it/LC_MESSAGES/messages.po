@@ -55,7 +55,7 @@ msgid "Welcome to Swiss Open Access Repository!"
 msgstr ""
 
 #: sonar/config.py:411
-msgid "institution"
+msgid "organisation"
 msgstr ""
 
 #: sonar/config.py:412

@@ -142,7 +142,7 @@
     "Note 1",
     "Note 2"
   ],
-  "institution": {
-    "$ref": "https://sonar.ch/api/institutions/org"
+  "organisation": {
+    "$ref": "https://sonar.ch/api/organisations/org"
   }
 }

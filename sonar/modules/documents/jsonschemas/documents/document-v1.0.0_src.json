@@ -123,15 +123,15 @@
       "type": "string",
       "minLength": 1
     },
-    "institution": {
-      "title": "Organization",
-      "description": "Organization linked to document.",
+    "organisation": {
+      "title": "Organisation",
+      "description": "Organisation linked to document.",
       "type": "object",
       "properties": {
         "$ref": {
-          "title": "Organization",
+          "title": "Organisation",
           "type": "string",
-          "pattern": "^https://sonar.ch/api/institutions/.*?$",
+          "pattern": "^https://sonar.ch/api/organisations/.*?$",
           "minLength": 1
         }
       },

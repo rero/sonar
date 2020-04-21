@@ -39,12 +39,12 @@ def test_search(app, client):
     """Test search."""
     assert isinstance(views.search(), str)
     assert client.get(
-        '/organization/sonar/search/documents').status_code == 200
+        '/organisation/sonar/search/documents').status_code == 200
 
 
 def test_detail(app, client, document_fixture):
     """Test document detail page."""
-    assert client.get('/organization/sonar/documents/10000').status_code == 200
+    assert client.get('/organisation/sonar/documents/10000').status_code == 200
 
 
 def test_title_format(document_fixture):
@@ -354,19 +354,22 @@ def test_has_external_urls_for_files(app):
     """Test if record has to point files to external URL or not."""
     assert views.has_external_urls_for_files({
         'pid': 1,
-        'institution': {
+        'organisation': {
             'pid': 'csal'
         }
     })
 
     assert not views.has_external_urls_for_files({
         'pid': 1,
-        'institution': {
+        'organisation': {
             'pid': 'unisi'
         }
     })
 
-    assert not views.has_external_urls_for_files({'pid': 1, 'institution': {}})
+    assert not views.has_external_urls_for_files({
+        'pid': 1,
+        'organisation': {}
+    })
 
     assert not views.has_external_urls_for_files({'pid': 1})
 
@@ -389,10 +392,10 @@ def test_part_of_format():
 
 
 def test_is_file_restricted(app):
-    """Test if a file is restricted by embargo date and/or institution."""
+    """Test if a file is restricted by embargo date and/or organisation."""
     views.pull_ir(None, {'ir': 'sonar'})
 
-    record = {'institution': {'pid': 'unisi'}}
+    record = {'organisation': {'pid': 'unisi'}}
 
     # No restricution and no embargo date
     assert views.is_file_restricted({}, {}) == {
@@ -414,28 +417,30 @@ def test_is_file_restricted(app):
             'restricted': True
         }
 
-    # Restricted by institution and organisation is global
-    assert views.is_file_restricted({'restricted': 'institution'}, record) == {
-        'date': None,
-        'restricted': True
-    }
+    # Restricted by organisation and organisation is global
+    assert views.is_file_restricted({'restricted': 'organisation'},
+                                    record) == {
+                                        'date': None,
+                                        'restricted': True
+                                    }
 
-    # Restricted by institution and current institution match
+    # Restricted by organisation and current organisation match
     views.pull_ir(None, {'ir': 'unisi'})
-    assert views.is_file_restricted({'restricted': 'institution'}, record) == {
-        'date': None,
-        'restricted': False
-    }
+    assert views.is_file_restricted({'restricted': 'organisation'},
+                                    record) == {
+                                        'date': None,
+                                        'restricted': False
+                                    }
 
-    # Restricted by institution and record don't have institution
-    assert views.is_file_restricted({'restricted': 'institution'}, {}) == {
+    # Restricted by organisation and record don't have organisation
+    assert views.is_file_restricted({'restricted': 'organisation'}, {}) == {
         'date': None,
         'restricted': True
     }
 
-    # Restricted by institution and institution don't match
-    assert views.is_file_restricted({'restricted': 'institution'},
-                                    {'institution': {
+    # Restricted by organisation and organisation don't match
+    assert views.is_file_restricted({'restricted': 'organisation'},
+                                    {'organisation': {
                                         'pid': 'some-org'
                                     }}) == {
                                         'date': None,
@@ -457,13 +462,13 @@ def test_is_file_restricted(app):
                                             'restricted': True
                                         }
 
-    # Restricted by embargo date and institution
+    # Restricted by embargo date and organisation
     views.pull_ir(None, {'ir': 'sonar'})
     with app.test_request_context(environ_base={'REMOTE_ADDR': '10.1.2.3'}):
         assert views.is_file_restricted(
             {
                 'embargo_date': '2021-01-01',
-                'restricted': 'institution'
+                'restricted': 'organisation'
             }, record) == {
                 'restricted': True,
                 'date': datetime.datetime(2021, 1, 1, 0, 0)

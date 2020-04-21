@@ -43,7 +43,7 @@
         "fulltext": {
           "type": "text"
         },
-        "institution": {
+        "organisation": {
           "type": "object",
           "properties": {
             "pid": {

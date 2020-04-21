@@ -15,30 +15,27 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Record serializers."""
+
+"""Organisation extension."""
 
 from __future__ import absolute_import, print_function
 
-from invenio_records_rest.serializers.json import JSONSerializer
-from invenio_records_rest.serializers.response import record_responsify, \
-    search_responsify
 
-from ..marshmallow import InstitutionSchemaV1
+class Organisations(object):
+    """Organisation extension."""
 
-# Serializers
-# ===========
-#: JSON serializer definition.
-json_v1 = JSONSerializer(InstitutionSchemaV1, replace_refs=True)
+    def __init__(self, app=None):
+        """Extension initialization."""
+        if app:
+            self.init_app(app)
 
-# Records-REST serializers
-# ========================
-#: JSON record serializer for individual records.
-json_v1_response = record_responsify(json_v1, 'application/json')
-#: JSON record serializer for search results.
-json_v1_search = search_responsify(json_v1, 'application/json')
+    def init_app(self, app):
+        """Flask application initialization."""
+        self.init_config(app)
+        app.extensions['sonar_organisations'] = self
 
-__all__ = (
-    'json_v1',
-    'json_v1_response',
-    'json_v1_search',
-)
+    def init_config(self, app):
+        """Initialize configuration.
+
+        Override configuration variables with the values in this package.
+        """

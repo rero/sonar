@@ -20,21 +20,21 @@
 import pytest
 
 from sonar.modules.documents.dojson.rerodoc.overdo import Overdo
-from sonar.modules.institutions.api import InstitutionRecord
+from sonar.modules.organisations.api import OrganisationRecord
 
 
-def test_create_institution(app):
-    """Test create institution."""
-    Overdo.create_institution('test')
+def test_create_organisation(app):
+    """Test create organisation."""
+    Overdo.create_organisation('test')
 
-    # Institution creation OK
-    institution = InstitutionRecord.get_record_by_pid('test')
-    assert institution
-    assert institution['pid'] == 'test'
+    # Organisation creation OK
+    organisation = OrganisationRecord.get_record_by_pid('test')
+    assert organisation
+    assert organisation['pid'] == 'test'
 
-    # No institution key provided
+    # No organisation key provided
     with pytest.raises(Exception) as exception:
-        Overdo.create_institution(None)
+        Overdo.create_organisation(None)
     assert str(exception.value) == 'No key provided'
 
 

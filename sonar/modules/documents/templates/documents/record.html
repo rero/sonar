@@ -24,8 +24,8 @@
 {% set title = record.title[0] | title_format(current_i18n.language) %}
 
 <h1 class="text-primary">{{ title }}</h1>
-{% if record.institution %}
-<h5 class="text-secondary">{{ _(record.institution.name) }}</h5>
+{% if record.organisation %}
+<h5 class="text-secondary">{{ _(record.organisation.name) }}</h5>
 {% endif %}
 <section class="mt-3">
   <article class="">

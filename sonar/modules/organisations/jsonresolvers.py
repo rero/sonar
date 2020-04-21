@@ -15,25 +15,24 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Loaders.
-
-This file contains sample loaders that can be used to deserialize input data in
-an application level data structure. The marshmallow_loader() method can be
-parameterized with different schemas for the record metadata. In the provided
-json_v1 instance, it uses the InstitutionMetadataSchemaV1, defining the
-PersistentIdentifier field.
-"""
+"""Organisation resolver."""
 
 from __future__ import absolute_import, print_function
 
-from invenio_records_rest.loaders.marshmallow import json_patch_loader, \
-    marshmallow_loader
+import jsonresolver
+from invenio_pidstore.resolver import Resolver
+from invenio_records.api import Record
 
-from ..marshmallow import InstitutionMetadataSchemaV1
 
-#: JSON loader using Marshmallow for data validation.
-json_v1 = marshmallow_loader(InstitutionMetadataSchemaV1)
+# the host corresponds to the config value for the key JSONSCHEMAS_HOST
+@jsonresolver.route('/api/organisations/<pid>', host='sonar.ch')
+def organisation_resolver(pid):
+    """Resolve referenced organisation."""
+    resolver = Resolver(pid_type='org', object_type="rec",
+                        getter=Record.get_record)
+    _, record = resolver.resolve(pid)
 
-__all__ = (
-    'json_v1',
-)
+    if record.get('$schema'):
+        del record['$schema']
+
+    return record

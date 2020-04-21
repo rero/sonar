@@ -15,14 +15,14 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Test institutions jsonresolvers."""
+"""Test organisations jsonresolvers."""
 
 
-def test_institution_resolver(document_fixture):
-    """Test institution resolver."""
-    assert document_fixture['institution'].get('$ref')
-    assert document_fixture['institution'][
-        '$ref'] == 'https://sonar.ch/api/institutions/org'
+def test_organisation_resolver(document_fixture):
+    """Test organisation resolver."""
+    assert document_fixture['organisation'].get('$ref')
+    assert document_fixture['organisation'][
+        '$ref'] == 'https://sonar.ch/api/organisations/org'
 
     assert document_fixture.replace_refs().get(
-        'institution')['name'] == 'Fake organization'
+        'organisation')['name'] == 'Fake organisation'

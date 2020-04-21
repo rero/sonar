@@ -40,7 +40,7 @@ def test_get_moderators(app):
     moderators = UserSearch().get_moderators()
     assert list(moderators)
 
-    moderators = UserSearch().get_moderators('not_existing_institution')
+    moderators = UserSearch().get_moderators('not_existing_organisation')
     assert not list(moderators)
 
 
@@ -96,8 +96,8 @@ def test_get_moderators_emails(app):
     assert emails
     assert 'john.doe@rero.ch' in emails
 
-    user['institution'] = {
-        '$ref': 'https://sonar.ch/api/institutions/not-existing'
+    user['organisation'] = {
+        '$ref': 'https://sonar.ch/api/organisations/not-existing'
     }
     emails = user.get_moderators_emails()
     assert not emails

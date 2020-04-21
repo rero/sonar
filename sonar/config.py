@@ -34,7 +34,8 @@ from invenio_records_rest.facets import terms_filter
 
 from sonar.modules.deposits.api import DepositRecord, DepositSearch
 from sonar.modules.documents.api import DocumentRecord, DocumentSearch
-from sonar.modules.institutions.api import InstitutionRecord, InstitutionSearch
+from sonar.modules.organisations.api import OrganisationRecord, \
+    OrganisationSearch
 from sonar.modules.permissions import can_create_record_factory, \
     can_delete_record_factory, can_list_record_factory, \
     can_read_record_factory, can_update_record_factory, wiki_edit_permission
@@ -240,7 +241,7 @@ SECURITY_REGISTER_USER_TEMPLATE = 'sonar/accounts/signup.html'
 RECORDS_UI_ENDPOINTS = {
     'document': {
         'pid_type': 'doc',
-        'route': '/organization/<ir>/documents/<pid_value>',
+        'route': '/organisation/<ir>/documents/<pid_value>',
         'view_imp': 'sonar.modules.documents.views:detail'
     },
     'doc_previewer': {
@@ -304,30 +305,30 @@ RECORDS_REST_ENDPOINTS = {
          update_permission_factory_imp=can_update_record_factory,
          delete_permission_factory_imp=can_delete_record_factory,
          list_permission_factory_imp=can_list_record_factory),
-    'inst':
-    dict(pid_type='inst',
-         pid_minter='institution_id',
-         pid_fetcher='institution_id',
+    'org':
+    dict(pid_type='org',
+         pid_minter='organisation_id',
+         pid_fetcher='organisation_id',
          default_endpoint_prefix=True,
-         record_class=InstitutionRecord,
-         search_class=InstitutionSearch,
+         record_class=OrganisationRecord,
+         search_class=OrganisationSearch,
          indexer_class=RecordIndexer,
-         search_index='institutions',
+         search_index='organisations',
          search_type=None,
          record_serializers={
-             'application/json': ('sonar.modules.institutions.serializers'
+             'application/json': ('sonar.modules.organisations.serializers'
                                   ':json_v1_response'),
          },
          search_serializers={
-             'application/json': ('sonar.modules.institutions.serializers'
+             'application/json': ('sonar.modules.organisations.serializers'
                                   ':json_v1_search'),
          },
          record_loaders={
-             'application/json': ('sonar.modules.institutions.loaders'
+             'application/json': ('sonar.modules.organisations.loaders'
                                   ':json_v1'),
          },
-         list_route='/institutions/',
-         item_route='/institutions/<pid(inst):pid_value>',
+         list_route='/organisations/',
+         item_route='/organisations/<pid(org):pid_value>',
          default_media_type='application/json',
          max_result_window=10000,
          error_handlers=dict(),
@@ -403,13 +404,13 @@ RECORDS_REST_ENDPOINTS = {
 RECORDS_REST_FACETS = {
     'documents':
     dict(aggs=dict(
-        institution=dict(terms=dict(field='institution.pid')),
+        organisation=dict(terms=dict(field='organisation.pid')),
         language=dict(terms=dict(field='language.value')),
         subject=dict(terms=dict(field='facet_subjects')),
         specific_collections=dict(terms=dict(field='specificCollections')),
         document_type=dict(terms=dict(field='documentType'))),
          filters={
-             _('institution'): terms_filter('institution.pid'),
+             _('organisation'): terms_filter('organisation.pid'),
              _('language'): terms_filter('language.value'),
              _('subject'): terms_filter('facet_subjects'),
              _('specific_collections'): terms_filter('specificCollections'),

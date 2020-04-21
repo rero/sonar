@@ -59,15 +59,15 @@
       "type": "string",
       "pattern": "^\\+[0-9]*$"
     },
-    "institution": {
-      "title": "Organization",
-      "description": "Organization linked to user.",
+    "organisation": {
+      "title": "Organisation",
+      "description": "Organisation linked to user.",
       "type": "object",
       "properties": {
         "$ref": {
-          "title": "Organization",
+          "title": "Organisation",
           "type": "string",
-          "pattern": "^https://sonar.ch/api/institutions/.*?$"
+          "pattern": "^https://sonar.ch/api/organisations/.*?$"
         }
       }
     },

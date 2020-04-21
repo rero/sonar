@@ -106,7 +106,7 @@ def test_create_document(app, deposit_fixture):
         'role': ['ctb']
     }]
 
-    assert document.files['main.pdf']['restricted'] == 'institution'
+    assert document.files['main.pdf']['restricted'] == 'organisation'
     assert document.files['main.pdf']['embargo_date'] == '2021-01-01'
 
     assert len(document.files) == 6

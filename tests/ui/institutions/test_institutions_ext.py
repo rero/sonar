@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Test SONAR institution extension."""
+"""Test SONAR organisation extension."""
 
-from sonar.modules.institutions.ext import Institutions
+from sonar.modules.organisations.ext import Organisations
 
 
 def test_init(app):
     """Test extension constructor."""
-    institutions = Institutions(app)
-    assert isinstance(institutions, Institutions)
+    organisations = Organisations(app)
+    assert isinstance(organisations, Organisations)

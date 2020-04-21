@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Institution Api."""
+"""Organisation Api."""
 
 
 from functools import partial
@@ -26,31 +26,31 @@ from ..minters import id_minter
 from ..providers import Provider
 
 # provider
-InstitutionProvider = type(
-    'InstitutionProvider',
+OrganisationProvider = type(
+    'OrganisationProvider',
     (Provider,),
-    dict(pid_type='inst')
+    dict(pid_type='org')
 )
 # minter
-institution_pid_minter = partial(id_minter, provider=InstitutionProvider)
+organisation_pid_minter = partial(id_minter, provider=OrganisationProvider)
 # fetcher
-institution_pid_fetcher = partial(id_fetcher, provider=InstitutionProvider)
+organisation_pid_fetcher = partial(id_fetcher, provider=OrganisationProvider)
 
 
-class InstitutionSearch(SonarSearch):
-    """Search institutions."""
+class OrganisationSearch(SonarSearch):
+    """Search organisations."""
 
     class Meta:
         """Search only on item index."""
 
-        index = 'institutions'
+        index = 'organisations'
         doc_types = []
 
 
-class InstitutionRecord(SonarRecord):
-    """Institution record class."""
+class OrganisationRecord(SonarRecord):
+    """Organisation record class."""
 
-    minter = institution_pid_minter
-    fetcher = institution_pid_fetcher
-    provider = InstitutionProvider
-    schema = 'institution'
+    minter = organisation_pid_minter
+    fetcher = organisation_pid_fetcher
+    provider = OrganisationProvider
+    schema = 'organisation'

@@ -26,17 +26,17 @@ from invenio_records_rest.schemas.fields import DateString, \
 from marshmallow import fields, missing, validate
 
 
-class InstitutionMetadataSchemaV1(StrictKeysMixin):
-    """Schema for the institution metadata."""
+class OrganisationMetadataSchemaV1(StrictKeysMixin):
+    """Schema for the organisation metadata."""
 
     pid = PersistentIdentifier()
     name = SanitizedUnicode(required=True)
 
 
-class InstitutionSchemaV1(StrictKeysMixin):
-    """Institution schema."""
+class OrganisationSchemaV1(StrictKeysMixin):
+    """organisation schema."""
 
-    metadata = fields.Nested(InstitutionMetadataSchemaV1)
+    metadata = fields.Nested(OrganisationMetadataSchemaV1)
     created = fields.Str(dump_only=True)
     updated = fields.Str(dump_only=True)
     links = fields.Dict(dump_only=True)

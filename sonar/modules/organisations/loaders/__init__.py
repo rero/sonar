@@ -15,27 +15,25 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+"""Loaders.
 
-"""Institution extension."""
+This file contains sample loaders that can be used to deserialize input data in
+an application level data structure. The marshmallow_loader() method can be
+parameterized with different schemas for the record metadata. In the provided
+json_v1 instance, it uses the OrganisationMetadataSchemaV1, defining the
+PersistentIdentifier field.
+"""
 
 from __future__ import absolute_import, print_function
 
+from invenio_records_rest.loaders.marshmallow import json_patch_loader, \
+    marshmallow_loader
 
-class Institutions(object):
-    """Institution extension."""
+from ..marshmallow import OrganisationMetadataSchemaV1
 
-    def __init__(self, app=None):
-        """Extension initialization."""
-        if app:
-            self.init_app(app)
+#: JSON loader using Marshmallow for data validation.
+json_v1 = marshmallow_loader(OrganisationMetadataSchemaV1)
 
-    def init_app(self, app):
-        """Flask application initialization."""
-        self.init_config(app)
-        app.extensions['sonar_institutions'] = self
-
-    def init_config(self, app):
-        """Initialize configuration.
-
-        Override configuration variables with the values in this package.
-        """
+__all__ = (
+    'json_v1',
+)

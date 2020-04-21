@@ -37,7 +37,7 @@ class UserMetadataSchemaV1(StrictKeysMixin):
     postal_code = SanitizedUnicode()
     city = SanitizedUnicode()
     phone = SanitizedUnicode()
-    institution = fields.Dict(dump_only=True)
+    organisation = fields.Dict(dump_only=True)
     roles = fields.List(SanitizedUnicode, required=True)
 
 

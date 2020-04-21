@@ -102,7 +102,7 @@ def update_file_permissions(permissions_file, chunk_size):
                     if matches:
                         # If status if RERO or INTERNAL, file must not be
                         # displayed, otherwise file is restricted within
-                        # institution
+                        # organisation
                         if matches.group(1) in ['RERO', 'INTERNAL']:
                             current_app.logger.warning(
                                 'Access restricted to {status} for file '
@@ -110,7 +110,7 @@ def update_file_permissions(permissions_file, chunk_size):
                                                   record=row))
                             record_file['restricted'] = 'internal'
                         else:
-                            record_file['restricted'] = 'institution'
+                            record_file['restricted'] = 'organisation'
                     else:
                         # permissions contains a date
                         matches = re.search(
@@ -118,9 +118,9 @@ def update_file_permissions(permissions_file, chunk_size):
                             r'\d{2}-\d{2})', row[1])
 
                         if matches:
-                            # file is restricted to institution
+                            # file is restricted to organisation
                             if matches.group(1) != 'INTERNAL':
-                                record_file['restricted'] = 'institution'
+                                record_file['restricted'] = 'organisation'
 
                             record_file['embargo_date'] = matches.group(2)
 

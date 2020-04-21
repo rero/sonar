@@ -26,8 +26,8 @@ from utils import mock_response
 from sonar.modules.documents.dojson.rerodoc.model import marc21tojson
 
 
-def test_marc21_to_type_and_institution(app):
-    """Test type and institution."""
+def test_marc21_to_type_and_organisation(app):
+    """Test type and organisation."""
 
     # Type only
     marc21xml = """
@@ -40,9 +40,9 @@ def test_marc21_to_type_and_institution(app):
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
     assert data.get('documentType') == 'coar:c_2f33'
-    assert not data.get('institution')
+    assert not data.get('organisation')
 
-    # Type and institution
+    # Type and organisation
     marc21xml = """
     <record>
         <datafield tag="980" ind1=" " ind2=" ">
@@ -57,11 +57,11 @@ def test_marc21_to_type_and_institution(app):
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
     assert data.get('documentType') == 'coar:c_2f33'
-    assert data.get('institution') == {
-        '$ref': 'https://sonar.ch/api/institutions/baage'
+    assert data.get('organisation') == {
+        '$ref': 'https://sonar.ch/api/organisations/baage'
     }
 
-    # Type, subtype and institution
+    # Type, subtype and organisation
     marc21xml = """
     <record>
         <datafield tag="980" ind1=" " ind2=" ">
@@ -77,11 +77,11 @@ def test_marc21_to_type_and_institution(app):
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
     assert data.get('documentType') == 'coar:c_6501'
-    assert data.get('institution') == {
-        '$ref': 'https://sonar.ch/api/institutions/baage'
+    assert data.get('organisation') == {
+        '$ref': 'https://sonar.ch/api/organisations/baage'
     }
 
-    # Institution only
+    # Organisation only
     marc21xml = """
     <record>
         <datafield tag="980" ind1=" " ind2=" ">
@@ -95,8 +95,8 @@ def test_marc21_to_type_and_institution(app):
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
     assert not data.get('documentType')
-    assert data.get('institution') == {
-        '$ref': 'https://sonar.ch/api/institutions/baage'
+    assert data.get('organisation') == {
+        '$ref': 'https://sonar.ch/api/organisations/baage'
     }
 
 
