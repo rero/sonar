@@ -53,4 +53,4 @@ class OrganisationRecord(SonarRecord):
     minter = organisation_pid_minter
     fetcher = organisation_pid_fetcher
     provider = OrganisationProvider
-    schema = 'organisation'
+    schema = 'organisations/organisation-v1.0.0.json'

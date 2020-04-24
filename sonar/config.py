@@ -461,9 +461,6 @@ RECORDS_FILES_REST_ENDPOINTS = {
 SONAR_ENDPOINTS_ENABLED = True
 """Enable/disable automatic endpoint registration."""
 
-JSONSCHEMAS_RESOLVE_SCHEMA = True
-JSONSCHEMAS_REPLACE_REFS = True
-
 # OAUTH
 # =====
 OAUTHCLIENT_REMOTE_APPS = dict(orcid=orcid.REMOTE_APP)

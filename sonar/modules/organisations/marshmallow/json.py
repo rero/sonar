@@ -19,11 +19,18 @@
 
 from __future__ import absolute_import, print_function
 
-from invenio_jsonschemas.proxies import current_jsonschemas
-from invenio_records_rest.schemas import Nested, StrictKeysMixin
-from invenio_records_rest.schemas.fields import DateString, \
+from functools import partial
+
+from invenio_records_rest.schemas import StrictKeysMixin
+from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
-from marshmallow import fields, missing, validate
+from marshmallow import fields
+
+from sonar.modules.organisations.api import OrganisationRecord
+from sonar.modules.serializers import schema_from_context
+
+schema_from_organisation = partial(schema_from_context,
+                                   schema=OrganisationRecord.schema)
 
 
 class OrganisationMetadataSchemaV1(StrictKeysMixin):
@@ -31,6 +38,12 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
 
     pid = PersistentIdentifier()
     name = SanitizedUnicode(required=True)
+    # When loading, if $schema is not provided, it's retrieved by
+    # Record.schema property.
+    schema = GenFunction(load_only=True,
+                         attribute="$schema",
+                         data_key="$schema",
+                         deserialize=schema_from_organisation)
 
 
 class OrganisationSchemaV1(StrictKeysMixin):

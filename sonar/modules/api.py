@@ -62,8 +62,7 @@ class SonarRecord(Record, FilesMixin):
             id_ = uuid4()
 
         if '$schema' not in data:
-            data["$schema"] = current_jsonschemas.path_to_url(
-                '{schema}s/{schema}-v1.0.0.json'.format(schema=cls.schema))
+            data["$schema"] = current_jsonschemas.path_to_url(cls.schema)
 
         cls.minter(id_, data)
 
@@ -211,8 +210,8 @@ class SonarRecord(Record, FilesMixin):
 
         try:
             # Create thumbnail
-            image_blob = create_thumbnail_from_file(
-                file.file.uri, file.mimetype)
+            image_blob = create_thumbnail_from_file(file.file.uri,
+                                                    file.mimetype)
 
             thumbnail_key = change_filename_extension(file['key'], 'jpg')
 

@@ -63,7 +63,7 @@ class DepositRecord(SonarRecord):
     minter = deposit_pid_minter
     fetcher = deposit_pid_fetcher
     provider = DepositProvider
-    schema = 'deposit'
+    schema = 'deposits/deposit-v1.0.0.json'
 
     @classmethod
     def create(cls, data, id_=None, dbcommit=False, with_bucket=True,

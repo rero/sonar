@@ -19,10 +19,17 @@
 
 from __future__ import absolute_import, print_function
 
+from functools import partial
+
 from invenio_records_rest.schemas import StrictKeysMixin
-from invenio_records_rest.schemas.fields import PersistentIdentifier, \
-    SanitizedUnicode
+from invenio_records_rest.schemas.fields import GenFunction, \
+    PersistentIdentifier, SanitizedUnicode
 from marshmallow import fields
+
+from sonar.modules.serializers import schema_from_context
+from sonar.modules.users.api import UserRecord
+
+schema_from_user = partial(schema_from_context, schema=UserRecord.schema)
 
 
 class UserMetadataSchemaV1(StrictKeysMixin):
@@ -39,6 +46,12 @@ class UserMetadataSchemaV1(StrictKeysMixin):
     phone = SanitizedUnicode()
     organisation = fields.Dict(dump_only=True)
     roles = fields.List(SanitizedUnicode, required=True)
+    # When loading, if $schema is not provided, it's retrieved by
+    # Record.schema property.
+    schema = GenFunction(load_only=True,
+                         attribute="$schema",
+                         data_key="$schema",
+                         deserialize=schema_from_user)
 
 
 class UserSchemaV1(StrictKeysMixin):

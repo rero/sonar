@@ -82,7 +82,7 @@ class UserRecord(SonarRecord):
     minter = user_pid_minter
     fetcher = user_pid_fetcher
     provider = UserProvider
-    schema = 'user'
+    schema = 'users/user-v1.0.0.json'
 
     @classmethod
     def get_user_by_current_user(cls, user):

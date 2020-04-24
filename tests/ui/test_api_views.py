@@ -17,28 +17,9 @@
 
 """Test SONAR api views."""
 
-import json
-import os
-
 from invenio_app.factory import create_api
 
-from sonar.theme.api_views import prepare_jsonschema
-
 create_app = create_api
-
-
-def test_prepare_jsonschema():
-    """Test JSON schema transformation before returning by API endpoint."""
-    with open(
-            os.path.dirname(os.path.abspath(__file__)) +
-            '/data/json_to_compile.json') as json_file:
-        schema = json.load(json_file)
-        assert '$schema' in schema
-        assert 'pid' in schema['required']
-
-        schema = prepare_jsonschema(schema)
-        assert '$schema' not in schema
-        assert 'pid' not in schema['required']
 
 
 def test_json_schema_form(client):

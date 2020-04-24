@@ -20,6 +20,7 @@
 import json
 
 import mock
+from flask import url_for
 from invenio_search import current_search
 from utils import VerifyRecordPermissionPatch
 
@@ -31,14 +32,14 @@ def test_simple_flow(client, document_json_fixture):
     headers = [('Content-Type', 'application/json')]
 
     # create a record
-    response = client.post('https://localhost:5000/documents/',
+    response = client.post(url_for('invenio_records_rest.doc_list'),
                            data=json.dumps(document_json_fixture),
                            headers=headers)
     assert response.status_code == 201
     current_search.flush_and_refresh('documents')
 
     # retrieve record
-    res = client.get('https://localhost:5000/documents/1')
+    res = client.get(url_for('invenio_records_rest.doc_item', pid_value=1))
     assert res.status_code == 200
     assert response.json['metadata']['title'][0]['mainTitle'][0][
         'value'] == 'Title of the document'
@@ -46,7 +47,8 @@ def test_simple_flow(client, document_json_fixture):
 
 def test_add_files_restrictions(client, document_with_file):
     """Test adding file restrictions before dumping object."""
-    res = client.get('https://localhost:5000/documents/10000')
+    res = client.get(
+        url_for('invenio_records_rest.doc_item', pid_value=10000, resolve=1))
     assert res.status_code == 200
     assert res.json['metadata']['_files'][0]['restricted'] == {
         'restricted': True,

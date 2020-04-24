@@ -19,16 +19,17 @@
 
 from __future__ import absolute_import, print_function
 
-from invenio_records_rest.serializers.json import JSONSerializer
 from invenio_records_rest.serializers.response import record_responsify, \
     search_responsify
+
+from sonar.modules.serializers import JSONSerializer
 
 from ..marshmallow import DocumentSchemaV1
 
 # Serializers
 # ===========
 #: JSON serializer definition.
-json_v1 = JSONSerializer(DocumentSchemaV1, replace_refs=True)
+json_v1 = JSONSerializer(DocumentSchemaV1)
 
 # Records-REST serializers
 # ========================
