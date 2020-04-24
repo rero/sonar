@@ -38,13 +38,13 @@ class UserMetadataSchemaV1(StrictKeysMixin):
     pid = PersistentIdentifier()
     user_id = fields.Integer()
     full_name = SanitizedUnicode(required=True)
-    birth_date = fields.DateTime()
+    birth_date = SanitizedUnicode()
     email = SanitizedUnicode(required=True)
     street = SanitizedUnicode()
     postal_code = SanitizedUnicode()
     city = SanitizedUnicode()
     phone = SanitizedUnicode()
-    organisation = fields.Dict(dump_only=True)
+    organisation = fields.Dict()
     roles = fields.List(SanitizedUnicode, required=True)
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
