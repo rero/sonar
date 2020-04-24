@@ -19,6 +19,8 @@
 
 import json
 
+from flask import url_for
+
 from sonar.modules.deposits.rest import FilesResource
 from sonar.modules.users.api import UserRecord
 
@@ -113,8 +115,7 @@ def test_file_put(client, deposit_fixture):
 def test_publish(client, db, db_user_fixture, db_moderator_fixture,
                  deposit_fixture):
     """Test publishing a deposit."""
-    url = 'https://localhost:5000/deposits/{pid}/publish'.format(
-        pid=deposit_fixture['pid'])
+    url = url_for('deposits.publish', pid=deposit_fixture['pid'])
 
     # Everything OK
     response = client.post(url, data={})
@@ -141,8 +142,7 @@ def test_publish(client, db, db_user_fixture, db_moderator_fixture,
 def test_review(client, db, db_user_fixture, db_moderator_fixture,
                 deposit_fixture):
     """Test reviewing a deposit."""
-    url = 'https://localhost:5000/deposits/{pid}/review'.format(
-        pid=deposit_fixture['pid'])
+    url = url_for('deposits.review', pid=deposit_fixture['pid'])
 
     headers = {
         'Content-Type': 'application/json',
@@ -233,10 +233,9 @@ def test_review(client, db, db_user_fixture, db_moderator_fixture,
     assert response.status_code == 200
 
 
-def test_extract_metadata(app, client, deposit_fixture):
+def test_extract_metadata(client, deposit_fixture):
     """Test PDF metadata extraction."""
-    url = 'https://localhost:5000/deposits/{pid}/extract-pdf-metadata'.format(
-        pid=deposit_fixture['pid'])
+    url = url_for('deposits.extract_metadata', pid=deposit_fixture['pid'])
 
     headers = {
         'Content-Type': 'application/json',
@@ -252,8 +251,7 @@ def test_extract_metadata(app, client, deposit_fixture):
     response = client.get(url, headers=headers)
     assert response.status_code == 500
 
-    response = client.get(
-        'https://localhost:5000/deposits/{pid}/extract-pdf-metadata'.format(
-            pid='not-existing'),
-        headers=headers)
+    response = client.get(url_for('deposits.extract_metadata',
+                                  pid='not-existing'),
+                          headers=headers)
     assert response.status_code == 400

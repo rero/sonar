@@ -13,7 +13,7 @@
       "title": "Schema",
       "description": "Schema to validate document against.",
       "type": "string",
-      "default": "https://sonar.ch/schema/documents/document-v1.0.0.json",
+      "default": "https://sonar.ch/schemas/documents/document-v1.0.0.json",
       "minLength": 1
     },
     "_bucket": {

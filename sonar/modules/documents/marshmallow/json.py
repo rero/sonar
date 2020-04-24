@@ -19,12 +19,19 @@
 
 from __future__ import absolute_import, print_function
 
+from functools import partial
+
 from invenio_records_rest.schemas import StrictKeysMixin
-from invenio_records_rest.schemas.fields import PersistentIdentifier, \
-    SanitizedUnicode
+from invenio_records_rest.schemas.fields import GenFunction, \
+    PersistentIdentifier, SanitizedUnicode
 from marshmallow import fields, pre_dump
 
+from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.views import is_file_restricted
+from sonar.modules.serializers import schema_from_context
+
+schema_from_document = partial(schema_from_context,
+                               schema=DocumentRecord.schema)
 
 
 class DocumentMetadataSchemaV1(StrictKeysMixin):
@@ -51,6 +58,12 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     identifiedBy = fields.List(fields.Dict())
     subjects = fields.List(fields.Dict())
     classification = fields.List(fields.Dict())
+    # When loading, if $schema is not provided, it's retrieved by
+    # Record.schema property.
+    schema = GenFunction(load_only=True,
+                         attribute="$schema",
+                         data_key="$schema",
+                         deserialize=schema_from_document)
 
     @pre_dump
     def add_files_restrictions(self, item):

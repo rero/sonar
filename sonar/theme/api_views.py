@@ -24,7 +24,6 @@ this file.
 
 from __future__ import absolute_import, print_function
 
-import copy
 import re
 
 from flask import Blueprint, abort, jsonify
@@ -32,20 +31,6 @@ from invenio_jsonschemas import current_jsonschemas
 from invenio_jsonschemas.errors import JSONSchemaNotFound
 
 blueprint = Blueprint('api_sonar', __name__)
-
-
-def prepare_jsonschema(schema):
-    """Json schema prep."""
-    schema = copy.deepcopy(schema)
-
-    del schema['$schema']
-
-    if 'pid' in schema.get('required', []):
-        schema['required'].remove('pid')
-
-    del schema['properties']['$schema']
-
-    return schema
 
 
 @blueprint.route('/schemaform/<document_type>')
@@ -59,6 +44,6 @@ def schemaform(document_type):
         schema_name = '{}/{}-v1.0.0.json'.format(document_type, doc_type)
         schema = current_jsonschemas.get_schema(schema_name)
 
-        return jsonify({'schema': prepare_jsonschema(schema)})
+        return jsonify({'schema': schema})
     except JSONSchemaNotFound:
         abort(404)

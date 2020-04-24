@@ -50,7 +50,7 @@ class DocumentRecord(SonarRecord):
     minter = document_pid_minter
     fetcher = document_pid_fetcher
     provider = DocumentProvider
-    schema = 'document'
+    schema = 'documents/document-v1.0.0.json'
     affiliations = []
 
     @staticmethod
