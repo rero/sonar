@@ -196,8 +196,8 @@ APP_DEFAULT_SECURE_HEADERS = {
         'default-src': ["'self'"],
         'object-src': ["'none'"],
         'script-src': [
-            "'self'", "'unsafe-inline'", 'https://code.jquery.com',
-            'https://cdnjs.cloudflare.com',
+            "'self'", "'unsafe-inline'", "'unsafe-eval'",
+            'https://code.jquery.com', 'https://cdnjs.cloudflare.com',
             'https://stackpath.bootstrapcdn.com'
         ],
         'style-src': [

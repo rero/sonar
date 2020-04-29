@@ -375,7 +375,7 @@ def document_with_file(app, db, document_fixture, pdf_file):
     document_fixture.add_file(content,
                               'test1.pdf',
                               order=1,
-                              restricted='insitution',
+                              restricted='institution',
                               embargo_date='2021-01-01')
 
     document_fixture.commit()
