@@ -1,12 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Schema for document",
+  "title": "Document",
   "type": "object",
-  "required": [
-    "$schema",
-    "pid",
-    "title"
-  ],
   "additionalProperties": false,
   "properties": {
     "$schema": {
@@ -25,9 +20,11 @@
     "_files": {
       "title": "Files",
       "description": "List of files attached to the record.",
+      "type": "array",
       "items": {
         "title": "File item",
         "description": "Describes the information of a single file in the record.",
+        "type": "object",
         "additionalProperties": false,
         "properties": {
           "bucket": {
@@ -113,10 +110,8 @@
           "file_id",
           "version_id",
           "key"
-        ],
-        "type": "object"
-      },
-      "type": "array"
+        ]
+      }
     },
     "pid": {
       "title": "Document ID",
@@ -125,41 +120,45 @@
     },
     "organisation": {
       "title": "Organisation",
-      "description": "Organisation linked to document.",
       "type": "object",
       "properties": {
         "$ref": {
           "title": "Organisation",
           "type": "string",
           "pattern": "^https://sonar.ch/api/organisations/.*?$",
-          "minLength": 1
+          "minLength": 1,
+          "form": {
+            "remoteOptions": {
+              "type": "organisations"
+            }
+          }
         }
       },
       "required": [
         "$ref"
-      ]
+      ],
+      "form": {
+        "hide": true,
+        "navigation": {
+          "essential": true
+        }
+      }
     },
     "documentType": {
       "$ref": "type-v1.0.0.json"
     },
     "title": {
-      "title": "Title",
+      "title": "Titles",
       "type": "array",
       "minItems": 1,
       "items": {
-        "title": "Title item",
+        "title": "Title",
         "type": "object",
-        "required": [
-          "type",
-          "mainTitle"
-        ],
         "additionalProperties": false,
         "properties": {
           "type": {
             "title": "Type",
-            "description": "Type of the title.",
             "type": "string",
-            "default": "bf:Title",
             "enum": [
               "bf:Title"
             ],
@@ -173,73 +172,79 @@
             }
           },
           "mainTitle": {
-            "title": "Main title",
-            "description": "Main title.",
+            "title": "Main titles",
             "type": "array",
             "minItems": 1,
             "items": {
+              "title": "Main title",
               "type": "object",
-              "required": [
-                "value",
-                "language"
-              ],
               "additionalProperties": false,
               "properties": {
                 "value": {
-                  "title": "Value of the title",
+                  "title": "Value",
                   "type": "string",
                   "minLength": 1
                 },
                 "language": {
                   "$ref": "language-v1.0.0.json"
                 }
-              }
+              },
+              "required": [
+                "value",
+                "language"
+              ]
             }
           },
           "subtitle": {
-            "title": "Subtitle",
-            "description": "Subtitle.",
+            "title": "Subtitles",
             "type": "array",
             "items": {
+              "title": "Subtitle",
               "type": "object",
-              "required": [
-                "value",
-                "language"
-              ],
               "additionalProperties": false,
               "properties": {
                 "value": {
-                  "title": "Value of the title",
+                  "title": "Value",
                   "type": "string",
                   "minLength": 1
                 },
                 "language": {
                   "$ref": "language-v1.0.0.json"
                 }
-              }
+              },
+              "required": [
+                "value",
+                "language"
+              ]
+            },
+            "form": {
+              "hide": true
             }
           }
-        }
+        },
+        "propertiesOrder": [
+          "type",
+          "mainTitle",
+          "subtitle"
+        ],
+        "required": [
+          "type",
+          "mainTitle"
+        ]
       }
     },
     "language": {
-      "title": "Language",
-      "description": "List of languages for the resource.",
+      "title": "Languages",
       "type": "array",
       "minItems": 1,
       "items": {
+        "title": "Language",
         "type": "object",
-        "required": [
-          "type",
-          "value"
-        ],
         "additionalProperties": false,
         "properties": {
           "type": {
             "title": "Type",
-            "description": "Type of the language.",
             "type": "string",
-            "default": "bf:Language",
             "enum": [
               "bf:Language"
             ],
@@ -255,48 +260,66 @@
           "value": {
             "$ref": "language-v1.0.0.json"
           }
+        },
+        "required": [
+          "type",
+          "value"
+        ]
+      },
+      "form": {
+        "hide": true,
+        "navigation": {
+          "essential": true
         }
       }
     },
     "editionStatement": {
-      "title": "Edition statement",
+      "title": "Edition",
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "editionDesignation": {
-          "title": "Edition designation",
+          "title": "Designation",
           "type": "object",
           "properties": {
             "value": {
-              "title": "Value",
               "type": "string",
               "minLength": 1
             }
-          }
+          },
+          "required": [
+            "value"
+          ]
         },
         "responsibility": {
           "title": "Responsibility",
           "type": "object",
           "properties": {
             "value": {
-              "title": "Value",
               "type": "string",
               "minLength": 1
             }
           }
         }
+      },
+      "required": [
+        "editionDesignation"
+      ],
+      "form": {
+        "hide": true,
+        "navigation": {
+          "essential": true
+        }
       }
     },
     "provisionActivity": {
-      "title": "Provision Activity",
+      "title": "Provision activities",
       "type": "array",
       "minItems": 1,
       "items": {
+        "title": "Provision activity",
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "type"
-        ],
         "properties": {
           "type": {
             "title": "Type",
@@ -319,10 +342,11 @@
             }
           },
           "statement": {
-            "title": "Statement of place and/or agent and/or date of the provision activity",
+            "title": "Statements",
             "type": "array",
             "minItems": 1,
             "items": {
+              "title": "Statement",
               "type": "object",
               "properties": {
                 "type": {
@@ -358,42 +382,75 @@
                     "type": "object",
                     "properties": {
                       "value": {
-                        "title": "Place and/or agent name and/or date",
+                        "title": "Value",
                         "type": "string",
                         "minLength": 1
                       }
                     }
                   }
                 }
-              }
+              },
+              "propertiesOrder": [
+                "type",
+                "label"
+              ]
             }
           },
           "startDate": {
             "title": "Start date of publication",
             "type": "string",
             "minLength": 1,
-            "pattern": "^[0-9]{4}(-[0-9]{2}-[0-9]{2})?$"
+            "pattern": "^[0-9]{4}(-[0-9]{2}-[0-9]{2})?$",
+            "form": {
+              "placeholder": "Example: 2019 or 2019-01-01",
+              "hideExpression": "model.type !== 'bf:Publication'",
+              "expressionProperties": {
+                "templateOptions.required": "model.type === 'bf:Publication'"
+              }
+            }
           },
           "endDate": {
             "title": "End date of publication",
             "type": "string",
             "minLength": 1,
-            "pattern": "^[0-9]{4}(-[0-9]{2}-[0-9]{2})?$"
+            "pattern": "^[0-9]{4}(-[0-9]{2}-[0-9]{2})?$",
+            "form": {
+              "placeholder": "Example: 2019 or 2019-01-01",
+              "hideExpression": "model.type !== 'bf:Publication' || !model.startDate"
+            }
           }
-        }
+        },
+        "propertiesOrder": [
+          "type",
+          "statement",
+          "startDate",
+          "endDate"
+        ],
+        "required": [
+          "type"
+        ]
+      },
+      "form": {
+        "hideExpression": "!field.parent.model.documentType || ['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc', 'coar:c_3e5a', 'coar:c_5794', 'coar:c_6670'].includes(field.parent.model.documentType)"
       }
     },
     "extent": {
       "title": "Extent",
       "description": "Extent of the resource, ie number of pages or volumes.",
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "form": {
+        "hide": true
+      }
     },
     "otherMaterialCharacteristics": {
       "title": "Other Material Characteristics",
       "description": "Other Material Characteristics, ie illustrations, black and with or coloured.",
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "form": {
+        "hide": true
+      }
     },
     "formats": {
       "title": "Formats",
@@ -401,15 +458,22 @@
       "type": "array",
       "minItems": 1,
       "items": {
+        "title": "Format",
         "type": "string",
         "minLength": 1
+      },
+      "form": {
+        "hide": true
       }
     },
     "additionalMaterials": {
       "title": "Additional materials",
       "description": "Accompanying material of the resource, ie maps.",
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "form": {
+        "hide": true
+      }
     },
     "series": {
       "title": "Series",
@@ -418,72 +482,77 @@
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": [
-          "name"
-        ],
         "additionalProperties": false,
         "properties": {
           "name": {
             "title": "Title",
-            "description": "Title of the series.",
             "type": "string",
             "minLength": 1
           },
           "number": {
             "title": "Numbering",
-            "description": "Numbering of the resource within the series.",
             "type": "string",
             "minLength": 1
           }
-        }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "form": {
+        "hide": true
       }
     },
     "notes": {
       "title": "Notes",
-      "description": "Note on the resource.",
       "type": "array",
       "minItems": 1,
       "items": {
         "title": "Note",
         "type": "string",
         "minLength": 1
+      },
+      "form": {
+        "hide": true
       }
     },
     "abstracts": {
       "title": "Abstracts",
-      "description": "Abstracts.",
       "type": "array",
       "minItems": 1,
       "items": {
-        "title": "Abstract item",
+        "title": "Abstract",
         "type": "object",
-        "required": [
-          "value",
-          "language"
-        ],
         "additionalProperties": false,
         "properties": {
           "value": {
-            "title": "Value of the abstract",
+            "title": "Value",
             "type": "string",
             "minLength": 1
           },
           "language": {
             "$ref": "language-v1.0.0.json"
           }
+        },
+        "required": [
+          "value",
+          "language"
+        ]
+      },
+      "form": {
+        "hide": true,
+        "navigation": {
+          "essential": true
         }
       }
     },
     "identifiedBy": {
-      "title": "Identifier",
+      "title": "Identifiers",
       "type": "array",
       "minItems": 1,
       "items": {
+        "title": "Identifier",
         "type": "object",
-        "required": [
-          "type",
-          "value"
-        ],
         "additionalProperties": false,
         "properties": {
           "type": {
@@ -500,8 +569,8 @@
               "bf:Ismn",
               "bf:Isrc",
               "bf:Issn",
-              "bf:IssnL",
               "bf:Local",
+              "bf:IssnL",
               "bf:MatrixNumber",
               "bf:MusicDistributorNumber",
               "bf:MusicPlate",
@@ -510,7 +579,9 @@
               "bf:Upc",
               "bf:Urn",
               "bf:VideoRecordingNumber",
-              "uri"
+              "uri",
+              "bf:ReportNumber",
+              "bf:Strn"
             ],
             "form": {
               "options": [
@@ -597,70 +668,101 @@
                 {
                   "label": "uri",
                   "value": "uri"
+                },
+                {
+                  "label": "bf:ReportNumber",
+                  "value": "bf:ReportNumber"
+                },
+                {
+                  "label": "bf:Strn",
+                  "value": "bf:Strn"
                 }
               ]
             }
           },
           "value": {
-            "title": "Identifier value",
-            "description": "Identifier value.",
+            "title": "Value",
             "type": "string",
             "minLength": 1
           },
           "note": {
             "title": "Note",
-            "description": "Note of the identifier.",
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "form": {
+              "hide": true
+            }
           },
           "qualifier": {
             "title": "Qualifier",
-            "description": "Qualifier of the identifier.",
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "form": {
+              "hide": true
+            }
           },
           "acquisitionTerms": {
             "title": "Acquisition terms",
-            "description": "Acquisition terms of the resource.",
             "type": "string",
             "minLength": 1
           },
           "source": {
             "title": "Source",
-            "description": "Source of the identifier.",
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "form": {
+              "hideExpression": "model.type !== 'bf:Local'",
+              "expressionProperties": {
+                "templateOptions.required": "model.type === 'bf:Local'"
+              }
+            }
           },
           "status": {
             "title": "Status",
-            "description": "Status of the ISBN/ISSN identifier.",
             "type": "string",
-            "validationMessage": "ISBN/ISSN status should be selected in the list below.",
             "enum": [
               "invalid",
               "cancelled",
               "invalid or cancelled"
-            ]
+            ],
+            "validationMessage": "ISBN/ISSN status should be selected in the list below.",
+            "form": {
+              "hide": true
+            }
           }
+        },
+        "propertiesOrder": [
+          "type",
+          "value",
+          "status",
+          "qualifier",
+          "note",
+          "source"
+        ],
+        "required": [
+          "type",
+          "value"
+        ]
+      },
+      "form": {
+        "hide": true,
+        "navigation": {
+          "essential": true
         }
       }
     },
     "subjects": {
-      "title": "Subject",
+      "title": "Subjects",
       "type": "array",
+      "minItems": 1,
       "items": {
+        "title": "Subject",
         "type": "object",
-        "required": [
-          "label"
-        ],
         "additionalProperties": false,
         "properties": {
           "label": {
             "title": "Label",
             "type": "object",
-            "required": [
-              "value"
-            ],
             "additionalProperties": false,
             "properties": {
               "language": {
@@ -668,7 +770,6 @@
               },
               "value": {
                 "title": "Value",
-                "description": "A list of keywords.",
                 "type": "array",
                 "minItems": 1,
                 "items": {
@@ -677,14 +778,25 @@
                   "minLength": 1
                 }
               }
-            }
+            },
+            "required": [
+              "value"
+            ]
           },
           "source": {
             "title": "Source",
-            "description": "Source of heading or term.",
             "type": "string",
             "minLength": 1
           }
+        },
+        "required": [
+          "label"
+        ]
+      },
+      "form": {
+        "hide": true,
+        "navigation": {
+          "essential": true
         }
       }
     },
@@ -695,81 +807,145 @@
       "default": false
     },
     "otherEdition": {
-      "title": "Other editions",
+      "title": "Other electronic versions",
       "type": "array",
       "minItems": 1,
       "items": {
+        "title": "Other electronic version",
         "type": "object",
-        "required": [
-          "document",
-          "publicNote"
-        ],
         "additionalProperties": false,
         "properties": {
           "document": {
             "title": "Document",
             "type": "object",
-            "required": [
-              "electronicLocator"
-            ],
             "additionalProperties": false,
             "properties": {
               "electronicLocator": {
-                "title": "Electronic locator",
+                "title": "URL",
                 "type": "string",
                 "minLength": 1
               }
-            }
+            },
+            "required": [
+              "electronicLocator"
+            ]
           },
           "publicNote": {
             "title": "Public note",
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "form": {
+              "placeholder": "Example: Published version"
+            }
           }
-        }
+        },
+        "propertiesOrder": [
+          "publicNote",
+          "document"
+        ],
+        "required": [
+          "document",
+          "publicNote"
+        ]
+      },
+      "form": {
+        "hide": true
       }
     },
     "specificCollections": {
-      "title": "Collection",
+      "title": "Collections",
       "type": "array",
       "minItems": 1,
       "items": {
+        "title": "Collection",
         "type": "string",
         "minLength": 1
+      },
+      "form": {
+        "hide": true,
+        "navigation": {
+          "essential": true
+        }
       }
     },
     "classification": {
-      "title": "Classification",
+      "title": "Classifications",
       "type": "array",
       "minItems": 1,
       "items": {
         "title": "Classification",
         "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "bf:ClassificationUdc",
-              "bf:ClassificationDdc"
-            ],
-            "form": {
-              "options": [
-                {
-                  "label": "bf:ClassificationUdc",
-                  "value": "bf:ClassificationUdc"
-                },
-                {
-                  "label": "bf:ClassificationDdc",
-                  "value": "bf:ClassificationDdc"
+        "oneOf": [
+          {
+            "title": "bf:ClassificationUdc",
+            "properties": {
+              "type": {
+                "title": "Type",
+                "type": "string",
+                "enum": [
+                  "bf:ClassificationUdc"
+                ],
+                "form": {
+                  "options": [
+                    {
+                      "label": "bf:ClassificationUdc",
+                      "value": "bf:ClassificationUdc"
+                    }
+                  ]
                 }
-              ]
-            }
+              },
+              "classificationPortion": {
+                "$ref": "classification-v1.0.0.json"
+              }
+            },
+            "propertiesOrder": [
+              "type",
+              "classificationPortion"
+            ],
+            "required": [
+              "type",
+              "classificationPortion"
+            ]
           },
-          "classificationPortion": {
-            "type": "string",
-            "minLength": 1
+          {
+            "title": "bf:ClassificationDdc",
+            "properties": {
+              "type": {
+                "title": "Type",
+                "type": "string",
+                "enum": [
+                  "bf:ClassificationDdc"
+                ],
+                "form": {
+                  "options": [
+                    {
+                      "label": "bf:ClassificationDdc",
+                      "value": "bf:ClassificationDdc"
+                    }
+                  ]
+                }
+              },
+              "classificationPortion": {
+                "title": "Classification portion",
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "propertiesOrder": [
+              "type",
+              "classificationPortion"
+            ],
+            "required": [
+              "type",
+              "classificationPortion"
+            ]
           }
+        ]
+      },
+      "form": {
+        "hide": true,
+        "navigation": {
+          "essential": true
         }
       }
     },
@@ -781,15 +957,15 @@
         "title": "Content note",
         "type": "string",
         "minLength": 1
+      },
+      "form": {
+        "hide": true
       }
     },
     "dissertation": {
       "title": "Dissertation",
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "degree"
-      ],
       "properties": {
         "degree": {
           "title": "Degree",
@@ -806,6 +982,12 @@
             "minLength": 1
           }
         }
+      },
+      "required": [
+        "degree"
+      ],
+      "form": {
+        "hide": true
       }
     },
     "usageAndAccessPolicy": {
@@ -816,6 +998,9 @@
         "title": "Usage and access policy",
         "type": "string",
         "minLength": 1
+      },
+      "form": {
+        "hide": true
       }
     },
     "contribution": {
@@ -826,9 +1011,6 @@
         "title": "Contribution",
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "role"
-        ],
         "properties": {
           "agent": {
             "title": "Agent",
@@ -868,17 +1050,17 @@
               "preferred_name": {
                 "title": "Preferred name",
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "form": {
+                  "expressionProperties": {
+                    "templateOptions.required": "['bf:Person', 'bf:Organization', 'bf:Meeting'].includes(model.type)"
+                  }
+                }
               },
               "identifiedBy": {
                 "title": "Identified by",
                 "type": "object",
                 "additionalProperties": false,
-                "required": [
-                  "type",
-                  "source",
-                  "value"
-                ],
                 "properties": {
                   "type": {
                     "title": "Type",
@@ -895,34 +1077,70 @@
                     "type": "string",
                     "minLength": 1
                   }
+                },
+                "required": [
+                  "type",
+                  "source",
+                  "value"
+                ],
+                "form": {
+                  "hideExpression": "field.model.type !== 'bf:Person'"
                 }
               },
               "date_of_birth": {
                 "title": "Date of birth",
                 "type": "string",
-                "minLength": 4
+                "minLength": 4,
+                "form": {
+                  "hideExpression": "field.model.type !== 'bf:Person'"
+                }
               },
               "date_of_death": {
                 "title": "Date of death",
                 "type": "string",
-                "minLength": 4
+                "minLength": 4,
+                "form": {
+                  "hideExpression": "field.model.type !== 'bf:Person'"
+                }
               },
               "place": {
                 "title": "Place",
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "form": {
+                  "hideExpression": "field.model.type !== 'bf:Meeting'"
+                }
               },
               "date": {
                 "title": "Date",
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "form": {
+                  "hideExpression": "field.model.type !== 'bf:Meeting'"
+                }
               },
               "number": {
                 "title": "Number",
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "form": {
+                  "hideExpression": "field.model.type !== 'bf:Meeting'"
+                }
               }
-            }
+            },
+            "propertiesOrder": [
+              "type",
+              "preferred_name",
+              "place",
+              "number",
+              "date",
+              "identifiedBy",
+              "date_of_birth",
+              "date_of_death"
+            ],
+            "required": [
+              "type"
+            ]
           },
           "role": {
             "title": "Roles",
@@ -967,7 +1185,10 @@
           "affiliation": {
             "title": "Affiliation",
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "form": {
+              "hideExpression": "field.parent.model.agent.type !== 'bf:Person'"
+            }
           },
           "controlledAffiliation": {
             "title": "Controlled affiliations",
@@ -977,46 +1198,76 @@
               "title": "Controlled affiliation",
               "type": "string",
               "minLength": 1
+            },
+            "form": {
+              "hideExpression": "field.parent.model.agent.type !== 'bf:Person'"
             }
           }
+        },
+        "propertiesOrder": [
+          "agent",
+          "role",
+          "affiliation",
+          "controlledAffiliation"
+        ],
+        "required": [
+          "agent",
+          "role"
+        ]
+      },
+      "form": {
+        "hide": true,
+        "navigation": {
+          "essential": true
         }
       }
     },
     "partOf": {
-      "title": "Is part of",
+      "title": "Part of (host document)",
       "type": "array",
       "minItems": 1,
       "items": {
-        "title": "Is part of",
+        "title": "Document",
         "type": "object",
         "additionalProperties": false,
         "properties": {
           "numberingYear": {
-            "title": "Numbering year",
+            "title": "Year",
             "type": "string",
             "minLength": 1
           },
           "numberingVolume": {
-            "title": "Numbering volume",
+            "title": "Volume",
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "form": {
+              "hideExpression": "!['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.parent.model.documentType)"
+            }
           },
           "numberingIssue": {
-            "title": "Numbering issue",
+            "title": "Issue",
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "form": {
+              "hideExpression": "!['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.parent.model.documentType)"
+            }
           },
           "numberingPages": {
-            "title": "Numbering pages",
+            "title": "Pages",
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "form": {
+              "placeholder": "Examples: 135, 5-27, …"
+            }
           },
           "document": {
+            "title": "Document",
             "type": "object",
             "additionalProperties": false,
             "properties": {
               "title": {
                 "title": "Title",
+                "description": "Host document, for example a journal for an article, or a book for a book chapter.",
                 "type": "string",
                 "minLength": 1
               },
@@ -1028,29 +1279,97 @@
                   "startDate": {
                     "title": "Start date",
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "form": {
+                      "hide": true
+                    }
                   },
                   "statement": {
                     "title": "Statement",
                     "type": "string",
                     "minLength": 1
                   }
+                },
+                "propertiesOrder": [
+                  "statement",
+                  "startDate"
+                ],
+                "form": {
+                  "hideExpression": "!['coar:c_3248', 'coar:c_5794', 'coar:c_6670'].includes(field.parent.parent.parent.parent.model.documentType)"
                 }
               },
               "contribution": {
-                "title": "Contributions",
+                "title": "Contribution",
                 "type": "array",
                 "minItems": 1,
                 "items": {
-                  "title": "Contribution",
+                  "title": "Author or editor",
                   "type": "string",
-                  "minLength": 1
+                  "minLength": 1,
+                  "form": {
+                    "placeholder": "Example: Muller, Hans"
+                  }
+                },
+                "form": {
+                  "hideExpression": "!['coar:c_3248', 'coar:c_5794', 'coar:c_6670'].includes(field.parent.parent.parent.parent.model.documentType)"
                 }
               }
-            }
+            },
+            "propertiesOrder": [
+              "title",
+              "publication",
+              "contribution"
+            ],
+            "required": [
+              "title"
+            ]
           }
-        }
+        },
+        "propertiesOrder": [
+          "document",
+          "numberingYear",
+          "numberingVolume",
+          "numberingIssue",
+          "numberingPages"
+        ],
+        "required": [
+          "document",
+          "numberingYear"
+        ]
+      },
+      "form": {
+        "hideExpression": "!['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)"
       }
     }
-  }
+  },
+  "propertiesOrder": [
+    "documentType",
+    "title",
+    "organisation",
+    "classification",
+    "language",
+    "abstracts",
+    "subjects",
+    "identifiedBy",
+    "contribution",
+    "dissertation",
+    "editionStatement",
+    "otherEdition",
+    "provisionActivity",
+    "partOf",
+    "specificCollections",
+    "extent",
+    "formats",
+    "notes",
+    "series",
+    "additionalMaterials",
+    "contentNote",
+    "otherMaterialCharacteristics",
+    "usageAndAccessPolicy"
+  ],
+  "required": [
+    "$schema",
+    "pid",
+    "title"
+  ]
 }

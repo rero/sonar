@@ -309,7 +309,7 @@ def is_file_restricted(file, record):
             return True
 
         # No organisation in record, restriction is active
-        if not record.get('organisation'):
+        if not record.get('organisation', {}).get('pid'):
             return True
 
         # Record organisation is different from current organisation

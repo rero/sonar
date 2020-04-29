@@ -48,7 +48,7 @@ def test_add_files_restrictions(client, document_with_file):
     res = client.get(
         url_for('invenio_records_rest.doc_item', pid_value=10000, resolve=1))
     assert res.status_code == 200
-    assert res.json['metadata']['_files'][0]['restricted'] == {
+    assert res.json['metadata']['_files'][0]['restriction'] == {
         'restricted': True,
         'date': '2021-01-01'
     }

@@ -2,88 +2,276 @@
   "title": "Document type",
   "type": "string",
   "enum": [
-    "coar:c_816b",
-    "coar:c_6501",
-    "coar:c_3248",
-    "coar:c_5794",
     "coar:c_2f33",
-    "coar:c_bdcc",
-    "coar:c_7a1f",
-    "coar:c_46ec",
-    "coar:c_db06",
-    "coar:c_12cc",
-    "coar:c_18ws",
-    "coar:c_2fe3",
-    "coar:c_0640",
-    "coar:c_18cc",
+    "coar:c_3248",
+    "coar:c_c94f",
+    "coar:c_5794",
+    "coar:c_18cp",
+    "coar:c_6670",
+    "coar:c_18co",
+    "coar:c_f744",
+    "coar:c_ddb1",
+    "coar:c_3e5a",
+    "coar:c_beb9",
+    "coar:c_6501",
+    "coar:c_998f",
+    "coar:c_dcae04bc",
+    "coar:c_8544",
+    "non_textual_object",
+    "coar:c_8a7e",
     "coar:c_ecc8",
-    "coar:c_18cw"
+    "coar:c_12cc",
+    "coar:c_18cc",
+    "coar:c_18cw",
+    "coar:c_5ce6",
+    "coar:c_15cd",
+    "coar:c_2659",
+    "coar:c_0640",
+    "coar:c_2cd9",
+    "coar:c_2fe3",
+    "coar:c_816b",
+    "coar:c_93fc",
+    "coar:c_18ww",
+    "coar:c_18wz",
+    "coar:c_18wq",
+    "coar:c_186u",
+    "coar:c_18op",
+    "coar:c_ba1f",
+    "coar:c_18hj",
+    "coar:c_18ws",
+    "coar:c_18gh",
+    "coar:c_46ec2",
+    "coar:c_7a1f",
+    "coar:c_db06",
+    "coar:c_bdcc",
+    "habilitation_thesis",
+    "advanced_studies_thesis",
+    "other",
+    "coar:c_8042",
+    "coar:c_1843"
   ],
   "form": {
     "options": [
       {
-        "label": "document_type_coar:c_816b",
-        "value": "coar:c_816b"
-      },
-      {
-        "label": "document_type_coar:c_6501",
-        "value": "coar:c_6501"
+        "label": "document_type_coar:c_2f33",
+        "value": "coar:c_2f33"
       },
       {
         "label": "document_type_coar:c_3248",
         "value": "coar:c_3248"
       },
       {
+        "label": "document_type_coar:c_c94f",
+        "value": "coar:c_c94f"
+      },
+      {
         "label": "document_type_coar:c_5794",
-        "value": "coar:c_5794"
+        "value": "coar:c_5794",
+        "level": 1
       },
       {
-        "label": "document_type_coar:c_2f33",
-        "value": "coar:c_2f33"
+        "label": "document_type_coar:c_18cp",
+        "value": "coar:c_18cp",
+        "level": 1
       },
       {
-        "label": "document_type_coar:c_bdcc",
-        "value": "coar:c_bdcc"
+        "label": "document_type_coar:c_6670",
+        "value": "coar:c_6670",
+        "level": 1
       },
       {
-        "label": "document_type_coar:c_7a1f",
-        "value": "coar:c_7a1f"
+        "label": "document_type_coar:c_18co",
+        "value": "coar:c_18co",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_f744",
+        "value": "coar:c_f744",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_ddb1",
+        "value": "coar:c_ddb1"
+      },
+      {
+        "label": "document_type_coar:c_3e5a",
+        "value": "coar:c_3e5a"
+      },
+      {
+        "label": "document_type_coar:c_beb9",
+        "value": "coar:c_beb9",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_6501",
+        "value": "coar:c_6501",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_998f",
+        "value": "coar:c_998f",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_dcae04bc",
+        "value": "coar:c_dcae04bc",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_8544",
+        "value": "coar:c_8544"
+      },
+      {
+        "label": "document_type_non_textual_object",
+        "value": "non_textual_object"
+      },
+      {
+        "label": "document_type_coar:c_8a7e",
+        "value": "coar:c_8a7e",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_ecc8",
+        "value": "coar:c_ecc8",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_12cc",
+        "value": "coar:c_12cc",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_18cc",
+        "value": "coar:c_18cc",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_18cw",
+        "value": "coar:c_18cw",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_5ce6",
+        "value": "coar:c_5ce6",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_15cd",
+        "value": "coar:c_15cd"
+      },
+      {
+        "label": "document_type_coar:c_2659",
+        "value": "coar:c_2659"
+      },
+      {
+        "label": "document_type_coar:c_0640",
+        "value": "coar:c_0640",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_2cd9",
+        "value": "coar:c_2cd9",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_2fe3",
+        "value": "coar:c_2fe3",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_816b",
+        "value": "coar:c_816b"
+      },
+      {
+        "label": "document_type_coar:c_93fc",
+        "value": "coar:c_93fc"
+      },
+      {
+        "label": "document_type_coar:c_18ww",
+        "value": "coar:c_18ww",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_18wz",
+        "value": "coar:c_18wz",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_18wq",
+        "value": "coar:c_18wq",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_186u",
+        "value": "coar:c_186u",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_18op",
+        "value": "coar:c_18op",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_ba1f",
+        "value": "coar:c_ba1f",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_18hj",
+        "value": "coar:c_18hj",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_18ws",
+        "value": "coar:c_18ws",
+        "level": 1
+      },
+      {
+        "label": "document_type_coar:c_18gh",
+        "value": "coar:c_18gh",
+        "level": 1
       },
       {
         "label": "document_type_coar:c_46ec",
         "value": "coar:c_46ec"
       },
       {
+        "label": "document_type_coar:c_7a1f",
+        "value": "coar:c_7a1f",
+        "level": 1
+      },
+      {
         "label": "document_type_coar:c_db06",
-        "value": "coar:c_db06"
+        "value": "coar:c_db06",
+        "level": 1
       },
       {
-        "label": "document_type_coar:c_12cc",
-        "value": "coar:c_12cc"
+        "label": "document_type_coar:c_bdcc",
+        "value": "coar:c_bdcc",
+        "level": 1
       },
       {
-        "label": "document_type_coar:c_18ws",
-        "value": "coar:c_18ws"
+        "label": "document_type_habilitation_thesis",
+        "value": "habilitation_thesis",
+        "level": 1
       },
       {
-        "label": "document_type_coar:c_2fe3",
-        "value": "coar:c_2fe3"
+        "label": "document_type_advanced_studies_thesis",
+        "value": "advanced_studies_thesis",
+        "level": 1
       },
       {
-        "label": "document_type_coar:c_0640",
-        "value": "coar:c_0640"
+        "label": "document_type_other",
+        "value": "other",
+        "level": 1
       },
       {
-        "label": "document_type_coar:c_18cc",
-        "value": "coar:c_18cc"
+        "label": "document_type_coar:c_8042",
+        "value": "coar:c_8042"
       },
       {
-        "label": "document_type_coar:c_ecc8",
-        "value": "coar:c_ecc8"
-      },
-      {
-        "label": "document_type_coar:c_18cw",
-        "value": "coar:c_18cw"
+        "label": "document_type_coar:c_1843",
+        "value": "coar:c_1843"
       }
     ]
   }

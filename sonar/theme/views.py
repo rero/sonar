@@ -101,11 +101,41 @@ def schemas(record_type):
         schema_name = '{}/{}-v1.0.0.json'.format(record_type, rec_type)
         schema = current_jsonschemas.get_schema(schema_name)
 
-        # Recursively translate properties in schema
-        translate(
-            schema,
-            keys=current_app.config['SONAR_APP_BABEL_TRANSLATE_JSON_KEYS'])
-
-        return jsonify({'schema': schema})
+        return jsonify({'schema': prepare_schema(schema)})
     except JSONSchemaNotFound:
         abort(404)
+
+
+def prepare_schema(schema):
+    """Prepare schema before sending it."""
+    # Recursively translate properties in schema
+    translate(schema,
+              keys=current_app.config['SONAR_APP_BABEL_TRANSLATE_JSON_KEYS'])
+
+    # Recursively hierarchize form option if a level property is available.
+    def hierarchize_form_options(schema):
+        """Hierarchize form options."""
+        if schema.get('properties'):
+            for key, value in schema['properties'].items():
+                if value.get('form', {}).get('options'):
+                    for option in value['form']['options']:
+                        if option.get('level'):
+                            option['label'] = "{spaces} {label}".format(
+                                spaces='-' * 2 * option['level'],
+                                label=option['label'])
+
+                if value.get('type') == 'array' and value['items'][
+                        'type'] == 'object':
+                    hierarchize_form_options(value['items'])
+
+                if value.get('type') == 'object':
+                    hierarchize_form_options(value)
+
+        for of_field in ['oneOf', 'anyOf', 'allOf', 'not']:
+            if schema.get(of_field):
+                for field in schema[of_field]:
+                    hierarchize_form_options(field)
+
+    hierarchize_form_options(schema)
+
+    return schema

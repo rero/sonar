@@ -21,10 +21,10 @@ from __future__ import absolute_import, print_function
 
 from functools import partial
 
-from invenio_records_rest.schemas import StrictKeysMixin
+from invenio_records_rest.schemas import Nested, StrictKeysMixin
 from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
-from marshmallow import fields, pre_dump
+from marshmallow import fields, pre_dump, pre_load
 
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.views import is_file_restricted
@@ -32,6 +32,30 @@ from sonar.modules.serializers import schema_from_context
 
 schema_from_document = partial(schema_from_context,
                                schema=DocumentRecord.schema)
+
+
+class FileSchemaV1(StrictKeysMixin):
+    """File schema."""
+
+    bucket = SanitizedUnicode()
+    file_id = SanitizedUnicode()
+    version_id = SanitizedUnicode()
+    key = SanitizedUnicode()
+    checksum = SanitizedUnicode()
+    size = fields.Number()
+    label = SanitizedUnicode()
+    type = SanitizedUnicode()
+    order = fields.Number()
+    external_url = SanitizedUnicode()
+    restricted = SanitizedUnicode()
+    embargo_date = SanitizedUnicode()
+    restriction = fields.Dict(dump_only=True)
+
+    @pre_load
+    def remove_restriction(self, data):
+        """Remove restriction information before saving."""
+        data.pop('restriction', None)
+        return data
 
 
 class DocumentMetadataSchemaV1(StrictKeysMixin):
@@ -43,21 +67,25 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     partOf = fields.List(fields.Dict())
     abstracts = fields.List(fields.Dict())
     contribution = fields.List(fields.Dict())
-    organisation = fields.Dict(dump_only=True)
-    _files = fields.Dict(dump_only=True)
+    organisation = fields.Dict()
     language = fields.List(fields.Dict())
     copyrightDate = fields.List(fields.String())
     editionStatement = fields.Dict()
     provisionActivity = fields.List(fields.Dict())
     extent = SanitizedUnicode()
     otherMaterialCharacteristics = SanitizedUnicode()
-    formats = fields.Dict()
+    formats = fields.List(SanitizedUnicode())
     additionalMaterials = SanitizedUnicode()
     series = fields.List(fields.Dict())
     notes = fields.List(fields.String())
     identifiedBy = fields.List(fields.Dict())
     subjects = fields.List(fields.Dict())
     classification = fields.List(fields.Dict())
+    specificCollections = fields.List(SanitizedUnicode())
+    dissertation = fields.Dict()
+    otherEdition = fields.List(fields.Dict())
+    _bucket = SanitizedUnicode()
+    _files = Nested(FileSchemaV1, many=True)
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
     schema = GenFunction(load_only=True,
@@ -84,7 +112,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
                     restricted['date'] = restricted['date'].strftime(
                         '%Y-%m-%d')
 
-                item['_files'][key]['restricted'] = restricted
+                item['_files'][key]['restriction'] = restricted
 
         return item
 
