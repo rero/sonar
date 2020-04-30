@@ -72,3 +72,12 @@ def test_logged_user(app, client, admin_user_fixture_with_db):
     res = client.get(url + '?resolve=1')
     assert b'"email":"admin@test.com"' in res.data
     assert b'"pid":"org"' in res.data
+
+
+def test_schemas(client):
+    """Test JSON schemas endpoint."""
+    res = client.get(url_for('sonar.schemas', record_type='documents'))
+    assert res.status_code == 200
+
+    res = client.get(url_for('sonar.schemas', record_type='not_existing'))
+    assert res.status_code == 404

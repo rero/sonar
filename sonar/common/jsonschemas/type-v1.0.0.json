@@ -18,5 +18,73 @@
     "coar:c_18cc",
     "coar:c_ecc8",
     "coar:c_18cw"
-  ]
+  ],
+  "form": {
+    "options": [
+      {
+        "label": "document_type_coar:c_816b",
+        "value": "coar:c_816b"
+      },
+      {
+        "label": "document_type_coar:c_6501",
+        "value": "coar:c_6501"
+      },
+      {
+        "label": "document_type_coar:c_3248",
+        "value": "coar:c_3248"
+      },
+      {
+        "label": "document_type_coar:c_5794",
+        "value": "coar:c_5794"
+      },
+      {
+        "label": "document_type_coar:c_2f33",
+        "value": "coar:c_2f33"
+      },
+      {
+        "label": "document_type_coar:c_bdcc",
+        "value": "coar:c_bdcc"
+      },
+      {
+        "label": "document_type_coar:c_7a1f",
+        "value": "coar:c_7a1f"
+      },
+      {
+        "label": "document_type_coar:c_46ec",
+        "value": "coar:c_46ec"
+      },
+      {
+        "label": "document_type_coar:c_db06",
+        "value": "coar:c_db06"
+      },
+      {
+        "label": "document_type_coar:c_12cc",
+        "value": "coar:c_12cc"
+      },
+      {
+        "label": "document_type_coar:c_18ws",
+        "value": "coar:c_18ws"
+      },
+      {
+        "label": "document_type_coar:c_2fe3",
+        "value": "coar:c_2fe3"
+      },
+      {
+        "label": "document_type_coar:c_0640",
+        "value": "coar:c_0640"
+      },
+      {
+        "label": "document_type_coar:c_18cc",
+        "value": "coar:c_18cc"
+      },
+      {
+        "label": "document_type_coar:c_ecc8",
+        "value": "coar:c_ecc8"
+      },
+      {
+        "label": "document_type_coar:c_18cw",
+        "value": "coar:c_18cw"
+      }
+    ]
+  }
 }

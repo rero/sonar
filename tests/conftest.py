@@ -444,7 +444,7 @@ def deposit_fixture(app, db, db_user_fixture, pdf_file,
             }]
         },
         'status':
-        'in progress',
+        'in_progress',
         'step':
         'diffusion',
         'user': {

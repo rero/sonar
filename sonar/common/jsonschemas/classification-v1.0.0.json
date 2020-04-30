@@ -2,15 +2,15 @@
   "title": "Classification",
   "type": "string",
   "enum": [
-    "004",
-    "02",
     "1",
-    "159.9",
-    "159.953",
-    "16",
     "2",
-    "294/299",
+    "02",
     "3",
+    "004",
+    "6",
+    "7",
+    "7.071",
+    "16",
     "31",
     "32",
     "33",
@@ -18,72 +18,412 @@
     "35",
     "36",
     "37",
+    "39",
+    "51",
+    "52",
+    "53",
+    "54",
+    "55",
+    "56",
+    "57",
+    "58",
+    "59",
+    "60",
+    "61",
+    "63",
+    "65",
+    "66",
+    "71",
+    "72",
+    "75",
+    "77",
+    "78",
+    "81",
+    "82",
+    "91",
+    "94",
+    "159.9",
+    "159.953",
     "370",
     "376",
     "378.6",
-    "39",
-    "51",
     "519.2",
-    "52",
     "524.8",
-    "53",
-    "54",
     "543",
     "548",
     "549",
-    "55",
-    "55/56",
     "551",
     "556",
-    "56",
-    "57",
-    "57/59",
     "574",
-    "58",
-    "59",
-    "6",
-    "60",
-    "61",
     "613.2",
-    "614.253.5",
+    "615",
     "615.8",
     "615.84",
-    "615",
-    "616-083",
-    "616.31",
     "616",
+    "616.31",
     "620.1",
     "620.9",
+    "621",
     "621.01",
     "621.3",
     "621.38",
     "621.39",
     "621.762",
-    "621",
-    "63",
-    "65",
-    "66",
     "663",
     "664",
     "681",
-    "7.071",
-    "7",
-    "71",
-    "72",
-    "73/77",
-    "75",
-    "77",
-    "78",
     "796",
-    "81",
-    "81\u00b428",
-    "82",
     "902",
     "903",
-    "91",
     "929.5",
-    "93/94",
     "931",
-    "94"
-  ]
+    "294/299",
+    "55/56",
+    "57/59",
+    "614.253.5",
+    "616-083",
+    "73/77",
+    "81´28",
+    "93/94"
+  ],
+  "form": {
+    "options": [
+      {
+        "label": "classification_1",
+        "value": "1"
+      },
+      {
+        "label": "classification_2",
+        "value": "2"
+      },
+      {
+        "label": "classification_02",
+        "value": "02"
+      },
+      {
+        "label": "classification_3",
+        "value": "3"
+      },
+      {
+        "label": "classification_004",
+        "value": "004"
+      },
+      {
+        "label": "classification_6",
+        "value": "6"
+      },
+      {
+        "label": "classification_7",
+        "value": "7"
+      },
+      {
+        "label": "classification_7.071",
+        "value": "7.071"
+      },
+      {
+        "label": "classification_16",
+        "value": "16"
+      },
+      {
+        "label": "classification_31",
+        "value": "31"
+      },
+      {
+        "label": "classification_32",
+        "value": "32"
+      },
+      {
+        "label": "classification_33",
+        "value": "33"
+      },
+      {
+        "label": "classification_34",
+        "value": "34"
+      },
+      {
+        "label": "classification_35",
+        "value": "35"
+      },
+      {
+        "label": "classification_36",
+        "value": "36"
+      },
+      {
+        "label": "classification_37",
+        "value": "37"
+      },
+      {
+        "label": "classification_39",
+        "value": "39"
+      },
+      {
+        "label": "classification_51",
+        "value": "51"
+      },
+      {
+        "label": "classification_52",
+        "value": "52"
+      },
+      {
+        "label": "classification_53",
+        "value": "53"
+      },
+      {
+        "label": "classification_54",
+        "value": "54"
+      },
+      {
+        "label": "classification_55",
+        "value": "55"
+      },
+      {
+        "label": "classification_56",
+        "value": "56"
+      },
+      {
+        "label": "classification_57",
+        "value": "57"
+      },
+      {
+        "label": "classification_58",
+        "value": "58"
+      },
+      {
+        "label": "classification_59",
+        "value": "59"
+      },
+      {
+        "label": "classification_60",
+        "value": "60"
+      },
+      {
+        "label": "classification_61",
+        "value": "61"
+      },
+      {
+        "label": "classification_61",
+        "value": "61"
+      },
+      {
+        "label": "classification_63",
+        "value": "63"
+      },
+      {
+        "label": "classification_65",
+        "value": "65"
+      },
+      {
+        "label": "classification_66",
+        "value": "66"
+      },
+      {
+        "label": "classification_71",
+        "value": "71"
+      },
+      {
+        "label": "classification_72",
+        "value": "72"
+      },
+      {
+        "label": "classification_75",
+        "value": "75"
+      },
+      {
+        "label": "classification_77",
+        "value": "77"
+      },
+      {
+        "label": "classification_78",
+        "value": "78"
+      },
+      {
+        "label": "classification_81",
+        "value": "81"
+      },
+      {
+        "label": "classification_82",
+        "value": "82"
+      },
+      {
+        "label": "classification_91",
+        "value": "91"
+      },
+      {
+        "label": "classification_94",
+        "value": "94"
+      },
+      {
+        "label": "classification_159.9",
+        "value": "159.9"
+      },
+      {
+        "label": "classification_159.953",
+        "value": "159.953"
+      },
+      {
+        "label": "classification_370",
+        "value": "370"
+      },
+      {
+        "label": "classification_376",
+        "value": "376"
+      },
+      {
+        "label": "classification_378.6",
+        "value": "378.6"
+      },
+      {
+        "label": "classification_519.2",
+        "value": "519.2"
+      },
+      {
+        "label": "classification_524.8",
+        "value": "524.8"
+      },
+      {
+        "label": "classification_543",
+        "value": "543"
+      },
+      {
+        "label": "classification_548",
+        "value": "548"
+      },
+      {
+        "label": "classification_549",
+        "value": "549"
+      },
+      {
+        "label": "classification_551",
+        "value": "551"
+      },
+      {
+        "label": "classification_556",
+        "value": "556"
+      },
+      {
+        "label": "classification_574",
+        "value": "574"
+      },
+      {
+        "label": "classification_613.2",
+        "value": "613.2"
+      },
+      {
+        "label": "classification_615",
+        "value": "615"
+      },
+      {
+        "label": "classification_615.8",
+        "value": "615.8"
+      },
+      {
+        "label": "classification_615.84",
+        "value": "615.84"
+      },
+      {
+        "label": "classification_616",
+        "value": "616"
+      },
+      {
+        "label": "classification_616.31",
+        "value": "616.31"
+      },
+      {
+        "label": "classification_620.1",
+        "value": "620.1"
+      },
+      {
+        "label": "classification_620.9",
+        "value": "620.9"
+      },
+      {
+        "label": "classification_621",
+        "value": "621"
+      },
+      {
+        "label": "classification_621.01",
+        "value": "621.01"
+      },
+      {
+        "label": "classification_621.3",
+        "value": "621.3"
+      },
+      {
+        "label": "classification_621.38",
+        "value": "621.38"
+      },
+      {
+        "label": "classification_621.39",
+        "value": "621.39"
+      },
+      {
+        "label": "classification_621.762",
+        "value": "621.762"
+      },
+      {
+        "label": "classification_663",
+        "value": "663"
+      },
+      {
+        "label": "classification_664",
+        "value": "664"
+      },
+      {
+        "label": "classification_681",
+        "value": "681"
+      },
+      {
+        "label": "classification_796",
+        "value": "796"
+      },
+      {
+        "label": "classification_902",
+        "value": "902"
+      },
+      {
+        "label": "classification_903",
+        "value": "903"
+      },
+      {
+        "label": "classification_929.5",
+        "value": "929.5"
+      },
+      {
+        "label": "classification_931",
+        "value": "931"
+      },
+      {
+        "label": "classification_294/299",
+        "value": "294/299"
+      },
+      {
+        "label": "classification_55/56",
+        "value": "55/56"
+      },
+      {
+        "label": "classification_57/59",
+        "value": "57/59"
+      },
+      {
+        "label": "classification_614.253.5",
+        "value": "614.253.5"
+      },
+      {
+        "label": "classification_616-083",
+        "value": "616-083"
+      },
+      {
+        "label": "classification_73/77",
+        "value": "73/77"
+      },
+      {
+        "label": "classification_81´28",
+        "value": "81´28"
+      },
+      {
+        "label": "classification_93/94",
+        "value": "93/94"
+      }
+    ]
+  }
 }

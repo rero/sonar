@@ -50,15 +50,15 @@ class DepositRecord(SonarRecord):
 
     STEP_DIFFUSION = 'diffusion'
 
-    STATUS_IN_PROGRESS = 'in progress'
+    STATUS_IN_PROGRESS = 'in_progress'
     STATUS_VALIDATED = 'validated'
-    STATUS_TO_VALIDATE = 'to validate'
+    STATUS_TO_VALIDATE = 'to_validate'
     STATUS_REJECTED = 'rejected'
-    STATUS_ASK_FOR_CHANGES = 'ask for changes'
+    STATUS_ASK_FOR_CHANGES = 'ask_for_changes'
 
     REVIEW_ACTION_APPROVE = 'approve'
     REVIEW_ACTION_REJECT = 'reject'
-    REVIEW_ACTION_ASK_FOR_CHANGES = 'ask-for-changes'
+    REVIEW_ACTION_ASK_FOR_CHANGES = 'ask_for_changes'
 
     minter = deposit_pid_minter
     fetcher = deposit_pid_fetcher
@@ -219,7 +219,7 @@ class DepositRecord(SonarRecord):
                 'type': 'bf:Person',
                 'preferred_name': contributor['name']
             },
-            'role': ['ctb'],
+            'role': ['cre'],
             'affiliation': contributor['affiliation']
         } for contributor in self['contributors']]
 

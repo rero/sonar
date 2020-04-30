@@ -50,11 +50,11 @@
             <ul class="list-unstyled mb-0">
               {% for contribution in record.contribution %}
               <li>
-                <small class="badge badge-secondary text-uppercase text-light">{{ _(contribution.agent.type) }}</small>
-                {{ contribution.agent.preferred_name }}
+                <small class="badge badge-secondary text-light">{{ _(contribution.agent.type) }}</small>
                 {% for role in contribution.role %}
-                <small class="badge badge-light text-uppercase">{{ _(role) }}</small>
+                <small class="badge badge-secondary text-light">{{ _('contribution_role_' + role) }}</small>
                 {% endfor %}
+                {{ contribution.agent.preferred_name }}
               </li>
               {% endfor %}
             </ul>
@@ -63,7 +63,7 @@
 
           <!-- DOCUMENT TYPE -->
           {% if record.documentType %}
-          {{ dl(_('Document type'), _(record.documentType)) }}
+          {{ dl(_('Document type'), _('document_type_' + record.documentType)) }}
           {% endif %}
 
           <!-- EDITION STATEMENT-->
@@ -177,7 +177,7 @@
               {% for identifier in record.identifiedBy|identifiedby_format %}
               <li>
                 {{ identifier.value }}
-                <small class="badge badge-secondary text-uppercase text-light">{{ identifier.type }}</small>
+                <small class="badge badge-secondary text-light">{{ identifier.type }}</small>
               </li>
               {% endfor %}
             </ul>
@@ -192,7 +192,7 @@
             <ul class="list-unstyled mb-0">
               {% for language in record.language %}
               <li>
-                {{ _('lang-' + language.value) }}
+                {{ _('lang_' + language.value) }}
               </li>
               {% endfor %}
             </ul>

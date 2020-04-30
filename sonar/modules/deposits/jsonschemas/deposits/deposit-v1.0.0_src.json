@@ -130,14 +130,38 @@
     "status": {
       "title": "Status",
       "type": "string",
-      "default": "in progress",
+      "default": "in_progress",
       "enum": [
-        "in progress",
-        "to validate",
+        "in_progress",
+        "to_validate",
         "validated",
         "rejected",
-        "ask for changes"
-      ]
+        "ask_for_changes"
+      ],
+      "form": {
+        "options": [
+          {
+            "label": "deposit_status_in_progress",
+            "value": "in_progress"
+          },
+          {
+            "label": "deposit_status_to_validate",
+            "value": "to_validate"
+          },
+          {
+            "label": "deposit_status_validated",
+            "value": "validated"
+          },
+          {
+            "label": "deposit_status_rejected",
+            "value": "rejected"
+          },
+          {
+            "label": "deposit_status_ask_for_changes",
+            "value": "ask_for_changes"
+          }
+        ]
+      }
     },
     "step": {
       "title": "Step",
@@ -184,8 +208,28 @@
               "submit",
               "approve",
               "reject",
-              "ask-for-changes"
-            ]
+              "ask_for_changes"
+            ],
+            "form": {
+              "options": [
+                {
+                  "label": "deposit_log_action_submit",
+                  "value": "submit"
+                },
+                {
+                  "label": "deposit_log_action_approve",
+                  "value": "approve"
+                },
+                {
+                  "label": "deposit_log_action_reject",
+                  "value": "reject"
+                },
+                {
+                  "label": "deposit_log_action_ask_for_changes",
+                  "value": "ask_for_changes"
+                }
+              ]
+            }
           },
           "date": {
             "title": "Date",
@@ -375,7 +419,10 @@
               "abstract"
             ],
             "additionalProperties": false,
-            "propertiesOrder": ["language", "abstract"],
+            "propertiesOrder": [
+              "language",
+              "abstract"
+            ],
             "properties": {
               "language": {
                 "$ref": "language-v1.0.0.json"
@@ -403,7 +450,10 @@
               "subjects"
             ],
             "additionalProperties": false,
-            "propertiesOrder": ["language", "subjects"],
+            "propertiesOrder": [
+              "language",
+              "subjects"
+            ],
             "properties": {
               "language": {
                 "$ref": "language-v1.0.0.json"

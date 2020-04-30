@@ -24,10 +24,15 @@ this file.
 
 from __future__ import absolute_import, print_function
 
-from flask import Blueprint, jsonify, redirect, render_template, request, \
-    url_for
-from flask_login import current_user
+import re
 
+from flask import Blueprint, abort, current_app, jsonify, redirect, \
+    render_template, request, url_for
+from flask_login import current_user
+from invenio_jsonschemas import current_jsonschemas
+from invenio_jsonschemas.errors import JSONSchemaNotFound
+
+from sonar.modules.babel_extractors import translate
 from sonar.modules.permissions import can_access_manage_view
 from sonar.modules.users.api import UserRecord
 
@@ -78,3 +83,29 @@ def logged_user():
     # tests, organisation cannot not be encoded to JSON after call of
     # user.replace_refs() --> check why
     return jsonify(data)
+
+
+@blueprint.route('/schemas/<record_type>')
+def schemas(record_type):
+    """Return schema for the editor.
+
+    :param record_type: Type of resource.
+    :returns: JSONified schema or a 404 if not found.
+    """
+    rec_type = record_type
+    rec_type = re.sub('ies$', 'y', rec_type)
+    rec_type = re.sub('s$', '', rec_type)
+
+    try:
+        current_jsonschemas.get_schema.cache_clear()
+        schema_name = '{}/{}-v1.0.0.json'.format(record_type, rec_type)
+        schema = current_jsonschemas.get_schema(schema_name)
+
+        # Recursively translate properties in schema
+        translate(
+            schema,
+            keys=current_app.config['SONAR_APP_BABEL_TRANSLATE_JSON_KEYS'])
+
+        return jsonify({'schema': schema})
+    except JSONSchemaNotFound:
+        abort(404)
