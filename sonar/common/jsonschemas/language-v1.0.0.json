@@ -487,5 +487,2450 @@
     "zun",
     "zxx",
     "zza"
-  ]
+  ],
+  "form": {
+    "options": [
+      {
+        "label": "lang_eng",
+        "value": "eng"
+      },
+      {
+        "label": "lang_fre",
+        "value": "fre"
+      },
+      {
+        "label": "lang_ger",
+        "value": "ger"
+      },
+      {
+        "label": "lang_ita",
+        "value": "ita"
+      },
+      {
+        "label": "lang_aar",
+        "value": "aar",
+        "group": "------------"
+      },
+      {
+        "label": "lang_abk",
+        "value": "abk",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ace",
+        "value": "ace",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ach",
+        "value": "ach",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ada",
+        "value": "ada",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ady",
+        "value": "ady",
+        "group": "------------"
+      },
+      {
+        "label": "lang_afa",
+        "value": "afa",
+        "group": "------------"
+      },
+      {
+        "label": "lang_afh",
+        "value": "afh",
+        "group": "------------"
+      },
+      {
+        "label": "lang_afr",
+        "value": "afr",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ain",
+        "value": "ain",
+        "group": "------------"
+      },
+      {
+        "label": "lang_aka",
+        "value": "aka",
+        "group": "------------"
+      },
+      {
+        "label": "lang_akk",
+        "value": "akk",
+        "group": "------------"
+      },
+      {
+        "label": "lang_alb",
+        "value": "alb",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ale",
+        "value": "ale",
+        "group": "------------"
+      },
+      {
+        "label": "lang_alg",
+        "value": "alg",
+        "group": "------------"
+      },
+      {
+        "label": "lang_alt",
+        "value": "alt",
+        "group": "------------"
+      },
+      {
+        "label": "lang_amh",
+        "value": "amh",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ang",
+        "value": "ang",
+        "group": "------------"
+      },
+      {
+        "label": "lang_anp",
+        "value": "anp",
+        "group": "------------"
+      },
+      {
+        "label": "lang_apa",
+        "value": "apa",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ara",
+        "value": "ara",
+        "group": "------------"
+      },
+      {
+        "label": "lang_arc",
+        "value": "arc",
+        "group": "------------"
+      },
+      {
+        "label": "lang_arg",
+        "value": "arg",
+        "group": "------------"
+      },
+      {
+        "label": "lang_arm",
+        "value": "arm",
+        "group": "------------"
+      },
+      {
+        "label": "lang_arn",
+        "value": "arn",
+        "group": "------------"
+      },
+      {
+        "label": "lang_arp",
+        "value": "arp",
+        "group": "------------"
+      },
+      {
+        "label": "lang_art",
+        "value": "art",
+        "group": "------------"
+      },
+      {
+        "label": "lang_arw",
+        "value": "arw",
+        "group": "------------"
+      },
+      {
+        "label": "lang_asm",
+        "value": "asm",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ast",
+        "value": "ast",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ath",
+        "value": "ath",
+        "group": "------------"
+      },
+      {
+        "label": "lang_aus",
+        "value": "aus",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ava",
+        "value": "ava",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ave",
+        "value": "ave",
+        "group": "------------"
+      },
+      {
+        "label": "lang_awa",
+        "value": "awa",
+        "group": "------------"
+      },
+      {
+        "label": "lang_aym",
+        "value": "aym",
+        "group": "------------"
+      },
+      {
+        "label": "lang_aze",
+        "value": "aze",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bad",
+        "value": "bad",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bai",
+        "value": "bai",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bak",
+        "value": "bak",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bal",
+        "value": "bal",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bam",
+        "value": "bam",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ban",
+        "value": "ban",
+        "group": "------------"
+      },
+      {
+        "label": "lang_baq",
+        "value": "baq",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bas",
+        "value": "bas",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bat",
+        "value": "bat",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bej",
+        "value": "bej",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bel",
+        "value": "bel",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bem",
+        "value": "bem",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ben",
+        "value": "ben",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ber",
+        "value": "ber",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bho",
+        "value": "bho",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bih",
+        "value": "bih",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bik",
+        "value": "bik",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bin",
+        "value": "bin",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bis",
+        "value": "bis",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bla",
+        "value": "bla",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bnt",
+        "value": "bnt",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bos",
+        "value": "bos",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bra",
+        "value": "bra",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bre",
+        "value": "bre",
+        "group": "------------"
+      },
+      {
+        "label": "lang_btk",
+        "value": "btk",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bua",
+        "value": "bua",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bug",
+        "value": "bug",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bul",
+        "value": "bul",
+        "group": "------------"
+      },
+      {
+        "label": "lang_bur",
+        "value": "bur",
+        "group": "------------"
+      },
+      {
+        "label": "lang_byn",
+        "value": "byn",
+        "group": "------------"
+      },
+      {
+        "label": "lang_cad",
+        "value": "cad",
+        "group": "------------"
+      },
+      {
+        "label": "lang_cai",
+        "value": "cai",
+        "group": "------------"
+      },
+      {
+        "label": "lang_car",
+        "value": "car",
+        "group": "------------"
+      },
+      {
+        "label": "lang_cat",
+        "value": "cat",
+        "group": "------------"
+      },
+      {
+        "label": "lang_cau",
+        "value": "cau",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ceb",
+        "value": "ceb",
+        "group": "------------"
+      },
+      {
+        "label": "lang_cel",
+        "value": "cel",
+        "group": "------------"
+      },
+      {
+        "label": "lang_cha",
+        "value": "cha",
+        "group": "------------"
+      },
+      {
+        "label": "lang_chb",
+        "value": "chb",
+        "group": "------------"
+      },
+      {
+        "label": "lang_che",
+        "value": "che",
+        "group": "------------"
+      },
+      {
+        "label": "lang_chg",
+        "value": "chg",
+        "group": "------------"
+      },
+      {
+        "label": "lang_chi",
+        "value": "chi",
+        "group": "------------"
+      },
+      {
+        "label": "lang_chk",
+        "value": "chk",
+        "group": "------------"
+      },
+      {
+        "label": "lang_chm",
+        "value": "chm",
+        "group": "------------"
+      },
+      {
+        "label": "lang_chn",
+        "value": "chn",
+        "group": "------------"
+      },
+      {
+        "label": "lang_cho",
+        "value": "cho",
+        "group": "------------"
+      },
+      {
+        "label": "lang_chp",
+        "value": "chp",
+        "group": "------------"
+      },
+      {
+        "label": "lang_chr",
+        "value": "chr",
+        "group": "------------"
+      },
+      {
+        "label": "lang_chu",
+        "value": "chu",
+        "group": "------------"
+      },
+      {
+        "label": "lang_chv",
+        "value": "chv",
+        "group": "------------"
+      },
+      {
+        "label": "lang_chy",
+        "value": "chy",
+        "group": "------------"
+      },
+      {
+        "label": "lang_cmc",
+        "value": "cmc",
+        "group": "------------"
+      },
+      {
+        "label": "lang_cnr",
+        "value": "cnr",
+        "group": "------------"
+      },
+      {
+        "label": "lang_cop",
+        "value": "cop",
+        "group": "------------"
+      },
+      {
+        "label": "lang_cor",
+        "value": "cor",
+        "group": "------------"
+      },
+      {
+        "label": "lang_cos",
+        "value": "cos",
+        "group": "------------"
+      },
+      {
+        "label": "lang_cpe",
+        "value": "cpe",
+        "group": "------------"
+      },
+      {
+        "label": "lang_cpf",
+        "value": "cpf",
+        "group": "------------"
+      },
+      {
+        "label": "lang_cpp",
+        "value": "cpp",
+        "group": "------------"
+      },
+      {
+        "label": "lang_cre",
+        "value": "cre",
+        "group": "------------"
+      },
+      {
+        "label": "lang_crh",
+        "value": "crh",
+        "group": "------------"
+      },
+      {
+        "label": "lang_crp",
+        "value": "crp",
+        "group": "------------"
+      },
+      {
+        "label": "lang_csb",
+        "value": "csb",
+        "group": "------------"
+      },
+      {
+        "label": "lang_cus",
+        "value": "cus",
+        "group": "------------"
+      },
+      {
+        "label": "lang_cze",
+        "value": "cze",
+        "group": "------------"
+      },
+      {
+        "label": "lang_dak",
+        "value": "dak",
+        "group": "------------"
+      },
+      {
+        "label": "lang_dan",
+        "value": "dan",
+        "group": "------------"
+      },
+      {
+        "label": "lang_dar",
+        "value": "dar",
+        "group": "------------"
+      },
+      {
+        "label": "lang_day",
+        "value": "day",
+        "group": "------------"
+      },
+      {
+        "label": "lang_del",
+        "value": "del",
+        "group": "------------"
+      },
+      {
+        "label": "lang_den",
+        "value": "den",
+        "group": "------------"
+      },
+      {
+        "label": "lang_dgr",
+        "value": "dgr",
+        "group": "------------"
+      },
+      {
+        "label": "lang_din",
+        "value": "din",
+        "group": "------------"
+      },
+      {
+        "label": "lang_div",
+        "value": "div",
+        "group": "------------"
+      },
+      {
+        "label": "lang_doi",
+        "value": "doi",
+        "group": "------------"
+      },
+      {
+        "label": "lang_dra",
+        "value": "dra",
+        "group": "------------"
+      },
+      {
+        "label": "lang_dsb",
+        "value": "dsb",
+        "group": "------------"
+      },
+      {
+        "label": "lang_dua",
+        "value": "dua",
+        "group": "------------"
+      },
+      {
+        "label": "lang_dum",
+        "value": "dum",
+        "group": "------------"
+      },
+      {
+        "label": "lang_dut",
+        "value": "dut",
+        "group": "------------"
+      },
+      {
+        "label": "lang_dyu",
+        "value": "dyu",
+        "group": "------------"
+      },
+      {
+        "label": "lang_dzo",
+        "value": "dzo",
+        "group": "------------"
+      },
+      {
+        "label": "lang_efi",
+        "value": "efi",
+        "group": "------------"
+      },
+      {
+        "label": "lang_egy",
+        "value": "egy",
+        "group": "------------"
+      },
+      {
+        "label": "lang_eka",
+        "value": "eka",
+        "group": "------------"
+      },
+      {
+        "label": "lang_elx",
+        "value": "elx",
+        "group": "------------"
+      },
+      {
+        "label": "lang_eng",
+        "value": "eng",
+        "group": "------------"
+      },
+      {
+        "label": "lang_enm",
+        "value": "enm",
+        "group": "------------"
+      },
+      {
+        "label": "lang_epo",
+        "value": "epo",
+        "group": "------------"
+      },
+      {
+        "label": "lang_est",
+        "value": "est",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ewe",
+        "value": "ewe",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ewo",
+        "value": "ewo",
+        "group": "------------"
+      },
+      {
+        "label": "lang_fan",
+        "value": "fan",
+        "group": "------------"
+      },
+      {
+        "label": "lang_fao",
+        "value": "fao",
+        "group": "------------"
+      },
+      {
+        "label": "lang_fat",
+        "value": "fat",
+        "group": "------------"
+      },
+      {
+        "label": "lang_fij",
+        "value": "fij",
+        "group": "------------"
+      },
+      {
+        "label": "lang_fil",
+        "value": "fil",
+        "group": "------------"
+      },
+      {
+        "label": "lang_fin",
+        "value": "fin",
+        "group": "------------"
+      },
+      {
+        "label": "lang_fiu",
+        "value": "fiu",
+        "group": "------------"
+      },
+      {
+        "label": "lang_fon",
+        "value": "fon",
+        "group": "------------"
+      },
+      {
+        "label": "lang_fre",
+        "value": "fre",
+        "group": "------------"
+      },
+      {
+        "label": "lang_frm",
+        "value": "frm",
+        "group": "------------"
+      },
+      {
+        "label": "lang_fro",
+        "value": "fro",
+        "group": "------------"
+      },
+      {
+        "label": "lang_frr",
+        "value": "frr",
+        "group": "------------"
+      },
+      {
+        "label": "lang_frs",
+        "value": "frs",
+        "group": "------------"
+      },
+      {
+        "label": "lang_fry",
+        "value": "fry",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ful",
+        "value": "ful",
+        "group": "------------"
+      },
+      {
+        "label": "lang_fur",
+        "value": "fur",
+        "group": "------------"
+      },
+      {
+        "label": "lang_gaa",
+        "value": "gaa",
+        "group": "------------"
+      },
+      {
+        "label": "lang_gay",
+        "value": "gay",
+        "group": "------------"
+      },
+      {
+        "label": "lang_gba",
+        "value": "gba",
+        "group": "------------"
+      },
+      {
+        "label": "lang_gem",
+        "value": "gem",
+        "group": "------------"
+      },
+      {
+        "label": "lang_geo",
+        "value": "geo",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ger",
+        "value": "ger",
+        "group": "------------"
+      },
+      {
+        "label": "lang_gez",
+        "value": "gez",
+        "group": "------------"
+      },
+      {
+        "label": "lang_gil",
+        "value": "gil",
+        "group": "------------"
+      },
+      {
+        "label": "lang_gla",
+        "value": "gla",
+        "group": "------------"
+      },
+      {
+        "label": "lang_gle",
+        "value": "gle",
+        "group": "------------"
+      },
+      {
+        "label": "lang_glg",
+        "value": "glg",
+        "group": "------------"
+      },
+      {
+        "label": "lang_glv",
+        "value": "glv",
+        "group": "------------"
+      },
+      {
+        "label": "lang_gmh",
+        "value": "gmh",
+        "group": "------------"
+      },
+      {
+        "label": "lang_goh",
+        "value": "goh",
+        "group": "------------"
+      },
+      {
+        "label": "lang_gon",
+        "value": "gon",
+        "group": "------------"
+      },
+      {
+        "label": "lang_gor",
+        "value": "gor",
+        "group": "------------"
+      },
+      {
+        "label": "lang_got",
+        "value": "got",
+        "group": "------------"
+      },
+      {
+        "label": "lang_grb",
+        "value": "grb",
+        "group": "------------"
+      },
+      {
+        "label": "lang_grc",
+        "value": "grc",
+        "group": "------------"
+      },
+      {
+        "label": "lang_gre",
+        "value": "gre",
+        "group": "------------"
+      },
+      {
+        "label": "lang_grn",
+        "value": "grn",
+        "group": "------------"
+      },
+      {
+        "label": "lang_gsw",
+        "value": "gsw",
+        "group": "------------"
+      },
+      {
+        "label": "lang_guj",
+        "value": "guj",
+        "group": "------------"
+      },
+      {
+        "label": "lang_gwi",
+        "value": "gwi",
+        "group": "------------"
+      },
+      {
+        "label": "lang_hai",
+        "value": "hai",
+        "group": "------------"
+      },
+      {
+        "label": "lang_hat",
+        "value": "hat",
+        "group": "------------"
+      },
+      {
+        "label": "lang_hau",
+        "value": "hau",
+        "group": "------------"
+      },
+      {
+        "label": "lang_haw",
+        "value": "haw",
+        "group": "------------"
+      },
+      {
+        "label": "lang_heb",
+        "value": "heb",
+        "group": "------------"
+      },
+      {
+        "label": "lang_her",
+        "value": "her",
+        "group": "------------"
+      },
+      {
+        "label": "lang_hil",
+        "value": "hil",
+        "group": "------------"
+      },
+      {
+        "label": "lang_him",
+        "value": "him",
+        "group": "------------"
+      },
+      {
+        "label": "lang_hin",
+        "value": "hin",
+        "group": "------------"
+      },
+      {
+        "label": "lang_hit",
+        "value": "hit",
+        "group": "------------"
+      },
+      {
+        "label": "lang_hmn",
+        "value": "hmn",
+        "group": "------------"
+      },
+      {
+        "label": "lang_hmo",
+        "value": "hmo",
+        "group": "------------"
+      },
+      {
+        "label": "lang_hrv",
+        "value": "hrv",
+        "group": "------------"
+      },
+      {
+        "label": "lang_hsb",
+        "value": "hsb",
+        "group": "------------"
+      },
+      {
+        "label": "lang_hun",
+        "value": "hun",
+        "group": "------------"
+      },
+      {
+        "label": "lang_hup",
+        "value": "hup",
+        "group": "------------"
+      },
+      {
+        "label": "lang_iba",
+        "value": "iba",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ibo",
+        "value": "ibo",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ice",
+        "value": "ice",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ido",
+        "value": "ido",
+        "group": "------------"
+      },
+      {
+        "label": "lang_iii",
+        "value": "iii",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ijo",
+        "value": "ijo",
+        "group": "------------"
+      },
+      {
+        "label": "lang_iku",
+        "value": "iku",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ile",
+        "value": "ile",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ilo",
+        "value": "ilo",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ina",
+        "value": "ina",
+        "group": "------------"
+      },
+      {
+        "label": "lang_inc",
+        "value": "inc",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ind",
+        "value": "ind",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ine",
+        "value": "ine",
+        "group": "------------"
+      },
+      {
+        "label": "lang_inh",
+        "value": "inh",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ipk",
+        "value": "ipk",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ira",
+        "value": "ira",
+        "group": "------------"
+      },
+      {
+        "label": "lang_iro",
+        "value": "iro",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ita",
+        "value": "ita",
+        "group": "------------"
+      },
+      {
+        "label": "lang_jav",
+        "value": "jav",
+        "group": "------------"
+      },
+      {
+        "label": "lang_jbo",
+        "value": "jbo",
+        "group": "------------"
+      },
+      {
+        "label": "lang_jpn",
+        "value": "jpn",
+        "group": "------------"
+      },
+      {
+        "label": "lang_jpr",
+        "value": "jpr",
+        "group": "------------"
+      },
+      {
+        "label": "lang_jrb",
+        "value": "jrb",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kaa",
+        "value": "kaa",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kab",
+        "value": "kab",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kac",
+        "value": "kac",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kal",
+        "value": "kal",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kam",
+        "value": "kam",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kan",
+        "value": "kan",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kar",
+        "value": "kar",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kas",
+        "value": "kas",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kau",
+        "value": "kau",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kaw",
+        "value": "kaw",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kaz",
+        "value": "kaz",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kbd",
+        "value": "kbd",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kha",
+        "value": "kha",
+        "group": "------------"
+      },
+      {
+        "label": "lang_khi",
+        "value": "khi",
+        "group": "------------"
+      },
+      {
+        "label": "lang_khm",
+        "value": "khm",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kho",
+        "value": "kho",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kik",
+        "value": "kik",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kin",
+        "value": "kin",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kir",
+        "value": "kir",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kmb",
+        "value": "kmb",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kok",
+        "value": "kok",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kom",
+        "value": "kom",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kon",
+        "value": "kon",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kor",
+        "value": "kor",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kos",
+        "value": "kos",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kpe",
+        "value": "kpe",
+        "group": "------------"
+      },
+      {
+        "label": "lang_krc",
+        "value": "krc",
+        "group": "------------"
+      },
+      {
+        "label": "lang_krl",
+        "value": "krl",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kro",
+        "value": "kro",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kru",
+        "value": "kru",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kua",
+        "value": "kua",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kum",
+        "value": "kum",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kur",
+        "value": "kur",
+        "group": "------------"
+      },
+      {
+        "label": "lang_kut",
+        "value": "kut",
+        "group": "------------"
+      },
+      {
+        "label": "lang_lad",
+        "value": "lad",
+        "group": "------------"
+      },
+      {
+        "label": "lang_lah",
+        "value": "lah",
+        "group": "------------"
+      },
+      {
+        "label": "lang_lam",
+        "value": "lam",
+        "group": "------------"
+      },
+      {
+        "label": "lang_lao",
+        "value": "lao",
+        "group": "------------"
+      },
+      {
+        "label": "lang_lat",
+        "value": "lat",
+        "group": "------------"
+      },
+      {
+        "label": "lang_lav",
+        "value": "lav",
+        "group": "------------"
+      },
+      {
+        "label": "lang_lez",
+        "value": "lez",
+        "group": "------------"
+      },
+      {
+        "label": "lang_lim",
+        "value": "lim",
+        "group": "------------"
+      },
+      {
+        "label": "lang_lin",
+        "value": "lin",
+        "group": "------------"
+      },
+      {
+        "label": "lang_lit",
+        "value": "lit",
+        "group": "------------"
+      },
+      {
+        "label": "lang_lol",
+        "value": "lol",
+        "group": "------------"
+      },
+      {
+        "label": "lang_loz",
+        "value": "loz",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ltz",
+        "value": "ltz",
+        "group": "------------"
+      },
+      {
+        "label": "lang_lua",
+        "value": "lua",
+        "group": "------------"
+      },
+      {
+        "label": "lang_lub",
+        "value": "lub",
+        "group": "------------"
+      },
+      {
+        "label": "lang_lug",
+        "value": "lug",
+        "group": "------------"
+      },
+      {
+        "label": "lang_lui",
+        "value": "lui",
+        "group": "------------"
+      },
+      {
+        "label": "lang_lun",
+        "value": "lun",
+        "group": "------------"
+      },
+      {
+        "label": "lang_luo",
+        "value": "luo",
+        "group": "------------"
+      },
+      {
+        "label": "lang_lus",
+        "value": "lus",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mac",
+        "value": "mac",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mad",
+        "value": "mad",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mag",
+        "value": "mag",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mah",
+        "value": "mah",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mai",
+        "value": "mai",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mak",
+        "value": "mak",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mal",
+        "value": "mal",
+        "group": "------------"
+      },
+      {
+        "label": "lang_man",
+        "value": "man",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mao",
+        "value": "mao",
+        "group": "------------"
+      },
+      {
+        "label": "lang_map",
+        "value": "map",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mar",
+        "value": "mar",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mas",
+        "value": "mas",
+        "group": "------------"
+      },
+      {
+        "label": "lang_may",
+        "value": "may",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mdf",
+        "value": "mdf",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mdr",
+        "value": "mdr",
+        "group": "------------"
+      },
+      {
+        "label": "lang_men",
+        "value": "men",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mga",
+        "value": "mga",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mic",
+        "value": "mic",
+        "group": "------------"
+      },
+      {
+        "label": "lang_min",
+        "value": "min",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mis",
+        "value": "mis",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mkh",
+        "value": "mkh",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mlg",
+        "value": "mlg",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mlt",
+        "value": "mlt",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mnc",
+        "value": "mnc",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mni",
+        "value": "mni",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mno",
+        "value": "mno",
+        "group": "------------"
+      },
+      {
+        "label": "lang_moh",
+        "value": "moh",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mon",
+        "value": "mon",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mos",
+        "value": "mos",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mul",
+        "value": "mul",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mun",
+        "value": "mun",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mus",
+        "value": "mus",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mwl",
+        "value": "mwl",
+        "group": "------------"
+      },
+      {
+        "label": "lang_mwr",
+        "value": "mwr",
+        "group": "------------"
+      },
+      {
+        "label": "lang_myn",
+        "value": "myn",
+        "group": "------------"
+      },
+      {
+        "label": "lang_myv",
+        "value": "myv",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nah",
+        "value": "nah",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nai",
+        "value": "nai",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nap",
+        "value": "nap",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nau",
+        "value": "nau",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nav",
+        "value": "nav",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nbl",
+        "value": "nbl",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nde",
+        "value": "nde",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ndo",
+        "value": "ndo",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nds",
+        "value": "nds",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nep",
+        "value": "nep",
+        "group": "------------"
+      },
+      {
+        "label": "lang_new",
+        "value": "new",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nia",
+        "value": "nia",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nic",
+        "value": "nic",
+        "group": "------------"
+      },
+      {
+        "label": "lang_niu",
+        "value": "niu",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nno",
+        "value": "nno",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nob",
+        "value": "nob",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nog",
+        "value": "nog",
+        "group": "------------"
+      },
+      {
+        "label": "lang_non",
+        "value": "non",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nor",
+        "value": "nor",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nqo",
+        "value": "nqo",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nso",
+        "value": "nso",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nub",
+        "value": "nub",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nwc",
+        "value": "nwc",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nya",
+        "value": "nya",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nym",
+        "value": "nym",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nyn",
+        "value": "nyn",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nyo",
+        "value": "nyo",
+        "group": "------------"
+      },
+      {
+        "label": "lang_nzi",
+        "value": "nzi",
+        "group": "------------"
+      },
+      {
+        "label": "lang_oci",
+        "value": "oci",
+        "group": "------------"
+      },
+      {
+        "label": "lang_oji",
+        "value": "oji",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ori",
+        "value": "ori",
+        "group": "------------"
+      },
+      {
+        "label": "lang_orm",
+        "value": "orm",
+        "group": "------------"
+      },
+      {
+        "label": "lang_osa",
+        "value": "osa",
+        "group": "------------"
+      },
+      {
+        "label": "lang_oss",
+        "value": "oss",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ota",
+        "value": "ota",
+        "group": "------------"
+      },
+      {
+        "label": "lang_oto",
+        "value": "oto",
+        "group": "------------"
+      },
+      {
+        "label": "lang_paa",
+        "value": "paa",
+        "group": "------------"
+      },
+      {
+        "label": "lang_pag",
+        "value": "pag",
+        "group": "------------"
+      },
+      {
+        "label": "lang_pal",
+        "value": "pal",
+        "group": "------------"
+      },
+      {
+        "label": "lang_pam",
+        "value": "pam",
+        "group": "------------"
+      },
+      {
+        "label": "lang_pan",
+        "value": "pan",
+        "group": "------------"
+      },
+      {
+        "label": "lang_pap",
+        "value": "pap",
+        "group": "------------"
+      },
+      {
+        "label": "lang_pau",
+        "value": "pau",
+        "group": "------------"
+      },
+      {
+        "label": "lang_peo",
+        "value": "peo",
+        "group": "------------"
+      },
+      {
+        "label": "lang_per",
+        "value": "per",
+        "group": "------------"
+      },
+      {
+        "label": "lang_phi",
+        "value": "phi",
+        "group": "------------"
+      },
+      {
+        "label": "lang_phn",
+        "value": "phn",
+        "group": "------------"
+      },
+      {
+        "label": "lang_pli",
+        "value": "pli",
+        "group": "------------"
+      },
+      {
+        "label": "lang_pol",
+        "value": "pol",
+        "group": "------------"
+      },
+      {
+        "label": "lang_pon",
+        "value": "pon",
+        "group": "------------"
+      },
+      {
+        "label": "lang_por",
+        "value": "por",
+        "group": "------------"
+      },
+      {
+        "label": "lang_pra",
+        "value": "pra",
+        "group": "------------"
+      },
+      {
+        "label": "lang_pro",
+        "value": "pro",
+        "group": "------------"
+      },
+      {
+        "label": "lang_pus",
+        "value": "pus",
+        "group": "------------"
+      },
+      {
+        "label": "lang_que",
+        "value": "que",
+        "group": "------------"
+      },
+      {
+        "label": "lang_raj",
+        "value": "raj",
+        "group": "------------"
+      },
+      {
+        "label": "lang_rap",
+        "value": "rap",
+        "group": "------------"
+      },
+      {
+        "label": "lang_rar",
+        "value": "rar",
+        "group": "------------"
+      },
+      {
+        "label": "lang_roa",
+        "value": "roa",
+        "group": "------------"
+      },
+      {
+        "label": "lang_roh",
+        "value": "roh",
+        "group": "------------"
+      },
+      {
+        "label": "lang_rom",
+        "value": "rom",
+        "group": "------------"
+      },
+      {
+        "label": "lang_rum",
+        "value": "rum",
+        "group": "------------"
+      },
+      {
+        "label": "lang_run",
+        "value": "run",
+        "group": "------------"
+      },
+      {
+        "label": "lang_rup",
+        "value": "rup",
+        "group": "------------"
+      },
+      {
+        "label": "lang_rus",
+        "value": "rus",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sad",
+        "value": "sad",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sag",
+        "value": "sag",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sah",
+        "value": "sah",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sai",
+        "value": "sai",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sal",
+        "value": "sal",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sam",
+        "value": "sam",
+        "group": "------------"
+      },
+      {
+        "label": "lang_san",
+        "value": "san",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sas",
+        "value": "sas",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sat",
+        "value": "sat",
+        "group": "------------"
+      },
+      {
+        "label": "lang_scn",
+        "value": "scn",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sco",
+        "value": "sco",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sel",
+        "value": "sel",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sem",
+        "value": "sem",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sga",
+        "value": "sga",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sgn",
+        "value": "sgn",
+        "group": "------------"
+      },
+      {
+        "label": "lang_shn",
+        "value": "shn",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sid",
+        "value": "sid",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sin",
+        "value": "sin",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sio",
+        "value": "sio",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sit",
+        "value": "sit",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sla",
+        "value": "sla",
+        "group": "------------"
+      },
+      {
+        "label": "lang_slo",
+        "value": "slo",
+        "group": "------------"
+      },
+      {
+        "label": "lang_slv",
+        "value": "slv",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sma",
+        "value": "sma",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sme",
+        "value": "sme",
+        "group": "------------"
+      },
+      {
+        "label": "lang_smi",
+        "value": "smi",
+        "group": "------------"
+      },
+      {
+        "label": "lang_smj",
+        "value": "smj",
+        "group": "------------"
+      },
+      {
+        "label": "lang_smn",
+        "value": "smn",
+        "group": "------------"
+      },
+      {
+        "label": "lang_smo",
+        "value": "smo",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sms",
+        "value": "sms",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sna",
+        "value": "sna",
+        "group": "------------"
+      },
+      {
+        "label": "lang_snd",
+        "value": "snd",
+        "group": "------------"
+      },
+      {
+        "label": "lang_snk",
+        "value": "snk",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sog",
+        "value": "sog",
+        "group": "------------"
+      },
+      {
+        "label": "lang_som",
+        "value": "som",
+        "group": "------------"
+      },
+      {
+        "label": "lang_son",
+        "value": "son",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sot",
+        "value": "sot",
+        "group": "------------"
+      },
+      {
+        "label": "lang_spa",
+        "value": "spa",
+        "group": "------------"
+      },
+      {
+        "label": "lang_srd",
+        "value": "srd",
+        "group": "------------"
+      },
+      {
+        "label": "lang_srn",
+        "value": "srn",
+        "group": "------------"
+      },
+      {
+        "label": "lang_srp",
+        "value": "srp",
+        "group": "------------"
+      },
+      {
+        "label": "lang_srr",
+        "value": "srr",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ssa",
+        "value": "ssa",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ssw",
+        "value": "ssw",
+        "group": "------------"
+      },
+      {
+        "label": "lang_suk",
+        "value": "suk",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sun",
+        "value": "sun",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sus",
+        "value": "sus",
+        "group": "------------"
+      },
+      {
+        "label": "lang_sux",
+        "value": "sux",
+        "group": "------------"
+      },
+      {
+        "label": "lang_swa",
+        "value": "swa",
+        "group": "------------"
+      },
+      {
+        "label": "lang_swe",
+        "value": "swe",
+        "group": "------------"
+      },
+      {
+        "label": "lang_syc",
+        "value": "syc",
+        "group": "------------"
+      },
+      {
+        "label": "lang_syr",
+        "value": "syr",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tah",
+        "value": "tah",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tai",
+        "value": "tai",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tam",
+        "value": "tam",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tat",
+        "value": "tat",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tel",
+        "value": "tel",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tem",
+        "value": "tem",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ter",
+        "value": "ter",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tet",
+        "value": "tet",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tgk",
+        "value": "tgk",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tgl",
+        "value": "tgl",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tha",
+        "value": "tha",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tib",
+        "value": "tib",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tig",
+        "value": "tig",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tir",
+        "value": "tir",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tiv",
+        "value": "tiv",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tkl",
+        "value": "tkl",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tlh",
+        "value": "tlh",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tli",
+        "value": "tli",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tmh",
+        "value": "tmh",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tog",
+        "value": "tog",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ton",
+        "value": "ton",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tpi",
+        "value": "tpi",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tsi",
+        "value": "tsi",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tsn",
+        "value": "tsn",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tso",
+        "value": "tso",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tuk",
+        "value": "tuk",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tum",
+        "value": "tum",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tup",
+        "value": "tup",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tur",
+        "value": "tur",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tut",
+        "value": "tut",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tvl",
+        "value": "tvl",
+        "group": "------------"
+      },
+      {
+        "label": "lang_twi",
+        "value": "twi",
+        "group": "------------"
+      },
+      {
+        "label": "lang_tyv",
+        "value": "tyv",
+        "group": "------------"
+      },
+      {
+        "label": "lang_udm",
+        "value": "udm",
+        "group": "------------"
+      },
+      {
+        "label": "lang_uga",
+        "value": "uga",
+        "group": "------------"
+      },
+      {
+        "label": "lang_uig",
+        "value": "uig",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ukr",
+        "value": "ukr",
+        "group": "------------"
+      },
+      {
+        "label": "lang_umb",
+        "value": "umb",
+        "group": "------------"
+      },
+      {
+        "label": "lang_und",
+        "value": "und",
+        "group": "------------"
+      },
+      {
+        "label": "lang_urd",
+        "value": "urd",
+        "group": "------------"
+      },
+      {
+        "label": "lang_uzb",
+        "value": "uzb",
+        "group": "------------"
+      },
+      {
+        "label": "lang_vai",
+        "value": "vai",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ven",
+        "value": "ven",
+        "group": "------------"
+      },
+      {
+        "label": "lang_vie",
+        "value": "vie",
+        "group": "------------"
+      },
+      {
+        "label": "lang_vol",
+        "value": "vol",
+        "group": "------------"
+      },
+      {
+        "label": "lang_vot",
+        "value": "vot",
+        "group": "------------"
+      },
+      {
+        "label": "lang_wak",
+        "value": "wak",
+        "group": "------------"
+      },
+      {
+        "label": "lang_wal",
+        "value": "wal",
+        "group": "------------"
+      },
+      {
+        "label": "lang_war",
+        "value": "war",
+        "group": "------------"
+      },
+      {
+        "label": "lang_was",
+        "value": "was",
+        "group": "------------"
+      },
+      {
+        "label": "lang_wel",
+        "value": "wel",
+        "group": "------------"
+      },
+      {
+        "label": "lang_wen",
+        "value": "wen",
+        "group": "------------"
+      },
+      {
+        "label": "lang_wln",
+        "value": "wln",
+        "group": "------------"
+      },
+      {
+        "label": "lang_wol",
+        "value": "wol",
+        "group": "------------"
+      },
+      {
+        "label": "lang_xal",
+        "value": "xal",
+        "group": "------------"
+      },
+      {
+        "label": "lang_xho",
+        "value": "xho",
+        "group": "------------"
+      },
+      {
+        "label": "lang_yao",
+        "value": "yao",
+        "group": "------------"
+      },
+      {
+        "label": "lang_yap",
+        "value": "yap",
+        "group": "------------"
+      },
+      {
+        "label": "lang_yid",
+        "value": "yid",
+        "group": "------------"
+      },
+      {
+        "label": "lang_yor",
+        "value": "yor",
+        "group": "------------"
+      },
+      {
+        "label": "lang_ypk",
+        "value": "ypk",
+        "group": "------------"
+      },
+      {
+        "label": "lang_zap",
+        "value": "zap",
+        "group": "------------"
+      },
+      {
+        "label": "lang_zbl",
+        "value": "zbl",
+        "group": "------------"
+      },
+      {
+        "label": "lang_zen",
+        "value": "zen",
+        "group": "------------"
+      },
+      {
+        "label": "lang_zha",
+        "value": "zha",
+        "group": "------------"
+      },
+      {
+        "label": "lang_znd",
+        "value": "znd",
+        "group": "------------"
+      },
+      {
+        "label": "lang_zul",
+        "value": "zul",
+        "group": "------------"
+      },
+      {
+        "label": "lang_zun",
+        "value": "zun",
+        "group": "------------"
+      },
+      {
+        "label": "lang_zxx",
+        "value": "zxx",
+        "group": "------------"
+      },
+      {
+        "label": "lang_zza",
+        "value": "zza",
+        "group": "------------"
+      }
+    ]
+  }
 }

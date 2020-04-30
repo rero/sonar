@@ -129,7 +129,7 @@ def test_publish(client, db, db_user_fixture, db_moderator_fixture,
     assert response.status_code == 400
 
     # Test the publication by a moderator
-    deposit_fixture['status'] = 'in progress'
+    deposit_fixture['status'] = 'in_progress'
     deposit_fixture.commit()
     db_user_fixture['roles'] = ['moderator']
     db_user_fixture.commit()
@@ -154,7 +154,7 @@ def test_review(client, db, db_user_fixture, db_moderator_fixture,
     assert response.status_code == 400
 
     # No payload posted
-    deposit_fixture['status'] = 'to validate'
+    deposit_fixture['status'] = 'to_validate'
     deposit_fixture.commit()
     db.session.commit()
 
@@ -199,7 +199,7 @@ def test_review(client, db, db_user_fixture, db_moderator_fixture,
     assert response.status_code == 200
 
     # Valid refusal request
-    deposit_fixture['status'] = 'to validate'
+    deposit_fixture['status'] = 'to_validate'
     deposit_fixture.commit()
     db.session.commit()
     response = client.post(url,
@@ -216,12 +216,12 @@ def test_review(client, db, db_user_fixture, db_moderator_fixture,
     assert response.status_code == 200
 
     # Valid ask for changes request
-    deposit_fixture['status'] = 'to validate'
+    deposit_fixture['status'] = 'to_validate'
     deposit_fixture.commit()
     db.session.commit()
     response = client.post(url,
                            data=json.dumps({
-                               'action': 'ask-for-changes',
+                               'action': 'ask_for_changes',
                                'comment': None,
                                'user': {
                                    '$ref':

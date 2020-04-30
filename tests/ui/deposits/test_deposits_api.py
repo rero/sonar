@@ -103,7 +103,7 @@ def test_create_document(app, deposit_fixture):
             'type': 'bf:Person'
         },
         'controlledAffiliation': ['Uni of Bern and Hospital'],
-        'role': ['ctb']
+        'role': ['cre']
     }]
 
     assert document.files['main.pdf']['restricted'] == 'organisation'

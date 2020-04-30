@@ -85,9 +85,34 @@
           "admin",
           "moderator",
           "user"
-        ]
+        ],
+        "form": {
+          "options": [
+            {
+              "label": "role_superadmin",
+              "value": "superadmin"
+            },
+            {
+              "label": "role_admin",
+              "value": "admin"
+            },
+            {
+              "label": "role_moderator",
+              "value": "moderator"
+            },
+            {
+              "label": "role_user",
+              "value": "user"
+            }
+          ]
+        }
       }
     }
   },
-  "required": ["full_name", "email", "roles", "$schema"]
+  "required": [
+    "full_name",
+    "email",
+    "roles",
+    "$schema"
+  ]
 }

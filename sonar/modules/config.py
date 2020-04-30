@@ -53,3 +53,11 @@ SONAR_APP_INTERNAL_IPS = ['127.0.0.1']
 
 SONAR_APP_DEFAULT_ORGANISATION = 'sonar'
 """Default organisation key."""
+
+SONAR_APP_BABEL_TRANSLATE_JSON_KEYS = [
+    'title',
+    'label',
+    'description',
+    'placeholder'
+]
+"""Keys to translate in JSON schemas."""

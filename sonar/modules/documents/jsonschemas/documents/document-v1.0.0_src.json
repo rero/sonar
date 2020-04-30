@@ -162,7 +162,15 @@
             "default": "bf:Title",
             "enum": [
               "bf:Title"
-            ]
+            ],
+            "form": {
+              "options": [
+                {
+                  "label": "bf:Title",
+                  "value": "bf:Title"
+                }
+              ]
+            }
           },
           "mainTitle": {
             "title": "Main title",
@@ -234,7 +242,15 @@
             "default": "bf:Language",
             "enum": [
               "bf:Language"
-            ]
+            ],
+            "form": {
+              "options": [
+                {
+                  "label": "bf:Language",
+                  "value": "bf:Language"
+                }
+              ]
+            }
           },
           "value": {
             "$ref": "language-v1.0.0.json"
@@ -278,7 +294,9 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["type"],
+        "required": [
+          "type"
+        ],
         "properties": {
           "type": {
             "title": "Type",
@@ -286,7 +304,19 @@
             "enum": [
               "bf:Publication",
               "bf:Manufacture"
-            ]
+            ],
+            "form": {
+              "options": [
+                {
+                  "label": "bf:Publication",
+                  "value": "bf:Publication"
+                },
+                {
+                  "label": "bf:Manufacture",
+                  "value": "bf:Manufacture"
+                }
+              ]
+            }
           },
           "statement": {
             "title": "Statement of place and/or agent and/or date of the provision activity",
@@ -302,7 +332,23 @@
                     "bf:Place",
                     "bf:Agent",
                     "Date"
-                  ]
+                  ],
+                  "form": {
+                    "options": [
+                      {
+                        "label": "bf:Place",
+                        "value": "bf:Place"
+                      },
+                      {
+                        "label": "bf:Agent",
+                        "value": "bf:Agent"
+                      },
+                      {
+                        "label": "Date",
+                        "value": "Date"
+                      }
+                    ]
+                  }
                 },
                 "label": {
                   "title": "Label",
@@ -464,11 +510,96 @@
               "bf:Upc",
               "bf:Urn",
               "bf:VideoRecordingNumber",
-              "bf:Strn",
-              "bf:ReportNumber",
-              "uri",
-              "pmid"
-            ]
+              "uri"
+            ],
+            "form": {
+              "options": [
+                {
+                  "label": "bf:AudioIssueNumber",
+                  "value": "bf:AudioIssueNumber"
+                },
+                {
+                  "label": "bf:Doi",
+                  "value": "bf:Doi"
+                },
+                {
+                  "label": "bf:Ean",
+                  "value": "bf:Ean"
+                },
+                {
+                  "label": "bf:Gtin14Number",
+                  "value": "bf:Gtin14Number"
+                },
+                {
+                  "label": "bf:Identifier",
+                  "value": "bf:Identifier"
+                },
+                {
+                  "label": "bf:Isan",
+                  "value": "bf:Isan"
+                },
+                {
+                  "label": "bf:Isbn",
+                  "value": "bf:Isbn"
+                },
+                {
+                  "label": "bf:Ismn",
+                  "value": "bf:Ismn"
+                },
+                {
+                  "label": "bf:Isrc",
+                  "value": "bf:Isrc"
+                },
+                {
+                  "label": "bf:Issn",
+                  "value": "bf:Issn"
+                },
+                {
+                  "label": "bf:IssnL",
+                  "value": "bf:IssnL"
+                },
+                {
+                  "label": "bf:Local",
+                  "value": "bf:Local"
+                },
+                {
+                  "label": "bf:MatrixNumber",
+                  "value": "bf:MatrixNumber"
+                },
+                {
+                  "label": "bf:MusicDistributorNumber",
+                  "value": "bf:MusicDistributorNumber"
+                },
+                {
+                  "label": "bf:MusicPlate",
+                  "value": "bf:MusicPlate"
+                },
+                {
+                  "label": "bf:MusicPublisherNumber",
+                  "value": "bf:MusicPublisherNumber"
+                },
+                {
+                  "label": "bf:PublisherNumber",
+                  "value": "bf:PublisherNumber"
+                },
+                {
+                  "label": "bf:Upc",
+                  "value": "bf:Upc"
+                },
+                {
+                  "label": "bf:Urn",
+                  "value": "bf:Urn"
+                },
+                {
+                  "label": "bf:VideoRecordingNumber",
+                  "value": "bf:VideoRecordingNumber"
+                },
+                {
+                  "label": "uri",
+                  "value": "uri"
+                }
+              ]
+            }
           },
           "value": {
             "title": "Identifier value",
@@ -618,7 +749,22 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": ["bf:ClassificationUdc", "bf:ClassificationDdc"]
+            "enum": [
+              "bf:ClassificationUdc",
+              "bf:ClassificationDdc"
+            ],
+            "form": {
+              "options": [
+                {
+                  "label": "bf:ClassificationUdc",
+                  "value": "bf:ClassificationUdc"
+                },
+                {
+                  "label": "bf:ClassificationDdc",
+                  "value": "bf:ClassificationDdc"
+                }
+              ]
+            }
           },
           "classificationPortion": {
             "type": "string",
@@ -641,7 +787,9 @@
       "title": "Dissertation",
       "type": "object",
       "additionalProperties": false,
-      "required": ["degree"],
+      "required": [
+        "degree"
+      ],
       "properties": {
         "degree": {
           "title": "Degree",
@@ -678,7 +826,9 @@
         "title": "Contribution",
         "type": "object",
         "additionalProperties": false,
-        "required": ["role"],
+        "required": [
+          "role"
+        ],
         "properties": {
           "agent": {
             "title": "Agent",
@@ -688,7 +838,32 @@
               "type": {
                 "title": "Type",
                 "type": "string",
-                "enum": ["bf:Person", "bf:Organization", "bf:Meeting", "bf:Local"]
+                "enum": [
+                  "bf:Person",
+                  "bf:Organization",
+                  "bf:Meeting",
+                  "bf:Local"
+                ],
+                "form": {
+                  "options": [
+                    {
+                      "label": "bf:Person",
+                      "value": "bf:Person"
+                    },
+                    {
+                      "label": "bf:Organization",
+                      "value": "bf:Organization"
+                    },
+                    {
+                      "label": "bf:Meeting",
+                      "value": "bf:Meeting"
+                    },
+                    {
+                      "label": "bf:Local",
+                      "value": "bf:Local"
+                    }
+                  ]
+                }
               },
               "preferred_name": {
                 "title": "Preferred name",
@@ -699,7 +874,11 @@
                 "title": "Identified by",
                 "type": "object",
                 "additionalProperties": false,
-                "required": ["type", "source", "value"],
+                "required": [
+                  "type",
+                  "source",
+                  "value"
+                ],
                 "properties": {
                   "type": {
                     "title": "Type",
@@ -752,7 +931,37 @@
             "items": {
               "title": "Role",
               "type": "string",
-              "enum": ["dgs", "prt", "cre", "edt", "ctb"]
+              "enum": [
+                "dgs",
+                "prt",
+                "cre",
+                "edt",
+                "ctb"
+              ],
+              "form": {
+                "options": [
+                  {
+                    "label": "contribution_role_dgs",
+                    "value": "dgs"
+                  },
+                  {
+                    "label": "contribution_role_prt",
+                    "value": "prt"
+                  },
+                  {
+                    "label": "contribution_role_cre",
+                    "value": "cre"
+                  },
+                  {
+                    "label": "contribution_role_edt",
+                    "value": "edt"
+                  },
+                  {
+                    "label": "contribution_role_ctb",
+                    "value": "ctb"
+                  }
+                ]
+              }
             }
           },
           "affiliation": {
