@@ -24,8 +24,10 @@
 # image (built with Dockerfile.base) which only includes your Python
 # dependencies.
 
-ARG DEPENDENCIES_VERSION=latest
-FROM sonar-base:${DEPENDENCIES_VERSION}
+ARG VERSION=latest
+FROM sonar-base:${VERSION}
+
+ARG UI_TGZ=""
 
 COPY ./ .
 COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
@@ -35,6 +37,7 @@ RUN pip install . && \
     invenio webpack create && \
     # --unsafe needed because we are running as root
     invenio webpack install --unsafe && \
+    if [ "${UI_TGZ}" != "" ] ; then invenio webpack install $PWD/data/$UI_TGZ --unsafe ; fi && \
     invenio webpack build &&  \
     invenio utils compile-json ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json -o ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json && \
     invenio utils compile-json ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json -o ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json && \
