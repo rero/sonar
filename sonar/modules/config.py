@@ -61,3 +61,6 @@ SONAR_APP_BABEL_TRANSLATE_JSON_KEYS = [
     'placeholder'
 ]
 """Keys to translate in JSON schemas."""
+
+SONAR_APP_FILE_STORAGE_PATH = None
+"""File storage location."""
