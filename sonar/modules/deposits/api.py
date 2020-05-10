@@ -134,10 +134,7 @@ class DepositRecord(SonarRecord):
             })
 
         # Languages
-        metadata['language'] = [{
-            'value': language,
-            'type': 'bf:Language'
-        }]
+        metadata['language'] = [{'value': language, 'type': 'bf:Language'}]
 
         # Document date
         if self['metadata'].get('documentDate'):
@@ -149,31 +146,36 @@ class DepositRecord(SonarRecord):
             }]
 
         # Published in
-        part_of = {
-            'numberingYear': self['metadata']['publication']['year'],
-            'numberingPages': self['metadata']['publication']['pages'],
-            'document': {
-                'title': self['metadata']['publication']['publishedIn']
-            }
-        }
-        if self['metadata']['publication'].get('volume'):
-            part_of['numberingVolume'] = self['metadata']['publication'][
-                'volume']
-
-        if self['metadata']['publication'].get('number'):
-            part_of['numberingIssue'] = self['metadata']['publication'][
-                'number']
-
-        if self['metadata']['publication'].get('editors'):
-            part_of['document']['contribution'] = self['metadata'][
-                'publication']['editors']
-
-        if self['metadata']['publication'].get('publisher'):
-            part_of['document']['publication'] = {
-                'statement': self['metadata']['publication']['publisher']
+        if self['metadata'].get('publication'):
+            part_of = {
+                'numberingYear': self['metadata']['publication']['year'],
+                'document': {
+                    'title': self['metadata']['publication']['publishedIn']
+                }
             }
 
-        metadata['partOf'] = [part_of]
+            if self['metadata']['publication'].get('pages'):
+                part_of['numberingPages'] = self['metadata']['publication'][
+                    'pages']
+
+            if self['metadata']['publication'].get('volume'):
+                part_of['numberingVolume'] = self['metadata']['publication'][
+                    'volume']
+
+            if self['metadata']['publication'].get('number'):
+                part_of['numberingIssue'] = self['metadata']['publication'][
+                    'number']
+
+            if self['metadata']['publication'].get('editors'):
+                part_of['document']['contribution'] = self['metadata'][
+                    'publication']['editors']
+
+            if self['metadata']['publication'].get('publisher'):
+                part_of['document']['publication'] = {
+                    'statement': self['metadata']['publication']['publisher']
+                }
+
+            metadata['partOf'] = [part_of]
 
         # Other electronic versions
         if self['metadata'].get('otherElectronicVersions'):
@@ -190,18 +192,21 @@ class DepositRecord(SonarRecord):
                 'specificCollections']
 
         # Classification
-        metadata['classification'] = [{
-            'type':
-            'bf:ClassificationUdc',
-            'classificationPortion':
-            self['metadata']['classification']
-        }]
+        if self['metadata'].get('classification'):
+            metadata['classification'] = [{
+                'type':
+                'bf:ClassificationUdc',
+                'classificationPortion':
+                self['metadata']['classification']
+            }]
 
         # Abstracts
         if self['metadata'].get('abstracts'):
             metadata['abstracts'] = [{
-                'language': abstract.get('language', language),
-                'value': abstract['abstract']
+                'language':
+                abstract.get('language', language),
+                'value':
+                abstract['abstract']
             } for abstract in self['metadata']['abstracts']]
 
         # Subjects
@@ -214,21 +219,30 @@ class DepositRecord(SonarRecord):
             } for subject in self['metadata']['subjects']]
 
         # Contributors
-        metadata['contribution'] = [{
-            'agent': {
-                'type': 'bf:Person',
-                'preferred_name': contributor['name']
-            },
-            'role': ['cre'],
-            'affiliation': contributor['affiliation']
-        } for contributor in self['contributors']]
+        contributors = []
+        for contributor in self['contributors']:
+            data = {
+                'agent': {
+                    'type': 'bf:Person',
+                    'preferred_name': contributor['name']
+                },
+                'role': ['cre'],
+                'affiliation': contributor.get('affiliation')
+            }
 
-        # Resolve controlled affiliations
-        for contributor in metadata['contribution']:
-            affiliations = DocumentRecord.get_affiliations(
-                contributor['affiliation'])
-            if affiliations:
-                contributor['controlledAffiliation'] = affiliations
+            # Resolve controlled affiliations
+            if data.get('affiliation'):
+                affiliations = DocumentRecord.get_affiliations(
+                    data['affiliation'])
+                if affiliations:
+                    data['controlledAffiliation'] = affiliations
+            else:
+                data.pop('affiliation', None)
+
+            contributors.append(data)
+
+        if contributors:
+            metadata['contribution'] = contributors
 
         document = DocumentRecord.create(metadata,
                                          dbcommit=True,

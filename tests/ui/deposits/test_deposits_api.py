@@ -23,7 +23,6 @@ def test_create_document(app, deposit_fixture):
     document = deposit_fixture.create_document()
 
     assert document['documentType'] == 'coar:c_816b'
-
     assert document['title'] == [{
         'type':
         'bf:Title',
@@ -39,14 +38,11 @@ def test_create_document(app, deposit_fixture):
             'value': 'Subtitle of the document'
         }]
     }]
-
     assert document['language'] == [{'value': 'eng', 'type': 'bf:Language'}]
-
     assert document['provisionActivity'] == [{
         'type': 'bf:Publication',
         'startDate': '2020-01-01'
     }]
-
     assert document['partOf'] == [{
         'numberingYear': '2019',
         'numberingPages': '1-12',
@@ -60,21 +56,17 @@ def test_create_document(app, deposit_fixture):
         'numberingVolume': '12',
         'numberingIssue': '2'
     }]
-
     assert document['otherEdition'] == [{
         'document': {
             'electronicLocator': 'https://some.url/document.pdf'
         },
         'publicNote': 'Published version'
     }]
-
     assert document['specificCollections'] == ['Collection 1', 'Collection 2']
-
     assert document['classification'] == [{
         'type': 'bf:ClassificationUdc',
         'classificationPortion': '543'
     }]
-
     assert document['abstracts'] == [{
         'language': 'eng',
         'value': 'Abstract of the document'
@@ -82,7 +74,6 @@ def test_create_document(app, deposit_fixture):
         'language': 'fre',
         'value': 'Résumé du document'
     }]
-
     assert document['subjects'] == [{
         'label': {
             'language': 'eng',
@@ -94,7 +85,6 @@ def test_create_document(app, deposit_fixture):
             'value': ['Sujet 1', 'Sujet 2']
         }
     }]
-
     assert document['contribution'] == [{
         'affiliation':
         'University of Bern, Switzerland',
@@ -105,8 +95,18 @@ def test_create_document(app, deposit_fixture):
         'controlledAffiliation': ['Uni of Bern and Hospital'],
         'role': ['cre']
     }]
-
     assert document.files['main.pdf']['restricted'] == 'organisation'
     assert document.files['main.pdf']['embargo_date'] == '2021-01-01'
-
     assert len(document.files) == 6
+
+    # Test without affiliation
+    deposit_fixture['contributors'][0]['affiliation'] = None
+    document = deposit_fixture.create_document()
+
+    assert document['contribution'] == [{
+        'agent': {
+            'preferred_name': 'Takayoshi, Shintaro',
+            'type': 'bf:Person'
+        },
+        'role': ['cre']
+    }]

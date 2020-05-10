@@ -249,8 +249,7 @@
       "required": [
         "language",
         "title",
-        "documentType",
-        "classification"
+        "documentType"
       ],
       "propertiesOrder": [
         "documentType",
@@ -304,17 +303,16 @@
           "type": "string",
           "minLength": 1,
           "pattern": "^[0-9]{4}(-[0-9]{2}-[0-9]{2})?$",
-          "template": {
-            "type": "date"
+          "form": {
+            "placeholder": "Example: 2019 or 2019-05-05"
           }
         },
         "publication": {
-          "title": "Publication",
+          "title": "Part of (host document)",
           "type": "object",
           "required": [
             "publishedIn",
-            "year",
-            "pages"
+            "year"
           ],
           "additionalProperties": false,
           "propertiesOrder": [
@@ -323,12 +321,13 @@
             "volume",
             "number",
             "pages",
-            "editors",
-            "publisher"
+            "publisher",
+            "editors"
           ],
           "properties": {
             "publishedIn": {
-              "title": "Published in",
+              "title": "Document",
+              "description": "Host document, for example a journal for an article, or a book for a book chapter.",
               "type": "string",
               "minLength": 1
             },
@@ -340,18 +339,23 @@
             "volume": {
               "title": "Volume",
               "type": "string",
-              "minLength": 1
+              "minLength": 1,
+              "hideExpression": "!['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)"
             },
             "number": {
               "title": "Number",
               "type": "string",
-              "minLength": 1
+              "minLength": 1,
+              "hideExpression": "!['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)"
             },
             "pages": {
               "title": "Pages",
               "type": "string",
               "minLength": 1,
-              "pattern": "^[0-9]+(-[0-9]+)?$"
+              "pattern": "^[0-9]+(-[0-9]+)?$",
+              "form": {
+                "placeholder": "Examples: 135, 5-27, …"
+              }
             },
             "editors": {
               "title": "Editors",
@@ -368,7 +372,8 @@
               "type": "string",
               "minLength": 1
             }
-          }
+          },
+          "hideExpression": "!['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)"
         },
         "otherElectronicVersions": {
           "title": "Other electronic versions",
@@ -431,7 +436,7 @@
                 "title": "Abstract",
                 "type": "string",
                 "minLength": 1,
-                "template": {
+                "form": {
                   "type": "textarea",
                   "rows": 3
                 }
@@ -484,8 +489,7 @@
         "title": "Contributor",
         "type": "object",
         "required": [
-          "name",
-          "affiliation"
+          "name"
         ],
         "propertiesOrder": [
           "name",
@@ -496,8 +500,7 @@
             "title": "Name",
             "description": "Last name, first name, ex: Doe, John",
             "type": "string",
-            "minLength": 1,
-            "pattern": "^[^,]+, [^,]+$"
+            "minLength": 1
           },
           "affiliation": {
             "title": "Affiliation",

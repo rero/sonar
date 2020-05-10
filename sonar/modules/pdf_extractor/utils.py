@@ -93,7 +93,7 @@ def format_extracted_data(data):
                     author_data['name'] = ', '.join(name)
 
             if author_data.get('name'):
-                author_data['affiliation'] = '[Unknown]'
+                author_data['affiliation'] = None
 
                 affiliations = force_list(author.get('affiliation', []))
 
