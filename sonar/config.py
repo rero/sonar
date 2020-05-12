@@ -468,7 +468,7 @@ SONAR_ENDPOINTS_ENABLED = True
 # =====
 OAUTHCLIENT_REMOTE_APPS = dict(orcid=orcid.REMOTE_APP)
 
-ORCID_DOMAIN = 'sandbox.orcid.org'
+ORCID_DOMAIN = os.environ.get('ORCID_CONSUMER_DOMAIN', 'sandbox.orcid.org')
 
 OAUTHCLIENT_REMOTE_APPS['orcid']['signup_handler']['info'] = \
     'sonar.modules.oauth.orcid:account_info'

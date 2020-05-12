@@ -133,7 +133,7 @@ def get_orcid_record(orcid_id, token, request_type=''):
     api = orcid.PublicAPI(
         credentials['consumer_key'],
         credentials['consumer_secret'],
-        sandbox=True,
+        sandbox=(current_app.config.get('ORCID_DOMAIN').startswith('sandbox'))
     )
     try:
         return api.read_record_public(orcid_id, request_type, token)
