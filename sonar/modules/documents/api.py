@@ -18,10 +18,9 @@
 """Document Api."""
 
 import csv
-import os
 from functools import partial
 
-from ..api import SonarRecord, SonarSearch
+from ..api import SonarIndexer, SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
 from ..minters import id_minter
 from ..providers import Provider
@@ -111,3 +110,9 @@ class DocumentRecord(SonarRecord):
                     return cls.get_record_by_pid(results[0]['pid'])
 
         return None
+
+
+class DocumentIndexer(SonarIndexer):
+    """Indexing documents in Elasticsearch."""
+
+    record_cls = DocumentRecord

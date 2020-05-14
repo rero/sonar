@@ -21,7 +21,7 @@ from functools import partial
 
 from elasticsearch_dsl.query import Q
 
-from ..api import SonarRecord, SonarSearch
+from ..api import SonarIndexer, SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
 from ..minters import id_minter
 from ..providers import Provider
@@ -170,3 +170,9 @@ class UserRecord(SonarRecord):
     def is_super_admin(self):
         """Check if a user a super administrator."""
         return self.is_granted(UserRecord.ROLE_SUPERADMIN)
+
+
+class UserIndexer(SonarIndexer):
+    """Indexing documents in Elasticsearch."""
+
+    record_cls = UserRecord

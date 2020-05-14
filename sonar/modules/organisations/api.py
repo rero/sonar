@@ -20,7 +20,7 @@
 
 from functools import partial
 
-from ..api import SonarRecord, SonarSearch
+from ..api import SonarIndexer, SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
 from ..minters import id_minter
 from ..providers import Provider
@@ -54,3 +54,9 @@ class OrganisationRecord(SonarRecord):
     fetcher = organisation_pid_fetcher
     provider = OrganisationProvider
     schema = 'organisations/organisation-v1.0.0.json'
+
+
+class OrganisationIndexer(SonarIndexer):
+    """Indexing documents in Elasticsearch."""
+
+    record_cls = OrganisationRecord

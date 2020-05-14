@@ -25,11 +25,14 @@ import requests
 from flask import current_app
 from invenio_db import db
 from invenio_files_rest.helpers import compute_md5_checksum
+from invenio_indexer import current_record_to_index
 from invenio_indexer.api import RecordIndexer
 from invenio_jsonschemas import current_jsonschemas
 from invenio_pidstore.errors import PIDDoesNotExistError
 from invenio_pidstore.models import PersistentIdentifier
 from invenio_records_files.api import FilesMixin, Record
+from invenio_records_rest.utils import obj_or_import_string
+from invenio_search import current_search
 from invenio_search.api import RecordsSearch
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -77,6 +80,13 @@ class SonarRecord(Record, FilesMixin):
         return record
 
     @classmethod
+    def get_indexer_class(cls):
+        """Get the indexer from config."""
+        return obj_or_import_string(
+            current_app.config['RECORDS_REST_ENDPOINTS'][
+                cls.provider.pid_type]['indexer_class'])
+
+    @classmethod
     def get_record_by_pid(cls, pid, with_deleted=False):
         """Get ils record by pid value."""
         assert cls.provider
@@ -121,7 +131,8 @@ class SonarRecord(Record, FilesMixin):
 
     def reindex(self):
         """Reindex record."""
-        RecordIndexer().index(self)
+        indexer = self.get_indexer_class()
+        indexer().index(self)
 
     def add_file_from_url(self, url, key, **kwargs):
         """Add file to record by getting data from given url.
@@ -247,3 +258,32 @@ class SonarSearch(RecordsSearch):
         """Search only on item index."""
 
         index = 'records'
+
+
+class SonarIndexer(RecordIndexer):
+    """Indexing class for SONAR."""
+
+    record_cls = SonarRecord
+
+    def index(self, record):
+        """Indexing a record.
+
+        :param record: Record to index.
+        :returns: Indexation result
+        """
+        return_value = super(SonarIndexer, self).index(record)
+
+        index_name, doc_type = current_record_to_index(record)
+        current_search.flush_and_refresh(index_name)
+        return return_value
+
+    def delete(self, record):
+        """Delete a record.
+
+        :param record: Record to remove from index.
+        :returns: Indexation result
+        """
+        return_value = super(SonarIndexer, self).delete(record)
+        index_name, doc_type = current_record_to_index(record)
+        current_search.flush_and_refresh(index_name)
+        return return_value

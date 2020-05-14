@@ -21,13 +21,10 @@ import mock
 import pytest
 from flask import url_for
 from invenio_app.factory import create_api
-from invenio_indexer import current_record_to_index
-from invenio_indexer.api import RecordIndexer
-from invenio_search import current_search
 from six import BytesIO
 
 from sonar.modules.api import SonarRecord
-from sonar.modules.documents.api import DocumentRecord
+from sonar.modules.documents.api import DocumentIndexer, DocumentRecord
 
 create_app = create_api
 
@@ -72,11 +69,8 @@ def test_reindex(app, db, client, document_json_fixture):
     record = DocumentRecord.create(document_json_fixture)
     db.session.commit()
 
-    indexer = RecordIndexer()
+    indexer = DocumentIndexer()
     indexer.index(record)
-
-    index_name, doc_type = current_record_to_index(record)
-    current_search.flush_and_refresh(index_name)
 
     headers = [('Content-Type', 'application/json')]
 
@@ -200,3 +194,34 @@ def test_create_thumbnail(document_fixture, pdf_file):
     document_fixture.files['test.txt'] = BytesIO(b'Hello, World')
     document_fixture.create_thumbnail(document_fixture.files['test.txt'])
     assert len(document_fixture.files) == 1
+
+
+def test_index_record(client, db, document_json_fixture):
+    """Test index a record."""
+    res = client.get(url_for('invenio_records_rest.doc_list'))
+    assert res.status_code == 200
+    total = res.json['hits']['total']
+
+    record = DocumentRecord.create(document_json_fixture, dbcommit=True)
+    db.session.commit()
+
+    indexer = DocumentIndexer()
+    indexer.index(record)
+
+    res = client.get(url_for('invenio_records_rest.doc_list'))
+    assert res.status_code == 200
+    assert res.json['hits']['total'] == (total + 1)
+
+
+def test_remove_from_index(client, db, document_fixture):
+    """Test remove a record from index."""
+    res = client.get(url_for('invenio_records_rest.doc_list'))
+    assert res.status_code == 200
+    total = res.json['hits']['total']
+
+    indexer = DocumentIndexer()
+    indexer.delete(document_fixture)
+
+    res = client.get(url_for('invenio_records_rest.doc_list'))
+    assert res.status_code == 200
+    assert res.json['hits']['total'] == (total - 1)
