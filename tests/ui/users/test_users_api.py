@@ -19,7 +19,6 @@
 
 from flask_security import current_user
 from invenio_accounts.testutils import login_user_via_view
-from invenio_search import current_search
 
 from sonar.modules.users.api import UserRecord, UserSearch
 
@@ -34,8 +33,6 @@ def test_get_moderators(app):
         },
         dbcommit=True)
     user.reindex()
-
-    current_search.flush_and_refresh('users')
 
     moderators = UserSearch().get_moderators()
     assert list(moderators)
@@ -60,8 +57,6 @@ def test_get_user_by_current_user(app, client, admin_user_fixture):
         },
         dbcommit=True)
     user.reindex()
-
-    current_search.flush_and_refresh('users')
 
     user = UserRecord.get_user_by_current_user(current_user)
     assert 'email' in user
@@ -89,8 +84,6 @@ def test_get_moderators_emails(app):
         },
         dbcommit=True)
     user.reindex()
-
-    current_search.flush_and_refresh('users')
 
     emails = user.get_moderators_emails()
     assert emails

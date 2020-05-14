@@ -22,7 +22,7 @@ from functools import partial
 
 from sonar.modules.documents.api import DocumentRecord
 
-from ..api import SonarRecord, SonarSearch
+from ..api import SonarIndexer, SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
 from ..minters import id_minter
 from ..providers import Provider
@@ -266,3 +266,9 @@ class DepositRecord(SonarRecord):
         }
 
         return document
+
+
+class DepositIndexer(SonarIndexer):
+    """Indexing documents in Elasticsearch."""
+
+    record_cls = DepositRecord

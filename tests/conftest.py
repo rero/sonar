@@ -28,7 +28,6 @@ from flask_security.utils import encrypt_password
 from invenio_access.models import ActionUsers, Role
 from invenio_accounts.ext import hash_password
 from invenio_files_rest.models import Location
-from invenio_search import current_search
 
 from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.documents.api import DocumentRecord
@@ -152,8 +151,6 @@ def db_moderator_fixture(app, db):
     user.reindex()
     db.session.commit()
 
-    current_search.flush_and_refresh('users')
-
     return user
 
 
@@ -245,8 +242,6 @@ def admin_user_fixture_with_db(app, db, admin_user_fixture,
         dbcommit=True)
     db_user.reindex()
     db.session.commit()
-
-    current_search.flush_and_refresh('users')
 
     return db_user
 
@@ -361,8 +356,6 @@ def document_fixture(app, db, document_json_fixture, bucket_location_fixture):
                                      with_bucket=True)
     db.session.commit()
     document.reindex()
-
-    current_search.flush_and_refresh('documents')
 
     return document
 
@@ -479,8 +472,6 @@ def deposit_fixture(app, db, db_user_fixture, pdf_file,
     deposit.commit()
     deposit.reindex()
     db.session.commit()
-
-    current_search.flush_and_refresh('deposits')
 
     return deposit
 

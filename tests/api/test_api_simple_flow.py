@@ -21,7 +21,6 @@ import json
 
 import mock
 from flask import url_for
-from invenio_search import current_search
 from utils import VerifyRecordPermissionPatch
 
 
@@ -36,7 +35,6 @@ def test_simple_flow(client, document_json_fixture):
                            data=json.dumps(document_json_fixture),
                            headers=headers)
     assert response.status_code == 201
-    current_search.flush_and_refresh('documents')
 
     # retrieve record
     res = client.get(url_for('invenio_records_rest.doc_item', pid_value=1))
