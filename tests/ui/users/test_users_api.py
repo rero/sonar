@@ -23,13 +23,16 @@ from invenio_accounts.testutils import login_user_via_view
 from sonar.modules.users.api import UserRecord, UserSearch
 
 
-def test_get_moderators(app):
+def test_get_moderators(app, organisation_fixture):
     """Test search for moderators."""
     user = UserRecord.create(
         {
             'full_name': 'John Doe',
             'email': 'john.doe@rero.ch',
-            'roles': [UserRecord.ROLE_MODERATOR]
+            'roles': [UserRecord.ROLE_MODERATOR],
+            'organisation': {
+                '$ref': 'https://sonar.ch/api/organisations/org'
+            }
         },
         dbcommit=True)
     user.reindex()
@@ -41,7 +44,8 @@ def test_get_moderators(app):
     assert not list(moderators)
 
 
-def test_get_user_by_current_user(app, client, admin_user_fixture):
+def test_get_user_by_current_user(app, client, admin_user_fixture,
+                                  organisation_fixture):
     """Test getting a user with email taken from logged user."""
     login_user_via_view(client,
                         email=admin_user_fixture.email,
@@ -53,7 +57,10 @@ def test_get_user_by_current_user(app, client, admin_user_fixture):
         {
             'full_name': 'John Doe',
             'email': 'admin@test.com',
-            'roles': [UserRecord.ROLE_MODERATOR]
+            'roles': [UserRecord.ROLE_MODERATOR],
+            'organisation': {
+                '$ref': 'https://sonar.ch/api/organisations/org'
+            }
         },
         dbcommit=True)
     user.reindex()
@@ -74,13 +81,16 @@ def test_get_reachable_roles(app):
     assert not roles
 
 
-def test_get_moderators_emails(app):
+def test_get_moderators_emails(app, organisation_fixture):
     """Test getting list of moderators emails."""
     user = UserRecord.create(
         {
             'full_name': 'John Doe',
             'email': 'john.doe@rero.ch',
-            'roles': [UserRecord.ROLE_MODERATOR]
+            'roles': [UserRecord.ROLE_MODERATOR],
+            'organisation': {
+                '$ref': 'https://sonar.ch/api/organisations/org'
+            }
         },
         dbcommit=True)
     user.reindex()
@@ -96,13 +106,16 @@ def test_get_moderators_emails(app):
     assert not emails
 
 
-def test_is_granted(app):
+def test_is_granted(app, organisation_fixture):
     """Test if user is granted with a role."""
     user = UserRecord.create(
         {
             'full_name': 'John Doe',
             'email': 'john.doe@rero.ch',
-            'roles': [UserRecord.ROLE_MODERATOR]
+            'roles': [UserRecord.ROLE_MODERATOR],
+            'organisation': {
+                '$ref': 'https://sonar.ch/api/organisations/org'
+            }
         },
         dbcommit=True)
 
@@ -115,13 +128,16 @@ def test_is_granted(app):
     assert not user.is_granted(UserRecord.ROLE_MODERATOR)
 
 
-def test_is_role_property():
+def test_is_role_property(organisation_fixture):
     """Test if user is in a particular role."""
     user = UserRecord.create(
         {
             'full_name': 'John Doe',
             'email': 'john.doe@rero.ch',
-            'roles': [UserRecord.ROLE_MODERATOR]
+            'roles': [UserRecord.ROLE_MODERATOR],
+            'organisation': {
+                '$ref': 'https://sonar.ch/api/organisations/org'
+            }
         },
         dbcommit=True)
 

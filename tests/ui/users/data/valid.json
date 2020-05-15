@@ -10,6 +10,9 @@
     "password": "123456",
     "phone": "+39324993597",
     "postal_code": "11100",
-    "street": "Viale Rue Gran Paradiso, 44"
+    "street": "Viale Rue Gran Paradiso, 44",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/org"
+    }
   }
 ]

@@ -8,7 +8,10 @@
     "street": "Sonnenbergstr 39",
     "postal_code": "6544",
     "city": "Braggio",
-    "phone": "+41916658961"
+    "phone": "+41916658961",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/rero"
+    }
   },
   {
     "full_name": "Elia Rossi",
@@ -19,7 +22,10 @@
     "street": "Brunnacherstrasse 112",
     "postal_code": "5330",
     "city": "Zurzach",
-    "phone": "+41625037543"
+    "phone": "+41625037543",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/rero"
+    }
   },
   {
     "full_name": "Emanuele Fiorentini",
@@ -30,7 +36,10 @@
     "street": "Lichtmattstrasse 123",
     "postal_code": "5736",
     "city": "Burg",
-    "phone": "+41627676171"
+    "phone": "+41627676171",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/rero"
+    }
   },
   {
     "full_name": "Jules Brochu",
@@ -41,6 +50,9 @@
     "street": "Rasenstrasse 2",
     "postal_code": "4577",
     "city": "Hessigkofen",
-    "phone": "+41323666556"
+    "phone": "+41323666556",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/rero"
+    }
   }
 ]

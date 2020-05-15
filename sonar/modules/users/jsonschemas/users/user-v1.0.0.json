@@ -85,7 +85,10 @@
             }
           }
         }
-      }
+      },
+      "required": [
+        "$ref"
+      ]
     },
     "roles": {
       "title": "Role",
@@ -139,6 +142,7 @@
     "full_name",
     "email",
     "roles",
+    "organisation",
     "$schema"
   ]
 }

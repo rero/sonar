@@ -29,6 +29,7 @@ from invenio_search.proxies import current_search
 from jsonref import JsonLoader
 
 from .deposits.cli import deposits
+from .organisations.cli.organisations import organisations
 from .users.cli import users
 
 
@@ -38,6 +39,7 @@ def fixtures():
 
 
 fixtures.add_command(users)
+fixtures.add_command(organisations)
 fixtures.add_command(deposits)
 
 
