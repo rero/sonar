@@ -76,7 +76,8 @@ pipenv run invenio fixtures deposits create
 # Create configuration for RERODOC OAI harvesting
 pipenv run invenio oaiharvester config create data/rerodoc_oai_sources.json
 
-# Create users
+# Create users and organisations
+pipenv run invenio fixtures organisations import $(pipenv --where)/data/organisations.json
 pipenv run invenio fixtures users import $(pipenv --where)/data/users.json
 
 # Create document sample

@@ -123,12 +123,15 @@ def organisation_fixture(app, db):
 
 
 @pytest.fixture()
-def db_user_fixture(app, db):
+def db_user_fixture(app, db, organisation_fixture):
     """Create user in database."""
     data = {
         'email': 'user@rero.ch',
         'full_name': 'John Doe',
-        'roles': ['user']
+        'roles': ['user'],
+        'organisation': {
+            '$ref': 'https://sonar.ch/api/organisations/org'
+        }
     }
 
     user = UserRecord.create(data, dbcommit=True)
@@ -139,12 +142,15 @@ def db_user_fixture(app, db):
 
 
 @pytest.fixture()
-def db_moderator_fixture(app, db):
+def db_moderator_fixture(app, db, organisation_fixture):
     """Create moderator in database."""
     data = {
         'email': 'moderator@rero.ch',
         'full_name': 'John Doe',
-        'roles': ['moderator']
+        'roles': ['moderator'],
+        'organisation': {
+            '$ref': 'https://sonar.ch/api/organisations/org'
+        }
     }
 
     user = UserRecord.create(data, dbcommit=True)
