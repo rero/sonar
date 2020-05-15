@@ -42,6 +42,20 @@
     }
   },
   {
+    "full_name": "Claude Roussel",
+    "email": "rero.sonar+publisher@gmail.com",
+    "password": "123456",
+    "roles": ["publisher"],
+    "birth_date": "1983-09-14",
+    "street": "Kirchstrasse 57",
+    "postal_code": "1660",
+    "city": "La Lécherette",
+    "phone": "+41269639084",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/rero"
+    }
+  },
+  {
     "full_name": "Jules Brochu",
     "email": "rero.sonar+user@gmail.com",
     "password": "123456",

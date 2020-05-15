@@ -27,9 +27,14 @@
         {{_('Super administration')}}
     </a>
     {% endif %}
-    {% if has_user_access() %}
+    {% if has_admin_access() %}
     <a class="dropdown-item" href="{{ url_for('sonar.manage')}}">
         {{_('Administration')}}
+    </a>
+    {% endif %}
+    {% if has_publisher_access() %}
+    <a class="dropdown-item" href="{{ url_for('sonar.manage', path='deposit/0/create')}}">
+        {{_('Deposit a publication')}}
     </a>
     {% endif %}
 

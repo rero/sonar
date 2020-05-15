@@ -20,11 +20,16 @@
 from functools import partial
 
 from elasticsearch_dsl.query import Q
+from flask_security import current_user
+from werkzeug.local import LocalProxy
 
 from ..api import SonarIndexer, SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
 from ..minters import id_minter
 from ..providers import Provider
+
+current_user_record = LocalProxy(lambda: UserRecord.get_user_by_current_user(
+    current_user))
 
 # provider
 UserProvider = type('UserProvider', (Provider, ), dict(pid_type='user'))
@@ -69,12 +74,14 @@ class UserRecord(SonarRecord):
 
     ROLE_USER = 'user'
     ROLE_MODERATOR = 'moderator'
+    ROLE_PUBLISHER = 'publisher'
     ROLE_ADMIN = 'admin'
     ROLE_SUPERADMIN = 'superadmin'
 
     ROLES_HIERARCHY = {
         ROLE_USER: [],
-        ROLE_MODERATOR: [ROLE_USER],
+        ROLE_PUBLISHER: [ROLE_USER],
+        ROLE_MODERATOR: [ROLE_PUBLISHER, ROLE_USER],
         ROLE_ADMIN: [ROLE_MODERATOR, ROLE_USER],
         ROLE_SUPERADMIN: [ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER],
     }
@@ -151,10 +158,23 @@ class UserRecord(SonarRecord):
 
         return False
 
+    def get_all_reachable_roles(self):
+        """Get list of roles depending on role hierarchy."""
+        roles = []
+        for role in self['roles']:
+            roles.extend(self.get_reachable_roles(role))
+
+        return list(set(roles))
+
     @property
     def is_moderator(self):
         """Check if a user a moderator."""
         return self.is_granted(UserRecord.ROLE_MODERATOR)
+
+    @property
+    def is_publisher(self):
+        """Check if a user a pulisher."""
+        return self.is_granted(UserRecord.ROLE_PUBLISHER)
 
     @property
     def is_user(self):

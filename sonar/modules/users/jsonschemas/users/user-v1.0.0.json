@@ -102,6 +102,7 @@
           "superadmin",
           "admin",
           "moderator",
+          "publisher",
           "user"
         ],
         "form": {
@@ -117,6 +118,10 @@
             {
               "label": "role_moderator",
               "value": "moderator"
+            },
+            {
+              "label": "role_publisher",
+              "value": "publisher"
             },
             {
               "label": "role_user",

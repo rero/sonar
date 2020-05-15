@@ -21,10 +21,11 @@ from __future__ import absolute_import, print_function
 
 from functools import partial
 
+from flask_security import current_user
 from invenio_records_rest.schemas import StrictKeysMixin
 from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
-from marshmallow import fields
+from marshmallow import fields, pre_load
 
 from sonar.modules.serializers import schema_from_context
 from sonar.modules.users.api import UserRecord
@@ -52,6 +53,24 @@ class UserMetadataSchemaV1(StrictKeysMixin):
                          attribute="$schema",
                          data_key="$schema",
                          deserialize=schema_from_user)
+
+    @pre_load
+    def guess_organisation(self, data, **kwargs):
+        """Guess organisation from current logged user.
+
+        :param data: Dict of user data.
+        :returns: Modified dict of user data.
+        """
+        # Organisation already attached to user, we do nothing.
+        if data.get('organisation'):
+            return data
+
+        # Store current user organisation in new user.
+        user = UserRecord.get_user_by_current_user(current_user)
+        if user.get('organisation'):
+            data['organisation'] = user['organisation']
+
+        return data
 
 
 class UserSchemaV1(StrictKeysMixin):

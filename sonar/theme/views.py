@@ -34,7 +34,7 @@ from invenio_jsonschemas.errors import JSONSchemaNotFound
 
 from sonar.modules.babel_extractors import translate
 from sonar.modules.permissions import can_access_manage_view
-from sonar.modules.users.api import UserRecord
+from sonar.modules.users.api import current_user_record, UserRecord
 
 blueprint = Blueprint('sonar',
                       __name__,
@@ -53,9 +53,6 @@ def error():
 @can_access_manage_view
 def manage(path=None):
     """Admin access page integrating angular ui."""
-    if not path:
-        return redirect(url_for('sonar.manage', path='records/documents'))
-
     return render_template('sonar/manage.html')
 
 
@@ -77,6 +74,7 @@ def logged_user():
         data['metadata']['is_super_admin'] = user.is_super_admin
         data['metadata']['is_admin'] = user.is_admin
         data['metadata']['is_moderator'] = user.is_moderator
+        data['metadata']['is_publisher'] = user.is_publisher
         data['metadata']['is_user'] = user.is_user
 
     # TODO: If an organisation is associated to user and only when running
@@ -100,6 +98,16 @@ def schemas(record_type):
         current_jsonschemas.get_schema.cache_clear()
         schema_name = '{}/{}-v1.0.0.json'.format(record_type, rec_type)
         schema = current_jsonschemas.get_schema(schema_name)
+
+        # TODO: Maybe find a proper way to do this.
+        if record_type == 'users' and not current_user.is_anonymous:
+            if current_user_record:
+                schema['properties']['roles']['items'][
+                    'enum'] = current_user_record.get_all_reachable_roles()
+
+                if not current_user_record.is_super_admin:
+                    schema['properties'].pop('organisation')
+                    schema['propertiesOrder'].remove('organisation')
 
         # Recursively translate properties in schema
         translate(

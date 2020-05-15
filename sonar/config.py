@@ -38,7 +38,8 @@ from sonar.modules.organisations.api import OrganisationRecord, \
     OrganisationSearch
 from sonar.modules.permissions import can_create_record_factory, \
     can_delete_record_factory, can_list_record_factory, \
-    can_read_record_factory, can_update_record_factory, wiki_edit_permission
+    can_manage_deposit_factory, can_read_record_factory, \
+    can_update_record_factory, wiki_edit_permission
 from sonar.modules.users.api import UserRecord, UserSearch
 from sonar.modules.utils import get_current_language
 
@@ -300,6 +301,7 @@ RECORDS_REST_ENDPOINTS = {
          default_media_type='application/json',
          max_result_window=10000,
          error_handlers=dict(),
+         search_factory_imp='sonar.modules.documents.query:search_factory',
          create_permission_factory_imp=can_create_record_factory,
          read_permission_factory_imp=can_read_record_factory,
          update_permission_factory_imp=can_update_record_factory,
@@ -332,6 +334,7 @@ RECORDS_REST_ENDPOINTS = {
          default_media_type='application/json',
          max_result_window=10000,
          error_handlers=dict(),
+         search_factory_imp='sonar.modules.organisations.query:search_factory',
          create_permission_factory_imp=can_create_record_factory,
          read_permission_factory_imp=can_read_record_factory,
          update_permission_factory_imp=can_update_record_factory,
@@ -364,6 +367,7 @@ RECORDS_REST_ENDPOINTS = {
          default_media_type='application/json',
          max_result_window=10000,
          error_handlers=dict(),
+         search_factory_imp='sonar.modules.users.query:search_factory',
          create_permission_factory_imp=can_create_record_factory,
          read_permission_factory_imp=can_read_record_factory,
          update_permission_factory_imp=can_update_record_factory,
@@ -393,11 +397,12 @@ RECORDS_REST_ENDPOINTS = {
          default_media_type='application/json',
          max_result_window=10000,
          error_handlers=dict(),
-         create_permission_factory_imp=can_create_record_factory,
-         read_permission_factory_imp=can_read_record_factory,
-         update_permission_factory_imp=can_update_record_factory,
-         delete_permission_factory_imp=can_delete_record_factory,
-         list_permission_factory_imp=can_list_record_factory)
+         search_factory_imp='sonar.modules.deposits.query:search_factory',
+         create_permission_factory_imp=can_manage_deposit_factory,
+         read_permission_factory_imp=can_manage_deposit_factory,
+         update_permission_factory_imp=can_manage_deposit_factory,
+         delete_permission_factory_imp=can_manage_deposit_factory,
+         list_permission_factory_imp=can_manage_deposit_factory)
 }
 """REST endpoints."""
 
