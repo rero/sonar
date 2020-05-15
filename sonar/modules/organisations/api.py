@@ -22,8 +22,8 @@ from functools import partial
 
 from ..api import SonarIndexer, SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
-from ..minters import id_minter
 from ..providers import Provider
+from .minters import id_minter
 
 # provider
 OrganisationProvider = type(

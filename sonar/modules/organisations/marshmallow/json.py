@@ -37,6 +37,7 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
     """Schema for the organisation metadata."""
 
     pid = PersistentIdentifier()
+    code = SanitizedUnicode(required=True)
     name = SanitizedUnicode(required=True)
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.

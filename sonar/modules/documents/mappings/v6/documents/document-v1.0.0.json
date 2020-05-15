@@ -49,6 +49,9 @@
             "pid": {
               "type": "keyword"
             },
+            "code": {
+              "type": "keyword"
+            },
             "name": {
               "type": "keyword"
             }

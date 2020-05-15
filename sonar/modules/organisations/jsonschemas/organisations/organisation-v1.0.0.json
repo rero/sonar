@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "id": "https://sonar.ch/schemas/organisations/organisation-v1.0.0.json",
   "additionalProperties": false,
-  "title": "SONAR organisation v1.0.0",
+  "title": "Organisation",
   "type": "object",
   "properties": {
     "$schema": {
@@ -10,15 +10,39 @@
       "default": "https://sonar.ch/schemas/organisations/organisation-v1.0.0.json"
     },
     "pid": {
-      "title": "Organisation identifier",
-      "description": "Organisation persistent identifier.",
-      "type": "string"
+      "title": "Identifier",
+      "type": "string",
+      "minLength": 1
+    },
+    "code": {
+      "title": "Code",
+      "description": "At least 3 characters and must contain only lower case characters and underscores.",
+      "type": "string",
+      "pattern": "^[a-z0-9_]{3,}$",
+      "minLength": 3,
+      "form": {
+        "hideExpression": "field.model.pid",
+        "validation": {
+          "validators": {
+            "valueAlreadyExists": {}
+          }
+        }
+      }
     },
     "name": {
       "title": "Name",
-      "description": "Organisation name.",
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     }
   },
-  "required": ["pid", "name", "$schema"]
+  "propertiesOrder": [
+    "code",
+    "name"
+  ],
+  "required": [
+    "pid",
+    "name",
+    "code",
+    "$schema"
+  ]
 }
