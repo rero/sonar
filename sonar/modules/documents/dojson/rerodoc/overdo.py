@@ -46,7 +46,7 @@ class Overdo(BaseOverdo):
             # Create organisation record
             organisation = OrganisationRecord.create(
                 {
-                    'pid': organisation_key,
+                    'code': organisation_key,
                     'name': organisation_key
                 },
                 dbcommit=True)

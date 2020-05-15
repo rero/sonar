@@ -114,7 +114,7 @@ def logged_user_client(create_user, client):
 @pytest.fixture()
 def organisation_fixture(app, db):
     """Create an organisation."""
-    data = {'pid': 'org', 'name': 'Fake organisation'}
+    data = {'code': 'org', 'name': 'Fake organisation'}
 
     organisation = OrganisationRecord.create(data, dbcommit=True)
     organisation.reindex()
