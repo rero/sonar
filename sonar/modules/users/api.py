@@ -20,6 +20,12 @@
 from functools import partial
 
 from elasticsearch_dsl.query import Q
+from flask import current_app
+from flask_security.confirmable import confirm_user
+from flask_security.recoverable import send_reset_password_instructions
+from invenio_accounts.ext import hash_password
+from werkzeug.local import LocalProxy
+from werkzeug.utils import cached_property
 
 from ..api import SonarIndexer, SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
@@ -32,6 +38,8 @@ UserProvider = type('UserProvider', (Provider, ), dict(pid_type='user'))
 user_pid_minter = partial(id_minter, provider=UserProvider)
 # fetcher
 user_pid_fetcher = partial(id_fetcher, provider=UserProvider)
+
+datastore = LocalProxy(lambda: current_app.extensions['security'].datastore)
 
 
 class UserSearch(SonarSearch):
@@ -83,6 +91,106 @@ class UserRecord(SonarRecord):
     fetcher = user_pid_fetcher
     provider = UserProvider
     schema = 'users/user-v1.0.0.json'
+    available_roles = [ROLE_SUPERADMIN, ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER]
+
+    @classmethod
+    def create(cls,
+               data,
+               id_=None,
+               dbcommit=False,
+               with_bucket=False,
+               **kwargs):
+        """Create a record and sync roles.
+
+        :param data: Metadata for record.
+        :param id_: Record UUID.
+        :param dbcommit: True for validating transaction.
+        :param with_bucket: True for associating a bucket to record.
+        :returns: Created record instance.
+        """
+        record = super(UserRecord, cls).create(data, id_, dbcommit,
+                                               with_bucket, **kwargs)
+
+        record.sync_roles()
+        return record
+
+    def update(self, data):
+        """Update data for record and update roles.
+
+        :param data: New metadata of the record.
+        :returns: Record instance.
+        """
+        super(UserRecord, self).update(data)
+        self.sync_roles()
+        return self
+
+    def delete(self, force=False, dbcommit=True, delindex=False):
+        """Delete record and persistent identifier.
+
+        :param force: True to hard delete record.
+        :param dbcommit: True for validating database transaction.
+        :param delindex: True to remove record from index.
+        """
+        # Remove roles from user account.
+        self.remove_roles()
+
+        # Deactivate account.
+        datastore.deactivate_user(self.user)
+
+        return super(UserRecord, self).delete(force=force,
+                                              dbcommit=dbcommit,
+                                              delindex=delindex)
+
+    @cached_property
+    def user(self):
+        """User account linked to current record.
+
+        :returns: User account.
+        """
+        email = self.get('email')
+        user = datastore.find_user(email=email)
+
+        if not user:
+            # Hash password before storing it.
+            password = hash_password(email)
+
+            # Create and save new user.
+            user = datastore.create_user(email=email, password=password)
+            datastore.commit()
+
+            # Send password reset
+            send_reset_password_instructions(user)
+
+            # Directly confirm user (no account activation by email)
+            confirm_user(user)
+        else:
+            # If user is not active, activate it.
+            if not user.is_active:
+                datastore.activate_user(user)
+
+        return user
+
+    def sync_roles(self):
+        """Synchronize roles between record object and user account."""
+        db_roles = self.user.roles
+
+        for role in self.available_roles:
+            in_db = role in db_roles
+            in_record = role in self.get('roles', [])
+
+            if in_record and not in_db:
+                self.add_role_to_account(role)
+
+            if not in_record and in_db:
+                self.remove_role_from_account(role)
+
+    def remove_roles(self):
+        """Remove roles from user account."""
+        db_roles = self.user.roles
+
+        for role in self.available_roles:
+            if role in db_roles:
+                self.remove_role_from_account(role)
 
     @classmethod
     def get_user_by_current_user(cls, user):
@@ -127,6 +235,24 @@ class UserRecord(SonarRecord):
                 roles.append(key)
 
         return roles
+
+    def add_role_to_account(self, role_name):
+        """Add the given role to user account.
+
+        :param role_name: Role to add.
+        """
+        role = datastore.find_role(role_name)
+        datastore.add_role_to_user(self.user, role)
+        datastore.commit()
+
+    def remove_role_from_account(self, role_name):
+        """Remove the given role from user account.
+
+        :param role_name: Role to remove.
+        """
+        role = datastore.find_role(role_name)
+        datastore.remove_role_from_user(self.user, role)
+        datastore.commit()
 
     def get_moderators_emails(self):
         """Get the list of moderators emails."""

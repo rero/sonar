@@ -121,6 +121,8 @@ ACCOUNTS_SESSION_REDIS_URL = 'redis://localhost:6379/1'
 #: proxies) removes these headers again before sending the response to the
 #: client. Set to False, in case of doubt.
 ACCOUNTS_USERINFO_HEADERS = True
+# make security blueprints available to the REST API
+ACCOUNTS_REGISTER_BLUEPRINT = True
 
 # User profiles
 # =============
@@ -360,7 +362,8 @@ RECORDS_REST_ENDPOINTS = {
                                   ':json_v1'),
          },
          list_route='/users/',
-         item_route='/users/<pid(user):pid_value>',
+         item_route='/users/<pid(user, record_class="sonar.modules.'
+         'users.api:UserRecord"):pid_value>',
          default_media_type='application/json',
          max_result_window=10000,
          error_handlers=dict(),

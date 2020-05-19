@@ -124,6 +124,16 @@ class SonarRecord(Record, FilesMixin):
         """Get a record by its ref link."""
         return cls.get_record_by_pid(cls.get_pid_by_ref_link(link))
 
+    @classmethod
+    def get_persistent_identifier(cls, identifier):
+        """Get persistent identifier object.
+
+        :param identifier: Record UUID.
+        :returns: PID instance of record.
+        """
+        return PersistentIdentifier.get_by_object(cls.provider.pid_type,
+                                                  cls.object_type, identifier)
+
     @staticmethod
     def dbcommit():
         """Commit changes to db."""
@@ -249,6 +259,27 @@ class SonarRecord(Record, FilesMixin):
                 return file
 
         return files[0]
+
+    def delete(self, force=False, dbcommit=False, delindex=False):
+        """Delete record and persistent identifier.
+
+        :param force: Boolean to hard or soft delete.
+        :param dbcommit: Boolean for validating database transaction.
+        :param delindex: Boolean for deleting the record from index.
+        """
+        persistent_identifier = self.get_persistent_identifier(self.id)
+        persistent_identifier.delete()
+
+        super(SonarRecord, self).delete(force=force)
+
+        if dbcommit:
+            self.dbcommit()
+
+        if delindex:
+            indexer = self.get_indexer_class()
+            indexer().delete(self)
+
+        return self
 
 
 class SonarSearch(RecordsSearch):

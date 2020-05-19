@@ -21,7 +21,7 @@ from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.users.api import UserRecord
 
 
-def test_user_resolver(app, organisation_fixture):
+def test_user_resolver(app, organisation_fixture, roles):
     """Test user resolver."""
     UserRecord.create({
         'pid': '1',

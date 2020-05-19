@@ -14,11 +14,6 @@
       "type": "string",
       "minLength": 1
     },
-    "user_id": {
-      "title": "Account identifier",
-      "type": "integer",
-      "minLength": 1
-    },
     "full_name": {
       "title": "First name and last name",
       "type": "string",

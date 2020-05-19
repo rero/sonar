@@ -23,7 +23,7 @@ from invenio_accounts.testutils import login_user_via_view
 from sonar.modules.users.api import UserRecord, UserSearch
 
 
-def test_get_moderators(app, organisation_fixture):
+def test_get_moderators(app, organisation_fixture, roles):
     """Test search for moderators."""
     user = UserRecord.create(
         {
@@ -81,7 +81,7 @@ def test_get_reachable_roles(app):
     assert not roles
 
 
-def test_get_moderators_emails(app, organisation_fixture):
+def test_get_moderators_emails(app, roles, organisation_fixture):
     """Test getting list of moderators emails."""
     user = UserRecord.create(
         {
@@ -145,3 +145,49 @@ def test_is_role_property(organisation_fixture):
     assert user.is_moderator
     assert not user.is_admin
     assert not user.is_super_admin
+
+
+def test_delete(app, admin_user_fixture_with_db):
+    """Test removing record."""
+    admin_user_fixture_with_db.delete(dbcommit=True, delindex=True)
+
+    deleted = UserRecord.get_record(admin_user_fixture_with_db.id,
+                                    with_deleted=True)
+    assert deleted.id == admin_user_fixture_with_db.id
+
+    with app.app_context():
+        datastore = app.extensions['security'].datastore
+        user = datastore.find_user(email='admin@test.com')
+        assert not user.roles
+        assert not user.is_active
+
+
+def test_update(app, admin_user_fixture_with_db):
+    """Test updating a record."""
+    admin_user_fixture_with_db.update({'roles': ['superadmin']})
+    assert admin_user_fixture_with_db['roles'] == ['superadmin']
+
+    with app.app_context():
+        datastore = app.extensions['security'].datastore
+        user = datastore.find_user(email='admin@test.com')
+        assert user.roles[0].name == 'superadmin'
+
+
+def test_reactivate_user(app, admin_user_fixture_with_db):
+    """Test reactivate user account."""
+    with app.app_context():
+        datastore = app.extensions['security'].datastore
+
+        user = datastore.find_user(email='admin@test.com')
+        assert user.is_active
+
+        datastore.deactivate_user(user)
+        datastore.commit()
+        assert not user.is_active
+
+        del admin_user_fixture_with_db.__dict__['user']
+
+        admin_user_fixture_with_db.update({'roles': ['admin']})
+        user = datastore.find_user(email='admin@test.com')
+        assert user.roles[0].name == 'admin'
+        assert user.is_active

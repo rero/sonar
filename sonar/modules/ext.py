@@ -19,6 +19,7 @@
 
 from __future__ import absolute_import, print_function
 
+import jinja2
 from flask_assets import Bundle, Environment
 from flask_bootstrap import Bootstrap
 from flask_wiki import Wiki
@@ -46,6 +47,15 @@ class Sonar(object):
         """Extension initialization."""
         if app:
             self.init_app(app)
+
+            # Force to load SONAR templates before others
+            # it is require for Flask-Security see:
+            # https://pythonhosted.org/Flask-Security/customizing.html#emails
+            sonar_loader = jinja2.ChoiceLoader([
+                jinja2.PackageLoader('sonar', 'templates'),
+                app.jinja_loader
+            ])
+            app.jinja_loader = sonar_loader
 
     def init_app(self, app):
         """Flask application initialization."""

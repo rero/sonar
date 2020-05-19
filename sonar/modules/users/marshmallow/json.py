@@ -36,7 +36,6 @@ class UserMetadataSchemaV1(StrictKeysMixin):
     """Schema for the user metadata."""
 
     pid = PersistentIdentifier()
-    user_id = fields.Integer()
     full_name = SanitizedUnicode(required=True)
     birth_date = SanitizedUnicode()
     email = SanitizedUnicode(required=True)
