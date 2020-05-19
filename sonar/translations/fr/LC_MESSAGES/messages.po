@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.0.1\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2020-05-10 10:06+0200\n"
+"POT-Creation-Date: 2020-05-01 13:38+0200\n"
 "PO-Revision-Date: 2019-06-06 11:09+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -54,47 +54,47 @@ msgstr ""
 msgid "Welcome to Swiss Open Access Repository!"
 msgstr ""
 
-#: sonar/config.py:413
+#: sonar/config.py:416
 msgid "organisation"
 msgstr ""
 
-#: sonar/config.py:414
+#: sonar/config.py:417
 msgid "language"
 msgstr ""
 
-#: sonar/config.py:415
+#: sonar/config.py:418
 msgid "subject"
 msgstr ""
 
-#: sonar/config.py:416
+#: sonar/config.py:419
 msgid "specific_collections"
 msgstr ""
 
-#: sonar/config.py:417
+#: sonar/config.py:420
 msgid "document_type"
 msgstr ""
 
-#: sonar/config.py:424
+#: sonar/config.py:427
 msgid "pid"
 msgstr ""
 
-#: sonar/config.py:425
+#: sonar/config.py:428
 msgid "status"
 msgstr ""
 
-#: sonar/config.py:426
+#: sonar/config.py:429
 msgid "user"
 msgstr ""
 
-#: sonar/config.py:427
+#: sonar/config.py:430
 msgid "contributor"
 msgstr ""
 
-#: sonar/config.py:434
+#: sonar/config.py:437
 msgid "Best match"
 msgstr ""
 
-#: sonar/config.py:440
+#: sonar/config.py:443
 msgid "Most recent"
 msgstr ""
 
@@ -2598,7 +2598,8 @@ msgid "SONAR deposit v1.0.0"
 msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:15
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:562
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:478
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:13
 msgid "Identifier"
 msgstr ""
 
@@ -2702,6 +2703,7 @@ msgstr ""
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:123
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:193
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:197
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:5
 msgid "User"
 msgstr ""
 
@@ -2905,7 +2907,7 @@ msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:496
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:18
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:23
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:18
 msgid "Name"
 msgstr ""
 
@@ -3003,9 +3005,8 @@ msgid "Document ID"
 msgstr ""
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:127
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:131
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:63
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:68
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:132
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:71
 msgid "Organisation"
 msgstr ""
 
@@ -3376,8 +3377,8 @@ msgstr ""
 msgid "Identified by"
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1065
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:28
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:901
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:23
 msgid "Date of birth"
 msgstr ""
 
@@ -3393,8 +3394,8 @@ msgstr ""
 msgid "Roles"
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1124
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:75
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:932
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:84
 msgid "Role"
 msgstr ""
 
@@ -3512,76 +3513,56 @@ msgstr ""
 msgid "Organisation name."
 msgstr ""
 
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:5
-msgid "SONAR user v1.0.0"
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:24
+msgid "Date in yyyy-mm-dd format, ex: 1970-01-01"
 msgstr ""
 
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:13
-msgid "User identifier"
-msgstr ""
-
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:14
-msgid "User persistent identifier."
-msgstr ""
-
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:18
-msgid "User account identifier"
-msgstr ""
-
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:19
-msgid "User account identifier."
-msgstr ""
-
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:34
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:31
 msgid "Email"
 msgstr ""
 
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:41
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:45
 msgid "Street"
 msgstr ""
 
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:42
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:46
 msgid "Street and number of the address, separated by a coma."
 msgstr ""
 
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:47
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:51
 msgid "Postal code"
 msgstr ""
 
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:52
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:56
 msgid "City"
 msgstr ""
 
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:57
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:61
 msgid "Phone number"
 msgstr ""
 
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:58
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:62
 msgid "Phone number with the international prefix, without spaces."
 msgstr ""
 
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:64
-msgid "Organisation linked to user."
-msgstr ""
-
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:76
-msgid "Define the roles of the user."
-msgstr ""
-
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:92
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:100
 msgid "role_superadmin"
 msgstr ""
 
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:96
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:104
 msgid "role_admin"
 msgstr ""
 
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:100
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:108
 msgid "role_moderator"
 msgstr ""
 
-#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:104
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:112
 msgid "role_user"
+msgstr ""
+
+#: sonar/templates/security/email/reset_instructions.html:18
+msgid "Click here to reset your password"
 msgstr ""
 
 #: sonar/theme/templates/sonar/footer.html:24

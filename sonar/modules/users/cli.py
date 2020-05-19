@@ -78,9 +78,6 @@ def import_users(infile):
             confirm_user(user)
             datastore.commit()
 
-            # Store account ID in user resource
-            user_data['user_id'] = user.id
-
             click.secho(
                 'User {email} with ID #{id} created successfully'.format(
                     email=email, id=user.id),

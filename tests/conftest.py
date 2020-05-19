@@ -21,6 +21,7 @@ import os
 import tempfile
 from io import BytesIO
 
+import mock
 import pytest
 from flask import url_for
 from flask_principal import ActionNeed
@@ -123,7 +124,21 @@ def organisation_fixture(app, db):
 
 
 @pytest.fixture()
-def db_user_fixture(app, db, organisation_fixture):
+def roles(base_app, database):
+    """Create user roles."""
+    datastore = base_app.extensions['invenio-accounts'].datastore
+
+    for role in UserRecord.available_roles:
+        db_role = datastore.find_role(role)
+
+        if not db_role:
+            datastore.create_role(name=role)
+
+    datastore.commit()
+
+
+@pytest.fixture()
+def db_user_fixture(app, db, organisation_fixture, roles):
     """Create user in database."""
     data = {
         'email': 'user@rero.ch',
@@ -134,7 +149,10 @@ def db_user_fixture(app, db, organisation_fixture):
         }
     }
 
-    user = UserRecord.create(data, dbcommit=True)
+    with mock.patch('sonar.modules.users.api.'
+                    'send_reset_password_instructions'):
+        user = UserRecord.create(data, dbcommit=True)
+
     user.reindex()
     db.session.commit()
 
@@ -173,7 +191,7 @@ def user_without_role_fixture(app, db):
 
 
 @pytest.fixture()
-def user_fixture(app, db):
+def user_fixture(app, db, roles):
     """Create user in database."""
     datastore = app.extensions['security'].datastore
     user = datastore.create_user(email='user@test.com',
@@ -181,10 +199,9 @@ def user_fixture(app, db):
                                  active=True)
     db.session.commit()
 
-    role = Role(name='user')
+    role = datastore.find_role('user')
     role.users.append(user)
 
-    db.session.add(role)
     db.session.add(ActionUsers.allow(ActionNeed('user-access'), user=user))
     db.session.commit()
 
@@ -192,7 +209,7 @@ def user_fixture(app, db):
 
 
 @pytest.fixture()
-def admin_user_fixture(app, db):
+def admin_user_fixture(app, db, roles):
     """User with admin access."""
     datastore = app.extensions['security'].datastore
     user = datastore.create_user(email='admin@test.com',
@@ -200,10 +217,9 @@ def admin_user_fixture(app, db):
                                  active=True)
     datastore.commit()
 
-    role = Role(name='admin')
+    role = datastore.find_role('admin')
     role.users.append(user)
 
-    db.session.add(role)
     db.session.add(ActionUsers.allow(ActionNeed('admin-access'), user=user))
     db.session.commit()
 
@@ -240,7 +256,6 @@ def admin_user_fixture_with_db(app, db, admin_user_fixture,
             'email': admin_user_fixture.email,
             'full_name': 'Jules Brochu',
             'roles': ['admin'],
-            'user_id': admin_user_fixture.id,
             'organisation': {
                 '$ref': 'https://sonar.ch/api/organisations/org'
             }

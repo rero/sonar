@@ -10,9 +10,6 @@
         "pid": {
           "type": "keyword"
         },
-        "user_id": {
-          "type": "keyword"
-        },
         "full_name": {
           "type": "keyword"
         },
