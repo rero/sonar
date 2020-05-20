@@ -20,29 +20,6 @@
 from __future__ import absolute_import, print_function
 
 import pytest
-from flask_security import login_user
-
-
-@pytest.fixture(scope='module')
-def user_fixture(app):
-    """Create user in database."""
-    with app.app_context():
-        datastore = app.extensions['security'].datastore
-        datastore.create_user(email='john.doe@test.com',
-                              password='123456',
-                              active=True)
-        datastore.commit()
-    return app
-
-
-@pytest.fixture(scope='module')
-def logged_user_fixture(app, client, user_fixture):
-    """Find user and log in it."""
-    with app.app_context():
-        datastore = app.extensions['security'].datastore
-        user = datastore.find_user(email='john.doe@test.com')
-        login_user(user)
-    return user
 
 
 @pytest.fixture(scope='module')

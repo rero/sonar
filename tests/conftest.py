@@ -91,36 +91,29 @@ def app_config(app_config):
     return app_config
 
 
-@pytest.fixture()
-def create_user(app):
-    """Create user in database."""
-    datastore = app.extensions['security'].datastore
-    datastore.create_user(email='john.doe@test.com',
-                          password=encrypt_password('123456'),
-                          active=True)
-    datastore.commit()
+@pytest.fixture
+def make_organisation(app, db):
+    """Factory for creating organisation."""
+
+    def _make_organisation(code):
+        data = {'code': code, 'name': code}
+
+        record = OrganisationRecord.get_record_by_pid(code)
+
+        if not record:
+            record = OrganisationRecord.create(data, dbcommit=True)
+            record.reindex()
+            db.session.commit()
+
+        return record
+
+    return _make_organisation
 
 
 @pytest.fixture()
-def logged_user_client(create_user, client):
-    """Log in user."""
-    response = client.post(url_for('security.login'),
-                           data=dict(email='john.doe@test.com',
-                                     password='123456'))
-    assert response.status_code == 302
-
-    return client
-
-
-@pytest.fixture()
-def organisation_fixture(app, db):
+def organisation(make_organisation):
     """Create an organisation."""
-    data = {'code': 'org', 'name': 'Fake organisation'}
-
-    organisation = OrganisationRecord.create(data, dbcommit=True)
-    organisation.reindex()
-    db.session.commit()
-    return organisation
+    make_organisation('org')
 
 
 @pytest.fixture()
@@ -137,52 +130,68 @@ def roles(base_app, database):
     datastore.commit()
 
 
+@pytest.fixture
+def make_user(app, db, make_organisation):
+    """Factory for creating user."""
+
+    def _make_user(role_name, organisation='org'):
+        make_organisation(organisation)
+
+        name = role_name
+        if organisation:
+            name = organisation + '-' + name
+
+        email = '{name}@rero.ch'.format(name=name)
+
+        datastore = app.extensions['security'].datastore
+
+        user = datastore.find_user(email=email)
+
+        if not user:
+            user = datastore.create_user(
+                email=email,
+                password=hash_password('123456'),
+                active=True)
+            datastore.commit()
+
+        role = datastore.find_role(role_name)
+        if not role:
+            role = Role(name=role_name)
+
+        role.users.append(user)
+
+        db.session.add(role)
+        db.session.add(
+            ActionUsers.allow(ActionNeed(
+                '{role}-access'.format(role=role_name)),
+                              user=user))
+        db.session.commit()
+
+        record = UserRecord.create(
+            {
+                'email': email,
+                'full_name': name,
+                'roles': [role_name],
+                'organisation': {
+                    '$ref':
+                    'https://sonar.ch/api/organisations/{organisation}'.format(
+                        organisation=organisation)
+                }
+            },
+            dbcommit=True)
+        record.reindex()
+        db.session.commit()
+
+        return record
+
+    return _make_user
+
+
 @pytest.fixture()
-def db_user_fixture(app, db, organisation_fixture, roles):
-    """Create user in database."""
-    data = {
-        'email': 'user@rero.ch',
-        'full_name': 'John Doe',
-        'roles': ['user'],
-        'organisation': {
-            '$ref': 'https://sonar.ch/api/organisations/org'
-        }
-    }
-
-    with mock.patch('sonar.modules.users.api.'
-                    'send_reset_password_instructions'):
-        user = UserRecord.create(data, dbcommit=True)
-
-    user.reindex()
-    db.session.commit()
-
-    return user
-
-
-@pytest.fixture()
-def db_moderator_fixture(app, db, organisation_fixture):
-    """Create moderator in database."""
-    data = {
-        'email': 'moderator@rero.ch',
-        'full_name': 'John Doe',
-        'roles': ['moderator'],
-        'organisation': {
-            '$ref': 'https://sonar.ch/api/organisations/org'
-        }
-    }
-
-    user = UserRecord.create(data, dbcommit=True)
-    user.reindex()
-    db.session.commit()
-
-    return user
-
-
-@pytest.fixture()
-def user_without_role_fixture(app, db):
+def user_without_role(app, db):
     """Create user in database without role."""
     datastore = app.extensions['security'].datastore
-    user = datastore.create_user(email='user-without-role@test.com',
+    user = datastore.create_user(email='user-without-role@rero.ch',
                                  password=hash_password('123456'),
                                  active=True)
     db.session.commit()
@@ -191,84 +200,37 @@ def user_without_role_fixture(app, db):
 
 
 @pytest.fixture()
-def user_fixture(app, db, roles):
-    """Create user in database."""
-    datastore = app.extensions['security'].datastore
-    user = datastore.create_user(email='user@test.com',
-                                 password=hash_password('123456'),
-                                 active=True)
-    db.session.commit()
-
-    role = datastore.find_role('user')
-    role.users.append(user)
-
-    db.session.add(ActionUsers.allow(ActionNeed('user-access'), user=user))
-    db.session.commit()
-
-    return user
+def user(make_user):
+    """Create user."""
+    return make_user('user')
 
 
 @pytest.fixture()
-def admin_user_fixture(app, db, roles):
-    """User with admin access."""
-    datastore = app.extensions['security'].datastore
-    user = datastore.create_user(email='admin@test.com',
-                                 password=hash_password('123456'),
-                                 active=True)
-    datastore.commit()
-
-    role = datastore.find_role('admin')
-    role.users.append(user)
-
-    db.session.add(ActionUsers.allow(ActionNeed('admin-access'), user=user))
-    db.session.commit()
-
-    return user
+def moderator(make_user):
+    """Create moderator."""
+    return make_user('moderator')
 
 
 @pytest.fixture()
-def superadmin_user_fixture(app, db):
-    """User with admin access."""
-    datastore = app.extensions['security'].datastore
-    user = datastore.create_user(email='superadmin@test.com',
-                                 password=hash_password('123456'),
-                                 active=True)
-    db.session.commit()
-
-    role = Role(name='superadmin')
-    role.users.append(user)
-
-    db.session.add(role)
-    db.session.add(ActionUsers.allow(ActionNeed('superuser-access'),
-                                     user=user))
-    db.session.commit()
-
-    return user
+def publisher(make_user):
+    """Create publisher."""
+    return make_user('publisher')
 
 
 @pytest.fixture()
-def admin_user_fixture_with_db(app, db, admin_user_fixture,
-                               organisation_fixture):
-    """Create user in database."""
-    db_user = UserRecord.create(
-        {
-            'pid': '10000',
-            'email': admin_user_fixture.email,
-            'full_name': 'Jules Brochu',
-            'roles': ['admin'],
-            'organisation': {
-                '$ref': 'https://sonar.ch/api/organisations/org'
-            }
-        },
-        dbcommit=True)
-    db_user.reindex()
-    db.session.commit()
-
-    return db_user
+def admin(make_user):
+    """Create admin user."""
+    return make_user('admin')
 
 
 @pytest.fixture()
-def document_json_fixture(app, db, organisation_fixture):
+def superuser(make_user):
+    """Create super user."""
+    return make_user('superuser')
+
+
+@pytest.fixture()
+def document_json(app, db, organisation):
     """JSON document fixture."""
     data = {
         'pid':
@@ -360,9 +322,6 @@ def document_json_fixture(app, db, organisation_fixture):
             'responsibility': {
                 'value': 'Zeng Lingliang zhu bian'
             }
-        },
-        'organisation': {
-            '$ref': 'https://sonar.ch/api/organisations/org'
         }
     }
 
@@ -370,38 +329,158 @@ def document_json_fixture(app, db, organisation_fixture):
 
 
 @pytest.fixture()
-def document_fixture(app, db, document_json_fixture, bucket_location_fixture):
+def make_document(db, document_json, make_organisation, bucket_location,
+                  pdf_file):
+    """Factory for creating document."""
+
+    def _make_document(organisation='org', with_file=False):
+        if organisation:
+            make_organisation(organisation)
+            document_json['organisation'] = {
+                '$ref': 'https://sonar.ch/api/organisations/org'
+            }
+
+        record = DocumentRecord.create(document_json,
+                                       dbcommit=True,
+                                       with_bucket=True)
+        record.commit()
+        db.session.commit()
+
+        if with_file:
+            with open(pdf_file, 'rb') as file:
+                record.add_file(file.read(),
+                                'test1.pdf',
+                                order=1,
+                                restricted='insitution',
+                                embargo_date='2021-01-01')
+                record.commit()
+
+        db.session.commit()
+        record.reindex()
+        return record
+
+    return _make_document
+
+
+@pytest.fixture()
+def document(make_document):
     """Create a document."""
-    document = DocumentRecord.create(document_json_fixture,
-                                     dbcommit=True,
-                                     with_bucket=True)
-    db.session.commit()
-    document.reindex()
-
-    return document
+    return make_document()
 
 
 @pytest.fixture()
-def document_with_file(app, db, document_fixture, pdf_file):
+def document_with_file(make_document):
     """Create a document with a file associated."""
-    with open(pdf_file, 'rb') as file:
-        content = file.read()
-
-    document_fixture.add_file(content,
-                              'test1.pdf',
-                              order=1,
-                              restricted='institution',
-                              embargo_date='2021-01-01')
-
-    document_fixture.commit()
-    db.session.commit()
-
-    return document_fixture
+    return make_document('org', True)
 
 
 @pytest.fixture()
-def deposit_fixture(app, db, db_user_fixture, pdf_file,
-                    bucket_location_fixture):
+def make_deposit(db, bucket_location, pdf_file, make_user):
+    """Factory for creating deposit."""
+
+    def _make_deposit(role='publisher', organisation=None):
+        user = make_user(role, organisation)
+
+        deposit_json = {
+            '$schema':
+            'https://sonar.ch/schemas/deposits/deposit-v1.0.0.json',
+            '_bucket':
+            '03e5e909-2fce-479e-a697-657e1392cc72',
+            'contributors': [{
+                'affiliation': 'University of Bern, Switzerland',
+                'name': 'Takayoshi, Shintaro'
+            }],
+            'metadata': {
+                'documentType':
+                'coar:c_816b',
+                'title':
+                'Title of the document',
+                'subtitle':
+                'Subtitle of the document',
+                'otherLanguageTitle': {
+                    'language': 'fre',
+                    'title': 'Titre du document'
+                },
+                'language':
+                'eng',
+                'documentDate':
+                '2020-01-01',
+                'publication': {
+                    'publishedIn': 'Journal',
+                    'year': '2019',
+                    'volume': '12',
+                    'number': '2',
+                    'pages': '1-12',
+                    'editors': ['Denson, Edward', 'Worth, James'],
+                    'publisher': 'Publisher'
+                },
+                'otherElectronicVersions': [{
+                    'type':
+                    'Published version',
+                    'url':
+                    'https://some.url/document.pdf'
+                }],
+                'specificCollections': ['Collection 1', 'Collection 2'],
+                'classification':
+                '543',
+                'abstracts': [{
+                    'language': 'eng',
+                    'abstract': 'Abstract of the document'
+                }, {
+                    'language': 'fre',
+                    'abstract': 'Résumé du document'
+                }],
+                'subjects': [{
+                    'language': 'eng',
+                    'subjects': ['Subject 1', 'Subject 2']
+                }, {
+                    'language': 'fre',
+                    'subjects': ['Sujet 1', 'Sujet 2']
+                }]
+            },
+            'status':
+            'in_progress',
+            'step':
+            'diffusion',
+            'user': {
+                '$ref':
+                'https://sonar.ch/api/users/{pid}'.format(pid=user['pid'])
+            }
+        }
+
+        record = DepositRecord.create(deposit_json,
+                                      dbcommit=True,
+                                      with_bucket=True)
+
+        with open(pdf_file, 'rb') as file:
+            content = file.read()
+
+        record.files['main.pdf'] = BytesIO(content)
+        record.files['main.pdf']['label'] = 'Main file'
+        record.files['main.pdf']['category'] = 'main'
+        record.files['main.pdf']['type'] = 'file'
+        record.files['main.pdf']['embargo'] = True
+        record.files['main.pdf']['embargoDate'] = '2021-01-01'
+        record.files['main.pdf']['exceptInOrganisation'] = True
+
+        record.files['additional.pdf'] = BytesIO(content)
+        record.files['additional.pdf']['label'] = 'Additional file 1'
+        record.files['additional.pdf']['category'] = 'additional'
+        record.files['additional.pdf']['type'] = 'file'
+        record.files['additional.pdf']['embargo'] = False
+        record.files['additional.pdf']['exceptInOrganisation'] = False
+
+        record.commit()
+        record.reindex()
+        db.session.commit()
+
+        return record
+
+    return _make_deposit
+
+
+@pytest.fixture()
+def deposit(app, db, user, pdf_file, bucket_location):
     """Deposit fixture."""
     deposit_json = {
         '$schema':
@@ -423,7 +502,8 @@ def deposit_fixture(app, db, db_user_fixture, pdf_file,
                 'language': 'fre',
                 'title': 'Titre du document'
             },
-            'language': 'eng',
+            'language':
+            'eng',
             'documentDate':
             '2020-01-01',
             'publication': {
@@ -462,9 +542,7 @@ def deposit_fixture(app, db, db_user_fixture, pdf_file,
         'step':
         'diffusion',
         'user': {
-            '$ref':
-            'https://sonar.ch/api/users/{pid}'.format(
-                pid=db_user_fixture['pid'])
+            '$ref': 'https://sonar.ch/api/users/{pid}'.format(pid=user['pid'])
         }
     }
 
@@ -498,7 +576,7 @@ def deposit_fixture(app, db, db_user_fixture, pdf_file,
 
 
 @pytest.fixture()
-def bucket_location_fixture(app, db):
+def bucket_location(app, db):
     """Create a default location for managing files."""
     tmppath = tempfile.mkdtemp()
     db.session.add(Location(name='default', uri=tmppath, default=True))

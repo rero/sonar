@@ -20,7 +20,7 @@
 from sonar.modules.documents.api import DocumentRecord
 
 
-def test_get_record_by_identifier(app, document_fixture):
+def test_get_record_by_identifier(app, document):
     """Test getting record by its identifier."""
     # Record found
     record = DocumentRecord.get_record_by_identifier([{

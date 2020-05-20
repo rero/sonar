@@ -25,17 +25,15 @@ def test_account_info(app, mock_api_read_record, orcid_record, user_record):
     assert sonar_orcid.account_info(None, orcid_record) == user_record
 
 
-def test_account_setup(app, orcid_record, models_fixture,
-                       remote_account_fixture):
+def test_account_setup(app, orcid_record, remote_account):
     """Test account setup after login."""
-    remote_account, remote_token = remote_account_fixture
+    account, token = remote_account
 
     ioc = app.extensions['oauthlib.client']
 
-    sonar_orcid.account_setup(ioc.remote_apps['orcid'], remote_token,
-                              orcid_record)
+    sonar_orcid.account_setup(ioc.remote_apps['orcid'], token, orcid_record)
 
-    assert remote_account.extra_data['orcid'] == orcid_record['orcid']
+    assert account.extra_data['orcid'] == orcid_record['orcid']
 
 
 def test_get_orcid_record(mock_api_read_record, app, orcid_record):

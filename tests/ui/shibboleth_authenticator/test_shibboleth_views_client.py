@@ -43,7 +43,8 @@ def test_login(app, client, valid_sp_configuration):
     assert client.get('/shibboleth/login/idp').status_code == 500
 
 
-def test_authorized(monkeypatch, app, client, user_fixture, valid_attributes):
+def test_authorized(monkeypatch, app, client, user_without_role,
+                    valid_attributes):
     """Test authorized view."""
     # Test unexisting identity provider
     app.config.update(SHIBBOLETH_SERVICE_PROVIDER=dict(
@@ -130,8 +131,7 @@ def test_authorized(monkeypatch, app, client, user_fixture, valid_attributes):
     # Test error in relay state token
     monkeypatch.setattr(
         'sonar.modules.shibboleth_authenticator.views.client'
-        '._create_identifier',
-        lambda: 'test')
+        '._create_identifier', lambda: 'test')
     assert client.post('/shibboleth/authorized/idp',
                        data=dict(
                            SAMLResponse=_load_file('valid_saml_response'),

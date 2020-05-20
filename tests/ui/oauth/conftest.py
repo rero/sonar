@@ -58,25 +58,12 @@ def user_record():
     )
 
 
-@pytest.fixture(scope='module')
-def models_fixture(app):
-    """Flask app with example data used to test models."""
-    with app.app_context():
-        datastore = app.extensions['security'].datastore
-        datastore.create_user(email='john.doe@test.com',
-                              password='123456',
-                              active=True)
-        datastore.commit()
-
-
-@pytest.fixture(scope='module')
-def remote_account_fixture(app, models_fixture):
+@pytest.fixture()
+def remote_account(app, user_without_role):
     """Create a remote token from user data."""
-    datastore = app.extensions['security'].datastore
-    user = datastore.find_user(email='john.doe@test.com')
-
     remote_account = RemoteAccount.create(1, 'dev', dict())
-    remote_token = RemoteToken.create(user.id, 'dev', 'token', 'secret')
+    remote_token = RemoteToken.create(user_without_role.id, 'dev', 'token',
+                                      'secret')
 
     return remote_account, remote_token
 
@@ -84,6 +71,7 @@ def remote_account_fixture(app, models_fixture):
 @pytest.fixture
 def mock_api_read_record(monkeypatch):
     """Mock the call to api for retrieving record details."""
+
     def read_record_public(method, record_id, request_type, token):
         record = {
             'orcid-identifier': {

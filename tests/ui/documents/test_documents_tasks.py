@@ -25,16 +25,16 @@ from sonar.modules.documents.tasks import import_records
 
 @mock.patch(
     'sonar.modules.documents.tasks.DocumentRecord.get_record_by_identifier')
-def test_import_records(mock_record_by_identifier, app, document_json_fixture,
-                        bucket_location_fixture):
+def test_import_records(mock_record_by_identifier, app, document_json,
+                        bucket_location):
     """Test import records."""
     # Successful importing record
     mock_record_by_identifier.return_value = None
-    document_json_fixture['files'] = [{
+    document_json['files'] = [{
         'key': 'test.pdf',
         'url': 'http://some.url/file.pdf'
     }]
-    import_records([document_json_fixture])
+    import_records([document_json])
     assert DocumentRecord.get_record_by_pid('10000')
 
     # Error during importation of record
@@ -42,12 +42,12 @@ def test_import_records(mock_record_by_identifier, app, document_json_fixture,
         raise Exception("No record found for identifier")
 
     mock_record_by_identifier.side_effect = exception_side_effect
-    document_json_fixture['pid'] = '10001'
-    document_json_fixture['files'] = [{
+    document_json['pid'] = '10001'
+    document_json['files'] = [{
         'key': 'test.pdf',
         'url': 'http://some.url/file.pdf'
     }]
 
-    import_records([document_json_fixture])
+    import_records([document_json])
 
     assert not DocumentRecord.get_record_by_pid('10001')

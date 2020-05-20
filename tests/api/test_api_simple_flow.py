@@ -26,13 +26,13 @@ from utils import VerifyRecordPermissionPatch
 
 @mock.patch('invenio_records_rest.views.verify_record_permission',
             mock.MagicMock(return_value=VerifyRecordPermissionPatch))
-def test_simple_flow(client, document_json_fixture):
+def test_simple_flow(client, document_json):
     """Test simple flow using REST API."""
     headers = [('Content-Type', 'application/json')]
 
     # create a record
     response = client.post(url_for('invenio_records_rest.doc_list'),
-                           data=json.dumps(document_json_fixture),
+                           data=json.dumps(document_json),
                            headers=headers)
     assert response.status_code == 201
 

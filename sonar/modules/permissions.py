@@ -26,24 +26,25 @@ from invenio_access import Permission
 from invenio_records_rest.utils import check_elasticsearch
 
 superuser_access_permission = Permission(ActionNeed('superuser-access'))
-admin_access_permission = Permission(RoleNeed('moderator'), RoleNeed('admin'))
-moderator_access_permission = Permission(ActionNeed('admin-access'))
-user_access_permission = Permission(RoleNeed('user'),
-                                    RoleNeed('moderator'), RoleNeed('admin'))
+admin_access_permission = Permission(ActionNeed('admin-access'))
+publisher_access_permission = Permission(RoleNeed('publisher'),
+                                         RoleNeed('moderator'),
+                                         RoleNeed('admin'),
+                                         RoleNeed('superuser'))
 
 # Allow access without permission check
 allow_access = type('Allow', (), {'can': lambda self: True})()
 
 
-def has_user_access():
-    """Check if current user has at least role user.
+def has_publisher_access():
+    """Check if current user has at least role publisher.
 
     This function is used in app context and can be called in all templates.
     """
     if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
         return True
 
-    return user_access_permission.can()
+    return publisher_access_permission.can()
 
 
 def has_admin_access():
@@ -54,10 +55,10 @@ def has_admin_access():
     if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
         return True
 
-    return moderator_access_permission.can()
+    return admin_access_permission.can()
 
 
-def has_super_admin_access():
+def has_superuser_access():
     """Check if current user has access to super admin panel.
 
     This function is used in app context and can be called in all templates.
@@ -83,7 +84,7 @@ def can_create_record_factory(**kwargs):
     if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
         return allow_access
 
-    return user_access_permission
+    return admin_access_permission
 
 
 def can_update_record_factory(**kwargs):
@@ -91,7 +92,7 @@ def can_update_record_factory(**kwargs):
     if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
         return allow_access
 
-    return user_access_permission
+    return admin_access_permission
 
 
 def can_delete_record_factory(**kwargs):
@@ -99,7 +100,7 @@ def can_delete_record_factory(**kwargs):
     if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
         return allow_access
 
-    return user_access_permission
+    return admin_access_permission
 
 
 def can_access_manage_view(func):
@@ -109,7 +110,7 @@ def can_access_manage_view(func):
         if not current_user.is_authenticated:
             abort(401)
         else:
-            if has_user_access():
+            if has_admin_access():
                 return func(*args, **kwargs)
 
             abort(403)

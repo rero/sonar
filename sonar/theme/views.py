@@ -74,9 +74,10 @@ def logged_user():
 
     if user:
         data['metadata'] = user.dumps()
-        data['metadata']['is_super_admin'] = user.is_super_admin
+        data['metadata']['is_superuser'] = user.is_superuser
         data['metadata']['is_admin'] = user.is_admin
         data['metadata']['is_moderator'] = user.is_moderator
+        data['metadata']['is_publisher'] = user.is_publisher
         data['metadata']['is_user'] = user.is_user
 
     # TODO: If an organisation is associated to user and only when running

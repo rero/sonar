@@ -20,10 +20,17 @@
 
 from functools import partial
 
+from werkzeug.local import LocalProxy
+
+from sonar.modules.users.api import current_user_record
+
 from ..api import SonarIndexer, SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
 from ..providers import Provider
 from .minters import id_minter
+
+current_organisation = LocalProxy(
+    lambda: OrganisationRecord.get_organisation_by_user(current_user_record))
 
 # provider
 OrganisationProvider = type(
@@ -54,6 +61,18 @@ class OrganisationRecord(SonarRecord):
     fetcher = organisation_pid_fetcher
     provider = OrganisationProvider
     schema = 'organisations/organisation-v1.0.0.json'
+
+    @classmethod
+    def get_organisation_by_user(cls, user):
+        """Return organisation associated with user.
+
+        :param user: User record.
+        :returns: Organisation record or None.
+        """
+        if not user or not user.get('organisation'):
+            return None
+
+        return cls.get_record_by_ref_link(user['organisation']['$ref'])
 
 
 class OrganisationIndexer(SonarIndexer):
