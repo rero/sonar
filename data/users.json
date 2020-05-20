@@ -1,9 +1,9 @@
 [
   {
     "full_name": "Jorg Mueller",
-    "email": "rero.sonar+superadmin@gmail.com",
+    "email": "rero.sonar+superuser@gmail.com",
     "password": "123456",
-    "roles": ["superadmin"],
+    "roles": ["superuser"],
     "birth_date": "1978-03-09",
     "street": "Sonnenbergstr 39",
     "postal_code": "6544",
@@ -37,6 +37,20 @@
     "postal_code": "5736",
     "city": "Burg",
     "phone": "+41627676171",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/rero"
+    }
+  },
+  {
+    "full_name": "Claude Roussel",
+    "email": "rero.sonar+publisher@gmail.com",
+    "password": "123456",
+    "roles": ["publisher"],
+    "birth_date": "1983-09-14",
+    "street": "Kirchstrasse 57",
+    "postal_code": "1660",
+    "city": "La Lécherette",
+    "phone": "+41269639084",
     "organisation": {
       "$ref": "https://sonar.ch/api/organisations/rero"
     }

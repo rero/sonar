@@ -94,16 +94,17 @@
       "items": {
         "type": "string",
         "enum": [
-          "superadmin",
+          "superuser",
           "admin",
           "moderator",
+          "publisher",
           "user"
         ],
         "form": {
           "options": [
             {
-              "label": "role_superadmin",
-              "value": "superadmin"
+              "label": "role_superuser",
+              "value": "superuser"
             },
             {
               "label": "role_admin",
@@ -112,6 +113,10 @@
             {
               "label": "role_moderator",
               "value": "moderator"
+            },
+            {
+              "label": "role_publisher",
+              "value": "publisher"
             },
             {
               "label": "role_user",

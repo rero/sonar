@@ -24,8 +24,8 @@ from flask_assets import Bundle, Environment
 from flask_bootstrap import Bootstrap
 from flask_wiki import Wiki
 
-from sonar.modules.permissions import has_admin_access, \
-    has_super_admin_access, has_user_access
+from sonar.modules.permissions import has_admin_access, has_publisher_access, \
+    has_superuser_access
 from sonar.modules.utils import get_switch_aai_providers
 
 from . import config
@@ -33,9 +33,10 @@ from . import config
 
 def utility_processor():
     """Dictionary for passing data to templates."""
-    return dict(has_user_access=has_user_access,
+    return dict(
+                has_publisher_access=has_publisher_access,
                 has_admin_access=has_admin_access,
-                has_super_admin_access=has_super_admin_access,
+                has_superuser_access=has_superuser_access,
                 ui_version=config.SONAR_APP_UI_VERSION,
                 aai_providers=get_switch_aai_providers)
 

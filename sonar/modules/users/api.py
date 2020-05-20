@@ -21,6 +21,7 @@ from functools import partial
 
 from elasticsearch_dsl.query import Q
 from flask import current_app
+from flask_security import current_user
 from flask_security.confirmable import confirm_user
 from flask_security.recoverable import send_reset_password_instructions
 from invenio_accounts.ext import hash_password
@@ -31,6 +32,9 @@ from ..api import SonarIndexer, SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
 from ..minters import id_minter
 from ..providers import Provider
+
+current_user_record = LocalProxy(lambda: UserRecord.get_user_by_current_user(
+    current_user))
 
 # provider
 UserProvider = type('UserProvider', (Provider, ), dict(pid_type='user'))
@@ -77,21 +81,24 @@ class UserRecord(SonarRecord):
 
     ROLE_USER = 'user'
     ROLE_MODERATOR = 'moderator'
+    ROLE_PUBLISHER = 'publisher'
     ROLE_ADMIN = 'admin'
-    ROLE_SUPERADMIN = 'superadmin'
+    ROLE_SUPERUSER = 'superuser'
 
     ROLES_HIERARCHY = {
         ROLE_USER: [],
-        ROLE_MODERATOR: [ROLE_USER],
-        ROLE_ADMIN: [ROLE_MODERATOR, ROLE_USER],
-        ROLE_SUPERADMIN: [ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER],
+        ROLE_PUBLISHER: [ROLE_USER],
+        ROLE_MODERATOR: [ROLE_PUBLISHER, ROLE_USER],
+        ROLE_ADMIN: [ROLE_MODERATOR, ROLE_PUBLISHER, ROLE_USER],
+        ROLE_SUPERUSER:
+        [ROLE_ADMIN, ROLE_MODERATOR, ROLE_PUBLISHER, ROLE_USER],
     }
 
     minter = user_pid_minter
     fetcher = user_pid_fetcher
     provider = UserProvider
     schema = 'users/user-v1.0.0.json'
-    available_roles = [ROLE_SUPERADMIN, ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER]
+    available_roles = [ROLE_SUPERUSER, ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER]
 
     @classmethod
     def create(cls,
@@ -195,6 +202,9 @@ class UserRecord(SonarRecord):
     @classmethod
     def get_user_by_current_user(cls, user):
         """Get user by current logged user."""
+        if user.is_anonymous:
+            return None
+
         return cls.get_user_by_email(email=user.email)
 
     @classmethod
@@ -277,10 +287,23 @@ class UserRecord(SonarRecord):
 
         return False
 
+    def get_all_reachable_roles(self):
+        """Get list of roles depending on role hierarchy."""
+        roles = []
+        for role in self['roles']:
+            roles.extend(self.get_reachable_roles(role))
+
+        return list(set(roles))
+
     @property
     def is_moderator(self):
         """Check if a user a moderator."""
         return self.is_granted(UserRecord.ROLE_MODERATOR)
+
+    @property
+    def is_publisher(self):
+        """Check if a user a pulisher."""
+        return self.is_granted(UserRecord.ROLE_PUBLISHER)
 
     @property
     def is_user(self):
@@ -293,9 +316,9 @@ class UserRecord(SonarRecord):
         return self.is_granted(UserRecord.ROLE_ADMIN)
 
     @property
-    def is_super_admin(self):
+    def is_superuser(self):
         """Check if a user a super administrator."""
-        return self.is_granted(UserRecord.ROLE_SUPERADMIN)
+        return self.is_granted(UserRecord.ROLE_SUPERUSER)
 
 
 class UserIndexer(SonarIndexer):

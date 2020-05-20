@@ -21,7 +21,7 @@ from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.users.api import UserRecord
 
 
-def test_user_resolver(app, organisation_fixture, roles):
+def test_user_resolver(app, organisation, roles):
     """Test user resolver."""
     UserRecord.create({
         'pid': '1',
@@ -33,8 +33,9 @@ def test_user_resolver(app, organisation_fixture, roles):
         }
     })
 
-    record = DepositRecord.create({
-        'user': {'$ref': 'https://sonar.ch/api/users/1'}
-    }, with_bucket=False)
+    record = DepositRecord.create(
+        {'user': {
+            '$ref': 'https://sonar.ch/api/users/1'
+        }}, with_bucket=False)
 
     assert record.replace_refs().get('user')['email'] == 'admin@test.com'

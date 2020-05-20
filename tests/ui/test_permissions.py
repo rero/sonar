@@ -20,36 +20,34 @@
 from flask_security import url_for_security
 from invenio_accounts.testutils import login_user_via_view
 
-from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.permissions import admin_permission_factory, \
     can_create_record_factory, can_delete_record_factory, \
     can_list_record_factory, can_read_record_factory, \
     can_update_record_factory, files_permission_factory, has_admin_access, \
-    has_super_admin_access, has_user_access, wiki_edit_permission
+    has_publisher_access, has_superuser_access, wiki_edit_permission
 
 
-def test_has_user_access(app, client, user_without_role_fixture, user_fixture):
-    """Test if user has an admin access."""
+def test_has_publisher_access(app, client, user_without_role, publisher):
+    """Test if user has an publisher access."""
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
-    assert has_user_access()
+    assert has_publisher_access()
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
     login_user_via_view(client,
-                        email=user_without_role_fixture.email,
+                        email=user_without_role.email,
                         password='123456')
 
-    assert not has_user_access()
+    assert not has_publisher_access()
 
     client.get(url_for_security('logout'))
 
-    login_user_via_view(client, email=user_fixture.email, password='123456')
+    login_user_via_view(client, email=publisher['email'], password='123456')
 
-    assert has_user_access()
+    assert has_publisher_access()
 
 
-def test_has_admin_access(app, client, user_without_role_fixture,
-                          admin_user_fixture):
+def test_has_admin_access(app, client, user_without_role, admin):
     """Test if user has an admin access."""
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
@@ -57,44 +55,38 @@ def test_has_admin_access(app, client, user_without_role_fixture,
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
     login_user_via_view(client,
-                        email=user_without_role_fixture.email,
+                        email=user_without_role.email,
                         password='123456')
 
     assert not has_admin_access()
 
     client.get(url_for_security('logout'))
 
-    login_user_via_view(client,
-                        email=admin_user_fixture.email,
-                        password='123456')
+    login_user_via_view(client, email=admin['email'], password='123456')
 
     assert has_admin_access()
 
 
-def test_has_super_admin_access(app, client, user_without_role_fixture,
-                                superadmin_user_fixture):
+def test_has_superuser_access(app, client, user_without_role, superuser):
     """Test if user has a super admin access."""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
-    assert has_super_admin_access()
+    assert has_superuser_access()
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
     login_user_via_view(client,
-                        email=user_without_role_fixture.email,
+                        email=user_without_role.email,
                         password='123456')
 
-    assert not has_super_admin_access()
+    assert not has_superuser_access()
 
     client.get(url_for_security('logout'))
 
-    login_user_via_view(client,
-                        email=superadmin_user_fixture.email,
-                        password='123456')
+    login_user_via_view(client, email=superuser['email'], password='123456')
 
-    assert has_super_admin_access()
+    assert has_superuser_access()
 
 
-def test_permissions_factories(app, client, admin_user_fixture,
-                               document_fixture):
+def test_permissions_factories(app, client, admin, document):
     """Test is user can list record."""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
 
@@ -105,52 +97,44 @@ def test_permissions_factories(app, client, admin_user_fixture,
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
 
-    login_user_via_view(client,
-                        email=admin_user_fixture.email,
-                        password='123456')
+    login_user_via_view(client, email=admin['email'], password='123456')
 
     assert can_list_record_factory()
     assert can_create_record_factory()
     assert can_update_record_factory()
     assert can_delete_record_factory()
-    assert can_read_record_factory(document_fixture)
+    assert can_read_record_factory(document)
 
 
-def test_files_permission_factory(app, client, admin_user_fixture):
+def test_files_permission_factory(app, client, admin):
     """Test files permission factory."""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
     assert files_permission_factory().can()
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
-    login_user_via_view(client,
-                        email=admin_user_fixture.email,
-                        password='123456')
+    login_user_via_view(client, email=admin['email'], password='123456')
     assert files_permission_factory().can()
 
 
-def test_admin_permission_factory(app, client, superadmin_user_fixture):
+def test_admin_permission_factory(app, client, superuser):
     """Test factory for admin access permission."""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
     assert admin_permission_factory(None).can()
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
-    login_user_via_view(client,
-                        email=superadmin_user_fixture.email,
-                        password='123456')
+    login_user_via_view(client, email=superuser['email'], password='123456')
     assert admin_permission_factory(None).can()
 
 
-def test_wiki_edit_ui_permission(client, user_fixture, admin_user_fixture):
+def test_wiki_edit_ui_permission(client, user, admin):
     """Test wiki edit ui permission."""
     # No access
-    login_user_via_view(client, email=user_fixture.email, password='123456')
+    login_user_via_view(client, email=user['email'], password='123456')
     assert not wiki_edit_permission()
 
     # Logout user
     client.get(url_for_security('logout'))
 
     # OK user has access
-    login_user_via_view(client,
-                        email=admin_user_fixture.email,
-                        password='123456')
+    login_user_via_view(client, email=admin['email'], password='123456')
     assert wiki_edit_permission()

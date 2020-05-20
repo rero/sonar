@@ -21,8 +21,6 @@ import pytest
 from flask import url_for
 from invenio_accounts.testutils import login_user_via_session
 
-from sonar.modules.users.api import UserRecord
-
 
 def test_error(client):
     """Test error page"""
@@ -30,7 +28,7 @@ def test_error(client):
         assert client.get(url_for('sonar.error'))
 
 
-def test_admin_record_page(app, admin_user_fixture, user_without_role_fixture):
+def test_admin_record_page(app, admin, user_without_role):
     """Test admin page redirection to defaults."""
     with app.test_client() as client:
         file_url = url_for('sonar.manage')
@@ -40,12 +38,12 @@ def test_admin_record_page(app, admin_user_fixture, user_without_role_fixture):
         assert res.status_code == 401
 
         # User is logged, but is not allowed to access the page.
-        login_user_via_session(client, email=user_without_role_fixture.email)
+        login_user_via_session(client, email=user_without_role.email)
         res = client.get(file_url)
         assert res.status_code == 403
 
         # OK, but redirected to the default page
-        login_user_via_session(client, email=admin_user_fixture.email)
+        login_user_via_session(client, email=admin['email'])
         res = client.get(file_url)
         assert res.status_code == 302
         assert '/records/documents' in res.location
@@ -57,20 +55,20 @@ def test_admin_record_page(app, admin_user_fixture, user_without_role_fixture):
         assert '<sonar-root>' in str(res.data)
 
 
-def test_logged_user(app, client, admin_user_fixture_with_db):
+def test_logged_user(app, client, admin):
     """Test logged user page."""
     url = url_for('sonar.logged_user')
 
     res = client.get(url)
     assert b'{}' in res.data
 
-    login_user_via_session(client, email=admin_user_fixture_with_db['email'])
+    login_user_via_session(client, email=admin['email'])
 
     res = client.get(url)
-    assert b'"email":"admin@test.com"' in res.data
+    assert b'"email":"org-admin@rero.ch"' in res.data
 
     res = client.get(url + '?resolve=1')
-    assert b'"email":"admin@test.com"' in res.data
+    assert b'"email":"org-admin@rero.ch"' in res.data
     assert b'"pid":"org"' in res.data
 
 

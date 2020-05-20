@@ -29,11 +29,11 @@ from sonar.modules.documents.api import DocumentIndexer, DocumentRecord
 create_app = create_api
 
 
-def test_create(app, document_json_fixture):
+def test_create(app, document_json):
     """Test creating a record."""
-    DocumentRecord.create(document_json_fixture)
+    DocumentRecord.create(document_json)
     assert DocumentRecord.get_record_by_pid('10000')['pid'] == '10000'
-    DocumentRecord.create(document_json_fixture, dbcommit=True)
+    DocumentRecord.create(document_json, dbcommit=True)
     assert DocumentRecord.get_record_by_pid('10000')['pid'] == '10000'
 
 
@@ -43,11 +43,11 @@ def test_get_ref_link(app):
         '/api/document/1'
 
 
-def test_get_record_by_pid(app, document_json_fixture):
+def test_get_record_by_pid(app, document_json):
     """Test get record by PID."""
     assert DocumentRecord.get_record_by_pid('10000') is None
 
-    record = DocumentRecord.create(document_json_fixture)
+    record = DocumentRecord.create(document_json)
 
     assert DocumentRecord.get_record_by_pid('10000')['pid'] == '10000'
 
@@ -56,17 +56,17 @@ def test_get_record_by_pid(app, document_json_fixture):
     assert DocumentRecord.get_record_by_pid('10000') is None
 
 
-def test_dbcommit(app, document_json_fixture):
+def test_dbcommit(app, document_json):
     """Test record commit to db."""
-    record = DocumentRecord.create(document_json_fixture)
+    record = DocumentRecord.create(document_json)
     record.dbcommit()
 
     assert DocumentRecord.get_record_by_pid('10000')['pid'] == '10000'
 
 
-def test_reindex(app, db, client, document_json_fixture):
+def test_reindex(app, db, client, document_json):
     """Test record reindex."""
-    record = DocumentRecord.create(document_json_fixture)
+    record = DocumentRecord.create(document_json)
     db.session.commit()
 
     indexer = DocumentIndexer()
@@ -94,7 +94,7 @@ def test_get_pid_by_ref_link(app):
     assert pid == '10000'
 
 
-def test_get_record_by_ref_link(app, document_fixture):
+def test_get_record_by_ref_link(app, document):
     """Test getting a record by a reference link."""
 
     record = DocumentRecord.get_record_by_ref_link(
@@ -102,17 +102,17 @@ def test_get_record_by_ref_link(app, document_fixture):
     assert record['pid'] == '10000'
 
 
-def test_add_file_from_url(app, document_fixture):
+def test_add_file_from_url(app, document):
     """Test add file to document by giving its URL."""
-    document_fixture.add_file_from_url(
+    document.add_file_from_url(
         'http://doc.rero.ch/record/328028/files/nor_irc.pdf', 'test.pdf')
 
-    assert len(document_fixture.files) == 3
-    assert document_fixture.files['test.pdf']['label'] == 'test.pdf'
+    assert len(document.files) == 3
+    assert document.files['test.pdf']['label'] == 'test.pdf'
 
 
 @mock.patch('sonar.modules.api.extract_text_from_content')
-def test_add_file(mock_extract, app, pdf_file, document_fixture):
+def test_add_file(mock_extract, app, pdf_file, document):
     """Test add file to document."""
     with open(pdf_file, 'rb') as file:
         content = file.read()
@@ -120,25 +120,25 @@ def test_add_file(mock_extract, app, pdf_file, document_fixture):
     mock_extract.return_value = 'Fulltext content'
 
     # Successful file add
-    document_fixture.add_file(content, 'test1.pdf')
-    assert document_fixture.files['test1.pdf']
-    assert document_fixture.files['test1.txt']
+    document.add_file(content, 'test1.pdf')
+    assert document.files['test1.pdf']
+    assert document.files['test1.txt']
 
     # Test already existing files
-    document_fixture.add_file(content, 'test1.pdf')
-    assert len(document_fixture.files) == 3
+    document.add_file(content, 'test1.pdf')
+    assert len(document.files) == 3
 
     # Importing files is disabled
     app.config['SONAR_DOCUMENTS_IMPORT_FILES'] = False
-    document_fixture.add_file(content, 'test3.pdf')
-    assert 'test3.pdf' not in document_fixture.files
+    document.add_file(content, 'test3.pdf')
+    assert 'test3.pdf' not in document.files
 
     # Extracting fulltext is disabled
     app.config['SONAR_DOCUMENTS_IMPORT_FILES'] = True
     app.config['SONAR_DOCUMENTS_EXTRACT_FULLTEXT_ON_IMPORT'] = False
-    document_fixture.add_file(content, 'test4.pdf')
-    assert document_fixture.files['test4.pdf']
-    assert 'test4.txt' not in document_fixture.files
+    document.add_file(content, 'test4.pdf')
+    assert document.files['test4.pdf']
+    assert 'test4.txt' not in document.files
 
     # Test exception when extracting fulltext
     app.config['SONAR_DOCUMENTS_EXTRACT_FULLTEXT_ON_IMPORT'] = True
@@ -147,9 +147,9 @@ def test_add_file(mock_extract, app, pdf_file, document_fixture):
         raise Exception("Fulltext extraction error")
 
     mock_extract.side_effect = exception_side_effect
-    document_fixture.add_file(content, 'test5.pdf')
-    assert document_fixture.files['test5.pdf']
-    assert 'test5.txt' not in document_fixture.files
+    document.add_file(content, 'test5.pdf')
+    assert document.files['test5.pdf']
+    assert 'test5.txt' not in document.files
 
 
 def test_get_main_file(document_with_file):
@@ -172,37 +172,37 @@ def test_get_main_file(document_with_file):
     assert not document_with_file.get_main_file()
 
 
-def test_create_thumbnail(document_fixture, pdf_file):
+def test_create_thumbnail(document, pdf_file):
     """Test create a thumbnail for document's file."""
     # No file associated with record, implies no thumbnail creation
-    document_fixture.create_thumbnail()
+    document.create_thumbnail()
 
     with open(pdf_file, 'rb') as file:
         content = file.read()
 
-    document_fixture.files['test.pdf'] = BytesIO(content)
+    document.files['test.pdf'] = BytesIO(content)
 
     # Successful thumbail creation
-    document_fixture.create_thumbnail(document_fixture.files['test.pdf'])
-    assert len(document_fixture.files) == 2
-    assert document_fixture.files['test.jpg']
+    document.create_thumbnail(document.files['test.pdf'])
+    assert len(document.files) == 2
+    assert document.files['test.jpg']
 
-    document_fixture.files['test.pdf'].remove()
-    document_fixture.files['test.jpg'].remove()
+    document.files['test.pdf'].remove()
+    document.files['test.jpg'].remove()
 
     # Failed creation of thumbnail
-    document_fixture.files['test.txt'] = BytesIO(b'Hello, World')
-    document_fixture.create_thumbnail(document_fixture.files['test.txt'])
-    assert len(document_fixture.files) == 1
+    document.files['test.txt'] = BytesIO(b'Hello, World')
+    document.create_thumbnail(document.files['test.txt'])
+    assert len(document.files) == 1
 
 
-def test_index_record(client, db, document_json_fixture):
+def test_index_record(client, db, document_json):
     """Test index a record."""
     res = client.get(url_for('invenio_records_rest.doc_list'))
     assert res.status_code == 200
     total = res.json['hits']['total']
 
-    record = DocumentRecord.create(document_json_fixture, dbcommit=True)
+    record = DocumentRecord.create(document_json, dbcommit=True)
     db.session.commit()
 
     indexer = DocumentIndexer()
@@ -213,14 +213,14 @@ def test_index_record(client, db, document_json_fixture):
     assert res.json['hits']['total'] == (total + 1)
 
 
-def test_remove_from_index(client, db, document_fixture):
+def test_remove_from_index(client, db, document):
     """Test remove a record from index."""
     res = client.get(url_for('invenio_records_rest.doc_list'))
     assert res.status_code == 200
     total = res.json['hits']['total']
 
     indexer = DocumentIndexer()
-    indexer.delete(document_fixture)
+    indexer.delete(document)
 
     res = client.get(url_for('invenio_records_rest.doc_list'))
     assert res.status_code == 200

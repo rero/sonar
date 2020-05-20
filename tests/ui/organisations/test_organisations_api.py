@@ -15,14 +15,24 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Test organisations jsonresolvers."""
+"""Test organisations API."""
+
+from sonar.modules.organisations.api import OrganisationRecord
 
 
-def test_organisation_resolver(document):
-    """Test organisation resolver."""
-    assert document['organisation'].get('$ref')
-    assert document['organisation'][
-        '$ref'] == 'https://sonar.ch/api/organisations/org'
+def test_get_organisation_by_user(user):
+    """Test getting organisation by user."""
+    # No user passed
+    organisation = OrganisationRecord.get_organisation_by_user(None)
+    assert not organisation
 
-    assert document.replace_refs().get(
-        'organisation')['name'] == 'org'
+    # OK
+    organisation = OrganisationRecord.get_organisation_by_user(user)
+    assert 'code' in organisation
+    assert organisation['code'] == 'org'
+
+    user.pop('organisation')
+
+    # User has no organisation
+    organisation = OrganisationRecord.get_organisation_by_user(user)
+    assert not organisation

@@ -18,9 +18,9 @@
 """Test API for deposits."""
 
 
-def test_create_document(app, deposit_fixture):
+def test_create_document(app, deposit):
     """Test create document based on it."""
-    document = deposit_fixture.create_document()
+    document = deposit.create_document()
 
     assert document['documentType'] == 'coar:c_816b'
     assert document['title'] == [{
@@ -100,8 +100,8 @@ def test_create_document(app, deposit_fixture):
     assert len(document.files) == 6
 
     # Test without affiliation
-    deposit_fixture['contributors'][0]['affiliation'] = None
-    document = deposit_fixture.create_document()
+    deposit['contributors'][0]['affiliation'] = None
+    document = deposit.create_document()
 
     assert document['contribution'] == [{
         'agent': {

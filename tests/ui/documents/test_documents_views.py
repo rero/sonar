@@ -42,12 +42,12 @@ def test_search(app, client):
         '/organisation/sonar/search/documents').status_code == 200
 
 
-def test_detail(app, client, document_fixture):
+def test_detail(app, client, document):
     """Test document detail page."""
     assert client.get('/organisation/sonar/documents/10000').status_code == 200
 
 
-def test_title_format(document_fixture):
+def test_title_format(document):
     """Test title format for display it in template."""
     # No title
     assert views.title_format({'mainTitle': [], 'subtitle': []}, 'en') == ''
@@ -124,7 +124,7 @@ def test_abstracts_format():
     assert result == views.abstracts_format(abstracts)
 
 
-def test_subjects_format(document_fixture):
+def test_subjects_format(document):
     """Test subjects format."""
     subjects = [{
         'label': {
@@ -184,10 +184,10 @@ def test_identifiedby_format():
     assert results == views.identifiedby_format(identifiedby)
 
 
-def test_create_publication_statement(document_fixture):
+def test_create_publication_statement(document):
     """Test create publication statement."""
     publication_statement = views.create_publication_statement(
-        document_fixture['provisionActivity'][0])
+        document['provisionActivity'][0])
     assert publication_statement
     assert publication_statement[
         'default'] == 'Bienne : Impr. Weber, [2006] ; Lausanne ; Rippone : ' \

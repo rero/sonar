@@ -25,49 +25,48 @@ from sonar.modules.deposits.rest import FilesResource
 from sonar.modules.users.api import UserRecord
 
 
-def test_get(app, deposit_fixture):
+def test_get(app, deposit):
     """Test get a deposit by its ID."""
-    response = FilesResource.get(deposit_fixture['pid'])
+    response = FilesResource.get(deposit['pid'])
     assert response.status_code == 200
     assert len(response.json) == 2
 
 
-def test_post(client, deposit_fixture):
+def test_post(client, deposit):
     """Test post file in deposit."""
     # Test non existing deposit
     url = '/deposits/10000/custom-files?key=1.pdf&type=additional'.format(
-        pid=deposit_fixture['pid'])
+        pid=deposit['pid'])
     response = client.post(url)
     assert response.status_code == 400
 
     # Test non existing "key" paremeter
     url = '/deposits/{pid}/custom-files?type=additional'.format(
-        pid=deposit_fixture['pid'])
+        pid=deposit['pid'])
     response = client.post(url)
     assert response.status_code == 400
 
     # Test non existing "type" paremeter
-    url = '/deposits/{pid}/custom-files?key=1.pdf'.format(
-        pid=deposit_fixture['pid'])
+    url = '/deposits/{pid}/custom-files?key=1.pdf'.format(pid=deposit['pid'])
     response = client.post(url)
     assert response.status_code == 400
 
     # Test type not in "main" or "additional"
     url = '/deposits/{pid}/custom-files?key=1.pdf&type=fake'.format(
-        pid=deposit_fixture['pid'])
+        pid=deposit['pid'])
     response = client.post(url)
     assert response.status_code == 400
 
     # OK
     url = '/deposits/{pid}/custom-files?key=1.pdf&type=additional'.format(
-        pid=deposit_fixture['pid'])
+        pid=deposit['pid'])
     response = client.post(url)
     assert response.status_code == 200
     assert response.content_type == 'application/json'
     assert response.json['key'] == '1.pdf'
 
 
-def test_file_put(client, deposit_fixture):
+def test_file_put(client, deposit):
     """Test putting metadata on existing file."""
     url = '/deposits/{pid}/custom-files/{key}'
 
@@ -76,73 +75,66 @@ def test_file_put(client, deposit_fixture):
     assert response.status_code == 400
 
     # Non existing file
-    response = client.put(
-        url.format(pid=deposit_fixture['pid'], key='fake.pdf'))
+    response = client.put(url.format(pid=deposit['pid'], key='fake.pdf'))
     assert response.status_code == 400
 
     # OK
-    response = client.put(url.format(pid=deposit_fixture['pid'],
-                                     key='main.pdf'),
+    response = client.put(url.format(pid=deposit['pid'], key='main.pdf'),
                           data=json.dumps({'label': 'Updated label'}),
                           headers={'Content-Type': 'application/json'})
     assert response.status_code == 200
     assert response.json['label'] == 'Updated label'
 
     # With embargo date
-    response = client.put(url.format(pid=deposit_fixture['pid'],
-                                     key='main.pdf'),
+    response = client.put(url.format(pid=deposit['pid'], key='main.pdf'),
                           data=json.dumps({'embargoDate': '2021-01-01'}),
                           headers={'Content-Type': 'application/json'})
     assert response.status_code == 200
     assert response.json['embargoDate'] == '2021-01-01'
 
     # With wrong embargo date
-    response = client.put(url.format(pid=deposit_fixture['pid'],
-                                     key='main.pdf'),
+    response = client.put(url.format(pid=deposit['pid'], key='main.pdf'),
                           data=json.dumps({'embargoDate': '2021'}),
                           headers={'Content-Type': 'application/json'})
     assert response.status_code == 400
 
     # Removing embargo date
-    response = client.put(url.format(pid=deposit_fixture['pid'],
-                                     key='main.pdf'),
+    response = client.put(url.format(pid=deposit['pid'], key='main.pdf'),
                           data=json.dumps({'embargoDate': None}),
                           headers={'Content-Type': 'application/json'})
     assert response.status_code == 200
     assert not response.json.get('embargoDate')
 
 
-def test_publish(client, db, db_user_fixture, db_moderator_fixture,
-                 deposit_fixture):
+def test_publish(client, db, user, moderator, deposit):
     """Test publishing a deposit."""
-    url = url_for('deposits.publish', pid=deposit_fixture['pid'])
+    url = url_for('deposits.publish', pid=deposit['pid'])
 
     # Everything OK
     response = client.post(url, data={})
     assert response.status_code == 200
 
     # Deposit is not in progress
-    deposit_fixture['status'] = 'validated'
-    deposit_fixture.commit()
+    deposit['status'] = 'validated'
+    deposit.commit()
     db.session.commit()
     response = client.post(url, data={})
     assert response.status_code == 400
 
     # Test the publication by a moderator
-    deposit_fixture['status'] = 'in_progress'
-    deposit_fixture.commit()
-    db_user_fixture['roles'] = ['moderator']
-    db_user_fixture.commit()
+    deposit['status'] = 'in_progress'
+    deposit.commit()
+    user['roles'] = ['moderator']
+    user.commit()
     db.session.commit()
 
     response = client.post(url, data={})
     assert response.status_code == 200
 
 
-def test_review(client, db, db_user_fixture, db_moderator_fixture,
-                deposit_fixture):
+def test_review(client, db, user, moderator, deposit):
     """Test reviewing a deposit."""
-    url = url_for('deposits.review', pid=deposit_fixture['pid'])
+    url = url_for('deposits.review', pid=deposit['pid'])
 
     headers = {
         'Content-Type': 'application/json',
@@ -154,8 +146,8 @@ def test_review(client, db, db_user_fixture, db_moderator_fixture,
     assert response.status_code == 400
 
     # No payload posted
-    deposit_fixture['status'] = 'to_validate'
-    deposit_fixture.commit()
+    deposit['status'] = 'to_validate'
+    deposit.commit()
     db.session.commit()
 
     response = client.post(url)
@@ -178,7 +170,7 @@ def test_review(client, db, db_user_fixture, db_moderator_fixture,
                                'user': {
                                    '$ref':
                                    UserRecord.get_ref_link(
-                                       'users', db_user_fixture['pid'])
+                                       'users', user['pid'])
                                }
                            }),
                            headers=headers)
@@ -192,15 +184,15 @@ def test_review(client, db, db_user_fixture, db_moderator_fixture,
                                'user': {
                                    '$ref':
                                    UserRecord.get_ref_link(
-                                       'users', db_moderator_fixture['pid'])
+                                       'users', moderator['pid'])
                                }
                            }),
                            headers=headers)
     assert response.status_code == 200
 
     # Valid refusal request
-    deposit_fixture['status'] = 'to_validate'
-    deposit_fixture.commit()
+    deposit['status'] = 'to_validate'
+    deposit.commit()
     db.session.commit()
     response = client.post(url,
                            data=json.dumps({
@@ -209,15 +201,15 @@ def test_review(client, db, db_user_fixture, db_moderator_fixture,
                                'user': {
                                    '$ref':
                                    UserRecord.get_ref_link(
-                                       'users', db_moderator_fixture['pid'])
+                                       'users', moderator['pid'])
                                }
                            }),
                            headers=headers)
     assert response.status_code == 200
 
     # Valid ask for changes request
-    deposit_fixture['status'] = 'to_validate'
-    deposit_fixture.commit()
+    deposit['status'] = 'to_validate'
+    deposit.commit()
     db.session.commit()
     response = client.post(url,
                            data=json.dumps({
@@ -226,16 +218,16 @@ def test_review(client, db, db_user_fixture, db_moderator_fixture,
                                'user': {
                                    '$ref':
                                    UserRecord.get_ref_link(
-                                       'users', db_moderator_fixture['pid'])
+                                       'users', moderator['pid'])
                                }
                            }),
                            headers=headers)
     assert response.status_code == 200
 
 
-def test_extract_metadata(client, deposit_fixture):
+def test_extract_metadata(client, deposit):
     """Test PDF metadata extraction."""
-    url = url_for('deposits.extract_metadata', pid=deposit_fixture['pid'])
+    url = url_for('deposits.extract_metadata', pid=deposit['pid'])
 
     headers = {
         'Content-Type': 'application/json',
@@ -247,7 +239,7 @@ def test_extract_metadata(client, deposit_fixture):
     assert response.json[
         'title'] == 'High-harmonic generation in quantum spin systems'
 
-    deposit_fixture.files['main.pdf'].remove()
+    deposit.files['main.pdf'].remove()
     response = client.get(url, headers=headers)
     assert response.status_code == 500
 

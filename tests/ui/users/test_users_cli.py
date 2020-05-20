@@ -22,7 +22,7 @@ from click.testing import CliRunner
 import sonar.modules.users.cli as Cli
 
 
-def test_import_users(app, script_info, organisation_fixture):
+def test_import_users(app, script_info, organisation):
     """Test import users."""
     runner = CliRunner()
 

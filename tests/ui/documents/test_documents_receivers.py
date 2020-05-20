@@ -23,7 +23,7 @@ from sonar.modules.documents.receivers import chunks, \
     populate_fulltext_field, transform_harvested_records
 
 
-def test_transform_harvested_records(app, bucket_location_fixture):
+def test_transform_harvested_records(app, bucket_location):
     """Test harvested record transformation."""
     request, records = get_records(
         ['oai:doc.rero.ch:20120503160026-MV'],
@@ -34,22 +34,20 @@ def test_transform_harvested_records(app, bucket_location_fixture):
     transform_harvested_records(None, records, **{'name': 'test', 'max': 1})
 
 
-def test_populate_fulltext_field(app, db, document_fixture, pdf_file):
+def test_populate_fulltext_field(app, db, document, pdf_file):
     """Test add full text to document."""
     with open(pdf_file, 'rb') as file:
         content = file.read()
 
     # Successful file add
-    document_fixture.add_file(content, 'test1.pdf', type='file')
-    assert document_fixture.files['test1.pdf']
-    assert document_fixture.files['test1.txt']
+    document.add_file(content, 'test1.pdf', type='file')
+    assert document.files['test1.pdf']
+    assert document.files['test1.txt']
 
     db.session.commit()
 
     json = {}
-    populate_fulltext_field(record=document_fixture,
-                            index='documents',
-                            json=json)
+    populate_fulltext_field(record=document, index='documents', json=json)
 
     assert len(json['fulltext']) == 1
     assert json['fulltext'][0].startswith('PHYSICAL REVIEW B 99')
