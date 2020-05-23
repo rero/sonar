@@ -15,19 +15,21 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""JSON Schemas."""
+"""Marshmallow for deposits."""
 
 from __future__ import absolute_import, print_function
 
 from functools import partial
 
+from flask_security import current_user
 from invenio_records_rest.schemas import StrictKeysMixin
 from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
-from marshmallow import fields
+from marshmallow import fields, pre_dump, pre_load
 
 from sonar.modules.serializers import schema_from_context
 from sonar.modules.users.api import UserRecord
+from sonar.modules.users.permissions import UserPermission
 
 schema_from_user = partial(schema_from_context, schema=UserRecord.schema)
 
@@ -44,13 +46,47 @@ class UserMetadataSchemaV1(StrictKeysMixin):
     city = SanitizedUnicode()
     phone = SanitizedUnicode()
     organisation = fields.Dict()
-    roles = fields.List(SanitizedUnicode, required=True)
+    roles = fields.List(SanitizedUnicode)
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
     schema = GenFunction(load_only=True,
                          attribute="$schema",
                          data_key="$schema",
                          deserialize=schema_from_user)
+    permissions = fields.Dict(dump_only=True)
+
+    @pre_load
+    def guess_organisation(self, data, **kwargs):
+        """Guess organisation from current logged user.
+
+        :param data: Dict of user data.
+        :returns: Modified dict of user data.
+        """
+        # Organisation already attached to user, we do nothing.
+        if data.get('organisation'):
+            return data
+
+        # Store current user organisation in new user.
+        user = UserRecord.get_user_by_current_user(current_user)
+        if user.get('organisation'):
+            data['organisation'] = user['organisation']
+
+        return data
+
+    @pre_dump
+    def add_permissions(self, item):
+        """Add permissions to record.
+
+        :param data: Dict of user data.
+        :returns: Modified dict of user data.
+        """
+        item['permissions'] = {
+            'read': UserPermission.read(current_user, item),
+            'update': UserPermission.update(current_user, item),
+            'delete': UserPermission.delete(current_user, item)
+        }
+
+        return item
 
 
 class UserSchemaV1(StrictKeysMixin):

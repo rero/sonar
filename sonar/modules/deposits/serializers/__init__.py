@@ -15,10 +15,31 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Marshmallow for deposits."""
+"""Deposit serializers."""
 
 from __future__ import absolute_import, print_function
 
-from .json import UserMetadataSchemaV1, UserSchemaV1
+from invenio_records_rest.serializers.response import record_responsify, \
+    search_responsify
 
-__all__ = ('UserMetadataSchemaV1', 'UserSchemaV1',)
+from sonar.modules.serializers import JSONSerializer
+
+from ..marshmallow import DepositSchemaV1
+
+# Serializers
+# ===========
+#: JSON serializer definition.
+json_v1 = JSONSerializer(DepositSchemaV1)
+
+# Records-REST serializers
+# ========================
+#: JSON record serializer for individual records.
+json_v1_response = record_responsify(json_v1, 'application/json')
+#: JSON record serializer for search results.
+json_v1_search = search_responsify(json_v1, 'application/json')
+
+__all__ = (
+    'json_v1',
+    'json_v1_response',
+    'json_v1_search',
+)

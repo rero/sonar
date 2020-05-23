@@ -28,26 +28,23 @@ from sonar.modules.documents.tasks import import_records
 def test_import_records(mock_record_by_identifier, app, document_json,
                         bucket_location):
     """Test import records."""
-    # Successful importing record
-    mock_record_by_identifier.return_value = None
-    document_json['files'] = [{
+    files = [{
         'key': 'test.pdf',
         'url': 'http://some.url/file.pdf'
     }]
-    import_records([document_json])
-    assert DocumentRecord.get_record_by_pid('10000')
+
+    # Successful importing record
+    mock_record_by_identifier.return_value = None
+    document_json['files'] = files
+    ids = import_records([document_json])
+    assert DocumentRecord.get_record(ids[0])
 
     # Error during importation of record
     def exception_side_effect(data):
         raise Exception("No record found for identifier")
 
     mock_record_by_identifier.side_effect = exception_side_effect
-    document_json['pid'] = '10001'
-    document_json['files'] = [{
-        'key': 'test.pdf',
-        'url': 'http://some.url/file.pdf'
-    }]
 
-    import_records([document_json])
+    ids = import_records([document_json])
 
-    assert not DocumentRecord.get_record_by_pid('10001')
+    assert not ids

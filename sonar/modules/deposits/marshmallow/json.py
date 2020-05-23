@@ -27,49 +27,55 @@ from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
 from marshmallow import fields, pre_dump
 
-from sonar.modules.organisations.api import OrganisationRecord
-from sonar.modules.organisations.permissions import OrganisationPermission
+from sonar.modules.deposits.api import DepositRecord
+from sonar.modules.deposits.permissions import DepositPermission
 from sonar.modules.serializers import schema_from_context
 
-schema_from_organisation = partial(schema_from_context,
-                                   schema=OrganisationRecord.schema)
+schema_from_deposit = partial(schema_from_context, schema=DepositRecord.schema)
 
 
-class OrganisationMetadataSchemaV1(StrictKeysMixin):
-    """Schema for the organisation metadata."""
+class DepositMetadataSchemaV1(StrictKeysMixin):
+    """Schema for the deposit metadata."""
 
     pid = PersistentIdentifier()
-    code = SanitizedUnicode(required=True)
-    name = SanitizedUnicode(required=True)
+    contributors = fields.List(fields.Dict())
+    diffusion = fields.Dict()
+    document = fields.Dict()
+    logs = fields.List(fields.Dict())
+    metadata = fields.Dict()
+    status = SanitizedUnicode()
+    step = SanitizedUnicode()
+    user = fields.Dict()
+    _files = fields.List(fields.Dict())
+    _bucket = SanitizedUnicode()
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
     schema = GenFunction(load_only=True,
                          attribute="$schema",
                          data_key="$schema",
-                         deserialize=schema_from_organisation)
+                         deserialize=schema_from_deposit)
     permissions = fields.Dict(dump_only=True)
 
     @pre_dump
     def add_permissions(self, item):
         """Add permissions to record.
 
-        :param item: Dict representing the record.
-        :returns: Modified dict.
+        :param item: Dict representing the record
+        :returns: Dict of modified record.
         """
         item['permissions'] = {
-            'read': OrganisationPermission.read(current_user, item),
-            'update': OrganisationPermission.update(current_user, item),
-            'delete': OrganisationPermission.delete(current_user, item)
+            'read': DepositPermission.read(current_user, item),
+            'update': DepositPermission.update(current_user, item),
+            'delete': DepositPermission.delete(current_user, item)
         }
 
         return item
 
 
-class OrganisationSchemaV1(StrictKeysMixin):
-    """organisation schema."""
+class DepositSchemaV1(StrictKeysMixin):
+    """Deposit schema."""
 
-    metadata = fields.Nested(OrganisationMetadataSchemaV1)
+    metadata = fields.Nested(DepositMetadataSchemaV1)
     created = fields.Str(dump_only=True)
     updated = fields.Str(dump_only=True)
     links = fields.Dict(dump_only=True)
-    id = PersistentIdentifier()

@@ -113,11 +113,11 @@ def make_organisation(app, db):
 @pytest.fixture()
 def organisation(make_organisation):
     """Create an organisation."""
-    make_organisation('org')
+    return make_organisation('org')
 
 
 @pytest.fixture()
-def roles(base_app, database):
+def roles(base_app, db):
     """Create user roles."""
     datastore = base_app.extensions['invenio-accounts'].datastore
 
@@ -127,7 +127,9 @@ def roles(base_app, database):
         if not db_role:
             datastore.create_role(name=role)
 
-    datastore.commit()
+        datastore.commit()
+
+    db.session.commit()
 
 
 @pytest.fixture
@@ -139,7 +141,7 @@ def make_user(app, db, make_organisation):
 
         name = role_name
         if organisation:
-            name = organisation + '-' + name
+            name = organisation + name
 
         email = '{name}@rero.ch'.format(name=name)
 
@@ -147,12 +149,14 @@ def make_user(app, db, make_organisation):
 
         user = datastore.find_user(email=email)
 
-        if not user:
-            user = datastore.create_user(
-                email=email,
-                password=hash_password('123456'),
-                active=True)
-            datastore.commit()
+        if user:
+            record = UserRecord.get_user_by_email(email)
+            return record
+
+        user = datastore.create_user(email=email,
+                                     password=hash_password('123456'),
+                                     active=True)
+        datastore.commit()
 
         role = datastore.find_role(role_name)
         if not role:
@@ -169,6 +173,7 @@ def make_user(app, db, make_organisation):
 
         record = UserRecord.create(
             {
+                'pid': name,
                 'email': email,
                 'full_name': name,
                 'roles': [role_name],
@@ -233,8 +238,6 @@ def superuser(make_user):
 def document_json(app, db, organisation):
     """JSON document fixture."""
     data = {
-        'pid':
-        '10000',
         'identifiedBy': [{
             'value': 'urn:nbn:ch:rero-006-108713',
             'type': 'bf:Urn'
@@ -333,12 +336,17 @@ def make_document(db, document_json, make_organisation, bucket_location,
                   pdf_file):
     """Factory for creating document."""
 
-    def _make_document(organisation='org', with_file=False):
+    def _make_document(organisation='org', with_file=False, pid=None):
         if organisation:
             make_organisation(organisation)
             document_json['organisation'] = {
                 '$ref': 'https://sonar.ch/api/organisations/org'
             }
+
+        if pid:
+            document_json['pid'] = pid
+        else:
+            document_json.pop('pid', None)
 
         record = DocumentRecord.create(document_json,
                                        dbcommit=True,
@@ -365,7 +373,7 @@ def make_document(db, document_json, make_organisation, bucket_location,
 @pytest.fixture()
 def document(make_document):
     """Create a document."""
-    return make_document()
+    return make_document('org', False)
 
 
 @pytest.fixture()
@@ -375,78 +383,82 @@ def document_with_file(make_document):
 
 
 @pytest.fixture()
-def make_deposit(db, bucket_location, pdf_file, make_user):
+def deposit_json():
+    """Deposit JSON."""
+    return {
+        '$schema':
+        'https://sonar.ch/schemas/deposits/deposit-v1.0.0.json',
+        '_bucket':
+        '03e5e909-2fce-479e-a697-657e1392cc72',
+        'contributors': [{
+            'affiliation': 'University of Bern, Switzerland',
+            'name': 'Takayoshi, Shintaro'
+        }],
+        'metadata': {
+            'documentType':
+            'coar:c_816b',
+            'title':
+            'Title of the document',
+            'subtitle':
+            'Subtitle of the document',
+            'otherLanguageTitle': {
+                'language': 'fre',
+                'title': 'Titre du document'
+            },
+            'language':
+            'eng',
+            'documentDate':
+            '2020-01-01',
+            'publication': {
+                'publishedIn': 'Journal',
+                'year': '2019',
+                'volume': '12',
+                'number': '2',
+                'pages': '1-12',
+                'editors': ['Denson, Edward', 'Worth, James'],
+                'publisher': 'Publisher'
+            },
+            'otherElectronicVersions': [{
+                'type': 'Published version',
+                'url': 'https://some.url/document.pdf'
+            }],
+            'specificCollections': ['Collection 1', 'Collection 2'],
+            'classification':
+            '543',
+            'abstracts': [{
+                'language': 'eng',
+                'abstract': 'Abstract of the document'
+            }, {
+                'language': 'fre',
+                'abstract': 'Résumé du document'
+            }],
+            'subjects': [{
+                'language': 'eng',
+                'subjects': ['Subject 1', 'Subject 2']
+            }, {
+                'language': 'fre',
+                'subjects': ['Sujet 1', 'Sujet 2']
+            }]
+        },
+        'status':
+        'in_progress',
+        'step':
+        'diffusion'
+    }
+
+
+@pytest.fixture()
+def make_deposit(db, deposit_json, bucket_location, pdf_file, make_user):
     """Factory for creating deposit."""
 
     def _make_deposit(role='publisher', organisation=None):
         user = make_user(role, organisation)
 
-        deposit_json = {
-            '$schema':
-            'https://sonar.ch/schemas/deposits/deposit-v1.0.0.json',
-            '_bucket':
-            '03e5e909-2fce-479e-a697-657e1392cc72',
-            'contributors': [{
-                'affiliation': 'University of Bern, Switzerland',
-                'name': 'Takayoshi, Shintaro'
-            }],
-            'metadata': {
-                'documentType':
-                'coar:c_816b',
-                'title':
-                'Title of the document',
-                'subtitle':
-                'Subtitle of the document',
-                'otherLanguageTitle': {
-                    'language': 'fre',
-                    'title': 'Titre du document'
-                },
-                'language':
-                'eng',
-                'documentDate':
-                '2020-01-01',
-                'publication': {
-                    'publishedIn': 'Journal',
-                    'year': '2019',
-                    'volume': '12',
-                    'number': '2',
-                    'pages': '1-12',
-                    'editors': ['Denson, Edward', 'Worth, James'],
-                    'publisher': 'Publisher'
-                },
-                'otherElectronicVersions': [{
-                    'type':
-                    'Published version',
-                    'url':
-                    'https://some.url/document.pdf'
-                }],
-                'specificCollections': ['Collection 1', 'Collection 2'],
-                'classification':
-                '543',
-                'abstracts': [{
-                    'language': 'eng',
-                    'abstract': 'Abstract of the document'
-                }, {
-                    'language': 'fre',
-                    'abstract': 'Résumé du document'
-                }],
-                'subjects': [{
-                    'language': 'eng',
-                    'subjects': ['Subject 1', 'Subject 2']
-                }, {
-                    'language': 'fre',
-                    'subjects': ['Sujet 1', 'Sujet 2']
-                }]
-            },
-            'status':
-            'in_progress',
-            'step':
-            'diffusion',
-            'user': {
-                '$ref':
-                'https://sonar.ch/api/users/{pid}'.format(pid=user['pid'])
-            }
+        deposit_json['user'] = {
+            '$ref': 'https://sonar.ch/api/users/{pid}'.format(pid=user['pid'])
         }
+
+        deposit_json.pop('pid', None)
 
         record = DepositRecord.create(deposit_json,
                                       dbcommit=True,

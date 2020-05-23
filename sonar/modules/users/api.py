@@ -98,7 +98,9 @@ class UserRecord(SonarRecord):
     fetcher = user_pid_fetcher
     provider = UserProvider
     schema = 'users/user-v1.0.0.json'
-    available_roles = [ROLE_SUPERUSER, ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER]
+    available_roles = [
+        ROLE_SUPERUSER, ROLE_ADMIN, ROLE_MODERATOR, ROLE_PUBLISHER, ROLE_USER
+    ]
 
     @classmethod
     def create(cls,

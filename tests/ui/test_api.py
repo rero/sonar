@@ -20,6 +20,7 @@
 import mock
 import pytest
 from flask import url_for
+from invenio_accounts.testutils import login_user_via_session
 from invenio_app.factory import create_api
 from six import BytesIO
 
@@ -31,10 +32,12 @@ create_app = create_api
 
 def test_create(app, document_json):
     """Test creating a record."""
-    DocumentRecord.create(document_json)
-    assert DocumentRecord.get_record_by_pid('10000')['pid'] == '10000'
+    record = DocumentRecord.create(document_json)
+    assert DocumentRecord.get_record_by_pid(
+        record['pid'])['pid'] == record['pid']
     DocumentRecord.create(document_json, dbcommit=True)
-    assert DocumentRecord.get_record_by_pid('10000')['pid'] == '10000'
+    assert DocumentRecord.get_record_by_pid(
+        record['pid'])['pid'] == record['pid']
 
 
 def test_get_ref_link(app):
@@ -45,15 +48,16 @@ def test_get_ref_link(app):
 
 def test_get_record_by_pid(app, document_json):
     """Test get record by PID."""
-    assert DocumentRecord.get_record_by_pid('10000') is None
+    assert DocumentRecord.get_record_by_pid('not-existing') is None
 
     record = DocumentRecord.create(document_json)
 
-    assert DocumentRecord.get_record_by_pid('10000')['pid'] == '10000'
+    assert DocumentRecord.get_record_by_pid(
+        record['pid'])['pid'] == record['pid']
 
     record.delete()
 
-    assert DocumentRecord.get_record_by_pid('10000') is None
+    assert DocumentRecord.get_record_by_pid(record['pid']) is None
 
 
 def test_dbcommit(app, document_json):
@@ -61,10 +65,11 @@ def test_dbcommit(app, document_json):
     record = DocumentRecord.create(document_json)
     record.dbcommit()
 
-    assert DocumentRecord.get_record_by_pid('10000')['pid'] == '10000'
+    assert DocumentRecord.get_record_by_pid(
+        record['pid'])['pid'] == record['pid']
 
 
-def test_reindex(app, db, client, document_json):
+def test_reindex(app, db, client, document_json, superuser):
     """Test record reindex."""
     record = DocumentRecord.create(document_json)
     db.session.commit()
@@ -74,13 +79,15 @@ def test_reindex(app, db, client, document_json):
 
     headers = [('Content-Type', 'application/json')]
 
-    url = url_for('invenio_records_rest.doc_item', pid_value='10000')
+    url = url_for('invenio_records_rest.doc_item', pid_value=record['pid'])
+
+    login_user_via_session(client, email=superuser['email'])
 
     response = client.get(url, headers=headers)
     data = response.json
 
     assert response.status_code == 200
-    assert data['metadata']['pid'] == '10000'
+    assert data['metadata']['pid'] == record['pid']
 
 
 def test_get_pid_by_ref_link(app):
@@ -89,17 +96,22 @@ def test_get_pid_by_ref_link(app):
         SonarRecord.get_pid_by_ref_link('falsy-link')
     assert str(e.value) == 'falsy-link is not a valid ref link'
 
-    pid = SonarRecord.get_pid_by_ref_link(
-        'https://sonar.ch/api/documents/10000')
+    link = url_for('invenio_records_rest.doc_item',
+                   _external=True,
+                   pid_value='10000')
+
+    pid = SonarRecord.get_pid_by_ref_link(link)
     assert pid == '10000'
 
 
 def test_get_record_by_ref_link(app, document):
     """Test getting a record by a reference link."""
+    link = url_for('invenio_records_rest.doc_item',
+                   _external=True,
+                   pid_value=document['pid'])
 
-    record = DocumentRecord.get_record_by_ref_link(
-        'https://sonar.ch/api/documents/10000')
-    assert record['pid'] == '10000'
+    record = DocumentRecord.get_record_by_ref_link(link)
+    assert record['pid'] == document['pid']
 
 
 def test_add_file_from_url(app, document):
@@ -196,8 +208,10 @@ def test_create_thumbnail(document, pdf_file):
     assert len(document.files) == 1
 
 
-def test_index_record(client, db, document_json):
+def test_index_record(client, db, document_json, superuser):
     """Test index a record."""
+    login_user_via_session(client, email=superuser['email'])
+
     res = client.get(url_for('invenio_records_rest.doc_list'))
     assert res.status_code == 200
     total = res.json['hits']['total']
@@ -213,8 +227,10 @@ def test_index_record(client, db, document_json):
     assert res.json['hits']['total'] == (total + 1)
 
 
-def test_remove_from_index(client, db, document):
+def test_remove_from_index(client, db, document, superuser):
     """Test remove a record from index."""
+    login_user_via_session(client, email=superuser['email'])
+
     res = client.get(url_for('invenio_records_rest.doc_list'))
     assert res.status_code == 200
     total = res.json['hits']['total']

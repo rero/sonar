@@ -28,18 +28,20 @@ from __future__ import absolute_import, print_function
 import os
 from datetime import timedelta
 
-from invenio_indexer.api import RecordIndexer
 from invenio_oauthclient.contrib import orcid
 from invenio_records_rest.facets import terms_filter
 
 from sonar.modules.deposits.api import DepositRecord, DepositSearch
+from sonar.modules.deposits.permissions import DepositPermission
 from sonar.modules.documents.api import DocumentRecord, DocumentSearch
+from sonar.modules.documents.permissions import DocumentPermission
 from sonar.modules.organisations.api import OrganisationRecord, \
     OrganisationSearch
-from sonar.modules.permissions import can_create_record_factory, \
-    can_delete_record_factory, can_list_record_factory, \
-    can_read_record_factory, can_update_record_factory, wiki_edit_permission
+from sonar.modules.organisations.permissions import OrganisationPermission
+from sonar.modules.permissions import record_permission_factory, \
+    wiki_edit_permission
 from sonar.modules.users.api import UserRecord, UserSearch
+from sonar.modules.users.permissions import UserPermission
 from sonar.modules.utils import get_current_language
 
 
@@ -275,132 +277,160 @@ RECORDS_UI_ENDPOINTS = {
 
 RECORDS_REST_ENDPOINTS = {
     'doc':
-    dict(pid_type='doc',
-         pid_minter='document_id',
-         pid_fetcher='document_id',
-         default_endpoint_prefix=True,
-         record_class=DocumentRecord,
-         search_class=DocumentSearch,
-         indexer_class='sonar.modules.documents.api:DocumentIndexer',
-         search_index='documents',
-         search_type=None,
-         record_serializers={
-             'application/json': ('sonar.modules.documents.serializers'
-                                  ':json_v1_response'),
-         },
-         search_serializers={
-             'application/json': ('sonar.modules.documents.serializers'
-                                  ':json_v1_search'),
-         },
-         record_loaders={
-             'application/json': ('sonar.modules.documents.loaders'
-                                  ':json_v1'),
-         },
-         list_route='/documents/',
-         item_route='/documents/<pid(doc, record_class="sonar.modules.'
-         'documents.api:DocumentRecord"):pid_value>',
-         default_media_type='application/json',
-         max_result_window=10000,
-         error_handlers=dict(),
-         create_permission_factory_imp=can_create_record_factory,
-         read_permission_factory_imp=can_read_record_factory,
-         update_permission_factory_imp=can_update_record_factory,
-         delete_permission_factory_imp=can_delete_record_factory,
-         list_permission_factory_imp=can_list_record_factory),
+    dict(
+        pid_type='doc',
+        pid_minter='document_id',
+        pid_fetcher='document_id',
+        default_endpoint_prefix=True,
+        record_class=DocumentRecord,
+        search_class=DocumentSearch,
+        indexer_class='sonar.modules.documents.api:DocumentIndexer',
+        search_index='documents',
+        search_type=None,
+        record_serializers={
+            'application/json': ('sonar.modules.documents.serializers'
+                                 ':json_v1_response'),
+        },
+        search_serializers={
+            'application/json': ('sonar.modules.documents.serializers'
+                                 ':json_v1_search'),
+        },
+        record_loaders={
+            'application/json': ('sonar.modules.documents.loaders'
+                                 ':json_v1'),
+        },
+        list_route='/documents/',
+        item_route='/documents/<pid(doc, record_class="sonar.modules.'
+        'documents.api:DocumentRecord"):pid_value>',
+        default_media_type='application/json',
+        max_result_window=10000,
+        search_factory_imp='sonar.modules.documents.query:search_factory',
+        create_permission_factory_imp=lambda record: record_permission_factory(
+            action='create', cls=DocumentPermission),
+        read_permission_factory_imp=lambda record: record_permission_factory(
+            action='read', record=record, cls=DocumentPermission),
+        update_permission_factory_imp=lambda record: record_permission_factory(
+            action='update', record=record, cls=DocumentPermission),
+        delete_permission_factory_imp=lambda record: record_permission_factory(
+            action='delete', record=record, cls=DocumentPermission),
+        list_permission_factory_imp=lambda record: record_permission_factory(
+            action='list', record=record, cls=DocumentPermission)),
     'org':
-    dict(pid_type='org',
-         pid_minter='organisation_id',
-         pid_fetcher='organisation_id',
-         default_endpoint_prefix=True,
-         record_class=OrganisationRecord,
-         search_class=OrganisationSearch,
-         indexer_class='sonar.modules.organisations.api:OrganisationIndexer',
-         search_index='organisations',
-         search_type=None,
-         record_serializers={
-             'application/json': ('sonar.modules.organisations.serializers'
-                                  ':json_v1_response'),
-         },
-         search_serializers={
-             'application/json': ('sonar.modules.organisations.serializers'
-                                  ':json_v1_search'),
-         },
-         record_loaders={
-             'application/json': ('sonar.modules.organisations.loaders'
-                                  ':json_v1'),
-         },
-         list_route='/organisations/',
-         item_route='/organisations/<pid(org):pid_value>',
-         default_media_type='application/json',
-         max_result_window=10000,
-         error_handlers=dict(),
-         create_permission_factory_imp=can_create_record_factory,
-         read_permission_factory_imp=can_read_record_factory,
-         update_permission_factory_imp=can_update_record_factory,
-         delete_permission_factory_imp=can_delete_record_factory,
-         list_permission_factory_imp=can_list_record_factory),
+    dict(
+        pid_type='org',
+        pid_minter='organisation_id',
+        pid_fetcher='organisation_id',
+        default_endpoint_prefix=True,
+        record_class=OrganisationRecord,
+        search_class=OrganisationSearch,
+        indexer_class='sonar.modules.organisations.api:OrganisationIndexer',
+        search_index='organisations',
+        search_type=None,
+        record_serializers={
+            'application/json': ('sonar.modules.organisations.serializers'
+                                 ':json_v1_response'),
+        },
+        search_serializers={
+            'application/json': ('sonar.modules.organisations.serializers'
+                                 ':json_v1_search'),
+        },
+        record_loaders={
+            'application/json': ('sonar.modules.organisations.loaders'
+                                 ':json_v1'),
+        },
+        list_route='/organisations/',
+        item_route='/organisations/<pid(org):pid_value>',
+        default_media_type='application/json',
+        max_result_window=10000,
+        search_factory_imp='sonar.modules.organisations.query:search_factory',
+        create_permission_factory_imp=lambda record: record_permission_factory(
+            action='create', cls=OrganisationPermission),
+        read_permission_factory_imp=lambda record: record_permission_factory(
+            action='read', record=record, cls=OrganisationPermission),
+        update_permission_factory_imp=lambda record: record_permission_factory(
+            action='update', record=record, cls=OrganisationPermission),
+        delete_permission_factory_imp=lambda record: record_permission_factory(
+            action='delete', record=record, cls=OrganisationPermission),
+        list_permission_factory_imp=lambda record: record_permission_factory(
+            action='list', record=record, cls=OrganisationPermission)),
     'user':
-    dict(pid_type='user',
-         pid_minter='user_id',
-         pid_fetcher='user_id',
-         default_endpoint_prefix=True,
-         record_class=UserRecord,
-         search_class=UserSearch,
-         indexer_class='sonar.modules.users.api:UserIndexer',
-         search_index='users',
-         search_type=None,
-         record_serializers={
-             'application/json': ('sonar.modules.users.serializers'
-                                  ':json_v1_response'),
-         },
-         search_serializers={
-             'application/json': ('sonar.modules.users.serializers'
-                                  ':json_v1_search'),
-         },
-         record_loaders={
-             'application/json': ('sonar.modules.users.loaders'
-                                  ':json_v1'),
-         },
-         list_route='/users/',
-         item_route='/users/<pid(user, record_class="sonar.modules.'
-         'users.api:UserRecord"):pid_value>',
-         default_media_type='application/json',
-         max_result_window=10000,
-         error_handlers=dict(),
-         create_permission_factory_imp=can_create_record_factory,
-         read_permission_factory_imp=can_read_record_factory,
-         update_permission_factory_imp=can_update_record_factory,
-         delete_permission_factory_imp=can_delete_record_factory,
-         list_permission_factory_imp=can_list_record_factory),
+    dict(
+        pid_type='user',
+        pid_minter='user_id',
+        pid_fetcher='user_id',
+        default_endpoint_prefix=True,
+        record_class=UserRecord,
+        search_class=UserSearch,
+        indexer_class='sonar.modules.users.api:UserIndexer',
+        search_index='users',
+        search_type=None,
+        record_serializers={
+            'application/json': ('sonar.modules.users.serializers'
+                                 ':json_v1_response'),
+        },
+        search_serializers={
+            'application/json': ('sonar.modules.users.serializers'
+                                 ':json_v1_search'),
+        },
+        record_loaders={
+            'application/json': ('sonar.modules.users.loaders'
+                                 ':json_v1'),
+        },
+        list_route='/users/',
+        item_route='/users/<pid(user, record_class="sonar.modules.'
+        'users.api:UserRecord"):pid_value>',
+        default_media_type='application/json',
+        max_result_window=10000,
+        search_factory_imp='sonar.modules.users.query:search_factory',
+        create_permission_factory_imp=lambda record: record_permission_factory(
+            action='create', cls=UserPermission),
+        read_permission_factory_imp=lambda record: record_permission_factory(
+            action='read', record=record, cls=UserPermission),
+        update_permission_factory_imp=lambda record: record_permission_factory(
+            action='update', record=record, cls=UserPermission),
+        delete_permission_factory_imp=lambda record: record_permission_factory(
+            action='delete', record=record, cls=UserPermission),
+        list_permission_factory_imp=lambda record: record_permission_factory(
+            action='list', record=record, cls=UserPermission)),
     'depo':
-    dict(pid_type='depo',
-         pid_minter='deposit_id',
-         pid_fetcher='deposit_id',
-         default_endpoint_prefix=True,
-         record_class=DepositRecord,
-         search_class=DepositSearch,
-         indexer_class='sonar.modules.deposits.api:DepositIndexer',
-         search_index='deposits',
-         search_type=None,
-         record_serializers={
-             'application/json': ('invenio_records_rest.serializers'
-                                  ':json_v1_response'),
-         },
-         search_serializers={
-             'application/json': ('invenio_records_rest.serializers'
-                                  ':json_v1_search'),
-         },
-         list_route='/deposits/',
-         item_route='/deposits/<pid(depo, record_class="sonar.modules.deposits'
-         '.api:DepositRecord"):pid_value>',
-         default_media_type='application/json',
-         max_result_window=10000,
-         error_handlers=dict(),
-         create_permission_factory_imp=can_create_record_factory,
-         read_permission_factory_imp=can_read_record_factory,
-         update_permission_factory_imp=can_update_record_factory,
-         delete_permission_factory_imp=can_delete_record_factory,
-         list_permission_factory_imp=can_list_record_factory)
+    dict(
+        pid_type='depo',
+        pid_minter='deposit_id',
+        pid_fetcher='deposit_id',
+        default_endpoint_prefix=True,
+        record_class=DepositRecord,
+        search_class=DepositSearch,
+        indexer_class='sonar.modules.deposits.api:DepositIndexer',
+        search_index='deposits',
+        search_type=None,
+        record_serializers={
+            'application/json': ('sonar.modules.deposits.serializers'
+                                 ':json_v1_response'),
+        },
+        search_serializers={
+            'application/json': ('sonar.modules.deposits.serializers'
+                                 ':json_v1_search'),
+        },
+        record_loaders={
+            'application/json': ('sonar.modules.deposits.loaders'
+                                 ':json_v1'),
+        },
+        list_route='/deposits/',
+        item_route='/deposits/<pid(depo, record_class="sonar.modules.deposits'
+        '.api:DepositRecord"):pid_value>',
+        default_media_type='application/json',
+        max_result_window=10000,
+        search_factory_imp='sonar.modules.deposits.query:search_factory',
+        create_permission_factory_imp=lambda record: record_permission_factory(
+            action='create', cls=DepositPermission),
+        read_permission_factory_imp=lambda record: record_permission_factory(
+            action='read', record=record, cls=DepositPermission),
+        update_permission_factory_imp=lambda record: record_permission_factory(
+            action='update', record=record, cls=DepositPermission),
+        delete_permission_factory_imp=lambda record: record_permission_factory(
+            action='delete', record=record, cls=DepositPermission),
+        list_permission_factory_imp=lambda record: record_permission_factory(
+            action='list', record=record, cls=DepositPermission)),
 }
 """REST endpoints."""
 

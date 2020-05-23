@@ -6,7 +6,6 @@
 # Translators:
 # Nicolas Prongué <n.prongue@outlook.com>, 2020
 # MarionRERO <marion.davis@rero.ch>, 2020
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
@@ -686,418 +685,418 @@ msgid "Year"
 msgstr "Année"
 
 msgid "bf:Agent"
-msgstr "bf:Agent"
+msgstr "Agent"
 
 msgid "bf:AudioIssueNumber"
-msgstr ""
+msgstr "Audio issue number"
 
 msgid "bf:ClassificationDdc"
-msgstr ""
+msgstr "DDC Classification"
 
 msgid "bf:ClassificationUdc"
-msgstr ""
+msgstr "UDC Classification"
 
 msgid "bf:Doi"
-msgstr ""
+msgstr "DOI"
 
 msgid "bf:Ean"
-msgstr ""
+msgstr "EAN"
 
 msgid "bf:Gtin14Number"
-msgstr ""
+msgstr "Global Trade Item Number 14"
 
 msgid "bf:Identifier"
-msgstr "bf:Identifiant"
+msgstr "Identifier"
 
 msgid "bf:Isan"
-msgstr ""
+msgstr "ISAN"
 
 msgid "bf:Isbn"
-msgstr ""
+msgstr "ISBN"
 
 msgid "bf:Ismn"
-msgstr ""
+msgstr "ISMN"
 
 msgid "bf:Isrc"
-msgstr ""
+msgstr "ISRC"
 
 msgid "bf:Issn"
-msgstr ""
+msgstr "ISSN"
 
 msgid "bf:IssnL"
-msgstr ""
+msgstr "ISSN-L"
 
 msgid "bf:Language"
-msgstr "bf:Langue"
+msgstr "Language entity"
 
 msgid "bf:Local"
-msgstr ""
+msgstr "Local identifier"
 
 msgid "bf:Manufacture"
-msgstr "bf:Manufacture"
+msgstr "Manufacturer"
 
 msgid "bf:MatrixNumber"
-msgstr ""
+msgstr "Audio matrix number"
 
 msgid "bf:Meeting"
-msgstr "bf:Réunion"
+msgstr "Meeting"
 
 msgid "bf:MusicDistributorNumber"
-msgstr ""
+msgstr "Music distributor number"
 
 msgid "bf:MusicPlate"
-msgstr ""
+msgstr "Music plate number"
 
 msgid "bf:MusicPublisherNumber"
-msgstr ""
+msgstr "Music publisher number"
 
 msgid "bf:Organization"
-msgstr "bf:Organisation"
+msgstr "Organization"
 
 msgid "bf:Person"
-msgstr "bf:Personne"
+msgstr "Person"
 
 msgid "bf:Place"
-msgstr "bf:Lieu"
+msgstr "Place"
 
 msgid "bf:Publication"
-msgstr "bf:Publication"
+msgstr "Publisher"
 
 msgid "bf:PublisherNumber"
-msgstr ""
+msgstr "Publisher number"
 
 msgid "bf:ReportNumber"
-msgstr ""
+msgstr "Technical report number"
 
 msgid "bf:Strn"
-msgstr ""
+msgstr "STRN"
 
 msgid "bf:Title"
-msgstr "bf:Titre"
+msgstr "Title entity"
 
 msgid "bf:Upc"
-msgstr ""
+msgstr "UPC"
 
 msgid "bf:Urn"
-msgstr ""
+msgstr "URN"
 
 msgid "bf:VideoRecordingNumber"
-msgstr ""
+msgstr "Video recording number"
 
 msgid "classification_004"
-msgstr ""
+msgstr "Computer science"
 
 msgid "classification_02"
-msgstr ""
+msgstr "Library sciences"
 
 msgid "classification_1"
-msgstr ""
+msgstr "Philosophy"
 
 msgid "classification_159.9"
-msgstr ""
+msgstr "Psychology"
 
 msgid "classification_159.953"
-msgstr ""
+msgstr "Memory and learning"
 
 msgid "classification_16"
-msgstr ""
+msgstr "Logic"
 
 msgid "classification_2"
-msgstr ""
+msgstr "Religion Theology"
 
 msgid "classification_294/299"
-msgstr ""
+msgstr "Orientalism"
 
 msgid "classification_3"
-msgstr ""
+msgstr "Social sciences"
 
 msgid "classification_31"
-msgstr ""
+msgstr "Demography Sociology Statistics"
 
 msgid "classification_32"
-msgstr ""
+msgstr "Political sciences"
 
 msgid "classification_33"
-msgstr ""
+msgstr "Economics"
 
 msgid "classification_34"
-msgstr ""
+msgstr "Law"
 
 msgid "classification_35"
-msgstr ""
+msgstr "Public administration"
 
 msgid "classification_36"
-msgstr ""
+msgstr "Social work"
 
 msgid "classification_37"
-msgstr ""
+msgstr "Education Teaching"
 
 msgid "classification_370"
-msgstr ""
+msgstr "Orthophony"
 
 msgid "classification_376"
-msgstr ""
+msgstr "Special education"
 
 msgid "classification_378.6"
-msgstr ""
+msgstr "Higher Education Institutions"
 
 msgid "classification_39"
-msgstr ""
+msgstr "Anthropology Ethnology"
 
 msgid "classification_51"
-msgstr ""
+msgstr "Mathematics"
 
 msgid "classification_519.2"
-msgstr ""
+msgstr "Probabilites Statistics"
 
 msgid "classification_52"
-msgstr ""
+msgstr "Astronomy Astrophysics"
 
 msgid "classification_524.8"
-msgstr ""
+msgstr "Cosmology"
 
 msgid "classification_53"
-msgstr ""
+msgstr "Physics"
 
 msgid "classification_54"
-msgstr ""
+msgstr "Chemistry"
 
 msgid "classification_543"
-msgstr ""
+msgstr "Analytical chemistry"
 
 msgid "classification_548"
-msgstr ""
+msgstr "Crystallography"
 
 msgid "classification_549"
-msgstr ""
+msgstr "Mineralogy"
 
 msgid "classification_55"
-msgstr ""
+msgstr "Geology"
 
 msgid "classification_55/56"
-msgstr ""
+msgstr "Earth sciences"
 
 msgid "classification_551"
-msgstr ""
+msgstr "Climate"
 
 msgid "classification_556"
-msgstr ""
+msgstr "Hydrology"
 
 msgid "classification_56"
-msgstr ""
+msgstr "Paleontology"
 
 msgid "classification_57"
-msgstr ""
+msgstr "Biology"
 
 msgid "classification_57/59"
-msgstr ""
+msgstr "Biology Life sciences"
 
 msgid "classification_574"
-msgstr ""
+msgstr "Ecology"
 
 msgid "classification_58"
-msgstr ""
+msgstr "Botany"
 
 msgid "classification_59"
-msgstr ""
+msgstr "Zoology"
 
 msgid "classification_6"
-msgstr ""
+msgstr "Engineering"
 
 msgid "classification_60"
-msgstr ""
+msgstr "Biotechnology"
 
 msgid "classification_61"
-msgstr ""
+msgstr "Medicine"
 
 msgid "classification_613.2"
-msgstr ""
+msgstr "Nutrition and Dietetics"
 
 msgid "classification_614.253.5"
-msgstr ""
+msgstr "Midwife"
 
 msgid "classification_615"
-msgstr ""
+msgstr "Therapeutic. Pharmacy Pharmacology"
 
 msgid "classification_615.8"
-msgstr ""
+msgstr "Physiotherapy"
 
 msgid "classification_615.84"
-msgstr ""
+msgstr "Medical Radiation Technology"
 
 msgid "classification_616"
-msgstr ""
+msgstr "Clinical medicine"
 
 msgid "classification_616-083"
-msgstr ""
+msgstr "Nursing"
 
 msgid "classification_616.31"
-msgstr ""
+msgstr "Dental medicine"
 
 msgid "classification_61_2"
-msgstr ""
+msgstr "Health"
 
 msgid "classification_620.1"
-msgstr ""
+msgstr "Materials"
 
 msgid "classification_620.9"
-msgstr ""
+msgstr "Energy"
 
 msgid "classification_621"
-msgstr ""
+msgstr "Industrial Engineering"
 
 msgid "classification_621.01"
-msgstr ""
+msgstr "Mechanics"
 
 msgid "classification_621.3"
-msgstr ""
+msgstr "Electricity"
 
 msgid "classification_621.38"
-msgstr ""
+msgstr "Electronics"
 
 msgid "classification_621.39"
-msgstr ""
+msgstr "Telecommunications"
 
 msgid "classification_621.762"
-msgstr ""
+msgstr "Powder metallurgy"
 
 msgid "classification_63"
-msgstr ""
+msgstr "Agriculture Agronomy"
 
 msgid "classification_65"
-msgstr ""
+msgstr "Information communication and media sciences"
 
 msgid "classification_66"
-msgstr ""
+msgstr "Chemical technology"
 
 msgid "classification_663"
-msgstr ""
+msgstr "Beverage industry"
 
 msgid "classification_664"
-msgstr ""
+msgstr "Food production and preservation"
 
 msgid "classification_681"
-msgstr ""
+msgstr "Microengineering"
 
 msgid "classification_7"
-msgstr ""
+msgstr "Arts"
 
 msgid "classification_7.071"
-msgstr ""
+msgstr "Art history"
 
 msgid "classification_71"
-msgstr ""
+msgstr "Urbanism"
 
 msgid "classification_72"
-msgstr ""
+msgstr "Architecture"
 
 msgid "classification_73/77"
-msgstr ""
+msgstr "Visual arts"
 
 msgid "classification_75"
-msgstr ""
+msgstr "Painting"
 
 msgid "classification_77"
-msgstr ""
+msgstr "Photography"
 
 msgid "classification_78"
-msgstr ""
+msgstr "Music"
 
 msgid "classification_796"
-msgstr ""
+msgstr "Sports sciences"
 
 msgid "classification_81"
-msgstr ""
+msgstr "Language Linguistics"
 
 msgid "classification_81´28"
-msgstr ""
+msgstr "Dialectology"
 
 msgid "classification_82"
-msgstr ""
+msgstr "Literature"
 
 msgid "classification_902"
-msgstr ""
+msgstr "Archeology"
 
 msgid "classification_903"
-msgstr ""
+msgstr "Pre-history"
 
 msgid "classification_91"
-msgstr ""
+msgstr "Geography"
 
 msgid "classification_929.5"
-msgstr ""
+msgstr "Genealogy"
 
 msgid "classification_93/94"
-msgstr ""
+msgstr "History"
 
 msgid "classification_931"
-msgstr ""
+msgstr "Ancient history"
 
 msgid "classification_94"
-msgstr ""
+msgstr "Medieval and modern history"
 
 msgid "classification_root_1"
-msgstr ""
+msgstr "Medicine, Technology, Engineering"
 
 msgid "classification_root_2"
-msgstr ""
+msgstr "Exact and natural sciences"
 
 msgid "classification_root_3"
-msgstr ""
+msgstr "Arts, Human and Social Science"
 
 msgid "contribution_role_cre"
-msgstr ""
+msgstr "Creator"
 
 msgid "contribution_role_ctb"
-msgstr ""
+msgstr "Contributor"
 
 msgid "contribution_role_dgs"
-msgstr ""
+msgstr "Degree supervisor"
 
 msgid "contribution_role_edt"
-msgstr ""
+msgstr "Editor"
 
 msgid "contribution_role_prt"
-msgstr ""
+msgstr "Printer"
 
 msgid "contributor"
 msgstr "contributeur"
 
 msgid "csal"
-msgstr ""
+msgstr "National licenses"
 
 msgid "deposit_log_action_approve"
-msgstr ""
+msgstr "Approve"
 
 msgid "deposit_log_action_ask_for_changes"
-msgstr ""
+msgstr "Ask for changes"
 
 msgid "deposit_log_action_reject"
-msgstr ""
+msgstr "Reject"
 
 msgid "deposit_log_action_submit"
-msgstr ""
+msgstr "Submit"
 
 msgid "deposit_status_ask_for_changes"
-msgstr "demande de modifications"
+msgstr "Demande de modifications"
 
 msgid "deposit_status_in_progress"
-msgstr "en cours"
+msgstr "En cours"
 
 msgid "deposit_status_rejected"
-msgstr "refusé"
+msgstr "Refusé"
 
 msgid "deposit_status_to_validate"
-msgstr "à valider"
+msgstr "A valider"
 
 msgid "deposit_status_validated"
-msgstr "validé"
+msgstr "Validé"
 
 msgid "document_type"
-msgstr ""
+msgstr "Document types"
 
 msgid "document_type_advanced_studies_thesis"
-msgstr ""
+msgstr "Advanced studies thesis"
 
 msgid "document_type_coar:c_0640"
 msgstr "revue"
@@ -1106,52 +1105,52 @@ msgid "document_type_coar:c_12cc"
 msgstr "matériel cartographique"
 
 msgid "document_type_coar:c_15cd"
-msgstr ""
+msgstr "Patent"
 
 msgid "document_type_coar:c_1843"
-msgstr ""
+msgstr "Other"
 
 msgid "document_type_coar:c_186u"
-msgstr ""
+msgstr "Policy report"
 
 msgid "document_type_coar:c_18cc"
 msgstr "son"
 
 msgid "document_type_coar:c_18co"
-msgstr ""
+msgstr "Conference poster not in proceedings"
 
 msgid "document_type_coar:c_18cp"
-msgstr ""
+msgstr "Conference paper not in proceedings"
 
 msgid "document_type_coar:c_18cw"
 msgstr "partition"
 
 msgid "document_type_coar:c_18gh"
-msgstr ""
+msgstr "Technical report"
 
 msgid "document_type_coar:c_18hj"
-msgstr ""
+msgstr "Report to funding agency"
 
 msgid "document_type_coar:c_18op"
-msgstr ""
+msgstr "Project deliverable"
 
 msgid "document_type_coar:c_18wq"
-msgstr ""
+msgstr "Other type of report"
 
 msgid "document_type_coar:c_18ws"
 msgstr "rapport de recherche"
 
 msgid "document_type_coar:c_18ww"
-msgstr ""
+msgstr "Internal report"
 
 msgid "document_type_coar:c_18wz"
-msgstr ""
+msgstr "Memorandum"
 
 msgid "document_type_coar:c_2659"
-msgstr ""
+msgstr "Periodical"
 
 msgid "document_type_coar:c_2cd9"
-msgstr ""
+msgstr "Magazine"
 
 msgid "document_type_coar:c_2f33"
 msgstr "livre"
@@ -1163,85 +1162,85 @@ msgid "document_type_coar:c_3248"
 msgstr "chapitre de livre"
 
 msgid "document_type_coar:c_3e5a"
-msgstr ""
+msgstr "Contribution to journal"
 
 msgid "document_type_coar:c_46ec"
-msgstr "thèse"
+msgstr "Thesis"
 
 msgid "document_type_coar:c_5794"
 msgstr "article de conférence"
 
 msgid "document_type_coar:c_5ce6"
-msgstr ""
+msgstr "Software"
 
 msgid "document_type_coar:c_6501"
 msgstr "article scientifique"
 
 msgid "document_type_coar:c_6670"
-msgstr ""
+msgstr "Conference poster"
 
 msgid "document_type_coar:c_7a1f"
 msgstr "mémoire de bachelor"
 
 msgid "document_type_coar:c_8042"
-msgstr ""
+msgstr "Working paper"
 
 msgid "document_type_coar:c_816b"
-msgstr "preprint"
+msgstr "Preprint"
 
 msgid "document_type_coar:c_8544"
-msgstr ""
+msgstr "Lecture"
 
 msgid "document_type_coar:c_8a7e"
-msgstr ""
+msgstr "Moving image"
 
 msgid "document_type_coar:c_93fc"
-msgstr ""
+msgstr "Report"
 
 msgid "document_type_coar:c_998f"
-msgstr ""
+msgstr "Newspaper article"
 
 msgid "document_type_coar:c_ba1f"
-msgstr ""
+msgstr "Report part"
 
 msgid "document_type_coar:c_bdcc"
 msgstr "mémoire de master"
 
 msgid "document_type_coar:c_beb9"
-msgstr ""
+msgstr "Data paper"
 
 msgid "document_type_coar:c_c94f"
-msgstr ""
+msgstr "Conference object"
 
 msgid "document_type_coar:c_db06"
 msgstr "thèse de doctorat"
 
 msgid "document_type_coar:c_dcae04bc"
-msgstr ""
+msgstr "Review article"
 
 msgid "document_type_coar:c_ddb1"
-msgstr ""
+msgstr "Dataset"
 
 msgid "document_type_coar:c_ecc8"
-msgstr "image"
+msgstr "Image"
 
 msgid "document_type_coar:c_f744"
-msgstr ""
+msgstr "Conference proceedings"
 
 msgid "document_type_habilitation_thesis"
-msgstr ""
+msgstr "Habilitation thesis"
 
 msgid "document_type_non_textual_object"
-msgstr ""
+msgstr "Non-textual object"
 
 msgid "document_type_other"
-msgstr ""
+msgstr "Other"
 
 msgid "eduid"
-msgstr ""
+msgstr "Switch edu-ID"
 
 msgid "eduidtest"
-msgstr ""
+msgstr "Switch edu-ID Test"
 
 msgid "lang_aar"
 msgstr "afar"
@@ -2714,22 +2713,22 @@ msgid "pid"
 msgstr ""
 
 msgid "role_admin"
-msgstr ""
+msgstr "Admin"
 
 msgid "role_moderator"
-msgstr ""
+msgstr "Moderator"
 
 msgid "role_publisher"
-msgstr ""
+msgstr "Submitter"
 
 msgid "role_superuser"
-msgstr ""
+msgstr "Super user"
 
 msgid "role_user"
-msgstr ""
+msgstr "User"
 
 msgid "specific_collections"
-msgstr ""
+msgstr "Specific collections"
 
 msgid "status"
 msgstr "statut"
@@ -2738,13 +2737,13 @@ msgid "subject"
 msgstr "sujet"
 
 msgid "unifr"
-msgstr ""
+msgstr "University of Fribourg"
 
 msgid "unisi"
-msgstr ""
+msgstr "University of Lugano"
 
 msgid "uri"
-msgstr ""
+msgstr "URI"
 
 msgid "user"
 msgstr "utilisateur"
