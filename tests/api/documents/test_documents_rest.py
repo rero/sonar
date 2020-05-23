@@ -30,12 +30,12 @@ def test_put(app, client, document_with_file):
 
     # Retrieve document by doing a get request.
     response = client.get(url_for('invenio_records_rest.doc_item',
-                                  pid_value=10000),
+                                  pid_value=document_with_file['pid']),
                           headers=headers)
 
     # Put data to document
     response = client.put(url_for('invenio_records_rest.doc_item',
-                                  pid_value=10000),
+                                  pid_value=document_with_file['pid']),
                           headers=headers,
                           data=json.dumps(response.json['metadata']))
     assert response.status_code == 200

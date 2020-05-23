@@ -45,8 +45,7 @@ def test_admin_record_page(app, admin, user_without_role):
         # OK, but redirected to the default page
         login_user_via_session(client, email=admin['email'])
         res = client.get(file_url)
-        assert res.status_code == 302
-        assert '/records/documents' in res.location
+        assert res.status_code == 200
 
         # OK
         file_url = url_for('sonar.manage', path='records/documents')
@@ -55,27 +54,107 @@ def test_admin_record_page(app, admin, user_without_role):
         assert '<sonar-root>' in str(res.data)
 
 
-def test_logged_user(app, client, admin):
+def test_logged_user(app, client, superuser, admin, moderator, publisher,
+                     user):
     """Test logged user page."""
     url = url_for('sonar.logged_user')
 
     res = client.get(url)
     assert b'{}' in res.data
 
+    # Logged as admin
     login_user_via_session(client, email=admin['email'])
-
     res = client.get(url)
-    assert b'"email":"org-admin@rero.ch"' in res.data
+    assert b'"email":"orgadmin@rero.ch"' in res.data
+    assert res.json['metadata']['permissions']['documents']['add']
+    assert not res.json['metadata']['permissions']['organisations']['add']
+    assert res.json['metadata']['permissions']['users']['add']
+    assert res.json['metadata']['permissions']['deposits']['add']
 
     res = client.get(url + '?resolve=1')
-    assert b'"email":"org-admin@rero.ch"' in res.data
+    assert b'"email":"orgadmin@rero.ch"' in res.data
     assert b'"pid":"org"' in res.data
 
+    # Logged as superuser
+    login_user_via_session(client, email=superuser['email'])
+    res = client.get(url)
+    assert b'"email":"orgsuperuser@rero.ch"' in res.data
+    assert res.json['metadata']['permissions']['documents']['add']
+    assert res.json['metadata']['permissions']['organisations']['add']
+    assert res.json['metadata']['permissions']['users']['add']
+    assert res.json['metadata']['permissions']['deposits']['add']
+    assert res.json['metadata']['permissions']['documents']['list']
+    assert res.json['metadata']['permissions']['organisations']['list']
+    assert res.json['metadata']['permissions']['users']['list']
+    assert res.json['metadata']['permissions']['deposits']['list']
 
-def test_schemas(client):
+    # Logged as moderator
+    login_user_via_session(client, email=moderator['email'])
+    res = client.get(url)
+    assert b'"email":"orgmoderator@rero.ch"' in res.data
+    assert res.json['metadata']['permissions']['documents']['add']
+    assert not res.json['metadata']['permissions']['organisations']['add']
+    assert not res.json['metadata']['permissions']['users']['add']
+    assert res.json['metadata']['permissions']['deposits']['add']
+    assert res.json['metadata']['permissions']['documents']['list']
+    assert not res.json['metadata']['permissions']['organisations']['list']
+    assert res.json['metadata']['permissions']['users']['list']
+    assert res.json['metadata']['permissions']['deposits']['list']
+
+    # Logged as publisher
+    login_user_via_session(client, email=publisher['email'])
+    res = client.get(url)
+    assert b'"email":"orgpublisher@rero.ch"' in res.data
+    assert not res.json['metadata']['permissions']['documents']['add']
+    assert not res.json['metadata']['permissions']['organisations']['add']
+    assert not res.json['metadata']['permissions']['users']['add']
+    assert res.json['metadata']['permissions']['deposits']['add']
+    assert not res.json['metadata']['permissions']['documents']['list']
+    assert not res.json['metadata']['permissions']['organisations']['list']
+    assert res.json['metadata']['permissions']['users']['list']
+    assert res.json['metadata']['permissions']['deposits']['list']
+
+    # Logged as user
+    login_user_via_session(client, email=user['email'])
+    res = client.get(url)
+    assert b'"email":"orguser@rero.ch"' in res.data
+    assert not res.json['metadata']['permissions']['documents']['add']
+    assert not res.json['metadata']['permissions']['organisations']['add']
+    assert not res.json['metadata']['permissions']['users']['add']
+    assert not res.json['metadata']['permissions']['deposits']['add']
+    assert not res.json['metadata']['permissions']['documents']['list']
+    assert not res.json['metadata']['permissions']['organisations']['list']
+    assert res.json['metadata']['permissions']['users']['list']
+    assert not res.json['metadata']['permissions']['deposits']['list']
+
+
+def test_schemas(client, admin, user):
     """Test JSON schemas endpoint."""
     res = client.get(url_for('sonar.schemas', record_type='documents'))
     assert res.status_code == 200
+    assert res.json['schema']['properties'].get('organisation')
+
+    res = client.get(url_for('sonar.schemas', record_type='users'))
+    assert res.status_code == 200
+    assert res.json['schema']['properties'].get('organisation')
+    assert res.json['schema']['properties'].get('roles')
+
+    login_user_via_session(client, email=admin['email'])
+
+    res = client.get(url_for('sonar.schemas', record_type='documents'))
+    assert res.status_code == 200
+    assert not res.json['schema']['properties'].get('organisation')
+
+    res = client.get(url_for('sonar.schemas', record_type='users'))
+    assert res.status_code == 200
+    assert not res.json['schema']['properties'].get('organisation')
+    assert res.json['schema']['properties'].get('roles')
 
     res = client.get(url_for('sonar.schemas', record_type='not_existing'))
     assert res.status_code == 404
+
+    login_user_via_session(client, email=user['email'])
+    res = client.get(url_for('sonar.schemas', record_type='users'))
+    assert res.status_code == 200
+    assert not res.json['schema']['properties'].get('organisation')
+    assert not res.json['schema']['properties'].get('roles')

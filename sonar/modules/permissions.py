@@ -23,7 +23,6 @@ from flask import abort, current_app
 from flask_login import current_user
 from flask_principal import ActionNeed, RoleNeed
 from invenio_access import Permission
-from invenio_records_rest.utils import check_elasticsearch
 
 superuser_access_permission = Permission(ActionNeed('superuser-access'))
 admin_access_permission = Permission(ActionNeed('admin-access'))
@@ -34,6 +33,9 @@ publisher_access_permission = Permission(RoleNeed('publisher'),
 
 # Allow access without permission check
 allow_access = type('Allow', (), {'can': lambda self: True})()
+
+# Deny access without permission check
+deny_access = type('Allow', (), {'can': lambda self: False})()
 
 
 def has_publisher_access():
@@ -69,42 +71,28 @@ def has_superuser_access():
     return superuser_access_permission.can()
 
 
-def can_list_record_factory(**kwargs):
-    """Factory to check if a ressource can be listed."""
-    return allow_access
+def record_permission_factory(record=None, action=None, cls=None):
+    """Record permission factory.
 
-
-def can_read_record_factory(record):
-    """Factory to check if a record can be read."""
-    return check_elasticsearch(record)
-
-
-def can_create_record_factory(**kwargs):
-    """Factory to check if a record can be created."""
+    :params record: Record against which to check permission.
+    :params action: Action to check.
+    :params cls: Class of the permission.
+    :returns: Permission object.
+    """
+    # Permission is allowed for all actions.
     if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
         return allow_access
 
-    return admin_access_permission
+    # No specific class, the base record permission class is taken.
+    if not cls:
+        cls = RecordPermission
 
-
-def can_update_record_factory(**kwargs):
-    """Factory to check if a record can be updated."""
-    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
-        return allow_access
-
-    return admin_access_permission
-
-
-def can_delete_record_factory(**kwargs):
-    """Factory to check if a record can be deleted."""
-    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
-        return allow_access
-
-    return admin_access_permission
+    return cls.create_permission(record, action)
 
 
 def can_access_manage_view(func):
     """Check if user has access to admin views."""
+
     @wraps(func)
     def decorated_view(*args, **kwargs):
         if not current_user.is_authenticated:
@@ -141,3 +129,122 @@ def wiki_edit_permission():
     :return: true if the logged user has the admin role.
     """
     return has_admin_access()
+
+
+class RecordPermission:
+    """Record permissions for CRUD operations."""
+
+    list_actions = ['list']
+    create_actions = ['create']
+    read_actions = ['read']
+    update_actions = ['update']
+    delete_actions = ['delete']
+
+    def __init__(self, record, func, user):
+        """Initialize a file permission object.
+
+        :param record: Record to check.
+        :param fund: method of the class to call.
+        :param user: Object representing current logged user.
+        """
+        self.record = record
+        self.func = func
+        self.user = user or current_user
+
+    def can(self):
+        """Return the permission object determining if the action can be done.
+
+        :returns: Permission object.
+        """
+        return self.func(self.user, self.record)
+
+    @classmethod
+    def create_permission(cls, record, action, user=None):
+        """Create a record permission.
+
+        :param action: Action to check.
+        :param user: Logged user.
+        :returns: Permission object.
+        """
+        if action in cls.list_actions:
+            return cls(record, cls.list, user)
+
+        if action in cls.create_actions:
+            return cls(record, cls.create, user)
+
+        if action in cls.read_actions:
+            return cls(record, cls.read, user)
+
+        if action in cls.update_actions:
+            return cls(record, cls.update, user)
+
+        if action in cls.delete_actions:
+            return cls(record, cls.delete, user)
+
+        # Deny access by default
+        return deny_access
+
+    @classmethod
+    def list(cls, user, record=None):
+        """List permission check.
+
+        :param user: Logged user.
+        :param recor: Record to check.
+        :returns: True is action can be done.
+        """
+        if user.is_anonymous:
+            return False
+
+        return has_superuser_access()
+
+    @classmethod
+    def create(cls, user, record=None):
+        """Create permission check.
+
+        :param user: Logged user.
+        :param recor: Record to check.
+        :returns: True is action can be done.
+        """
+        if user.is_anonymous:
+            return False
+
+        return has_superuser_access()
+
+    @classmethod
+    def read(cls, user, record):
+        """Read permission check.
+
+        :param user: Logged user.
+        :param recor: Record to check.
+        :returns: True is action can be done.
+        """
+        if user.is_anonymous:
+            return False
+
+        return has_superuser_access()
+
+    @classmethod
+    def update(cls, user, record):
+        """Update permission check.
+
+        :param user: Logged user.
+        :param recor: Record to check.
+        :returns: True is action can be done.
+        """
+        if user.is_anonymous:
+            return False
+
+        return has_superuser_access()
+
+    @classmethod
+    def delete(cls, user, record):
+        """Delete permission check.
+
+        :param user: Logged user.
+        :param recor: Record to check.
+        :returns: True is action can be done.
+        """
+        if user.is_anonymous:
+            return False
+
+        return has_superuser_access()

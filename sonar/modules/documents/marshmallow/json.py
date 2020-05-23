@@ -21,14 +21,17 @@ from __future__ import absolute_import, print_function
 
 from functools import partial
 
+from flask_security import current_user
 from invenio_records_rest.schemas import Nested, StrictKeysMixin
 from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
 from marshmallow import fields, pre_dump, pre_load
 
 from sonar.modules.documents.api import DocumentRecord
+from sonar.modules.documents.permissions import DocumentPermission
 from sonar.modules.documents.views import is_file_restricted
 from sonar.modules.serializers import schema_from_context
+from sonar.modules.users.api import current_user_record
 
 schema_from_document = partial(schema_from_context,
                                schema=DocumentRecord.schema)
@@ -92,6 +95,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
                          attribute="$schema",
                          data_key="$schema",
                          deserialize=schema_from_document)
+    permissions = fields.Dict(dump_only=True)
 
     @pre_dump
     def add_files_restrictions(self, item):
@@ -115,6 +119,38 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
                 item['_files'][key]['restriction'] = restricted
 
         return item
+
+    @pre_dump
+    def add_permissions(self, item):
+        """Add permissions to record.
+
+        :param item: Dict representing the record.
+        :returns: Modified dict.
+        """
+        item['permissions'] = {
+            'read': DocumentPermission.read(current_user, item),
+            'update': DocumentPermission.update(current_user, item),
+            'delete': DocumentPermission.delete(current_user, item)
+        }
+
+        return item
+
+    @pre_load
+    def guess_organisation(self, data, **kwargs):
+        """Guess organisation from current logged user.
+
+        :param data: Dict of record data.
+        :returns: Modified dict of record data.
+        """
+        # Organisation already attached to document, we do nothing.
+        if data.get('organisation'):
+            return data
+
+        # Store current user organisation in new document.
+        if current_user_record.get('organisation'):
+            data['organisation'] = current_user_record['organisation']
+
+        return data
 
 
 class DocumentSchemaV1(StrictKeysMixin):

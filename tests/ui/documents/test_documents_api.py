@@ -27,7 +27,7 @@ def test_get_record_by_identifier(app, document):
         'value': '111111',
         'type': 'bf:Local'
     }])
-    assert record['pid'] == '10000'
+    assert record['pid'] == document['pid']
 
     # Record not found
     record = DocumentRecord.get_record_by_identifier([{

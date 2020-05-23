@@ -15,10 +15,17 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Marshmallow for deposits."""
+"""Deposit loaders."""
 
 from __future__ import absolute_import, print_function
 
-from .json import UserMetadataSchemaV1, UserSchemaV1
+from invenio_records_rest.loaders.marshmallow import json_patch_loader, \
+    marshmallow_loader
 
-__all__ = ('UserMetadataSchemaV1', 'UserSchemaV1',)
+from ..marshmallow import DepositMetadataSchemaV1
+
+json_v1 = marshmallow_loader(DepositMetadataSchemaV1)
+
+__all__ = (
+    'json_v1',
+)

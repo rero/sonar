@@ -26,15 +26,19 @@ from __future__ import absolute_import, print_function
 
 import re
 
-from flask import Blueprint, abort, current_app, jsonify, redirect, \
-    render_template, request, url_for
+from flask import Blueprint, abort, current_app, jsonify, render_template, \
+    request
 from flask_login import current_user
 from invenio_jsonschemas import current_jsonschemas
 from invenio_jsonschemas.errors import JSONSchemaNotFound
 
 from sonar.modules.babel_extractors import translate
+from sonar.modules.deposits.permissions import DepositPermission
+from sonar.modules.documents.permissions import DocumentPermission
+from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import can_access_manage_view
-from sonar.modules.users.api import UserRecord
+from sonar.modules.users.api import UserRecord, current_user_record
+from sonar.modules.users.permissions import UserPermission
 
 blueprint = Blueprint('sonar',
                       __name__,
@@ -53,9 +57,6 @@ def error():
 @can_access_manage_view
 def manage(path=None):
     """Admin access page integrating angular ui."""
-    if not path:
-        return redirect(url_for('sonar.manage', path='records/documents'))
-
     return render_template('sonar/manage.html')
 
 
@@ -79,6 +80,24 @@ def logged_user():
         data['metadata']['is_moderator'] = user.is_moderator
         data['metadata']['is_publisher'] = user.is_publisher
         data['metadata']['is_user'] = user.is_user
+        data['metadata']['permissions'] = {
+            'users': {
+                'add': UserPermission.create(user),
+                'list': UserPermission.list(user)
+            },
+            'documents': {
+                'add': DocumentPermission.create(user),
+                'list': DocumentPermission.list(user)
+            },
+            'organisations': {
+                'add': OrganisationPermission.create(user),
+                'list': OrganisationPermission.list(user)
+            },
+            'deposits': {
+                'add': DepositPermission.create(user),
+                'list': DepositPermission.list(user)
+            }
+        }
 
     # TODO: If an organisation is associated to user and only when running
     # tests, organisation cannot not be encoded to JSON after call of
@@ -101,6 +120,27 @@ def schemas(record_type):
         current_jsonschemas.get_schema.cache_clear()
         schema_name = '{}/{}-v1.0.0.json'.format(record_type, rec_type)
         schema = current_jsonschemas.get_schema(schema_name)
+
+        # TODO: Maybe find a proper way to do this.
+        if record_type in [
+                'users', 'documents'
+        ] and not current_user.is_anonymous and current_user_record:
+            if record_type == 'users':
+                # If user is admin, restrict available roles list.
+                if current_user_record.is_admin:
+                    schema['properties']['roles']['items'][
+                        'enum'] = current_user_record.\
+                            get_all_reachable_roles()
+                # User cannot select role
+                else:
+                    schema['properties'].pop('roles')
+                    if schema.get('propertiesOrder'):
+                        schema['propertiesOrder'].remove('roles')
+
+            if not current_user_record.is_superuser:
+                schema['properties'].pop('organisation')
+                if schema.get('propertiesOrder'):
+                    schema['propertiesOrder'].remove('organisation')
 
         return jsonify({'schema': prepare_schema(schema)})
     except JSONSchemaNotFound:

@@ -5,7 +5,6 @@
 #
 # Translators:
 # Nicolas Prongué <n.prongue@outlook.com>, 2020
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
@@ -1078,7 +1077,7 @@ msgid "deposit_status_validated"
 msgstr "Validated"
 
 msgid "document_type"
-msgstr "Document type"
+msgstr "Document types"
 
 msgid "document_type_advanced_studies_thesis"
 msgstr "Advanced studies thesis"
@@ -2713,7 +2712,7 @@ msgid "role_user"
 msgstr "User"
 
 msgid "specific_collections"
-msgstr ""
+msgstr "Specific collections"
 
 msgid "status"
 msgstr ""
@@ -2728,7 +2727,7 @@ msgid "unisi"
 msgstr "University of Lugano"
 
 msgid "uri"
-msgstr ""
+msgstr "URI"
 
 msgid "user"
 msgstr ""

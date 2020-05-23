@@ -33,6 +33,7 @@ def import_records(records_to_import):
     get the status and/or the result of the task, execution is faster.
 
     :param list records_to_import: List of records to import.
+    :returns: List of IDs.
     """
     indexer = RecordIndexer()
 
@@ -88,3 +89,5 @@ def import_records(records_to_import):
     db.session.commit()
     indexer.bulk_index(ids)
     indexer.process_bulk_queue()
+
+    return ids

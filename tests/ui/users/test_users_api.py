@@ -58,10 +58,9 @@ def test_get_user_by_current_user(app, client, user_without_role, user):
     client.get(url_for_security('logout'))
 
     login_user_via_view(client, email=user['email'], password='123456')
-    print(current_user)
     record = UserRecord.get_user_by_current_user(current_user)
     assert 'email' in record
-    assert user['email'] == 'org-user@rero.ch'
+    assert user['email'] == 'orguser@rero.ch'
 
 
 def test_get_reachable_roles(app):
@@ -153,7 +152,7 @@ def test_delete(app, admin):
 
     with app.app_context():
         datastore = app.extensions['security'].datastore
-        user = datastore.find_user(email='org-admin@rero.ch')
+        user = datastore.find_user(email='orgadmin@rero.ch')
         assert not user.roles
         assert not user.is_active
 
@@ -165,7 +164,7 @@ def test_update(app, admin, roles):
 
     with app.app_context():
         datastore = app.extensions['security'].datastore
-        user = datastore.find_user(email='org-admin@rero.ch')
+        user = datastore.find_user(email='orgadmin@rero.ch')
         assert user.roles[0].name == 'superuser'
 
 
@@ -174,7 +173,7 @@ def test_reactivate_user(app, admin):
     with app.app_context():
         datastore = app.extensions['security'].datastore
 
-        user = datastore.find_user(email='org-admin@rero.ch')
+        user = datastore.find_user(email='orgadmin@rero.ch')
         assert user.is_active
 
         datastore.deactivate_user(user)
@@ -184,7 +183,7 @@ def test_reactivate_user(app, admin):
         del admin.__dict__['user']
 
         admin.update({'roles': ['admin']})
-        user = datastore.find_user(email='org-admin@rero.ch')
+        user = datastore.find_user(email='orgadmin@rero.ch')
         assert user.roles[0].name == 'admin'
         assert user.is_active
 

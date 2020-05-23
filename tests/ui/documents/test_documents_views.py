@@ -20,6 +20,7 @@
 import datetime
 
 import pytest
+from flask import url_for
 
 import sonar.modules.documents.views as views
 
@@ -38,13 +39,16 @@ def test_index(client):
 def test_search(app, client):
     """Test search."""
     assert isinstance(views.search(), str)
-    assert client.get(
-        '/organisation/sonar/search/documents').status_code == 200
+    assert client.get(url_for('documents.search',
+                              resource_type='documents')).status_code == 200
 
 
 def test_detail(app, client, document):
     """Test document detail page."""
-    assert client.get('/organisation/sonar/documents/10000').status_code == 200
+    assert client.get(
+        url_for('invenio_records_ui.document',
+                ir='sonar',
+                pid_value=document['pid'])).status_code == 200
 
 
 def test_title_format(document):
