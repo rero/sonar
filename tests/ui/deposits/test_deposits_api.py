@@ -17,10 +17,18 @@
 
 """Test API for deposits."""
 
+from invenio_accounts.testutils import login_user_via_view
 
-def test_create_document(app, deposit):
+
+def test_create_document(app, client, deposit, user):
     """Test create document based on it."""
+    login_user_via_view(client, email=user['email'], password='123456')
+
     document = deposit.create_document()
+
+    assert document['organisation'] == {
+        '$ref': 'https://sonar.ch/api/organisations/org'
+    }
 
     assert document['documentType'] == 'coar:c_816b'
     assert document['title'] == [{
