@@ -21,6 +21,7 @@ from datetime import datetime
 from functools import partial
 
 from sonar.modules.documents.api import DocumentRecord
+from sonar.modules.users.api import current_user_record
 
 from ..api import SonarIndexer, SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
@@ -97,6 +98,10 @@ class DepositRecord(SonarRecord):
     def create_document(self):
         """Create document from deposit."""
         metadata = {}
+
+        # Organisation
+        if current_user_record and current_user_record.get('organisation'):
+            metadata['organisation'] = current_user_record['organisation']
 
         # Document type
         metadata['documentType'] = self['metadata']['documentType']
