@@ -67,7 +67,11 @@
       {%- endblock head_links %}
 
       {%- block css %}
-        {{ webpack[g.ir|default('sonar') ~ '-theme.css'] }}
+        {% if g.get('organisation', {}).get('isDedicated') %}
+          {{ webpack[view_code ~ '-theme.css'] }}
+        {% else %}
+          {{ webpack['sonar-theme.css'] }}
+        {% endif %}
         {# assets "invenio_theme_css" %}<link href="{{ ASSET_URL }}" rel="stylesheet">{% endassets #}
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>

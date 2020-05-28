@@ -96,7 +96,12 @@ def make_organisation(app, db):
     """Factory for creating organisation."""
 
     def _make_organisation(code):
-        data = {'code': code, 'name': code}
+        data = {
+            'code': code,
+            'name': code,
+            'isShared': True,
+            'isDedicated': False
+        }
 
         record = OrganisationRecord.get_record_by_pid(code)
 

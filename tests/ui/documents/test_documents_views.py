@@ -20,14 +20,37 @@
 import datetime
 
 import pytest
-from flask import url_for
+from flask import g, url_for
 
 import sonar.modules.documents.views as views
 
 
-def test_pull_ir(app):
-    """Test pull IR."""
-    views.pull_ir(None, {"ir": "sonar"})
+def test_default_view_code(app):
+    """Test set default view code."""
+    views.default_view_code(None, {'view': 'sonar'})
+
+
+def test_store_organisation(db, organisation):
+    """Test store organisation in globals."""
+    # Default view, no organisation stored.
+    views.store_organisation(None, {'view': 'sonar'})
+    assert not g.get('organisation')
+
+    # Existing organisation stored
+    views.store_organisation(None, {'view': 'org'})
+    assert g.organisation['code'] == 'org'
+    assert g.organisation['isShared']
+
+    # Non existing organisation
+    with pytest.raises(Exception) as exception:
+        views.store_organisation(None, {'view': 'not-existing-org'})
+        assert str(exception.value) == 'Organisation\'s view is not accessible'
+
+    # Existing organisation without shared view
+    organisation.update({'isShared': False})
+    with pytest.raises(Exception) as exception:
+        views.store_organisation(None, {'view': 'org'})
+        assert str(exception.value) == 'Organisation\'s view is not accessible'
 
 
 def test_index(client):
@@ -45,10 +68,11 @@ def test_search(app, client):
 
 def test_detail(app, client, document):
     """Test document detail page."""
-    assert client.get(
-        url_for('invenio_records_ui.document',
-                ir='sonar',
-                pid_value=document['pid'])).status_code == 200
+    assert client.get(url_for('documents.detail',
+                              pid_value=document['pid'])).status_code == 200
+
+    assert client.get(url_for('documents.detail',
+                              pid_value='not-existing')).status_code == 404
 
 
 def test_title_format(document):
@@ -395,13 +419,14 @@ def test_part_of_format():
     }) == '2015'
 
 
-def test_is_file_restricted(app):
+def test_is_file_restricted(app, organisation):
     """Test if a file is restricted by embargo date and/or organisation."""
-    views.pull_ir(None, {'ir': 'sonar'})
+    g.pop('organisation', None)
+    views.store_organisation(None, {'view': 'sonar'})
 
-    record = {'organisation': {'pid': 'unisi'}}
+    record = {'organisation': {'pid': 'org'}}
 
-    # No restricution and no embargo date
+    # No restriction and no embargo date
     assert views.is_file_restricted({}, {}) == {
         'date': None,
         'restricted': False
@@ -429,7 +454,7 @@ def test_is_file_restricted(app):
                                     }
 
     # Restricted by organisation and current organisation match
-    views.pull_ir(None, {'ir': 'unisi'})
+    views.store_organisation(None, {'view': 'org'})
     assert views.is_file_restricted({'restricted': 'organisation'},
                                     record) == {
                                         'date': None,
@@ -467,7 +492,8 @@ def test_is_file_restricted(app):
                                         }
 
     # Restricted by embargo date and organisation
-    views.pull_ir(None, {'ir': 'sonar'})
+    g.pop('organisation', None)
+    views.store_organisation(None, {'view': 'sonar'})
     with app.test_request_context(environ_base={'REMOTE_ADDR': '10.1.2.3'}):
         assert views.is_file_restricted(
             {
@@ -490,25 +516,25 @@ def test_is_file_restricted(app):
             }
 
 
-def test_get_current_organisation(app):
+def test_get_current_organisation_code(app, organisation):
     """Test get current organisation."""
     # No globals and no args
-    assert views.get_current_organisation() == 'sonar'
+    assert views.get_current_organisation_code() == 'sonar'
 
     # Default globals and no args
-    views.pull_ir(None, {'ir': 'sonar'})
-    assert views.get_current_organisation() == 'sonar'
+    views.store_organisation(None, {'view': 'sonar'})
+    assert views.get_current_organisation_code() == 'sonar'
 
     # Organisation globals and no args
-    views.pull_ir(None, {'ir': 'unisi'})
-    assert views.get_current_organisation() == 'unisi'
+    views.store_organisation(None, {'view': 'org'})
+    assert views.get_current_organisation_code() == 'org'
 
     # Args is global
     with app.test_request_context() as req:
         req.request.args = {'view': 'sonar'}
-        assert views.get_current_organisation() == 'sonar'
+        assert views.get_current_organisation_code() == 'sonar'
 
     # Args has organisation view
     with app.test_request_context() as req:
         req.request.args = {'view': 'unisi'}
-        assert views.get_current_organisation() == 'unisi'
+        assert views.get_current_organisation_code() == 'unisi'

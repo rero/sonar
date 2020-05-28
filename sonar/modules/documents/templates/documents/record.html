@@ -226,7 +226,7 @@
           {% endif %}
 
           <!-- PERMANENT LINK -->
-          {% set link = url_for('invenio_records_ui.document', pid_value=record.pid, ir=g.ir|default('sonar'), _external=True) %}
+          {% set link = url_for('documents.detail', pid_value=record.pid, view=view_code, _external=True) %}
           {{ dl(_('Permalink'), '<a href="' + link + '">' + link + '</a>') }}
         </dl>
       </div>

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2020-06-04 14:40+0200\n"
+"POT-Creation-Date: 2020-06-05 10:30+0200\n"
 "PO-Revision-Date: 2020-05-13 05:58+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>, 2020\n"
 "Language: en\n"
@@ -292,7 +292,13 @@ msgstr ""
 msgid "Invenio"
 msgstr ""
 
+msgid "Is dedicated"
+msgstr ""
+
 msgid "Is part of"
+msgstr ""
+
+msgid "Is shared"
 msgstr ""
 
 msgid "Issue"
@@ -374,6 +380,12 @@ msgid "Numbering"
 msgstr ""
 
 msgid "Organisation"
+msgstr ""
+
+msgid "Organisation has a specific theme for his view."
+msgstr ""
+
+msgid "Organisation records can be accessed by a specific URL."
 msgstr ""
 
 msgid "Other Material Characteristics"

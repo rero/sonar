@@ -22,9 +22,11 @@ from __future__ import absolute_import, print_function
 import re
 from datetime import datetime
 
-from flask import Blueprint, current_app, g, render_template, request
+from flask import Blueprint, abort, current_app, g, render_template, request
 from flask_babelex import gettext as _
 
+from sonar.modules.documents.api import DocumentRecord
+from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.utils import change_filename_extension
 
 from .utils import publication_statement_text, series_format_text
@@ -33,7 +35,7 @@ blueprint = Blueprint('documents',
                       __name__,
                       template_folder='templates',
                       static_folder='static',
-                      url_prefix='/organisation/<ir>')
+                      url_prefix='/organisation/<view>')
 """Blueprint used for loading templates and static assets
 
 The sole purpose of this blueprint is to ensure that Invenio can find the
@@ -43,33 +45,50 @@ this file.
 
 
 @blueprint.url_defaults
-def add_ir(endpoint, values):
-    """Add default ir parameter."""
-    values.setdefault('ir', 'sonar')
+def default_view_code(endpoint, values):
+    """Add default view code."""
+    values.setdefault('view',
+                      current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'))
 
 
 @blueprint.url_value_preprocessor
-def pull_ir(endpoint, values):
-    """Add ir parameter to global variables."""
-    g.ir = values.pop('ir')
+def store_organisation(endpoint, values):
+    """Add organisation record to global variables."""
+    view = values.pop('view',
+                      current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'))
+
+    if view != current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'):
+        organisation = OrganisationRecord.get_record_by_pid(view)
+
+        if not organisation or not organisation['isShared']:
+            raise Exception('Organisation\'s view is not accessible')
+
+        g.organisation = organisation.dumps()
 
 
 @blueprint.route('/')
 def index():
-    """IR (and SONAR) home view."""
+    """Homepage."""
     return render_template('sonar/frontpage.html')
 
 
-@blueprint.route('/search/<resource_type>')
-def search(resource_type=None):
-    """IR search results."""
+@blueprint.route('/search/documents')
+def search():
+    """Search results page."""
     return render_template('sonar/search.html')
 
 
-def detail(pid, record, template=None, **kwargs):
-    """Search details."""
-    g.ir = kwargs.get('ir')
-    return render_template('documents/record.html', pid=pid, record=record)
+@blueprint.route('/documents/<pid_value>')
+def detail(pid_value):
+    """Document detail page."""
+    record = DocumentRecord.get_record_by_pid(pid_value)
+
+    if not record:
+        abort(404)
+
+    return render_template('documents/record.html',
+                           pid=pid_value,
+                           record=record)
 
 
 @blueprint.app_template_filter()
@@ -301,7 +320,7 @@ def is_file_restricted(file, record):
                 'SONAR_APP_INTERNAL_IPS')
 
         # File is restricted by organisation
-        organisation = get_current_organisation()
+        organisation = get_current_organisation_code()
 
         # We are in global organisation, so restriction is active
         if organisation == current_app.config.get(
@@ -389,13 +408,16 @@ def get_preferred_languages(force_language=None):
     return list(dict.fromkeys(preferred_languages))
 
 
-def get_current_organisation():
+def get_current_organisation_code():
     """Return current organisation by globals or query parameter."""
+    # Organisation is present in query parameters, useful for API calls.
     organisation = request.args.get('view')
     if organisation:
         return organisation
 
-    if g.get('ir'):
-        return g.ir
+    # Organisation stored in globals
+    if g.get('organisation', {}).get('code'):
+        return g.organisation['code']
 
-    return None
+    # Default organisation
+    return current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION')

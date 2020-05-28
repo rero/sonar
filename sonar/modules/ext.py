@@ -26,7 +26,7 @@ from flask_wiki import Wiki
 
 from sonar.modules.permissions import has_admin_access, has_publisher_access, \
     has_superuser_access
-from sonar.modules.utils import get_switch_aai_providers
+from sonar.modules.utils import get_switch_aai_providers, get_view_code
 
 from . import config
 
@@ -38,7 +38,8 @@ def utility_processor():
                 has_admin_access=has_admin_access,
                 has_superuser_access=has_superuser_access,
                 ui_version=config.SONAR_APP_UI_VERSION,
-                aai_providers=get_switch_aai_providers)
+                aai_providers=get_switch_aai_providers,
+                view_code=get_view_code())
 
 
 class Sonar(object):

@@ -243,11 +243,6 @@ SECURITY_RESET_PASSWORD_TEMPLATE = 'sonar/accounts/reset_password.html'
 SECURITY_REGISTER_USER_TEMPLATE = 'sonar/accounts/signup.html'
 
 RECORDS_UI_ENDPOINTS = {
-    'document': {
-        'pid_type': 'doc',
-        'route': '/organisation/<ir>/documents/<pid_value>',
-        'view_imp': 'sonar.modules.documents.views:detail'
-    },
     'doc_previewer': {
         'pid_type': 'doc',
         'route': '/documents/<pid_value>/preview/<filename>',
