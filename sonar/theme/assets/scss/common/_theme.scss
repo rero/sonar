@@ -24,8 +24,8 @@
   background-color: #15334D;
 }
 
-.bg-ir {
-    background-color: $bg-ir;
+.bg-organisation {
+    background-color: $bg-organisation;
 }
 
 img.logo {
@@ -33,7 +33,7 @@ img.logo {
     max-height: 90px;
 }
 
-.text-ir {
+.text-organisation {
     @extend .text-light
 }
 

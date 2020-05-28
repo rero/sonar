@@ -19,7 +19,7 @@
 
 import re
 
-from flask import current_app
+from flask import current_app, g
 from invenio_i18n.ext import current_i18n
 from invenio_mail.api import TemplatedMessage
 from wand.color import Color
@@ -118,3 +118,14 @@ def remove_trailing_punctuation(data,
 def get_current_language():
     """Return the current selected locale."""
     return current_i18n.locale.language
+
+
+def get_view_code():
+    """Return view code corresponding to organisation.
+
+    :returns: View code as string.
+    """
+    if g.get('organisation'):
+        return g.organisation['code']
+
+    return current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION')

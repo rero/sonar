@@ -14,8 +14,11 @@
         "code": {
           "type": "keyword"
         },
-        "name": {
-          "type": "text"
+        "isShared": {
+          "type": "boolean"
+        },
+        "isDedicated": {
+          "type": "boolean"
         },
         "_created": {
           "type": "date"

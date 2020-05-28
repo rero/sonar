@@ -20,10 +20,12 @@
 import os
 
 import pytest
+from flask import g
 
+from sonar.modules.documents.views import store_organisation
 from sonar.modules.utils import change_filename_extension, \
     create_thumbnail_from_file, get_current_language, \
-    get_switch_aai_providers
+    get_switch_aai_providers, get_view_code
 
 
 def test_change_filename_extension(app):
@@ -83,3 +85,12 @@ def test_get_current_language(app):
 
     with app.test_request_context(headers=[('Accept-Language', 'fr')]):
         assert get_current_language() == 'fr'
+
+
+def test_get_view_code(organisation):
+    """Test get view code stored in organisation."""
+    store_organisation(None, {'view': 'org'})
+    assert get_view_code() == 'org'
+
+    g.pop('organisation', None)
+    assert get_view_code() == 'sonar'

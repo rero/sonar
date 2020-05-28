@@ -20,13 +20,14 @@
 {%- extends config.BASE_TEMPLATE %}
 
 {% block header %}
-<div class="bg-ir p-4">
+<div class="bg-organisation p-4">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-8 col-xs-6 col-lg-4 py-3 py-sm-5">
-            <a href="{{ url_for('documents.index', ir=g.ir|default('sonar')) }}">
+            <a href="{{ url_for('documents.index', view=view_code) }}">
                 {%- if config.THEME_LOGO %}
-                  <img src="{{ url_for('static', filename='images/' ~ g.ir|default('sonar') ~ '-logo.svg')}}" alt="{{_(config.THEME_SITENAME)}}" class="logo"/>
+                  {% set logo_code = view_code if g.get('organisation', {}).get('isDedicated') else config.SONAR_APP_DEFAULT_ORGANISATION %}
+                  <img src="{{ url_for('static', filename='images/' ~ logo_code ~ '-logo.svg')}}" alt="{{_(config.THEME_SITENAME)}}" class="logo"/>
                 {%- else %}
                   {{_(config.THEME_SITENAME)}}
                 {%- endif %}
@@ -35,14 +36,14 @@
       </div>
       <div class="row justify-content-center">
           <div class="col-sm-12 col-lg-8 text-right my-4">
-            <form class="justify-content-end" action="{{ url_for('documents.search', ir=g.ir|default('sonar'), resource_type='documents') }}" role="search">
+            <form class="justify-content-end" action="{{ url_for('documents.search', view=view_code) }}" role="search">
               <div class="row">
                 <div class="col-12 col-sm-11">
                     <input class="form-control form-control-lg mr-2" type="search" placeholder="{{_('Search publications, authors, projects, ...')}}" aria-label="Search" name="q">
                 </div>
                 <div class="col-2 col-sm-1 d-none d-sm-block">
                   <button class="btn btn-link btn-lg" type="submit">
-                    <i class="fa fa-search fa-lg text-ir"></i>
+                    <i class="fa fa-search fa-lg text-organisation"></i>
                   </button>
                 </div>
               </div>

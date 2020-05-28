@@ -47,7 +47,9 @@ class Overdo(BaseOverdo):
             organisation = OrganisationRecord.create(
                 {
                     'code': organisation_key,
-                    'name': organisation_key
+                    'name': organisation_key,
+                    'isShared': False,
+                    'isDedicated': False
                 },
                 dbcommit=True)
             organisation.reindex()

@@ -33,11 +33,28 @@
       "title": "Name",
       "type": "string",
       "minLength": 1
+    },
+    "isShared": {
+      "title": "Is shared",
+      "description": "Organisation records can be accessed by a specific URL.",
+      "type": "boolean",
+      "default": false
+    },
+    "isDedicated": {
+      "title": "Is dedicated",
+      "description": "Organisation has a specific theme for his view.",
+      "type": "boolean",
+      "default": false,
+      "form": {
+        "hideExpression": "!field.model.isShared"
+      }
     }
   },
   "propertiesOrder": [
     "code",
-    "name"
+    "name",
+    "isShared",
+    "isDedicated"
   ],
   "required": [
     "pid",

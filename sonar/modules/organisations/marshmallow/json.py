@@ -41,6 +41,8 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
     pid = PersistentIdentifier()
     code = SanitizedUnicode(required=True)
     name = SanitizedUnicode(required=True)
+    isShared = fields.Boolean()
+    isDedicated = fields.Boolean()
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
     schema = GenFunction(load_only=True,
