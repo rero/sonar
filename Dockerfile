@@ -44,6 +44,6 @@ RUN pip install . && \
     python ./setup.py compile_catalog && \
     pip install . && \
     mkdir ${INVENIO_INSTANCE_PATH}/static/sonar-ui && \
-    cp ${INVENIO_INSTANCE_PATH}/assets/node_modules/@rero/sonar-ui/dist/sonar/* ${INVENIO_INSTANCE_PATH}/static/sonar-ui
+    cp -R ${INVENIO_INSTANCE_PATH}/assets/node_modules/@rero/sonar-ui/dist/sonar/* ${INVENIO_INSTANCE_PATH}/static/sonar-ui
 
 ENTRYPOINT [ "bash", "-c"]
