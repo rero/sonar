@@ -67,9 +67,15 @@ def import_users(infile):
             password = hash_password(password)
             del user_data['password']
 
+            if not user_data.get('roles'):
+                user_data['roles'] = [UserRecord.ROLE_USER]
+
             roles = user_data.get('roles', []).copy()
-            if not roles or not isinstance(roles, list):
-                roles = []
+
+            for role in roles:
+                if not datastore.find_role(role):
+                    datastore.create_role(name=role)
+                    datastore.commit()
 
             # Create account and activate it
             datastore.create_user(email=email, password=password, roles=roles)

@@ -19,7 +19,8 @@
 
 import pytest
 from flask import url_for
-from invenio_accounts.testutils import login_user_via_session
+from invenio_accounts.testutils import login_user_via_session, \
+    login_user_via_view
 
 
 def test_error(client):
@@ -158,3 +159,26 @@ def test_schemas(client, admin, user):
     assert res.status_code == 200
     assert not res.json['schema']['properties'].get('organisation')
     assert not res.json['schema']['properties'].get('roles')
+
+
+def test_profile(client, user):
+    """Test profile page."""
+    # Not logged
+    res = client.get(url_for('sonar.profile'))
+    assert res.status_code == 302
+    assert res.location.find('/login/') != -1
+
+    # Logged and redirected with user PID as param
+    login_user_via_view(client, email=user['email'], password='123456')
+    res = client.get(url_for('sonar.profile'))
+    assert res.status_code == 302
+    assert res.location.find(
+        '/users/profile/{pid}'.format(pid=user['pid'])) != -1
+
+    # Logged
+    res = client.get(url_for('sonar.profile', pid=user['pid']))
+    assert res.status_code == 200
+
+    # Wrong PID
+    res = client.get(url_for('sonar.profile', pid='wrong'))
+    assert res.status_code == 403

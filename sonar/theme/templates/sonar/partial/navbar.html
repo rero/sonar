@@ -88,7 +88,7 @@
           <a class="nav-link text-uppercase" href="#" id="{{ dropdownId }}" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-user mr-2"></i>
-            {{ current_user.profile.full_name if current_user.profile.full_name else current_user.email }}
+            {{ current_user_record.full_name }}
           </a>
           {% include 'sonar/partial/dropdown_user.html' %}
           {% endwith %}

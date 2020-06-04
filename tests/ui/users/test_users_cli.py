@@ -55,3 +55,4 @@ def test_import_users(app, script_info, organisation):
                            obj=script_info)
     user = datastore.find_user(email='rero.sonar+user@gmail.com')
     assert user
+    assert user.roles[0].name == 'user'

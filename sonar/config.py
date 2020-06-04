@@ -128,7 +128,7 @@ ACCOUNTS_REGISTER_BLUEPRINT = True
 
 # User profiles
 # =============
-USERPROFILES_EXTEND_SECURITY_FORMS = True
+USERPROFILES = False
 
 # Celery configuration
 # ====================

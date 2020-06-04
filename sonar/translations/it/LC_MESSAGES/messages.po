@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2020-06-05 10:30+0200\n"
+"POT-Creation-Date: 2020-06-05 10:32+0200\n"
 "PO-Revision-Date: 2020-05-13 05:58+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>, 2020\n"
 "Language: it\n"
@@ -19,6 +19,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+
+#, python-format
+msgid "%(icon)s Profile"
+msgstr ""
 
 msgid "Abstract"
 msgstr ""
@@ -512,9 +516,6 @@ msgid "Series"
 msgstr ""
 
 msgid "Series to which belongs the resource."
-msgstr ""
-
-msgid "Settings"
 msgstr ""
 
 msgid "Sign Up"
@@ -2746,4 +2747,7 @@ msgstr ""
 
 msgid "vol."
 msgstr ""
+
+#~ msgid "Settings"
+#~ msgstr ""
 
