@@ -26,9 +26,12 @@ from __future__ import absolute_import, print_function
 
 import re
 
-from flask import Blueprint, abort, current_app, jsonify, render_template, \
-    request
-from flask_login import current_user
+from flask import Blueprint, abort, current_app, jsonify, redirect, \
+    render_template, request, url_for
+from flask_babelex import lazy_gettext as _
+from flask_breadcrumbs import register_breadcrumb
+from flask_login import current_user, login_required
+from flask_menu import current_menu, register_menu
 from invenio_jsonschemas import current_jsonschemas
 from invenio_jsonschemas.errors import JSONSchemaNotFound
 
@@ -44,6 +47,34 @@ blueprint = Blueprint('sonar',
                       __name__,
                       template_folder='templates',
                       static_folder='static')
+
+
+@blueprint.before_app_request
+def init_view():
+    """Do some stuff before rendering any view."""
+    current_menu.submenu('settings').submenu('security').hide()
+    current_menu.submenu('settings').submenu('applications').hide()
+
+
+@blueprint.route('/users/profile')
+@blueprint.route('/users/profile/<pid>')
+@login_required
+@register_menu(blueprint, 'settings.profile',
+               _('%(icon)s Profile', icon='<i class="fa fa-user fa-fw"></i>'))
+@register_breadcrumb(blueprint, 'breadcrumbs.profile', _('Profile'))
+def profile(pid=None):
+    """Logged user profile edition page.
+
+    :param pid: Logged user PID.
+    """
+    if pid and pid != current_user_record['pid']:
+        abort(403)
+
+    if not pid:
+        return redirect(
+            url_for('sonar.profile', pid=current_user_record['pid']))
+
+    return render_template('sonar/accounts/profile.html')
 
 
 @blueprint.route('/error')

@@ -43,7 +43,7 @@ def test_login(app, client, valid_sp_configuration):
     assert client.get('/shibboleth/login/idp').status_code == 500
 
 
-def test_authorized(monkeypatch, app, client, user_without_role,
+def test_authorized(monkeypatch, app, client, roles, user_without_role,
                     valid_attributes):
     """Test authorized view."""
     # Test unexisting identity provider

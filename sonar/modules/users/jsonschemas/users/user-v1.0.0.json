@@ -142,7 +142,6 @@
     "full_name",
     "email",
     "roles",
-    "organisation",
     "$schema"
   ]
 }

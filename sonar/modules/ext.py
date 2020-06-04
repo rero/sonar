@@ -22,10 +22,13 @@ from __future__ import absolute_import, print_function
 import jinja2
 from flask_assets import Bundle, Environment
 from flask_bootstrap import Bootstrap
+from flask_security import user_registered
 from flask_wiki import Wiki
 
 from sonar.modules.permissions import has_admin_access, has_publisher_access, \
     has_superuser_access
+from sonar.modules.users.api import current_user_record
+from sonar.modules.users.signals import user_registered_handler
 from sonar.modules.utils import get_switch_aai_providers, get_view_code
 
 from . import config
@@ -39,7 +42,8 @@ def utility_processor():
                 has_superuser_access=has_superuser_access,
                 ui_version=config.SONAR_APP_UI_VERSION,
                 aai_providers=get_switch_aai_providers,
-                view_code=get_view_code())
+                view_code=get_view_code(),
+                current_user_record=current_user_record)
 
 
 class Sonar(object):
@@ -81,6 +85,9 @@ class Sonar(object):
                    output='sonar_ui.%(version)s.js'))
 
         app.context_processor(utility_processor)
+
+        # Connect to signal sent when a user is created in Flask-Security.
+        user_registered.connect(user_registered_handler, weak=False)
 
     def init_config(self, app):
         """Initialize configuration."""
