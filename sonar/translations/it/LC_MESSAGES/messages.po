@@ -1,33 +1,20 @@
-# -*- coding: utf-8 -*-
+# Italian translations for sonar.
+# Copyright (C) 2020 RERO
+# This file is distributed under the same license as the sonar project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
 #
-# Swiss Open Access Repository
-# Copyright (C) 2019 RERO
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as published
-# by
-# the Free Software Foundation, version 3 of the License.
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU Affero General Public License for more details.
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-# Dockerfile that builds a fully functional image of your app.
-# Note: It is important to keep the commands in this file in sync with your
-# boostrap script located in ./scripts/bootstrap.
-# In order to increase the build speed, we are extending this image from a
-# base
-# image (built with Dockerfile.base) which only includes your Python
-# dependencies.
+# Translators:
+# Nicolas Prongué <n.prongue@outlook.com>, 2020
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: sonar 0.0.1\n"
+"Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2020-06-03 07:53+0200\n"
-"PO-Revision-Date: 2019-07-15 17:09+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2020-06-04 14:40+0200\n"
+"PO-Revision-Date: 2020-05-13 05:58+0000\n"
+"Last-Translator: Nicolas Prongué <n.prongue@outlook.com>, 2020\n"
 "Language: it\n"
-"Language-Team: it <LL@li.org>\n"
+"Language-Team: Italian (https://www.transifex.com/rero/teams/77935/it/)\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -1097,10 +1084,10 @@ msgid "document_type_advanced_studies_thesis"
 msgstr ""
 
 msgid "document_type_coar:c_0640"
-msgstr ""
+msgstr "rivista"
 
 msgid "document_type_coar:c_12cc"
-msgstr ""
+msgstr "cartografia"
 
 msgid "document_type_coar:c_15cd"
 msgstr ""
@@ -1112,7 +1099,7 @@ msgid "document_type_coar:c_186u"
 msgstr ""
 
 msgid "document_type_coar:c_18cc"
-msgstr ""
+msgstr "suono"
 
 msgid "document_type_coar:c_18co"
 msgstr ""
@@ -1121,7 +1108,7 @@ msgid "document_type_coar:c_18cp"
 msgstr ""
 
 msgid "document_type_coar:c_18cw"
-msgstr ""
+msgstr "partitura"
 
 msgid "document_type_coar:c_18gh"
 msgstr ""
@@ -1136,7 +1123,7 @@ msgid "document_type_coar:c_18wq"
 msgstr ""
 
 msgid "document_type_coar:c_18ws"
-msgstr ""
+msgstr "rapporto di ricerca"
 
 msgid "document_type_coar:c_18ww"
 msgstr ""
@@ -1151,40 +1138,40 @@ msgid "document_type_coar:c_2cd9"
 msgstr ""
 
 msgid "document_type_coar:c_2f33"
-msgstr ""
+msgstr "libro"
 
 msgid "document_type_coar:c_2fe3"
-msgstr ""
+msgstr "giornale"
 
 msgid "document_type_coar:c_3248"
-msgstr ""
+msgstr "capitolo di libro"
 
 msgid "document_type_coar:c_3e5a"
 msgstr ""
 
 msgid "document_type_coar:c_46ec"
-msgstr ""
+msgstr "tesi"
 
 msgid "document_type_coar:c_5794"
-msgstr ""
+msgstr "articolo de congresso"
 
 msgid "document_type_coar:c_5ce6"
 msgstr ""
 
 msgid "document_type_coar:c_6501"
-msgstr ""
+msgstr "articolo scientifico"
 
 msgid "document_type_coar:c_6670"
 msgstr ""
 
 msgid "document_type_coar:c_7a1f"
-msgstr ""
+msgstr "tesi di bachelor"
 
 msgid "document_type_coar:c_8042"
 msgstr ""
 
 msgid "document_type_coar:c_816b"
-msgstr ""
+msgstr "preprint"
 
 msgid "document_type_coar:c_8544"
 msgstr ""
@@ -1202,7 +1189,7 @@ msgid "document_type_coar:c_ba1f"
 msgstr ""
 
 msgid "document_type_coar:c_bdcc"
-msgstr ""
+msgstr "tesi di master"
 
 msgid "document_type_coar:c_beb9"
 msgstr ""
@@ -1211,7 +1198,7 @@ msgid "document_type_coar:c_c94f"
 msgstr ""
 
 msgid "document_type_coar:c_db06"
-msgstr ""
+msgstr " tesi di dottorato"
 
 msgid "document_type_coar:c_dcae04bc"
 msgstr ""
@@ -1220,7 +1207,7 @@ msgid "document_type_coar:c_ddb1"
 msgstr ""
 
 msgid "document_type_coar:c_ecc8"
-msgstr ""
+msgstr "immagine"
 
 msgid "document_type_coar:c_f744"
 msgstr ""

@@ -1,33 +1,21 @@
-# -*- coding: utf-8 -*-
+# French translations for sonar.
+# Copyright (C) 2020 RERO
+# This file is distributed under the same license as the sonar project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
 #
-# Swiss Open Access Repository
-# Copyright (C) 2019 RERO
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as published
-# by
-# the Free Software Foundation, version 3 of the License.
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU Affero General Public License for more details.
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-# Dockerfile that builds a fully functional image of your app.
-# Note: It is important to keep the commands in this file in sync with your
-# boostrap script located in ./scripts/bootstrap.
-# In order to increase the build speed, we are extending this image from a
-# base
-# image (built with Dockerfile.base) which only includes your Python
-# dependencies.
+# Translators:
+# Nicolas Prongué <n.prongue@outlook.com>, 2020
+# MarionRERO <marion.davis@rero.ch>, 2020
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: sonar 0.0.1\n"
+"Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2020-06-03 07:53+0200\n"
-"PO-Revision-Date: 2019-06-06 11:09+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2020-06-04 14:40+0200\n"
+"PO-Revision-Date: 2020-05-13 05:58+0000\n"
+"Last-Translator: MarionRERO <marion.davis@rero.ch>, 2020\n"
 "Language: fr\n"
-"Language-Team: fr <LL@li.org>\n"
+"Language-Team: French (https://www.transifex.com/rero/teams/77935/fr/)\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -35,34 +23,34 @@ msgstr ""
 "Generated-By: Babel 2.8.0\n"
 
 msgid "Abstract"
-msgstr ""
+msgstr "Résumé"
 
 msgid "Abstracts"
-msgstr ""
+msgstr "Résumés"
 
 msgid "Accompanying material of the resource, ie maps."
-msgstr ""
+msgstr "Matériel annexe à la ressource, c-a-d plans."
 
 msgid "Acquisition terms"
-msgstr ""
+msgstr "Conditions d'acquisition"
 
 msgid "Action"
-msgstr ""
+msgstr "Action"
 
 msgid "Additional Materials"
-msgstr ""
+msgstr "Documents supplémentaires"
 
 msgid "Additional materials"
-msgstr ""
+msgstr "Documents supplémentaires"
 
 msgid "Administration"
-msgstr ""
+msgstr "Administration"
 
 msgid "Affiliation"
-msgstr ""
+msgstr "Affiliation"
 
 msgid "Agent"
-msgstr ""
+msgstr "Agent"
 
 msgid ""
 "At least 3 characters and must contain only lower case characters and "
@@ -73,25 +61,25 @@ msgid "Author or editor"
 msgstr ""
 
 msgid "Back to SONAR"
-msgstr ""
+msgstr "Retour à SONAR"
 
 msgid "Best match"
-msgstr ""
+msgstr "meilleure correspondance"
 
 msgid "Bucket UUID"
-msgstr ""
+msgstr "Seau UUID"
 
 msgid "Bucket UUID used to store files"
-msgstr ""
+msgstr "Seau UUID pour le stockage des fichiers"
 
 msgid "Checksum"
-msgstr ""
+msgstr "somme de contrôle"
 
 msgid "City"
-msgstr ""
+msgstr "Ville"
 
 msgid "Classification"
-msgstr ""
+msgstr "Classification"
 
 msgid "Classification portion"
 msgstr ""
@@ -106,111 +94,115 @@ msgid "Code"
 msgstr ""
 
 msgid "Collection"
-msgstr ""
+msgstr "Collection"
 
 msgid "Collections"
 msgstr ""
 
 msgid "Comment"
-msgstr ""
+msgstr "Commentaire"
 
 msgid "Contains"
-msgstr ""
+msgstr "Contient"
 
 msgid "Content note"
-msgstr ""
+msgstr "Note de contenu"
 
 msgid "Content notes"
-msgstr ""
+msgstr "Notes de contenu"
 
 msgid "Contribution"
-msgstr ""
+msgstr "Contribution"
 
 msgid "Contributions"
-msgstr ""
+msgstr "Contributions"
 
 msgid "Contributor"
-msgstr ""
+msgstr "Contributeur"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Contributeurs"
 
 msgid "Controlled affiliation"
-msgstr ""
+msgstr "Affiliation contrôlée"
 
 msgid "Controlled affiliations"
-msgstr ""
+msgstr "Affiliations contrôlées"
 
 msgid "Copyright date"
-msgstr ""
+msgstr "Date de droit d'auteur"
 
 msgid "Current cataloguing step."
-msgstr ""
+msgstr "Etape actuelle de catalogage"
 
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 msgid "Date in yyyy-mm-dd format, ex: 1970-01-01"
 msgstr ""
 
 msgid "Date of birth"
-msgstr ""
+msgstr "Date de naissance"
 
 msgid "Date of death"
-msgstr ""
+msgstr "Date de décès"
 
 msgid "Degree"
-msgstr ""
+msgstr "Diplôme"
 
 msgid "Describes the information of a single file in the record."
-msgstr ""
+msgstr "Décrit l'information d'un seul fichier dans la notice."
 
 msgid "Designation"
 msgstr ""
 
 msgid "Dissertation"
-msgstr ""
+msgstr "Dissertation"
 
 msgid "Document"
-msgstr ""
+msgstr "Document"
 
 msgid "Document ID"
-msgstr ""
+msgstr "Identifiant du document"
 
 msgid "Document created on basis of this deposit."
-msgstr ""
+msgstr "Document créé sur la base de ce dépôt."
 
 msgid "Document date"
-msgstr ""
+msgstr "Date du document"
 
 msgid "Document is harvested or not, will disable record edition or similar."
 msgstr ""
+"Le document est moissonné ou non, désactivera la modification de la "
+"notice ou équivalent."
 
 msgid "Document type"
-msgstr ""
+msgstr "type de document"
 
 msgid "Edition"
-msgstr ""
+msgstr "Edition"
 
 msgid "Editors"
-msgstr ""
+msgstr "Editeurs"
 
 msgid "Email"
-msgstr ""
+msgstr "E-mail"
 
 msgid "Embargo"
-msgstr ""
+msgstr "Embargo"
 
 msgid "Embargo date"
-msgstr ""
+msgstr "Date d'embargo"
 
 msgid "End date of publication"
-msgstr ""
+msgstr "Date de fin de publication"
 
 msgid ""
 "Enter your email address below and we will send you a link to reset your "
 "password."
 msgstr ""
+"Saisissez votre adresse e-mail ci-dessous et nous vous enverrons un lien "
+"pour réinitialiser votre mot de passe."
 
 msgid "Example: 2019 or 2019-01-01"
 msgstr ""
@@ -231,60 +223,62 @@ msgid "Examples: 135, 5-27, …"
 msgstr ""
 
 msgid "Except within organisation"
-msgstr ""
+msgstr "Sauf au sein de l'organisation"
 
 msgid "Extent"
-msgstr ""
+msgstr "Etendue"
 
 msgid "Extent of the resource, ie number of pages or volumes."
-msgstr ""
+msgstr "Etendue de la ressource, c-à-d nombre de pages ou volumes."
 
 msgid "File UUID"
-msgstr ""
+msgstr "Fichier UUID"
 
 msgid "File item"
-msgstr ""
+msgstr "Exemplaire de fichier"
 
 msgid "Files"
-msgstr ""
+msgstr "Fichiers"
 
 msgid ""
 "Fill in your details to complete your registration. You only have to do "
 "this once."
 msgstr ""
+"Saisissez vos coordonnées pour valider votre inscription. Vous n'aurez "
+"besoin de le faire qu'une seule fois."
 
 msgid "First name and last name"
 msgstr ""
 
 msgid "Follow us"
-msgstr ""
+msgstr "Nous suivre"
 
 msgid "Forgot password?"
-msgstr ""
+msgstr "Mot de passe oublié?"
 
 msgid "Format"
 msgstr ""
 
 msgid "Format of the resource, ie dimensions in cm."
-msgstr ""
+msgstr "Format de la ressource, c-à-d dimensions en cm."
 
 msgid "Formats"
-msgstr ""
+msgstr "Formats"
 
 msgid "French"
-msgstr ""
+msgstr "français"
 
 msgid "Further info on the project page"
-msgstr ""
+msgstr "Plus d'informations sur la page du projet"
 
 msgid "German"
-msgstr ""
+msgstr "allemand"
 
 msgid "Harvested"
-msgstr ""
+msgstr "Moissonné"
 
 msgid "Help"
-msgstr ""
+msgstr "Aide"
 
 msgid ""
 "Host document, for example a journal for an article, or a book for a book"
@@ -292,169 +286,171 @@ msgid ""
 msgstr ""
 
 msgid "Identified by"
-msgstr ""
+msgstr "Identifié par"
 
 msgid "Identifier"
-msgstr ""
+msgstr "Identifiant"
 
 msgid "Identifiers"
-msgstr ""
+msgstr "Identifiants"
 
 msgid "In the format \\"
-msgstr ""
+msgstr "En format \\"
 
 msgid "Invenio"
-msgstr ""
+msgstr "Invenio"
 
 msgid "Is part of"
-msgstr ""
+msgstr "Fait partie de"
 
 msgid "Issue"
 msgstr ""
 
 msgid "Italian"
-msgstr ""
+msgstr "italien"
 
 msgid "Jury note"
-msgstr ""
+msgstr "Note du jury"
 
 msgid "Key"
-msgstr ""
+msgstr "Clé"
 
 msgid "Key (filename) of the file."
-msgstr ""
+msgstr "Clé (nom de fichier) du fichier"
 
 msgid "Label"
-msgstr ""
+msgstr "Etiquette"
 
 msgid "Label of the file"
-msgstr ""
+msgstr "Etiquette du fichier"
 
 msgid "Language"
-msgstr ""
+msgstr "Langue"
 
 msgid "Languages"
-msgstr ""
+msgstr "Langues"
 
 msgid "Last name, first name, ex: Doe, John"
-msgstr ""
+msgstr "Nom, prénom, ex: Dupont, Jean"
 
 msgid "List of files attached to the record."
-msgstr ""
+msgstr "Liste des fichiers liés à la notice"
 
 msgid "Log"
-msgstr ""
+msgstr "Enregistrement"
 
 msgid "Log In"
-msgstr ""
+msgstr "Se connecter"
 
 msgid "Log in"
-msgstr ""
+msgstr "Se connecter"
 
 msgid "Log in to account"
-msgstr ""
+msgstr "Se connecter au compte"
 
 msgid "Logout"
-msgstr ""
+msgstr "Se déconnecter"
 
 msgid "Logs"
-msgstr ""
+msgstr "Enregistrements"
 
 msgid "MD5 checksum of the file."
-msgstr ""
+msgstr "somme de contrôle MD5 du fichier."
 
 msgid "Main title"
-msgstr ""
+msgstr "Titre principal"
 
 msgid "Main titles"
 msgstr ""
 
 msgid "Most recent"
-msgstr ""
+msgstr "plus récent"
 
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 msgid "Note"
-msgstr ""
+msgstr "Note"
 
 msgid "Notes"
-msgstr ""
+msgstr "Notes"
 
 msgid "Number"
-msgstr ""
+msgstr "Numéro"
 
 msgid "Numbering"
-msgstr ""
+msgstr "Numérotation"
 
 msgid "Organisation"
-msgstr ""
+msgstr "Organisation"
 
 msgid "Other Material Characteristics"
-msgstr ""
+msgstr "Autres caractéristiques matérielles"
 
 msgid ""
 "Other Material Characteristics, ie illustrations, black and with or "
 "coloured."
 msgstr ""
+"Autres caractéristiques matérielles, par ex. illustrations, noir et blanc"
+" ou couleur."
 
 msgid "Other editions"
-msgstr ""
+msgstr "Autres éditions"
 
 msgid "Other electronic version"
-msgstr ""
+msgstr "Autre version électronique"
 
 msgid "Other electronic versions"
-msgstr ""
+msgstr "Autres versions électroniques"
 
 msgid "Other files"
-msgstr ""
+msgstr "Autres fichiers"
 
 msgid "Pages"
-msgstr ""
+msgstr "Pages"
 
 msgid "Part of (host document)"
 msgstr ""
 
 msgid "Permalink"
-msgstr ""
+msgstr "Permalien"
 
 msgid "Phone number"
-msgstr ""
+msgstr "Numéro de téléphone"
 
 msgid "Phone number with the international prefix, without spaces."
-msgstr ""
+msgstr "Numéro de téléphone avec le préfixe international, sans espaces."
 
 msgid "Physical description"
-msgstr ""
+msgstr "Description physique"
 
 msgid "Place"
-msgstr ""
+msgstr "Lieu"
 
 msgid "Position"
-msgstr ""
+msgstr "Position"
 
 msgid "Position of the file"
-msgstr ""
+msgstr "Position du fichier"
 
 msgid "Postal code"
-msgstr ""
+msgstr "Code postal"
 
 #, python-format
 msgid "Powered by <a href=\"%(link)s\" target=\"_blank\">RERO</a>"
 msgstr ""
 
 msgid "Preferred name"
-msgstr ""
+msgstr "Nom de préférence"
 
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 msgid "Project and contact"
-msgstr ""
+msgstr "Projet et contact"
 
 msgid "Project website on"
-msgstr ""
+msgstr "Site web du projet sur"
 
 msgid "Provision activities"
 msgstr ""
@@ -463,191 +459,198 @@ msgid "Provision activity"
 msgstr ""
 
 msgid "Public access from"
-msgstr ""
+msgstr "Accès public depuis"
 
 msgid "Public note"
-msgstr ""
+msgstr "Note publique"
 
 msgid "Publication"
-msgstr ""
+msgstr "Publication"
 
 msgid "Publisher"
-msgstr ""
+msgstr "Editeur"
 
 msgid "Qualifier"
-msgstr ""
+msgstr "Qualifiant"
 
 msgid "Reset Password"
-msgstr ""
+msgstr "Réinitialiser le mot de passe"
 
 msgid "Responsibility"
-msgstr ""
+msgstr "Responsabilité"
 
 msgid "Restricted"
-msgstr ""
+msgstr "Restreint"
 
 msgid "Role"
-msgstr ""
+msgstr "Rôle"
 
 msgid "Roles"
-msgstr ""
+msgstr "Rôles"
 
 msgid "SONAR administration"
-msgstr ""
+msgstr "Gestion de SONAR"
 
 msgid "SONAR deposit v1.0.0"
-msgstr ""
+msgstr "Dépôt SONAR v1.0.0"
 
 msgid "Schema"
-msgstr ""
+msgstr "Schéma"
 
 msgid "Schema to validate document against."
-msgstr ""
+msgstr "Schéma par rapport auquel valider le document."
 
 msgid "Search"
-msgstr ""
+msgstr "Recherche"
 
 msgid "Search publications, authors, projects, ..."
-msgstr ""
+msgstr "Rechercher dans les publications, auteurs, projets..."
 
 msgid "Series"
-msgstr ""
+msgstr "Série"
 
 msgid "Series to which belongs the resource."
-msgstr ""
+msgstr "Série à laquelle appartient la ressource."
 
 msgid "Settings"
-msgstr ""
+msgstr "Paramètres"
 
 msgid "Sign Up"
-msgstr ""
+msgstr "S'inscrire"
 
 msgid "Sign up"
-msgstr ""
+msgstr "S'inscrire"
 
 #, python-format
 msgid "Sign up for a %(sitename)s account"
-msgstr ""
+msgstr "S'inscrire pour un compte %(sitename)s"
 
 #, python-format
 msgid "Sign-in with %(type)s"
-msgstr ""
+msgstr "Se connecter avec %(type)s"
 
 msgid "Sign-in with SWITCHaai"
-msgstr ""
+msgstr "Se connecter avec SWITCHaai"
 
 #, python-format
 msgid "Sign-up with %(type)s"
-msgstr ""
+msgstr "S'inscrire avec %(type)s"
 
 msgid "Sign-up with SWITCHaai"
-msgstr ""
+msgstr "S'inscrire avec SWITCHaai"
 
 msgid "Size"
-msgstr ""
+msgstr "taille"
 
 msgid "Size of the file in bytes."
-msgstr ""
+msgstr "Taille du fichier en octets."
 
 msgid "Software under development!"
-msgstr ""
+msgstr "Logiciel en développement!"
 
 msgid "Source"
-msgstr ""
+msgstr "Source"
 
 msgid "Source code on"
-msgstr ""
+msgstr "Code source sur"
 
 msgid "Specific collections"
-msgstr ""
+msgstr "Collections spécifiques"
 
 msgid "Start date"
-msgstr ""
+msgstr "Date de début"
 
 msgid "Start date of publication"
-msgstr ""
+msgstr "Date de début de publication"
 
 msgid "Statement"
-msgstr ""
+msgstr "Déclaration"
 
 msgid "Statements"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "Statut"
 
 msgid "Step"
-msgstr ""
+msgstr "Etape"
 
 msgid "Street"
-msgstr ""
+msgstr "Rue"
 
 msgid "Street and number of the address, separated by a coma."
-msgstr ""
+msgstr "Rue et numéro de l'adresse, séparés par une virgule."
 
 msgid "Subject"
-msgstr ""
+msgstr "Sujet"
 
 msgid "Subjects"
-msgstr ""
+msgstr "Sujets"
 
 msgid "Subtitle"
-msgstr ""
+msgstr "Sous-titre"
 
 msgid "Subtitles"
 msgstr ""
 
 msgid "Super administration"
-msgstr ""
+msgstr "Super administration"
 
 msgid "Swiss Open Access Repository"
-msgstr ""
+msgstr "Swiss Open Access Repository"
 
 msgid ""
 "The SONAR project aims to create a scholarly archive that collects, "
 "promotes and preserves the publications of authors affiliated with Swiss "
 "public research institutions."
 msgstr ""
+"Le projet SONAR vise à créer une archive scientifique qui recueille, "
+"promeut et préserve les publications des auteurs affiliés aux "
+"institutions publiques de recherche suisses."
 
 msgid ""
 "The names of the organisation's specific/patrimonial collections to which"
 " this document belongs"
 msgstr ""
+"Les noms des collections spécifiques ou patrimoniales de l'organisation "
+"auxquelles ce document appartient."
 
 msgid "The project"
-msgstr ""
+msgstr "Le projet"
 
 msgid "Thesis note"
-msgstr ""
+msgstr "Note de thèse"
 
 msgid ""
 "This field corresponds to the exact publication date of the article, if "
 "known."
 msgstr ""
+"Ce champ correspond à la date exacte de publication de l'article, si elle"
+" est connue."
 
 msgid "Title"
-msgstr ""
+msgstr "Titre"
 
 msgid "Title in other language"
-msgstr ""
+msgstr "Titre dans une autre langue"
 
 msgid "Titles"
 msgstr ""
 
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 msgid "Type of the file"
-msgstr ""
+msgstr "Type du fichier"
 
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 msgid "URL to file"
-msgstr ""
+msgstr "URL vers le fichier"
 
 msgid "URL to file hosted in an external platform."
-msgstr ""
+msgstr "URL vers le fichier hébergé sur une plateforme externe."
 
 msgid "UUID of the FileInstance object."
 msgstr ""
@@ -656,34 +659,34 @@ msgid "UUID of the ObjectVersion object."
 msgstr ""
 
 msgid "UUID of the bucket to which this file is assigned."
-msgstr ""
+msgstr "UUID du seau auquel ce fichier est attribué"
 
 msgid "Usage and access policies"
-msgstr ""
+msgstr "Politiques d'utilisation et d'accès"
 
 msgid "Usage and access policy"
-msgstr ""
+msgstr "Politique d'utilisation et d'accès"
 
 msgid "User"
-msgstr ""
+msgstr "Utilisateur"
 
 msgid "Value"
-msgstr ""
+msgstr "Valeur"
 
 msgid "Version UUID"
-msgstr ""
+msgstr "Version UUID"
 
 msgid "Volume"
-msgstr ""
+msgstr "Volume"
 
 msgid "Welcome to Swiss Open Access Repository!"
-msgstr ""
+msgstr "Bienvenue à Swiss Open Access Repository!"
 
 msgid "Year"
-msgstr ""
+msgstr "Année"
 
 msgid "bf:Agent"
-msgstr ""
+msgstr "bf:Agent"
 
 msgid "bf:AudioIssueNumber"
 msgstr ""
@@ -704,7 +707,7 @@ msgid "bf:Gtin14Number"
 msgstr ""
 
 msgid "bf:Identifier"
-msgstr ""
+msgstr "bf:Identifiant"
 
 msgid "bf:Isan"
 msgstr ""
@@ -725,19 +728,19 @@ msgid "bf:IssnL"
 msgstr ""
 
 msgid "bf:Language"
-msgstr ""
+msgstr "bf:Langue"
 
 msgid "bf:Local"
 msgstr ""
 
 msgid "bf:Manufacture"
-msgstr ""
+msgstr "bf:Manufacture"
 
 msgid "bf:MatrixNumber"
 msgstr ""
 
 msgid "bf:Meeting"
-msgstr ""
+msgstr "bf:Réunion"
 
 msgid "bf:MusicDistributorNumber"
 msgstr ""
@@ -749,16 +752,16 @@ msgid "bf:MusicPublisherNumber"
 msgstr ""
 
 msgid "bf:Organization"
-msgstr ""
+msgstr "bf:Organisation"
 
 msgid "bf:Person"
-msgstr ""
+msgstr "bf:Personne"
 
 msgid "bf:Place"
-msgstr ""
+msgstr "bf:Lieu"
 
 msgid "bf:Publication"
-msgstr ""
+msgstr "bf:Publication"
 
 msgid "bf:PublisherNumber"
 msgstr ""
@@ -770,7 +773,7 @@ msgid "bf:Strn"
 msgstr ""
 
 msgid "bf:Title"
-msgstr ""
+msgstr "bf:Titre"
 
 msgid "bf:Upc"
 msgstr ""
@@ -1058,7 +1061,7 @@ msgid "contribution_role_prt"
 msgstr ""
 
 msgid "contributor"
-msgstr ""
+msgstr "contributeur"
 
 msgid "csal"
 msgstr ""
@@ -1076,19 +1079,19 @@ msgid "deposit_log_action_submit"
 msgstr ""
 
 msgid "deposit_status_ask_for_changes"
-msgstr ""
+msgstr "demande de modifications"
 
 msgid "deposit_status_in_progress"
-msgstr ""
+msgstr "en cours"
 
 msgid "deposit_status_rejected"
-msgstr ""
+msgstr "refusé"
 
 msgid "deposit_status_to_validate"
-msgstr ""
+msgstr "à valider"
 
 msgid "deposit_status_validated"
-msgstr ""
+msgstr "validé"
 
 msgid "document_type"
 msgstr ""
@@ -1097,10 +1100,10 @@ msgid "document_type_advanced_studies_thesis"
 msgstr ""
 
 msgid "document_type_coar:c_0640"
-msgstr ""
+msgstr "revue"
 
 msgid "document_type_coar:c_12cc"
-msgstr ""
+msgstr "matériel cartographique"
 
 msgid "document_type_coar:c_15cd"
 msgstr ""
@@ -1112,7 +1115,7 @@ msgid "document_type_coar:c_186u"
 msgstr ""
 
 msgid "document_type_coar:c_18cc"
-msgstr ""
+msgstr "son"
 
 msgid "document_type_coar:c_18co"
 msgstr ""
@@ -1121,7 +1124,7 @@ msgid "document_type_coar:c_18cp"
 msgstr ""
 
 msgid "document_type_coar:c_18cw"
-msgstr ""
+msgstr "partition"
 
 msgid "document_type_coar:c_18gh"
 msgstr ""
@@ -1136,7 +1139,7 @@ msgid "document_type_coar:c_18wq"
 msgstr ""
 
 msgid "document_type_coar:c_18ws"
-msgstr ""
+msgstr "rapport de recherche"
 
 msgid "document_type_coar:c_18ww"
 msgstr ""
@@ -1151,40 +1154,40 @@ msgid "document_type_coar:c_2cd9"
 msgstr ""
 
 msgid "document_type_coar:c_2f33"
-msgstr ""
+msgstr "livre"
 
 msgid "document_type_coar:c_2fe3"
-msgstr ""
+msgstr "journal"
 
 msgid "document_type_coar:c_3248"
-msgstr ""
+msgstr "chapitre de livre"
 
 msgid "document_type_coar:c_3e5a"
 msgstr ""
 
 msgid "document_type_coar:c_46ec"
-msgstr ""
+msgstr "thèse"
 
 msgid "document_type_coar:c_5794"
-msgstr ""
+msgstr "article de conférence"
 
 msgid "document_type_coar:c_5ce6"
 msgstr ""
 
 msgid "document_type_coar:c_6501"
-msgstr ""
+msgstr "article scientifique"
 
 msgid "document_type_coar:c_6670"
 msgstr ""
 
 msgid "document_type_coar:c_7a1f"
-msgstr ""
+msgstr "mémoire de bachelor"
 
 msgid "document_type_coar:c_8042"
 msgstr ""
 
 msgid "document_type_coar:c_816b"
-msgstr ""
+msgstr "preprint"
 
 msgid "document_type_coar:c_8544"
 msgstr ""
@@ -1202,7 +1205,7 @@ msgid "document_type_coar:c_ba1f"
 msgstr ""
 
 msgid "document_type_coar:c_bdcc"
-msgstr ""
+msgstr "mémoire de master"
 
 msgid "document_type_coar:c_beb9"
 msgstr ""
@@ -1211,7 +1214,7 @@ msgid "document_type_coar:c_c94f"
 msgstr ""
 
 msgid "document_type_coar:c_db06"
-msgstr ""
+msgstr "thèse de doctorat"
 
 msgid "document_type_coar:c_dcae04bc"
 msgstr ""
@@ -1220,7 +1223,7 @@ msgid "document_type_coar:c_ddb1"
 msgstr ""
 
 msgid "document_type_coar:c_ecc8"
-msgstr ""
+msgstr "image"
 
 msgid "document_type_coar:c_f744"
 msgstr ""
@@ -2696,16 +2699,16 @@ msgid "lang_zza"
 msgstr ""
 
 msgid "language"
-msgstr ""
+msgstr "langue"
 
 msgid "no."
-msgstr ""
+msgstr "no."
 
 msgid "organisation"
-msgstr ""
+msgstr "organisation"
 
 msgid "p."
-msgstr ""
+msgstr "p."
 
 msgid "pid"
 msgstr ""
@@ -2729,10 +2732,10 @@ msgid "specific_collections"
 msgstr ""
 
 msgid "status"
-msgstr ""
+msgstr "statut"
 
 msgid "subject"
-msgstr ""
+msgstr "sujet"
 
 msgid "unifr"
 msgstr ""
@@ -2744,7 +2747,7 @@ msgid "uri"
 msgstr ""
 
 msgid "user"
-msgstr ""
+msgstr "utilisateur"
 
 msgid "vol."
-msgstr ""
+msgstr "vol."
