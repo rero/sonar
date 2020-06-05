@@ -19,12 +19,44 @@
 
 from __future__ import absolute_import, print_function
 
+from datetime import datetime
+
+from flask import current_app, request
 from invenio_records_rest.serializers.response import record_responsify, \
     search_responsify
 
-from sonar.modules.serializers import JSONSerializer
+from sonar.modules.serializers import JSONSerializer as _JSONSerializer
+from sonar.modules.users.api import current_user_record
 
 from ..marshmallow import DocumentSchemaV1
+
+
+class JSONSerializer(_JSONSerializer):
+    """JSON serializer for documents."""
+
+    def post_process_serialize_search(self, results, pid_fetcher):
+        """Post process the search results."""
+        view = request.args.get('view')
+
+        if view:
+            if view != current_app.config.get(
+                    'SONAR_APP_DEFAULT_ORGANISATION'):
+                results['aggregations'].pop('organisation', {})
+        else:
+            if not current_user_record.is_superuser:
+                results['aggregations'].pop('organisation', {})
+
+        if results['aggregations'].get('year'):
+            results['aggregations']['year']['type'] = 'range'
+            results['aggregations']['year']['config'] = {
+                'min': 1950,
+                'max': int(datetime.now().year),
+                'step': 1
+            }
+
+        return super(JSONSerializer,
+                     self).post_process_serialize_search(results, pid_fetcher)
+
 
 # Serializers
 # ===========

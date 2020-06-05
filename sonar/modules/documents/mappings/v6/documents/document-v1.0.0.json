@@ -115,7 +115,8 @@
               }
             },
             "startDate": {
-              "type": "date"
+              "type": "date",
+              "format": "yyyy-MM-dd||yyyy"
             },
             "endDate": {
               "type": "date"
@@ -304,8 +305,13 @@
                 "type": {
                   "type": "keyword"
                 },
-                "preferred_named": {
-                  "type": "text"
+                "preferred_name": {
+                  "type": "text",
+                  "fields": {
+                    "raw": {
+                      "type":  "keyword"
+                    }
+                  }
                 },
                 "identifiedBy": {
                   "type": "object",
@@ -345,7 +351,12 @@
               "type": "text"
             },
             "controlledAffiliation": {
-              "type": "text"
+              "type": "text",
+              "fields": {
+                "raw": {
+                  "type":  "keyword"
+                }
+              }
             }
           }
         },

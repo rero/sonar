@@ -29,7 +29,7 @@ import os
 from datetime import timedelta
 
 from invenio_oauthclient.contrib import orcid
-from invenio_records_rest.facets import terms_filter
+from invenio_records_rest.facets import range_filter, terms_filter
 
 from sonar.modules.deposits.api import DepositRecord, DepositSearch
 from sonar.modules.deposits.permissions import DepositPermission
@@ -435,14 +435,36 @@ RECORDS_REST_FACETS = {
         organisation=dict(terms=dict(field='organisation.pid')),
         language=dict(terms=dict(field='language.value')),
         subject=dict(terms=dict(field='facet_subjects')),
-        specific_collections=dict(terms=dict(field='specificCollections')),
-        document_type=dict(terms=dict(field='documentType'))),
+        specific_collection=dict(terms=dict(field='specificCollections')),
+        document_type=dict(terms=dict(field='documentType')),
+        controlled_affiliation=dict(terms=dict(
+            field='contribution.controlledAffiliation.raw')),
+        author=dict(terms=dict(
+            field='contribution.agent.preferred_name.raw')),
+        year=dict(date_histogram=dict(
+            field='provisionActivity.startDate',
+            interval='year',
+            format='yyyy',
+        ))),
          filters={
-             _('organisation'): terms_filter('organisation.pid'),
-             _('language'): terms_filter('language.value'),
-             _('subject'): terms_filter('facet_subjects'),
-             _('specific_collections'): terms_filter('specificCollections'),
-             _('document_type'): terms_filter('documentType')
+             'organisation':
+             terms_filter('organisation.pid'),
+             'language':
+             terms_filter('language.value'),
+             'subject':
+             terms_filter('facet_subjects'),
+             'specific_collection':
+             terms_filter('specificCollections'),
+             'document_type':
+             terms_filter('documentType'),
+             'controlled_affiliation':
+             terms_filter('contribution.controlledAffiliation.raw'),
+             'author':
+             terms_filter('contribution.agent.preferred_name.raw'),
+             'year':
+             range_filter('provisionActivity.startDate',
+                          format='yyyy',
+                          end_date_math='/y')
          }),
     'deposits':
     dict(aggs=dict(status=dict(terms=dict(field='status')),
