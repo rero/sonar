@@ -15,18 +15,13 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,700|Roboto+Condensed:300,700');
 @import '~font-awesome/scss/font-awesome.scss';
 @import "~bootstrap/scss/bootstrap";
 @import '~ngx-toastr/toastr-bs4-alert';
 
-/* roboto-condensed-regular - latin */
-@font-face {
-  font-family: 'Roboto Condensed';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Roboto Condensed'), local('RobotoCondensed-Regular'),
-       url('../../fonts/roboto-condensed-v17-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('../../fonts/roboto-condensed-v17-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+.bg-header {
+  background-color: #15334D;
 }
 
 .bg-ir {
