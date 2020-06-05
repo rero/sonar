@@ -1244,1459 +1244,1459 @@ msgid "eduidtest"
 msgstr ""
 
 msgid "lang_aar"
-msgstr ""
+msgstr "afar"
 
 msgid "lang_abk"
-msgstr ""
+msgstr "abkhaze"
 
 msgid "lang_ace"
-msgstr ""
+msgstr "aceh"
 
 msgid "lang_ach"
-msgstr ""
+msgstr "acoli"
 
 msgid "lang_ada"
-msgstr ""
+msgstr "adangme"
 
 msgid "lang_ady"
-msgstr ""
+msgstr "adyguéen"
 
 msgid "lang_afa"
-msgstr ""
+msgstr "afro-asiatiques, autres langues"
 
 msgid "lang_afh"
-msgstr ""
+msgstr "afrihili"
 
 msgid "lang_afr"
-msgstr ""
+msgstr "afrikaans"
 
 msgid "lang_ain"
-msgstr ""
+msgstr "aïnou"
 
 msgid "lang_aka"
-msgstr ""
+msgstr "akan"
 
 msgid "lang_akk"
-msgstr ""
+msgstr "akkadien"
 
 msgid "lang_alb"
-msgstr ""
+msgstr "albanais"
 
 msgid "lang_ale"
-msgstr ""
+msgstr "aléoute"
 
 msgid "lang_alg"
-msgstr ""
+msgstr "algonquines, langues"
 
 msgid "lang_alt"
-msgstr ""
+msgstr "altaï du Sud"
 
 msgid "lang_amh"
-msgstr ""
+msgstr "amharique"
 
 msgid "lang_ang"
-msgstr ""
+msgstr "ancien anglais"
 
 msgid "lang_anp"
-msgstr ""
+msgstr "angika"
 
 msgid "lang_apa"
-msgstr ""
+msgstr "apaches, langues"
 
 msgid "lang_ara"
-msgstr ""
+msgstr "arabe"
 
 msgid "lang_arc"
-msgstr ""
+msgstr "araméen"
 
 msgid "lang_arg"
-msgstr ""
+msgstr "aragonais"
 
 msgid "lang_arm"
-msgstr ""
+msgstr "arménien"
 
 msgid "lang_arn"
-msgstr ""
+msgstr "mapuche"
 
 msgid "lang_arp"
-msgstr ""
+msgstr "arapaho"
 
 msgid "lang_art"
-msgstr ""
+msgstr "artificielles, autres langues"
 
 msgid "lang_arw"
-msgstr ""
+msgstr "arawak"
 
 msgid "lang_asm"
-msgstr ""
+msgstr "assamais"
 
 msgid "lang_ast"
-msgstr ""
+msgstr "asturien"
 
 msgid "lang_ath"
-msgstr ""
+msgstr "athapascanes, langues"
 
 msgid "lang_aus"
-msgstr ""
+msgstr "australiennes, langues"
 
 msgid "lang_ava"
-msgstr ""
+msgstr "avar"
 
 msgid "lang_ave"
-msgstr ""
+msgstr "avestique"
 
 msgid "lang_awa"
-msgstr ""
+msgstr "awadhi"
 
 msgid "lang_aym"
-msgstr ""
+msgstr "aymara"
 
 msgid "lang_aze"
-msgstr ""
+msgstr "azéri"
 
 msgid "lang_bad"
-msgstr ""
+msgstr "banda, langues"
 
 msgid "lang_bai"
-msgstr ""
+msgstr "bamilékés, langues"
 
 msgid "lang_bak"
-msgstr ""
+msgstr "bachkir"
 
 msgid "lang_bal"
-msgstr ""
+msgstr "baloutchi"
 
 msgid "lang_bam"
-msgstr ""
+msgstr "bambara"
 
 msgid "lang_ban"
-msgstr ""
+msgstr "balinais"
 
 msgid "lang_baq"
-msgstr ""
+msgstr "basque"
 
 msgid "lang_bas"
-msgstr ""
+msgstr "bassa"
 
 msgid "lang_bat"
-msgstr ""
+msgstr "baltes, langues"
 
 msgid "lang_bej"
-msgstr ""
+msgstr "bedja"
 
 msgid "lang_bel"
-msgstr ""
+msgstr "biélorusse"
 
 msgid "lang_bem"
-msgstr ""
+msgstr "bemba"
 
 msgid "lang_ben"
-msgstr ""
+msgstr "bengali"
 
 msgid "lang_ber"
-msgstr ""
+msgstr "berbères, autres langues"
 
 msgid "lang_bho"
-msgstr ""
+msgstr "bhodjpouri"
 
 msgid "lang_bih"
-msgstr ""
+msgstr "bihari"
 
 msgid "lang_bik"
-msgstr ""
+msgstr "bikol"
 
 msgid "lang_bin"
-msgstr ""
+msgstr "bini"
 
 msgid "lang_bis"
-msgstr ""
+msgstr "bichelamar"
 
 msgid "lang_bla"
-msgstr ""
+msgstr "siksika"
 
 msgid "lang_bnt"
-msgstr ""
+msgstr "bantoues, autres langues"
 
 msgid "lang_bos"
-msgstr ""
+msgstr "bosniaque"
 
 msgid "lang_bra"
-msgstr ""
+msgstr "braj"
 
 msgid "lang_bre"
-msgstr ""
+msgstr "breton"
 
 msgid "lang_btk"
-msgstr ""
+msgstr "batak, langues"
 
 msgid "lang_bua"
-msgstr ""
+msgstr "bouriate"
 
 msgid "lang_bug"
-msgstr ""
+msgstr "bugi"
 
 msgid "lang_bul"
-msgstr ""
+msgstr "bulgare"
 
 msgid "lang_bur"
-msgstr ""
+msgstr "birman"
 
 msgid "lang_byn"
-msgstr ""
+msgstr "blin"
 
 msgid "lang_cad"
-msgstr ""
+msgstr "caddo"
 
 msgid "lang_cai"
-msgstr ""
+msgstr "indiennes d'Amérique centrale, autres langues"
 
 msgid "lang_car"
-msgstr ""
+msgstr "caribe"
 
 msgid "lang_cat"
-msgstr ""
+msgstr "catalan"
 
 msgid "lang_cau"
-msgstr ""
+msgstr "caucasiens, autres langues"
 
 msgid "lang_ceb"
-msgstr ""
+msgstr "cebuano"
 
 msgid "lang_cel"
-msgstr ""
+msgstr "celtique, autres langues"
 
 msgid "lang_cha"
-msgstr ""
+msgstr "chamorro"
 
 msgid "lang_chb"
-msgstr ""
+msgstr "chibcha"
 
 msgid "lang_che"
-msgstr ""
+msgstr "tchétchène"
 
 msgid "lang_chg"
-msgstr ""
+msgstr "tchaghataï"
 
 msgid "lang_chi"
-msgstr ""
+msgstr "chinois"
 
 msgid "lang_chk"
-msgstr ""
+msgstr "chuuk"
 
 msgid "lang_chm"
-msgstr ""
+msgstr "mari"
 
 msgid "lang_chn"
-msgstr ""
+msgstr "jargon chinook"
 
 msgid "lang_cho"
-msgstr ""
+msgstr "choctaw"
 
 msgid "lang_chp"
-msgstr ""
+msgstr "chipewyan"
 
 msgid "lang_chr"
-msgstr ""
+msgstr "cherokee"
 
 msgid "lang_chu"
-msgstr ""
+msgstr "slavon d’église"
 
 msgid "lang_chv"
-msgstr ""
+msgstr "tchouvache"
 
 msgid "lang_chy"
-msgstr ""
+msgstr "cheyenne"
 
 msgid "lang_cmc"
-msgstr ""
+msgstr "chamic"
 
 msgid "lang_cnr"
-msgstr ""
+msgstr "monténégrin"
 
 msgid "lang_cop"
-msgstr ""
+msgstr "copte"
 
 msgid "lang_cor"
-msgstr ""
+msgstr "cornique"
 
 msgid "lang_cos"
-msgstr ""
+msgstr "corse"
 
 msgid "lang_cpe"
-msgstr ""
+msgstr "créoles et pidgins anglais, autres"
 
 msgid "lang_cpf"
-msgstr ""
+msgstr "créoles et pidgins français, autres"
 
 msgid "lang_cpp"
-msgstr ""
+msgstr "créoles et pidgins portugais, autres"
 
 msgid "lang_cre"
-msgstr ""
+msgstr "cree"
 
 msgid "lang_crh"
-msgstr ""
+msgstr "turc de Crimée"
 
 msgid "lang_crp"
-msgstr ""
+msgstr "créoles et pidgins divers"
 
 msgid "lang_csb"
-msgstr ""
+msgstr "kachoube"
 
 msgid "lang_cus"
-msgstr ""
+msgstr "couchitiques, autres langues"
 
 msgid "lang_cze"
-msgstr ""
+msgstr "tchèque"
 
 msgid "lang_dak"
-msgstr ""
+msgstr "dakota"
 
 msgid "lang_dan"
-msgstr ""
+msgstr "danois"
 
 msgid "lang_dar"
-msgstr ""
+msgstr "dargwa"
 
 msgid "lang_day"
-msgstr ""
+msgstr "Land Dayak, langues"
 
 msgid "lang_del"
-msgstr ""
+msgstr "delaware"
 
 msgid "lang_den"
-msgstr ""
+msgstr "esclave"
 
 msgid "lang_dgr"
-msgstr ""
+msgstr "dogrib"
 
 msgid "lang_din"
-msgstr ""
+msgstr "dinka"
 
 msgid "lang_div"
-msgstr ""
+msgstr "maldivien"
 
 msgid "lang_doi"
-msgstr ""
+msgstr "dogri"
 
 msgid "lang_dra"
-msgstr ""
+msgstr "dravidiennes, langues"
 
 msgid "lang_dsb"
-msgstr ""
+msgstr "bas-sorabe"
 
 msgid "lang_dua"
-msgstr ""
+msgstr "douala"
 
 msgid "lang_dum"
-msgstr ""
+msgstr "moyen néerlandais"
 
 msgid "lang_dut"
-msgstr ""
+msgstr "néerlandais"
 
 msgid "lang_dyu"
-msgstr ""
+msgstr "dioula"
 
 msgid "lang_dzo"
-msgstr ""
+msgstr "dzongkha"
 
 msgid "lang_efi"
-msgstr ""
+msgstr "éfik"
 
 msgid "lang_egy"
-msgstr ""
+msgstr "égyptien ancien"
 
 msgid "lang_eka"
-msgstr ""
+msgstr "ékadjouk"
 
 msgid "lang_elx"
-msgstr ""
+msgstr "élamite"
 
 msgid "lang_eng"
-msgstr ""
+msgstr "anglais"
 
 msgid "lang_enm"
-msgstr ""
+msgstr "moyen anglais"
 
 msgid "lang_epo"
-msgstr ""
+msgstr "espéranto"
 
 msgid "lang_est"
-msgstr ""
+msgstr "estonien"
 
 msgid "lang_ewe"
-msgstr ""
+msgstr "éwé"
 
 msgid "lang_ewo"
-msgstr ""
+msgstr "éwondo"
 
 msgid "lang_fan"
-msgstr ""
+msgstr "fang"
 
 msgid "lang_fao"
-msgstr ""
+msgstr "féroïen"
 
 msgid "lang_fat"
-msgstr ""
+msgstr "fanti"
 
 msgid "lang_fij"
-msgstr ""
+msgstr "fidjien"
 
 msgid "lang_fil"
-msgstr ""
+msgstr "filipino"
 
 msgid "lang_fin"
-msgstr ""
+msgstr "finnois"
 
 msgid "lang_fiu"
-msgstr ""
+msgstr "finno-ougriennnes, autres langues"
 
 msgid "lang_fon"
-msgstr ""
+msgstr "fon"
 
 msgid "lang_fre"
-msgstr ""
+msgstr "français"
 
 msgid "lang_frm"
-msgstr ""
+msgstr "moyen français"
 
 msgid "lang_fro"
-msgstr ""
+msgstr "ancien français"
 
 msgid "lang_frr"
-msgstr ""
+msgstr "frison du Nord"
 
 msgid "lang_frs"
-msgstr ""
+msgstr "frison oriental"
 
 msgid "lang_fry"
-msgstr ""
+msgstr "frison occidental"
 
 msgid "lang_ful"
-msgstr ""
+msgstr "peul"
 
 msgid "lang_fur"
-msgstr ""
+msgstr "frioulan"
 
 msgid "lang_gaa"
-msgstr ""
+msgstr "ga"
 
 msgid "lang_gay"
-msgstr ""
+msgstr "gayo"
 
 msgid "lang_gba"
-msgstr ""
+msgstr "gbaya"
 
 msgid "lang_gem"
-msgstr ""
+msgstr "germaniques, autres langues"
 
 msgid "lang_geo"
-msgstr ""
+msgstr "géorgien"
 
 msgid "lang_ger"
-msgstr ""
+msgstr "allemand"
 
 msgid "lang_gez"
-msgstr ""
+msgstr "guèze"
 
 msgid "lang_gil"
-msgstr ""
+msgstr "gilbertin"
 
 msgid "lang_gla"
-msgstr ""
+msgstr "gaélique écossais"
 
 msgid "lang_gle"
-msgstr ""
+msgstr "irlandais"
 
 msgid "lang_glg"
-msgstr ""
+msgstr "galicien"
 
 msgid "lang_glv"
-msgstr ""
+msgstr "mannois"
 
 msgid "lang_gmh"
-msgstr ""
+msgstr "moyen haut-allemand"
 
 msgid "lang_goh"
-msgstr ""
+msgstr "ancien haut allemand"
 
 msgid "lang_gon"
-msgstr ""
+msgstr "gondi"
 
 msgid "lang_gor"
-msgstr ""
+msgstr "gorontalo"
 
 msgid "lang_got"
-msgstr ""
+msgstr "gotique"
 
 msgid "lang_grb"
-msgstr ""
+msgstr "grebo"
 
 msgid "lang_grc"
-msgstr ""
+msgstr "grec ancien (jusqu'à 1453)"
 
 msgid "lang_gre"
-msgstr ""
+msgstr "grec moderne (après 1453)"
 
 msgid "lang_grn"
-msgstr ""
+msgstr "guarani"
 
 msgid "lang_gsw"
-msgstr ""
+msgstr "suisse allemand"
 
 msgid "lang_guj"
-msgstr ""
+msgstr "goudjerati"
 
 msgid "lang_gwi"
-msgstr ""
+msgstr "gwichʼin"
 
 msgid "lang_hai"
-msgstr ""
+msgstr "haida"
 
 msgid "lang_hat"
-msgstr ""
+msgstr "créole haïtien"
 
 msgid "lang_hau"
-msgstr ""
+msgstr "haoussa"
 
 msgid "lang_haw"
-msgstr ""
+msgstr "hawaïen"
 
 msgid "lang_heb"
-msgstr ""
+msgstr "hébreu"
 
 msgid "lang_her"
-msgstr ""
+msgstr "héréro"
 
 msgid "lang_hil"
-msgstr ""
+msgstr "hiligaynon"
 
 msgid "lang_him"
-msgstr ""
+msgstr "himachali"
 
 msgid "lang_hin"
-msgstr ""
+msgstr "hindi"
 
 msgid "lang_hit"
-msgstr ""
+msgstr "hittite"
 
 msgid "lang_hmn"
-msgstr ""
+msgstr "hmong"
 
 msgid "lang_hmo"
-msgstr ""
+msgstr "hiri motu"
 
 msgid "lang_hrv"
-msgstr ""
+msgstr "croate"
 
 msgid "lang_hsb"
-msgstr ""
+msgstr "haut-sorabe"
 
 msgid "lang_hun"
-msgstr ""
+msgstr "hongrois"
 
 msgid "lang_hup"
-msgstr ""
+msgstr "hupa"
 
 msgid "lang_iba"
-msgstr ""
+msgstr "iban"
 
 msgid "lang_ibo"
-msgstr ""
+msgstr "igbo"
 
 msgid "lang_ice"
-msgstr ""
+msgstr "islandais"
 
 msgid "lang_ido"
-msgstr ""
+msgstr "ido"
 
 msgid "lang_iii"
-msgstr ""
+msgstr "yi du Sichuan"
 
 msgid "lang_ijo"
-msgstr ""
+msgstr "ijo, langues"
 
 msgid "lang_iku"
-msgstr ""
+msgstr "inuktitut"
 
 msgid "lang_ile"
-msgstr ""
+msgstr "interlingue"
 
 msgid "lang_ilo"
-msgstr ""
+msgstr "ilocano"
 
 msgid "lang_ina"
-msgstr ""
+msgstr "interlingua"
 
 msgid "lang_inc"
-msgstr ""
+msgstr "indo-aryennes, autres langues"
 
 msgid "lang_ind"
-msgstr ""
+msgstr "indonésien"
 
 msgid "lang_ine"
-msgstr ""
+msgstr "indo-européennes, autres langues"
 
 msgid "lang_inh"
-msgstr ""
+msgstr "ingouche"
 
 msgid "lang_ipk"
-msgstr ""
+msgstr "inupiaq"
 
 msgid "lang_ira"
-msgstr ""
+msgstr "iraniennes, autres langues"
 
 msgid "lang_iro"
-msgstr ""
+msgstr "iroquois, langues (famille)"
 
 msgid "lang_ita"
-msgstr ""
+msgstr "italien"
 
 msgid "lang_jav"
-msgstr ""
+msgstr "javanais"
 
 msgid "lang_jbo"
-msgstr ""
+msgstr "lojban"
 
 msgid "lang_jpn"
-msgstr ""
+msgstr "japonais"
 
 msgid "lang_jpr"
-msgstr ""
+msgstr "judéo-persan"
 
 msgid "lang_jrb"
-msgstr ""
+msgstr "judéo-arabe"
 
 msgid "lang_kaa"
-msgstr ""
+msgstr "karakalpak"
 
 msgid "lang_kab"
-msgstr ""
+msgstr "kabyle"
 
 msgid "lang_kac"
-msgstr ""
+msgstr "kachin"
 
 msgid "lang_kal"
-msgstr ""
+msgstr "groenlandais"
 
 msgid "lang_kam"
-msgstr ""
+msgstr "kamba"
 
 msgid "lang_kan"
-msgstr ""
+msgstr "kannada"
 
 msgid "lang_kar"
-msgstr ""
+msgstr "karen, langues"
 
 msgid "lang_kas"
-msgstr ""
+msgstr "cachemiri"
 
 msgid "lang_kau"
-msgstr ""
+msgstr "kanouri"
 
 msgid "lang_kaw"
-msgstr ""
+msgstr "kawi"
 
 msgid "lang_kaz"
-msgstr ""
+msgstr "kazakh"
 
 msgid "lang_kbd"
-msgstr ""
+msgstr "kabarde"
 
 msgid "lang_kha"
-msgstr ""
+msgstr "khasi"
 
 msgid "lang_khi"
-msgstr ""
+msgstr "khoisan, autres langues"
 
 msgid "lang_khm"
-msgstr ""
+msgstr "khmer"
 
 msgid "lang_kho"
-msgstr ""
+msgstr "khotanais"
 
 msgid "lang_kik"
-msgstr ""
+msgstr "kikuyu"
 
 msgid "lang_kin"
-msgstr ""
+msgstr "kinyarwanda"
 
 msgid "lang_kir"
-msgstr ""
+msgstr "kirghize"
 
 msgid "lang_kmb"
-msgstr ""
+msgstr "kimboundou"
 
 msgid "lang_kok"
-msgstr ""
+msgstr "konkani"
 
 msgid "lang_kom"
-msgstr ""
+msgstr "komi"
 
 msgid "lang_kon"
-msgstr ""
+msgstr "kikongo"
 
 msgid "lang_kor"
-msgstr ""
+msgstr "coréen"
 
 msgid "lang_kos"
-msgstr ""
+msgstr "kosraéen"
 
 msgid "lang_kpe"
-msgstr ""
+msgstr "kpellé"
 
 msgid "lang_krc"
-msgstr ""
+msgstr "karatchaï balkar"
 
 msgid "lang_krl"
-msgstr ""
+msgstr "carélien"
 
 msgid "lang_kro"
-msgstr ""
+msgstr "krou, langues"
 
 msgid "lang_kru"
-msgstr ""
+msgstr "kouroukh"
 
 msgid "lang_kua"
-msgstr ""
+msgstr "kuanyama"
 
 msgid "lang_kum"
-msgstr ""
+msgstr "koumyk"
 
 msgid "lang_kur"
-msgstr ""
+msgstr "kurde"
 
 msgid "lang_kut"
-msgstr ""
+msgstr "kutenai"
 
 msgid "lang_lad"
-msgstr ""
+msgstr "ladino"
 
 msgid "lang_lah"
-msgstr ""
+msgstr "lahnda"
 
 msgid "lang_lam"
-msgstr ""
+msgstr "lamba"
 
 msgid "lang_lao"
-msgstr ""
+msgstr "lao"
 
 msgid "lang_lat"
-msgstr ""
+msgstr "latin"
 
 msgid "lang_lav"
-msgstr ""
+msgstr "letton"
 
 msgid "lang_lez"
-msgstr ""
+msgstr "lezghien"
 
 msgid "lang_lim"
-msgstr ""
+msgstr "limbourgeois"
 
 msgid "lang_lin"
-msgstr ""
+msgstr "lingala"
 
 msgid "lang_lit"
-msgstr ""
+msgstr "lituanien"
 
 msgid "lang_lol"
-msgstr ""
+msgstr "mongo"
 
 msgid "lang_loz"
-msgstr ""
+msgstr "lozi"
 
 msgid "lang_ltz"
-msgstr ""
+msgstr "luxembourgeois"
 
 msgid "lang_lua"
-msgstr ""
+msgstr "luba-kasaï (ciluba)"
 
 msgid "lang_lub"
-msgstr ""
+msgstr "luba-katanga (kiluba)"
 
 msgid "lang_lug"
-msgstr ""
+msgstr "ganda"
 
 msgid "lang_lui"
-msgstr ""
+msgstr "luiseño"
 
 msgid "lang_lun"
-msgstr ""
+msgstr "lunda"
 
 msgid "lang_luo"
-msgstr ""
+msgstr "luo"
 
 msgid "lang_lus"
-msgstr ""
+msgstr "lushaï"
 
 msgid "lang_mac"
-msgstr ""
+msgstr "macédonien"
 
 msgid "lang_mad"
-msgstr ""
+msgstr "madurais"
 
 msgid "lang_mag"
-msgstr ""
+msgstr "magahi"
 
 msgid "lang_mah"
-msgstr ""
+msgstr "marshallais"
 
 msgid "lang_mai"
-msgstr ""
+msgstr "maïthili"
 
 msgid "lang_mak"
-msgstr ""
+msgstr "makassar"
 
 msgid "lang_mal"
-msgstr ""
+msgstr "malayalam"
 
 msgid "lang_man"
-msgstr ""
+msgstr "mandingue"
 
 msgid "lang_mao"
-msgstr ""
+msgstr "maori"
 
 msgid "lang_map"
-msgstr ""
+msgstr "malayo-polynésiennes, autres langues"
 
 msgid "lang_mar"
-msgstr ""
+msgstr "marathi"
 
 msgid "lang_mas"
-msgstr ""
+msgstr "maasaï"
 
 msgid "lang_may"
-msgstr ""
+msgstr "malais"
 
 msgid "lang_mdf"
-msgstr ""
+msgstr "mokcha"
 
 msgid "lang_mdr"
-msgstr ""
+msgstr "mandar"
 
 msgid "lang_men"
-msgstr ""
+msgstr "mendé"
 
 msgid "lang_mga"
-msgstr ""
+msgstr "moyen irlandais"
 
 msgid "lang_mic"
-msgstr ""
+msgstr "micmac"
 
 msgid "lang_min"
-msgstr ""
+msgstr "minangkabau"
 
 msgid "lang_mis"
-msgstr ""
+msgstr "diverses, langues"
 
 msgid "lang_mkh"
-msgstr ""
+msgstr "môn-khmer, langues"
 
 msgid "lang_mlg"
-msgstr ""
+msgstr "malgache"
 
 msgid "lang_mlt"
-msgstr ""
+msgstr "maltais"
 
 msgid "lang_mnc"
-msgstr ""
+msgstr "mandchou"
 
 msgid "lang_mni"
-msgstr ""
+msgstr "manipuri"
 
 msgid "lang_mno"
-msgstr ""
+msgstr "manobo, langues"
 
 msgid "lang_moh"
-msgstr ""
+msgstr "mohawk"
 
 msgid "lang_mon"
-msgstr ""
+msgstr "mongol"
 
 msgid "lang_mos"
-msgstr ""
+msgstr "moré"
 
 msgid "lang_mul"
-msgstr ""
+msgstr "multilingue"
 
 msgid "lang_mun"
-msgstr ""
+msgstr "mounda, langues"
 
 msgid "lang_mus"
-msgstr ""
+msgstr "muskogee"
 
 msgid "lang_mwl"
-msgstr ""
+msgstr "mirandais"
 
 msgid "lang_mwr"
-msgstr ""
+msgstr "marwarî"
 
 msgid "lang_myn"
-msgstr ""
+msgstr "maya, langues"
 
 msgid "lang_myv"
-msgstr ""
+msgstr "erzya"
 
 msgid "lang_nah"
-msgstr ""
+msgstr "nahuatl, langues"
 
 msgid "lang_nai"
-msgstr ""
+msgstr "indiennes d'Amérique du Nord, autres langues"
 
 msgid "lang_nap"
-msgstr ""
+msgstr "napolitain"
 
 msgid "lang_nau"
-msgstr ""
+msgstr "nauruan"
 
 msgid "lang_nav"
-msgstr ""
+msgstr "navajo"
 
 msgid "lang_nbl"
-msgstr ""
+msgstr "ndébélé du Sud"
 
 msgid "lang_nde"
-msgstr ""
+msgstr "ndébélé du Nord"
 
 msgid "lang_ndo"
-msgstr ""
+msgstr "ndonga"
 
 msgid "lang_nds"
-msgstr ""
+msgstr "bas-allemand"
 
 msgid "lang_nep"
-msgstr ""
+msgstr "népalais"
 
 msgid "lang_new"
-msgstr ""
+msgstr "newari"
 
 msgid "lang_nia"
-msgstr ""
+msgstr "niha"
 
 msgid "lang_nic"
-msgstr ""
+msgstr "nigéro-congolaises,langues"
 
 msgid "lang_niu"
-msgstr ""
+msgstr "niuéen"
 
 msgid "lang_nno"
-msgstr ""
+msgstr "norvégien nynorsk"
 
 msgid "lang_nob"
-msgstr ""
+msgstr "norvégien bokmål"
 
 msgid "lang_nog"
-msgstr ""
+msgstr "nogaï"
 
 msgid "lang_non"
-msgstr ""
+msgstr "vieux norrois"
 
 msgid "lang_nor"
-msgstr ""
+msgstr "norvégien"
 
 msgid "lang_nqo"
-msgstr ""
+msgstr "n’ko"
 
 msgid "lang_nso"
-msgstr ""
+msgstr "sotho du Nord"
 
 msgid "lang_nub"
-msgstr ""
+msgstr "nubiennes, langues"
 
 msgid "lang_nwc"
-msgstr ""
+msgstr "newarî classique"
 
 msgid "lang_nya"
-msgstr ""
+msgstr "chewa"
 
 msgid "lang_nym"
-msgstr ""
+msgstr "nyamwezi"
 
 msgid "lang_nyn"
-msgstr ""
+msgstr "nyankolé"
 
 msgid "lang_nyo"
-msgstr ""
+msgstr "nyoro"
 
 msgid "lang_nzi"
-msgstr ""
+msgstr "nzema"
 
 msgid "lang_oci"
-msgstr ""
+msgstr "occitan"
 
 msgid "lang_oji"
-msgstr ""
+msgstr "ojibwa"
 
 msgid "lang_ori"
-msgstr ""
+msgstr "odia"
 
 msgid "lang_orm"
-msgstr ""
+msgstr "oromo"
 
 msgid "lang_osa"
-msgstr ""
+msgstr "osage"
 
 msgid "lang_oss"
-msgstr ""
+msgstr "ossète"
 
 msgid "lang_ota"
-msgstr ""
+msgstr "turc ottoman"
 
 msgid "lang_oto"
-msgstr ""
+msgstr "otomi, langues"
 
 msgid "lang_paa"
-msgstr ""
+msgstr "papoues, autres langues"
 
 msgid "lang_pag"
-msgstr ""
+msgstr "pangasinan"
 
 msgid "lang_pal"
-msgstr ""
+msgstr "pahlavi"
 
 msgid "lang_pam"
-msgstr ""
+msgstr "pampangan"
 
 msgid "lang_pan"
-msgstr ""
+msgstr "pendjabi"
 
 msgid "lang_pap"
-msgstr ""
+msgstr "papiamento"
 
 msgid "lang_pau"
-msgstr ""
+msgstr "paluan"
 
 msgid "lang_peo"
-msgstr ""
+msgstr "persan ancien"
 
 msgid "lang_per"
-msgstr ""
+msgstr "persan"
 
 msgid "lang_phi"
-msgstr ""
+msgstr "philippin, autres langues"
 
 msgid "lang_phn"
-msgstr ""
+msgstr "phénicien"
 
 msgid "lang_pli"
-msgstr ""
+msgstr "pali"
 
 msgid "lang_pol"
-msgstr ""
+msgstr "polonais"
 
 msgid "lang_pon"
-msgstr ""
+msgstr "pohnpei"
 
 msgid "lang_por"
-msgstr ""
+msgstr "portugais"
 
 msgid "lang_pra"
-msgstr ""
+msgstr "prâkrit"
 
 msgid "lang_pro"
-msgstr ""
+msgstr "provençal ancien"
 
 msgid "lang_pus"
-msgstr ""
+msgstr "pachto"
 
 msgid "lang_que"
-msgstr ""
+msgstr "quechua"
 
 msgid "lang_raj"
-msgstr ""
+msgstr "rajasthani"
 
 msgid "lang_rap"
-msgstr ""
+msgstr "rapanui"
 
 msgid "lang_rar"
-msgstr ""
+msgstr "rarotongien"
 
 msgid "lang_roa"
-msgstr ""
+msgstr "romanes, langues"
 
 msgid "lang_roh"
-msgstr ""
+msgstr "romanche"
 
 msgid "lang_rom"
-msgstr ""
+msgstr "romani"
 
 msgid "lang_rum"
-msgstr ""
+msgstr "roumain"
 
 msgid "lang_run"
-msgstr ""
+msgstr "roundi"
 
 msgid "lang_rup"
-msgstr ""
+msgstr "aroumain"
 
 msgid "lang_rus"
-msgstr ""
+msgstr "russe"
 
 msgid "lang_sad"
-msgstr ""
+msgstr "sandawe"
 
 msgid "lang_sag"
-msgstr ""
+msgstr "sango"
 
 msgid "lang_sah"
-msgstr ""
+msgstr "iakoute"
 
 msgid "lang_sai"
-msgstr ""
+msgstr "indiennes d'Amérique du Sud, autres langues"
 
 msgid "lang_sal"
-msgstr ""
+msgstr "salish, langues"
 
 msgid "lang_sam"
-msgstr ""
+msgstr "araméen samaritain"
 
 msgid "lang_san"
-msgstr ""
+msgstr "sanskrit"
 
 msgid "lang_sas"
-msgstr ""
+msgstr "sasak"
 
 msgid "lang_sat"
-msgstr ""
+msgstr "santali"
 
 msgid "lang_scn"
-msgstr ""
+msgstr "sicilien"
 
 msgid "lang_sco"
-msgstr ""
+msgstr "écossais"
 
 msgid "lang_sel"
-msgstr ""
+msgstr "selkoupe"
 
 msgid "lang_sem"
-msgstr ""
+msgstr "sémitiques, langues"
 
 msgid "lang_sga"
-msgstr ""
+msgstr "ancien irlandais"
 
 msgid "lang_sgn"
-msgstr ""
+msgstr "langue des signes"
 
 msgid "lang_shn"
-msgstr ""
+msgstr "shan"
 
 msgid "lang_sid"
-msgstr ""
+msgstr "sidamo"
 
 msgid "lang_sin"
-msgstr ""
+msgstr "cingalais"
 
 msgid "lang_sio"
-msgstr ""
+msgstr "sioux, langues"
 
 msgid "lang_sit"
-msgstr ""
+msgstr "sino-tibétaines, autres langues"
 
 msgid "lang_sla"
-msgstr ""
+msgstr "slaves, langues"
 
 msgid "lang_slo"
-msgstr ""
+msgstr "slovaque"
 
 msgid "lang_slv"
-msgstr ""
+msgstr "slovène"
 
 msgid "lang_sma"
-msgstr ""
+msgstr "same du Sud"
 
 msgid "lang_sme"
-msgstr ""
+msgstr "same du Nord"
 
 msgid "lang_smi"
-msgstr ""
+msgstr "sâmes, langues"
 
 msgid "lang_smj"
-msgstr ""
+msgstr "same de Lule"
 
 msgid "lang_smn"
-msgstr ""
+msgstr "same d’Inari"
 
 msgid "lang_smo"
-msgstr ""
+msgstr "samoan"
 
 msgid "lang_sms"
-msgstr ""
+msgstr "same skolt"
 
 msgid "lang_sna"
-msgstr ""
+msgstr "shona"
 
 msgid "lang_snd"
-msgstr ""
+msgstr "sindhi"
 
 msgid "lang_snk"
-msgstr ""
+msgstr "soninké"
 
 msgid "lang_sog"
-msgstr ""
+msgstr "sogdien"
 
 msgid "lang_som"
-msgstr ""
+msgstr "somali"
 
 msgid "lang_son"
-msgstr ""
+msgstr "songhai"
 
 msgid "lang_sot"
-msgstr ""
+msgstr "sotho du Sud"
 
 msgid "lang_spa"
-msgstr ""
+msgstr "espagnol"
 
 msgid "lang_srd"
-msgstr ""
+msgstr "sarde"
 
 msgid "lang_srn"
-msgstr ""
+msgstr "sranan tongo"
 
 msgid "lang_srp"
-msgstr ""
+msgstr "serbe"
 
 msgid "lang_srr"
-msgstr ""
+msgstr "sérère"
 
 msgid "lang_ssa"
-msgstr ""
+msgstr "nilo-sahariennes, langues"
 
 msgid "lang_ssw"
-msgstr ""
+msgstr "swati"
 
 msgid "lang_suk"
-msgstr ""
+msgstr "soukouma"
 
 msgid "lang_sun"
-msgstr ""
+msgstr "soundanais"
 
 msgid "lang_sus"
-msgstr ""
+msgstr "soussou"
 
 msgid "lang_sux"
-msgstr ""
+msgstr "sumérien"
 
 msgid "lang_swa"
-msgstr ""
+msgstr "swahili"
 
 msgid "lang_swe"
-msgstr ""
+msgstr "suédois"
 
 msgid "lang_syc"
-msgstr ""
+msgstr "syriaque classique"
 
 msgid "lang_syr"
-msgstr ""
+msgstr "syriaque"
 
 msgid "lang_tah"
-msgstr ""
+msgstr "tahitien"
 
 msgid "lang_tai"
-msgstr ""
+msgstr "tai, langues"
 
 msgid "lang_tam"
-msgstr ""
+msgstr "tamoul"
 
 msgid "lang_tat"
-msgstr ""
+msgstr "tatar"
 
 msgid "lang_tel"
-msgstr ""
+msgstr "télougou"
 
 msgid "lang_tem"
-msgstr ""
+msgstr "timné"
 
 msgid "lang_ter"
-msgstr ""
+msgstr "tereno"
 
 msgid "lang_tet"
-msgstr ""
+msgstr "tétoum"
 
 msgid "lang_tgk"
-msgstr ""
+msgstr "tadjik"
 
 msgid "lang_tgl"
-msgstr ""
+msgstr "tagalog"
 
 msgid "lang_tha"
-msgstr ""
+msgstr "thaï"
 
 msgid "lang_tib"
-msgstr ""
+msgstr "tibétain"
 
 msgid "lang_tig"
-msgstr ""
+msgstr "tigré"
 
 msgid "lang_tir"
-msgstr ""
+msgstr "tigrigna"
 
 msgid "lang_tiv"
-msgstr ""
+msgstr "tiv"
 
 msgid "lang_tkl"
-msgstr ""
+msgstr "tokelau"
 
 msgid "lang_tlh"
-msgstr ""
+msgstr "klingon"
 
 msgid "lang_tli"
-msgstr ""
+msgstr "tlingit"
 
 msgid "lang_tmh"
-msgstr ""
+msgstr "tamacheq"
 
 msgid "lang_tog"
-msgstr ""
+msgstr "tonga nyasa"
 
 msgid "lang_ton"
-msgstr ""
+msgstr "tongien"
 
 msgid "lang_tpi"
-msgstr ""
+msgstr "tok pisin"
 
 msgid "lang_tsi"
-msgstr ""
+msgstr "tsimshian"
 
 msgid "lang_tsn"
-msgstr ""
+msgstr "tswana"
 
 msgid "lang_tso"
-msgstr ""
+msgstr "tsonga"
 
 msgid "lang_tuk"
-msgstr ""
+msgstr "turkmène"
 
 msgid "lang_tum"
-msgstr ""
+msgstr "tumbuka"
 
 msgid "lang_tup"
-msgstr ""
+msgstr "tupi, langues"
 
 msgid "lang_tur"
-msgstr ""
+msgstr "turc"
 
 msgid "lang_tut"
-msgstr ""
+msgstr "altaïques, langues"
 
 msgid "lang_tvl"
-msgstr ""
+msgstr "tuvalu"
 
 msgid "lang_twi"
-msgstr ""
+msgstr "twi"
 
 msgid "lang_tyv"
-msgstr ""
+msgstr "touvain"
 
 msgid "lang_udm"
-msgstr ""
+msgstr "oudmourte"
 
 msgid "lang_uga"
-msgstr ""
+msgstr "ougaritique"
 
 msgid "lang_uig"
-msgstr ""
+msgstr "ouïghour"
 
 msgid "lang_ukr"
-msgstr ""
+msgstr "ukrainien"
 
 msgid "lang_umb"
-msgstr ""
+msgstr "umbundu"
 
 msgid "lang_und"
-msgstr ""
+msgstr "langue indéterminée"
 
 msgid "lang_urd"
-msgstr ""
+msgstr "ourdou"
 
 msgid "lang_uzb"
-msgstr ""
+msgstr "ouzbek"
 
 msgid "lang_vai"
-msgstr ""
+msgstr "vaï"
 
 msgid "lang_ven"
-msgstr ""
+msgstr "venda"
 
 msgid "lang_vie"
-msgstr ""
+msgstr "vietnamien"
 
 msgid "lang_vol"
-msgstr ""
+msgstr "volapük"
 
 msgid "lang_vot"
-msgstr ""
+msgstr "vote"
 
 msgid "lang_wak"
-msgstr ""
+msgstr "wakashennes, langues"
 
 msgid "lang_wal"
-msgstr ""
+msgstr "walamo"
 
 msgid "lang_war"
-msgstr ""
+msgstr "waray"
 
 msgid "lang_was"
-msgstr ""
+msgstr "washo"
 
 msgid "lang_wel"
-msgstr ""
+msgstr "gallois"
 
 msgid "lang_wen"
-msgstr ""
+msgstr "sorabes, langues"
 
 msgid "lang_wln"
-msgstr ""
+msgstr "wallon"
 
 msgid "lang_wol"
-msgstr ""
+msgstr "wolof"
 
 msgid "lang_xal"
-msgstr ""
+msgstr "kalmouk"
 
 msgid "lang_xho"
-msgstr ""
+msgstr "xhosa"
 
 msgid "lang_yao"
-msgstr ""
+msgstr "yao"
 
 msgid "lang_yap"
-msgstr ""
+msgstr "yapois"
 
 msgid "lang_yid"
-msgstr ""
+msgstr "yiddish"
 
 msgid "lang_yor"
-msgstr ""
+msgstr "yoruba"
 
 msgid "lang_ypk"
-msgstr ""
+msgstr "yupik, langues"
 
 msgid "lang_zap"
-msgstr ""
+msgstr "zapotèque"
 
 msgid "lang_zbl"
-msgstr ""
+msgstr "symboles Bliss"
 
 msgid "lang_zen"
-msgstr ""
+msgstr "zenaga"
 
 msgid "lang_zha"
-msgstr ""
+msgstr "zhuang"
 
 msgid "lang_znd"
-msgstr ""
+msgstr "zandé, langues"
 
 msgid "lang_zul"
-msgstr ""
+msgstr "zoulou"
 
 msgid "lang_zun"
-msgstr ""
+msgstr "zuñi"
 
 msgid "lang_zxx"
-msgstr ""
+msgstr "sans contenu linguistique"
 
 msgid "lang_zza"
-msgstr ""
+msgstr "zazaki"
 
 msgid "language"
 msgstr "langue"
@@ -2751,3 +2751,4 @@ msgstr "utilisateur"
 
 msgid "vol."
 msgstr "vol."
+

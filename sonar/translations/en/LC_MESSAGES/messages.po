@@ -670,2017 +670,2017 @@ msgid "Year"
 msgstr ""
 
 msgid "bf:Agent"
-msgstr ""
+msgstr "Agent"
 
 msgid "bf:AudioIssueNumber"
-msgstr ""
+msgstr "Audio issue number"
 
 msgid "bf:ClassificationDdc"
-msgstr ""
+msgstr "DDC Classification"
 
 msgid "bf:ClassificationUdc"
-msgstr ""
+msgstr "UDC Classification"
 
 msgid "bf:Doi"
-msgstr ""
+msgstr "DOI"
 
 msgid "bf:Ean"
-msgstr ""
+msgstr "EAN"
 
 msgid "bf:Gtin14Number"
-msgstr ""
+msgstr "Global Trade Item Number 14"
 
 msgid "bf:Identifier"
-msgstr ""
+msgstr "Identifier"
 
 msgid "bf:Isan"
-msgstr ""
+msgstr "ISAN"
 
 msgid "bf:Isbn"
-msgstr ""
+msgstr "ISBN"
 
 msgid "bf:Ismn"
-msgstr ""
+msgstr "ISMN"
 
 msgid "bf:Isrc"
-msgstr ""
+msgstr "ISRC"
 
 msgid "bf:Issn"
-msgstr ""
+msgstr "ISSN"
 
 msgid "bf:IssnL"
-msgstr ""
+msgstr "ISSN-L"
 
 msgid "bf:Language"
-msgstr ""
+msgstr "Language entity"
 
 msgid "bf:Local"
-msgstr ""
+msgstr "Local identifier"
 
 msgid "bf:Manufacture"
-msgstr ""
+msgstr "Manufacturer"
 
 msgid "bf:MatrixNumber"
-msgstr ""
+msgstr "Audio matrix number"
 
 msgid "bf:Meeting"
-msgstr ""
+msgstr "Meeting"
 
 msgid "bf:MusicDistributorNumber"
-msgstr ""
+msgstr "Music distributor number"
 
 msgid "bf:MusicPlate"
-msgstr ""
+msgstr "Music plate number"
 
 msgid "bf:MusicPublisherNumber"
-msgstr ""
+msgstr "Music publisher number"
 
 msgid "bf:Organization"
-msgstr ""
+msgstr "Organization"
 
 msgid "bf:Person"
-msgstr ""
+msgstr "Person"
 
 msgid "bf:Place"
-msgstr ""
+msgstr "Place"
 
 msgid "bf:Publication"
-msgstr ""
+msgstr "Publisher"
 
 msgid "bf:PublisherNumber"
-msgstr ""
+msgstr "Publisher number"
 
 msgid "bf:ReportNumber"
-msgstr ""
+msgstr "Technical report number"
 
 msgid "bf:Strn"
-msgstr ""
+msgstr "STRN"
 
 msgid "bf:Title"
-msgstr ""
+msgstr "Title entity"
 
 msgid "bf:Upc"
-msgstr ""
+msgstr "UPC"
 
 msgid "bf:Urn"
-msgstr ""
+msgstr "URN"
 
 msgid "bf:VideoRecordingNumber"
-msgstr ""
+msgstr "Video recording number"
 
 msgid "classification_004"
-msgstr ""
+msgstr "Computer science"
 
 msgid "classification_02"
-msgstr ""
+msgstr "Library sciences"
 
 msgid "classification_1"
-msgstr ""
+msgstr "Philosophy"
 
 msgid "classification_159.9"
-msgstr ""
+msgstr "Psychology"
 
 msgid "classification_159.953"
-msgstr ""
+msgstr "Memory and learning"
 
 msgid "classification_16"
-msgstr ""
+msgstr "Logic"
 
 msgid "classification_2"
-msgstr ""
+msgstr "Religion Theology"
 
 msgid "classification_294/299"
-msgstr ""
+msgstr "Orientalism"
 
 msgid "classification_3"
-msgstr ""
+msgstr "Social sciences"
 
 msgid "classification_31"
-msgstr ""
+msgstr "Demography Sociology Statistics"
 
 msgid "classification_32"
-msgstr ""
+msgstr "Political sciences"
 
 msgid "classification_33"
-msgstr ""
+msgstr "Economics"
 
 msgid "classification_34"
-msgstr ""
+msgstr "Law"
 
 msgid "classification_35"
-msgstr ""
+msgstr "Public administration"
 
 msgid "classification_36"
-msgstr ""
+msgstr "Social work"
 
 msgid "classification_37"
-msgstr ""
+msgstr "Education Teaching"
 
 msgid "classification_370"
-msgstr ""
+msgstr "Orthophony"
 
 msgid "classification_376"
-msgstr ""
+msgstr "Special education"
 
 msgid "classification_378.6"
-msgstr ""
+msgstr "Higher Education Institutions"
 
 msgid "classification_39"
-msgstr ""
+msgstr "Anthropology Ethnology"
 
 msgid "classification_51"
-msgstr ""
+msgstr "Mathematics"
 
 msgid "classification_519.2"
-msgstr ""
+msgstr "Probabilites Statistics"
 
 msgid "classification_52"
-msgstr ""
+msgstr "Astronomy Astrophysics"
 
 msgid "classification_524.8"
-msgstr ""
+msgstr "Cosmology"
 
 msgid "classification_53"
-msgstr ""
+msgstr "Physics"
 
 msgid "classification_54"
-msgstr ""
+msgstr "Chemistry"
 
 msgid "classification_543"
-msgstr ""
+msgstr "Analytical chemistry"
 
 msgid "classification_548"
-msgstr ""
+msgstr "Crystallography"
 
 msgid "classification_549"
-msgstr ""
+msgstr "Mineralogy"
 
 msgid "classification_55"
-msgstr ""
+msgstr "Geology"
 
 msgid "classification_55/56"
-msgstr ""
+msgstr "Earth sciences"
 
 msgid "classification_551"
-msgstr ""
+msgstr "Climate"
 
 msgid "classification_556"
-msgstr ""
+msgstr "Hydrology"
 
 msgid "classification_56"
-msgstr ""
+msgstr "Paleontology"
 
 msgid "classification_57"
-msgstr ""
+msgstr "Biology"
 
 msgid "classification_57/59"
-msgstr ""
+msgstr "Biology Life sciences"
 
 msgid "classification_574"
-msgstr ""
+msgstr "Ecology"
 
 msgid "classification_58"
-msgstr ""
+msgstr "Botany"
 
 msgid "classification_59"
-msgstr ""
+msgstr "Zoology"
 
 msgid "classification_6"
-msgstr ""
+msgstr "Engineering"
 
 msgid "classification_60"
-msgstr ""
+msgstr "Biotechnology"
 
 msgid "classification_61"
-msgstr ""
+msgstr "Medicine"
 
 msgid "classification_613.2"
-msgstr ""
+msgstr "Nutrition and Dietetics"
 
 msgid "classification_614.253.5"
-msgstr ""
+msgstr "Midwife"
 
 msgid "classification_615"
-msgstr ""
+msgstr "Therapeutic. Pharmacy Pharmacology"
 
 msgid "classification_615.8"
-msgstr ""
+msgstr "Physiotherapy"
 
 msgid "classification_615.84"
-msgstr ""
+msgstr "Medical Radiation Technology"
 
 msgid "classification_616"
-msgstr ""
+msgstr "Clinical medicine"
 
 msgid "classification_616-083"
-msgstr ""
+msgstr "Nursing"
 
 msgid "classification_616.31"
-msgstr ""
+msgstr "Dental medicine"
 
 msgid "classification_61_2"
-msgstr ""
+msgstr "Health"
 
 msgid "classification_620.1"
-msgstr ""
+msgstr "Materials"
 
 msgid "classification_620.9"
-msgstr ""
+msgstr "Energy"
 
 msgid "classification_621"
-msgstr ""
+msgstr "Industrial Engineering"
 
 msgid "classification_621.01"
-msgstr ""
+msgstr "Mechanics"
 
 msgid "classification_621.3"
-msgstr ""
+msgstr "Electricity"
 
 msgid "classification_621.38"
-msgstr ""
+msgstr "Electronics"
 
 msgid "classification_621.39"
-msgstr ""
+msgstr "Telecommunications"
 
 msgid "classification_621.762"
-msgstr ""
+msgstr "Powder metallurgy"
 
 msgid "classification_63"
-msgstr ""
+msgstr "Agriculture Agronomy"
 
 msgid "classification_65"
-msgstr ""
+msgstr "Information communication and media sciences"
 
 msgid "classification_66"
-msgstr ""
+msgstr "Chemical technology"
 
 msgid "classification_663"
-msgstr ""
+msgstr "Beverage industry"
 
 msgid "classification_664"
-msgstr ""
+msgstr "Food production and preservation"
 
 msgid "classification_681"
-msgstr ""
+msgstr "Microengineering"
 
 msgid "classification_7"
-msgstr ""
+msgstr "Arts"
 
 msgid "classification_7.071"
-msgstr ""
+msgstr "Art history"
 
 msgid "classification_71"
-msgstr ""
+msgstr "Urbanism"
 
 msgid "classification_72"
-msgstr ""
+msgstr "Architecture"
 
 msgid "classification_73/77"
-msgstr ""
+msgstr "Visual arts"
 
 msgid "classification_75"
-msgstr ""
+msgstr "Painting"
 
 msgid "classification_77"
-msgstr ""
+msgstr "Photography"
 
 msgid "classification_78"
-msgstr ""
+msgstr "Music"
 
 msgid "classification_796"
-msgstr ""
+msgstr "Sports sciences"
 
 msgid "classification_81"
-msgstr ""
+msgstr "Language Linguistics"
 
 msgid "classification_81´28"
-msgstr ""
+msgstr "Dialectology"
 
 msgid "classification_82"
-msgstr ""
+msgstr "Literature"
 
 msgid "classification_902"
-msgstr ""
+msgstr "Archeology"
 
 msgid "classification_903"
-msgstr ""
+msgstr "Pre-history"
 
 msgid "classification_91"
-msgstr ""
+msgstr "Geography"
 
 msgid "classification_929.5"
-msgstr ""
+msgstr "Genealogy"
 
 msgid "classification_93/94"
-msgstr ""
+msgstr "History"
 
 msgid "classification_931"
-msgstr ""
+msgstr "Ancient history"
 
 msgid "classification_94"
-msgstr ""
+msgstr "Medieval and modern history"
 
 msgid "classification_root_1"
-msgstr ""
+msgstr "Medicine, Technology, Engineering"
 
 msgid "classification_root_2"
-msgstr ""
+msgstr "Exact and natural sciences"
 
 msgid "classification_root_3"
-msgstr ""
+msgstr "Arts, Human and Social Science"
 
 msgid "contribution_role_cre"
-msgstr ""
+msgstr "Creator"
 
 msgid "contribution_role_ctb"
-msgstr ""
+msgstr "Contributor"
 
 msgid "contribution_role_dgs"
-msgstr ""
+msgstr "Degree supervisor"
 
 msgid "contribution_role_edt"
-msgstr ""
+msgstr "Editor"
 
 msgid "contribution_role_prt"
-msgstr ""
+msgstr "Printer"
 
 msgid "contributor"
 msgstr ""
 
 msgid "csal"
-msgstr ""
+msgstr "National licenses"
 
 msgid "deposit_log_action_approve"
-msgstr ""
+msgstr "Approve"
 
 msgid "deposit_log_action_ask_for_changes"
-msgstr ""
+msgstr "Ask for changes"
 
 msgid "deposit_log_action_reject"
-msgstr ""
+msgstr "Reject"
 
 msgid "deposit_log_action_submit"
-msgstr ""
+msgstr "Submit"
 
 msgid "deposit_status_ask_for_changes"
-msgstr ""
+msgstr "Ask for changes"
 
 msgid "deposit_status_in_progress"
-msgstr ""
+msgstr "In progress"
 
 msgid "deposit_status_rejected"
-msgstr ""
+msgstr "Rejected"
 
 msgid "deposit_status_to_validate"
-msgstr ""
+msgstr "To validate"
 
 msgid "deposit_status_validated"
-msgstr ""
+msgstr "Validated"
 
 msgid "document_type"
-msgstr ""
+msgstr "Document type"
 
 msgid "document_type_advanced_studies_thesis"
-msgstr ""
+msgstr "Advanced studies thesis"
 
 msgid "document_type_coar:c_0640"
-msgstr "journal"
+msgstr "Journal"
 
 msgid "document_type_coar:c_12cc"
-msgstr "cartographic material"
+msgstr "Cartographic material"
 
 msgid "document_type_coar:c_15cd"
-msgstr ""
+msgstr "Patent"
 
 msgid "document_type_coar:c_1843"
-msgstr ""
+msgstr "Other"
 
 msgid "document_type_coar:c_186u"
-msgstr ""
+msgstr "Policy report"
 
 msgid "document_type_coar:c_18cc"
-msgstr "sound"
+msgstr "Sound"
 
 msgid "document_type_coar:c_18co"
-msgstr ""
+msgstr "Conference poster not in proceedings"
 
 msgid "document_type_coar:c_18cp"
-msgstr ""
+msgstr "Conference paper not in proceedings"
 
 msgid "document_type_coar:c_18cw"
-msgstr "score"
+msgstr "Musical notation"
 
 msgid "document_type_coar:c_18gh"
-msgstr ""
+msgstr "Technical report"
 
 msgid "document_type_coar:c_18hj"
-msgstr ""
+msgstr "Report to funding agency"
 
 msgid "document_type_coar:c_18op"
-msgstr ""
+msgstr "Project deliverable"
 
 msgid "document_type_coar:c_18wq"
-msgstr ""
+msgstr "Other type of report"
 
 msgid "document_type_coar:c_18ws"
-msgstr "research report"
+msgstr "Research report"
 
 msgid "document_type_coar:c_18ww"
-msgstr ""
+msgstr "Internal report"
 
 msgid "document_type_coar:c_18wz"
-msgstr ""
+msgstr "Memorandum"
 
 msgid "document_type_coar:c_2659"
-msgstr ""
+msgstr "Periodical"
 
 msgid "document_type_coar:c_2cd9"
-msgstr ""
+msgstr "Magazine"
 
 msgid "document_type_coar:c_2f33"
-msgstr "book"
+msgstr "Book"
 
 msgid "document_type_coar:c_2fe3"
-msgstr "newspaper"
+msgstr "Newspaper"
 
 msgid "document_type_coar:c_3248"
-msgstr "book chapter"
+msgstr "Book chapter"
 
 msgid "document_type_coar:c_3e5a"
-msgstr ""
+msgstr "Contribution to journal"
 
 msgid "document_type_coar:c_46ec"
-msgstr "thesis"
+msgstr "Thesis"
 
 msgid "document_type_coar:c_5794"
-msgstr "conference paper"
+msgstr "Conference paper"
 
 msgid "document_type_coar:c_5ce6"
-msgstr ""
+msgstr "Software"
 
 msgid "document_type_coar:c_6501"
-msgstr "scientific article"
+msgstr "Scientific article"
 
 msgid "document_type_coar:c_6670"
-msgstr ""
+msgstr "Conference poster"
 
 msgid "document_type_coar:c_7a1f"
-msgstr "bachelor thesis"
+msgstr "Bachelor thesis"
 
 msgid "document_type_coar:c_8042"
-msgstr ""
+msgstr "Working paper"
 
 msgid "document_type_coar:c_816b"
-msgstr "preprint"
+msgstr "Preprint"
 
 msgid "document_type_coar:c_8544"
-msgstr ""
+msgstr "Lecture"
 
 msgid "document_type_coar:c_8a7e"
-msgstr ""
+msgstr "Moving image"
 
 msgid "document_type_coar:c_93fc"
-msgstr ""
+msgstr "Report"
 
 msgid "document_type_coar:c_998f"
-msgstr ""
+msgstr "Newspaper article"
 
 msgid "document_type_coar:c_ba1f"
-msgstr ""
+msgstr "Report part"
 
 msgid "document_type_coar:c_bdcc"
-msgstr "master thesis"
+msgstr "Master thesis"
 
 msgid "document_type_coar:c_beb9"
-msgstr ""
+msgstr "Data paper"
 
 msgid "document_type_coar:c_c94f"
-msgstr ""
+msgstr "Conference object"
 
 msgid "document_type_coar:c_db06"
-msgstr "doctoral thesis"
+msgstr "Doctoral thesis"
 
 msgid "document_type_coar:c_dcae04bc"
-msgstr ""
+msgstr "Review article"
 
 msgid "document_type_coar:c_ddb1"
-msgstr ""
+msgstr "Dataset"
 
 msgid "document_type_coar:c_ecc8"
-msgstr "image"
+msgstr "Image"
 
 msgid "document_type_coar:c_f744"
-msgstr ""
+msgstr "Conference proceedings"
 
 msgid "document_type_habilitation_thesis"
-msgstr ""
+msgstr "Habilitation thesis"
 
 msgid "document_type_non_textual_object"
-msgstr ""
+msgstr "Non-textual object"
 
 msgid "document_type_other"
-msgstr ""
+msgstr "Other"
 
 msgid "eduid"
-msgstr ""
+msgstr "Switch edu-ID"
 
 msgid "eduidtest"
-msgstr ""
+msgstr "Switch edu-ID Test"
 
 msgid "lang_aar"
-msgstr ""
+msgstr "Afar"
 
 msgid "lang_abk"
-msgstr ""
+msgstr "Abkhazian"
 
 msgid "lang_ace"
-msgstr ""
+msgstr "Achinese"
 
 msgid "lang_ach"
-msgstr ""
+msgstr "Acoli"
 
 msgid "lang_ada"
-msgstr ""
+msgstr "Adangme"
 
 msgid "lang_ady"
-msgstr ""
+msgstr "Adyghe"
 
 msgid "lang_afa"
-msgstr ""
+msgstr "Afroasiatic (other)"
 
 msgid "lang_afh"
-msgstr ""
+msgstr "Afrihili (Artificial language)"
 
 msgid "lang_afr"
-msgstr ""
+msgstr "Afrikaans"
 
 msgid "lang_ain"
-msgstr ""
+msgstr "Ainu"
 
 msgid "lang_aka"
-msgstr ""
+msgstr "Akan"
 
 msgid "lang_akk"
-msgstr ""
+msgstr "Akkadian"
 
 msgid "lang_alb"
-msgstr ""
+msgstr "Albanian"
 
 msgid "lang_ale"
-msgstr ""
+msgstr "Aleut"
 
 msgid "lang_alg"
-msgstr ""
+msgstr "Algonquian (Other)"
 
 msgid "lang_alt"
-msgstr ""
+msgstr "Altai"
 
 msgid "lang_amh"
-msgstr ""
+msgstr "Amharic"
 
 msgid "lang_ang"
-msgstr ""
+msgstr "English, Old (ca. 450-1100)"
 
 msgid "lang_anp"
-msgstr ""
+msgstr "Angika"
 
 msgid "lang_apa"
-msgstr ""
+msgstr "Apache languages"
 
 msgid "lang_ara"
-msgstr ""
+msgstr "Arabic"
 
 msgid "lang_arc"
-msgstr ""
+msgstr "Aramaic"
 
 msgid "lang_arg"
-msgstr ""
+msgstr "Aragonese"
 
 msgid "lang_arm"
-msgstr ""
+msgstr "Armenian"
 
 msgid "lang_arn"
-msgstr ""
+msgstr "Mapuche"
 
 msgid "lang_arp"
-msgstr ""
+msgstr "Arapaho"
 
 msgid "lang_art"
-msgstr ""
+msgstr "Artificial (Other)"
 
 msgid "lang_arw"
-msgstr ""
+msgstr "Arawak"
 
 msgid "lang_asm"
-msgstr ""
+msgstr "Assamese"
 
 msgid "lang_ast"
-msgstr ""
+msgstr "Bable"
 
 msgid "lang_ath"
-msgstr ""
+msgstr "Athapascan (Other)"
 
 msgid "lang_aus"
-msgstr ""
+msgstr "Australian languages"
 
 msgid "lang_ava"
-msgstr ""
+msgstr "Avaric"
 
 msgid "lang_ave"
-msgstr ""
+msgstr "Avestan"
 
 msgid "lang_awa"
-msgstr ""
+msgstr "Awadhi"
 
 msgid "lang_aym"
-msgstr ""
+msgstr "Aymara"
 
 msgid "lang_aze"
-msgstr ""
+msgstr "Azerbaijani"
 
 msgid "lang_bad"
-msgstr ""
+msgstr "Banda languages"
 
 msgid "lang_bai"
-msgstr ""
+msgstr "Bamileke languages"
 
 msgid "lang_bak"
-msgstr ""
+msgstr "Bashkir"
 
 msgid "lang_bal"
-msgstr ""
+msgstr "Baluchi"
 
 msgid "lang_bam"
-msgstr ""
+msgstr "Bambara"
 
 msgid "lang_ban"
-msgstr ""
+msgstr "Balinese"
 
 msgid "lang_baq"
-msgstr ""
+msgstr "Basque"
 
 msgid "lang_bas"
-msgstr ""
+msgstr "Basa"
 
 msgid "lang_bat"
-msgstr ""
+msgstr "Baltic (Other)"
 
 msgid "lang_bej"
-msgstr ""
+msgstr "Beja"
 
 msgid "lang_bel"
-msgstr ""
+msgstr "Belarusian"
 
 msgid "lang_bem"
-msgstr ""
+msgstr "Bemba"
 
 msgid "lang_ben"
-msgstr ""
+msgstr "Bengali"
 
 msgid "lang_ber"
-msgstr ""
+msgstr "Berber (Other)"
 
 msgid "lang_bho"
-msgstr ""
+msgstr "Bhojpuri"
 
 msgid "lang_bih"
-msgstr ""
+msgstr "Bihari (Other)"
 
 msgid "lang_bik"
-msgstr ""
+msgstr "Bikol"
 
 msgid "lang_bin"
-msgstr ""
+msgstr "Edo"
 
 msgid "lang_bis"
-msgstr ""
+msgstr "Bislama"
 
 msgid "lang_bla"
-msgstr ""
+msgstr "Siksika"
 
 msgid "lang_bnt"
-msgstr ""
+msgstr "Bantu (Other)"
 
 msgid "lang_bos"
-msgstr ""
+msgstr "Bosnian"
 
 msgid "lang_bra"
-msgstr ""
+msgstr "Braj"
 
 msgid "lang_bre"
-msgstr ""
+msgstr "Breton"
 
 msgid "lang_btk"
-msgstr ""
+msgstr "Batak"
 
 msgid "lang_bua"
-msgstr ""
+msgstr "Buriat"
 
 msgid "lang_bug"
-msgstr ""
+msgstr "Bugis"
 
 msgid "lang_bul"
-msgstr ""
+msgstr "Bulgarian"
 
 msgid "lang_bur"
-msgstr ""
+msgstr "Burmese"
 
 msgid "lang_byn"
-msgstr ""
+msgstr "Bilin"
 
 msgid "lang_cad"
-msgstr ""
+msgstr "Caddo"
 
 msgid "lang_cai"
-msgstr ""
+msgstr "Central American Indian (Other)"
 
 msgid "lang_car"
-msgstr ""
+msgstr "Carib"
 
 msgid "lang_cat"
-msgstr ""
+msgstr "Catalan"
 
 msgid "lang_cau"
-msgstr ""
+msgstr "Caucasian (Other)"
 
 msgid "lang_ceb"
-msgstr ""
+msgstr "Cebuano"
 
 msgid "lang_cel"
-msgstr ""
+msgstr "Celtic (Other)"
 
 msgid "lang_cha"
-msgstr ""
+msgstr "Chamorro"
 
 msgid "lang_chb"
-msgstr ""
+msgstr "Chibcha"
 
 msgid "lang_che"
-msgstr ""
+msgstr "Chechen"
 
 msgid "lang_chg"
-msgstr ""
+msgstr "Chagatai"
 
 msgid "lang_chi"
-msgstr ""
+msgstr "Chinese"
 
 msgid "lang_chk"
-msgstr ""
+msgstr "Chuukese"
 
 msgid "lang_chm"
-msgstr ""
+msgstr "Mari"
 
 msgid "lang_chn"
-msgstr ""
+msgstr "Chinook jargon"
 
 msgid "lang_cho"
-msgstr ""
+msgstr "Choctaw"
 
 msgid "lang_chp"
-msgstr ""
+msgstr "Chipewyan"
 
 msgid "lang_chr"
-msgstr ""
+msgstr "Cherokee"
 
 msgid "lang_chu"
-msgstr ""
+msgstr "Church Slavic"
 
 msgid "lang_chv"
-msgstr ""
+msgstr "Chuvash"
 
 msgid "lang_chy"
-msgstr ""
+msgstr "Cheyenne"
 
 msgid "lang_cmc"
-msgstr ""
+msgstr "Chamic languages"
 
 msgid "lang_cnr"
-msgstr ""
+msgstr "Montenegrin"
 
 msgid "lang_cop"
-msgstr ""
+msgstr "Coptic"
 
 msgid "lang_cor"
-msgstr ""
+msgstr "Cornish"
 
 msgid "lang_cos"
-msgstr ""
+msgstr "Corsican"
 
 msgid "lang_cpe"
-msgstr ""
+msgstr "Creoles and Pidgins, English-based (Other)"
 
 msgid "lang_cpf"
-msgstr ""
+msgstr "Creoles and Pidgins, French-based (Other)"
 
 msgid "lang_cpp"
-msgstr ""
+msgstr "Creoles and Pidgins, Portuguese-based (Other)"
 
 msgid "lang_cre"
-msgstr ""
+msgstr "Cree"
 
 msgid "lang_crh"
-msgstr ""
+msgstr "Crimean Tatar"
 
 msgid "lang_crp"
-msgstr ""
+msgstr "Creoles and Pidgins (Other)"
 
 msgid "lang_csb"
-msgstr ""
+msgstr "Kashubian"
 
 msgid "lang_cus"
-msgstr ""
+msgstr "Cushitic (Other)"
 
 msgid "lang_cze"
-msgstr ""
+msgstr "Czech"
 
 msgid "lang_dak"
-msgstr ""
+msgstr "Dakota"
 
 msgid "lang_dan"
-msgstr ""
+msgstr "Danish"
 
 msgid "lang_dar"
-msgstr ""
+msgstr "Dargwa"
 
 msgid "lang_day"
-msgstr ""
+msgstr "Dayak"
 
 msgid "lang_del"
-msgstr ""
+msgstr "Delaware"
 
 msgid "lang_den"
-msgstr ""
+msgstr "Slavey"
 
 msgid "lang_dgr"
-msgstr ""
+msgstr "Dogrib"
 
 msgid "lang_din"
-msgstr ""
+msgstr "Dinka"
 
 msgid "lang_div"
-msgstr ""
+msgstr "Divehi"
 
 msgid "lang_doi"
-msgstr ""
+msgstr "Dogri"
 
 msgid "lang_dra"
-msgstr ""
+msgstr "Dravidian (Other)"
 
 msgid "lang_dsb"
-msgstr ""
+msgstr "Lower Sorbian"
 
 msgid "lang_dua"
-msgstr ""
+msgstr "Duala"
 
 msgid "lang_dum"
-msgstr ""
+msgstr "Dutch, Middle (ca. 1050-1350)"
 
 msgid "lang_dut"
-msgstr ""
+msgstr "Dutch"
 
 msgid "lang_dyu"
-msgstr ""
+msgstr "Dyula"
 
 msgid "lang_dzo"
-msgstr ""
+msgstr "Dzongkha"
 
 msgid "lang_efi"
-msgstr ""
+msgstr "Efik"
 
 msgid "lang_egy"
-msgstr ""
+msgstr "Egyptian"
 
 msgid "lang_eka"
-msgstr ""
+msgstr "Ekajuk"
 
 msgid "lang_elx"
-msgstr ""
+msgstr "Elamite"
 
 msgid "lang_eng"
-msgstr ""
+msgstr "English"
 
 msgid "lang_enm"
-msgstr ""
+msgstr "English, Middle (1100-1500)"
 
 msgid "lang_epo"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "lang_est"
-msgstr ""
+msgstr "Estonian"
 
 msgid "lang_ewe"
-msgstr ""
+msgstr "Ewe"
 
 msgid "lang_ewo"
-msgstr ""
+msgstr "Ewondo"
 
 msgid "lang_fan"
-msgstr ""
+msgstr "Fang"
 
 msgid "lang_fao"
-msgstr ""
+msgstr "Faroese"
 
 msgid "lang_fat"
-msgstr ""
+msgstr "Fanti"
 
 msgid "lang_fij"
-msgstr ""
+msgstr "Fijian"
 
 msgid "lang_fil"
-msgstr ""
+msgstr "Filipino"
 
 msgid "lang_fin"
-msgstr ""
+msgstr "Finnish"
 
 msgid "lang_fiu"
-msgstr ""
+msgstr "Finno-Ugrian (Other)"
 
 msgid "lang_fon"
-msgstr ""
+msgstr "Fon"
 
 msgid "lang_fre"
-msgstr ""
+msgstr "French"
 
 msgid "lang_frm"
-msgstr ""
+msgstr "French, Middle (ca. 1300-1600)"
 
 msgid "lang_fro"
-msgstr ""
+msgstr "French, Old (ca. 842-1300)"
 
 msgid "lang_frr"
-msgstr ""
+msgstr "North Frisian"
 
 msgid "lang_frs"
-msgstr ""
+msgstr "East Frisian"
 
 msgid "lang_fry"
-msgstr ""
+msgstr "Frisian"
 
 msgid "lang_ful"
-msgstr ""
+msgstr "Fula"
 
 msgid "lang_fur"
-msgstr ""
+msgstr "Friulian"
 
 msgid "lang_gaa"
-msgstr ""
+msgstr "Gã"
 
 msgid "lang_gay"
-msgstr ""
+msgstr "Gayo"
 
 msgid "lang_gba"
-msgstr ""
+msgstr "Gbaya"
 
 msgid "lang_gem"
-msgstr ""
+msgstr "Germanic (Other)"
 
 msgid "lang_geo"
-msgstr ""
+msgstr "Georgian"
 
 msgid "lang_ger"
-msgstr ""
+msgstr "German"
 
 msgid "lang_gez"
-msgstr ""
+msgstr "Ethiopic"
 
 msgid "lang_gil"
-msgstr ""
+msgstr "Gilbertese"
 
 msgid "lang_gla"
-msgstr ""
+msgstr "Scottish Gaelic"
 
 msgid "lang_gle"
-msgstr ""
+msgstr "Irish"
 
 msgid "lang_glg"
-msgstr ""
+msgstr "Galician"
 
 msgid "lang_glv"
-msgstr ""
+msgstr "Manx"
 
 msgid "lang_gmh"
-msgstr ""
+msgstr "German, Middle High (ca. 1050-1500)"
 
 msgid "lang_goh"
-msgstr ""
+msgstr "German, Old High (ca. 750-1050)"
 
 msgid "lang_gon"
-msgstr ""
+msgstr "Gondi"
 
 msgid "lang_gor"
-msgstr ""
+msgstr "Gorontalo"
 
 msgid "lang_got"
-msgstr ""
+msgstr "Gothic"
 
 msgid "lang_grb"
-msgstr ""
+msgstr "Grebo"
 
 msgid "lang_grc"
-msgstr ""
+msgstr "Greek, Ancient (to 1453)"
 
 msgid "lang_gre"
-msgstr ""
+msgstr "Greek, Modern (1453- )"
 
 msgid "lang_grn"
-msgstr ""
+msgstr "Guarani"
 
 msgid "lang_gsw"
-msgstr ""
+msgstr "Swiss German"
 
 msgid "lang_guj"
-msgstr ""
+msgstr "Gujarati"
 
 msgid "lang_gwi"
-msgstr ""
+msgstr "Gwich'in"
 
 msgid "lang_hai"
-msgstr ""
+msgstr "Haida"
 
 msgid "lang_hat"
-msgstr ""
+msgstr "Haitian French Creole"
 
 msgid "lang_hau"
-msgstr ""
+msgstr "Hausa"
 
 msgid "lang_haw"
-msgstr ""
+msgstr "Hawaiian"
 
 msgid "lang_heb"
-msgstr ""
+msgstr "Hebrew"
 
 msgid "lang_her"
-msgstr ""
+msgstr "Herero"
 
 msgid "lang_hil"
-msgstr ""
+msgstr "Hiligaynon"
 
 msgid "lang_him"
-msgstr ""
+msgstr "Western Pahari languages"
 
 msgid "lang_hin"
-msgstr ""
+msgstr "Hindi"
 
 msgid "lang_hit"
-msgstr ""
+msgstr "Hittite"
 
 msgid "lang_hmn"
-msgstr ""
+msgstr "Hmong"
 
 msgid "lang_hmo"
-msgstr ""
+msgstr "Hiri Motu"
 
 msgid "lang_hrv"
-msgstr ""
+msgstr "Croatian"
 
 msgid "lang_hsb"
-msgstr ""
+msgstr "Upper Sorbian"
 
 msgid "lang_hun"
-msgstr ""
+msgstr "Hungarian"
 
 msgid "lang_hup"
-msgstr ""
+msgstr "Hupa"
 
 msgid "lang_iba"
-msgstr ""
+msgstr "Iban"
 
 msgid "lang_ibo"
-msgstr ""
+msgstr "Igbo"
 
 msgid "lang_ice"
-msgstr ""
+msgstr "Icelandic"
 
 msgid "lang_ido"
-msgstr ""
+msgstr "Ido"
 
 msgid "lang_iii"
-msgstr ""
+msgstr "Sichuan Yi"
 
 msgid "lang_ijo"
-msgstr ""
+msgstr "Ijo"
 
 msgid "lang_iku"
-msgstr ""
+msgstr "Inuktitut"
 
 msgid "lang_ile"
-msgstr ""
+msgstr "Interlingue"
 
 msgid "lang_ilo"
-msgstr ""
+msgstr "Iloko"
 
 msgid "lang_ina"
-msgstr ""
+msgstr "Interlingua (International Auxiliary Language Association)"
 
 msgid "lang_inc"
-msgstr ""
+msgstr "Indic (Other)"
 
 msgid "lang_ind"
-msgstr ""
+msgstr "Indonesian"
 
 msgid "lang_ine"
-msgstr ""
+msgstr "Indo-European (Other)"
 
 msgid "lang_inh"
-msgstr ""
+msgstr "Ingush"
 
 msgid "lang_ipk"
-msgstr ""
+msgstr "Inupiaq"
 
 msgid "lang_ira"
-msgstr ""
+msgstr "Iranian (Other)"
 
 msgid "lang_iro"
-msgstr ""
+msgstr "Iroquoian (Other)"
 
 msgid "lang_ita"
-msgstr ""
+msgstr "Italian"
 
 msgid "lang_jav"
-msgstr ""
+msgstr "Javanese"
 
 msgid "lang_jbo"
-msgstr ""
+msgstr "Lojban (Artificial language)"
 
 msgid "lang_jpn"
-msgstr ""
+msgstr "Japanese"
 
 msgid "lang_jpr"
-msgstr ""
+msgstr "Judeo-Persian"
 
 msgid "lang_jrb"
-msgstr ""
+msgstr "Judeo-Arabic"
 
 msgid "lang_kaa"
-msgstr ""
+msgstr "Kara-Kalpak"
 
 msgid "lang_kab"
-msgstr ""
+msgstr "Kabyle"
 
 msgid "lang_kac"
-msgstr ""
+msgstr "Kachin"
 
 msgid "lang_kal"
-msgstr ""
+msgstr "Kalâtdlisut"
 
 msgid "lang_kam"
-msgstr ""
+msgstr "Kamba"
 
 msgid "lang_kan"
-msgstr ""
+msgstr "Kannada"
 
 msgid "lang_kar"
-msgstr ""
+msgstr "Karen languages"
 
 msgid "lang_kas"
-msgstr ""
+msgstr "Kashmiri"
 
 msgid "lang_kau"
-msgstr ""
+msgstr "Kanuri"
 
 msgid "lang_kaw"
-msgstr ""
+msgstr "Kawi"
 
 msgid "lang_kaz"
-msgstr ""
+msgstr "Kazakh"
 
 msgid "lang_kbd"
-msgstr ""
+msgstr "Kabardian"
 
 msgid "lang_kha"
-msgstr ""
+msgstr "Khasi"
 
 msgid "lang_khi"
-msgstr ""
+msgstr "Khoisan (Other)"
 
 msgid "lang_khm"
-msgstr ""
+msgstr "Khmer"
 
 msgid "lang_kho"
-msgstr ""
+msgstr "Khotanese"
 
 msgid "lang_kik"
-msgstr ""
+msgstr "Kikuyu"
 
 msgid "lang_kin"
-msgstr ""
+msgstr "Kinyarwanda"
 
 msgid "lang_kir"
-msgstr ""
+msgstr "Kyrgyz"
 
 msgid "lang_kmb"
-msgstr ""
+msgstr "Kimbundu"
 
 msgid "lang_kok"
-msgstr ""
+msgstr "Konkani"
 
 msgid "lang_kom"
-msgstr ""
+msgstr "Komi"
 
 msgid "lang_kon"
-msgstr ""
+msgstr "Kongo"
 
 msgid "lang_kor"
-msgstr ""
+msgstr "Korean"
 
 msgid "lang_kos"
-msgstr ""
+msgstr "Kosraean"
 
 msgid "lang_kpe"
-msgstr ""
+msgstr "Kpelle"
 
 msgid "lang_krc"
-msgstr ""
+msgstr "Karachay-Balkar"
 
 msgid "lang_krl"
-msgstr ""
+msgstr "Karelian"
 
 msgid "lang_kro"
-msgstr ""
+msgstr "Kru (Other)"
 
 msgid "lang_kru"
-msgstr ""
+msgstr "Kurukh"
 
 msgid "lang_kua"
-msgstr ""
+msgstr "Kuanyama"
 
 msgid "lang_kum"
-msgstr ""
+msgstr "Kumyk"
 
 msgid "lang_kur"
-msgstr ""
+msgstr "Kurdish"
 
 msgid "lang_kut"
-msgstr ""
+msgstr "Kootenai"
 
 msgid "lang_lad"
-msgstr ""
+msgstr "Ladino"
 
 msgid "lang_lah"
-msgstr ""
+msgstr "Lahndā"
 
 msgid "lang_lam"
-msgstr ""
+msgstr "Lamba (Zambia and Congo)"
 
 msgid "lang_lao"
-msgstr ""
+msgstr "Lao"
 
 msgid "lang_lat"
-msgstr ""
+msgstr "Latin"
 
 msgid "lang_lav"
-msgstr ""
+msgstr "Latvian"
 
 msgid "lang_lez"
-msgstr ""
+msgstr "Lezgian"
 
 msgid "lang_lim"
-msgstr ""
+msgstr "Limburgish"
 
 msgid "lang_lin"
-msgstr ""
+msgstr "Lingala"
 
 msgid "lang_lit"
-msgstr ""
+msgstr "Lithuanian"
 
 msgid "lang_lol"
-msgstr ""
+msgstr "Mongo-Nkundu"
 
 msgid "lang_loz"
-msgstr ""
+msgstr "Lozi"
 
 msgid "lang_ltz"
-msgstr ""
+msgstr "Luxembourgish"
 
 msgid "lang_lua"
-msgstr ""
+msgstr "Luba-Lulua"
 
 msgid "lang_lub"
-msgstr ""
+msgstr "Luba-Katanga"
 
 msgid "lang_lug"
-msgstr ""
+msgstr "Ganda"
 
 msgid "lang_lui"
-msgstr ""
+msgstr "Luiseño"
 
 msgid "lang_lun"
-msgstr ""
+msgstr "Lunda"
 
 msgid "lang_luo"
-msgstr ""
+msgstr "Luo (Kenya and Tanzania)"
 
 msgid "lang_lus"
-msgstr ""
+msgstr "Lushai"
 
 msgid "lang_mac"
-msgstr ""
+msgstr "Macedonian"
 
 msgid "lang_mad"
-msgstr ""
+msgstr "Madurese"
 
 msgid "lang_mag"
-msgstr ""
+msgstr "Magahi"
 
 msgid "lang_mah"
-msgstr ""
+msgstr "Marshallese"
 
 msgid "lang_mai"
-msgstr ""
+msgstr "Maithili"
 
 msgid "lang_mak"
-msgstr ""
+msgstr "Makasar"
 
 msgid "lang_mal"
-msgstr ""
+msgstr "Malayalam"
 
 msgid "lang_man"
-msgstr ""
+msgstr "Mandingo"
 
 msgid "lang_mao"
-msgstr ""
+msgstr "Maori"
 
 msgid "lang_map"
-msgstr ""
+msgstr "Austronesian (Other)"
 
 msgid "lang_mar"
-msgstr ""
+msgstr "Marathi"
 
 msgid "lang_mas"
-msgstr ""
+msgstr "Maasai"
 
 msgid "lang_may"
-msgstr ""
+msgstr "Malay"
 
 msgid "lang_mdf"
-msgstr ""
+msgstr "Moksha"
 
 msgid "lang_mdr"
-msgstr ""
+msgstr "Mandar"
 
 msgid "lang_men"
-msgstr ""
+msgstr "Mende"
 
 msgid "lang_mga"
-msgstr ""
+msgstr "Irish, Middle (ca. 1100-1550)"
 
 msgid "lang_mic"
-msgstr ""
+msgstr "Micmac"
 
 msgid "lang_min"
-msgstr ""
+msgstr "Minangkabau"
 
 msgid "lang_mis"
-msgstr ""
+msgstr "Miscellaneous languages"
 
 msgid "lang_mkh"
-msgstr ""
+msgstr "Mon-Khmer (Other)"
 
 msgid "lang_mlg"
-msgstr ""
+msgstr "Malagasy"
 
 msgid "lang_mlt"
-msgstr ""
+msgstr "Maltese"
 
 msgid "lang_mnc"
-msgstr ""
+msgstr "Manchu"
 
 msgid "lang_mni"
-msgstr ""
+msgstr "Manipuri"
 
 msgid "lang_mno"
-msgstr ""
+msgstr "Manobo languages"
 
 msgid "lang_moh"
-msgstr ""
+msgstr "Mohawk"
 
 msgid "lang_mon"
-msgstr ""
+msgstr "Mongolian"
 
 msgid "lang_mos"
-msgstr ""
+msgstr "Mooré"
 
 msgid "lang_mul"
-msgstr ""
+msgstr "Multiple languages"
 
 msgid "lang_mun"
-msgstr ""
+msgstr "Munda (Other)"
 
 msgid "lang_mus"
-msgstr ""
+msgstr "Creek"
 
 msgid "lang_mwl"
-msgstr ""
+msgstr "Mirandese"
 
 msgid "lang_mwr"
-msgstr ""
+msgstr "Marwari"
 
 msgid "lang_myn"
-msgstr ""
+msgstr "Mayan languages"
 
 msgid "lang_myv"
-msgstr ""
+msgstr "Erzya"
 
 msgid "lang_nah"
-msgstr ""
+msgstr "Nahuatl"
 
 msgid "lang_nai"
-msgstr ""
+msgstr "North American Indian (Other)"
 
 msgid "lang_nap"
-msgstr ""
+msgstr "Neapolitan Italian"
 
 msgid "lang_nau"
-msgstr ""
+msgstr "Nauru"
 
 msgid "lang_nav"
-msgstr ""
+msgstr "Navajo"
 
 msgid "lang_nbl"
-msgstr ""
+msgstr "Ndebele (South Africa)"
 
 msgid "lang_nde"
-msgstr ""
+msgstr "Ndebele (Zimbabwe)"
 
 msgid "lang_ndo"
-msgstr ""
+msgstr "Ndonga"
 
 msgid "lang_nds"
-msgstr ""
+msgstr "Low German"
 
 msgid "lang_nep"
-msgstr ""
+msgstr "Nepali"
 
 msgid "lang_new"
-msgstr ""
+msgstr "Newari"
 
 msgid "lang_nia"
-msgstr ""
+msgstr "Nias"
 
 msgid "lang_nic"
-msgstr ""
+msgstr "Niger-Kordofanian (Other)"
 
 msgid "lang_niu"
-msgstr ""
+msgstr "Niuean"
 
 msgid "lang_nno"
-msgstr ""
+msgstr "Norwegian (Nynorsk)"
 
 msgid "lang_nob"
-msgstr ""
+msgstr "Norwegian (Bokmål)"
 
 msgid "lang_nog"
-msgstr ""
+msgstr "Nogai"
 
 msgid "lang_non"
-msgstr ""
+msgstr "Old Norse"
 
 msgid "lang_nor"
-msgstr ""
+msgstr "Norwegian"
 
 msgid "lang_nqo"
-msgstr ""
+msgstr "N'Ko"
 
 msgid "lang_nso"
-msgstr ""
+msgstr "Northern Sotho"
 
 msgid "lang_nub"
-msgstr ""
+msgstr "Nubian languages"
 
 msgid "lang_nwc"
-msgstr ""
+msgstr "Newari, Old"
 
 msgid "lang_nya"
-msgstr ""
+msgstr "Nyanja"
 
 msgid "lang_nym"
-msgstr ""
+msgstr "Nyamwezi"
 
 msgid "lang_nyn"
-msgstr ""
+msgstr "Nyankole"
 
 msgid "lang_nyo"
-msgstr ""
+msgstr "Nyoro"
 
 msgid "lang_nzi"
-msgstr ""
+msgstr "Nzima"
 
 msgid "lang_oci"
-msgstr ""
+msgstr "Occitan (post-1500)"
 
 msgid "lang_oji"
-msgstr ""
+msgstr "Ojibwa"
 
 msgid "lang_ori"
-msgstr ""
+msgstr "Oriya"
 
 msgid "lang_orm"
-msgstr ""
+msgstr "Oromo"
 
 msgid "lang_osa"
-msgstr ""
+msgstr "Osage"
 
 msgid "lang_oss"
-msgstr ""
+msgstr "Ossetic"
 
 msgid "lang_ota"
-msgstr ""
+msgstr "Turkish, Ottoman"
 
 msgid "lang_oto"
-msgstr ""
+msgstr "Otomian languages"
 
 msgid "lang_paa"
-msgstr ""
+msgstr "Papuan (Other)"
 
 msgid "lang_pag"
-msgstr ""
+msgstr "Pangasinan"
 
 msgid "lang_pal"
-msgstr ""
+msgstr "Pahlavi"
 
 msgid "lang_pam"
-msgstr ""
+msgstr "Pampanga"
 
 msgid "lang_pan"
-msgstr ""
+msgstr "Panjabi"
 
 msgid "lang_pap"
-msgstr ""
+msgstr "Papiamento"
 
 msgid "lang_pau"
-msgstr ""
+msgstr "paluan"
 
 msgid "lang_peo"
-msgstr ""
+msgstr "Old Persian (ca. 600-400 B.C.)"
 
 msgid "lang_per"
-msgstr ""
+msgstr "Persian"
 
 msgid "lang_phi"
-msgstr ""
+msgstr "Philippine (Other)"
 
 msgid "lang_phn"
-msgstr ""
+msgstr "Phoenician"
 
 msgid "lang_pli"
-msgstr ""
+msgstr "Pali"
 
 msgid "lang_pol"
-msgstr ""
+msgstr "Polish"
 
 msgid "lang_pon"
-msgstr ""
+msgstr "Pohnpeian"
 
 msgid "lang_por"
-msgstr ""
+msgstr "Portuguese"
 
 msgid "lang_pra"
-msgstr ""
+msgstr "Prakrit languages"
 
 msgid "lang_pro"
-msgstr ""
+msgstr "Provençal (to 1500)"
 
 msgid "lang_pus"
-msgstr ""
+msgstr "Pushto"
 
 msgid "lang_que"
-msgstr ""
+msgstr "Quechua"
 
 msgid "lang_raj"
-msgstr ""
+msgstr "Rajasthani"
 
 msgid "lang_rap"
-msgstr ""
+msgstr "Rapanui"
 
 msgid "lang_rar"
-msgstr ""
+msgstr "Rarotongan"
 
 msgid "lang_roa"
-msgstr ""
+msgstr "Romance (Other)"
 
 msgid "lang_roh"
-msgstr ""
+msgstr "Raeto-Romance"
 
 msgid "lang_rom"
-msgstr ""
+msgstr "Romani"
 
 msgid "lang_rum"
-msgstr ""
+msgstr "Romanian"
 
 msgid "lang_run"
-msgstr ""
+msgstr "Rundi"
 
 msgid "lang_rup"
-msgstr ""
+msgstr "Aromanian"
 
 msgid "lang_rus"
-msgstr ""
+msgstr "Russian"
 
 msgid "lang_sad"
-msgstr ""
+msgstr "Sandawe"
 
 msgid "lang_sag"
-msgstr ""
+msgstr "Sango (Ubangi Creole)"
 
 msgid "lang_sah"
-msgstr ""
+msgstr "Yakut"
 
 msgid "lang_sai"
-msgstr ""
+msgstr "South American Indian (Other)"
 
 msgid "lang_sal"
-msgstr ""
+msgstr "Salishan languages"
 
 msgid "lang_sam"
-msgstr ""
+msgstr "Samaritan Aramaic"
 
 msgid "lang_san"
-msgstr ""
+msgstr "Sanskrit"
 
 msgid "lang_sas"
-msgstr ""
+msgstr "Sasak"
 
 msgid "lang_sat"
-msgstr ""
+msgstr "Santali"
 
 msgid "lang_scn"
-msgstr ""
+msgstr "Sicilian Italian"
 
 msgid "lang_sco"
-msgstr ""
+msgstr "Scots"
 
 msgid "lang_sel"
-msgstr ""
+msgstr "Selkup"
 
 msgid "lang_sem"
-msgstr ""
+msgstr "Semitic (Other)"
 
 msgid "lang_sga"
-msgstr ""
+msgstr "Irish, Old (to 1100)"
 
 msgid "lang_sgn"
-msgstr ""
+msgstr "Sign languages"
 
 msgid "lang_shn"
-msgstr ""
+msgstr "Shan"
 
 msgid "lang_sid"
-msgstr ""
+msgstr "Sidamo"
 
 msgid "lang_sin"
-msgstr ""
+msgstr "Sinhalese"
 
 msgid "lang_sio"
-msgstr ""
+msgstr "Siouan (Other)"
 
 msgid "lang_sit"
-msgstr ""
+msgstr "Sino-Tibetan (Other)"
 
 msgid "lang_sla"
-msgstr ""
+msgstr "Slavic (Other)"
 
 msgid "lang_slo"
-msgstr ""
+msgstr "Slovak"
 
 msgid "lang_slv"
-msgstr ""
+msgstr "Slovenian"
 
 msgid "lang_sma"
-msgstr ""
+msgstr "Southern Sami"
 
 msgid "lang_sme"
-msgstr ""
+msgstr "Northern Sami"
 
 msgid "lang_smi"
-msgstr ""
+msgstr "Sami"
 
 msgid "lang_smj"
-msgstr ""
+msgstr "Lule Sami"
 
 msgid "lang_smn"
-msgstr ""
+msgstr "Inari Sami"
 
 msgid "lang_smo"
-msgstr ""
+msgstr "Samoan"
 
 msgid "lang_sms"
-msgstr ""
+msgstr "Skolt Sami"
 
 msgid "lang_sna"
-msgstr ""
+msgstr "Shona"
 
 msgid "lang_snd"
-msgstr ""
+msgstr "Sindhi"
 
 msgid "lang_snk"
-msgstr ""
+msgstr "Soninke"
 
 msgid "lang_sog"
-msgstr ""
+msgstr "Sogdian"
 
 msgid "lang_som"
-msgstr ""
+msgstr "Somali"
 
 msgid "lang_son"
-msgstr ""
+msgstr "Songhai"
 
 msgid "lang_sot"
-msgstr ""
+msgstr "Sotho"
 
 msgid "lang_spa"
-msgstr ""
+msgstr "Spanish"
 
 msgid "lang_srd"
-msgstr ""
+msgstr "Sardinian"
 
 msgid "lang_srn"
-msgstr ""
+msgstr "Sranan"
 
 msgid "lang_srp"
-msgstr ""
+msgstr "Serbian"
 
 msgid "lang_srr"
-msgstr ""
+msgstr "Serer"
 
 msgid "lang_ssa"
-msgstr ""
+msgstr "Nilo-Saharan (Other)"
 
 msgid "lang_ssw"
-msgstr ""
+msgstr "Swazi"
 
 msgid "lang_suk"
-msgstr ""
+msgstr "Sukuma"
 
 msgid "lang_sun"
-msgstr ""
+msgstr "Sundanese"
 
 msgid "lang_sus"
-msgstr ""
+msgstr "Susu"
 
 msgid "lang_sux"
-msgstr ""
+msgstr "Sumerian"
 
 msgid "lang_swa"
-msgstr ""
+msgstr "Swahili"
 
 msgid "lang_swe"
-msgstr ""
+msgstr "Swedish"
 
 msgid "lang_syc"
-msgstr ""
+msgstr "Syriac"
 
 msgid "lang_syr"
-msgstr ""
+msgstr "Syriac, Modern"
 
 msgid "lang_tah"
-msgstr ""
+msgstr "Tahitian"
 
 msgid "lang_tai"
-msgstr ""
+msgstr "Tai (Other)"
 
 msgid "lang_tam"
-msgstr ""
+msgstr "Tamil"
 
 msgid "lang_tat"
-msgstr ""
+msgstr "Tatar"
 
 msgid "lang_tel"
-msgstr ""
+msgstr "Telugu"
 
 msgid "lang_tem"
-msgstr ""
+msgstr "Temne"
 
 msgid "lang_ter"
-msgstr ""
+msgstr "Terena"
 
 msgid "lang_tet"
-msgstr ""
+msgstr "Tetum"
 
 msgid "lang_tgk"
-msgstr ""
+msgstr "Tajik"
 
 msgid "lang_tgl"
-msgstr ""
+msgstr "Tagalog"
 
 msgid "lang_tha"
-msgstr ""
+msgstr "Thai"
 
 msgid "lang_tib"
-msgstr ""
+msgstr "Tibetan"
 
 msgid "lang_tig"
-msgstr ""
+msgstr "Tigré"
 
 msgid "lang_tir"
-msgstr ""
+msgstr "Tigrinya"
 
 msgid "lang_tiv"
-msgstr ""
+msgstr "Tiv"
 
 msgid "lang_tkl"
-msgstr ""
+msgstr "Tokelauan"
 
 msgid "lang_tlh"
-msgstr ""
+msgstr "Klingon (Artificial language)"
 
 msgid "lang_tli"
-msgstr ""
+msgstr "Tlingit"
 
 msgid "lang_tmh"
-msgstr ""
+msgstr "Tamashek"
 
 msgid "lang_tog"
-msgstr ""
+msgstr "Tonga (Nyasa)"
 
 msgid "lang_ton"
-msgstr ""
+msgstr "Tongan"
 
 msgid "lang_tpi"
-msgstr ""
+msgstr "Tok Pisin"
 
 msgid "lang_tsi"
-msgstr ""
+msgstr "Tsimshian"
 
 msgid "lang_tsn"
-msgstr ""
+msgstr "Tswana"
 
 msgid "lang_tso"
-msgstr ""
+msgstr "Tsonga"
 
 msgid "lang_tuk"
-msgstr ""
+msgstr "Turkmen"
 
 msgid "lang_tum"
-msgstr ""
+msgstr "Tumbuka"
 
 msgid "lang_tup"
-msgstr ""
+msgstr "Tupi languages"
 
 msgid "lang_tur"
-msgstr ""
+msgstr "Turkish"
 
 msgid "lang_tut"
-msgstr ""
+msgstr "Altaic (Other)"
 
 msgid "lang_tvl"
-msgstr ""
+msgstr "Tuvaluan"
 
 msgid "lang_twi"
-msgstr ""
+msgstr "Twi"
 
 msgid "lang_tyv"
-msgstr ""
+msgstr "Tuvinian"
 
 msgid "lang_udm"
-msgstr ""
+msgstr "Udmurt"
 
 msgid "lang_uga"
-msgstr ""
+msgstr "Ugaritic"
 
 msgid "lang_uig"
-msgstr ""
+msgstr "Uighur"
 
 msgid "lang_ukr"
-msgstr ""
+msgstr "Ukrainian"
 
 msgid "lang_umb"
-msgstr ""
+msgstr "Umbundu"
 
 msgid "lang_und"
-msgstr ""
+msgstr "Undetermined"
 
 msgid "lang_urd"
-msgstr ""
+msgstr "Urdu"
 
 msgid "lang_uzb"
-msgstr ""
+msgstr "Uzbek"
 
 msgid "lang_vai"
-msgstr ""
+msgstr "Vai"
 
 msgid "lang_ven"
-msgstr ""
+msgstr "Venda"
 
 msgid "lang_vie"
-msgstr ""
+msgstr "Vietnamese"
 
 msgid "lang_vol"
-msgstr ""
+msgstr "Volapük"
 
 msgid "lang_vot"
-msgstr ""
+msgstr "Votic"
 
 msgid "lang_wak"
-msgstr ""
+msgstr "Wakashan languages"
 
 msgid "lang_wal"
-msgstr ""
+msgstr "Wolayta"
 
 msgid "lang_war"
-msgstr ""
+msgstr "Waray"
 
 msgid "lang_was"
-msgstr ""
+msgstr "Washoe"
 
 msgid "lang_wel"
-msgstr ""
+msgstr "Welsh"
 
 msgid "lang_wen"
-msgstr ""
+msgstr "Sorbian (Other)"
 
 msgid "lang_wln"
-msgstr ""
+msgstr "Walloon"
 
 msgid "lang_wol"
-msgstr ""
+msgstr "Wolof"
 
 msgid "lang_xal"
-msgstr ""
+msgstr "Oirat"
 
 msgid "lang_xho"
-msgstr ""
+msgstr "Xhosa"
 
 msgid "lang_yao"
-msgstr ""
+msgstr "Yao (Africa)"
 
 msgid "lang_yap"
-msgstr ""
+msgstr "Yapese"
 
 msgid "lang_yid"
-msgstr ""
+msgstr "Yiddish"
 
 msgid "lang_yor"
-msgstr ""
+msgstr "Yoruba"
 
 msgid "lang_ypk"
-msgstr ""
+msgstr "Yupik languages"
 
 msgid "lang_zap"
-msgstr ""
+msgstr "Zapotec"
 
 msgid "lang_zbl"
-msgstr ""
+msgstr "Blissymbolics"
 
 msgid "lang_zen"
-msgstr ""
+msgstr "Zenaga"
 
 msgid "lang_zha"
-msgstr ""
+msgstr "Zhuang"
 
 msgid "lang_znd"
-msgstr ""
+msgstr "Zande languages"
 
 msgid "lang_zul"
-msgstr ""
+msgstr "Zulu"
 
 msgid "lang_zun"
-msgstr ""
+msgstr "Zuni"
 
 msgid "lang_zxx"
-msgstr ""
+msgstr "No linguistic content"
 
 msgid "lang_zza"
-msgstr ""
+msgstr "Zaza"
 
 msgid "language"
 msgstr ""
@@ -2698,19 +2698,19 @@ msgid "pid"
 msgstr ""
 
 msgid "role_admin"
-msgstr ""
+msgstr "Admin"
 
 msgid "role_moderator"
-msgstr ""
+msgstr "Moderator"
 
 msgid "role_publisher"
-msgstr ""
+msgstr "Submitter"
 
 msgid "role_superuser"
-msgstr ""
+msgstr "Super user"
 
 msgid "role_user"
-msgstr ""
+msgstr "User"
 
 msgid "specific_collections"
 msgstr ""
@@ -2722,10 +2722,10 @@ msgid "subject"
 msgstr ""
 
 msgid "unifr"
-msgstr ""
+msgstr "University of Fribourg"
 
 msgid "unisi"
-msgstr ""
+msgstr "University of Lugano"
 
 msgid "uri"
 msgstr ""
@@ -2735,3 +2735,4 @@ msgstr ""
 
 msgid "vol."
 msgstr ""
+
