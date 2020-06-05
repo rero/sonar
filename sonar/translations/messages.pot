@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2020-06-05 10:32+0200\n"
+"POT-Creation-Date: 2020-06-24 10:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1084,9 +1084,6 @@ msgid "deposit_status_to_validate"
 msgstr ""
 
 msgid "deposit_status_validated"
-msgstr ""
-
-msgid "document_type"
 msgstr ""
 
 msgid "document_type_advanced_studies_thesis"
@@ -2691,13 +2688,7 @@ msgstr ""
 msgid "lang_zza"
 msgstr ""
 
-msgid "language"
-msgstr ""
-
 msgid "no."
-msgstr ""
-
-msgid "organisation"
 msgstr ""
 
 msgid "p."
@@ -2721,13 +2712,7 @@ msgstr ""
 msgid "role_user"
 msgstr ""
 
-msgid "specific_collections"
-msgstr ""
-
 msgid "status"
-msgstr ""
-
-msgid "subject"
 msgstr ""
 
 msgid "unifr"

@@ -9,12 +9,14 @@
     {{
       webpack["sonar-theme.css"]
     }}
+    <link rel="stylesheet" href="/static/sonar-ui/styles.css">
   </head>
 
   <body>
     <sonar-root></sonar-root>
     <script src="/static/sonar-ui/runtime.js?{{ ui_version }}"></script>
     <script src="/static/sonar-ui/polyfills.js?{{ ui_version }}"></script>
+    <script src="/static/sonar-ui/scripts.js?{{ ui_version }}"></script>
     <script src="/static/sonar-ui/main.js?{{ ui_version }}"></script>
   </body>
 </html>

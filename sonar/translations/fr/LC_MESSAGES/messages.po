@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2020-06-05 10:32+0200\n"
+"POT-Creation-Date: 2020-06-24 10:12+0200\n"
 "PO-Revision-Date: 2020-05-13 05:58+0000\n"
 "Last-Translator: MarionRERO <marion.davis@rero.ch>, 2020\n"
 "Language: fr\n"
@@ -1104,9 +1104,6 @@ msgstr "A valider"
 
 msgid "deposit_status_validated"
 msgstr "Validé"
-
-msgid "document_type"
-msgstr "Document types"
 
 msgid "document_type_advanced_studies_thesis"
 msgstr "Advanced studies thesis"
@@ -2710,14 +2707,8 @@ msgstr "sans contenu linguistique"
 msgid "lang_zza"
 msgstr "zazaki"
 
-msgid "language"
-msgstr "langue"
-
 msgid "no."
 msgstr "no."
-
-msgid "organisation"
-msgstr "organisation"
 
 msgid "p."
 msgstr "p."
@@ -2740,14 +2731,8 @@ msgstr "Super user"
 msgid "role_user"
 msgstr "User"
 
-msgid "specific_collections"
-msgstr "Specific collections"
-
 msgid "status"
 msgstr "statut"
-
-msgid "subject"
-msgstr "sujet"
 
 msgid "unifr"
 msgstr "University of Fribourg"
@@ -2763,7 +2748,4 @@ msgstr "utilisateur"
 
 msgid "vol."
 msgstr "vol."
-
-#~ msgid "Settings"
-#~ msgstr "Paramètres"
 

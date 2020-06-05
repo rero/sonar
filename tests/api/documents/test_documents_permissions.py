@@ -48,28 +48,33 @@ def test_list(client, make_document, superuser, admin, moderator, submitter,
     res = client.get(url_for('invenio_records_rest.doc_list'))
     assert res.status_code == 200
     assert res.json['hits']['total'] == 1
+    assert not res.json['aggregations'].get('organisation')
 
     # Logged as admin
     login_user_via_session(client, email=admin['email'])
     res = client.get(url_for('invenio_records_rest.doc_list'))
     assert res.status_code == 200
     assert res.json['hits']['total'] == 1
+    assert not res.json['aggregations'].get('organisation')
 
     # Logged as superuser
     login_user_via_session(client, email=superuser['email'])
     res = client.get(url_for('invenio_records_rest.doc_list'))
     assert res.status_code == 200
     assert res.json['hits']['total'] == 2
+    assert res.json['aggregations'].get('organisation')
 
     # Public search
     res = client.get(url_for('invenio_records_rest.doc_list', view='sonar'))
     assert res.status_code == 200
     assert res.json['hits']['total'] == 2
+    assert res.json['aggregations'].get('organisation')
 
     # Public search for organisation
     res = client.get(url_for('invenio_records_rest.doc_list', view='org'))
     assert res.status_code == 200
     assert res.json['hits']['total'] == 1
+    assert not res.json['aggregations'].get('organisation')
 
 
 def test_create(client, document_json, superuser, admin, moderator, submitter,
