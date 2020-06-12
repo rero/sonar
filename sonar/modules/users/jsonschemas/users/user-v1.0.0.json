@@ -90,7 +90,7 @@
       "type": "array",
       "uniqueItems": true,
       "minItems": 1,
-      "maxItems": 4,
+      "maxItems": 1,
       "items": {
         "type": "string",
         "enum": [
