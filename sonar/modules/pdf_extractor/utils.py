@@ -91,6 +91,7 @@ def format_extracted_data(data):
 
                 if len(name) > 1:
                     author_data['name'] = ', '.join(name)
+                    author_data['role'] = 'cre'
 
             if author_data.get('name'):
                 author_data['affiliation'] = None

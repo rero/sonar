@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2020-06-24 10:12+0200\n"
+"POT-Creation-Date: 2020-06-24 09:43+0200\n"
 "PO-Revision-Date: 2020-05-13 05:58+0000\n"
 "Last-Translator: MarionRERO <marion.davis@rero.ch>, 2020\n"
 "Language: fr\n"
@@ -207,6 +207,9 @@ msgstr ""
 "Saisissez votre adresse e-mail ci-dessous et nous vous enverrons un lien "
 "pour réinitialiser votre mot de passe."
 
+msgid "Example: 1111-2222-3333-4444"
+msgstr ""
+
 msgid "Example: 2019 or 2019-01-01"
 msgstr ""
 
@@ -389,6 +392,9 @@ msgstr "Numéro"
 
 msgid "Numbering"
 msgstr "Numérotation"
+
+msgid "ORCID"
+msgstr ""
 
 msgid "Organisation"
 msgstr "Organisation"

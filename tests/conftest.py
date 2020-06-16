@@ -17,15 +17,13 @@
 
 """Common pytest fixtures and plugins."""
 
+import copy
 import os
 import tempfile
 from io import BytesIO
 
-import mock
 import pytest
-from flask import url_for
 from flask_principal import ActionNeed
-from flask_security.utils import encrypt_password
 from invenio_access.models import ActionUsers, Role
 from invenio_accounts.ext import hash_password
 from invenio_files_rest.models import Location
@@ -397,7 +395,9 @@ def deposit_json():
         '03e5e909-2fce-479e-a697-657e1392cc72',
         'contributors': [{
             'affiliation': 'University of Bern, Switzerland',
-            'name': 'Takayoshi, Shintaro'
+            'name': 'Takayoshi, Shintaro',
+            'role': 'cre',
+            'orcid': '1234-5678-1234-5678'
         }],
         'metadata': {
             'documentType':
@@ -424,7 +424,7 @@ def deposit_json():
                 'publisher': 'Publisher'
             },
             'otherElectronicVersions': [{
-                'type': 'Published version',
+                'publicNote': 'Published version',
                 'url': 'https://some.url/document.pdf'
             }],
             'specificCollections': ['Collection 1', 'Collection 2'],
@@ -497,75 +497,14 @@ def make_deposit(db, deposit_json, bucket_location, pdf_file, make_user):
 
 
 @pytest.fixture()
-def deposit(app, db, user, pdf_file, bucket_location):
+def deposit(app, db, user, pdf_file, bucket_location, deposit_json):
     """Deposit fixture."""
-    deposit_json = {
-        '$schema':
-        'https://sonar.ch/schemas/deposits/deposit-v1.0.0.json',
-        '_bucket':
-        '03e5e909-2fce-479e-a697-657e1392cc72',
-        'contributors': [{
-            'affiliation': 'University of Bern, Switzerland',
-            'name': 'Takayoshi, Shintaro'
-        }],
-        'metadata': {
-            'documentType':
-            'coar:c_816b',
-            'title':
-            'Title of the document',
-            'subtitle':
-            'Subtitle of the document',
-            'otherLanguageTitle': {
-                'language': 'fre',
-                'title': 'Titre du document'
-            },
-            'language':
-            'eng',
-            'documentDate':
-            '2020-01-01',
-            'publication': {
-                'publishedIn': 'Journal',
-                'year': '2019',
-                'volume': '12',
-                'number': '2',
-                'pages': '1-12',
-                'editors': ['Denson, Edward', 'Worth, James'],
-                'publisher': 'Publisher'
-            },
-            'otherElectronicVersions': [{
-                'type': 'Published version',
-                'url': 'https://some.url/document.pdf'
-            }],
-            'specificCollections': ['Collection 1', 'Collection 2'],
-            'classification':
-            '543',
-            'abstracts': [{
-                'language': 'eng',
-                'abstract': 'Abstract of the document'
-            }, {
-                'language': 'fre',
-                'abstract': 'Résumé du document'
-            }],
-            'subjects': [{
-                'language': 'eng',
-                'subjects': ['Subject 1', 'Subject 2']
-            }, {
-                'language': 'fre',
-                'subjects': ['Sujet 1', 'Sujet 2']
-            }]
-        },
-        'status':
-        'in_progress',
-        'step':
-        'diffusion',
-        'user': {
-            '$ref': 'https://sonar.ch/api/users/{pid}'.format(pid=user['pid'])
-        }
+    json = copy.deepcopy(deposit_json)
+    json['user'] = {
+        '$ref': 'https://sonar.ch/api/users/{pid}'.format(pid=user['pid'])
     }
 
-    deposit = DepositRecord.create(deposit_json,
-                                   dbcommit=True,
-                                   with_bucket=True)
+    deposit = DepositRecord.create(json, dbcommit=True, with_bucket=True)
 
     with open(pdf_file, 'rb') as file:
         content = file.read()

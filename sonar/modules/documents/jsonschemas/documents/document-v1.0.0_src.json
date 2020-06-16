@@ -1065,7 +1065,17 @@
                   "type": {
                     "title": "Type",
                     "type": "string",
-                    "minLength": 1
+                    "enum": [
+                      "bf:Doi"
+                    ],
+                    "form": {
+                      "options": [
+                        {
+                          "label": "bf:Doi",
+                          "value": "bf:Doi"
+                        }
+                      ]
+                    }
                   },
                   "source": {
                     "title": "Source",
