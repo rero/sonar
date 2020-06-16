@@ -25,6 +25,7 @@ from io import BytesIO
 
 from flask import Blueprint, abort, current_app, jsonify, make_response, \
     request
+from flask_babelex import _
 from invenio_db import db
 from invenio_rest import ContentNegotiatedMethodView
 
@@ -144,11 +145,12 @@ def publish(pid=None):
         if moderators_emails:
             # Send an email to validators
             send_email(
-                moderators_emails, 'Deposit to validate', 'email/validation', {
+                moderators_emails, _('Deposit to validate'),
+                'deposits/email/validation', {
                     'deposit': deposit,
                     'user': user,
                     'link': current_app.config.get('SONAR_APP_ANGULAR_URL')
-                })
+                }, False)
 
     deposit.log_action(user, 'submit')
 
@@ -188,18 +190,17 @@ def review(pid=None):
     subject = None
     status = None
 
-    # TODO: Translate subjects
     if payload['action'] == DepositRecord.REVIEW_ACTION_APPROVE:
-        subject = 'Deposit approval'
+        subject = _('Deposit approval')
         status = DepositRecord.STATUS_VALIDATED
 
         # Create document based on deposit
         deposit.create_document()
     elif payload['action'] == DepositRecord.REVIEW_ACTION_REJECT:
-        subject = 'Deposit rejection'
+        subject = _('Deposit rejection')
         status = DepositRecord.STATUS_REJECTED
     else:
-        subject = 'Ask for changes on deposit'
+        subject = _('Ask for changes on deposit')
         status = DepositRecord.STATUS_ASK_FOR_CHANGES
 
     deposit['status'] = status
@@ -212,14 +213,14 @@ def review(pid=None):
 
     send_email(
         [deposit_user['email']], subject,
-        'email/{action}'.format(action=payload['action']), {
+        'deposits/email/{action}'.format(action=payload['action']), {
             'deposit': deposit,
             'deposit_user': deposit_user,
             'user': user,
             'date': datetime.now().strftime('%d.%m.%Y %H:%M:%S'),
             'comment': payload['comment'],
             'link': current_app.config.get('SONAR_APP_ANGULAR_URL')
-        })
+        }, False)
 
     deposit.commit()
     deposit.reindex()

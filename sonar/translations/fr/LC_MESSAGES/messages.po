@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2020-06-24 09:43+0200\n"
+"POT-Creation-Date: 2020-06-16 15:20+0200\n"
 "PO-Revision-Date: 2020-05-13 05:58+0000\n"
 "Last-Translator: MarionRERO <marion.davis@rero.ch>, 2020\n"
 "Language: fr\n"
@@ -54,6 +54,9 @@ msgstr "Affiliation"
 
 msgid "Agent"
 msgstr "Agent"
+
+msgid "Ask for changes on deposit"
+msgstr ""
 
 msgid ""
 "At least 3 characters and must contain only lower case characters and "
@@ -152,6 +155,15 @@ msgstr "Date de décès"
 
 msgid "Degree"
 msgstr "Diplôme"
+
+msgid "Deposit approval"
+msgstr ""
+
+msgid "Deposit rejection"
+msgstr ""
+
+msgid "Deposit to validate"
+msgstr ""
 
 msgid "Describes the information of a single file in the record."
 msgstr "Décrit l'information d'un seul fichier dans la notice."
@@ -696,6 +708,9 @@ msgstr "Version UUID"
 
 msgid "Volume"
 msgstr "Volume"
+
+msgid "Welcome on SONAR"
+msgstr ""
 
 msgid "Welcome to Swiss Open Access Repository!"
 msgstr "Bienvenue à Swiss Open Access Repository!"

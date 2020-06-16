@@ -1,0 +1,19 @@
+<p>Dear {{ user.full_name }},</p>
+<p>An account has been created for you on SONAR, the Insitutional repository of {{ user.organisation.name }}.</p>
+<p>To access it, please <a href="{{ reset_link.replace('/api', '') }}">reset your password.</a></p>
+<p>Your login e-mail: {{ user.email }}</p>
+{% if user.is_submitter %}
+<p>You will then be able to:</p>
+<ul>
+  <li>Upload publications.</li>
+  {% if user.is_moderator %}
+  <li>Moderate submissions and edit document metadata.</li>
+  {% endif %}
+  {% if user.is_admin %}
+  <li>Manage the repository as an administrator.</li>
+  {% endif %}
+</ul>
+{% endif %}
+<p>Thank you for your participation!</p>
+<p>Best regards</p>
+<p>{{ user.organisation.name }}</p>
