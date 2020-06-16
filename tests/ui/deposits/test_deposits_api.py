@@ -98,7 +98,12 @@ def test_create_document(app, client, deposit, user):
         'University of Bern, Switzerland',
         'agent': {
             'preferred_name': 'Takayoshi, Shintaro',
-            'type': 'bf:Person'
+            'type': 'bf:Person',
+            'identifiedBy': {
+                'source': 'ORCID',
+                'type': 'bf:Doi',
+                'value': '1234-5678-1234-5678'
+            }
         },
         'controlledAffiliation': ['Uni of Bern and Hospital'],
         'role': ['cre']
@@ -114,7 +119,12 @@ def test_create_document(app, client, deposit, user):
     assert document['contribution'] == [{
         'agent': {
             'preferred_name': 'Takayoshi, Shintaro',
-            'type': 'bf:Person'
+            'type': 'bf:Person',
+            'identifiedBy': {
+                'source': 'ORCID',
+                'type': 'bf:Doi',
+                'value': '1234-5678-1234-5678'
+            }
         },
         'role': ['cre']
     }]

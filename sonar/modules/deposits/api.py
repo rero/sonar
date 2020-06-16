@@ -188,7 +188,7 @@ class DepositRecord(SonarRecord):
                 'document': {
                     'electronicLocator': link['url']
                 },
-                'publicNote': link['type']
+                'publicNote': link['publicNote']
             } for link in self['metadata']['otherElectronicVersions']]
 
         # Specific collections
@@ -231,9 +231,17 @@ class DepositRecord(SonarRecord):
                     'type': 'bf:Person',
                     'preferred_name': contributor['name']
                 },
-                'role': ['cre'],
+                'role': [contributor['role']],
                 'affiliation': contributor.get('affiliation')
             }
+
+            # ORCID for contributor
+            if contributor.get('orcid'):
+                data['agent']['identifiedBy'] = {
+                    'type': 'bf:Doi',
+                    'source': 'ORCID',
+                    'value': contributor['orcid']
+                }
 
             # Resolve controlled affiliations
             if data.get('affiliation'):

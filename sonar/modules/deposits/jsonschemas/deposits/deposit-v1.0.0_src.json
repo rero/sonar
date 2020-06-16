@@ -272,7 +272,11 @@
         "title": {
           "title": "Title",
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "form": {
+            "type": "textarea",
+            "rows": 2
+          }
         },
         "subtitle": {
           "title": "Subtitle",
@@ -382,15 +386,18 @@
             "title": "Other electronic version",
             "type": "object",
             "required": [
-              "type",
+              "publicNote",
               "url"
             ],
             "additionalProperties": false,
             "properties": {
-              "type": {
-                "title": "Type",
+              "publicNote": {
+                "title": "Public note",
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "form": {
+                  "placeholder": "Example: Published version"
+                }
               },
               "url": {
                 "title": "URL",
@@ -489,11 +496,14 @@
         "title": "Contributor",
         "type": "object",
         "required": [
-          "name"
+          "name",
+          "role"
         ],
         "propertiesOrder": [
           "name",
-          "affiliation"
+          "affiliation",
+          "role",
+          "orcid"
         ],
         "properties": {
           "name": {
@@ -506,6 +516,51 @@
             "title": "Affiliation",
             "type": "string",
             "minLength": 1
+          },
+          "role": {
+            "title": "Role",
+            "type": "string",
+            "default": "cre",
+            "enum": [
+              "dgs",
+              "prt",
+              "cre",
+              "edt",
+              "ctb"
+            ],
+            "form": {
+              "options": [
+                {
+                  "label": "contribution_role_cre",
+                  "value": "cre"
+                },
+                {
+                  "label": "contribution_role_ctb",
+                  "value": "ctb"
+                },
+                {
+                  "label": "contribution_role_edt",
+                  "value": "edt"
+                },
+                {
+                  "label": "contribution_role_dgs",
+                  "value": "dgs"
+                },
+                {
+                  "label": "contribution_role_prt",
+                  "value": "prt"
+                }
+              ]
+            }
+          },
+          "orcid": {
+            "title": "ORCID",
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$",
+            "form": {
+              "placeholder": "Example: 1111-2222-3333-4444"
+            }
           }
         }
       }

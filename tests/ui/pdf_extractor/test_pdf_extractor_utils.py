@@ -40,14 +40,16 @@ def test_format_extracted_data(app):
         assert formatted_data['authors'] == [{
             'affiliation':
             'Swiss Institute of Bioinformatics, Lausanne, Switzerland',
-            'name': 'Komljenovic, Andrea'
+            'name': 'Komljenovic, Andrea',
+            'role': 'cre'
         }, {
             'affiliation':
             'Institute of Bioengineering, Laboratory of Integrative Systems '
             'Physiology, École Polytechnique Fédérale de Lausanne, Lausanne, '
             'Lausanne, Switzerland',
             'name':
-            'Sleiman, Maroun Bou'
+            'Sleiman, Maroun Bou',
+            'role': 'cre'
         }]
 
         # Test authors
