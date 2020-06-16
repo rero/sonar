@@ -65,14 +65,16 @@ def change_filename_extension(filename, extension):
     return matches.group(1) + '.' + extension
 
 
-def send_email(recipients, subject, template, ctx=None, **kwargs):
+def send_email(recipients, subject, template, ctx=None, html=True, lang='en'):
     """Send email."""
-    lang = kwargs.get('lang', 'en')
+    email_type = 'html' if html else 'txt'
 
-    template = '{template}.{lang}.txt'.format(template=template, lang=lang)
-
+    template = '{template}/{lang}.{type}'.format(template=template,
+                                                 lang=lang,
+                                                 type=email_type)
     msg = TemplatedMessage(
-        template_body=template,
+        template_body=template if not html else None,
+        template_html=template if html else None,
         sender=current_app.config.get('SECURITY_EMAIL_SENDER'),
         recipients=recipients,
         subject=subject,

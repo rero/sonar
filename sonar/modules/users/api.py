@@ -23,10 +23,11 @@ from elasticsearch_dsl.query import Q
 from flask import current_app
 from flask_security import current_user
 from flask_security.confirmable import confirm_user
-from flask_security.recoverable import send_reset_password_instructions
 from invenio_accounts.ext import hash_password
 from werkzeug.local import LocalProxy
 from werkzeug.utils import cached_property
+
+from sonar.modules.users.utils import send_welcome_email
 
 from ..api import SonarIndexer, SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
@@ -167,8 +168,8 @@ class UserRecord(SonarRecord):
             user = datastore.create_user(email=email, password=password)
             datastore.commit()
 
-            # Send password reset
-            send_reset_password_instructions(user)
+            # Send welcome email
+            send_welcome_email(self, user)
 
             # Directly confirm user (no account activation by email)
             confirm_user(user)

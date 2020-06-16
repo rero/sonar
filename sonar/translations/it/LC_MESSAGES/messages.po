@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2020-06-24 09:43+0200\n"
+"POT-Creation-Date: 2020-06-16 15:20+0200\n"
 "PO-Revision-Date: 2020-05-13 05:58+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>, 2020\n"
 "Language: it\n"
@@ -52,6 +52,9 @@ msgid "Affiliation"
 msgstr ""
 
 msgid "Agent"
+msgstr ""
+
+msgid "Ask for changes on deposit"
 msgstr ""
 
 msgid ""
@@ -150,6 +153,15 @@ msgid "Date of death"
 msgstr ""
 
 msgid "Degree"
+msgstr ""
+
+msgid "Deposit approval"
+msgstr ""
+
+msgid "Deposit rejection"
+msgstr ""
+
+msgid "Deposit to validate"
 msgstr ""
 
 msgid "Describes the information of a single file in the record."
@@ -679,6 +691,9 @@ msgid "Version UUID"
 msgstr ""
 
 msgid "Volume"
+msgstr ""
+
+msgid "Welcome on SONAR"
 msgstr ""
 
 msgid "Welcome to Swiss Open Access Repository!"
