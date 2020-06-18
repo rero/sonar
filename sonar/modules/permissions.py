@@ -26,7 +26,7 @@ from invenio_access import Permission
 
 superuser_access_permission = Permission(ActionNeed('superuser-access'))
 admin_access_permission = Permission(ActionNeed('admin-access'))
-publisher_access_permission = Permission(RoleNeed('publisher'),
+submitter_access_permission = Permission(RoleNeed('submitter'),
                                          RoleNeed('moderator'),
                                          RoleNeed('admin'),
                                          RoleNeed('superuser'))
@@ -38,15 +38,15 @@ allow_access = type('Allow', (), {'can': lambda self: True})()
 deny_access = type('Allow', (), {'can': lambda self: False})()
 
 
-def has_publisher_access():
-    """Check if current user has at least role publisher.
+def has_submitter_access():
+    """Check if current user has at least role submitter.
 
     This function is used in app context and can be called in all templates.
     """
     if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
         return True
 
-    return publisher_access_permission.can()
+    return submitter_access_permission.can()
 
 
 def has_admin_access():

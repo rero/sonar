@@ -222,9 +222,9 @@ def moderator(make_user):
 
 
 @pytest.fixture()
-def publisher(make_user):
-    """Create publisher."""
-    return make_user('publisher')
+def submitter(make_user):
+    """Create submitter."""
+    return make_user('submitter')
 
 
 @pytest.fixture()
@@ -456,7 +456,7 @@ def deposit_json():
 def make_deposit(db, deposit_json, bucket_location, pdf_file, make_user):
     """Factory for creating deposit."""
 
-    def _make_deposit(role='publisher', organisation=None):
+    def _make_deposit(role='submitter', organisation=None):
         user = make_user(role, organisation)
 
         deposit_json['user'] = {

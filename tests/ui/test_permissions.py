@@ -21,28 +21,28 @@ from flask_security import url_for_security
 from invenio_accounts.testutils import login_user_via_view
 
 from sonar.modules.permissions import admin_permission_factory, \
-    files_permission_factory, has_admin_access, has_publisher_access, \
+    files_permission_factory, has_admin_access, has_submitter_access, \
     has_superuser_access, record_permission_factory, wiki_edit_permission
 
 
-def test_has_publisher_access(app, client, user_without_role, publisher):
-    """Test if user has an publisher access."""
+def test_has_submitter_access(app, client, user_without_role, submitter):
+    """Test if user has an submitter access."""
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
-    assert has_publisher_access()
+    assert has_submitter_access()
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
     login_user_via_view(client,
                         email=user_without_role.email,
                         password='123456')
 
-    assert not has_publisher_access()
+    assert not has_submitter_access()
 
     client.get(url_for_security('logout'))
 
-    login_user_via_view(client, email=publisher['email'], password='123456')
+    login_user_via_view(client, email=submitter['email'], password='123456')
 
-    assert has_publisher_access()
+    assert has_submitter_access()
 
 
 def test_has_admin_access(app, client, user_without_role, admin):

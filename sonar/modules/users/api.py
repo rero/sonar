@@ -81,17 +81,17 @@ class UserRecord(SonarRecord):
 
     ROLE_USER = 'user'
     ROLE_MODERATOR = 'moderator'
-    ROLE_PUBLISHER = 'publisher'
+    ROLE_SUBMITTER = 'submitter'
     ROLE_ADMIN = 'admin'
     ROLE_SUPERUSER = 'superuser'
 
     ROLES_HIERARCHY = {
         ROLE_USER: [],
-        ROLE_PUBLISHER: [ROLE_USER],
-        ROLE_MODERATOR: [ROLE_PUBLISHER, ROLE_USER],
-        ROLE_ADMIN: [ROLE_MODERATOR, ROLE_PUBLISHER, ROLE_USER],
+        ROLE_SUBMITTER: [ROLE_USER],
+        ROLE_MODERATOR: [ROLE_SUBMITTER, ROLE_USER],
+        ROLE_ADMIN: [ROLE_MODERATOR, ROLE_SUBMITTER, ROLE_USER],
         ROLE_SUPERUSER:
-        [ROLE_ADMIN, ROLE_MODERATOR, ROLE_PUBLISHER, ROLE_USER],
+        [ROLE_ADMIN, ROLE_MODERATOR, ROLE_SUBMITTER, ROLE_USER],
     }
 
     minter = user_pid_minter
@@ -99,7 +99,7 @@ class UserRecord(SonarRecord):
     provider = UserProvider
     schema = 'users/user-v1.0.0.json'
     available_roles = [
-        ROLE_SUPERUSER, ROLE_ADMIN, ROLE_MODERATOR, ROLE_PUBLISHER, ROLE_USER
+        ROLE_SUPERUSER, ROLE_ADMIN, ROLE_MODERATOR, ROLE_SUBMITTER, ROLE_USER
     ]
 
     @classmethod
@@ -303,9 +303,9 @@ class UserRecord(SonarRecord):
         return self.is_granted(UserRecord.ROLE_MODERATOR)
 
     @property
-    def is_publisher(self):
-        """Check if a user a pulisher."""
-        return self.is_granted(UserRecord.ROLE_PUBLISHER)
+    def is_submitter(self):
+        """Check if a user a submitter."""
+        return self.is_granted(UserRecord.ROLE_SUBMITTER)
 
     @property
     def is_user(self):

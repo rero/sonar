@@ -25,7 +25,7 @@ from flask_bootstrap import Bootstrap
 from flask_security import user_registered
 from flask_wiki import Wiki
 
-from sonar.modules.permissions import has_admin_access, has_publisher_access, \
+from sonar.modules.permissions import has_admin_access, has_submitter_access, \
     has_superuser_access
 from sonar.modules.users.api import current_user_record
 from sonar.modules.users.signals import user_registered_handler
@@ -37,7 +37,7 @@ from . import config
 def utility_processor():
     """Dictionary for passing data to templates."""
     return dict(
-                has_publisher_access=has_publisher_access,
+                has_submitter_access=has_submitter_access,
                 has_admin_access=has_admin_access,
                 has_superuser_access=has_superuser_access,
                 ui_version=config.SONAR_APP_UI_VERSION,

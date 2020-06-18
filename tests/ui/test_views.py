@@ -55,7 +55,7 @@ def test_admin_record_page(app, admin, user_without_role):
         assert '<sonar-root>' in str(res.data)
 
 
-def test_logged_user(app, client, superuser, admin, moderator, publisher,
+def test_logged_user(app, client, superuser, admin, moderator, submitter,
                      user):
     """Test logged user page."""
     url = url_for('sonar.logged_user')
@@ -102,10 +102,10 @@ def test_logged_user(app, client, superuser, admin, moderator, publisher,
     assert res.json['metadata']['permissions']['users']['list']
     assert res.json['metadata']['permissions']['deposits']['list']
 
-    # Logged as publisher
-    login_user_via_session(client, email=publisher['email'])
+    # Logged as submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.get(url)
-    assert b'"email":"orgpublisher@rero.ch"' in res.data
+    assert b'"email":"orgsubmitter@rero.ch"' in res.data
     assert not res.json['metadata']['permissions']['documents']['add']
     assert not res.json['metadata']['permissions']['organisations']['add']
     assert not res.json['metadata']['permissions']['users']['add']

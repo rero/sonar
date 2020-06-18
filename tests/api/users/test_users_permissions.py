@@ -23,7 +23,7 @@ from flask import url_for
 from invenio_accounts.testutils import login_user_via_session
 
 
-def test_list(client, make_user, superuser, admin, moderator, publisher, user):
+def test_list(client, make_user, superuser, admin, moderator, submitter, user):
     """Test list users permissions."""
     make_user('user', 'org2')
 
@@ -52,8 +52,8 @@ def test_list(client, make_user, superuser, admin, moderator, publisher, user):
     assert res.json['hits']['total'] == 1
     assert not res.json['hits']['hits'][0]['metadata'].get('email')
 
-    # Logged as publisher
-    login_user_via_session(client, email=publisher['email'])
+    # Logged as submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.get(url_for('invenio_records_rest.user_list'))
     assert res.status_code == 200
     assert res.json['hits']['total'] == 1
@@ -77,7 +77,7 @@ def test_list(client, make_user, superuser, admin, moderator, publisher, user):
     assert res.json['hits']['total'] == 6
 
 
-def test_create(client, organisation, superuser, admin, moderator, publisher,
+def test_create(client, organisation, superuser, admin, moderator, submitter,
                 user):
     """Test create users permissions."""
     headers = {
@@ -104,8 +104,8 @@ def test_create(client, organisation, superuser, admin, moderator, publisher,
                       headers=headers)
     assert res.status_code == 403
 
-    # Publisher
-    login_user_via_session(client, email=publisher['email'])
+    # submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.post(url_for('invenio_records_rest.user_list'),
                       data=json.dumps(user_json),
                       headers=headers)
@@ -143,7 +143,7 @@ def test_create(client, organisation, superuser, admin, moderator, publisher,
         '$ref'] == 'https://sonar.ch/api/organisations/org'
 
 
-def test_read(client, make_user, superuser, admin, moderator, publisher, user):
+def test_read(client, make_user, superuser, admin, moderator, submitter, user):
     """Test read users permissions."""
     # Not logged
     res = client.get(
@@ -167,10 +167,10 @@ def test_read(client, make_user, superuser, admin, moderator, publisher, user):
         url_for('invenio_records_rest.user_item', pid_value=moderator['pid']))
     assert res.status_code == 403
 
-    # Logged as publisher
-    login_user_via_session(client, email=publisher['email'])
+    # Logged as submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.get(
-        url_for('invenio_records_rest.user_item', pid_value=publisher['pid']))
+        url_for('invenio_records_rest.user_item', pid_value=submitter['pid']))
     assert res.status_code == 200
     assert res.json['metadata']['permissions'] == {
         'delete': False,
@@ -178,7 +178,7 @@ def test_read(client, make_user, superuser, admin, moderator, publisher, user):
         'update': True
     }
 
-    login_user_via_session(client, email=publisher['email'])
+    login_user_via_session(client, email=submitter['email'])
     res = client.get(
         url_for('invenio_records_rest.user_item', pid_value=user['pid']))
     assert res.status_code == 403
@@ -235,7 +235,7 @@ def test_read(client, make_user, superuser, admin, moderator, publisher, user):
     }
 
 
-def test_update(client, make_user, superuser, admin, moderator, publisher,
+def test_update(client, make_user, superuser, admin, moderator, submitter,
                 user):
     """Test update users permissions."""
     headers = {
@@ -266,15 +266,15 @@ def test_update(client, make_user, superuser, admin, moderator, publisher,
                      headers=headers)
     assert res.status_code == 403
 
-    # Logged as publisher
-    login_user_via_session(client, email=publisher['email'])
+    # Logged as submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.put(url_for('invenio_records_rest.user_item',
-                             pid_value=publisher['pid']),
-                     data=json.dumps(publisher.dumps()),
+                             pid_value=submitter['pid']),
+                     data=json.dumps(submitter.dumps()),
                      headers=headers)
     assert res.status_code == 200
 
-    login_user_via_session(client, email=publisher['email'])
+    login_user_via_session(client, email=submitter['email'])
     res = client.put(url_for('invenio_records_rest.user_item',
                              pid_value=user['pid']),
                      data=json.dumps(user.dumps()),
@@ -330,7 +330,7 @@ def test_update(client, make_user, superuser, admin, moderator, publisher,
     assert res.status_code == 200
 
 
-def test_delete(client, make_user, superuser, admin, moderator, publisher,
+def test_delete(client, make_user, superuser, admin, moderator, submitter,
                 user):
     """Test delete users permissions."""
     # Not logged
@@ -344,8 +344,8 @@ def test_delete(client, make_user, superuser, admin, moderator, publisher,
         url_for('invenio_records_rest.user_item', pid_value=user['pid']))
     assert res.status_code == 403
 
-    # Logged as publisher
-    login_user_via_session(client, email=publisher['email'])
+    # Logged as submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.delete(
         url_for('invenio_records_rest.user_item', pid_value=user['pid']))
     assert res.status_code == 403

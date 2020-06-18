@@ -23,7 +23,7 @@ from flask import url_for
 from invenio_accounts.testutils import login_user_via_session
 
 
-def test_list(client, make_document, superuser, admin, moderator, publisher,
+def test_list(client, make_document, superuser, admin, moderator, submitter,
               user):
     """Test list documents permissions."""
     make_document(None)
@@ -38,8 +38,8 @@ def test_list(client, make_document, superuser, admin, moderator, publisher,
     res = client.get(url_for('invenio_records_rest.doc_list'))
     assert res.status_code == 403
 
-    # Logged as publisher
-    login_user_via_session(client, email=publisher['email'])
+    # Logged as submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.get(url_for('invenio_records_rest.doc_list'))
     assert res.status_code == 403
 
@@ -72,7 +72,7 @@ def test_list(client, make_document, superuser, admin, moderator, publisher,
     assert res.json['hits']['total'] == 1
 
 
-def test_create(client, document_json, superuser, admin, moderator, publisher,
+def test_create(client, document_json, superuser, admin, moderator, submitter,
                 user):
     """Test create documents permissions."""
     headers = {
@@ -93,8 +93,8 @@ def test_create(client, document_json, superuser, admin, moderator, publisher,
                       headers=headers)
     assert res.status_code == 403
 
-    # Publisher
-    login_user_via_session(client, email=publisher['email'])
+    # submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.post(url_for('invenio_records_rest.doc_list'),
                       data=json.dumps(document_json),
                       headers=headers)
@@ -129,7 +129,7 @@ def test_create(client, document_json, superuser, admin, moderator, publisher,
 
 
 def test_read(client, document, make_user, superuser, admin, moderator,
-              publisher, user):
+              submitter, user):
     """Test read documents permissions."""
     # Not logged
     res = client.get(
@@ -142,8 +142,8 @@ def test_read(client, document, make_user, superuser, admin, moderator,
         url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
     assert res.status_code == 403
 
-    # Logged as publisher
-    login_user_via_session(client, email=publisher['email'])
+    # Logged as submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.get(
         url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
     assert res.status_code == 403
@@ -190,7 +190,7 @@ def test_read(client, document, make_user, superuser, admin, moderator,
 
 
 def test_update(client, document, make_user, superuser, admin, moderator,
-                publisher, user):
+                submitter, user):
     """Test update documents permissions."""
     headers = {
         'Content-Type': 'application/json',
@@ -212,8 +212,8 @@ def test_update(client, document, make_user, superuser, admin, moderator,
                      headers=headers)
     assert res.status_code == 403
 
-    # Logged as publisher
-    login_user_via_session(client, email=publisher['email'])
+    # Logged as submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.put(url_for('invenio_records_rest.doc_item',
                              pid_value=document['pid']),
                      data=json.dumps(document.dumps()),
@@ -255,7 +255,7 @@ def test_update(client, document, make_user, superuser, admin, moderator,
 
 
 def test_delete(client, document, make_document, make_user, superuser, admin,
-                moderator, publisher, user):
+                moderator, submitter, user):
     """Test delete documents permissions."""
     # Not logged
     res = client.delete(
@@ -268,8 +268,8 @@ def test_delete(client, document, make_document, make_user, superuser, admin,
         url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
     assert res.status_code == 403
 
-    # Logged as publisher
-    login_user_via_session(client, email=publisher['email'])
+    # Logged as submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.delete(
         url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
     assert res.status_code == 403
