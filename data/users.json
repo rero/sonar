@@ -43,9 +43,9 @@
   },
   {
     "full_name": "Claude Roussel",
-    "email": "rero.sonar+publisher@gmail.com",
+    "email": "rero.sonar+submitter@gmail.com",
     "password": "123456",
-    "roles": ["publisher"],
+    "roles": ["submitter"],
     "birth_date": "1983-09-14",
     "street": "Kirchstrasse 57",
     "postal_code": "1660",

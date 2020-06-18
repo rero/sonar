@@ -25,12 +25,12 @@ from invenio_accounts.testutils import login_user_via_session
 from sonar.modules.deposits.api import DepositRecord
 
 
-def test_list(client, make_deposit, superuser, admin, moderator, publisher,
+def test_list(client, make_deposit, superuser, admin, moderator, submitter,
               user):
     """Test list deposits permissions."""
-    make_deposit('publisher', 'org')
+    make_deposit('submitter', 'org')
     make_deposit('admin', 'org')
-    make_deposit('publisher', 'org2')
+    make_deposit('submitter', 'org2')
 
     # Not logged
     res = client.get(url_for('invenio_records_rest.depo_list'))
@@ -41,8 +41,8 @@ def test_list(client, make_deposit, superuser, admin, moderator, publisher,
     res = client.get(url_for('invenio_records_rest.depo_list'))
     assert res.status_code == 403
 
-    # Logged as publisher
-    login_user_via_session(client, email=publisher['email'])
+    # Logged as submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.get(url_for('invenio_records_rest.depo_list'))
     assert res.status_code == 200
     assert res.json['hits']['total'] == 1
@@ -67,7 +67,7 @@ def test_list(client, make_deposit, superuser, admin, moderator, publisher,
 
 
 def test_create(client, deposit_json, bucket_location, superuser, admin,
-                moderator, publisher, user):
+                moderator, submitter, user):
     """Test create deposits permissions."""
     headers = {
         'Content-Type': 'application/json',
@@ -90,10 +90,10 @@ def test_create(client, deposit_json, bucket_location, superuser, admin,
                       headers=headers)
     assert res.status_code == 403
 
-    # Publisher
-    login_user_via_session(client, email=publisher['email'])
+    # submitter
+    login_user_via_session(client, email=submitter['email'])
     deposit_json['user'] = {
-        '$ref': 'https://sonar.ch/api/users/{pid}'.format(pid=publisher['pid'])
+        '$ref': 'https://sonar.ch/api/users/{pid}'.format(pid=submitter['pid'])
     }
     res = client.post(url_for('invenio_records_rest.depo_list'),
                       data=json.dumps(deposit_json),
@@ -132,10 +132,10 @@ def test_create(client, deposit_json, bucket_location, superuser, admin,
 
 
 def test_read(client, make_deposit, make_user, superuser, admin, moderator,
-              publisher, user):
+              submitter, user):
     """Test read deposits permissions."""
-    deposit1 = make_deposit('publisher', 'org')
-    deposit2 = make_deposit('publisher', 'org2')
+    deposit1 = make_deposit('submitter', 'org')
+    deposit2 = make_deposit('submitter', 'org2')
 
     # Not logged
     res = client.get(
@@ -148,8 +148,8 @@ def test_read(client, make_deposit, make_user, superuser, admin, moderator,
         url_for('invenio_records_rest.depo_item', pid_value=deposit1['pid']))
     assert res.status_code == 403
 
-    # Logged as publisher
-    login_user_via_session(client, email=publisher['email'])
+    # Logged as submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.get(
         url_for('invenio_records_rest.depo_item', pid_value=deposit1['pid']))
     assert res.status_code == 200
@@ -192,11 +192,11 @@ def test_read(client, make_deposit, make_user, superuser, admin, moderator,
     assert res.status_code == 200
 
 
-def test_update(client, make_deposit, superuser, admin, moderator, publisher,
+def test_update(client, make_deposit, superuser, admin, moderator, submitter,
                 user):
     """Test update deposits permissions."""
-    deposit1 = make_deposit('publisher', 'org')
-    deposit2 = make_deposit('publisher', 'org2')
+    deposit1 = make_deposit('submitter', 'org')
+    deposit2 = make_deposit('submitter', 'org2')
 
     headers = {
         'Content-Type': 'application/json',
@@ -218,8 +218,8 @@ def test_update(client, make_deposit, superuser, admin, moderator, publisher,
                      headers=headers)
     assert res.status_code == 403
 
-    # Logged as publisher
-    login_user_via_session(client, email=publisher['email'])
+    # Logged as submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.put(url_for('invenio_records_rest.depo_item',
                              pid_value=deposit1['pid']),
                      data=json.dumps(deposit1.dumps()),
@@ -277,10 +277,10 @@ def test_update(client, make_deposit, superuser, admin, moderator, publisher,
 
 
 def test_delete(client, db, make_deposit, superuser, admin, moderator,
-                publisher, user):
+                submitter, user):
     """Test delete deposits permissions."""
-    deposit1 = make_deposit('publisher', 'org')
-    deposit2 = make_deposit('publisher', 'org2')
+    deposit1 = make_deposit('submitter', 'org')
+    deposit2 = make_deposit('submitter', 'org2')
 
     # Not logged
     res = client.delete(
@@ -293,8 +293,8 @@ def test_delete(client, db, make_deposit, superuser, admin, moderator,
         url_for('invenio_records_rest.depo_item', pid_value=deposit1['pid']))
     assert res.status_code == 403
 
-    # Logged as publisher
-    login_user_via_session(client, email=publisher['email'])
+    # Logged as submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.delete(
         url_for('invenio_records_rest.depo_item', pid_value=deposit2['pid']))
     assert res.status_code == 403
@@ -315,7 +315,7 @@ def test_delete(client, db, make_deposit, superuser, admin, moderator,
         url_for('invenio_records_rest.depo_item', pid_value=deposit1['pid']))
     assert res.status_code == 204
 
-    deposit1 = make_deposit('publisher', 'org')
+    deposit1 = make_deposit('submitter', 'org')
 
     # Logged as moderator
     login_user_via_session(client, email=moderator['email'])
@@ -327,7 +327,7 @@ def test_delete(client, db, make_deposit, superuser, admin, moderator,
         url_for('invenio_records_rest.depo_item', pid_value=deposit1['pid']))
     assert res.status_code == 204
 
-    deposit1 = make_deposit('publisher', 'org')
+    deposit1 = make_deposit('submitter', 'org')
 
     # Logged as admin
     login_user_via_session(client, email=admin['email'])
@@ -339,7 +339,7 @@ def test_delete(client, db, make_deposit, superuser, admin, moderator,
         url_for('invenio_records_rest.depo_item', pid_value=deposit1['pid']))
     assert res.status_code == 204
 
-    deposit1 = make_deposit('publisher', 'org')
+    deposit1 = make_deposit('submitter', 'org')
 
     # Logged as superuser
     login_user_via_session(client, email=superuser['email'])

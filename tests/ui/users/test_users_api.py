@@ -68,7 +68,7 @@ def test_get_reachable_roles(app):
     roles = UserRecord.get_reachable_roles(UserRecord.ROLE_MODERATOR)
     assert len(roles) == 3
     assert UserRecord.ROLE_MODERATOR in roles
-    assert UserRecord.ROLE_PUBLISHER in roles
+    assert UserRecord.ROLE_SUBMITTER in roles
     assert UserRecord.ROLE_USER in roles
 
     roles = UserRecord.get_reachable_roles('unknown_role')
@@ -136,7 +136,7 @@ def test_is_role_property(organisation, roles):
         dbcommit=True)
 
     assert user.is_user
-    assert user.is_publisher
+    assert user.is_submitter
     assert user.is_moderator
     assert not user.is_admin
     assert not user.is_superuser
@@ -197,5 +197,5 @@ def test_get_all_reachable_roles(app, db, user):
     assert len(roles) == 4
     assert 'user' in roles
     assert 'moderator' in roles
-    assert 'publisher' in roles
+    assert 'submitter' in roles
     assert 'admin' in roles

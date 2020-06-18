@@ -109,7 +109,7 @@ def logged_user():
         data['metadata']['is_superuser'] = user.is_superuser
         data['metadata']['is_admin'] = user.is_admin
         data['metadata']['is_moderator'] = user.is_moderator
-        data['metadata']['is_publisher'] = user.is_publisher
+        data['metadata']['is_submitter'] = user.is_submitter
         data['metadata']['is_user'] = user.is_user
         data['metadata']['permissions'] = {
             'users': {

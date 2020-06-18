@@ -17,13 +17,10 @@
 
 """Permissions for deposits."""
 
-import copy
-
 from sonar.modules.deposits.api import DepositRecord
-from sonar.modules.organisations.api import OrganisationRecord, \
-    current_organisation
+from sonar.modules.organisations.api import current_organisation
 from sonar.modules.permissions import RecordPermission
-from sonar.modules.users.api import UserRecord, current_user_record
+from sonar.modules.users.api import current_user_record
 
 
 class DepositPermission(RecordPermission):
@@ -37,8 +34,8 @@ class DepositPermission(RecordPermission):
         :param recor: Record to check.
         :returns: True is action can be done.
         """
-        # At least for publishers logged users.
-        if not current_user_record or not current_user_record.is_publisher:
+        # At least for submitters logged users.
+        if not current_user_record or not current_user_record.is_submitter:
             return False
 
         return True
@@ -55,7 +52,7 @@ class DepositPermission(RecordPermission):
         if not current_user_record:
             return False
 
-        return current_user_record.is_publisher
+        return current_user_record.is_submitter
 
     @classmethod
     def read(cls, user, record):
@@ -65,8 +62,8 @@ class DepositPermission(RecordPermission):
         :param recor: Record to check.
         :returns: True is action can be done.
         """
-        # At least for publishers logged users.
-        if not current_user_record or not current_user_record.is_publisher:
+        # At least for submitters logged users.
+        if not current_user_record or not current_user_record.is_submitter:
             return False
 
         # Superuser is allowd
@@ -81,7 +78,7 @@ class DepositPermission(RecordPermission):
             return current_organisation['pid'] == deposit['user'][
                 'organisation']['pid']
 
-        # Publishers have only access to their own deposits.
+        # Submitters have only access to their own deposits.
         return current_user_record['pid'] == deposit['user']['pid']
 
     @classmethod

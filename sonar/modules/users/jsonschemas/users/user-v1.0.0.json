@@ -97,7 +97,7 @@
           "superuser",
           "admin",
           "moderator",
-          "publisher",
+          "submitter",
           "user"
         ],
         "form": {
@@ -115,8 +115,8 @@
               "value": "moderator"
             },
             {
-              "label": "role_publisher",
-              "value": "publisher"
+              "label": "role_submitter",
+              "value": "submitter"
             },
             {
               "label": "role_user",

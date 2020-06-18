@@ -2712,7 +2712,7 @@ msgstr ""
 msgid "role_moderator"
 msgstr ""
 
-msgid "role_publisher"
+msgid "role_submitter"
 msgstr ""
 
 msgid "role_superuser"

@@ -24,7 +24,7 @@ from invenio_accounts.testutils import login_user_via_session
 
 
 def test_list(client, make_organisation, superuser, admin, moderator,
-              publisher, user):
+              submitter, user):
     """Test list organisations permissions."""
     make_organisation('org2')
 
@@ -37,8 +37,8 @@ def test_list(client, make_organisation, superuser, admin, moderator,
     res = client.get(url_for('invenio_records_rest.org_list'))
     assert res.status_code == 403
 
-    # Logged as publisher
-    login_user_via_session(client, email=publisher['email'])
+    # Logged as submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.get(url_for('invenio_records_rest.org_list'))
     assert res.status_code == 403
 
@@ -60,7 +60,7 @@ def test_list(client, make_organisation, superuser, admin, moderator,
     assert res.json['hits']['total'] == 2
 
 
-def test_create(client, superuser, admin, moderator, publisher, user):
+def test_create(client, superuser, admin, moderator, submitter, user):
     """Test create organisations permissions."""
     data = {'code': 'org2', 'name': 'org2'}
 
@@ -82,8 +82,8 @@ def test_create(client, superuser, admin, moderator, publisher, user):
                       headers=headers)
     assert res.status_code == 403
 
-    # Publisher
-    login_user_via_session(client, email=publisher['email'])
+    # submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.post(url_for('invenio_records_rest.org_list'),
                       data=json.dumps(data),
                       headers=headers)
@@ -113,7 +113,7 @@ def test_create(client, superuser, admin, moderator, publisher, user):
 
 
 def test_read(client, make_organisation, superuser, admin, moderator,
-              publisher, user):
+              submitter, user):
     """Test read organisations permissions."""
     make_organisation('org2')
 
@@ -126,8 +126,8 @@ def test_read(client, make_organisation, superuser, admin, moderator,
     res = client.get(url_for('invenio_records_rest.org_item', pid_value='org'))
     assert res.status_code == 403
 
-    # Logged as publisher
-    login_user_via_session(client, email=publisher['email'])
+    # Logged as submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.get(url_for('invenio_records_rest.org_item', pid_value='org'))
     assert res.status_code == 403
 
@@ -168,7 +168,7 @@ def test_read(client, make_organisation, superuser, admin, moderator,
 
 
 def test_update(client, make_organisation, superuser, admin, moderator,
-                publisher, user):
+                submitter, user):
     """Test update organisations permissions."""
     headers = {
         'Content-Type': 'application/json',
@@ -191,8 +191,8 @@ def test_update(client, make_organisation, superuser, admin, moderator,
                      headers=headers)
     assert res.status_code == 403
 
-    # Logged as publisher
-    login_user_via_session(client, email=publisher['email'])
+    # Logged as submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.put(url_for('invenio_records_rest.org_item', pid_value='org'),
                      data=json.dumps(org.dumps()),
                      headers=headers)
@@ -236,7 +236,7 @@ def test_update(client, make_organisation, superuser, admin, moderator,
 
 
 def test_delete(client, superuser, admin,
-                moderator, publisher, user):
+                moderator, submitter, user):
     """Test delete organisations permissions."""
     # Not logged
     res = client.delete(
@@ -249,8 +249,8 @@ def test_delete(client, superuser, admin,
         url_for('invenio_records_rest.org_item', pid_value='org'))
     assert res.status_code == 403
 
-    # Logged as publisher
-    login_user_via_session(client, email=publisher['email'])
+    # Logged as submitter
+    login_user_via_session(client, email=submitter['email'])
     res = client.delete(
         url_for('invenio_records_rest.org_item', pid_value='org'))
     assert res.status_code == 403

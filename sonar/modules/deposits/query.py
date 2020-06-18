@@ -43,7 +43,7 @@ def search_factory(self, search, query_parser=None):
         return (search, urlkwargs)
 
     # For user, only records that belongs to him.
-    if current_user_record.is_publisher:
+    if current_user_record.is_submitter:
         search = search.filter(
             'term', user__pid=current_user_record['pid'])
 
