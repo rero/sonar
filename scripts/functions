@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
+#
+# Swiss Open Access Repository
+# Copyright (C) 2019 RERO
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, version 3 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+function color {
+    type=$1
+    if [ -f $type ]; then
+        type="normal"
+    fi
+
+    # Choose color
+    case $1 in
+        success)
+            color=2
+            ;;
+        error)
+            color=1
+            ;;
+        warning)
+            color=214
+            ;;
+        info)
+            color=6
+            ;;
+        *)
+            color=7
+            ;;
+    esac
+}
+
+function message {
+    color $2
+
+    # Apply color
+    tput setaf $color
+
+    # Display text
+    echo -e "$(tput setaf $color)$1$(tput sgr0)"
+}
+
+function title {
+    color $2
+    echo -e "$(tput setaf $color)\n===================================\n$1\n===================================$(tput sgr0)"
+}
+
+function section {
+    color $2
+    echo -e "$(tput setaf 0; tput setab $color)\n $1 $(tput sgr0)"
+}

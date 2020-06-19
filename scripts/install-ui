@@ -16,27 +16,37 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+source $(dirname "$0")/functions
+
 set -e
+
+title "Installation of SONAR UI library"
 
 tarball=$1
 
 # Remove installed package
+section "Remove installed packages" "info"
 rm -rf ${assets_folder}/node_modules/@rero
+message "Done" "success"
 
 if test -z "$tarball"; then
-    echo 'No tarball file provided, standard installation from package.json'
-    pipenv run invenio webpack create
+    section "Create package.json file" "info"
+    message "No tarball file provided, standard installation from package.json" "info"
+    invenio webpack create
 fi
 
 # Install dependencies
-pipenv run invenio webpack install $tarball
+section "Install dependencies" "info"
+invenio webpack install $tarball
 
 # Store folder path
 assets_folder=$(pipenv run invenio shell --no-term-title -c "print(app.config.get('WEBPACKEXT_PROJECT_BUILDDIR'))")
 static_folder=$(pipenv run invenio shell --no-term-title -c "print('static_folder:%s' % app.static_folder)"|grep static_folder| cut -d: -f2-)
 
 # Copy sonar-ui files to static folder to use it with flask-assets
+section "Copy SONAR UI files to static folder" "info"
 mkdir -p ${static_folder}/sonar-ui
 cp -R ${assets_folder}/node_modules/@rero/sonar-ui/dist/sonar/* ${static_folder}/sonar-ui
+message "Done" "success"
 
-echo "Install UI finished!"
+message "\nInstall UI finished!" "success"

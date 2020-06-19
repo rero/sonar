@@ -16,18 +16,27 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+source $(dirname "$0")/functions
+
 set -e
+
+title "Start web server and celery"
 
 script_path=$(dirname "$0")
 
 export FLASK_ENV=development
-# Start Worker and Server
-pipenv run celery worker -A invenio_app.celery -l INFO --beat --without-heartbeat & pid_celery=$!
-# pipenv run celery worker -A invenio_app.celery -l INFO & pid_celery=$!
 
-pipenv run invenio run \
+# Start Worker and Server
+section "Start celery worker" "info"
+celery worker -A invenio_app.celery -l INFO --beat --without-heartbeat & pid_celery=$!
+message "Done" "success"
+
+# Start web server
+section "Start web server" "info"
+invenio run \
        --cert "$script_path"/../docker/nginx/test.crt \
        --key "$script_path"/../docker/nginx/test.key & pid_server=$!
+message "Done" "success"
 
 trap 'kill $pid_celery $pid_server &>/dev/null' EXIT
 

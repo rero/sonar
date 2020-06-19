@@ -36,6 +36,7 @@ safety = ">=1.8"
 # Version 0.6 causes a segmentation fault when loading an image..
 wand = ">=0.5.0,<0.6.0"
 transifex-client = "*"
+python-dotenv = "*"
 
 [dev-packages]
 Flask-Debugtoolbar = ">=0.10.1"
@@ -61,3 +62,8 @@ python_version = "3.6"
 [scripts]
 test = "python setup.py test"
 build_sphinx = "python setup.py build_sphinx"
+bootstrap = "./scripts/bootstrap"
+console = "./scripts/console"
+install-ui = "./scripts/install-ui"
+server = "./scripts/server"
+setup = "./scripts/setup"
