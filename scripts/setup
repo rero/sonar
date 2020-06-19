@@ -16,13 +16,15 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+source $(dirname "$0")/functions
+
 set -e
+
+title "Application setup"
 
 # Size of data to create
 size="minimal"
 import=false
-local=false
-documents_api_url="https://localhost:5000/api/documents/"
 
 while test $# -gt 0; do
     case "$1" in
@@ -35,64 +37,70 @@ while test $# -gt 0; do
         --full)
             size="full"
             ;;
-        --local)
-            local=true
-            ;;
         --import)
             import=true
             ;;
-        --documents-api-url)
-            # Shift to next value for getting option value
-            shift
-            documents_api_url=$1
-            ;;
-        *) echo "Option $1 not recognized" ;;
+        *) message "Option $1 not recognized" "error" ;;
     esac
     shift
 done
 
-printf "\nSize of setup is set to \"$size\"\n\n"
+if $import; then
+    message "Size of import sets is set to \"$size\"" "info"
+fi
 
 # Clean redis
-pipenv run invenio shell --no-term-title -c "import redis; redis.StrictRedis.from_url(app.config['CACHE_REDIS_URL']).flushall(); print('Cache cleared')"
-pipenv run invenio db destroy --yes-i-know
-pipenv run invenio db init create
-pipenv run invenio index destroy --force --yes-i-know
-pipenv run invenio utils es-init --force # To take templates into account
-pipenv run invenio index queue init purge
+section "Clear redis cache" "info"
+invenio shell --no-term-title -c "import redis; redis.StrictRedis.from_url(app.config['CACHE_REDIS_URL']).flushall(); print('Cache cleared')"
+
+section "Initialize database" "info"
+invenio db destroy --yes-i-know
+invenio db init create
+
+section "Initialize elasticsearch indexes" "info"
+invenio index destroy --force --yes-i-know
+invenio utils es-init --force # To take templates into account
+invenio index queue init purge
 
 # Create admin role to restrict access
-pipenv run invenio roles create superuser
-pipenv run invenio roles create admin
-pipenv run invenio roles create moderator
-pipenv run invenio roles create submitter
-pipenv run invenio roles create user
-pipenv run invenio access allow superuser-access role superuser
-pipenv run invenio access allow admin-access role superuser
-pipenv run invenio access allow admin-access role admin
-pipenv run invenio access allow admin-access role moderator
-pipenv run invenio access allow admin-access role submitter
+section "Create roles for users" "info"
+invenio roles create superuser
+invenio roles create admin
+invenio roles create moderator
+invenio roles create submitter
+invenio roles create user
+
+section "Initialize access for roles" "info"
+invenio access allow superuser-access role superuser
+invenio access allow admin-access role superuser
+invenio access allow admin-access role admin
+invenio access allow admin-access role moderator
+invenio access allow admin-access role submitter
+message "Done" "success"
 
 # Create a default location for depositing files
-pipenv run invenio fixtures deposits create
+section "Create location for storing files" "info"
+invenio fixtures deposits create
 
 # Create configuration for RERODOC OAI harvesting
-pipenv run invenio oaiharvester config create data/rerodoc_oai_sources.json
+section "Create configuration for RERODOC harvesting" "info"
+invenio oaiharvester config create data/rerodoc_oai_sources.json
 
 # Create users and organisations
-pipenv run invenio fixtures organisations import $(pipenv --where)/data/organisations.json
-pipenv run invenio fixtures users import $(pipenv --where)/data/users.json
+section "Create organisations" "info"
+invenio fixtures organisations import $(pipenv --where)/data/organisations.json
 
-# Create document sample
-if $local; then
-    curl -L -H 'Content-Type:application/json' --data-binary "@./data/complete_document_sample.json" -XPOST $documents_api_url --insecure
-fi
+section "Create users" "info"
+invenio fixtures users import $(pipenv --where)/data/users.json
 
 # Import rerodoc data
 if $import; then
+    section "Import sets of data" "info"
     case "$size" in
-        full) pipenv run invenio oaiharvester harvest-all ;;
-        small) pipenv run invenio oaiharvester harvest-all --max 100 ;;
-        *) pipenv run invenio oaiharvester harvest-all --max 10 ;;
+        full) invenio oaiharvester harvest-all ;;
+        small) invenio oaiharvester harvest-all --max 100 ;;
+        *) invenio oaiharvester harvest-all --max 10 ;;
     esac
 fi
+
+message "\nInstallation finished successfully" "success"

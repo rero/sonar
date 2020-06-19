@@ -16,14 +16,20 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+script_path=$(dirname "$0")
+
+source ${script_path}/functions
+
 set -e
 
-script_path=$(dirname "$0")
+title "Bootstrap script"
+
+section "Updating dependencies" "info"
+
 pipfile_lock_path="$script_path/../Pipfile.lock"
-cwd=`pwd`
 
 if [ ! -f $pipfile_lock_path ]; then
-    echo "'Pipfile.lock' not found. Generating via 'pipenv lock --dev'..."
+    message "'Pipfile.lock' not found. Generating via 'pipenv lock --dev'..." "info"
     pipenv lock --dev
 fi
 
@@ -31,25 +37,32 @@ fi
 pipenv sync --dev
 
 # Install application code and entrypoints from 'setup.py'
-pipenv run pip install -e $script_path/..
+section "Install entry points" "info"
+pip install -e $script_path/..
 
 # Collect static files
-pipenv run invenio collect -v
+section "Collect static files" "info"
+invenio collect -v
 
 # Store folder path
-assets_folder=$(pipenv run invenio shell --no-term-title -c "print(app.config.get('WEBPACKEXT_PROJECT_BUILDDIR'))")
-static_folder=$(pipenv run invenio shell --no-term-title -c "print('static_folder:%s' % app.static_folder)"|grep static_folder| cut -d: -f2-)
+assets_folder=$(invenio shell --no-term-title -c "print(app.config.get('WEBPACKEXT_PROJECT_BUILDDIR'))")
+static_folder=$(invenio shell --no-term-title -c "print('static_folder:%s' % app.static_folder)"|grep static_folder| cut -d: -f2-)
+
+section "Install assets" "info"
 
 # Remove installed RERO packages (in case they was installed with pack)
 rm -rf ${assets_folder}/node_modules/@rero
 
 # Build webpack assets
-pipenv run invenio webpack buildall
+invenio webpack buildall
 
 # Copy sonar-ui files to static folder to use it with flask-assets
 mkdir -p ${static_folder}/sonar-ui
 cp -R ${assets_folder}/node_modules/@rero/sonar-ui/dist/sonar/* ${static_folder}/sonar-ui
 
 # Compile JSON schemas
-pipenv run invenio utils compile-json ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json -o ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
-pipenv run invenio utils compile-json ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json -o ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json
+section "Compile JSON schemas" "info"
+invenio utils compile-json ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json -o ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
+invenio utils compile-json ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json -o ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json
+
+message "\nBootstrap finished successfully" "success"
