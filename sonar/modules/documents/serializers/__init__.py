@@ -43,7 +43,7 @@ class JSONSerializer(_JSONSerializer):
                     'SONAR_APP_DEFAULT_ORGANISATION'):
                 results['aggregations'].pop('organisation', {})
         else:
-            if not current_user_record.is_superuser:
+            if current_user_record and not current_user_record.is_superuser:
                 results['aggregations'].pop('organisation', {})
 
         if results['aggregations'].get('year'):

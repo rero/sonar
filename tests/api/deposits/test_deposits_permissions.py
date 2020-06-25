@@ -25,8 +25,8 @@ from invenio_accounts.testutils import login_user_via_session
 from sonar.modules.deposits.api import DepositRecord
 
 
-def test_list(client, make_deposit, superuser, admin, moderator, submitter,
-              user):
+def test_list(app, client, make_deposit, superuser, admin, moderator,
+              submitter, user):
     """Test list deposits permissions."""
     make_deposit('submitter', 'org')
     make_deposit('admin', 'org')
@@ -35,6 +35,13 @@ def test_list(client, make_deposit, superuser, admin, moderator, submitter,
     # Not logged
     res = client.get(url_for('invenio_records_rest.depo_list'))
     assert res.status_code == 401
+
+    # Not logged but permission checks disabled
+    app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
+    res = client.get(url_for('invenio_records_rest.depo_list'))
+    assert res.status_code == 200
+    assert res.json['hits']['total'] == 3
+    app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
 
     # Logged as user
     login_user_via_session(client, email=user['email'])

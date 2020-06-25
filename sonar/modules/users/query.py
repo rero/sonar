@@ -17,6 +17,7 @@
 
 """Query for users."""
 
+from flask import current_app
 from invenio_records_rest.query import es_search_factory
 
 from sonar.modules.organisations.api import current_organisation
@@ -31,6 +32,9 @@ def search_factory(self, search, query_parser=None):
     :returns: Tuple with search instance and URL arguments.
     """
     search, urlkwargs = es_search_factory(self, search)
+
+    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
+        return (search, urlkwargs)
 
     # Searching for existing email, everybody can do that
     if urlkwargs.get('q') and urlkwargs['q'].startswith('email:'):
