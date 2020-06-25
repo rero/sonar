@@ -31,9 +31,12 @@ def search_factory(self, search, query_parser=None):
     :param query_parser: Url arguments.
     :returns: Tuple with search instance and URL arguments.
     """
-    view = request.args.get('view')
-
     search, urlkwargs = es_search_factory(self, search)
+
+    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
+        return (search, urlkwargs)
+
+    view = request.args.get('view')
 
     # Public search
     if view:
