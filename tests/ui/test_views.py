@@ -138,7 +138,7 @@ def test_schemas(client, admin, user):
     res = client.get(url_for('sonar.schemas', record_type='users'))
     assert res.status_code == 200
     assert res.json['schema']['properties'].get('organisation')
-    assert res.json['schema']['properties'].get('roles')
+    assert res.json['schema']['properties'].get('role')
 
     login_user_via_session(client, email=admin['email'])
 
@@ -149,16 +149,18 @@ def test_schemas(client, admin, user):
     res = client.get(url_for('sonar.schemas', record_type='users'))
     assert res.status_code == 200
     assert not res.json['schema']['properties'].get('organisation')
-    assert res.json['schema']['properties'].get('roles')
+    assert res.json['schema']['properties'].get('role')
+    assert len(res.json['schema']['properties']['role']['enum']) == 4
 
     res = client.get(url_for('sonar.schemas', record_type='not_existing'))
     assert res.status_code == 404
 
     login_user_via_session(client, email=user['email'])
+
     res = client.get(url_for('sonar.schemas', record_type='users'))
     assert res.status_code == 200
     assert not res.json['schema']['properties'].get('organisation')
-    assert not res.json['schema']['properties'].get('roles')
+    assert not res.json['schema']['properties'].get('role')
 
 
 def test_profile(client, user):

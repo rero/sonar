@@ -159,18 +159,29 @@ def schemas(record_type):
             if record_type == 'users':
                 # If user is admin, restrict available roles list.
                 if current_user_record.is_admin:
-                    schema['properties']['roles']['items'][
-                        'enum'] = current_user_record.\
-                            get_all_reachable_roles()
+                    reachable_roles = current_user_record.\
+                        get_all_reachable_roles()
+
+                    schema['properties']['role']['form']['options'] = []
+                    for role in reachable_roles:
+                        schema['properties']['role']['form']['options'].append(
+                            {
+                                'label': 'role_{role}'.format(role=role),
+                                'value': role
+                            })
+
+                    schema['properties']['role'][
+                        'enum'] = current_user_record.get_all_reachable_roles(
+                        )
                 # User cannot select role
                 else:
-                    schema['properties'].pop('roles')
-                    if schema.get('propertiesOrder'):
-                        schema['propertiesOrder'].remove('roles')
+                    schema['properties'].pop('role')
+                    if 'role' in schema.get('propertiesOrder', []):
+                        schema['propertiesOrder'].remove('role')
 
             if not current_user_record.is_superuser:
                 schema['properties'].pop('organisation')
-                if schema.get('propertiesOrder'):
+                if 'organisation' in schema.get('propertiesOrder', []):
                     schema['propertiesOrder'].remove('organisation')
 
         return jsonify({'schema': prepare_schema(schema)})

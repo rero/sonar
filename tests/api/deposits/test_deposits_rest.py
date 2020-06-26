@@ -124,7 +124,7 @@ def test_publish(client, db, user, moderator, deposit):
     # Test the publication by a moderator
     deposit['status'] = 'in_progress'
     deposit.commit()
-    user['roles'] = ['moderator']
+    user['role'] = 'moderator'
     user.commit()
     db.session.commit()
 

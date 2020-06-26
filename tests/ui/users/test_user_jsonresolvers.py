@@ -27,7 +27,7 @@ def test_user_resolver(app, organisation, roles):
         'pid': '1',
         'full_name': 'Jules Brochu',
         'email': 'admin@test.com',
-        'roles': ['user'],
+        'role': 'user',
         'organisation': {
             '$ref': 'https://sonar.ch/api/organisations/org'
         }

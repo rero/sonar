@@ -76,7 +76,7 @@ class UserPermission(RecordPermission):
             return True
 
         # Cannot read superusers records
-        if UserRecord.ROLE_SUPERUSER in record['roles']:
+        if UserRecord.ROLE_SUPERUSER == record['role']:
             return False
 
         user = UserRecord.get_record_by_pid(record['pid'])

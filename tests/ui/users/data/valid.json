@@ -4,9 +4,7 @@
     "city": "Aosta",
     "email": "rero.sonar+admin@gmail.com",
     "full_name": "Astrid M\u00fcller",
-    "roles": [
-      "admin"
-    ],
+    "role": "admin",
     "password": "123456",
     "phone": "+39324993597",
     "postal_code": "11100",

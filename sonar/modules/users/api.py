@@ -65,7 +65,7 @@ class UserSearch(SonarSearch):
         filter_roles = []
         roles = UserRecord.get_all_roles_for_role(UserRecord.ROLE_MODERATOR)
         for role in roles:
-            filter_roles.append(Q('term', roles=role))
+            filter_roles.append(Q('term', role=role))
 
         query = self.query(
             'bool',
@@ -186,7 +186,7 @@ class UserRecord(SonarRecord):
 
         for role in self.available_roles:
             in_db = role in db_roles
-            in_record = role in self.get('roles', [])
+            in_record = role == self.get('role', None)
 
             if in_record and not in_db:
                 self.add_role_to_account(role)
@@ -281,21 +281,17 @@ class UserRecord(SonarRecord):
 
     def is_granted(self, role_to_check):
         """Check if user has at least the role passed in argument."""
-        if 'roles' not in self:
+        if not self.get('role'):
             return False
 
-        for role in self['roles']:
-            if role_to_check in self.get_reachable_roles(role):
-                return True
+        if role_to_check in self.get_reachable_roles(self.get('role')):
+            return True
 
         return False
 
     def get_all_reachable_roles(self):
         """Get list of roles depending on role hierarchy."""
-        roles = []
-        for role in self['roles']:
-            roles.extend(self.get_reachable_roles(role))
-
+        roles = self.get_reachable_roles(self.get('role'))
         return list(set(roles))
 
     @property

@@ -3,9 +3,7 @@
     "birth_date": "1989-05-14",
     "city": "Aosta",
     "full_name": "Astrid M\u00fcller",
-    "roles": [
-      "admin"
-    ],
+    "role": "admin",
     "password": "123456",
     "phone": "+39324993597",
     "postal_code": "11100",

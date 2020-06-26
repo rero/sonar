@@ -85,51 +85,46 @@
         "$ref"
       ]
     },
-    "roles": {
+    "role": {
       "title": "Role",
-      "type": "array",
-      "uniqueItems": true,
-      "minItems": 1,
-      "maxItems": 1,
-      "items": {
-        "type": "string",
-        "enum": [
-          "superuser",
-          "admin",
-          "moderator",
-          "submitter",
-          "user"
-        ],
-        "form": {
-          "options": [
-            {
-              "label": "role_superuser",
-              "value": "superuser"
-            },
-            {
-              "label": "role_admin",
-              "value": "admin"
-            },
-            {
-              "label": "role_moderator",
-              "value": "moderator"
-            },
-            {
-              "label": "role_submitter",
-              "value": "submitter"
-            },
-            {
-              "label": "role_user",
-              "value": "user"
-            }
-          ]
-        }
+      "type": "string",
+      "minLength": 1,
+      "enum": [
+        "superuser",
+        "admin",
+        "moderator",
+        "submitter",
+        "user"
+      ],
+      "form": {
+        "options": [
+          {
+            "label": "role_superuser",
+            "value": "superuser"
+          },
+          {
+            "label": "role_admin",
+            "value": "admin"
+          },
+          {
+            "label": "role_moderator",
+            "value": "moderator"
+          },
+          {
+            "label": "role_submitter",
+            "value": "submitter"
+          },
+          {
+            "label": "role_user",
+            "value": "user"
+          }
+        ]
       }
     }
   },
   "propertiesOrder": [
     "organisation",
-    "roles",
+    "role",
     "full_name",
     "email",
     "phone",
@@ -141,7 +136,7 @@
   "required": [
     "full_name",
     "email",
-    "roles",
+    "role",
     "$schema"
   ]
 }

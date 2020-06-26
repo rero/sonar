@@ -38,7 +38,7 @@ def user_registered_handler(app, user, confirm_token):
             {
                 'full_name': user.email,
                 'email': user.email,
-                'roles': [UserRecord.ROLE_USER]
+                'role': UserRecord.ROLE_USER
             },
             dbcommit=True)
         user_record.reindex()
