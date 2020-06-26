@@ -29,7 +29,7 @@ def test_get_moderators(app, organisation, roles):
         {
             'full_name': 'John Doe',
             'email': 'john.doe@rero.ch',
-            'roles': [UserRecord.ROLE_MODERATOR],
+            'role': UserRecord.ROLE_MODERATOR,
             'organisation': {
                 '$ref': 'https://sonar.ch/api/organisations/org'
             }
@@ -81,7 +81,7 @@ def test_get_moderators_emails(app, organisation, roles):
         {
             'full_name': 'John Doe',
             'email': 'john.doe@rero.ch',
-            'roles': [UserRecord.ROLE_MODERATOR],
+            'role': UserRecord.ROLE_MODERATOR,
             'organisation': {
                 '$ref': 'https://sonar.ch/api/organisations/org'
             }
@@ -106,7 +106,7 @@ def test_is_granted(app, organisation, roles):
         {
             'full_name': 'John Doe',
             'email': 'john.doe@rero.ch',
-            'roles': [UserRecord.ROLE_MODERATOR],
+            'role': UserRecord.ROLE_MODERATOR,
             'organisation': {
                 '$ref': 'https://sonar.ch/api/organisations/org'
             }
@@ -118,7 +118,7 @@ def test_is_granted(app, organisation, roles):
     assert user.is_granted(UserRecord.ROLE_MODERATOR)
     assert user.is_granted(UserRecord.ROLE_USER)
 
-    del user['roles']
+    del user['role']
     assert not user.is_granted(UserRecord.ROLE_MODERATOR)
 
 
@@ -128,7 +128,7 @@ def test_is_role_property(organisation, roles):
         {
             'full_name': 'John Doe',
             'email': 'john.doe@rero.ch',
-            'roles': [UserRecord.ROLE_MODERATOR],
+            'role': UserRecord.ROLE_MODERATOR,
             'organisation': {
                 '$ref': 'https://sonar.ch/api/organisations/org'
             }
@@ -159,8 +159,8 @@ def test_delete(app, admin):
 
 def test_update(app, admin, roles):
     """Test updating a record."""
-    admin.update({'roles': ['superuser']})
-    assert admin['roles'] == ['superuser']
+    admin.update({'role': 'superuser'})
+    assert admin['role'] == 'superuser'
 
     with app.app_context():
         datastore = app.extensions['security'].datastore
@@ -182,7 +182,7 @@ def test_reactivate_user(app, admin):
 
         del admin.__dict__['user']
 
-        admin.update({'roles': ['admin']})
+        admin.update({'role': 'admin'})
         user = datastore.find_user(email='orgadmin@rero.ch')
         assert user.roles[0].name == 'admin'
         assert user.is_active
@@ -190,7 +190,7 @@ def test_reactivate_user(app, admin):
 
 def test_get_all_reachable_roles(app, db, user):
     """Test getting all reachable roles."""
-    user['roles'] = ['user', 'admin']
+    user['role'] = 'admin'
 
     roles = user.get_all_reachable_roles()
 

@@ -67,18 +67,17 @@ def import_users(infile):
             password = hash_password(password)
             del user_data['password']
 
-            if not user_data.get('roles'):
-                user_data['roles'] = [UserRecord.ROLE_USER]
+            if not user_data.get('role'):
+                user_data['role'] = UserRecord.ROLE_USER
 
-            roles = user_data.get('roles', []).copy()
-
-            for role in roles:
-                if not datastore.find_role(role):
-                    datastore.create_role(name=role)
-                    datastore.commit()
+            if not datastore.find_role(user_data['role']):
+                datastore.create_role(name=user_data['role'])
+                datastore.commit()
 
             # Create account and activate it
-            datastore.create_user(email=email, password=password, roles=roles)
+            datastore.create_user(email=email,
+                                  password=password,
+                                  roles=[user_data['role']])
             datastore.commit()
             user = datastore.find_user(email=email)
             confirm_user(user)
@@ -94,9 +93,8 @@ def import_users(infile):
             user.reindex()
 
         except Exception as error:
-            click.secho(
-                'User {user} could not be imported: {error}'.format(
-                    user=user_data, error=str(error)),
-                fg='red')
+            click.secho('User {user} could not be imported: {error}'.format(
+                user=user_data, error=str(error)),
+                        fg='red')
 
     click.secho('Finished', fg='green')

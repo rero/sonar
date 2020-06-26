@@ -29,4 +29,4 @@ def test_user_registered_handler(app, roles, user_without_role):
 
     user = UserRecord.get_user_by_email(user_without_role.email)
     assert user
-    assert user['roles'] == ['user']
+    assert user['role'] == 'user'

@@ -179,7 +179,7 @@ def make_user(app, db, make_organisation):
                 'pid': name,
                 'email': email,
                 'full_name': name,
-                'roles': [role_name],
+                'role': role_name,
                 'organisation': {
                     '$ref':
                     'https://sonar.ch/api/organisations/{organisation}'.format(

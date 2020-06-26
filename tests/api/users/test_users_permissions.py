@@ -96,7 +96,7 @@ def test_create(client, organisation, superuser, admin, moderator, submitter,
     user_json = {
         'email': 'user@rero.ch',
         'full_name': 'User',
-        'roles': ['user']
+        'role': 'user'
     }
 
     # Not logged

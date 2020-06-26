@@ -50,7 +50,7 @@ def search_factory(self, search, query_parser=None):
     if current_user_record.is_admin:
         search = search \
             .filter('term', organisation__pid=current_organisation['pid']) \
-            .filter('bool', must_not={'term': {'roles': 'superuser'}})
+            .filter('bool', must_not={'term': {'role': 'superuser'}})
         return (search, urlkwargs)
 
     # For remaining roles, they can only list themselves
