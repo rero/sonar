@@ -46,7 +46,7 @@ SONAR_APP_DISABLE_PERMISSION_CHECKS = False
 """Disable permission checks during API calls. Useful when API is test from
 command line or progams like postman."""
 
-SONAR_APP_UI_VERSION = '0.2.0'
+SONAR_APP_UI_VERSION = '0.3.0'
 
 SONAR_APP_INTERNAL_IPS = ['127.0.0.1']
 """Internal IPs for accessing files."""
