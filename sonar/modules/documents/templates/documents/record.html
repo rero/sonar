@@ -17,234 +17,200 @@
 
 {%- extends config.RECORDS_UI_BASE_TEMPLATE %}
 
-{% from 'sonar/macros/macro.html' import dl, dl_dict, dl_list, thumbnail %}
+{% from 'sonar/macros/macro.html' import thumbnail %}
 
 {%- block body %}
 {% set record = record.replace_refs() %}
 {% set title = record.title[0] | title_format(current_i18n.language) %}
+{% set files = record._files | files_by_type %}
 
-<h1 class="text-primary">{{ title }}</h1>
-{% if record.organisation %}
-<h5 class="text-secondary">{{ _(record.organisation.name) }}</h5>
-{% endif %}
 <section class="mt-3">
-  <article class="">
-    <div class="row">
-      {% set main_file = record._files | files_by_type | first %}
-      {% if main_file %}
-      {{ thumbnail('documents', record, main_file, 'col-sm-3') }}
-      {% endif %}
-      <div class="col">
-        <dl class="row mb-0">
-          <!-- COLLECTION SPECIFIQUE -->
-          {% if record.specificCollections %}
-          {{ dl_list(_('Specific collections'), record.specificCollections) }}
-          {% endif %}
-
-          <!-- CONTRIBUTORS-->
-          {% if record.contribution|length > 0 %}
-          <dt class="col-sm-3">
-            {{ _('Contributions') }}:
-          </dt>
-          <dd class="col-sm-9">
-            <ul class="list-unstyled mb-0">
-              {% for contribution in record.contribution %}
-              <li>
-                <small class="badge badge-secondary text-light">{{ _(contribution.agent.type) }}</small>
-                {% for role in contribution.role %}
-                <small class="badge badge-secondary text-light">{{ _('contribution_role_' + role) }}</small>
-                {% endfor %}
-                {{ contribution.agent.preferred_name }}
-              </li>
-              {% endfor %}
-            </ul>
-          </dd>
-          {% endif %}
-
-          <!-- DOCUMENT TYPE -->
-          {% if record.documentType %}
-          {{ dl(_('Document type'), _('document_type_' + record.documentType)) }}
-          {% endif %}
-
-          <!-- EDITION STATEMENT-->
-          {% if record.editionStatement %}
-          {{ dl(_('Edition'), record.editionStatement.editionDesignation.value ~ ' / ' ~ record.editionStatement.responsibility.value) }}
-          {% endif %}
-
-          <!-- PUBLICATION STATEMENT -->
-          {% for provision_activity in record.provisionActivity %}
-          {{ dl_dict(_(provision_activity.type), provision_activity|create_publication_statement ) }}
-          {% endfor %}
-
-          <!-- COPYRIGHT DATE -->
-          {% if record.copyrightDate %}
-          {{ dl(_('Copyright date'), record.copyrightDate|join(', ')) }}
-          {% endif %}
-
-          <!-- ABSTRACT -->
-          {% if record.abstracts|length > 0 %}
-          {{ dl(_('Abstract'), record.abstracts|abstracts_format|nl2br) }}
-          {% endif %}
-
-          <!-- PHYSICAL DESCRIPTION -->
-          {% if record.extent or record.otherMaterialCharacteristics or record.formats %}
-          {% set formats = ', '.join(record.formats) %}
-          {% set description = ', '.join([record.extent, record.otherMaterialCharacteristics, formats]|select) %}
-          {{ dl(_('Physical description'), description) }}
-          {% endif %}
-
-          <!-- ADDITIONAL MATERIALS -->
-          {% if record.additionalMaterials %}
-          {{ dl(_('Additional Materials'), record.additionalMaterials) }}
-          {% endif %}
-
-          <!-- SERIES -->
-          {% if record.series|length > 0 %}
-          {{ dl(_('Series'), record.series|series_format) }}
-          {% endif %}
-
-          <!-- IS PART OF -->
-          {% if record.partOf %}
-          <dt class="col-sm-3">
-            {{ _('Is part of') }}:
-          </dt>
-          <dd class="col-sm-9">
-            <ul class="list-unstyled mb-0">
-              {% for item in record.partOf %}
-              <li>{{ item | part_of_format }}</li>
-              {% endfor %}
-            </ul>
-          </dd>
-          {% endif %}
-
-          <!-- SUBJECTS -->
-          {% if record.subjects|length > 0 %}
-          <dt class="col-sm-3">
-            {{ _('Subjects') }}:
-          </dt>
-          <dd class="col-sm-9">
-            <ul class="list-unstyled mb-0">
-              {% for subject in record.subjects|subjects_format(current_i18n.language) %}
-              <li>
-                {{ subject.value }}
-                {% if subject.source %}
-                <small class="badge badge-secondary text-uppercase text-light">{{ subject.source }}</small>
-                {% endif %}
-              </li>
-              {% endfor %}
-            </ul>
-          </dd>
-          {% endif %}
-
-          <!-- NOTES -->
-          {% if record.notes|length > 0 %}
-          <dt class="col-sm-3">
-            {{ _('Notes') }}:
-          </dt>
-          <dd class="col-sm-9">
-            <ul class="list-unstyled mb-0">
-              {% for note in record.notes %}
-              <li>
-                {{ note }}
-              </li>
-              {% endfor %}
-            </ul>
-          </dd>
-          {% endif %}
-
-          <!-- CONTENT NOTES -->
-          {% if record.contentNote|length > 0 %}
-          <dt class="col-sm-3">
-            {{ _('Contains') }}:
-          </dt>
-          <dd class="col-sm-9">
-            <ul class="list-unstyled mb-0">
-              {% for note in record.contentNote %}
-              <li>
-                {{ note }}
-              </li>
-              {% endfor %}
-            </ul>
-          </dd>
-          {% endif %}
-
-          {% if record.identifiedBy|identifiedby_format|length > 0 %}
-          <dt class="col-sm-3">
-            {{ _('Identifiers') }}:
-          </dt>
-          <dd class="col-sm-9">
-            <ul class="list-unstyled mb-0">
-              {% for identifier in record.identifiedBy|identifiedby_format %}
-              <li>
-                {{ identifier.value }}
-                <small class="badge badge-secondary text-light">{{ identifier.type }}</small>
-              </li>
-              {% endfor %}
-            </ul>
-          </dd>
-          {% endif %}
-
-          {% if record.language %}
-          <dt class="col-sm-3">
-            {{ _('Languages') }}:
-          </dt>
-          <dd class="col-sm-9">
-            <ul class="list-unstyled mb-0">
-              {% for language in record.language %}
-              <li>
-                {{ _('lang_' + language.value) }}
-              </li>
-              {% endfor %}
-            </ul>
-          </dd>
-          {% endif %}
-
-          {% if record.dissertation %}
-          {% if record.dissertation.degree %}
-          {{ dl(_('Thesis note'), record.dissertation.degree) }}
-          {% endif %}
-          {% if record.dissertation.note %}
-          {{ dl_list(_('Jury note'), record.dissertation.note) }}
-          {% endif %}
-          {% endif %}
-
-          <!-- OTHER EDITION -->
-          {% if record.otherEdition %}
-          <dt class="col-sm-3">
-            {{ _('Other editions') }}:
-          </dt>
-          <dd class="col-sm-9">
-            {% for otherEdition in record.otherEdition %}
-            <p class="m-0">{{ _(otherEdition.publicNote) }} : <a href="{{ otherEdition.document.electronicLocator }}"
-                target="_blank">{{ otherEdition.document.electronicLocator }}</a></p>
-            {% endfor %}
-          </dd>
-          {% endif %}
-
-          {% if record.usageAndAccessPolicy %}
-          {{ dl_list(_('Usage and access policy'), record.usageAndAccessPolicy) }}
-          {% endif %}
-
-          <!-- PERMANENT LINK -->
-          {% set link = url_for('documents.detail', pid_value=record.pid, view=view_code, _external=True) %}
-          {{ dl(_('Permalink'), '<a href="' + link + '">' + link + '</a>') }}
-        </dl>
+  <div class="row">
+    <div class="col-lg-3">
+      {% if files and files | length > 0 %}
+      <div class="mb-4">
+        {{ thumbnail('documents', record, files | first) }}
       </div>
-    </div>
-
-    {% set files = record._files | files_by_type %}
-    {% if files and files | length > 1 %}
-    <h5 class="mt-5">{{ _('Other files') }}</h5>
-
-    <div class="row">
-      {% for file in files %}
-      {% if loop.index > 1 %}
-      {{ thumbnail('documents', record, file, 'col-sm-3 mb-4') }}
       {% endif %}
-      {% endfor %}
+      <!-- DOCUMENT TYPE -->
+      {% if record.documentType %}
+      <h5 class="text-center my-4">{{ _('document_type_' + record.documentType) }}</h5>
+      {% endif %}
+      {% if files and files | length > 1 %}
+      <p class="text-center">
+        <a href="{{ request.url }}#other_files">+ {{ (files | length) - 1 }} {{ _('other files') }}</a>
+      </p>
+      {% endif %}
     </div>
+    <div class="col">
+      <h1 class="text-primary">{{ title }}</h1>
+
+      <!-- CONTRIBUTORS-->
+      {% set contributors = record | contributors %}
+      {% if contributors | length > 0 %}
+      <div class="my-2">
+        <ul class="list-unstyled m-0">
+          {% for contribution in contributors %}
+          <li class="creator {{ 'd-none' if loop.index > 3 }}">
+            {{ contribution.agent.preferred_name }}
+            {% if not 'cre' in contribution.role %}
+            ({{ _('contribution_role_' + contribution.role[0]) | lower }})
+            {% endif %}
+            {% if contribution.agent.get('identifiedBy', {}).get('value') %}
+            <a href="https://orcid.org/{{ contribution.agent.identifiedBy.value }}" target="_blank"
+              class="badge badge-secondary text-light">
+              ORCID
+            </a>
+            {% endif %}
+
+            {% if contribution.get('affiliation') %}
+            {% if contribution.get('controlledAffiliation') %}
+            <small class="affiliation-tooltip" data-placement="top"
+              title="{{ contribution.controlledAffiliation | join(' ; ') }}"><i
+                class="text-muted">{{ contribution.affiliation }}</i></small>
+            {% else %}
+            <small><i class="text-muted">{{ contribution.affiliation }}</i></small>
+            {% endif %}
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        {% if record.contribution | length > 3 %}
+        <a href="#" id="show-more-contributors">{{ _('Show more') }}&hellip;</a>
+        {% endif %}
+        {% endif %}
+      </div>
+
+      <!-- PUBLICATION STATEMENT -->
+      {% for provision_activity in record.provisionActivity %}
+      <ul class="list-unstyled my-2">
+        {% set statement = provision_activity | create_publication_statement %}
+        {% for element in statement %}
+        <li>{{ statement[element] }}</li>
+        {% endfor %}
+      </ul>
+      {% endfor %}
+
+      <!-- EXTENT -->
+      {% if record.extent %}
+      <p class="my-2">{{ record.extent }}</p>
+      {% endif %}
+
+      <!-- PART OF -->
+      {% if record.partOf and record.partOf | length > 0 %}
+      <div class="d-flex flex-row mb-3">
+        <div class="mr-1"><strong>{{ _('Published in') }}:</strong></div>
+        <div class="">
+          <ul class="list-unstyled mb-0">
+            {% for item in record.partOf %}
+            <li>{{ item | part_of_format }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- SUBJECTS -->
+      {% if record.subjects|length > 0 %}
+      <div class="my-3">
+        {% for subject in record.subjects %}
+        {% for value in subject.label.value %}
+        <h5 class="d-inline">
+          <span class="badge badge-secondary text-light font-weight-light">
+            <i class="fa fa-tag mx-1"></i> {{ value }}
+          </span>
+        </h5>
+        {% endfor %}
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <!-- ABSTRACT -->
+      {% set abstracts = record | abstracts %}
+      {% if abstracts|length > 0 %}
+      <div class="my-4 text-justify">
+        {% for abstract in abstracts %}
+        <a href="#" class="abstract-lang badge badge-{{ 'secondary text-light' if loop.first else 'light text-reset' }}"
+          data-lang="{{ abstract.language }}">{{ _('lang_' + abstract.language) }}</a>
+        {% endfor %}
+        {% for abstract in abstracts %}
+        <span id="lang-{{ abstract.language }}" class="abstract-container {{ '' if loop.first else 'd-none' }}">
+          {% if abstract.value | length > 400 %}
+          <span data-abstract="{{ abstract.value | nl2br | safe }}">{{ abstract.value | truncate(400) }}</span> <a
+            href="#" class="showMore-abstract">{{ _('Show more') }}&hellip;</a>
+          {% else %}
+          {{ abstract.value | nl2br | safe }}
+          {% endif %}
+        </span>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <dl class="row mb-0">
+        <!-- OTHER EDITION -->
+        {% if record.otherEdition %}
+        <dt class="col-lg-3">
+          {{ _('Other electronic version') }}
+        </dt>
+        <dd class="col-lg-9">
+          {% for otherEdition in record.otherEdition %}
+          <p class="m-0">{{ otherEdition.publicNote }} : <a href="{{ otherEdition.document.electronicLocator }}"
+              target="_blank">{{ otherEdition.document.electronicLocator }}</a></p>
+          {% endfor %}
+        </dd>
+        {% endif %}
+
+        <!-- LANGUAGE -->
+        {% if record.language %}
+        <dt class="col-lg-3">
+          {{ _('Language') }}
+        </dt>
+        <dd class="col-lg-9">
+          <ul class="list-unstyled mb-0">
+            {% for language in record.language %}
+            <li>
+              {{ _('lang_' + language.value) }}
+            </li>
+            {% endfor %}
+          </ul>
+        </dd>
+        {% endif %}
+
+        <!-- CLASSIFICATION -->
+        {% if record.classification and record.classification | length > 0 %}
+        {% for classification in record.classification %}
+        <dt class="col-lg-3">
+          {{ _('Classification') }}
+        </dt>
+        <dd class="col-lg-9">
+          {{ _('classification_' + classification.classificationPortion) }}
+        </dd>
+        {% endfor %}
+        {% endif %}
+
+        <!-- PERMANENT LINK -->
+        {% set link = record.get_permanent_link(request.host_url, record.pid, view_code) %}
+        <dt class="col-lg-3">
+          {{ _('Permalink') }}
+        </dt>
+        <dd class="col-lg-9 text-truncate">
+          <a href="{{ link }}">{{ link }}</a>
+        </dd>
+      </dl>
+    </div>
+  </div>
+
+  {% if files and files | length > 1 %}
+  <h5 id="other_files" class="mt-5">{{ _('Other files') }}</h5>
+  <hr class="mb-4 mt-0">
+  <div class="row">
+    {% for file in files %}
+    {% if loop.index > 1 %}
+    {{ thumbnail('documents', record, file, 'col-lg-2 mb-4') }}
     {% endif %}
-  </article>
+    {% endfor %}
+  </div>
+  {% endif %}
 
   <!-- Preview modal -->
   <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -283,6 +249,30 @@
       }
 
       $('#previewModal').modal('show')
+    });
+
+    $('.affiliation-tooltip').tooltip();
+
+    // Show all contributors
+    $('#show-more-contributors').click(function (event) {
+      event.preventDefault();
+      $('li.creator.d-none').removeClass('d-none');
+      $(this).remove();
+    });
+
+    $('.showMore-abstract').click(function (event) {
+      event.preventDefault();
+      $(this).prev().html($(this).prev().data('abstract'))
+      $(this).remove();
+    });
+
+    $('.abstract-lang').click(function (event) {
+      event.preventDefault();
+      $('.abstract-container').addClass('d-none');
+      var id = '#lang-' + $(this).data('lang');
+      $(id).removeClass('d-none');
+      $('.abstract-lang').removeClass().addClass('abstract-lang badge badge-light text-reset');
+      $(this).removeClass().addClass('abstract-lang badge badge-secondary text-light');
     });
   });
 </script>

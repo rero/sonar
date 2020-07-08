@@ -19,17 +19,17 @@
 
 from __future__ import absolute_import, print_function
 
-import re
 from datetime import datetime
 
 from flask import Blueprint, abort, current_app, g, render_template, request
 from flask_babelex import gettext as _
+from invenio_i18n.ext import current_i18n
 
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.utils import change_filename_extension
 
-from .utils import publication_statement_text, series_format_text
+from .utils import publication_statement_text
 
 blueprint = Blueprint('documents',
                       __name__,
@@ -133,84 +133,9 @@ def title_format(title, language):
 
 
 @blueprint.app_template_filter()
-def publishers_format(publishers):
-    """Format publishers for template."""
-    output = []
-    for publisher in publishers:
-        line = []
-        places = publisher.get('place', [])
-        if places:
-            line.append('; '.join(str(x) for x in places) + ': ')
-        names = publisher.get('name')
-        line.append('; '.join(str(x) for x in names))
-        output.append(''.join(str(x) for x in line))
-    return '; '.join(str(x) for x in output)
-
-
-@blueprint.app_template_filter()
-def series_format(series):
-    """Format series for template."""
-    output = []
-    for serie in series:
-        output.append(series_format_text(serie))
-    return '; '.join(str(x) for x in output)
-
-
-@blueprint.app_template_filter()
-def abstracts_format(abstracts):
-    """Format abstracts for template."""
-    output = []
-    for abstract in abstracts:
-        output.append(re.sub(r'\n+', '\n', abstract['value']))
-    return '\n\n'.join(str(x) for x in output)
-
-
-@blueprint.app_template_filter()
-def subjects_format(subjects, language):
-    """Format subjects for template.
-
-    :param subjects: Subject object list.
-    :param language: Current language of the interface.
-    """
-    language = get_bibliographic_code_from_language(language)
-
-    items = []
-    for subject in subjects:
-        item = {}
-
-        # Has source
-        if subject.get('source'):
-            item['source'] = subject['source']
-
-        # Add only subjects for current language or subjects without language
-        if not subject['label'].get(
-                'language') or subject['label']['language'] == language:
-            item['value'] = ' ; '.join(subject['label']['value'])
-
-        if item:
-            items.append(item)
-
-    return items
-
-
-@blueprint.app_template_filter()
 def create_publication_statement(provision_activity):
     """Create publication statement from place, agent and date values."""
     return publication_statement_text(provision_activity)
-
-
-@blueprint.app_template_filter()
-def identifiedby_format(identifiedby):
-    """Format identifiedby for template."""
-    output = []
-    for identifier in identifiedby:
-        status = identifier.get('status')
-        id_type = identifier.get('type')
-        if (not status or status == 'valid') and id_type != 'bf:Local':
-            if id_type.find(':') != -1:
-                id_type = id_type.split(':')[1]
-            output.append({'type': id_type, 'value': identifier.get('value')})
-    return output
 
 
 @blueprint.app_template_filter()
@@ -357,6 +282,33 @@ def is_file_restricted(file, record):
         restricted['date'] = None
 
     return restricted
+
+
+@blueprint.app_template_filter()
+def contributors(record):
+    """Get ordered list of contributors."""
+    if not record.get('contribution'):
+        return []
+
+    priorities = ['cre', 'ctb', 'dgs', 'edt', 'prt']
+
+    return sorted(record['contribution'],
+                  key=lambda i: priorities.index(i['role'][0]))
+
+
+@blueprint.app_template_filter()
+def abstracts(record):
+    """Get ordered list of abstracts."""
+    if not record.get('abstracts'):
+        return []
+
+    language = get_bibliographic_code_from_language(
+        current_i18n.locale.language)
+    preferred_languages = get_preferred_languages(language)
+
+    return sorted(record['abstracts'],
+                  key=lambda abstract: preferred_languages.index(abstract[
+                      'language']))
 
 
 def get_language_from_bibliographic_code(language_code):

@@ -101,7 +101,7 @@ def test_create_document(app, client, deposit, user):
             'type': 'bf:Person',
             'identifiedBy': {
                 'source': 'ORCID',
-                'type': 'bf:Doi',
+                'type': 'bf:Local',
                 'value': '1234-5678-1234-5678'
             }
         },
@@ -122,7 +122,7 @@ def test_create_document(app, client, deposit, user):
             'type': 'bf:Person',
             'identifiedBy': {
                 'source': 'ORCID',
-                'type': 'bf:Doi',
+                'type': 'bf:Local',
                 'value': '1234-5678-1234-5678'
             }
         },

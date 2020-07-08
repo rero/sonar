@@ -63,13 +63,3 @@ def publication_statement_text(provision_activity):
         value = remove_trailing_punctuation(value)
         statement_with_language[key] = value
     return statement_with_language
-
-
-def series_format_text(serie):
-    """Format series for template."""
-    output = []
-    if serie.get('name'):
-        output.append(serie.get('name'))
-    if serie.get('number'):
-        output.append(', ' + serie.get('number'))
-    return ''.join(str(x) for x in output)

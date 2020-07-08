@@ -20,6 +20,8 @@
 import csv
 from functools import partial
 
+from flask import current_app
+
 from ..api import SonarIndexer, SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
 from ..minters import id_minter
@@ -93,6 +95,21 @@ class DocumentRecord(SonarRecord):
                     break
 
         return controlled_affiliations
+
+    @staticmethod
+    def get_permanent_link(host, pid, org=None):
+        """Return the permanent link for the document.
+
+        :param host: Application server host.
+        :param org: Organisation key.
+        :param pid: PID of the document.
+        :returns: Document's full URL as string.
+        """
+        if not org:
+            org = current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION')
+
+        return current_app.config.get('SONAR_DOCUMENTS_PERMALINK').format(
+            host=host, org=org, pid=pid)
 
     @classmethod
     def get_record_by_identifier(cls, identifiers):

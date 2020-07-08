@@ -7,12 +7,11 @@
 # Nicolas Prongué <n.prongue@outlook.com>, 2020
 # MarionRERO <marion.davis@rero.ch>, 2020
 # Sébastien Délèze <sebastien.deleze@rero.ch>, 2020
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2020-07-15 13:31+0200\n"
+"POT-Creation-Date: 2020-07-09 07:52+0200\n"
 "PO-Revision-Date: 2020-05-13 05:58+0000\n"
 "Last-Translator: Sébastien Délèze <sebastien.deleze@rero.ch>, 2020\n"
 "Language: fr\n"
@@ -41,9 +40,6 @@ msgstr "Conditions d'acquisition"
 
 msgid "Action"
 msgstr "Action"
-
-msgid "Additional Materials"
-msgstr "Documents supplémentaires"
 
 msgid "Additional materials"
 msgstr "Documents supplémentaires"
@@ -110,9 +106,6 @@ msgstr ""
 msgid "Comment"
 msgstr "Commentaire"
 
-msgid "Contains"
-msgstr "Contient"
-
 msgid "Content note"
 msgstr "Note de contenu"
 
@@ -136,9 +129,6 @@ msgstr "Affiliation contrôlée"
 
 msgid "Controlled affiliations"
 msgstr "Affiliations contrôlées"
-
-msgid "Copyright date"
-msgstr "Date de droit d'auteur"
 
 msgid "Current cataloguing step."
 msgstr "Etape actuelle de catalogage"
@@ -323,9 +313,6 @@ msgstr "Invenio"
 msgid "Is dedicated"
 msgstr ""
 
-msgid "Is part of"
-msgstr "Fait partie de"
-
 msgid "Is shared"
 msgstr ""
 
@@ -334,9 +321,6 @@ msgstr ""
 
 msgid "Italian"
 msgstr "italien"
-
-msgid "Jury note"
-msgstr "Note du jury"
 
 msgid "Key"
 msgstr "Clé"
@@ -429,9 +413,6 @@ msgstr ""
 "Autres caractéristiques matérielles, par ex. illustrations, noir et blanc"
 " ou couleur."
 
-msgid "Other editions"
-msgstr "Autres éditions"
-
 msgid "Other electronic version"
 msgstr "Autre version électronique"
 
@@ -455,9 +436,6 @@ msgstr "Numéro de téléphone"
 
 msgid "Phone number with the international prefix, without spaces."
 msgstr "Numéro de téléphone avec le préfixe international, sans espaces."
-
-msgid "Physical description"
-msgstr "Description physique"
 
 msgid "Place"
 msgstr "Lieu"
@@ -501,6 +479,9 @@ msgstr "Note publique"
 
 msgid "Publication"
 msgstr "Publication"
+
+msgid "Published in"
+msgstr ""
 
 msgid "Publisher"
 msgstr "Editeur"
@@ -546,6 +527,9 @@ msgstr "Série"
 
 msgid "Series to which belongs the resource."
 msgstr "Série à laquelle appartient la ressource."
+
+msgid "Show more"
+msgstr ""
 
 msgid "Sign Up"
 msgstr "S'inscrire"
@@ -649,9 +633,6 @@ msgstr ""
 
 msgid "The project"
 msgstr "Le projet"
-
-msgid "Thesis note"
-msgstr "Note de thèse"
 
 msgid ""
 "This field corresponds to the exact publication date of the article, if "
@@ -2732,6 +2713,9 @@ msgstr "zazaki"
 
 msgid "no."
 msgstr "no."
+
+msgid "other files"
+msgstr "Autres fichiers"
 
 msgid "p."
 msgstr "p."

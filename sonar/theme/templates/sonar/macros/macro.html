@@ -15,53 +15,6 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #}
 
-{% macro dl(title, content) %}
-<dt class="col-sm-3">
-  {{ title }}:
-</dt>
-<dd class="col-sm-9">
-  {{ content|safe }}
-</dd>
-{% endmacro %}
-
-{% macro dl_dict(name, dict_or_string) %}
-{% if dict_or_string %}
-<dt class="col-sm-3">
-  {{ name }}:
-</dt>
-<dd class="col-sm-9">
-  {% if dict_or_string is string %}
-  {{ dict_or_string }}
-  {% else %}
-  <ul class="list-unstyled rero-ils-person mb-0">
-    {% for element in dict_or_string %}
-    <li>{{ dict_or_string[element] }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %}
-</dd>
-{% endif %}
-{% endmacro %}
-
-{% macro dl_list(name, list_or_string) %}
-{% if list_or_string %}
-<dt class="col-sm-3">
-  {{ name }}:
-</dt>
-<dd class="col-sm-9">
-  {% if list_or_string is string %}
-  {{ list_or_string }}
-  {% else %}
-  <ul class="list-unstyled rero-ils-person mb-0">
-    {% for element in list_or_string %}
-    <li>{{ element }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %}
-</dd>
-{% endif %}
-{% endmacro %}
-
 {% macro thumbnail(resource_type, record, file, class = '') %}
 {% set thumbnail = file | thumbnail(record._files) %}
 {% if thumbnail %}

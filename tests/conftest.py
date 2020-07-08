@@ -321,6 +321,20 @@ def document_json(app, db, organisation):
                 'type': 'bf:Agent'
             }]
         }],
+        'partOf': [{
+            'document': {
+                'contribution': ['Renato, Ferrari', 'Albano, Mesta'],
+                'publication': {
+                    'startDate': '2019-05-05',
+                    'statement': 'John Doe Publications inc.'
+                },
+                'title': 'Journal du dimanche'
+            },
+            'numberingPages': '135-139',
+            'numberingYear': '2020',
+            'numberingVolume': '6',
+            'numberingIssue': '12'
+        }],
         'editionStatement': {
             'editionDesignation': {
                 'value': 'Di 3 ban'

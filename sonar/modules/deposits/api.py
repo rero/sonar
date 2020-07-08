@@ -238,7 +238,7 @@ class DepositRecord(SonarRecord):
             # ORCID for contributor
             if contributor.get('orcid'):
                 data['agent']['identifiedBy'] = {
-                    'type': 'bf:Doi',
+                    'type': 'bf:Local',
                     'source': 'ORCID',
                     'value': contributor['orcid']
                 }

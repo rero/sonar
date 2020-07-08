@@ -170,6 +170,12 @@ def test_read(client, document, make_user, superuser, admin, moderator,
         'read': True,
         'update': True
     }
+    assert res.json['metadata']['partOf'][0][
+        'text'] == 'Journal du dimanche, 2020, vol. 6, no. 12, p. 135-139'
+    assert res.json['metadata']['provisionActivity'][0]['text'] == {
+        'default':
+        'Bienne : Impr. Weber, [2006] ; Lausanne ; Rippone : Impr. Coustaud'
+    }
 
     # Logged as admin
     login_user_via_session(client, email=admin['email'])
