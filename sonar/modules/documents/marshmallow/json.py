@@ -21,6 +21,7 @@ from __future__ import absolute_import, print_function
 
 from functools import partial
 
+from flask import request
 from flask_security import current_user
 from invenio_records_rest.schemas import Nested, StrictKeysMixin
 from invenio_records_rest.schemas.fields import GenFunction, \
@@ -29,7 +30,8 @@ from marshmallow import fields, pre_dump, pre_load
 
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.permissions import DocumentPermission
-from sonar.modules.documents.views import is_file_restricted
+from sonar.modules.documents.views import create_publication_statement, \
+    is_file_restricted, part_of_format
 from sonar.modules.serializers import schema_from_context
 from sonar.modules.users.api import current_user_record
 
@@ -96,6 +98,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
                          data_key="$schema",
                          deserialize=schema_from_document)
     permissions = fields.Dict(dump_only=True)
+    permalink = fields.Dict(dump_only=True)
 
     @pre_dump
     def add_files_restrictions(self, item):
@@ -135,6 +138,34 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
 
         return item
 
+    @pre_dump
+    def add_permalink(self, item):
+        """Add permanent link to document."""
+        item['permalink'] = DocumentRecord.get_permanent_link(
+            request.host_url, item['pid'])
+        return item
+
+    @pre_dump
+    def add_formatted_texts(self, item):
+        """Add formatted texts for objects which are processing in backend.
+
+        :param item: Dict of record data.
+        :returns: Modified data.
+        """
+        # Provision activity processing
+        for index, provision_activity in enumerate(
+                item.get('provisionActivity', [])):
+            item['provisionActivity'][index][
+                'text'] = create_publication_statement(provision_activity)
+
+        # Part of proccessing
+        for index, part_of in enumerate(
+                item.get('partOf', [])):
+            item['partOf'][index][
+                'text'] = part_of_format(part_of)
+
+        return item
+
     @pre_load
     def guess_organisation(self, data, **kwargs):
         """Guess organisation from current logged user.
@@ -151,6 +182,19 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
             data['organisation'] = current_user_record['organisation']
 
         return data
+
+    @pre_load
+    def remove_formatted_texts(self, data):
+        """Removes formatted texts from `provisionActivity` and `partOf` fields.
+
+        :param data: Dict of record data.
+        :returns: Modified data.
+        """
+        for provision_activity in data.get('provisionActivity', []):
+            provision_activity.pop('text', None)
+
+        for part_of in data.get('partOf', []):
+            part_of.pop('text', None)
 
 
 class DocumentSchemaV1(StrictKeysMixin):

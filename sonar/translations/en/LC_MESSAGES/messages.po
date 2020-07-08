@@ -5,12 +5,11 @@
 #
 # Translators:
 # Sébastien Délèze <sebastien.deleze@rero.ch>, 2020
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2020-07-15 13:31+0200\n"
+"POT-Creation-Date: 2020-07-09 07:52+0200\n"
 "PO-Revision-Date: 2020-05-13 05:58+0000\n"
 "Last-Translator: Sébastien Délèze <sebastien.deleze@rero.ch>, 2020\n"
 "Language: en\n"
@@ -38,9 +37,6 @@ msgid "Acquisition terms"
 msgstr ""
 
 msgid "Action"
-msgstr ""
-
-msgid "Additional Materials"
 msgstr ""
 
 msgid "Additional materials"
@@ -108,9 +104,6 @@ msgstr ""
 msgid "Comment"
 msgstr ""
 
-msgid "Contains"
-msgstr ""
-
 msgid "Content note"
 msgstr ""
 
@@ -133,9 +126,6 @@ msgid "Controlled affiliation"
 msgstr ""
 
 msgid "Controlled affiliations"
-msgstr ""
-
-msgid "Copyright date"
 msgstr ""
 
 msgid "Current cataloguing step."
@@ -315,9 +305,6 @@ msgstr ""
 msgid "Is dedicated"
 msgstr ""
 
-msgid "Is part of"
-msgstr ""
-
 msgid "Is shared"
 msgstr ""
 
@@ -325,9 +312,6 @@ msgid "Issue"
 msgstr ""
 
 msgid "Italian"
-msgstr ""
-
-msgid "Jury note"
 msgstr ""
 
 msgid "Key"
@@ -419,9 +403,6 @@ msgid ""
 "coloured."
 msgstr ""
 
-msgid "Other editions"
-msgstr ""
-
 msgid "Other electronic version"
 msgstr ""
 
@@ -444,9 +425,6 @@ msgid "Phone number"
 msgstr ""
 
 msgid "Phone number with the international prefix, without spaces."
-msgstr ""
-
-msgid "Physical description"
 msgstr ""
 
 msgid "Place"
@@ -492,6 +470,9 @@ msgstr ""
 msgid "Publication"
 msgstr ""
 
+msgid "Published in"
+msgstr ""
+
 msgid "Publisher"
 msgstr ""
 
@@ -535,6 +516,9 @@ msgid "Series"
 msgstr ""
 
 msgid "Series to which belongs the resource."
+msgstr ""
+
+msgid "Show more"
 msgstr ""
 
 msgid "Sign Up"
@@ -633,9 +617,6 @@ msgid ""
 msgstr ""
 
 msgid "The project"
-msgstr ""
-
-msgid "Thesis note"
 msgstr ""
 
 msgid ""
@@ -2714,6 +2695,9 @@ msgid "lang_zza"
 msgstr "Zaza"
 
 msgid "no."
+msgstr ""
+
+msgid "other files"
 msgstr ""
 
 msgid "p."

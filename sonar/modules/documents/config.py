@@ -28,3 +28,6 @@ SONAR_DOCUMENTS_GENERATE_THUMBNAIL = True
 
 SONAR_DOCUMENTS_ORGANISATIONS_EXTERNAL_FILES = ['csal']
 """Display external files URL for these organisations."""
+
+SONAR_DOCUMENTS_PERMALINK = '{host}organisation/{org}/documents/{pid}'
+"""Permalink for accessing documents details."""

@@ -1,4 +1,5 @@
 {
+  "documentType": "coar:c_3248",
   "identifiedBy": [
     {
       "value": "urn:nbn:ch:rero-006-108713",
@@ -15,16 +16,70 @@
       "type": "bf:Language"
     }
   ],
+  "classification": [
+    {
+      "classificationPortion": "621.38",
+      "type": "bf:ClassificationUdc"
+    }
+  ],
   "contribution": [
     {
       "agent": {
         "type": "bf:Person",
-        "preferred_name": "John, Doe",
+        "preferred_name": "Brenda, Collins",
         "date_of_birth": "1960",
         "date_of_death": "2000"
       },
       "role": [
         "cre"
+      ],
+      "affiliation": "Institute for Research"
+    },
+    {
+      "agent": {
+        "type": "bf:Person",
+        "preferred_name": "Esther, Owens",
+        "identifiedBy": {
+          "source": "ORCID",
+          "type": "bf:Doi",
+          "value": "1111-2222-3333-4444"
+        }
+      },
+      "role": [
+        "cre"
+      ],
+      "controlledAffiliation": [
+        "HEP Vaud"
+      ],
+      "affiliation": "Haute école Pédagogique de Lausanne"
+    },
+    {
+      "agent": {
+        "type": "bf:Person",
+        "preferred_name": "Joe, Holloway"
+      },
+      "role": [
+        "cre"
+      ],
+      "affiliation": "Institute for Research"
+    },
+    {
+      "agent": {
+        "type": "bf:Person",
+        "preferred_name": "Edgar, Sowards"
+      },
+      "role": [
+        "cre"
+      ],
+      "affiliation": "Institute for Research"
+    },
+    {
+      "agent": {
+        "type": "bf:Person",
+        "preferred_name": "Lauren, Sena"
+      },
+      "role": [
+        "ctb"
       ],
       "affiliation": "Institute for Research"
     }
@@ -50,16 +105,51 @@
   "abstracts": [
     {
       "language": "eng",
-      "value": "Abstract of the document"
+      "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ex vitae ipsum fermentum auctor vitae eget sem. Nam sed facilisis metus. Nullam dignissim massa vel leo euismod, quis rutrum neque cursus. Quisque fermentum libero ut urna tincidunt interdum. Fusce condimentum accumsan ipsum vel mattis. Sed ultricies tellus sed ultrices semper. Vestibulum hendrerit risus at dui gravida, nec pulvinar mauris imperdiet. Cras iaculis massa a pellentesque vulputate. Mauris ac tellus sit amet risus suscipit ullamcorper. Donec fermentum tellus in ligula ullamcorper, eu condimentum elit tincidunt. Suspendisse lacinia porta velit, quis mattis quam posuere eu. Nam feugiat massa magna, bibendum vestibulum eros feugiat nec. Ut quis semper lectus, in porttitor nibh."
+    },
+    {
+      "language": "fre",
+      "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ex vitae ipsum fermentum auctor vitae eget sem. Nam sed facilisis metus. Nullam dignissim massa vel leo euismod, quis rutrum neque cursus. Quisque fermentum libero ut urna tincidunt interdum. Fusce condimentum accumsan ipsum vel mattis. Sed ultricies tellus sed ultrices semper. Vestibulum hendrerit risus at dui gravida, nec pulvinar mauris imperdiet. Cras iaculis massa a pellentesque vulputate. Mauris ac tellus sit amet risus suscipit ullamcorper. Donec fermentum tellus in ligula ullamcorper, eu condimentum elit tincidunt. Suspendisse lacinia porta velit, quis mattis quam posuere eu. Nam feugiat massa magna, bibendum vestibulum eros feugiat nec. Ut quis semper lectus, in porttitor nibh."
     }
   ],
   "subjects": [
     {
-      "language": "eng",
-      "value": [
-        "Time series models",
-        "GARCH models"
-      ]
+      "label": {
+        "language": "eng",
+        "value": [
+          "Time series models",
+          "GARCH models"
+        ]
+      },
+      "source": "Source"
+    },
+    {
+      "label": {
+        "language": "fre",
+        "value": [
+          "Sujet 1",
+          "Sujet 2"
+        ]
+      }
+    }
+  ],
+  "partOf": [
+    {
+      "document": {
+        "contribution": [
+          "Renato, Ferrari",
+          "Albano, Mesta"
+        ],
+        "publication": {
+          "startDate": "2019-05-05",
+          "statement": "John Doe Publications inc."
+        },
+        "title": "Journal du dimanche"
+      },
+      "numberingPages": "135-139",
+      "numberingYear": "2020",
+      "numberingVolume": "6",
+      "numberingIssue": "12"
     }
   ],
   "provisionActivity": [
@@ -125,24 +215,15 @@
       "value": "Zeng Lingliang zhu bian"
     }
   },
-  "copyrightDate": [
-    "© 1971"
-  ],
-  "series": [
+  "otherEdition": [
     {
-      "name": "Collection One",
-      "number": "5"
-    },
-    {
-      "name": "Collection Two",
-      "number": "123"
+      "document": {
+        "electronicLocator": "https://www.rero.ch"
+      },
+      "publicNote": "Published version"
     }
   ],
-  "notes": [
-    "Note 1",
-    "Note 2"
-  ],
   "organisation": {
-    "$ref": "https://sonar.ch/api/organisations/org"
+    "$ref": "https://sonar.ch/api/organisations/rero"
   }
 }

@@ -33,10 +33,6 @@ img.logo {
     max-height: 90px;
 }
 
-.text-organisation {
-    @extend .text-light
-}
-
 .standalone-editor {
   legend, button.btn-outline-danger {
     display: none;

@@ -116,102 +116,6 @@ def test_title_format(document):
     assert views.title_format(title, 'it') == 'Title EN : Subtitle IT'
 
 
-def test_publishers_format():
-    """Test publishers format."""
-    result = 'Foo; place1; place2: Foo; Bar'
-    assert result == views.publishers_format([{
-        'name': ['Foo']
-    }, {
-        'place': ['place1', 'place2'],
-        'name': ['Foo', 'Bar']
-    }])
-
-
-def test_series_format():
-    """Test series format."""
-    result = 'serie 1; serie 2, 2018'
-    assert result == views.series_format([{
-        'name': 'serie 1'
-    }, {
-        'name': 'serie 2',
-        'number': '2018'
-    }])
-
-
-def test_abstracts_format():
-    """Test series format."""
-    abstracts = [{
-        'language': 'eng',
-        'value': 'Abstract'
-    }, {
-        'language': 'fre',
-        'value': 'Résumé'
-    }]
-
-    result = 'Abstract\n\nRésumé'
-    assert result == views.abstracts_format(abstracts)
-
-
-def test_subjects_format(document):
-    """Test subjects format."""
-    subjects = [{
-        'label': {
-            'value': ['subject 1', 'subject 2'],
-            'language': 'eng'
-        }
-    }, {
-        'label': {
-            'value': ['sujet 1', 'sujet 2'],
-            'language': 'fre'
-        }
-    }, {
-        'label': {
-            'value': ['subject with source 1', 'subject with source 2']
-        },
-        'source': 'RERO'
-    }]
-
-    assert views.subjects_format(subjects, 'en') == [{
-        'value':
-        'subject 1 ; subject 2'
-    }, {
-        'value': 'subject with source 1 ; subject with source 2',
-        'source': 'RERO'
-    }]
-
-    assert views.subjects_format(subjects, 'de') == [{
-        'value': 'subject with source 1 ; subject with source 2',
-        'source': 'RERO'
-    }]
-
-
-def test_identifiedby_format():
-    """Test identifiedBy format."""
-    identifiedby = [{
-        'type': 'bf:Local',
-        'source': 'RERO',
-        'value': 'R008745599'
-    }, {
-        'type': 'bf:Isbn',
-        'value': '9782844267788'
-    }, {
-        'type': 'bf:Local',
-        'source': 'BNF',
-        'value': 'FRBNF452959040000002'
-    }, {
-        'type': 'uri',
-        'value': 'http://catalogue.bnf.fr/ark:/12148/cb45295904f'
-    }]
-    results = [{
-        'type': 'Isbn',
-        'value': '9782844267788'
-    }, {
-        'type': 'uri',
-        'value': 'http://catalogue.bnf.fr/ark:/12148/cb45295904f'
-    }]
-    assert results == views.identifiedby_format(identifiedby)
-
-
 def test_create_publication_statement(document):
     """Test create publication statement."""
     publication_statement = views.create_publication_statement(
@@ -538,3 +442,43 @@ def test_get_current_organisation_code(app, organisation):
     with app.test_request_context() as req:
         req.request.args = {'view': 'unisi'}
         assert views.get_current_organisation_code() == 'unisi'
+
+
+def test_abstracts(app):
+    """Test getting ordered abstracts."""
+    # Abstracts are ordered, english first.
+    abstracts = [{
+        'language': 'fre',
+        'value': 'Résumé'
+    }, {
+        'language': 'eng',
+        'value': 'Summary'
+    }]
+    assert views.abstracts({'abstracts': abstracts})[0]['language'] == 'eng'
+
+    # No abstract
+    assert views.abstracts({}) == []
+
+
+def test_contributors():
+    """Test ordering contributors."""
+    contributors = [{
+        'role': ['dgs']
+    }, {
+        'role': ['ctb']
+    }, {
+        'role': ['prt']
+    }, {
+        'role': ['edt']
+    }, {
+        'role': ['cre']
+    }]
+
+    priorities = ['cre', 'ctb', 'dgs', 'edt', 'prt']
+
+    for index, contributor in enumerate(
+            views.contributors({'contribution': contributors})):
+        assert contributor['role'][0] == priorities[index]
+
+    # No contributors
+    assert views.contributors({}) == []

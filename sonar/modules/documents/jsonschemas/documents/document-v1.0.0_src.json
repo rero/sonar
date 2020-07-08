@@ -1066,13 +1066,18 @@
                     "title": "Type",
                     "type": "string",
                     "enum": [
-                      "bf:Doi"
+                      "bf:Doi",
+                      "bf:Local"
                     ],
                     "form": {
                       "options": [
                         {
                           "label": "bf:Doi",
                           "value": "bf:Doi"
+                        },
+                        {
+                          "label": "bf:Local",
+                          "value": "bf:Local"
                         }
                       ]
                     }
