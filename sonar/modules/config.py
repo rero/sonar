@@ -51,7 +51,7 @@ SONAR_APP_UI_VERSION = '0.3.0'
 SONAR_APP_INTERNAL_IPS = ['127.0.0.1']
 """Internal IPs for accessing files."""
 
-SONAR_APP_DEFAULT_ORGANISATION = 'sonar'
+SONAR_APP_DEFAULT_ORGANISATION = 'global'
 """Default organisation key."""
 
 SONAR_APP_BABEL_TRANSLATE_JSON_KEYS = [

@@ -27,13 +27,13 @@ import sonar.modules.documents.views as views
 
 def test_default_view_code(app):
     """Test set default view code."""
-    views.default_view_code(None, {'view': 'sonar'})
+    views.default_view_code(None, {'view': 'global'})
 
 
 def test_store_organisation(db, organisation):
     """Test store organisation in globals."""
     # Default view, no organisation stored.
-    views.store_organisation(None, {'view': 'sonar'})
+    views.store_organisation(None, {'view': 'global'})
     assert not g.get('organisation')
 
     # Existing organisation stored
@@ -326,7 +326,7 @@ def test_part_of_format():
 def test_is_file_restricted(app, organisation):
     """Test if a file is restricted by embargo date and/or organisation."""
     g.pop('organisation', None)
-    views.store_organisation(None, {'view': 'sonar'})
+    views.store_organisation(None, {'view': 'global'})
 
     record = {'organisation': {'pid': 'org'}}
 
@@ -397,7 +397,7 @@ def test_is_file_restricted(app, organisation):
 
     # Restricted by embargo date and organisation
     g.pop('organisation', None)
-    views.store_organisation(None, {'view': 'sonar'})
+    views.store_organisation(None, {'view': 'global'})
     with app.test_request_context(environ_base={'REMOTE_ADDR': '10.1.2.3'}):
         assert views.is_file_restricted(
             {
@@ -423,11 +423,11 @@ def test_is_file_restricted(app, organisation):
 def test_get_current_organisation_code(app, organisation):
     """Test get current organisation."""
     # No globals and no args
-    assert views.get_current_organisation_code() == 'sonar'
+    assert views.get_current_organisation_code() == 'global'
 
     # Default globals and no args
-    views.store_organisation(None, {'view': 'sonar'})
-    assert views.get_current_organisation_code() == 'sonar'
+    views.store_organisation(None, {'view': 'global'})
+    assert views.get_current_organisation_code() == 'global'
 
     # Organisation globals and no args
     views.store_organisation(None, {'view': 'org'})
@@ -435,8 +435,8 @@ def test_get_current_organisation_code(app, organisation):
 
     # Args is global
     with app.test_request_context() as req:
-        req.request.args = {'view': 'sonar'}
-        assert views.get_current_organisation_code() == 'sonar'
+        req.request.args = {'view': 'global'}
+        assert views.get_current_organisation_code() == 'global'
 
     # Args has organisation view
     with app.test_request_context() as req:

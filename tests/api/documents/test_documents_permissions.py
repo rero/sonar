@@ -72,7 +72,7 @@ def test_list(app, client, make_document, superuser, admin, moderator,
     assert res.json['aggregations'].get('organisation')
 
     # Public search
-    res = client.get(url_for('invenio_records_rest.doc_list', view='sonar'))
+    res = client.get(url_for('invenio_records_rest.doc_list', view='global'))
     assert res.status_code == 200
     assert res.json['hits']['total'] == 2
     assert res.json['aggregations'].get('organisation')
