@@ -35,7 +35,7 @@ blueprint = Blueprint('documents',
                       __name__,
                       template_folder='templates',
                       static_folder='static',
-                      url_prefix='/organisation/<view>')
+                      url_prefix='/<view>')
 """Blueprint used for loading templates and static assets
 
 The sole purpose of this blueprint is to ensure that Invenio can find the

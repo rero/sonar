@@ -93,4 +93,4 @@ def test_get_view_code(organisation):
     assert get_view_code() == 'org'
 
     g.pop('organisation', None)
-    assert get_view_code() == 'sonar'
+    assert get_view_code() == 'global'
