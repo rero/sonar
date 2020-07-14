@@ -111,7 +111,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
             return item
 
         for key, file in enumerate(item['_files']):
-            if file['type'] == 'file':
+            if file.get('type') == 'file':
                 restricted = is_file_restricted(file, item)
 
                 # Format date before serialization

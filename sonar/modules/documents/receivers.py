@@ -98,7 +98,7 @@ def populate_fulltext_field(sender=None,
     # Store fulltext in array for indexing
     json['fulltext'] = []
     for file in record.files:
-        if file['type'] == 'fulltext':
+        if file.get('type') == 'fulltext':
             with file.file.storage().open() as pdf_file:
                 json['fulltext'].append(pdf_file.read().decode('utf-8'))
 

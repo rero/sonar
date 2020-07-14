@@ -31,6 +31,7 @@ from invenio_jsonschemas import current_jsonschemas
 from invenio_pidstore.errors import PIDDoesNotExistError
 from invenio_pidstore.models import PersistentIdentifier
 from invenio_records_files.api import FilesMixin, Record
+from invenio_records_files.models import RecordsBuckets
 from invenio_records_rest.utils import obj_or_import_string
 from invenio_search import current_search
 from invenio_search.api import RecordsSearch
@@ -138,6 +139,52 @@ class SonarRecord(Record, FilesMixin):
     def dbcommit():
         """Commit changes to db."""
         db.session.commit()
+
+    @staticmethod
+    def update_files(bucket_id):
+        """Update record files accordingly to files stored in given bucket.
+
+        :param bucket_id: Bucket identifier.
+        """
+        try:
+            # Find the record bucket object.
+            try:
+                records_buckets = RecordsBuckets.query.filter_by(
+                    bucket_id=bucket_id).first()
+            except Exception:
+                raise Exception('`records_buckets` object not found.')
+
+            # Find the record PID.
+            pid = PersistentIdentifier.query.filter_by(
+                object_uuid=records_buckets.record_id).first()
+
+            if not pid:
+                raise Exception('Persistent identifier not found.')
+
+            # Retrieve real record class
+            record_class = current_app.config.get(
+                'RECORDS_REST_ENDPOINTS',
+                {}).get(pid.pid_type).get('record_class')
+
+            if not record_class:
+                raise Exception('Class for record not found.')
+
+            # Load record by its PID.
+            record = record_class.get_record_by_pid(pid.pid_value)
+
+            # Update record metadata with files.
+            record.files.flush()
+
+            # Store metadata in DB.
+            record.commit()
+            db.session.commit()
+
+            # Re-index record.
+            record.reindex()
+        except Exception as exception:
+            raise Exception(
+                'Unable to update files for record with bucket {bucket}: '
+                '{message}'.format(bucket=bucket_id, message=str(exception)))
 
     def reindex(self):
         """Reindex record."""
@@ -249,7 +296,7 @@ class SonarRecord(Record, FilesMixin):
 
     def get_main_file(self):
         """Get the main file of record."""
-        files = [file for file in self.files if file['type'] == 'file']
+        files = [file for file in self.files if file.get('type') == 'file']
 
         if not files:
             return None

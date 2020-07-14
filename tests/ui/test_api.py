@@ -22,6 +22,7 @@ import pytest
 from flask import url_for
 from invenio_accounts.testutils import login_user_via_session
 from invenio_app.factory import create_api
+from invenio_pidstore.models import PersistentIdentifier
 from six import BytesIO
 
 from sonar.modules.api import SonarRecord
@@ -241,3 +242,33 @@ def test_remove_from_index(client, db, document, superuser):
     res = client.get(url_for('invenio_records_rest.doc_list'))
     assert res.status_code == 200
     assert res.json['hits']['total'] == (total - 1)
+
+
+def test_update_files(app, db, document_with_file):
+    """Test update files for record."""
+    # OK
+    SonarRecord.update_files(document_with_file['_bucket'])
+    assert len(document_with_file.files) == 3
+
+    # Record bucket not found
+    with pytest.raises(Exception) as exception:
+        SonarRecord.update_files('9bca9173-2c7b-4e22-bd6d-46e4f972dbf89')
+    assert str(
+        exception.value).find('`records_buckets` object not found.') != -1
+
+    # Not record class found
+    app.config.get('RECORDS_REST_ENDPOINTS',
+                   {}).get('doc', {}).pop('record_class', None)
+
+    with pytest.raises(Exception) as exception:
+        SonarRecord.update_files(document_with_file['_bucket'])
+    assert str(exception.value).find('Class for record not found.') != -1
+
+    # Persistent identifier not found
+    pid = PersistentIdentifier.get('doc', document_with_file['pid'])
+    db.session.delete(pid)
+    db.session.commit()
+
+    with pytest.raises(Exception) as exception:
+        SonarRecord.update_files(document_with_file['_bucket'])
+    assert str(exception.value).find('Persistent identifier not found.') != -1
