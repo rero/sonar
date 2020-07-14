@@ -24,9 +24,11 @@ from flask_assets import Bundle, Environment
 from flask_bootstrap import Bootstrap
 from flask_security import user_registered
 from flask_wiki import Wiki
+from invenio_files_rest.signals import file_deleted, file_uploaded
 
 from sonar.modules.permissions import has_admin_access, has_submitter_access, \
     has_superuser_access
+from sonar.modules.receivers import file_listener
 from sonar.modules.users.api import current_user_record
 from sonar.modules.users.signals import user_registered_handler
 from sonar.modules.utils import get_switch_aai_providers, get_view_code
@@ -36,8 +38,7 @@ from . import config
 
 def utility_processor():
     """Dictionary for passing data to templates."""
-    return dict(
-                has_submitter_access=has_submitter_access,
+    return dict(has_submitter_access=has_submitter_access,
                 has_admin_access=has_admin_access,
                 has_superuser_access=has_superuser_access,
                 ui_version=config.SONAR_APP_UI_VERSION,
@@ -57,10 +58,8 @@ class Sonar(object):
             # Force to load SONAR templates before others
             # it is require for Flask-Security see:
             # https://pythonhosted.org/Flask-Security/customizing.html#emails
-            sonar_loader = jinja2.ChoiceLoader([
-                jinja2.PackageLoader('sonar', 'templates'),
-                app.jinja_loader
-            ])
+            sonar_loader = jinja2.ChoiceLoader(
+                [jinja2.PackageLoader('sonar', 'templates'), app.jinja_loader])
             app.jinja_loader = sonar_loader
 
     def init_app(self, app):
@@ -88,6 +87,10 @@ class Sonar(object):
 
         # Connect to signal sent when a user is created in Flask-Security.
         user_registered.connect(user_registered_handler, weak=False)
+
+        # Connect to signal sent when a file is uploaded or deleted
+        file_uploaded.connect(file_listener, weak=False)
+        file_deleted.connect(file_listener, weak=False)
 
     def init_config(self, app):
         """Initialize configuration."""

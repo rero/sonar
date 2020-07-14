@@ -146,7 +146,7 @@ def files_by_type(files, file_type='file'):
     :param file_type: Type of the files to return.
     :return Filtered list
     """
-    return [file for file in files if file['type'] == file_type]
+    return [file for file in files if file.get('type') == file_type]
 
 
 @blueprint.app_template_filter()
