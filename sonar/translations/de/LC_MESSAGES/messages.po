@@ -5,13 +5,15 @@
 #
 # Translators:
 # Nicolas Prongué <n.prongue@outlook.com>, 2020
+# Sébastien Délèze <sebastien.deleze@rero.ch>, 2020
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2020-06-16 15:20+0200\n"
+"POT-Creation-Date: 2020-07-15 13:31+0200\n"
 "PO-Revision-Date: 2020-05-13 05:58+0000\n"
-"Last-Translator: Nicolas Prongué <n.prongue@outlook.com>, 2020\n"
+"Last-Translator: Sébastien Délèze <sebastien.deleze@rero.ch>, 2020\n"
 "Language: de\n"
 "Language-Team: German (https://www.transifex.com/rero/teams/77935/de/)\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -156,13 +158,13 @@ msgid "Degree"
 msgstr ""
 
 msgid "Deposit approval"
-msgstr ""
+msgstr "Deposit approval"
 
 msgid "Deposit rejection"
-msgstr ""
+msgstr "Deposit rejection"
 
 msgid "Deposit to validate"
-msgstr ""
+msgstr "Deposit to validate"
 
 msgid "Describes the information of a single file in the record."
 msgstr ""
@@ -2753,4 +2755,3 @@ msgstr ""
 
 msgid "vol."
 msgstr ""
-
