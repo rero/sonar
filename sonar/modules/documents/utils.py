@@ -19,7 +19,7 @@
 
 from __future__ import absolute_import, print_function
 
-from sonar.modules.utils import remove_trailing_punctuation
+from sonar.modules.utils import format_date, remove_trailing_punctuation
 
 
 def publication_statement_text(provision_activity):
@@ -27,7 +27,7 @@ def publication_statement_text(provision_activity):
     # Only if provision activity is imported from field 269 (no statement,
     # but start date)
     if 'statement' not in provision_activity:
-        return provision_activity['startDate']
+        return format_date(provision_activity['startDate'])
 
     punctuation = {'bf:Place': ' ; ', 'bf:Agent': ', '}
 

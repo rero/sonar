@@ -24,7 +24,7 @@ from flask import g
 
 from sonar.modules.documents.views import store_organisation
 from sonar.modules.utils import change_filename_extension, \
-    create_thumbnail_from_file, get_current_language, \
+    create_thumbnail_from_file, format_date, get_current_language, \
     get_switch_aai_providers, get_view_code
 
 
@@ -94,3 +94,15 @@ def test_get_view_code(organisation):
 
     g.pop('organisation', None)
     assert get_view_code() == 'global'
+
+
+def test_format_date():
+    """Test date formatting."""
+    # Just year
+    assert format_date('2020') == '2020'
+
+    # Complete date
+    assert format_date('2020-01-01') == '01.01.2020'
+
+    # No processing
+    assert format_date('July 31, 2020') == 'July 31, 2020'

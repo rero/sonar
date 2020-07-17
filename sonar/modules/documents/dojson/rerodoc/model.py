@@ -252,21 +252,13 @@ def marc21_to_provision_activity_field_260(self, key, value):
 @utils.ignore_value
 def marc21_to_provision_activity_field_269(self, key, value):
     """Get provision activity data from field 269."""
-    provisition_activity = self.get('provisionActivity', [])
+    # 260$c has priority to this date
+    if marc21tojson.blob_record.get('260__', {}).get('c'):
+        return None
 
     # No date, skipping
     if not value.get('c'):
         return None
-
-    def get_publication():
-        """Get stored publication."""
-        for key, item in enumerate(provisition_activity):
-            if item['type'] == 'bf:Publication':
-                return provisition_activity.pop(key)
-
-        return {'type': 'bf:Publication', 'startDate': None}
-
-    publication = get_publication()
 
     # Assign start date
     match = re.search(r'^[0-9]{4}(-[0-9]{2}-[0-9]{2})?$', value.get('c'))
@@ -275,13 +267,7 @@ def marc21_to_provision_activity_field_269(self, key, value):
     if not match:
         return None
 
-    publication['startDate'] = value.get('c')
-
-    # Inject publiction into provision activity
-    provisition_activity.append(publication)
-
-    # Re-assign provisionActivity
-    self['provisionActivity'] = provisition_activity
+    add_provision_activity_start_date(self, value.get('c'))
 
     return None
 
@@ -634,13 +620,29 @@ def marc21_to_content_note(self, key, value):
 @utils.ignore_value
 def marc21_to_dissertation_field_502(self, key, value):
     """Extract dissertation degree."""
-    if not value.get('a'):
+    if value.get('a'):
+        dissertation = self.get('dissertation', {})
+        dissertation['degree'] = value.get('a')
+        self['dissertation'] = dissertation
+
+    # Try to get start date and store in provision activity
+    # 260$c and 269$c have priority to this date
+    record = marc21tojson.blob_record
+    if (record.get('260__', {}).get('c') or record.get('269__', {}).get('c') or
+            record.get('773__', {}).get('g')):
         return None
 
-    dissertation = self.get('dissertation', {})
-    dissertation['degree'] = value.get('a')
+    # No date, skipping
+    if not value.get('9'):
+        return None
 
-    self['dissertation'] = dissertation
+    # Match either 2019 or 2019-01-01
+    match = re.search(r'^[0-9]{4}(-[0-9]{2}-[0-9]{2})?$', value.get('9'))
+
+    if not match:
+        return None
+
+    add_provision_activity_start_date(self, value.get('9'))
 
     return None
 
@@ -858,8 +860,10 @@ def marc21_to_part_of(self, key, value):
         if contributors:
             document['contribution'] = contributors
 
+    record = marc21tojson.blob_record
+
     # Publication based on document sub type
-    sub_type = marc21tojson.blob_record.get('980__', {}).get('f')
+    sub_type = record.get('980__', {}).get('f')
     if value.get('d') or sub_type == 'ART_INBOOK':
         document['publication'] = {}
 
@@ -869,7 +873,39 @@ def marc21_to_part_of(self, key, value):
         if sub_type == 'ART_INBOOK':
             document['publication']['startDate'] = numbering[0]
 
+    # If no field 260$c or 269$c, store start date
+    if (not record.get('260__', {}).get('c') and
+            not record.get('269__', {}).get('c')):
+        add_provision_activity_start_date(self, numbering[0])
+
     if document:
         data['document'] = document
 
     return data
+
+
+def add_provision_activity_start_date(data, date):
+    """Add start date for provision activity.
+
+    :param data: Data dictionary.
+    :param date: Date to add.
+    """
+    provisition_activity = data.get('provisionActivity', [])
+
+    def get_publication():
+        """Get stored publication."""
+        for key, item in enumerate(provisition_activity):
+            if item['type'] == 'bf:Publication':
+                return provisition_activity.pop(key)
+
+        return {'type': 'bf:Publication', 'startDate': None}
+
+    publication = get_publication()
+
+    publication['startDate'] = date
+
+    # Inject publiction into provision activity
+    provisition_activity.append(publication)
+
+    # Re-assign provisionActivity
+    data['provisionActivity'] = provisition_activity

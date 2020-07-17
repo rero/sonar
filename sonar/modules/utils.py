@@ -17,6 +17,7 @@
 
 """Utils functions for application."""
 
+import datetime
 import re
 
 from flask import current_app, g
@@ -131,3 +132,18 @@ def get_view_code():
         return g.organisation['code']
 
     return current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION')
+
+
+def format_date(date):
+    """Format date to given format.
+
+    :param date: String representing the date.
+    :param format: Format of the ouput.
+    :returns: The formatted date.
+    """
+    # Complete date (eg. 2020-12-31)
+    if re.match(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}$', date):
+        return datetime.datetime.strptime(date,
+                                          '%Y-%m-%d').strftime('%d.%m.%Y')
+
+    return date

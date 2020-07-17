@@ -53,3 +53,9 @@ def test_publication_statement_text():
         'type': 'bf:Publication',
         'startDate': '1990'
     }) == '1990'
+
+    # Without statement, complete date
+    assert utils.publication_statement_text({
+        'type': 'bf:Publication',
+        'startDate': '1990-12-31'
+    }) == '31.12.1990'

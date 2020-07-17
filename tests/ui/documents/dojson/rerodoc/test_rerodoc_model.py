@@ -383,10 +383,7 @@ def test_marc21_to_language(app):
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('language') == [{
-        'type': 'bf:Language',
-        'value': 'fre'
-    }]
+    assert data.get('language') == [{'type': 'bf:Language', 'value': 'fre'}]
 
     # Multiple $a
     marc21xml = """
@@ -472,8 +469,7 @@ def test_marc21_to_provision_activity_field_260(app):
             "label": [{
                 "value": "Bulletin officiel du Directoire"
             }],
-            "type":
-            "bf:Agent"
+            "type": "bf:Agent"
         }, {
             "label": [{
                 "value": "1798-1799"
@@ -636,11 +632,38 @@ def test_marc21_to_provision_activity_all():
         <datafield tag="269" ind1=" " ind2=" ">
             <subfield code="c">1700</subfield>
         </datafield>
+        <datafield tag="502" ind1=" " ind2=" ">
+            <subfield code="a">Thèse 2</subfield>
+            <subfield code="9">2020</subfield>
+        </datafield>
     </record>
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
     assert data.get('provisionActivity') == [{
+        "type":
+        "bf:Publication",
+        "startDate":
+        "1798",
+        "endDate":
+        "1799",
+        "statement": [{
+            "label": [{
+                "value": "Lausanne"
+            }],
+            "type": "bf:Place"
+        }, {
+            "label": [{
+                "value": "Bulletin officiel du Directoire"
+            }],
+            "type": "bf:Agent"
+        }, {
+            "label": [{
+                "value": "1798-1799"
+            }],
+            "type": "Date"
+        }]
+    }, {
         "type":
         "bf:Manufacture",
         "statement": [{
@@ -653,30 +676,6 @@ def test_marc21_to_provision_activity_all():
                 "value": "Henri Vincent"
             }],
             "type": "bf:Agent"
-        }]
-    }, {
-        "type":
-        "bf:Publication",
-        "startDate":
-        "1700",
-        "endDate":
-        "1799",
-        "statement": [{
-            "label": [{
-                "value": "Lausanne"
-            }],
-            "type": "bf:Place"
-        }, {
-            "label": [{
-                "value": "Bulletin officiel du Directoire"
-            }],
-            "type":
-            "bf:Agent"
-        }, {
-            "label": [{
-                "value": "1798-1799"
-            }],
-            "type": "Date"
         }]
     }]
 
@@ -1580,12 +1579,10 @@ def test_marc21_to_classification_from_field_080():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('classification') == [
-        {
-            "type": "bf:ClassificationUdc",
-            "classificationPortion": "82"
-        }
-    ]
+    assert data.get('classification') == [{
+        "type": "bf:ClassificationUdc",
+        "classificationPortion": "82"
+    }]
 
     # Not $a record
     marc21xml = """
@@ -1612,12 +1609,10 @@ def test_marc21_to_classification_from_field_084():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('classification') == [
-        {
-            "type": "bf:ClassificationDdc",
-            "classificationPortion": "610"
-        }
-    ]
+    assert data.get('classification') == [{
+        "type": "bf:ClassificationDdc",
+        "classificationPortion": "610"
+    }]
 
     # Not $a record
     marc21xml = """
@@ -1659,16 +1654,13 @@ def test_marc21_to_classification_from_all():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('classification') == [
-        {
-            "type": "bf:ClassificationUdc",
-            "classificationPortion": "82"
-        },
-        {
-            "type": "bf:ClassificationDdc",
-            "classificationPortion": "610"
-        }
-    ]
+    assert data.get('classification') == [{
+        "type": "bf:ClassificationUdc",
+        "classificationPortion": "82"
+    }, {
+        "type": "bf:ClassificationDdc",
+        "classificationPortion": "610"
+    }]
 
 
 def test_marc21_to_content_note():
@@ -2222,7 +2214,7 @@ def test_marc21_to_contribution_field_711():
     assert not data.get('contribution')
 
 
-def test_marc21_to_part_of():
+def test_marc21_to_part_of(app):
     """Test extracting is part of from field 773."""
     # With sub type of ART INBOOK
     marc21xml = """
@@ -2250,6 +2242,10 @@ def test_marc21_to_part_of():
                 'startDate': '2015'
             }
         }
+    }]
+    assert data.get('provisionActivity') == [{
+        'startDate': '2015',
+        'type': 'bf:Publication'
     }]
 
     # With sub type is not ART INBOOK
@@ -2279,6 +2275,10 @@ def test_marc21_to_part_of():
             }
         }
     }]
+    assert data.get('provisionActivity') == [{
+        'startDate': '2020',
+        'type': 'bf:Publication'
+    }]
 
     # Without $g
     marc21xml = """
@@ -2296,6 +2296,7 @@ def test_marc21_to_part_of():
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
     assert not data.get('partOf')
+    assert not data.get('provisionActivity')
 
     # Without empty numbering year
     marc21xml = """
@@ -2314,6 +2315,7 @@ def test_marc21_to_part_of():
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
     assert not data.get('partOf')
+    assert not data.get('provisionActivity')
 
     # Without numbering year
     marc21xml = """
@@ -2332,6 +2334,7 @@ def test_marc21_to_part_of():
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
     assert not data.get('partOf')
+    assert not data.get('provisionActivity')
 
     # Without title
     marc21xml = """
@@ -2357,6 +2360,10 @@ def test_marc21_to_part_of():
                 'statement': 'Stämpfli Verlag, Bern'
             }
         }
+    }]
+    assert data.get('provisionActivity') == [{
+        'startDate': '2015',
+        'type': 'bf:Publication'
     }]
 
     # Without $c
@@ -2384,6 +2391,10 @@ def test_marc21_to_part_of():
             }
         }
     }]
+    assert data.get('provisionActivity') == [{
+        'startDate': '2015',
+        'type': 'bf:Publication'
+    }]
 
     # Without document
     marc21xml = """
@@ -2398,6 +2409,163 @@ def test_marc21_to_part_of():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('partOf') == [{
-        'numberingYear': '2015'
+    assert data.get('partOf') == [{'numberingYear': '2015'}]
+    assert data.get('provisionActivity') == [{
+        'startDate': '2015',
+        'type': 'bf:Publication'
     }]
+
+
+def test_start_date_priorities(app):
+    """Test start date priorities for provision activity."""
+    # Four potential start dates.
+    marc21xml = """
+    <record>
+        <datafield tag="260" ind1=" " ind2=" ">
+            <subfield code="a">Lausanne</subfield>
+            <subfield code="c">1798-1799</subfield>
+            <subfield code="b">Bulletin officiel du Directoire,</subfield>
+        </datafield>
+        <datafield tag="773" ind1=" " ind2=" ">
+            <subfield code="g">2015///</subfield>
+        </datafield>
+        <datafield tag="269" ind1=" " ind2=" ">
+            <subfield code="c">1966</subfield>
+        </datafield>
+        <datafield tag="502" ind1=" " ind2=" ">
+            <subfield code="a">Thèse 1</subfield>
+            <subfield code="9">2020</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data['provisionActivity'][0]['startDate'] == '1798'
+
+    # Start dates from 269$c must be taken.
+    marc21xml = """
+    <record>
+        <datafield tag="269" ind1=" " ind2=" ">
+            <subfield code="c">1966</subfield>
+        </datafield>
+        <datafield tag="502" ind1=" " ind2=" ">
+            <subfield code="a">Thèse 1</subfield>
+            <subfield code="9">2020</subfield>
+        </datafield>
+        <datafield tag="773" ind1=" " ind2=" ">
+            <subfield code="g">2015///</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data['provisionActivity'][0]['startDate'] == '1966'
+
+    # Start dates from 773$g must be taken.
+    marc21xml = """
+    <record>
+        <datafield tag="502" ind1=" " ind2=" ">
+            <subfield code="a">Thèse 1</subfield>
+            <subfield code="9">2020</subfield>
+        </datafield>
+        <datafield tag="773" ind1=" " ind2=" ">
+            <subfield code="g">2015///</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data['provisionActivity'][0]['startDate'] == '2015'
+
+    # Only 502$9
+    marc21xml = """
+    <record>
+        <datafield tag="502" ind1=" " ind2=" ">
+            <subfield code="a">Thèse 1</subfield>
+            <subfield code="9">2020</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data['provisionActivity'][0]['startDate'] == '2020'
+
+
+def test_marc21_to_provision_activity_field_502(app):
+    """Test provision activity with field 502."""
+    # One field
+    marc21xml = """
+    <record>
+        <datafield tag="502" ind1=" " ind2=" ">
+            <subfield code="a">Thèse 1</subfield>
+            <subfield code="9">2020</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('provisionActivity') == [{
+        'startDate': '2020',
+        'type': 'bf:Publication'
+    }]
+
+    # One field with full date
+    marc21xml = """
+    <record>
+        <datafield tag="502" ind1=" " ind2=" ">
+            <subfield code="a">Thèse 1</subfield>
+            <subfield code="9">2020-09-09</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('provisionActivity') == [{
+        'startDate': '2020-09-09',
+        'type': 'bf:Publication'
+    }]
+
+    # Date does not match "YYYY" OR "YYYY-MM-DD"
+    marc21xml = """
+    <record>
+        <datafield tag="502" ind1=" " ind2=" ">
+            <subfield code="a">Thèse 1</subfield>
+            <subfield code="9">2010-2020</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('provisionActivity')
+
+    # Multiple fields
+    marc21xml = """
+    <record>
+        <datafield tag="502" ind1=" " ind2=" ">
+            <subfield code="a">Thèse 1</subfield>
+            <subfield code="9">2010</subfield>
+        </datafield>
+        <datafield tag="502" ind1=" " ind2=" ">
+            <subfield code="a">Thèse 2</subfield>
+            <subfield code="9">2020</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert data.get('provisionActivity') == [{
+        'startDate': '2020',
+        'type': 'bf:Publication'
+    }]
+
+    # No field $9
+    marc21xml = """
+    <record>
+        <datafield tag="502" ind1=" " ind2=" ">
+            <subfield code="a">Thèse 2</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('provisionActivity')

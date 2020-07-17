@@ -85,9 +85,13 @@
       {% for provision_activity in record.provisionActivity %}
       <ul class="list-unstyled my-2">
         {% set statement = provision_activity | create_publication_statement %}
+        {% if statement is string %}
+        {{ statement }}
+        {% else %}
         {% for element in statement %}
         <li>{{ statement[element] }}</li>
         {% endfor %}
+        {% endif %}
       </ul>
       {% endfor %}
 
