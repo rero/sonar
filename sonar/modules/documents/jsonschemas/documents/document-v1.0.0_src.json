@@ -972,23 +972,38 @@
           "type": "string",
           "minLength": 1
         },
-        "note": {
-          "title": "Notes",
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "title": "Note",
-            "type": "string",
-            "minLength": 1
+        "jury_note": {
+          "title": "Jury note",
+          "type": "string",
+          "minLength": 1
+        },
+        "grantingInstitution": {
+          "title": "Granting institution",
+          "type": "string",
+          "minLength": 1
+        },
+        "date": {
+          "title": "Date",
+          "type": "string",
+          "pattern": "^[0-9]{4}(-[0-9]{2}-[0-9]{2})?$",
+          "form": {
+            "placeholder": "Example: 2019 or 2019-05-05"
           }
         }
       },
+      "propertiesOrder": [
+        "degree",
+        "grantingInstitution",
+        "date",
+        "jury_note"
+      ],
       "required": [
         "degree"
       ],
       "form": {
         "hide": true
-      }
+      },
+      "hideExpression": "!['coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'habilitation_thesis', 'advanced_studies_thesis', 'other'].includes(field.parent.model.documentType)"
     },
     "usageAndAccessPolicy": {
       "title": "Usage and access policies",

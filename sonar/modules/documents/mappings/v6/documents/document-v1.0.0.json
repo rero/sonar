@@ -288,7 +288,13 @@
             "degree": {
               "type": "text"
             },
-            "notes": {
+            "jury_note": {
+              "type": "text"
+            },
+            "grantingInstitution": {
+              "type": "text"
+            },
+            "date": {
               "type": "text"
             }
           }

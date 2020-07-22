@@ -31,7 +31,7 @@ from marshmallow import fields, pre_dump, pre_load
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.permissions import DocumentPermission
 from sonar.modules.documents.views import create_publication_statement, \
-    is_file_restricted, part_of_format
+    dissertation, is_file_restricted, part_of_format
 from sonar.modules.serializers import schema_from_context
 from sonar.modules.users.api import current_user_record
 
@@ -164,6 +164,9 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
             item['partOf'][index][
                 'text'] = part_of_format(part_of)
 
+        if item.get('dissertation'):
+            item['dissertation']['text'] = dissertation(item)
+
         return item
 
     @pre_load
@@ -185,7 +188,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
 
     @pre_load
     def remove_formatted_texts(self, data):
-        """Removes formatted texts from `provisionActivity` and `partOf` fields.
+        """Removes formatted texts from fields.
 
         :param data: Dict of record data.
         :returns: Modified data.
@@ -195,6 +198,8 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
 
         for part_of in data.get('partOf', []):
             part_of.pop('text', None)
+
+        data.get('dissertation', {}).pop('text', None)
 
 
 class DocumentSchemaV1(StrictKeysMixin):

@@ -27,7 +27,7 @@ from invenio_i18n.ext import current_i18n
 
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.organisations.api import OrganisationRecord
-from sonar.modules.utils import change_filename_extension
+from sonar.modules.utils import change_filename_extension, format_date
 
 from .utils import publication_statement_text
 
@@ -306,9 +306,41 @@ def abstracts(record):
         current_i18n.locale.language)
     preferred_languages = get_preferred_languages(language)
 
-    return sorted(record['abstracts'],
-                  key=lambda abstract: preferred_languages.index(abstract[
-                      'language']))
+    return sorted(
+        record['abstracts'],
+        key=lambda abstract: preferred_languages.index(abstract['language']))
+
+
+@blueprint.app_template_filter()
+def dissertation(record):
+    """Get dissertation text."""
+    if not record.get('dissertation'):
+        return None
+
+    dissertation_text = [record['dissertation']['degree']]
+
+    # Dissertation has grantingInstitution or date
+    if record['dissertation'].get(
+            'grantingInstitution') or record['dissertation'].get('date'):
+        dissertation_text.append(': ')
+
+        # Add grantingInstitution
+        if record['dissertation'].get('grantingInstitution'):
+            dissertation_text.append(
+                record['dissertation']['grantingInstitution'])
+
+        # Add date
+        if record['dissertation'].get('date'):
+            dissertation_text.append(', {date}'.format(
+                date=format_date(record['dissertation']['date'])))
+
+    # Add jury note
+    if record['dissertation'].get('jury_note'):
+        dissertation_text.append(' ({label}: {note})'.format(
+            label=_('Jury note').lower(),
+            note=record['dissertation']['jury_note']))
+
+    return ''.join(dissertation_text)
 
 
 def get_language_from_bibliographic_code(language_code):

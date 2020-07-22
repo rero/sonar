@@ -108,6 +108,14 @@ def test_create_document(app, client, deposit, user):
         'controlledAffiliation': ['Uni of Bern and Hospital'],
         'role': ['cre']
     }]
+
+    assert document['dissertation'] == {
+        'degree': 'Doctoral thesis',
+        'grantingInstitution': 'Università della Svizzera italiana',
+        'date': '2010-12-01',
+        'jury_note': 'Jury note'
+    }
+
     assert document.files['main.pdf']['restricted'] == 'organisation'
     assert document.files['main.pdf']['embargo_date'] == '2021-01-01'
     assert len(document.files) == 6

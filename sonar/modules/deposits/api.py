@@ -214,6 +214,10 @@ class DepositRecord(SonarRecord):
                 abstract['abstract']
             } for abstract in self['metadata']['abstracts']]
 
+        # Dissertation
+        if self['metadata'].get('dissertation'):
+            metadata['dissertation'] = self['metadata']['dissertation']
+
         # Subjects
         if self['metadata'].get('subjects'):
             metadata['subjects'] = [{

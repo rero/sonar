@@ -100,6 +100,12 @@
       <p class="my-2">{{ record.extent }}</p>
       {% endif %}
 
+      <!-- DISSERTATION -->
+      {% set dissertation = record | dissertation %}
+      {% if dissertation %}
+      <p class="my-2">{{ dissertation }}</p>
+      {% endif %}
+
       <!-- PART OF -->
       {% if record.partOf and record.partOf | length > 0 %}
       <div class="d-flex flex-row mb-3">

@@ -1746,7 +1746,7 @@ def test_marc21_to_dissertation_field_508():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('dissertation') == {'note': ['Magna cum laude']}
+    assert data.get('dissertation') == {'jury_note': 'Magna cum laude'}
 
     # Multiple
     marc21xml = """
@@ -1761,7 +1761,7 @@ def test_marc21_to_dissertation_field_508():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('dissertation') == {'note': ['Note 1', 'Note 2']}
+    assert data.get('dissertation') == {'jury_note': 'Note 2'}
 
     # Without $a
     marc21xml = """
@@ -1791,7 +1791,7 @@ def test_marc21_to_dissertation_all():
     data = marc21tojson.do(marc21json)
     assert data.get('dissertation') == {
         'degree': 'Thèse de doctorat',
-        'note': ['Magna cum laude']
+        'jury_note': 'Magna cum laude'
     }
 
 
