@@ -30,6 +30,9 @@
 .. image:: https://img.shields.io/github/license/rero/sonar.svg
         :target: https://github.com/rero/sonar/blob/master/LICENSE
 
+.. image:: https://hosted.weblate.org/widgets/rero_plus/-/sonar/svg-badge.svg
+        :target: https://hosted.weblate.org/engage/rero_plus/?utm_source=widget
+
 SONAR is an archive of scholarly publications. It intends to collect, promote
 and preserve the publications of authors affiliated with Swiss public research
 institutions.
