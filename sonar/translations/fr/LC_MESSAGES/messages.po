@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2020-07-09 07:52+0200\n"
 "PO-Revision-Date: 2020-07-23 09:33+0000\n"
-"Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Last-Translator: iGor milhit <igor.milhit@rero.ch>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "fr/>\n"
 "Language: fr\n"
@@ -97,7 +97,7 @@ msgid "Click here to reset your password"
 msgstr ""
 
 msgid "Code"
-msgstr ""
+msgstr "Code"
 
 msgid "Collection"
 msgstr "Collection"
@@ -192,7 +192,7 @@ msgid "Edition"
 msgstr "Edition"
 
 msgid "Editors"
-msgstr "Editeurs"
+msgstr "Éditeurs"
 
 msgid "Email"
 msgstr "E-mail"
@@ -312,8 +312,9 @@ msgstr "En format \\"
 msgid "Invenio"
 msgstr "Invenio"
 
+#, fuzzy
 msgid "Is dedicated"
-msgstr ""
+msgstr "Est une organisation dédiée"
 
 msgid "Is shared"
 msgstr ""
@@ -331,7 +332,7 @@ msgid "Key (filename) of the file."
 msgstr "Clé (nom de fichier) du fichier"
 
 msgid "Label"
-msgstr "Etiquette"
+msgstr "Label"
 
 msgid "Label of the file"
 msgstr "Etiquette du fichier"
@@ -340,7 +341,7 @@ msgid "Language"
 msgstr "Langue"
 
 msgid "Languages"
-msgstr "Langues"
+msgstr "langues"
 
 msgid "Last name, first name, ex: Doe, John"
 msgstr "Nom, prénom, ex: Dupont, Jean"
@@ -483,10 +484,10 @@ msgid "Publication"
 msgstr "Publication"
 
 msgid "Published in"
-msgstr ""
+msgstr "Publié dans"
 
 msgid "Publisher"
-msgstr "Editeur"
+msgstr "Éditeur"
 
 msgid "Qualifier"
 msgstr "Qualifiant"
@@ -531,7 +532,7 @@ msgid "Series to which belongs the resource."
 msgstr "Série à laquelle appartient la ressource."
 
 msgid "Show more"
-msgstr ""
+msgstr "Afficher plus"
 
 msgid "Sign Up"
 msgstr "S'inscrire"
@@ -752,11 +753,12 @@ msgid "bf:Local"
 msgstr "Local identifier"
 
 msgid "bf:Manufacture"
-msgstr "Manufacturer"
+msgstr "Fabrication"
 
 msgid "bf:MatrixNumber"
 msgstr "Audio matrix number"
 
+#, fuzzy
 msgid "bf:Meeting"
 msgstr "Meeting"
 
@@ -770,16 +772,17 @@ msgid "bf:MusicPublisherNumber"
 msgstr "Music publisher number"
 
 msgid "bf:Organization"
-msgstr "Organization"
+msgstr "Organisation"
 
+#, fuzzy
 msgid "bf:Person"
 msgstr "Person"
 
 msgid "bf:Place"
-msgstr "Place"
+msgstr "Lieu"
 
 msgid "bf:Publication"
-msgstr "Publisher"
+msgstr "Publication"
 
 msgid "bf:PublisherNumber"
 msgstr "Publisher number"
@@ -802,53 +805,57 @@ msgstr "URN"
 msgid "bf:VideoRecordingNumber"
 msgstr "Video recording number"
 
+#, fuzzy
 msgid "classification_004"
 msgstr "Computer science"
 
+#, fuzzy
 msgid "classification_02"
 msgstr "Library sciences"
 
 msgid "classification_1"
-msgstr "Philosophy"
+msgstr "Philosophie"
 
 msgid "classification_159.9"
-msgstr "Psychology"
+msgstr "Psychologie"
 
 msgid "classification_159.953"
-msgstr "Memory and learning"
+msgstr "Mémoire et apprentissage"
 
 msgid "classification_16"
-msgstr "Logic"
+msgstr "Logique"
 
 msgid "classification_2"
-msgstr "Religion Theology"
+msgstr "Religion, théologie"
 
+#, fuzzy
 msgid "classification_294/299"
 msgstr "Orientalism"
 
 msgid "classification_3"
-msgstr "Social sciences"
+msgstr "Sciences sociales"
 
 msgid "classification_31"
-msgstr "Demography Sociology Statistics"
+msgstr "Démographie, sociologie, statistique"
 
 msgid "classification_32"
-msgstr "Political sciences"
+msgstr "Sciences politiques"
 
 msgid "classification_33"
-msgstr "Economics"
+msgstr "Économie"
 
 msgid "classification_34"
-msgstr "Law"
+msgstr "Droit"
 
+#, fuzzy
 msgid "classification_35"
-msgstr "Public administration"
+msgstr "Administration publique"
 
 msgid "classification_36"
 msgstr "Social work"
 
 msgid "classification_37"
-msgstr "Education Teaching"
+msgstr "Éducation, enseignement"
 
 msgid "classification_370"
 msgstr "Orthophony"
@@ -860,16 +867,16 @@ msgid "classification_378.6"
 msgstr "Higher Education Institutions"
 
 msgid "classification_39"
-msgstr "Anthropology Ethnology"
+msgstr "Anthropologie, ethnologie"
 
 msgid "classification_51"
 msgstr "Mathematics"
 
 msgid "classification_519.2"
-msgstr "Probabilites Statistics"
+msgstr "Probabilités, statistiques"
 
 msgid "classification_52"
-msgstr "Astronomy Astrophysics"
+msgstr "Astronomie, astrophysique"
 
 msgid "classification_524.8"
 msgstr "Cosmology"
@@ -908,7 +915,7 @@ msgid "classification_57"
 msgstr "Biology"
 
 msgid "classification_57/59"
-msgstr "Biology Life sciences"
+msgstr "Biologie, sciences de la vie"
 
 msgid "classification_574"
 msgstr "Ecology"
@@ -934,8 +941,9 @@ msgstr "Nutrition and Dietetics"
 msgid "classification_614.253.5"
 msgstr "Midwife"
 
+#, fuzzy
 msgid "classification_615"
-msgstr "Therapeutic. Pharmacy Pharmacology"
+msgstr "Therapeutic. Pharmacy, Pharmacology"
 
 msgid "classification_615.8"
 msgstr "Physiotherapy"
@@ -980,10 +988,10 @@ msgid "classification_621.762"
 msgstr "Powder metallurgy"
 
 msgid "classification_63"
-msgstr "Agriculture Agronomy"
+msgstr "Agriculture, agronomie"
 
 msgid "classification_65"
-msgstr "Information communication and media sciences"
+msgstr "Information, communication et sciences des médias"
 
 msgid "classification_66"
 msgstr "Chemical technology"
@@ -1025,7 +1033,7 @@ msgid "classification_796"
 msgstr "Sports sciences"
 
 msgid "classification_81"
-msgstr "Language Linguistics"
+msgstr "Langue, linguistique"
 
 msgid "classification_81´28"
 msgstr "Dialectology"
@@ -1081,8 +1089,9 @@ msgstr "Printer"
 msgid "contributor"
 msgstr "contributeur"
 
+#, fuzzy
 msgid "csal"
-msgstr "National licenses"
+msgstr "National collections"
 
 msgid "deposit_log_action_approve"
 msgstr "Approve"
@@ -1106,7 +1115,7 @@ msgid "deposit_status_rejected"
 msgstr "Refusé"
 
 msgid "deposit_status_to_validate"
-msgstr "A valider"
+msgstr "À valider"
 
 msgid "deposit_status_validated"
 msgstr "Validé"
