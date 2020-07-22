@@ -342,6 +342,12 @@ def document_json(app, db, organisation):
             'responsibility': {
                 'value': 'Zeng Lingliang zhu bian'
             }
+        },
+        'dissertation': {
+            'degree': 'Doctoral thesis',
+            'grantingInstitution': 'Università della Svizzera italiana',
+            'date': '2010-12-01',
+            'jury_note': 'Jury note'
         }
     }
 
@@ -457,7 +463,13 @@ def deposit_json():
             }, {
                 'language': 'fre',
                 'subjects': ['Sujet 1', 'Sujet 2']
-            }]
+            }],
+            'dissertation': {
+                'degree': 'Doctoral thesis',
+                'grantingInstitution': 'Università della Svizzera italiana',
+                'date': '2010-12-01',
+                'jury_note': 'Jury note'
+            }
         },
         'status':
         'in_progress',

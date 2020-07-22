@@ -259,6 +259,7 @@
         "language",
         "documentDate",
         "publication",
+        "dissertation",
         "otherElectronicVersions",
         "specificCollections",
         "classification",
@@ -482,6 +483,46 @@
               }
             }
           }
+        },
+        "dissertation": {
+          "title": "Dissertation",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "degree": {
+              "title": "Degree",
+              "type": "string",
+              "minLength": 1
+            },
+            "jury_note": {
+              "title": "Jury note",
+              "type": "string",
+              "minLength": 1
+            },
+            "grantingInstitution": {
+              "title": "Granting institution",
+              "type": "string",
+              "minLength": 1
+            },
+            "date": {
+              "title": "Date",
+              "type": "string",
+              "pattern": "^[0-9]{4}(-[0-9]{2}-[0-9]{2})?$",
+              "form": {
+                "placeholder": "Example: 2019 or 2019-05-05"
+              }
+            }
+          },
+          "propertiesOrder": [
+            "degree",
+            "grantingInstitution",
+            "date",
+            "jury_note"
+          ],
+          "required": [
+            "degree"
+          ],
+          "hideExpression": "!['coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'habilitation_thesis', 'advanced_studies_thesis', 'other'].includes(field.parent.model.documentType)"
         }
       }
     },

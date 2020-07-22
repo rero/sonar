@@ -655,10 +655,7 @@ def marc21_to_dissertation_field_508(self, key, value):
         return None
 
     dissertation = self.get('dissertation', {})
-
-    note = dissertation.get('note', [])
-    note.append(value.get('a'))
-    dissertation['note'] = note
+    dissertation['jury_note'] = value.get('a')
 
     self['dissertation'] = dissertation
 
