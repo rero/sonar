@@ -126,9 +126,9 @@ def files_permission_factory(*kwargs):
 def wiki_edit_permission():
     """Wiki edition permission.
 
-    :return: true if the logged user has the admin role.
+    :return: true if the logged user has the superuser role.
     """
-    return has_admin_access()
+    return has_superuser_access()
 
 
 class RecordPermission:

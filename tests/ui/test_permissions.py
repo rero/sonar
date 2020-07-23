@@ -179,7 +179,7 @@ def test_admin_permission_factory(app, client, superuser):
     assert admin_permission_factory(None).can()
 
 
-def test_wiki_edit_ui_permission(client, user, admin):
+def test_wiki_edit_ui_permission(client, user, superuser):
     """Test wiki edit ui permission."""
     # No access
     login_user_via_view(client, email=user['email'], password='123456')
@@ -189,5 +189,5 @@ def test_wiki_edit_ui_permission(client, user, admin):
     client.get(url_for_security('logout'))
 
     # OK user has access
-    login_user_via_view(client, email=admin['email'], password='123456')
+    login_user_via_view(client, email=superuser['email'], password='123456')
     assert wiki_edit_permission()
