@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2020-07-09 07:52+0200\n"
 "PO-Revision-Date: 2020-07-23 09:33+0000\n"
-"Last-Translator: Olivier DOSSMANN <weblate@dossmann.net>\n"
+"Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "fr/>\n"
 "Language: fr\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #, python-format
 msgid "%(icon)s Profile"
-msgstr ""
+msgstr "%(icon)s Mon compte"
 
 msgid "Abstract"
 msgstr "Résumé"
@@ -38,13 +38,13 @@ msgid "Accompanying material of the resource, ie maps."
 msgstr "Matériel annexe à la ressource, c-a-d plans."
 
 msgid "Acquisition terms"
-msgstr "Conditions d'acquisition"
+msgstr "Modalité d'acquisition"
 
 msgid "Action"
 msgstr "Action"
 
 msgid "Additional materials"
-msgstr "Documents supplémentaires"
+msgstr "Matériel d'accompagnement"
 
 msgid "Administration"
 msgstr "Administration"
@@ -70,7 +70,7 @@ msgid "Back to SONAR"
 msgstr "Retour à SONAR"
 
 msgid "Best match"
-msgstr "meilleure correspondance"
+msgstr "Meilleure correspondance"
 
 msgid "Bucket UUID"
 msgstr "Seau UUID"
@@ -79,7 +79,7 @@ msgid "Bucket UUID used to store files"
 msgstr "Seau UUID pour le stockage des fichiers"
 
 msgid "Checksum"
-msgstr "somme de contrôle"
+msgstr "Somme de contrôle"
 
 msgid "City"
 msgstr "Ville"
@@ -133,7 +133,7 @@ msgid "Controlled affiliations"
 msgstr "Affiliations contrôlées"
 
 msgid "Current cataloguing step."
-msgstr "Etape actuelle de catalogage"
+msgstr "Étape actuelle de catalogage."
 
 msgid "Date"
 msgstr "Date"
