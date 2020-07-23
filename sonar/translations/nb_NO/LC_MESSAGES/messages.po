@@ -1,0 +1,2737 @@
+# Translations template for sonar.
+# Copyright (C) 2020 RERO
+# This file is distributed under the same license as the sonar project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sonar 0.5.0\n"
+"Report-Msgid-Bugs-To: software@rero.ch\n"
+"POT-Creation-Date: 2020-07-09 07:52+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: nb_NO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+#, python-format
+msgid "%(icon)s Profile"
+msgstr ""
+
+msgid "Abstract"
+msgstr ""
+
+msgid "Abstracts"
+msgstr ""
+
+msgid "Accompanying material of the resource, ie maps."
+msgstr ""
+
+msgid "Acquisition terms"
+msgstr ""
+
+msgid "Action"
+msgstr ""
+
+msgid "Additional materials"
+msgstr ""
+
+msgid "Administration"
+msgstr ""
+
+msgid "Affiliation"
+msgstr ""
+
+msgid "Agent"
+msgstr ""
+
+msgid "Ask for changes on deposit"
+msgstr ""
+
+msgid ""
+"At least 3 characters and must contain only lower case characters and "
+"underscores."
+msgstr ""
+
+msgid "Author or editor"
+msgstr ""
+
+msgid "Back to SONAR"
+msgstr ""
+
+msgid "Best match"
+msgstr ""
+
+msgid "Bucket UUID"
+msgstr ""
+
+msgid "Bucket UUID used to store files"
+msgstr ""
+
+msgid "Checksum"
+msgstr ""
+
+msgid "City"
+msgstr ""
+
+msgid "Classification"
+msgstr ""
+
+msgid "Classification portion"
+msgstr ""
+
+msgid "Classifications"
+msgstr ""
+
+msgid "Click here to reset your password"
+msgstr ""
+
+msgid "Code"
+msgstr ""
+
+msgid "Collection"
+msgstr ""
+
+msgid "Collections"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "Content note"
+msgstr ""
+
+msgid "Content notes"
+msgstr ""
+
+msgid "Contribution"
+msgstr ""
+
+msgid "Contributions"
+msgstr ""
+
+msgid "Contributor"
+msgstr ""
+
+msgid "Contributors"
+msgstr ""
+
+msgid "Controlled affiliation"
+msgstr ""
+
+msgid "Controlled affiliations"
+msgstr ""
+
+msgid "Current cataloguing step."
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Date in yyyy-mm-dd format, ex: 1970-01-01"
+msgstr ""
+
+msgid "Date of birth"
+msgstr ""
+
+msgid "Date of death"
+msgstr ""
+
+msgid "Degree"
+msgstr ""
+
+msgid "Deposit approval"
+msgstr ""
+
+msgid "Deposit rejection"
+msgstr ""
+
+msgid "Deposit to validate"
+msgstr ""
+
+msgid "Describes the information of a single file in the record."
+msgstr ""
+
+msgid "Designation"
+msgstr ""
+
+msgid "Dissertation"
+msgstr ""
+
+msgid "Document"
+msgstr ""
+
+msgid "Document ID"
+msgstr ""
+
+msgid "Document created on basis of this deposit."
+msgstr ""
+
+msgid "Document date"
+msgstr ""
+
+msgid "Document is harvested or not, will disable record edition or similar."
+msgstr ""
+
+msgid "Document type"
+msgstr ""
+
+msgid "Edition"
+msgstr ""
+
+msgid "Editors"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Embargo"
+msgstr ""
+
+msgid "Embargo date"
+msgstr ""
+
+msgid "End date of publication"
+msgstr ""
+
+msgid ""
+"Enter your email address below and we will send you a link to reset your "
+"password."
+msgstr ""
+
+msgid "Example: 1111-2222-3333-4444"
+msgstr ""
+
+msgid "Example: 2019 or 2019-01-01"
+msgstr ""
+
+msgid "Example: 2019 or 2019-05-05"
+msgstr ""
+
+msgid "Example: John Doe"
+msgstr ""
+
+msgid "Example: Muller, Hans"
+msgstr ""
+
+msgid "Example: Published version"
+msgstr ""
+
+msgid "Examples: 135, 5-27, …"
+msgstr ""
+
+msgid "Except within organisation"
+msgstr ""
+
+msgid "Extent"
+msgstr ""
+
+msgid "Extent of the resource, ie number of pages or volumes."
+msgstr ""
+
+msgid "File UUID"
+msgstr ""
+
+msgid "File item"
+msgstr ""
+
+msgid "Files"
+msgstr ""
+
+msgid ""
+"Fill in your details to complete your registration. You only have to do "
+"this once."
+msgstr ""
+
+msgid "First name and last name"
+msgstr ""
+
+msgid "Follow us"
+msgstr ""
+
+msgid "Forgot password?"
+msgstr ""
+
+msgid "Format"
+msgstr ""
+
+msgid "Format of the resource, ie dimensions in cm."
+msgstr ""
+
+msgid "Formats"
+msgstr ""
+
+msgid "French"
+msgstr ""
+
+msgid "Further info on the project page"
+msgstr ""
+
+msgid "German"
+msgstr ""
+
+msgid "Harvested"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid ""
+"Host document, for example a journal for an article, or a book for a book"
+" chapter."
+msgstr ""
+
+msgid "Identified by"
+msgstr ""
+
+msgid "Identifier"
+msgstr ""
+
+msgid "Identifiers"
+msgstr ""
+
+msgid "In the format \\"
+msgstr ""
+
+msgid "Invenio"
+msgstr ""
+
+msgid "Is dedicated"
+msgstr ""
+
+msgid "Is shared"
+msgstr ""
+
+msgid "Issue"
+msgstr ""
+
+msgid "Italian"
+msgstr ""
+
+msgid "Key"
+msgstr ""
+
+msgid "Key (filename) of the file."
+msgstr ""
+
+msgid "Label"
+msgstr ""
+
+msgid "Label of the file"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Languages"
+msgstr ""
+
+msgid "Last name, first name, ex: Doe, John"
+msgstr ""
+
+msgid "List of files attached to the record."
+msgstr ""
+
+msgid "Log"
+msgstr ""
+
+msgid "Log In"
+msgstr ""
+
+msgid "Log in"
+msgstr ""
+
+msgid "Log in to account"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
+msgid "Logs"
+msgstr ""
+
+msgid "MD5 checksum of the file."
+msgstr ""
+
+msgid "Main title"
+msgstr ""
+
+msgid "Main titles"
+msgstr ""
+
+msgid "Most recent"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Note"
+msgstr ""
+
+msgid "Notes"
+msgstr ""
+
+msgid "Number"
+msgstr ""
+
+msgid "Numbering"
+msgstr ""
+
+msgid "ORCID"
+msgstr ""
+
+msgid "Organisation"
+msgstr ""
+
+msgid "Organisation has a specific theme for his view."
+msgstr ""
+
+msgid "Organisation records can be accessed by a specific URL."
+msgstr ""
+
+msgid "Other Material Characteristics"
+msgstr ""
+
+msgid ""
+"Other Material Characteristics, ie illustrations, black and with or "
+"coloured."
+msgstr ""
+
+msgid "Other electronic version"
+msgstr ""
+
+msgid "Other electronic versions"
+msgstr ""
+
+msgid "Other files"
+msgstr ""
+
+msgid "Pages"
+msgstr ""
+
+msgid "Part of (host document)"
+msgstr ""
+
+msgid "Permalink"
+msgstr ""
+
+msgid "Phone number"
+msgstr ""
+
+msgid "Phone number with the international prefix, without spaces."
+msgstr ""
+
+msgid "Place"
+msgstr ""
+
+msgid "Position"
+msgstr ""
+
+msgid "Position of the file"
+msgstr ""
+
+msgid "Postal code"
+msgstr ""
+
+#, python-format
+msgid "Powered by <a href=\"%(link)s\" target=\"_blank\">RERO</a>"
+msgstr ""
+
+msgid "Preferred name"
+msgstr ""
+
+msgid "Profile"
+msgstr ""
+
+msgid "Project and contact"
+msgstr ""
+
+msgid "Project website on"
+msgstr ""
+
+msgid "Provision activities"
+msgstr ""
+
+msgid "Provision activity"
+msgstr ""
+
+msgid "Public access from"
+msgstr ""
+
+msgid "Public note"
+msgstr ""
+
+msgid "Publication"
+msgstr ""
+
+msgid "Published in"
+msgstr ""
+
+msgid "Publisher"
+msgstr ""
+
+msgid "Qualifier"
+msgstr ""
+
+msgid "Reset Password"
+msgstr ""
+
+msgid "Responsibility"
+msgstr ""
+
+msgid "Restricted"
+msgstr ""
+
+msgid "Role"
+msgstr ""
+
+msgid "Roles"
+msgstr ""
+
+msgid "SONAR administration"
+msgstr ""
+
+msgid "SONAR deposit v1.0.0"
+msgstr ""
+
+msgid "Schema"
+msgstr ""
+
+msgid "Schema to validate document against."
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Search publications, authors, projects, ..."
+msgstr ""
+
+msgid "Series"
+msgstr ""
+
+msgid "Series to which belongs the resource."
+msgstr ""
+
+msgid "Show more"
+msgstr ""
+
+msgid "Sign Up"
+msgstr ""
+
+msgid "Sign up"
+msgstr ""
+
+#, python-format
+msgid "Sign up for a %(sitename)s account"
+msgstr ""
+
+#, python-format
+msgid "Sign-in with %(type)s"
+msgstr ""
+
+msgid "Sign-in with SWITCHaai"
+msgstr ""
+
+#, python-format
+msgid "Sign-up with %(type)s"
+msgstr ""
+
+msgid "Sign-up with SWITCHaai"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+
+msgid "Size of the file in bytes."
+msgstr ""
+
+msgid "Software under development!"
+msgstr ""
+
+msgid "Source"
+msgstr ""
+
+msgid "Source code on"
+msgstr ""
+
+msgid "Specific collections"
+msgstr ""
+
+msgid "Start date"
+msgstr ""
+
+msgid "Start date of publication"
+msgstr ""
+
+msgid "Statement"
+msgstr ""
+
+msgid "Statements"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Step"
+msgstr ""
+
+msgid "Street"
+msgstr ""
+
+msgid "Street and number of the address, separated by a coma."
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Subjects"
+msgstr ""
+
+msgid "Subtitle"
+msgstr ""
+
+msgid "Subtitles"
+msgstr ""
+
+msgid "Super administration"
+msgstr ""
+
+msgid "Swiss Open Access Repository"
+msgstr ""
+
+msgid ""
+"The SONAR project aims to create a scholarly archive that collects, "
+"promotes and preserves the publications of authors affiliated with Swiss "
+"public research institutions."
+msgstr ""
+
+msgid ""
+"The names of the organisation's specific/patrimonial collections to which"
+" this document belongs"
+msgstr ""
+
+msgid "The project"
+msgstr ""
+
+msgid ""
+"This field corresponds to the exact publication date of the article, if "
+"known."
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Title in other language"
+msgstr ""
+
+msgid "Titles"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Type of the file"
+msgstr ""
+
+msgid "URL"
+msgstr ""
+
+msgid "URL to file"
+msgstr ""
+
+msgid "URL to file hosted in an external platform."
+msgstr ""
+
+msgid "UUID of the FileInstance object."
+msgstr ""
+
+msgid "UUID of the ObjectVersion object."
+msgstr ""
+
+msgid "UUID of the bucket to which this file is assigned."
+msgstr ""
+
+msgid "Usage and access policies"
+msgstr ""
+
+msgid "Usage and access policy"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Version UUID"
+msgstr ""
+
+msgid "Volume"
+msgstr ""
+
+msgid "Welcome on SONAR"
+msgstr ""
+
+msgid "Welcome to Swiss Open Access Repository!"
+msgstr ""
+
+msgid "Year"
+msgstr ""
+
+msgid "bf:Agent"
+msgstr ""
+
+msgid "bf:AudioIssueNumber"
+msgstr ""
+
+msgid "bf:ClassificationDdc"
+msgstr ""
+
+msgid "bf:ClassificationUdc"
+msgstr ""
+
+msgid "bf:Doi"
+msgstr ""
+
+msgid "bf:Ean"
+msgstr ""
+
+msgid "bf:Gtin14Number"
+msgstr ""
+
+msgid "bf:Identifier"
+msgstr ""
+
+msgid "bf:Isan"
+msgstr ""
+
+msgid "bf:Isbn"
+msgstr ""
+
+msgid "bf:Ismn"
+msgstr ""
+
+msgid "bf:Isrc"
+msgstr ""
+
+msgid "bf:Issn"
+msgstr ""
+
+msgid "bf:IssnL"
+msgstr ""
+
+msgid "bf:Language"
+msgstr ""
+
+msgid "bf:Local"
+msgstr ""
+
+msgid "bf:Manufacture"
+msgstr ""
+
+msgid "bf:MatrixNumber"
+msgstr ""
+
+msgid "bf:Meeting"
+msgstr ""
+
+msgid "bf:MusicDistributorNumber"
+msgstr ""
+
+msgid "bf:MusicPlate"
+msgstr ""
+
+msgid "bf:MusicPublisherNumber"
+msgstr ""
+
+msgid "bf:Organization"
+msgstr ""
+
+msgid "bf:Person"
+msgstr ""
+
+msgid "bf:Place"
+msgstr ""
+
+msgid "bf:Publication"
+msgstr ""
+
+msgid "bf:PublisherNumber"
+msgstr ""
+
+msgid "bf:ReportNumber"
+msgstr ""
+
+msgid "bf:Strn"
+msgstr ""
+
+msgid "bf:Title"
+msgstr ""
+
+msgid "bf:Upc"
+msgstr ""
+
+msgid "bf:Urn"
+msgstr ""
+
+msgid "bf:VideoRecordingNumber"
+msgstr ""
+
+msgid "classification_004"
+msgstr ""
+
+msgid "classification_02"
+msgstr ""
+
+msgid "classification_1"
+msgstr ""
+
+msgid "classification_159.9"
+msgstr ""
+
+msgid "classification_159.953"
+msgstr ""
+
+msgid "classification_16"
+msgstr ""
+
+msgid "classification_2"
+msgstr ""
+
+msgid "classification_294/299"
+msgstr ""
+
+msgid "classification_3"
+msgstr ""
+
+msgid "classification_31"
+msgstr ""
+
+msgid "classification_32"
+msgstr ""
+
+msgid "classification_33"
+msgstr ""
+
+msgid "classification_34"
+msgstr ""
+
+msgid "classification_35"
+msgstr ""
+
+msgid "classification_36"
+msgstr ""
+
+msgid "classification_37"
+msgstr ""
+
+msgid "classification_370"
+msgstr ""
+
+msgid "classification_376"
+msgstr ""
+
+msgid "classification_378.6"
+msgstr ""
+
+msgid "classification_39"
+msgstr ""
+
+msgid "classification_51"
+msgstr ""
+
+msgid "classification_519.2"
+msgstr ""
+
+msgid "classification_52"
+msgstr ""
+
+msgid "classification_524.8"
+msgstr ""
+
+msgid "classification_53"
+msgstr ""
+
+msgid "classification_54"
+msgstr ""
+
+msgid "classification_543"
+msgstr ""
+
+msgid "classification_548"
+msgstr ""
+
+msgid "classification_549"
+msgstr ""
+
+msgid "classification_55"
+msgstr ""
+
+msgid "classification_55/56"
+msgstr ""
+
+msgid "classification_551"
+msgstr ""
+
+msgid "classification_556"
+msgstr ""
+
+msgid "classification_56"
+msgstr ""
+
+msgid "classification_57"
+msgstr ""
+
+msgid "classification_57/59"
+msgstr ""
+
+msgid "classification_574"
+msgstr ""
+
+msgid "classification_58"
+msgstr ""
+
+msgid "classification_59"
+msgstr ""
+
+msgid "classification_6"
+msgstr ""
+
+msgid "classification_60"
+msgstr ""
+
+msgid "classification_61"
+msgstr ""
+
+msgid "classification_613.2"
+msgstr ""
+
+msgid "classification_614.253.5"
+msgstr ""
+
+msgid "classification_615"
+msgstr ""
+
+msgid "classification_615.8"
+msgstr ""
+
+msgid "classification_615.84"
+msgstr ""
+
+msgid "classification_616"
+msgstr ""
+
+msgid "classification_616-083"
+msgstr ""
+
+msgid "classification_616.31"
+msgstr ""
+
+msgid "classification_61_2"
+msgstr ""
+
+msgid "classification_620.1"
+msgstr ""
+
+msgid "classification_620.9"
+msgstr ""
+
+msgid "classification_621"
+msgstr ""
+
+msgid "classification_621.01"
+msgstr ""
+
+msgid "classification_621.3"
+msgstr ""
+
+msgid "classification_621.38"
+msgstr ""
+
+msgid "classification_621.39"
+msgstr ""
+
+msgid "classification_621.762"
+msgstr ""
+
+msgid "classification_63"
+msgstr ""
+
+msgid "classification_65"
+msgstr ""
+
+msgid "classification_66"
+msgstr ""
+
+msgid "classification_663"
+msgstr ""
+
+msgid "classification_664"
+msgstr ""
+
+msgid "classification_681"
+msgstr ""
+
+msgid "classification_7"
+msgstr ""
+
+msgid "classification_7.071"
+msgstr ""
+
+msgid "classification_71"
+msgstr ""
+
+msgid "classification_72"
+msgstr ""
+
+msgid "classification_73/77"
+msgstr ""
+
+msgid "classification_75"
+msgstr ""
+
+msgid "classification_77"
+msgstr ""
+
+msgid "classification_78"
+msgstr ""
+
+msgid "classification_796"
+msgstr ""
+
+msgid "classification_81"
+msgstr ""
+
+msgid "classification_81´28"
+msgstr ""
+
+msgid "classification_82"
+msgstr ""
+
+msgid "classification_902"
+msgstr ""
+
+msgid "classification_903"
+msgstr ""
+
+msgid "classification_91"
+msgstr ""
+
+msgid "classification_929.5"
+msgstr ""
+
+msgid "classification_93/94"
+msgstr ""
+
+msgid "classification_931"
+msgstr ""
+
+msgid "classification_94"
+msgstr ""
+
+msgid "classification_root_1"
+msgstr ""
+
+msgid "classification_root_2"
+msgstr ""
+
+msgid "classification_root_3"
+msgstr ""
+
+msgid "contribution_role_cre"
+msgstr ""
+
+msgid "contribution_role_ctb"
+msgstr ""
+
+msgid "contribution_role_dgs"
+msgstr ""
+
+msgid "contribution_role_edt"
+msgstr ""
+
+msgid "contribution_role_prt"
+msgstr ""
+
+msgid "contributor"
+msgstr ""
+
+msgid "csal"
+msgstr ""
+
+msgid "deposit_log_action_approve"
+msgstr ""
+
+msgid "deposit_log_action_ask_for_changes"
+msgstr ""
+
+msgid "deposit_log_action_reject"
+msgstr ""
+
+msgid "deposit_log_action_submit"
+msgstr ""
+
+msgid "deposit_status_ask_for_changes"
+msgstr ""
+
+msgid "deposit_status_in_progress"
+msgstr ""
+
+msgid "deposit_status_rejected"
+msgstr ""
+
+msgid "deposit_status_to_validate"
+msgstr ""
+
+msgid "deposit_status_validated"
+msgstr ""
+
+msgid "document_type_advanced_studies_thesis"
+msgstr ""
+
+msgid "document_type_coar:c_0640"
+msgstr ""
+
+msgid "document_type_coar:c_12cc"
+msgstr ""
+
+msgid "document_type_coar:c_15cd"
+msgstr ""
+
+msgid "document_type_coar:c_1843"
+msgstr ""
+
+msgid "document_type_coar:c_186u"
+msgstr ""
+
+msgid "document_type_coar:c_18cc"
+msgstr ""
+
+msgid "document_type_coar:c_18co"
+msgstr ""
+
+msgid "document_type_coar:c_18cp"
+msgstr ""
+
+msgid "document_type_coar:c_18cw"
+msgstr ""
+
+msgid "document_type_coar:c_18gh"
+msgstr ""
+
+msgid "document_type_coar:c_18hj"
+msgstr ""
+
+msgid "document_type_coar:c_18op"
+msgstr ""
+
+msgid "document_type_coar:c_18wq"
+msgstr ""
+
+msgid "document_type_coar:c_18ws"
+msgstr ""
+
+msgid "document_type_coar:c_18ww"
+msgstr ""
+
+msgid "document_type_coar:c_18wz"
+msgstr ""
+
+msgid "document_type_coar:c_2659"
+msgstr ""
+
+msgid "document_type_coar:c_2cd9"
+msgstr ""
+
+msgid "document_type_coar:c_2f33"
+msgstr ""
+
+msgid "document_type_coar:c_2fe3"
+msgstr ""
+
+msgid "document_type_coar:c_3248"
+msgstr ""
+
+msgid "document_type_coar:c_3e5a"
+msgstr ""
+
+msgid "document_type_coar:c_46ec"
+msgstr ""
+
+msgid "document_type_coar:c_5794"
+msgstr ""
+
+msgid "document_type_coar:c_5ce6"
+msgstr ""
+
+msgid "document_type_coar:c_6501"
+msgstr ""
+
+msgid "document_type_coar:c_6670"
+msgstr ""
+
+msgid "document_type_coar:c_7a1f"
+msgstr ""
+
+msgid "document_type_coar:c_8042"
+msgstr ""
+
+msgid "document_type_coar:c_816b"
+msgstr ""
+
+msgid "document_type_coar:c_8544"
+msgstr ""
+
+msgid "document_type_coar:c_8a7e"
+msgstr ""
+
+msgid "document_type_coar:c_93fc"
+msgstr ""
+
+msgid "document_type_coar:c_998f"
+msgstr ""
+
+msgid "document_type_coar:c_ba1f"
+msgstr ""
+
+msgid "document_type_coar:c_bdcc"
+msgstr ""
+
+msgid "document_type_coar:c_beb9"
+msgstr ""
+
+msgid "document_type_coar:c_c94f"
+msgstr ""
+
+msgid "document_type_coar:c_db06"
+msgstr ""
+
+msgid "document_type_coar:c_dcae04bc"
+msgstr ""
+
+msgid "document_type_coar:c_ddb1"
+msgstr ""
+
+msgid "document_type_coar:c_ecc8"
+msgstr ""
+
+msgid "document_type_coar:c_f744"
+msgstr ""
+
+msgid "document_type_habilitation_thesis"
+msgstr ""
+
+msgid "document_type_non_textual_object"
+msgstr ""
+
+msgid "document_type_other"
+msgstr ""
+
+msgid "eduid"
+msgstr ""
+
+msgid "eduidtest"
+msgstr ""
+
+msgid "lang_aar"
+msgstr ""
+
+msgid "lang_abk"
+msgstr ""
+
+msgid "lang_ace"
+msgstr ""
+
+msgid "lang_ach"
+msgstr ""
+
+msgid "lang_ada"
+msgstr ""
+
+msgid "lang_ady"
+msgstr ""
+
+msgid "lang_afa"
+msgstr ""
+
+msgid "lang_afh"
+msgstr ""
+
+msgid "lang_afr"
+msgstr ""
+
+msgid "lang_ain"
+msgstr ""
+
+msgid "lang_aka"
+msgstr ""
+
+msgid "lang_akk"
+msgstr ""
+
+msgid "lang_alb"
+msgstr ""
+
+msgid "lang_ale"
+msgstr ""
+
+msgid "lang_alg"
+msgstr ""
+
+msgid "lang_alt"
+msgstr ""
+
+msgid "lang_amh"
+msgstr ""
+
+msgid "lang_ang"
+msgstr ""
+
+msgid "lang_anp"
+msgstr ""
+
+msgid "lang_apa"
+msgstr ""
+
+msgid "lang_ara"
+msgstr ""
+
+msgid "lang_arc"
+msgstr ""
+
+msgid "lang_arg"
+msgstr ""
+
+msgid "lang_arm"
+msgstr ""
+
+msgid "lang_arn"
+msgstr ""
+
+msgid "lang_arp"
+msgstr ""
+
+msgid "lang_art"
+msgstr ""
+
+msgid "lang_arw"
+msgstr ""
+
+msgid "lang_asm"
+msgstr ""
+
+msgid "lang_ast"
+msgstr ""
+
+msgid "lang_ath"
+msgstr ""
+
+msgid "lang_aus"
+msgstr ""
+
+msgid "lang_ava"
+msgstr ""
+
+msgid "lang_ave"
+msgstr ""
+
+msgid "lang_awa"
+msgstr ""
+
+msgid "lang_aym"
+msgstr ""
+
+msgid "lang_aze"
+msgstr ""
+
+msgid "lang_bad"
+msgstr ""
+
+msgid "lang_bai"
+msgstr ""
+
+msgid "lang_bak"
+msgstr ""
+
+msgid "lang_bal"
+msgstr ""
+
+msgid "lang_bam"
+msgstr ""
+
+msgid "lang_ban"
+msgstr ""
+
+msgid "lang_baq"
+msgstr ""
+
+msgid "lang_bas"
+msgstr ""
+
+msgid "lang_bat"
+msgstr ""
+
+msgid "lang_bej"
+msgstr ""
+
+msgid "lang_bel"
+msgstr ""
+
+msgid "lang_bem"
+msgstr ""
+
+msgid "lang_ben"
+msgstr ""
+
+msgid "lang_ber"
+msgstr ""
+
+msgid "lang_bho"
+msgstr ""
+
+msgid "lang_bih"
+msgstr ""
+
+msgid "lang_bik"
+msgstr ""
+
+msgid "lang_bin"
+msgstr ""
+
+msgid "lang_bis"
+msgstr ""
+
+msgid "lang_bla"
+msgstr ""
+
+msgid "lang_bnt"
+msgstr ""
+
+msgid "lang_bos"
+msgstr ""
+
+msgid "lang_bra"
+msgstr ""
+
+msgid "lang_bre"
+msgstr ""
+
+msgid "lang_btk"
+msgstr ""
+
+msgid "lang_bua"
+msgstr ""
+
+msgid "lang_bug"
+msgstr ""
+
+msgid "lang_bul"
+msgstr ""
+
+msgid "lang_bur"
+msgstr ""
+
+msgid "lang_byn"
+msgstr ""
+
+msgid "lang_cad"
+msgstr ""
+
+msgid "lang_cai"
+msgstr ""
+
+msgid "lang_car"
+msgstr ""
+
+msgid "lang_cat"
+msgstr ""
+
+msgid "lang_cau"
+msgstr ""
+
+msgid "lang_ceb"
+msgstr ""
+
+msgid "lang_cel"
+msgstr ""
+
+msgid "lang_cha"
+msgstr ""
+
+msgid "lang_chb"
+msgstr ""
+
+msgid "lang_che"
+msgstr ""
+
+msgid "lang_chg"
+msgstr ""
+
+msgid "lang_chi"
+msgstr ""
+
+msgid "lang_chk"
+msgstr ""
+
+msgid "lang_chm"
+msgstr ""
+
+msgid "lang_chn"
+msgstr ""
+
+msgid "lang_cho"
+msgstr ""
+
+msgid "lang_chp"
+msgstr ""
+
+msgid "lang_chr"
+msgstr ""
+
+msgid "lang_chu"
+msgstr ""
+
+msgid "lang_chv"
+msgstr ""
+
+msgid "lang_chy"
+msgstr ""
+
+msgid "lang_cmc"
+msgstr ""
+
+msgid "lang_cnr"
+msgstr ""
+
+msgid "lang_cop"
+msgstr ""
+
+msgid "lang_cor"
+msgstr ""
+
+msgid "lang_cos"
+msgstr ""
+
+msgid "lang_cpe"
+msgstr ""
+
+msgid "lang_cpf"
+msgstr ""
+
+msgid "lang_cpp"
+msgstr ""
+
+msgid "lang_cre"
+msgstr ""
+
+msgid "lang_crh"
+msgstr ""
+
+msgid "lang_crp"
+msgstr ""
+
+msgid "lang_csb"
+msgstr ""
+
+msgid "lang_cus"
+msgstr ""
+
+msgid "lang_cze"
+msgstr ""
+
+msgid "lang_dak"
+msgstr ""
+
+msgid "lang_dan"
+msgstr ""
+
+msgid "lang_dar"
+msgstr ""
+
+msgid "lang_day"
+msgstr ""
+
+msgid "lang_del"
+msgstr ""
+
+msgid "lang_den"
+msgstr ""
+
+msgid "lang_dgr"
+msgstr ""
+
+msgid "lang_din"
+msgstr ""
+
+msgid "lang_div"
+msgstr ""
+
+msgid "lang_doi"
+msgstr ""
+
+msgid "lang_dra"
+msgstr ""
+
+msgid "lang_dsb"
+msgstr ""
+
+msgid "lang_dua"
+msgstr ""
+
+msgid "lang_dum"
+msgstr ""
+
+msgid "lang_dut"
+msgstr ""
+
+msgid "lang_dyu"
+msgstr ""
+
+msgid "lang_dzo"
+msgstr ""
+
+msgid "lang_efi"
+msgstr ""
+
+msgid "lang_egy"
+msgstr ""
+
+msgid "lang_eka"
+msgstr ""
+
+msgid "lang_elx"
+msgstr ""
+
+msgid "lang_eng"
+msgstr ""
+
+msgid "lang_enm"
+msgstr ""
+
+msgid "lang_epo"
+msgstr ""
+
+msgid "lang_est"
+msgstr ""
+
+msgid "lang_ewe"
+msgstr ""
+
+msgid "lang_ewo"
+msgstr ""
+
+msgid "lang_fan"
+msgstr ""
+
+msgid "lang_fao"
+msgstr ""
+
+msgid "lang_fat"
+msgstr ""
+
+msgid "lang_fij"
+msgstr ""
+
+msgid "lang_fil"
+msgstr ""
+
+msgid "lang_fin"
+msgstr ""
+
+msgid "lang_fiu"
+msgstr ""
+
+msgid "lang_fon"
+msgstr ""
+
+msgid "lang_fre"
+msgstr ""
+
+msgid "lang_frm"
+msgstr ""
+
+msgid "lang_fro"
+msgstr ""
+
+msgid "lang_frr"
+msgstr ""
+
+msgid "lang_frs"
+msgstr ""
+
+msgid "lang_fry"
+msgstr ""
+
+msgid "lang_ful"
+msgstr ""
+
+msgid "lang_fur"
+msgstr ""
+
+msgid "lang_gaa"
+msgstr ""
+
+msgid "lang_gay"
+msgstr ""
+
+msgid "lang_gba"
+msgstr ""
+
+msgid "lang_gem"
+msgstr ""
+
+msgid "lang_geo"
+msgstr ""
+
+msgid "lang_ger"
+msgstr ""
+
+msgid "lang_gez"
+msgstr ""
+
+msgid "lang_gil"
+msgstr ""
+
+msgid "lang_gla"
+msgstr ""
+
+msgid "lang_gle"
+msgstr ""
+
+msgid "lang_glg"
+msgstr ""
+
+msgid "lang_glv"
+msgstr ""
+
+msgid "lang_gmh"
+msgstr ""
+
+msgid "lang_goh"
+msgstr ""
+
+msgid "lang_gon"
+msgstr ""
+
+msgid "lang_gor"
+msgstr ""
+
+msgid "lang_got"
+msgstr ""
+
+msgid "lang_grb"
+msgstr ""
+
+msgid "lang_grc"
+msgstr ""
+
+msgid "lang_gre"
+msgstr ""
+
+msgid "lang_grn"
+msgstr ""
+
+msgid "lang_gsw"
+msgstr ""
+
+msgid "lang_guj"
+msgstr ""
+
+msgid "lang_gwi"
+msgstr ""
+
+msgid "lang_hai"
+msgstr ""
+
+msgid "lang_hat"
+msgstr ""
+
+msgid "lang_hau"
+msgstr ""
+
+msgid "lang_haw"
+msgstr ""
+
+msgid "lang_heb"
+msgstr ""
+
+msgid "lang_her"
+msgstr ""
+
+msgid "lang_hil"
+msgstr ""
+
+msgid "lang_him"
+msgstr ""
+
+msgid "lang_hin"
+msgstr ""
+
+msgid "lang_hit"
+msgstr ""
+
+msgid "lang_hmn"
+msgstr ""
+
+msgid "lang_hmo"
+msgstr ""
+
+msgid "lang_hrv"
+msgstr ""
+
+msgid "lang_hsb"
+msgstr ""
+
+msgid "lang_hun"
+msgstr ""
+
+msgid "lang_hup"
+msgstr ""
+
+msgid "lang_iba"
+msgstr ""
+
+msgid "lang_ibo"
+msgstr ""
+
+msgid "lang_ice"
+msgstr ""
+
+msgid "lang_ido"
+msgstr ""
+
+msgid "lang_iii"
+msgstr ""
+
+msgid "lang_ijo"
+msgstr ""
+
+msgid "lang_iku"
+msgstr ""
+
+msgid "lang_ile"
+msgstr ""
+
+msgid "lang_ilo"
+msgstr ""
+
+msgid "lang_ina"
+msgstr ""
+
+msgid "lang_inc"
+msgstr ""
+
+msgid "lang_ind"
+msgstr ""
+
+msgid "lang_ine"
+msgstr ""
+
+msgid "lang_inh"
+msgstr ""
+
+msgid "lang_ipk"
+msgstr ""
+
+msgid "lang_ira"
+msgstr ""
+
+msgid "lang_iro"
+msgstr ""
+
+msgid "lang_ita"
+msgstr ""
+
+msgid "lang_jav"
+msgstr ""
+
+msgid "lang_jbo"
+msgstr ""
+
+msgid "lang_jpn"
+msgstr ""
+
+msgid "lang_jpr"
+msgstr ""
+
+msgid "lang_jrb"
+msgstr ""
+
+msgid "lang_kaa"
+msgstr ""
+
+msgid "lang_kab"
+msgstr ""
+
+msgid "lang_kac"
+msgstr ""
+
+msgid "lang_kal"
+msgstr ""
+
+msgid "lang_kam"
+msgstr ""
+
+msgid "lang_kan"
+msgstr ""
+
+msgid "lang_kar"
+msgstr ""
+
+msgid "lang_kas"
+msgstr ""
+
+msgid "lang_kau"
+msgstr ""
+
+msgid "lang_kaw"
+msgstr ""
+
+msgid "lang_kaz"
+msgstr ""
+
+msgid "lang_kbd"
+msgstr ""
+
+msgid "lang_kha"
+msgstr ""
+
+msgid "lang_khi"
+msgstr ""
+
+msgid "lang_khm"
+msgstr ""
+
+msgid "lang_kho"
+msgstr ""
+
+msgid "lang_kik"
+msgstr ""
+
+msgid "lang_kin"
+msgstr ""
+
+msgid "lang_kir"
+msgstr ""
+
+msgid "lang_kmb"
+msgstr ""
+
+msgid "lang_kok"
+msgstr ""
+
+msgid "lang_kom"
+msgstr ""
+
+msgid "lang_kon"
+msgstr ""
+
+msgid "lang_kor"
+msgstr ""
+
+msgid "lang_kos"
+msgstr ""
+
+msgid "lang_kpe"
+msgstr ""
+
+msgid "lang_krc"
+msgstr ""
+
+msgid "lang_krl"
+msgstr ""
+
+msgid "lang_kro"
+msgstr ""
+
+msgid "lang_kru"
+msgstr ""
+
+msgid "lang_kua"
+msgstr ""
+
+msgid "lang_kum"
+msgstr ""
+
+msgid "lang_kur"
+msgstr ""
+
+msgid "lang_kut"
+msgstr ""
+
+msgid "lang_lad"
+msgstr ""
+
+msgid "lang_lah"
+msgstr ""
+
+msgid "lang_lam"
+msgstr ""
+
+msgid "lang_lao"
+msgstr ""
+
+msgid "lang_lat"
+msgstr ""
+
+msgid "lang_lav"
+msgstr ""
+
+msgid "lang_lez"
+msgstr ""
+
+msgid "lang_lim"
+msgstr ""
+
+msgid "lang_lin"
+msgstr ""
+
+msgid "lang_lit"
+msgstr ""
+
+msgid "lang_lol"
+msgstr ""
+
+msgid "lang_loz"
+msgstr ""
+
+msgid "lang_ltz"
+msgstr ""
+
+msgid "lang_lua"
+msgstr ""
+
+msgid "lang_lub"
+msgstr ""
+
+msgid "lang_lug"
+msgstr ""
+
+msgid "lang_lui"
+msgstr ""
+
+msgid "lang_lun"
+msgstr ""
+
+msgid "lang_luo"
+msgstr ""
+
+msgid "lang_lus"
+msgstr ""
+
+msgid "lang_mac"
+msgstr ""
+
+msgid "lang_mad"
+msgstr ""
+
+msgid "lang_mag"
+msgstr ""
+
+msgid "lang_mah"
+msgstr ""
+
+msgid "lang_mai"
+msgstr ""
+
+msgid "lang_mak"
+msgstr ""
+
+msgid "lang_mal"
+msgstr ""
+
+msgid "lang_man"
+msgstr ""
+
+msgid "lang_mao"
+msgstr ""
+
+msgid "lang_map"
+msgstr ""
+
+msgid "lang_mar"
+msgstr ""
+
+msgid "lang_mas"
+msgstr ""
+
+msgid "lang_may"
+msgstr ""
+
+msgid "lang_mdf"
+msgstr ""
+
+msgid "lang_mdr"
+msgstr ""
+
+msgid "lang_men"
+msgstr ""
+
+msgid "lang_mga"
+msgstr ""
+
+msgid "lang_mic"
+msgstr ""
+
+msgid "lang_min"
+msgstr ""
+
+msgid "lang_mis"
+msgstr ""
+
+msgid "lang_mkh"
+msgstr ""
+
+msgid "lang_mlg"
+msgstr ""
+
+msgid "lang_mlt"
+msgstr ""
+
+msgid "lang_mnc"
+msgstr ""
+
+msgid "lang_mni"
+msgstr ""
+
+msgid "lang_mno"
+msgstr ""
+
+msgid "lang_moh"
+msgstr ""
+
+msgid "lang_mon"
+msgstr ""
+
+msgid "lang_mos"
+msgstr ""
+
+msgid "lang_mul"
+msgstr ""
+
+msgid "lang_mun"
+msgstr ""
+
+msgid "lang_mus"
+msgstr ""
+
+msgid "lang_mwl"
+msgstr ""
+
+msgid "lang_mwr"
+msgstr ""
+
+msgid "lang_myn"
+msgstr ""
+
+msgid "lang_myv"
+msgstr ""
+
+msgid "lang_nah"
+msgstr ""
+
+msgid "lang_nai"
+msgstr ""
+
+msgid "lang_nap"
+msgstr ""
+
+msgid "lang_nau"
+msgstr ""
+
+msgid "lang_nav"
+msgstr ""
+
+msgid "lang_nbl"
+msgstr ""
+
+msgid "lang_nde"
+msgstr ""
+
+msgid "lang_ndo"
+msgstr ""
+
+msgid "lang_nds"
+msgstr ""
+
+msgid "lang_nep"
+msgstr ""
+
+msgid "lang_new"
+msgstr ""
+
+msgid "lang_nia"
+msgstr ""
+
+msgid "lang_nic"
+msgstr ""
+
+msgid "lang_niu"
+msgstr ""
+
+msgid "lang_nno"
+msgstr ""
+
+msgid "lang_nob"
+msgstr ""
+
+msgid "lang_nog"
+msgstr ""
+
+msgid "lang_non"
+msgstr ""
+
+msgid "lang_nor"
+msgstr ""
+
+msgid "lang_nqo"
+msgstr ""
+
+msgid "lang_nso"
+msgstr ""
+
+msgid "lang_nub"
+msgstr ""
+
+msgid "lang_nwc"
+msgstr ""
+
+msgid "lang_nya"
+msgstr ""
+
+msgid "lang_nym"
+msgstr ""
+
+msgid "lang_nyn"
+msgstr ""
+
+msgid "lang_nyo"
+msgstr ""
+
+msgid "lang_nzi"
+msgstr ""
+
+msgid "lang_oci"
+msgstr ""
+
+msgid "lang_oji"
+msgstr ""
+
+msgid "lang_ori"
+msgstr ""
+
+msgid "lang_orm"
+msgstr ""
+
+msgid "lang_osa"
+msgstr ""
+
+msgid "lang_oss"
+msgstr ""
+
+msgid "lang_ota"
+msgstr ""
+
+msgid "lang_oto"
+msgstr ""
+
+msgid "lang_paa"
+msgstr ""
+
+msgid "lang_pag"
+msgstr ""
+
+msgid "lang_pal"
+msgstr ""
+
+msgid "lang_pam"
+msgstr ""
+
+msgid "lang_pan"
+msgstr ""
+
+msgid "lang_pap"
+msgstr ""
+
+msgid "lang_pau"
+msgstr ""
+
+msgid "lang_peo"
+msgstr ""
+
+msgid "lang_per"
+msgstr ""
+
+msgid "lang_phi"
+msgstr ""
+
+msgid "lang_phn"
+msgstr ""
+
+msgid "lang_pli"
+msgstr ""
+
+msgid "lang_pol"
+msgstr ""
+
+msgid "lang_pon"
+msgstr ""
+
+msgid "lang_por"
+msgstr ""
+
+msgid "lang_pra"
+msgstr ""
+
+msgid "lang_pro"
+msgstr ""
+
+msgid "lang_pus"
+msgstr ""
+
+msgid "lang_que"
+msgstr ""
+
+msgid "lang_raj"
+msgstr ""
+
+msgid "lang_rap"
+msgstr ""
+
+msgid "lang_rar"
+msgstr ""
+
+msgid "lang_roa"
+msgstr ""
+
+msgid "lang_roh"
+msgstr ""
+
+msgid "lang_rom"
+msgstr ""
+
+msgid "lang_rum"
+msgstr ""
+
+msgid "lang_run"
+msgstr ""
+
+msgid "lang_rup"
+msgstr ""
+
+msgid "lang_rus"
+msgstr ""
+
+msgid "lang_sad"
+msgstr ""
+
+msgid "lang_sag"
+msgstr ""
+
+msgid "lang_sah"
+msgstr ""
+
+msgid "lang_sai"
+msgstr ""
+
+msgid "lang_sal"
+msgstr ""
+
+msgid "lang_sam"
+msgstr ""
+
+msgid "lang_san"
+msgstr ""
+
+msgid "lang_sas"
+msgstr ""
+
+msgid "lang_sat"
+msgstr ""
+
+msgid "lang_scn"
+msgstr ""
+
+msgid "lang_sco"
+msgstr ""
+
+msgid "lang_sel"
+msgstr ""
+
+msgid "lang_sem"
+msgstr ""
+
+msgid "lang_sga"
+msgstr ""
+
+msgid "lang_sgn"
+msgstr ""
+
+msgid "lang_shn"
+msgstr ""
+
+msgid "lang_sid"
+msgstr ""
+
+msgid "lang_sin"
+msgstr ""
+
+msgid "lang_sio"
+msgstr ""
+
+msgid "lang_sit"
+msgstr ""
+
+msgid "lang_sla"
+msgstr ""
+
+msgid "lang_slo"
+msgstr ""
+
+msgid "lang_slv"
+msgstr ""
+
+msgid "lang_sma"
+msgstr ""
+
+msgid "lang_sme"
+msgstr ""
+
+msgid "lang_smi"
+msgstr ""
+
+msgid "lang_smj"
+msgstr ""
+
+msgid "lang_smn"
+msgstr ""
+
+msgid "lang_smo"
+msgstr ""
+
+msgid "lang_sms"
+msgstr ""
+
+msgid "lang_sna"
+msgstr ""
+
+msgid "lang_snd"
+msgstr ""
+
+msgid "lang_snk"
+msgstr ""
+
+msgid "lang_sog"
+msgstr ""
+
+msgid "lang_som"
+msgstr ""
+
+msgid "lang_son"
+msgstr ""
+
+msgid "lang_sot"
+msgstr ""
+
+msgid "lang_spa"
+msgstr ""
+
+msgid "lang_srd"
+msgstr ""
+
+msgid "lang_srn"
+msgstr ""
+
+msgid "lang_srp"
+msgstr ""
+
+msgid "lang_srr"
+msgstr ""
+
+msgid "lang_ssa"
+msgstr ""
+
+msgid "lang_ssw"
+msgstr ""
+
+msgid "lang_suk"
+msgstr ""
+
+msgid "lang_sun"
+msgstr ""
+
+msgid "lang_sus"
+msgstr ""
+
+msgid "lang_sux"
+msgstr ""
+
+msgid "lang_swa"
+msgstr ""
+
+msgid "lang_swe"
+msgstr ""
+
+msgid "lang_syc"
+msgstr ""
+
+msgid "lang_syr"
+msgstr ""
+
+msgid "lang_tah"
+msgstr ""
+
+msgid "lang_tai"
+msgstr ""
+
+msgid "lang_tam"
+msgstr ""
+
+msgid "lang_tat"
+msgstr ""
+
+msgid "lang_tel"
+msgstr ""
+
+msgid "lang_tem"
+msgstr ""
+
+msgid "lang_ter"
+msgstr ""
+
+msgid "lang_tet"
+msgstr ""
+
+msgid "lang_tgk"
+msgstr ""
+
+msgid "lang_tgl"
+msgstr ""
+
+msgid "lang_tha"
+msgstr ""
+
+msgid "lang_tib"
+msgstr ""
+
+msgid "lang_tig"
+msgstr ""
+
+msgid "lang_tir"
+msgstr ""
+
+msgid "lang_tiv"
+msgstr ""
+
+msgid "lang_tkl"
+msgstr ""
+
+msgid "lang_tlh"
+msgstr ""
+
+msgid "lang_tli"
+msgstr ""
+
+msgid "lang_tmh"
+msgstr ""
+
+msgid "lang_tog"
+msgstr ""
+
+msgid "lang_ton"
+msgstr ""
+
+msgid "lang_tpi"
+msgstr ""
+
+msgid "lang_tsi"
+msgstr ""
+
+msgid "lang_tsn"
+msgstr ""
+
+msgid "lang_tso"
+msgstr ""
+
+msgid "lang_tuk"
+msgstr ""
+
+msgid "lang_tum"
+msgstr ""
+
+msgid "lang_tup"
+msgstr ""
+
+msgid "lang_tur"
+msgstr ""
+
+msgid "lang_tut"
+msgstr ""
+
+msgid "lang_tvl"
+msgstr ""
+
+msgid "lang_twi"
+msgstr ""
+
+msgid "lang_tyv"
+msgstr ""
+
+msgid "lang_udm"
+msgstr ""
+
+msgid "lang_uga"
+msgstr ""
+
+msgid "lang_uig"
+msgstr ""
+
+msgid "lang_ukr"
+msgstr ""
+
+msgid "lang_umb"
+msgstr ""
+
+msgid "lang_und"
+msgstr ""
+
+msgid "lang_urd"
+msgstr ""
+
+msgid "lang_uzb"
+msgstr ""
+
+msgid "lang_vai"
+msgstr ""
+
+msgid "lang_ven"
+msgstr ""
+
+msgid "lang_vie"
+msgstr ""
+
+msgid "lang_vol"
+msgstr ""
+
+msgid "lang_vot"
+msgstr ""
+
+msgid "lang_wak"
+msgstr ""
+
+msgid "lang_wal"
+msgstr ""
+
+msgid "lang_war"
+msgstr ""
+
+msgid "lang_was"
+msgstr ""
+
+msgid "lang_wel"
+msgstr ""
+
+msgid "lang_wen"
+msgstr ""
+
+msgid "lang_wln"
+msgstr ""
+
+msgid "lang_wol"
+msgstr ""
+
+msgid "lang_xal"
+msgstr ""
+
+msgid "lang_xho"
+msgstr ""
+
+msgid "lang_yao"
+msgstr ""
+
+msgid "lang_yap"
+msgstr ""
+
+msgid "lang_yid"
+msgstr ""
+
+msgid "lang_yor"
+msgstr ""
+
+msgid "lang_ypk"
+msgstr ""
+
+msgid "lang_zap"
+msgstr ""
+
+msgid "lang_zbl"
+msgstr ""
+
+msgid "lang_zen"
+msgstr ""
+
+msgid "lang_zha"
+msgstr ""
+
+msgid "lang_znd"
+msgstr ""
+
+msgid "lang_zul"
+msgstr ""
+
+msgid "lang_zun"
+msgstr ""
+
+msgid "lang_zxx"
+msgstr ""
+
+msgid "lang_zza"
+msgstr ""
+
+msgid "no."
+msgstr ""
+
+msgid "other files"
+msgstr ""
+
+msgid "p."
+msgstr ""
+
+msgid "pid"
+msgstr ""
+
+msgid "role_admin"
+msgstr ""
+
+msgid "role_moderator"
+msgstr ""
+
+msgid "role_submitter"
+msgstr ""
+
+msgid "role_superuser"
+msgstr ""
+
+msgid "role_user"
+msgstr ""
+
+msgid "status"
+msgstr ""
+
+msgid "unifr"
+msgstr ""
+
+msgid "unisi"
+msgstr ""
+
+msgid "uri"
+msgstr ""
+
+msgid "user"
+msgstr ""
+
+msgid "vol."
+msgstr ""
