@@ -8,143 +8,147 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
-"Report-Msgid-Bugs-To: software@rero.ch\n"
+"Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2020-07-09 07:52+0200\n"
-"PO-Revision-Date: 2020-05-13 05:58+0000\n"
-"Last-Translator: Sébastien Délèze <sebastien.deleze@rero.ch>, 2020\n"
+"PO-Revision-Date: 2020-08-13 05:44+0000\n"
+"Last-Translator: Marion Davis <marion.davis@rero.ch>\n"
+"Language-Team: English <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"en/>\n"
 "Language: en\n"
-"Language-Team: English (https://www.transifex.com/rero/teams/77935/en/)\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.2-dev\n"
 "Generated-By: Babel 2.8.0\n"
 
 #, python-format
 msgid "%(icon)s Profile"
-msgstr ""
+msgstr "%(icon)s My account"
 
 msgid "Abstract"
-msgstr ""
+msgstr "Abstract"
 
 msgid "Abstracts"
-msgstr ""
+msgstr "Abstracts"
 
 msgid "Accompanying material of the resource, ie maps."
-msgstr ""
+msgstr "Accompanying material of the resource, ie maps."
 
 msgid "Acquisition terms"
-msgstr ""
+msgstr "Term of availability"
 
 msgid "Action"
-msgstr ""
+msgstr "Action"
 
 msgid "Additional materials"
-msgstr ""
+msgstr "Additional materials"
 
 msgid "Administration"
-msgstr ""
+msgstr "Administration"
 
 msgid "Affiliation"
-msgstr ""
+msgstr "Affiliation"
 
 msgid "Agent"
-msgstr ""
+msgstr "Agent"
 
 msgid "Ask for changes on deposit"
-msgstr ""
+msgstr "Ask for changes on deposit"
 
 msgid ""
 "At least 3 characters and must contain only lower case characters and "
 "underscores."
 msgstr ""
+"At least 3 characters and must contain only lower case characters and "
+"underscores."
 
 msgid "Author or editor"
-msgstr ""
+msgstr "Author or editor"
 
 msgid "Back to SONAR"
-msgstr ""
+msgstr "Back to SONAR"
 
 msgid "Best match"
-msgstr ""
+msgstr "Best match"
 
 msgid "Bucket UUID"
-msgstr ""
+msgstr "Bucket UUID"
 
 msgid "Bucket UUID used to store files"
-msgstr ""
+msgstr "Bucket UUID used to store files"
 
 msgid "Checksum"
-msgstr ""
+msgstr "Checksum"
 
 msgid "City"
-msgstr ""
+msgstr "City"
 
 msgid "Classification"
-msgstr ""
+msgstr "Classification"
 
 msgid "Classification portion"
-msgstr ""
+msgstr "Classification number"
 
 msgid "Classifications"
-msgstr ""
+msgstr "Classifications"
 
 msgid "Click here to reset your password"
-msgstr ""
+msgstr "Click here to reset your password"
 
 msgid "Code"
-msgstr ""
+msgstr "Code"
 
 msgid "Collection"
-msgstr ""
+msgstr "Collection"
 
 msgid "Collections"
-msgstr ""
+msgstr "Collections"
 
 msgid "Comment"
-msgstr ""
+msgstr "Comment"
 
 msgid "Content note"
-msgstr ""
+msgstr "Content note"
 
 msgid "Content notes"
-msgstr ""
+msgstr "Content notes"
 
 msgid "Contribution"
-msgstr ""
+msgstr "Contribution"
 
 msgid "Contributions"
-msgstr ""
+msgstr "Contributions"
 
 msgid "Contributor"
-msgstr ""
+msgstr "Contributor"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Contributors"
 
 msgid "Controlled affiliation"
-msgstr ""
+msgstr "Controlled affiliation"
 
 msgid "Controlled affiliations"
-msgstr ""
+msgstr "Controlled affiliations"
 
 msgid "Current cataloguing step."
-msgstr ""
+msgstr "Current cataloguing step."
 
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 msgid "Date in yyyy-mm-dd format, ex: 1970-01-01"
-msgstr ""
+msgstr "Date in yyyy-mm-dd format, ex: 1970-01-01"
 
 msgid "Date of birth"
-msgstr ""
+msgstr "Date of birth"
 
 msgid "Date of death"
-msgstr ""
+msgstr "Date of death"
 
 msgid "Degree"
-msgstr ""
+msgstr "Degree"
 
 msgid "Deposit approval"
 msgstr "Deposit approval"
@@ -156,533 +160,548 @@ msgid "Deposit to validate"
 msgstr "Deposit to validate"
 
 msgid "Describes the information of a single file in the record."
-msgstr ""
+msgstr "Describes the information of a single file in the record."
 
 msgid "Designation"
-msgstr ""
+msgstr "Designation"
 
 msgid "Dissertation"
-msgstr ""
+msgstr "Dissertation"
 
 msgid "Document"
-msgstr ""
+msgstr "Document"
 
 msgid "Document ID"
-msgstr ""
+msgstr "Document ID"
 
 msgid "Document created on basis of this deposit."
-msgstr ""
+msgstr "Document created on basis of this deposit."
 
 msgid "Document date"
-msgstr ""
+msgstr "Document date"
 
 msgid "Document is harvested or not, will disable record edition or similar."
-msgstr ""
+msgstr "Document is harvested or not, will disable record edition or similar."
 
 msgid "Document type"
-msgstr ""
+msgstr "Document type"
 
 msgid "Edition"
-msgstr ""
+msgstr "Edition"
 
 msgid "Editors"
-msgstr ""
+msgstr "Editors"
 
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 msgid "Embargo"
-msgstr ""
+msgstr "Embargo"
 
 msgid "Embargo date"
-msgstr ""
+msgstr "Embargo date"
 
 msgid "End date of publication"
-msgstr ""
+msgstr "End date of publication"
 
 msgid ""
 "Enter your email address below and we will send you a link to reset your "
 "password."
 msgstr ""
+"Enter your email address below and we will send you a link to reset your "
+"password."
 
 msgid "Example: 1111-2222-3333-4444"
-msgstr ""
+msgstr "Example: 1111-2222-3333-4444"
 
 msgid "Example: 2019 or 2019-01-01"
-msgstr ""
+msgstr "Example: 2019 or 2019-01-01"
 
 msgid "Example: 2019 or 2019-05-05"
-msgstr ""
+msgstr "Example: 2019 or 2019-05-05"
 
 msgid "Example: John Doe"
-msgstr ""
+msgstr "Example: John Doe"
 
 msgid "Example: Muller, Hans"
-msgstr ""
+msgstr "Example: Muller, Hans"
 
 msgid "Example: Published version"
-msgstr ""
+msgstr "Example: Published version"
 
 msgid "Examples: 135, 5-27, …"
-msgstr ""
+msgstr "Examples: 135, 5-27, …"
 
 msgid "Except within organisation"
-msgstr ""
+msgstr "Except within organisation"
 
 msgid "Extent"
-msgstr ""
+msgstr "Extent"
 
 msgid "Extent of the resource, ie number of pages or volumes."
-msgstr ""
+msgstr "Extent of the resource, ie number of pages or volumes."
 
 msgid "File UUID"
-msgstr ""
+msgstr "File UUID"
 
 msgid "File item"
-msgstr ""
+msgstr "File item"
 
 msgid "Files"
-msgstr ""
+msgstr "Files"
 
 msgid ""
 "Fill in your details to complete your registration. You only have to do "
 "this once."
 msgstr ""
+"Fill in your details to complete your registration. You only have to do this "
+"once."
 
 msgid "First name and last name"
-msgstr ""
+msgstr "First name and last name"
 
 msgid "Follow us"
-msgstr ""
+msgstr "Follow us"
 
 msgid "Forgot password?"
-msgstr ""
+msgstr "Forgot password?"
 
 msgid "Format"
-msgstr ""
+msgstr "Format"
 
 msgid "Format of the resource, ie dimensions in cm."
-msgstr ""
+msgstr "Format of the resource, i.e. dimensions in cm."
 
 msgid "Formats"
-msgstr ""
+msgstr "Formats"
 
 msgid "French"
-msgstr ""
+msgstr "French"
 
 msgid "Further info on the project page"
-msgstr ""
+msgstr "Further info on the project page"
 
 msgid "German"
-msgstr ""
+msgstr "German"
 
 msgid "Harvested"
-msgstr ""
+msgstr "Harvested"
 
 msgid "Help"
-msgstr ""
+msgstr "Help"
 
 msgid ""
 "Host document, for example a journal for an article, or a book for a book"
 " chapter."
 msgstr ""
+"Host document, for example a journal for an article, or a book for a book "
+"chapter."
 
 msgid "Identified by"
-msgstr ""
+msgstr "Identified by"
 
 msgid "Identifier"
-msgstr ""
+msgstr "Identifier"
 
 msgid "Identifiers"
-msgstr ""
+msgstr "Identifiers"
 
 msgid "In the format \\"
-msgstr ""
+msgstr "In the format \\"
 
 msgid "Invenio"
-msgstr ""
+msgstr "Invenio"
 
 msgid "Is dedicated"
-msgstr ""
+msgstr "Is dedicated"
 
 msgid "Is shared"
-msgstr ""
+msgstr "Appears in the shared repository"
 
 msgid "Issue"
-msgstr ""
+msgstr "Issue"
 
 msgid "Italian"
-msgstr ""
+msgstr "Italian"
 
 msgid "Key"
-msgstr ""
+msgstr "Key"
 
 msgid "Key (filename) of the file."
-msgstr ""
+msgstr "Key (filename) of the file."
 
 msgid "Label"
-msgstr ""
+msgstr "Label"
 
 msgid "Label of the file"
-msgstr ""
+msgstr "Label of the file"
 
 msgid "Language"
-msgstr ""
+msgstr "Language"
 
 msgid "Languages"
-msgstr ""
+msgstr "Languages"
 
 msgid "Last name, first name, ex: Doe, John"
-msgstr ""
+msgstr "Last name, first name, ex: Doe, John"
 
 msgid "List of files attached to the record."
-msgstr ""
+msgstr "List of files attached to the record."
 
 msgid "Log"
-msgstr ""
+msgstr "Log"
 
 msgid "Log In"
-msgstr ""
+msgstr "Log in"
 
 msgid "Log in"
-msgstr ""
+msgstr "Log in"
 
 msgid "Log in to account"
-msgstr ""
+msgstr "Log in to account"
 
 msgid "Logout"
-msgstr ""
+msgstr "Logout"
 
 msgid "Logs"
-msgstr ""
+msgstr "Logs"
 
 msgid "MD5 checksum of the file."
-msgstr ""
+msgstr "MD5 checksum of the file."
 
 msgid "Main title"
-msgstr ""
+msgstr "Title proper"
 
 msgid "Main titles"
-msgstr ""
+msgstr "Titles proper"
 
 msgid "Most recent"
-msgstr ""
+msgstr "Most recent"
 
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 msgid "Note"
-msgstr ""
+msgstr "Note"
 
 msgid "Notes"
-msgstr ""
+msgstr "Notes"
 
 msgid "Number"
-msgstr ""
+msgstr "Number"
 
 msgid "Numbering"
-msgstr ""
+msgstr "Numbering"
 
 msgid "ORCID"
-msgstr ""
+msgstr "ORCID"
 
 msgid "Organisation"
-msgstr ""
+msgstr "Organisation"
 
 msgid "Organisation has a specific theme for his view."
-msgstr ""
+msgstr "Organisation has a specific theme for its view."
 
 msgid "Organisation records can be accessed by a specific URL."
-msgstr ""
+msgstr "Organisation records can be accessed by a specific URL."
 
 msgid "Other Material Characteristics"
-msgstr ""
+msgstr "Other material characteristics"
 
 msgid ""
 "Other Material Characteristics, ie illustrations, black and with or "
 "coloured."
 msgstr ""
+"Other material characteristics, i.e. illustrations, black and with or "
+"coloured."
 
 msgid "Other electronic version"
-msgstr ""
+msgstr "Other electronic version"
 
 msgid "Other electronic versions"
-msgstr ""
+msgstr "Other electronic versions"
 
 msgid "Other files"
-msgstr ""
+msgstr "Other files"
 
 msgid "Pages"
-msgstr ""
+msgstr "Pages"
 
 msgid "Part of (host document)"
-msgstr ""
+msgstr "Contained in (host document)"
 
 msgid "Permalink"
-msgstr ""
+msgstr "Permalink"
 
 msgid "Phone number"
-msgstr ""
+msgstr "Phone number"
 
 msgid "Phone number with the international prefix, without spaces."
-msgstr ""
+msgstr "Phone number with the international prefix, without spaces."
 
 msgid "Place"
-msgstr ""
+msgstr "Place"
 
 msgid "Position"
-msgstr ""
+msgstr "Position"
 
 msgid "Position of the file"
-msgstr ""
+msgstr "Position of the file"
 
 msgid "Postal code"
-msgstr ""
+msgstr "Postal code"
 
 #, python-format
 msgid "Powered by <a href=\"%(link)s\" target=\"_blank\">RERO</a>"
-msgstr ""
+msgstr "Powered by <a href=\"%(link)s\" target=\"_blank\">RERO</a>"
 
 msgid "Preferred name"
-msgstr ""
+msgstr "Preferred name"
 
 msgid "Profile"
-msgstr ""
+msgstr "Profile"
 
 msgid "Project and contact"
-msgstr ""
+msgstr "Project and contact"
 
 msgid "Project website on"
-msgstr ""
+msgstr "Project website on"
 
 msgid "Provision activities"
-msgstr ""
+msgstr "Publication, manufacture, distribution, production"
 
 msgid "Provision activity"
-msgstr ""
+msgstr "Publication, manufacture, distribution, production"
 
 msgid "Public access from"
-msgstr ""
+msgstr "Public access from"
 
 msgid "Public note"
-msgstr ""
+msgstr "Public note"
 
 msgid "Publication"
-msgstr ""
+msgstr "Publication"
 
 msgid "Published in"
-msgstr ""
+msgstr "Published in"
 
 msgid "Publisher"
-msgstr ""
+msgstr "Publisher"
 
 msgid "Qualifier"
-msgstr ""
+msgstr "Qualification"
 
 msgid "Reset Password"
-msgstr ""
+msgstr "Reset password"
 
 msgid "Responsibility"
-msgstr ""
+msgstr "Responsibility"
 
 msgid "Restricted"
-msgstr ""
+msgstr "Restricted"
 
 msgid "Role"
-msgstr ""
+msgstr "Role"
 
 msgid "Roles"
-msgstr ""
+msgstr "Roles"
 
 msgid "SONAR administration"
-msgstr ""
+msgstr "SONAR administration"
 
 msgid "SONAR deposit v1.0.0"
-msgstr ""
+msgstr "SONAR deposit v1.0.0"
 
 msgid "Schema"
-msgstr ""
+msgstr "Schema"
 
 msgid "Schema to validate document against."
-msgstr ""
+msgstr "Schema to validate document against."
 
 msgid "Search"
-msgstr ""
+msgstr "Search"
 
 msgid "Search publications, authors, projects, ..."
-msgstr ""
+msgstr "Search publications, authors, projects, ..."
 
 msgid "Series"
-msgstr ""
+msgstr "Series"
 
 msgid "Series to which belongs the resource."
-msgstr ""
+msgstr "Series to which belongs the resource."
 
 msgid "Show more"
-msgstr ""
+msgstr "Show more"
 
 msgid "Sign Up"
-msgstr ""
+msgstr "Sign up"
 
 msgid "Sign up"
-msgstr ""
+msgstr "Sign up"
 
 #, python-format
 msgid "Sign up for a %(sitename)s account"
-msgstr ""
+msgstr "Sign up for a %(sitename)s account"
 
 #, python-format
 msgid "Sign-in with %(type)s"
-msgstr ""
+msgstr "Sign-in with %(type)s"
 
 msgid "Sign-in with SWITCHaai"
-msgstr ""
+msgstr "Sign-in with SWITCHaai"
 
 #, python-format
 msgid "Sign-up with %(type)s"
-msgstr ""
+msgstr "Sign-up with %(type)s"
 
 msgid "Sign-up with SWITCHaai"
-msgstr ""
+msgstr "Sign-up with SWITCHaai"
 
 msgid "Size"
-msgstr ""
+msgstr "Size"
 
 msgid "Size of the file in bytes."
-msgstr ""
+msgstr "Size of the file in bytes."
 
 msgid "Software under development!"
-msgstr ""
+msgstr "Software under development!"
 
 msgid "Source"
-msgstr ""
+msgstr "Source"
 
 msgid "Source code on"
-msgstr ""
+msgstr "Source code on"
 
 msgid "Specific collections"
-msgstr ""
+msgstr "Specific collections"
 
 msgid "Start date"
-msgstr ""
+msgstr "Date 1"
 
 msgid "Start date of publication"
-msgstr ""
+msgstr "Date of publication 1"
 
 msgid "Statement"
-msgstr ""
+msgstr "Statement"
 
 msgid "Statements"
-msgstr ""
+msgstr "Statements"
 
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 msgid "Step"
-msgstr ""
+msgstr "Step"
 
 msgid "Street"
-msgstr ""
+msgstr "Street"
 
 msgid "Street and number of the address, separated by a coma."
-msgstr ""
+msgstr "Street and number of the address, separated by a coma."
 
 msgid "Subject"
-msgstr ""
+msgstr "Subject"
 
 msgid "Subjects"
-msgstr ""
+msgstr "Subjects"
 
 msgid "Subtitle"
-msgstr ""
+msgstr "Other title information"
 
 msgid "Subtitles"
-msgstr ""
+msgstr "Subtitles"
 
 msgid "Super administration"
-msgstr ""
+msgstr "Super administration"
 
 msgid "Swiss Open Access Repository"
-msgstr ""
+msgstr "Swiss Open Access Repository"
 
 msgid ""
 "The SONAR project aims to create a scholarly archive that collects, "
 "promotes and preserves the publications of authors affiliated with Swiss "
 "public research institutions."
 msgstr ""
+"The SONAR project aims to create a scholarly archive that collects, promotes "
+"and preserves the publications of authors affiliated with Swiss public "
+"research institutions."
 
 msgid ""
 "The names of the organisation's specific/patrimonial collections to which"
 " this document belongs"
 msgstr ""
+"The names of the organisation's specific/patrimonial collections to which "
+"this document belongs"
 
 msgid "The project"
-msgstr ""
+msgstr "The project"
 
 msgid ""
 "This field corresponds to the exact publication date of the article, if "
 "known."
 msgstr ""
+"This field corresponds to the exact publication date of the article, if "
+"known."
 
 msgid "Title"
-msgstr ""
+msgstr "Title"
 
 msgid "Title in other language"
-msgstr ""
+msgstr "Title in other language"
 
 msgid "Titles"
-msgstr ""
+msgstr "Titles"
 
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 msgid "Type of the file"
-msgstr ""
+msgstr "Type of the file"
 
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 msgid "URL to file"
-msgstr ""
+msgstr "URL to file"
 
 msgid "URL to file hosted in an external platform."
-msgstr ""
+msgstr "URL to file hosted in an external platform."
 
 msgid "UUID of the FileInstance object."
-msgstr ""
+msgstr "UUID of the FileInstance object."
 
 msgid "UUID of the ObjectVersion object."
-msgstr ""
+msgstr "UUID of the ObjectVersion object."
 
 msgid "UUID of the bucket to which this file is assigned."
-msgstr ""
+msgstr "UUID of the bucket to which this file is assigned."
 
 msgid "Usage and access policies"
-msgstr ""
+msgstr "Usage and access policies"
 
 msgid "Usage and access policy"
-msgstr ""
+msgstr "Usage and access policy"
 
 msgid "User"
-msgstr ""
+msgstr "User"
 
 msgid "Value"
-msgstr ""
+msgstr "Value"
 
 msgid "Version UUID"
-msgstr ""
+msgstr "Version UUID"
 
 msgid "Volume"
-msgstr ""
+msgstr "Volume"
 
 msgid "Welcome on SONAR"
-msgstr ""
+msgstr "Welcome on SONAR"
 
 msgid "Welcome to Swiss Open Access Repository!"
-msgstr ""
+msgstr "Welcome to Swiss Open Access Repository!"
 
 msgid "Year"
-msgstr ""
+msgstr "Year"
 
 msgid "bf:Agent"
 msgstr "Agent"
@@ -733,7 +752,7 @@ msgid "bf:Local"
 msgstr "Local identifier"
 
 msgid "bf:Manufacture"
-msgstr "Manufacturer"
+msgstr "Manufacture"
 
 msgid "bf:MatrixNumber"
 msgstr "Audio matrix number"
@@ -751,7 +770,7 @@ msgid "bf:MusicPublisherNumber"
 msgstr "Music publisher number"
 
 msgid "bf:Organization"
-msgstr "Organization"
+msgstr "Corporate body"
 
 msgid "bf:Person"
 msgstr "Person"
@@ -760,7 +779,7 @@ msgid "bf:Place"
 msgstr "Place"
 
 msgid "bf:Publication"
-msgstr "Publisher"
+msgstr "Publication"
 
 msgid "bf:PublisherNumber"
 msgstr "Publisher number"
@@ -802,7 +821,7 @@ msgid "classification_16"
 msgstr "Logic"
 
 msgid "classification_2"
-msgstr "Religion Theology"
+msgstr "Religion, theology"
 
 msgid "classification_294/299"
 msgstr "Orientalism"
@@ -811,7 +830,7 @@ msgid "classification_3"
 msgstr "Social sciences"
 
 msgid "classification_31"
-msgstr "Demography Sociology Statistics"
+msgstr "Demography, sociology, statistics"
 
 msgid "classification_32"
 msgstr "Political sciences"
@@ -829,7 +848,7 @@ msgid "classification_36"
 msgstr "Social work"
 
 msgid "classification_37"
-msgstr "Education Teaching"
+msgstr "Education, teaching"
 
 msgid "classification_370"
 msgstr "Orthophony"
@@ -841,16 +860,16 @@ msgid "classification_378.6"
 msgstr "Higher Education Institutions"
 
 msgid "classification_39"
-msgstr "Anthropology Ethnology"
+msgstr "Anthropology, ethnology"
 
 msgid "classification_51"
 msgstr "Mathematics"
 
 msgid "classification_519.2"
-msgstr "Probabilites Statistics"
+msgstr "Probabilites, statistics"
 
 msgid "classification_52"
-msgstr "Astronomy Astrophysics"
+msgstr "Astronomy, astrophysics"
 
 msgid "classification_524.8"
 msgstr "Cosmology"
@@ -889,7 +908,7 @@ msgid "classification_57"
 msgstr "Biology"
 
 msgid "classification_57/59"
-msgstr "Biology Life sciences"
+msgstr "Biology, life sciences"
 
 msgid "classification_574"
 msgstr "Ecology"
@@ -916,7 +935,7 @@ msgid "classification_614.253.5"
 msgstr "Midwife"
 
 msgid "classification_615"
-msgstr "Therapeutic. Pharmacy Pharmacology"
+msgstr "Therapeutic, pharmacy, pharmacology"
 
 msgid "classification_615.8"
 msgstr "Physiotherapy"
@@ -961,10 +980,10 @@ msgid "classification_621.762"
 msgstr "Powder metallurgy"
 
 msgid "classification_63"
-msgstr "Agriculture Agronomy"
+msgstr "Agriculture, agronomy"
 
 msgid "classification_65"
-msgstr "Information communication and media sciences"
+msgstr "Information, communication and media sciences"
 
 msgid "classification_66"
 msgstr "Chemical technology"
@@ -1006,7 +1025,7 @@ msgid "classification_796"
 msgstr "Sports sciences"
 
 msgid "classification_81"
-msgstr "Language Linguistics"
+msgstr "Language, linguistics"
 
 msgid "classification_81´28"
 msgstr "Dialectology"
@@ -1060,7 +1079,7 @@ msgid "contribution_role_prt"
 msgstr "Printer"
 
 msgid "contributor"
-msgstr ""
+msgstr "contributor"
 
 msgid "csal"
 msgstr "National licenses"
@@ -2695,16 +2714,16 @@ msgid "lang_zza"
 msgstr "Zaza"
 
 msgid "no."
-msgstr ""
+msgstr "no."
 
 msgid "other files"
-msgstr ""
+msgstr "other files"
 
 msgid "p."
-msgstr ""
+msgstr "p."
 
 msgid "pid"
-msgstr ""
+msgstr "pid"
 
 msgid "role_admin"
 msgstr "Admin"
@@ -2722,7 +2741,7 @@ msgid "role_user"
 msgstr "User"
 
 msgid "status"
-msgstr ""
+msgstr "status"
 
 msgid "unifr"
 msgstr "University of Fribourg"
@@ -2734,7 +2753,7 @@ msgid "uri"
 msgstr "URI"
 
 msgid "user"
-msgstr ""
+msgstr "user"
 
 msgid "vol."
-msgstr ""
+msgstr "vol."
