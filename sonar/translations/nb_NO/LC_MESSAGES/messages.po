@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.5.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2020-07-09 07:52+0200\n"
-"PO-Revision-Date: 2020-07-24 11:41+0000\n"
+"PO-Revision-Date: 2020-08-01 11:14+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "rero_plus/sonar/nb_NO/>\n"
@@ -37,19 +37,19 @@ msgid "Acquisition terms"
 msgstr ""
 
 msgid "Action"
-msgstr ""
+msgstr "Handling"
 
 msgid "Additional materials"
 msgstr ""
 
 msgid "Administration"
-msgstr ""
+msgstr "Administrasjon"
 
 msgid "Affiliation"
-msgstr ""
+msgstr "Tilknytning"
 
 msgid "Agent"
-msgstr ""
+msgstr "Agent"
 
 msgid "Ask for changes on deposit"
 msgstr ""
@@ -63,10 +63,10 @@ msgid "Author or editor"
 msgstr ""
 
 msgid "Back to SONAR"
-msgstr ""
+msgstr "Tilbake til SONAR"
 
 msgid "Best match"
-msgstr ""
+msgstr "Nærmeste treff"
 
 msgid "Bucket UUID"
 msgstr ""
@@ -75,10 +75,10 @@ msgid "Bucket UUID used to store files"
 msgstr ""
 
 msgid "Checksum"
-msgstr ""
+msgstr "Sjekksum"
 
 msgid "City"
-msgstr ""
+msgstr "By"
 
 msgid "Classification"
 msgstr ""
@@ -90,58 +90,58 @@ msgid "Classifications"
 msgstr ""
 
 msgid "Click here to reset your password"
-msgstr ""
+msgstr "Klikk her for å tilbakestille passordet ditt"
 
 msgid "Code"
-msgstr ""
+msgstr "Kode"
 
 msgid "Collection"
-msgstr ""
+msgstr "Samling"
 
 msgid "Collections"
-msgstr ""
+msgstr "Samlinger"
 
 msgid "Comment"
-msgstr ""
+msgstr "Kommentar"
 
 msgid "Content note"
-msgstr ""
+msgstr "Kommentarmerknad"
 
 msgid "Content notes"
-msgstr ""
+msgstr "Kommentarmerknader"
 
 msgid "Contribution"
-msgstr ""
+msgstr "Bidragsyter"
 
 msgid "Contributions"
-msgstr ""
+msgstr "Bidragsytere"
 
 msgid "Contributor"
-msgstr ""
+msgstr "Bidragsyter"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Bidragsytere"
 
 msgid "Controlled affiliation"
-msgstr ""
+msgstr "Kontrollert tilknytning"
 
 msgid "Controlled affiliations"
-msgstr ""
+msgstr "Kontrollerte tilknytninger"
 
 msgid "Current cataloguing step."
 msgstr ""
 
 msgid "Date"
-msgstr ""
+msgstr "Dato"
 
 msgid "Date in yyyy-mm-dd format, ex: 1970-01-01"
 msgstr ""
 
 msgid "Date of birth"
-msgstr ""
+msgstr "Fødselsdato"
 
 msgid "Date of death"
-msgstr ""
+msgstr "Avdød"
 
 msgid "Degree"
 msgstr ""
@@ -165,22 +165,22 @@ msgid "Dissertation"
 msgstr ""
 
 msgid "Document"
-msgstr ""
+msgstr "Dokument"
 
 msgid "Document ID"
-msgstr ""
+msgstr "Dokument-ID"
 
 msgid "Document created on basis of this deposit."
 msgstr ""
 
 msgid "Document date"
-msgstr ""
+msgstr "Dokumentdato"
 
 msgid "Document is harvested or not, will disable record edition or similar."
 msgstr ""
 
 msgid "Document type"
-msgstr ""
+msgstr "Dokumenttype"
 
 msgid "Edition"
 msgstr ""
@@ -189,7 +189,7 @@ msgid "Editors"
 msgstr ""
 
 msgid "Email"
-msgstr ""
+msgstr "E-post"
 
 msgid "Embargo"
 msgstr ""
@@ -212,19 +212,19 @@ msgid "Example: 2019 or 2019-01-01"
 msgstr ""
 
 msgid "Example: 2019 or 2019-05-05"
-msgstr ""
+msgstr "Eksempel: 2019 eller 2019-05-05"
 
 msgid "Example: John Doe"
-msgstr ""
+msgstr "Eksempel: Ola Nordmann"
 
 msgid "Example: Muller, Hans"
-msgstr ""
+msgstr "Eksempel: Muller, Hans"
 
 msgid "Example: Published version"
 msgstr ""
 
 msgid "Examples: 135, 5-27, …"
-msgstr ""
+msgstr "Eksempler: 135, 5-27, …"
 
 msgid "Except within organisation"
 msgstr ""
@@ -236,21 +236,23 @@ msgid "Extent of the resource, ie number of pages or volumes."
 msgstr ""
 
 msgid "File UUID"
-msgstr ""
+msgstr "Fil-UUID"
 
 msgid "File item"
-msgstr ""
+msgstr "Fil-element"
 
 msgid "Files"
-msgstr ""
+msgstr "Filer"
 
 msgid ""
 "Fill in your details to complete your registration. You only have to do "
 "this once."
 msgstr ""
+"Fyll inn dine detaljer for å fullføre registreringen. Du må kun gjøre dette "
+"én gang."
 
 msgid "First name and last name"
-msgstr ""
+msgstr "For- og etternavn"
 
 msgid "Follow us"
 msgstr "Følg oss"
@@ -265,39 +267,41 @@ msgid "Format of the resource, ie dimensions in cm."
 msgstr "Format for ressursen, altså dimensjoner i cm."
 
 msgid "Formats"
-msgstr ""
+msgstr "Formater"
 
 msgid "French"
-msgstr ""
+msgstr "Fransk"
 
 msgid "Further info on the project page"
-msgstr ""
+msgstr "Ytterligere info på prosjektsiden"
 
 msgid "German"
-msgstr ""
+msgstr "Tysk"
 
 msgid "Harvested"
-msgstr ""
+msgstr "Høstet"
 
 msgid "Help"
-msgstr ""
+msgstr "Hjelp"
 
 msgid ""
 "Host document, for example a journal for an article, or a book for a book"
 " chapter."
 msgstr ""
+"Vertsdokument, for eksempel et tidsskrift for en artikkel, eller en bok for "
+"et bokkapittel."
 
 msgid "Identified by"
-msgstr ""
+msgstr "Identifisert av"
 
 msgid "Identifier"
-msgstr ""
+msgstr "Identifikator"
 
 msgid "Identifiers"
-msgstr ""
+msgstr "Identifikatorer"
 
 msgid "In the format \\"
-msgstr ""
+msgstr "I formatet \\"
 
 msgid "Invenio"
 msgstr ""
@@ -312,19 +316,19 @@ msgid "Issue"
 msgstr ""
 
 msgid "Italian"
-msgstr ""
+msgstr "Italiensk"
 
 msgid "Key"
-msgstr ""
+msgstr "Nøkkel"
 
 msgid "Key (filename) of the file."
 msgstr ""
 
 msgid "Label"
-msgstr ""
+msgstr "Etikett"
 
 msgid "Label of the file"
-msgstr ""
+msgstr "Etikett for filen"
 
 msgid "Language"
 msgstr "Språk"
@@ -339,25 +343,25 @@ msgid "List of files attached to the record."
 msgstr ""
 
 msgid "Log"
-msgstr ""
+msgstr "Logg"
 
 msgid "Log In"
-msgstr ""
+msgstr "Logg inn"
 
 msgid "Log in"
-msgstr ""
+msgstr "Logg inn"
 
 msgid "Log in to account"
-msgstr ""
+msgstr "Logg inn på konto"
 
 msgid "Logout"
 msgstr "Logg ut"
 
 msgid "Logs"
-msgstr ""
+msgstr "Logger"
 
 msgid "MD5 checksum of the file."
-msgstr ""
+msgstr "MD5-sjekksum for filen."
 
 msgid "Main title"
 msgstr "Hovedtittel"
@@ -422,38 +426,38 @@ msgid "Permalink"
 msgstr ""
 
 msgid "Phone number"
-msgstr ""
+msgstr "Telefonnummer"
 
 msgid "Phone number with the international prefix, without spaces."
 msgstr ""
 
 msgid "Place"
-msgstr ""
+msgstr "Sted"
 
 msgid "Position"
-msgstr ""
+msgstr "Posisjon"
 
 msgid "Position of the file"
-msgstr ""
+msgstr "Posisjon i filen"
 
 msgid "Postal code"
-msgstr ""
+msgstr "Postnummer"
 
 #, python-format
 msgid "Powered by <a href=\"%(link)s\" target=\"_blank\">RERO</a>"
-msgstr ""
+msgstr "Drevet av <a href=\"%(link)s\" target=\"_blank\">RERO</a>"
 
 msgid "Preferred name"
-msgstr ""
+msgstr "Foretrukket navn"
 
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 msgid "Project and contact"
-msgstr ""
+msgstr "Profil og kontrakt"
 
 msgid "Project website on"
-msgstr ""
+msgstr "Prosjektnettside på"
 
 msgid "Provision activities"
 msgstr ""
@@ -480,22 +484,22 @@ msgid "Qualifier"
 msgstr ""
 
 msgid "Reset Password"
-msgstr ""
+msgstr "Tilbakestill passord"
 
 msgid "Responsibility"
-msgstr ""
+msgstr "Ansvar"
 
 msgid "Restricted"
-msgstr ""
+msgstr "Begrenset"
 
 msgid "Role"
-msgstr ""
+msgstr "Rolle"
 
 msgid "Roles"
-msgstr ""
+msgstr "Roller"
 
 msgid "SONAR administration"
-msgstr ""
+msgstr "SONAR-administrasjon"
 
 msgid "SONAR deposit v1.0.0"
 msgstr ""
@@ -549,22 +553,22 @@ msgid "Size"
 msgstr ""
 
 msgid "Size of the file in bytes."
-msgstr ""
+msgstr "Størrelse på fil i byte."
 
 msgid "Software under development!"
-msgstr ""
+msgstr "Programvare under utvikling!"
 
 msgid "Source"
-msgstr ""
+msgstr "Kilde"
 
 msgid "Source code on"
-msgstr ""
+msgstr "Kildekode på"
 
 msgid "Specific collections"
 msgstr ""
 
 msgid "Start date"
-msgstr ""
+msgstr "Startdato"
 
 msgid "Start date of publication"
 msgstr ""
@@ -576,31 +580,31 @@ msgid "Statements"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 msgid "Step"
-msgstr ""
+msgstr "Steg"
 
 msgid "Street"
-msgstr ""
+msgstr "Gate"
 
 msgid "Street and number of the address, separated by a coma."
 msgstr ""
 
 msgid "Subject"
-msgstr ""
+msgstr "Emne"
 
 msgid "Subjects"
-msgstr ""
+msgstr "Emner"
 
 msgid "Subtitle"
-msgstr ""
+msgstr "Undertekst"
 
 msgid "Subtitles"
-msgstr ""
+msgstr "Undertekster"
 
 msgid "Super administration"
-msgstr ""
+msgstr "Super-administrasjon"
 
 msgid "Swiss Open Access Repository"
 msgstr ""
@@ -617,7 +621,7 @@ msgid ""
 msgstr ""
 
 msgid "The project"
-msgstr ""
+msgstr "Prosjektet"
 
 msgid ""
 "This field corresponds to the exact publication date of the article, if "
@@ -625,19 +629,19 @@ msgid ""
 msgstr ""
 
 msgid "Title"
-msgstr ""
+msgstr "Tittel"
 
 msgid "Title in other language"
-msgstr ""
+msgstr "Tittel på annet språk"
 
 msgid "Titles"
-msgstr ""
+msgstr "Titler"
 
 msgid "Type"
-msgstr ""
+msgstr "Typer"
 
 msgid "Type of the file"
-msgstr ""
+msgstr "Filtype"
 
 msgid "URL"
 msgstr "Nettadresse"
@@ -664,25 +668,25 @@ msgid "Usage and access policy"
 msgstr ""
 
 msgid "User"
-msgstr ""
+msgstr "Bruker"
 
 msgid "Value"
-msgstr ""
+msgstr "Verdi"
 
 msgid "Version UUID"
-msgstr ""
+msgstr "Versjons-UUID"
 
 msgid "Volume"
 msgstr ""
 
 msgid "Welcome on SONAR"
-msgstr ""
+msgstr "Velkommen til SONAR"
 
 msgid "Welcome to Swiss Open Access Repository!"
 msgstr ""
 
 msgid "Year"
-msgstr ""
+msgstr "År"
 
 msgid "bf:Agent"
 msgstr ""
