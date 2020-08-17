@@ -83,9 +83,9 @@
         </li>
         {% endif %}
         {% else %}
-        <li class="nav-item dropdown d-none d-lg-block px-3">
+        <li class="nav-item dropdown d-none d-lg-block pl-3">
           {% with dropdownId='userLinkDropdown' %}
-          <a class="nav-link text-uppercase" href="#" id="{{ dropdownId }}" role="button" data-toggle="dropdown"
+          <a class="nav-link dropdown-toggle" href="#" id="{{ dropdownId }}" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-user mr-2"></i>
             {{ current_user_record.full_name }}
@@ -96,7 +96,7 @@
         {% endif %}
         {%- if config.I18N_LANGUAGES %}
         <li class="nav-item dropdown pl-3">
-          <a class="nav-link" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+          <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             {{ current_i18n.language|upper }}
           </a>
