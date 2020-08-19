@@ -91,6 +91,7 @@
     "931"
   ],
   "form": {
+    "type": "enum",
     "options": [
       {
         "label": "classification_root_1",

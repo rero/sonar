@@ -489,6 +489,7 @@
     "zza"
   ],
   "form": {
+    "type": "enum",
     "options": [
       {
         "label": "lang_eng",

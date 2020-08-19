@@ -51,6 +51,7 @@
     "coar:c_1843"
   ],
   "form": {
+    "type": "enum",
     "options": [
       {
         "label": "document_type_coar:c_2f33",
