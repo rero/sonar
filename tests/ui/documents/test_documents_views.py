@@ -30,27 +30,32 @@ def test_default_view_code(app):
     views.default_view_code(None, {'view': 'global'})
 
 
-def test_store_organisation(db, organisation):
+def test_store_organisation(client, db, organisation):
     """Test store organisation in globals."""
     # Default view, no organisation stored.
-    views.store_organisation(None, {'view': 'global'})
+    assert client.get(url_for('documents.index',
+                              view='global')).status_code == 200
     assert not g.get('organisation')
 
-    # Existing organisation stored
-    views.store_organisation(None, {'view': 'org'})
+    # Existing organisation stored, with shared view
+    assert client.get(url_for('documents.index',
+                              view='org')).status_code == 200
     assert g.organisation['code'] == 'org'
     assert g.organisation['isShared']
 
-    # Non existing organisation
-    with pytest.raises(Exception) as exception:
-        views.store_organisation(None, {'view': 'not-existing-org'})
-        assert str(exception.value) == 'Organisation\'s view is not accessible'
+    # Non-existing organisation
+    g.pop('organisation')
+    assert client.get(url_for('documents.index',
+                              view='non-existing')).status_code == 404
+    assert not g.get('organisation')
 
     # Existing organisation without shared view
-    organisation.update({'isShared': False})
-    with pytest.raises(Exception) as exception:
-        views.store_organisation(None, {'view': 'org'})
-        assert str(exception.value) == 'Organisation\'s view is not accessible'
+    organisation['isShared'] = False
+    organisation.commit()
+    db.session.commit()
+    assert client.get(url_for('documents.index',
+                              view='org')).status_code == 404
+    assert not g.get('organisation')
 
 
 def test_index(client):
@@ -326,7 +331,8 @@ def test_part_of_format():
 def test_is_file_restricted(app, organisation):
     """Test if a file is restricted by embargo date and/or organisation."""
     g.pop('organisation', None)
-    views.store_organisation(None, {'view': 'global'})
+
+    views.store_organisation()
 
     record = {'organisation': {'pid': 'org'}}
 
@@ -358,7 +364,10 @@ def test_is_file_restricted(app, organisation):
                                     }
 
     # Restricted by organisation and current organisation match
-    views.store_organisation(None, {'view': 'org'})
+    with app.test_request_context() as req:
+        req.request.view_args['view'] = 'org'
+        views.store_organisation()
+
     assert views.is_file_restricted({'restricted': 'organisation'},
                                     record) == {
                                         'date': None,
@@ -397,7 +406,7 @@ def test_is_file_restricted(app, organisation):
 
     # Restricted by embargo date and organisation
     g.pop('organisation', None)
-    views.store_organisation(None, {'view': 'global'})
+    views.store_organisation()
     with app.test_request_context(environ_base={'REMOTE_ADDR': '10.1.2.3'}):
         assert views.is_file_restricted(
             {
@@ -426,11 +435,13 @@ def test_get_current_organisation_code(app, organisation):
     assert views.get_current_organisation_code() == 'global'
 
     # Default globals and no args
-    views.store_organisation(None, {'view': 'global'})
+    views.store_organisation()
     assert views.get_current_organisation_code() == 'global'
 
     # Organisation globals and no args
-    views.store_organisation(None, {'view': 'org'})
+    with app.test_request_context() as req:
+        req.request.view_args['view'] = 'org'
+        views.store_organisation()
     assert views.get_current_organisation_code() == 'org'
 
     # Args is global
