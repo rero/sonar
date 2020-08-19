@@ -112,6 +112,16 @@ class DocumentRecord(SonarRecord):
             host=host, org=org, pid=pid)
 
     @classmethod
+    def create(cls, data, id_=None, dbcommit=False, with_bucket=True,
+               **kwargs):
+        """Create document record."""
+        return super(DocumentRecord, cls).create(data,
+                                                 id_=id_,
+                                                 dbcommit=dbcommit,
+                                                 with_bucket=with_bucket,
+                                                 **kwargs)
+
+    @classmethod
     def get_record_by_identifier(cls, identifiers):
         """Get a record by its identifier.
 
