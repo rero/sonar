@@ -51,35 +51,35 @@ def default_view_code(endpoint, values):
                       current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'))
 
 
-@blueprint.url_value_preprocessor
-def store_organisation(endpoint, values):
+@blueprint.before_request
+def store_organisation():
     """Add organisation record to global variables."""
-    view = values.pop('view',
-                      current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'))
+    view = request.view_args.get(
+        'view', current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'))
 
     if view != current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'):
         organisation = OrganisationRecord.get_record_by_pid(view)
 
-        if not organisation or not organisation['isShared']:
-            raise Exception('Organisation\'s view is not accessible')
+        if not organisation or not organisation.get('isShared'):
+            abort(404)
 
         g.organisation = organisation.dumps()
 
 
 @blueprint.route('/')
-def index():
+def index(view='global'):
     """Homepage."""
     return render_template('sonar/frontpage.html')
 
 
 @blueprint.route('/search/documents')
-def search():
+def search(view='global'):
     """Search results page."""
     return render_template('sonar/search.html')
 
 
 @blueprint.route('/documents/<pid_value>')
-def detail(pid_value):
+def detail(pid_value, view='global'):
     """Document detail page."""
     record = DocumentRecord.get_record_by_pid(pid_value)
 

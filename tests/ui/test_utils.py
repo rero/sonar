@@ -87,9 +87,12 @@ def test_get_current_language(app):
         assert get_current_language() == 'fr'
 
 
-def test_get_view_code(organisation):
+def test_get_view_code(app, organisation):
     """Test get view code stored in organisation."""
-    store_organisation(None, {'view': 'org'})
+    with app.test_request_context() as req:
+        req.request.view_args['view'] = 'org'
+        store_organisation()
+
     assert get_view_code() == 'org'
 
     g.pop('organisation', None)
