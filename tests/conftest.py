@@ -238,7 +238,7 @@ def superuser(make_user):
 
 
 @pytest.fixture()
-def document_json(app, db, organisation):
+def document_json(app, db, bucket_location, organisation):
     """JSON document fixture."""
     data = {
         'identifiedBy': [{
@@ -355,8 +355,7 @@ def document_json(app, db, organisation):
 
 
 @pytest.fixture()
-def make_document(db, document_json, make_organisation, bucket_location,
-                  pdf_file):
+def make_document(db, document_json, make_organisation, pdf_file):
     """Factory for creating document."""
 
     def _make_document(organisation='org', with_file=False, pid=None):
