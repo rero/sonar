@@ -267,7 +267,19 @@ RECORDS_UI_ENDPOINTS = {
         'route': '/deposits/<pid_value>/files/<filename>',
         'view_imp': 'invenio_records_files.utils:file_download_ui',
         'record_class': 'invenio_records_files.api:Record'
-    }
+    },
+    'org_previewer': {
+        'pid_type': 'org',
+        'route': '/organisations/<pid_value>/preview/<filename>',
+        'view_imp': 'invenio_previewer.views:preview',
+        'record_class': 'sonar.modules.organisations.api:OrganisationRecord'
+    },
+    'org_files': {
+        'pid_type': 'org',
+        'route': '/organisations/<pid_value>/files/<filename>',
+        'view_imp': 'invenio_records_files.utils:file_download_ui',
+        'record_class': 'invenio_records_files.api:Record'
+    },
 }
 """Records UI for sonar."""
 
@@ -335,7 +347,8 @@ RECORDS_REST_ENDPOINTS = {
                                  ':json_v1'),
         },
         list_route='/organisations/',
-        item_route='/organisations/<pid(org):pid_value>',
+        item_route='/organisations/<pid(org, record_class="sonar.modules.'
+        'organisations.api:OrganisationRecord"):pid_value>',
         default_media_type='application/json',
         max_result_window=10000,
         search_factory_imp='sonar.modules.organisations.query:search_factory',
@@ -505,7 +518,8 @@ RECORDS_REST_DEFAULT_SORT = dict(documents=dict(
 RECORDS_FILES_REST_ENDPOINTS = {
     'RECORDS_REST_ENDPOINTS': {
         'doc': '/files',
-        'depo': '/files'
+        'depo': '/files',
+        'org': '/files'
     }
 }
 

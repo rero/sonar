@@ -14,21 +14,6 @@
   You should have received a copy of the GNU Affero General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #}
-
-{% if g.get('organisation') and not g.organisation['isDedicated'] %}
-  <div class="bg-secondary text-light p-1">
-    <div class="container">
-      <div class="row">
-        <div class="col">{{ g.organisation.name }}</div>
-        <div class="col text-right">
-          <a class="text-light" href="{{url_for('documents.index', view=config.SONAR_APP_DEFAULT_ORGANISATION)}}">
-            {{_('Back to SONAR')}}
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-{% endif %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-{{ 'header' if page == 'home' else 'organisation' }}">
   <div class="container">
     {%- if not current_user.is_authenticated %}
@@ -58,7 +43,7 @@
           class="d-inline-block align-top mr-3 my-4" alt="">
       </a>
       {% if not admin %}
-      <form action="{{ url_for('documents.search', view=view_code) }}"
+      <form action="{{ url_for('documents.search', view=view_code if g.get('organisation', {}).get('isDedicated') else config.SONAR_APP_DEFAULT_ORGANISATION) }}"
         class="form-inline my-2 my-lg-0 ml-lg-5">
         <input name="q" class="form-control mr-sm-2" type="search" placeholder="{{_('Search')}}"
           aria-label="{{_('Search')}}" value="{{ request.args.get('q', '') }}">

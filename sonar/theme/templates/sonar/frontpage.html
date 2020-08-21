@@ -24,7 +24,7 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-8 col-xs-6 col-lg-4 py-3 py-sm-5">
-            <a href="{{ url_for('documents.index', view=view_code) }}">
+            <a href="{{ url_for('documents.index', view=view_code if g.get('organisation', {}).get('isDedicated') else config.SONAR_APP_DEFAULT_ORGANISATION) }}">
                 {%- if config.THEME_LOGO %}
                   {% set logo_code = view_code if g.get('organisation', {}).get('isDedicated') else config.SONAR_APP_DEFAULT_ORGANISATION %}
                   <img src="{{ url_for('static', filename='images/' ~ logo_code ~ '-logo.svg')}}" alt="{{_(config.THEME_SITENAME)}}" class="logo"/>
@@ -36,7 +36,7 @@
       </div>
       <div class="row justify-content-center">
           <div class="col-sm-12 col-lg-8 text-right my-4">
-            <form class="justify-content-end" action="{{ url_for('documents.search', view=view_code) }}" role="search">
+            <form class="justify-content-end" action="{{ url_for('documents.search', view=view_code if g.get('organisation', {}).get('isDedicated') else config.SONAR_APP_DEFAULT_ORGANISATION) }}" role="search">
               <div class="row">
                 <div class="col-12 col-sm-11">
                     <input class="form-control form-control-lg mr-2" type="search" placeholder="{{_('Search publications, authors, projects, ...')}}" aria-label="Search" name="q">
@@ -56,6 +56,7 @@
 <div class="bg-secondary text-light text-center py-2">
   <h6 class="m-0">{{ _('Software under development!') }}</h6>
 </div>
+{% include 'sonar/partial/organisation.html' %}
 {% endblock %}
 
 {%- block body %}

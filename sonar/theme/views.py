@@ -189,6 +189,36 @@ def schemas(record_type):
         abort(404)
 
 
+@blueprint.app_template_filter()
+def record_image_url(record, key=None):
+    """Get image URL for a record.
+
+    :param files: Liste of files of the record.
+    :param key: The key of the file to be rendered, if no key, takes the first.
+    :returns: Image url corresponding to key, or the first one.
+    """
+    if not record.get('_files'):
+        return None
+
+    def image_url(file):
+        """Return image URL for a file.
+
+        :param file: File to get the URL from.
+        :returns: URL of the file.
+        """
+        return '/api/files/{bucket}/{key}'.format(key=file['key'],
+                                                  bucket=file['bucket'])
+
+    for file in record['_files']:
+        if re.match(r'^.*\.(jpe?g|png|gif|svg)$',
+                    file['key'],
+                    flags=re.IGNORECASE):
+            if not key or file['key'] == key:
+                return image_url(file)
+
+    return None
+
+
 def prepare_schema(schema):
     """Prepare schema before sending it."""
     # Recursively translate properties in schema

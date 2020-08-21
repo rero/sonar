@@ -22,6 +22,8 @@ from flask import url_for
 from invenio_accounts.testutils import login_user_via_session, \
     login_user_via_view
 
+from sonar.theme.views import record_image_url
+
 
 def test_error(client):
     """Test error page"""
@@ -184,3 +186,35 @@ def test_profile(client, user):
     # Wrong PID
     res = client.get(url_for('sonar.profile', pid='wrong'))
     assert res.status_code == 403
+
+
+def test_record_image_url():
+    """Test getting record image url."""
+    # No file key
+    assert not record_image_url({})
+
+    # No files
+    assert not record_image_url({'_files': []})
+
+    # No images
+    assert not record_image_url(
+        {'_files': [{
+            'bucket': '1234',
+            'key': 'test.pdf'
+        }]})
+
+    record = {
+        '_files': [{
+            'bucket': '1234',
+            'key': 'test.jpg'
+        }, {
+            'bucket': '1234',
+            'key': 'test2.jpg'
+        }]
+    }
+
+    # Take the first file
+    assert record_image_url(record) == '/api/files/1234/test.jpg'
+
+    # Take files corresponding to key
+    assert record_image_url(record, 'test2.jpg') == '/api/files/1234/test2.jpg'
