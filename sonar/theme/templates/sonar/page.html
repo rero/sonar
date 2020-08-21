@@ -95,7 +95,9 @@
       {%- block body_inner %}
           <header>
               {% include 'sonar/partial/navbar.html' %}
-              {%- block header %}{%- endblock header %}
+              {%- block header %}
+              {% include 'sonar/partial/organisation.html' %}
+              {%- endblock header %}
           </header>
 
         <div class="container my-5">

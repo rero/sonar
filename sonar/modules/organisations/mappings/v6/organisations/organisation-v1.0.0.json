@@ -11,6 +11,9 @@
         "pid": {
           "type": "keyword"
         },
+        "description": {
+          "type": "text"
+        },
         "code": {
           "type": "keyword"
         },

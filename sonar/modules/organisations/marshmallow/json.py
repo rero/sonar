@@ -41,6 +41,7 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
     pid = PersistentIdentifier()
     code = SanitizedUnicode(required=True)
     name = SanitizedUnicode(required=True)
+    description = SanitizedUnicode()
     isShared = fields.Boolean()
     isDedicated = fields.Boolean()
     # When loading, if $schema is not provided, it's retrieved by
@@ -50,6 +51,8 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
                          data_key="$schema",
                          deserialize=schema_from_organisation)
     permissions = fields.Dict(dump_only=True)
+    _files = fields.List(fields.Dict())
+    _bucket = SanitizedUnicode()
 
     @pre_dump
     def add_permissions(self, item):

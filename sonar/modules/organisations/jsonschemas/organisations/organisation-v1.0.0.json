@@ -34,6 +34,18 @@
       "type": "string",
       "minLength": 1
     },
+    "description": {
+      "title": "Description",
+      "description": "HTML markup admitted.",
+      "type": "string",
+      "minLength": 1,
+      "form": {
+        "type": "textarea",
+        "templateOptions": {
+          "rows": 5
+        }
+      }
+    },
     "isShared": {
       "title": "Is shared",
       "description": "Organisation records can be accessed by a specific URL.",
@@ -48,11 +60,67 @@
       "form": {
         "hideExpression": "!field.model.isShared"
       }
+    },
+    "_bucket": {
+      "title": "Bucket UUID",
+      "type": "string",
+      "minLength": 1
+    },
+    "_files": {
+      "title": "Files",
+      "description": "List of files attached to the record.",
+      "type": "array",
+      "items": {
+        "title": "File item",
+        "description": "Describes the information of a single file in the record.",
+        "additionalProperties": false,
+        "type": "object",
+        "properties": {
+          "bucket": {
+            "title": "Bucket UUID",
+            "type": "string",
+            "minLength": 1
+          },
+          "file_id": {
+            "title": "File UUID",
+            "type": "string",
+            "minLength": 1
+          },
+          "version_id": {
+            "title": "Version UUID",
+            "type": "string",
+            "minLength": 1
+          },
+          "key": {
+            "title": "Key",
+            "type": "string",
+            "minLength": 1
+          },
+          "checksum": {
+            "title": "Checksum",
+            "description": "MD5 checksum of the file.",
+            "type": "string",
+            "minLength": 1
+          },
+          "size": {
+            "title": "Size",
+            "description": "Size of the file in bytes.",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "bucket",
+          "file_id",
+          "version_id",
+          "key"
+        ]
+      }
     }
   },
   "propertiesOrder": [
     "code",
     "name",
+    "description",
     "isShared",
     "isDedicated"
   ],

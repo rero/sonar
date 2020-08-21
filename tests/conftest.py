@@ -90,7 +90,7 @@ def app_config(app_config):
 
 
 @pytest.fixture
-def make_organisation(app, db):
+def make_organisation(app, db, bucket_location):
     """Factory for creating organisation."""
 
     def _make_organisation(code):

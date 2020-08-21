@@ -1,0 +1,41 @@
+{% if g.get('organisation') and not g.organisation['isDedicated'] %}
+<div class="bg-light py-4">
+  <div class="container">
+    <div class="row justify-content-center">
+      {% set thumbnail = g.organisation | record_image_url %}
+      {% if thumbnail %}
+      <div class="col-6 col-lg-2">
+        <img src="{{ thumbnail }}" alt="{{ g.organisation.name }}" class="img-fluid">
+      </div>
+      {% endif %}
+      <div class="col-12 col-lg-{{ '10' if thumbnail else '12' }}">
+        <h1 class="mb-2">{{ g.organisation.name }}</h1>
+        {% if g.organisation.get('description') %}
+        <p class="mb-3 text-justify">{{ g.organisation.description | nl2br | safe }}</p>
+        {% endif %}
+        <div class="row">
+          <div class="col-12 col-lg-4">
+            <form action="{{ url_for('documents.search', view=view_code) }}" role="search">
+              <div class="input-group mb-2">
+                <input type="text" name="q" value="{{ request.args.get('q', '') }}" class="form-control"
+                  id="inlineFormInputGroup" placeholder="{{ _('Search') }}">
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-primary mb-2">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col text-right">
+            <a href="{{url_for('documents.index', view=config.SONAR_APP_DEFAULT_ORGANISATION)}}"
+              class="btn btn-outline-primary">
+              {{_('Back to SONAR')}}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}

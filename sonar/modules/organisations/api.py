@@ -17,7 +17,6 @@
 
 """Organisation Api."""
 
-
 from functools import partial
 
 from werkzeug.local import LocalProxy
@@ -33,11 +32,8 @@ current_organisation = LocalProxy(
     lambda: OrganisationRecord.get_organisation_by_user(current_user_record))
 
 # provider
-OrganisationProvider = type(
-    'OrganisationProvider',
-    (Provider,),
-    dict(pid_type='org')
-)
+OrganisationProvider = type('OrganisationProvider', (Provider, ),
+                            dict(pid_type='org'))
 # minter
 organisation_pid_minter = partial(id_minter, provider=OrganisationProvider)
 # fetcher
@@ -61,6 +57,16 @@ class OrganisationRecord(SonarRecord):
     fetcher = organisation_pid_fetcher
     provider = OrganisationProvider
     schema = 'organisations/organisation-v1.0.0.json'
+
+    @classmethod
+    def create(cls, data, id_=None, dbcommit=False, with_bucket=True,
+               **kwargs):
+        """Create organisation record."""
+        return super(OrganisationRecord, cls).create(data,
+                                                     id_=id_,
+                                                     dbcommit=dbcommit,
+                                                     with_bucket=with_bucket,
+                                                     **kwargs)
 
     @classmethod
     def get_organisation_by_user(cls, user):
