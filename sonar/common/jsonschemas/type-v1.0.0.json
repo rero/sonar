@@ -274,6 +274,12 @@
         "label": "document_type_coar:c_1843",
         "value": "coar:c_1843"
       }
-    ]
+    ],
+    "templateOptions": {
+      "cssClass": "editor-title"
+    },
+    "expressionProperties": {
+      "templateOptions.required": "true"
+    }
   }
 }
