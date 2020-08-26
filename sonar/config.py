@@ -29,7 +29,7 @@ import os
 from datetime import timedelta
 
 from invenio_oauthclient.contrib import orcid
-from invenio_records_rest.facets import range_filter, terms_filter
+from invenio_records_rest.facets import range_filter
 
 from sonar.modules.deposits.api import DepositRecord, DepositSearch
 from sonar.modules.deposits.permissions import DepositPermission
@@ -40,6 +40,7 @@ from sonar.modules.organisations.api import OrganisationRecord, \
 from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import record_permission_factory, \
     wiki_edit_permission
+from sonar.modules.query import and_term_filter
 from sonar.modules.users.api import UserRecord, UserSearch
 from sonar.modules.users.permissions import UserPermission
 from sonar.modules.utils import get_current_language
@@ -448,19 +449,19 @@ RECORDS_REST_FACETS = {
         ))),
          filters={
              'organisation':
-             terms_filter('organisation.pid'),
+             and_term_filter('organisation.pid'),
              'language':
-             terms_filter('language.value'),
+             and_term_filter('language.value'),
              'subject':
-             terms_filter('facet_subjects'),
+             and_term_filter('facet_subjects'),
              'specific_collection':
-             terms_filter('specificCollections'),
+             and_term_filter('specificCollections'),
              'document_type':
-             terms_filter('documentType'),
+             and_term_filter('documentType'),
              'controlled_affiliation':
-             terms_filter('contribution.controlledAffiliation.raw'),
+             and_term_filter('contribution.controlledAffiliation.raw'),
              'author':
-             terms_filter('contribution.agent.preferred_name.raw'),
+             and_term_filter('contribution.agent.preferred_name.raw'),
              'year':
              range_filter('provisionActivity.startDate',
                           format='yyyy',
@@ -471,10 +472,10 @@ RECORDS_REST_FACETS = {
                    user=dict(terms=dict(field='user.full_name.keyword')),
                    contributor=dict(terms=dict(field='facet_contributors'))),
          filters={
-             _('pid'): terms_filter('pid'),
-             _('status'): terms_filter('status'),
-             _('user'): terms_filter('user.full_name.keyword'),
-             _('contributor'): terms_filter('facet_contributors'),
+             _('pid'): and_term_filter('pid'),
+             _('status'): and_term_filter('status'),
+             _('user'): and_term_filter('user.full_name.keyword'),
+             _('contributor'): and_term_filter('facet_contributors'),
          })
 }
 """REST search facets."""
@@ -482,14 +483,14 @@ RECORDS_REST_FACETS = {
 RECORDS_REST_SORT_OPTIONS = dict(documents=dict(
     bestmatch=dict(
         title=_('Best match'),
-        fields=['_score'],
-        default_order='desc',
+        fields=['-_score'],
+        default_order='asc',
         order=2,
     ),
     mostrecent=dict(
         title=_('Most recent'),
         fields=['-_created'],
-        default_order='asc',
+        default_order='desc',
         order=1,
     ),
 ))

@@ -11,7 +11,7 @@
           "type": "keyword"
         },
         "full_name": {
-          "type": "keyword"
+          "type": "text"
         },
         "birth_date": {
           "type": "date"

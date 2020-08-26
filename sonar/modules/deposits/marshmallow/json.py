@@ -79,3 +79,4 @@ class DepositSchemaV1(StrictKeysMixin):
     created = fields.Str(dump_only=True)
     updated = fields.Str(dump_only=True)
     links = fields.Dict(dump_only=True)
+    explanation = fields.Raw(dump_only=True)

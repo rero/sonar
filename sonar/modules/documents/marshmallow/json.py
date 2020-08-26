@@ -207,3 +207,4 @@ class DocumentSchemaV1(StrictKeysMixin):
 
     metadata = fields.Nested(DocumentMetadataSchemaV1)
     links = fields.Dict(dump_only=True)
+    explanation = fields.Raw(dump_only=True)

@@ -75,3 +75,4 @@ class OrganisationSchemaV1(StrictKeysMixin):
     updated = fields.Str(dump_only=True)
     links = fields.Dict(dump_only=True)
     id = PersistentIdentifier()
+    explanation = fields.Raw(dump_only=True)

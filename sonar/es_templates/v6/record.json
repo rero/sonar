@@ -12,12 +12,13 @@
         }
       },
       "analyzer": {
-        "global_lowercase_asciifolding": {
+        "default": {
           "type": "custom",
           "tokenizer": "char_group_tokenizer",
           "filter": [
             "lowercase",
-            "asciifolding"
+            "icu_folding",
+            "german_normalization"
           ]
         }
       }
