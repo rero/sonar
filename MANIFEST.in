@@ -44,6 +44,7 @@ include babel.ini
 include docker/haproxy/Dockerfile
 include docker/nginx/Dockerfile
 include docker/postgres/Dockerfile
+include docker/elasticsearch/Dockerfile
 include pytest.ini
 include scripts/bootstrap
 include scripts/console

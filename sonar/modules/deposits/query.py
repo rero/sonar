@@ -18,9 +18,9 @@
 """Query for deposits."""
 
 from flask import current_app
-from invenio_records_rest.query import es_search_factory
 
 from sonar.modules.organisations.api import current_organisation
+from sonar.modules.query import default_search_factory
 from sonar.modules.users.api import current_user_record
 
 
@@ -31,7 +31,7 @@ def search_factory(self, search, query_parser=None):
     :param query_parser: Url arguments.
     :returns: Tuple with search instance and URL arguments.
     """
-    search, urlkwargs = es_search_factory(self, search)
+    search, urlkwargs = default_search_factory(self, search)
 
     if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
         return (search, urlkwargs)

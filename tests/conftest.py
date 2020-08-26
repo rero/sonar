@@ -278,6 +278,9 @@ def document_json(app, db, bucket_location, organisation):
         'abstracts': [{
             'language': 'eng',
             'value': 'Abstract of the document'
+        }, {
+            'language': 'fre',
+            'value': 'Résumé'
         }],
         'subjects': [{
             'label': {

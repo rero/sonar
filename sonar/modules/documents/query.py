@@ -17,11 +17,39 @@
 
 """Query for documents."""
 
+from elasticsearch_dsl.query import Q
 from flask import current_app, request
-from invenio_records_rest.query import es_search_factory
 
 from sonar.modules.organisations.api import current_organisation
+from sonar.modules.query import default_search_factory, \
+    get_operator_and_query_type
 from sonar.modules.users.api import current_user_record
+
+FIELDS = [
+    '_bucket', '_files.*', 'pid', 'organisation.*', 'title.*^3',
+    'editionStatement.*', 'provisionActivity.*', 'extent',
+    'otherMaterialCharacteristics', 'formats', 'additionalMaterials',
+    'series.*', 'notes', 'abstracts.*', 'identifiedBy.*', 'subjects.*',
+    'otherEdition.*', 'classification.*', 'contentNote', 'dissertation.*',
+    'usageAndAccessPolicy', 'contribution.*', 'partOf.*'
+]
+
+
+def documents_query_parser(qstr=None):
+    """Custom query parser for documents."""
+    if not qstr:
+        return Q()
+
+    operator, query_type = get_operator_and_query_type(qstr)
+
+    return Q(query_type,
+             query=qstr,
+             default_operator=operator,
+             fields=FIELDS,
+             lenient=True)
+    # lenient property is necessary to make it wildcards working, see
+    # https://github.com/elastic/elasticsearch/issues/39577#issuecomment-468751713
+    # for more details.
 
 
 def search_factory(self, search, query_parser=None):
@@ -31,7 +59,8 @@ def search_factory(self, search, query_parser=None):
     :param query_parser: Url arguments.
     :returns: Tuple with search instance and URL arguments.
     """
-    search, urlkwargs = es_search_factory(self, search)
+    search, urlkwargs = default_search_factory(self, search,
+                                               documents_query_parser)
 
     if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
         return (search, urlkwargs)

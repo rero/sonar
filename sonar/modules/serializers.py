@@ -28,6 +28,21 @@ from invenio_records_rest.serializers.json import \
 class JSONSerializer(_JSONSerializer):
     """JSON serializer for SONAR."""
 
+    @staticmethod
+    def preprocess_search_hit(pid, record_hit, links_factory=None, **kwargs):
+        """Prepare a record hit from Elasticsearch for serialization."""
+        record = super(JSONSerializer, JSONSerializer).preprocess_search_hit(
+            pid=pid,
+            record_hit=record_hit,
+            links_factory=links_factory,
+            kwargs=kwargs)
+
+        # Adds explanation of how elasticsearch attributes relevances on hits.
+        if record_hit.get('_explanation'):
+            record['explanation'] = record_hit.get('_explanation')
+
+        return record
+
     def preprocess_record(self, pid, record, links_factory=None, **kwargs):
         """Prepare record for serialization."""
         if request and request.args.get('resolve') == '1':
@@ -43,8 +58,12 @@ class JSONSerializer(_JSONSerializer):
         """Post process the search results."""
         return results
 
-    def serialize_search(self, pid_fetcher, search_result, links=None,
-                         item_links_factory=None, **kwargs):
+    def serialize_search(self,
+                         pid_fetcher,
+                         search_result,
+                         links=None,
+                         item_links_factory=None,
+                         **kwargs):
         """Serialize a search result.
 
         :param pid_fetcher: Persistent identifier fetcher.
@@ -53,20 +72,22 @@ class JSONSerializer(_JSONSerializer):
         """
         results = dict(
             hits=dict(
-                hits=[self.transform_search_hit(
-                    pid_fetcher(hit['_id'], hit['_source']),
-                    hit,
-                    links_factory=item_links_factory,
-                    **kwargs
-                ) for hit in search_result['hits']['hits']],
+                hits=[
+                    self.transform_search_hit(pid_fetcher(
+                        hit['_id'], hit['_source']),
+                                              hit,
+                                              links_factory=item_links_factory,
+                                              **kwargs)
+                    for hit in search_result['hits']['hits']
+                ],
                 total=search_result['hits']['total'],
             ),
             links=links or {},
             aggregations=search_result.get('aggregations', dict()),
         )
         return json.dumps(
-            self.post_process_serialize_search(
-                results, pid_fetcher), **self._format_args())
+            self.post_process_serialize_search(results, pid_fetcher),
+            **self._format_args())
 
 
 def schema_from_context(_, context, data, schema):

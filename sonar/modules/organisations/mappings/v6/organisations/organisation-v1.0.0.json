@@ -5,8 +5,7 @@
       "numeric_detection": false,
       "properties": {
         "$schema": {
-          "type": "text",
-          "index": false
+          "type": "keyword"
         },
         "pid": {
           "type": "keyword"

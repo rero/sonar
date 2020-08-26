@@ -39,7 +39,7 @@ def test_list(app, client, make_user, superuser, admin, moderator, submitter,
     assert res.json['hits']['total'] == 6
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
 
-    # Logged as user
+    # # Logged as user
     login_user_via_session(client, email=user['email'])
     res = client.get(url_for('invenio_records_rest.user_list'))
     assert res.status_code == 200
@@ -48,14 +48,14 @@ def test_list(app, client, make_user, superuser, admin, moderator, submitter,
     # Test search email, no result
     res = client.get(
         url_for('invenio_records_rest.user_list',
-                q='email:"test@gmail.com"%20NOT%20pid:3'))
+                q='email:test@gmail.com NOT pid:orguser'))
     assert res.status_code == 200
     assert res.json['hits']['total'] == 0
 
     # Test search email, existing email
     res = client.get(
         url_for('invenio_records_rest.user_list',
-                q='email:"orgadmin@rero.ch"%20NOT%20pid:3'))
+                q='email:orgadmin@rero.ch NOT pid:orguser'))
     assert res.status_code == 200
     assert res.json['hits']['total'] == 1
     assert not res.json['hits']['hits'][0]['metadata'].get('email')
