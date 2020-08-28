@@ -258,6 +258,7 @@
         "otherLanguageTitle",
         "language",
         "documentDate",
+        "identifiedBy",
         "publication",
         "dissertation",
         "otherElectronicVersions",
@@ -297,6 +298,11 @@
             "language": {
               "$ref": "language-v1.0.0.json"
             }
+          },
+          "form": {
+            "templateOptions": {
+              "cssClass": "editor-title"
+            }
           }
         },
         "language": {
@@ -310,6 +316,201 @@
           "pattern": "^[0-9]{4}(-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]))?$",
           "form": {
             "placeholder": "Example: 2019 or 2019-05-05"
+          }
+        },
+        "identifiedBy": {
+          "title": "Identifiers",
+          "type": "array",
+          "items": {
+            "title": "Identifier",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "key": "identified_by_type",
+                "title": "Type",
+                "type": "string",
+                "enum": [
+                  "bf:AudioIssueNumber",
+                  "bf:Doi",
+                  "bf:Ean",
+                  "bf:Gtin14Number",
+                  "bf:Identifier",
+                  "bf:Isan",
+                  "bf:Isbn",
+                  "bf:Ismn",
+                  "bf:Isrc",
+                  "bf:Issn",
+                  "bf:Local",
+                  "bf:IssnL",
+                  "bf:MatrixNumber",
+                  "bf:MusicDistributorNumber",
+                  "bf:MusicPlate",
+                  "bf:MusicPublisherNumber",
+                  "bf:PublisherNumber",
+                  "bf:Upc",
+                  "bf:Urn",
+                  "bf:VideoRecordingNumber",
+                  "uri",
+                  "bf:ReportNumber",
+                  "bf:Strn",
+                  "pmid"
+                ],
+                "form": {
+                  "options": [
+                    {
+                      "label": "bf:Doi",
+                      "value": "bf:Doi"
+                    },
+                    {
+                      "label": "pmid",
+                      "value": "pmid"
+                    },
+                    {
+                      "label": "bf:Isbn",
+                      "value": "bf:Isbn"
+                    },
+                    {
+                      "label": "bf:AudioIssueNumber",
+                      "value": "bf:AudioIssueNumber",
+                      "group": "------------"
+                    },
+
+                    {
+                      "label": "bf:Ean",
+                      "value": "bf:Ean",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "bf:Gtin14Number",
+                      "value": "bf:Gtin14Number",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "bf:Identifier",
+                      "value": "bf:Identifier",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "bf:Isan",
+                      "value": "bf:Isan",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "bf:Ismn",
+                      "value": "bf:Ismn",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "bf:Isrc",
+                      "value": "bf:Isrc",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "bf:Issn",
+                      "value": "bf:Issn",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "bf:IssnL",
+                      "value": "bf:IssnL",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "bf:Local",
+                      "value": "bf:Local",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "bf:MatrixNumber",
+                      "value": "bf:MatrixNumber",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "bf:MusicDistributorNumber",
+                      "value": "bf:MusicDistributorNumber",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "bf:MusicPlate",
+                      "value": "bf:MusicPlate",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "bf:MusicPublisherNumber",
+                      "value": "bf:MusicPublisherNumber",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "bf:PublisherNumber",
+                      "value": "bf:PublisherNumber",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "bf:Upc",
+                      "value": "bf:Upc",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "bf:Urn",
+                      "value": "bf:Urn",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "bf:VideoRecordingNumber",
+                      "value": "bf:VideoRecordingNumber",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "uri",
+                      "value": "uri",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "bf:ReportNumber",
+                      "value": "bf:ReportNumber",
+                      "group": "------------"
+                    },
+                    {
+                      "label": "bf:Strn",
+                      "value": "bf:Strn",
+                      "group": "------------"
+                    }
+                  ]
+                }
+              },
+              "value": {
+                "key": "identified_by_value",
+                "title": "Value",
+                "type": "string",
+                "minLength": 1
+              },
+              "source": {
+                "title": "Source",
+                "type": "string",
+                "minLength": 1,
+                "form": {
+                  "expressionProperties": {
+                    "templateOptions.required": "model.type === 'bf:Local'"
+                  },
+                  "hideExpression": "model.type !== 'bf:Local'"
+                }
+              }
+            },
+            "propertiesOrder": [
+              "type",
+              "value",
+              "source"
+            ],
+            "required": [
+              "type",
+              "value"
+            ]
+          },
+          "form": {
+            "templateOptions": {
+              "cssClass": "editor-title"
+            }
           }
         },
         "publication": {
@@ -345,13 +546,17 @@
               "title": "Volume",
               "type": "string",
               "minLength": 1,
-              "hideExpression": "!['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)"
+              "form": {
+                "hideExpression": "!['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)"
+              }
             },
             "number": {
               "title": "Number",
               "type": "string",
               "minLength": 1,
-              "hideExpression": "!['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)"
+              "form": {
+                "hideExpression": "!['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)"
+              }
             },
             "pages": {
               "title": "Pages",
@@ -378,7 +583,12 @@
               "minLength": 1
             }
           },
-          "hideExpression": "!['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)"
+          "form": {
+            "hideExpression": "!['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)",
+            "templateOptions": {
+              "cssClass": "editor-title"
+            }
+          }
         },
         "otherElectronicVersions": {
           "title": "Other electronic versions",
@@ -407,6 +617,11 @@
                 "pattern": "^https?://.+"
               }
             }
+          },
+          "form": {
+            "templateOptions": {
+              "cssClass": "editor-title"
+            }
           }
         },
         "specificCollections": {
@@ -416,6 +631,11 @@
           "items": {
             "type": "string",
             "minLength": 1
+          },
+          "form": {
+            "templateOptions": {
+              "cssClass": "editor-title"
+            }
           }
         },
         "classification": {
@@ -450,6 +670,11 @@
                 }
               }
             }
+          },
+          "form": {
+            "templateOptions": {
+              "cssClass": "editor-title"
+            }
           }
         },
         "subjects": {
@@ -481,6 +706,11 @@
                   "minLength": 1
                 }
               }
+            }
+          },
+          "form": {
+            "templateOptions": {
+              "cssClass": "editor-title"
             }
           }
         },
@@ -522,7 +752,12 @@
           "required": [
             "degree"
           ],
-          "hideExpression": "!['coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'habilitation_thesis', 'advanced_studies_thesis', 'other'].includes(field.parent.model.documentType)"
+          "form": {
+            "hideExpression": "!['coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'habilitation_thesis', 'advanced_studies_thesis', 'other'].includes(field.parent.model.documentType)",
+            "templateOptions": {
+              "cssClass": "editor-title"
+            }
+          }
         }
       }
     },
