@@ -473,7 +473,18 @@ def deposit_json():
                 'grantingInstitution': 'Università della Svizzera italiana',
                 'date': '2010-12-01',
                 'jury_note': 'Jury note'
-            }
+            },
+            'identifiedBy': [{
+                'type': 'pmid',
+                'value': '123456'
+            }, {
+                'type': 'bf:Local',
+                'value': '9999',
+                'source': 'RERO'
+            }, {
+                'type': 'bf:Doi',
+                'value': '10.1038/nphys1170'
+            }]
         },
         'status':
         'in_progress',

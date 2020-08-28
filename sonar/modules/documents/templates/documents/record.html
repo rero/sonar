@@ -186,6 +186,26 @@
         </dd>
         {% endif %}
 
+        <!-- IDENTIFIED BY -->
+        {% if record.identifiedBy %}
+        <dt class="col-lg-3">
+          {{ _('Identifiers') }}
+        </dt>
+        <dd class="col-lg-9">
+          <ul class="list-unstyled mb-0">
+            {% for identifier in record.identifiedBy %}
+            <li>
+              <span class="badge badge-secondary text-light mr-1">{{ _(identifier.type) }}</span>
+              {{ identifier.value }}
+              {% if identifier.source %}
+              <i class="text-muted ml-1">{{ identifier.source }}</i>
+              {% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+        </dd>
+        {% endif %}
+
         <!-- CLASSIFICATION -->
         {% if record.classification and record.classification | length > 0 %}
         {% for classification in record.classification %}

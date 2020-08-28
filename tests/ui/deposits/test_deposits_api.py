@@ -116,6 +116,19 @@ def test_create_document(app, client, deposit, user):
         'jury_note': 'Jury note'
     }
 
+    assert document['identifiedBy'] == [{
+        'type': 'bf:Local',
+        'value': '123456',
+        'source': 'PMID'
+    }, {
+        'type': 'bf:Local',
+        'value': '9999',
+        'source': 'RERO'
+    }, {
+        'type': 'bf:Doi',
+        'value': '10.1038/nphys1170'
+    }]
+
     assert document.files['main.pdf']['restricted'] == 'organisation'
     assert document.files['main.pdf']['embargo_date'] == '2021-01-01'
     assert len(document.files) == 6

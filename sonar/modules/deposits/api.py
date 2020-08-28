@@ -227,6 +227,28 @@ class DepositRecord(SonarRecord):
                 }
             } for subject in self['metadata']['subjects']]
 
+        # Identifiers
+        identifiers = []
+        if self['metadata'].get('identifiedBy'):
+            for identifier in self['metadata']['identifiedBy']:
+                data = {
+                    'type': identifier['type'],
+                    'value': identifier['value'],
+                }
+
+                if identifier.get('source'):
+                    data['source'] = identifier['source']
+
+                # Special for PMID
+                if identifier['type'] == 'pmid':
+                    data['source'] = 'PMID'
+                    data['type'] = 'bf:Local'
+
+                identifiers.append(data)
+
+        if identifiers:
+            metadata['identifiedBy'] = identifiers
+
         # Contributors
         contributors = []
         for contributor in self['contributors']:
