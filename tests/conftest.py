@@ -44,8 +44,8 @@ def es(appctx):
     should used the function-scoped :py:data:`es_clear` fixture to leave the
     indexes clean for the following tests.
     """
-    from invenio_search.errors import IndexAlreadyExistsError
     from invenio_search import current_search, current_search_client
+    from invenio_search.errors import IndexAlreadyExistsError
 
     try:
         list(current_search.put_templates())

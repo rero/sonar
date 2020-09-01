@@ -17,10 +17,12 @@
 # removed when https://github.com/pyupio/safety-db/pull/2274 is merged and
 # released.
 
+SCRIPT_PATH=$(dirname "$0")
+
 # TODO: Use pipenv check when it will be available again
 pipenv run safety check && \
 pipenv run pydocstyle sonar tests docs && \
-pipenv run isort -rc -c -df && \
+pipenv run isort --check-only --diff "${SCRIPT_PATH}" && \
 pipenv run check-manifest --ignore ".travis-*,docs/_build*" && \
 pipenv run sphinx-build -qnNW docs docs/_build/html && \
 pipenv run test
