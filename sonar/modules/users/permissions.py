@@ -82,6 +82,9 @@ class UserPermission(RecordPermission):
         user = UserRecord.get_record_by_pid(record['pid'])
         user = user.replace_refs()
 
+        if not user.get('organisation'):
+            return True
+
         return current_organisation['pid'] == user['organisation']['pid']
 
     @classmethod
@@ -113,6 +116,9 @@ class UserPermission(RecordPermission):
 
         # Cannot delete himself
         if current_user_record['pid'] == record['pid']:
+            return False
+
+        if not record.get('organisation'):
             return False
 
         # For admin read is only for logged user organisation

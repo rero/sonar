@@ -140,10 +140,10 @@ def make_user(app, db, make_organisation):
     """Factory for creating user."""
 
     def _make_user(role_name, organisation='org'):
-        make_organisation(organisation)
-
         name = role_name
+
         if organisation:
+            make_organisation(organisation)
             name = organisation + name
 
         email = '{name}@rero.ch'.format(name=name)
@@ -174,19 +174,21 @@ def make_user(app, db, make_organisation):
                               user=user))
         db.session.commit()
 
-        record = UserRecord.create(
-            {
-                'pid': name,
-                'email': email,
-                'full_name': name,
-                'role': role_name,
-                'organisation': {
-                    '$ref':
-                    'https://sonar.ch/api/organisations/{organisation}'.format(
-                        organisation=organisation)
-                }
-            },
-            dbcommit=True)
+        data = {
+            'pid': name,
+            'email': email,
+            'full_name': name,
+            'role': role_name
+        }
+
+        if organisation:
+            data['organisation'] = {
+                '$ref':
+                'https://sonar.ch/api/organisations/{organisation}'.format(
+                    organisation=organisation)
+            }
+
+        record = UserRecord.create(data, dbcommit=True)
         record.reindex()
         db.session.commit()
 
