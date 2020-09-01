@@ -93,11 +93,7 @@ def test_create(client, organisation, superuser, admin, moderator, submitter,
         'Accept': 'application/json'
     }
 
-    user_json = {
-        'email': 'user@rero.ch',
-        'full_name': 'User',
-        'role': 'user'
-    }
+    user_json = {'email': 'user@rero.ch', 'full_name': 'User', 'role': 'user'}
 
     # Not logged
     res = client.post(url_for('invenio_records_rest.user_list'),
@@ -238,6 +234,18 @@ def test_read(client, make_user, superuser, admin, moderator, submitter, user):
     assert res.status_code == 200
     assert res.json['metadata']['permissions'] == {
         'delete': True,
+        'read': True,
+        'update': True
+    }
+
+    # Test user without associated organisation
+    new_user = make_user('user', None)
+    login_user_via_session(client, email=admin['email'])
+    res = client.get(
+        url_for('invenio_records_rest.user_item', pid_value=new_user['pid']))
+    assert res.status_code == 200
+    assert res.json['metadata']['permissions'] == {
+        'delete': False,
         'read': True,
         'update': True
     }
