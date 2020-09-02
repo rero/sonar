@@ -1,0 +1,14 @@
+<p>{{ _('Dear %(email)s', email=user.email) }},</p>
+
+{% if security.confirmable %}
+<p>
+  {{ _('Please confirm your e-mail by clicking here') }}: <a href="{{ confirmation_link }}">{{ _('Confirm e-mail') }}</a>
+</p>
+{% endif %}
+<p>{{ _('To be able to deposit publications, you must be registered against a SONAR institution. For now, your account does not provide additional features, but in the future you will be able to create document lists and save requests.') }}</p>
+<p>{{ _('Best regards') }}</p>
+<p>{{ _('The SONAR team at RERO') }}</p>
+
+{{ _('E-mail') }}: <a href="mailto:info.sonar@rero.ch">info.sonar@rero.ch</a><br>
+<a href="https://www.sonar.ch/" target="_blank">https://www.sonar.ch/</a><br>
+<a href="https://www.rero.ch" target="_blank">https://www.rero.ch</a>
