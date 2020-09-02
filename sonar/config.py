@@ -116,7 +116,8 @@ COLLECT_STORAGE = 'flask_collect.storage.file'
 #: Email address used as sender of account registration emails.
 SECURITY_EMAIL_SENDER = SUPPORT_EMAIL
 #: Email subject for account registration emails.
-SECURITY_EMAIL_SUBJECT_REGISTER = _("Welcome to Swiss Open Access Repository!")
+SECURITY_EMAIL_SUBJECT_REGISTER = _(
+    'Welcome to SONAR, the Swiss Open Access Repository!')
 #: Redis session storage URL.
 ACCOUNTS_SESSION_REDIS_URL = 'redis://localhost:6379/1'
 #: Enable session/user id request tracing. This feature will add X-Session-ID
@@ -453,8 +454,7 @@ RECORDS_REST_FACETS = {
         document_type=dict(terms=dict(field='documentType')),
         controlled_affiliation=dict(terms=dict(
             field='contribution.controlledAffiliation.raw')),
-        author=dict(terms=dict(
-            field='contribution.agent.preferred_name.raw')),
+        author=dict(terms=dict(field='contribution.agent.preferred_name.raw')),
         year=dict(date_histogram=dict(
             field='provisionActivity.startDate',
             interval='year',
