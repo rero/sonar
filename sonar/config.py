@@ -444,17 +444,27 @@ RECORDS_REST_ENDPOINTS = {
 }
 """REST endpoints."""
 
+DEFAULT_AGGREGATION_SIZE = 50
+"""Default size for aggregations."""
+
 RECORDS_REST_FACETS = {
     'documents':
     dict(aggs=dict(
-        organisation=dict(terms=dict(field='organisation.pid')),
-        language=dict(terms=dict(field='language.value')),
-        subject=dict(terms=dict(field='facet_subjects')),
-        specific_collection=dict(terms=dict(field='specificCollections')),
-        document_type=dict(terms=dict(field='documentType')),
-        controlled_affiliation=dict(terms=dict(
-            field='contribution.controlledAffiliation.raw')),
-        author=dict(terms=dict(field='contribution.agent.preferred_name.raw')),
+        organisation=dict(terms=dict(field='organisation.pid',
+                                     size=DEFAULT_AGGREGATION_SIZE)),
+        language=dict(
+            terms=dict(field='language.value', size=DEFAULT_AGGREGATION_SIZE)),
+        subject=dict(
+            terms=dict(field='facet_subjects', size=DEFAULT_AGGREGATION_SIZE)),
+        specific_collection=dict(terms=dict(field='specificCollections',
+                                            size=DEFAULT_AGGREGATION_SIZE)),
+        document_type=dict(
+            terms=dict(field='documentType', size=DEFAULT_AGGREGATION_SIZE)),
+        controlled_affiliation=dict(
+            terms=dict(field='contribution.controlledAffiliation.raw',
+                       size=DEFAULT_AGGREGATION_SIZE)),
+        author=dict(terms=dict(field='contribution.agent.preferred_name.raw',
+                               size=DEFAULT_AGGREGATION_SIZE)),
         year=dict(date_histogram=dict(
             field='provisionActivity.startDate',
             interval='year',
@@ -481,9 +491,12 @@ RECORDS_REST_FACETS = {
                           end_date_math='/y')
          }),
     'deposits':
-    dict(aggs=dict(status=dict(terms=dict(field='status')),
-                   user=dict(terms=dict(field='user.full_name.keyword')),
-                   contributor=dict(terms=dict(field='facet_contributors'))),
+    dict(aggs=dict(
+        status=dict(terms=dict(field='status', size=DEFAULT_AGGREGATION_SIZE)),
+        user=dict(terms=dict(field='user.full_name.keyword',
+                             size=DEFAULT_AGGREGATION_SIZE)),
+        contributor=dict(terms=dict(field='facet_contributors',
+                                    size=DEFAULT_AGGREGATION_SIZE))),
          filters={
              _('pid'): and_term_filter('pid'),
              _('status'): and_term_filter('status'),
