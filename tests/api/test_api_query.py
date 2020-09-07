@@ -22,7 +22,8 @@ from flask import url_for
 from invenio_accounts.testutils import login_user_via_session
 
 
-def test_api_query(client, document, document_json, make_document, superuser):
+def test_api_query(client, document_with_file, document_json, make_document,
+                   superuser):
     """Test simple flow using REST API."""
     headers = [('Content-Type', 'application/json')]
     login_user_via_session(client, email=superuser['email'])
@@ -91,6 +92,15 @@ def test_api_query(client, document, document_json, make_document, superuser):
                           headers=headers)
     assert response.status_code == 200
     assert response.json['hits']['total'] == 1
+
+    # Test search in fulltext
+    response = client.get(url_for('invenio_records_rest.doc_list',
+                                  q='fulltext:the',
+                                  debug=1),
+                          headers=headers)
+    assert response.status_code == 200
+    assert response.json['hits']['total'] == 1
+    assert len(response.json['hits']['hits'][0]['explanation']['details']) == 3
 
     # Not allowed operator
     with pytest.raises(Exception) as exception:
