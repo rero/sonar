@@ -17,6 +17,8 @@
 
 """Query for documents."""
 
+import re
+
 from elasticsearch_dsl.query import Q
 from flask import current_app, request
 
@@ -40,12 +42,21 @@ def documents_query_parser(qstr=None):
     if not qstr:
         return Q()
 
+    fields = FIELDS.copy()
+
+    # Special treatment for fulltext, we want to search in all fields and
+    # additionally in the fulltext field.
+    if 'fulltext:' in qstr:
+        result = re.match(r'^fulltext:(.*)$', qstr)
+        qstr = result.group(1)
+        fields.append('fulltext')
+
     operator, query_type = get_operator_and_query_type(qstr)
 
     return Q(query_type,
              query=qstr,
              default_operator=operator,
-             fields=FIELDS,
+             fields=fields,
              lenient=True)
     # lenient property is necessary to make it wildcards working, see
     # https://github.com/elastic/elasticsearch/issues/39577#issuecomment-468751713
