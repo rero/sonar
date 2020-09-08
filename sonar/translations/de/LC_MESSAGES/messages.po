@@ -10,17 +10,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
-"POT-Creation-Date: 2020-07-15 13:31+0200\n"
+"POT-Creation-Date: 2020-09-08 08:38+0200\n"
 "PO-Revision-Date: 2020-08-14 06:32+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
-"de/>\n"
 "Language: de\n"
+"Language-Team: German "
+"<https://hosted.weblate.org/projects/rero_plus/sonar/de/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.2-dev\n"
 "Generated-By: Babel 2.8.0\n"
 
 #, python-format
@@ -71,6 +70,9 @@ msgstr ""
 msgid "Best match"
 msgstr ""
 
+msgid "Best regards"
+msgstr ""
+
 msgid "Bucket UUID"
 msgstr ""
 
@@ -106,6 +108,9 @@ msgstr ""
 
 msgid "Comment"
 msgstr "Kommentar"
+
+msgid "Confirm e-mail"
+msgstr ""
 
 msgid "Content note"
 msgstr ""
@@ -146,6 +151,10 @@ msgstr "Geburtsdatum"
 msgid "Date of death"
 msgstr ""
 
+#, python-format
+msgid "Dear %(email)s"
+msgstr ""
+
 msgid "Degree"
 msgstr ""
 
@@ -159,6 +168,9 @@ msgid "Deposit to validate"
 msgstr "Deposit to validate"
 
 msgid "Describes the information of a single file in the record."
+msgstr ""
+
+msgid "Description"
 msgstr ""
 
 msgid "Designation"
@@ -181,10 +193,13 @@ msgstr ""
 
 msgid "Document is harvested or not, will disable record edition or similar."
 msgstr ""
-"Dokument wird gesammelt oder nicht ; dies deaktiviert die Bearbeitung der "
-"Ressource."
+"Dokument wird gesammelt oder nicht ; dies deaktiviert die Bearbeitung der"
+" Ressource."
 
 msgid "Document type"
+msgstr ""
+
+msgid "E-mail"
 msgstr ""
 
 msgid "Edition"
@@ -283,6 +298,12 @@ msgstr ""
 msgid "German"
 msgstr "Deutsch"
 
+msgid "Granting institution"
+msgstr ""
+
+msgid "HTML markup admitted."
+msgstr ""
+
 msgid "Harvested"
 msgstr "Gesammelt"
 
@@ -320,6 +341,9 @@ msgstr "Lieferung"
 
 msgid "Italian"
 msgstr "Italienisch"
+
+msgid "Jury note"
+msgstr ""
 
 msgid "Key"
 msgstr ""
@@ -436,6 +460,9 @@ msgstr "Telefonnummer mit Landsvorwahl, ohne Leerzeichen."
 
 msgid "Place"
 msgstr "Ort"
+
+msgid "Please confirm your e-mail by clicking here"
+msgstr ""
 
 msgid "Position"
 msgstr ""
@@ -618,6 +645,9 @@ msgid ""
 "public research institutions."
 msgstr ""
 
+msgid "The SONAR team at RERO"
+msgstr ""
+
 msgid ""
 "The names of the organisation's specific/patrimonial collections to which"
 " this document belongs"
@@ -639,6 +669,13 @@ msgstr ""
 
 msgid "Titles"
 msgstr "Titel"
+
+msgid ""
+"To be able to deposit publications, you must be registered against a "
+"SONAR institution. For now, your account does not provide additional "
+"features, but in the future you will be able to create document lists and"
+" save requests."
+msgstr ""
 
 msgid "Type"
 msgstr "Typ"
@@ -685,7 +722,7 @@ msgstr "Band"
 msgid "Welcome on SONAR"
 msgstr ""
 
-msgid "Welcome to Swiss Open Access Repository!"
+msgid "Welcome to SONAR, the Swiss Open Access Repository!"
 msgstr ""
 
 msgid "Year"
@@ -2713,6 +2750,9 @@ msgstr ""
 msgid "pid"
 msgstr ""
 
+msgid "pmid"
+msgstr ""
+
 msgid "role_admin"
 msgstr "Admin"
 
@@ -2745,3 +2785,7 @@ msgstr "Benutzer"
 
 msgid "vol."
 msgstr ""
+
+#~ msgid "Welcome to Swiss Open Access Repository!"
+#~ msgstr ""
+

@@ -10,17 +10,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
-"POT-Creation-Date: 2020-07-09 07:52+0200\n"
+"POT-Creation-Date: 2020-09-08 08:38+0200\n"
 "PO-Revision-Date: 2020-08-14 06:32+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/rero_plus/sonar/"
-"it/>\n"
 "Language: it\n"
+"Language-Team: Italian "
+"<https://hosted.weblate.org/projects/rero_plus/sonar/it/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.2-dev\n"
 "Generated-By: Babel 2.8.0\n"
 
 #, python-format
@@ -60,8 +59,7 @@ msgstr "Richiedere modifiche sul deposito"
 msgid ""
 "At least 3 characters and must contain only lower case characters and "
 "underscores."
-msgstr ""
-"Deve contenere almeno 3 caratteri (unicamente minuscole o trattini bassi)."
+msgstr "Deve contenere almeno 3 caratteri (unicamente minuscole o trattini bassi)."
 
 msgid "Author or editor"
 msgstr "Autore o editore"
@@ -71,6 +69,9 @@ msgstr "Ritorno a SONAR"
 
 msgid "Best match"
 msgstr "Migliore corrispondenza"
+
+msgid "Best regards"
+msgstr ""
 
 msgid "Bucket UUID"
 msgstr ""
@@ -107,6 +108,9 @@ msgstr "Collezioni"
 
 msgid "Comment"
 msgstr "Commento"
+
+msgid "Confirm e-mail"
+msgstr ""
 
 msgid "Content note"
 msgstr "Nota di contenuto"
@@ -147,6 +151,10 @@ msgstr "Data di nascita"
 msgid "Date of death"
 msgstr "Data di morte"
 
+#, python-format
+msgid "Dear %(email)s"
+msgstr ""
+
 msgid "Degree"
 msgstr "Diploma"
 
@@ -161,6 +169,9 @@ msgstr "Deposito da validare"
 
 msgid "Describes the information of a single file in the record."
 msgstr "Descrive l'informazione di un singolo file nella risorsa."
+
+msgid "Description"
+msgstr ""
 
 msgid "Designation"
 msgstr "Designazione"
@@ -182,11 +193,14 @@ msgstr "Data del documento"
 
 msgid "Document is harvested or not, will disable record edition or similar."
 msgstr ""
-"Documento è stato raccolto o no, disattiva la possibilità di modificare la "
-"risorsa."
+"Documento è stato raccolto o no, disattiva la possibilità di modificare "
+"la risorsa."
 
 msgid "Document type"
 msgstr "Tipo di documento"
+
+msgid "E-mail"
+msgstr ""
 
 msgid "Edition"
 msgstr "Edizione"
@@ -286,6 +300,12 @@ msgstr "Ulteriori informazioni sulla pagina del progetto"
 msgid "German"
 msgstr "Tedesco"
 
+msgid "Granting institution"
+msgstr ""
+
+msgid "HTML markup admitted."
+msgstr ""
+
 msgid "Harvested"
 msgstr "Raccolto"
 
@@ -323,6 +343,9 @@ msgstr "Numero"
 
 msgid "Italian"
 msgstr "Italiano"
+
+msgid "Jury note"
+msgstr ""
 
 msgid "Key"
 msgstr "Chiave"
@@ -441,6 +464,9 @@ msgstr "Numero di telefono con il prefisso internazionale, senza spazi."
 
 msgid "Place"
 msgstr "Luogo"
+
+msgid "Please confirm your e-mail by clicking here"
+msgstr ""
 
 msgid "Position"
 msgstr "Posizione"
@@ -626,12 +652,15 @@ msgstr ""
 "colleziona, promuove e preserva le pubblicazioni delle persone affiliate "
 "alle istituzioni di ricerca pubbliche della Svizzera."
 
+msgid "The SONAR team at RERO"
+msgstr ""
+
 msgid ""
 "The names of the organisation's specific/patrimonial collections to which"
 " this document belongs"
 msgstr ""
-"I nomi delle collezioni specifiche o patrimoniali dell'organizzazione alle "
-"quali questo documento appartiene"
+"I nomi delle collezioni specifiche o patrimoniali dell'organizzazione "
+"alle quali questo documento appartiene"
 
 msgid "The project"
 msgstr "Il progetto"
@@ -651,6 +680,13 @@ msgstr "Titolo in un'altra lingua"
 
 msgid "Titles"
 msgstr "Titoli"
+
+msgid ""
+"To be able to deposit publications, you must be registered against a "
+"SONAR institution. For now, your account does not provide additional "
+"features, but in the future you will be able to create document lists and"
+" save requests."
+msgstr ""
 
 msgid "Type"
 msgstr "Tipo"
@@ -697,8 +733,8 @@ msgstr "Volume"
 msgid "Welcome on SONAR"
 msgstr "Benvenuti su SONAR"
 
-msgid "Welcome to Swiss Open Access Repository!"
-msgstr "Benvenuti su Swiss Open Access Repository !"
+msgid "Welcome to SONAR, the Swiss Open Access Repository!"
+msgstr ""
 
 msgid "Year"
 msgstr "Anno"
@@ -2725,6 +2761,9 @@ msgstr "p."
 msgid "pid"
 msgstr ""
 
+msgid "pmid"
+msgstr ""
+
 msgid "role_admin"
 msgstr "Admin"
 
@@ -2757,3 +2796,4 @@ msgstr "utente"
 
 msgid "vol."
 msgstr "vol."
+
