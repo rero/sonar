@@ -104,14 +104,22 @@ def oai_config_info():
               is_flag=True,
               default=False,
               help="Enqueue harvesting and return immediately.")
+@click.option(
+    '-f',
+    '--force',
+    is_flag=True,
+    default=False,
+    help='Force to re-import records, (don\'t take care of last run date).'
+)
 @with_appcontext
 @click.pass_context
-def oai_config_harvest_all(ctx, max, enqueue):
+def oai_config_harvest_all(ctx, max, enqueue, force):
     """Harvesting data for the set and the configuration.
 
     :param ctx: App context.
     :param max: Max records to harvest for each sources.
     :param enqueue: Enqueue process or return immediately.
+    :param force: Force to re-import records.
     """
     with current_app.app_context():
         sources = OAIHarvestConfig.query.all()
@@ -127,4 +135,5 @@ def oai_config_harvest_all(ctx, max, enqueue):
                    name=name,
                    arguments=arguments,
                    enqueue=enqueue,
-                   quiet=True)
+                   quiet=True,
+                   from_date='1900-01-01' if force else None)
