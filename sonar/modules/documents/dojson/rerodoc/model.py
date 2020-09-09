@@ -516,7 +516,6 @@ def marc21_to_files(self, key, value):
     """Get files."""
     key = value.get('f')
     url = value.get('u')
-    size = int(value.get('s', 0))
     mime_type = value.get('q', 'text/plain')
 
     if not key or not url:
@@ -546,8 +545,7 @@ def marc21_to_files(self, key, value):
         'url': url,
         'label': value.get('z', key),
         'type': 'file',
-        'order': order,
-        'size': size
+        'order': order
     }
 
     return data

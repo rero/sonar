@@ -17,6 +17,7 @@
 
 """API for manipulating records."""
 
+import os.path
 import re
 from io import BytesIO
 from uuid import uuid4
@@ -36,10 +37,6 @@ from invenio_records_rest.utils import obj_or_import_string
 from invenio_search import current_search
 from invenio_search.api import RecordsSearch
 from sqlalchemy.orm.exc import NoResultFound
-
-from sonar.modules.pdf_extractor.utils import extract_text_from_content
-from sonar.modules.utils import change_filename_extension, \
-    create_thumbnail_from_file
 
 
 class SonarRecord(Record, FilesMixin):
@@ -141,16 +138,17 @@ class SonarRecord(Record, FilesMixin):
         db.session.commit()
 
     @staticmethod
-    def update_files(bucket_id):
-        """Update record files accordingly to files stored in given bucket.
+    def get_record_by_bucket(bucket):
+        """Find a record by the given bucket.
 
-        :param bucket_id: Bucket identifier.
+        :param bucket: Bucket ID.
+        :returns: Record corresponding to bucket or None.
         """
         try:
             # Find the record bucket object.
             try:
                 records_buckets = RecordsBuckets.query.filter_by(
-                    bucket_id=bucket_id).first()
+                    bucket_id=bucket).first()
             except Exception:
                 raise Exception('`records_buckets` object not found.')
 
@@ -170,21 +168,9 @@ class SonarRecord(Record, FilesMixin):
                 raise Exception('Class for record not found.')
 
             # Load record by its PID.
-            record = record_class.get_record_by_pid(pid.pid_value)
-
-            # Update record metadata with files.
-            record.files.flush()
-
-            # Store metadata in DB.
-            record.commit()
-            db.session.commit()
-
-            # Re-index record.
-            record.reindex()
-        except Exception as exception:
-            raise Exception(
-                'Unable to update files for record with bucket {bucket}: '
-                '{message}'.format(bucket=bucket_id, message=str(exception)))
+            return record_class.get_record_by_pid(pid.pid_value)
+        except Exception:
+            return None
 
     def reindex(self):
         """Reindex record."""
@@ -199,113 +185,56 @@ class SonarRecord(Record, FilesMixin):
 
         for kwargs, see add_file method below.
         """
-        kwargs['url'] = url
+        kwargs['external_url'] = url
         self.add_file(requests.get(url).content, key, **kwargs)
 
     def add_file(self, data, key, **kwargs):
         """Create file and add it to record.
 
-        :param data: Binary data of file
-        :param str key: File key
-
         kwargs may contain some additional data such as: file label, file type,
         order and url.
+
+        :param data: Binary data of file
+        :param str key: File key
+        :returns: File object created.
         """
         if not current_app.config.get('SONAR_DOCUMENTS_IMPORT_FILES'):
             return
 
-        # If file with the same key exists and checksum is the same as the
-        # registered file, we don't do anything
+        # If file with the same key exists and file exists and checksum is
+        # the same as the registered file, we don't do anything
         checksum = compute_md5_checksum(BytesIO(data))
-        if key in self.files and checksum == self.files[key].file.checksum:
-            return
+        if key in self.files and os.path.isfile(
+                self.files[key].file.uri
+        ) and checksum == self.files[key].file.checksum:
+            return None
 
         # Create the file
         self.files[key] = BytesIO(data)
-        self.files[key]['label'] = kwargs.get('label', key)
-        self.files[key]['type'] = kwargs.get('type', 'file')
-        self.files[key]['order'] = kwargs.get('order', 1)
 
-        # Embargo
-        if kwargs.get('restricted'):
-            self.files[key]['restricted'] = kwargs['restricted']
+        for kwarg_key, kwarg_value in kwargs.items():
+            self.files[key][kwarg_key] = kwarg_value
 
-        if kwargs.get('embargo_date'):
-            self.files[key]['embargo_date'] = kwargs['embargo_date']
+        return self.files[key]
 
-        # Store external file URL
-        if kwargs.get('url'):
-            self.files[key]['external_url'] = kwargs['url']
+    def sync_files(self, file, deleted=False):
+        """Sync files between bucket and records.
 
-        # Create thumbnail
-        if current_app.config.get('SONAR_DOCUMENTS_GENERATE_THUMBNAIL'):
-            self.create_thumbnail(self.files[key])
+        This operation is necessary to make files available in record detail
+        and be indexed.
 
-        # Try to extract full text from file data, and generate a warning if
-        # it's not possible. For several cases, file is locked against fulltext
-        # copy.
-        if current_app.config.get(
-                'SONAR_DOCUMENTS_EXTRACT_FULLTEXT_ON_IMPORT'
-        ) and self.files[key].mimetype == 'application/pdf':
-            try:
-                fulltext = extract_text_from_content(data)
-
-                key = change_filename_extension(key, 'txt')
-                self.files[key] = BytesIO(fulltext.encode())
-                self.files[key]['type'] = 'fulltext'
-            except Exception as exception:
-                current_app.logger.warning(
-                    'Error during fulltext extraction of {file} of record '
-                    '{record}: {error}'.format(file=key,
-                                               error=exception,
-                                               record=self['identifiedBy']))
-
-    def create_thumbnail(self, file=None):
-        """Create a thumbnail for record.
-
-        This is done by getting the file with order 1 or the first file
-        instead.
-
-        :param file: File from which thumbnail is created.
+        :param file: File object.
+        :param deleted: Wether the given file has been deleted or not.
         """
-        # If not file passed, try to get the main file
-        if not file:
-            file = self.get_main_file()
+        # Update record metadata with files.
+        self.files.flush()
 
-        # No file found, we don't do anything
-        if not file:
-            return
+        # Store metadata in DB.
+        self.commit()
+        db.session.commit()
 
-        try:
-            # Create thumbnail
-            image_blob = create_thumbnail_from_file(file.file.uri,
-                                                    file.mimetype)
-
-            thumbnail_key = change_filename_extension(file['key'], 'jpg')
-
-            # Store thumbnail in record's files
-            self.files[thumbnail_key] = BytesIO(image_blob)
-            self.files[thumbnail_key]['type'] = 'thumbnail'
-        except Exception as exception:
-            current_app.logger.warning(
-                'Error during thumbnail generation of {file} of record '
-                '{record}: {error}'.format(file=file['key'],
-                                           error=exception,
-                                           record=self.get(
-                                               'identifiedBy', self['pid'])))
-
-    def get_main_file(self):
-        """Get the main file of record."""
-        files = [file for file in self.files if file.get('type') == 'file']
-
-        if not files:
-            return None
-
-        for file in files:
-            if file.get('type') == 'file' and file.get('order') == 1:
-                return file
-
-        return files[0]
+        # Re-index record.
+        self.reindex()
 
     def delete(self, force=False, dbcommit=False, delindex=False):
         """Delete record and persistent identifier.
