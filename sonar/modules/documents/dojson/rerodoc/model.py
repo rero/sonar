@@ -463,7 +463,11 @@ def marc21_to_identified_by_from_091(self, key, value):
     if not value.get('a') or value.get('b') != 'pmid':
         return None
 
-    identified_by.append({'type': 'pmid', 'value': value.get('a')})
+    identified_by.append({
+        'type': 'bf:Local',
+        'value': value.get('a'),
+        'source': 'PMID'
+    })
 
     return identified_by
 

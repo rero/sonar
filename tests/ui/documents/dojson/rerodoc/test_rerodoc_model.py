@@ -1257,7 +1257,11 @@ def test_marc21_to_identified_by_from_091():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('identifiedBy') == [{'type': 'pmid', 'value': '24638240'}]
+    assert data.get('identifiedBy') == [{
+        'type': 'bf:Local',
+        'value': '24638240',
+        'source': 'PMID'
+    }]
 
     # Without code $a
     marc21xml = """
@@ -1359,8 +1363,9 @@ def test_marc21_to_identified_by_full():
         'type': 'bf:ReportNumber',
         'value': '25'
     }, {
-        'type': 'pmid',
-        'value': '24638240'
+        'type': 'bf:Local',
+        'value': '24638240',
+        'source': 'PMID'
     }]
 
 
