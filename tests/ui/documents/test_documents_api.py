@@ -59,3 +59,21 @@ def test_load_affiliations():
     """Test load affiliations from file."""
     DocumentRecord.load_affiliations()
     assert len(DocumentRecord.affiliations) == 77
+
+
+def test_get_next_file_order(document_with_file, document):
+    """Test getting next file position."""
+    # One file with order 1
+    assert document_with_file.get_next_file_order() == 2
+
+    # Adding a new file
+    document_with_file.add_file(b'File content', 'file2.pdf')
+    assert document_with_file.get_next_file_order() == 3
+
+    # No order properties
+    for file in document_with_file.files:
+        document_with_file.files[file.key].data.pop('order', None)
+    assert document_with_file.get_next_file_order() == 2
+
+    # No files
+    assert document.get_next_file_order() == 1

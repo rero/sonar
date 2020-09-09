@@ -124,7 +124,7 @@ def test_add_file_from_url(app, document):
     assert document.files['test.pdf']['label'] == 'test.pdf'
 
 
-@mock.patch('sonar.modules.api.extract_text_from_content')
+@mock.patch('sonar.modules.documents.api.extract_text_from_content')
 def test_add_file(mock_extract, app, pdf_file, document):
     """Test add file to document."""
     with open(pdf_file, 'rb') as file:
@@ -187,9 +187,6 @@ def test_get_main_file(document_with_file):
 
 def test_create_thumbnail(document, pdf_file):
     """Test create a thumbnail for document's file."""
-    # No file associated with record, implies no thumbnail creation
-    document.create_thumbnail()
-
     with open(pdf_file, 'rb') as file:
         content = file.read()
 
@@ -244,31 +241,29 @@ def test_remove_from_index(client, db, document, superuser):
     assert res.json['hits']['total'] == (total - 1)
 
 
-def test_update_files(app, db, document_with_file):
-    """Test update files for record."""
+def test_get_record_by_bucket(app, db, document_with_file):
+    """Test retrieving a record with a given bucket."""
     # OK
-    SonarRecord.update_files(document_with_file['_bucket'])
-    assert len(document_with_file.files) == 3
+    record = SonarRecord.get_record_by_bucket(document_with_file['_bucket'])
+    assert record
 
     # Record bucket not found
-    with pytest.raises(Exception) as exception:
-        SonarRecord.update_files('9bca9173-2c7b-4e22-bd6d-46e4f972dbf89')
-    assert str(
-        exception.value).find('`records_buckets` object not found.') != -1
+    assert not SonarRecord.get_record_by_bucket(
+        '9bca9173-2c7b-4e22-bd6d-46e4f972dbf89')
 
     # Not record class found
     app.config.get('RECORDS_REST_ENDPOINTS',
                    {}).get('doc', {}).pop('record_class', None)
-
-    with pytest.raises(Exception) as exception:
-        SonarRecord.update_files(document_with_file['_bucket'])
-    assert str(exception.value).find('Class for record not found.') != -1
+    assert not SonarRecord.get_record_by_bucket(document_with_file['_bucket'])
 
     # Persistent identifier not found
     pid = PersistentIdentifier.get('doc', document_with_file['pid'])
     db.session.delete(pid)
     db.session.commit()
+    assert not SonarRecord.get_record_by_bucket(document_with_file['_bucket'])
 
-    with pytest.raises(Exception) as exception:
-        SonarRecord.update_files(document_with_file['_bucket'])
-    assert str(exception.value).find('Persistent identifier not found.') != -1
+
+def test_sync_files(document_with_file):
+    """Test update files for record."""
+    document_with_file.sync_files(document_with_file.files['test1.pdf'])
+    assert len(document_with_file.files) == 3

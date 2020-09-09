@@ -28,7 +28,8 @@ from invenio_files_rest.signals import file_deleted, file_uploaded
 
 from sonar.modules.permissions import has_admin_access, has_submitter_access, \
     has_superuser_access
-from sonar.modules.receivers import file_listener
+from sonar.modules.receivers import file_deleted_listener, \
+    file_uploaded_listener
 from sonar.modules.users.api import current_user_record
 from sonar.modules.users.signals import user_registered_handler
 from sonar.modules.utils import get_switch_aai_providers, get_view_code
@@ -89,8 +90,8 @@ class Sonar(object):
         user_registered.connect(user_registered_handler, weak=False)
 
         # Connect to signal sent when a file is uploaded or deleted
-        file_uploaded.connect(file_listener, weak=False)
-        file_deleted.connect(file_listener, weak=False)
+        file_uploaded.connect(file_uploaded_listener, weak=False)
+        file_deleted.connect(file_deleted_listener, weak=False)
 
     def init_config(self, app):
         """Initialize configuration."""

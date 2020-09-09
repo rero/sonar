@@ -20,12 +20,37 @@
 from sonar.modules.api import SonarRecord
 
 
-def file_listener(obj):
-    """Function executed when a file is uploaded or deleted.
+def file_uploaded_listener(obj):
+    """Function executed when a file is uploaded.
 
     :param obj: Object version.
     """
     try:
-        SonarRecord.update_files(obj.bucket_id)
+        sync_record_files(obj, False)
     except Exception:
         pass
+
+
+def file_deleted_listener(obj):
+    """Function executed when a file is deleted.
+
+    :param obj: Object version.
+    """
+    try:
+        sync_record_files(obj, True)
+    except Exception:
+        pass
+
+
+def sync_record_files(file, deleted=False):
+    """Sync files in record corresponding to bucket.
+
+    :param file: File object
+    :param delete: Wether file is deleted or not.
+    """
+    record = SonarRecord.get_record_by_bucket(file.bucket_id)
+
+    if not record:
+        return
+
+    record.sync_files(file, deleted)
