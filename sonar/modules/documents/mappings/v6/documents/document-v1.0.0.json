@@ -222,7 +222,7 @@
               "type": "keyword"
             },
             "value": {
-              "type": "text"
+              "type": "keyword"
             },
             "note": {
               "type": "text"
@@ -234,7 +234,7 @@
               "type": "text"
             },
             "source": {
-              "type": "text"
+              "type": "keyword"
             },
             "status": {
               "type": "keyword"

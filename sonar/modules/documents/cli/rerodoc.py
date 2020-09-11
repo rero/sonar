@@ -60,7 +60,7 @@ def update_file_permissions(permissions_file, chunk_size):
 
     try:
         with open(permissions_file.name, 'r') as file:
-            reader = csv.reader(file, delimiter=';')
+            reader = csv.reader(file, delimiter=',')
 
             # header
             header = next(reader)

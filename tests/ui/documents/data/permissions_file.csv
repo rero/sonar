@@ -1,10 +1,10 @@
-"id_bibrec";"status";"docname"
-111111;"status:PA16JU";"test1"
-111112;"status:PA16JU";"test1"
-111111;"status:PA16JU";"test2"
-111111;"status:RERO";"test1"
-111111;"firerole:
+"id_bibrec","status","docname"
+111111,"status:PA16JU","test1"
+111112,"status:PA16JU","test1"
+111111,"status:PA16JU","test2"
+111111,"status:RERO","test1"
+111111,"firerole:
     allow roles /.*,UNIFR,.*/
     allow from ""2014-07-14""
     allow any
-";"test1"
+","test1"
