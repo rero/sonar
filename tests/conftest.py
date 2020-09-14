@@ -386,7 +386,7 @@ def make_document(db, document_json, make_organisation, pdf_file):
                 record.add_file(file.read(),
                                 'test1.pdf',
                                 order=1,
-                                restricted='institution',
+                                restricted='organisation',
                                 embargo_date='2021-01-01')
                 record.commit()
 
