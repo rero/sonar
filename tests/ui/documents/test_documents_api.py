@@ -77,3 +77,14 @@ def test_get_next_file_order(document_with_file, document):
 
     # No files
     assert document.get_next_file_order() == 1
+
+
+def test_get_files_list(document, pdf_file):
+    """Test getting the list of files, filtered and orderd."""
+    document.add_file(b'file 1', 'test1.pdf', order=2)
+    document.add_file(b'file 2', 'test2.pdf', order=1)
+    document.add_file(b'file 3', 'test3.pdf', order=3)
+    document.add_file(b'file 4', 'test4.pdf', order=4, type="not-file")
+    files = document.get_files_list()
+    assert len(files) == 3
+    assert files[0]['order'] == 1

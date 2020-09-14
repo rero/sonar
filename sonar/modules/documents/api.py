@@ -278,6 +278,20 @@ class DocumentRecord(SonarRecord):
 
         return max(positions) + 1
 
+    def get_files_list(self):
+        """Return the list of files.
+
+        The files are ordered by `order` property and filtered by `type` with
+        value `file`.
+
+        :returns: Formatted list of files.
+        """
+        files = [
+            file for file in self.get('_files', [])
+            if file.get('type') == 'file'
+        ]
+        return sorted(files, key=lambda file: file.get('order', 100))
+
 
 class DocumentIndexer(SonarIndexer):
     """Indexing documents in Elasticsearch."""

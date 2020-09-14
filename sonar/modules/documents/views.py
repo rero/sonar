@@ -139,17 +139,6 @@ def create_publication_statement(provision_activity):
 
 
 @blueprint.app_template_filter()
-def files_by_type(files, file_type='file'):
-    """Return only files corresponding to type.
-
-    :param files: List of files associated with record
-    :param file_type: Type of the files to return.
-    :return Filtered list
-    """
-    return [file for file in files if file.get('type') == file_type]
-
-
-@blueprint.app_template_filter()
 def file_size(size):
     """Return file size human readable.
 

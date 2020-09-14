@@ -22,7 +22,7 @@
 {%- block body %}
 {% set record = record.replace_refs() %}
 {% set title = record.title[0] | title_format(current_i18n.language) %}
-{% set files = record._files | files_by_type %}
+{% set files = record.get_files_list() %}
 
 <section class="mt-3">
   <div class="row">
