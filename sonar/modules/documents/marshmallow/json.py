@@ -101,7 +101,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     permalink = fields.Dict(dump_only=True)
 
     @pre_dump
-    def add_files_restrictions(self, item):
+    def process_files(self, item):
         """Add restrictions to file before dumping data.
 
         :param item: Item object to process
@@ -110,6 +110,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
         if not item.get('_files'):
             return item
 
+        # Add restrictions
         for key, file in enumerate(item['_files']):
             if file.get('type') == 'file':
                 restricted = is_file_restricted(file, item)
@@ -120,6 +121,10 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
                         '%Y-%m-%d')
 
                 item['_files'][key]['restriction'] = restricted
+
+        # Sort files to have the main file in first position
+        item['_files'] = sorted(item['_files'],
+                                key=lambda file: file.get('order', 100))
 
         return item
 
@@ -159,10 +164,8 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
                 'text'] = create_publication_statement(provision_activity)
 
         # Part of proccessing
-        for index, part_of in enumerate(
-                item.get('partOf', [])):
-            item['partOf'][index][
-                'text'] = part_of_format(part_of)
+        for index, part_of in enumerate(item.get('partOf', [])):
+            item['partOf'][index]['text'] = part_of_format(part_of)
 
         if item.get('dissertation'):
             item['dissertation']['text'] = dissertation(item)
