@@ -22,8 +22,6 @@
       "description": "List of files attached to the record.",
       "type": "array",
       "items": {
-        "title": "File item",
-        "description": "Describes the information of a single file in the record.",
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -64,7 +62,6 @@
           },
           "label": {
             "title": "Label",
-            "description": "Label of the file",
             "type": "string",
             "minLength": 1
           },
@@ -81,28 +78,30 @@
           },
           "order": {
             "title": "Position",
-            "description": "Position of the file",
+            "description": "Position of the file, The lowest position means file is the main file.",
             "type": "integer",
             "default": 1,
             "minimum": 1
           },
           "external_url": {
             "title": "URL to file",
-            "description": "URL to file hosted in an external platform.",
             "type": "string",
             "minLength": 1,
-            "pattern": "^https?://"
+            "pattern": "^https?://.*"
           },
           "restricted": {
             "title": "Restricted",
+            "description": "Type of restriction. 'organisation': the file is only available inside organisation view. 'internal': file is only available with a referenced IP.",
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "pattern": "^(organisation|internal)$"
           },
           "embargo_date": {
             "title": "Embargo date",
+            "description": "Example: 2019-05-05",
             "type": "string",
             "minLength": 1,
-            "format": "date"
+            "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
           }
         },
         "required": [
@@ -110,7 +109,8 @@
           "file_id",
           "version_id",
           "key"
-        ]
+        ],
+        "propertiesOrder": ["label", "order", "external_url", "restricted", "embargo_date"]
       }
     },
     "pid": {
