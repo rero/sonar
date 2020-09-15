@@ -114,3 +114,14 @@ def and_term_filter(field):
             must.append(Q('term', **{field: value}))
         return Q('bool', must=must)
     return inner
+
+
+def missing_field_filter(field):
+    """Filter to search data which does not contain the specified field.
+
+    :param field: Property that must not exist.
+    :returns: elasticsearch DSL query.
+    """
+    def inner(values):
+        return Q('bool', must_not=[Q('exists', field=field)])
+    return inner
