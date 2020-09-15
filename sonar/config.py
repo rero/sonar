@@ -40,7 +40,7 @@ from sonar.modules.organisations.api import OrganisationRecord, \
 from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import record_permission_factory, \
     wiki_edit_permission
-from sonar.modules.query import and_term_filter
+from sonar.modules.query import and_term_filter, missing_field_filter
 from sonar.modules.users.api import UserRecord, UserSearch
 from sonar.modules.users.permissions import UserPermission
 from sonar.modules.utils import get_current_language
@@ -502,7 +502,25 @@ RECORDS_REST_FACETS = {
              _('status'): and_term_filter('status'),
              _('user'): and_term_filter('user.full_name.keyword'),
              _('contributor'): and_term_filter('facet_contributors'),
-         })
+         }),
+    'users': {
+        'aggs': {
+            'missing_organisation': {
+                'filter': {
+                    'bool': {
+                        'must_not': {
+                            'exists': {
+                                'field': 'organisation'
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        'filters': {
+            'missing_organisation': missing_field_filter('organisation')
+        }
+    }
 }
 """REST search facets."""
 
