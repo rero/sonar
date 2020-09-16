@@ -59,6 +59,11 @@ def marc21_to_type_and_organisation(self, key, value):
     if value.get('b'):
         organisation = value.get('b').lower()
 
+        # Specific transformation for `unisi`, because the real acronym is
+        # `usi`.
+        if organisation == 'unisi':
+            organisation = 'usi'
+
         if organisation not in marc21tojson.registererd_organisations:
             marc21tojson.create_organisation(organisation)
             marc21tojson.registererd_organisations.append(organisation)

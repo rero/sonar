@@ -99,6 +99,21 @@ def test_marc21_to_type_and_organisation(app, bucket_location):
         '$ref': 'https://sonar.ch/api/organisations/baage'
     }
 
+    # Specific conversion for unisi
+    marc21xml = """
+    <record>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="b">UNISI</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = marc21tojson.do(marc21json)
+    assert not data.get('documentType')
+    assert data.get('organisation') == {
+        '$ref': 'https://sonar.ch/api/organisations/usi'
+    }
+
 
 def test_marc21_to_title_245():
     """Test dojson marc21_to_title."""

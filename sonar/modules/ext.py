@@ -32,7 +32,8 @@ from sonar.modules.receivers import file_deleted_listener, \
     file_uploaded_listener
 from sonar.modules.users.api import current_user_record
 from sonar.modules.users.signals import user_registered_handler
-from sonar.modules.utils import get_switch_aai_providers, get_view_code
+from sonar.modules.utils import get_specific_theme, get_switch_aai_providers, \
+    get_view_code
 
 from . import config
 
@@ -45,7 +46,8 @@ def utility_processor():
                 ui_version=config.SONAR_APP_UI_VERSION,
                 aai_providers=get_switch_aai_providers,
                 view_code=get_view_code(),
-                current_user_record=current_user_record)
+                current_user_record=current_user_record,
+                get_specific_theme=get_specific_theme)
 
 
 class Sonar(object):
