@@ -25,7 +25,7 @@ from flask import g
 from sonar.modules.documents.views import store_organisation
 from sonar.modules.utils import change_filename_extension, \
     create_thumbnail_from_file, format_date, get_current_language, \
-    get_switch_aai_providers, get_view_code
+    get_specific_theme, get_switch_aai_providers, get_view_code
 
 
 def test_change_filename_extension(app):
@@ -109,3 +109,26 @@ def test_format_date():
 
     # No processing
     assert format_date('July 31, 2020') == 'July 31, 2020'
+
+
+def test_get_specific_theme(app, organisation, make_organisation):
+    """Test getting a theme by organisation."""
+    with app.test_request_context() as req:
+        req.request.view_args['view'] = 'org'
+        store_organisation()
+
+    # Not dedicated --> global theme
+    assert get_specific_theme() == 'global-theme.css'
+
+    # Dedicated, but no specific style --> global theme
+    g.organisation['isDedicated'] = True
+    assert get_specific_theme() == 'global-theme.css'
+
+    # Dedicated and specific style --> specific theme
+    make_organisation('usi')
+    with app.test_request_context() as req:
+        req.request.view_args['view'] = 'usi'
+        store_organisation()
+
+    g.organisation['isDedicated'] = True
+    assert get_specific_theme() == 'usi-theme.css'

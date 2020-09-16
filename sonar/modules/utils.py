@@ -26,6 +26,8 @@ from invenio_mail.api import TemplatedMessage
 from wand.color import Color
 from wand.image import Image
 
+from sonar.theme.webpack import theme
+
 
 def create_thumbnail_from_file(file_path, mimetype):
     """Create a thumbnail from given file path and return image blob.
@@ -147,3 +149,18 @@ def format_date(date):
                                           '%Y-%m-%d').strftime('%d.%m.%Y')
 
     return date
+
+
+def get_specific_theme():
+    """Return the webpack entry for the current organisation.
+
+    :returns: String representing the webpack entry. Default to `global`.
+    """
+    if g.get('organisation', {}).get('isDedicated'):
+        theme_name = '{organisation}-theme'.format(
+            organisation=g.organisation['pid'])
+
+        if theme.entry.get(theme_name):
+            return '{theme}.css'.format(theme=theme_name)
+
+    return 'global-theme.css'

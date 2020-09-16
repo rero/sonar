@@ -19,5 +19,5 @@ _('eduid')
 
 # Organisations
 _('csal')
-_('unisi')
+_('usi')
 _('unifr')

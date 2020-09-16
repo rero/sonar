@@ -268,7 +268,7 @@ def test_has_external_urls_for_files(app):
     assert not views.has_external_urls_for_files({
         'pid': 1,
         'organisation': {
-            'pid': 'unisi'
+            'pid': 'usi'
         }
     })
 
@@ -420,8 +420,8 @@ def test_get_current_organisation_code(app, organisation):
 
     # Args has organisation view
     with app.test_request_context() as req:
-        req.request.args = {'view': 'unisi'}
-        assert views.get_current_organisation_code() == 'unisi'
+        req.request.args = {'view': 'usi'}
+        assert views.get_current_organisation_code() == 'usi'
 
 
 def test_abstracts(app):

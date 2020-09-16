@@ -23,14 +23,18 @@
 <div class="bg-organisation p-4">
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-8 col-xs-6 col-lg-4 py-3 py-sm-5">
+        <div class="col-8 col-xs-6 col-lg-3 py-3 py-sm-5 text-center">
             <a href="{{ url_for('documents.index', view=view_code if g.get('organisation', {}).get('isDedicated') else config.SONAR_APP_DEFAULT_ORGANISATION) }}">
-                {%- if config.THEME_LOGO %}
-                  {% set logo_code = view_code if g.get('organisation', {}).get('isDedicated') else config.SONAR_APP_DEFAULT_ORGANISATION %}
-                  <img src="{{ url_for('static', filename='images/' ~ logo_code ~ '-logo.svg')}}" alt="{{_(config.THEME_SITENAME)}}" class="logo"/>
-                {%- else %}
-                  {{_(config.THEME_SITENAME)}}
-                {%- endif %}
+              {% if g.get('organisation', {}).get('isDedicated') %}
+              {% set thumbnail = g.organisation | record_image_url %}
+              {% if thumbnail %}
+              <img src="{{ thumbnail }}" class="img-fluid">
+              {% else %}
+              <h1>{{g.organisation.name}}</h1>
+              {% endif %}
+              {% else %}
+              <img src="{{ url_for('static', filename='images/global-logo.svg') }}" class="img-fluid">
+              {% endif %}
             </a>
         </div>
       </div>
