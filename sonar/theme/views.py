@@ -54,14 +54,15 @@ def init_view():
     """Do some stuff before rendering any view."""
     current_menu.submenu('settings').submenu('security').hide()
     current_menu.submenu('settings').submenu('applications').hide()
+    current_menu.submenu('settings').submenu('admin').hide()
 
 
 @blueprint.route('/users/profile')
 @blueprint.route('/users/profile/<pid>')
 @login_required
-@register_menu(blueprint, 'settings.profile',
+@register_menu(blueprint, 'settings.record_profile',
                _('%(icon)s Profile', icon='<i class="fa fa-user fa-fw"></i>'))
-@register_breadcrumb(blueprint, 'breadcrumbs.profile', _('Profile'))
+@register_breadcrumb(blueprint, 'breadcrumbs.record_profile', _('Profile'))
 def profile(pid=None):
     """Logged user profile edition page.
 

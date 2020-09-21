@@ -30,15 +30,3 @@ def user_registered_handler(app, user, confirm_token):
     role = datastore.find_role(UserRecord.ROLE_USER)
     datastore.add_role_to_user(user, role)
     datastore.commit()
-
-    # Create user record
-    user_record = UserRecord.get_user_by_email(user.email)
-    if not user_record:
-        user_record = UserRecord.create(
-            {
-                'full_name': user.email,
-                'email': user.email,
-                'role': UserRecord.ROLE_USER
-            },
-            dbcommit=True)
-        user_record.reindex()
