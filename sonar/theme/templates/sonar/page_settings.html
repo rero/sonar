@@ -23,7 +23,8 @@
     <div class="col-sm-3 col-md-3 col-pad-left-0">
       {%- block settings_menu scoped %}
       <ul class="list-group">
-        {%- for item in current_menu.submenu('settings').children if item.visible %}
+        {% set hideProfileKey = 'record_profile' if not current_user_record else 'profile' %}
+        {%- for item in current_menu.submenu('settings').children if item.visible and item.name != hideProfileKey %}
         {%- block settings_menu_item scoped %}
         <a href="{{ item.url }}" class="list-group-item{% if item.active %} active{% endif %}">
           {{ item.text|safe }}
