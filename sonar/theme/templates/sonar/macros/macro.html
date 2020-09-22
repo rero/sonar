@@ -23,13 +23,11 @@
 <div class="text-center {{ class }}">
   {% set restricted = file | is_file_restricted(record) %}
   {% if not restricted.restricted %}
-  {% if externalUrl %}
-  {% if file.external_url %}
+  {% if externalUrl and file.external_url %}
   <a href="{{ file.external_url }}" target="_blank">
     <img src="/{{ resource_type }}/{{ record.pid }}/files/{{ thumbnail.key }}" class="img-thumbnail img-fluid"
       alt="{{ file_title }}">
   </a>
-  {% endif %}
   {% else %}
   <a href="/{{ resource_type }}/{{ record.pid }}/preview/{{ file.key }}" data-title="{{ file_title }}"
     class="previewLink">
@@ -38,7 +36,7 @@
   </a>
   {% endif %}
   <p class="my-1 small">{{ file_title }}</p>
-  {% if not externalUrl %}
+  {% if not externalUrl or not file.external_url %}
   <p class="m-0">
     <a href="/{{ resource_type }}/{{ record.pid }}/preview/{{ file.key }}" data-title="{{ file_title }}"
       class="previewLink"><i class="fa fa-eye mr-2"></i></a>
