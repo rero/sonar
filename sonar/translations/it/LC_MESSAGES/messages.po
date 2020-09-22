@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2020-09-15 16:29+0200\n"
-"PO-Revision-Date: 2020-09-18 15:36+0000\n"
-"Last-Translator: Davide Dosi <davide.dosi@usi.ch>\n"
+"PO-Revision-Date: 2020-09-22 11:39+0000\n"
+"Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "it/>\n"
 "Language: it\n"
@@ -470,7 +470,7 @@ msgstr "Identificativo"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:607
 #: sonar/modules/documents/templates/documents/record.html:192
 msgid "Identifiers"
-msgstr "Identificativi"
+msgstr "Identificatori"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:572
 msgid "In the format \\"
