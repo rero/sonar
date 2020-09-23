@@ -524,26 +524,32 @@ RECORDS_REST_FACETS = {
 }
 """REST search facets."""
 
-RECORDS_REST_SORT_OPTIONS = dict(documents=dict(
-    bestmatch=dict(
-        title=_('Best match'),
-        fields=['-_score'],
-        default_order='asc',
-        order=2,
-    ),
-    mostrecent=dict(
-        title=_('Most recent'),
-        fields=['-_created'],
-        default_order='desc',
-        order=1,
-    ),
-))
+INDEXES = ['documents', 'organisations', 'users', 'deposits']
+
+RECORDS_REST_SORT_OPTIONS = {}
+for index in INDEXES:
+    RECORDS_REST_SORT_OPTIONS[index] = {
+        'mostrecent': {
+            'title': _('Most recent'),
+            'fields': ['-_created'],
+            'default_order': 'desc',
+            'order': 1,
+        },
+        'bestmatch': {
+            'title': _('Best match'),
+            'fields': ['-_score'],
+            'default_order': 'asc',
+            'order': 2,
+        }
+    }
 """Setup sorting options."""
 
-RECORDS_REST_DEFAULT_SORT = dict(documents=dict(
-    query='bestmatch',
-    noquery='mostrecent',
-), )
+RECORDS_REST_DEFAULT_SORT = {}
+for index in INDEXES:
+    RECORDS_REST_DEFAULT_SORT[index] = {
+        'query': 'bestmatch',
+        'noquery': 'mostrecent'
+    }
 """Set default sorting options."""
 
 RECORDS_FILES_REST_ENDPOINTS = {
