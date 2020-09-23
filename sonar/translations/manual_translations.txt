@@ -16,8 +16,3 @@
 # SWITCHaai providers
 _('eduidtest')
 _('eduid')
-
-# Organisations
-_('csal')
-_('usi')
-_('unifr')

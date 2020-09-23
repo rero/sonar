@@ -25,6 +25,7 @@ from flask import current_app, request
 from invenio_records_rest.serializers.response import record_responsify, \
     search_responsify
 
+from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.serializers import JSONSerializer as _JSONSerializer
 from sonar.modules.users.api import current_user_record
 
@@ -53,6 +54,15 @@ class JSONSerializer(_JSONSerializer):
                 'max': int(datetime.now().year),
                 'step': 1
             }
+
+        # Add organisation name
+        for org_term in results.get('aggregations',
+                                    {}).get('organisation',
+                                            {}).get('buckets', []):
+            organisation = OrganisationRecord.get_record_by_pid(
+                org_term['key'])
+            if organisation:
+                org_term['name'] = organisation['name']
 
         return super(JSONSerializer,
                      self).post_process_serialize_search(results, pid_fetcher)
