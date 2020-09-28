@@ -90,7 +90,7 @@ def app_config(app_config):
 
 
 @pytest.fixture
-def make_organisation(app, db, bucket_location):
+def make_organisation(app, db, bucket_location, without_oaiset_signals):
     """Factory for creating organisation."""
 
     def _make_organisation(code):
@@ -374,6 +374,7 @@ def make_document(db, document_json, make_organisation, pdf_file):
             document_json['pid'] = pid
         else:
             document_json.pop('pid', None)
+            document_json.pop('_oai', None)
 
         record = DocumentRecord.create(document_json,
                                        dbcommit=True,
@@ -596,3 +597,12 @@ def mock_thumbnail_creation(monkeypatch):
     """Mock thumbnail creation for all tests."""
     monkeypatch.setattr('sonar.modules.utils.Image.make_blob', lambda *args:
                         b'Fake thumbnail image content')
+
+
+@pytest.yield_fixture
+def without_oaiset_signals(app):
+    """Temporary disable oaiset signals."""
+    from invenio_oaiserver import current_oaiserver
+    current_oaiserver.unregister_signals_oaiset()
+    yield
+    current_oaiserver.register_signals_oaiset()

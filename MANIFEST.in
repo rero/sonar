@@ -45,6 +45,7 @@ include scripts/setup
 include scripts/update
 include scripts/install-ui
 include scripts/functions
+include sonar/theme/static/xsl/oai2.xsl
 include tests/ui/shibboleth_authenticator/data/valid_saml_response
 
 prune docs/_build

@@ -23,7 +23,8 @@ from sonar.modules.documents.receivers import chunks, \
     populate_fulltext_field, transform_harvested_records
 
 
-def test_transform_harvested_records(app, bucket_location):
+def test_transform_harvested_records(app, bucket_location,
+                                     without_oaiset_signals):
     """Test harvested record transformation."""
     request, records = get_records(
         ['oai:doc.rero.ch:20120503160026-MV'],

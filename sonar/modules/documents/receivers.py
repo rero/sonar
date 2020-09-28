@@ -18,8 +18,14 @@
 """Signals connections for documents."""
 
 import time
+from datetime import datetime
 
+import pytz
 from dojson.contrib.marc21.utils import create_record
+from flask import current_app
+
+from sonar.modules.api import SonarRecord
+from sonar.modules.documents.api import DocumentRecord
 
 from .api import DocumentRecord
 from .dojson.rerodoc.model import marc21tojson
@@ -111,3 +117,21 @@ def chunks(records, size):
     """
     for i in range(0, len(records), size):
         yield records[i:i + size]
+
+
+def update_oai_property(sender, record):
+    """Called when a document is created or updated.
+
+    Update `_oai` property of the record.
+
+    :param sender: Sender
+    :param record: Document record
+    """
+    if not isinstance(record, DocumentRecord):
+        return
+
+    record['_oai']['updated'] = pytz.utc.localize(
+        datetime.utcnow()).isoformat()
+    record['_oai']['sets'] = [
+        SonarRecord.get_pid_by_ref_link(record['organisation']['$ref'])
+    ] if record.get('organisation') else []

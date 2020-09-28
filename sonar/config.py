@@ -656,3 +656,12 @@ PREVIEWER_MAX_IMAGE_SIZE_BYTES = 5 * 1024 * 1024
 """Maximum file size in bytes for image files."""
 PREVIEWER_MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024
 """Maximum file size in bytes for JSON/XML files."""
+
+# OAI-PMH
+# =======
+#: Index to use for the OAI-PMH server.
+OAISERVER_RECORD_INDEX = 'documents'
+#: OAI identifier prefix
+OAISERVER_ID_PREFIX = 'oai:sonar.ch:'
+#: XSL file
+OAISERVER_XSL_URL = 'static/xsl/oai2.xsl'

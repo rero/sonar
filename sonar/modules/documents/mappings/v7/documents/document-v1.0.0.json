@@ -64,6 +64,20 @@
           }
         }
       },
+      "_oai": {
+        "properties": {
+          "id": {
+            "type": "keyword"
+          },
+          "sets": {
+            "type": "keyword"
+          },
+          "updated": {
+            "type": "date"
+          }
+        },
+        "type": "object"
+      },
       "pid": {
         "type": "keyword"
       },
