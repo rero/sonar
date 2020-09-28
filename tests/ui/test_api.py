@@ -283,6 +283,10 @@ def test_get_record_by_bucket(app, db, document_with_file):
     pid = PersistentIdentifier.get('doc', document_with_file['pid'])
     db.session.delete(pid)
     db.session.commit()
+    pid = PersistentIdentifier.get('oai',
+                                   'oai:sonar.ch:' + document_with_file['pid'])
+    db.session.delete(pid)
+    db.session.commit()
     assert not SonarRecord.get_record_by_bucket(document_with_file['_bucket'])
 
 

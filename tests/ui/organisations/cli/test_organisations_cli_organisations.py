@@ -23,7 +23,8 @@ import sonar.modules.organisations.cli.organisations as Cli
 from sonar.modules.organisations.api import OrganisationRecord
 
 
-def test_import_organisations(app, script_info, bucket_location):
+def test_import_organisations(app, script_info, bucket_location,
+                              without_oaiset_signals):
     """Test import organisations."""
     runner = CliRunner()
 
@@ -44,5 +45,4 @@ def test_import_organisations(app, script_info, bucket_location):
                            obj=script_info)
     assert result.output.find(
         'Organisation {\'code\': \'test\', \'name\': \'Test\'} could not be '
-        'imported: Record already exists in DB'
-    )
+        'imported: Record already exists in DB')

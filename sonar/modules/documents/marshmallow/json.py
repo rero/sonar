@@ -99,6 +99,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     usageAndAccessPolicy = fields.Dict()
     _bucket = SanitizedUnicode()
     _files = Nested(FileSchemaV1, many=True)
+    _oai = fields.Dict()
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
     schema = GenFunction(load_only=True,

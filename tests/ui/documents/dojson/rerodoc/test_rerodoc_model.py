@@ -26,7 +26,8 @@ from utils import mock_response
 from sonar.modules.documents.dojson.rerodoc.model import marc21tojson
 
 
-def test_marc21_to_type_and_organisation(app, bucket_location):
+def test_marc21_to_type_and_organisation(app, bucket_location,
+                                         without_oaiset_signals):
     """Test type and organisation."""
 
     # Type only

@@ -23,7 +23,7 @@ from sonar.modules.documents.dojson.rerodoc.overdo import Overdo
 from sonar.modules.organisations.api import OrganisationRecord
 
 
-def test_create_organisation(app, bucket_location):
+def test_create_organisation(app, bucket_location, without_oaiset_signals):
     """Test create organisation."""
     Overdo.create_organisation('test')
 

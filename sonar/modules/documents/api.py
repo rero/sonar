@@ -23,13 +23,13 @@ from io import BytesIO
 
 from flask import current_app
 
+from sonar.modules.documents.minters import id_minter
 from sonar.modules.pdf_extractor.utils import extract_text_from_content
 from sonar.modules.utils import change_filename_extension, \
     create_thumbnail_from_file
 
 from ..api import SonarIndexer, SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
-from ..minters import id_minter
 from ..providers import Provider
 
 # provider

@@ -19,6 +19,8 @@
 
 from functools import partial
 
+from invenio_db import db
+from invenio_oaiserver.models import OAISet
 from werkzeug.local import LocalProxy
 
 from sonar.modules.users.api import current_user_record
@@ -62,6 +64,10 @@ class OrganisationRecord(SonarRecord):
     def create(cls, data, id_=None, dbcommit=False, with_bucket=True,
                **kwargs):
         """Create organisation record."""
+        # Create OAI set
+        oaiset = OAISet(spec=data['code'], name=data['name'])
+        db.session.add(oaiset)
+
         return super(OrganisationRecord, cls).create(data,
                                                      id_=id_,
                                                      dbcommit=dbcommit,
@@ -79,6 +85,19 @@ class OrganisationRecord(SonarRecord):
             return None
 
         return cls.get_record_by_ref_link(user['organisation']['$ref'])
+
+    def update(self, data):
+        """Update data for record."""
+        # Update OAI set name according to organisation's name
+        oaiset = OAISet.query.filter(
+            OAISet.spec == data['code']).first()
+
+        if oaiset:
+            oaiset.name = data['name']
+            db.session.commit()
+
+        super(OrganisationRecord, self).update(data)
+        return self
 
 
 class OrganisationIndexer(SonarIndexer):
