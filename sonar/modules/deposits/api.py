@@ -285,6 +285,11 @@ class DepositRecord(SonarRecord):
         if contributors:
             metadata['contribution'] = contributors
 
+        # License
+        metadata['usageAndAccessPolicy'] = {
+            'license': self['diffusion']['license']
+        }
+
         document = DocumentRecord.create(metadata,
                                          dbcommit=True,
                                          with_bucket=True)

@@ -842,7 +842,13 @@
     },
     "diffusion": {
       "type": "object",
-      "properties": {}
+      "additionalProperties": false,
+      "properties": {
+        "license": {
+          "$ref": "license-v1.0.0.json"
+        }
+      },
+      "required": ["license"]
     },
     "document": {
       "title": "Document",

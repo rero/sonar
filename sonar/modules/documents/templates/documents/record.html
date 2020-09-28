@@ -26,18 +26,20 @@
 
 <section class="mt-3">
   <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-3 text-center">
       {% if files and files | length > 0 %}
       <div class="mb-4">
         {{ thumbnail('documents', record, files | first) }}
       </div>
       {% endif %}
+
       <!-- DOCUMENT TYPE -->
       {% if record.documentType %}
-      <h5 class="text-center my-4">{{ _('document_type_' + record.documentType) }}</h5>
+      <h5 class="my-4">{{ _('document_type_' + record.documentType) }}</h5>
       {% endif %}
+
       {% if files and files | length > 1 %}
-      <p class="text-center">
+      <p>
         <a href="{{ request.url }}#other_files">+ {{ (files | length) - 1 }} {{ _('other files') }}</a>
       </p>
       {% endif %}
@@ -213,6 +215,19 @@
           {{ _('classification_' + classification.classificationPortion) }}
         </dd>
         {% endfor %}
+        {% endif %}
+
+        <!-- LICENSE -->
+        {% if record.usageAndAccessPolicy %}
+        <dt class="col-lg-3">
+          {{ _('License') }}
+        </dt>
+        <dd class="col-lg-9">
+          {{ _(record.usageAndAccessPolicy.license) }}
+          {% if record.usageAndAccessPolicy.label %}
+          <br>{{ record.usageAndAccessPolicy.label }}
+          {% endif %}
+        </dd>
         {% endif %}
 
         <!-- PERMANENT LINK -->

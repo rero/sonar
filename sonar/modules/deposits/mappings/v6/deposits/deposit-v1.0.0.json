@@ -228,7 +228,12 @@
           "type": "keyword"
         },
         "diffusion": {
-          "type": "object"
+          "type": "object",
+          "properties": {
+            "license": {
+              "type": "keyword"
+            }
+          }
         },
         "document": {
           "type": "object",

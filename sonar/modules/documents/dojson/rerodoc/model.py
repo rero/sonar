@@ -670,11 +670,16 @@ def marc21_to_dissertation_field_508(self, key, value):
 
 
 @marc21tojson.over('usageAndAccessPolicy', '^540..')
-@utils.for_each_value
 @utils.ignore_value
 def marc21_to_usage_and_access_policy(self, key, value):
     """Extract usage and access policy."""
-    return value.get('a')
+    if not value.get('a'):
+        return None
+
+    return {
+        'label': value.get('a'),
+        'license': 'Other OA / license undefined'
+    }
 
 
 @marc21tojson.over('contribution', '^100..')
