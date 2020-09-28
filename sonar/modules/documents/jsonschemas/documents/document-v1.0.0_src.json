@@ -1089,14 +1089,21 @@
       "hideExpression": "!['coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'habilitation_thesis', 'advanced_studies_thesis', 'other'].includes(field.parent.model.documentType)"
     },
     "usageAndAccessPolicy": {
-      "title": "Usage and access policies",
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "title": "Usage and access policy",
-        "type": "string",
-        "minLength": 1
+      "title": "Usage and access policy",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "license": {
+          "$ref": "license-v1.0.0.json"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string",
+          "minLength": 1
+        }
       },
+      "propertiesOrder": ["license", "label"],
+      "required": ["license"],
       "form": {
         "hide": true,
         "templateOptions": {

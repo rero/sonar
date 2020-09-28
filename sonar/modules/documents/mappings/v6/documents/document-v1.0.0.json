@@ -320,7 +320,15 @@
           }
         },
         "usageAndAccessPolicy": {
-          "type": "text"
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "text"
+            },
+            "license": {
+              "type": "keyword"
+            }
+          }
         },
         "contribution": {
           "type": "object",

@@ -1827,7 +1827,10 @@ def test_marc21_to_usage_and_access_policy():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('usageAndAccessPolicy') == ['Springer-Verlag Berlin']
+    assert data.get('usageAndAccessPolicy') == {
+        'label': 'Springer-Verlag Berlin',
+        'license': 'Other OA / license undefined'
+    }
 
     # Multiple
     marc21xml = """
@@ -1842,7 +1845,10 @@ def test_marc21_to_usage_and_access_policy():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert data.get('usageAndAccessPolicy') == ['Usage 1', 'Usage 2']
+    assert data.get('usageAndAccessPolicy') == {
+        'label': 'Usage 2',
+        'license': 'Other OA / license undefined'
+    }
 
     # Without $a
     marc21xml = """
@@ -1852,7 +1858,9 @@ def test_marc21_to_usage_and_access_policy():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert not data.get('usageAndAccessPolicy')
+    assert data.get('usageAndAccessPolicy') == {
+        'license': 'Other OA / license undefined'
+    }
 
     # Without 540
     marc21xml = """
@@ -1860,7 +1868,9 @@ def test_marc21_to_usage_and_access_policy():
     """
     marc21json = create_record(marc21xml)
     data = marc21tojson.do(marc21json)
-    assert not data.get('usageAndAccessPolicy')
+    assert data.get('usageAndAccessPolicy') == {
+        'license': 'Other OA / license undefined'
+    }
 
 
 def test_marc21_to_contribution_field_100():

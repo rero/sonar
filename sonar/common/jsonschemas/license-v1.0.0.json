@@ -1,0 +1,55 @@
+{
+  "title": "License",
+  "type": "string",
+  "enum": [
+    "CC0",
+    "CC BY",
+    "CC BY-NC",
+    "CC BY-NC-ND",
+    "CC BY-NC-SA",
+    "CC BY-ND",
+    "CC BY-SA",
+    "Other OA / license undefined",
+    "Not OA / Rights reserved"
+  ],
+  "form": {
+    "options": [
+      {
+        "label": "CC0",
+        "value": "CC0"
+      },
+      {
+        "label": "CC BY",
+        "value": "CC BY"
+      },
+      {
+        "label": "CC BY-NC",
+        "value": "CC BY-NC"
+      },
+      {
+        "label": "CC BY-NC-ND",
+        "value": "CC BY-NC-ND"
+      },
+      {
+        "label": "CC BY-NC-SA",
+        "value": "CC BY-NC-SA"
+      },
+      {
+        "label": "CC BY-ND",
+        "value": "CC BY-ND"
+      },
+      {
+        "label": "CC BY-SA",
+        "value": "CC BY-SA"
+      },
+      {
+        "label": "Other OA / license undefined",
+        "value": "Other OA / license undefined"
+      },
+      {
+        "label": "Not OA / Rights reserved",
+        "value": "Not OA / Rights reserved"
+      }
+    ]
+  }
+}

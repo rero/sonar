@@ -486,6 +486,9 @@ def deposit_json():
                 'value': '10.1038/nphys1170'
             }]
         },
+        'diffusion': {
+            'license': 'CC0'
+        },
         'status':
         'in_progress',
         'step':
