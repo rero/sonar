@@ -20,6 +20,8 @@
 from datetime import datetime
 from functools import partial
 
+import pytz
+
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.users.api import current_user_record
 
@@ -84,7 +86,7 @@ class DepositRecord(SonarRecord):
 
         log = {
             'user': user,
-            'date': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'date': pytz.utc.localize(datetime.utcnow()).isoformat(),
             'action': action
         }
 
