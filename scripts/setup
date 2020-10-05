@@ -49,6 +49,10 @@ if $import; then
     message "Size of import sets is set to \"$size\"" "info"
 fi
 
+# Purge celery
+section "Purge celery tasks" "info"
+celery --app invenio_app.celery purge -f
+
 # Clean redis
 section "Clear redis cache" "info"
 invenio shell --no-term-title -c "import redis; redis.StrictRedis.from_url(app.config['CACHE_REDIS_URL']).flushall(); print('Cache cleared')"

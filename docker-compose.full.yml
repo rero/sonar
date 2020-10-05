@@ -100,7 +100,7 @@ services:
       file: docker-services.yml
       service: app
     restart: "always"
-    command: ["celery worker -A invenio_app.celery --loglevel=INFO"]
+    command: ["celery --app invenio_app.celery worker --loglevel=INFO"]
     image: sonar
     links:
       - cache

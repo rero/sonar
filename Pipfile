@@ -38,6 +38,8 @@ wand = ">=0.5.0,<0.6.0"
 transifex-client = "*"
 python-dotenv = "*"
 flask-cors = ">3.0.8"
+# Avoid an error during invenio-previewer initialization
+nbconvert = ">=5.6.1,<6.0.0"
 
 [dev-packages]
 Flask-Debugtoolbar = ">=0.10.1"
