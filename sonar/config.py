@@ -211,8 +211,8 @@ APP_DEFAULT_SECURE_HEADERS = {
             'https://fonts.googleapis.com'
         ],
         'font-src': [
-            "'self'", "'unsafe-inline'", 'https://cdnjs.cloudflare.com',
-            'https://fonts.gstatic.com'
+            "'self'", "data:", "blob:", "'unsafe-inline'",
+            'https://cdnjs.cloudflare.com', 'https://fonts.gstatic.com'
         ],
         'img-src': ["'self'", "data:", "blob:"]
         # To allow PDF previewer to create left navigation.
@@ -642,3 +642,7 @@ WIKI_BASE_TEMPLATE = 'sonar/page_wiki.html'
 WIKI_EDIT_VIEW_PERMISSION = wiki_edit_permission
 WIKI_EDIT_UI_PERMISSION = wiki_edit_permission
 WIKI_MARKDOWN_EXTENSIONS = set(('extra', ))
+
+# PREVIEW
+# =======
+PREVIEWER_BASE_TEMPLATE = 'sonar/preview/base.html'

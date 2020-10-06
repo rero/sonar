@@ -29,7 +29,8 @@ theme = WebpackBundle(
     entry={
         'app': './js/app.js',
         'global-theme': './scss/global/theme.scss',
-        'usi-theme': './scss/usi/theme.scss'
+        'usi-theme': './scss/usi/theme.scss',
+        'preview': './scss/preview.scss',
     },
     dependencies={
         'popper.js': '^1.15',
