@@ -60,6 +60,9 @@ invenio webpack buildall
 mkdir -p ${static_folder}/sonar-ui
 cp -R ${assets_folder}/node_modules/@rero/sonar-ui/dist/sonar/* ${static_folder}/sonar-ui
 
+# Copy worker from pdfjs to avoid a 404 error when previewing PDF files.
+cp ${assets_folder}/node_modules/pdfjs-dist/build/pdf.worker.min.js ${static_folder}/js/pdfjs/
+
 # Compile JSON schemas
 section "Compile JSON schemas" "info"
 invenio utils compile-json ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json -o ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
