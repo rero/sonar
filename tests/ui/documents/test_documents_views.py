@@ -202,6 +202,15 @@ def test_part_of_format():
     }) == 'Mehr oder weniger Staat?, 2015, vol. 28, no. 2, p. 469-480'
 
     assert views.part_of_format({
+        'document': {
+            'title': 'Mehr oder weniger Staat?'
+        },
+        'numberingYear': '2015',
+        'numberingIssue': '2',
+        'numberingPages': '469-480'
+    }) == 'Mehr oder weniger Staat?, 2015'
+
+    assert views.part_of_format({
         'numberingYear': '2015',
     }) == '2015'
 

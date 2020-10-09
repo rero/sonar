@@ -37,6 +37,9 @@
           "key": {
             "type": "keyword"
           },
+          "mimetype": {
+            "type": "keyword"
+          },
           "checksum": {
             "type": "keyword"
           },

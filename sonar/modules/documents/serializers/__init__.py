@@ -25,6 +25,8 @@ from flask import current_app, request
 from invenio_records_rest.serializers.response import record_responsify, \
     search_responsify
 
+from sonar.modules.documents.serializers.dc import SonarDublinCoreSerializer
+from sonar.modules.documents.serializers.schemas.dc import DublinCoreV1
 from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.serializers import JSONSerializer as _JSONSerializer
 from sonar.modules.users.api import current_user_record
@@ -72,6 +74,8 @@ class JSONSerializer(_JSONSerializer):
 # ===========
 #: JSON serializer definition.
 json_v1 = JSONSerializer(DocumentSchemaV1)
+#: Dublin Core serializer
+dc_v1 = SonarDublinCoreSerializer(DublinCoreV1, replace_refs=True)
 
 # Records-REST serializers
 # ========================
@@ -85,3 +89,8 @@ __all__ = (
     'json_v1_response',
     'json_v1_search',
 )
+
+# OAI-PMH record serializers.
+# ===========================
+#: OAI-PMH OAI Dublin Core record serializer.
+oaipmh_oai_dc = dc_v1.serialize_oaipmh

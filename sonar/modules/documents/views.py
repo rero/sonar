@@ -171,13 +171,13 @@ def part_of_format(part_of):
         items.append('{label} {value}'.format(
             label=_('vol.'), value=part_of['numberingVolume']))
 
-    if 'numberingIssue' in part_of:
-        items.append('{label} {value}'.format(label=_('no.'),
-                                              value=part_of['numberingIssue']))
+        if 'numberingIssue' in part_of:
+            items.append('{label} {value}'.format(
+                label=_('no.'), value=part_of['numberingIssue']))
 
-    if 'numberingPages' in part_of:
-        items.append('{label} {value}'.format(label=_('p.'),
-                                              value=part_of['numberingPages']))
+        if 'numberingPages' in part_of:
+            items.append('{label} {value}'.format(
+                label=_('p.'), value=part_of['numberingPages']))
 
     return ', '.join(items)
 

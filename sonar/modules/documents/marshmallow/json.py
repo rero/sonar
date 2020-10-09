@@ -56,6 +56,7 @@ class FileSchemaV1(StrictKeysMixin):
     file_id = SanitizedUnicode()
     version_id = SanitizedUnicode()
     key = SanitizedUnicode()
+    mimetype = SanitizedUnicode()
     checksum = SanitizedUnicode()
     size = fields.Number()
     label = SanitizedUnicode()

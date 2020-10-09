@@ -665,3 +665,13 @@ OAISERVER_RECORD_INDEX = 'documents'
 OAISERVER_ID_PREFIX = 'oai:sonar.ch:'
 #: XSL file
 OAISERVER_XSL_URL = 'static/xsl/oai2.xsl'
+#: Export formats
+OAISERVER_METADATA_FORMATS = {
+    'oai_dc': {
+        'namespace': 'http://www.openarchives.org/OAI/2.0/oai_dc/',
+        'schema': 'http://www.openarchives.org/OAI/2.0/oai_dc.xsd',
+        'serializer': 'sonar.modules.documents.serializers.oaipmh_oai_dc',
+    }
+}
+#: Number of records to return per page in OAI-PMH results.
+OAISERVER_PAGE_SIZE = 100
