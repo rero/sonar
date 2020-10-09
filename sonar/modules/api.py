@@ -31,12 +31,30 @@ from invenio_indexer.api import RecordIndexer
 from invenio_jsonschemas import current_jsonschemas
 from invenio_pidstore.errors import PIDDoesNotExistError
 from invenio_pidstore.models import PersistentIdentifier, PIDStatus
-from invenio_records_files.api import FilesMixin, Record
+from invenio_records_files.api import FileObject as InvenioFileObjet
+from invenio_records_files.api import FilesMixin as InvenioFilesMixin
+from invenio_records_files.api import Record
 from invenio_records_files.models import RecordsBuckets
 from invenio_records_rest.utils import obj_or_import_string
 from invenio_search import current_search
 from invenio_search.api import RecordsSearch
 from sqlalchemy.orm.exc import NoResultFound
+
+
+class FileObject(InvenioFileObjet):
+    """Wrapper for files."""
+
+    def dumps(self):
+        """Create a dump of the metadata associated to the record."""
+        super(FileObject, self).dumps()
+        self.data.update({'mimetype': self.obj.mimetype})
+        return self.data
+
+
+class FilesMixin(InvenioFilesMixin):
+    """Implement files attribute for Record models."""
+
+    file_cls = FileObject
 
 
 class SonarRecord(Record, FilesMixin):

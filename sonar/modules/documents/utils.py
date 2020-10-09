@@ -147,7 +147,8 @@ def get_file_restriction(file, organisation):
     not_restricted = {'restricted': False, 'date': None}
 
     # We are in admin, no restrictions are applied.
-    if not request.args.get('view') and not request.view_args.get('view'):
+    if not request.args.get('view') and not request.view_args.get(
+            'view') and request.url_rule.rule != '/oai2d':
         return not_restricted
 
     # No specific access or specific access is open access

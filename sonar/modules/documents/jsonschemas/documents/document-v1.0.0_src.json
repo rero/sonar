@@ -49,6 +49,11 @@
             "type": "string",
             "minLength": 1
           },
+          "mimetype": {
+            "title": "MIME type",
+            "type": "string",
+            "minLength": 1
+          },
           "checksum": {
             "title": "Checksum",
             "description": "MD5 checksum of the file.",
