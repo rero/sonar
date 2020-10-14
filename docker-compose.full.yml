@@ -58,7 +58,7 @@ services:
       file: docker-services.yml
       service: frontend
     volumes:
-      - static_data:/opt/invenio/var/instance/static
+      - static_data:/invenio/var/instance/static
     links:
       - web-ui
       - web-api
@@ -67,12 +67,12 @@ services:
     extends:
       file: docker-services.yml
       service: app
-    command: ["uwsgi /opt/invenio/var/instance/uwsgi_ui.ini"]
+    command: ["uwsgi /invenio/var/instance/uwsgi_ui.ini"]
     image: sonar
     ports:
       - "5000"
     volumes:
-      - static_data:/opt/invenio/var/instance/static
+      - static_data:/invenio/var/instance/static
     links:
       - cache
       - es
@@ -83,12 +83,12 @@ services:
     extends:
       file: docker-services.yml
       service: app
-    command: ["uwsgi /opt/invenio/var/instance/uwsgi_rest.ini"]
+    command: ["uwsgi /invenio/var/instance/uwsgi_rest.ini"]
     image: sonar
     ports:
       - "5001"
     volumes:
-      - static_data:/opt/invenio/var/instance/static
+      - static_data:/invenio/var/instance/static
     links:
       - cache
       - es

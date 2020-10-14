@@ -20,9 +20,19 @@ source $(dirname "$0")/functions
 
 set -e
 
+# Poetry is a mandatory condition to launch this program!
+if [[ -z "${VIRTUAL_ENV}" ]]; then
+  message "Launch this script via poetry command: poetry run ${PROGRAM}" "error"
+  exit 1
+fi
+
 title "Installation of SONAR UI library"
 
 tarball=$1
+
+# Store folder path
+assets_folder=$(invenio shell --no-term-title -c "print(app.config.get('WEBPACKEXT_PROJECT_BUILDDIR'))")
+static_folder=$(invenio shell --no-term-title -c "print('static_folder:%s' % app.static_folder)"|grep static_folder| cut -d: -f2-)
 
 # Remove installed package
 section "Remove installed packages" "info"
@@ -37,11 +47,7 @@ fi
 
 # Install dependencies
 section "Install dependencies" "info"
-invenio webpack install $tarball
-
-# Store folder path
-assets_folder=$(pipenv run invenio shell --no-term-title -c "print(app.config.get('WEBPACKEXT_PROJECT_BUILDDIR'))")
-static_folder=$(pipenv run invenio shell --no-term-title -c "print('static_folder:%s' % app.static_folder)"|grep static_folder| cut -d: -f2-)
+npm i $tarball --prefix $assets_folder
 
 # Copy sonar-ui files to static folder to use it with flask-assets
 section "Copy SONAR UI files to static folder" "info"

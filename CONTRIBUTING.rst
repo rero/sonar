@@ -78,14 +78,7 @@ Ready to contribute? Here's how to set up `sonar` for local development.
 
       $ git clone git@github.com:your_name_here/sonar.git
 
-3. Install your local copy. Assuming you have
-   `pipenv <https://docs.pipenv.org/install/#installing-pipenv>`_, installed, this is how you
-   set up your fork for local development:
-
-   .. code-block:: console
-
-      $ cd sonar/
-      $ pipenv run install -e .[all]
+3. Install your local using the `installation procedure`.
 
 4. Create a branch for local development:
 
@@ -99,7 +92,7 @@ Ready to contribute? Here's how to set up `sonar` for local development.
 
    .. code-block:: console
 
-      $ ./run-tests.sh
+      $ poetry run ./scripts/test
 
    The tests will provide you with test coverage and also check PEP8
    (code style), PEP257 (documentation), flake8 as well as build the Sphinx

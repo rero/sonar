@@ -20,6 +20,12 @@ source $(dirname "$0")/functions
 
 set -e
 
+# Poetry is a mandatory condition to launch this program!
+if [[ -z "${VIRTUAL_ENV}" ]]; then
+  message "Launch this script via poetry command: poetry run ${PROGRAM}" "error"
+  exit 1
+fi
+
 title "Application setup"
 
 # Size of data to create
@@ -92,10 +98,10 @@ invenio oaiharvester config create data/rerodoc_oai_sources.json
 
 # Create users and organisations
 section "Create organisations" "info"
-invenio fixtures organisations import $(pipenv --where)/data/organisations.json
+invenio fixtures organisations import ./data/organisations.json
 
 section "Create users" "info"
-invenio fixtures users import $(pipenv --where)/data/users.json
+invenio fixtures users import ./data/users.json
 
 # Import rerodoc data
 if $import; then
