@@ -12,15 +12,6 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU Affero General Public License for more details.
 
-# To update your MANIFEST.in, use the following commands:
-#
-#  git init  # if not already done
-#  git add -A
-#  pipenv run check-manifest -u  # to install run "pipenv install --dev"
-#  # please sort the lines in this file after running the commands
-
-# Check manifest will not automatically add these two files:
-
 exclude sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
 exclude sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json
 

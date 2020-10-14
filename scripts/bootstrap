@@ -16,29 +16,47 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-script_path=$(dirname "$0")
-
-source ${script_path}/functions
+source $(dirname "$0")/functions
 
 set -e
 
-title "Bootstrap script"
+deploy=false
+ui_tgz=""
 
-section "Updating dependencies" "info"
-
-pipfile_lock_path="$script_path/../Pipfile.lock"
-
-if [ ! -f $pipfile_lock_path ]; then
-    message "'Pipfile.lock' not found. Generating via 'pipenv lock --dev'..." "info"
-    pipenv lock --dev
+# Poetry is a mandatory condition to launch this program!
+if [[ -z "${VIRTUAL_ENV}" ]]; then
+  message "Launch this script via poetry command: poetry run ${PROGRAM}" "error"
+  exit 1
 fi
 
-# Installs all packages specified in Pipfile.lock
-pipenv sync --dev
+# Check arguments and options
+while test $# -gt 0; do
+    case "$1" in
+        --ui)
+            if [ ! -z "$2" ]; then
+              ui_tgz=$2
+              shift
+            fi
+            ;;
+        --deploy)
+            deploy=true
+            ;;
+        *) message "Option $1 not recognized" "error" ;;
+    esac
+    shift
+done
 
-# Install application code and entrypoints from 'setup.py'
-section "Install entry points" "info"
-pip install -e $script_path/..
+title "Bootstrap script"
+
+# Update pip version
+section "Upgrading pip..." "info"
+poetry run pip install --upgrade pip
+
+# Installs all packages specified in poetry.lock
+if [ "$deploy" = false ]; then
+  section "Updating dependencies" "info"
+  poetry install
+fi
 
 # Collect static files
 section "Collect static files" "info"
@@ -56,6 +74,11 @@ rm -rf ${assets_folder}/node_modules/@rero
 # Build webpack assets
 invenio webpack buildall
 
+if [ ! -z "$ui_tgz" ]; then
+  message "Install UI from $ui_tgz" "info"
+  npm i $ui_tgz --prefix $assets_folder
+fi
+
 # Copy sonar-ui files to static folder to use it with flask-assets
 mkdir -p ${static_folder}/sonar-ui
 cp -R ${assets_folder}/node_modules/@rero/sonar-ui/dist/sonar/* ${static_folder}/sonar-ui
@@ -67,5 +90,9 @@ cp ${assets_folder}/node_modules/pdfjs-dist/build/pdf.worker.min.js ${static_fol
 section "Compile JSON schemas" "info"
 invenio utils compile-json ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json -o ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
 invenio utils compile-json ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json -o ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json
+
+# Compile translations catalogs
+section "Compile translations catalogs" "info"
+python ./setup.py compile_catalog
 
 message "\nBootstrap finished successfully" "success"

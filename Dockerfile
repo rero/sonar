@@ -27,23 +27,17 @@
 ARG VERSION=latest
 FROM sonar-base:${VERSION}
 
-ARG UI_TGZ=""
-
-COPY ./ .
+# Copy files
+COPY ./ ${WORKING_DIR}/src
+WORKDIR ${WORKING_DIR}/src
 COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
 
-RUN pip install . && \
-    invenio collect -v  && \
-    invenio webpack create && \
-    # --unsafe needed because we are running as root
-    invenio webpack install --unsafe && \
-    if [ "${UI_TGZ}" != "" ] ; then invenio webpack install $PWD/data/$UI_TGZ --unsafe ; fi && \
-    invenio webpack build &&  \
-    invenio utils compile-json ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json -o ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json && \
-    invenio utils compile-json ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json -o ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json && \
-    python ./setup.py compile_catalog && \
-    pip install . && \
-    mkdir ${INVENIO_INSTANCE_PATH}/static/sonar-ui && \
-    cp -R ${INVENIO_INSTANCE_PATH}/assets/node_modules/@rero/sonar-ui/dist/sonar/* ${INVENIO_INSTANCE_PATH}/static/sonar-ui
+# Change owner
+RUN chown -R invenio:invenio ${WORKING_DIR}
+
+# Run bootstrap
+ENV TERM=xterm-256color
+ARG UI_TGZ=""
+RUN poetry run ./scripts/bootstrap --deploy --ui ${UI_TGZ}
 
 ENTRYPOINT [ "bash", "-c"]

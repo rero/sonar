@@ -1,1 +1,0 @@
-#-e git+https://github.com/inveniosoftware/invenio-records-rest.git#egg=invenio-records-rest

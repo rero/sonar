@@ -22,9 +22,39 @@
 # and includes Pip, Pipenv, Node.js, NPM and some few standard libraries
 # Invenio usually needs.
 
-FROM inveniosoftware/centos7-python:3.6
+FROM python:3.6-slim-stretch
 
-RUN yum -y install libxml2-devel xmlsec1-devel xmlsec1-openssl-devel libtool-ltdl-devel xpdf ghostscript ImageMagick
+# require debian packages
+RUN apt-get upgrade -y && apt-get update -y
+RUN apt-get install --no-install-recommends -y git vim-tiny curl gcc gnupg libc6-dev libxml2-dev libxmlsec1-dev libxmlsec1-openssl xpdf xpdf-utils ghostscript imagemagick && rm -rf /var/lib/apt/lists/*
+RUN pip install --upgrade setuptools wheel pip "poetry<1.1.0"
 
-COPY Pipfile Pipfile.lock ./
-RUN pipenv install --deploy --system
+# # Install Node
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN apt-get install --no-install-recommends -y nodejs && rm -rf /var/lib/apt/lists/*
+RUN npm install --silent  node-sass@4.14.1 clean-css-cli@4.3.0 uglify-js@3.9.4 requirejs@2.3.6
+
+# Env variables
+ENV WORKING_DIR=/invenio
+ENV INVENIO_INSTANCE_PATH=${WORKING_DIR}/var/instance
+
+# Create directories
+RUN mkdir -p ${INVENIO_INSTANCE_PATH}
+RUN mkdir -p ${WORKING_DIR}/src
+RUN mkdir -p ${WORKING_DIR}/instance
+
+# copy everything inside /src
+COPY ./ ${WORKING_DIR}/src
+WORKDIR ${WORKING_DIR}/src
+
+# copy uwsgi config files
+COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
+
+# Set folder permissions
+ENV INVENIO_USER_ID=1000
+RUN useradd invenio --uid ${INVENIO_USER_ID}  --home ${WORKING_DIR} && \
+    chown -R invenio:invenio ${WORKING_DIR} && \
+    chmod -R go+w ${WORKING_DIR}
+
+# Install dependencies
+RUN poetry install --no-dev

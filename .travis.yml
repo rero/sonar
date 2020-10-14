@@ -54,13 +54,14 @@ before_install:
   # Chrome webdriver for Selenium
   - "PATH=$PATH:$HOME/webdrivers"
   - "nvm install 8; nvm use 8"
-  - "travis_retry pip install --upgrade pip setuptools py pipenv"
+  - "travis_retry pip install --upgrade pip setuptools py \"poetry<1.1.0\""
   - "travis_retry pip install twine wheel coveralls"
   # patch default version of travis which is marked as unsafe by pipenv check
   - "travis_retry pip install --upgrade numpy"
 
 install:
   - "./scripts/bootstrap"
+  - "poetry show"
 
 before_script:
   # https://docs.travis-ci.com/user/gui-and-headless-browsers/
@@ -69,7 +70,7 @@ before_script:
   - "./docker/wait-for-services.sh"
 
 script:
-  - ./run-tests.sh
+  - "./scripts/test"
 
 after_success:
   - coveralls
