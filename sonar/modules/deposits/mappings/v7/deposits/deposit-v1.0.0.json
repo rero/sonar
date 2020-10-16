@@ -1,0 +1,253 @@
+{
+  "mappings": {
+    "date_detection": false,
+    "numeric_detection": false,
+    "properties": {
+      "$schema": {
+        "type": "keyword"
+      },
+      "pid": {
+        "type": "keyword"
+      },
+      "_bucket": {
+        "type": "keyword"
+      },
+      "_files": {
+        "type": "object",
+        "properties": {
+          "bucket": {
+            "type": "keyword"
+          },
+          "file_id": {
+            "type": "keyword"
+          },
+          "version_id": {
+            "type": "keyword"
+          },
+          "key": {
+            "type": "keyword"
+          },
+          "checksum": {
+            "type": "keyword"
+          },
+          "size": {
+            "type": "integer"
+          },
+          "label": {
+            "type": "text"
+          },
+          "category": {
+            "type": "keyword"
+          },
+          "type": {
+            "type": "keyword"
+          },
+          "embargo": {
+            "type": "boolean"
+          },
+          "embargoDate": {
+            "type": "date",
+            "format": "yyyy-MM-dd"
+          },
+          "exceptInOrganisation": {
+            "type": "boolean"
+          }
+        }
+      },
+      "user": {
+        "type": "object",
+        "properties": {
+          "$ref": {
+            "type": "keyword"
+          }
+        }
+      },
+      "status": {
+        "type": "keyword"
+      },
+      "step": {
+        "type": "keyword"
+      },
+      "logs": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "$ref": {
+                "type": "keyword"
+              }
+            }
+          },
+          "action": {
+            "type": "keyword"
+          },
+          "date": {
+            "type": "date"
+          },
+          "comment": {
+            "type": "text"
+          }
+        }
+      },
+      "metadata": {
+        "type": "object",
+        "properties": {
+          "documentType": {
+            "type": "keyword"
+          },
+          "title": {
+            "type": "text"
+          },
+          "subtitle": {
+            "type": "text"
+          },
+          "otherLanguageTitle": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "text"
+              },
+              "language": {
+                "type": "keyword"
+              }
+            }
+          },
+          "language": {
+            "type": "keyword"
+          },
+          "documentDate": {
+            "type": "date",
+            "format": "yyyy-MM-dd||yyyy"
+          },
+          "publication": {
+            "type": "object",
+            "properties": {
+              "publishedIn": {
+                "type": "text"
+              },
+              "year": {
+                "type": "text"
+              },
+              "volume": {
+                "type": "text"
+              },
+              "number": {
+                "type": "text"
+              },
+              "pages": {
+                "type": "text"
+              },
+              "editors": {
+                "type": "text"
+              },
+              "publisher": {
+                "type": "text"
+              }
+            }
+          },
+          "otherElectronicVersions": {
+            "type": "object",
+            "properties": {
+              "publicNote": {
+                "type": "text"
+              },
+              "url": {
+                "type": "keyword"
+              }
+            }
+          },
+          "specificCollections": {
+            "type": "text"
+          },
+          "classification": {
+            "type": "keyword"
+          },
+          "abstracts": {
+            "type": "object",
+            "properties": {
+              "language": {
+                "type": "keyword"
+              },
+              "abstract": {
+                "type": "text"
+              }
+            }
+          },
+          "subjects": {
+            "type": "object",
+            "properties": {
+              "language": {
+                "type": "keyword"
+              },
+              "subjects": {
+                "type": "keyword"
+              }
+            }
+          },
+          "dissertation": {
+            "type": "object",
+            "properties": {
+              "degree": {
+                "type": "text"
+              },
+              "jury_note": {
+                "type": "text"
+              },
+              "grantingInstitution": {
+                "type": "text"
+              },
+              "date": {
+                "type": "date",
+                "format": "yyyy-MM-dd||yyyy"
+              }
+            }
+          }
+        }
+      },
+      "contributors": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "text",
+            "copy_to": "facet_contributors"
+          },
+          "affiliation": {
+            "type": "keyword"
+          },
+          "role": {
+            "type": "keyword"
+          },
+          "orcid": {
+            "type": "keyword"
+          }
+        }
+      },
+      "facet_contributors": {
+        "type": "keyword"
+      },
+      "diffusion": {
+        "type": "object",
+        "properties": {
+          "license": {
+            "type": "keyword"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {
+          "$ref": {
+            "type": "keyword"
+          }
+        }
+      },
+      "_created": {
+        "type": "date"
+      },
+      "_updated": {
+        "type": "date"
+      }
+    }
+  }
+}

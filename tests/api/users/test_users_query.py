@@ -32,7 +32,7 @@ def test_queries(client, superuser, make_user):
                                   missing_organisation='1'),
                           headers=headers)
     assert response.status_code == 200
-    assert response.json['hits']['total'] == 0
+    assert response.json['hits']['total']['value'] == 0
 
     # 1 user found
     make_user('user', None)
@@ -40,4 +40,4 @@ def test_queries(client, superuser, make_user):
                                   missing_organisation='1'),
                           headers=headers)
     assert response.status_code == 200
-    assert response.json['hits']['total'] == 1
+    assert response.json['hits']['total']['value'] == 1

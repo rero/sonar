@@ -36,53 +36,53 @@ def test_list(app, client, make_user, superuser, admin, moderator, submitter,
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
     res = client.get(url_for('invenio_records_rest.user_list'))
     assert res.status_code == 200
-    assert res.json['hits']['total'] == 6
+    assert res.json['hits']['total']['value'] == 6
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
 
     # # Logged as user
     login_user_via_session(client, email=user['email'])
     res = client.get(url_for('invenio_records_rest.user_list'))
     assert res.status_code == 200
-    assert res.json['hits']['total'] == 1
+    assert res.json['hits']['total']['value'] == 1
 
     # Test search email, no result
     res = client.get(
         url_for('invenio_records_rest.user_list',
                 q='email:test@gmail.com NOT pid:orguser'))
     assert res.status_code == 200
-    assert res.json['hits']['total'] == 0
+    assert res.json['hits']['total']['value'] == 0
 
     # Test search email, existing email
     res = client.get(
         url_for('invenio_records_rest.user_list',
                 q='email:orgadmin@rero.ch NOT pid:orguser'))
     assert res.status_code == 200
-    assert res.json['hits']['total'] == 1
+    assert res.json['hits']['total']['value'] == 1
     assert not res.json['hits']['hits'][0]['metadata'].get('email')
 
     # Logged as submitter
     login_user_via_session(client, email=submitter['email'])
     res = client.get(url_for('invenio_records_rest.user_list'))
     assert res.status_code == 200
-    assert res.json['hits']['total'] == 1
+    assert res.json['hits']['total']['value'] == 1
 
     # Logged as moderator
     login_user_via_session(client, email=moderator['email'])
     res = client.get(url_for('invenio_records_rest.user_list'))
     assert res.status_code == 200
-    assert res.json['hits']['total'] == 1
+    assert res.json['hits']['total']['value'] == 1
 
     # Logged as admin
     login_user_via_session(client, email=admin['email'])
     res = client.get(url_for('invenio_records_rest.user_list'))
     assert res.status_code == 200
-    assert res.json['hits']['total'] == 4
+    assert res.json['hits']['total']['value'] == 4
 
     # Logged as superuser
     login_user_via_session(client, email=superuser['email'])
     res = client.get(url_for('invenio_records_rest.user_list'))
     assert res.status_code == 200
-    assert res.json['hits']['total'] == 6
+    assert res.json['hits']['total']['value'] == 6
 
 
 def test_create(client, organisation, superuser, admin, moderator, submitter,

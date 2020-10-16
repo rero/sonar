@@ -73,8 +73,19 @@ class UserMetadataSchemaV1(StrictKeysMixin):
 
         return data
 
+    @pre_load
+    def remove_fields(self, data, **kwargs):
+        """Removes computed fields.
+
+        :param data: Dict of record data.
+        :returns: Modified data.
+        """
+        data.pop('permissions', None)
+
+        return data
+
     @pre_dump
-    def add_permissions(self, item):
+    def add_permissions(self, item, **kwargs):
         """Add permissions to record.
 
         :param data: Dict of user data.

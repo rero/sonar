@@ -25,7 +25,7 @@ from flask_security import current_user
 from invenio_records_rest.schemas import StrictKeysMixin
 from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
-from marshmallow import fields, pre_dump
+from marshmallow import fields, pre_dump, pre_load
 
 from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.deposits.permissions import DepositPermission
@@ -57,7 +57,7 @@ class DepositMetadataSchemaV1(StrictKeysMixin):
     permissions = fields.Dict(dump_only=True)
 
     @pre_dump
-    def add_permissions(self, item):
+    def add_permissions(self, item, **kwargs):
         """Add permissions to record.
 
         :param item: Dict representing the record
@@ -70,6 +70,17 @@ class DepositMetadataSchemaV1(StrictKeysMixin):
         }
 
         return item
+
+    @pre_load
+    def remove_fields(self, data, **kwargs):
+        """Removes computed fields.
+
+        :param data: Dict of record data.
+        :returns: Modified data.
+        """
+        data.pop('permissions', None)
+
+        return data
 
 
 class DepositSchemaV1(StrictKeysMixin):

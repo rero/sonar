@@ -58,7 +58,7 @@ class FileSchemaV1(StrictKeysMixin):
     restriction = fields.Dict(dump_only=True)
 
     @pre_load
-    def remove_restriction(self, data):
+    def remove_restriction(self, data, **kwargs):
         """Remove restriction information before saving."""
         data.pop('restriction', None)
         return data
@@ -100,10 +100,10 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
                          data_key="$schema",
                          deserialize=schema_from_document)
     permissions = fields.Dict(dump_only=True)
-    permalink = fields.Dict(dump_only=True)
+    permalink = SanitizedUnicode(dump_only=True)
 
     @pre_dump
-    def process_files(self, item):
+    def process_files(self, item, **kwargs):
         """Add restrictions to file before dumping data.
 
         :param item: Item object to process
@@ -131,7 +131,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
         return item
 
     @pre_dump
-    def add_permissions(self, item):
+    def add_permissions(self, item, **kwargs):
         """Add permissions to record.
 
         :param item: Dict representing the record.
@@ -146,14 +146,14 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
         return item
 
     @pre_dump
-    def add_permalink(self, item):
+    def add_permalink(self, item, **kwargs):
         """Add permanent link to document."""
         item['permalink'] = DocumentRecord.get_permanent_link(
             request.host_url, item['pid'])
         return item
 
     @pre_dump
-    def add_formatted_texts(self, item):
+    def add_formatted_texts(self, item, **kwargs):
         """Add formatted texts for objects which are processing in backend.
 
         :param item: Dict of record data.
@@ -197,8 +197,8 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
         return data
 
     @pre_load
-    def remove_formatted_texts(self, data):
-        """Removes formatted texts from fields.
+    def remove_fields(self, data, **kwargs):
+        """Removes computed fields.
 
         :param data: Dict of record data.
         :returns: Modified data.
@@ -213,6 +213,11 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
             contribution.pop('text', None)
 
         data.get('dissertation', {}).pop('text', None)
+
+        data.pop('permalink', None)
+        data.pop('permissions', None)
+
+        return data
 
 
 class DocumentSchemaV1(StrictKeysMixin):

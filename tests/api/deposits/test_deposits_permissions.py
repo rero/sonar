@@ -40,7 +40,7 @@ def test_list(app, client, make_deposit, superuser, admin, moderator,
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
     res = client.get(url_for('invenio_records_rest.depo_list'))
     assert res.status_code == 200
-    assert res.json['hits']['total'] == 3
+    assert res.json['hits']['total']['value'] == 3
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
 
     # Logged as user
@@ -52,25 +52,25 @@ def test_list(app, client, make_deposit, superuser, admin, moderator,
     login_user_via_session(client, email=submitter['email'])
     res = client.get(url_for('invenio_records_rest.depo_list'))
     assert res.status_code == 200
-    assert res.json['hits']['total'] == 1
+    assert res.json['hits']['total']['value'] == 1
 
     # Logged as moderator
     login_user_via_session(client, email=moderator['email'])
     res = client.get(url_for('invenio_records_rest.depo_list'))
     assert res.status_code == 200
-    assert res.json['hits']['total'] == 2
+    assert res.json['hits']['total']['value'] == 2
 
     # Logged as admin
     login_user_via_session(client, email=admin['email'])
     res = client.get(url_for('invenio_records_rest.depo_list'))
     assert res.status_code == 200
-    assert res.json['hits']['total'] == 2
+    assert res.json['hits']['total']['value'] == 2
 
     # Logged as superuser
     login_user_via_session(client, email=superuser['email'])
     res = client.get(url_for('invenio_records_rest.depo_list'))
     assert res.status_code == 200
-    assert res.json['hits']['total'] == 3
+    assert res.json['hits']['total']['value'] == 3
 
 
 def test_create(client, deposit_json, bucket_location, superuser, admin,

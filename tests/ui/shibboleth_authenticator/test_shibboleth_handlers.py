@@ -39,7 +39,7 @@ def test_authorized_signup_handler(app, roles, valid_sp_configuration,
 
     # Unavailable configuration
     with pytest.raises(KeyError):
-        authorized_signup_handler(auth)
+        authorized_signup_handler(auth, None)
 
     # Test valid configuration
     assert authorized_signup_handler(auth, 'idp').status_code == 302
