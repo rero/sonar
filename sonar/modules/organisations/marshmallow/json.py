@@ -25,7 +25,7 @@ from flask_security import current_user
 from invenio_records_rest.schemas import StrictKeysMixin
 from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
-from marshmallow import fields, pre_dump
+from marshmallow import fields, pre_dump, pre_load
 
 from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.organisations.permissions import OrganisationPermission
@@ -68,7 +68,7 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
     _bucket = SanitizedUnicode()
 
     @pre_dump
-    def add_permissions(self, item):
+    def add_permissions(self, item, **kwargs):
         """Add permissions to record.
 
         :param item: Dict representing the record.
@@ -81,6 +81,17 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
         }
 
         return item
+
+    @pre_load
+    def remove_fields(self, data, **kwargs):
+        """Removes computed fields.
+
+        :param data: Dict of record data.
+        :returns: Modified data.
+        """
+        data.pop('permissions', None)
+
+        return data
 
 
 class OrganisationSchemaV1(StrictKeysMixin):

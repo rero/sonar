@@ -212,7 +212,7 @@ def test_index_record(client, db, document_json, superuser):
 
     res = client.get(url_for('invenio_records_rest.doc_list'))
     assert res.status_code == 200
-    total = res.json['hits']['total']
+    total = res.json['hits']['total']['value']
 
     record = DocumentRecord.create(document_json, dbcommit=True)
     db.session.commit()
@@ -222,7 +222,7 @@ def test_index_record(client, db, document_json, superuser):
 
     res = client.get(url_for('invenio_records_rest.doc_list'))
     assert res.status_code == 200
-    assert res.json['hits']['total'] == (total + 1)
+    assert res.json['hits']['total']['value'] == (total + 1)
 
 
 def test_remove_from_index(client, db, document, superuser):
@@ -231,14 +231,14 @@ def test_remove_from_index(client, db, document, superuser):
 
     res = client.get(url_for('invenio_records_rest.doc_list'))
     assert res.status_code == 200
-    total = res.json['hits']['total']
+    total = res.json['hits']['total']['value']
 
     indexer = DocumentIndexer()
     indexer.delete(document)
 
     res = client.get(url_for('invenio_records_rest.doc_list'))
     assert res.status_code == 200
-    assert res.json['hits']['total'] == (total - 1)
+    assert res.json['hits']['total']['value'] == (total - 1)
 
 
 def test_get_record_by_bucket(app, db, document_with_file):
