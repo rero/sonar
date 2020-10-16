@@ -253,7 +253,7 @@ class DepositRecord(SonarRecord):
 
         # Contributors
         contributors = []
-        for contributor in self['contributors']:
+        for contributor in self.get('contributors', []):
             data = {
                 'agent': {
                     'type': 'bf:Person',
