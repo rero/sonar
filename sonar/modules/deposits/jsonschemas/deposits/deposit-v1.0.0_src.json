@@ -764,7 +764,6 @@
     "contributors": {
       "title": "Contributors",
       "type": "array",
-      "minItems": 1,
       "default": [
         {}
       ],
