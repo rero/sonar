@@ -183,6 +183,8 @@ def test_update(client, make_organisation, superuser, admin, moderator,
     }
 
     org = make_organisation('org')
+    org['isShared'] = False
+    org['isDedicated'] = False
     org2 = make_organisation('org2')
 
     # Not logged
@@ -219,6 +221,14 @@ def test_update(client, make_organisation, superuser, admin, moderator,
                      headers=headers)
     assert res.status_code == 200
 
+    # Logged as admin and try to modify organisation's modes
+    org['isDedicated'] = True
+    org['isShared'] = True
+    res = client.put(url_for('invenio_records_rest.org_item', pid_value='org'),
+                     data=json.dumps(org.dumps()),
+                     headers=headers)
+    assert res.status_code == 400
+
     # Logged as admin of other organisation
     res = client.put(url_for('invenio_records_rest.org_item',
                              pid_value=org2['pid']),
@@ -227,6 +237,8 @@ def test_update(client, make_organisation, superuser, admin, moderator,
     assert res.status_code == 403
 
     # Logged as superuser
+    org['isDedicated'] = True
+    org['isShared'] = True
     login_user_via_session(client, email=superuser['email'])
     res = client.put(url_for('invenio_records_rest.org_item',
                              pid_value=org['pid']),
