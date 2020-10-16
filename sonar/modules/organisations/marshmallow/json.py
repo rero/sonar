@@ -29,10 +29,23 @@ from marshmallow import fields, pre_dump
 
 from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.organisations.permissions import OrganisationPermission
+from sonar.modules.permissions import has_superuser_access
 from sonar.modules.serializers import schema_from_context
 
 schema_from_organisation = partial(schema_from_context,
                                    schema=OrganisationRecord.schema)
+
+
+def can_activate_mode(value):
+    """Check if current user can activate `shared` or `dedicated` mode.
+
+    If the value is set to False, validation passed because the mode is not
+    activated.
+
+    :param value: Boolean value posted.
+    :returns: True if property can be modified
+    """
+    return not value or has_superuser_access()
 
 
 class OrganisationMetadataSchemaV1(StrictKeysMixin):
@@ -42,8 +55,8 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
     code = SanitizedUnicode(required=True)
     name = SanitizedUnicode(required=True)
     description = SanitizedUnicode()
-    isShared = fields.Boolean()
-    isDedicated = fields.Boolean()
+    isShared = fields.Boolean(validate=can_activate_mode)
+    isDedicated = fields.Boolean(validate=can_activate_mode)
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
     schema = GenFunction(load_only=True,
