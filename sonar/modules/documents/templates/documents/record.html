@@ -52,10 +52,7 @@
         <ul class="list-unstyled m-0">
           {% for contribution in contributors %}
           <li class="creator {{ 'd-none' if loop.index > 3 }}">
-            {{ contribution.agent.preferred_name }}
-            {% if not 'cre' in contribution.role %}
-            ({{ _('contribution_role_' + contribution.role[0]) | lower }})
-            {% endif %}
+            {{ contribution | contribution_text }}
             {% if contribution.agent.get('identifiedBy', {}).get('value') %}
             <a href="https://orcid.org/{{ contribution.agent.identifiedBy.value }}" target="_blank"
               class="badge badge-secondary text-light">

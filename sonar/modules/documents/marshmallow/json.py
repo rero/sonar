@@ -30,8 +30,9 @@ from marshmallow import fields, pre_dump, pre_load
 
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.permissions import DocumentPermission
-from sonar.modules.documents.views import create_publication_statement, \
-    dissertation, is_file_restricted, part_of_format
+from sonar.modules.documents.views import contribution_text, \
+    create_publication_statement, dissertation, is_file_restricted, \
+    part_of_format
 from sonar.modules.serializers import schema_from_context
 from sonar.modules.users.api import current_user_record
 
@@ -167,6 +168,11 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
         for index, part_of in enumerate(item.get('partOf', [])):
             item['partOf'][index]['text'] = part_of_format(part_of)
 
+        # Contribution
+        for index, contribution in enumerate(item.get('contribution', [])):
+            item['contribution'][index]['text'] = contribution_text(
+                contribution)
+
         if item.get('dissertation'):
             item['dissertation']['text'] = dissertation(item)
 
@@ -201,6 +207,9 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
 
         for part_of in data.get('partOf', []):
             part_of.pop('text', None)
+
+        for contribution in data.get('contribution', []):
+            contribution.pop('text', None)
 
         data.get('dissertation', {}).pop('text', None)
 
