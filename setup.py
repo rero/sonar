@@ -93,7 +93,8 @@ setup(
         'invenio_base.api_apps': [
             'documents = sonar.modules.documents:Documents',
             'organisations = sonar.modules.organisations:Organisations',
-            'sonar = sonar.modules:Sonar'
+            'sonar = sonar.modules:Sonar',
+            'invenio_i18n = invenio_i18n:InvenioI18N'
         ],
         'invenio_jsonschemas.schemas': [
             'documents = sonar.modules.documents.jsonschemas',

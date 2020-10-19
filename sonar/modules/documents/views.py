@@ -332,6 +332,38 @@ def dissertation(record):
     return ''.join(dissertation_text)
 
 
+@blueprint.app_template_filter()
+def contribution_text(contribution):
+    """Display contribution row text.
+
+    :param contribution: Dict representing the contribution.
+    :returns: Formatted text.
+    """
+    data = [contribution['agent']['preferred_name']]
+
+    # Meeting
+    if contribution['agent']['type'] == 'bf:Meeting':
+        meeting = []
+        if contribution['agent'].get('number'):
+            meeting.append(contribution['agent']['number'])
+
+        if contribution['agent'].get('date'):
+            meeting.append(contribution['agent']['date'])
+
+        if contribution['agent'].get('place'):
+            meeting.append(contribution['agent']['place'])
+
+        data.append('({meeting})'.format(meeting=' : '.join(meeting)))
+
+    # Person
+    if contribution['agent'][
+            'type'] == 'bf:Person' and contribution['role'][0] != 'cre':
+        data.append('({role})'.format(role=_('contribution_role_{role}'.format(
+            role=contribution['role'][0])).lower()))
+
+    return ' '.join(data)
+
+
 def get_language_from_bibliographic_code(language_code):
     """Return language code from bibliographic language.
 
