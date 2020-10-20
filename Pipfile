@@ -40,6 +40,8 @@ python-dotenv = "*"
 flask-cors = ">3.0.8"
 # Avoid an error during invenio-previewer initialization
 nbconvert = ">=5.6.1,<6.0.0"
+# Avoid an error with version 2.0, https://github.com/pypa/pipenv/issues/4476
+importlib-metadata = "<2.0"
 
 [dev-packages]
 Flask-Debugtoolbar = ">=0.10.1"
