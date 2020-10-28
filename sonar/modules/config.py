@@ -22,20 +22,18 @@ SONAR_APP_API_URL = 'https://localhost:5000/api/'
 SONAR_APP_ANGULAR_URL = 'https://localhost:5000/manage/'
 """Link to angular integrated app root."""
 
-SONAR_APP_LANGUAGES_MAP = dict(
-    fre='fr',
-    ger='de',
-    eng='en',
-    ita='it',
-    spa='sp',
-    ara='ar',
-    chi='zh',
-    lat='la',
-    heb='iw',
-    jpn='ja',
-    por='pt',
-    rus='ru'
-)
+SONAR_APP_LANGUAGES_MAP = dict(fre='fr',
+                               ger='de',
+                               eng='en',
+                               ita='it',
+                               spa='sp',
+                               ara='ar',
+                               chi='zh',
+                               lat='la',
+                               heb='iw',
+                               jpn='ja',
+                               por='pt',
+                               rus='ru')
 
 SONAR_APP_PREFERRED_LANGUAGES = ['eng', 'fre', 'ger', 'ita']
 """Order of preferred languages for displaying value in views."""
@@ -55,12 +53,16 @@ SONAR_APP_DEFAULT_ORGANISATION = 'global'
 """Default organisation key."""
 
 SONAR_APP_BABEL_TRANSLATE_JSON_KEYS = [
-    'title',
-    'label',
-    'description',
-    'placeholder'
+    'title', 'label', 'description', 'placeholder'
 ]
 """Keys to translate in JSON schemas."""
 
 SONAR_APP_FILE_STORAGE_PATH = None
 """File storage location."""
+
+SONAR_APP_EXPORT_SERIALIZERS = {
+    'org': ('sonar.modules.organisations.serializers.schemas.export:'
+            'ExportSchemaV1'),
+    'user': ('sonar.modules.users.serializers.schemas.export:'
+             'ExportSchemaV1'),
+}

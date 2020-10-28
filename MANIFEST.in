@@ -51,8 +51,11 @@ prune docs/_build
 
 recursive-include _sources *.txt
 recursive-include _static *.css *.js *.png
-recursive-include data *.crt *.json *.csv
+recursive-include data *.crt *.json *.csv *.jpg
 recursive-include docker *.cfg *.conf *.crt *.ini *.key *.pem *.sh
 recursive-include docs *.bat *.py *.rst *.txt Makefile
 recursive-include sonar *.babelrc *.eslintignore *.gitkeep *.json *.html *.js *.scss *.css *.png *.jpg *.svg *.po *.pot *.mo *.py *.txt *.woff *.woff2
 recursive-include tests *.doc *.json *.pdf *.py *.xml *.jpg *.csv
+
+exclude data/backups/organisations/data.json
+exclude data/backups/users/data.json

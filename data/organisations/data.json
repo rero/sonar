@@ -1,0 +1,13 @@
+[
+  {
+      "code": "rero",
+      "name": "RERO",
+      "isShared": true,
+      "files": [
+        {
+          "key": "rero.jpg",
+          "path": "./rero/rero.jpg"
+        }
+      ]
+  }
+]

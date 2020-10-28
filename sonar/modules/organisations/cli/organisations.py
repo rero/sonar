@@ -18,6 +18,8 @@
 """Documents CLI commands."""
 
 import json
+import os.path
+from io import BytesIO
 
 import click
 from click.exceptions import ClickException
@@ -40,6 +42,8 @@ def import_organisations(file):
     """Import organisations from JSON file."""
     click.secho('Importing organisations from {file}'.format(file=file.name))
 
+    directory = os.path.dirname(file.name)
+
     indexer = OrganisationIndexer()
 
     for record in json.load(file):
@@ -50,8 +54,19 @@ def import_organisations(file):
             if db_record:
                 raise ClickException('Record already exists in DB')
 
+            files = record.pop('files', [])
+
             # Register record to DB
             db_record = OrganisationRecord.create(record)
+
+            # Add files
+            for file in files:
+                file_path = os.path.join(directory, file['path'])
+                if os.path.isfile(file_path):
+                    with open(file_path, 'rb') as f:
+                        db_record.files[file['key']] = BytesIO(f.read())
+
+            db_record.commit()
             db.session.commit()
 
             indexer.index(db_record)

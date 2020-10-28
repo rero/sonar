@@ -26,7 +26,6 @@ from click.exceptions import ClickException
 from flask import current_app
 from flask.cli import with_appcontext
 from flask_security.confirmable import confirm_user
-from invenio_accounts.ext import hash_password
 from werkzeug.local import LocalProxy
 
 from ..users.api import UserRecord
@@ -44,7 +43,7 @@ def users():
 @with_appcontext
 def import_users(infile):
     """Import users."""
-    click.secho('Importing users from {file}'.format(file=infile))
+    click.secho('Importing users from {file}'.format(file=infile.name))
 
     data = json.load(infile)
     for user_data in data:
@@ -63,8 +62,12 @@ def import_users(infile):
                     'User with email {email} already exists'.format(
                         email=email))
 
-            password = user_data.get('password', '123456')
-            password = hash_password(password)
+            password = user_data.get(
+                'password',
+                '$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw'
+                '/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvf'
+                'R3m1mNVfsHgfgA'
+            )
             del user_data['password']
 
             if not user_data.get('role'):
