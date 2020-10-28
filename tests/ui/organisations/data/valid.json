@@ -1,6 +1,12 @@
 [
   {
     "code": "test",
-    "name": "Test"
+    "name": "Test",
+    "files": [
+      {
+        "key": "test.jpg",
+        "path": "./test/test.jpg"
+      }
+    ]
   }
 ]

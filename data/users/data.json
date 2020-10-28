@@ -2,7 +2,7 @@
   {
     "full_name": "Jorg Mueller",
     "email": "rero.sonar+superuser@gmail.com",
-    "password": "123456",
+    "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
     "role": "superuser",
     "birth_date": "1978-03-09",
     "street": "Sonnenbergstr 39",
@@ -16,7 +16,7 @@
   {
     "full_name": "Elia Rossi",
     "email": "rero.sonar+admin@gmail.com",
-    "password": "123456",
+    "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
     "role": "admin",
     "birth_date": "1971-12-01",
     "street": "Brunnacherstrasse 112",
@@ -30,7 +30,7 @@
   {
     "full_name": "Emanuele Fiorentini",
     "email": "rero.sonar+moderator@gmail.com",
-    "password": "123456",
+    "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
     "role": "moderator",
     "birth_date": "1964-10-10",
     "street": "Lichtmattstrasse 123",
@@ -44,7 +44,7 @@
   {
     "full_name": "Claude Roussel",
     "email": "rero.sonar+submitter@gmail.com",
-    "password": "123456",
+    "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
     "role": "submitter",
     "birth_date": "1983-09-14",
     "street": "Kirchstrasse 57",
@@ -58,7 +58,7 @@
   {
     "full_name": "Jules Brochu",
     "email": "rero.sonar+user@gmail.com",
-    "password": "123456",
+    "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
     "role": "user",
     "birth_date": "1984-04-20",
     "street": "Rasenstrasse 2",

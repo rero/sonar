@@ -59,6 +59,11 @@
 </div>
 <div class="bg-secondary text-light text-center py-2">
   <h6 class="m-0">{{ _('Software under development!') }}</h6>
+  {% if current_user_record.is_submitter %}
+  <h6 class="m-0 mt-1">
+    <strong>{{ _('Note: Publications manually deposited in this test portal might occasionally need to be deleted, for operational reasons.') }}</strong>
+  </h6>
+  {% endif %}
 </div>
 {% include 'sonar/partial/organisation.html' %}
 {% endblock %}

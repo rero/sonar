@@ -31,6 +31,27 @@ from sonar.modules.documents.api import DocumentIndexer, DocumentRecord
 create_app = create_api
 
 
+def test_get_record_class_by_pid_type(app):
+    """Test get record class by PID type."""
+    record = SonarRecord.get_record_class_by_pid_type('doc')
+    assert record.__name__ == 'DocumentRecord'
+
+
+def test_get_all_pids(app, document):
+    """Test get all identifiers for a record type."""
+    result = list(DocumentRecord.get_all_pids())
+    assert result == ['1']
+
+    # with delete --> false
+    document.delete()
+    result = list(DocumentRecord.get_all_pids())
+    assert result == []
+
+    # with delete --> true
+    result = list(DocumentRecord.get_all_pids(with_deleted=True))
+    assert result == ['1']
+
+
 def test_create(app, document_json):
     """Test creating a record."""
     record = DocumentRecord.create(document_json)
@@ -255,6 +276,8 @@ def test_get_record_by_bucket(app, db, document_with_file):
     app.config.get('RECORDS_REST_ENDPOINTS',
                    {}).get('doc', {}).pop('record_class', None)
     assert not SonarRecord.get_record_by_bucket(document_with_file['_bucket'])
+    app.config['RECORDS_REST_ENDPOINTS']['doc'][
+        'record_class'] = DocumentRecord
 
     # Persistent identifier not found
     pid = PersistentIdentifier.get('doc', document_with_file['pid'])

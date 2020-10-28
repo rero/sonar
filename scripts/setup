@@ -31,6 +31,11 @@ title "Application setup"
 # Size of data to create
 size="minimal"
 import=false
+fixtures_folder='./data'
+
+# If set to true, data for organisations and users will be erased and base
+# fixtures are created.
+clear_data=false
 
 while test $# -gt 0; do
     case "$1" in
@@ -46,6 +51,9 @@ while test $# -gt 0; do
         --import)
             import=true
             ;;
+        --clear-data)
+            clear_data=true
+            ;;
         *) message "Option $1 not recognized" "error" ;;
     esac
     shift
@@ -55,6 +63,10 @@ if $import; then
     message "Size of import sets is set to \"$size\"" "info"
 fi
 
+if $clear_data; then
+    message "All data will be cleared!" "warning"
+fi
+
 # Purge celery
 section "Purge celery tasks" "info"
 celery --app invenio_app.celery purge -f
@@ -62,6 +74,16 @@ celery --app invenio_app.celery purge -f
 # Clean redis
 section "Clear redis cache" "info"
 invenio shell --no-term-title -c "import redis; redis.StrictRedis.from_url(app.config['CACHE_REDIS_URL']).flushall(); print('Cache cleared')"
+
+if [ $clear_data = false ]; then
+    fixtures_folder='./data/backups'
+    section "Backup of existing data" "info"
+    invenio utils export --pid-type org --output-dir "${fixtures_folder}/organisations"
+    invenio utils export --pid-type user --output-dir "${fixtures_folder}/users"
+fi
+
+section "Clear files" "info"
+invenio utils clear-files
 
 section "Initialize database" "info"
 invenio db destroy --yes-i-know
@@ -98,10 +120,10 @@ invenio oaiharvester config create data/rerodoc_oai_sources.json
 
 # Create users and organisations
 section "Create organisations" "info"
-invenio fixtures organisations import ./data/organisations.json
+invenio fixtures organisations import "${fixtures_folder}/organisations/data.json"
 
 section "Create users" "info"
-invenio fixtures users import ./data/users.json
+invenio fixtures users import "${fixtures_folder}/users/data.json"
 
 # Import rerodoc data
 if $import; then

@@ -579,8 +579,10 @@ def deposit(app, db, user, pdf_file, bucket_location, deposit_json):
 def bucket_location(app, db):
     """Create a default location for managing files."""
     tmppath = tempfile.mkdtemp()
-    db.session.add(Location(name='default', uri=tmppath, default=True))
+    location = Location(name='default', uri=tmppath, default=True)
+    db.session.add(location)
     db.session.commit()
+    return location
 
 
 @pytest.fixture()

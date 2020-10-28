@@ -74,6 +74,9 @@ target/
 sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
 sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json
 
+# Generated JSON files
+data/backups/
+
 # Celery
 celerybeat-schedule
 

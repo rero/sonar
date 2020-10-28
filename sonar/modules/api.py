@@ -30,7 +30,7 @@ from invenio_indexer import current_record_to_index
 from invenio_indexer.api import RecordIndexer
 from invenio_jsonschemas import current_jsonschemas
 from invenio_pidstore.errors import PIDDoesNotExistError
-from invenio_pidstore.models import PersistentIdentifier
+from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 from invenio_records_files.api import FilesMixin, Record
 from invenio_records_files.models import RecordsBuckets
 from invenio_records_rest.utils import obj_or_import_string
@@ -83,6 +83,33 @@ class SonarRecord(Record, FilesMixin):
         return obj_or_import_string(
             current_app.config['RECORDS_REST_ENDPOINTS'][
                 cls.provider.pid_type]['indexer_class'])
+
+    @classmethod
+    def get_record_class_by_pid_type(cls, pid_type):
+        """Get the record class from config by the given PID type.
+
+        :param pid_type: PID type.
+        :returns: Record class.
+        """
+        return current_app.config.get(
+                'RECORDS_REST_ENDPOINTS',
+                {}).get(pid_type, {}).get('record_class')
+
+    @classmethod
+    def get_all_pids(cls, with_deleted=False):
+        """Get all records pids.
+
+        :param with_deleted: Include deleted records.
+        :returns: A generator iterator.
+        """
+        query = PersistentIdentifier.query.filter_by(
+            pid_type=cls.provider.pid_type
+        )
+        if not with_deleted:
+            query = query.filter_by(status=PIDStatus.REGISTERED)
+
+        for identifier in query:
+            yield identifier.pid_value
 
     @classmethod
     def get_record_by_pid(cls, pid, with_deleted=False):
