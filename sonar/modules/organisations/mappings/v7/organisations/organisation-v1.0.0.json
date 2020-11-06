@@ -21,6 +21,9 @@
       "isDedicated": {
         "type": "boolean"
       },
+      "allowedIps": {
+        "type": "text"
+      },
       "_created": {
         "type": "date"
       },

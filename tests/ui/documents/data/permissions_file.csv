@@ -8,3 +8,8 @@
     allow from ""2014-07-14""
     allow any
 ","test1"
+111111,"firerole:
+    allow roles /.*,INTERNAL,.*/
+    allow from ""2014-07-14""
+    allow any
+","test1"

@@ -57,6 +57,7 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
     description = SanitizedUnicode()
     isShared = fields.Boolean(validate=can_activate_mode)
     isDedicated = fields.Boolean(validate=can_activate_mode)
+    allowedIps = SanitizedUnicode()
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
     schema = GenFunction(load_only=True,

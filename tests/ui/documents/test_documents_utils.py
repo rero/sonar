@@ -17,10 +17,7 @@
 
 """Test documents utils."""
 
-from flask import g
-
 from sonar.modules.documents import utils
-from sonar.modules.documents.views import store_organisation
 
 
 def test_publication_statement_text():
@@ -64,130 +61,265 @@ def test_publication_statement_text():
     }) == '31.12.1990'
 
 
-def test_get_file_restriction(app, organisation):
+def test_get_file_restriction(app, organisation, admin, monkeypatch):
     """Test if a file is restricted by embargo date and/or organisation."""
-    g.pop('organisation', None)
-
-    store_organisation()
-
-    record = {'organisation': {'pid': 'org'}}
-
-    # No restriction and no embargo date
-    assert utils.get_file_restriction({}, {}) == {
-        'date': None,
-        'restricted': False
+    # No view arg, file is allowed
+    assert utils.get_file_restriction({}, organisation) == {
+        'restricted': False,
+        'date': None
     }
 
-    # Restricted by internal, but IP is allowed
-    with app.test_request_context(environ_base={'REMOTE_ADDR': '127.0.0.1'}):
-        assert utils.get_file_restriction({'restricted': 'internal'}, {}) == {
+    with app.test_request_context(
+            environ_base={'REMOTE_ADDR': '127.0.0.1'}) as req:
+        req.request.args = {'view': 'global'}
+
+        # No access property, file is allowed
+        assert utils.get_file_restriction({}, organisation) == {
             'date': None,
             'restricted': False
         }
 
-    # Restricted by internal, but IP is not allowed
-    with app.test_request_context(environ_base={'REMOTE_ADDR': '10.1.2.3'}):
-        assert utils.get_file_restriction({'restricted': 'internal'}, {}) == {
+        # No access property, file is allowed
+        assert utils.get_file_restriction({}, organisation) == {
             'date': None,
-            'restricted': True
+            'restricted': False
         }
 
-    # Restricted by organisation and organisation is global
-    assert utils.get_file_restriction({'restricted': 'organisation'},
-                                      record) == {
-                                          'date': None,
-                                          'restricted': True
-                                      }
-
-    # Restricted by organisation and current organisation match
-    with app.test_request_context() as req:
-        req.request.view_args['view'] = 'org'
-        store_organisation()
-
-    assert utils.get_file_restriction({'restricted': 'organisation'},
-                                      record) == {
-                                          'date': None,
-                                          'restricted': False
-                                      }
-
-    # Restricted by organisation and record don't have organisation
-    assert utils.get_file_restriction({'restricted': 'organisation'}, {}) == {
-        'date': None,
-        'restricted': True
-    }
-
-    # Restricted by organisation and organisation don't match
-    assert utils.get_file_restriction({'restricted': 'organisation'},
-                                      {'organisation': {
-                                          'pid': 'some-org'
-                                      }}) == {
-                                          'date': None,
-                                          'restricted': True
-                                      }
-
-    # Restricted by embargo date only, but embargo date is in the past
-    assert utils.get_file_restriction({'embargo_date': '2020-01-01'}, {}) == {
-        'date': None,
-        'restricted': False
-    }
-
-    # Restricted by embargo date only and embargo date is in the future
-    with app.test_request_context(environ_base={'REMOTE_ADDR': '10.1.2.3'}):
-        assert utils.get_file_restriction({'embargo_date': '2021-01-01'},
-                                          {}) == {
-                                              'date': '01/01/2021',
-                                              'restricted': True
+        # Access property is open access, file is allowed
+        assert utils.get_file_restriction({'access': 'coar:c_abf2'},
+                                          organisation) == {
+                                              'date': None,
+                                              'restricted': False
                                           }
 
-    # Restricted by embargo date and organisation
-    g.pop('organisation', None)
-    store_organisation()
-    with app.test_request_context(environ_base={'REMOTE_ADDR': '10.1.2.3'}):
-        assert utils.get_file_restriction(
-            {
-                'embargo_date': '2021-01-01',
-                'restricted': 'organisation'
-            }, record) == {
-                'restricted': True,
-                'date': '01/01/2021'
-            }
+        # Embargo access, but no date specified, file is allowed
+        assert utils.get_file_restriction({'access': 'coar:c_f1cf'},
+                                          organisation) == {
+                                              'date': None,
+                                              'restricted': False
+                                          }
 
-    # Restricted by embargo date but internal IP gives access
-    with app.test_request_context(environ_base={'REMOTE_ADDR': '127.0.0.1'}):
+        # Embargo access, but date is invalid, file is allowed
         assert utils.get_file_restriction(
             {
-                'embargo_date': '2021-01-01',
-                'restricted': 'internal'
-            }, {}) == {
+                'access': 'coar:c_f1cf',
+                'embargo_date': 'wrong'
+            }, organisation) == {
                 'date': None,
                 'restricted': False
             }
 
+        # Embargo access, but date is in the past, file is allowed
+        assert utils.get_file_restriction(
+            {
+                'access': 'coar:c_f1cf',
+                'embargo_date': '2010-01-01'
+            }, organisation) == {
+                'date': None,
+                'restricted': False
+            }
 
-def test_get_current_organisation_code(app, organisation):
-    """Test get current organisation."""
-    # No globals and no args
-    assert utils.get_current_organisation_code() == 'global'
+        # Embargo access, restriction is not defined, no access
+        assert utils.get_file_restriction(
+            {
+                'access': 'coar:c_f1cf',
+                'embargo_date': '2022-01-01'
+            }, organisation) == {
+                'date': '01/01/2022',
+                'restricted': True
+            }
 
-    # Default globals and no args
-    store_organisation()
-    assert utils.get_current_organisation_code() == 'global'
+        # Embargo access, restriction is full, no access
+        assert utils.get_file_restriction(
+            {
+                'access': 'coar:c_f1cf',
+                'restricted_outside_organisation': False,
+                'embargo_date': '2022-01-01'
+            }, organisation) == {
+                'date': '01/01/2022',
+                'restricted': True
+            }
 
-    # Organisation globals and no args
-    with app.test_request_context() as req:
-        req.request.view_args['view'] = 'org'
-        store_organisation()
-    assert utils.get_current_organisation_code() == 'org'
+        # Embargo access, restriction is outside organisation, no user logged
+        # and IP is not white listed.
+        assert utils.get_file_restriction(
+            {
+                'access': 'coar:c_f1cf',
+                'restricted_outside_organisation': True,
+                'embargo_date': '2022-01-01'
+            }, {}) == {
+                'date': '01/01/2022',
+                'restricted': True
+            }
 
-    # Args is global
-    with app.test_request_context() as req:
-        req.request.args = {'view': 'global'}
-        assert utils.get_current_organisation_code() == 'global'
+        # Embargo access, restriction is outside organisation, user logged but
+        # organisation does not exist in record --> file is locked
+        assert utils.get_file_restriction(
+            {
+                'access': 'coar:c_f1cf',
+                'restricted_outside_organisation': True,
+                'embargo_date': '2022-01-01'
+            }, None) == {
+                'date': '01/01/2022',
+                'restricted': True
+            }
 
-    # Args has organisation view
-    with app.test_request_context() as req:
-        req.request.args = {'view': 'unisi'}
-        assert utils.get_current_organisation_code() == 'unisi'
+        # Embargo access, restriction is outside organisation, user logged but
+        # organisations are not corresponding --> file is locked
+        monkeypatch.setattr(
+            'sonar.modules.organisations.api.OrganisationRecord.'
+            'get_organisation_by_user', lambda *args: {'pid': 'another-org'})
+        assert utils.get_file_restriction(
+            {
+                'access': 'coar:c_f1cf',
+                'restricted_outside_organisation': True,
+                'embargo_date': '2022-01-01'
+            }, organisation) == {
+                'date': '01/01/2022',
+                'restricted': True
+            }
+
+        # Embargo access, restriction is outside organisation, user logged and
+        # organisations are matching --> file is accessible
+        monkeypatch.setattr(
+            'sonar.modules.organisations.api.OrganisationRecord.'
+            'get_organisation_by_user', lambda *args: {'pid': 'org'})
+        assert utils.get_file_restriction(
+            {
+                'access': 'coar:c_f1cf',
+                'restricted_outside_organisation': True,
+                'embargo_date': '2022-01-01'
+            }, organisation) == {
+                'date': None,
+                'restricted': False
+            }
+
+        # Embargo access, restriction is outside organisation, user logged and
+        # IP is not white listed --> file is locked
+        monkeypatch.setattr(
+            'sonar.modules.organisations.api.OrganisationRecord.'
+            'get_organisation_by_user', lambda *args: {'pid': 'another-org'})
+        organisation['allowedIps'] = ''
+        assert utils.get_file_restriction(
+            {
+                'access': 'coar:c_f1cf',
+                'restricted_outside_organisation': True,
+                'embargo_date': '2022-01-01'
+            }, organisation) == {
+                'date': '01/01/2022',
+                'restricted': True
+            }
+
+        # Embargo access, restriction is outside organisation, user logged and
+        # IP is white listed --> file is accessible
+        organisation['allowedIps'] = '127.0.0.1'
+        assert utils.get_file_restriction(
+            {
+                'access': 'coar:c_f1cf',
+                'restricted_outside_organisation': True,
+                'embargo_date': '2022-01-01'
+            }, organisation) == {
+                'date': None,
+                'restricted': False
+            }
+
+        # Reset allowed IPs
+        organisation['allowedIps'] = ''
+
+        # Restricted access, restriction is not defined, no access
+        assert utils.get_file_restriction({
+            'access': 'coar:c_16ec',
+        }, organisation) == {
+            'date': None,
+            'restricted': True
+        }
+
+        # Restricted access, restriction is full, no access
+        assert utils.get_file_restriction(
+            {
+                'access': 'coar:c_16ec',
+                'restricted_outside_organisation': False,
+            }, organisation) == {
+                'date': None,
+                'restricted': True
+            }
+
+        # Restricted access, restriction is outside organisation, no user
+        # logged and IP is not white listed.
+        assert utils.get_file_restriction(
+            {
+                'access': 'coar:c_16ec',
+                'restricted_outside_organisation': True,
+            }, {}) == {
+                'date': None,
+                'restricted': True
+            }
+
+        # Restricted access, restriction is outside organisation, user logged
+        # but organisation does not exist in record --> file is locked
+        assert utils.get_file_restriction(
+            {
+                'access': 'coar:c_16ec',
+                'restricted_outside_organisation': True,
+            }, None) == {
+                'date': None,
+                'restricted': True
+            }
+
+        # Restricted access, restriction is outside organisation, user logged
+        # but organisations are not corresponding --> file is locked
+        monkeypatch.setattr(
+            'sonar.modules.organisations.api.OrganisationRecord.'
+            'get_organisation_by_user', lambda *args: {'pid': 'another-org'})
+        assert utils.get_file_restriction(
+            {
+                'access': 'coar:c_16ec',
+                'restricted_outside_organisation': True,
+            }, organisation) == {
+                'date': None,
+                'restricted': True
+            }
+
+        # Restricted access, restriction is outside organisation, user logged
+        # and organisations are matching --> file is accessible
+        monkeypatch.setattr(
+            'sonar.modules.organisations.api.OrganisationRecord.'
+            'get_organisation_by_user', lambda *args: {'pid': 'org'})
+        assert utils.get_file_restriction(
+            {
+                'access': 'coar:c_16ec',
+                'restricted_outside_organisation': True,
+            }, organisation) == {
+                'date': None,
+                'restricted': False
+            }
+
+        # Restricted access, restriction is outside organisation, user logged
+        # and IP is not white listed --> file is locked
+        monkeypatch.setattr(
+            'sonar.modules.organisations.api.OrganisationRecord.'
+            'get_organisation_by_user', lambda *args: {'pid': 'another-org'})
+        organisation['allowedIps'] = ''
+        assert utils.get_file_restriction(
+            {
+                'access': 'coar:c_16ec',
+                'restricted_outside_organisation': True,
+            }, organisation) == {
+                'date': None,
+                'restricted': True
+            }
+
+        # Embargo access, restriction is outside organisation, user logged and
+        # IP is white listed --> file is accessible
+        organisation['allowedIps'] = '127.0.0.1'
+        assert utils.get_file_restriction(
+            {
+                'access': 'coar:c_16ec',
+                'restricted_outside_organisation': True,
+            }, organisation) == {
+                'date': None,
+                'restricted': False
+            }
 
 
 def test_get_file_links(app):

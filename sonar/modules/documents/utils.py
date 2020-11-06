@@ -22,11 +22,13 @@ from __future__ import absolute_import, print_function
 import re
 from datetime import datetime
 
-from flask import current_app, g, request
+from flask import current_app, request
 
 from sonar.modules.api import SonarRecord
+from sonar.modules.organisations.api import OrganisationRecord, \
+    current_organisation
 from sonar.modules.utils import change_filename_extension, format_date, \
-    remove_trailing_punctuation
+    is_ip_in_list, remove_trailing_punctuation
 
 
 def publication_statement_text(provision_activity):
@@ -72,21 +74,6 @@ def publication_statement_text(provision_activity):
     return statement_with_language
 
 
-def get_current_organisation_code():
-    """Return current organisation by globals or query parameter."""
-    # Organisation is present in query parameters, useful for API calls.
-    organisation = request.args.get('view')
-    if organisation:
-        return organisation
-
-    # Organisation stored in globals
-    if g.get('organisation', {}).get('code'):
-        return g.organisation['code']
-
-    # Default organisation
-    return current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION')
-
-
 def get_file_links(file, record):
     """Return link data to preview and/or download the file.
 
@@ -121,62 +108,79 @@ def get_file_links(file, record):
     return links
 
 
-def get_file_restriction(file, record):
+def get_file_restriction(file, organisation):
     """Check if current file can be displayed.
 
-    :param file: File dict
-    :param record: Current record
-    :returns object containing result and possibly embargo date
+    :param file: File dict.
+    :param organisation: Record's organisation.
+    :returns: Object containing result as boolean and possibly embargo date.
     """
 
-    def is_restricted_by_scope(file):
-        """File is restricted by scope (internal, rero or organisation).
+    def is_allowed_by_scope():
+        """Check if file is fully restricted or only outside organisation.
 
-        :param file: File object.
+        :returns: True if file is allowed.
         """
-        # File is restricted by internal IPs
-        if file['restricted'] == 'internal':
-            return request.remote_addr not in current_app.config.get(
-                'SONAR_APP_INTERNAL_IPS')
+        if not file.get('restricted_outside_organisation'):
+            return False
 
-        # File is restricted by organisation
-        organisation = get_current_organisation_code()
+        if not organisation:
+            return False
 
-        # We are in global organisation, so restriction is active
-        if organisation == current_app.config.get(
-                'SONAR_APP_DEFAULT_ORGANISATION'):
+        # Logged user belongs to same organisation as record's organisation.
+        if current_organisation and current_organisation[
+                'pid'] == organisation['pid']:
             return True
 
-        # No organisation in record, restriction is active
-        if not record.get('organisation', {}).get('pid'):
-            return True
-
-        # Record organisation is different from current organisation
-        if organisation != record['organisation']['pid']:
+        # Check IP is allowed.
+        ip_address = request.environ.get('X-Forwarded-For',
+                                         request.remote_addr)
+        # Take only the first IP, as X-Forwarded for gives the real IP + the
+        # proxy IP.
+        ip_address = ip_address.split(', ')[0]
+        if is_ip_in_list(ip_address,
+                         organisation.get('allowedIps', '').split('\n')):
             return True
 
         return False
 
-    restricted = {'restricted': False, 'date': None}
+    not_restricted = {'restricted': False, 'date': None}
 
-    try:
-        embargo_date = datetime.strptime(file.get('embargo_date'), '%Y-%m-%d')
-    except Exception:
-        embargo_date = None
+    # We are in admin, no restrictions are applied.
+    if not request.args.get('view') and not request.view_args.get('view'):
+        return not_restricted
 
-    # Store embargo date if greater than now
-    if embargo_date and embargo_date > datetime.now():
-        restricted['restricted'] = True
-        restricted['date'] = embargo_date.strftime('%d/%m/%Y')
+    # No specific access or specific access is open access
+    if not file.get('access') or file['access'] == 'coar:c_abf2':
+        return not_restricted
 
-    # File is restricted by organisation
-    if file.get('restricted'):
-        restricted['restricted'] = is_restricted_by_scope(file)
+    # Access is embargoed
+    if file['access'] == 'coar:c_f1cf':
+        # No embargo date
+        if not file.get('embargo_date'):
+            return not_restricted
 
-    if not restricted['restricted']:
-        restricted['date'] = None
+        try:
+            embargo_date = datetime.strptime(file['embargo_date'], '%Y-%m-%d')
+        except Exception:
+            embargo_date = None
 
-    return restricted
+        # No embargo date or embargo date is in the past, file is accessible
+        if not embargo_date or embargo_date <= datetime.now():
+            return not_restricted
+
+        # Restriction is full or file is not allowed in organisation.
+        if not is_allowed_by_scope():
+            return {
+                'restricted': True,
+                'date': embargo_date.strftime('%d/%m/%Y')
+            }
+
+    # Access is restricted
+    if file['access'] == 'coar:c_16ec' and not is_allowed_by_scope():
+        return {'restricted': True, 'date': None}
+
+    return not_restricted
 
 
 def has_external_urls_for_files(record):
@@ -226,8 +230,14 @@ def populate_files_properties(record):
     :param record: Record object
     :param file: File dict
     """
+    # Load organisation for the record
+    organisation_pid = OrganisationRecord.get_pid_by_ref_link(
+        record['organisation']['$ref']) if record['organisation'].get(
+            '$ref') else record['organisation']['pid']
+    organisation = OrganisationRecord.get_record_by_pid(organisation_pid)
+
     for file in record['_files']:
         if file.get('type') == 'file':
-            file['restriction'] = get_file_restriction(file, record)
+            file['restriction'] = get_file_restriction(file, organisation)
             file['thumbnail'] = get_thumbnail(file, record)
             file['links'] = get_file_links(file, record)

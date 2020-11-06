@@ -85,17 +85,54 @@
           },
           "external_url": {
             "title": "External URL",
+            "description": "If this field is filled in, the file points to the specified URL.",
             "type": "string",
             "minLength": 1,
             "format": "uri",
-            "pattern": "^https?://.*"
+            "pattern": "^https?://.*",
+            "form": {
+              "hideExpression": "true"
+            }
           },
-          "restricted": {
-            "title": "Restricted",
-            "description": "Type of restriction. 'organisation': the file is only available inside organisation view. 'internal': file is only available with a referenced IP.",
+          "access": {
+            "title": "Access",
             "type": "string",
-            "minLength": 1,
-            "pattern": "^(organisation|internal)$"
+            "enum": [
+              "coar:c_abf2",
+              "coar:c_f1cf",
+              "coar:c_16ec"
+            ],
+            "default": "coar:c_abf2",
+            "form": {
+              "options": [
+                {
+                  "label": "coar:c_abf2",
+                  "value": "coar:c_abf2"
+                },
+                {
+                  "label": "coar:c_f1cf",
+                  "value": "coar:c_f1cf"
+                },
+                {
+                  "label": "coar:c_16ec",
+                  "value": "coar:c_16ec"
+                }
+              ],
+              "expressionProperties": {
+                "templateOptions.required": "true"
+              }
+            }
+          },
+          "restricted_outside_organisation": {
+            "title": "Access allowed from the organisation's IP addresses",
+            "type": "boolean",
+            "default": true,
+            "form": {
+              "hideExpression": "!model.access || model.access === 'coar:c_abf2'",
+              "expressionProperties": {
+                "templateOptions.required": "model.access && model.access !== 'coar:c_abf2'"
+              }
+            }
           },
           "embargo_date": {
             "title": "Embargo date",
@@ -103,7 +140,13 @@
             "type": "string",
             "minLength": 1,
             "format": "date",
-            "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
+            "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
+            "form": {
+              "hideExpression": "!model.access || model.access !== 'coar:c_f1cf'",
+              "expressionProperties": {
+                "templateOptions.required": "model.access && model.access === 'coar:c_f1cf'"
+              }
+            }
           }
         },
         "required": [
@@ -112,7 +155,14 @@
           "version_id",
           "key"
         ],
-        "propertiesOrder": ["label", "order", "external_url", "restricted", "embargo_date"]
+        "propertiesOrder": [
+          "label",
+          "order",
+          "access",
+          "embargo_date",
+          "restricted_outside_organisation",
+          "external_url"
+        ]
       }
     },
     "pid": {
@@ -277,7 +327,10 @@
             "$ref": "language-v1.0.0.json"
           }
         },
-        "propertiesOrder": [ "value", "type" ],
+        "propertiesOrder": [
+          "value",
+          "type"
+        ],
         "required": [
           "type",
           "value"
@@ -414,7 +467,9 @@
                         "minLength": 1
                       }
                     },
-                    "required": ["value"]
+                    "required": [
+                      "value"
+                    ]
                   }
                 }
               },
@@ -422,7 +477,10 @@
                 "type",
                 "label"
               ],
-              "required": ["type", "label"]
+              "required": [
+                "type",
+                "label"
+              ]
             },
             "form": {
               "expressionProperties": {
