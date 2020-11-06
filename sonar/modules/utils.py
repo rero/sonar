@@ -23,6 +23,7 @@ import re
 from flask import current_app, g
 from invenio_i18n.ext import current_i18n
 from invenio_mail.api import TemplatedMessage
+from netaddr import IPAddress, IPGlob, IPNetwork, IPSet
 from wand.color import Color
 from wand.image import Image
 
@@ -172,3 +173,35 @@ def get_specific_theme():
             return '{theme}.css'.format(theme=theme_name)
 
     return 'global-theme.css'
+
+
+def is_ip_in_list(ip_address, addresses_list):
+    """Check if address IP is in list.
+
+    :param ip_address: Address IP to check
+    :param addresses_list: Range of IP, network or simple IP.
+    :returns: True if given IP is in list.
+    """
+    if not isinstance(addresses_list, list):
+        raise Exception('Given parameter is not a list.')
+
+    ip_set = IPSet()
+
+    for ip_range in addresses_list:
+        try:
+            # It's a glob
+            if '*' in ip_range or '-' in ip_range:
+                ip_set.add(IPGlob(ip_range))
+            # It's a network
+            elif '/' in ip_range:
+                ip_set.add(IPNetwork(ip_range))
+            # Simple IP
+            else:
+                ip_set.add(IPAddress(ip_range))
+        except Exception:
+            pass
+
+    try:
+        return ip_address in ip_set
+    except Exception:
+        return False

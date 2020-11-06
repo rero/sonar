@@ -101,16 +101,16 @@ def update_file_permissions(permissions_file, chunk_size):
                     matches = re.search(r'status:(\w+)$', row[1])
                     if matches:
                         # If status if RERO or INTERNAL, file must not be
-                        # displayed, otherwise file is restricted within
+                        # displayed, otherwise file is not accessible outside
                         # organisation
+                        record_file[
+                            'access'] = 'coar:c_16ec'  # restricted access
                         if matches.group(1) in ['RERO', 'INTERNAL']:
-                            current_app.logger.warning(
-                                'Access restricted to {status} for file '
-                                '{record}'.format(status=matches.group(1),
-                                                  record=row))
-                            record_file['restricted'] = 'internal'
+                            record_file[
+                                'restricted_outside_organisation'] = False
                         else:
-                            record_file['restricted'] = 'organisation'
+                            record_file[
+                                'restricted_outside_organisation'] = True
                     else:
                         # permissions contains a date
                         matches = re.search(
@@ -118,15 +118,26 @@ def update_file_permissions(permissions_file, chunk_size):
                             r'\d{2}-\d{2})', row[1])
 
                         if matches:
-                            # file is restricted to organisation
+                            # file is accessible inside organisation
                             if matches.group(1) != 'INTERNAL':
-                                record_file['restricted'] = 'organisation'
+                                record_file[
+                                    'restricted_outside_organisation'] = True
+                            # file is not accessible
+                            else:
+                                record_file[
+                                    'restricted_outside_organisation'] = False
 
+                            record_file[
+                                'access'] = 'coar:c_f1cf'  # embargoed access
                             record_file['embargo_date'] = matches.group(2)
 
                     record.commit()
                     db.session.flush()
                     ids.append(str(record.id))
+
+                    current_app.logger.warning(
+                        'Restriction added for file {file} in record {record}.'
+                        .format(file=file_name, record=record['pid']))
 
                     # Bulk save and index
                     if len(ids) % chunk_size == 0:

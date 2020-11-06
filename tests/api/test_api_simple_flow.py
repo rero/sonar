@@ -51,6 +51,7 @@ def test_add_files_restrictions(client, document_with_file, superuser):
     login_user_via_session(client, email=superuser['email'])
     res = client.get(
         url_for('invenio_records_rest.doc_item',
+                view='global',
                 pid_value=document_with_file['pid'],
                 resolve=1))
     assert res.status_code == 200

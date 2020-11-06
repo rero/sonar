@@ -311,10 +311,10 @@ class DepositRecord(SonarRecord):
                 }
 
                 if file.get('embargo', False) and file.get('embargoDate'):
+                    kwargs['access'] = 'coar:c_f1cf'  # Embargoed access
                     kwargs['embargo_date'] = file['embargoDate']
-
-                if file.get('exceptInOrganisation'):
-                    kwargs['restricted'] = 'organisation'
+                    kwargs['restricted_outside_organisation'] = file.get(
+                        'exceptInOrganisation', False)
 
                 document.add_file(content, file['key'], **kwargs)
 

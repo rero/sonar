@@ -29,6 +29,7 @@ python-dotenv = "*"
 flask-cors = ">3.0.8"
 nbconvert = {version = ">=5.6.1,<6.0.0", extras = ["execute"]}
 cryptography = ">=3.2"
+netaddr = "*"
 
 [tool.poetry.dev-dependencies]
 Flask-Debugtoolbar = ">=0.10.1"

@@ -25,7 +25,8 @@ from flask import g
 from sonar.modules.documents.views import store_organisation
 from sonar.modules.utils import change_filename_extension, \
     create_thumbnail_from_file, format_date, get_current_language, \
-    get_specific_theme, get_switch_aai_providers, get_view_code
+    get_specific_theme, get_switch_aai_providers, get_view_code, \
+    is_ip_in_list
 
 
 def test_change_filename_extension(app):
@@ -132,3 +133,29 @@ def test_get_specific_theme(app, organisation, make_organisation):
 
     g.organisation['isDedicated'] = True
     assert get_specific_theme() == 'usi-theme.css'
+
+
+def test_is_ip_in_list():
+    """Test IP address list."""
+    # Wrong IP
+    assert not is_ip_in_list('wrong', [])
+
+    # Not a list
+    with pytest.raises(Exception) as exception:
+        is_ip_in_list('10.10.10.10', 'Not a list')
+    assert str(exception.value) == 'Given parameter is not a list.'
+
+    # No list
+    assert not is_ip_in_list('10.10.10.10', [])
+
+    # Wrong list
+    assert not is_ip_in_list('10.10.10.10', ['wrong'])
+
+    # With glob range and asterisk
+    assert is_ip_in_list('10.10.10.10', ['10.10.10.*'])
+
+    # With glob range and hyphen
+    assert is_ip_in_list('10.10.10.10', ['10.10.10.0-100'])
+
+    # With network range
+    assert is_ip_in_list('10.10.10.10', ['10.10.10.0/24'])

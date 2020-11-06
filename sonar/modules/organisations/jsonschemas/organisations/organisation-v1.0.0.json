@@ -61,6 +61,18 @@
         "hideExpression": "!field.model.isShared"
       }
     },
+    "allowedIps": {
+      "title": "Allowed IP addresses",
+      "description": "List of IP addresses or ranges that allows to display files. One rule per line.",
+      "type": "string",
+      "minLength": 1,
+      "form": {
+        "type": "textarea",
+        "templateOptions": {
+          "rows": 10
+        }
+      }
+    },
     "_bucket": {
       "title": "Bucket UUID",
       "type": "string",
@@ -122,7 +134,8 @@
     "name",
     "description",
     "isShared",
-    "isDedicated"
+    "isDedicated",
+    "allowedIps"
   ],
   "required": [
     "pid",

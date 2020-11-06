@@ -46,9 +46,6 @@ command line or progams like postman."""
 
 SONAR_APP_UI_VERSION = '0.4.0'
 
-SONAR_APP_INTERNAL_IPS = ['127.0.0.1']
-"""Internal IPs for accessing files."""
-
 SONAR_APP_DEFAULT_ORGANISATION = 'global'
 """Default organisation key."""
 

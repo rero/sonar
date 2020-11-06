@@ -55,7 +55,10 @@
           "external_url": {
             "type": "keyword"
           },
-          "restricted": {
+          "access": {
+            "type": "keyword"
+          },
+          "restricted_outside_organisation": {
             "type": "keyword"
           },
           "embargo_date": {
