@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2020-09-15 16:29+0200\n"
-"PO-Revision-Date: 2020-10-16 16:26+0000\n"
+"PO-Revision-Date: 2020-11-07 16:26+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "it/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.1-dev\n"
+"X-Generator: Weblate 4.3.2\n"
 "Generated-By: Babel 2.8.0\n"
 
 #: sonar/theme/views.py:63
@@ -93,7 +93,7 @@ msgstr "Migliore corrispondenza"
 
 #: sonar/templates/security/email/welcome.html:9
 msgid "Best regards"
-msgstr ""
+msgstr "Cordiali saluti"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:20
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:34
@@ -102,11 +102,11 @@ msgstr ""
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:65
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:80
 msgid "Bucket UUID"
-msgstr ""
+msgstr "Bucket UUID"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:16
 msgid "Bucket UUID used to store files"
-msgstr ""
+msgstr "Bucket UUID utilizzato per archiviare i file"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:54
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:55
@@ -217,7 +217,7 @@ msgstr "Data di morte"
 #: sonar/templates/security/email/welcome.html:1
 #, python-format
 msgid "Dear %(email)s"
-msgstr ""
+msgstr "Gentile %(email)s"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:723
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1051
@@ -253,7 +253,7 @@ msgstr "Designazione"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:718
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1046
 msgid "Dissertation"
-msgstr "Informazioni sulla dissertazione o tesi"
+msgstr "Dissertazione"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:535
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:849
@@ -378,7 +378,7 @@ msgstr "UUID del file"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:25
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:74
 msgid "File item"
-msgstr ""
+msgstr "File item"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:25
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:21
@@ -437,7 +437,7 @@ msgstr "Istituzione che eroga il contributo"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:39
 msgid "HTML markup admitted."
-msgstr ""
+msgstr "Markup HTML ammesso."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:867
 msgid "Harvested"
@@ -500,7 +500,7 @@ msgstr "Italiano"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1056
 #: sonar/modules/documents/views.py:340
 msgid "Jury note"
-msgstr ""
+msgstr "Nota della giuria"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:49
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:49
@@ -1045,15 +1045,15 @@ msgstr "URL verso il file ospitato presso una piattaforma esterna."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:38
 msgid "UUID of the FileInstance object."
-msgstr ""
+msgstr "UUID of the FileInstance object."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:44
 msgid "UUID of the ObjectVersion object."
-msgstr ""
+msgstr "UUID of the ObjectVersion object."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:32
 msgid "UUID of the bucket to which this file is assigned."
-msgstr ""
+msgstr "UUID del bucket a cui è assegnato questo file."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1092
 msgid "Usage and access policies"
@@ -1088,7 +1088,7 @@ msgstr "Valore"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:43
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:90
 msgid "Version UUID"
-msgstr ""
+msgstr "UUID della versione"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:546
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1354
@@ -1114,6 +1114,7 @@ msgstr "Agent"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:374
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:646
+#, fuzzy
 msgid "bf:AudioIssueNumber"
 msgstr "Audio issue number"
 
@@ -1146,12 +1147,12 @@ msgstr "Global Trade Item Number 14"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:390
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:662
 msgid "bf:Identifier"
-msgstr "Identifier"
+msgstr "altro identificatore"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:395
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:666
 msgid "bf:Isan"
-msgstr "ISAN"
+msgstr "ISAN (International Standard Audiovisual Number)"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:370
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:670
@@ -1161,12 +1162,12 @@ msgstr "ISBN"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:400
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:674
 msgid "bf:Ismn"
-msgstr "ISMN"
+msgstr "ISMN (International Standard Music Number)"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:405
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:678
 msgid "bf:Isrc"
-msgstr "ISRC"
+msgstr "ISRC (International Standard Recording Code)"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:410
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:682
@@ -3837,11 +3838,11 @@ msgstr "p."
 
 #: sonar/config.py:501
 msgid "pid"
-msgstr ""
+msgstr "pid"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:366
 msgid "pmid"
-msgstr ""
+msgstr "PMID"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:106
 msgid "role_admin"
