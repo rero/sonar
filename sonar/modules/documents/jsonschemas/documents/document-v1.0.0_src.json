@@ -1196,13 +1196,8 @@
                     "minLength": 1
                   }
                 },
-                "required": [
-                  "type",
-                  "source",
-                  "value"
-                ],
                 "form": {
-                  "hideExpression": "field.model.type !== 'bf:Person'"
+                  "hideExpression": "field.parent.model.type !== 'bf:Person'"
                 }
               },
               "date_of_birth": {
