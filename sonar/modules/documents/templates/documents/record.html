@@ -20,7 +20,6 @@
 {% from 'sonar/macros/macro.html' import thumbnail %}
 
 {%- block body %}
-{% set record = record.replace_refs() %}
 {% set title = record.title[0] | title_format(current_i18n.language) %}
 {% set files = record.get_files_list() %}
 
@@ -29,8 +28,10 @@
     <div class="col-lg-3 text-center">
       {% if files and files | length > 0 %}
       <div class="mb-4">
-        {{ thumbnail('documents', record, files | first) }}
+        {{ thumbnail(record, files | first) }}
       </div>
+      {% else %}
+      <img src="{{ url_for('static', filename='images/no-image.png') }}" alt="{{ title }}" class="img-fluid">
       {% endif %}
 
       <!-- DOCUMENT TYPE -->
@@ -77,8 +78,8 @@
         {% if record.contribution | length > 3 %}
         <a href="#" id="show-more-contributors">{{ _('Show more') }}&hellip;</a>
         {% endif %}
-        {% endif %}
       </div>
+      {% endif %}
 
       <!-- PUBLICATION STATEMENT -->
       {% for provision_activity in record.provisionActivity %}
@@ -248,7 +249,9 @@
   <div class="row">
     {% for file in files %}
     {% if loop.index > 1 %}
-    {{ thumbnail('documents', record, file, 'col-lg-2 mb-4') }}
+    <div class="col-lg-2 mb-5">
+      {{ thumbnail(record, file) }}
+    </div>
     {% endif %}
     {% endfor %}
   </div>

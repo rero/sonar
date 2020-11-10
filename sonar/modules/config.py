@@ -66,3 +66,8 @@ SONAR_APP_EXPORT_SERIALIZERS = {
     'user': ('sonar.modules.users.serializers.schemas.export:'
              'ExportSchemaV1'),
 }
+
+SONAR_APP_FILE_PREVIEW_EXTENSIONS = [
+    'jpeg', 'jpg', 'gif', 'png', 'pdf', 'json', 'xml', 'csv', 'zip', 'md'
+]
+"""List of extensions for which files can be previewed."""

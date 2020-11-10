@@ -19,15 +19,15 @@
 
 from __future__ import absolute_import, print_function
 
-from datetime import datetime
-
 from flask import Blueprint, abort, current_app, g, render_template, request
 from flask_babelex import gettext as _
 from invenio_i18n.ext import current_i18n
 
 from sonar.modules.documents.api import DocumentRecord
+from sonar.modules.documents.utils import has_external_urls_for_files, \
+    populate_files_properties
 from sonar.modules.organisations.api import OrganisationRecord
-from sonar.modules.utils import change_filename_extension, format_date
+from sonar.modules.utils import format_date
 
 from .utils import publication_statement_text
 
@@ -85,6 +85,14 @@ def detail(pid_value, view='global'):
 
     if not record:
         abort(404)
+
+    # Add restriction, link and thumbnail to files
+    if record.get('_files'):
+        # Check if organisation's record forces to point file to an external
+        # url
+        record['external_url'] = has_external_urls_for_files(record)
+
+        populate_files_properties(record)
 
     return render_template('documents/record.html',
                            pid=pid_value,
@@ -148,46 +156,6 @@ def file_size(size):
 
 
 @blueprint.app_template_filter()
-def file_title(file):
-    """Return file label or key if label not exists.
-
-    :param file: File to get title from.
-    """
-    if file.get('label'):
-        return file['label']
-
-    return file['key']
-
-
-@blueprint.app_template_filter()
-def thumbnail(file, files):
-    """Get thumbnail from file.
-
-    :param file: Dict of file from which thumbnail will be returned.
-    :param files: Liste of files of the record.
-    """
-    key = change_filename_extension(file['key'], 'jpg')
-
-    matches = [file for file in files if file['key'] == key]
-
-    if not matches:
-        return None
-
-    return matches[0]
-
-
-@blueprint.app_template_filter()
-def has_external_urls_for_files(record):
-    """Check if files point to external website.
-
-    :param record: Current record.
-    """
-    return record.get('organisation', {}).get(
-        'pid') and record['organisation']['pid'] in current_app.config.get(
-            'SONAR_DOCUMENTS_ORGANISATIONS_EXTERNAL_FILES')
-
-
-@blueprint.app_template_filter()
 def part_of_format(part_of):
     """Format partOf property for display.
 
@@ -212,65 +180,6 @@ def part_of_format(part_of):
                                               value=part_of['numberingPages']))
 
     return ', '.join(items)
-
-
-@blueprint.app_template_filter()
-def is_file_restricted(file, record):
-    """Check if current file can be displayed.
-
-    :param file: File dict
-    :param record: Current record
-    :returns object containing result and possibly embargo date
-    """
-
-    def is_restricted_by_scope(file):
-        """File is restricted by scope (internal, rero or organisation).
-
-        :param file: File object.
-        """
-        # File is restricted by internal IPs
-        if file['restricted'] == 'internal':
-            return request.remote_addr not in current_app.config.get(
-                'SONAR_APP_INTERNAL_IPS')
-
-        # File is restricted by organisation
-        organisation = get_current_organisation_code()
-
-        # We are in global organisation, so restriction is active
-        if organisation == current_app.config.get(
-                'SONAR_APP_DEFAULT_ORGANISATION'):
-            return True
-
-        # No organisation in record, restriction is active
-        if not record.get('organisation', {}).get('pid'):
-            return True
-
-        # Record organisation is different from current organisation
-        if organisation != record['organisation']['pid']:
-            return True
-
-        return False
-
-    restricted = {'restricted': False, 'date': None}
-
-    try:
-        embargo_date = datetime.strptime(file.get('embargo_date'), '%Y-%m-%d')
-    except Exception:
-        embargo_date = None
-
-    # Store embargo date if greater than now
-    if embargo_date and embargo_date > datetime.now():
-        restricted['restricted'] = True
-        restricted['date'] = embargo_date
-
-    # File is restricted by organisation
-    if file.get('restricted'):
-        restricted['restricted'] = is_restricted_by_scope(file)
-
-    if not restricted['restricted']:
-        restricted['date'] = None
-
-    return restricted
 
 
 @blueprint.app_template_filter()
@@ -411,18 +320,3 @@ def get_preferred_languages(force_language=None):
         preferred_languages.insert(0, force_language)
 
     return list(dict.fromkeys(preferred_languages))
-
-
-def get_current_organisation_code():
-    """Return current organisation by globals or query parameter."""
-    # Organisation is present in query parameters, useful for API calls.
-    organisation = request.args.get('view')
-    if organisation:
-        return organisation
-
-    # Organisation stored in globals
-    if g.get('organisation', {}).get('code'):
-        return g.organisation['code']
-
-    # Default organisation
-    return current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION')

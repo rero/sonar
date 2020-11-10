@@ -34,7 +34,7 @@ def test_change_filename_extension(app):
         change_filename_extension('test', 'txt')
     assert str(e.value) == 'test is not a valid filename'
 
-    assert change_filename_extension('test.pdf', 'txt') == 'test.txt'
+    assert change_filename_extension('test.pdf', 'txt') == 'test-pdf.txt'
 
 
 def test_create_thumbnail_from_file():

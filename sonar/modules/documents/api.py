@@ -181,19 +181,25 @@ class DocumentRecord(SonarRecord):
         :param file: File object.
         :param deleted: Wether the given file has been deleted or not.
         """
-        # For documents, a thumbnail and a fulltext file is generated.
+        # Synchronise files between bucket and record.
+        self.files.flush()
+
+        # If file is not deleted, a thumbnail and a fulltext file is generated.
         if not deleted:
             self.create_fulltext_file(self.files[file.key])
             self.create_thumbnail(self.files[file.key])
 
-        if not self.files[file.key].get('type'):
-            self.files[file.key]['type'] = 'file'
+            # Default type is `file`
+            if not self.files[file.key].get('type'):
+                self.files[file.key]['type'] = 'file'
 
-        if not self.files[file.key].get('label'):
-            self.files[file.key]['label'] = file.key
+            # Default label is `file.key`
+            if not self.files[file.key].get('label'):
+                self.files[file.key]['label'] = file.key
 
-        if not self.files[file.key].get('order'):
-            self.files[file.key]['order'] = self.get_next_file_order()
+            # Order is calculated with other files
+            if not self.files[file.key].get('order'):
+                self.files[file.key]['order'] = self.get_next_file_order()
 
         super(DocumentRecord, self).sync_files(file, deleted)
 
