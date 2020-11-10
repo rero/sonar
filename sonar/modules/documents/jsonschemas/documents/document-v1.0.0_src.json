@@ -78,15 +78,16 @@
           },
           "order": {
             "title": "Position",
-            "description": "Position of the file, The lowest position means file is the main file.",
+            "description": "Position of the file, the first file in the list is the main file.",
             "type": "integer",
             "default": 1,
             "minimum": 1
           },
           "external_url": {
-            "title": "URL to file",
+            "title": "External URL",
             "type": "string",
             "minLength": 1,
+            "format": "uri",
             "pattern": "^https?://.*"
           },
           "restricted": {
@@ -101,6 +102,7 @@
             "description": "Example: 2019-05-05",
             "type": "string",
             "minLength": 1,
+            "format": "date",
             "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
           }
         },

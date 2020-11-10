@@ -15,44 +15,51 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #}
 
-{% macro thumbnail(resource_type, record, file, class = '') %}
-{% set thumbnail = file | thumbnail(record._files) %}
-{% if thumbnail %}
-{% set file_title = file | file_title %}
-{% set externalUrl = record | has_external_urls_for_files %}
-<div class="text-center {{ class }}">
-  {% set restricted = file | is_file_restricted(record) %}
-  {% if not restricted.restricted %}
-  {% if externalUrl and file.external_url %}
-  <a href="{{ file.external_url }}" target="_blank">
-    <img src="/{{ resource_type }}/{{ record.pid }}/files/{{ thumbnail.key }}" class="img-thumbnail img-fluid"
-      alt="{{ file_title }}">
-  </a>
+{% macro thumbnail(record, file) %}
+<div class="text-center">
+  {% if file.links.external %}
+  {{ thumbnail_image(file.thumbnail, file.label, file.links.external, '_blank') }}
+  {% elif file.links.preview %}
+  {{ thumbnail_image(file.thumbnail, file.label, file.links.preview, '_self', 'previewLink') }}
+  {% elif file.links.download %}
+  {{ thumbnail_image(file.thumbnail, file.label, file.links.download + '?download', '_self') }}
   {% else %}
-  <a href="/{{ resource_type }}/{{ record.pid }}/preview/{{ file.key }}" data-title="{{ file_title }}"
-    class="previewLink">
-    <img src="/{{ resource_type }}/{{ record.pid }}/files/{{ thumbnail.key }}" class="img-thumbnail img-fluid"
-      alt="{{ file_title }}">
-  </a>
+  {{ thumbnail_image(file.thumbnail, file.label) }}
   {% endif %}
-  <p class="my-1 small">{{ file_title }}</p>
-  {% if not externalUrl or not file.external_url %}
-  <p class="m-0">
-    <a href="/{{ resource_type }}/{{ record.pid }}/preview/{{ file.key }}" data-title="{{ file_title }}"
-      class="previewLink"><i class="fa fa-eye mr-2"></i></a>
-    <a href="/{{ resource_type }}/{{ record.pid }}/files/{{ file.key }}" target="_blank"><i
-        class="fa fa-download"></i></a>
-  </p>
+  <div class="my-1 small">{{ file.label }}</div>
+  {% if file.restriction and file.restriction.date %}
+  <div class="my-1">
+    <span class="badge badge-secondary text-light">
+      {{ _('Public access from') }}<br>{{ file.restriction.date }}
+    </span>
+  </div>
   {% endif %}
-  {% else %}
-  <img src="{{ url_for('static', filename='images/restricted.png') }}" alt="{{ file.key }}" class="mt-5" />
-  <p class="my-1 small">{{ file_title }}</p>
-  {% if restricted.date %}
-  <span class="badge badge-secondary text-light mt-2">
-    {{ _('Public access from') }} {{ restricted.date.strftime('%d/%m/%Y') }}
-  </span>
-  {% endif %}
-  {% endif %}
+  <div class="my-1">
+    {% if file.links.external %}
+    <a href="{{ file.links.external }}" target="_blank">
+      <i class="fa fa-external-link mx-1"></i>
+    </a>
+    {% endif %}
+    {% if file.links.preview %}
+    <a href="{{ file.links.preview }}" data-title="{{ file.label }}" class="previewLink">
+      <i class="fa fa-eye mx-1"></i>
+    </a>
+    {% endif %}
+    {% if file.links.download %}
+    <a href="{{ file.links.download }}?download">
+      <i class="fa fa-download mx-1"></i>
+    </a>
+    {% endif %}
+  </div>
 </div>
-{% endif %}
+{% endmacro %}
+
+{% macro thumbnail_image(image, label, link=None, target='_self', class='') %}
+{% if link %}
+<a href="{{ link }}" target="{{ target }}" class="{{ class }}">
+  <img src="{{ image }}" class="img-fluid" alt="{{ label }}">
+</a>
+{% else%}
+<img src="{{ image }}" class="img-fluid" alt="{{ label }}">
+{% endif%}
 {% endmacro %}

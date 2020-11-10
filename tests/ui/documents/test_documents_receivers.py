@@ -42,7 +42,7 @@ def test_populate_fulltext_field(app, db, document, pdf_file):
     # Successful file add
     document.add_file(content, 'test1.pdf', type='file')
     assert document.files['test1.pdf']
-    assert document.files['test1.txt']
+    assert document.files['test1-pdf.txt']
 
     db.session.commit()
 

@@ -17,8 +17,6 @@
 
 """Test documents views."""
 
-import datetime
-
 import pytest
 from flask import g, url_for
 
@@ -71,10 +69,11 @@ def test_search(app, client):
                               resource_type='documents')).status_code == 200
 
 
-def test_detail(app, client, document):
+def test_detail(app, client, document_with_file):
     """Test document detail page."""
-    assert client.get(url_for('documents.detail',
-                              pid_value=document['pid'])).status_code == 200
+    assert client.get(
+        url_for('documents.detail',
+                pid_value=document_with_file['pid'])).status_code == 200
 
     assert client.get(url_for('documents.detail',
                               pid_value='not-existing')).status_code == 404
@@ -166,96 +165,6 @@ def test_file_size(app):
     assert views.file_size(2889638) == '2.76Mb'
 
 
-def test_file_title():
-    """Test getting the caption of a file."""
-    assert views.file_title({
-        'bucket':
-        '18126249-6eb7-4fa5-b0b5-f8599e3c2bf0',
-        'checksum':
-        'md5:e73223fe5c54532ebfd3e101cb6527ce',
-        'file_id':
-        'd953c07c-5e7f-4636-bc81-3627f947c494',
-        'key':
-        '1_2004ECO001.pdf',
-        'label':
-        'Texte intégral',
-        'order':
-        1,
-        'size':
-        2889638,
-        'type':
-        'file',
-        'version_id':
-        '1c9705d3-8a9c-489e-adaf-d7d741b205ba'
-    }) == 'Texte intégral'
-
-    assert views.file_title({
-        'bucket':
-        '18126249-6eb7-4fa5-b0b5-f8599e3c2bf0',
-        'checksum':
-        'md5:e73223fe5c54532ebfd3e101cb6527ce',
-        'file_id':
-        'd953c07c-5e7f-4636-bc81-3627f947c494',
-        'key':
-        '1_2004ECO001.pdf',
-        'order':
-        1,
-        'size':
-        2889638,
-        'type':
-        'file',
-        'version_id':
-        '1c9705d3-8a9c-489e-adaf-d7d741b205ba'
-    }) == '1_2004ECO001.pdf'
-
-
-def test_thumbnail():
-    """Test getting the thumbnail of a file."""
-    files = [{
-        'bucket': '18126249-6eb7-4fa5-b0b5-f8599e3c2bf0',
-        'checksum': 'md5:e73223fe5c54532ebfd3e101cb6527ce',
-        'file_id': 'd953c07c-5e7f-4636-bc81-3627f947c494',
-        'key': '1_2004ECO001.pdf',
-        'label': 'Texte intégral',
-        'order': 1,
-        'size': 2889638,
-        'type': 'file',
-        'version_id': '1c9705d3-8a9c-489e-adaf-d7d741b205ba'
-    }, {
-        'bucket': '18126249-6eb7-4fa5-b0b5-f8599e3c2bf0',
-        'checksum': 'md5:519bd9463e54f681d73861e7e17e2050',
-        'file_id': '722264a3-b6d4-459c-a88d-2aca6fe34a0e',
-        'key': '1_2004ECO001.jpg',
-        'size': 160659,
-        'type': 'thumbnail',
-        'version_id': '1194512e-7c99-42e1-b320-a15ccb2ac946'
-    }]
-
-    assert views.thumbnail(files[0], files) == {
-        'bucket': '18126249-6eb7-4fa5-b0b5-f8599e3c2bf0',
-        'checksum': 'md5:519bd9463e54f681d73861e7e17e2050',
-        'file_id': '722264a3-b6d4-459c-a88d-2aca6fe34a0e',
-        'key': '1_2004ECO001.jpg',
-        'size': 160659,
-        'type': 'thumbnail',
-        'version_id': '1194512e-7c99-42e1-b320-a15ccb2ac946'
-    }
-
-    files = [{
-        'bucket': '18126249-6eb7-4fa5-b0b5-f8599e3c2bf0',
-        'checksum': 'md5:e73223fe5c54532ebfd3e101cb6527ce',
-        'file_id': 'd953c07c-5e7f-4636-bc81-3627f947c494',
-        'key': '1_2004ECO001.pdf',
-        'label': 'Texte intégral',
-        'order': 1,
-        'size': 2889638,
-        'type': 'file',
-        'version_id': '1c9705d3-8a9c-489e-adaf-d7d741b205ba'
-    }]
-
-    assert not views.thumbnail(files[0], files)
-
-
 def test_has_external_urls_for_files(app):
     """Test if record has to point files to external URL or not."""
     assert views.has_external_urls_for_files({
@@ -295,133 +204,6 @@ def test_part_of_format():
     assert views.part_of_format({
         'numberingYear': '2015',
     }) == '2015'
-
-
-def test_is_file_restricted(app, organisation):
-    """Test if a file is restricted by embargo date and/or organisation."""
-    g.pop('organisation', None)
-
-    views.store_organisation()
-
-    record = {'organisation': {'pid': 'org'}}
-
-    # No restriction and no embargo date
-    assert views.is_file_restricted({}, {}) == {
-        'date': None,
-        'restricted': False
-    }
-
-    # Restricted by internal, but IP is allowed
-    with app.test_request_context(environ_base={'REMOTE_ADDR': '127.0.0.1'}):
-        assert views.is_file_restricted({'restricted': 'internal'}, {}) == {
-            'date': None,
-            'restricted': False
-        }
-
-    # Restricted by internal, but IP is not allowed
-    with app.test_request_context(environ_base={'REMOTE_ADDR': '10.1.2.3'}):
-        assert views.is_file_restricted({'restricted': 'internal'}, {}) == {
-            'date': None,
-            'restricted': True
-        }
-
-    # Restricted by organisation and organisation is global
-    assert views.is_file_restricted({'restricted': 'organisation'},
-                                    record) == {
-                                        'date': None,
-                                        'restricted': True
-                                    }
-
-    # Restricted by organisation and current organisation match
-    with app.test_request_context() as req:
-        req.request.view_args['view'] = 'org'
-        views.store_organisation()
-
-    assert views.is_file_restricted({'restricted': 'organisation'},
-                                    record) == {
-                                        'date': None,
-                                        'restricted': False
-                                    }
-
-    # Restricted by organisation and record don't have organisation
-    assert views.is_file_restricted({'restricted': 'organisation'}, {}) == {
-        'date': None,
-        'restricted': True
-    }
-
-    # Restricted by organisation and organisation don't match
-    assert views.is_file_restricted({'restricted': 'organisation'},
-                                    {'organisation': {
-                                        'pid': 'some-org'
-                                    }}) == {
-                                        'date': None,
-                                        'restricted': True
-                                    }
-
-    # Restricted by embargo date only, but embargo date is in the past
-    assert views.is_file_restricted({'embargo_date': '2020-01-01'}, {}) == {
-        'date': None,
-        'restricted': False
-    }
-
-    # Restricted by embargo date only and embargo date is in the future
-    with app.test_request_context(environ_base={'REMOTE_ADDR': '10.1.2.3'}):
-        assert views.is_file_restricted({'embargo_date': '2021-01-01'},
-                                        {}) == {
-                                            'date': datetime.datetime(
-                                                2021, 1, 1, 0, 0),
-                                            'restricted': True
-                                        }
-
-    # Restricted by embargo date and organisation
-    g.pop('organisation', None)
-    views.store_organisation()
-    with app.test_request_context(environ_base={'REMOTE_ADDR': '10.1.2.3'}):
-        assert views.is_file_restricted(
-            {
-                'embargo_date': '2021-01-01',
-                'restricted': 'organisation'
-            }, record) == {
-                'restricted': True,
-                'date': datetime.datetime(2021, 1, 1, 0, 0)
-            }
-
-    # Restricted by embargo date but internal IP gives access
-    with app.test_request_context(environ_base={'REMOTE_ADDR': '127.0.0.1'}):
-        assert views.is_file_restricted(
-            {
-                'embargo_date': '2021-01-01',
-                'restricted': 'internal'
-            }, {}) == {
-                'date': None,
-                'restricted': False
-            }
-
-
-def test_get_current_organisation_code(app, organisation):
-    """Test get current organisation."""
-    # No globals and no args
-    assert views.get_current_organisation_code() == 'global'
-
-    # Default globals and no args
-    views.store_organisation()
-    assert views.get_current_organisation_code() == 'global'
-
-    # Organisation globals and no args
-    with app.test_request_context() as req:
-        req.request.view_args['view'] = 'org'
-        views.store_organisation()
-    assert views.get_current_organisation_code() == 'org'
-
-    # Args is global
-    with app.test_request_context() as req:
-        req.request.args = {'view': 'global'}
-        assert views.get_current_organisation_code() == 'global'
-
-    # Args has organisation view
-    with app.test_request_context() as req:
-        req.request.args = {'view': 'usi'}
-        assert views.get_current_organisation_code() == 'usi'
 
 
 def test_abstracts(app):

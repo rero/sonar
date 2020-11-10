@@ -26,13 +26,14 @@ from flask_security import current_user
 from invenio_records_rest.schemas import Nested, StrictKeysMixin
 from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
-from marshmallow import fields, pre_dump, pre_load
+from marshmallow import EXCLUDE, fields, pre_dump, pre_load
 
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.permissions import DocumentPermission
+from sonar.modules.documents.utils import has_external_urls_for_files, \
+    populate_files_properties
 from sonar.modules.documents.views import contribution_text, \
-    create_publication_statement, dissertation, is_file_restricted, \
-    part_of_format
+    create_publication_statement, dissertation, part_of_format
 from sonar.modules.serializers import schema_from_context
 from sonar.modules.users.api import current_user_record
 
@@ -42,6 +43,14 @@ schema_from_document = partial(schema_from_context,
 
 class FileSchemaV1(StrictKeysMixin):
     """File schema."""
+
+    class Meta:
+        """Meta for file schema."""
+
+        # Specifically exclude unknown fields, as in the new version of
+        # marshmallow, dump_only fields are treated as included.
+        # https://github.com/marshmallow-code/marshmallow/issues/875
+        unknown = EXCLUDE
 
     bucket = SanitizedUnicode()
     file_id = SanitizedUnicode()
@@ -56,12 +65,8 @@ class FileSchemaV1(StrictKeysMixin):
     restricted = SanitizedUnicode()
     embargo_date = SanitizedUnicode()
     restriction = fields.Dict(dump_only=True)
-
-    @pre_load
-    def remove_restriction(self, data, **kwargs):
-        """Remove restriction information before saving."""
-        data.pop('restriction', None)
-        return data
+    links = fields.Dict(dump_only=True)
+    thumbnail = SanitizedUnicode(dump_only=True)
 
 
 class DocumentMetadataSchemaV1(StrictKeysMixin):
@@ -103,8 +108,8 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     permalink = SanitizedUnicode(dump_only=True)
 
     @pre_dump
-    def process_files(self, item, **kwargs):
-        """Add restrictions to file before dumping data.
+    def populate_files_properties(self, item, **kwargs):
+        """Add some customs properties to file before dumping it.
 
         :param item: Item object to process
         :returns: Modified item
@@ -112,17 +117,11 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
         if not item.get('_files'):
             return item
 
-        # Add restrictions
-        for key, file in enumerate(item['_files']):
-            if file.get('type') == 'file':
-                restricted = is_file_restricted(file, item)
+        # Check if organisation record forces to point file to an external url
+        item['external_url'] = has_external_urls_for_files(item)
 
-                # Format date before serialization
-                if restricted.get('date'):
-                    restricted['date'] = restricted['date'].strftime(
-                        '%Y-%m-%d')
-
-                item['_files'][key]['restriction'] = restricted
+        # Add restriction, link and thumbnail to files
+        populate_files_properties(item)
 
         # Sort files to have the main file in first position
         item['_files'] = sorted(item['_files'],

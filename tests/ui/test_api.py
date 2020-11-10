@@ -156,7 +156,7 @@ def test_add_file(mock_extract, app, pdf_file, document):
     # Successful file add
     document.add_file(content, 'test1.pdf')
     assert document.files['test1.pdf']
-    assert document.files['test1.txt']
+    assert document.files['test1-pdf.txt']
 
     # Test already existing files
     document.add_file(content, 'test1.pdf')
@@ -172,7 +172,7 @@ def test_add_file(mock_extract, app, pdf_file, document):
     app.config['SONAR_DOCUMENTS_EXTRACT_FULLTEXT_ON_IMPORT'] = False
     document.add_file(content, 'test4.pdf')
     assert document.files['test4.pdf']
-    assert 'test4.txt' not in document.files
+    assert 'test4-pdf.txt' not in document.files
 
     # Test exception when extracting fulltext
     app.config['SONAR_DOCUMENTS_EXTRACT_FULLTEXT_ON_IMPORT'] = True
@@ -183,7 +183,7 @@ def test_add_file(mock_extract, app, pdf_file, document):
     mock_extract.side_effect = exception_side_effect
     document.add_file(content, 'test5.pdf')
     assert document.files['test5.pdf']
-    assert 'test5.txt' not in document.files
+    assert 'test5-pdf.txt' not in document.files
 
 
 def test_get_main_file(document_with_file):
@@ -216,10 +216,10 @@ def test_create_thumbnail(document, pdf_file):
     # Successful thumbail creation
     document.create_thumbnail(document.files['test.pdf'])
     assert len(document.files) == 2
-    assert document.files['test.jpg']
+    assert document.files['test-pdf.jpg']
 
     document.files['test.pdf'].remove()
-    document.files['test.jpg'].remove()
+    document.files['test-pdf.jpg'].remove()
 
     # Failed creation of thumbnail
     document.files['test.txt'] = BytesIO(b'Hello, World')

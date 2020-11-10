@@ -52,20 +52,28 @@ def create_thumbnail_from_file(file_path, mimetype):
         img.format = 'jpg'
         img.background_color = Color('white')
         img.alpha_channel = 'remove'
-        img.resize(200, 300)
+        img.border('#dee2e6', 3, 3)
+        img.transform(resize='200x')
 
         return img.make_blob()
 
 
 def change_filename_extension(filename, extension):
-    """Return filename with the given extension."""
-    matches = re.search(r'(.*)\..*$', filename)
+    """Return filename with the given extension.
+
+    Additionally, the original extension is appended to the filename, to avoid
+    conflict with other files having the same name (without extension).
+    """
+    matches = re.search(r'(.*)\.(.*)$', filename)
 
     if matches is None:
         raise Exception(
             '{filename} is not a valid filename'.format(filename=filename))
 
-    return matches.group(1) + '.' + extension
+    return '{name}-{source_extension}.{extension}'.format(
+        name=matches.group(1),
+        source_extension=matches.group(2),
+        extension=extension)
 
 
 def send_email(recipients, subject, template, ctx=None, html=True, lang='en'):

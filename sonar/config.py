@@ -652,3 +652,7 @@ WIKI_MARKDOWN_EXTENSIONS = set(('extra', ))
 # PREVIEW
 # =======
 PREVIEWER_BASE_TEMPLATE = 'sonar/preview/base.html'
+PREVIEWER_MAX_IMAGE_SIZE_BYTES = 5 * 1024 * 1024
+"""Maximum file size in bytes for image files."""
+PREVIEWER_MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024
+"""Maximum file size in bytes for JSON/XML files."""
