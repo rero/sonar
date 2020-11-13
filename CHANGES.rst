@@ -1,6 +1,178 @@
 Changelog
 =========
 
+`v0.7.0 <https://github.com/rero/sonar/tree/v0.7.0>`__ (2020-11-13)
+-------------------------------------------------------------------
+
+`Full
+Changelog <https://github.com/rero/sonar/compare/v0.6.0...v0.7.0>`__
+
+**Closed issues:**
+
+-  Other files are not well displayed in the document's detail view
+   `#357 <https://github.com/rero/sonar/issues/357>`__
+-  Restore backups for organisations and users after a new setup
+   `#356 <https://github.com/rero/sonar/issues/356>`__
+-  Field contributor should not be required in deposit form
+   `#352 <https://github.com/rero/sonar/issues/352>`__
+-  Disallow modify isDedicated and isShared properties for non
+   superusers. `#351 <https://github.com/rero/sonar/issues/351>`__
+-  Upgrade Invenio to version 3.3 and Elasticsearch to version 7
+   `#345 <https://github.com/rero/sonar/issues/345>`__
+-  ORCID must support X as last caracter.
+   `#342 <https://github.com/rero/sonar/issues/342>`__
+-  Move from pipenv to poetry
+   `#341 <https://github.com/rero/sonar/issues/341>`__
+-  File formats `#339 <https://github.com/rero/sonar/issues/339>`__
+-  Conferences should be displayed with number, place and date
+   `#338 <https://github.com/rero/sonar/issues/338>`__
+-  Bookmarks are not well displayed in PDF previews
+   `#336 <https://github.com/rero/sonar/issues/336>`__
+-  Time zone is wrong for dates in the logs of deposits.
+   `#333 <https://github.com/rero/sonar/issues/333>`__
+-  Upgrade to celery 5
+   `#331 <https://github.com/rero/sonar/issues/331>`__
+-  Check files permissions
+   `#328 <https://github.com/rero/sonar/issues/328>`__
+-  OAI-PMH Export format in Dublin Core (DC)
+   `#325 <https://github.com/rero/sonar/issues/325>`__
+-  Add field licence on step "diffusion" of deposit
+   `#324 <https://github.com/rero/sonar/issues/324>`__
+-  Accept all file formats for documents
+   `#322 <https://github.com/rero/sonar/issues/322>`__
+-  Translate values for 'organisation' facet
+   `#320 <https://github.com/rero/sonar/issues/320>`__
+-  Order records by date by default if no query specified
+   `#318 <https://github.com/rero/sonar/issues/318>`__
+-  Do not create user ressource when invenio account is created
+   `#314 <https://github.com/rero/sonar/issues/314>`__
+-  OAI-PMH Automatic creation sets for organisation
+   `#311 <https://github.com/rero/sonar/issues/311>`__
+-  Import documents to organisation "usi" and not "unisi" when
+   harvesting from rerodoc
+   `#308 <https://github.com/rero/sonar/issues/308>`__
+-  For dedicated repository, avoid error when the custom styles file
+   does not exist `#307 <https://github.com/rero/sonar/issues/307>`__
+-  Add a facet to search user not attached to an organisation
+   `#305 <https://github.com/rero/sonar/issues/305>`__
+-  Add translation context during messages extraction
+   `#302 <https://github.com/rero/sonar/issues/302>`__
+-  Ensure that file with lowest order is considered as the main file.
+   `#300 <https://github.com/rero/sonar/issues/300>`__
+-  Possibility to add/edit metadata for files
+   `#280 <https://github.com/rero/sonar/issues/280>`__
+-  Retrieve roles from invenio-access instead of storing them into User
+   API class `#244 <https://github.com/rero/sonar/issues/244>`__
+-  [2] @rerowep suggested to upgrade to ES 7.6.2
+   `#224 <https://github.com/rero/sonar/issues/224>`__
+
+**Merged pull requests:**
+
+-  documents: fix contributions in editor.
+   `#369 <https://github.com/rero/sonar/pull/369>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  translations: update catalogs
+   `#368 <https://github.com/rero/sonar/pull/368>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  project: restore data
+   `#364 <https://github.com/rero/sonar/pull/364>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  dependencies: fix version for ``importlib-metadata``
+   `#360 <https://github.com/rero/sonar/pull/360>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  translations: update catalogs
+   `#359 <https://github.com/rero/sonar/pull/359>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  documents: meeting display
+   `#355 <https://github.com/rero/sonar/pull/355>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  deposits: contributors are not required
+   `#354 <https://github.com/rero/sonar/pull/354>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  organisations: validate modes update
+   `#353 <https://github.com/rero/sonar/pull/353>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  deposits: fix ORCID format
+   `#348 <https://github.com/rero/sonar/pull/348>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  project: upgrade invenio and elasticsearch
+   `#347 <https://github.com/rero/sonar/pull/347>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  project: use poetry `#344 <https://github.com/rero/sonar/pull/344>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  documents: export records in Dublic Core format
+   `#340 <https://github.com/rero/sonar/pull/340>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  documents: Customize PDF preview styles
+   `#337 <https://github.com/rero/sonar/pull/337>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  deposit: fix log date format
+   `#335 <https://github.com/rero/sonar/pull/335>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  dependencies: update celery to version 5
+   `#332 <https://github.com/rero/sonar/pull/332>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  translations: update catalogs
+   `#330 <https://github.com/rero/sonar/pull/330>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  documents: improve files permissions
+   `#329 <https://github.com/rero/sonar/pull/329>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  deposits: add license
+   `#327 <https://github.com/rero/sonar/pull/327>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  documents: configure OAI sets
+   `#326 <https://github.com/rero/sonar/pull/326>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  documents: handle several file formats
+   `#323 <https://github.com/rero/sonar/pull/323>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  documents: update name in organisation facet
+   `#321 <https://github.com/rero/sonar/pull/321>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  records: sort by most recent descending by default
+   `#319 <https://github.com/rero/sonar/pull/319>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  documents: fix thumbnail without external URL
+   `#317 <https://github.com/rero/sonar/pull/317>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  users: avoid create user resource
+   `#315 <https://github.com/rero/sonar/pull/315>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  translations: update catalogs
+   `#313 <https://github.com/rero/sonar/pull/313>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  organisation: rename ``unisi`` to ``usi``
+   `#309 <https://github.com/rero/sonar/pull/309>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  users: facet for users without organisation
+   `#306 <https://github.com/rero/sonar/pull/306>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  translations: add context when extracting messages
+   `#304 <https://github.com/rero/sonar/pull/304>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  Translations update from Weblate
+   `#303 <https://github.com/rero/sonar/pull/303>`__
+   (`weblate <https://github.com/weblate>`__)
+-  documents: order files
+   `#301 <https://github.com/rero/sonar/pull/301>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  documents: configure ``\_files`` in JSON schema
+   `#299 <https://github.com/rero/sonar/pull/299>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  documents: fix files permissions CLI
+   `#298 <https://github.com/rero/sonar/pull/298>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  records: refactor file handling
+   `#297 <https://github.com/rero/sonar/pull/297>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  imports: change PMID identifier
+   `#296 <https://github.com/rero/sonar/pull/296>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+-  documents: add option to force harvesting records
+   `#295 <https://github.com/rero/sonar/pull/295>`__
+   (`sebastiendeleze <https://github.com/sebastiendeleze>`__)
+
 `v0.6.0 <https://github.com/rero/sonar/tree/v0.6.0>`__ (2020-09-08)
 -------------------------------------------------------------------
 
