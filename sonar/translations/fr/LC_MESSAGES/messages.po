@@ -12,15 +12,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2020-11-13 08:45+0100\n"
-"PO-Revision-Date: 2020-11-07 16:26+0000\n"
-"Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"PO-Revision-Date: 2020-11-17 15:28+0000\n"
+"Last-Translator: iGor milhit <igor.milhit@rero.ch>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"fr/>\n"
 "Language: fr\n"
-"Language-Team: French "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/fr/>\n"
-"Plural-Forms: nplurals=2; plural=n > 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.4-dev\n"
 "Generated-By: Babel 2.8.0\n"
 
 #: sonar/theme/views.py:64
@@ -1236,7 +1237,7 @@ msgstr "Global Trade Item Number 14"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:395
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:757
 msgid "bf:Identifier"
-msgstr "autre identifiant"
+msgstr "Identifiant"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:400
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:761
@@ -1285,7 +1286,7 @@ msgstr "Fabrication"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:430
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:789
 msgid "bf:MatrixNumber"
-msgstr "Numéro de matrice (documents audio)"
+msgstr "Numéro de matrice (sons)"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1242
 msgid "bf:Meeting"
@@ -1325,7 +1326,7 @@ msgstr "Publication"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:450
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:805
 msgid "bf:PublisherNumber"
-msgstr "Autre référence de l'éditeur"
+msgstr "Numéro de l'éditeur"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:475
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:825
@@ -3973,7 +3974,7 @@ msgstr "statut"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:470
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:821
 msgid "uri"
-msgstr "URI"
+msgstr "URI (Uniform Resource Identifier)"
 
 #: sonar/config.py:503
 msgid "user"
@@ -3982,4 +3983,3 @@ msgstr "utilisateur"
 #: sonar/modules/documents/views.py:172
 msgid "vol."
 msgstr "vol."
-
