@@ -26,6 +26,7 @@ from __future__ import absolute_import, print_function
 
 import re
 
+import dateutil.parser
 from flask import Blueprint, abort, current_app, jsonify, redirect, \
     render_template, request, url_for
 from flask_babelex import lazy_gettext as _
@@ -258,3 +259,14 @@ def prepare_schema(schema):
     hierarchize_form_options(schema)
 
     return schema
+
+
+@blueprint.app_template_filter()
+def format_date(date, format='%d/%m/%Y'):
+    """Format the given ISO format date string.
+
+    :param date: Date string in ISO format.
+    :param format: Output format.
+    :returns: Formatted date string.
+    """
+    return dateutil.parser.isoparse(date).strftime('%d/%m/%Y')

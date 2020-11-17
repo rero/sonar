@@ -29,9 +29,9 @@
       "type": "string",
       "minLength": 1,
       "form": {
-        "hideExpression": "model.type !== 'bf:Local'",
+        "hideExpression": "!model || model.type !== 'bf:Local'",
         "expressionProperties": {
-          "templateOptions.required": "model.type === 'bf:Local'"
+          "templateOptions.required": "model && model.type === 'bf:Local'"
         }
       }
     },

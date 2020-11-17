@@ -17,7 +17,7 @@
 
 """Query for projects."""
 
-from flask import current_app
+from flask import current_app, request
 
 from sonar.modules.organisations.api import current_organisation
 from sonar.modules.query import default_search_factory
@@ -41,14 +41,16 @@ def search_factory(self, search, query_parser=None):
         return (search, urlkwargs)
 
     # For admin and moderator, only records that belongs to his organisation.
-    if current_user_record.is_moderator:
-        search = search.filter(
-            'term', organisation__pid=current_organisation['pid'])
+    # The same rule is applied when searching project in typeahead input.
+    if current_user_record.is_moderator or (
+            request.args.get('q') and
+            request.args['q'].startswith('autocomplete_name')):
+        search = search.filter('term',
+                               organisation__pid=current_organisation['pid'])
         return (search, urlkwargs)
 
     # For user, only records that belongs to him.
     if current_user_record.is_submitter:
-        search = search.filter(
-            'term', user__pid=current_user_record['pid'])
+        search = search.filter('term', user__pid=current_user_record['pid'])
 
     return (search, urlkwargs)

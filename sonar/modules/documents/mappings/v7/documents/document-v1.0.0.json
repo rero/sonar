@@ -452,6 +452,17 @@
           }
         }
       },
+      "projects": {
+        "type": "object",
+        "properties": {
+          "pid": {
+            "type": "keyword"
+          },
+          "name": {
+            "type": "text"
+          }
+        }
+      },
       "_created": {
         "type": "date"
       },

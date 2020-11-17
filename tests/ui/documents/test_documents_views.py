@@ -349,3 +349,12 @@ def test_contribution_text():
             'place': 'Place'
         }
     }) == 'Meeting (1234 : 2019 : Place)'
+
+
+def test_project_detail(app, client, project):
+    """Test project detail page."""
+    assert client.get(url_for('documents.project_detail',
+                              pid_value=project['pid'])).status_code == 200
+
+    assert client.get(url_for('documents.project_detail',
+                              pid_value='not-existing')).status_code == 404
