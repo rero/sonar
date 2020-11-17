@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2020-11-13 08:45+0100\n"
-"PO-Revision-Date: 2020-11-07 16:26+0000\n"
+"PO-Revision-Date: 2020-11-24 13:29+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"de/>\n"
 "Language: de\n"
-"Language-Team: German "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/de/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.4-dev\n"
 "Generated-By: Babel 2.8.0\n"
 
 #: sonar/theme/views.py:64
@@ -1182,7 +1183,7 @@ msgstr "Agent"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:379
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:741
 msgid "bf:AudioIssueNumber"
-msgstr "Audio issue number"
+msgstr "Verlagsreferenz (Audiodokumente)"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1078
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1092
@@ -1208,12 +1209,12 @@ msgstr "EAN"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:390
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:753
 msgid "bf:Gtin14Number"
-msgstr "Global Trade Item Number 14"
+msgstr "GTIN-14"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:395
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:757
 msgid "bf:Identifier"
-msgstr "anderer Identifikator"
+msgstr "Identifikator"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:400
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:761
@@ -1253,7 +1254,7 @@ msgstr "Language entity"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:785
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1277
 msgid "bf:Local"
-msgstr "Local identifier"
+msgstr "Lokaler Identifikator"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:453
 msgid "bf:Manufacture"
@@ -1262,7 +1263,7 @@ msgstr "Herstellung"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:430
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:789
 msgid "bf:MatrixNumber"
-msgstr "Audio matrix number"
+msgstr "Matrix-Nummer (Tone)"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1242
 msgid "bf:Meeting"
@@ -1271,17 +1272,17 @@ msgstr "Meeting"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:435
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:793
 msgid "bf:MusicDistributorNumber"
-msgstr "Music distributor number"
+msgstr "Vertriebsnummer (Musik)"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:440
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:797
 msgid "bf:MusicPlate"
-msgstr "Music plate number"
+msgstr "Druckplattennummer (Partituren)"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:445
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:801
 msgid "bf:MusicPublisherNumber"
-msgstr "Music publisher number"
+msgstr "Verlagsnummer (Musik)"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1238
 msgid "bf:Organization"
@@ -1302,7 +1303,7 @@ msgstr "Veröffentlichung"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:450
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:805
 msgid "bf:PublisherNumber"
-msgstr "Publisher number"
+msgstr "Verlagsnummer"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:475
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:825
@@ -1331,7 +1332,7 @@ msgstr "URN"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:465
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:817
 msgid "bf:VideoRecordingNumber"
-msgstr "Video recording number"
+msgstr "Videoaufzeichnungsnummer"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:103
 msgid "classification_004"
@@ -3959,4 +3960,3 @@ msgstr "Benutzer"
 #: sonar/modules/documents/views.py:172
 msgid "vol."
 msgstr ""
-
