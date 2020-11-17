@@ -20,6 +20,7 @@
 import datetime
 import re
 
+import pytz
 from flask import current_app, g
 from invenio_i18n.ext import current_i18n
 from invenio_mail.api import TemplatedMessage
@@ -158,6 +159,17 @@ def format_date(date):
                                           '%Y-%m-%d').strftime('%d.%m.%Y')
 
     return date
+
+
+def localize_date(date, format='%Y-%m-%d'):
+    """Localize the given date string.
+
+    :param date: String representation of the date.
+    :param format: Format of input date.
+    :returns: The localized date string.
+    """
+    return pytz.utc.localize(datetime.datetime.strptime(date,
+                                                        format)).isoformat()
 
 
 def get_specific_theme():

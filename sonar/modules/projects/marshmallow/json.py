@@ -27,10 +27,12 @@ from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
 from marshmallow import fields, pre_dump, pre_load
 
+from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.projects.api import ProjectRecord
 from sonar.modules.projects.permissions import ProjectPermission
 from sonar.modules.serializers import schema_from_context
 from sonar.modules.users.api import current_user_record
+from sonar.modules.utils import localize_date
 
 schema_from_project = partial(schema_from_context, schema=ProjectRecord.schema)
 
@@ -48,6 +50,7 @@ class ProjectMetadataSchemaV1(StrictKeysMixin):
     funding_organisations = fields.List(fields.Dict())
     organisation = fields.Dict()
     user = fields.Dict()
+    documents = fields.List(fields.Dict(), dump_only=True)
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
     schema = GenFunction(load_only=True,
@@ -55,6 +58,19 @@ class ProjectMetadataSchemaV1(StrictKeysMixin):
                          data_key="$schema",
                          deserialize=schema_from_project)
     permissions = fields.Dict(dump_only=True)
+
+    @pre_dump
+    def format_data(self, item, **kwargs):
+        """Format data before dumping object."""
+        item['startDate'] = localize_date(item['startDate'])
+        if item.get('endDate'):
+            item['endDate'] = localize_date(item['endDate'])
+
+        # Add documents
+        item['documents'] = DocumentRecord.get_documents_by_project(
+            item['pid'])
+
+        return item
 
     @pre_dump
     def add_permissions(self, item, **kwargs):

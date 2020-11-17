@@ -1,0 +1,87 @@
+{%- extends config.RECORDS_UI_BASE_TEMPLATE %}
+
+{% macro format_identifier(identifier) %}
+<span class="badge badge-secondary text-light mr-1">{{ _(record.identifiedBy.type) }}</span>
+{{ record.identifiedBy.value }}
+{% if record.identifiedBy.source %}
+<i class="text-muted ml-1">{{ record.identifiedBy.source }}</i>
+{% endif %}
+{% endmacro %}
+
+{% block body %}
+<h1>{{ record.name }}</h1>
+{% if record.description %}
+<div class="my-4">{{ record.description | nl2br | safe }}</div>
+{% endif %}
+
+<dl class="row mt-4">
+  <dt class="col-sm-3">{{ _('Start date') }}</dt>
+  <dd class="col-sm-9">{{ record.startDate | format_date }}</dd>
+
+  {% if record.endDate %}
+  <dt class="col-sm-3">{{ _('End date') }}</dt>
+  <dd class="col-sm-9">{{ record.endDate | format_date }}</dd>
+  {% endif %}
+
+  {% if record.identifiedBy %}
+  <dt class="col-sm-3">{{ _('Identifier') }}</dt>
+  <dd class="col-sm-9">{{ format_identifier(record.identifiedBy) }}</dd>
+  {% endif %}
+
+  <dt class="col-sm-3">{{ _('Investigators') }}</dt>
+  <dd class="col-sm-9">
+    <ul class="list-group list-group-flush">
+      {% for investigator in record.investigators %}
+      <li class="list-group-item px-0 py-1">
+        {{ investigator.agent.preferred_name }}
+        {% for role in investigator.role %}
+        <span class="badge badge-secondary text-light ml-1">{{ _(role) }}</span>
+        {% endfor %}
+        {% if investigator.affiliation or investigator.identifiedBy %}
+        <dl class="row mb-0">
+          {% if investigator.affiliation %}
+          <dt class="col-sm-2">{{ _('Affiliation') }}</dt>
+          <dd class="col-sm-10 mb-0">{{ investigator.affiliation }}</dd>
+          {% endif%}
+          {% if investigator.identifiedBy %}
+          <dt class="col-sm-2">{{ _('Identifier') }}</dt>
+          <dd class="col-sm-10">
+            {{ format_identifier(record.identifiedBy) }}
+          </dd>
+          {% endif%}
+
+        </dl>
+        {% endif %}
+      </li>
+      {% endfor %}
+  </dd>
+
+  <dt class="col-sm-3">{{ _('Funding organisations') }}</dt>
+  <dd class="col-sm-9">
+    <ul class="list-group list-group-flush">
+      {% for funding_organisation in record.funding_organisations %}
+      <li class="list-group-item px-0 py-1">
+        {{ funding_organisation.agent.preferred_name }}
+        {% if funding_organisation.identifiedBy %}
+        <dl class="row mb-0 ng-star-inserted">
+          <dt class="col-sm-2">{{ _('Identifier') }}</dt>
+          <dd class="col-sm-10">{{ format_identifier(funding_organisation.identifiedBy) }}</dd>
+        </dl>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </dd>
+</dl>
+
+{% if record.documents %}
+<h4>{{ _('Linked documents') }}</h4>
+<ul>
+  {% for document in record.documents %}
+  <li>
+    <a href="{{ document.permalink }}">{{ document.title[0] | title_format(current_i18n.language) }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock body %}

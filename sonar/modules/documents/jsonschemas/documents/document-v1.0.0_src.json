@@ -1197,8 +1197,13 @@
           "minLength": 1
         }
       },
-      "propertiesOrder": ["license", "label"],
-      "required": ["license"],
+      "propertiesOrder": [
+        "license",
+        "label"
+      ],
+      "required": [
+        "license"
+      ],
       "form": {
         "hide": true,
         "templateOptions": {
@@ -1285,9 +1290,9 @@
                     "type": "string",
                     "minLength": 1,
                     "form": {
-                      "hideExpression": "model.type !== 'bf:Local'",
+                      "hideExpression": "model && model.type !== 'bf:Local'",
                       "expressionProperties": {
-                        "templateOptions.required": "model.type === 'bf:Local'"
+                        "templateOptions.required": "model && model.type === 'bf:Local'"
                       }
                     }
                   },
@@ -1560,12 +1565,49 @@
           "cssClass": "editor-title"
         }
       }
+    },
+    "projects": {
+      "title": "Projects",
+      "type": "array",
+      "items": {
+        "title": "Project",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "$ref": {
+            "title": "Project",
+            "type": "string",
+            "pattern": "^https://sonar.ch/api/projects/.*?$",
+            "minLength": 1,
+            "form": {
+              "remoteTypeahead": {
+                "type": "projects",
+                "field": "autocomplete_name",
+                "label": "name"
+              }
+            }
+          }
+        },
+        "required": [
+          "$ref"
+        ]
+      },
+      "form": {
+        "hide": true,
+        "navigation": {
+          "essential": true
+        },
+        "templateOptions": {
+          "cssClass": "editor-title"
+        }
+      }
     }
   },
   "propertiesOrder": [
     "documentType",
     "title",
     "organisation",
+    "projects",
     "classification",
     "language",
     "abstracts",

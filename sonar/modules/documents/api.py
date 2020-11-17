@@ -21,7 +21,7 @@ import csv
 from functools import partial
 from io import BytesIO
 
-from flask import current_app
+from flask import current_app, request
 
 from sonar.modules.documents.minters import id_minter
 from sonar.modules.pdf_extractor.utils import extract_text_from_content
@@ -115,6 +115,26 @@ class DocumentRecord(SonarRecord):
 
         return current_app.config.get('SONAR_DOCUMENTS_PERMALINK').format(
             host=host, org=org, pid=pid)
+
+    @staticmethod
+    def get_documents_by_project(project_pid):
+        """Return the list of documents associated to the given project.
+
+        :param project_pid: PID of the project.
+        :returns: List of documents matching the project PID.
+        """
+
+        def format_hit(hit):
+            """Format hit item."""
+            hit = hit.to_dict()
+            hit['permalink'] = DocumentRecord.get_permanent_link(
+                request.host_url, hit['pid'])
+            return hit
+
+        results = DocumentSearch().filter(
+            'term',
+            projects__pid=project_pid).source(includes=['pid', 'title'])
+        return list(map(format_hit, results))
 
     @classmethod
     def create(cls, data, id_=None, dbcommit=False, with_bucket=True,

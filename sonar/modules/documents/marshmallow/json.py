@@ -98,6 +98,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     dissertation = fields.Dict()
     otherEdition = fields.List(fields.Dict())
     usageAndAccessPolicy = fields.Dict()
+    projects = fields.List(fields.Dict())
     _bucket = SanitizedUnicode()
     _files = Nested(FileSchemaV1, many=True)
     _oai = fields.Dict()
