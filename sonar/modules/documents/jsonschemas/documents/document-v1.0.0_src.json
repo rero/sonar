@@ -1264,14 +1264,14 @@
                     "title": "Type",
                     "type": "string",
                     "enum": [
-                      "bf:Doi",
+                      "bf:Identifier",
                       "bf:Local"
                     ],
                     "form": {
                       "options": [
                         {
-                          "label": "bf:Doi",
-                          "value": "bf:Doi"
+                          "label": "bf:Identifier",
+                          "value": "bf:Identifier"
                         },
                         {
                           "label": "bf:Local",
@@ -1283,7 +1283,13 @@
                   "source": {
                     "title": "Source",
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "form": {
+                      "hideExpression": "model.type !== 'bf:Local'",
+                      "expressionProperties": {
+                        "templateOptions.required": "model.type === 'bf:Local'"
+                      }
+                    }
                   },
                   "value": {
                     "title": "Value",
@@ -1291,6 +1297,7 @@
                     "minLength": 1
                   }
                 },
+                "propertiesOrder": ["type", "source", "value"],
                 "form": {
                   "hideExpression": "field.parent.model.type !== 'bf:Person'"
                 }

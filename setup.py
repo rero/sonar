@@ -101,13 +101,15 @@ setup(
             'organisations = sonar.modules.organisations.jsonschemas',
             'users = sonar.modules.users.jsonschemas',
             'deposits = sonar.modules.deposits.jsonschemas',
+            'projects = sonar.modules.projects.jsonschemas',
             'common = sonar.common.jsonschemas'
         ],
         'invenio_search.mappings': [
             'documents = sonar.modules.documents.mappings',
             'organisations = sonar.modules.organisations.mappings',
             'users = sonar.modules.users.mappings',
-            'deposits = sonar.modules.deposits.mappings'
+            'deposits = sonar.modules.deposits.mappings',
+            'projects = sonar.modules.projects.mappings'
         ],
         'invenio_search.templates': [
             'base-record = sonar.es_templates:list_es_templates'
@@ -120,7 +122,9 @@ setup(
             'user_id = \
                 sonar.modules.users.api:user_pid_minter',
             'deposit_id = \
-                sonar.modules.deposits.api:deposit_pid_minter'
+                sonar.modules.deposits.api:deposit_pid_minter',
+            'project_id = \
+                sonar.modules.projects.api:project_pid_minter'
         ],
         'invenio_pidstore.fetchers': [
             'document_id = \
@@ -130,12 +134,15 @@ setup(
             'user_id = \
                 sonar.modules.users.api:user_pid_fetcher',
             'deposit_id = \
-                sonar.modules.deposits.api:deposit_pid_fetcher'
+                sonar.modules.deposits.api:deposit_pid_fetcher',
+            'project_id = \
+                sonar.modules.projects.api:project_pid_fetcher'
         ],
         "invenio_records.jsonresolver": [
             "organisation = sonar.modules.organisations.jsonresolvers",
             "user = sonar.modules.users.jsonresolvers",
-            "document = sonar.modules.documents.jsonresolvers"
+            "document = sonar.modules.documents.jsonresolvers",
+            "project = sonar.modules.projects.jsonresolvers"
         ],
         'invenio_celery.tasks' : [
             'documents = sonar.modules.documents.tasks'

@@ -40,6 +40,7 @@ from sonar.modules.deposits.permissions import DepositPermission
 from sonar.modules.documents.permissions import DocumentPermission
 from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import can_access_manage_view
+from sonar.modules.projects.permissions import ProjectPermission
 from sonar.modules.users.api import UserRecord, current_user_record
 from sonar.modules.users.permissions import UserPermission
 
@@ -128,6 +129,10 @@ def logged_user():
             'deposits': {
                 'add': DepositPermission.create(user),
                 'list': DepositPermission.list(user)
+            },
+            'projects': {
+                'add': ProjectPermission.create(user),
+                'list': ProjectPermission.list(user)
             }
         }
 
@@ -155,7 +160,7 @@ def schemas(record_type):
 
         # TODO: Maybe find a proper way to do this.
         if record_type in [
-                'users', 'documents'
+                'users', 'documents', 'projects'
         ] and not current_user.is_anonymous and current_user_record:
             if record_type == 'users':
                 # If user is admin, restrict available roles list.
