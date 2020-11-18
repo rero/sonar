@@ -1197,8 +1197,13 @@
           "minLength": 1
         }
       },
-      "propertiesOrder": ["license", "label"],
-      "required": ["license"],
+      "propertiesOrder": [
+        "license",
+        "label"
+      ],
+      "required": [
+        "license"
+      ],
       "form": {
         "hide": true,
         "templateOptions": {
@@ -1264,14 +1269,14 @@
                     "title": "Type",
                     "type": "string",
                     "enum": [
-                      "bf:Doi",
+                      "bf:Identifier",
                       "bf:Local"
                     ],
                     "form": {
                       "options": [
                         {
-                          "label": "bf:Doi",
-                          "value": "bf:Doi"
+                          "label": "bf:Identifier",
+                          "value": "bf:Identifier"
                         },
                         {
                           "label": "bf:Local",
@@ -1283,7 +1288,13 @@
                   "source": {
                     "title": "Source",
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "form": {
+                      "hideExpression": "model && model.type !== 'bf:Local'",
+                      "expressionProperties": {
+                        "templateOptions.required": "model && model.type === 'bf:Local'"
+                      }
+                    }
                   },
                   "value": {
                     "title": "Value",
@@ -1291,6 +1302,7 @@
                     "minLength": 1
                   }
                 },
+                "propertiesOrder": ["type", "source", "value"],
                 "form": {
                   "hideExpression": "field.parent.model.type !== 'bf:Person'"
                 }
@@ -1553,12 +1565,48 @@
           "cssClass": "editor-title"
         }
       }
+    },
+    "projects": {
+      "title": "Research projects",
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "title": "Research project",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "$ref": {
+            "type": "string",
+            "pattern": "^https://sonar.ch/api/projects/.*?$",
+            "form": {
+              "remoteTypeahead": {
+                "type": "projects",
+                "field": "autocomplete_name",
+                "label": "name"
+              }
+            }
+          }
+        },
+        "required": [
+          "$ref"
+        ]
+      },
+      "form": {
+        "hide": true,
+        "navigation": {
+          "essential": true
+        },
+        "templateOptions": {
+          "cssClass": "editor-title"
+        }
+      }
     }
   },
   "propertiesOrder": [
     "documentType",
     "title",
     "organisation",
+    "projects",
     "classification",
     "language",
     "abstracts",

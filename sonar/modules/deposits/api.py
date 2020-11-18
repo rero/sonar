@@ -23,6 +23,7 @@ from functools import partial
 import pytz
 
 from sonar.modules.documents.api import DocumentRecord
+from sonar.modules.projects.api import ProjectRecord
 from sonar.modules.users.api import current_user_record
 
 from ..api import SonarIndexer, SonarRecord, SonarSearch
@@ -259,9 +260,11 @@ class DepositRecord(SonarRecord):
                     'type': 'bf:Person',
                     'preferred_name': contributor['name']
                 },
-                'role': [contributor['role']],
-                'affiliation': contributor.get('affiliation')
+                'role': [contributor['role']]
             }
+
+            if contributor.get('affiliation'):
+                data['affiliation'] = contributor['affiliation']
 
             # ORCID for contributor
             if contributor.get('orcid'):
@@ -271,19 +274,92 @@ class DepositRecord(SonarRecord):
                     'value': contributor['orcid']
                 }
 
-            # Resolve controlled affiliations
-            if data.get('affiliation'):
-                affiliations = DocumentRecord.get_affiliations(
-                    data['affiliation'])
-                if affiliations:
-                    data['controlledAffiliation'] = affiliations
-            else:
-                data.pop('affiliation', None)
-
             contributors.append(data)
 
         if contributors:
             metadata['contribution'] = contributors
+
+        # Projects
+        if self.get('projects'):
+            projects = []
+
+            for project in self['projects']:
+                # Create a new project
+                if not project.get('$ref'):
+                    data = project.copy()
+
+                    # Store user
+                    data['user'] = self['user']
+
+                    # Store organisation
+                    data['organisation'] = current_user_record['organisation']
+
+                    # Project identifier
+                    if project.get('identifier'):
+                        data['identifiedBy'] = {
+                            'type': 'bf:Identifier',
+                            'value': project['identifier']
+                        }
+                        data.pop('identifier')
+
+                    # Investigators
+                    if project.get('investigators'):
+                        data['investigators'] = []
+                        for investigator in project['investigators']:
+                            investigator_data = {
+                                'agent': {
+                                    'preferred_name': investigator['name']
+                                },
+                                'role': [investigator['role']],
+                            }
+
+                            if investigator.get('affiliation'):
+                                investigator_data[
+                                    'affiliation'] = investigator.get(
+                                        'affiliation')
+
+                            if investigator.get('orcid'):
+                                investigator_data['identifiedBy'] = {
+                                    'type': 'bf:Local',
+                                    'source': 'ORCID',
+                                    'value': investigator.get('orcid')
+                                }
+
+                            data['investigators'].append(investigator_data)
+
+                    # Funding organisations
+                    if project.get('funding_organisations'):
+                        data['funding_organisations'] = []
+                        for funding_organisation in project[
+                                'funding_organisations']:
+                            funding_organisation_data = {
+                                'agent': {
+                                    'preferred_name':
+                                    funding_organisation['name']
+                                }
+                            }
+
+                            if funding_organisation.get('identifier'):
+                                funding_organisation_data['identifiedBy'] = {
+                                    'type': 'bf:Identifier',
+                                    'value': funding_organisation['identifier']
+                                }
+
+                            data['funding_organisations'].append(
+                                funding_organisation_data)
+
+                    project_record = ProjectRecord.create(data, dbcommit=True)
+                    project_record.reindex()
+                    project = {
+                        '$ref':
+                        project_record.get_ref_link('projects',
+                                                    project_record['pid'])
+                    }
+
+                projects.append(project)
+
+            if projects:
+                metadata['projects'] = projects
 
         # License
         metadata['usageAndAccessPolicy'] = {

@@ -27,6 +27,8 @@ from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.utils import has_external_urls_for_files, \
     populate_files_properties
 from sonar.modules.organisations.api import OrganisationRecord
+from sonar.modules.projects.api import ProjectRecord
+from sonar.modules.projects.marshmallow.json import ProjectMetadataSchemaV1
 from sonar.modules.utils import format_date
 
 from .utils import publication_statement_text
@@ -94,7 +96,32 @@ def detail(pid_value, view='global'):
 
         populate_files_properties(record)
 
+    # Resolve $ref properties
+    record = record.replace_refs()
+
     return render_template('documents/record.html',
+                           pid=pid_value,
+                           record=record)
+
+
+@blueprint.route('/projects/<pid_value>')
+def project_detail(pid_value, view='global'):
+    """Project detail view.
+
+    :param pid_value: Project PID.
+    :param view: Organisation's view.
+    :returns: Rendered template.
+    """
+    record = ProjectRecord.get_record_by_pid(pid_value)
+
+    if not record:
+        abort(404)
+
+    record = record.replace_refs()
+    # Serialize record to have the same transformation as REST API.
+    record = ProjectMetadataSchemaV1().dump(record)
+
+    return render_template('sonar/projects/detail.html',
                            pid=pid_value,
                            record=record)
 

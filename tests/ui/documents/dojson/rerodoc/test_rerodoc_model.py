@@ -1897,8 +1897,7 @@ def test_marc21_to_contribution_field_100():
         },
         'role': ['cre'],
         'affiliation':
-        'University of Bern, Switzerland',
-        'controlledAffiliation': ['Uni of Bern and Hospital']
+        'University of Bern, Switzerland'
     }]
 
     # Not $a
@@ -1949,8 +1948,7 @@ def test_marc21_to_contribution_field_100():
         },
         'role': ['cre'],
         'affiliation':
-        'University of Bern, Switzerland',
-        'controlledAffiliation': ['Uni of Bern and Hospital']
+        'University of Bern, Switzerland'
     }]
 
     # Only birth date, variant 2
@@ -1973,8 +1971,7 @@ def test_marc21_to_contribution_field_100():
         },
         'role': ['cre'],
         'affiliation':
-        'University of Bern, Switzerland',
-        'controlledAffiliation': ['Uni of Bern and Hospital']
+        'University of Bern, Switzerland'
     }]
 
     # Only birth date, variant 3
@@ -1997,8 +1994,7 @@ def test_marc21_to_contribution_field_100():
         },
         'role': ['cre'],
         'affiliation':
-        'University of Bern, Switzerland',
-        'controlledAffiliation': ['Uni of Bern and Hospital']
+        'University of Bern, Switzerland'
     }]
 
 
@@ -2026,8 +2022,7 @@ def test_marc21_to_contribution_field_700():
         },
         'role': ['dgs'],
         'affiliation':
-        'University of Bern, Switzerland',
-        'controlledAffiliation': ['Uni of Bern and Hospital']
+        'University of Bern, Switzerland'
     }]
 
     # Not $a
@@ -2065,8 +2060,7 @@ def test_marc21_to_contribution_field_700():
         },
         'role': ['dgs'],
         'affiliation':
-        'University of Bern, Switzerland',
-        'controlledAffiliation': ['Uni of Bern and Hospital']
+        'University of Bern, Switzerland'
     }]
 
     # Role from field 980, but not existing

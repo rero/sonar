@@ -162,6 +162,31 @@
       {% endif %}
 
       <dl class="row mb-0">
+        <!-- PROJECTS -->
+        {% if record.projects %}
+        <dt class="col-lg-3">
+          {{ _('Research projects') }}
+        </dt>
+        <dd class="col-lg-9">
+          <ul class="list-unstyled mb-0">
+            {% for project in record.projects %}
+            <li class="p-0">
+              <a href="{{ url_for('documents.project_detail', pid_value=project.pid, view=view_code) }}">
+                {{ project.name }}
+              </a>
+              {%- if project.funding_organisations -%}
+              ({{ _('supported by') }}&nbsp;
+              {%- for funding_organisation in project.funding_organisations -%}
+              {{funding_organisation.agent.preferred_name}}{% if not loop.last %},&nbsp;{% endif %}
+              {%- endfor -%}
+              )
+              {%- endif -%}
+            </li>
+            {% endfor %}
+          </ul>
+        </dd>
+        {% endif %}
+
         <!-- OTHER EDITION -->
         {% if record.otherEdition %}
         <dt class="col-lg-3">
