@@ -1,0 +1,95 @@
+{%- extends config.RECORDS_UI_BASE_TEMPLATE %}
+
+{% macro format_identifier(identifier) %}
+{%- if identifier.source %}
+<span class="badge badge-secondary text-light mr-1">{{ _(identifier.source) }}</span>
+{% else -%}
+<span class="badge badge-secondary text-light mr-1">{{ _(identifier.type) }}</span>
+{%- endif -%}
+{{ identifier.value }}
+{% endmacro %}
+
+{% block body %}
+<div class="mb-3">
+  <a href="javascript: history.back(-1)">
+    <i class="fa fa-arrow-left mr-1"></i> {{ _('Back') }}
+  </a>
+</div>
+<h1>{{ record.name }}</h1>
+{% if record.description %}
+<div class="my-4">{{ record.description | nl2br | safe }}</div>
+{% endif %}
+
+<dl class="row mt-4">
+  <dt class="col-sm-3">{{ _('Period') }}</dt>
+  <dd class="col-sm-9">{{ record.startDate | format_date }} - {{ record.endDate | format_date if record.endDate else '' }}</dd>
+
+  {% if record.identifiedBy %}
+  <dt class="col-sm-3">{{ _('Identifier') }}</dt>
+  <dd class="col-sm-9">{{ format_identifier(record.identifiedBy) }}</dd>
+  {% endif %}
+
+  {% if record.investigators %}
+  <dt class="col-sm-3">{{ _('Investigators') }}</dt>
+  <dd class="col-sm-9">
+    {% for investigator in record.investigators %}
+    <p class="m-0">
+      {{ investigator.agent.preferred_name }}
+      (
+      {%- for role in investigator.role -%}
+      {{ _(role) }}{% if not loop.last %},&nbsp;{%endif%}
+      {%- endfor -%}
+      )
+      {% if investigator.identifiedBy %}
+      {{ format_identifier(investigator.identifiedBy) }}
+      {% endif%}
+      {% if investigator.affiliation %}
+      {% if investigator.controlledAffiliation %}
+      <small class="affiliation-tooltip" data-placement="top"
+        title="{{ investigator.controlledAffiliation | join(' ; ') }}"><i
+          class="text-muted">{{ investigator.affiliation }}</i></small>
+      {% else %}
+      <small><i class="text-muted">{{ investigator.affiliation }}</i></small>
+      {% endif %}
+      {% endif %}
+    </p>
+    {% endfor %}
+  </dd>
+  {% endif %}
+
+  {% if record.funding_organisations %}
+  <dt class="col-sm-3">{{ _('Funding organisations') }}</dt>
+  <dd class="col-sm-9">
+    {% for funding_organisation in record.funding_organisations %}
+    <p class="m-0">
+      {{ funding_organisation.agent.preferred_name }}
+      {% if funding_organisation.identifiedBy %}
+      {{ format_identifier(funding_organisation.identifiedBy) }}
+      {% endif %}
+    </p>
+    {% endfor %}
+  </dd>
+  {% endif %}
+</dl>
+
+{% if record.documents %}
+<h4>{{ _('Linked documents') }}</h4>
+<ul>
+  {% for document in record.documents %}
+  <li>
+    <a href="{{ document.permalink }}">{{ document.title[0] | title_format(current_i18n.language) }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock body %}
+
+
+{% block javascript %}
+{{super()}}
+<script>
+  $(document).ready(function () {
+    $('.affiliation-tooltip').tooltip();
+  });
+</script>
+{% endblock javascript %}

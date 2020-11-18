@@ -17,12 +17,12 @@
 
 """Document Api."""
 
-import csv
 from functools import partial
 from io import BytesIO
 
-from flask import current_app
+from flask import current_app, request
 
+from sonar.affiliations import AffiliationResolver
 from sonar.modules.documents.minters import id_minter
 from sonar.modules.pdf_extractor.utils import extract_text_from_content
 from sonar.modules.utils import change_filename_extension, \
@@ -57,49 +57,6 @@ class DocumentRecord(SonarRecord):
     fetcher = document_pid_fetcher
     provider = DocumentProvider
     schema = 'documents/document-v1.0.0.json'
-    affiliations = []
-
-    @staticmethod
-    def load_affiliations():
-        """Load affiliations from reference file."""
-        csv_file = './data/affiliations.csv'
-
-        DocumentRecord.affiliations = []
-
-        with open(csv_file, 'r') as file:
-            reader = csv.reader(file, delimiter='\t')
-            for row in reader:
-                affiliation = []
-                for index, value in enumerate(row):
-                    if index > 0 and value:
-                        affiliation.append(value)
-
-                if affiliation:
-                    DocumentRecord.affiliations.append(affiliation)
-
-    @staticmethod
-    def get_affiliations(full_affiliation):
-        """Get controlled affiliations list based on reference CSV file.
-
-        :param full_affiliation: String representing complete affiliation
-        """
-        if not full_affiliation:
-            return []
-
-        if not DocumentRecord.affiliations:
-            DocumentRecord.load_affiliations()
-
-        full_affiliation = full_affiliation.lower()
-
-        controlled_affiliations = []
-
-        for affiliations in DocumentRecord.affiliations:
-            for affiliation in affiliations:
-                if affiliation.lower() in full_affiliation:
-                    controlled_affiliations.append(affiliations[0])
-                    break
-
-        return controlled_affiliations
 
     @staticmethod
     def get_permanent_link(host, pid, org=None):
@@ -116,15 +73,52 @@ class DocumentRecord(SonarRecord):
         return current_app.config.get('SONAR_DOCUMENTS_PERMALINK').format(
             host=host, org=org, pid=pid)
 
+    @staticmethod
+    def get_documents_by_project(project_pid):
+        """Return the list of documents associated to the given project.
+
+        :param project_pid: PID of the project.
+        :returns: List of documents matching the project PID.
+        """
+
+        def format_hit(hit):
+            """Format hit item."""
+            hit = hit.to_dict()
+            hit['permalink'] = DocumentRecord.get_permanent_link(
+                request.host_url, hit['pid'])
+            return hit
+
+        results = DocumentSearch().filter(
+            'term',
+            projects__pid=project_pid).source(includes=['pid', 'title'])
+        return list(map(format_hit, results))
+
     @classmethod
     def create(cls, data, id_=None, dbcommit=False, with_bucket=True,
                **kwargs):
         """Create document record."""
+        cls.guess_controlled_affiliations(data)
         return super(DocumentRecord, cls).create(data,
                                                  id_=id_,
                                                  dbcommit=dbcommit,
                                                  with_bucket=with_bucket,
                                                  **kwargs)
+
+    @classmethod
+    def guess_controlled_affiliations(cls, data):
+        """Guess controlled affiliations.
+
+        :param data: Record data.
+        """
+        affiliation_resolver = AffiliationResolver()
+        for contributor in data.get('contribution', []):
+            if contributor.get('affiliation'):
+                controlled_affiliation = affiliation_resolver.resolve(
+                    contributor['affiliation'])
+                if controlled_affiliation:
+                    contributor['controlledAffiliation'] = [
+                        controlled_affiliation
+                    ]
 
     @classmethod
     def get_record_by_identifier(cls, identifiers):
@@ -297,6 +291,15 @@ class DocumentRecord(SonarRecord):
             if file.get('type') == 'file'
         ]
         return sorted(files, key=lambda file: file.get('order', 100))
+
+    def update(self, data):
+        """Update record.
+
+        :param data: Record data.
+        :returns: Record instance
+        """
+        self.guess_controlled_affiliations(data)
+        return super(DocumentRecord, self).update(data)
 
 
 class DocumentIndexer(SonarIndexer):

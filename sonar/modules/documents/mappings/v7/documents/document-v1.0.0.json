@@ -452,6 +452,43 @@
           }
         }
       },
+      "projects": {
+        "type": "object",
+        "properties": {
+          "pid": {
+            "type": "keyword"
+          },
+          "name": {
+            "type": "text"
+          },
+          "investigators": {
+            "type": "object",
+            "properties": {
+              "agent": {
+                "type": "object",
+                "properties": {
+                  "preferred_name": {
+                    "type": "text"
+                  }
+                }
+              }
+            }
+          },
+          "funding_organisations": {
+            "type": "object",
+            "properties": {
+              "agent": {
+                "type": "object",
+                "properties": {
+                  "preferred_name": {
+                    "type": "text"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "_created": {
         "type": "date"
       },

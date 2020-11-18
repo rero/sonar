@@ -702,9 +702,6 @@ def marc21_to_contribution_field_100(self, key, value):
     # Affiliation
     if value.get('u'):
         data['affiliation'] = value.get('u')
-        affiliations = DocumentRecord.get_affiliations(value.get('u'))
-        if affiliations:
-            data['controlledAffiliation'] = affiliations
 
     # Date of birth - date of death
     date_of_birth, date_of_death = overdo.extract_date(value.get('d'))
@@ -748,9 +745,6 @@ def marc21_to_contribution_field_700(self, key, value):
     # Affiliation
     if value.get('u'):
         data['affiliation'] = value.get('u')
-        affiliations = DocumentRecord.get_affiliations(value.get('u'))
-        if affiliations:
-            data['controlledAffiliation'] = affiliations
 
     # Date of birth - date of death
     date_of_birth, date_of_death = overdo.extract_date(value.get('d'))

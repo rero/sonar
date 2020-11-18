@@ -11,11 +11,22 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-[pytest]
-pep8ignore = docs/conf.py ALL
-addopts = --pep8 --doctest-glob="*.rst" --doctest-modules --cov=sonar --cov-report=term-missing --ignore=setup.py -p celery.contrib.pytest
-testpaths = docs tests sonar
-; Not displaying all the PendingDeprecationWarnings from invenio
-filterwarnings =
-    ignore::PendingDeprecationWarning
+"""Loaders for projects."""
+
+from __future__ import absolute_import, print_function
+
+from invenio_records_rest.loaders.marshmallow import json_patch_loader, \
+    marshmallow_loader
+
+from ..marshmallow import ProjectMetadataSchemaV1
+
+#: JSON loader using Marshmallow for data validation.
+json_v1 = marshmallow_loader(ProjectMetadataSchemaV1)
+
+__all__ = (
+    'json_v1',
+)

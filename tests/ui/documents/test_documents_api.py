@@ -37,30 +37,6 @@ def test_get_record_by_identifier(app, document):
     assert not record
 
 
-def test_get_affiliations():
-    """Test getting controlled affiliations."""
-    affiliation = '''
-    Institute for Research in Biomedicine (IRB), Faculty of Biomedical
-    Sciences, Università della Svizzera italiana, Switzerland - Graduate
-    School for Cellular and Biomedical Sciences, University of Bern, c/o
-    Theodor Kocher Institute, Freiestrasse 1, P.O. Box 938, CH-3000 Bern 9,
-    Switzerland
-    '''
-    affiliations = DocumentRecord.get_affiliations(affiliation)
-    assert affiliations == [
-        'Uni of Bern and Hospital', 'Uni of Italian Switzerland'
-    ]
-
-    affiliations = DocumentRecord.get_affiliations(None)
-    assert not affiliations
-
-
-def test_load_affiliations():
-    """Test load affiliations from file."""
-    DocumentRecord.load_affiliations()
-    assert len(DocumentRecord.affiliations) == 77
-
-
 def test_get_next_file_order(document_with_file, document):
     """Test getting next file position."""
     # One file with order 1
@@ -88,3 +64,15 @@ def test_get_files_list(document, pdf_file):
     files = document.get_files_list()
     assert len(files) == 3
     assert files[0]['order'] == 1
+
+
+def test_get_documents_by_project(db, project, document):
+    """"Test getting documents by a project."""
+    document['projects'] = [{'$ref': 'https://sonar.ch/api/projects/11111'}]
+    document.commit()
+    document.reindex()
+    db.session.commit()
+
+    documents = DocumentRecord.get_documents_by_project(project['pid'])
+    assert documents[0]['pid'] == '1'
+    assert documents[0]['permalink'] == 'http://localhost/global/documents/1'

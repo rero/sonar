@@ -226,8 +226,7 @@ def test_rerodoc_loader(app, organisation):
             'role': ['cre'],
             'affiliation':
             'Institute for Computational Science, University of Zürich, '
-            'Winterthurerstrasse 190, CH-8057 Zürich, Switzerland',
-            'controlledAffiliation': ['Uni of Zurich and Hospital']
+            'Winterthurerstrasse 190, CH-8057 Zürich, Switzerland'
         }, {
             'agent': {
                 'type': 'bf:Person',

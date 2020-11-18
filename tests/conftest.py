@@ -31,6 +31,7 @@ from invenio_files_rest.models import Location
 from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.organisations.api import OrganisationRecord
+from sonar.modules.projects.api import ProjectRecord
 from sonar.modules.users.api import UserRecord
 
 
@@ -575,6 +576,103 @@ def deposit(app, db, user, pdf_file, bucket_location, deposit_json):
     db.session.commit()
 
     return deposit
+
+
+@pytest.fixture()
+def project_json():
+    """Project JSON."""
+    return {
+        '$schema':
+        'https://sonar.ch/schemas/projects/project-v1.0.0.json',
+        'pid':
+        '11111',
+        'name':
+        'Project 1',
+        'description':
+        'Description of the project',
+        'startDate':
+        '2019-01-01',
+        'endDate':
+        '2020-01-01',
+        'identifiedBy': {
+            'type': 'bf:Local',
+            'source': 'RERO',
+            'value': '1111'
+        },
+        'investigators': [{
+            'agent': {
+                'preferred_name': 'John Doe'
+            },
+            'role': ['investigator'],
+            'affiliation': 'IST',
+            'identifiedBy': {
+                'type': 'bf:Local',
+                'source': 'RERO',
+                'value': '2222'
+            }
+        }],
+        'funding_organisations': [{
+            'agent': {
+                'preferred_name': 'Funding organisation'
+            },
+            'identifiedBy': {
+                'type': 'bf:Local',
+                'source': 'RERO',
+                'value': '3333'
+            }
+        }]
+    }
+
+
+@pytest.fixture()
+def make_project(db, project_json, make_user):
+    """Factory for creating project."""
+
+    def _make_project(role='submitter', organisation=None):
+        user = make_user(role, organisation)
+
+        project_json['user'] = {
+            '$ref': 'https://sonar.ch/api/users/{pid}'.format(pid=user['pid'])
+        }
+
+        project_json['organisation'] = {
+            '$ref':
+            'https://sonar.ch/api/organisations/{pid}'.format(pid=organisation)
+        }
+
+        project_json.pop('pid', None)
+
+        record = ProjectRecord.create(project_json,
+                                      dbcommit=True,
+                                      with_bucket=False)
+        record.commit()
+        record.reindex()
+        db.session.commit()
+
+        return record
+
+    return _make_project
+
+
+@pytest.fixture()
+def project(app, db, user, organisation, project_json):
+    """Deposit fixture."""
+    json = copy.deepcopy(project_json)
+    json['user'] = {
+        '$ref': 'https://sonar.ch/api/users/{pid}'.format(pid=user['pid'])
+    }
+    json['organisation'] = {
+        '$ref':
+        'https://sonar.ch/api/organisations/{pid}'.format(
+            pid=organisation['pid'])
+    }
+
+    project = ProjectRecord.create(json, dbcommit=True, with_bucket=False)
+    project.commit()
+    project.reindex()
+    db.session.commit()
+
+    return project
 
 
 @pytest.fixture()

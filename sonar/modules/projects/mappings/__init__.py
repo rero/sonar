@@ -11,11 +11,10 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-[pytest]
-pep8ignore = docs/conf.py ALL
-addopts = --pep8 --doctest-glob="*.rst" --doctest-modules --cov=sonar --cov-report=term-missing --ignore=setup.py -p celery.contrib.pytest
-testpaths = docs tests sonar
-; Not displaying all the PendingDeprecationWarnings from invenio
-filterwarnings =
-    ignore::PendingDeprecationWarning
+"""Elasticsearch mapping for projects."""
+
+from __future__ import absolute_import, print_function
