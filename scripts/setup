@@ -29,7 +29,7 @@ fi
 title "Application setup"
 
 # Size of data to create
-size="minimal"
+size="0"
 import=false
 fixtures_folder='./data'
 
@@ -39,17 +39,12 @@ clear_data=false
 
 while test $# -gt 0; do
     case "$1" in
-        --minimal)
-            size="minimal"
-            ;;
-        --small)
-            size="small"
-            ;;
-        --full)
-            size="full"
-            ;;
         --import)
             import=true
+            ;;
+        --size)
+            size="$2"
+            shift
             ;;
         --clear-data)
             clear_data=true
@@ -59,12 +54,12 @@ while test $# -gt 0; do
     shift
 done
 
-if $import; then
-    message "Size of import sets is set to \"$size\"" "info"
-fi
-
 if $clear_data; then
     message "All data will be cleared!" "warning"
+fi
+
+if $import; then
+    message "Size of import sets is set to \"$size\"" "info"
 fi
 
 # Purge celery
@@ -114,9 +109,9 @@ message "Done" "success"
 section "Create location for storing files" "info"
 invenio fixtures deposits create
 
-# Create configuration for RERODOC OAI harvesting
-section "Create configuration for RERODOC harvesting" "info"
-invenio oaiharvester config create data/rerodoc_oai_sources.json
+# Create configurations for OAI harvesting
+section "Create configurations for OAI harvesting" "info"
+invenio oaiharvester config create data/oai_sources.json
 
 # Create users and organisations
 section "Create organisations" "info"
@@ -128,11 +123,7 @@ invenio fixtures users import "${fixtures_folder}/users/data.json"
 # Import rerodoc data
 if $import; then
     section "Import sets of data" "info"
-    case "$size" in
-        full) invenio oaiharvester harvest-all ;;
-        small) invenio oaiharvester harvest-all --max 100 ;;
-        *) invenio oaiharvester harvest-all --max 10 ;;
-    esac
+    invenio oaiharvester harvest -n rerodoc -q -a max=${size}
 fi
 
 message "\nInstallation finished successfully" "success"

@@ -27,7 +27,7 @@ from sonar.modules.documents.dojson.rerodoc.overdo import Overdo
 from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.utils import remove_trailing_punctuation
 
-marc21tojson = Overdo()
+overdo = Overdo()
 
 TYPE_MAPPINGS = {
     'PREPRINT|': 'coar:c_816b',
@@ -51,7 +51,7 @@ TYPE_MAPPINGS = {
 }
 
 
-@marc21tojson.over('type', '^980')
+@overdo.over('type', '^980')
 @utils.ignore_value
 def marc21_to_type_and_organisation(self, key, value):
     """Get document type and organisation from 980 field."""
@@ -64,9 +64,9 @@ def marc21_to_type_and_organisation(self, key, value):
         if organisation == 'unisi':
             organisation = 'usi'
 
-        if organisation not in marc21tojson.registererd_organisations:
-            marc21tojson.create_organisation(organisation)
-            marc21tojson.registererd_organisations.append(organisation)
+        if organisation not in overdo.registererd_organisations:
+            overdo.create_organisation(organisation)
+            overdo.registererd_organisations.append(organisation)
 
         self['organisation'] = {
             '$ref': OrganisationRecord.get_ref_link('organisations',
@@ -87,7 +87,7 @@ def marc21_to_type_and_organisation(self, key, value):
     return None
 
 
-@marc21tojson.over('language', '^041')
+@overdo.over('language', '^041')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_language(self, key, value):
@@ -107,7 +107,7 @@ def marc21_to_language(self, key, value):
     return None
 
 
-@marc21tojson.over('title', '^245..')
+@overdo.over('title', '^245..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_title_245(self, key, value):
@@ -133,7 +133,7 @@ def marc21_to_title_245(self, key, value):
     return title
 
 
-@marc21tojson.over('title', '^246..')
+@overdo.over('title', '^246..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_title_246(self, key, value):
@@ -154,7 +154,7 @@ def marc21_to_title_246(self, key, value):
     return None
 
 
-@marc21tojson.over('editionStatement', '^250..')
+@overdo.over('editionStatement', '^250..')
 @utils.ignore_value
 def marc21_to_edition_statement(self, key, value):
     """Get edition statement data."""
@@ -171,7 +171,7 @@ def marc21_to_edition_statement(self, key, value):
     }
 
 
-@marc21tojson.over('provisionActivity', '^260..')
+@overdo.over('provisionActivity', '^260..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_provision_activity_field_260(self, key, value):
@@ -253,12 +253,12 @@ def marc21_to_provision_activity_field_260(self, key, value):
     return None
 
 
-@marc21tojson.over('provisionActivity', '^269..')
+@overdo.over('provisionActivity', '^269..')
 @utils.ignore_value
 def marc21_to_provision_activity_field_269(self, key, value):
     """Get provision activity data from field 269."""
     # 260$c has priority to this date
-    if marc21tojson.blob_record.get('260__', {}).get('c'):
+    if overdo.blob_record.get('260__', {}).get('c'):
         return None
 
     # No date, skipping
@@ -277,7 +277,7 @@ def marc21_to_provision_activity_field_269(self, key, value):
     return None
 
 
-@marc21tojson.over('formats', '^300..')
+@overdo.over('formats', '^300..')
 @utils.ignore_value
 def marc21_to_description(self, key, value):
     """Get extent, otherMaterialCharacteristics, formats.
@@ -289,12 +289,12 @@ def marc21_to_description(self, key, value):
     if value.get('a'):
         if not self.get('extent'):
             self['extent'] = remove_trailing_punctuation(
-                marc21tojson.not_repetitive(value, 'a'))
+                overdo.not_repetitive(value, 'a'))
 
     if value.get('b'):
         if self.get('otherMaterialCharacteristics', []) == []:
             self['otherMaterialCharacteristics'] = remove_trailing_punctuation(
-                marc21tojson.not_repetitive(value, 'b'))
+                overdo.not_repetitive(value, 'b'))
 
     if value.get('c'):
         formats = self.get('formats')
@@ -308,7 +308,7 @@ def marc21_to_description(self, key, value):
     return None
 
 
-@marc21tojson.over('series', '^490..')
+@overdo.over('series', '^490..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_series(self, key, value):
@@ -330,7 +330,7 @@ def marc21_to_series(self, key, value):
     return series
 
 
-@marc21tojson.over('abstracts', '^520..')
+@overdo.over('abstracts', '^520..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_abstract(self, key, value):
@@ -349,7 +349,7 @@ def marc21_to_abstract(self, key, value):
     return None
 
 
-@marc21tojson.over('identifiedBy', '001')
+@overdo.over('identifiedBy', '001')
 @utils.ignore_value
 def marc21_to_identified_by_from_001(self, key, value):
     """Get identifier from field 001."""
@@ -364,7 +364,7 @@ def marc21_to_identified_by_from_001(self, key, value):
     return identified_by
 
 
-@marc21tojson.over('identifiedBy', '^020..')
+@overdo.over('identifiedBy', '^020..')
 @utils.ignore_value
 def marc21_to_identified_by_from_020(self, key, value):
     """Get identifier from field 020."""
@@ -378,7 +378,7 @@ def marc21_to_identified_by_from_020(self, key, value):
     return identified_by
 
 
-@marc21tojson.over('identifiedBy', '^0247.')
+@overdo.over('identifiedBy', '^0247.')
 @utils.ignore_value
 def marc21_to_identified_by_from_024(self, key, value):
     """Get identifier from field 024."""
@@ -392,7 +392,7 @@ def marc21_to_identified_by_from_024(self, key, value):
     return identified_by
 
 
-@marc21tojson.over('identifiedBy', '^027..')
+@overdo.over('identifiedBy', '^027..')
 @utils.ignore_value
 def marc21_to_identified_by_from_027(self, key, value):
     """Get identifier from field 027."""
@@ -406,7 +406,7 @@ def marc21_to_identified_by_from_027(self, key, value):
     return identified_by
 
 
-@marc21tojson.over('identifiedBy', '^035..')
+@overdo.over('identifiedBy', '^035..')
 @utils.ignore_value
 def marc21_to_identified_by_from_035(self, key, value):
     """Get identifier from field 035."""
@@ -424,7 +424,7 @@ def marc21_to_identified_by_from_035(self, key, value):
     return identified_by
 
 
-@marc21tojson.over('identifiedBy', '^037..')
+@overdo.over('identifiedBy', '^037..')
 @utils.ignore_value
 def marc21_to_identified_by_from_037(self, key, value):
     """Get identifier from field 037."""
@@ -445,7 +445,7 @@ def marc21_to_identified_by_from_037(self, key, value):
     return identified_by
 
 
-@marc21tojson.over('identifiedBy', '^088..')
+@overdo.over('identifiedBy', '^088..')
 @utils.ignore_value
 def marc21_to_identified_by_from_088(self, key, value):
     """Get identifier from field 088."""
@@ -459,7 +459,7 @@ def marc21_to_identified_by_from_088(self, key, value):
     return identified_by
 
 
-@marc21tojson.over('identifiedBy', '^091..')
+@overdo.over('identifiedBy', '^091..')
 @utils.ignore_value
 def marc21_to_identified_by_from_091(self, key, value):
     """Get identifier from field 091."""
@@ -477,15 +477,15 @@ def marc21_to_identified_by_from_091(self, key, value):
     return identified_by
 
 
-@marc21tojson.over('notes', '^500..')
+@overdo.over('notes', '^500..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_notes(self, key, value):
     """Get  notes."""
-    return marc21tojson.not_repetitive(value, 'a')
+    return overdo.not_repetitive(value, 'a')
 
 
-@marc21tojson.over('subjects', '^600..|695..')
+@overdo.over('subjects', '^600..|695..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_subjects(self, key, value):
@@ -518,7 +518,7 @@ def marc21_to_subjects(self, key, value):
     return subjects
 
 
-@marc21tojson.over('files', '^856..')
+@overdo.over('files', '^856..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_files(self, key, value):
@@ -560,7 +560,7 @@ def marc21_to_files(self, key, value):
     return data
 
 
-@marc21tojson.over('otherEdition', '^775..')
+@overdo.over('otherEdition', '^775..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_other_edition(self, key, value):
@@ -579,7 +579,7 @@ def marc21_to_other_edition(self, key, value):
     }
 
 
-@marc21tojson.over('specificCollections', '^982..')
+@overdo.over('specificCollections', '^982..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_specific_collection(self, key, value):
@@ -587,7 +587,7 @@ def marc21_to_specific_collection(self, key, value):
     return value.get('a')
 
 
-@marc21tojson.over('classification', '^080..')
+@overdo.over('classification', '^080..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_classification_field_080(self, key, value):
@@ -601,7 +601,7 @@ def marc21_to_classification_field_080(self, key, value):
     }
 
 
-@marc21tojson.over('classification', '^084..')
+@overdo.over('classification', '^084..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_classification_field_084(self, key, value):
@@ -615,7 +615,7 @@ def marc21_to_classification_field_084(self, key, value):
     }
 
 
-@marc21tojson.over('contentNote', '^505..')
+@overdo.over('contentNote', '^505..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_content_note(self, key, value):
@@ -623,7 +623,7 @@ def marc21_to_content_note(self, key, value):
     return value.get('a')
 
 
-@marc21tojson.over('dissertation', '^502..')
+@overdo.over('dissertation', '^502..')
 @utils.ignore_value
 def marc21_to_dissertation_field_502(self, key, value):
     """Extract dissertation degree."""
@@ -634,7 +634,7 @@ def marc21_to_dissertation_field_502(self, key, value):
 
     # Try to get start date and store in provision activity
     # 260$c and 269$c have priority to this date
-    record = marc21tojson.blob_record
+    record = overdo.blob_record
     if (record.get('260__', {}).get('c') or record.get('269__', {}).get('c') or
             record.get('773__', {}).get('g')):
         return None
@@ -654,7 +654,7 @@ def marc21_to_dissertation_field_502(self, key, value):
     return None
 
 
-@marc21tojson.over('dissertation', '^508..')
+@overdo.over('dissertation', '^508..')
 @utils.ignore_value
 def marc21_to_dissertation_field_508(self, key, value):
     """Extract dissertation note."""
@@ -669,7 +669,7 @@ def marc21_to_dissertation_field_508(self, key, value):
     return None
 
 
-@marc21tojson.over('usageAndAccessPolicy', '^540..')
+@overdo.over('usageAndAccessPolicy', '^540..')
 @utils.ignore_value
 def marc21_to_usage_and_access_policy(self, key, value):
     """Extract usage and access policy."""
@@ -682,7 +682,7 @@ def marc21_to_usage_and_access_policy(self, key, value):
     }
 
 
-@marc21tojson.over('contribution', '^100..')
+@overdo.over('contribution', '^100..')
 @utils.ignore_value
 def marc21_to_contribution_field_100(self, key, value):
     """Extract contribution from field 100."""
@@ -707,7 +707,7 @@ def marc21_to_contribution_field_100(self, key, value):
             data['controlledAffiliation'] = affiliations
 
     # Date of birth - date of death
-    date_of_birth, date_of_death = marc21tojson.extract_date(value.get('d'))
+    date_of_birth, date_of_death = overdo.extract_date(value.get('d'))
 
     if date_of_birth:
         data['agent']['date_of_birth'] = date_of_birth
@@ -721,7 +721,7 @@ def marc21_to_contribution_field_100(self, key, value):
     return None
 
 
-@marc21tojson.over('contribution', '^700..')
+@overdo.over('contribution', '^700..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_contribution_field_700(self, key, value):
@@ -731,7 +731,7 @@ def marc21_to_contribution_field_700(self, key, value):
 
     contribution = self.get('contribution', [])
 
-    role = marc21tojson.get_contributor_role(value.get('e'))
+    role = overdo.get_contributor_role(value.get('e'))
 
     if not role:
         raise Exception('No role found for contributor {contribution}'.format(
@@ -753,7 +753,7 @@ def marc21_to_contribution_field_700(self, key, value):
             data['controlledAffiliation'] = affiliations
 
     # Date of birth - date of death
-    date_of_birth, date_of_death = marc21tojson.extract_date(value.get('d'))
+    date_of_birth, date_of_death = overdo.extract_date(value.get('d'))
 
     if date_of_birth:
         data['agent']['date_of_birth'] = date_of_birth
@@ -767,7 +767,7 @@ def marc21_to_contribution_field_700(self, key, value):
     return None
 
 
-@marc21tojson.over('contribution', '^710..')
+@overdo.over('contribution', '^710..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_contribution_field_710(self, key, value):
@@ -788,7 +788,7 @@ def marc21_to_contribution_field_710(self, key, value):
     return None
 
 
-@marc21tojson.over('contribution', '^711..')
+@overdo.over('contribution', '^711..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_contribution_field_711(self, key, value):
@@ -824,7 +824,7 @@ def marc21_to_contribution_field_711(self, key, value):
     return None
 
 
-@marc21tojson.over('partOf', '^773..')
+@overdo.over('partOf', '^773..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_part_of(self, key, value):
@@ -869,7 +869,7 @@ def marc21_to_part_of(self, key, value):
         if contributors:
             document['contribution'] = contributors
 
-    record = marc21tojson.blob_record
+    record = overdo.blob_record
 
     # Publication based on document sub type
     sub_type = record.get('980__', {}).get('f')

@@ -41,10 +41,10 @@ def create():
     click.secho('Creating default location for importing files', bold=True)
 
     # Directory where files are stored
-    directory = current_app.config.get('SONAR_APP_FILE_STORAGE_PATH')
-
+    directory = current_app.config.get('SONAR_APP_STORAGE_PATH')
     if not directory:
-        directory = join(current_app.instance_path, 'files')
+        directory = current_app.instance_path
+    directory = join(directory, 'files')
 
     if exists(directory):
         shutil.rmtree(directory)

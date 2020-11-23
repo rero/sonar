@@ -54,7 +54,7 @@ SONAR_APP_BABEL_TRANSLATE_JSON_KEYS = [
 ]
 """Keys to translate in JSON schemas."""
 
-SONAR_APP_FILE_STORAGE_PATH = None
+SONAR_APP_STORAGE_PATH = None
 """File storage location."""
 
 SONAR_APP_EXPORT_SERIALIZERS = {
