@@ -112,6 +112,10 @@
         "value"
       ],
       "form": {
+        "hide": true,
+        "navigation": {
+          "essential": true
+        },
         "templateOptions": {
           "cssClass": "editor-title"
         }
@@ -120,7 +124,6 @@
     "investigators": {
       "title": "Investigators",
       "type": "array",
-      "minItems": 1,
       "items": {
         "title": "Investigator",
         "type": "object",
@@ -190,6 +193,10 @@
         ]
       },
       "form": {
+        "hide": true,
+        "navigation": {
+          "essential": true
+        },
         "templateOptions": {
           "cssClass": "editor-title"
         }
@@ -198,7 +205,6 @@
     "funding_organisations": {
       "title": "Funding organisations",
       "type": "array",
-      "minItems": 1,
       "items": {
         "title": "Funding organisation",
         "type": "object",
@@ -235,6 +241,10 @@
         ]
       },
       "form": {
+        "hide": true,
+        "navigation": {
+          "essential": true
+        },
         "templateOptions": {
           "cssClass": "editor-title"
         }
@@ -311,8 +321,6 @@
   "required": [
     "name",
     "startDate",
-    "investigators",
-    "funding_organisations",
     "$schema"
   ]
 }

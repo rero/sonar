@@ -380,7 +380,6 @@
                       "value": "bf:AudioIssueNumber",
                       "group": "------------"
                     },
-
                     {
                       "label": "bf:Ean",
                       "value": "bf:Ean",
@@ -839,10 +838,197 @@
             "minLength": 1,
             "pattern": "^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[0-9X]$",
             "form": {
-              "placeholder": "Example: 1111-2222-3333-4444"
+              "templateOptions": {
+                "placeholder": "Example: 1111-2222-3333-4444"
+              }
             }
           }
         }
+      }
+    },
+    "projects": {
+      "title": "Projects",
+      "type": "array",
+      "default": [{}],
+      "items": {
+        "title": "Project",
+        "type": "object",
+        "oneOf": [
+          {
+            "title": "Existing project",
+            "properties": {
+              "$ref": {
+                "title": "Project",
+                "type": "string",
+                "pattern": "^https://sonar.ch/api/projects/.*?$",
+                "minLength": 1,
+                "form": {
+                  "remoteTypeahead": {
+                    "type": "projects",
+                    "field": "autocomplete_name",
+                    "label": "name"
+                  }
+                }
+              }
+            },
+            "required": [
+              "$ref"
+            ]
+          },
+          {
+            "title": "Add a new project",
+            "properties": {
+              "name": {
+                "title": "Name",
+                "type": "string",
+                "minLength": 1
+              },
+              "description": {
+                "title": "Description",
+                "type": "string",
+                "minLength": 1,
+                "form": {
+                  "type": "textarea",
+                  "templateOptions": {
+                    "rows": 5
+                  }
+                }
+              },
+              "startDate": {
+                "title": "Start date",
+                "description": "Example: 2019-05-05",
+                "type": "string",
+                "format": "date",
+                "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
+              },
+              "endDate": {
+                "title": "End date",
+                "description": "Example: 2019-05-05",
+                "type": "string",
+                "format": "date",
+                "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
+              },
+              "identifier": {
+                "title": "Identifier",
+                "type": "string",
+                "minLength": 1
+              },
+              "investigators": {
+                "title": "Investigators",
+                "type": "array",
+                "items": {
+                  "title": "Investigator",
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": {
+                      "title": "Name",
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "role": {
+                      "title": "Role",
+                      "type": "string",
+                      "enum": [
+                        "investigator",
+                        "coinvestigator"
+                      ],
+                      "form": {
+                        "options": [
+                          {
+                            "label": "investigator",
+                            "value": "investigator"
+                          },
+                          {
+                            "label": "coinvestigator",
+                            "value": "coinvestigator"
+                          }
+                        ]
+                      }
+                    },
+                    "affiliation": {
+                      "title": "Affiliation",
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "orcid": {
+                      "title": "ORCID",
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[0-9X]$",
+                      "form": {
+                        "templateOptions": {
+                          "placeholder": "Example: 1111-2222-3333-4444"
+                        }
+                      }
+                    }
+                  },
+                  "propertiesOrder": [
+                    "name",
+                    "role",
+                    "affiliation",
+                    "orcid"
+                  ],
+                  "required": [
+                    "name",
+                    "role"
+                  ]
+                },
+                "form": {
+                  "templateOptions": {
+                    "cssClass": "editor-title"
+                  }
+                }
+              },
+              "funding_organisations": {
+                "title": "Funding organisations",
+                "type": "array",
+                "items": {
+                  "title": "Funding organisation",
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": {
+                      "title": "Name",
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "identifier": {
+                      "title": "Identifier",
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "propertiesOrder": [
+                    "name",
+                    "identifier"
+                  ],
+                  "required": [
+                    "name"
+                  ]
+                },
+                "form": {
+                  "templateOptions": {
+                    "cssClass": "editor-title"
+                  }
+                }
+              }
+            },
+            "propertiesOrder": [
+              "name",
+              "description",
+              "startDate",
+              "endDate",
+              "identifier",
+              "investigators",
+              "funding_organisations"
+            ],
+            "required": [
+              "name",
+              "startDate"
+            ]
+          }
+        ]
       }
     },
     "diffusion": {
@@ -853,7 +1039,9 @@
           "$ref": "license-v1.0.0.json"
         }
       },
-      "required": ["license"]
+      "required": [
+        "license"
+      ]
     },
     "document": {
       "title": "Document",

@@ -46,6 +46,7 @@ class DepositMetadataSchemaV1(StrictKeysMixin):
     status = SanitizedUnicode()
     step = SanitizedUnicode()
     user = fields.Dict()
+    projects = fields.List(fields.Dict())
     _files = fields.List(fields.Dict())
     _bucket = SanitizedUnicode()
     # When loading, if $schema is not provided, it's retrieved by

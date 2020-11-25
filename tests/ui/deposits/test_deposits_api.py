@@ -20,8 +20,36 @@
 from invenio_accounts.testutils import login_user_via_view
 
 
-def test_create_document(app, client, deposit, user):
+def test_create_document(app, db, project, client, deposit, user):
     """Test create document based on it."""
+    deposit['projects'] = [{
+        '$ref': 'https://sonar.ch/api/projects/11111'
+    }, {
+        'name':
+        'Project 1',
+        'description':
+        'Description',
+        'identifier':
+        'p-1000',
+        'startDate':
+        '2020-01-01',
+        'endDate':
+        '2021-12-31',
+        'investigators': [{
+            'name': 'John Doe',
+            'role': 'investigator',
+            'affiliation': 'RERO',
+            'orcid': '1000-1000-1000-1000'
+        }],
+        'funding_organisations': [{
+            'name': 'Funding organisation',
+            'identifier': 'f-1000'
+        }]
+    }]
+    deposit.commit()
+    deposit.reindex()
+    db.session.commit()
+
     login_user_via_view(client, email=user['email'], password='123456')
 
     document = deposit.create_document()
@@ -128,6 +156,8 @@ def test_create_document(app, client, deposit, user):
         'type': 'bf:Doi',
         'value': '10.1038/nphys1170'
     }]
+
+    assert len(document['projects']) == 2
 
     assert document.files['main.pdf']['access'] == 'coar:c_f1cf'
     assert document.files['main.pdf']['restricted_outside_organisation']

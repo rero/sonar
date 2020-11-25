@@ -161,17 +161,6 @@ def format_date(date):
     return date
 
 
-def localize_date(date, format='%Y-%m-%d'):
-    """Localize the given date string.
-
-    :param date: String representation of the date.
-    :param format: Format of input date.
-    :returns: The localized date string.
-    """
-    return pytz.utc.localize(datetime.datetime.strptime(date,
-                                                        format)).isoformat()
-
-
 def get_specific_theme():
     """Return the webpack entry for the current organisation.
 

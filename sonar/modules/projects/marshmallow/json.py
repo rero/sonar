@@ -32,7 +32,6 @@ from sonar.modules.projects.api import ProjectRecord
 from sonar.modules.projects.permissions import ProjectPermission
 from sonar.modules.serializers import schema_from_context
 from sonar.modules.users.api import current_user_record
-from sonar.modules.utils import localize_date
 
 schema_from_project = partial(schema_from_context, schema=ProjectRecord.schema)
 
@@ -62,10 +61,6 @@ class ProjectMetadataSchemaV1(StrictKeysMixin):
     @pre_dump
     def format_data(self, item, **kwargs):
         """Format data before dumping object."""
-        item['startDate'] = localize_date(item['startDate'])
-        if item.get('endDate'):
-            item['endDate'] = localize_date(item['endDate'])
-
         # Add documents
         item['documents'] = DocumentRecord.get_documents_by_project(
             item['pid'])
