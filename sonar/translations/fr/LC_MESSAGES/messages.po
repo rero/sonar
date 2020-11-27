@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2020-11-13 08:45+0100\n"
-"PO-Revision-Date: 2020-11-17 15:28+0000\n"
-"Last-Translator: iGor milhit <igor.milhit@rero.ch>\n"
+"PO-Revision-Date: 2020-11-24 13:29+0000\n"
+"Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "fr/>\n"
 "Language: fr\n"
@@ -1222,17 +1222,17 @@ msgstr "Classification décimale universelle"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:745
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1273
 msgid "bf:Doi"
-msgstr "DOI (Digital Object Identifier)"
+msgstr "DOI"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:385
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:749
 msgid "bf:Ean"
-msgstr "EAN (International Article Number)"
+msgstr "EAN"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:390
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:753
 msgid "bf:Gtin14Number"
-msgstr "Global Trade Item Number 14"
+msgstr "GTIN-14"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:395
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:757
@@ -1242,32 +1242,32 @@ msgstr "Identifiant"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:400
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:761
 msgid "bf:Isan"
-msgstr "ISAN (International Standard Audiovisual Number)"
+msgstr "ISAN"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:375
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:765
 msgid "bf:Isbn"
-msgstr "ISBN (International Standard Book Number)"
+msgstr "ISBN"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:405
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:769
 msgid "bf:Ismn"
-msgstr "ISMN (International Standard Music Number)"
+msgstr "ISMN"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:410
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:773
 msgid "bf:Isrc"
-msgstr "ISRC (International Standard Recording Code)"
+msgstr "ISRC"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:415
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:777
 msgid "bf:Issn"
-msgstr "ISSN (International Standard Serial Number)"
+msgstr "ISSN"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:420
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:781
 msgid "bf:IssnL"
-msgstr "ISSN-L (ISSN de liaison)"
+msgstr "ISSN-L"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:355
 msgid "bf:Language"
@@ -1345,12 +1345,12 @@ msgstr "Titre"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:455
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:809
 msgid "bf:Upc"
-msgstr "UPC (Universal Product Code)"
+msgstr "UPC"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:460
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:813
 msgid "bf:Urn"
-msgstr "URN (Uniform Resource Name)"
+msgstr "URN"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:465
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:817
@@ -3974,7 +3974,7 @@ msgstr "statut"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:470
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:821
 msgid "uri"
-msgstr "URI (Uniform Resource Identifier)"
+msgstr "URI"
 
 #: sonar/config.py:503
 msgid "user"
