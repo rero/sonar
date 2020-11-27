@@ -25,8 +25,8 @@
 FROM python:3.6-slim-stretch
 
 # require debian packages
-RUN apt-get upgrade -y && apt-get update -y
-RUN apt-get install --no-install-recommends -y git vim-tiny curl gcc gnupg libc6-dev libxml2-dev libxmlsec1-dev libxmlsec1-openssl xpdf xpdf-utils ghostscript imagemagick && rm -rf /var/lib/apt/lists/*
+RUN apt-get upgrade -y
+RUN apt-get update -y && apt-get install --no-install-recommends -y cron git vim-tiny curl gcc gnupg libc6-dev libxml2-dev libxmlsec1-dev libxmlsec1-openssl xpdf xpdf-utils ghostscript imagemagick && rm -rf /var/lib/apt/lists/*
 RUN pip install --upgrade setuptools wheel pip "poetry<1.1.0"
 
 # # Install Node
@@ -49,6 +49,10 @@ WORKDIR ${WORKING_DIR}/src
 
 # copy uwsgi config files
 COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
+
+# Crons
+RUN echo "#0 3 * * * ${WORKING_DIR}/src/sonar/scripts/export > /invenio/src/cron.log 2>&1" | crontab -
+RUN cron
 
 # Set folder permissions
 ENV INVENIO_USER_ID=1000

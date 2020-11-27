@@ -68,3 +68,9 @@ SONAR_APP_FILE_PREVIEW_EXTENSIONS = [
     'jpeg', 'jpg', 'gif', 'png', 'pdf', 'json', 'xml', 'csv', 'zip', 'md'
 ]
 """List of extensions for which files can be previewed."""
+
+
+SONAR_APP_WEBDAV_HEG_HOST = 'https://share.rero.ch/HEG'
+SONAR_APP_WEBDAV_HEG_USER = None
+SONAR_APP_WEBDAV_HEG_PASSWORD = None
+"""Connection data to webdav for HEG."""

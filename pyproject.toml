@@ -31,6 +31,7 @@ nbconvert = {version = ">=5.6.1,<6.0.0", extras = ["execute"]}
 cryptography = ">=3.2"
 netaddr = "*"
 dcxml = "*"
+webdavclient3 = "^3.14.5"
 
 [tool.poetry.dev-dependencies]
 Flask-Debugtoolbar = ">=0.10.1"

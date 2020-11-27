@@ -29,6 +29,7 @@ from flask import current_app
 from sonar.modules.api import SonarRecord
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.loaders.schemas.factory import LoaderSchemaFactory
+from sonar.webdav import HegClient
 
 from .api import DocumentRecord
 from .tasks import import_records
@@ -169,11 +170,15 @@ def export_json(sender=None, records=None, **kwargs):
         loader_schema = LoaderSchemaFactory.create(kwargs['name'])
         records_to_export.append(loader_schema.dump(str(record)))
 
-    json_file = open(
-        join(
-            data_directory, '{source}-{date}.json'.format(
-                source=kwargs['name'],
-                date=datetime.now().strftime('%Y%m%d%H%M%S'))), 'w')
+    file_name = '{source}-{date}.json'.format(
+        source=kwargs['name'], date=datetime.now().strftime('%Y%m%d%H%M%S'))
+    file_path = join(data_directory, file_name)
+
+    json_file = open(file_path, 'w')
     json_file.write(json.dumps(records_to_export))
+
+    # Export to webdav for HEG
+    client = HegClient()
+    client.upload_file(file_name, file_path)
 
     print('{count} records exported'.format(count=len(records_to_export)))

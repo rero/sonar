@@ -89,8 +89,12 @@ def test_chunks():
     assert records[-1] == [10]
 
 
-def test_export_json(app, bucket_location):
+def test_export_json(app, bucket_location, monkeypatch):
     """Test export records to file."""
+    # Patch the file upload to webdav.
+    monkeypatch.setattr(
+        'webdav3.client.Client.upload_file', lambda *args: True)
+
     request, records = get_records(
         ['oai:doc.rero.ch:20120503160026-MV'],
         metadata_prefix='marcxml',
