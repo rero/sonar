@@ -46,16 +46,16 @@
         {{g.organisation.name}}
         {% endif %}
         {% else %}
-        <img src="{{ url_for('static', filename='images/global-logo.svg') }}" height="50"
-          class="d-inline-block align-top mr-3 my-2" alt="">
+        <img src="{{ url_for('static', filename='images/global-logo.svg') }}" height="{{ '30' if g.get('organisation') else '50' }}"
+          class="d-inline-block align-top {{ '' if g.get('organisation') else 'my-2' }}" alt="">
         {% endif %}
       </a>
       {% if not admin %}
       <form action="{{ url_for('documents.search', view=view_code if g.get('organisation', {}).get('isDedicated') else config.SONAR_APP_DEFAULT_ORGANISATION) }}"
-        class="form-inline my-2 my-lg-0 ml-lg-5">
-        <input name="q" class="form-control mr-sm-2" type="search" placeholder="{{_('Search')}}"
+        class="form-inline my-2 my-lg-0 ml-lg-3">
+        <input name="q" class="form-control {{ 'form-control-sm' if g.get('organisation') else '' }} mr-sm-2" type="search" placeholder="{{_('Search')}}"
           aria-label="{{_('Search')}}" value="{{ request.args.get('q', '') }}">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+        <button class="btn btn-outline-light {{ 'btn-sm' if g.get('organisation') else '' }} my-2 my-sm-0" type="submit">
           <i class="fa fa-search"></i>
         </button>
       </form>
