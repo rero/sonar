@@ -37,7 +37,7 @@ def send_welcome_email(user_record, user):
                                   token=token,
                                   _external=True)
 
-    send_email([user_record['email']], _('Welcome on SONAR'),
+    send_email([user_record['email']], _('Welcome to SONAR'),
                'users/email/welcome', {
                    'user': user_record,
                    'reset_link': reset_link
