@@ -24,6 +24,11 @@
 {% set files = record.get_files_list() %}
 
 <section class="mt-3">
+  <div class="mb-3">
+    <a href="javascript: history.back(-1)">
+      <i class="fa fa-arrow-left mr-1"></i> {{ _('Back') }}
+    </a>
+  </div>
   <div class="row">
     <div class="col-lg-3 text-center">
       {% if files and files | length > 0 %}
