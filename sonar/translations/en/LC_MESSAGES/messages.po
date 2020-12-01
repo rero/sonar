@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2020-11-13 08:45+0100\n"
-"PO-Revision-Date: 2020-11-24 13:29+0000\n"
+"PO-Revision-Date: 2020-12-07 15:29+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: English <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "en/>\n"
@@ -1326,7 +1326,7 @@ msgstr "Publisher number"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:475
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:825
 msgid "bf:ReportNumber"
-msgstr "Technical report number"
+msgstr "Report number"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:480
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:829
