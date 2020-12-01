@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2020-11-13 08:45+0100\n"
-"PO-Revision-Date: 2020-11-24 13:29+0000\n"
-"Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"PO-Revision-Date: 2020-12-01 07:29+0000\n"
+"Last-Translator: iGor milhit <igor.milhit@rero.ch>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "fr/>\n"
 "Language: fr\n"
@@ -62,7 +62,7 @@ msgstr "Action"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:610
 msgid "Additional materials"
-msgstr "Matériel d'accompagnement"
+msgstr "Matériel supplémentaire"
 
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:30
 #: sonar/theme/templates/sonar/partial/navbar.html:63
@@ -574,7 +574,7 @@ msgstr "Clé du fichier (nom de fichier)."
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:919
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1195
 msgid "Label"
-msgstr "Label"
+msgstr "Étiquette"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:339
