@@ -439,6 +439,7 @@
           "type": {
             "title": "Type",
             "type": "string",
+            "default": "bf:Publication",
             "enum": [
               "bf:Publication",
               "bf:Manufacture"
@@ -1046,9 +1047,6 @@
               "type": {
                 "title": "Type",
                 "type": "string",
-                "readOnly": true,
-                "const": "bf:ClassificationUdc",
-                "default": "bf:ClassificationUdc",
                 "enum": [
                   "bf:ClassificationUdc"
                 ],
@@ -1113,11 +1111,12 @@
         ]
       },
       "form": {
+        "hide": true,
+        "navigation": {
+          "essential": true
+        },
         "templateOptions": {
           "cssClass": "editor-title"
-        },
-        "expressionProperties": {
-          "templateOptions.required": "true"
         }
       }
     },
@@ -1376,6 +1375,7 @@
                 "edt",
                 "ctb"
               ],
+              "default": "cre",
               "form": {
                 "options": [
                   {
@@ -1605,10 +1605,10 @@
   "propertiesOrder": [
     "documentType",
     "title",
+    "language",
     "organisation",
     "projects",
     "classification",
-    "language",
     "abstracts",
     "subjects",
     "identifiedBy",
