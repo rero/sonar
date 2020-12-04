@@ -38,6 +38,7 @@ TYPE_MAPPINGS = {
     'DISSERTATION|DISS_MASTER': 'coar:c_bdcc',
     'DISSERTATION|DISS_BACHELOR': 'coar:c_7a1f',
     'DISSERTATION|DISS_CONT_EDU': 'coar:c_46ec',
+    'THESIS|': 'coar:c_db06',
     'THESIS|TH_PHD': 'coar:c_db06',
     'THESIS|TH_HABILIT': 'coar:c_46ec',
     'MAP|': 'coar:c_12cc',
