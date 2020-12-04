@@ -145,13 +145,42 @@ class DepositRecord(SonarRecord):
         metadata['language'] = [{'value': language, 'type': 'bf:Language'}]
 
         # Document date
-        if self['metadata'].get('documentDate'):
-            metadata['provisionActivity'] = [{
+        metadata['provisionActivity'] = [{
+            'type':
+            'bf:Publication',
+            'startDate':
+            self['metadata']['documentDate']
+        }]
+        metadata['provisionActivity'][0]['statement'] = []
+
+        # Publication place
+        if self['metadata'].get('publicationPlace'):
+            metadata['provisionActivity'][0]['statement'].append({
+                'label': [{
+                    'value': self['metadata']['publicationPlace']
+                }],
                 'type':
-                'bf:Publication',
-                'startDate':
-                self['metadata']['documentDate']
-            }]
+                'bf:Place'
+            })
+
+        # Publisher
+        if self['metadata'].get('publisher'):
+            metadata['provisionActivity'][0]['statement'].append({
+                'label': [{
+                    'value': self['metadata']['publisher']
+                }],
+                'type':
+                'bf:Agent'
+            })
+
+        # Add a statement for date
+        metadata['provisionActivity'][0]['statement'].append({
+            'label': [{
+                'value': self['metadata']['documentDate']
+            }],
+            'type':
+            'Date'
+        })
 
         # Published in
         if self['metadata'].get('publication'):

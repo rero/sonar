@@ -440,8 +440,10 @@ def deposit_json():
             },
             'language':
             'eng',
+            'publicationPlace': 'Place',
+            'publisher': 'Publisher name',
             'documentDate':
-            '2020-01-01',
+            '2020',
             'publication': {
                 'publishedIn': 'Journal',
                 'year': '2019',
@@ -680,7 +682,6 @@ def project(app, db, user, organisation, project_json):
 def bucket_location(app, db):
     """Create a default location for managing files."""
     tmppath = tempfile.mkdtemp()
-    print(tmppath)
     location = Location(name='default', uri=tmppath, default=True)
     db.session.add(location)
     db.session.commit()
