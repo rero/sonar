@@ -76,8 +76,26 @@ def test_create_document(app, db, project, client, deposit, user):
     }]
     assert document['language'] == [{'value': 'eng', 'type': 'bf:Language'}]
     assert document['provisionActivity'] == [{
-        'type': 'bf:Publication',
-        'startDate': '2020-01-01'
+        'type':
+        'bf:Publication',
+        'startDate':
+        '2020',
+        'statement': [{
+            'label': [{
+                'value': 'Place'
+            }],
+            'type': 'bf:Place'
+        }, {
+            'label': [{
+                'value': 'Publisher name'
+            }],
+            'type': 'bf:Agent'
+        }, {
+            'label': [{
+                'value': '2020'
+            }],
+            'type': 'Date'
+        }]
     }]
     assert document['partOf'] == [{
         'numberingYear': '2019',

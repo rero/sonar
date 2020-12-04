@@ -51,7 +51,7 @@
       {% endif %}
     </div>
     <div class="col">
-      <h1 class="text-primary">{{ title }}</h1>
+      <h1 class="text-primary">{{ title | nl2br | safe }}</h1>
 
       <!-- CONTRIBUTORS-->
       {% set contributors = record | contributors %}

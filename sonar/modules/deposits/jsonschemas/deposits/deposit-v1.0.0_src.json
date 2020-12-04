@@ -254,14 +254,17 @@
       "required": [
         "language",
         "title",
-        "documentType"
+        "documentType",
+        "documentDate"
       ],
       "propertiesOrder": [
         "documentType",
         "title",
         "subtitle",
-        "otherLanguageTitle",
         "language",
+        "otherLanguageTitle",
+        "publicationPlace",
+        "publisher",
         "documentDate",
         "identifiedBy",
         "publication",
@@ -282,7 +285,9 @@
           "minLength": 1,
           "form": {
             "type": "textarea",
-            "rows": 2
+            "templateOptions": {
+              "rows": 3
+            }
           }
         },
         "subtitle": {
@@ -313,14 +318,37 @@
         "language": {
           "$ref": "language-v1.0.0.json"
         },
-        "documentDate": {
-          "title": "Document date",
-          "description": "This field corresponds to the exact publication date of the article, if known.",
+        "publicationPlace": {
+          "title": "Publication place",
           "type": "string",
           "minLength": 1,
-          "pattern": "^[0-9]{4}(-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]))?$",
           "form": {
-            "placeholder": "Example: 2019 or 2019-05-05"
+            "hideExpression": "!model.documentType || !['coar:c_2f33', 'coar:c_f744', 'coar:c_8a7e', 'coar:c_ecc8', 'coar:c_12cc', 'coar:c_18cc', 'coar:c_18cw', 'coar:c_5ce6', 'coar:c_15cd', 'coar:c_2659', 'coar:c_0640', 'coar:c_2cd9', 'coar:c_2fe3', 'coar:c_93fc', 'coar:c_18ww', 'coar:c_18wz', 'coar:c_18wq', 'coar:c_186u', 'coar:c_18op', 'coar:c_ba1f', 'coar:c_18hj', 'coar:c_18ws', 'coar:c_18gh', 'coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'coar:c_8042', 'coar:c_1843'].includes(model.documentType)"
+          }
+        },
+        "publisher": {
+          "title": "Publisher",
+          "type": "string",
+          "minLength": 1,
+          "form": {
+            "hideExpression": "!model.documentType || !['coar:c_2f33', 'coar:c_f744', 'coar:c_8a7e', 'coar:c_ecc8', 'coar:c_12cc', 'coar:c_18cc', 'coar:c_18cw', 'coar:c_5ce6', 'coar:c_15cd', 'coar:c_2659', 'coar:c_0640', 'coar:c_2cd9', 'coar:c_2fe3', 'coar:c_93fc', 'coar:c_18ww', 'coar:c_18wz', 'coar:c_18wq', 'coar:c_186u', 'coar:c_18op', 'coar:c_ba1f', 'coar:c_18hj', 'coar:c_18ws', 'coar:c_18gh', 'coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'coar:c_8042', 'coar:c_1843'].includes(model.documentType)"
+          }
+        },
+        "documentDate": {
+          "title": "Document date",
+          "description": "Enter the date in the format YYYY.",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[0-9]{4}$",
+          "form": {
+            "templateOptions": {
+              "placeholder": "Example: 2020"
+            },
+            "validation": {
+              "messages": {
+                "patternMessage": "Format is not valid: YYYY."
+              }
+            }
           }
         },
         "identifiedBy": {
@@ -568,7 +596,9 @@
               "minLength": 1,
               "pattern": "^[0-9]+(-[0-9]+)?$",
               "form": {
-                "placeholder": "Examples: 135, 5-27, …"
+                "templateOptions": {
+                  "placeholder": "Examples: 135, 5-27, …"
+                }
               }
             },
             "editors": {
@@ -611,7 +641,9 @@
                 "type": "string",
                 "minLength": 1,
                 "form": {
-                  "placeholder": "Example: Published version"
+                  "templateOptions": {
+                    "placeholder": "Example: Published version"
+                  }
                 }
               },
               "url": {
@@ -670,7 +702,9 @@
                 "minLength": 1,
                 "form": {
                   "type": "textarea",
-                  "rows": 3
+                  "templateOptions": {
+                    "rows": 3
+                  }
                 }
               }
             }
@@ -743,7 +777,9 @@
               "type": "string",
               "pattern": "^[0-9]{4}(-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]))?$",
               "form": {
-                "placeholder": "Example: 2019 or 2019-05-05"
+                "templateOptions": {
+                  "placeholder": "Example: 2019 or 2019-05-05"
+                }
               }
             }
           },

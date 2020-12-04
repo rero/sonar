@@ -50,7 +50,7 @@ SONAR_APP_DEFAULT_ORGANISATION = 'global'
 """Default organisation key."""
 
 SONAR_APP_BABEL_TRANSLATE_JSON_KEYS = [
-    'title', 'label', 'description', 'placeholder'
+    'title', 'label', 'description', 'placeholder', 'patternMessage'
 ]
 """Keys to translate in JSON schemas."""
 
