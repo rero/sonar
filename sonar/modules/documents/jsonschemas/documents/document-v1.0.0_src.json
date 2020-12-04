@@ -27,7 +27,7 @@
         "properties": {
           "bucket": {
             "title": "Bucket UUID",
-            "description": "UUID of the bucket to which this file is assigned.",
+            "description": "UUID of the bucket the tile is assigned to.",
             "type": "string",
             "minLength": 1
           },
@@ -567,7 +567,7 @@
     },
     "extent": {
       "title": "Extent",
-      "description": "Extent of the resource, ie number of pages or volumes.",
+      "description": "Extent of the resource, i.e. the number of pages or volumes.",
       "type": "string",
       "minLength": 1,
       "form": {
@@ -579,7 +579,7 @@
     },
     "otherMaterialCharacteristics": {
       "title": "Other Material Characteristics",
-      "description": "Other Material Characteristics, ie illustrations, black and with or coloured.",
+      "description": "Other Material Characteristics, i.e. illustrations, black and white, or coloured.",
       "type": "string",
       "minLength": 1,
       "form": {
@@ -591,7 +591,7 @@
     },
     "formats": {
       "title": "Formats",
-      "description": "Format of the resource, ie dimensions in cm.",
+      "description": "Format of the resource, i.e. dimensions in cm.",
       "type": "array",
       "minItems": 1,
       "items": {
@@ -608,7 +608,7 @@
     },
     "additionalMaterials": {
       "title": "Additional materials",
-      "description": "Accompanying material of the resource, ie maps.",
+      "description": "Accompanying material of the resource, i.e. maps.",
       "type": "string",
       "minLength": 1,
       "form": {
@@ -620,7 +620,7 @@
     },
     "series": {
       "title": "Series",
-      "description": "Series to which belongs the resource.",
+      "description": "Series the resource belongs to.",
       "type": "array",
       "minItems": 1,
       "items": {
