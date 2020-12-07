@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2020-11-13 08:45+0100\n"
-"PO-Revision-Date: 2020-11-24 13:29+0000\n"
+"PO-Revision-Date: 2020-12-05 19:29+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "it/>\n"
@@ -1705,15 +1705,15 @@ msgstr "Arts, Human and Social Science"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:122
 msgid "coar:c_16ec"
-msgstr "coar:c_16ec"
+msgstr "Accesso riservato"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:114
 msgid "coar:c_abf2"
-msgstr "coar:c_abf2"
+msgstr "Accesso aperto"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:118
 msgid "coar:c_f1cf"
-msgstr "coar:c_f1cf"
+msgstr "Sottoposto a embargo"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:814
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1378
