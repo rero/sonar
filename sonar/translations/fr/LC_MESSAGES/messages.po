@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2020-11-13 08:45+0100\n"
-"PO-Revision-Date: 2020-12-04 07:29+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"PO-Revision-Date: 2020-12-07 15:29+0000\n"
+"Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "fr/>\n"
 "Language: fr\n"
@@ -145,11 +145,11 @@ msgstr "CC BY-ND"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:42
 msgid "CC BY-SA"
-msgstr ""
+msgstr "CC BY-SA"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:18
 msgid "CC0"
-msgstr ""
+msgstr "CC0"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:59
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:58
@@ -295,7 +295,7 @@ msgstr "Désignation"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:723
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1141
 msgid "Dissertation"
-msgstr "Note de thèse"
+msgstr "Thèse"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:540
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:859
@@ -597,7 +597,7 @@ msgstr "Nom, prénom, ex : Dupont, Jean"
 #: sonar/common/jsonschemas/license-v1.0.0.json:2
 #: sonar/modules/documents/templates/documents/record.html:224
 msgid "License"
-msgstr ""
+msgstr "Licence"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:66
 msgid ""
@@ -670,7 +670,7 @@ msgstr "Nom"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:50
 msgid "Not OA / Rights reserved"
-msgstr ""
+msgstr "Pas OA / Droits réservés"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:657
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:841
@@ -741,7 +741,7 @@ msgstr ""
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:46
 msgid "Other OA / license undefined"
-msgstr ""
+msgstr "Autre OA / licence indéfinie"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:602
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:972
@@ -1336,7 +1336,7 @@ msgstr "Numéro de rapport"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:480
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:829
 msgid "bf:Strn"
-msgstr "Numéro normalisé de rapport technique"
+msgstr "STRN"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:260
 msgid "bf:Title"
@@ -1707,15 +1707,15 @@ msgstr "Lettres, sciences humaines et sociales"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:122
 msgid "coar:c_16ec"
-msgstr ""
+msgstr "Accès réservé"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:114
 msgid "coar:c_abf2"
-msgstr ""
+msgstr "Libre accès"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:118
 msgid "coar:c_f1cf"
-msgstr ""
+msgstr "Sous embargo"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:814
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1378
@@ -3929,7 +3929,7 @@ msgstr "zazaki"
 
 #: sonar/modules/documents/views.py:176
 msgid "no."
-msgstr "no."
+msgstr "no"
 
 #: sonar/modules/documents/templates/documents/record.html:44
 msgid "other files"
@@ -3945,7 +3945,7 @@ msgstr "pid"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:371
 msgid "pmid"
-msgstr "pmid"
+msgstr "PMID"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:106
 msgid "role_admin"
