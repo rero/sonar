@@ -59,20 +59,3 @@ def test_oai_config_info(app, script_info):
     # List configurations
     result = runner.invoke(Cli.oai_config_info, obj=script_info)
     assert result.output.startswith('\nfake')
-
-
-def test_oai_config_harvest_all(app, db, script_info):
-    """Test harvest all."""
-    runner = CliRunner()
-
-    # Create configurations
-    configuration = OAIHarvestConfig(name='fake',
-                                     baseurl='http://some.domain.com/oai2d',
-                                     metadataprefix='marcxml',
-                                     setspecs='fake-set')
-    configuration.save()
-    db.session.commit()
-
-    result = runner.invoke(Cli.oai_config_harvest_all, ['--max', '1'],
-                           obj=script_info)
-    assert result.output == ''

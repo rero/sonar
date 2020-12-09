@@ -17,22 +17,48 @@
 
 """Test documents recievers."""
 
+from os import listdir
+from os.path import exists, join
+
 from invenio_oaiharvester.tasks import get_records
 
-from sonar.modules.documents.receivers import chunks, \
+from sonar.modules.documents.receivers import chunks, export_json, \
     populate_fulltext_field, transform_harvested_records
 
 
 def test_transform_harvested_records(app, bucket_location,
-                                     without_oaiset_signals):
+                                     without_oaiset_signals, capsys):
     """Test harvested record transformation."""
     request, records = get_records(
         ['oai:doc.rero.ch:20120503160026-MV'],
-        metadata_prefix="marcxml",
+        metadata_prefix='marcxml',
         url='http://doc.rero.ch/oai2d',
     )
 
-    transform_harvested_records(None, records, **{'name': 'test', 'max': 1})
+    transform_harvested_records(None, records, **{
+        'name': 'rerodoc',
+        'max': '1'
+    })
+    captured = capsys.readouterr()
+    assert captured.out.find('1 records harvested') != -1
+
+    # Max set to 0 --> import all
+    transform_harvested_records(None, records, **{
+        'name': 'rerodoc',
+        'max': '0'
+    })
+    captured = capsys.readouterr()
+    assert captured.out.find('1 records harvested') != -1
+
+    # Not an import
+    transform_harvested_records(
+        None, records, **{
+            'name': 'rerodoc',
+            'max': '1',
+            'action': 'not-existing'
+        })
+    captured = capsys.readouterr()
+    assert captured.out == ''
 
 
 def test_populate_fulltext_field(app, db, document, pdf_file):
@@ -61,3 +87,24 @@ def test_chunks():
     assert len(records) == 4
     assert records[0] == [1, 2, 3]
     assert records[-1] == [10]
+
+
+def test_export_json(app, bucket_location, monkeypatch):
+    """Test export records to file."""
+    # Patch the file upload to webdav.
+    monkeypatch.setattr(
+        'webdav3.client.Client.upload_file', lambda *args: True)
+
+    request, records = get_records(
+        ['oai:doc.rero.ch:20120503160026-MV'],
+        metadata_prefix='marcxml',
+        url='http://doc.rero.ch/oai2d',
+    )
+
+    data_directory = join(app.instance_path, 'data')
+
+    export_json(None, records, **{'name': 'rerodoc', 'action': 'not-existing'})
+    assert not exists(data_directory)
+
+    export_json(None, records, **{'name': 'rerodoc', 'action': 'export'})
+    assert len(listdir(data_directory)) == 1

@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
+#
+# Swiss Open Access Repository
+# Copyright (C) 2019 RERO
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, version 3 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+source $(dirname "$0")/functions
+
+set -e
+
+title "Exporting data for HEG"
+
+cd $(dirname "$0")/..
+
+section "Harvest and export records from BORIS" "info"
+poetry run invenio oaiharvester harvest -a action=export -n boris -q
+
+section "Harvest and export records from Archive ouverte UNIGE" "info"
+poetry run invenio oaiharvester harvest -a action=export -n archive_ouverte_unige -q

@@ -17,18 +17,21 @@
 
 """Signals connections for documents."""
 
+import json
 import time
 from datetime import datetime
+from os import makedirs
+from os.path import exists, join
 
 import pytz
-from dojson.contrib.marc21.utils import create_record
 from flask import current_app
 
 from sonar.modules.api import SonarRecord
 from sonar.modules.documents.api import DocumentRecord
+from sonar.modules.documents.loaders.schemas.factory import LoaderSchemaFactory
+from sonar.webdav import HegClient
 
 from .api import DocumentRecord
-from .dojson.rerodoc.model import marc21tojson
 from .tasks import import_records
 
 CHUNK_SIZE = 100
@@ -42,9 +45,15 @@ def transform_harvested_records(sender=None, records=None, **kwargs):
     :param sender: Sender of the signal.
     :param list records: Liste of records to harvest.
     """
+    if kwargs.get('action', 'import') != 'import':
+        return
+
     start_time = time.time()
 
     max_records = kwargs.get('max', None)
+    # Cancel parameter if max is set to 0
+    if max_records == '0':
+        max_records = None
 
     if kwargs.get('name'):
         print('Harvesting records from "{set}"'.format(set=kwargs.get('name')))
@@ -57,12 +66,11 @@ def transform_harvested_records(sender=None, records=None, **kwargs):
 
     records = []
 
+    loader_schema = LoaderSchemaFactory.create(kwargs['name'])
+
     for harvested_record in harvested_records:
         # Convert from Marc XML to JSON
-        data = create_record(harvested_record.xml)
-
-        # Transform JSON
-        data = marc21tojson.do(data)
+        data = loader_schema.dump(str(harvested_record))
 
         # Add transformed data to list
         records.append(data)
@@ -135,3 +143,42 @@ def update_oai_property(sender, record):
     record['_oai']['sets'] = [
         SonarRecord.get_pid_by_ref_link(record['organisation']['$ref'])
     ] if record.get('organisation') else []
+
+
+def export_json(sender=None, records=None, **kwargs):
+    """Export records in JSON and store them in a file.
+
+    :param sender: Sender of the signal.
+    :param records: List of records to harvest.
+    """
+    if not kwargs.get('name') or kwargs.get('action') != 'export':
+        return
+
+    data_directory = current_app.config.get('SONAR_APP_STORAGE_PATH')
+    if not data_directory:
+        data_directory = current_app.instance_path
+    data_directory = join(data_directory, 'data')
+
+    if not exists(data_directory):
+        makedirs(data_directory)
+
+    records_to_export = []
+
+    print('{count} records harvested'.format(count=len(records)))
+
+    for record in records:
+        loader_schema = LoaderSchemaFactory.create(kwargs['name'])
+        records_to_export.append(loader_schema.dump(str(record)))
+
+    file_name = '{source}-{date}.json'.format(
+        source=kwargs['name'], date=datetime.now().strftime('%Y%m%d%H%M%S'))
+    file_path = join(data_directory, file_name)
+
+    json_file = open(file_path, 'w')
+    json_file.write(json.dumps(records_to_export))
+
+    # Export to webdav for HEG
+    client = HegClient()
+    client.upload_file(file_name, file_path)
+
+    print('{count} records exported'.format(count=len(records_to_export)))

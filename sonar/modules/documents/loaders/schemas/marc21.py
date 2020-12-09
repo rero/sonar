@@ -1,0 +1,34 @@
+# -*- coding: utf-8 -*-
+#
+# Swiss Open Access Repository
+# Copyright (C) 2019 RERO
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, version 3 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+"""Marc21 schema."""
+
+from dojson.contrib.marc21.utils import create_record
+from marshmallow import Schema, pre_dump
+
+
+class Marc21Schema(Schema):
+    """Marc21 marshmallow schema."""
+
+    @pre_dump
+    def parse_xml(self, data, **kwargs):
+        """Parse xml data and convert into dictionary.
+
+        :param data: XML string.
+        :returns: DictDict.
+        """
+        return create_record(data)
