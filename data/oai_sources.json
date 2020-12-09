@@ -1,0 +1,26 @@
+[
+  {
+    "key": "rerodoc",
+    "name": "rerodoc",
+    "url": "http://doc.rero.ch/oai2d",
+    "metadataprefix": "marcxml",
+    "comment": "",
+    "setspecs": "unisi unifr nl-epfl nl-ethz nl-fachhochschulen nl-lib4ri nl-unibas nl-unibe nl-unifr nl-unige nl-unil nl-unilu nl-unine nl-unisg nl-usi nl-uzh"
+  },
+  {
+    "key": "archive_ouverte_unige",
+    "name": "Archive ouverte UNIGE",
+    "url": "https://archive-ouverte.unige.ch/oaiprovider/",
+    "metadataprefix": "marc21",
+    "comment": "",
+    "setspecs": ""
+  },
+  {
+    "key": "boris",
+    "name": "BORIS UNIGE",
+    "url": "https://boris.unibe.ch/cgi/oai2",
+    "metadataprefix": "oai_openaire",
+    "comment": "",
+    "setspecs": ""
+  }
+]

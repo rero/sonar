@@ -64,11 +64,11 @@ version = "1.5"
 
 [[package]]
 category = "main"
-description = "Disable App Nap on OS X 10.9"
+description = "Disable App Nap on macOS >= 10.9"
 name = "appnope"
 optional = false
 python-versions = "*"
-version = "0.1.0"
+version = "0.1.2"
 
 [[package]]
 category = "main"
@@ -1092,14 +1092,14 @@ marker = "python_version < \"3.8\" or python_version >= \"3.7\" and python_versi
 name = "importlib-metadata"
 optional = false
 python-versions = ">=3.6"
-version = "3.1.0"
+version = "3.1.1"
 
 [package.dependencies]
 zipp = ">=0.5"
 
 [package.extras]
-docs = ["sphinx", "rst.linker"]
-testing = ["packaging", "pep517", "unittest2", "importlib-resources (>=1.3)"]
+docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
+testing = ["pytest (>=3.5,<3.7.3 || >3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pytest-cov", "jaraco.test (>=3.2.0)", "packaging", "pep517", "pyfakefs", "flufl.flake8", "pytest-black (>=0.3.7)", "pytest-mypy", "importlib-resources (>=1.3)"]
 
 [[package]]
 category = "main"
@@ -1850,11 +1850,11 @@ description = "Invenio module for previewing files."
 name = "invenio-previewer"
 optional = false
 python-versions = "*"
-version = "1.2.1"
+version = "1.2.2"
 
 [package.dependencies]
 cchardet = ">=1.0.0"
-invenio-assets = ">=1.1.2"
+invenio-assets = ">=1.1.2,<1.2.0"
 invenio-base = ">=1.2.2"
 invenio-formatter = ">=1.0.2"
 invenio-i18n = ">=1.2.0"
@@ -1867,13 +1867,13 @@ tornado = ">=4.1,<=5.1.1"
 
 [package.dependencies.nbconvert]
 extras = ["execute"]
-version = ">=4.1.0"
+version = ">=4.1.0,<6.0.0"
 
 [package.extras]
-all = ["Sphinx (>=1.5.1,<3)", "invenio-files-rest (>=1.0.0)", "invenio-records-files (>=1.1.0)", "check-manifest (>=0.25)", "coverage (>=4.5.3)", "invenio-config (>=1.0.2)", "invenio-db (>=1.0.2)", "isort (>=4.3.4)", "mock (>=1.3.0)", "pydocstyle (>=1.0.0)", "pytest-cov (>=2.7.1)", "pytest-pep8 (>=1.0.6)", "pytest (>=4.6.4,<5.0.0)"]
+all = ["Sphinx (>=1.5.1,<3)", "invenio-files-rest (>=1.0.0)", "invenio-records-files (>=1.1.0)", "invenio-config (>=1.0.2)", "invenio-db (>=1.0.2)", "mock (>=1.3.0)", "pytest-invenio (>=1.4.0)"]
 docs = ["Sphinx (>=1.5.1,<3)"]
 files = ["invenio-files-rest (>=1.0.0)", "invenio-records-files (>=1.1.0)"]
-tests = ["check-manifest (>=0.25)", "coverage (>=4.5.3)", "invenio-config (>=1.0.2)", "invenio-db (>=1.0.2)", "isort (>=4.3.4)", "mock (>=1.3.0)", "pydocstyle (>=1.0.0)", "pytest-cov (>=2.7.1)", "pytest-pep8 (>=1.0.6)", "pytest (>=4.6.4,<5.0.0)"]
+tests = ["invenio-config (>=1.0.2)", "invenio-db (>=1.0.2)", "mock (>=1.3.0)", "pytest-invenio (>=1.4.0)"]
 
 [[package]]
 category = "main"
@@ -2243,7 +2243,7 @@ description = "Apply JSON-Patches (RFC 6902)"
 name = "jsonpatch"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
-version = "1.27"
+version = "1.28"
 
 [package.dependencies]
 jsonpointer = ">=1.9"
@@ -3707,6 +3707,19 @@ version = "2.0"
 
 [[package]]
 category = "main"
+description = "WebDAV client, based on original package https://github.com/designerror/webdav-client-python but uses requests instead of PyCURL"
+name = "webdavclient3"
+optional = false
+python-versions = "*"
+version = "3.14.5"
+
+[package.dependencies]
+lxml = "*"
+python-dateutil = "*"
+requests = "*"
+
+[[package]]
+category = "main"
 description = "Character encoding aliases for legacy web content"
 name = "webencodings"
 optional = false
@@ -3821,7 +3834,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pytest (>=3.5,<3.7.3 || >3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pytest-cov", "jaraco.test (>=3.2.0)", "jaraco.itertools", "func-timeout", "pytest-black (>=0.3.7)", "pytest-mypy"]
 
 [metadata]
-content-hash = "33e000b529b9ec625963c2fabb2e687be586128ff7971c5a4918142b15d15c3f"
+content-hash = "5c554287d0c94a3945592a475c974c65cffd71b01399727cb1e1f4d3f5cfb3ec"
 lock-version = "1.0"
 python-versions = "^3.6"
 
@@ -3850,8 +3863,8 @@ apipkg = [
     {file = "apipkg-1.5.tar.gz", hash = "sha256:37228cda29411948b422fae072f57e31d3396d2ee1c9783775980ee9c9990af6"},
 ]
 appnope = [
-    {file = "appnope-0.1.0-py2.py3-none-any.whl", hash = "sha256:5b26757dc6f79a3b7dc9fab95359328d5747fcb2409d331ea66d0272b90ab2a0"},
-    {file = "appnope-0.1.0.tar.gz", hash = "sha256:8b995ffe925347a2138d7ac0fe77155e4311a0ea6d6da4f5128fe4b3cbe5ed71"},
+    {file = "appnope-0.1.2-py2.py3-none-any.whl", hash = "sha256:93aa393e9d6c54c5cd570ccadd8edad61ea0c4b9ea7a01409020c9aa019eb442"},
+    {file = "appnope-0.1.2.tar.gz", hash = "sha256:dd83cd4b5b460958838f6eb3000c660b1f9caf2a5b1de4264e941512f603258a"},
 ]
 arrow = [
     {file = "arrow-0.17.0-py2.py3-none-any.whl", hash = "sha256:e098abbd9af3665aea81bdd6c869e93af4feb078e98468dd351c383af187aac5"},
@@ -4248,8 +4261,8 @@ imagesize = [
     {file = "imagesize-1.2.0.tar.gz", hash = "sha256:b1f6b5a4eab1f73479a50fb79fcf729514a900c341d8503d62a62dbc4127a2b1"},
 ]
 importlib-metadata = [
-    {file = "importlib_metadata-3.1.0-py2.py3-none-any.whl", hash = "sha256:590690d61efdd716ff82c39ca9a9d4209252adfe288a4b5721181050acbd4175"},
-    {file = "importlib_metadata-3.1.0.tar.gz", hash = "sha256:d9b8a46a0885337627a6430db287176970fff18ad421becec1d64cfc763c2099"},
+    {file = "importlib_metadata-3.1.1-py3-none-any.whl", hash = "sha256:6112e21359ef8f344e7178aa5b72dc6e62b38b0d008e6d3cb212c5b84df72013"},
+    {file = "importlib_metadata-3.1.1.tar.gz", hash = "sha256:b0c2d3b226157ae4517d9625decf63591461c66b3a808c2666d538946519d170"},
 ]
 importlib-resources = [
     {file = "importlib_resources-3.3.0-py2.py3-none-any.whl", hash = "sha256:a3d34a8464ce1d5d7c92b0ea4e921e696d86f2aa212e684451cb1482c8d84ed5"},
@@ -4354,8 +4367,8 @@ invenio-pidstore = [
     {file = "invenio_pidstore-1.2.1-py2.py3-none-any.whl", hash = "sha256:cdb912807aa92fe0885dd87444f02b44e8aa0f93134337098d03f451562acb86"},
 ]
 invenio-previewer = [
-    {file = "invenio-previewer-1.2.1.tar.gz", hash = "sha256:7c4aa6a08fd71f47e93f3a3938a29029a6b17fd771a9cc2cc3bdcb13c5571152"},
-    {file = "invenio_previewer-1.2.1-py2.py3-none-any.whl", hash = "sha256:b3434e942ce10c4b89975930e5937b5a0eaf4b943abe4bfb40796e5f48c96035"},
+    {file = "invenio-previewer-1.2.2.tar.gz", hash = "sha256:98fb75a6d1f482a9ad503ef7488dabe94ecf39bdb38e811d6e2986b664218c01"},
+    {file = "invenio_previewer-1.2.2-py2.py3-none-any.whl", hash = "sha256:f873afc9e099c381f2f6762f8ae675c68255b55b41232f4faa33ce33b9ecd7f0"},
 ]
 invenio-records = [
     {file = "invenio-records-1.3.2.tar.gz", hash = "sha256:9cc95def65fdb46db21d935c0e29bb9296c749f17ac97c0962653ffa736b6414"},
@@ -4427,8 +4440,8 @@ jsmin = [
     {file = "jsmin-2.2.2.tar.gz", hash = "sha256:b6df99b2cd1c75d9d342e4335b535789b8da9107ec748212706ef7bbe5c2553b"},
 ]
 jsonpatch = [
-    {file = "jsonpatch-1.27-py2.py3-none-any.whl", hash = "sha256:86eaaccfac8891c6a09ab48aec13fb5921ff32c838e7a19981f0d2b94915f668"},
-    {file = "jsonpatch-1.27.tar.gz", hash = "sha256:4d08af10d71723b5b2924da6ba90f273a4d1a5c6accfb605eb970cb2f9b29cf9"},
+    {file = "jsonpatch-1.28-py2.py3-none-any.whl", hash = "sha256:da3831be60919e8c98564acfc1fa918cb96e7c9750b0428388483f04d0d1c5a7"},
+    {file = "jsonpatch-1.28.tar.gz", hash = "sha256:e930adc932e4d36087dbbf0f22e1ded32185dfb20662f2e3dd848677a5295a14"},
 ]
 jsonpointer = [
     {file = "jsonpointer-2.0-py2.py3-none-any.whl", hash = "sha256:ff379fa021d1b81ab539f5ec467c7745beb1a5671463f9dcc2b2d458bd361c1e"},
@@ -5135,6 +5148,9 @@ webargs = [
 webassets = [
     {file = "webassets-2.0-py3-none-any.whl", hash = "sha256:a31a55147752ba1b3dc07dee0ad8c8efff274464e08bbdb88c1fd59ffd552724"},
     {file = "webassets-2.0.tar.gz", hash = "sha256:167132337677c8cedc9705090f6d48da3fb262c8e0b2773b29f3352f050181cd"},
+]
+webdavclient3 = [
+    {file = "webdavclient3-3.14.5.tar.gz", hash = "sha256:6072f9a583059f8ff313f8544d415b4191fc89bdf6230259b0527b706ab1837b"},
 ]
 webencodings = [
     {file = "webencodings-0.5.1-py2.py3-none-any.whl", hash = "sha256:a0af1213f3c2226497a97e2b3aa01a7e4bee4f403f95be16fc9acd2947514a78"},
