@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2020-11-13 08:45+0100\n"
-"PO-Revision-Date: 2020-12-07 15:29+0000\n"
+"PO-Revision-Date: 2020-12-10 12:29+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "fr/>\n"
@@ -42,11 +42,11 @@ msgstr "Résumés"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:103
 msgid "Access"
-msgstr ""
+msgstr "Accès"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:132
 msgid "Access allowed from the organisation's IP addresses"
-msgstr ""
+msgstr "Accès autorisé depuis les adresses IP de l'organisation"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:611
 msgid "Accompanying material of the resource, ie maps."
@@ -80,7 +80,7 @@ msgstr "Agent"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:65
 msgid "Allowed IP addresses"
-msgstr ""
+msgstr "Adresses IP autorisées"
 
 #: sonar/modules/deposits/rest.py:203
 msgid "Ask for changes on deposit"
@@ -379,9 +379,8 @@ msgid "Example: 2019 or 2019-05-05"
 msgstr "Exemple : 2019 ou 2019-05-05"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:144
-#, fuzzy
 msgid "Example: 2019-05-05"
-msgstr "Exemple : 2019 ou 2019-05-05"
+msgstr "Exemple : 2019-05-05"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:22
 msgid "Example: John Doe"
@@ -417,7 +416,7 @@ msgstr ""
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:92
 msgid "External URL"
-msgstr ""
+msgstr "URL externe"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:39
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:35
@@ -526,7 +525,7 @@ msgstr "Identifiants"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:93
 msgid "If this field is filled in, the file points to the specified URL."
-msgstr ""
+msgstr "Si ce champ est utilisé, le fichier pointe vers l'URL spécifiée."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:577
 msgid "In the format \\"
@@ -588,7 +587,7 @@ msgstr "Langues"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:192
 msgid "Last OAI-PMH set update (ISO8601 formatted timestamp)"
-msgstr ""
+msgstr "Dernière mise à jour OAI-PMH (horodatage formaté selon ISO8601)"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:791
 msgid "Last name, first name, ex: Doe, John"
@@ -604,6 +603,8 @@ msgid ""
 "List of IP addresses or ranges that allows to display files. One rule per"
 " line."
 msgstr ""
+"Liste d'adresses IP, ou rangs d'adresses IP, pour lesquels l'accès aux "
+"fichiers est autorisé. Une règle par ligne."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:26
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:22
@@ -647,9 +648,8 @@ msgstr "Somme de contrôle MD5 du fichier."
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:54
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:53
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:112
-#, fuzzy
 msgid "MIME type"
-msgstr "Type de document"
+msgstr "Type MIME"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:271
 msgid "Main title"
@@ -682,6 +682,8 @@ msgid ""
 "Note: Publications manually deposited in this test portal might "
 "occasionally need to be deleted, for operational reasons."
 msgstr ""
+"Note : Les publications ajoutées manuellement dans ce portail de test "
+"peuvent être supprimées ponctuellement, pour des raisons opérationnelles."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:653
 msgid "Notes"
@@ -698,15 +700,15 @@ msgstr "Numérotation"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:179
 msgid "OAI-PMH record identifier."
-msgstr ""
+msgstr "Identifiant OAI-PMH de la ressource."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:184
 msgid "OAI-PMH sets for record."
-msgstr ""
+msgstr "Sets OAI-PMH."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:174
 msgid "OAI-PMH specific information."
-msgstr ""
+msgstr "Informations spécifiques à OAI-PMH."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:837
 msgid "ORCID"
@@ -794,7 +796,7 @@ msgstr "Position"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:86
 msgid "Position of the file, the first file in the list is the main file."
-msgstr ""
+msgstr "Position du fichier, le premier de la liste est le fichier principal."
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:55
 msgid "Postal code"
@@ -811,7 +813,7 @@ msgstr "Nom privilégié"
 
 #: sonar/modules/documents/templates/documents/record.html:265
 msgid "Preview"
-msgstr ""
+msgstr "Aperçu"
 
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:21
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:24
@@ -1743,9 +1745,8 @@ msgid "contribution_role_prt"
 msgstr "Imprimeur"
 
 #: sonar/modules/documents/views.py:270
-#, fuzzy
 msgid "contribution_role_{role}"
-msgstr "Créateur"
+msgstr "contribution_role_{role}"
 
 #: sonar/config.py:504
 msgid "contributor"
@@ -1881,7 +1882,7 @@ msgstr "Contribution à une revue"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:236
 msgid "document_type_coar:c_46ec"
-msgstr "Thèse"
+msgstr "Thèse, mémoire"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:69
 msgid "document_type_coar:c_5794"
