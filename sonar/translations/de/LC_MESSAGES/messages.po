@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2020-11-13 08:45+0100\n"
-"PO-Revision-Date: 2020-12-07 15:29+0000\n"
+"PO-Revision-Date: 2020-12-10 12:29+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "de/>\n"
@@ -293,7 +293,7 @@ msgstr "Bezeichnung"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:723
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1141
 msgid "Dissertation"
-msgstr "Dissertation"
+msgstr "These"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:540
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:859
@@ -667,7 +667,7 @@ msgstr "Name"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:50
 msgid "Not OA / Rights reserved"
-msgstr "Nicht Open Access / Rechte vorbehalten"
+msgstr "Nicht OA / Rechte vorbehalten"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:657
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:841
@@ -697,11 +697,11 @@ msgstr "Zählung"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:179
 msgid "OAI-PMH record identifier."
-msgstr "OAI-PMH record identifier."
+msgstr "OAI-PMH-Identifikator der Ressource."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:184
 msgid "OAI-PMH sets for record."
-msgstr "OAI-PMH Sets für Ressource."
+msgstr "OAI-PMH Sets."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:174
 msgid "OAI-PMH specific information."
@@ -741,7 +741,7 @@ msgstr ""
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:46
 msgid "Other OA / license undefined"
-msgstr "Andere Art von Open Access / Lizenz unbestimmt"
+msgstr "Andere Art von OA / Lizenz unbestimmt"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:602
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:972
@@ -803,7 +803,7 @@ msgstr "Postleitzahl"
 #: sonar/theme/templates/sonar/footer.html:32
 #, python-format
 msgid "Powered by <a href=\"%(link)s\" target=\"_blank\">RERO</a>"
-msgstr "Betreiber:  <a href=\"%(link)s\" target=\"_blank\">RERO</a>"
+msgstr "Betreiber: <a href=\"%(link)s\" target=\"_blank\">RERO</a>"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1249
 msgid "Preferred name"
@@ -935,7 +935,7 @@ msgstr "Registrieren"
 #: sonar/theme/templates/sonar/accounts/signup.html:27
 #, python-format
 msgid "Sign up for a %(sitename)s account"
-msgstr "Registrieren für ein  %(sitename)s-Konto"
+msgstr "Registrieren für ein %(sitename)s-Konto"
 
 #: sonar/theme/templates/sonar/accounts/login.html:41
 #, python-format
@@ -1044,7 +1044,7 @@ msgstr "Titelzusätze"
 
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:27
 msgid "Super administration"
-msgstr "Super administration"
+msgstr "Super-Administration"
 
 #: sonar/config.py:90 sonar/config.py:94
 msgid "Swiss Open Access Repository"
@@ -1070,7 +1070,7 @@ msgid ""
 " this document belongs"
 msgstr ""
 "Die Namen der besonderen/kulturhistorischen Sammlungen einer Organisation, "
-"zu denen dieses Dokument gehört."
+"zu denen dieses Dokument gehört"
 
 #: sonar/theme/templates/sonar/frontpage.html:74
 msgid "The project"
@@ -1187,7 +1187,7 @@ msgstr "Band"
 
 #: sonar/modules/users/utils.py:40
 msgid "Welcome on SONAR"
-msgstr "Willkommen bei SONAR!"
+msgstr "Willkommen bei SONAR"
 
 #: sonar/config.py:119
 msgid "Welcome to SONAR, the Swiss Open Access Repository!"
@@ -1742,9 +1742,8 @@ msgid "contribution_role_prt"
 msgstr "Printer"
 
 #: sonar/modules/documents/views.py:270
-#, fuzzy
 msgid "contribution_role_{role}"
-msgstr "Creator"
+msgstr "contribution_role_{role}"
 
 #: sonar/config.py:504
 msgid "contributor"
