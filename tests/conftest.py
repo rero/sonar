@@ -252,7 +252,8 @@ def document_json(app, db, bucket_location, organisation):
             'type': 'bf:Identifier'
         }, {
             'value': '111111',
-            'type': 'bf:Local'
+            'type': 'bf:Local',
+            'source': 'RERO DOC'
         }],
         'language': [{
             'value': 'eng',
