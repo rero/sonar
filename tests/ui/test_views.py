@@ -218,3 +218,14 @@ def test_record_image_url():
 
     # Take files corresponding to key
     assert record_image_url(record, 'test2.jpg') == '/api/files/1234/test2.jpg'
+
+
+def test_rerodoc_redirection(client, document):
+    """Test redirection with RERODOC identifier."""
+    res = client.get(url_for('sonar.rerodoc_redirection', pid='NOT-EXISTING'))
+    assert res.status_code == 404
+
+    res = client.get(url_for('sonar.rerodoc_redirection', pid='111111'))
+    assert res.status_code == 302
+    assert res.location.find(
+        '/global/documents/{pid}'.format(pid=document['pid'])) != -1

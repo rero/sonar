@@ -35,9 +35,11 @@ from flask_login import current_user, login_required
 from flask_menu import current_menu, register_menu
 from invenio_jsonschemas import current_jsonschemas
 from invenio_jsonschemas.errors import JSONSchemaNotFound
+from invenio_pidstore.models import PersistentIdentifier
 
 from sonar.modules.babel_extractors import translate
 from sonar.modules.deposits.permissions import DepositPermission
+from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.permissions import DocumentPermission
 from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import can_access_manage_view
@@ -84,6 +86,22 @@ def profile(pid=None):
 def error():
     """Error to generate exception for test purposes."""
     raise Exception('this is an error for test purposes')
+
+
+@blueprint.route('/rerodoc/<pid>')
+def rerodoc_redirection(pid):
+    """Redirection to document with identifier from RERODOC.
+
+    :param pid: PID from RERODOC.
+    :returns: A redirection to record's detail page or 404 if not found.
+    """
+    try:
+        pid = PersistentIdentifier.get('rerod', pid)
+    except Exception:
+        abort(404)
+
+    return redirect(
+        url_for('documents.detail', pid_value=pid.get_redirect().pid_value))
 
 
 @blueprint.route('/manage/')

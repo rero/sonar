@@ -23,6 +23,7 @@ from flask import current_app
 from invenio_oaiserver.minters import oaiid_minter
 from invenio_oaiserver.provider import OAIIDProvider
 from invenio_pidstore.errors import PIDDoesNotExistError
+from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 
 
 def id_minter(record_uuid, data, provider, pid_key='pid', object_type='rec'):
@@ -44,4 +45,30 @@ def id_minter(record_uuid, data, provider, pid_key='pid', object_type='rec'):
     except PIDDoesNotExistError:
         oaiid_minter(record_uuid, data)
 
+    rerodoc_minter(record_uuid, data, pid_key)
+
     return pid
+
+
+def rerodoc_minter(record_uuid, data, pid_key='pid'):
+    """RERODOC minter.
+
+    :param record_uuid: Record UUID.
+    :param data: Record data.
+    :param pid_key: PID key.
+    :returns: Created PID object.
+    """
+    for identifier in data.get('identifiedBy', []):
+        if identifier.get('source') == 'RERO DOC':
+            try:
+                pid = PersistentIdentifier.create('rerod',
+                                                  identifier['value'],
+                                                  object_type='rec',
+                                                  object_uuid=record_uuid,
+                                                  status=PIDStatus.REGISTERED)
+                pid.redirect(PersistentIdentifier.get('doc', data[pid_key]))
+                return pid
+            except Exception:
+                pass
+
+    return None

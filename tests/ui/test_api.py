@@ -22,7 +22,7 @@ import pytest
 from flask import url_for
 from invenio_accounts.testutils import login_user_via_session
 from invenio_app.factory import create_api
-from invenio_pidstore.models import PersistentIdentifier
+from invenio_pidstore.models import PersistentIdentifier, Redirect
 from six import BytesIO
 
 from sonar.modules.api import SonarRecord
@@ -280,6 +280,7 @@ def test_get_record_by_bucket(app, db, document_with_file):
         'record_class'] = DocumentRecord
 
     # Persistent identifier not found
+    Redirect.query.delete()
     pid = PersistentIdentifier.get('doc', document_with_file['pid'])
     db.session.delete(pid)
     db.session.commit()
