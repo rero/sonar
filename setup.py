@@ -54,7 +54,8 @@ setup(
             'oaiharvester = \
                 sonar.modules.documents.cli.oaiharvester:oaiharvester',
             'utils = sonar.modules.cli:utils',
-            'es = sonar.elasticsearch.cli:es'
+            'es = sonar.elasticsearch.cli:es',
+            'heg = sonar.heg.cli:heg'
         ],
         'invenio_base.apps': [
             'sonar = sonar.modules:Sonar',

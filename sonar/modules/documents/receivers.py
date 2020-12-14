@@ -29,6 +29,7 @@ from flask import current_app
 from sonar.modules.api import SonarRecord
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.loaders.schemas.factory import LoaderSchemaFactory
+from sonar.modules.utils import chunks
 from sonar.webdav import HegClient
 
 from .api import DocumentRecord
@@ -115,16 +116,6 @@ def populate_fulltext_field(sender=None,
         if file.get('type') == 'fulltext':
             with file.file.storage().open() as pdf_file:
                 json['fulltext'].append(pdf_file.read().decode('utf-8'))
-
-
-def chunks(records, size):
-    """Yield chunks from records.
-
-    :param list records: Full records list.
-    :param int size: Size of chunks.
-    """
-    for i in range(0, len(records), size):
-        yield records[i:i + size]
 
 
 def update_oai_property(sender, record):

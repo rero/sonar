@@ -231,7 +231,14 @@ class SonarRecord(Record, FilesMixin):
         for kwargs, see add_file method below.
         """
         kwargs['external_url'] = url
-        self.add_file(requests.get(url).content, key, **kwargs)
+        result = requests.get(url)
+        if result.status_code == 200:
+            self.add_file(result.content, key, **kwargs)
+        else:
+            # File cannot be downloaded, keep the link to the external source.
+            # And create an empty file.
+            kwargs['force_external_url'] = True
+            self.add_file(b'', key, **kwargs)
 
     def add_file(self, data, key, **kwargs):
         """Create file and add it to record.

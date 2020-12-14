@@ -36,3 +36,16 @@ def test_get_organisation_by_user(user):
     # User has no organisation
     organisation = OrganisationRecord.get_organisation_by_user(user)
     assert not organisation
+
+
+def test_get_or_create(organisation):
+    """Test get or create an organisation."""
+    # Existing organisation
+    organisation = OrganisationRecord.get_or_create('org', 'Organisation')
+    assert organisation['pid'] == 'org'
+    assert organisation['name'] == 'org'
+
+    # New organisation
+    organisation = OrganisationRecord.get_or_create('new-org', 'Organisation')
+    assert organisation['pid'] == 'new-org'
+    assert organisation['name'] == 'Organisation'

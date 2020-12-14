@@ -37,6 +37,12 @@ def test_import_records(mock_record_by_identifier, app, document_json,
     mock_record_by_identifier.return_value = None
     document_json['files'] = files
     ids = import_records([document_json])
+    record = DocumentRecord.get_record(ids[0])
+    assert record
+
+    # Update
+    mock_record_by_identifier.return_value = record
+    ids = import_records([document_json])
     assert DocumentRecord.get_record(ids[0])
 
     # Error during importation of record

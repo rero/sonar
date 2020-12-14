@@ -50,6 +50,8 @@ def import_records(records_to_import):
                 record = DocumentRecord.create(data,
                                                dbcommit=False,
                                                with_bucket=True)
+            else:
+                record.update(data)
 
             for file_data in files_data:
                 # Store url and key and remove it from dict to pass dict to

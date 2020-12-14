@@ -86,11 +86,31 @@ class OrganisationRecord(SonarRecord):
 
         return cls.get_record_by_ref_link(user['organisation']['$ref'])
 
+    @classmethod
+    def get_or_create(cls, code, name=None):
+        """Get or create an organisation.
+
+        :param code: Organisation's code, equivalent to PID.
+        :param name: Organisation's name.
+        :returns: Organisations object.
+        """
+        organisation = cls.get_record_by_pid(code)
+
+        if organisation:
+            return organisation
+
+        organisation = cls.create(
+            {
+                'code': code,
+                'name': name if name else code
+            }, dbcommit=True)
+        organisation.reindex()
+        return organisation
+
     def update(self, data):
         """Update data for record."""
         # Update OAI set name according to organisation's name
-        oaiset = OAISet.query.filter(
-            OAISet.spec == data['code']).first()
+        oaiset = OAISet.query.filter(OAISet.spec == data['code']).first()
 
         if oaiset:
             oaiset.name = data['name']

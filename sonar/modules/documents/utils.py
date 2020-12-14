@@ -88,7 +88,8 @@ def get_file_links(file, record):
         return links
 
     # File has an external url
-    if record['external_url'] and file.get('external_url'):
+    if (record['external_url'] or file.get(
+            'force_external_url', False)) and file.get('external_url'):
         links['external'] = file['external_url']
         return links
 
@@ -193,10 +194,7 @@ def has_external_urls_for_files(record):
     :returns: True if record's organisation is configured to point files to an
     external URL.
     """
-    if not record.get('organisation'):
-        return False
-
-    for organisation in record['organisation']:
+    for organisation in record.get('organisation', []):
         organisation_pid = SonarRecord.get_pid_by_ref_link(
             organisation['$ref']) if organisation.get(
                 '$ref') else organisation['pid']
