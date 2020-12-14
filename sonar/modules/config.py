@@ -33,7 +33,8 @@ SONAR_APP_LANGUAGES_MAP = dict(fre='fr',
                                heb='iw',
                                jpn='ja',
                                por='pt',
-                               rus='ru')
+                               rus='ru',
+                               afr='af')
 
 SONAR_APP_PREFERRED_LANGUAGES = ['eng', 'fre', 'ger', 'ita']
 """Order of preferred languages for displaying value in views."""
@@ -74,3 +75,5 @@ SONAR_APP_WEBDAV_HEG_HOST = 'https://share.rero.ch/HEG'
 SONAR_APP_WEBDAV_HEG_USER = None
 SONAR_APP_WEBDAV_HEG_PASSWORD = None
 """Connection data to webdav for HEG."""
+
+SONAR_APP_HEG_DATA_DIRECTORY = './data/heg'

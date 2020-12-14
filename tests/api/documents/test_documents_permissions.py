@@ -26,8 +26,8 @@ from invenio_accounts.testutils import login_user_via_session
 def test_list(app, client, make_document, superuser, admin, moderator,
               submitter, user):
     """Test list documents permissions."""
-    make_document(None)
-    make_document('org')
+    make_document(None, with_file=True)
+    make_document('org', with_file=True)
 
     # Not logged
     res = client.get(url_for('invenio_records_rest.doc_list'))

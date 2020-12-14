@@ -205,3 +205,13 @@ def is_ip_in_list(ip_address, addresses_list):
         return ip_address in ip_set
     except Exception:
         return False
+
+
+def chunks(records, size):
+    """Yield chunks from records.
+
+    :param list records: Full records list.
+    :param int size: Size of chunks.
+    """
+    for i in range(0, len(records), size):
+        yield records[i:i + size]

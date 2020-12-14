@@ -138,11 +138,17 @@ def test_get_record_by_ref_link(app, document):
 
 def test_add_file_from_url(app, document):
     """Test add file to document by giving its URL."""
+    # OK
     document.add_file_from_url(
         'http://doc.rero.ch/record/328028/files/nor_irc.pdf', 'test.pdf')
-
     assert len(document.files) == 3
     assert document.files['test.pdf']['label'] == 'test.pdf'
+
+    # Non existing file URL
+    document.add_file_from_url(
+        'http://doc.rero.ch/pdf-url', 'test2.pdf')
+    assert len(document.files) == 4
+    assert document.files['test2.pdf']['label'] == 'test2.pdf'
 
 
 @mock.patch('sonar.modules.documents.api.extract_text_from_content')

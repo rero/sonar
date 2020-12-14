@@ -83,6 +83,10 @@ def search_factory(self, search, query_parser=None):
         # Filter record by organisation view.
         if view != current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'):
             search = search.filter('term', organisation__pid=view)
+
+        # Don't display records without file.
+        search = search.filter('bool', must={'exists': {'field': '_files'}})
+        search = search.filter('bool', must={'term': {'_files.type': 'file'}})
     # Admin
     else:
         # Filters records by user's organisation

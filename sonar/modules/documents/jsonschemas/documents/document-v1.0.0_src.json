@@ -99,6 +99,15 @@
               "hideExpression": "true"
             }
           },
+          "force_external_url": {
+            "title": "Force external URL",
+            "description": "If the value is set to true, the file will point to the external link.",
+            "type": "boolean",
+            "default": false,
+            "form": {
+              "hideExpression": "true"
+            }
+          },
           "access": {
             "title": "Access",
             "type": "string",
@@ -1541,6 +1550,208 @@
                 "form": {
                   "hideExpression": "!['coar:c_3248', 'coar:c_5794', 'coar:c_6670'].includes(field.parent.parent.parent.parent.model.documentType)"
                 }
+              },
+              "identifiedBy": {
+                "title": "Identifiers",
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "title": "Identifier",
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "type": {
+                      "title": "Type",
+                      "type": "string",
+                      "enum": [
+                        "bf:AudioIssueNumber",
+                        "bf:Doi",
+                        "bf:Ean",
+                        "bf:Gtin14Number",
+                        "bf:Identifier",
+                        "bf:Isan",
+                        "bf:Isbn",
+                        "bf:Ismn",
+                        "bf:Isrc",
+                        "bf:Issn",
+                        "bf:Local",
+                        "bf:IssnL",
+                        "bf:MatrixNumber",
+                        "bf:MusicDistributorNumber",
+                        "bf:MusicPlate",
+                        "bf:MusicPublisherNumber",
+                        "bf:PublisherNumber",
+                        "bf:Upc",
+                        "bf:Urn",
+                        "bf:VideoRecordingNumber",
+                        "uri",
+                        "bf:ReportNumber",
+                        "bf:Strn"
+                      ],
+                      "form": {
+                        "options": [
+                          {
+                            "label": "bf:AudioIssueNumber",
+                            "value": "bf:AudioIssueNumber"
+                          },
+                          {
+                            "label": "bf:Doi",
+                            "value": "bf:Doi"
+                          },
+                          {
+                            "label": "bf:Ean",
+                            "value": "bf:Ean"
+                          },
+                          {
+                            "label": "bf:Gtin14Number",
+                            "value": "bf:Gtin14Number"
+                          },
+                          {
+                            "label": "bf:Identifier",
+                            "value": "bf:Identifier"
+                          },
+                          {
+                            "label": "bf:Isan",
+                            "value": "bf:Isan"
+                          },
+                          {
+                            "label": "bf:Isbn",
+                            "value": "bf:Isbn"
+                          },
+                          {
+                            "label": "bf:Ismn",
+                            "value": "bf:Ismn"
+                          },
+                          {
+                            "label": "bf:Isrc",
+                            "value": "bf:Isrc"
+                          },
+                          {
+                            "label": "bf:Issn",
+                            "value": "bf:Issn"
+                          },
+                          {
+                            "label": "bf:IssnL",
+                            "value": "bf:IssnL"
+                          },
+                          {
+                            "label": "bf:Local",
+                            "value": "bf:Local"
+                          },
+                          {
+                            "label": "bf:MatrixNumber",
+                            "value": "bf:MatrixNumber"
+                          },
+                          {
+                            "label": "bf:MusicDistributorNumber",
+                            "value": "bf:MusicDistributorNumber"
+                          },
+                          {
+                            "label": "bf:MusicPlate",
+                            "value": "bf:MusicPlate"
+                          },
+                          {
+                            "label": "bf:MusicPublisherNumber",
+                            "value": "bf:MusicPublisherNumber"
+                          },
+                          {
+                            "label": "bf:PublisherNumber",
+                            "value": "bf:PublisherNumber"
+                          },
+                          {
+                            "label": "bf:Upc",
+                            "value": "bf:Upc"
+                          },
+                          {
+                            "label": "bf:Urn",
+                            "value": "bf:Urn"
+                          },
+                          {
+                            "label": "bf:VideoRecordingNumber",
+                            "value": "bf:VideoRecordingNumber"
+                          },
+                          {
+                            "label": "uri",
+                            "value": "uri"
+                          },
+                          {
+                            "label": "bf:ReportNumber",
+                            "value": "bf:ReportNumber"
+                          },
+                          {
+                            "label": "bf:Strn",
+                            "value": "bf:Strn"
+                          }
+                        ]
+                      }
+                    },
+                    "value": {
+                      "title": "Value",
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "note": {
+                      "title": "Note",
+                      "type": "string",
+                      "minLength": 1,
+                      "form": {
+                        "hide": true
+                      }
+                    },
+                    "qualifier": {
+                      "title": "Qualifier",
+                      "type": "string",
+                      "minLength": 1,
+                      "form": {
+                        "hide": true
+                      }
+                    },
+                    "acquisitionTerms": {
+                      "title": "Acquisition terms",
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "source": {
+                      "title": "Source",
+                      "type": "string",
+                      "minLength": 1,
+                      "form": {
+                        "hideExpression": "model.type !== 'bf:Local'",
+                        "expressionProperties": {
+                          "templateOptions.required": "model.type === 'bf:Local'"
+                        }
+                      }
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "string",
+                      "enum": [
+                        "invalid",
+                        "cancelled",
+                        "invalid or cancelled"
+                      ],
+                      "validationMessage": "ISBN/ISSN status should be selected in the list below.",
+                      "form": {
+                        "hide": true
+                      }
+                    }
+                  },
+                  "propertiesOrder": [
+                    "type",
+                    "value",
+                    "status",
+                    "qualifier",
+                    "note",
+                    "source"
+                  ],
+                  "required": [
+                    "type",
+                    "value"
+                  ]
+                },
+                "form": {
+                  "hide": true
+                }
               }
             },
             "propertiesOrder": [
@@ -1608,6 +1819,11 @@
           "cssClass": "editor-title"
         }
       }
+    },
+    "oa_status": {
+      "title": "Open access status",
+      "type": "string",
+      "minLength": 1
     }
   },
   "propertiesOrder": [

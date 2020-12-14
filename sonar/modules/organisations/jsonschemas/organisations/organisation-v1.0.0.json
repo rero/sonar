@@ -18,7 +18,7 @@
       "title": "Code",
       "description": "At least 3 characters and must contain only lower case characters and underscores.",
       "type": "string",
-      "pattern": "^[a-z0-9_]{3,}$",
+      "pattern": "^[a-z0-9_-]{3,}$",
       "minLength": 3,
       "form": {
         "hideExpression": "field.model.pid",

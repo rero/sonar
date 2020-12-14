@@ -58,6 +58,9 @@
           "external_url": {
             "type": "keyword"
           },
+          "force_external_url": {
+            "type": "boolean"
+          },
           "access": {
             "type": "keyword"
           },
@@ -447,6 +450,32 @@
               },
               "contribution": {
                 "type": "text"
+              },
+              "identifiedBy": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "keyword"
+                  },
+                  "value": {
+                    "type": "keyword"
+                  },
+                  "note": {
+                    "type": "text"
+                  },
+                  "qualifier": {
+                    "type": "text"
+                  },
+                  "acquisitionTerms": {
+                    "type": "text"
+                  },
+                  "source": {
+                    "type": "keyword"
+                  },
+                  "status": {
+                    "type": "keyword"
+                  }
+                }
               }
             }
           }
@@ -488,6 +517,9 @@
             }
           }
         }
+      },
+      "oa_status": {
+        "type": "keyword"
       },
       "_created": {
         "type": "date"

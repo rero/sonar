@@ -127,7 +127,7 @@ class DocumentRecord(SonarRecord):
         :param list identifiers: List of identifiers
         """
         for identifier in identifiers:
-            if identifier['type'] == 'bf:Local':
+            if identifier['type'] in ['bf:Local', 'bf:Doi']:
                 results = list(DocumentSearch().filter(
                     'term', identifiedBy__value=identifier['value']).source(
                         includes=['pid']))
