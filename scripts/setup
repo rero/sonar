@@ -81,8 +81,8 @@ section "Clear files" "info"
 invenio utils clear-files
 
 section "Initialize database" "info"
-invenio db destroy --yes-i-know
-invenio db init create
+invenio db drop --yes-i-know
+invenio db create
 
 section "Initialize elasticsearch indexes" "info"
 invenio index destroy --force --yes-i-know
