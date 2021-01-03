@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2020-11-13 08:45+0100\n"
-"PO-Revision-Date: 2020-12-10 12:29+0000\n"
+"PO-Revision-Date: 2020-12-24 13:29+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "fr/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.4-dev\n"
+"X-Generator: Weblate 4.4.1-dev\n"
 "Generated-By: Babel 2.8.0\n"
 
 #: sonar/theme/views.py:64
@@ -1894,7 +1894,7 @@ msgstr "Logiciel"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:107
 msgid "document_type_coar:c_6501"
-msgstr "Article"
+msgstr "Article scientifique"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:79
 msgid "document_type_coar:c_6670"
@@ -1914,11 +1914,11 @@ msgstr "Preprint"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:122
 msgid "document_type_coar:c_8544"
-msgstr "Cours"
+msgstr "Cours magistral"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:130
 msgid "document_type_coar:c_8a7e"
-msgstr "Image animée"
+msgstr "Film"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:187
 msgid "document_type_coar:c_93fc"
