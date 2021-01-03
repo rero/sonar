@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2020-11-13 08:45+0100\n"
-"PO-Revision-Date: 2020-11-24 13:29+0000\n"
+"PO-Revision-Date: 2020-12-24 13:29+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: English <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "en/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4-dev\n"
+"X-Generator: Weblate 4.4.1-dev\n"
 "Generated-By: Babel 2.8.0\n"
 
 #: sonar/theme/views.py:64
@@ -1812,15 +1812,15 @@ msgstr "Sound"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:84
 msgid "document_type_coar:c_18co"
-msgstr "Conference poster not in proceedings"
+msgstr "Conference poster (not in proceedings)"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:74
 msgid "document_type_coar:c_18cp"
-msgstr "Conference paper not in proceedings"
+msgstr "Conference paper (not in proceedings)"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:150
 msgid "document_type_coar:c_18cw"
-msgstr "Musical notation"
+msgstr "Score"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:231
 msgid "document_type_coar:c_18gh"
@@ -1872,7 +1872,7 @@ msgstr "Book chapter"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:98
 msgid "document_type_coar:c_3e5a"
-msgstr "Contribution to journal"
+msgstr "Journal contribution"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:236
 msgid "document_type_coar:c_46ec"
@@ -1912,7 +1912,7 @@ msgstr "Lecture"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:130
 msgid "document_type_coar:c_8a7e"
-msgstr "Moving image"
+msgstr "Film"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:187
 msgid "document_type_coar:c_93fc"

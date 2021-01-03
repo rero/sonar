@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2020-11-13 08:45+0100\n"
-"PO-Revision-Date: 2020-11-24 13:29+0000\n"
+"PO-Revision-Date: 2020-12-24 13:29+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "de/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4-dev\n"
+"X-Generator: Weblate 4.4.1-dev\n"
 "Generated-By: Babel 2.8.0\n"
 
 #: sonar/theme/views.py:64
@@ -1782,11 +1782,11 @@ msgstr "Patent"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:274
 msgid "document_type_coar:c_1843"
-msgstr "Other"
+msgstr "Sonstige"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:206
 msgid "document_type_coar:c_186u"
-msgstr "Policy report"
+msgstr "Policy Report"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:145
 msgid "document_type_coar:c_18cc"
@@ -1794,11 +1794,11 @@ msgstr "Ton"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:84
 msgid "document_type_coar:c_18co"
-msgstr "Conference poster not in proceedings"
+msgstr "Konferenzposter (nicht im Tagungsband)"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:74
 msgid "document_type_coar:c_18cp"
-msgstr "Conference paper not in proceedings"
+msgstr "Konferenzartikel (nicht im Tagungsband)"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:150
 msgid "document_type_coar:c_18cw"
@@ -1806,19 +1806,19 @@ msgstr "Partitur"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:231
 msgid "document_type_coar:c_18gh"
-msgstr "Technical report"
+msgstr "Technischer Bericht"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:221
 msgid "document_type_coar:c_18hj"
-msgstr "Report to funding agency"
+msgstr "Bericht an Förderorganisation"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:211
 msgid "document_type_coar:c_18op"
-msgstr "Project deliverable"
+msgstr "Ergebnis im Projekt"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:201
 msgid "document_type_coar:c_18wq"
-msgstr "Other type of report"
+msgstr "Sonstiger Bericht"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:226
 msgid "document_type_coar:c_18ws"
@@ -1826,7 +1826,7 @@ msgstr "Forschungsbericht"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:191
 msgid "document_type_coar:c_18ww"
-msgstr "Internal report"
+msgstr "Interner Bericht"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:196
 msgid "document_type_coar:c_18wz"
@@ -1834,11 +1834,11 @@ msgstr "Memorandum"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:164
 msgid "document_type_coar:c_2659"
-msgstr "Periodical"
+msgstr "Periodikum"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:173
 msgid "document_type_coar:c_2cd9"
-msgstr "Magazine"
+msgstr "Informationszeitschrift"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:57
 msgid "document_type_coar:c_2f33"
@@ -1854,15 +1854,15 @@ msgstr "Buchkapitel"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:98
 msgid "document_type_coar:c_3e5a"
-msgstr "Contribution to journal"
+msgstr "Zeitschriftenbeitrag"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:236
 msgid "document_type_coar:c_46ec"
-msgstr "Abschlussarbeit"
+msgstr "Schriftliche Abschlussarbeit"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:69
 msgid "document_type_coar:c_5794"
-msgstr "Konferenzbeitrag"
+msgstr "Konferenzartikel"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:155
 msgid "document_type_coar:c_5ce6"
@@ -1874,7 +1874,7 @@ msgstr "wissenschaftlicher Artikel"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:79
 msgid "document_type_coar:c_6670"
-msgstr "Conference poster"
+msgstr "Konferenzposter"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:240
 msgid "document_type_coar:c_7a1f"
@@ -1882,7 +1882,7 @@ msgstr "Abschlussarbeit (Bachelor)"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:270
 msgid "document_type_coar:c_8042"
-msgstr "Working paper"
+msgstr "Arbeitspapier"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:183
 msgid "document_type_coar:c_816b"
@@ -1890,23 +1890,23 @@ msgstr "Preprint"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:122
 msgid "document_type_coar:c_8544"
-msgstr "Lecture"
+msgstr "Vorlesung"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:130
 msgid "document_type_coar:c_8a7e"
-msgstr "Moving image"
+msgstr "Film"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:187
 msgid "document_type_coar:c_93fc"
-msgstr "Report"
+msgstr "Bericht"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:112
 msgid "document_type_coar:c_998f"
-msgstr "Newspaper article"
+msgstr "Zeitungsartikel"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:216
 msgid "document_type_coar:c_ba1f"
-msgstr "Report part"
+msgstr "Berichtkapitel"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:250
 msgid "document_type_coar:c_bdcc"
@@ -1914,11 +1914,11 @@ msgstr "Abschlussarbeit (Master)"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:102
 msgid "document_type_coar:c_beb9"
-msgstr "Data paper"
+msgstr "Data Paper"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:65
 msgid "document_type_coar:c_c94f"
-msgstr "Conference object"
+msgstr "Konferenzveröffentlichung"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:245
 msgid "document_type_coar:c_db06"
@@ -1926,11 +1926,11 @@ msgstr "Dissertation"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:117
 msgid "document_type_coar:c_dcae04bc"
-msgstr "Review article"
+msgstr "Übersichtsartikel"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:94
 msgid "document_type_coar:c_ddb1"
-msgstr "Dataset"
+msgstr "Datensatz"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:135
 msgid "document_type_coar:c_ecc8"
@@ -1938,7 +1938,7 @@ msgstr "Bild"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:89
 msgid "document_type_coar:c_f744"
-msgstr "Conference proceedings"
+msgstr "Tagungsband"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:255
 msgid "document_type_habilitation_thesis"
