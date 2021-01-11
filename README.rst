@@ -18,8 +18,9 @@
  Swiss Open Access Repository
 ==============================
 
-.. image:: https://img.shields.io/travis/rero/sonar.svg
-        :target: https://travis-ci.org/rero/sonar
+.. image:: https://github.com/rero/sonar/workflows/build/badge.svg
+        :alt: Github actions status
+        :target: https://github.com/rero/sonar/actions?query=workflow%3Abuild
 
 .. image:: https://img.shields.io/coveralls/rero/sonar.svg
         :target: https://coveralls.io/r/rero/sonar
