@@ -1,0 +1,49 @@
+name: build
+on: [push, pull_request, workflow_dispatch]
+
+env:
+  TERM: xterm-256color
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Libraries
+      run: |
+        sudo apt-get install -y libxml2 libxml2-dev libxmlsec1 libxmlsec1-dev xpdf ghostscript imagemagick
+        sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
+
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12'
+
+    - name: Docker compose up
+      run: docker-compose up -d
+
+    - name: Setup Python 3.6
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.6
+
+    - name: Install Poetry
+      uses: snok/install-poetry@v1.1.1
+      with:
+        version: 1.0.10
+
+    - name: Run Bootstrap
+      run: |
+        poetry run ./scripts/bootstrap
+        poetry run pip install --upgrade coveralls
+
+    - name: Run Test
+      run: poetry run ./scripts/test
+
+    - name: Code Coverage
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        pip install --upgrade coveralls
+        coveralls

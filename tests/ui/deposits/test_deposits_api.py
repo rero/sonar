@@ -161,7 +161,7 @@ def test_create_document(app, db, project, client, deposit, user):
 
     assert document.files['main.pdf']['access'] == 'coar:c_f1cf'
     assert document.files['main.pdf']['restricted_outside_organisation']
-    assert document.files['main.pdf']['embargo_date'] == '2021-01-01'
+    assert document.files['main.pdf']['embargo_date'] == '2022-01-01'
     assert len(document.files) == 6
 
     # Test without affiliation

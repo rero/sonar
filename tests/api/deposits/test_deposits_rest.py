@@ -87,10 +87,10 @@ def test_file_put(client, deposit):
 
     # With embargo date
     response = client.put(url.format(pid=deposit['pid'], key='main.pdf'),
-                          data=json.dumps({'embargoDate': '2021-01-01'}),
+                          data=json.dumps({'embargoDate': '2022-01-01'}),
                           headers={'Content-Type': 'application/json'})
     assert response.status_code == 200
-    assert response.json['embargoDate'] == '2021-01-01'
+    assert response.json['embargoDate'] == '2022-01-01'
 
     # With wrong embargo date
     response = client.put(url.format(pid=deposit['pid'], key='main.pdf'),
