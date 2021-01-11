@@ -49,6 +49,8 @@ before_install:
   # Stop default travis services
   - "sudo service mysql stop"
   - "sudo service postgresql stop"
+  # Docker login
+  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
   # Start docker services
   - "docker-compose up -d"
   # Chrome webdriver for Selenium
