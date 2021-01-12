@@ -44,6 +44,5 @@ jobs:
     - name: Code Coverage
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        pip install --upgrade coveralls
-        coveralls
+        COVERALLS_SERVICE_NAME: github
+      run: poetry run coveralls
