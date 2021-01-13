@@ -81,6 +81,7 @@ services:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - "discovery.type=single-node"
       - "indices.query.bool.max_clause_count=3000"
+      - "path.repo=/var/tmp"
     ulimits:
       memlock:
         soft: -1
@@ -92,6 +93,8 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
+    volumes:
+      - /var/tmp
   kibana:
     image: docker.elastic.co/kibana/kibana-oss:7.9.1
     environment:

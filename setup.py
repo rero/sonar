@@ -53,7 +53,8 @@ setup(
             'documents = sonar.modules.documents.cli.documents:documents',
             'oaiharvester = \
                 sonar.modules.documents.cli.oaiharvester:oaiharvester',
-            'utils = sonar.modules.cli:utils'
+            'utils = sonar.modules.cli:utils',
+            'es = sonar.elasticsearch.cli:es'
         ],
         'invenio_base.apps': [
             'sonar = sonar.modules:Sonar',
