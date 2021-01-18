@@ -201,12 +201,14 @@ APP_DEFAULT_SECURE_HEADERS = {
     'strict_transport_security_max_age': 31556926,  # One year in seconds
     'strict_transport_security_include_subdomains': True,
     'content_security_policy': {
-        'default-src': ["'self'"],
+        'default-src': ["'self'", 'https://www.google-analytics.com'],
         'object-src': ["'none'"],
         'script-src': [
             "'self'", "'unsafe-inline'", "'unsafe-eval'",
             'https://code.jquery.com', 'https://cdnjs.cloudflare.com',
-            'https://stackpath.bootstrapcdn.com'
+            'https://stackpath.bootstrapcdn.com',
+            'https://www.googletagmanager.com',
+            'https://www.google-analytics.com'
         ],
         'style-src': [
             "'self'", "'unsafe-inline'", 'https://cdnjs.cloudflare.com',
@@ -216,8 +218,8 @@ APP_DEFAULT_SECURE_HEADERS = {
             "'self'", "data:", "blob:", "'unsafe-inline'",
             'https://cdnjs.cloudflare.com', 'https://fonts.gstatic.com'
         ],
-        'img-src': ["'self'", "data:", "blob:"]
-        # To allow PDF previewer to create left navigation.
+        'img-src':
+        ["'self'", "data:", "blob:", 'https://www.google-analytics.com']
     },
     'content_security_policy_report_uri': None,
     'content_security_policy_report_only': False,
