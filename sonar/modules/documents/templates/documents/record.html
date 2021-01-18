@@ -226,7 +226,11 @@
             {% for identifier in record.identifiedBy %}
             <li>
               <span class="badge badge-secondary text-light mr-1">{{ _(identifier.type) }}</span>
+              {% if identifier.type == 'bf:Doi' %}
+              <a href="https://doi.org/{{ identifier.value }}" target="_blank">{{ identifier.value }}</a>
+              {% else %}
               {{ identifier.value }}
+              {% endif %}
               {% if identifier.source %}
               <i class="text-muted ml-1">{{ identifier.source }}</i>
               {% endif %}
