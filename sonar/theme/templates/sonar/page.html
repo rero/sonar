@@ -20,6 +20,17 @@
 <!DOCTYPE html>
 <html {% if html_css_classes %} class="{{ html_css_classes|join(' ') }}"{% endif %} lang="{{ current_i18n.locale.language|safe }}" dir="{{ current_i18n.locale.text_direction }}">
   <head>
+    {% if config.ENV == 'production' %}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1831395-15"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-1831395-15');
+    </script>
+    {% endif %}
     {%- block head %}
       {%- block head_meta %}
         <meta charset="utf-8">
