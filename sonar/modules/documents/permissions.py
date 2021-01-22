@@ -83,7 +83,11 @@ class DocumentPermission(RecordPermission):
 
         # For admin or moderators users, they can access only to their
         # organisation's documents.
-        return current_organisation['pid'] == document['organisation']['pid']
+        for organisation in document['organisation']:
+            if current_organisation['pid'] == organisation['pid']:
+                return True
+
+        return False
 
     @classmethod
     def update(cls, user, record):

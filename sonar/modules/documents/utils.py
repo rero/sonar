@@ -108,11 +108,11 @@ def get_file_links(file, record):
     return links
 
 
-def get_file_restriction(file, organisation):
+def get_file_restriction(file, organisations):
     """Check if current file can be displayed.
 
     :param file: File dict.
-    :param organisation: Record's organisation.
+    :param organisations: List of organisations.
     :returns: Object containing result as boolean and possibly embargo date.
     """
 
@@ -124,13 +124,14 @@ def get_file_restriction(file, organisation):
         if not file.get('restricted_outside_organisation'):
             return False
 
-        if not organisation:
+        if not organisations:
             return False
 
         # Logged user belongs to same organisation as record's organisation.
-        if current_organisation and current_organisation[
-                'pid'] == organisation['pid']:
-            return True
+        for organisation in organisations:
+            if current_organisation and current_organisation[
+                    'pid'] == organisation['pid']:
+                return True
 
         # Check IP is allowed.
         ip_address = request.environ.get('X-Forwarded-For',
@@ -138,9 +139,10 @@ def get_file_restriction(file, organisation):
         # Take only the first IP, as X-Forwarded for gives the real IP + the
         # proxy IP.
         ip_address = ip_address.split(', ')[0]
-        if is_ip_in_list(ip_address,
-                         organisation.get('allowedIps', '').split('\n')):
-            return True
+        for organisation in organisations:
+            if is_ip_in_list(ip_address,
+                             organisation.get('allowedIps', '').split('\n')):
+                return True
 
         return False
 
@@ -191,15 +193,18 @@ def has_external_urls_for_files(record):
     :returns: True if record's organisation is configured to point files to an
     external URL.
     """
-    if not record.get('organisation', {}):
+    if not record.get('organisation'):
         return False
 
-    organisation_pid = SonarRecord.get_pid_by_ref_link(
-        record['organisation']['$ref']) if record['organisation'].get(
-            '$ref') else record['organisation']['pid']
+    for organisation in record['organisation']:
+        organisation_pid = SonarRecord.get_pid_by_ref_link(
+            organisation['$ref']) if organisation.get(
+                '$ref') else organisation['pid']
 
-    return organisation_pid in current_app.config.get(
-        'SONAR_DOCUMENTS_ORGANISATIONS_EXTERNAL_FILES')
+        return organisation_pid in current_app.config.get(
+            'SONAR_DOCUMENTS_ORGANISATIONS_EXTERNAL_FILES')
+
+    return False
 
 
 def get_thumbnail(file, record):
@@ -231,14 +236,25 @@ def populate_files_properties(record):
     :param record: Record object
     :param file: File dict
     """
-    # Load organisation for the record
-    organisation_pid = OrganisationRecord.get_pid_by_ref_link(
-        record['organisation']['$ref']) if record['organisation'].get(
-            '$ref') else record['organisation']['pid']
-    organisation = OrganisationRecord.get_record_by_pid(organisation_pid)
-
     for file in record['_files']:
         if file.get('type') == 'file':
-            file['restriction'] = get_file_restriction(file, organisation)
+            file['restriction'] = get_file_restriction(
+                file, get_organisations(record))
             file['thumbnail'] = get_thumbnail(file, record)
             file['links'] = get_file_links(file, record)
+
+
+def get_organisations(record):
+    """Get list of organisations with full data.
+
+    :param record: Record object.
+    """
+    organisations = []
+    for organisation in record.get('organisation', []):
+        organisation_pid = OrganisationRecord.get_pid_by_ref_link(
+            organisation['$ref']) if organisation.get(
+                '$ref') else organisation['pid']
+        organisations.append(
+            OrganisationRecord.get_record_by_pid(organisation_pid))
+
+    return organisations

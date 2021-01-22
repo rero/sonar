@@ -64,7 +64,7 @@ def test_publication_statement_text():
 def test_get_file_restriction(app, organisation, admin, monkeypatch):
     """Test if a file is restricted by embargo date and/or organisation."""
     # No view arg, file is allowed
-    assert utils.get_file_restriction({}, organisation) == {
+    assert utils.get_file_restriction({}, [organisation]) == {
         'restricted': False,
         'date': None
     }
@@ -74,27 +74,27 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
         req.request.args = {'view': 'global'}
 
         # No access property, file is allowed
-        assert utils.get_file_restriction({}, organisation) == {
+        assert utils.get_file_restriction({}, [organisation]) == {
             'date': None,
             'restricted': False
         }
 
         # No access property, file is allowed
-        assert utils.get_file_restriction({}, organisation) == {
+        assert utils.get_file_restriction({}, [organisation]) == {
             'date': None,
             'restricted': False
         }
 
         # Access property is open access, file is allowed
         assert utils.get_file_restriction({'access': 'coar:c_abf2'},
-                                          organisation) == {
+                                          [organisation]) == {
                                               'date': None,
                                               'restricted': False
                                           }
 
         # Embargo access, but no date specified, file is allowed
         assert utils.get_file_restriction({'access': 'coar:c_f1cf'},
-                                          organisation) == {
+                                          [organisation]) == {
                                               'date': None,
                                               'restricted': False
                                           }
@@ -104,7 +104,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
             {
                 'access': 'coar:c_f1cf',
                 'embargo_date': 'wrong'
-            }, organisation) == {
+            }, [organisation]) == {
                 'date': None,
                 'restricted': False
             }
@@ -114,7 +114,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
             {
                 'access': 'coar:c_f1cf',
                 'embargo_date': '2010-01-01'
-            }, organisation) == {
+            }, [organisation]) == {
                 'date': None,
                 'restricted': False
             }
@@ -124,7 +124,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
             {
                 'access': 'coar:c_f1cf',
                 'embargo_date': '2022-01-01'
-            }, organisation) == {
+            }, [organisation]) == {
                 'date': '01/01/2022',
                 'restricted': True
             }
@@ -135,7 +135,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
                 'access': 'coar:c_f1cf',
                 'restricted_outside_organisation': False,
                 'embargo_date': '2022-01-01'
-            }, organisation) == {
+            }, [organisation]) == {
                 'date': '01/01/2022',
                 'restricted': True
             }
@@ -147,7 +147,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
                 'access': 'coar:c_f1cf',
                 'restricted_outside_organisation': True,
                 'embargo_date': '2022-01-01'
-            }, {}) == {
+            }, []) == {
                 'date': '01/01/2022',
                 'restricted': True
             }
@@ -159,7 +159,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
                 'access': 'coar:c_f1cf',
                 'restricted_outside_organisation': True,
                 'embargo_date': '2022-01-01'
-            }, None) == {
+            }, []) == {
                 'date': '01/01/2022',
                 'restricted': True
             }
@@ -174,7 +174,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
                 'access': 'coar:c_f1cf',
                 'restricted_outside_organisation': True,
                 'embargo_date': '2022-01-01'
-            }, organisation) == {
+            }, [organisation]) == {
                 'date': '01/01/2022',
                 'restricted': True
             }
@@ -189,7 +189,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
                 'access': 'coar:c_f1cf',
                 'restricted_outside_organisation': True,
                 'embargo_date': '2022-01-01'
-            }, organisation) == {
+            }, [organisation]) == {
                 'date': None,
                 'restricted': False
             }
@@ -205,7 +205,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
                 'access': 'coar:c_f1cf',
                 'restricted_outside_organisation': True,
                 'embargo_date': '2022-01-01'
-            }, organisation) == {
+            }, [organisation]) == {
                 'date': '01/01/2022',
                 'restricted': True
             }
@@ -218,7 +218,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
                 'access': 'coar:c_f1cf',
                 'restricted_outside_organisation': True,
                 'embargo_date': '2022-01-01'
-            }, organisation) == {
+            }, [organisation]) == {
                 'date': None,
                 'restricted': False
             }
@@ -229,7 +229,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
         # Restricted access, restriction is not defined, no access
         assert utils.get_file_restriction({
             'access': 'coar:c_16ec',
-        }, organisation) == {
+        }, [organisation]) == {
             'date': None,
             'restricted': True
         }
@@ -239,7 +239,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
             {
                 'access': 'coar:c_16ec',
                 'restricted_outside_organisation': False,
-            }, organisation) == {
+            }, [organisation]) == {
                 'date': None,
                 'restricted': True
             }
@@ -250,7 +250,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
             {
                 'access': 'coar:c_16ec',
                 'restricted_outside_organisation': True,
-            }, {}) == {
+            }, []) == {
                 'date': None,
                 'restricted': True
             }
@@ -261,7 +261,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
             {
                 'access': 'coar:c_16ec',
                 'restricted_outside_organisation': True,
-            }, None) == {
+            }, []) == {
                 'date': None,
                 'restricted': True
             }
@@ -275,7 +275,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
             {
                 'access': 'coar:c_16ec',
                 'restricted_outside_organisation': True,
-            }, organisation) == {
+            }, [organisation]) == {
                 'date': None,
                 'restricted': True
             }
@@ -289,7 +289,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
             {
                 'access': 'coar:c_16ec',
                 'restricted_outside_organisation': True,
-            }, organisation) == {
+            }, [organisation]) == {
                 'date': None,
                 'restricted': False
             }
@@ -304,7 +304,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
             {
                 'access': 'coar:c_16ec',
                 'restricted_outside_organisation': True,
-            }, organisation) == {
+            }, [organisation]) == {
                 'date': None,
                 'restricted': True
             }
@@ -316,7 +316,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
             {
                 'access': 'coar:c_16ec',
                 'restricted_outside_organisation': True,
-            }, organisation) == {
+            }, [organisation]) == {
                 'date': None,
                 'restricted': False
             }

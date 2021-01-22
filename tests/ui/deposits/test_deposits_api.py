@@ -54,9 +54,10 @@ def test_create_document(app, db, project, client, deposit, user):
 
     document = deposit.create_document()
 
-    assert document['organisation'] == {
-        '$ref': 'https://sonar.ch/api/organisations/org'
-    }
+    assert document['organisation'] == [{
+        '$ref':
+        'https://sonar.ch/api/organisations/org'
+    }]
 
     assert document['documentType'] == 'coar:c_816b'
     assert document['title'] == [{

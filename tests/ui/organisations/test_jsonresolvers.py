@@ -20,9 +20,9 @@
 
 def test_organisation_resolver(document):
     """Test organisation resolver."""
-    assert document['organisation'].get('$ref')
-    assert document['organisation'][
+    assert document['organisation'][0].get('$ref')
+    assert document['organisation'][0][
         '$ref'] == 'https://sonar.ch/api/organisations/org'
 
     assert document.replace_refs().get(
-        'organisation')['name'] == 'org'
+        'organisation')[0]['name'] == 'org'

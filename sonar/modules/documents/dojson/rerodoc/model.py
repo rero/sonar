@@ -69,10 +69,10 @@ def marc21_to_type_and_organisation(self, key, value):
             overdo.create_organisation(organisation)
             overdo.registererd_organisations.append(organisation)
 
-        self['organisation'] = {
-            '$ref': OrganisationRecord.get_ref_link('organisations',
-                                                    organisation)
-        }
+        self['organisation'] = [{
+            '$ref':
+            OrganisationRecord.get_ref_link('organisations', organisation)
+        }]
 
     # get doc type by mapping
     key = value.get('a', '') + '|' + value.get('f', '')
@@ -677,10 +677,7 @@ def marc21_to_usage_and_access_policy(self, key, value):
     if not value.get('a'):
         return None
 
-    return {
-        'label': value.get('a'),
-        'license': 'Other OA / license undefined'
-    }
+    return {'label': value.get('a'), 'license': 'Other OA / license undefined'}
 
 
 @overdo.over('contribution', '^100..')

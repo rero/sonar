@@ -80,7 +80,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     partOf = fields.List(fields.Dict())
     abstracts = fields.List(fields.Dict())
     contribution = fields.List(fields.Dict())
-    organisation = fields.Dict()
+    organisation = fields.List(fields.Dict())
     language = fields.List(fields.Dict())
     copyrightDate = fields.List(fields.String())
     editionStatement = fields.Dict()
@@ -195,7 +195,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
 
         # Store current user organisation in new document.
         if current_user_record.get('organisation'):
-            data['organisation'] = current_user_record['organisation']
+            data['organisation'] = [current_user_record['organisation']]
 
         return data
 
