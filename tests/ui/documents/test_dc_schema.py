@@ -39,9 +39,9 @@ def minimal_document(db, bucket_location, organisation):
                     'value': 'Title of the document'
                 }]
             }],
-            'organisation': {
+            'organisation': [{
                 '$ref': 'https://sonar.ch/api/organisations/org'
-            }
+            }]
         },
         dbcommit=True,
         with_bucket=True)

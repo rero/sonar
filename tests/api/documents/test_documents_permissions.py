@@ -118,7 +118,7 @@ def test_create(client, document_json, superuser, admin, moderator, submitter,
                       data=json.dumps(document_json),
                       headers=headers)
     assert res.status_code == 201
-    assert res.json['metadata']['organisation'][
+    assert res.json['metadata']['organisation'][0][
         '$ref'] == 'https://sonar.ch/api/organisations/org'
 
     # Admin
@@ -127,7 +127,7 @@ def test_create(client, document_json, superuser, admin, moderator, submitter,
                       data=json.dumps(document_json),
                       headers=headers)
     assert res.status_code == 201
-    assert res.json['metadata']['organisation'][
+    assert res.json['metadata']['organisation'][0][
         '$ref'] == 'https://sonar.ch/api/organisations/org'
 
     # Super user
@@ -136,7 +136,7 @@ def test_create(client, document_json, superuser, admin, moderator, submitter,
                       data=json.dumps(document_json),
                       headers=headers)
     assert res.status_code == 201
-    assert res.json['metadata']['organisation'][
+    assert res.json['metadata']['organisation'][0][
         '$ref'] == 'https://sonar.ch/api/organisations/org'
 
 

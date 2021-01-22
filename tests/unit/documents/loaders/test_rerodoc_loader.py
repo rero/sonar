@@ -175,9 +175,9 @@ def test_rerodoc_loader(app, organisation):
         }],
         'documentType':
         'coar:c_6501',
-        'organisation': {
+        'organisation': [{
             '$ref': 'https://sonar.ch/api/organisations/org'
-        },
+        }],
         'classification': [{
             'type': 'bf:ClassificationUdc',
             'classificationPortion': '52'

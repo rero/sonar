@@ -368,9 +368,10 @@ def make_document(db, document_json, make_organisation, pdf_file):
     def _make_document(organisation='org', with_file=False, pid=None):
         if organisation:
             make_organisation(organisation)
-            document_json['organisation'] = {
-                '$ref': 'https://sonar.ch/api/organisations/org'
-            }
+            document_json['organisation'] = [{
+                '$ref':
+                'https://sonar.ch/api/organisations/org'
+            }]
 
         if pid:
             document_json['pid'] = pid
@@ -440,8 +441,10 @@ def deposit_json():
             },
             'language':
             'eng',
-            'publicationPlace': 'Place',
-            'publisher': 'Publisher name',
+            'publicationPlace':
+            'Place',
+            'publisher':
+            'Publisher name',
             'documentDate':
             '2020',
             'publication': {

@@ -169,21 +169,22 @@ def test_has_external_urls_for_files(app):
     """Test if record has to point files to external URL or not."""
     assert views.has_external_urls_for_files({
         'pid': 1,
-        'organisation': {
+        'organisation': [{
             'pid': 'csal'
-        }
+        }]
     })
 
     assert not views.has_external_urls_for_files({
-        'pid': 1,
-        'organisation': {
+        'pid':
+        1,
+        'organisation': [{
             'pid': 'usi'
-        }
+        }]
     })
 
     assert not views.has_external_urls_for_files({
         'pid': 1,
-        'organisation': {}
+        'organisation': []
     })
 
     assert not views.has_external_urls_for_files({'pid': 1})
@@ -353,8 +354,10 @@ def test_contribution_text():
 
 def test_project_detail(app, client, project):
     """Test project detail page."""
-    assert client.get(url_for('documents.project_detail',
-                              pid_value=project['pid'])).status_code == 200
+    assert client.get(
+        url_for('documents.project_detail',
+                pid_value=project['pid'])).status_code == 200
 
-    assert client.get(url_for('documents.project_detail',
-                              pid_value='not-existing')).status_code == 404
+    assert client.get(
+        url_for('documents.project_detail',
+                pid_value='not-existing')).status_code == 404

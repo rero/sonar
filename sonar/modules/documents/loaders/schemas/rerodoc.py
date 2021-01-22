@@ -33,7 +33,7 @@ class RerodocSchema(Marc21Schema):
     partOf = fields.List(fields.Dict())
     abstracts = fields.List(fields.Dict())
     contribution = fields.List(fields.Dict())
-    organisation = fields.Dict()
+    organisation = fields.List(fields.Dict())
     language = fields.List(fields.Dict())
     copyrightDate = fields.List(fields.String())
     editionStatement = fields.Dict()

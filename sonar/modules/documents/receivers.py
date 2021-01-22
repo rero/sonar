@@ -140,9 +140,11 @@ def update_oai_property(sender, record):
 
     record['_oai']['updated'] = pytz.utc.localize(
         datetime.utcnow()).isoformat()
-    record['_oai']['sets'] = [
-        SonarRecord.get_pid_by_ref_link(record['organisation']['$ref'])
-    ] if record.get('organisation') else []
+    record['_oai']['sets'] = []
+
+    for organisation in record.get('organisation', []):
+        record['_oai']['sets'].append(
+            SonarRecord.get_pid_by_ref_link(organisation['$ref']))
 
 
 def export_json(sender=None, records=None, **kwargs):

@@ -58,9 +58,10 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
     assert data.get('documentType') == 'coar:c_2f33'
-    assert data.get('organisation') == {
-        '$ref': 'https://sonar.ch/api/organisations/baage'
-    }
+    assert data.get('organisation') == [{
+        '$ref':
+        'https://sonar.ch/api/organisations/baage'
+    }]
 
     # Type, subtype and organisation
     marc21xml = """
@@ -78,9 +79,10 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
     assert data.get('documentType') == 'coar:c_6501'
-    assert data.get('organisation') == {
-        '$ref': 'https://sonar.ch/api/organisations/baage'
-    }
+    assert data.get('organisation') == [{
+        '$ref':
+        'https://sonar.ch/api/organisations/baage'
+    }]
 
     # Organisation only
     marc21xml = """
@@ -96,9 +98,10 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
     assert not data.get('documentType')
-    assert data.get('organisation') == {
-        '$ref': 'https://sonar.ch/api/organisations/baage'
-    }
+    assert data.get('organisation') == [{
+        '$ref':
+        'https://sonar.ch/api/organisations/baage'
+    }]
 
     # Specific conversion for unisi
     marc21xml = """
@@ -111,9 +114,10 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
     assert not data.get('documentType')
-    assert data.get('organisation') == {
-        '$ref': 'https://sonar.ch/api/organisations/usi'
-    }
+    assert data.get('organisation') == [{
+        '$ref':
+        'https://sonar.ch/api/organisations/usi'
+    }]
 
 
 def test_marc21_to_title_245():

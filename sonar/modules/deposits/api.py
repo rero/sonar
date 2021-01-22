@@ -104,7 +104,7 @@ class DepositRecord(SonarRecord):
 
         # Organisation
         if current_user_record and current_user_record.get('organisation'):
-            metadata['organisation'] = current_user_record['organisation']
+            metadata['organisation'] = [current_user_record['organisation']]
 
         # Document type
         metadata['documentType'] = self['metadata']['documentType']
