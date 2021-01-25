@@ -75,6 +75,9 @@ def test_authorized_signup_handler(app, roles, valid_sp_configuration,
         'sonar.modules.shibboleth_authenticator.handlers.oauth_get_user',
         lambda remote, account_info: None)
     monkeypatch.setattr(
+        'sonar.modules.shibboleth_authenticator.handlers.get_account_info',
+        lambda *args: {'user': {}})
+    monkeypatch.setattr(
         'sonar.modules.shibboleth_authenticator.handlers.oauth_register',
         lambda form: None)
     response = authorized_signup_handler(auth, 'idp')

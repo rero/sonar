@@ -21,6 +21,7 @@ from __future__ import absolute_import, print_function
 
 from flask import current_app, redirect, session
 from flask_login import current_user, logout_user
+from invenio_accounts.models import User
 from invenio_db import db
 from invenio_oauthclient.errors import AlreadyLinkedError
 from invenio_oauthclient.handlers import get_session_next_url, \
@@ -28,6 +29,7 @@ from invenio_oauthclient.handlers import get_session_next_url, \
 from invenio_oauthclient.utils import create_csrf_disabled_registrationform, \
     fill_form, oauth_authenticate, oauth_get_user, oauth_link_external_id, \
     oauth_register
+from sqlalchemy import func
 from werkzeug.local import LocalProxy
 
 from .utils import get_account_info
@@ -61,7 +63,17 @@ def authorized_signup_handler(auth, remote=None, *args, **kwargs):
 
     account_info = get_account_info(auth.get_attributes(), remote)
 
-    user = oauth_get_user(remote, account_info=account_info)
+    user = None
+    # Pre-check done to use a case insensitive comparison because this is not
+    # done in invenio --> https://github.com/inveniosoftware/invenio-oauthclient/blob/master/invenio_oauthclient/utils.py#L82  # nopep8
+    if account_info.get('user', {}).get('email'):
+        user = User.query.filter(
+            func.lower(User.email) == func.lower(account_info['user']
+                                                 ['email'])).one_or_none()
+
+    if user is None:
+        user = oauth_get_user(remote, account_info=account_info)
+
     if user is None:
         # Auto sign-up if user not found
         form = create_csrf_disabled_registrationform()

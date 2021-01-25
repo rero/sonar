@@ -20,6 +20,15 @@
             "icu_folding",
             "german_normalization"
           ]
+        },
+        "custom_keyword": {
+          "type": "custom",
+          "tokenizer": "keyword",
+          "filter": [
+            "lowercase",
+            "icu_folding",
+            "german_normalization"
+          ]
         }
       }
     }
