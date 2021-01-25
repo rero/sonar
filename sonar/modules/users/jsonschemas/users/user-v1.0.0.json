@@ -45,7 +45,9 @@
       "form": {
         "validation": {
           "validators": {
-            "valueAlreadyExists": {}
+            "valueAlreadyExists": {
+              "term": "email.analyzed"
+            }
           },
           "messages": {
             "pattern": "Email should have at least one `@` and  one `.`."
