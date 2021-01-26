@@ -33,7 +33,7 @@ def test_send_welcome_email(app, user, submitter, moderator, admin):
         send_welcome_email(user, account)
 
         assert len(outbox) == 1
-        assert outbox[0].html.find('Dear orguser') != -1
+        assert outbox[0].html.find('Dear Orguser') != -1
         assert outbox[0].html.find('<li>Upload publications.</li>') == -1
         assert outbox[0].html.find(
             '<li>Moderate submissions and edit document metadata.</li>') == -1
@@ -47,7 +47,7 @@ def test_send_welcome_email(app, user, submitter, moderator, admin):
         send_welcome_email(submitter, account)
 
         assert len(outbox) == 1
-        assert outbox[0].html.find('Dear orgsubmitter') != -1
+        assert outbox[0].html.find('Dear Orgsubmitter') != -1
         assert outbox[0].html.find('<li>Upload publications.</li>') != -1
         assert outbox[0].html.find(
             '<li>Moderate submissions and edit document metadata.</li>') == -1
@@ -61,7 +61,7 @@ def test_send_welcome_email(app, user, submitter, moderator, admin):
         send_welcome_email(moderator, account)
 
         assert len(outbox) == 1
-        assert outbox[0].html.find('Dear orgmoderator') != -1
+        assert outbox[0].html.find('Dear Orgmoderator') != -1
         assert outbox[0].html.find('<li>Upload publications.</li>') != -1
         assert outbox[0].html.find(
             '<li>Moderate submissions and edit document metadata.</li>') != -1
@@ -75,7 +75,7 @@ def test_send_welcome_email(app, user, submitter, moderator, admin):
         send_welcome_email(admin, account)
 
         assert len(outbox) == 1
-        assert outbox[0].html.find('Dear orgadmin') != -1
+        assert outbox[0].html.find('Dear Orgadmin') != -1
         assert outbox[0].html.find('<li>Upload publications.</li>') != -1
         assert outbox[0].html.find(
             '<li>Moderate submissions and edit document metadata.</li>') != -1

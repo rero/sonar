@@ -536,14 +536,14 @@ RECORDS_REST_FACETS = {
     'deposits':
     dict(aggs=dict(
         status=dict(terms=dict(field='status', size=DEFAULT_AGGREGATION_SIZE)),
-        user=dict(terms=dict(field='user.full_name.keyword',
+        user=dict(terms=dict(field='user.pid',
                              size=DEFAULT_AGGREGATION_SIZE)),
         contributor=dict(terms=dict(field='facet_contributors',
                                     size=DEFAULT_AGGREGATION_SIZE))),
          filters={
              _('pid'): and_term_filter('pid'),
              _('status'): and_term_filter('status'),
-             _('user'): and_term_filter('user.full_name.keyword'),
+             _('user'): and_term_filter('user.pid'),
              _('contributor'): and_term_filter('facet_contributors'),
          }),
     'users': {
@@ -568,7 +568,7 @@ RECORDS_REST_FACETS = {
         'aggs': {
             'user': {
                 'terms': {
-                    'field': 'user.full_name',
+                    'field': 'user.pid',
                     'size': DEFAULT_AGGREGATION_SIZE
                 }
             },
@@ -580,7 +580,7 @@ RECORDS_REST_FACETS = {
             }
         },
         'filters': {
-            'user': and_term_filter('user.full_name'),
+            'user': and_term_filter('user.pid'),
             'organisation': and_term_filter('organisation.pid')
         }
     }

@@ -27,7 +27,8 @@ def test_get_moderators(app, organisation, roles):
     """Test search for moderators."""
     user = UserRecord.create(
         {
-            'full_name': 'John Doe',
+            'first_name': 'John',
+            'last_name': 'Doe',
             'email': 'john.doe@rero.ch',
             'role': UserRecord.ROLE_MODERATOR,
             'organisation': {
@@ -79,7 +80,8 @@ def test_get_moderators_emails(app, organisation, roles):
     """Test getting list of moderators emails."""
     user = UserRecord.create(
         {
-            'full_name': 'John Doe',
+            'first_name': 'John',
+            'last_name': 'Doe',
             'email': 'john.doe@rero.ch',
             'role': UserRecord.ROLE_MODERATOR,
             'organisation': {
@@ -104,7 +106,8 @@ def test_is_granted(app, organisation, roles):
     """Test if user is granted with a role."""
     user = UserRecord.create(
         {
-            'full_name': 'John Doe',
+            'first_name': 'John',
+            'last_name': 'Doe',
             'email': 'john.doe@rero.ch',
             'role': UserRecord.ROLE_MODERATOR,
             'organisation': {
@@ -126,7 +129,8 @@ def test_is_role_property(organisation, roles):
     """Test if user is in a particular role."""
     user = UserRecord.create(
         {
-            'full_name': 'John Doe',
+            'first_name': 'John',
+            'last_name': 'Doe',
             'email': 'john.doe@rero.ch',
             'role': UserRecord.ROLE_MODERATOR,
             'organisation': {

@@ -81,7 +81,11 @@
           <a class="nav-link dropdown-toggle" href="#" id="{{ dropdownId }}" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-user mr-2"></i>
-            {{ current_user_record.full_name if current_user_record else current_user.email }}
+            {% if current_user_record %}
+            {{ current_user_record.last_name }}, {{ current_user_record.first_name }}
+            {% else %}
+            {{ current_user.email }}
+            {% endif %}
           </a>
           {% include 'sonar/partial/dropdown_user.html' %}
           {% endwith %}

@@ -178,7 +178,8 @@ def make_user(app, db, make_organisation):
         data = {
             'pid': name,
             'email': email,
-            'full_name': name,
+            'first_name': name[0].upper() + name[1:],
+            'last_name': 'Doe',
             'role': role_name
         }
 

@@ -1,6 +1,6 @@
-Hi {{ deposit_user.full_name }},
+Hi {{ deposit_user.first_name }},
 
-We are sorry to inform that your deposit "{{ deposit.metadata.title }}" has been rejected by {{ user.full_name }} ({{ user.email }}).
+We are sorry to inform that your deposit "{{ deposit.metadata.title }}" has been rejected by {{ user.first_name }} {{ user.last_name }} ({{ user.email }}).
 
 {{ _('ID') }}: {{ deposit.pid }}
 {{ _('Date') }}: {{ date }}

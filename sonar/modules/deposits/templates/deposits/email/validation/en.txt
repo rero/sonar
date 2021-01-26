@@ -1,6 +1,6 @@
 Hi,
 
-A deposit (#{{ deposit.pid }}) has been submitted by {{ user.full_name }}.
+A deposit (#{{ deposit.pid }}) has been submitted by {{ user.first_name }} {{ user.last_name }}.
 
 Title of the deposit: {{ deposit.metadata.title }}
 
