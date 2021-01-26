@@ -65,7 +65,7 @@
       "user": {
         "type": "object",
         "properties": {
-          "$ref": {
+          "pid": {
             "type": "keyword"
           }
         }

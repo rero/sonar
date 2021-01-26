@@ -93,7 +93,12 @@ def test_create(client, organisation, superuser, admin, moderator, submitter,
         'Accept': 'application/json'
     }
 
-    user_json = {'email': 'user@rero.ch', 'full_name': 'User', 'role': 'user'}
+    user_json = {
+        'email': 'user@rero.ch',
+        'first_name': 'John',
+        'last_name': 'Doe',
+        'role': 'user'
+    }
 
     # Not logged
     res = client.post(url_for('invenio_records_rest.user_list'),

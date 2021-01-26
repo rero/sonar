@@ -14,12 +14,20 @@
       "type": "string",
       "minLength": 1
     },
-    "full_name": {
-      "title": "First name and last name",
+    "first_name": {
+      "title": "First name",
       "type": "string",
       "minLength": 1,
       "form": {
-        "placeholder": "Example: John Doe"
+        "placeholder": "Example: John"
+      }
+    },
+    "last_name": {
+      "title": "Last name",
+      "type": "string",
+      "minLength": 1,
+      "form": {
+        "placeholder": "Example: Doe"
       }
     },
     "birth_date": {
@@ -125,7 +133,8 @@
   "propertiesOrder": [
     "organisation",
     "role",
-    "full_name",
+    "first_name",
+    "last_name",
     "email",
     "phone",
     "birth_date",
@@ -134,7 +143,8 @@
     "city"
   ],
   "required": [
-    "full_name",
+    "first_name",
+    "last_name",
     "email",
     "role",
     "$schema"

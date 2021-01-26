@@ -23,7 +23,8 @@ from marshmallow import Schema, fields
 class ExportSchemaV1(Schema):
     """Schema for exporting records."""
 
-    full_name = fields.String(dump_only=True)
+    first_name = fields.String(dump_only=True)
+    last_name = fields.String(dump_only=True)
     birth_date = fields.String(dump_only=True)
     email = fields.String(dump_only=True)
     street = fields.String(dump_only=True)

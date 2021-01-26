@@ -38,7 +38,8 @@ class UserMetadataSchemaV1(StrictKeysMixin):
     """Schema for the user metadata."""
 
     pid = PersistentIdentifier()
-    full_name = SanitizedUnicode(required=True)
+    first_name = SanitizedUnicode(required=True)
+    last_name = SanitizedUnicode(required=True)
     birth_date = SanitizedUnicode()
     email = SanitizedUnicode(required=True)
     street = SanitizedUnicode()

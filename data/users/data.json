@@ -1,6 +1,7 @@
 [
   {
-    "full_name": "Jorg Mueller",
+    "first_name": "Jorg",
+    "last_name": "Mueller",
     "email": "rero.sonar+superuser@gmail.com",
     "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
     "role": "superuser",
@@ -14,7 +15,8 @@
     }
   },
   {
-    "full_name": "Elia Rossi",
+    "first_name": "Elia",
+    "last_name": "Rossi",
     "email": "rero.sonar+admin@gmail.com",
     "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
     "role": "admin",
@@ -28,7 +30,8 @@
     }
   },
   {
-    "full_name": "Emanuele Fiorentini",
+    "first_name": "Emanuele",
+    "last_name": "Fiorentini",
     "email": "rero.sonar+moderator@gmail.com",
     "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
     "role": "moderator",
@@ -42,7 +45,8 @@
     }
   },
   {
-    "full_name": "Claude Roussel",
+    "first_name": "Claude",
+    "last_name": "Roussel",
     "email": "rero.sonar+submitter@gmail.com",
     "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
     "role": "submitter",
@@ -56,7 +60,8 @@
     }
   },
   {
-    "full_name": "Jules Brochu",
+    "first_name": "Jules",
+    "last_name": "Brochu",
     "email": "rero.sonar+user@gmail.com",
     "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
     "role": "user",

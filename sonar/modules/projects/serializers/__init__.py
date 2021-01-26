@@ -25,7 +25,7 @@ from invenio_records_rest.serializers.response import record_responsify, \
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.serializers import JSONSerializer as _JSONSerializer
-from sonar.modules.users.api import current_user_record
+from sonar.modules.users.api import UserRecord, current_user_record
 
 from ..marshmallow import ProjectSchemaV1
 
@@ -52,6 +52,14 @@ class JSONSerializer(_JSONSerializer):
                 org_term['key'])
             if organisation:
                 org_term['name'] = organisation['name']
+
+        # Add user name
+        for org_term in results.get('aggregations',
+                                    {}).get('user', {}).get('buckets', []):
+            user = UserRecord.get_record_by_pid(org_term['key'])
+            if user:
+                org_term['name'] = '{last_name}, {first_name}'.format(
+                    last_name=user['last_name'], first_name=user['first_name'])
 
         return super(JSONSerializer,
                      self).post_process_serialize_search(results, pid_fetcher)

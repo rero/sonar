@@ -14,7 +14,10 @@
       "pid": {
         "type": "keyword"
       },
-      "full_name": {
+      "first_name": {
+        "type": "text"
+      },
+      "last_name": {
         "type": "text"
       },
       "birth_date": {

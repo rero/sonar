@@ -1,6 +1,6 @@
-Hi {{ deposit_user.full_name }},
+Hi {{ deposit_user.first_name }},
 
-{{ user.full_name }} ({{ user.email }}) requests changes on your deposit "{{ deposit.metadata.title }}".
+{{ user.first_name }} {{ user.last_name }} ({{ user.email }}) requests changes on your deposit "{{ deposit.metadata.title }}".
 
 {{ _('ID') }}: {{ deposit.pid }}
 {{ _('Date') }}: {{ date }}
