@@ -60,7 +60,7 @@ def import_records(records_to_import):
                 try:
                     record.add_file_from_url(url, key, **file_data)
                 except Exception as exception:
-                    current_app.logger.error(
+                    current_app.logger.warning(
                         'Error during import of file {file} of record '
                         '{record}: {error}'.format(
                             file=key,
