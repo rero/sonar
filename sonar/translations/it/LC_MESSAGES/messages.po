@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-01-25 13:50+0100\n"
-"PO-Revision-Date: 2021-01-03 17:32+0000\n"
+"PO-Revision-Date: 2021-01-28 14:32+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"it/>\n"
 "Language: it\n"
-"Language-Team: Italian "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/it/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.5-dev\n"
 "Generated-By: Babel 2.9.0\n"
 
 #: sonar/theme/views.py:68
@@ -108,7 +109,7 @@ msgstr "Autore o editore"
 #: sonar/modules/documents/templates/documents/record.html:29
 #: sonar/theme/templates/sonar/projects/detail.html:15
 msgid "Back"
-msgstr ""
+msgstr "Ritorno"
 
 #: sonar/theme/templates/sonar/partial/organisation.html:33
 msgid "Back to SONAR"
@@ -376,11 +377,11 @@ msgstr "Data di embargo"
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0.json:53
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0_src.json:53
 msgid "End date"
-msgstr ""
+msgstr "Data di fine"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:540
 msgid "End date of publication"
-msgstr "Data finale di pubblicazione"
+msgstr "Data 2"
 
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0.json:41
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0.json:54
@@ -457,7 +458,7 @@ msgstr "Eccetto all'interno dell'organizzazione"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:896
 msgid "Existing project"
-msgstr ""
+msgstr "Progetto esistente"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:570
 msgid "Extent"
@@ -539,7 +540,7 @@ msgstr ""
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0_src.json:221
 #: sonar/theme/templates/sonar/projects/detail.html:61
 msgid "Funding organisations"
-msgstr ""
+msgstr "Organizzazioni di finanziamento"
 
 #: sonar/theme/templates/sonar/frontpage.html:76
 msgid "Further info on the project page"
@@ -602,7 +603,7 @@ msgstr "Identificato da"
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:13
 #: sonar/theme/templates/sonar/projects/detail.html:28
 msgid "Identifier"
-msgstr "Identificativo"
+msgstr "identificatore"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:355
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:703
@@ -633,7 +634,7 @@ msgstr ""
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0_src.json:127
 #: sonar/theme/templates/sonar/projects/detail.html:33
 msgid "Investigators"
-msgstr ""
+msgstr "Ricercatori"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:56
 msgid "Is dedicated"
@@ -700,7 +701,7 @@ msgstr "Licenza"
 
 #: sonar/theme/templates/sonar/projects/detail.html:76
 msgid "Linked documents"
-msgstr ""
+msgstr "Documenti collegati"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:66
 msgid ""
@@ -885,7 +886,7 @@ msgstr "Contenuto in (documento ospitante)"
 
 #: sonar/theme/templates/sonar/projects/detail.html:24
 msgid "Period"
-msgstr ""
+msgstr "Periodo"
 
 #: sonar/modules/documents/templates/documents/record.html:267
 msgid "Permalink"
@@ -1003,7 +1004,7 @@ msgstr ""
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1570
 #: sonar/modules/documents/templates/documents/record.html:168
 msgid "Research projects"
-msgstr ""
+msgstr "Progetto di ricerca"
 
 #: sonar/theme/templates/sonar/accounts/forgot_password.html:28
 #: sonar/theme/templates/sonar/accounts/forgot_password.html:38
@@ -1151,7 +1152,7 @@ msgstr "Data di inizio"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:528
 msgid "Start date of publication"
-msgstr "Data di pubblicazione 1"
+msgstr "Data 1"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:465
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1508
@@ -1194,11 +1195,11 @@ msgstr "Soggetti"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:294
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:295
 msgid "Subtitle"
-msgstr "Sottotitolo"
+msgstr "Altre informazioni sul titolo"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:291
 msgid "Subtitles"
-msgstr "Sottotitoli"
+msgstr "Altre informazioni sul titolo"
 
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:27
 msgid "Super administration"
@@ -1504,7 +1505,7 @@ msgstr "Numero dell'editore"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:502
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:826
 msgid "bf:ReportNumber"
-msgstr "Technical report number"
+msgstr "Numero di rapporto"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:507
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:830
@@ -1608,7 +1609,7 @@ msgstr "Higher Education Institutions"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:445
 msgid "classification_39"
-msgstr "Anthropology Ethnology"
+msgstr "Antropologia, etnologia"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:234
 msgid "classification_51"
@@ -1616,11 +1617,11 @@ msgstr "Mathematics"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:239
 msgid "classification_519.2"
-msgstr "Probabilites Statistics"
+msgstr "Probabilità, statistiche"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:244
 msgid "classification_52"
-msgstr "Astronomy Astrophysics"
+msgstr "Astronomia, astrofisica"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:249
 msgid "classification_524.8"
@@ -1672,7 +1673,7 @@ msgstr "Biology"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:309
 msgid "classification_57/59"
-msgstr "Biology Life sciences"
+msgstr "Biologia, scienze della vita"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:279
 msgid "classification_574"
@@ -1708,7 +1709,7 @@ msgstr "Midwife"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:198
 msgid "classification_615"
-msgstr "Therapeutic. Pharmacy Pharmacology"
+msgstr "Terapeutica, farmacia, farmacologia"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:203
 msgid "classification_615.8"
@@ -1768,11 +1769,11 @@ msgstr "Powder metallurgy"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:113
 msgid "classification_63"
-msgstr "Agriculture Agronomy"
+msgstr "Agricoltura, agronomia"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:450
 msgid "classification_65"
-msgstr "Information communication and media sciences"
+msgstr "Scienze dell'informazione, della comunicazione e dei media"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:118
 msgid "classification_66"
@@ -1828,7 +1829,7 @@ msgstr "Sports sciences"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:470
 msgid "classification_81"
-msgstr "Language Linguistics"
+msgstr "Lingua, linguistica"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:475
 msgid "classification_81´28"
@@ -1880,21 +1881,21 @@ msgstr "Arts, Human and Social Science"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:122
 msgid "coar:c_16ec"
-msgstr "coar:c_16ec"
+msgstr "Accesso riservato"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:114
 msgid "coar:c_abf2"
-msgstr "coar:c_abf2"
+msgstr "Accesso aperto"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:118
 msgid "coar:c_f1cf"
-msgstr "coar:c_f1cf"
+msgstr "Sottoposto a embargo"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:980
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0.json:172
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0_src.json:172
 msgid "coinvestigator"
-msgstr ""
+msgstr "co-ricercatore"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:849
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1390
@@ -1971,11 +1972,11 @@ msgstr "Advanced studies thesis"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:224
 msgid "document_type_coar:c_0640"
-msgstr "rivista"
+msgstr "Rivista"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:190
 msgid "document_type_coar:c_12cc"
-msgstr "cartografia"
+msgstr "Cartografia"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:214
 msgid "document_type_coar:c_15cd"
@@ -1991,7 +1992,7 @@ msgstr "Informativa politica"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:196
 msgid "document_type_coar:c_18cc"
-msgstr "suono"
+msgstr "Suono"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:122
 msgid "document_type_coar:c_18co"
@@ -2003,7 +2004,7 @@ msgstr "Articolo di congresso (non pubblicato in atti)"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:202
 msgid "document_type_coar:c_18cw"
-msgstr "partitura"
+msgstr "Partitura"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:300
 msgid "document_type_coar:c_18gh"
@@ -2023,7 +2024,7 @@ msgstr "Altro tipo di rapporto"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:294
 msgid "document_type_coar:c_18ws"
-msgstr "rapporto di ricerca"
+msgstr "Rapporto di ricerca"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:252
 msgid "document_type_coar:c_18ww"
@@ -2044,16 +2045,16 @@ msgstr "Rivista divulgativa"
 #: sonar/common/jsonschemas/type-v1.0.0.json:57
 #: sonar/common/jsonschemas/type-v1.0.0.json:89
 msgid "document_type_coar:c_2f33"
-msgstr "libro"
+msgstr "Libro"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:236
 msgid "document_type_coar:c_2fe3"
-msgstr "giornale"
+msgstr "Giornale"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:61
 #: sonar/common/jsonschemas/type-v1.0.0.json:94
 msgid "document_type_coar:c_3248"
-msgstr "capitolo di libro"
+msgstr "Capitolo di libro"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:139
 msgid "document_type_coar:c_3e5a"
@@ -2061,7 +2062,7 @@ msgstr "Contributo in rivista"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:306
 msgid "document_type_coar:c_46ec"
-msgstr "tesi"
+msgstr "Tesi"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:65
 #: sonar/common/jsonschemas/type-v1.0.0.json:104
@@ -2075,7 +2076,7 @@ msgstr "Software"
 #: sonar/common/jsonschemas/type-v1.0.0.json:69
 #: sonar/common/jsonschemas/type-v1.0.0.json:150
 msgid "document_type_coar:c_6501"
-msgstr "articolo scientifico"
+msgstr "Articolo scientifico"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:116
 msgid "document_type_coar:c_6670"
@@ -2084,7 +2085,7 @@ msgstr "Poster in congresso"
 #: sonar/common/jsonschemas/type-v1.0.0.json:77
 #: sonar/common/jsonschemas/type-v1.0.0.json:311
 msgid "document_type_coar:c_7a1f"
-msgstr "tesi di bachelor"
+msgstr "Tesi di laurea (bachelor)"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:347
 msgid "document_type_coar:c_8042"
@@ -2093,7 +2094,7 @@ msgstr "Working paper"
 #: sonar/common/jsonschemas/type-v1.0.0.json:73
 #: sonar/common/jsonschemas/type-v1.0.0.json:242
 msgid "document_type_coar:c_816b"
-msgstr "preprint"
+msgstr "Preprint"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:168
 msgid "document_type_coar:c_8544"
@@ -2118,7 +2119,7 @@ msgstr "Capitolo di rapporto"
 #: sonar/common/jsonschemas/type-v1.0.0.json:85
 #: sonar/common/jsonschemas/type-v1.0.0.json:323
 msgid "document_type_coar:c_bdcc"
-msgstr "tesi di master"
+msgstr "Tesi di master"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:144
 msgid "document_type_coar:c_beb9"
@@ -2131,7 +2132,7 @@ msgstr "Contributo a congresso"
 #: sonar/common/jsonschemas/type-v1.0.0.json:81
 #: sonar/common/jsonschemas/type-v1.0.0.json:317
 msgid "document_type_coar:c_db06"
-msgstr "tesi di dottorato"
+msgstr "Tesi di dottorato"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:162
 msgid "document_type_coar:c_dcae04bc"
@@ -2143,7 +2144,7 @@ msgstr "Dataset"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:184
 msgid "document_type_coar:c_ecc8"
-msgstr "immagine"
+msgstr "Immagine"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:128
 msgid "document_type_coar:c_f744"
@@ -2173,7 +2174,7 @@ msgstr "Switch edu-ID Test"
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0.json:168
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0_src.json:168
 msgid "investigator"
-msgstr ""
+msgstr "ricercatore"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:511
 msgid "lang_aar"
@@ -4130,7 +4131,7 @@ msgstr "n."
 
 #: sonar/modules/documents/templates/documents/record.html:49
 msgid "other files"
-msgstr "Altri files"
+msgstr "altri files"
 
 #: sonar/modules/documents/views.py:207
 msgid "p."
@@ -4198,4 +4199,3 @@ msgstr "vol."
 
 #~ msgid "Welcome on SONAR"
 #~ msgstr "Benvenuti su SONAR"
-
