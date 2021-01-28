@@ -10,15 +10,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-01-25 13:50+0100\n"
-"PO-Revision-Date: 2020-12-24 13:29+0000\n"
+"PO-Revision-Date: 2021-01-28 14:32+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Language-Team: English <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"en/>\n"
 "Language: en\n"
-"Language-Team: English "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/en/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.5-dev\n"
 "Generated-By: Babel 2.9.0\n"
 
 #: sonar/theme/views.py:68
@@ -379,7 +380,7 @@ msgstr ""
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:540
 msgid "End date of publication"
-msgstr "End date of publication"
+msgstr "Date 2"
 
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0.json:41
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0.json:54
@@ -1145,7 +1146,7 @@ msgstr "Start date"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:528
 msgid "Start date of publication"
-msgstr "Date of publication 1"
+msgstr "Date 1"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:465
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1508
@@ -1192,7 +1193,7 @@ msgstr "Other title information"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:291
 msgid "Subtitles"
-msgstr "Subtitles"
+msgstr "Other title information"
 
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:27
 msgid "Super administration"
@@ -4193,4 +4194,3 @@ msgstr "vol."
 
 #~ msgid "Welcome on SONAR"
 #~ msgstr "Welcome on SONAR"
-
