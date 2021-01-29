@@ -16,6 +16,10 @@
 #}
 {% extends 'sonar/page.html' %}
 
+{% block base_href %}
+<base href="{{ request.path }}">
+{% endblock base_href %}
+
 {%- block css %}
 {{ super() }}
 <link href="{{ url_for('wiki.static', filename='css/wiki.css') }}" rel="stylesheet" />
