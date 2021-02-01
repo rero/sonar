@@ -19,6 +19,8 @@
 
 from __future__ import absolute_import, print_function
 
+import json
+
 from flask import Blueprint, abort, current_app, g, render_template, request
 from flask_babelex import gettext as _
 from invenio_i18n.ext import current_i18n
@@ -96,12 +98,26 @@ def detail(pid_value, view='global'):
 
         populate_files_properties(record)
 
+    # Import is here to avoid a circular reference error.
+    from sonar.modules.documents.serializers import google_scholar_v1, \
+        schemaorg_v1
+
+    # Get schema org data
+    schema_org_data = json.dumps(
+        schemaorg_v1.transform_record(record['pid'], record))
+
+    # Get scholar data
+    google_scholar_data = google_scholar_v1.transform_record(
+        record['pid'], record)
+
     # Resolve $ref properties
     record = record.replace_refs()
 
     return render_template('documents/record.html',
                            pid=pid_value,
-                           record=record)
+                           record=record,
+                           schema_org_data=schema_org_data,
+                           google_scholar_data=google_scholar_data)
 
 
 @blueprint.route('/projects/<pid_value>')

@@ -20,15 +20,15 @@
 import re
 
 from flask import request
-from marshmallow import Schema, fields, pre_dump
+from marshmallow import fields
 
 from sonar.modules.documents.api import DocumentRecord
-from sonar.modules.documents.utils import has_external_urls_for_files, \
-    populate_files_properties
 from sonar.modules.documents.views import part_of_format
 
+from .base_schema import BaseSchema
 
-class DublinCoreV1(Schema):
+
+class DublinCoreV1(BaseSchema):
     """Schema for records v1 in JSON."""
 
     contributors = fields.Method('get_contributors')
@@ -45,34 +45,6 @@ class DublinCoreV1(Schema):
     subjects = fields.Method('get_subjects')
     titles = fields.Method('get_titles')
     types = fields.Method('get_types')
-
-    @pre_dump
-    def pre_dump(self, item, **kwargs):
-        """Do some transformations in record before dumping it.
-
-        - Store the main file to use it in methods.
-        - Check if files must point to an external URL.
-        - Populate restrictions, thumbnail and URL in files.
-
-        :param item: Item object to process
-        :returns: Modified item
-        """
-        if not item['metadata'].get('_files'):
-            return item
-
-        # Store the main file
-        main_file = self.get_main_file(item)
-        if main_file:
-            item['metadata']['mainFile'] = main_file
-
-        # Check if organisation record forces to point file to an external url
-        item['metadata']['external_url'] = has_external_urls_for_files(
-            item['metadata'])
-
-        # Add restriction, link and thumbnail to files
-        populate_files_properties(item['metadata'])
-
-        return item
 
     def get_contributors(self, obj):
         """Get contributors."""
@@ -307,16 +279,3 @@ class DublinCoreV1(Schema):
             data += ' ({info})'.format(info=' : '.join(info))
 
         return data
-
-    def get_main_file(self, obj):
-        """Return the main file.
-
-        :param obj: Record dict.
-        :returns: Main file or None.
-        """
-        files = [
-            file for file in obj['metadata'].get('_files', [])
-            if file.get('type') == 'file'
-        ]
-        files = sorted(files, key=lambda file: file.get('order', 100))
-        return files[0] if files else None

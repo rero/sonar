@@ -26,7 +26,14 @@ from invenio_records_rest.serializers.response import record_responsify, \
     search_responsify
 
 from sonar.modules.documents.serializers.dc import SonarDublinCoreSerializer
+from sonar.modules.documents.serializers.google_scholar import \
+    SonarGoogleScholarSerializer
+from sonar.modules.documents.serializers.schemaorg import \
+    SonarSchemaOrgSerializer
 from sonar.modules.documents.serializers.schemas.dc import DublinCoreV1
+from sonar.modules.documents.serializers.schemas.google_scholar import \
+    GoogleScholarV1
+from sonar.modules.documents.serializers.schemas.schemaorg import SchemaOrgV1
 from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.serializers import JSONSerializer as _JSONSerializer
 from sonar.modules.users.api import current_user_record
@@ -76,6 +83,11 @@ class JSONSerializer(_JSONSerializer):
 json_v1 = JSONSerializer(DocumentSchemaV1)
 #: Dublin Core serializer
 dc_v1 = SonarDublinCoreSerializer(DublinCoreV1, replace_refs=True)
+#: schema.org serializer
+schemaorg_v1 = SonarSchemaOrgSerializer(SchemaOrgV1, replace_refs=True)
+#: google scholar serializer
+google_scholar_v1 = SonarGoogleScholarSerializer(GoogleScholarV1,
+                                                 replace_refs=True)
 
 # Records-REST serializers
 # ========================

@@ -19,8 +19,22 @@
 
 {% from 'sonar/macros/macro.html' import thumbnail %}
 
-{%- block body %}
 {% set title = record.title[0] | title_format(current_i18n.language) %}
+{% set description = record.abstracts[0].value if record.abstracts else None %}
+
+{% block head %}
+{{ super() }}
+<!-- Schema.org in JSON_LD -->
+<script type="application/ld+json">
+  {{ schema_org_data | safe }}
+</script>
+
+<!-- Google Scholar -->
+{{ google_scholar_data | safe }}
+{% endblock head %}
+
+{%- block body %}
+
 {% set files = record.get_files_list() %}
 
 <section class="mt-3">
