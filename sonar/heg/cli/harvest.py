@@ -19,7 +19,7 @@
 
 import datetime
 import json
-from os import listdir, path
+from os import listdir, path, remove
 
 import click
 from flask import current_app
@@ -67,12 +67,14 @@ def queue_files(file):
 
 @harvest.command()
 @click.option('--file', 'file', multiple=True)
+@click.option('--remove-file', is_flag=True, default=False)
 @with_appcontext
-def import_records(file):
+def import_records(file, remove_file):
     """Import records from HEG.
 
     :param file: Specific files to import, if not set, all the files in the
     folder will be imported.
+    :param remove_file: If True, remove file after process.
     """
     target_directory = current_app.config.get('SONAR_APP_HEG_DATA_DIRECTORY')
 
@@ -85,26 +87,31 @@ def import_records(file):
         records = []
 
         try:
-            with open(path.join(target_directory, single_file),
-                      'r') as json_file:
+            file_path = path.join(target_directory, single_file)
+
+            with open(file_path, 'r') as json_file:
                 for data in json_file.readlines():
                     data = json.loads(data)
                     try:
                         heg_record = HEGRecord(data)
                         records.append(heg_record.serialize())
                     except Exception as exception:
-                        click.secho(
-                            'Error during processing record {record}: '
-                            '{exception}'
-                            .format(record=data, exception=exception),
-                            fg='red')
+                        click.secho('Error during processing record {record}: '
+                                    '{exception}'.format(record=data,
+                                                         exception=exception),
+                                    fg='red')
 
             # Chunk record list and send celery task
             for chunk in list(chunks(records, CHUNK_SIZE)):
                 document_import_records.delay(chunk)
 
+            if remove_file:
+                remove(file_path)
+
             click.secho(
-                'Process finished, the data will be imported in background',
+                'Process finished for file "{file}", the data will be '
+                'imported in background'
+                .format(file=file_path),
                 fg='green')
         except Exception as exception:
             click.secho(str(exception), fg='red')

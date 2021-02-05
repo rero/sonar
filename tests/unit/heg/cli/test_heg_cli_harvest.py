@@ -17,6 +17,8 @@
 
 """Test HEG harvest CLI."""
 
+from shutil import copyfile
+
 from click.testing import CliRunner
 
 from sonar.heg.cli.harvest import import_records, queue_files
@@ -55,6 +57,14 @@ def test_import_records(app, script_info, monkeypatch):
     # OK, with file param
     app.config.update(SONAR_APP_HEG_DATA_DIRECTORY='./tests/unit/heg/data')
     result = runner.invoke(import_records, ['--file', 'HEG_data_1.json'],
+                           obj=script_info)
+    assert 'Process finished' in result.output
+
+    # OK, with file param and remove file
+    copyfile('./tests/unit/heg/data/HEG_data_1.json',
+             './tests/unit/heg/data/HEG_data_2.json')
+    result = runner.invoke(import_records,
+                           ['--file', 'HEG_data_2.json', '--remove-file'],
                            obj=script_info)
     assert 'Process finished' in result.output
 
