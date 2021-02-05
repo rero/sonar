@@ -95,7 +95,8 @@ def test_queue_files(monkeypatch):
 
     repository = HEGRepository('candy.hesge.ch', 'SONAR/baseline/complete')
     repository.queue_files('data.zip', './data/heg')
-    assert os.path.exists('./data/heg/HEG_data_1.json')
+    assert not os.path.exists('./data/heg/HEG_data_1.json')
+    assert os.path.exists('./data/heg/HEG_data_1_1.json')
 
 
 def test_remove_files_from_target():

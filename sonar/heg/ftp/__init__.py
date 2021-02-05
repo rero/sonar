@@ -18,9 +18,12 @@
 """HEG FTP repository."""
 
 import json
+import re
 from ftplib import FTP
 from os import listdir, path, remove
 from zipfile import ZipFile
+
+from sonar.modules.utils import chunks
 
 
 class HEGRepository():
@@ -51,11 +54,12 @@ class HEGRepository():
         """Close the FTP connection."""
         self._ftp.close()
 
-    def queue_files(self, file, target):
+    def queue_files(self, file, target, records_size=500):
         """Download file and unzip it.
 
         :param file: File to download.
         :param target: Target directory.
+        :param records_size: Number of records per file.
         """
         self.remove_files_from_target(target)
 
@@ -68,13 +72,38 @@ class HEGRepository():
         with ZipFile(target_file, 'r') as zip_object:
             zip_object.extractall(target)
 
+        # Remove source file
+        remove(target_file)
+        # Remove useless file
         try:
-            # Remove source file
-            remove(target_file)
-            # Remove useless file
             remove(path.join(target, 'clusters.json'))
         except Exception:
             pass
+
+        # Number of splitted files for each file
+        number_of_files = int(10000 / records_size)
+
+        # Split source files in smaller files
+        for filename in listdir(target):
+            file_path = path.join(target, filename)
+
+            matches = re.match(r'^(.*)\.json$', filename)
+            if matches:
+                with open(file_path) as json_file:
+                    files = [
+                        open(
+                            path.join(
+                                target, '{prefix}_{index}.json'.format(
+                                    prefix=matches.group(1),
+                                    index=(i + 1))), 'w')
+                        for i in range(number_of_files)
+                    ]
+                    for i, line in enumerate(json_file):
+                        files[i % number_of_files].write(line)
+                    for f in files:
+                        f.close()
+
+                    remove(file_path)
 
     def remove_files_from_target(self, target):
         """Remove all data files from target.
