@@ -521,6 +521,9 @@
       "oa_status": {
         "type": "keyword"
       },
+      "hiddenFromPublic": {
+        "type": "boolean"
+      },
       "_created": {
         "type": "date"
       },

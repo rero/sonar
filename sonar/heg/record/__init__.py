@@ -49,4 +49,8 @@ class HEGRecord():
                     SchemaFactory.create(source).dump(
                         self.data[record_source_key]), **record)
 
+        # Flag as hidden if no file provided
+        if not record.get('files'):
+            record['hiddenFromPublic'] = True
+
         return record

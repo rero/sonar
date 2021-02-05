@@ -17,7 +17,7 @@
 
 """Unpaywall schema."""
 
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, post_dump
 
 
 class UnpaywallSchema(Schema):
@@ -25,6 +25,11 @@ class UnpaywallSchema(Schema):
 
     files = fields.Method('get_files')
     oa_status = fields.Method('get_oa_status')
+
+    @post_dump
+    def remove_empty_values(self, data, **kwargs):
+        """Remove empty values before dumping data."""
+        return {key: value for key, value in data.items() if value}
 
     def get_files(self, obj):
         """Get files."""

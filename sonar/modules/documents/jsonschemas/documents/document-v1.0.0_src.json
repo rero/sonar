@@ -1824,6 +1824,10 @@
       "title": "Open access status",
       "type": "string",
       "minLength": 1
+    },
+    "hiddenFromPublic": {
+      "title": "Hidden to public",
+      "type": "boolean"
     }
   },
   "propertiesOrder": [
@@ -1850,7 +1854,8 @@
     "additionalMaterials",
     "contentNote",
     "otherMaterialCharacteristics",
-    "usageAndAccessPolicy"
+    "usageAndAccessPolicy",
+    "hiddenFromPublic"
   ],
   "required": [
     "$schema",

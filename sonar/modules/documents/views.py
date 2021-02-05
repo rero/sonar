@@ -85,7 +85,7 @@ def detail(pid_value, view='global'):
     """Document detail page."""
     record = DocumentRecord.get_record_by_pid(pid_value)
 
-    if not record:
+    if not record or record.get('hiddenFromPublic'):
         abort(404)
 
     # Add restriction, link and thumbnail to files

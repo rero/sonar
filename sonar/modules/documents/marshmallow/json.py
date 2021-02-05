@@ -100,6 +100,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     usageAndAccessPolicy = fields.Dict()
     projects = fields.List(fields.Dict())
     oa_status = SanitizedUnicode()
+    hiddenFromPublic = fields.Boolean()
     _bucket = SanitizedUnicode()
     _files = Nested(FileSchemaV1, many=True)
     _oai = fields.Dict()
