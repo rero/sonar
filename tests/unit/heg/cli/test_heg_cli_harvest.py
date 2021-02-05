@@ -43,7 +43,7 @@ def test_queue_files(app, script_info, monkeypatch):
     assert 'Files queued successfully' in result.output
 
 
-def test_import_records(app, script_info, monkeypatch):
+def test_import_records(app, script_info, monkeypatch, bucket_location):
     """Test import records."""
     # Data file not exist
     app.config.update(SONAR_APP_HEG_DATA_DIRECTORY='/non-existing/dir')
