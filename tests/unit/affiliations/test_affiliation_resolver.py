@@ -44,5 +44,13 @@ def test_resolve():
     assert affiliation_resolver.resolve(
         test_string) == 'Uni of Zurich and Hospital'
 
+    test_string = (
+        'Centre for Research in Environmental Epidemiology (CREAL), Barcelona '
+        '08003, Spain; CIBER Epidemiología y Salud Pública (CIBERESP), '
+        'Barcelona 08003, Spain; Universitat Pompeu Fabra (UPF), Barcelona '
+        '08003, Spain; Hospital del Mar Medical Research Institute (IMIM), '
+        'Barcelona 08003, Spain.')
+    assert not affiliation_resolver.resolve(test_string)
+
     test_string = 'Not existing'
     assert not affiliation_resolver.resolve(test_string)
