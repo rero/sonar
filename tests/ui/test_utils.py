@@ -26,7 +26,7 @@ from sonar.modules.documents.views import store_organisation
 from sonar.modules.utils import change_filename_extension, \
     create_thumbnail_from_file, format_date, get_current_language, \
     get_specific_theme, get_switch_aai_providers, get_view_code, \
-    is_ip_in_list
+    is_ip_in_list, remove_html
 
 
 def test_change_filename_extension(app):
@@ -159,3 +159,9 @@ def test_is_ip_in_list():
 
     # With network range
     assert is_ip_in_list('10.10.10.10', ['10.10.10.0/24'])
+
+
+def test_remove_html():
+    """Test remove html markup from string."""
+    assert remove_html('No HTML') == 'No HTML'
+    assert remove_html('<h1>Title</h1>') == 'Title'

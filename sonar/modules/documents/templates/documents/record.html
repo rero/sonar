@@ -151,7 +151,7 @@
         {% for abstract in abstracts %}
         <span id="lang-{{ abstract.language }}" class="abstract-container {{ '' if loop.first else 'd-none' }}">
           {% if abstract.value | length > 400 %}
-          <span data-abstract="{{ abstract.value | nl2br | safe }}">{{ abstract.value | truncate(400) }}</span> <a
+          <span data-abstract="{{ abstract.value | nl2br }}">{{ abstract.value | truncate(400) }}</span> <a
             href="#" class="showMore-abstract">{{ _('Show more') }}&hellip;</a>
           {% else %}
           {{ abstract.value | nl2br | safe }}

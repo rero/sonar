@@ -20,6 +20,7 @@
 import re
 
 from sonar.heg.serializers.schemas.heg import HEGSchema
+from sonar.modules.utils import remove_html
 
 
 class MedlineSchema(HEGSchema):
@@ -57,7 +58,10 @@ class MedlineSchema(HEGSchema):
         if not obj.get('abstract'):
             return None
 
-        return [{'value': obj['abstract'], 'language': obj['language']}]
+        return [{
+            'value': remove_html(obj['abstract']),
+            'language': obj['language']
+        }]
 
     def get_subjects(self, obj):
         """Get subjects."""
