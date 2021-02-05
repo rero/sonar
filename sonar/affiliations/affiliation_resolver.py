@@ -60,7 +60,7 @@ class AffiliationResolver():
 
         for affiliations in self.affiliations:
             for affiliation in affiliations:
-                if fuzz.partial_ratio(searched_affiliation, affiliation) > 90:
+                if fuzz.partial_ratio(searched_affiliation, affiliation) > 92:
                     return affiliations[0]
 
         return None
