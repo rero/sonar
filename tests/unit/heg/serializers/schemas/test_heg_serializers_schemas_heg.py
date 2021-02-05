@@ -35,6 +35,20 @@ def test_heg_schema(app):
         }]
     }
 
+    # With spanish language
+    data = {'_id': '111', 'language': 'es'}
+    assert HEGSchema().dump(data) == {
+        'documentType': 'coar:c_6501',
+        'identifiedBy': [{
+            'type': 'bf:Doi',
+            'value': '111'
+        }],
+        'language': [{
+            'type': 'bf:Language',
+            'value': 'spa'
+        }]
+    }
+
     # Without language
     data = {'_id': '111'}
     assert HEGSchema().dump(data) == {
