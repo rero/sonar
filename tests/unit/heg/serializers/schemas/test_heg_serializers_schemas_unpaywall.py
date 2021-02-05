@@ -43,4 +43,4 @@ def test_unpaywall_schema(app):
 
     # Without images
     data = {'_id': '111', 'oa_status': 'green'}
-    assert UnpaywallSchema().dump(data) == {'oa_status': 'green', 'files': []}
+    assert UnpaywallSchema().dump(data) == {'oa_status': 'green'}
