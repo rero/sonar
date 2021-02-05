@@ -12,15 +12,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-02-02 08:09+0100\n"
-"PO-Revision-Date: 2021-01-28 14:32+0000\n"
+"PO-Revision-Date: 2021-02-05 13:38+0000\n"
 "Last-Translator: iGor milhit <igor.milhit@rero.ch>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"fr/>\n"
 "Language: fr\n"
-"Language-Team: French "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/fr/>\n"
-"Plural-Forms: nplurals=2; plural=n > 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.5-dev\n"
 "Generated-By: Babel 2.9.0\n"
 
 #: sonar/theme/views.py:68
@@ -141,31 +142,31 @@ msgstr "Seau UUID pour le stockage des fichiers"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:22
 msgid "CC BY"
-msgstr ""
+msgstr "CC BY"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:26
 msgid "CC BY-NC"
-msgstr ""
+msgstr "CC BY-NC"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:30
 msgid "CC BY-NC-ND"
-msgstr ""
+msgstr "CC BY-NC-ND"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:34
 msgid "CC BY-NC-SA"
-msgstr ""
+msgstr "CC BY-NC-SA"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:38
 msgid "CC BY-ND"
-msgstr ""
+msgstr "CC BY-ND"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:42
 msgid "CC BY-SA"
-msgstr ""
+msgstr "CC BY-SA"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:18
 msgid "CC0"
-msgstr ""
+msgstr "CC0"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:59
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:58
@@ -318,7 +319,7 @@ msgstr "Désignation"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:756
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1153
 msgid "Dissertation"
-msgstr "Note de thèse"
+msgstr "Thèse"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:567
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1084
@@ -378,7 +379,7 @@ msgstr "Date d'embargo"
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0.json:53
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0_src.json:53
 msgid "End date"
-msgstr ""
+msgstr "Date de fin"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:553
 msgid "End date of publication"
@@ -465,7 +466,7 @@ msgstr "Sauf au sein de l'organisation"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:896
 msgid "Existing project"
-msgstr ""
+msgstr "Projet existant"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:583
 msgid "Extent"
@@ -506,7 +507,7 @@ msgstr ""
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:18
 msgid "First name"
-msgstr ""
+msgstr "Prénom"
 
 #: sonar/theme/templates/sonar/frontpage.html:79
 msgid "Follow us"
@@ -551,7 +552,7 @@ msgstr ""
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0_src.json:221
 #: sonar/theme/templates/sonar/projects/detail.html:61
 msgid "Funding organisations"
-msgstr ""
+msgstr "Agences de financement"
 
 #: sonar/theme/templates/sonar/frontpage.html:76
 msgid "Further info on the project page"
@@ -635,7 +636,7 @@ msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:606
 msgid "In the format \\"
-msgstr "En format \\"
+msgstr "Au format \"Nom, prénom\""
 
 #: sonar/theme/templates/sonar/page.html:53
 msgid "Invenio"
@@ -652,7 +653,7 @@ msgstr ""
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0_src.json:127
 #: sonar/theme/templates/sonar/projects/detail.html:33
 msgid "Investigators"
-msgstr ""
+msgstr "Chercheurs"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:56
 msgid "Is dedicated"
@@ -710,7 +711,7 @@ msgstr ""
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:26
 msgid "Last name"
-msgstr ""
+msgstr "Nom de famille"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:826
 msgid "Last name, first name, ex: Doe, John"
@@ -719,11 +720,11 @@ msgstr "Nom, prénom, ex : Dupont, Jean"
 #: sonar/common/jsonschemas/license-v1.0.0.json:2
 #: sonar/modules/documents/templates/documents/record.html:258
 msgid "License"
-msgstr ""
+msgstr "Licence"
 
 #: sonar/theme/templates/sonar/projects/detail.html:76
 msgid "Linked documents"
-msgstr ""
+msgstr "Documents en lien"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:66
 msgid ""
@@ -800,7 +801,7 @@ msgstr "Nom"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:50
 msgid "Not OA / Rights reserved"
-msgstr ""
+msgstr "Pas OA / Droits réservés"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:671
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:855
@@ -867,9 +868,8 @@ msgid "Organisation records can be accessed by a specific URL."
 msgstr "Les organisations sont accessibles par une URL spécifique."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:218
-#, fuzzy
 msgid "Organisations"
-msgstr "Organisation"
+msgstr "Organisations"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:595
 msgid "Other Material Characteristics"
@@ -880,10 +880,12 @@ msgid ""
 "Other Material Characteristics, i.e. illustrations, black and white, or "
 "coloured."
 msgstr ""
+"Autres caractéristiques matérielles, par ex. illustrations, noir et blanc, "
+"ou couleurs."
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:46
 msgid "Other OA / license undefined"
-msgstr ""
+msgstr "Autre OA / licence indéfinie"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:631
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:986
@@ -1031,7 +1033,7 @@ msgstr ""
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1789
 #: sonar/modules/documents/templates/documents/record.html:168
 msgid "Research projects"
-msgstr ""
+msgstr "Projets de recherche"
 
 #: sonar/theme/templates/sonar/accounts/forgot_password.html:28
 #: sonar/theme/templates/sonar/accounts/forgot_password.html:38
@@ -1350,7 +1352,7 @@ msgstr "Politique d'utilisation et d'accès"
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0_src.json:302
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:5
 msgid "User"
-msgstr "Utilisateur"
+msgstr "utilisateur"
 
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:39
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:516
@@ -1397,7 +1399,7 @@ msgstr "Année"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:496
 msgid "bf:Agent"
-msgstr "Agent"
+msgstr "agent"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:407
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:755
@@ -1483,7 +1485,7 @@ msgstr "ISSN-L"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:368
 msgid "bf:Language"
-msgstr "Langue"
+msgstr "langue"
 
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:21
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:452
@@ -1561,11 +1563,11 @@ msgstr "Numéro de rapport"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:843
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1682
 msgid "bf:Strn"
-msgstr "Numéro normalisé de rapport technique"
+msgstr "STRN"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:273
 msgid "bf:Title"
-msgstr "Titre"
+msgstr "titre"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:482
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:823
@@ -1935,21 +1937,21 @@ msgstr "Lettres, sciences humaines et sociales"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:131
 msgid "coar:c_16ec"
-msgstr ""
+msgstr "Accès réservé"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:123
 msgid "coar:c_abf2"
-msgstr ""
+msgstr "Libre accès"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:127
 msgid "coar:c_f1cf"
-msgstr ""
+msgstr "Sous embargo"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:980
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0.json:172
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0_src.json:172
 msgid "coinvestigator"
-msgstr ""
+msgstr "co-chercheur"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:849
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1407
@@ -2116,7 +2118,7 @@ msgstr "Contribution à une revue"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:306
 msgid "document_type_coar:c_46ec"
-msgstr "Thèse"
+msgstr "Thèse, mémoire"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:65
 #: sonar/common/jsonschemas/type-v1.0.0.json:104
@@ -2228,7 +2230,7 @@ msgstr "Switch edu-ID Test"
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0.json:168
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0_src.json:168
 msgid "investigator"
-msgstr ""
+msgstr "chercheur"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:511
 msgid "lang_aar"
@@ -4197,7 +4199,7 @@ msgstr "pid"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:399
 msgid "pmid"
-msgstr "pmid"
+msgstr "PMID"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:116
 msgid "role_admin"
@@ -4225,7 +4227,7 @@ msgstr "statut"
 
 #: sonar/modules/documents/templates/documents/record.html:178
 msgid "supported by"
-msgstr ""
+msgstr "avec le soutien de"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:497
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:835
@@ -4258,4 +4260,3 @@ msgstr "vol."
 
 #~ msgid "First name and last name"
 #~ msgstr "Prénom et nom"
-
