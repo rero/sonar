@@ -215,3 +215,8 @@ def chunks(records, size):
     """
     for i in range(0, len(records), size):
         yield records[i:i + size]
+
+
+def remove_html(content):
+    """Remove html tags from content."""
+    return re.sub(re.compile('<.*?>'), '', content)

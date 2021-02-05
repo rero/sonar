@@ -20,6 +20,7 @@
 import re
 
 from sonar.heg.serializers.schemas.heg import HEGSchema
+from sonar.modules.utils import remove_html
 
 
 class CrossrefSchema(HEGSchema):
@@ -55,7 +56,10 @@ class CrossrefSchema(HEGSchema):
         if not obj.get('abstract'):
             return None
 
-        return [{'value': obj['abstract'], 'language': obj['language']}]
+        return [{
+            'value': remove_html(obj['abstract']),
+            'language': obj['language']
+        }]
 
     def get_subjects(self, obj):
         """Get subjects."""
@@ -154,8 +158,10 @@ class CrossrefSchema(HEGSchema):
         for issn_type in obj.get('issn-type', []):
             if issn_type['type'] == 'electronic':
                 part_of['document']['identifiedBy'] = [{
-                    'type': 'bf:Issn',
-                    'value': issn_type['value']
+                    'type':
+                    'bf:Issn',
+                    'value':
+                    issn_type['value']
                 }]
 
         return [part_of]
