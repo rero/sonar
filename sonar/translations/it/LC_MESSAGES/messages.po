@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-02-02 08:09+0100\n"
-"PO-Revision-Date: 2021-01-29 11:38+0000\n"
+"PO-Revision-Date: 2021-02-06 17:50+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"it/>\n"
 "Language: it\n"
-"Language-Team: Italian "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/it/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.5-dev\n"
 "Generated-By: Babel 2.9.0\n"
 
 #: sonar/theme/views.py:68
@@ -435,14 +436,12 @@ msgid "Example: 2020-12-01"
 msgstr "Esempio: 2020-12-01"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:30
-#, fuzzy
 msgid "Example: Doe"
-msgstr "Esempio: Mario Bernasconi"
+msgstr "Esempio: Doe"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:22
-#, fuzzy
 msgid "Example: John"
-msgstr "Esempio: Mario Bernasconi"
+msgstr "Esempio: John"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1547
 msgid "Example: Muller, Hans"
@@ -505,7 +504,7 @@ msgstr ""
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:18
 msgid "First name"
-msgstr ""
+msgstr "Nome"
 
 #: sonar/theme/templates/sonar/frontpage.html:79
 msgid "Follow us"
@@ -513,7 +512,7 @@ msgstr "Seguici"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:103
 msgid "Force external URL"
-msgstr ""
+msgstr "Forzare l'URL esterno"
 
 #: sonar/theme/templates/sonar/accounts/login.html:54
 msgid "Forgot password?"
@@ -529,7 +528,7 @@ msgstr "Deve essere nel seguente formato: AAAA."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:608
 msgid "Format of the resource, i.e. dimensions in cm."
-msgstr "Formato della risorsa, per esempio dimensioni in cm."
+msgstr "Formato, per esempio dimensioni in cm."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:607
 msgid "Formats"
@@ -543,14 +542,14 @@ msgstr "Francese"
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0.json:275
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0_src.json:225
 msgid "Funding organisation"
-msgstr "Organizzazione di finanziamento"
+msgstr "Agenzia di finanziamento"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1021
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0.json:271
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0_src.json:221
 #: sonar/theme/templates/sonar/projects/detail.html:61
 msgid "Funding organisations"
-msgstr "Organizzazioni di finanziamento"
+msgstr "Agenzie di finanziamento"
 
 #: sonar/theme/templates/sonar/frontpage.html:76
 msgid "Further info on the project page"
@@ -626,7 +625,7 @@ msgstr "Identificatori"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:104
 msgid "If the value is set to true, the file will point to the external link."
-msgstr ""
+msgstr "Se il valore è impostato su vero, il file punterà al link esterno."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:93
 msgid "If this field is filled in, the file points to the specified URL."
@@ -634,7 +633,7 @@ msgstr "Se questo campo è compilato, il file punta all'URL specificato."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:606
 msgid "In the format \\"
-msgstr "In formato \\"
+msgstr "In formato \"Cognome, nome\""
 
 #: sonar/theme/templates/sonar/page.html:53
 msgid "Invenio"
@@ -708,9 +707,8 @@ msgid "Last OAI-PMH set update (ISO8601 formatted timestamp)"
 msgstr "Ultimo aggiornamento del set OAI-PMH (timestamp formattato ISO8601)"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:26
-#, fuzzy
 msgid "Last name"
-msgstr "nome"
+msgstr "Cognome"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:826
 msgid "Last name, first name, ex: Doe, John"
@@ -851,7 +849,7 @@ msgstr "ORCID"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1824
 msgid "Open access status"
-msgstr ""
+msgstr "Statuto Open Access"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:222
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:5
@@ -872,9 +870,8 @@ msgid "Organisation records can be accessed by a specific URL."
 msgstr "Le organizzazione sono accessibile tramite un URL specifico."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:218
-#, fuzzy
 msgid "Organisations"
-msgstr "Organizzazione"
+msgstr "Organizzazioni"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:595
 msgid "Other Material Characteristics"
@@ -1403,7 +1400,7 @@ msgstr "Anno"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:496
 msgid "bf:Agent"
-msgstr "Agent"
+msgstr "agente"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:407
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:755
@@ -1489,7 +1486,7 @@ msgstr "ISSN-L"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:368
 msgid "bf:Language"
-msgstr "Language entity"
+msgstr "lingua"
 
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:21
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:452
@@ -1571,7 +1568,7 @@ msgstr "STRN"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:273
 msgid "bf:Title"
-msgstr "Title entity"
+msgstr "titolo"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:482
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:823
@@ -4263,4 +4260,3 @@ msgstr "vol."
 
 #~ msgid "First name and last name"
 #~ msgstr "Nome e cognome"
-
