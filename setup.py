@@ -75,7 +75,8 @@ setup(
         'invenio_base.api_blueprints': [
             'pdf_extractor = sonar.modules.pdf_extractor.views.api:blueprint',
             'deposits = sonar.modules.deposits.rest:blueprint',
-            'users = sonar.modules.users.views:blueprint'
+            'users = sonar.modules.users.views:blueprint',
+            'monitoring = sonar.monitoring.views:blueprint',
         ],
         'invenio_assets.webpack': [
             'sonar_theme = sonar.theme.webpack:theme'
