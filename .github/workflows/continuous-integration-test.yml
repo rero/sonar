@@ -12,7 +12,11 @@ jobs:
 
     - name: Install Libraries
       run: |
-        sudo apt-get install -y libxml2 libxml2-dev libxmlsec1 libxmlsec1-dev xpdf ghostscript imagemagick
+        sudo apt-get install -y libxml2 libxml2-dev libxmlsec1 libxmlsec1-dev ghostscript imagemagick
+        wget http://security.ubuntu.com/ubuntu/pool/main/p/poppler/libpoppler73_0.62.0-2ubuntu2.12_amd64.deb
+        sudo apt-get install ./libpoppler73_0.62.0-2ubuntu2.12_amd64.deb
+        wget http://archive.ubuntu.com/ubuntu/pool/universe/x/xpdf/xpdf_3.04-7_amd64.deb
+        sudo apt-get install ./xpdf_3.04-7_amd64.deb
         sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
 
     - name: Setup node
