@@ -57,4 +57,5 @@ RUN useradd invenio --uid ${INVENIO_USER_ID}  --home ${WORKING_DIR} && \
     chmod -R go+w ${WORKING_DIR}
 
 # Install dependencies
+RUN poetry run pip install --upgrade pip
 RUN poetry install --no-dev
