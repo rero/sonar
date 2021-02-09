@@ -15,8 +15,6 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,700|Roboto+Condensed:300,700');
-@import '~font-awesome/scss/font-awesome.scss';
 @import "~bootstrap/scss/bootstrap";
 @import '~ngx-toastr/toastr-bs4-alert';
 
@@ -41,4 +39,11 @@ div.wiki-page div.sticky-top {
 
 .home-text {
   line-height: 1.5em;
+}
+
+// Disable bootstrap dropdown transition
+.collapsing {
+  -webkit-transition: none;
+  transition: none;
+  display: none;
 }

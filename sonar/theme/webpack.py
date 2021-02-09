@@ -27,14 +27,11 @@ theme = WebpackBundle(
     __name__,
     'assets',
     entry={
-        'app': './js/app.js',
         'global-theme': './scss/global/theme.scss',
         'usi-theme': './scss/usi/theme.scss',
         'preview': './scss/preview.scss',
     },
     dependencies={
-        'popper.js': '^1.15',
-        'jquery': '^3.2',
         'bootstrap': '^4.3',
         'font-awesome': '^4.0',
         'ngx-toastr': '^10.2.0',
