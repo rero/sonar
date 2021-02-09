@@ -22,14 +22,15 @@ along with this program. If not, see
       {% if g.get('organisation', {}).get('isDedicated') %}
       {% set thumbnail = g.organisation | record_image_url %}
       {% if thumbnail %}
-      <img src="{{ thumbnail }}" height="50" class="d-inline-block align-top mr-3 my-2" alt="">
+      <img src="{{ thumbnail }}" alt="{{ _('Organisation logo') }}" height="50"
+        class="d-inline-block align-top mr-3 my-2" alt="">
       {% else %}
       {{ g.organisation.name }}
       {% endif %}
       {% else %}
       <img src="{{ url_for('static', filename='images/global-logo.svg') }}"
         height="{{ '30' if g.get('organisation') else '50' }}"
-        class="d-inline-block align-top {{ '' if g.get('organisation') else 'my-2' }}" alt="">
+        class="d-inline-block align-top {{ '' if g.get('organisation') else 'my-2' }}" alt="{{ _('SONAR logo') }}">
       {% endif %}
     </a>
 
@@ -47,8 +48,8 @@ along with this program. If not, see
         <input name="q" class="form-control {{ 'form-control-sm' if g.get('organisation') else '' }} mr-sm-2"
           type="search" placeholder="{{ _('Search') }}" aria-label="{{ _('Search') }}"
           value="{{ request.args.get('q', '') }}">
-        <button class="btn btn-outline-light {{ 'btn-sm' if g.get('organisation') else '' }} my-2 my-sm-0"
-          type="submit">
+        <button class="btn btn-outline-light {{ 'btn-sm' if g.get('organisation') else '' }} my-2 my-sm-0" type="submit"
+          aria-label="{{ _('Search') }}">
           <i class="fa fa-search"></i>
         </button>
       </form>
@@ -59,13 +60,13 @@ along with this program. If not, see
       <ul class="navbar-nav ml-auto">
         {%- if not current_user.is_authenticated %}
         <li class="nav-item px-3">
-          <a class="nav-link" href="{{ url_for_security('login', next=request.path) }}" title="{{ _('Log in') }}">
+          <a class="nav-link text-light" href="{{ url_for_security('login', next=request.path) }}" title="{{ _('Log in') }}">
             {{ _('Log in') }}
           </a>
         </li>
         {% if security.registerable %}
         <li class="nav-item">
-          <a class="btn btn-outline-light" href="{{ url_for_security('register') }}">
+          <a class="btn btn-outline-light text-light" href="{{ url_for_security('register') }}">
             <strong>{{ _('Sign up') }}</strong>
           </a>
         </li>
@@ -73,7 +74,7 @@ along with this program. If not, see
         {% else %}
         <li class="nav-item dropdown pl-3">
           {% with dropdownId='userLinkDropdown' %}
-          <a class="nav-link dropdown-toggle" href="#" id="{{ dropdownId }}" role="button" data-toggle="dropdown"
+          <a class="nav-link text-light dropdown-toggle" href="#" id="{{ dropdownId }}" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-user mr-2"></i>
             {% if current_user_record %}
@@ -88,7 +89,7 @@ along with this program. If not, see
         {% endif %}
         {%- if config.I18N_LANGUAGES %}
         <li class="nav-item dropdown pl-3">
-          <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-toggle="dropdown"
+          <a class="nav-link text-light dropdown-toggle" href="#" id="languageDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             {{ current_i18n.language|upper }}
           </a>

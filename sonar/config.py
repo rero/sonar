@@ -100,6 +100,8 @@ THEME_FRONTPAGE_TEMPLATE = 'sonar/frontpage.html'
 THEME_LOGO = 'images/global-logo.svg'
 
 THEME_ERROR_TEMPLATE = 'sonar/page_error.html'
+# Analytics tracking code
+THEME_TRACKINGCODE_TEMPLATE = 'sonar/trackingcode.html'
 
 # Email configuration
 # ===================

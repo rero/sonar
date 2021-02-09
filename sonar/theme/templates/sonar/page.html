@@ -1,148 +1,193 @@
 {# -*- coding: utf-8 -*-
-  Swiss Open Access Repository
-  Copyright (C) 2019 RERO
+Swiss Open Access Repository
+Copyright (C) 2019 RERO
 
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU Affero General Public License as published by
-  the Free Software Foundation, version 3 of the License.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, version 3 of the License.
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-  GNU Affero General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
 
-  You should have received a copy of the GNU Affero General Public License
-  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see
+<http: //www.gnu.org/licenses />.
 #}
 
 {% set page = page|default('int') %}
+{% set description = _('The SONAR project aims to create a scholarly archive that collects, promotes and preserves the
+publications of authors affiliated with Swiss public research institutions.') %}
 
 <!DOCTYPE html>
-<html {% if html_css_classes %} class="{{ html_css_classes|join(' ') }}"{% endif %} lang="{{ current_i18n.locale.language|safe }}" dir="{{ current_i18n.locale.text_direction }}">
-  <head>
-    {% if config.ENV == 'production' %}
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1831395-15"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<html {% if html_css_classes %} class="{{ html_css_classes|join(' ') }}" {% endif %}
+  lang="{{ current_i18n.locale.language|safe }}" dir="{{ current_i18n.locale.text_direction }}">
 
-      gtag('config', 'UA-1831395-15');
-    </script>
-    {% endif %}
-    {%- block head %}
-      {%- block head_meta %}
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        {%- if description %}
-          <meta name="description" content="{{ description }}" />
-        {% endif %}
-        {%- if keywords %}
-          <meta name="keywords" content="{{ keywords }}" />
-        {% endif %}
-        {%- if config.get('THEME_GOOGLE_SITE_VERIFICATION', None) %}
-          {%- for google_id in config.THEME_GOOGLE_SITE_VERIFICATION %}
-            <meta name="google-site-verification" content="{{google_id}}"/>
-          {%- endfor %}
-        {%- endif %}
-      {%- endblock head_meta %}
+<head>
+  {% include config.THEME_TRACKINGCODE_TEMPLATE %}
+  {%- block head %}
+  {%- block head_meta %}
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- if description %}
+  <meta name="description" content="{{ description }}">
+  {% endif %}
+  {%- if keywords %}
+  <meta name="keywords" content="{{ keywords }}">
+  {% endif %}
+  {%- if config.get('THEME_GOOGLE_SITE_VERIFICATION', None) %}
+  {%- for google_id in config.THEME_GOOGLE_SITE_VERIFICATION %}
+  <meta name="google-site-verification" content="{{google_id}}">
+  {%- endfor %}
+  {%- endif %}
+  {%- endblock head_meta %}
 
-      {%- block head_title %}
-        {%- set title = title or _(config.THEME_SITENAME) or _('Invenio') %}
-        <title>{{title}}</title>
-      {%- endblock head_title %}
+  {%- block head_title %}
+  {%- set title = title or _(config.THEME_SITENAME) or _('Invenio') %}
+  <title>{{ title }}</title>
+  {%- endblock head_title %}
 
-      {%- block head_links %}
-        <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="/static/ms-icon-144x144.png">
-        <meta name="theme-color" content="#ffffff">
-        <link rel="apple-touch-icon" sizes="57x57" href="/static/apple-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="/static/apple-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="/static/apple-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="/static/apple-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="/static/apple-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="/static/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="/static/apple-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="/static/apple-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192" href="/static/android-icon-192x192.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="/static/favicon-96x96.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
-        <link rel="manifest" href="/static/manifest.json">
+  {%- block head_links %}
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/static/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="apple-touch-icon" sizes="57x57" href="/static/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/static/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/static/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/static/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/static/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/static/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/static/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/static/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/static/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/static/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+  <link rel="manifest" href="/static/manifest.json">
 
-        {%- if keywords %}
-          <link rel="canonical" href="{{ canonical_url }}"/>
-        {% endif %}
+  {%- if canonical_url %}
+  <link rel="canonical" href="{{ canonical_url }}">
+  {% endif %}
 
-        {%- block head_links_langs %}
-          {%- if alternate_urls %}
-            {%- for alt_ln, alternate_url in alternate_urls.items() %}
-              <link rel="alternate" hreflang="{{ alt_ln }}" href="{{ alternate_url }}"/>
-            {%- endfor %}
-          {%- endif %}
-        {%- endblock %}
+  {%- block head_links_langs %}
+  {%- if alternate_urls %}
+  {%- for alt_ln, alternate_url in alternate_urls.items() %}
+  <link rel="alternate" hreflang="{{ alt_ln }}" href="{{ alternate_url }}">
+  {%- endfor %}
+  {%- endif %}
+  {%- endblock %}
 
-        {%- block head_apple_icons %}
-          {%- for size in [144, 114, 72, 57] %}
-            {%- set icon_name = 'apple-touch-icon-%d-precomposed.png' | format(size) %}
-            <link rel="apple-touch-icon-precomposed" sizes="{{ size }}x{{ size }}" href="{{ url_for('static', filename=icon_name) }}"/>
-          {%- endfor %}
-        {%- endblock head_apple_icons %}
+  {%- block head_apple_icons %}
+  {%- for size in [144, 114, 72, 57] %}
+  {%- set icon_name = 'apple-touch-icon-%d-precomposed.png' | format(size) %}
+  <link rel="apple-touch-icon-precomposed" sizes="{{ size }}x{{ size }}"
+    href="{{ url_for('static', filename=icon_name) }}">
+  {%- endfor %}
+  {%- endblock head_apple_icons %}
 
-      {%- endblock head_links %}
+  {%- endblock head_links %}
 
-      {%- block css %}
-        {{ webpack[get_specific_theme()] }}
-      {%- endblock css %}
+  {%- block css %}
+  {{ webpack[get_specific_theme()] }}
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;700&family=Roboto:wght@300;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+    crossorigin="anonymous">
+  {%- endblock css %}
 
-    {%- endblock head %}
+  {%- endblock head %}
 
-    {% block base_href %}
-    <base href="/">
-    {% endblock base_href %}
-  </head>
-  <body ng-csp {% if body_css_classes %} class="{{ body_css_classes|join(' ') }}"{% endif %}{% if g.ln %} lang="{{ g.ln.split('_', 1)[0]|safe }}"{% if rtl_direction %} {{ rtl_direction|safe }}{% endif %}{% endif %} itemscope itemtype="http://schema.org/WebPage" data-spy="scroll" data-target=".scrollspy-target">
-    {%- block outer_body %}
-      {%- block browserupgrade %}
-        <!--[if lt IE 8]>
+  {% block base_href %}
+  <base href="/">
+  {% endblock base_href %}
+</head>
+
+<body {% if body_css_classes %} class="{{ body_css_classes|join(' ') }}" {% endif %}{% if g.ln %}
+  lang="{{ g.ln.split('_', 1)[0]|safe }}" {% if rtl_direction %} {{ rtl_direction|safe }}{% endif %}{% endif %}
+  itemscope itemtype="http://schema.org/WebPage" data-spy="scroll" data-target=".scrollspy-target">
+  {%- block outer_body %}
+  {%- block browserupgrade %}
+  <!--[if lt IE 8]>
           <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-      {%- endblock browserupgrade %}
+  {%- endblock browserupgrade %}
 
-      {%- block body_inner %}
-          <header>
-              {% include 'sonar/partial/navbar.html' %}
-              {%- block header %}
-              {% include 'sonar/partial/organisation.html' %}
-              {%- endblock header %}
-          </header>
+  {%- block body_inner %}
+  <header>
+    {% include 'sonar/partial/navbar.html' %}
+    {%- block header %}
+    {% include 'sonar/partial/organisation.html' %}
+    {%- endblock header %}
+  </header>
 
-        <div class="container my-5">
-          {%- block breadcrumbs %}
-            {%- include "sonar/breadcrumbs.html" %}
-          {%- endblock breadcrumbs %}
+  <div class="container my-5">
+    {%- block breadcrumbs %}
+    {%- include "sonar/breadcrumbs.html" %}
+    {%- endblock breadcrumbs %}
 
-          {%- block flashmessages %}
-            {%- from "sonar/macros/messages.html" import flashed_messages with context -%}
-            <div class="my-5">{{ flashed_messages() }}</div>
-          {%- endblock %}
+    {%- block flashmessages %}
+    {%- from "sonar/macros/messages.html" import flashed_messages with context -%}
+    <div class="my-5">{{ flashed_messages() }}</div>
+    {%- endblock %}
 
-          {%- block body %}{%- endblock body %}
-        </div>
+    {%- block body %}{%- endblock body %}
+  </div>
 
-        {% include 'sonar/footer.html' %}
-      {%- endblock body_inner %}
+  {% include 'sonar/footer.html' %}
+  {%- endblock body_inner %}
 
-      {%- block javascript %}
-        {% include 'sonar/javascript.html' %}
-      {%- endblock javascript %}
+  {%- block javascript %}
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener('click', function (event) {
+        let link = event.target;
 
-      {%- block trackingcode %}
-        {% include config.THEME_TRACKINGCODE_TEMPLATE %}
-      {%- endblock %}
-    {%- endblock outer_body %}
-  </body>
+        const dropdowns = document.getElementsByClassName('dropdown-menu show');
+
+        // If the clicked element doesn't have the right selector, bail
+        if (!link.matches('.dropdown-toggle') && !link.matches('.navbar-toggler')) {
+          link = link.parentNode
+
+          // This can maybe be a span inside link
+          if (!link.matches('.dropdown-toggle') && !link.matches('.navbar-toggler')) {
+            Array.prototype.forEach.call(dropdowns, function (el, i) {
+              el.classList.remove('show');
+            });
+            return;
+          }
+        };
+
+        // Don't follow the link
+        event.preventDefault();
+
+        // Dropdown corresponding to link
+        const dropdown = link.nextElementSibling;
+
+        // Hide all dropdowns
+        Array.prototype.forEach.call(dropdowns, function (el, i) {
+          if (el.isEqualNode(dropdown) === false) {
+            el.classList.remove('show');
+          }
+        });
+
+        // Already shown
+        if (dropdown.className.search('show') !== -1) {
+          dropdown.classList.remove('show')
+        } else {
+          dropdown.classList.add('show')
+        }
+      }, false);
+    });
+  </script>
+
+  {%- endblock javascript %}
+  {%- endblock outer_body %}
+</body>
+
 </html>
