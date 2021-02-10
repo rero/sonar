@@ -24,6 +24,8 @@ from flask_login import current_user
 from flask_principal import ActionNeed, RoleNeed
 from invenio_access import Permission
 
+from sonar.modules.users.api import current_user_record
+
 superuser_access_permission = Permission(ActionNeed('superuser-access'))
 admin_access_permission = Permission(ActionNeed('admin-access'))
 submitter_access_permission = Permission(RoleNeed('submitter'),
@@ -149,7 +151,7 @@ class RecordPermission:
         """
         self.record = record
         self.func = func
-        self.user = user or current_user
+        self.user = user or current_user_record
 
     def can(self):
         """Return the permission object determining if the action can be done.
@@ -188,11 +190,11 @@ class RecordPermission:
     def list(cls, user, record=None):
         """List permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
-        if user.is_anonymous:
+        if not user:
             return False
 
         return has_superuser_access()
@@ -201,11 +203,11 @@ class RecordPermission:
     def create(cls, user, record=None):
         """Create permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
-        if user.is_anonymous:
+        if not user:
             return False
 
         return has_superuser_access()
@@ -214,11 +216,11 @@ class RecordPermission:
     def read(cls, user, record):
         """Read permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
-        if user.is_anonymous:
+        if not user:
             return False
 
         return has_superuser_access()
@@ -227,11 +229,11 @@ class RecordPermission:
     def update(cls, user, record):
         """Update permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
-        if user.is_anonymous:
+        if not user:
             return False
 
         return has_superuser_access()
@@ -240,11 +242,11 @@ class RecordPermission:
     def delete(cls, user, record):
         """Delete permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
-        if user.is_anonymous:
+        if not user:
             return False
 
         return has_superuser_access()

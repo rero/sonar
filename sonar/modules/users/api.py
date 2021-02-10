@@ -20,7 +20,7 @@
 from functools import partial
 
 from elasticsearch_dsl.query import Q
-from flask import current_app
+from flask import _request_ctx_stack, current_app, has_request_context
 from flask_security import current_user
 from flask_security.confirmable import confirm_user
 from invenio_accounts.ext import hash_password
@@ -34,8 +34,20 @@ from ..fetchers import id_fetcher
 from ..minters import id_minter
 from ..providers import Provider
 
-current_user_record = LocalProxy(lambda: UserRecord.get_user_by_current_user(
-    current_user))
+
+def get_current_user():
+    """Return current user record from context."""
+    if has_request_context() and not hasattr(_request_ctx_stack.top,
+                                             'user_record'):
+        ctx = _request_ctx_stack.top
+        ctx.user_record = None if (
+            current_user.is_anonymous) else UserRecord.get_user_by_email(
+                email=current_user.email)
+
+    return getattr(_request_ctx_stack.top, 'user_record', None)
+
+
+current_user_record = LocalProxy(get_current_user)
 
 # provider
 UserProvider = type('UserProvider', (Provider, ), dict(pid_type='user'))
@@ -201,14 +213,6 @@ class UserRecord(SonarRecord):
         for role in self.available_roles:
             if role in db_roles:
                 self.remove_role_from_account(role)
-
-    @classmethod
-    def get_user_by_current_user(cls, user):
-        """Get user by current logged user."""
-        if user.is_anonymous:
-            return None
-
-        return cls.get_user_by_email(email=user.email)
 
     @classmethod
     def get_user_by_email(cls, email):

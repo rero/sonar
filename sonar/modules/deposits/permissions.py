@@ -20,7 +20,6 @@
 from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.organisations.api import current_organisation
 from sonar.modules.permissions import RecordPermission
-from sonar.modules.users.api import current_user_record
 
 
 class DepositPermission(RecordPermission):
@@ -30,12 +29,12 @@ class DepositPermission(RecordPermission):
     def list(cls, user, record=None):
         """List permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
         # At least for submitters logged users.
-        if not current_user_record or not current_user_record.is_submitter:
+        if not user or not user.is_submitter:
             return False
 
         return True
@@ -44,48 +43,48 @@ class DepositPermission(RecordPermission):
     def create(cls, user, record=None):
         """Create permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
         # No logged user.
-        if not current_user_record:
+        if not user:
             return False
 
-        return current_user_record.is_submitter
+        return user.is_submitter
 
     @classmethod
     def read(cls, user, record):
         """Read permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
         # At least for submitters logged users.
-        if not current_user_record or not current_user_record.is_submitter:
+        if not user or not user.is_submitter:
             return False
 
         # Superuser is allowd
-        if current_user_record.is_superuser:
+        if user.is_superuser:
             return True
 
         deposit = DepositRecord.get_record_by_pid(record['pid'])
         deposit = deposit.replace_refs()
 
         # Moderators are allowed only for their organisation's deposits.
-        if current_user_record.is_moderator:
+        if user.is_moderator:
             return current_organisation['pid'] == deposit['user'][
                 'organisation']['pid']
 
         # Submitters have only access to their own deposits.
-        return current_user_record['pid'] == deposit['user']['pid']
+        return user['pid'] == deposit['user']['pid']
 
     @classmethod
     def update(cls, user, record):
         """Update permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
@@ -96,7 +95,7 @@ class DepositPermission(RecordPermission):
     def delete(cls, user, record):
         """Delete permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """

@@ -20,7 +20,7 @@
 from sonar.modules.organisations.api import OrganisationRecord, \
     current_organisation
 from sonar.modules.permissions import RecordPermission
-from sonar.modules.users.api import UserRecord, current_user_record
+from sonar.modules.users.api import UserRecord
 
 
 class UserPermission(RecordPermission):
@@ -30,11 +30,11 @@ class UserPermission(RecordPermission):
     def list(cls, user, record=None):
         """List permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
-        if not current_user_record:
+        if not user:
             return False
 
         return True
@@ -43,36 +43,36 @@ class UserPermission(RecordPermission):
     def create(cls, user, record=None):
         """Create permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
-        if not current_user_record:
+        if not user:
             return False
 
-        return current_user_record.is_admin
+        return user.is_admin
 
     @classmethod
     def read(cls, user, record):
         """Read permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
-        if not current_user_record:
+        if not user:
             return False
 
         # Can read himself in all cases
-        if current_user_record['pid'] == record['pid']:
+        if user['pid'] == record['pid']:
             return True
 
         # If not admin, no access
-        if not current_user_record.is_admin:
+        if not user.is_admin:
             return False
 
         # Superuser is allowed
-        if current_user_record.is_superuser:
+        if user.is_superuser:
             return True
 
         # Cannot read superusers records
@@ -91,7 +91,7 @@ class UserPermission(RecordPermission):
     def update(cls, user, record):
         """Update permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
@@ -102,20 +102,20 @@ class UserPermission(RecordPermission):
     def delete(cls, user, record):
         """Delete permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
         # At least for admin logged users.
-        if not current_user_record or not current_user_record.is_admin:
+        if not user or not user.is_admin:
             return False
 
         # Superuser is allowed
-        if current_user_record.is_superuser:
+        if user.is_superuser:
             return True
 
         # Cannot delete himself
-        if current_user_record['pid'] == record['pid']:
+        if user['pid'] == record['pid']:
             return False
 
         if not record.get('organisation'):

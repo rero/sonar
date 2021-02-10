@@ -22,7 +22,6 @@ from __future__ import absolute_import, print_function
 from functools import partial
 
 from flask import request
-from flask_security import current_user
 from invenio_records_rest.schemas import Nested, StrictKeysMixin
 from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
@@ -142,10 +141,14 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
         :param item: Dict representing the record.
         :returns: Modified dict.
         """
+        # For public views, no check for permissions
+        if request.args.get('view'):
+            return item
+
         item['permissions'] = {
-            'read': DocumentPermission.read(current_user, item),
-            'update': DocumentPermission.update(current_user, item),
-            'delete': DocumentPermission.delete(current_user, item)
+            'read': DocumentPermission.read(current_user_record, item),
+            'update': DocumentPermission.update(current_user_record, item),
+            'delete': DocumentPermission.delete(current_user_record, item)
         }
 
         return item
