@@ -19,7 +19,6 @@
 
 from sonar.modules.organisations.api import current_organisation
 from sonar.modules.permissions import RecordPermission
-from sonar.modules.users.api import current_user_record
 
 
 class OrganisationPermission(RecordPermission):
@@ -29,12 +28,12 @@ class OrganisationPermission(RecordPermission):
     def list(cls, user, record=None):
         """List permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
         # Only for admin users at least.
-        if not current_user_record or not current_user_record.is_admin:
+        if not user or not user.is_admin:
             return False
 
         return True
@@ -43,27 +42,27 @@ class OrganisationPermission(RecordPermission):
     def create(cls, user, record=None):
         """Create permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
         # Only superuser can create an organisation.
-        return current_user_record and current_user_record.is_superuser
+        return user and user.is_superuser
 
     @classmethod
     def read(cls, user, record):
         """Read permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
         # Only for admin users
-        if not current_user_record or not current_user_record.is_admin:
+        if not user or not user.is_admin:
             return False
 
         # Super user is allowed
-        if current_user_record.is_superuser:
+        if user.is_superuser:
             return True
 
         # For admin users, they can read only their own organisation.
@@ -73,7 +72,7 @@ class OrganisationPermission(RecordPermission):
     def update(cls, user, record):
         """Update permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
@@ -84,7 +83,7 @@ class OrganisationPermission(RecordPermission):
     def delete(cls, user, record):
         """Delete permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True if action can be done.
         """

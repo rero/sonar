@@ -21,7 +21,6 @@ from __future__ import absolute_import, print_function
 
 from functools import partial
 
-from flask_security import current_user
 from invenio_records_rest.schemas import StrictKeysMixin
 from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
@@ -30,6 +29,7 @@ from marshmallow import fields, pre_dump, pre_load
 from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.deposits.permissions import DepositPermission
 from sonar.modules.serializers import schema_from_context
+from sonar.modules.users.api import current_user_record
 
 schema_from_deposit = partial(schema_from_context, schema=DepositRecord.schema)
 
@@ -65,9 +65,9 @@ class DepositMetadataSchemaV1(StrictKeysMixin):
         :returns: Dict of modified record.
         """
         item['permissions'] = {
-            'read': DepositPermission.read(current_user, item),
-            'update': DepositPermission.update(current_user, item),
-            'delete': DepositPermission.delete(current_user, item)
+            'read': DepositPermission.read(current_user_record, item),
+            'update': DepositPermission.update(current_user_record, item),
+            'delete': DepositPermission.delete(current_user_record, item)
         }
 
         return item

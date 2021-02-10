@@ -20,24 +20,6 @@
 from sonar.modules.organisations.api import OrganisationRecord
 
 
-def test_get_organisation_by_user(user):
-    """Test getting organisation by user."""
-    # No user passed
-    organisation = OrganisationRecord.get_organisation_by_user(None)
-    assert not organisation
-
-    # OK
-    organisation = OrganisationRecord.get_organisation_by_user(user)
-    assert 'code' in organisation
-    assert organisation['code'] == 'org'
-
-    user.pop('organisation')
-
-    # User has no organisation
-    organisation = OrganisationRecord.get_organisation_by_user(user)
-    assert not organisation
-
-
 def test_get_or_create(organisation):
     """Test get or create an organisation."""
     # Existing organisation

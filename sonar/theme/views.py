@@ -39,12 +39,11 @@ from invenio_pidstore.models import PersistentIdentifier
 
 from sonar.modules.babel_extractors import translate
 from sonar.modules.deposits.permissions import DepositPermission
-from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.permissions import DocumentPermission
 from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import can_access_manage_view
 from sonar.modules.projects.permissions import ProjectPermission
-from sonar.modules.users.api import UserRecord, current_user_record
+from sonar.modules.users.api import current_user_record
 from sonar.modules.users.permissions import UserPermission
 
 blueprint = Blueprint('sonar',
@@ -118,7 +117,7 @@ def logged_user():
     if current_user.is_anonymous:
         return jsonify({})
 
-    user = UserRecord.get_user_by_current_user(current_user)
+    user = current_user_record
 
     if user and 'resolve' in request.args:
         user = user.replace_refs()

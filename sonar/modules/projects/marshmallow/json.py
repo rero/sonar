@@ -21,7 +21,6 @@ from __future__ import absolute_import, print_function
 
 from functools import partial
 
-from flask_security import current_user
 from invenio_records_rest.schemas import StrictKeysMixin
 from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
@@ -77,9 +76,9 @@ class ProjectMetadataSchemaV1(StrictKeysMixin):
         :returns: Modified dict.
         """
         item['permissions'] = {
-            'read': ProjectPermission.read(current_user, item),
-            'update': ProjectPermission.update(current_user, item),
-            'delete': ProjectPermission.delete(current_user, item)
+            'read': ProjectPermission.read(current_user_record, item),
+            'update': ProjectPermission.update(current_user_record, item),
+            'delete': ProjectPermission.delete(current_user_record, item)
         }
 
         return item

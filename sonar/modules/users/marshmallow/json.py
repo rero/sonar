@@ -21,14 +21,13 @@ from __future__ import absolute_import, print_function
 
 from functools import partial
 
-from flask_security import current_user
 from invenio_records_rest.schemas import StrictKeysMixin
 from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
 from marshmallow import fields, pre_dump, pre_load
 
 from sonar.modules.serializers import schema_from_context
-from sonar.modules.users.api import UserRecord
+from sonar.modules.users.api import UserRecord, current_user_record
 from sonar.modules.users.permissions import UserPermission
 
 schema_from_user = partial(schema_from_context, schema=UserRecord.schema)
@@ -68,9 +67,8 @@ class UserMetadataSchemaV1(StrictKeysMixin):
             return data
 
         # Store current user organisation in new user.
-        user = UserRecord.get_user_by_current_user(current_user)
-        if user.get('organisation'):
-            data['organisation'] = user['organisation']
+        if current_user_record.get('organisation'):
+            data['organisation'] = current_user_record['organisation']
 
         return data
 
@@ -93,9 +91,9 @@ class UserMetadataSchemaV1(StrictKeysMixin):
         :returns: Modified dict of user data.
         """
         item['permissions'] = {
-            'read': UserPermission.read(current_user, item),
-            'update': UserPermission.update(current_user, item),
-            'delete': UserPermission.delete(current_user, item)
+            'read': UserPermission.read(current_user_record, item),
+            'update': UserPermission.update(current_user_record, item),
+            'delete': UserPermission.delete(current_user_record, item)
         }
 
         return item

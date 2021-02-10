@@ -45,25 +45,6 @@ def test_get_moderators(app, organisation, roles):
     assert not list(moderators)
 
 
-def test_get_user_by_current_user(app, client, user_without_role, user):
-    """Test getting a user with email taken from logged user."""
-    record = UserRecord.get_user_by_current_user(current_user)
-    assert record is None
-
-    login_user_via_view(client,
-                        email=user_without_role.email,
-                        password='123456')
-    record = UserRecord.get_user_by_current_user(current_user)
-    assert record is None
-
-    client.get(url_for_security('logout'))
-
-    login_user_via_view(client, email=user['email'], password='123456')
-    record = UserRecord.get_user_by_current_user(current_user)
-    assert 'email' in record
-    assert user['email'] == 'orguser@rero.ch'
-
-
 def test_get_reachable_roles(app):
     """Test get roles covered by the given role."""
     roles = UserRecord.get_reachable_roles(UserRecord.ROLE_MODERATOR)

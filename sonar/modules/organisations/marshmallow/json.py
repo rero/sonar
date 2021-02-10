@@ -21,7 +21,6 @@ from __future__ import absolute_import, print_function
 
 from functools import partial
 
-from flask_security import current_user
 from invenio_records_rest.schemas import StrictKeysMixin
 from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
@@ -31,6 +30,7 @@ from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import has_superuser_access
 from sonar.modules.serializers import schema_from_context
+from sonar.modules.users.api import current_user_record
 
 schema_from_organisation = partial(schema_from_context,
                                    schema=OrganisationRecord.schema)
@@ -76,9 +76,9 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
         :returns: Modified dict.
         """
         item['permissions'] = {
-            'read': OrganisationPermission.read(current_user, item),
-            'update': OrganisationPermission.update(current_user, item),
-            'delete': OrganisationPermission.delete(current_user, item)
+            'read': OrganisationPermission.read(current_user_record, item),
+            'update': OrganisationPermission.update(current_user_record, item),
+            'delete': OrganisationPermission.delete(current_user_record, item)
         }
 
         return item

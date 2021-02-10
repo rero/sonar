@@ -167,8 +167,8 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
         # Embargo access, restriction is outside organisation, user logged but
         # organisations are not corresponding --> file is locked
         monkeypatch.setattr(
-            'sonar.modules.organisations.api.OrganisationRecord.'
-            'get_organisation_by_user', lambda *args: {'pid': 'another-org'})
+            'sonar.modules.documents.utils.current_organisation',
+            {'pid': 'another-org'})
         assert utils.get_file_restriction(
             {
                 'access': 'coar:c_f1cf',
@@ -182,8 +182,8 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
         # Embargo access, restriction is outside organisation, user logged and
         # organisations are matching --> file is accessible
         monkeypatch.setattr(
-            'sonar.modules.organisations.api.OrganisationRecord.'
-            'get_organisation_by_user', lambda *args: {'pid': 'org'})
+            'sonar.modules.documents.utils.current_organisation',
+            {'pid': 'org'})
         assert utils.get_file_restriction(
             {
                 'access': 'coar:c_f1cf',
@@ -197,8 +197,8 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
         # Embargo access, restriction is outside organisation, user logged and
         # IP is not white listed --> file is locked
         monkeypatch.setattr(
-            'sonar.modules.organisations.api.OrganisationRecord.'
-            'get_organisation_by_user', lambda *args: {'pid': 'another-org'})
+            'sonar.modules.documents.utils.current_organisation',
+            {'pid': 'another-org'})
         organisation['allowedIps'] = ''
         assert utils.get_file_restriction(
             {
@@ -269,8 +269,8 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
         # Restricted access, restriction is outside organisation, user logged
         # but organisations are not corresponding --> file is locked
         monkeypatch.setattr(
-            'sonar.modules.organisations.api.OrganisationRecord.'
-            'get_organisation_by_user', lambda *args: {'pid': 'another-org'})
+            'sonar.modules.documents.utils.current_organisation',
+            {'pid': 'another-org'})
         assert utils.get_file_restriction(
             {
                 'access': 'coar:c_16ec',
@@ -283,8 +283,8 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
         # Restricted access, restriction is outside organisation, user logged
         # and organisations are matching --> file is accessible
         monkeypatch.setattr(
-            'sonar.modules.organisations.api.OrganisationRecord.'
-            'get_organisation_by_user', lambda *args: {'pid': 'org'})
+            'sonar.modules.documents.utils.current_organisation',
+            {'pid': 'org'})
         assert utils.get_file_restriction(
             {
                 'access': 'coar:c_16ec',
@@ -297,8 +297,8 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
         # Restricted access, restriction is outside organisation, user logged
         # and IP is not white listed --> file is locked
         monkeypatch.setattr(
-            'sonar.modules.organisations.api.OrganisationRecord.'
-            'get_organisation_by_user', lambda *args: {'pid': 'another-org'})
+            'sonar.modules.documents.utils.current_organisation',
+            {'pid': 'another-org'})
         organisation['allowedIps'] = ''
         assert utils.get_file_restriction(
             {

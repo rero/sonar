@@ -17,13 +17,10 @@
 
 """Permissions for projects."""
 
-from flask import request
-
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.organisations.api import current_organisation
 from sonar.modules.permissions import RecordPermission
 from sonar.modules.projects.api import ProjectRecord
-from sonar.modules.users.api import current_user_record
 
 
 class ProjectPermission(RecordPermission):
@@ -33,18 +30,17 @@ class ProjectPermission(RecordPermission):
     def list(cls, user, record=None):
         """List permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param record: Record to check.
         :returns: True is action can be done.
         """
-        return (False if not current_user_record else
-                current_user_record.is_submitter)
+        return (False if not user else user.is_submitter)
 
     @classmethod
     def create(cls, user, record=None):
         """Create permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param record: Record to check.
         :returns: True is action can be done.
         """
@@ -54,12 +50,12 @@ class ProjectPermission(RecordPermission):
     def read(cls, user, record):
         """Read permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param record: Record to check.
         :returns: True is action can be done.
         """
         # At least for submitters logged users.
-        if not current_user_record or not current_user_record.is_submitter:
+        if not user or not user.is_submitter:
             return False
 
         return True
@@ -68,16 +64,16 @@ class ProjectPermission(RecordPermission):
     def update(cls, user, record):
         """Update permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param record: Record to check.
         :returns: True is action can be done.
         """
         # At least for submitters logged users.
-        if not current_user_record or not current_user_record.is_submitter:
+        if not user or not user.is_submitter:
             return False
 
         # Superuser is allowd
-        if current_user_record.is_superuser:
+        if user.is_superuser:
             return True
 
         project = ProjectRecord.get_record_by_pid(record['pid'])
@@ -85,18 +81,18 @@ class ProjectPermission(RecordPermission):
 
         # For admin or moderators users, they can update only their
         # organisation's projects.
-        if current_user_record.is_moderator:
+        if user.is_moderator:
             return current_organisation['pid'] == project['organisation'][
                 'pid']
 
         # For submitters, they can only modify their own projects
-        return current_user_record['pid'] == project['user']['pid']
+        return user['pid'] == project['user']['pid']
 
     @classmethod
     def delete(cls, user, record):
         """Delete permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param record: Record to check.
         :returns: True if action can be done.
         """

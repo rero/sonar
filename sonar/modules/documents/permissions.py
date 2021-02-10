@@ -20,10 +20,8 @@
 from flask import request
 
 from sonar.modules.documents.api import DocumentRecord
-from sonar.modules.organisations.api import OrganisationRecord, \
-    current_organisation
+from sonar.modules.organisations.api import current_organisation
 from sonar.modules.permissions import RecordPermission
-from sonar.modules.users.api import current_user_record
 
 
 class DocumentPermission(RecordPermission):
@@ -33,19 +31,19 @@ class DocumentPermission(RecordPermission):
     def list(cls, user, record=None):
         """List permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
         view = request.args.get('view')
 
-        # Documents are accessess in public view, but eventually filtered later
-        # by organisation
+        # Documents are accessible in public view, but eventually filtered
+        # later by organisation
         if view:
             return True
 
         # Only for moderators users.
-        if (not current_user_record or not current_user_record.is_moderator or
+        if (not user or not user.is_moderator or
                 not current_organisation):
             return False
 
@@ -55,27 +53,27 @@ class DocumentPermission(RecordPermission):
     def create(cls, user, record=None):
         """Create permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
         # Only for moderators users
-        return current_user_record and current_user_record.is_moderator
+        return user and user.is_moderator
 
     @classmethod
     def read(cls, user, record):
         """Read permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
         # Only for moderator users.
-        if not current_user_record or not current_user_record.is_moderator:
+        if not user or not user.is_moderator:
             return False
 
         # Superuser is allowed.
-        if current_user_record.is_superuser:
+        if user.is_superuser:
             return True
 
         document = DocumentRecord.get_record_by_pid(record['pid'])
@@ -93,7 +91,7 @@ class DocumentPermission(RecordPermission):
     def update(cls, user, record):
         """Update permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
@@ -104,12 +102,12 @@ class DocumentPermission(RecordPermission):
     def delete(cls, user, record):
         """Delete permission check.
 
-        :param user: Logged user.
+        :param user: Current user record.
         :param recor: Record to check.
         :returns: True is action can be done.
         """
         # Delete is only for admins.
-        if not current_user_record or not current_user_record.is_admin:
+        if not user or not user.is_admin:
             return False
 
         # Same rules as read
