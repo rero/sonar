@@ -18,18 +18,27 @@
 <footer id="footer" class="bg-light mt-5">
   <div class="container">
     <div class="row justify-content-center align-items-center">
-      <div class="col-12 col-sm-6 py-2 py-sm-5 text-center text-sm-left">
-        <div class="d-flex flex-row">
+      <div class="col-lg-8 py-4 py-lg-5 text-center text-lg-left">
+        <div class="d-lg-flex flex-row">
           <div>
-              <a href="{{ url_for('wiki.index') }}">{{_('Help')}}</a>
+            <a href="{{ url_for('wiki.index') }}">{{ _('Help & Documentation') }}</a>
           </div>
-          <div class="ml-3">
-              <a href="https://sonar.ch" target="_blank">{{_('Project and contact')}}</a>
+          <div class="d-none d-lg-block mx-3">|</div>
+          <div>
+            <a href="https://about.sonar.ch/iraas/" target="_blank">{{ _('IR hosting service') }}</a>
+          </div>
+          <div class="d-none d-lg-block mx-3">|</div>
+          <div>
+            <a href="https://about.sonar.ch" target="_blank">{{ _('About SONAR') }}</a>
+          </div>
+          <div class="d-none d-lg-block mx-3">|</div>
+          <div>
+            <a href="https://about.sonar.ch/contact/" target="_blank">{{ _('Contact') }}</a>
           </div>
         </div>
       </div>
-      <div class="col-12 col-sm-6 py-2 py-sm-5 text-center text-sm-right">
-        {% trans link="https://www.rero.ch" %}Powered by <a href="{{link}}" target="_blank">RERO</a>{% endtrans %}
+      <div class="col-lg-4 py-2 py-lg-5 text-center text-lg-right">
+        {% trans link="https://www.rero.ch" %}Powered by <a href="{{ link }}" target="_blank">RERO</a>{% endtrans %}
       </div>
     </div>
   </div>
