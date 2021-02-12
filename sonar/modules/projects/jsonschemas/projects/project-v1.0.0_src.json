@@ -17,12 +17,7 @@
     "name": {
       "title": "Name",
       "type": "string",
-      "minLength": 1,
-      "form": {
-        "templateOptions": {
-          "cssClass": "editor-title"
-        }
-      }
+      "minLength": 1
     },
     "description": {
       "title": "Description",
@@ -31,7 +26,6 @@
       "form": {
         "type": "textarea",
         "templateOptions": {
-          "cssClass": "editor-title",
           "rows": 5
         }
       }
@@ -44,8 +38,7 @@
       "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
       "form": {
         "templateOptions": {
-          "placeholder": "Example: 2020-12-01",
-          "cssClass": "editor-title"
+          "placeholder": "Example: 2020-12-01"
         }
       }
     },
@@ -57,8 +50,7 @@
       "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
       "form": {
         "templateOptions": {
-          "placeholder": "Example: 2020-12-01",
-          "cssClass": "editor-title"
+          "placeholder": "Example: 2020-12-01"
         }
       }
     },
@@ -117,9 +109,6 @@
         "hide": true,
         "navigation": {
           "essential": true
-        },
-        "templateOptions": {
-          "cssClass": "editor-title"
         }
       }
     },
@@ -211,9 +200,6 @@
         "hide": true,
         "navigation": {
           "essential": true
-        },
-        "templateOptions": {
-          "cssClass": "editor-title"
         }
       }
     },
@@ -260,9 +246,6 @@
         "hide": true,
         "navigation": {
           "essential": true
-        },
-        "templateOptions": {
-          "cssClass": "editor-title"
         }
       }
     },
@@ -285,9 +268,6 @@
         "$ref"
       ],
       "form": {
-        "templateOptions": {
-          "cssClass": "editor-title"
-        },
         "expressionProperties": {
           "templateOptions.required": "true"
         }
@@ -313,9 +293,6 @@
         "$ref"
       ],
       "form": {
-        "templateOptions": {
-          "cssClass": "editor-title"
-        },
         "expressionProperties": {
           "templateOptions.required": "true"
         }
