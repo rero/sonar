@@ -311,7 +311,9 @@
           },
           "form": {
             "templateOptions": {
-              "cssClass": "editor-title"
+              "wrappers": [
+                "card"
+              ]
             }
           }
         },
@@ -541,7 +543,9 @@
           },
           "form": {
             "templateOptions": {
-              "cssClass": "editor-title"
+              "wrappers": [
+                "card"
+              ]
             }
           }
         },
@@ -620,7 +624,9 @@
           "form": {
             "hideExpression": "!['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)",
             "templateOptions": {
-              "cssClass": "editor-title"
+              "wrappers": [
+                "card"
+              ]
             }
           }
         },
@@ -656,7 +662,9 @@
           },
           "form": {
             "templateOptions": {
-              "cssClass": "editor-title"
+              "wrappers": [
+                "card"
+              ]
             }
           }
         },
@@ -670,7 +678,9 @@
           },
           "form": {
             "templateOptions": {
-              "cssClass": "editor-title"
+              "wrappers": [
+                "card"
+              ]
             }
           }
         },
@@ -711,7 +721,9 @@
           },
           "form": {
             "templateOptions": {
-              "cssClass": "editor-title"
+              "wrappers": [
+                "card"
+              ]
             }
           }
         },
@@ -748,7 +760,9 @@
           },
           "form": {
             "templateOptions": {
-              "cssClass": "editor-title"
+              "wrappers": [
+                "card"
+              ]
             }
           }
         },
@@ -795,7 +809,9 @@
           "form": {
             "hideExpression": "!['coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'habilitation_thesis', 'advanced_studies_thesis', 'other'].includes(field.parent.model.documentType)",
             "templateOptions": {
-              "cssClass": "editor-title"
+              "wrappers": [
+                "card"
+              ]
             }
           }
         }
@@ -880,12 +896,21 @@
             }
           }
         }
+      },
+      "form": {
+        "templateOptions": {
+          "wrappers": [
+            "card"
+          ]
+        }
       }
     },
     "projects": {
       "title": "Research projects",
       "type": "array",
-      "default": [{}],
+      "default": [
+        {}
+      ],
       "minItems": 0,
       "items": {
         "title": "Research project",
@@ -1013,7 +1038,9 @@
                 },
                 "form": {
                   "templateOptions": {
-                    "cssClass": "editor-title"
+                    "wrappers": [
+                      "card"
+                    ]
                   }
                 }
               },
@@ -1046,7 +1073,9 @@
                 },
                 "form": {
                   "templateOptions": {
-                    "cssClass": "editor-title"
+                    "wrappers": [
+                      "card"
+                    ]
                   }
                 }
               }
@@ -1066,6 +1095,13 @@
             ]
           }
         ]
+      },
+      "form": {
+        "templateOptions": {
+          "wrappers": [
+            "card"
+          ]
+        }
       }
     },
     "diffusion": {

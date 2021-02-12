@@ -354,9 +354,6 @@
         "group": "------------"
       }
     ],
-    "templateOptions": {
-      "cssClass": "editor-title"
-    },
     "expressionProperties": {
       "templateOptions.required": "true"
     }

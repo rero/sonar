@@ -238,9 +238,6 @@
         ]
       },
       "form": {
-        "templateOptions": {
-          "cssClass": "editor-title"
-        },
         "expressionProperties": {
           "templateOptions.required": "true"
         }
@@ -337,11 +334,6 @@
           "type",
           "mainTitle"
         ]
-      },
-      "form": {
-        "templateOptions": {
-          "cssClass": "editor-title"
-        }
       }
     },
     "language": {
@@ -385,9 +377,6 @@
         ]
       },
       "form": {
-        "templateOptions": {
-          "cssClass": "editor-title"
-        },
         "expressionProperties": {
           "templateOptions.required": "true"
         }
@@ -434,9 +423,6 @@
         "hide": true,
         "navigation": {
           "essential": true
-        },
-        "templateOptions": {
-          "cssClass": "editor-title"
         }
       }
     },
@@ -532,6 +518,7 @@
               ]
             },
             "form": {
+              "hide": true,
               "expressionProperties": {
                 "templateOptions.required": "field.parent.model.type && field.parent.model.type !== 'bf:Publication'"
               }
@@ -571,9 +558,6 @@
         ]
       },
       "form": {
-        "templateOptions": {
-          "cssClass": "editor-title"
-        },
         "expressionProperties": {
           "templateOptions.required": "!['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc', 'coar:c_3e5a', 'coar:c_5794', 'coar:c_6670'].includes(field.parent.model.documentType)"
         }
@@ -585,10 +569,7 @@
       "type": "string",
       "minLength": 1,
       "form": {
-        "hide": true,
-        "templateOptions": {
-          "cssClass": "editor-title"
-        }
+        "hide": true
       }
     },
     "otherMaterialCharacteristics": {
@@ -597,10 +578,7 @@
       "type": "string",
       "minLength": 1,
       "form": {
-        "hide": true,
-        "templateOptions": {
-          "cssClass": "editor-title"
-        }
+        "hide": true
       }
     },
     "formats": {
@@ -614,10 +592,7 @@
         "minLength": 1
       },
       "form": {
-        "hide": true,
-        "templateOptions": {
-          "cssClass": "editor-title"
-        }
+        "hide": true
       }
     },
     "additionalMaterials": {
@@ -626,10 +601,7 @@
       "type": "string",
       "minLength": 1,
       "form": {
-        "hide": true,
-        "templateOptions": {
-          "cssClass": "editor-title"
-        }
+        "hide": true
       }
     },
     "series": {
@@ -657,10 +629,7 @@
         ]
       },
       "form": {
-        "hide": true,
-        "templateOptions": {
-          "cssClass": "editor-title"
-        }
+        "hide": true
       }
     },
     "notes": {
@@ -673,10 +642,7 @@
         "minLength": 1
       },
       "form": {
-        "hide": true,
-        "templateOptions": {
-          "cssClass": "editor-title"
-        }
+        "hide": true
       }
     },
     "abstracts": {
@@ -706,9 +672,6 @@
         "hide": true,
         "navigation": {
           "essential": true
-        },
-        "templateOptions": {
-          "cssClass": "editor-title"
         }
       }
     },
@@ -914,9 +877,6 @@
         "hide": true,
         "navigation": {
           "essential": true
-        },
-        "templateOptions": {
-          "cssClass": "editor-title"
         }
       }
     },
@@ -966,9 +926,6 @@
         "hide": true,
         "navigation": {
           "essential": true
-        },
-        "templateOptions": {
-          "cssClass": "editor-title"
         }
       }
     },
@@ -1021,10 +978,7 @@
         ]
       },
       "form": {
-        "hide": true,
-        "templateOptions": {
-          "cssClass": "editor-title"
-        }
+        "hide": true
       }
     },
     "specificCollections": {
@@ -1040,9 +994,6 @@
         "hide": true,
         "navigation": {
           "essential": true
-        },
-        "templateOptions": {
-          "cssClass": "editor-title"
         }
       }
     },
@@ -1127,9 +1078,6 @@
         "hide": true,
         "navigation": {
           "essential": true
-        },
-        "templateOptions": {
-          "cssClass": "editor-title"
         }
       }
     },
@@ -1143,10 +1091,7 @@
         "minLength": 1
       },
       "form": {
-        "hide": true,
-        "templateOptions": {
-          "cssClass": "editor-title"
-        }
+        "hide": true
       }
     },
     "dissertation": {
@@ -1188,10 +1133,7 @@
         "degree"
       ],
       "form": {
-        "hide": true,
-        "templateOptions": {
-          "cssClass": "editor-title"
-        }
+        "hide": true
       },
       "hideExpression": "!['coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'habilitation_thesis', 'advanced_studies_thesis', 'other'].includes(field.parent.model.documentType)"
     },
@@ -1217,10 +1159,7 @@
         "license"
       ],
       "form": {
-        "hide": true,
-        "templateOptions": {
-          "cssClass": "editor-title"
-        }
+        "hide": true
       }
     },
     "contribution": {
@@ -1456,9 +1395,6 @@
         "hide": true,
         "navigation": {
           "essential": true
-        },
-        "templateOptions": {
-          "cssClass": "editor-title"
         }
       }
     },
@@ -1777,11 +1713,9 @@
         ]
       },
       "form": {
+        "hide": true,
         "expressionProperties": {
           "templateOptions.required": "['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_3e5a', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)"
-        },
-        "templateOptions": {
-          "cssClass": "editor-title"
         }
       }
     },
@@ -1814,9 +1748,6 @@
         "hide": true,
         "navigation": {
           "essential": true
-        },
-        "templateOptions": {
-          "cssClass": "editor-title"
         }
       }
     },
@@ -1827,7 +1758,10 @@
     },
     "hiddenFromPublic": {
       "title": "Hidden to public",
-      "type": "boolean"
+      "type": "boolean",
+      "form": {
+        "hide": true
+      }
     }
   },
   "propertiesOrder": [
