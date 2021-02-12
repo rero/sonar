@@ -39,7 +39,7 @@
         {%- if form.recaptcha %}
         <div class="form-group form-group-lg">{{ form.recaptcha() }}</div>
         {%- endif %}
-        <button type="submit" class="btn btn-secondary btn-lg btn-block text-light">{{ _('Sign Up') }}</button>
+        <button type="submit" class="btn btn-secondary btn-lg btn-block text-light">{{ _('Sign up') }}</button>
       </form>
       {%- endwith %}
       <hr class="my-5">
@@ -58,7 +58,7 @@
     </div>
   </div>
   <div class="mt-2 text-right">
-    <a href="{{ url_for_security('login') }}" class="text-light">{{ _('Log In') }}</a>
+    <a href="{{ url_for_security('login') }}" class="text-light">{{ _('Log in') }}</a>
   </div>
 </div>
 {% endblock panel %}
