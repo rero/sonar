@@ -1,5 +1,5 @@
 # English translations for sonar.
-# Copyright (C) 2020 RERO
+# Copyright (C) 2021 RERO
 # This file is distributed under the same license as the sonar project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
 #
