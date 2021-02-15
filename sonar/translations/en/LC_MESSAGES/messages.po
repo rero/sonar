@@ -10,15 +10,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-02-12 15:28+0100\n"
-"PO-Revision-Date: 2021-02-06 17:50+0000\n"
-"Last-Translator: iGor milhit <igor.milhit@rero.ch>\n"
+"PO-Revision-Date: 2021-02-15 09:19+0000\n"
+"Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Language-Team: English <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"en/>\n"
 "Language: en\n"
-"Language-Team: English "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/en/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.5-dev\n"
 "Generated-By: Babel 2.9.0\n"
 
 #: sonar/theme/views.py:67
@@ -28,7 +29,7 @@ msgstr "%(icon)s My account"
 
 #: sonar/theme/templates/sonar/footer.html:32
 msgid "About SONAR"
-msgstr ""
+msgstr "About SONAR"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:694
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:710
@@ -219,7 +220,7 @@ msgstr "Confirm e-mail"
 
 #: sonar/theme/templates/sonar/footer.html:36
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1089
 msgid "Content note"
@@ -576,11 +577,11 @@ msgstr "Harvested"
 
 #: sonar/theme/templates/sonar/footer.html:24
 msgid "Help & Documentation"
-msgstr ""
+msgstr "Help & documentation"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1760
 msgid "Hidden to public"
-msgstr ""
+msgstr "Hidden to public"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:572
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1446
@@ -593,7 +594,7 @@ msgstr ""
 
 #: sonar/theme/templates/sonar/footer.html:28
 msgid "IR hosting service"
-msgstr ""
+msgstr "IR hosting service"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:857
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1669
@@ -765,13 +766,13 @@ msgid "Log in to account"
 msgstr "Log in to account"
 
 #: sonar/theme/templates/sonar/accounts/login.html:41
-#, fuzzy, python-format
+#, python-format
 msgid "Log in with %(type)s"
-msgstr "Sign-in with %(type)s"
+msgstr "Log in with %(type)s"
 
 #: sonar/theme/templates/sonar/accounts/login.html:46
 msgid "Log in with SWITCHaai"
-msgstr ""
+msgstr "Log in with SWITCHaai"
 
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:32
 msgid "Logout"
@@ -826,14 +827,13 @@ msgid "Note"
 msgstr "Note"
 
 #: sonar/theme/templates/sonar/frontpage.html:68
-#, fuzzy
 msgid ""
 "Note: Publications manually deposited in this test portal might "
 "occasionally need to be deleted, for\n"
 "      operational reasons."
 msgstr ""
-"Note: Publications manually deposited in this test portal might "
-"occasionally need to be deleted, for operational reasons."
+"Note: Publications manually deposited in this test portal might occasionally "
+"need to be deleted, for operational reasons."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:636
 msgid "Notes"
@@ -884,9 +884,8 @@ msgid "Organisation has a specific theme for his view."
 msgstr "Organisation has a specific theme for its view."
 
 #: sonar/theme/templates/sonar/partial/navbar.html:25
-#, fuzzy
 msgid "Organisation logo"
-msgstr "Organisation"
+msgstr "Organisation logo"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:51
 msgid "Organisation records can be accessed by a specific URL."
@@ -974,11 +973,12 @@ msgid "Postal code"
 msgstr "Postal code"
 
 #: sonar/theme/templates/sonar/footer.html:41
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Powered by <a href=\"%(link)s\" target=\"_blank\" "
 "rel=\"noopener\">RERO</a>"
-msgstr "Powered by <a href=\"%(link)s\" target=\"_blank\">RERO</a>"
+msgstr ""
+"Powered by <a href=\"%(link)s\" target=\"_blank\" rel=\"noopener\">RERO</a>"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1205
 #: sonar/modules/projects/jsonschemas/projects/project-v1.0.0.json:130
@@ -1090,7 +1090,7 @@ msgstr "SONAR deposit v1.0.0"
 
 #: sonar/theme/templates/sonar/partial/navbar.html:33
 msgid "SONAR logo"
-msgstr ""
+msgstr "SONAR logo"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:8
 msgid "Schema"
@@ -1108,7 +1108,6 @@ msgid "Search"
 msgstr "Search"
 
 #: sonar/theme/templates/sonar/frontpage.html:52
-#, fuzzy
 msgid "Search publications, authors, projects..."
 msgstr "Search publications, authors, projects, ..."
 
@@ -1250,32 +1249,30 @@ msgid "Swiss Open Access Repository"
 msgstr "Swiss Open Access Repository"
 
 #: sonar/theme/templates/sonar/page.html:20
-#, fuzzy
 msgid ""
 "The SONAR project aims to create a scholarly archive that collects, "
 "promotes and preserves the\n"
 "publications of authors affiliated with Swiss public research "
 "institutions."
 msgstr ""
-"The SONAR project aims to create a scholarly archive that collects, "
-"promotes and preserves the publications of authors affiliated with Swiss "
-"public research institutions."
+"The SONAR project aims to create a scholarly archive that collects, promotes "
+"and preserves the publications of authors affiliated with Swiss public "
+"research institutions."
 
 #: sonar/templates/security/email/welcome.html:10
 msgid "The SONAR team at RERO"
 msgstr "The SONAR team at RERO"
 
 #: sonar/theme/templates/sonar/frontpage.html:80
-#, fuzzy
 msgid ""
 "The Swiss Open Access Repository is an archive of scholarly publications."
 " It collects and promotes open\n"
 "      access publications by authors affiliated with Swiss public "
 "research institutions."
 msgstr ""
-"The SONAR project aims to create a scholarly archive that collects, "
-"promotes and preserves the publications of authors affiliated with Swiss "
-"public research institutions."
+"The Swiss Open Access Repository is an archive of scholarly publications. It "
+"collects and promotes open access publications by authors affiliated with "
+"Swiss public research institutions."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:673
 msgid ""
@@ -4305,4 +4302,3 @@ msgstr "vol."
 
 #~ msgid "The project"
 #~ msgstr "The project"
-
