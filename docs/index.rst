@@ -51,6 +51,5 @@ interested.
    :maxdepth: 1
 
    contributing
-   changes
    license
    authors
