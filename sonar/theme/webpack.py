@@ -29,6 +29,7 @@ theme = WebpackBundle(
     entry={
         'global-theme': './scss/global/theme.scss',
         'usi-theme': './scss/usi/theme.scss',
+        'vge-theme': './scss/vge/theme.scss',
         'preview': './scss/preview.scss',
     },
     dependencies={
