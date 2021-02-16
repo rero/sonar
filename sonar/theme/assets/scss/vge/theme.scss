@@ -1,0 +1,45 @@
+/*
+  Swiss Open Access Repository
+  Copyright (C) 2021 RERO
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published by
+  the Free Software Foundation, version 3 of the License.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+@import "../common/variables";
+@import "../common/theme";
+
+/* Bandeau supérieur */
+.bg-header {
+  background-color: #cb4b40;
+}
+.navbar-dark .navbar-nav .nav-link {
+  color: #205078;
+}
+
+/* Bandeau principal */
+.bg-organisation {
+  background-color: #eeeeee;
+
+  .btn-outline-light, .form-control {
+    color: #8F8F8F;
+    border-color: #8F8F8F;
+  }
+}
+
+/* Bandeau intermédiaire */
+.text-light {
+  color: #000000 !important;
+}
+.bg-secondary {
+  background-color: #f7de89 !important
+}
