@@ -56,7 +56,6 @@ blueprint = Blueprint('sonar',
 def init_view():
     """Do some stuff before rendering any view."""
     current_menu.submenu('settings').submenu('security').hide()
-    current_menu.submenu('settings').submenu('applications').hide()
     current_menu.submenu('settings').submenu('admin').hide()
 
 
