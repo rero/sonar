@@ -207,6 +207,15 @@ def schemas(record_type):
                 if 'organisation' in schema.get('propertiesOrder', []):
                     schema['propertiesOrder'].remove('organisation')
 
+        # Remove modes fields if user does not have superuser role.
+        if (record_type == 'organisations' and
+                not current_user_record.is_superuser):
+            if 'isDedicated' in schema.get('propertiesOrder', []):
+                schema['propertiesOrder'].remove('isDedicated')
+
+            if 'isShared' in schema.get('propertiesOrder', []):
+                schema['propertiesOrder'].remove('isShared')
+
         return jsonify({'schema': prepare_schema(schema)})
     except JSONSchemaNotFound:
         abort(404)

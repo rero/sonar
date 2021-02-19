@@ -223,11 +223,11 @@ def test_update(client, make_organisation, superuser, admin, moderator,
 
     # Logged as admin and try to modify organisation's modes
     org['isDedicated'] = True
-    org['isShared'] = True
     res = client.put(url_for('invenio_records_rest.org_item', pid_value='org'),
                      data=json.dumps(org.dumps()),
                      headers=headers)
-    assert res.status_code == 400
+    assert res.status_code == 200
+    assert not res.json['metadata']['isDedicated']
 
     # Logged as admin of other organisation
     res = client.put(url_for('invenio_records_rest.org_item',

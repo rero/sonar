@@ -157,6 +157,12 @@ def test_schemas(client, admin, user):
     res = client.get(url_for('sonar.schemas', record_type='not_existing'))
     assert res.status_code == 404
 
+    # Organisations, with admin user --> no fields `isShared` and `isDedicated`
+    res = client.get(url_for('sonar.schemas', record_type='organisations'))
+    assert res.status_code == 200
+    assert 'isShared' not in res.json['schema']['propertiesOrder']
+    assert 'isDedicated' not in res.json['schema']['propertiesOrder']
+
     login_user_via_session(client, email=user['email'])
 
     res = client.get(url_for('sonar.schemas', record_type='users'))
