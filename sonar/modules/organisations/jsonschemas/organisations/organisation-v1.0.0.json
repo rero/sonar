@@ -63,7 +63,7 @@
     },
     "allowedIps": {
       "title": "Allowed IP addresses",
-      "description": "List of IP addresses or ranges that allows to display files. One rule per line.",
+      "description": "List of IP addresses or ranges that allow access to private files (access: embargoed or restricted), which are accessible only within the organisation. Note: the bibliographic record (metadata) is always public. Enter one rule per line.",
       "type": "string",
       "minLength": 1,
       "form": {
