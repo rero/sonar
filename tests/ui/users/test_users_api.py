@@ -138,8 +138,7 @@ def test_delete(app, admin):
     with app.app_context():
         datastore = app.extensions['security'].datastore
         user = datastore.find_user(email='orgadmin@rero.ch')
-        assert not user.roles
-        assert not user.is_active
+        assert not user
 
 
 def test_update(app, admin, roles):

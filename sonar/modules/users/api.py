@@ -156,8 +156,8 @@ class UserRecord(SonarRecord):
         # Remove roles from user account.
         self.remove_roles()
 
-        # Deactivate account.
-        datastore.deactivate_user(self.user)
+        # Delete account.
+        datastore.delete_user(self.user)
 
         return super(UserRecord, self).delete(force=force,
                                               dbcommit=dbcommit,
