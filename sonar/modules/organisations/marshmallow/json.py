@@ -26,7 +26,8 @@ from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
 from marshmallow import fields, pre_dump, pre_load
 
-from sonar.modules.organisations.api import OrganisationRecord
+from sonar.modules.organisations.api import OrganisationRecord, \
+    current_organisation
 from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import has_superuser_access
 from sonar.modules.serializers import schema_from_context
@@ -36,18 +37,6 @@ schema_from_organisation = partial(schema_from_context,
                                    schema=OrganisationRecord.schema)
 
 
-def can_activate_mode(value):
-    """Check if current user can activate `shared` or `dedicated` mode.
-
-    If the value is set to False, validation passed because the mode is not
-    activated.
-
-    :param value: Boolean value posted.
-    :returns: True if property can be modified
-    """
-    return not value or has_superuser_access()
-
-
 class OrganisationMetadataSchemaV1(StrictKeysMixin):
     """Schema for the organisation metadata."""
 
@@ -55,8 +44,8 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
     code = SanitizedUnicode(required=True)
     name = SanitizedUnicode(required=True)
     description = SanitizedUnicode()
-    isShared = fields.Boolean(validate=can_activate_mode)
-    isDedicated = fields.Boolean(validate=can_activate_mode)
+    isShared = fields.Boolean()
+    isDedicated = fields.Boolean()
     allowedIps = SanitizedUnicode()
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
@@ -92,6 +81,19 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
         """
         data.pop('permissions', None)
 
+        return data
+
+    @pre_load
+    def override_modes(self, data, **kwargs):
+        """Override organisation's modes.
+
+        For non super users, the modes (isShared, isDedicated) is not saved
+        by posting the data, but guessed from user's organisation.
+        """
+        if not has_superuser_access():
+            data['isShared'] = current_organisation.get('isShared', False)
+            data['isDedicated'] = current_organisation.get(
+                'isDedicated', False)
         return data
 
 
