@@ -400,6 +400,19 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "0.4.4"
 
 [[package]]
+category = "main"
+description = "Library for COUNTER-compliant detection of machines and robots."
+name = "counter-robots"
+optional = false
+python-versions = "*"
+version = "2018.6"
+
+[package.extras]
+all = ["Sphinx (>=1.5.1)", "check-manifest (>=0.25)", "coverage (>=4.0)", "isort (>=4.3.3)", "pydocstyle (>=1.0.0)", "pytest-cov (>=1.8.0)", "pytest-pep8 (>=1.0.6)", "pytest (>=2.8.0)", "Sphinx (>=1.5.1)", "check-manifest (>=0.25)", "coverage (>=4.0)", "isort (>=4.3.3)", "pydocstyle (>=1.0.0)", "pytest-cov (>=1.8.0)", "pytest-pep8 (>=1.0.6)", "pytest (>=2.8.0)"]
+docs = ["Sphinx (>=1.5.1)"]
+tests = ["check-manifest (>=0.25)", "coverage (>=4.0)", "isort (>=4.3.3)", "pydocstyle (>=1.0.0)", "pytest-cov (>=1.8.0)", "pytest-pep8 (>=1.0.6)", "pytest (>=2.8.0)"]
+
+[[package]]
 category = "dev"
 description = "Code coverage measurement for Python"
 name = "coverage"
@@ -1000,6 +1013,7 @@ WTForms = "*"
 reference = "647dd97880e2105948071b041286f318bf2628f7"
 type = "git"
 url = "https://github.com/rero/flask-wiki.git"
+
 [[package]]
 category = "main"
 description = "Simple integration of Flask and WTForms."
@@ -1753,6 +1767,7 @@ tests = ["check-manifest (>=0.35)", "coverage (>=4.3.4)", "isort (4.2.2)", "mock
 reference = "fe55e095a8e78b36cfad875f752f2facc2908bae"
 type = "git"
 url = "https://github.com/inveniosoftware/invenio-oaiharvester.git"
+
 [[package]]
 category = "main"
 description = "Invenio module that implements OAI-PMH server."
@@ -1904,6 +1919,24 @@ all = ["Sphinx (>=1.5.1,<3)", "invenio-files-rest (>=1.0.0)", "invenio-records-f
 docs = ["Sphinx (>=1.5.1,<3)"]
 files = ["invenio-files-rest (>=1.0.0)", "invenio-records-files (>=1.1.0)"]
 tests = ["invenio-config (>=1.0.2)", "invenio-db (>=1.0.2)", "mock (>=1.3.0)", "pytest-invenio (>=1.4.0)"]
+
+[[package]]
+category = "main"
+description = "Invenio module for managing queues."
+name = "invenio-queues"
+optional = false
+python-versions = "*"
+version = "1.0.0a3"
+
+[package.dependencies]
+invenio-base = ">=1.2.2"
+invenio-celery = ">=1.2.0"
+redis = ">=3.2.1"
+
+[package.extras]
+all = ["Sphinx (>=3)", "pytest-invenio (>=1.4.0)"]
+docs = ["Sphinx (>=3)"]
+tests = ["pytest-invenio (>=1.4.0)"]
 
 [[package]]
 category = "main"
@@ -2077,6 +2110,33 @@ invenio-i18n = ">=1.2.0"
 all = ["Sphinx (>=1.5.1)", "check-manifest (>=0.25)", "coverage (>=4.0)", "invenio-db (>=1.0.0)", "invenio-records (>=1.0.0)", "isort (>=4.3.0)", "pydocstyle (>=1.0.0)", "pytest-cov (>=1.8.0)", "pytest-pep8 (>=1.0.6)", "pytest (>=2.8.0,<3.3.0 || >3.3.0)"]
 docs = ["Sphinx (>=1.5.1)"]
 tests = ["check-manifest (>=0.25)", "coverage (>=4.0)", "invenio-db (>=1.0.0)", "invenio-records (>=1.0.0)", "isort (>=4.3.0)", "pydocstyle (>=1.0.0)", "pytest-cov (>=1.8.0)", "pytest-pep8 (>=1.0.6)", "pytest (>=2.8.0,<3.3.0 || >3.3.0)"]
+
+[[package]]
+category = "main"
+description = "Invenio module for collecting statistics."
+name = "invenio-stats"
+optional = false
+python-versions = "*"
+version = "1.0.0a18"
+
+[package.dependencies]
+counter-robots = ">=2018.6"
+invenio-base = ">=1.2.2"
+invenio-cache = ">=1.0.0"
+invenio-celery = ">=1.1.3"
+invenio-queues = ">=1.0.0a2"
+maxminddb-geolite2 = ">=2017.0404"
+python-dateutil = ">=2.6.1"
+python-geoip = ">=1.2"
+
+[package.extras]
+all = ["Sphinx (>=1.4)", "check-manifest (>=0.35)", "coverage (>=4.0)", "invenio-accounts (>=1.0.1)", "invenio-db (>=1.0.2)", "invenio-files-rest (>=1.0.0a23)", "invenio-oauth2server (>=1.0.1)", "invenio-records (>=1.0.0)", "invenio-records-ui (>=1.0.1)", "isort (>=4.2.15)", "pydocstyle (>=1.0.0)", "pytest-cov (>=1.8.0)", "pytest-pep8 (>=1.0.6)", "pytest (>=3.8.1,<4)"]
+docs = ["Sphinx (>=1.4)"]
+elasticsearch2 = ["invenio-search (>=1.2.3)"]
+elasticsearch5 = ["invenio-search (>=1.2.3)"]
+elasticsearch6 = ["invenio-search (>=1.2.3)"]
+elasticsearch7 = ["invenio-search (>=1.2.3)"]
+tests = ["check-manifest (>=0.35)", "coverage (>=4.0)", "invenio-accounts (>=1.0.1)", "invenio-db (>=1.0.2)", "invenio-files-rest (>=1.0.0a23)", "invenio-oauth2server (>=1.0.1)", "invenio-records (>=1.0.0)", "invenio-records-ui (>=1.0.1)", "isort (>=4.2.15)", "pydocstyle (>=1.0.0)", "pytest-cov (>=1.8.0)", "pytest-pep8 (>=1.0.6)", "pytest (>=3.8.1,<4)"]
 
 [[package]]
 category = "main"
@@ -3059,6 +3119,14 @@ version = "1.0.4"
 
 [[package]]
 category = "main"
+description = "Provides GeoIP functionality for Python."
+name = "python-geoip"
+optional = false
+python-versions = "*"
+version = "1.2"
+
+[[package]]
+category = "main"
 description = "Python extension for computing string edit distances and similarities."
 name = "python-levenshtein"
 optional = false
@@ -3615,7 +3683,7 @@ urllib3 = ">=1.24.2,<2.0.0"
 [[package]]
 category = "main"
 description = "Backported and Experimental Type Hints for Python 3.5+"
-marker = "python_version < \"3.8\" or python_version >= \"3.7\" and python_version < \"3.8\""
+marker = "python_version < \"3.8\" or python_version >= \"3.7\" and python_version < \"3.8\" or python_version >= \"3.7\" and python_version < \"3.8\" and (python_version < \"3.8\" or python_version >= \"3.7\" and python_version < \"3.8\")"
 name = "typing-extensions"
 optional = false
 python-versions = "*"
@@ -3862,7 +3930,7 @@ version = "0.12.0"
 [[package]]
 category = "main"
 description = "Backport of pathlib-compatible object wrapper for zip files"
-marker = "python_version < \"3.8\" or python_version >= \"3.7\" and python_version < \"3.8\""
+marker = "python_version < \"3.8\" or python_version >= \"3.7\" and python_version < \"3.8\" or python_version >= \"3.7\" and python_version < \"3.8\" and (python_version < \"3.8\" or python_version >= \"3.7\" and python_version < \"3.8\")"
 name = "zipp"
 optional = false
 python-versions = ">=3.6"
@@ -3873,7 +3941,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pytest (>=3.5,<3.7.3 || >3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pytest-cov", "jaraco.test (>=3.2.0)", "jaraco.itertools", "func-timeout", "pytest-black (>=0.3.7)", "pytest-mypy"]
 
 [metadata]
-content-hash = "f3cbbdf11606b5b58be31b1ccc327c3c6fbd6732c9d657746069ec70f9e6ca0c"
+content-hash = "45e891e868a81fc331584114617791b010a25b40ffb285d61b428c62ddad3b23"
 lock-version = "1.0"
 python-versions = "^3.6"
 
@@ -4060,6 +4128,10 @@ click-repl = [
 ]
 colorama = [
     {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
+]
+counter-robots = [
+    {file = "counter-robots-2018.6.tar.gz", hash = "sha256:6c231604a4bfa9b93d47d484e7e38219f231bdd15436561b0f4a2afc8a9f5b42"},
+    {file = "counter_robots-2018.6-py2.py3-none-any.whl", hash = "sha256:b4f4c4a0ce854fd4f012934084f8d5060ef9b2008e4e90d96cc79265dc93e7a9"},
 ]
 coverage = [
     {file = "coverage-5.3-cp27-cp27m-macosx_10_13_intel.whl", hash = "sha256:bd3166bb3b111e76a4f8e2980fa1addf2920a4ca9b2b8ca36a3bc3dedc618270"},
@@ -4409,6 +4481,10 @@ invenio-previewer = [
     {file = "invenio-previewer-1.2.2.tar.gz", hash = "sha256:98fb75a6d1f482a9ad503ef7488dabe94ecf39bdb38e811d6e2986b664218c01"},
     {file = "invenio_previewer-1.2.2-py2.py3-none-any.whl", hash = "sha256:f873afc9e099c381f2f6762f8ae675c68255b55b41232f4faa33ce33b9ecd7f0"},
 ]
+invenio-queues = [
+    {file = "invenio-queues-1.0.0a3.tar.gz", hash = "sha256:bbca40a03fb6427e1193557a7a1841e2a0a29ae9400c4198b6f7a839a771337c"},
+    {file = "invenio_queues-1.0.0a3-py2.py3-none-any.whl", hash = "sha256:15cf3ea8487a387c07c6cce7f955aa9d64570884f2a6907dbabe8660d186e9e4"},
+]
 invenio-records = [
     {file = "invenio-records-1.3.2.tar.gz", hash = "sha256:9cc95def65fdb46db21d935c0e29bb9296c749f17ac97c0962653ffa736b6414"},
     {file = "invenio_records-1.3.2-py2.py3-none-any.whl", hash = "sha256:8bc6a64446d23ea9e4b64fbf2069d0218d75a7313946ca1055a142ba0076b103"},
@@ -4436,6 +4512,10 @@ invenio-search = [
 invenio-search-ui = [
     {file = "invenio-search-ui-1.2.0.tar.gz", hash = "sha256:e1c7908c41a2b48f2360960c5627fd14061d6640752b774bdde8900c7acc91af"},
     {file = "invenio_search_ui-1.2.0-py2.py3-none-any.whl", hash = "sha256:107070404fc2bf85a2e1797c0dd46cf4e0a103090af5f11830e4505cfdb4e69f"},
+]
+invenio-stats = [
+    {file = "invenio-stats-1.0.0a18.tar.gz", hash = "sha256:54f8b3b008209c5a0918ce3b22435c71664833868842620297948d2c5d7f16ad"},
+    {file = "invenio_stats-1.0.0a18-py2.py3-none-any.whl", hash = "sha256:91a377a1e5db8a43ebf52c15868550f336682beb16337f8052acfccb74a78f10"},
 ]
 invenio-theme = [
     {file = "invenio-theme-1.1.4.tar.gz", hash = "sha256:d642c08df6a8af099188a48043aedfe8a44971ebaf67bc8ae21cf1a96eae2916"},
@@ -4876,6 +4956,10 @@ python-editor = [
     {file = "python_editor-1.0.4-py2.7.egg", hash = "sha256:ea87e17f6ec459e780e4221f295411462e0d0810858e055fc514684350a2f522"},
     {file = "python_editor-1.0.4-py3-none-any.whl", hash = "sha256:1bf6e860a8ad52a14c3ee1252d5dc25b2030618ed80c022598f00176adc8367d"},
     {file = "python_editor-1.0.4-py3.5.egg", hash = "sha256:c3da2053dbab6b29c94e43c486ff67206eafbe7eb52dbec7390b5e2fb05aac77"},
+]
+python-geoip = [
+    {file = "python-geoip-1.2.tar.gz", hash = "sha256:b7b11dab42bffba56943b3199e3441f41cea145244d215844ecb6de3d5fb2df5"},
+    {file = "python_geoip-1.2-py27-none-any.whl", hash = "sha256:fb0fa723d0cef2b52807afb7da154877125e0d40f94ec69707511549a8d431c9"},
 ]
 python-levenshtein = [
     {file = "python-Levenshtein-0.12.0.tar.gz", hash = "sha256:033a11de5e3d19ea25c9302d11224e1a1898fe5abd23c61c7c360c25195e3eb1"},

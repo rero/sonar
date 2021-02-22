@@ -24,6 +24,8 @@ import json
 from flask import Blueprint, abort, current_app, g, render_template, request
 from flask_babelex import gettext as _
 from invenio_i18n.ext import current_i18n
+from invenio_pidstore.models import PersistentIdentifier
+from invenio_records_ui.signals import record_viewed
 
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.utils import has_external_urls_for_files, \
@@ -89,6 +91,14 @@ def detail(pid_value, view='global'):
 
     if not record or record.get('hiddenFromPublic'):
         abort(404)
+
+    # Send signal when record is viewed
+    pid = PersistentIdentifier.get('doc', pid_value)
+    record_viewed.send(
+        current_app._get_current_object(),
+        pid=pid,
+        record=record,
+    )
 
     # Add restriction, link and thumbnail to files
     if record.get('_files'):

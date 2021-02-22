@@ -35,6 +35,7 @@ lxml = ">=4.6.2"
 webdavclient3 = "^3.14.5"
 fuzzywuzzy = "^0.18.0"
 python-Levenshtein = "^0.12.0"
+invenio-stats = "^1.0.0-alpha.18"
 
 [tool.poetry.dev-dependencies]
 Flask-Debugtoolbar = ">=0.10.1"
