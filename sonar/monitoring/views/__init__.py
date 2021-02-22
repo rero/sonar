@@ -19,8 +19,9 @@
 
 from functools import wraps
 
-from flask import Blueprint, abort, jsonify
+from flask import Blueprint, abort, jsonify, request
 from flask_security import current_user
+from invenio_search import current_search_client
 
 from sonar.modules.permissions import superuser_access_permission
 from sonar.monitoring.api.data_integrity import DataIntegrityMonitoring
@@ -35,49 +36,77 @@ def is_superuser(func):
     @wraps(func)
     def decorated_view(*args, **kwargs):
         if not current_user.is_authenticated:
-            return jsonify(), 401
+            return jsonify({'error': 'Unauthorized'}), 401
 
         if not superuser_access_permission.can():
-            return jsonify({'status': 'error: Forbidden'}), 403
+            return jsonify({'error': 'Forbidden'}), 403
 
         return func(*args, **kwargs)
 
     return decorated_view
 
 
-@blueprint.route('/db/connections/count')
+@blueprint.before_request
 @is_superuser
+def check_for_superuser():
+    """Check if user is superuser before each request, with decorator."""
+
+
+@blueprint.route('/db/connections/count')
 def db_connection_count():
     """Information about current database connections."""
     try:
         db_monitoring = DatabaseMonitoring()
-        return jsonify(db_monitoring.count_connections())
-    except Exception:
-        abort(500)
+        return jsonify({'data': db_monitoring.count_connections()})
+    except Exception as exception:
+        return jsonify({'error': str(exception)}), 500
 
 
 @blueprint.route('/db/activity')
-@is_superuser
 def db_activity():
     """Current database activity."""
     try:
         db_monitoring = DatabaseMonitoring()
-        return jsonify(db_monitoring.activity())
-    except Exception:
-        abort(500)
+        return jsonify({'data': db_monitoring.activity()})
+    except Exception as exception:
+        return jsonify({'error': str(exception)}), 500
 
 
 @blueprint.route('/data/status')
 def data_status():
     """Status of data integrity."""
-    data_monitoring = DataIntegrityMonitoring()
-    return jsonify(
-        {'status': 'green' if not data_monitoring.hasError() else 'red'})
+    try:
+        data_monitoring = DataIntegrityMonitoring()
+        return jsonify({
+            'data': {
+                'status': 'green' if not data_monitoring.has_error() else 'red'
+            }
+        })
+    except Exception as exception:
+        return jsonify({'error': str(exception)}), 500
 
 
 @blueprint.route('/data/info')
-@is_superuser
 def data_info():
     """Info of data integrity."""
-    data_monitoring = DataIntegrityMonitoring()
-    return jsonify(data_monitoring.info())
+    try:
+        data_monitoring = DataIntegrityMonitoring()
+        return jsonify({
+            'data':
+            data_monitoring.info(with_detail=('detail' in request.args))
+        })
+    except Exception as exception:
+        return jsonify({'error': str(exception)}), 500
+
+
+@blueprint.route('/es')
+def elastic_search():
+    """Displays elastic search cluster info.
+
+    :return: jsonified elastic search cluster info.
+    """
+    try:
+        info = current_search_client.cluster.health()
+        return jsonify({'data': info})
+    except Exception as exception:
+        return jsonify({'error': str(exception)}), 500
