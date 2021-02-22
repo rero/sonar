@@ -30,6 +30,7 @@ from datetime import timedelta
 
 from invenio_oauthclient.contrib import orcid
 from invenio_records_rest.facets import range_filter
+from invenio_stats.processors import EventsIndexer
 
 from sonar.modules.deposits.api import DepositRecord, DepositSearch
 from sonar.modules.deposits.permissions import DepositPermission
@@ -154,6 +155,12 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'invenio_accounts.tasks.clean_session_table',
         'schedule': timedelta(minutes=60),
     },
+    # Stats
+    'stats-process-events': {
+        'task': 'invenio_stats.tasks.process_events',
+        'schedule': timedelta(minutes=30),
+        'args': [('record-view', 'file-download')],
+    }
 }
 CELERY_BROKER_HEARTBEAT = 0
 #: Disable sending heartbeat events
@@ -538,8 +545,7 @@ RECORDS_REST_FACETS = {
     'deposits':
     dict(aggs=dict(
         status=dict(terms=dict(field='status', size=DEFAULT_AGGREGATION_SIZE)),
-        user=dict(terms=dict(field='user.pid',
-                             size=DEFAULT_AGGREGATION_SIZE)),
+        user=dict(terms=dict(field='user.pid', size=DEFAULT_AGGREGATION_SIZE)),
         contributor=dict(terms=dict(field='facet_contributors',
                                     size=DEFAULT_AGGREGATION_SIZE))),
          filters={
@@ -740,3 +746,60 @@ OAISERVER_METADATA_FORMATS = {
 }
 #: Number of records to return per page in OAI-PMH results.
 OAISERVER_PAGE_SIZE = 100
+
+# Stats
+# =====
+STATS_EVENTS = {
+    'file-download': {
+        'signal':
+        'invenio_files_rest.signals.file_downloaded',
+        'templates':
+        'invenio_stats.contrib.file_download',
+        'event_builders':
+        ['invenio_stats.contrib.event_builders.file_download_event_builder'],
+        'cls':
+        EventsIndexer,
+        'params': {
+            'preprocessors': [
+                'invenio_stats.processors:flag_robots',
+                # Don't index robot events
+                lambda doc: doc if not doc['is_robot'] else None,
+                'invenio_stats.processors:flag_machines',
+                'invenio_stats.processors:anonymize_user',
+                'invenio_stats.contrib.event_builders:build_file_unique_id',
+            ],
+            # Keep only 1 file download for each file and user every 30 sec
+            'double_click_window':
+            30,
+            # Create one index per year which will store file download events
+            'suffix':
+            '%Y',
+        }
+    },
+    'record-view': {
+        'signal':
+        'invenio_records_ui.signals.record_viewed',
+        'templates':
+        'invenio_stats.contrib.record_view',
+        'event_builders':
+        ['invenio_stats.contrib.event_builders.record_view_event_builder'],
+        'cls':
+        EventsIndexer,
+        'params': {
+            'preprocessors': [
+                'invenio_stats.processors:flag_robots',
+                # Don't index robot events
+                lambda doc: doc if not doc['is_robot'] else None,
+                'invenio_stats.processors:flag_machines',
+                'invenio_stats.processors:anonymize_user',
+                'invenio_stats.contrib.event_builders:build_record_unique_id',
+            ],
+            # Keep only 1 file download for each file and user every 30 sec
+            'double_click_window':
+            30,
+            # Create one index per year which will store file download events
+            'suffix':
+            '%Y',
+        },
+    },
+}
