@@ -59,10 +59,12 @@ def test_db_connection_count(client, es_clear, monkeypatch, admin, superuser):
     response = client.get(url_for('monitoring_api.db_connection_count'))
     assert response.status_code == 200
     assert response.json == {
-        'max': 100,
-        'used': 10,
-        'reserved_for_super': 2,
-        'free': 88
+        'data': {
+            'max': 100,
+            'used': 10,
+            'reserved_for_super': 2,
+            'free': 88
+        }
     }
 
 
@@ -98,64 +100,126 @@ def test_db_activity(client, es_clear, monkeypatch, admin, superuser):
     # Error
     response = client.get(url_for('monitoring_api.db_activity'))
     assert response.status_code == 200
-    assert response.json == [{
-        'application_name': '',
-        'client_address': '10.233.92.25',
-        'client_port': 33382,
-        'query': '\n        SELECT\n            pid, application_name, client',
-        'query_start': 'Mon, 08 Feb 2021 10:46:55 GMT',
-        'state': 'active',
-        'transaction_start': 'Mon, 08 Feb 2021 10:46:55 GMT',
-        'wait_event': None
-    }]
+    assert response.json == {
+        'data': [{
+            'application_name': '',
+            'client_address': '10.233.92.25',
+            'client_port': 33382,
+            'query':
+            '\n        SELECT\n            pid, application_name, client',
+            'query_start': 'Mon, 08 Feb 2021 10:46:55 GMT',
+            'state': 'active',
+            'transaction_start': 'Mon, 08 Feb 2021 10:46:55 GMT',
+            'wait_event': None
+        }]
+    }
 
 
-def test_data_status(client, es_clear, organisation, superuser, document):
+def test_data_status(client, es_clear, organisation, superuser, document,
+                     monkeypatch):
     """Test integrity status."""
     login_user_via_session(client, email=superuser['email'])
 
     # OK
     response = client.get(url_for('monitoring_api.data_status'))
     assert response.status_code == 200
-    assert response.json == {'status': 'green'}
+    assert response.json == {'data': {'status': 'green'}}
 
     # Has error
     document.delete()
     response = client.get(url_for('monitoring_api.data_status'))
     assert response.status_code == 200
-    assert response.json == {'status': 'red'}
+    assert response.json == {'data': {'status': 'red'}}
+
+    # Throw error
+    def mock_info(*args):
+        raise Exception('Unknown exception')
+
+    monkeypatch.setattr(
+        'sonar.monitoring.api.data_integrity.DataIntegrityMonitoring.info',
+        mock_info)
+    response = client.get(url_for('monitoring_api.data_status'))
+    assert response.status_code == 500
+    assert response.json == {'error': 'Unknown exception'}
 
 
-def test_data_info(client, es_clear, superuser, document):
+def test_data_info(client, es_clear, superuser, document, monkeypatch):
     """Test integrity info."""
     login_user_via_session(client, email=superuser['email'])
 
     response = client.get(url_for('monitoring_api.data_info'))
     assert response.status_code == 200
     assert response.json == {
-        'depo': {
-            'db': [],
-            'es': [],
-            'es_double': []
-        },
-        'doc': {
-            'db': [],
-            'es': [],
-            'es_double': []
-        },
-        'org': {
-            'db': [],
-            'es': [],
-            'es_double': []
-        },
-        'proj': {
-            'db': [],
-            'es': [],
-            'es_double': []
-        },
-        'user': {
-            'db': [],
-            'es': [],
-            'es_double': []
+        'data': {
+            'depo': {
+                'db': 0,
+                'es': 0,
+                'db-es': 0,
+                'index': 'deposits'
+            },
+            'doc': {
+                'db': 1,
+                'es': 1,
+                'db-es': 0,
+                'index': 'documents'
+            },
+            'org': {
+                'db': 1,
+                'es': 1,
+                'db-es': 0,
+                'index': 'organisations'
+            },
+            'proj': {
+                'db': 0,
+                'es': 0,
+                'db-es': 0,
+                'index': 'projects'
+            },
+            'user': {
+                'db': 1,
+                'es': 1,
+                'db-es': 0,
+                'index': 'users'
+            }
         }
     }
+
+    # With detail
+    response = client.get(url_for('monitoring_api.data_info', detail=True))
+    assert response.status_code == 200
+    assert response.json['data']['doc']['detail'] == {
+        'db': [],
+        'es': [],
+        'es_double': []
+    }
+
+    # Throw error
+    def mock_info(*args, **kwargs):
+        raise Exception('Unknown exception')
+
+    monkeypatch.setattr(
+        'sonar.monitoring.api.data_integrity.DataIntegrityMonitoring.info',
+        mock_info)
+    response = client.get(url_for('monitoring_api.data_info', detail=True))
+    assert response.status_code == 500
+    assert response.json == {'error': 'Unknown exception'}
+
+
+def test_elastic_search(client, superuser, monkeypatch):
+    """Test elastic search health."""
+    login_user_via_session(client, email=superuser['email'])
+
+    response = client.get(url_for('monitoring_api.elastic_search'))
+    assert response.status_code == 200
+    assert 'active_primary_shards' in response.json['data']
+    assert 'status' in response.json['data']
+
+    # Throw error
+    def mock_info(*args):
+        raise Exception('Unknown exception')
+
+    monkeypatch.setattr('invenio_search.current_search_client.cluster.health',
+                        mock_info)
+    response = client.get(url_for('monitoring_api.elastic_search'))
+    assert response.status_code == 500
+    assert response.json == {'error': 'Unknown exception'}

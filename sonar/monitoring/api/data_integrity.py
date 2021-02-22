@@ -97,28 +97,40 @@ class DataIntegrityMonitoring():
 
         return result
 
-    def info(self, with_deleted=False):
+    def info(self, with_deleted=False, with_detail=False):
         """Get count details for all resources.
 
         :param with_deleted: Count also deleted items in database.
+        :param with_detail: Show the detail of the differences.
         :returns: Dictionary with differences for each resource.
         """
         info = {}
         for doc_type, endpoint in current_app.config.get(
                 'RECORDS_REST_ENDPOINTS').items():
-            info[doc_type] = self.missing_pids(doc_type, with_deleted)
+            es_count = self.get_es_count(endpoint['search_index'])
+            db_count = self.get_db_count(doc_type)
+
+            info[doc_type] = {
+                'db': db_count,
+                'es': es_count,
+                'db-es': db_count - es_count,
+                'index': endpoint['search_index']
+            }
+
+            if with_detail:
+                info[doc_type]['detail'] = self.missing_pids(
+                    doc_type, with_deleted)
 
         return info
 
-    def hasError(self, with_deleted=False):
+    def has_error(self, with_deleted=False):
         """Check if any endpoint has an integrity error.
 
         :param with_deleted: Count also deleted items in database.
         :returns: True if an error is found
         """
         for doc_type, item in self.info(with_deleted).items():
-            for key in ['es', 'es_double', 'db']:
-                if item[key]:
-                    return True
+            if item['db-es'] != 0:
+                return True
 
         return False

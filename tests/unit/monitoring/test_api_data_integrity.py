@@ -119,13 +119,17 @@ def test_info(app, es_clear, document, deposit):
     for doc_type in ['depo', 'doc', 'org', 'proj', 'user']:
         assert doc_type in info
 
+    # With detail
+    info = monitoring.info(with_detail=True)
+    assert info['doc']['detail'] == {'db': [], 'es': [], 'es_double': []}
+
 
 def test_has_error(app, es_clear, document):
     """Test if data has error."""
     # No error
     monitoring = DataIntegrityMonitoring()
-    assert not monitoring.hasError()
+    assert not monitoring.has_error()
 
     # Error
     document.delete()
-    assert monitoring.hasError()
+    assert monitoring.has_error()
