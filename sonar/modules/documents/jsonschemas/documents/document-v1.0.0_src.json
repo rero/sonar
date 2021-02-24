@@ -204,9 +204,7 @@
         }
       },
       "required": [
-        "id",
-        "sets",
-        "updated"
+        "id"
       ]
     },
     "pid": {

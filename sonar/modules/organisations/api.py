@@ -80,7 +80,12 @@ class OrganisationRecord(SonarRecord):
                **kwargs):
         """Create organisation record."""
         # Create OAI set
-        oaiset = OAISet(spec=data['code'], name=data['name'])
+        # TODO: This will raise an error until this issue is not corrected:
+        # https://github.com/inveniosoftware/invenio-oaiserver/issues/191
+        oaiset = OAISet(
+            spec=data['code'],
+            name=data['name'],
+            search_pattern='organisation.pid:{code}'.format(code=data['code']))
         db.session.add(oaiset)
 
         return super(OrganisationRecord, cls).create(data,
