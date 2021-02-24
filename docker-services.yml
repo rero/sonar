@@ -58,7 +58,7 @@ services:
     ports:
       - "6379:6379"
   db:
-    image: postgres:9.6
+    image: postgres:12
     restart: "always"
     environment:
       - "POSTGRES_USER=sonar"
@@ -74,7 +74,7 @@ services:
       - "5672:5672"
   es:
     build: ./docker/elasticsearch/
-    image: elasticsearch-icu-7.9.1
+    image: elasticsearch-icu-7.10.1
     restart: "always"
     environment:
       - bootstrap.memory_lock=true
@@ -82,6 +82,7 @@ services:
       - "discovery.type=single-node"
       - "indices.query.bool.max_clause_count=3000"
       - "path.repo=/var/tmp"
+      - "cluster.routing.allocation.disk.threshold_enabled=false"
     ulimits:
       memlock:
         soft: -1
@@ -96,7 +97,7 @@ services:
     volumes:
       - /var/tmp
   kibana:
-    image: docker.elastic.co/kibana/kibana-oss:7.9.1
+    image: docker.elastic.co/kibana/kibana-oss:7.10.1
     environment:
       - "ELASTICSEARCH_HOSTS=http://es:9200"
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"

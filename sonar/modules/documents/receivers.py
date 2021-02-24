@@ -129,13 +129,20 @@ def update_oai_property(sender, record):
     if not isinstance(record, DocumentRecord):
         return
 
-    record['_oai']['updated'] = pytz.utc.localize(
-        datetime.utcnow()).isoformat()
-    record['_oai']['sets'] = []
-
+    sets = []
     for organisation in record.get('organisation', []):
-        record['_oai']['sets'].append(
-            SonarRecord.get_pid_by_ref_link(organisation['$ref']))
+        sets.append(SonarRecord.get_pid_by_ref_link(organisation['$ref']))
+
+    record['_oai'].update({
+        'updated':
+        pytz.utc.localize(datetime.utcnow()).isoformat(),
+        'sets':
+        sets
+    })
+
+    # Store the value in `json` property, as it's not more called during object
+    # creation. https://github.com/inveniosoftware/invenio-records/commit/ab7fdc10ddf54249dde8bc968f98b1fdd633610f#diff-51263e1ef21bcc060a5163632df055ef67ac3e3b2e222930649c13865cffa5aeR171
+    record.model.json = record.model_cls.encode(dict(record))
 
 
 def export_json(sender=None, records=None, **kwargs):
