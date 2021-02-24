@@ -34,6 +34,7 @@ theme = WebpackBundle(
     },
     dependencies={
         'bootstrap': '^4.3',
+        'popper.js': '^1.12',
         'font-awesome': '^4.0',
         'ngx-toastr': '^10.2.0',
         '@rero/sonar-ui': SONAR_APP_UI_VERSION

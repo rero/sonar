@@ -54,6 +54,9 @@ def _(x):
     return x
 
 
+# Application default theme, used in several modules (previewer, admin, ...)
+APP_THEME = ['bootstrap3']
+
 # Rate limiting
 # =============
 #: Storage for ratelimiter.
