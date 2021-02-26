@@ -19,30 +19,7 @@
 
 import re
 
-import six
-from flask_babelex import gettext as _
-
 KEY_VAL_REGEX = re.compile(r'"(.*?)"\s*:\s*"(.*?)"')
-
-
-def translate(data, keys=['title']):
-    """Translate strings in a data structure.
-
-    :param data: Dict to process.
-    :param keys: Properties to translate.
-    :returns: Dict with translated properties.
-    """
-    to_return = data
-    if isinstance(data, dict):
-        for k, v in six.iteritems(data):
-            if k in keys and isinstance(v, str) and v:
-                data[k] = _(v)
-            else:
-                translate(v, keys)
-    if isinstance(data, list):
-        for v in data:
-            translate(v, keys)
-    return to_return
 
 
 def extract(fileobj, keys=['title']):
