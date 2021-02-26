@@ -77,6 +77,7 @@ setup(
             'deposits = sonar.modules.deposits.rest:blueprint',
             'users = sonar.modules.users.views:blueprint',
             'monitoring = sonar.monitoring.views:blueprint',
+            'translations = sonar.translations.rest:blueprint',
         ],
         'invenio_assets.webpack': [
             'sonar_theme = sonar.theme.webpack:theme'

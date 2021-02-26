@@ -50,11 +50,6 @@ SONAR_APP_UI_VERSION = '1.0.1'
 SONAR_APP_DEFAULT_ORGANISATION = 'global'
 """Default organisation key."""
 
-SONAR_APP_BABEL_TRANSLATE_JSON_KEYS = [
-    'title', 'label', 'description', 'placeholder', 'patternMessage'
-]
-"""Keys to translate in JSON schemas."""
-
 SONAR_APP_STORAGE_PATH = None
 """File storage location."""
 

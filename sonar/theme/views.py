@@ -27,8 +27,8 @@ from __future__ import absolute_import, print_function
 import re
 
 import dateutil.parser
-from flask import Blueprint, abort, current_app, jsonify, redirect, \
-    render_template, request, url_for
+from flask import Blueprint, abort, jsonify, redirect, render_template, \
+    request, url_for
 from flask_babelex import lazy_gettext as _
 from flask_breadcrumbs import register_breadcrumb
 from flask_login import current_user, login_required
@@ -37,7 +37,6 @@ from invenio_jsonschemas import current_jsonschemas
 from invenio_jsonschemas.errors import JSONSchemaNotFound
 from invenio_pidstore.models import PersistentIdentifier
 
-from sonar.modules.babel_extractors import translate
 from sonar.modules.deposits.permissions import DepositPermission
 from sonar.modules.documents.permissions import DocumentPermission
 from sonar.modules.organisations.permissions import OrganisationPermission
@@ -253,10 +252,6 @@ def record_image_url(record, key=None):
 
 def prepare_schema(schema):
     """Prepare schema before sending it."""
-    # Recursively translate properties in schema
-    translate(schema,
-              keys=current_app.config['SONAR_APP_BABEL_TRANSLATE_JSON_KEYS'])
-
     # Recursively hierarchize form option if a level property is available.
     def hierarchize_form_options(schema):
         """Hierarchize form options."""
