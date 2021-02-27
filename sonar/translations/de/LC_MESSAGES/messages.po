@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-02-15 10:42+0100\n"
-"PO-Revision-Date: 2021-02-15 09:19+0000\n"
+"PO-Revision-Date: 2021-02-27 22:50+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"de/>\n"
 "Language: de\n"
-"Language-Team: German "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/de/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.5\n"
 "Generated-By: Babel 2.9.0\n"
 
 #: sonar/theme/views.py:67
@@ -98,7 +99,7 @@ msgstr "Zulässige IP-Adressen"
 
 #: sonar/modules/deposits/rest.py:203
 msgid "Ask for changes on deposit"
-msgstr "Änderungen an der Ablage beanfragen"
+msgstr "Um Änderungen an der Ablage bitten"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:19
 msgid ""
@@ -302,7 +303,7 @@ msgstr "Ablehnung der Ablage"
 
 #: sonar/modules/deposits/rest.py:148
 msgid "Deposit to validate"
-msgstr "Ablage zu bestätigen"
+msgstr "Ablage zu genehmigen"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:30
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:87
@@ -829,13 +830,12 @@ msgid "Note"
 msgstr "Anmerkung"
 
 #: sonar/theme/templates/sonar/frontpage.html:68
-#, fuzzy
 msgid ""
 "Note: Publications manually deposited in this test portal might "
 "occasionally need to be deleted, for operational reasons."
 msgstr ""
-"Anmerkung: Publikation, die manuell über dieses Portal hochgeladen "
-"wurden, müssen manchmal aus betrieblichen Gründen gelöscht werden."
+"Anmerkung: Publikation, die manuell über dieses Portal hochgeladen wurden, "
+"müssen manchmal aus betrieblichen Gründen gelöscht werden."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:636
 msgid "Notes"
@@ -1252,31 +1252,29 @@ msgid "Swiss Open Access Repository"
 msgstr "Swiss Open Access Repository"
 
 #: sonar/theme/templates/sonar/page.html:20
-#, fuzzy
 msgid ""
 "The SONAR project aims to create a scholarly archive that collects, "
 "promotes and preserves the publications of authors affiliated with Swiss "
 "public research institutions."
 msgstr ""
-"Das SONAR-Projekt hat zum Ziel, ein wissenschaftliches Archiv zu "
-"schaffen, das die Veröffentlichungen von Autor(inn)en an öffentlichen "
-"Schweizer Forschungseinrichtungen sammelt, bekannt macht und konserviert."
+"Das SONAR-Projekt hat zum Ziel, ein wissenschaftliches Archiv zu schaffen, "
+"das die Veröffentlichungen von Personen an öffentlichen Schweizer "
+"Forschungseinrichtungen sammelt, bekannt macht und konserviert."
 
 #: sonar/templates/security/email/welcome.html:10
 msgid "The SONAR team at RERO"
 msgstr "Das SONAR-Team bei RERO"
 
 #: sonar/theme/templates/sonar/frontpage.html:79
-#, fuzzy
 msgid ""
 "The Swiss Open Access Repository is an archive of scholarly publications."
 " It collects and promotes open access publications by authors affiliated "
 "with Swiss public research institutions."
 msgstr ""
-"Das Swiss Open Access Repository ist eine Plattform für wissenschaftliche"
-" Publikationen. Sie sammelt und verbreitet Open-Access-Publikationen von "
-"Autoren, die mit öffentlichen Schweizer Forschungseinrichtungen verbunden"
-" sind."
+"Das Swiss Open Access Repository ist eine Plattform für wissenschaftliche "
+"Publikationen. Sie sammelt und verbreitet Open-Access-Publikationen von "
+"Personen, die mit öffentlichen Schweizer Forschungseinrichtungen verbunden "
+"sind."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:673
 msgid ""
@@ -1530,7 +1528,7 @@ msgstr "Matrix-Nummer (Tone)"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1198
 msgid "bf:Meeting"
-msgstr "Meeting"
+msgstr "Konferenz"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:464
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:770
@@ -1852,15 +1850,15 @@ msgstr "Information, Kommunikation und Medienwissenschaften"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:118
 msgid "classification_66"
-msgstr "Chemical technology"
+msgstr "Chemische Technologie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:123
 msgid "classification_663"
-msgstr "Beverage industry"
+msgstr "Getränkeindustrie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:128
 msgid "classification_664"
-msgstr "Food production and preservation"
+msgstr "Lebensmittelproduktion und -konservierung"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:173
 msgid "classification_681"
@@ -1868,39 +1866,39 @@ msgstr "Microengineering"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:370
 msgid "classification_7"
-msgstr "Arts"
+msgstr "Künste"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:375
 msgid "classification_7.071"
-msgstr "Art history"
+msgstr "Kunstgeschichte"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:465
 msgid "classification_71"
-msgstr "Urbanism"
+msgstr "Urbanismus"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:460
 msgid "classification_72"
-msgstr "Architecture"
+msgstr "Architektur"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:385
 msgid "classification_73/77"
-msgstr "Visual arts"
+msgstr "Bildende Kunst"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:390
 msgid "classification_75"
-msgstr "Painting"
+msgstr "Malerei"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:395
 msgid "classification_77"
-msgstr "Photography"
+msgstr "Fotografie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:380
 msgid "classification_78"
-msgstr "Music"
+msgstr "Musik"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:500
 msgid "classification_796"
-msgstr "Sports sciences"
+msgstr "Sportwissenschaften"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:470
 msgid "classification_81"
@@ -1908,39 +1906,39 @@ msgstr "Sprache, Linguistik"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:475
 msgid "classification_81´28"
-msgstr "Dialectology"
+msgstr "Dialektologie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:480
 msgid "classification_82"
-msgstr "Literature"
+msgstr "Literatur"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:515
 msgid "classification_902"
-msgstr "Archeology"
+msgstr "Archäologie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:520
 msgid "classification_903"
-msgstr "Pre-history"
+msgstr "Vorgeschichte"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:485
 msgid "classification_91"
-msgstr "Geography"
+msgstr "Geographie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:525
 msgid "classification_929.5"
-msgstr "Genealogy"
+msgstr "Genealogie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:505
 msgid "classification_93/94"
-msgstr "History"
+msgstr "Geschichte"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:530
 msgid "classification_931"
-msgstr "Ancient history"
+msgstr "Alte Geschichte"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:510
 msgid "classification_94"
-msgstr "Medieval and modern history"
+msgstr "Mittelalterliche und moderne Geschichte"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:97
 msgid "classification_root_1"
@@ -2007,7 +2005,7 @@ msgstr "Mitwirkende"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:225
 msgid "deposit_log_action_approve"
-msgstr "Bestätigen"
+msgstr "Genehmigen"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:233
 msgid "deposit_log_action_ask_for_changes"
@@ -2023,23 +2021,23 @@ msgstr "Einreichen"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:165
 msgid "deposit_status_ask_for_changes"
-msgstr "Ask for changes"
+msgstr "Anfrage zu Änderungen"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:149
 msgid "deposit_status_in_progress"
-msgstr "In progress"
+msgstr "In Bearbeitung"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:161
 msgid "deposit_status_rejected"
-msgstr "Rejected"
+msgstr "Abgelehnt"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:153
 msgid "deposit_status_to_validate"
-msgstr "To validate"
+msgstr "Zu genehmigen"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:157
 msgid "deposit_status_validated"
-msgstr "Validated"
+msgstr "Genehmigt"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:335
 msgid "document_type_advanced_studies_thesis"
@@ -4318,4 +4316,3 @@ msgstr "Bd."
 
 #~ msgid "The project"
 #~ msgstr "Das Projekt"
-
