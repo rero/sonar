@@ -10,15 +10,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-02-15 10:42+0100\n"
-"PO-Revision-Date: 2021-02-15 09:19+0000\n"
+"PO-Revision-Date: 2021-02-27 22:50+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Language-Team: English <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"en/>\n"
 "Language: en\n"
-"Language-Team: English "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/en/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.5\n"
 "Generated-By: Babel 2.9.0\n"
 
 #: sonar/theme/views.py:67
@@ -826,13 +827,12 @@ msgid "Note"
 msgstr "Note"
 
 #: sonar/theme/templates/sonar/frontpage.html:68
-#, fuzzy
 msgid ""
 "Note: Publications manually deposited in this test portal might "
 "occasionally need to be deleted, for operational reasons."
 msgstr ""
-"Note: Publications manually deposited in this test portal might "
-"occasionally need to be deleted, for operational reasons."
+"Note: Publications manually deposited in this test portal might occasionally "
+"need to be deleted, for operational reasons."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:636
 msgid "Notes"
@@ -1249,30 +1249,28 @@ msgid "Swiss Open Access Repository"
 msgstr "Swiss Open Access Repository"
 
 #: sonar/theme/templates/sonar/page.html:20
-#, fuzzy
 msgid ""
 "The SONAR project aims to create a scholarly archive that collects, "
 "promotes and preserves the publications of authors affiliated with Swiss "
 "public research institutions."
 msgstr ""
-"The SONAR project aims to create a scholarly archive that collects, "
-"promotes and preserves the publications of authors affiliated with Swiss "
-"public research institutions."
+"The SONAR project aims to create a scholarly archive that collects, promotes "
+"and preserves the publications of authors affiliated with Swiss public "
+"research institutions."
 
 #: sonar/templates/security/email/welcome.html:10
 msgid "The SONAR team at RERO"
 msgstr "The SONAR team at RERO"
 
 #: sonar/theme/templates/sonar/frontpage.html:79
-#, fuzzy
 msgid ""
 "The Swiss Open Access Repository is an archive of scholarly publications."
 " It collects and promotes open access publications by authors affiliated "
 "with Swiss public research institutions."
 msgstr ""
-"The Swiss Open Access Repository is an archive of scholarly publications."
-" It collects and promotes open access publications by authors affiliated "
-"with Swiss public research institutions."
+"The Swiss Open Access Repository is an archive of scholarly publications. It "
+"collects and promotes open access publications by authors affiliated with "
+"Swiss public research institutions."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:673
 msgid ""
@@ -2003,7 +2001,7 @@ msgstr "contributor"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:225
 msgid "deposit_log_action_approve"
-msgstr "Approve"
+msgstr "Validate"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:233
 msgid "deposit_log_action_ask_for_changes"
@@ -2019,7 +2017,7 @@ msgstr "Submit"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:165
 msgid "deposit_status_ask_for_changes"
-msgstr "Ask for changes"
+msgstr "Request for changes"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:149
 msgid "deposit_status_in_progress"
@@ -4302,4 +4300,3 @@ msgstr "vol."
 
 #~ msgid "The project"
 #~ msgstr "The project"
-
