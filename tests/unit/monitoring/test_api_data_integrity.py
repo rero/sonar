@@ -106,8 +106,7 @@ def test_missing_pids(app, es_clear, document_json):
     app.config.get('RECORDS_REST_ENDPOINTS')['doc'].pop('search_index', None)
     with pytest.raises(Exception) as exception:
         monitoring.missing_pids('doc')
-    assert str(
-        exception.value) == 'No "search_index" configured for resource "doc"'
+    assert str(exception.value) == 'No index configured for resource "doc"'
     app.config.get(
         'RECORDS_REST_ENDPOINTS')['doc']['search_index'] = 'documents'
 
@@ -116,7 +115,7 @@ def test_info(app, es_clear, document, deposit):
     """Test info."""
     monitoring = DataIntegrityMonitoring()
     info = monitoring.info()
-    for doc_type in ['depo', 'doc', 'org', 'proj', 'user']:
+    for doc_type in ['depo', 'doc', 'org', 'projects', 'user']:
         assert doc_type in info
 
     # With detail

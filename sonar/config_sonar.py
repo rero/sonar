@@ -15,7 +15,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""SONAR configuration."""
+"""Specific configuration SONAR."""
+
 
 SONAR_APP_API_URL = 'https://localhost:5000/api/'
 

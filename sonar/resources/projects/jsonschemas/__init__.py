@@ -15,10 +15,4 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Marshmallow schemas for projects."""
-
-from __future__ import absolute_import, print_function
-
-from .json import ProjectMetadataSchemaV1, ProjectSchemaV1
-
-__all__ = ('ProjectMetadataSchemaV1', 'ProjectSchemaV1',)
+"""JSONSchema directory for projects."""

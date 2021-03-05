@@ -21,22 +21,20 @@ from __future__ import absolute_import, print_function
 
 from flask_webpackext import WebpackBundle
 
-from sonar.modules.config import SONAR_APP_UI_VERSION
+from sonar.config_sonar import SONAR_APP_UI_VERSION
 
-theme = WebpackBundle(
-    __name__,
-    'assets',
-    entry={
-        'global-theme': './scss/global/theme.scss',
-        'usi-theme': './scss/usi/theme.scss',
-        'vge-theme': './scss/vge/theme.scss',
-        'preview': './scss/preview.scss',
-    },
-    dependencies={
-        'bootstrap': '^4.3',
-        'popper.js': '^1.12',
-        'font-awesome': '^4.0',
-        'ngx-toastr': '^10.2.0',
-        '@rero/sonar-ui': SONAR_APP_UI_VERSION
-    }
-)
+theme = WebpackBundle(__name__,
+                      'assets',
+                      entry={
+                          'global-theme': './scss/global/theme.scss',
+                          'usi-theme': './scss/usi/theme.scss',
+                          'vge-theme': './scss/vge/theme.scss',
+                          'preview': './scss/preview.scss',
+                      },
+                      dependencies={
+                          'bootstrap': '^4.3',
+                          'popper.js': '^1.12',
+                          'font-awesome': '^4.0',
+                          'ngx-toastr': '^10.2.0',
+                          '@rero/sonar-ui': SONAR_APP_UI_VERSION
+                      })

@@ -87,6 +87,7 @@ class DepositMetadataSchemaV1(StrictKeysMixin):
 class DepositSchemaV1(StrictKeysMixin):
     """Deposit schema."""
 
+    id = PersistentIdentifier()
     metadata = fields.Nested(DepositMetadataSchemaV1)
     created = fields.Str(dump_only=True)
     updated = fields.Str(dump_only=True)

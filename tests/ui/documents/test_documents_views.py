@@ -354,9 +354,8 @@ def test_contribution_text():
 
 def test_project_detail(app, client, project):
     """Test project detail page."""
-    assert client.get(
-        url_for('documents.project_detail',
-                pid_value=project['pid'])).status_code == 200
+    assert client.get(url_for('documents.project_detail',
+                              pid_value=project.id)).status_code == 200
 
     assert client.get(
         url_for('documents.project_detail',

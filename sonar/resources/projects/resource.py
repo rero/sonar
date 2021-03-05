@@ -15,11 +15,22 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Test projects jsonresolvers."""
+"""Projects resource."""
+
+from invenio_records_resources.resources import \
+    RecordResource as BaseRecordResource
+from invenio_records_resources.resources import \
+    RecordResourceConfig as BaseRecordResourceConfig
 
 
-def test_projects_resolver(document, project):
-    """Test project resolver."""
-    document['project'] = {'$ref': 'https://sonar.ch/api/projects/11111'}
-    assert document['project']['$ref'] == 'https://sonar.ch/api/projects/11111'
-    assert document.replace_refs().get('project')['name'] == 'Project 1'
+class RecordResourceConfig(BaseRecordResourceConfig):
+    """Projects resource configuration."""
+
+    list_route = '/projects/'
+    item_route = f'{list_route}/<pid_value>'
+
+
+class RecordResource(BaseRecordResource):
+    """Projects resource"."""
+
+    default_config = RecordResourceConfig

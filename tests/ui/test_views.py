@@ -170,6 +170,15 @@ def test_schemas(client, admin, user):
     assert not res.json['schema']['properties'].get('organisation')
     assert not res.json['schema']['properties'].get('role')
 
+    # Projects
+    res = client.get(url_for('sonar.schemas', record_type='projects'))
+    assert res.status_code == 200
+    assert not res.json['schema']['properties']['metadata']['properties'].get(
+        'organisation')
+    assert not res.json['schema']['properties'].get('role')
+    assert 'organisation' not in res.json['schema']['properties']['metadata'][
+        'propertiesOrder']
+
 
 def test_profile(client, user):
     """Test profile page."""

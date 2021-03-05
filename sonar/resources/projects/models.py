@@ -15,4 +15,13 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""SONAR Modules."""
+"""Projects models."""
+
+from invenio_db import db
+from invenio_records.models import RecordMetadataBase
+
+
+class RecordMetadata(db.Model, RecordMetadataBase):
+    """Projects metadata model."""
+
+    __tablename__ = 'projects_metadata'

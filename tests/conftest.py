@@ -31,8 +31,8 @@ from invenio_files_rest.models import Location
 from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.organisations.api import OrganisationRecord
-from sonar.modules.projects.api import ProjectRecord
 from sonar.modules.users.api import UserRecord
+from sonar.proxies import sonar
 
 
 @pytest.fixture(scope='module')
@@ -140,7 +140,7 @@ def roles(base_app, db):
 def make_user(app, db, make_organisation):
     """Factory for creating user."""
 
-    def _make_user(role_name, organisation='org'):
+    def _make_user(role_name, organisation='org', access=None):
         name = role_name
 
         if organisation:
@@ -169,10 +169,10 @@ def make_user(app, db, make_organisation):
         role.users.append(user)
 
         db.session.add(role)
-        db.session.add(
-            ActionUsers.allow(ActionNeed(
-                '{role}-access'.format(role=role_name)),
-                              user=user))
+
+        if access:
+            db.session.add(ActionUsers.allow(ActionNeed(access), user=user))
+
         db.session.commit()
 
         data = {
@@ -220,25 +220,25 @@ def user(make_user):
 @pytest.fixture()
 def moderator(make_user):
     """Create moderator."""
-    return make_user('moderator')
+    return make_user('moderator', access='admin-access')
 
 
 @pytest.fixture()
 def submitter(make_user):
     """Create submitter."""
-    return make_user('submitter')
+    return make_user('submitter', access='admin-access')
 
 
 @pytest.fixture()
 def admin(make_user):
     """Create admin user."""
-    return make_user('admin')
+    return make_user('admin', access='admin-access')
 
 
 @pytest.fixture()
 def superuser(make_user):
     """Create super user."""
-    return make_user('superuser')
+    return make_user('superuser', access='superuser-access')
 
 
 @pytest.fixture()
@@ -589,45 +589,43 @@ def deposit(app, db, user, pdf_file, bucket_location, deposit_json):
 def project_json():
     """Project JSON."""
     return {
-        '$schema':
-        'https://sonar.ch/schemas/projects/project-v1.0.0.json',
-        'pid':
-        '11111',
-        'name':
-        'Project 1',
-        'description':
-        'Description of the project',
-        'startDate':
-        '2019-01-01',
-        'endDate':
-        '2020-01-01',
-        'identifiedBy': {
-            'type': 'bf:Local',
-            'source': 'RERO',
-            'value': '1111'
-        },
-        'investigators': [{
-            'agent': {
-                'preferred_name': 'John Doe'
-            },
-            'role': ['investigator'],
-            'affiliation': 'IST',
+        'metadata': {
+            'name':
+            'Project 1',
+            'description':
+            'Description of the project',
+            'startDate':
+            '2019-01-01',
+            'endDate':
+            '2020-01-01',
             'identifiedBy': {
                 'type': 'bf:Local',
                 'source': 'RERO',
-                'value': '2222'
-            }
-        }],
-        'funding_organisations': [{
-            'agent': {
-                'preferred_name': 'Funding organisation'
+                'value': '1111'
             },
-            'identifiedBy': {
-                'type': 'bf:Local',
-                'source': 'RERO',
-                'value': '3333'
-            }
-        }]
+            'investigators': [{
+                'agent': {
+                    'preferred_name': 'John Doe'
+                },
+                'role': ['investigator'],
+                'affiliation': 'IST',
+                'identifiedBy': {
+                    'type': 'bf:Local',
+                    'source': 'RERO',
+                    'value': '2222'
+                }
+            }],
+            'funding_organisations': [{
+                'agent': {
+                    'preferred_name': 'Funding organisation'
+                },
+                'identifiedBy': {
+                    'type': 'bf:Local',
+                    'source': 'RERO',
+                    'value': '3333'
+                }
+            }]
+        }
     }
 
 
@@ -638,48 +636,36 @@ def make_project(db, project_json, make_user):
     def _make_project(role='submitter', organisation=None):
         user = make_user(role, organisation)
 
-        project_json['user'] = {
+        project_json['metadata']['user'] = {
             '$ref': 'https://sonar.ch/api/users/{pid}'.format(pid=user['pid'])
         }
 
-        project_json['organisation'] = {
+        project_json['metadata']['organisation'] = {
             '$ref':
             'https://sonar.ch/api/organisations/{pid}'.format(pid=organisation)
         }
 
-        project_json.pop('pid', None)
+        project_json.pop('id', None)
 
-        record = ProjectRecord.create(project_json,
-                                      dbcommit=True,
-                                      with_bucket=False)
-        record.commit()
-        record.reindex()
-        db.session.commit()
-
-        return record
+        return sonar.service('projects').create(None, project_json)
 
     return _make_project
 
 
 @pytest.fixture()
-def project(app, db, user, organisation, project_json):
+def project(app, db, admin, organisation, project_json):
     """Deposit fixture."""
     json = copy.deepcopy(project_json)
-    json['user'] = {
-        '$ref': 'https://sonar.ch/api/users/{pid}'.format(pid=user['pid'])
+    json['metadata']['user'] = {
+        '$ref': 'https://sonar.ch/api/users/{pid}'.format(pid=admin['pid'])
     }
-    json['organisation'] = {
+    json['metadata']['organisation'] = {
         '$ref':
         'https://sonar.ch/api/organisations/{pid}'.format(
             pid=organisation['pid'])
     }
 
-    project = ProjectRecord.create(json, dbcommit=True, with_bucket=False)
-    project.commit()
-    project.reindex()
-    db.session.commit()
-
-    return project
+    return sonar.service('projects').create(None, json)
 
 
 @pytest.fixture()

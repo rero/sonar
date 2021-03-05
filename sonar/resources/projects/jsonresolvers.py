@@ -15,4 +15,26 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""JSON schemas for projects."""
+"""Project resolver."""
+
+import jsonresolver
+
+from sonar.proxies import sonar
+
+
+# the host corresponds to the config value for the key JSONSCHEMAS_HOST
+@jsonresolver.route('/api/projects/<pid>', host='sonar.ch')
+def project_resolver(pid):
+    """Resolve referenced project.
+
+    This resolver is kept for compatibility reason with old resource
+    management.
+    """
+    record = sonar.service('projects').record_cls.pid.resolve(pid)
+
+    data = {'pid': record['id'], 'name': record['metadata']['name']}
+
+    if record['metadata'].get('investigators'):
+        data['investigators'] = record['metadata']['investigators']
+
+    return data

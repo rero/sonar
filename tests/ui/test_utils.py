@@ -23,10 +23,7 @@ import pytest
 from flask import g
 
 from sonar.modules.documents.views import store_organisation
-from sonar.modules.utils import change_filename_extension, \
-    create_thumbnail_from_file, format_date, get_current_language, \
-    get_specific_theme, get_switch_aai_providers, get_view_code, \
-    is_ip_in_list, remove_html
+from sonar.modules.utils import *
 
 
 def test_change_filename_extension(app):
