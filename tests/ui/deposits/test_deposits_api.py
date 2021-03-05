@@ -20,10 +20,11 @@
 from invenio_accounts.testutils import login_user_via_view
 
 
-def test_create_document(app, db, project, client, deposit, user):
+def test_create_document(app, db, project, client, deposit, submitter):
     """Test create document based on it."""
     deposit['projects'] = [{
-        '$ref': 'https://sonar.ch/api/projects/11111'
+        '$ref':
+        f'https://sonar.ch/api/projects/{project.id}'
     }, {
         'name':
         'Project 1',
@@ -50,7 +51,7 @@ def test_create_document(app, db, project, client, deposit, user):
     deposit.reindex()
     db.session.commit()
 
-    login_user_via_view(client, email=user['email'], password='123456')
+    login_user_via_view(client, email=submitter['email'], password='123456')
 
     document = deposit.create_document()
 

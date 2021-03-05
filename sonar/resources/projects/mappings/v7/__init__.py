@@ -15,18 +15,4 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Loaders for projects."""
-
-from __future__ import absolute_import, print_function
-
-from invenio_records_rest.loaders.marshmallow import json_patch_loader, \
-    marshmallow_loader
-
-from ..marshmallow import ProjectMetadataSchemaV1
-
-#: JSON loader using Marshmallow for data validation.
-json_v1 = marshmallow_loader(ProjectMetadataSchemaV1)
-
-__all__ = (
-    'json_v1',
-)
+"""Elasticsearch version 7 mappings."""

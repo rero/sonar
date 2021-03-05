@@ -58,10 +58,16 @@ setup(
             'heg = sonar.heg.cli:heg'
         ],
         'invenio_base.apps': [
-            'sonar = sonar.modules:Sonar',
+            'sonar = sonar.ext:Sonar',
             'documents = sonar.modules.documents:Documents',
             'shibboleth_authenticator = \
                 sonar.modules.shibboleth_authenticator:ShibbolethAuthenticator',
+        ],
+        'invenio_base.api_apps': [
+            'sonar = sonar.ext:SonarAPI',
+            'documents = sonar.modules.documents:Documents',
+            'organisations = sonar.modules.organisations:Organisations',
+            'invenio_i18n = invenio_i18n:InvenioI18N'
         ],
         'invenio_base.blueprints': [
             'sonar = sonar.theme.views:blueprint',
@@ -84,7 +90,6 @@ setup(
         ],
         'invenio_config.module': [
             'sonar = sonar.config',
-            'sonar_app = sonar.modules.config',
             'sonar_documents = sonar.modules.documents.config',
             'shibboleth_authenticator = \
                 sonar.modules.shibboleth_authenticator.config',
@@ -94,18 +99,12 @@ setup(
             'messages = sonar',
             'messages_wiki = flask_wiki'
         ],
-        'invenio_base.api_apps': [
-            'documents = sonar.modules.documents:Documents',
-            'organisations = sonar.modules.organisations:Organisations',
-            'sonar = sonar.modules:Sonar',
-            'invenio_i18n = invenio_i18n:InvenioI18N'
-        ],
         'invenio_jsonschemas.schemas': [
             'documents = sonar.modules.documents.jsonschemas',
             'organisations = sonar.modules.organisations.jsonschemas',
             'users = sonar.modules.users.jsonschemas',
             'deposits = sonar.modules.deposits.jsonschemas',
-            'projects = sonar.modules.projects.jsonschemas',
+            'projects = sonar.resources.projects.jsonschemas',
             'common = sonar.common.jsonschemas'
         ],
         'invenio_search.mappings': [
@@ -113,7 +112,7 @@ setup(
             'organisations = sonar.modules.organisations.mappings',
             'users = sonar.modules.users.mappings',
             'deposits = sonar.modules.deposits.mappings',
-            'projects = sonar.modules.projects.mappings'
+            'projects = sonar.resources.projects.mappings'
         ],
         'invenio_search.templates': [
             'base-record = sonar.es_templates:list_es_templates'
@@ -126,9 +125,7 @@ setup(
             'user_id = \
                 sonar.modules.users.api:user_pid_minter',
             'deposit_id = \
-                sonar.modules.deposits.api:deposit_pid_minter',
-            'project_id = \
-                sonar.modules.projects.api:project_pid_minter'
+                sonar.modules.deposits.api:deposit_pid_minter'
         ],
         'invenio_pidstore.fetchers': [
             'document_id = \
@@ -138,15 +135,13 @@ setup(
             'user_id = \
                 sonar.modules.users.api:user_pid_fetcher',
             'deposit_id = \
-                sonar.modules.deposits.api:deposit_pid_fetcher',
-            'project_id = \
-                sonar.modules.projects.api:project_pid_fetcher'
+                sonar.modules.deposits.api:deposit_pid_fetcher'
         ],
         "invenio_records.jsonresolver": [
             "organisation = sonar.modules.organisations.jsonresolvers",
             "user = sonar.modules.users.jsonresolvers",
             "document = sonar.modules.documents.jsonresolvers",
-            "project = sonar.modules.projects.jsonresolvers"
+            "project = sonar.resources.projects.jsonresolvers"
         ],
         'invenio_celery.tasks' : [
             'documents = sonar.modules.documents.tasks'

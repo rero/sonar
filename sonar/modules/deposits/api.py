@@ -21,10 +21,12 @@ from datetime import datetime
 from functools import partial
 
 import pytz
+from flask import g
 
+from sonar.modules.api import SonarRecord
 from sonar.modules.documents.api import DocumentRecord
-from sonar.modules.projects.api import ProjectRecord
 from sonar.modules.users.api import current_user_record
+from sonar.proxies import sonar
 
 from ..api import SonarIndexer, SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
@@ -377,12 +379,12 @@ class DepositRecord(SonarRecord):
                             data['funding_organisations'].append(
                                 funding_organisation_data)
 
-                    project_record = ProjectRecord.create(data, dbcommit=True)
-                    project_record.reindex()
+                    project_record = sonar.service('projects').create(
+                        g.identity, {'metadata': data})
                     project = {
                         '$ref':
-                        project_record.get_ref_link('projects',
-                                                    project_record['pid'])
+                        SonarRecord.get_ref_link('projects',
+                                                 project_record['id'])
                     }
 
                 projects.append(project)

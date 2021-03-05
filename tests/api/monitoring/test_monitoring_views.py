@@ -169,7 +169,7 @@ def test_data_info(client, es_clear, superuser, document, monkeypatch):
                 'db-es': 0,
                 'index': 'organisations'
             },
-            'proj': {
+            'projects': {
                 'db': 0,
                 'es': 0,
                 'db-es': 0,

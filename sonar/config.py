@@ -41,8 +41,6 @@ from sonar.modules.organisations.api import OrganisationRecord, \
 from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import record_permission_factory, \
     wiki_edit_permission
-from sonar.modules.projects.api import ProjectRecord, ProjectSearch
-from sonar.modules.projects.permissions import ProjectPermission
 from sonar.modules.query import and_term_filter, missing_field_filter
 from sonar.modules.users.api import UserRecord, UserSearch
 from sonar.modules.users.permissions import UserPermission
@@ -457,45 +455,6 @@ RECORDS_REST_ENDPOINTS = {
             action='delete', record=record, cls=DepositPermission),
         list_permission_factory_imp=lambda record: record_permission_factory(
             action='list', record=record, cls=DepositPermission)),
-    'proj':
-    dict(
-        pid_type='proj',
-        pid_minter='project_id',
-        pid_fetcher='project_id',
-        default_endpoint_prefix=True,
-        record_class=ProjectRecord,
-        search_class=ProjectSearch,
-        indexer_class='sonar.modules.projects.api:ProjectIndexer',
-        search_index='projects',
-        search_type=None,
-        record_serializers={
-            'application/json': ('sonar.modules.projects.serializers'
-                                 ':json_v1_response'),
-        },
-        search_serializers={
-            'application/json': ('sonar.modules.projects.serializers'
-                                 ':json_v1_search'),
-        },
-        record_loaders={
-            'application/json': ('sonar.modules.projects.loaders'
-                                 ':json_v1'),
-        },
-        list_route='/projects/',
-        item_route='/projects/<pid(proj, record_class="sonar.modules.projects'
-        '.api:ProjectRecord"):pid_value>',
-        default_media_type='application/json',
-        max_result_window=10000,
-        search_factory_imp='sonar.modules.projects.query:search_factory',
-        create_permission_factory_imp=lambda record: record_permission_factory(
-            action='create', cls=ProjectPermission),
-        read_permission_factory_imp=lambda record: record_permission_factory(
-            action='read', record=record, cls=ProjectPermission),
-        update_permission_factory_imp=lambda record: record_permission_factory(
-            action='update', record=record, cls=ProjectPermission),
-        delete_permission_factory_imp=lambda record: record_permission_factory(
-            action='delete', record=record, cls=ProjectPermission),
-        list_permission_factory_imp=lambda record: record_permission_factory(
-            action='list', record=record, cls=ProjectPermission)),
 }
 """REST endpoints."""
 
@@ -574,31 +533,11 @@ RECORDS_REST_FACETS = {
         'filters': {
             'missing_organisation': missing_field_filter('organisation')
         }
-    },
-    'projects': {
-        'aggs': {
-            'user': {
-                'terms': {
-                    'field': 'user.pid',
-                    'size': DEFAULT_AGGREGATION_SIZE
-                }
-            },
-            'organisation': {
-                'terms': {
-                    'field': 'organisation.pid',
-                    'size': DEFAULT_AGGREGATION_SIZE
-                }
-            }
-        },
-        'filters': {
-            'user': and_term_filter('user.pid'),
-            'organisation': and_term_filter('organisation.pid')
-        }
     }
 }
 """REST search facets."""
 
-INDEXES = ['documents', 'organisations', 'users', 'deposits', 'projects']
+INDEXES = ['documents', 'organisations', 'users', 'deposits']
 
 RECORDS_REST_SORT_OPTIONS = {}
 for index in INDEXES:

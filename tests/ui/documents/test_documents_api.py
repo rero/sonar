@@ -68,11 +68,15 @@ def test_get_files_list(document, pdf_file):
 
 def test_get_documents_by_project(db, project, document):
     """"Test getting documents by a project."""
-    document['projects'] = [{'$ref': 'https://sonar.ch/api/projects/11111'}]
+    document['projects'] = [{
+        '$ref':
+        f'https://sonar.ch/api/projects/{project.id}'
+    }]
     document.commit()
     document.reindex()
     db.session.commit()
 
-    documents = DocumentRecord.get_documents_by_project(project['pid'])
-    assert documents[0]['pid'] == '1'
-    assert documents[0]['permalink'] == 'http://localhost/global/documents/1'
+    documents = DocumentRecord.get_documents_by_project(project.id)
+    assert documents[0]['pid'] == document['pid']
+    assert documents[0][
+        'permalink'] == f'http://localhost/global/documents/{document["pid"]}'

@@ -231,6 +231,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
 class DocumentSchemaV1(StrictKeysMixin):
     """Document schema."""
 
+    id = PersistentIdentifier()
     metadata = fields.Nested(DocumentMetadataSchemaV1)
     links = fields.Dict(dump_only=True)
     explanation = fields.Raw(dump_only=True)

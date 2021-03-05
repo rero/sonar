@@ -18,9 +18,10 @@
 """Data integrity monitoring."""
 
 from elasticsearch.exceptions import NotFoundError
-from flask import current_app
 from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 from invenio_search import RecordsSearch
+
+from sonar.proxies import sonar
 
 
 class DataIntegrityMonitoring():
@@ -35,7 +36,7 @@ class DataIntegrityMonitoring():
         :param with_deleted: Count also deleted items.
         :returns: Items count.
         """
-        if not current_app.config.get('RECORDS_REST_ENDPOINTS').get(doc_type):
+        if not sonar.endpoints.get(doc_type):
             raise Exception(
                 'No endpoint configured for "{type}"'.format(type=doc_type))
 
@@ -64,13 +65,11 @@ class DataIntegrityMonitoring():
         :param doc_type: Resource type.
         :param with_deleted: Check also delete items in database.
         """
-        index = current_app.config.get('RECORDS_REST_ENDPOINTS').get(
-            doc_type, {}).get('search_index')
+        index = sonar.endpoints.get(doc_type, None)
 
         if not index:
-            raise Exception(
-                'No "search_index" configured for resource "{type}"'.format(
-                    type=doc_type))
+            raise Exception('No index configured for resource "{type}"'.format(
+                type=doc_type))
 
         result = {'es': [], 'es_double': [], 'db': []}
 
@@ -105,16 +104,16 @@ class DataIntegrityMonitoring():
         :returns: Dictionary with differences for each resource.
         """
         info = {}
-        for doc_type, endpoint in current_app.config.get(
-                'RECORDS_REST_ENDPOINTS').items():
-            es_count = self.get_es_count(endpoint['search_index'])
+
+        for doc_type, index in sonar.endpoints.items():
+            es_count = self.get_es_count(index)
             db_count = self.get_db_count(doc_type)
 
             info[doc_type] = {
                 'db': db_count,
                 'es': es_count,
                 'db-es': db_count - es_count,
-                'index': endpoint['search_index']
+                'index': index
             }
 
             if with_detail:

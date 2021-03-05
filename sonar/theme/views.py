@@ -41,9 +41,9 @@ from sonar.modules.deposits.permissions import DepositPermission
 from sonar.modules.documents.permissions import DocumentPermission
 from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import can_access_manage_view
-from sonar.modules.projects.permissions import ProjectPermission
 from sonar.modules.users.api import current_user_record
 from sonar.modules.users.permissions import UserPermission
+from sonar.resources.projects.permissions import RecordPermissionPolicy
 
 blueprint = Blueprint('sonar',
                       __name__,
@@ -147,8 +147,8 @@ def logged_user():
                 'list': DepositPermission.list(user)
             },
             'projects': {
-                'add': ProjectPermission.create(user),
-                'list': ProjectPermission.list(user)
+                'add': RecordPermissionPolicy('create').can(),
+                'list': RecordPermissionPolicy('search').can()
             }
         }
 
@@ -176,7 +176,7 @@ def schemas(record_type):
 
         # TODO: Maybe find a proper way to do this.
         if record_type in [
-                'users', 'documents', 'projects'
+                'users', 'documents'
         ] and not current_user.is_anonymous and current_user_record:
             if record_type == 'users':
                 # If user is admin, restrict available roles list.
@@ -205,6 +205,13 @@ def schemas(record_type):
                 schema['properties'].pop('organisation')
                 if 'organisation' in schema.get('propertiesOrder', []):
                     schema['propertiesOrder'].remove('organisation')
+
+        if (record_type == 'projects' and not current_user.is_anonymous and
+                current_user_record and not current_user_record.is_superuser):
+            schema['properties']['metadata']['properties'].pop(
+                'organisation', None)
+            schema['properties']['metadata']['propertiesOrder'].remove(
+                'organisation')
 
         # Remove modes fields if user does not have superuser role.
         if (record_type == 'organisations' and
@@ -252,7 +259,6 @@ def record_image_url(record, key=None):
 
 def prepare_schema(schema):
     """Prepare schema before sending it."""
-    # Recursively hierarchize form option if a level property is available.
     def hierarchize_form_options(schema):
         """Hierarchize form options."""
         if schema.get('properties'):
