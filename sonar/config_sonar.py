@@ -17,7 +17,6 @@
 
 """Specific configuration SONAR."""
 
-
 SONAR_APP_API_URL = 'https://localhost:5000/api/'
 
 SONAR_APP_ANGULAR_URL = 'https://localhost:5000/manage/'
@@ -66,10 +65,16 @@ SONAR_APP_FILE_PREVIEW_EXTENSIONS = [
 ]
 """List of extensions for which files can be previewed."""
 
-
 SONAR_APP_WEBDAV_HEG_HOST = 'https://share.rero.ch/HEG'
 SONAR_APP_WEBDAV_HEG_USER = None
 SONAR_APP_WEBDAV_HEG_PASSWORD = None
 """Connection data to webdav for HEG."""
 
 SONAR_APP_HEG_DATA_DIRECTORY = './data/heg'
+
+SONAR_APP_ORGANISATION_CONFIG = {
+    'hepvs': {
+        'projects': True
+    }
+}
+# Custom resources for organisations

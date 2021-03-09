@@ -39,10 +39,12 @@ from invenio_pidstore.models import PersistentIdentifier
 
 from sonar.modules.deposits.permissions import DepositPermission
 from sonar.modules.documents.permissions import DocumentPermission
+from sonar.modules.organisations.api import current_organisation
 from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import can_access_manage_view
 from sonar.modules.users.api import current_user_record
 from sonar.modules.users.permissions import UserPermission
+from sonar.modules.utils import has_custom_resource
 from sonar.resources.projects.permissions import RecordPermissionPolicy
 
 blueprint = Blueprint('sonar',
@@ -172,6 +174,10 @@ def schemas(record_type):
     try:
         current_jsonschemas.get_schema.cache_clear()
         schema_name = '{}/{}-v1.0.0.json'.format(record_type, rec_type)
+
+        if has_custom_resource(record_type):
+            schema_name = f'{current_organisation["code"]}/{schema_name}'
+
         schema = current_jsonschemas.get_schema(schema_name)
 
         # TODO: Maybe find a proper way to do this.
