@@ -220,3 +220,20 @@ def chunks(records, size):
 def remove_html(content):
     """Remove html tags from content."""
     return re.sub(re.compile('<.*?>'), '', content)
+
+
+def has_custom_resource(resource_type):
+    """Check if user's organisation has a custom resource.
+
+    :param resource_type: Type of resource.
+    :returns: True if resource is custom for organisation.
+    """
+    # Mandatory to import current_organisation here, to avoid an error during
+    # tests.
+    from sonar.modules.organisations.api import current_organisation
+
+    if not current_organisation or not current_organisation.get('code'):
+        return False
+
+    return current_app.config.get('SONAR_APP_ORGANISATION_CONFIG').get(
+        current_organisation['code'], {}).get(resource_type)
