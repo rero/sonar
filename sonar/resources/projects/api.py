@@ -25,10 +25,13 @@ from invenio_records_resources.records.api import Record as BaseRecord
 from invenio_records_resources.records.systemfields import IndexField, PIDField
 from invenio_records_resources.services.records.components import \
     ServiceComponent
+from werkzeug.utils import cached_property
 
 from sonar.affiliations import AffiliationResolver
-from sonar.modules.organisations.api import OrganisationRecord
+from sonar.modules.organisations.api import OrganisationRecord, \
+    current_organisation
 from sonar.modules.users.api import UserRecord
+from sonar.modules.utils import has_custom_resource
 
 from . import models
 
@@ -64,9 +67,6 @@ class Record(BaseRecord):
     model_cls = models.RecordMetadata
 
     # System fields
-    schema = ConstantField(
-        '$schema', 'https://sonar.ch/schemas/projects/project-v1.0.0.json')
-
     index = IndexField('projects-project-v1.0.0', search_alias='projects')
 
     # The `pid_type` must not be filled as argument in this constructor.
@@ -77,6 +77,16 @@ class Record(BaseRecord):
     pid_type = RecordIdProvider.pid_type
 
     dumper = ElasticsearchDumper(extensions=[ElasticsearchDumperObjectsExt()])
+
+    @cached_property
+    def schema(self):
+        """Return the schema."""
+        schema_key = 'projects' if not has_custom_resource(
+            'projects') else f'{current_organisation["code"]}/projects'
+
+        schema = f'https://sonar.ch/schemas/{schema_key}/project-v1.0.0.json'
+
+        return ConstantField('$schema', schema)
 
 
 class RecordComponent(ServiceComponent):

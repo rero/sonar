@@ -74,6 +74,7 @@ target/
 sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
 sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json
 sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json
+sonar/dedicated/*/*/jsonschemas/*/*/*-v1.0.0.json
 
 # Generated JSON files
 data/backups/

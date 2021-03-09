@@ -19,15 +19,19 @@
 
 from invenio_records_resources.services import \
     RecordServiceConfig as BaseRecordServiceConfig
+from invenio_records_resources.services.records.schema import \
+    MarshmallowServiceSchema
+from invenio_records_rest.utils import obj_or_import_string
 
 from sonar.config import DEFAULT_AGGREGATION_SIZE
+from sonar.modules.organisations.api import current_organisation
 from sonar.modules.query import and_term_filter
+from sonar.modules.utils import has_custom_resource
 
 from ..service import RecordService as BaseRecordService
 from .api import Record, RecordComponent
 from .permissions import RecordPermissionPolicy
 from .results import RecordList
-from .schema import RecordSchema
 
 
 class RecordServiceConfig(BaseRecordServiceConfig):
@@ -36,7 +40,6 @@ class RecordServiceConfig(BaseRecordServiceConfig):
     permission_policy_cls = RecordPermissionPolicy
     record_cls = Record
     result_list_cls = RecordList
-    schema = RecordSchema
     search_facets_options = {
         'aggs': {
             'user': {
@@ -64,3 +67,16 @@ class RecordService(BaseRecordService):
     """Projects service."""
 
     default_config = RecordServiceConfig
+
+    @property
+    def schema(self):
+        """Returns the data schema instance."""
+        schema_path = 'sonar.resources.projects.schema:RecordSchema'
+
+        if has_custom_resource('projects'):
+            schema_path = f'sonar.dedicated.{current_organisation["code"]}.' \
+                'projects.schema:RecordSchema'
+
+        schema = obj_or_import_string(schema_path)
+
+        return MarshmallowServiceSchema(self, schema=schema)
