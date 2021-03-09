@@ -21,6 +21,8 @@ import os
 
 import pytest
 from flask import g
+from flask_security import url_for_security
+from invenio_accounts.testutils import login_user_via_view
 
 from sonar.modules.documents.views import store_organisation
 from sonar.modules.utils import *
@@ -162,3 +164,26 @@ def test_remove_html():
     """Test remove html markup from string."""
     assert remove_html('No HTML') == 'No HTML'
     assert remove_html('<h1>Title</h1>') == 'Title'
+
+
+def test_has_custom_resource(client, make_user, monkeypatch):
+    """Test if user's organisation has a custom resource."""
+    # User not logged
+    assert not has_custom_resource('projects')
+
+    # Custom resource found
+    user = make_user('admin', 'hepvs')
+    login_user_via_view(client, email=user['email'], password='123456')
+    assert has_custom_resource('projects')
+
+    client.get(url_for_security('logout'))
+
+    # No organisation associated to user
+    user = make_user('admin')
+    login_user_via_view(client, email=user['email'], password='123456')
+    assert not has_custom_resource('projects')
+
+    # No organisation code found for user's organisation
+    monkeypatch.setattr('sonar.modules.organisations.api.current_organisation',
+                        {})
+    assert not has_custom_resource('projects')

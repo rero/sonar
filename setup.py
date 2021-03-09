@@ -106,6 +106,7 @@ setup(
             'users = sonar.modules.users.jsonschemas',
             'deposits = sonar.modules.deposits.jsonschemas',
             'projects = sonar.resources.projects.jsonschemas',
+            'projects_hepvs = sonar.dedicated.hepvs.projects.jsonschemas',
             'common = sonar.common.jsonschemas'
         ],
         'invenio_search.mappings': [
