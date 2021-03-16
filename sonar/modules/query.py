@@ -125,3 +125,21 @@ def missing_field_filter(field):
     def inner(values):
         return Q('bool', must_not=[Q('exists', field=field)])
     return inner
+
+
+def open_access_filter(field):
+    """Filter for open access field.
+
+    :param field: Field name.
+    :return: Function that returns a boolean AND query between term values.
+    """
+    def inner(values):
+        # If filter is true, we search on status that are not `closed`.
+        if values[0] == 'true':
+            return Q('bool',
+                     must=[Q('exists', field=field)],
+                     must_not=[Q('term', **{field: 'closed'})])
+
+        # We search on status that are only `closed`.
+        return Q('bool', must=[Q('term', **{field: 'closed'})])
+    return inner

@@ -42,7 +42,8 @@ from sonar.modules.permissions import record_permission_factory, \
     wiki_edit_permission
 from sonar.modules.projects.api import ProjectRecord, ProjectSearch
 from sonar.modules.projects.permissions import ProjectPermission
-from sonar.modules.query import and_term_filter, missing_field_filter
+from sonar.modules.query import and_term_filter, missing_field_filter, \
+    open_access_filter
 from sonar.modules.users.api import UserRecord, UserSearch
 from sonar.modules.users.permissions import UserPermission
 from sonar.modules.utils import get_current_language
@@ -495,6 +496,9 @@ DEFAULT_AGGREGATION_SIZE = 50
 RECORDS_REST_FACETS = {
     'documents':
     dict(aggs=dict(
+        open_access=dict(terms=dict(field='oa_status',
+                                    size=DEFAULT_AGGREGATION_SIZE,
+                                    script={'source': "_value != 'closed'"})),
         organisation=dict(terms=dict(field='organisation.pid',
                                      size=DEFAULT_AGGREGATION_SIZE)),
         language=dict(
@@ -516,6 +520,8 @@ RECORDS_REST_FACETS = {
             format='yyyy',
         ))),
          filters={
+             'open_access':
+             open_access_filter('oa_status'),
              'organisation':
              and_term_filter('organisation.pid'),
              'language':
@@ -538,8 +544,7 @@ RECORDS_REST_FACETS = {
     'deposits':
     dict(aggs=dict(
         status=dict(terms=dict(field='status', size=DEFAULT_AGGREGATION_SIZE)),
-        user=dict(terms=dict(field='user.pid',
-                             size=DEFAULT_AGGREGATION_SIZE)),
+        user=dict(terms=dict(field='user.pid', size=DEFAULT_AGGREGATION_SIZE)),
         contributor=dict(terms=dict(field='facet_contributors',
                                     size=DEFAULT_AGGREGATION_SIZE))),
          filters={

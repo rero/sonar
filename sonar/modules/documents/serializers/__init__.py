@@ -64,6 +64,12 @@ class JSONSerializer(_JSONSerializer):
                 'step': 1
             }
 
+        # Open access
+        for bucket in results.get('aggregations',
+                                  {}).get('open_access',
+                                          {}).get('buckets', []):
+            bucket['name'] = 'Open' if bucket['key'] == 'true' else 'Closed'
+
         # Add organisation name
         for org_term in results.get('aggregations',
                                     {}).get('organisation',
