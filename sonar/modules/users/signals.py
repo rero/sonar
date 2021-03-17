@@ -30,3 +30,18 @@ def user_registered_handler(app, user, confirm_token):
     role = datastore.find_role(UserRecord.ROLE_USER)
     datastore.add_role_to_user(user, role)
     datastore.commit()
+
+
+def add_full_name(sender=None, record=None, json=None, index=None, **kwargs):
+    """Add full name field in index.
+
+    :param sender: Sender of the signal.
+    :param record: Record to index.
+    :param json: Indexed data.
+    :param index: Index where data is sent.
+    """
+    # Takes care only about users indexing
+    if not index.startswith('users'):
+        return
+
+    json['full_name'] = f'{json["first_name"]} {json["last_name"]}'

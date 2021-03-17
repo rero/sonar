@@ -20,6 +20,16 @@
       "last_name": {
         "type": "text"
       },
+      "full_name": {
+        "type": "text",
+        "fields": {
+          "suggest": {
+            "type": "text",
+            "analyzer": "autocomplete",
+            "search_analyzer": "standard"
+          }
+        }
+      },
       "birth_date": {
         "type": "date"
       },

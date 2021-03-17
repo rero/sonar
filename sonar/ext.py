@@ -25,13 +25,14 @@ from flask_bootstrap import Bootstrap
 from flask_security import user_registered
 from flask_wiki import Wiki
 from invenio_files_rest.signals import file_deleted, file_uploaded
+from invenio_indexer.signals import before_record_index
 
 from sonar.modules.permissions import has_admin_access, has_submitter_access, \
     has_superuser_access
 from sonar.modules.receivers import file_deleted_listener, \
     file_uploaded_listener
 from sonar.modules.users.api import current_user_record
-from sonar.modules.users.signals import user_registered_handler
+from sonar.modules.users.signals import add_full_name, user_registered_handler
 from sonar.modules.utils import get_specific_theme, get_switch_aai_providers, \
     get_view_code
 from sonar.resources.projects.resource import \
@@ -94,6 +95,9 @@ class Sonar():
         # Connect to signal sent when a file is uploaded or deleted
         file_uploaded.connect(file_uploaded_listener, weak=False)
         file_deleted.connect(file_deleted_listener, weak=False)
+
+        # Add user's full name before record index
+        before_record_index.connect(add_full_name, weak=False)
 
     def init_config(self, app):
         """Initialize configuration."""
