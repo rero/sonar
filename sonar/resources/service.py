@@ -18,6 +18,7 @@
 """SONAR resources base service class."""
 
 from flask_principal import Identity, Need, UserNeed
+from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 from invenio_records_resources.services.records import \
     RecordService as BaseRecordService
 
@@ -37,3 +38,13 @@ class RecordService(BaseRecordService):
             identity.provides.add(Need(method='system_role', value='any_user'))
 
         return super().create(identity, data, links_config)
+
+    def bulk_reindex(self):
+        """Send all records to the index queue and process indexing."""
+        ids = (x[0] for x in PersistentIdentifier.query.filter_by(
+            object_type='rec', status=PIDStatus.REGISTERED).filter(
+                PersistentIdentifier.pid_type.in_([self.record_cls.pid_type])).
+               values(PersistentIdentifier.object_uuid))
+
+        self.indexer.bulk_index(ids)
+        self.indexer.process_bulk_queue()

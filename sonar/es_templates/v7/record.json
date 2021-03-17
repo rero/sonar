@@ -2,6 +2,13 @@
   "index_patterns": "*",
   "settings": {
     "analysis": {
+      "filter": {
+        "autocomplete_filter": {
+          "type": "edge_ngram",
+          "min_gram": 1,
+          "max_gram": 20
+        }
+      },
       "tokenizer": {
         "char_group_tokenizer": {
           "type": "char_group",
@@ -28,6 +35,14 @@
             "lowercase",
             "icu_folding",
             "german_normalization"
+          ]
+        },
+        "autocomplete": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "autocomplete_filter"
           ]
         }
       }
