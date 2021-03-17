@@ -17,7 +17,8 @@
 
 """API for projects resources."""
 
-from invenio_pidstore.providers.recordid import RecordIdProvider
+from invenio_pidstore.providers.recordid import \
+    RecordIdProvider as BaseRecordIdProvider
 from invenio_records.dumpers import ElasticsearchDumper, ElasticsearchDumperExt
 from invenio_records.systemfields import ConstantField
 from invenio_records_resources.records.api import Record as BaseRecord
@@ -30,6 +31,10 @@ from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.users.api import UserRecord
 
 from . import models
+
+# Custom provider to set the PID type
+RecordIdProvider = type('RecordIdProvider', (BaseRecordIdProvider, ),
+                        dict(pid_type='proj'))
 
 
 class ElasticsearchDumperObjectsExt(ElasticsearchDumperExt):
@@ -64,7 +69,12 @@ class Record(BaseRecord):
 
     index = IndexField('projects-project-v1.0.0', search_alias='projects')
 
-    pid = PIDField('id', pid_type='proj', provider=RecordIdProvider)
+    # The `pid_type` must not be filled as argument in this constructor.
+    # Instead it is guessed from RecordIdProvider.
+    pid = PIDField('id', provider=RecordIdProvider)
+
+    # PID type retrieved from provider
+    pid_type = RecordIdProvider.pid_type
 
     dumper = ElasticsearchDumper(extensions=[ElasticsearchDumperObjectsExt()])
 
