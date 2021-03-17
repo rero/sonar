@@ -43,8 +43,7 @@ class Read(Admin):
         # typeahead input.
         # TODO: Find a better way for handling typeahead calls..
         if current_user_record.is_moderator or (
-                request.args.get('q') and
-                request.args['q'].startswith('autocomplete_name')):
+                request.args.get('q') and '.suggest' in request.args['q']):
             return Q('term',
                      metadata__organisation__pid=current_organisation['pid'])
 
