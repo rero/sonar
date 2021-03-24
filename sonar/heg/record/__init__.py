@@ -49,8 +49,9 @@ class HEGRecord():
                     SchemaFactory.create(source).dump(
                         self.data[record_source_key]), **record)
 
-        # Flag as hidden if no file provided
-        if not record.get('files'):
-            record['hiddenFromPublic'] = True
+        # If `oa_status` is `closed`, the first file is flagged as restricted.
+        if record.get('files'):
+            record['files'][0]['access'] = 'coar:c_16ec' if record.get(
+                'oa_status') == 'closed' else 'coar:c_abf2'
 
         return record

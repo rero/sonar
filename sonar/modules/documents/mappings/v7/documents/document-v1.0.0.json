@@ -524,7 +524,7 @@
       "oa_status": {
         "type": "keyword"
       },
-      "hiddenFromPublic": {
+      "isOpenAccess": {
         "type": "boolean"
       },
       "_created": {

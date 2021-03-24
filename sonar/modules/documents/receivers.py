@@ -84,11 +84,11 @@ def transform_harvested_records(sender=None, records=None, **kwargs):
         count=len(records), time=time.time() - start_time))
 
 
-def populate_fulltext_field(sender=None,
-                            record=None,
-                            json=None,
-                            index=None,
-                            **kwargs):
+def enrich_document_data(sender=None,
+                         record=None,
+                         json=None,
+                         index=None,
+                         **kwargs):
     """Receive a signal before record is indexed, to add fulltext.
 
     This function is called just before a record is sent to index.
@@ -105,6 +105,9 @@ def populate_fulltext_field(sender=None,
     # Transform record in DocumentRecord
     if not isinstance(record, DocumentRecord):
         record = DocumentRecord.get_record(record.id)
+
+    # Check if record is open access.
+    json['isOpenAccess'] = record.is_open_access()
 
     # No files are present in record
     if not record.files:

@@ -1759,13 +1759,40 @@
     "oa_status": {
       "title": "Open access status",
       "type": "string",
-      "minLength": 1
-    },
-    "hiddenFromPublic": {
-      "title": "Hidden to public",
-      "type": "boolean",
+      "enum": [
+        "green",
+        "gold",
+        "hybrid",
+        "bronze",
+        "closed"
+      ],
       "form": {
-        "hide": true
+        "hide": true,
+        "navigation": {
+          "essential": true
+        },
+        "options": [
+          {
+            "label": "Green",
+            "value": "green"
+          },
+          {
+            "label": "Gold",
+            "value": "gold"
+          },
+          {
+            "label": "Hybrid",
+            "value": "hybrid"
+          },
+          {
+            "label": "Bronze",
+            "value": "bronze"
+          },
+          {
+            "label": "Closed",
+            "value": "closed"
+          }
+        ]
       }
     }
   },
@@ -1794,7 +1821,7 @@
     "contentNote",
     "otherMaterialCharacteristics",
     "usageAndAccessPolicy",
-    "hiddenFromPublic"
+    "oa_status"
   ],
   "required": [
     "$schema",

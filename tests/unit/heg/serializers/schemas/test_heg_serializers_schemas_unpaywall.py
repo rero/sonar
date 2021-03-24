@@ -37,7 +37,8 @@ def test_unpaywall_schema(app):
             'label': 'Full-text',
             'order': 0,
             'type': 'file',
-            'url': 'https://pdf.url'
+            'url': 'https://pdf.url',
+            'force_external_url': True
         }]
     }
 

@@ -52,6 +52,5 @@ def test_serialize(app):
                 'value': 'Unknown title'
             }],
             'type': 'bf:Title'
-        }],
-        'hiddenFromPublic': True
+        }]
     }

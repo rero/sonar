@@ -40,6 +40,7 @@ class UnpaywallSchema(Schema):
         return [{
             'key': 'fulltext.pdf',
             'url': obj['best_oa_location']['url_for_pdf'],
+            'force_external_url': True,
             'label': 'Full-text',
             'type': 'file',
             'order': 0

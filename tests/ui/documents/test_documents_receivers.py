@@ -22,8 +22,8 @@ from os.path import exists, join
 
 from invenio_oaiharvester.tasks import get_records
 
-from sonar.modules.documents.receivers import chunks, export_json, \
-    populate_fulltext_field, transform_harvested_records
+from sonar.modules.documents.receivers import chunks, enrich_document_data, \
+    export_json, transform_harvested_records
 
 
 def test_transform_harvested_records(app, bucket_location,
@@ -61,7 +61,7 @@ def test_transform_harvested_records(app, bucket_location,
     assert captured.out == ''
 
 
-def test_populate_fulltext_field(app, db, document, pdf_file):
+def test_enrich_document_data(app, db, document, pdf_file):
     """Test add full text to document."""
     with open(pdf_file, 'rb') as file:
         content = file.read()
@@ -74,7 +74,7 @@ def test_populate_fulltext_field(app, db, document, pdf_file):
     db.session.commit()
 
     json = {}
-    populate_fulltext_field(record=document, index='documents', json=json)
+    enrich_document_data(record=document, index='documents', json=json)
 
     assert len(json['fulltext']) == 1
     assert json['fulltext'][0].startswith('PHYSICAL REVIEW B 99')

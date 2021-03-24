@@ -523,7 +523,9 @@ RECORDS_REST_FACETS = {
              'year':
              range_filter('provisionActivity.startDate',
                           format='yyyy',
-                          end_date_math='/y')
+                          end_date_math='/y'),
+             'open_access':
+             and_term_filter('isOpenAccess')
          }),
     'deposits':
     dict(aggs=dict(
