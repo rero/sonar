@@ -105,3 +105,39 @@ def test_get_documents_by_project(db, project, document):
     assert documents[0]['pid'] == document['pid']
     assert documents[0][
         'permalink'] == f'http://localhost/global/documents/{document["pid"]}'
+
+
+def test_is_open_access(document):
+    """Test if document is open access."""
+    assert not document.is_open_access()
+
+    # No restriction --> open access
+    document.add_file(b'Test', 'test1.pdf')
+    assert document.is_open_access()
+
+    # Restricted --> not open access
+    document.files['test1.pdf']['access'] = 'coar:c_16ec'
+    assert not document.is_open_access()
+
+    # Open access --> open access
+    document.files['test1.pdf']['access'] = 'coar:c_abf2'
+    assert document.is_open_access()
+
+    # Embargo access with no date --> not open access
+    document.files['test1.pdf']['access'] = 'coar:c_f1cf'
+    assert not document.is_open_access()
+
+    # Embargo access with future date --> not open access
+    document.files['test1.pdf']['access'] = 'coar:c_f1cf'
+    document.files['test1.pdf']['embargo_date'] = '2025-01-01'
+    assert not document.is_open_access()
+
+    # Embargo access with past date --> open access
+    document.files['test1.pdf']['access'] = 'coar:c_f1cf'
+    document.files['test1.pdf']['embargo_date'] = '2021-01-01'
+    assert document.is_open_access()
+
+    # Embargo access with wrong date --> not open access
+    document.files['test1.pdf']['access'] = 'coar:c_f1cf'
+    document.files['test1.pdf']['embargo_date'] = 'WRONG'
+    assert not document.is_open_access()

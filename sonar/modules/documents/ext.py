@@ -23,9 +23,8 @@ from invenio_indexer.signals import before_record_index
 from invenio_oaiharvester.signals import oaiharvest_finished
 from invenio_records.signals import before_record_insert, before_record_update
 
-from sonar.modules.documents.receivers import export_json, \
-    populate_fulltext_field, transform_harvested_records, \
-    update_oai_property
+from sonar.modules.documents.receivers import enrich_document_data, \
+    export_json, transform_harvested_records, update_oai_property
 
 from . import config
 
@@ -48,8 +47,7 @@ class Documents(object):
         oaiharvest_finished.connect(export_json, weak=False)
 
         # Connect to record index signal, to modify record before indexing.
-        before_record_index.connect(populate_fulltext_field,
-                                    weak=False)
+        before_record_index.connect(enrich_document_data, weak=False)
 
         # Adds `_oai` property
         before_record_insert.connect(update_oai_property)

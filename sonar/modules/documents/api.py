@@ -17,6 +17,7 @@
 
 """Document Api."""
 
+from datetime import datetime
 from functools import partial
 from io import BytesIO
 
@@ -326,6 +327,35 @@ class DocumentRecord(SonarRecord):
         """
         self.guess_controlled_affiliations(data)
         return super(DocumentRecord, self).update(data)
+
+    def is_open_access(self):
+        """Check if current document is open access.
+
+        :returns: True if the document is open access.
+        """
+        # No file, means not open access.
+        if not self.files:
+            return False
+
+        for file in self.files:
+            # Restricted access.
+            if file.get('access') == 'coar:c_16ec':
+                return False
+
+            # Embargoed access
+            if file.get('access') == 'coar:c_f1cf':
+                if not file.get('embargo_date'):
+                    return False
+
+                try:
+                    embargo_date = datetime.strptime(file['embargo_date'],
+                                                     '%Y-%m-%d')
+                except Exception:
+                    return False
+
+                return embargo_date <= datetime.now()
+
+        return True
 
 
 class DocumentIndexer(SonarIndexer):

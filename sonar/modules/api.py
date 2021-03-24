@@ -199,7 +199,9 @@ class SonarRecord(Record, FilesMixin):
 
             # Find the record PID.
             pid = PersistentIdentifier.query.filter_by(
-                object_uuid=records_buckets.record_id).first()
+                object_uuid=records_buckets.record_id).filter(
+                    ~PersistentIdentifier.pid_type.in_(['oai', 'rerod'])
+                ).first()
 
             if not pid:
                 raise Exception('Persistent identifier not found.')
