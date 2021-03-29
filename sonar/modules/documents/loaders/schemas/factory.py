@@ -18,8 +18,11 @@
 """Factory for creating a loader schema."""
 
 from .archive_ouverte_unige import ArchiveOuverteUnigeSchema
+from .arodes import ArodesSchema
 from .boris import BorisSchema
+from .edoc import EdocSchema
 from .rerodoc import RerodocSchema
+from .zora import ZoraSchema
 
 
 class LoaderSchemaFactory():
@@ -28,7 +31,10 @@ class LoaderSchemaFactory():
     schemas = {
         'rerodoc': RerodocSchema,
         'archive_ouverte_unige': ArchiveOuverteUnigeSchema,
-        'boris': BorisSchema
+        'boris': BorisSchema,
+        'arodes': ArodesSchema,
+        'zora': ZoraSchema,
+        'edoc': EdocSchema
     }
 
     @staticmethod

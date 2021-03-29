@@ -22,5 +22,29 @@
     "metadataprefix": "oai_openaire",
     "comment": "",
     "setspecs": ""
+  },
+  {
+    "key": "arodes",
+    "name": "ArODES",
+    "url": "https://hesso.tind.io/oai2d",
+    "metadataprefix": "marcxml",
+    "comment": "",
+    "setspecs": ""
+  },
+  {
+    "key": "zora",
+    "name": "Zora",
+    "url": "https://www.zora.uzh.ch/cgi/oai2",
+    "metadataprefix": "marc21",
+    "comment": "",
+    "setspecs": ""
+  },
+  {
+    "key": "edoc",
+    "name": "edoc",
+    "url": "https://edoc.unibas.ch/cgi/oai2",
+    "metadataprefix": "oai_dc",
+    "comment": "",
+    "setspecs": ""
   }
 ]

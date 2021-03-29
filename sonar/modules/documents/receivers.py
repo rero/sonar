@@ -73,8 +73,10 @@ def transform_harvested_records(sender=None, records=None, **kwargs):
         # Convert from Marc XML to JSON
         data = loader_schema.dump(str(harvested_record))
 
-        # Add transformed data to list
-        records.append(data)
+        # Avoid to import deleted records
+        if data and data.get('title'):
+            # Add transformed data to list
+            records.append(data)
 
     # Chunk record list and send celery task
     for chunk in list(chunks(records, CHUNK_SIZE)):
