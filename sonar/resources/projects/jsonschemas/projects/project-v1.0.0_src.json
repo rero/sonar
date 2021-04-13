@@ -46,15 +46,6 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "$schema": {
-          "type": "string",
-          "default": "https://sonar.ch/schemas/projects/project-v1.0.0.json"
-        },
-        "pid": {
-          "title": "Identifier",
-          "type": "string",
-          "minLength": 1
-        },
         "name": {
           "title": "Name",
           "type": "string",

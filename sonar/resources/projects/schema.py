@@ -30,7 +30,6 @@ from sonar.proxies import sonar
 class MetadataSchema(Schema):
     """Schema for the project metadata."""
 
-    pid = fields.Str()
     name = fields.Str(required=True)
     description = fields.Str()
     startDate = fields.Str()
