@@ -15,17 +15,4 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Test SONAR extension."""
-
-
-from sonar.proxies import sonar
-
-
-def test_get_endpoints(app):
-    """Test list endpoints."""
-    endpoints = sonar.endpoints
-    assert endpoints['doc'] == 'documents'
-    assert endpoints['depo'] == 'deposits'
-    assert endpoints['org'] == 'organisations'
-    assert endpoints['user'] == 'users'
-    assert endpoints['projects'] == 'projects'
+"""Suggestions."""

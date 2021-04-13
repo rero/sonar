@@ -85,6 +85,7 @@ setup(
             'users = sonar.modules.users.views:blueprint',
             'monitoring = sonar.monitoring.views:blueprint',
             'translations = sonar.translations.rest:blueprint',
+            'suggestions = sonar.suggestions.rest:blueprint',
         ],
         'invenio_assets.webpack': [
             'sonar_theme = sonar.theme.webpack:theme'
