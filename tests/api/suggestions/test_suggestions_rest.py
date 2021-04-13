@@ -17,18 +17,23 @@
 
 """Test suggestions rest."""
 
+import json
+
 from flask import url_for
 from invenio_accounts.testutils import login_user_via_session
 from invenio_search import current_search
 
 
-def test_completion(client, project, make_user):
+def test_completion(client, project_json, make_user):
     """Test completion suggestions."""
-    # Ensure project is indexed
-    current_search.flush_and_refresh(index='projects')
-
     user = make_user('admin', organisation='hepvs', access='admin-access')
     login_user_via_session(client, email=user['email'])
+
+    project_json['metadata']['projectSponsor'] = 'Sponsor 1'
+    res = client.post(url_for('projects.projects_list'),
+                      data=json.dumps(project_json))
+    # Ensure project is indexed
+    current_search.flush_and_refresh(index='projects')
 
     # No query parameter
     res = client.get(url_for('suggestions.completion'))
@@ -66,14 +71,14 @@ def test_completion(client, project, make_user):
     assert res.status_code == 400
     assert res.json == {'error': 'Bad request'}
 
-    # Resource managed by invenio-records-resources
+    # OK
     res = client.get(
         url_for('suggestions.completion',
-                q='Pro',
-                field='metadata.name.suggest',
+                q='Spo',
+                field='metadata.projectSponsor.suggest',
                 resource='projects'))
     assert res.status_code == 200
-    assert res.json == ['Project 1']
+    assert res.json == ['Sponsor 1']
 
     # Old way resource
     res = client.get(

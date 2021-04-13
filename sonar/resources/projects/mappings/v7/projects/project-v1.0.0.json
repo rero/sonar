@@ -18,8 +18,9 @@
             "type": "text",
             "fields": {
               "suggest": {
-                "type": "completion",
-                "analyzer": "default"
+                "type": "text",
+                "analyzer": "autocomplete",
+                "search_analyzer": "standard"
               }
             }
           },
@@ -122,6 +123,33 @@
             "properties": {
               "pid": {
                 "type": "keyword"
+              }
+            }
+          },
+          "projectSponsor": {
+            "type": "text",
+            "fields": {
+              "suggest": {
+                "type": "completion",
+                "analyzer": "default"
+              }
+            }
+          },
+          "innerSearcher": {
+            "type": "text",
+            "fields": {
+              "suggest": {
+                "type": "completion",
+                "analyzer": "default"
+              }
+            }
+          },
+          "keywords": {
+            "type": "text",
+            "fields": {
+              "suggest": {
+                "type": "completion",
+                "analyzer": "default"
               }
             }
           }
