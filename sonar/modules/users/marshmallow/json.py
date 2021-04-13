@@ -47,6 +47,7 @@ class UserMetadataSchemaV1(StrictKeysMixin):
     phone = SanitizedUnicode()
     organisation = fields.Dict()
     role = SanitizedUnicode()
+    full_name = SanitizedUnicode()
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
     schema = GenFunction(load_only=True,
