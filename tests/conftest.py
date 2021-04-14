@@ -255,6 +255,10 @@ def document_json(app, db, bucket_location, organisation):
             'value': '111111',
             'type': 'bf:Local',
             'source': 'RERO DOC'
+        }, {
+            'value': 'R003415713',
+            'type': 'bf:Local',
+            'source': 'RERO'
         }],
         'language': [{
             'value': 'eng',

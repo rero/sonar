@@ -25,11 +25,36 @@ def test_get_record_by_identifier(app, document):
     # Record found
     record = DocumentRecord.get_record_by_identifier([{
         'value': '111111',
-        'type': 'bf:Local'
+        'type': 'bf:Local',
+        'source': 'RERO DOC'
+    }, {
+        'value': 'R003415713',
+        'type': 'bf:Local',
+        'source': 'RERO'
     }])
     assert record['pid'] == document['pid']
 
-    # Record not found
+    # Not matching complete identifier
+    record = DocumentRecord.get_record_by_identifier([{
+        'value': '111111',
+        'type': 'bf:Local',
+        'source': 'Unmatching'
+    }, {
+        'value': 'R003415713',
+        'type': 'bf:Local',
+        'source': 'RERO'
+    }])
+    assert not record
+
+    # Mixing identifier data
+    record = DocumentRecord.get_record_by_identifier([{
+        'value': 'R003415713',
+        'type': 'bf:Local',
+        'source': 'RERO DOC'
+    }])
+    assert not record
+
+    # Record not found, cause juste `bf:Doi` and `bf:Local` are analyzed.
     record = DocumentRecord.get_record_by_identifier([{
         'value': 'oai:unknown',
         'type': 'bf:Identifier'

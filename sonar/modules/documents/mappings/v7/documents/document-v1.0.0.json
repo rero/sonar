@@ -104,6 +104,9 @@
           }
         }
       },
+      "sections": {
+        "type": "keyword"
+      },
       "documentType": {
         "type": "keyword"
       },
@@ -239,7 +242,7 @@
         }
       },
       "identifiedBy": {
-        "type": "object",
+        "type": "nested",
         "properties": {
           "type": {
             "type": "keyword"
