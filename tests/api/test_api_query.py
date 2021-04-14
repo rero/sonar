@@ -100,7 +100,7 @@ def test_api_query(client, document_with_file, document_json, make_document,
                           headers=headers)
     assert response.status_code == 200
     assert response.json['hits']['total']['value'] == 1
-    assert len(response.json['hits']['hits'][0]['explanation']['details']) == 3
+    assert response.json['hits']['hits'][0]['explanation']['details']
 
     # Not allowed operator
     with pytest.raises(Exception) as exception:

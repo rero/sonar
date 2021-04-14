@@ -65,6 +65,14 @@ def marc21_to_type_and_organisation(self, key, value):
         if organisation == 'unisi':
             organisation = 'usi'
 
+        # Specific transformation for `bpuge` and `mhnge`, because the real
+        # acronym is `vge`.
+        if organisation in ['bpuge', 'mhnge']:
+            # Store section
+            self['sections'] = [organisation
+                                ] if organisation != 'bpuge' else ['bge']
+            organisation = 'vge'
+
         if organisation not in overdo.registererd_organisations:
             overdo.create_organisation(organisation)
             overdo.registererd_organisations.append(organisation)
@@ -206,7 +214,7 @@ def marc21_to_provision_activity_field_260(self, key, value):
         years = value.get('c').split('-')
 
         # Start date
-        if years:
+        if years and re.match(r'^\d{4}$', years[0]):
             publication['startDate'] = years[0]
 
             publication['statement'].append({
@@ -218,7 +226,7 @@ def marc21_to_provision_activity_field_260(self, key, value):
             })
 
         # End date
-        if len(years) > 1:
+        if len(years) > 1 and re.match(r'^\d{4}$', years[1]):
             publication['endDate'] = years[1]
 
         provision_activity.append(publication)
@@ -341,6 +349,9 @@ def marc21_to_abstract(self, key, value):
 
     if not abstract:
         return None
+
+    if language == 'fr':
+        language = 'fre'
 
     abstracts_data = self.get('abstracts', [])
     abstracts_data.append({'value': abstract, 'language': language})

@@ -51,6 +51,9 @@ def import_records(records_to_import):
                                                dbcommit=False,
                                                with_bucket=True)
             else:
+                current_app.logger.warning(
+                    'Record already imported with PID {pid}: {record}'.format(
+                        pid=record['pid'], record=data))
                 record.update(data)
 
             for file_data in files_data:

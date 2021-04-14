@@ -35,7 +35,7 @@ from sonar.webdav import HegClient
 from .api import DocumentRecord
 from .tasks import import_records
 
-CHUNK_SIZE = 100
+CHUNK_SIZE = 20
 
 
 def transform_harvested_records(sender=None, records=None, **kwargs):

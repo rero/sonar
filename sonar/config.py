@@ -464,6 +464,8 @@ DEFAULT_AGGREGATION_SIZE = 50
 RECORDS_REST_FACETS = {
     'documents':
     dict(aggs=dict(
+        sections=dict(terms=dict(field='sections',
+                                     size=DEFAULT_AGGREGATION_SIZE)),
         organisation=dict(terms=dict(field='organisation.pid',
                                      size=DEFAULT_AGGREGATION_SIZE)),
         language=dict(
@@ -485,6 +487,8 @@ RECORDS_REST_FACETS = {
             format='yyyy',
         ))),
          filters={
+             'sections':
+             and_term_filter('sections'),
              'organisation':
              and_term_filter('organisation.pid'),
              'language':

@@ -20,6 +20,7 @@
 from functools import partial
 from io import BytesIO
 
+from elasticsearch_dsl import Q
 from flask import current_app, request
 
 from sonar.affiliations import AffiliationResolver
@@ -126,14 +127,39 @@ class DocumentRecord(SonarRecord):
 
         :param list identifiers: List of identifiers
         """
-        for identifier in identifiers:
-            if identifier['type'] in ['bf:Local', 'bf:Doi']:
-                results = list(DocumentSearch().filter(
-                    'term', identifiedBy__value=identifier['value']).source(
-                        includes=['pid']))
+        search = DocumentSearch()
 
-                if results:
-                    return cls.get_record_by_pid(results[0]['pid'])
+        # Search only for DOI or local indeitifiers.
+        search_identifiers = [
+            identifier for identifier in identifiers
+            if identifier['type'] in ['bf:Local', 'bf:Doi']
+        ]
+
+        # No identifiers to analyze
+        if not search_identifiers:
+            return None
+
+        # Construct filters to match the whole identifier (type, value and
+        # source). This is possible by configuring the property as `nested`
+        filters = []
+        for identifier in search_identifiers:
+            identifier_filters = [
+                Q('term', identifiedBy__value=identifier['value']),
+                Q('term', identifiedBy__type=identifier['type'])
+            ]
+            if identifier.get('source'):
+                identifier_filters.append(
+                    Q('term', identifiedBy__source=identifier['source']))
+
+            filters.append(
+                Q('nested',
+                  path='identifiedBy',
+                  query=Q('bool', filter=identifier_filters)))
+
+        search = search.query('bool', filter=filters).source(includes=['pid'])
+        results = list(search)
+        if results:
+            return cls.get_record_by_pid(results[0]['pid'])
 
         return None
 

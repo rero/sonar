@@ -12,6 +12,7 @@ jobs:
 
     - name: Install Libraries
       run: |
+        sudo apt-get update -y
         sudo apt-get install -y libxml2 libxml2-dev libxmlsec1 libxmlsec1-dev ghostscript imagemagick
         wget http://security.ubuntu.com/ubuntu/pool/main/p/poppler/libpoppler73_0.62.0-2ubuntu2.12_amd64.deb
         sudo apt-get install ./libpoppler73_0.62.0-2ubuntu2.12_amd64.deb

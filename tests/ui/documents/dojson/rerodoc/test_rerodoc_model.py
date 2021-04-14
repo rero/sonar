@@ -119,6 +119,40 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
         'https://sonar.ch/api/organisations/usi'
     }]
 
+    # Specific conversion for bpuge
+    marc21xml = """
+    <record>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="b">BPUGE</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = overdo.do(marc21json)
+    assert not data.get('documentType')
+    assert data.get('organisation') == [{
+        '$ref':
+        'https://sonar.ch/api/organisations/vge'
+    }]
+    assert data['sections'] == ['bge']
+
+    # Specific conversion for mhnge
+    marc21xml = """
+    <record>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="b">MHNGE</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = overdo.do(marc21json)
+    assert not data.get('documentType')
+    assert data.get('organisation') == [{
+        '$ref':
+        'https://sonar.ch/api/organisations/vge'
+    }]
+    assert data['sections'] == ['mhnge']
+
 
 def test_marc21_to_title_245():
     """Test dojson marc21_to_title."""
@@ -562,6 +596,34 @@ def test_marc21_to_provision_activity_field_260(app):
     assert data.get('provisionActivity')[0]['startDate'] == '1798'
     assert 'endDate' not in data.get('provisionActivity')[0]
 
+    # Wrong start date
+    marc21xml = """
+    <record>
+        <datafield tag="260" ind1=" " ind2=" ">
+            <subfield code="a">Lausanne</subfield>
+            <subfield code="c">[1798?]</subfield>
+            <subfield code="b">Bulletin officiel du Directoire,</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = overdo.do(marc21json)
+    assert 'startDate' not in data.get('provisionActivity')[0]
+
+    # Wrong end date
+    marc21xml = """
+    <record>
+        <datafield tag="260" ind1=" " ind2=" ">
+            <subfield code="a">Lausanne</subfield>
+            <subfield code="c">1798-</subfield>
+            <subfield code="b">Bulletin officiel du Directoire,</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = overdo.do(marc21json)
+    assert 'endDate' not in data.get('provisionActivity')[0]
+
 
 def test_marc21_to_provision_activity_field_269(app):
     """Test provision activity with field 269."""
@@ -917,6 +979,19 @@ def test_marc21_to_abstract():
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
     assert not data.get('abstracts')
+
+    # Special case with lang --> fr
+    marc21xml = """
+    <record>
+      <datafield tag="520" ind1=" " ind2=" ">
+        <subfield code="a">Résumé</subfield>
+        <subfield code="9">fr</subfield>
+      </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = overdo.do(marc21json)
+    assert data.get('abstracts') == [{'value': 'Résumé', 'language': 'fre'}]
 
 
 # notes: [500$a repetitive]
