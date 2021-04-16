@@ -230,7 +230,7 @@ def schemas(record_type):
             if 'isShared' in schema.get('propertiesOrder', []):
                 schema['propertiesOrder'].remove('isShared')
 
-        return jsonify({'schema': prepare_schema(schema)})
+        return jsonify({'schema': schema})
     except JSONSchemaNotFound:
         abort(404)
 
@@ -263,36 +263,6 @@ def record_image_url(record, key=None):
                 return image_url(file)
 
     return None
-
-
-def prepare_schema(schema):
-    """Prepare schema before sending it."""
-    def hierarchize_form_options(schema):
-        """Hierarchize form options."""
-        if schema.get('properties'):
-            for key, value in schema['properties'].items():
-                if value.get('form', {}).get('options'):
-                    for option in value['form']['options']:
-                        if option.get('level'):
-                            option['label'] = "{spaces} {label}".format(
-                                spaces='-' * 2 * option['level'],
-                                label=option['label'])
-
-                if value.get('type') == 'array' and value['items'][
-                        'type'] == 'object':
-                    hierarchize_form_options(value['items'])
-
-                if value.get('type') == 'object':
-                    hierarchize_form_options(value)
-
-        for of_field in ['oneOf', 'anyOf', 'allOf', 'not']:
-            if schema.get(of_field):
-                for field in schema[of_field]:
-                    hierarchize_form_options(field)
-
-    hierarchize_form_options(schema)
-
-    return schema
 
 
 @blueprint.app_template_filter()

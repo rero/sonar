@@ -51,307 +51,220 @@
     "coar:c_1843"
   ],
   "form": {
-    "type": "enum",
+    "templateOptions": {
+      "sort": false,
+      "wrappers": [
+        "card"
+      ]
+    },
     "options": [
       {
         "label": "document_type_coar:c_2f33",
-        "value": "coar:c_2f33"
-      },
-      {
-        "label": "document_type_coar:c_3248",
-        "value": "coar:c_3248"
-      },
-      {
-        "label": "document_type_coar:c_5794",
-        "value": "coar:c_5794"
-      },
-      {
-        "label": "document_type_coar:c_6501",
-        "value": "coar:c_6501"
-      },
-      {
-        "label": "document_type_coar:c_816b",
-        "value": "coar:c_816b"
-      },
-      {
-        "label": "document_type_coar:c_7a1f",
-        "value": "coar:c_7a1f"
-      },
-      {
-        "label": "document_type_coar:c_db06",
-        "value": "coar:c_db06"
-      },
-      {
-        "label": "document_type_coar:c_bdcc",
-        "value": "coar:c_bdcc"
-      },
-      {
-        "label": "document_type_coar:c_2f33",
         "value": "coar:c_2f33",
-        "group": "------------"
+        "preferred": true
       },
       {
         "label": "document_type_coar:c_3248",
         "value": "coar:c_3248",
-        "group": "------------"
+        "preferred": true
       },
       {
         "label": "document_type_coar:c_c94f",
         "value": "coar:c_c94f",
-        "group": "------------"
-      },
-      {
-        "label": "document_type_coar:c_5794",
-        "value": "coar:c_5794",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_18cp",
-        "value": "coar:c_18cp",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_6670",
-        "value": "coar:c_6670",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_18co",
-        "value": "coar:c_18co",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_f744",
-        "value": "coar:c_f744",
-        "group": "------------",
-        "level": 1
+        "children": [
+          {
+            "label": "document_type_coar:c_5794",
+            "value": "coar:c_5794",
+            "preferred": true
+          },
+          {
+            "label": "document_type_coar:c_18cp",
+            "value": "coar:c_18cp"
+          },
+          {
+            "label": "document_type_coar:c_6670",
+            "value": "coar:c_6670"
+          },
+          {
+            "label": "document_type_coar:c_18co",
+            "value": "coar:c_18co"
+          },
+          {
+            "label": "document_type_coar:c_f744",
+            "value": "coar:c_f744"
+          }
+        ]
       },
       {
         "label": "document_type_coar:c_ddb1",
-        "value": "coar:c_ddb1",
-        "group": "------------"
+        "value": "coar:c_ddb1"
       },
       {
         "label": "document_type_coar:c_3e5a",
         "value": "coar:c_3e5a",
-        "group": "------------"
-      },
-      {
-        "label": "document_type_coar:c_beb9",
-        "value": "coar:c_beb9",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_6501",
-        "value": "coar:c_6501",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_998f",
-        "value": "coar:c_998f",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_dcae04bc",
-        "value": "coar:c_dcae04bc",
-        "group": "------------",
-        "level": 1
+        "children": [
+          {
+            "label": "document_type_coar:c_beb9",
+            "value": "coar:c_beb9"
+          },
+          {
+            "label": "document_type_coar:c_6501",
+            "value": "coar:c_6501",
+            "preferred": true
+          },
+          {
+            "label": "document_type_coar:c_998f",
+            "value": "coar:c_998f"
+          },
+          {
+            "label": "document_type_coar:c_dcae04bc",
+            "value": "coar:c_dcae04bc"
+          }
+        ]
       },
       {
         "label": "document_type_coar:c_8544",
-        "value": "coar:c_8544",
-        "group": "------------"
+        "value": "coar:c_8544"
       },
       {
         "label": "document_type_non_textual_object",
         "value": "non_textual_object",
-        "group": "------------"
-      },
-      {
-        "label": "document_type_coar:c_8a7e",
-        "value": "coar:c_8a7e",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_ecc8",
-        "value": "coar:c_ecc8",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_12cc",
-        "value": "coar:c_12cc",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_18cc",
-        "value": "coar:c_18cc",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_18cw",
-        "value": "coar:c_18cw",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_5ce6",
-        "value": "coar:c_5ce6",
-        "group": "------------",
-        "level": 1
+        "children": [
+          {
+            "label": "document_type_coar:c_8a7e",
+            "value": "coar:c_8a7e"
+          },
+          {
+            "label": "document_type_coar:c_ecc8",
+            "value": "coar:c_ecc8"
+          },
+          {
+            "label": "document_type_coar:c_12cc",
+            "value": "coar:c_12cc"
+          },
+          {
+            "label": "document_type_coar:c_18cc",
+            "value": "coar:c_18cc"
+          },
+          {
+            "label": "document_type_coar:c_18cw",
+            "value": "coar:c_18cw"
+          },
+          {
+            "label": "document_type_coar:c_5ce6",
+            "value": "coar:c_5ce6"
+          }
+        ]
       },
       {
         "label": "document_type_coar:c_15cd",
-        "group": "------------",
         "value": "coar:c_15cd"
       },
       {
         "label": "document_type_coar:c_2659",
-        "group": "------------",
-        "value": "coar:c_2659"
-      },
-      {
-        "label": "document_type_coar:c_0640",
-        "value": "coar:c_0640",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_2cd9",
-        "value": "coar:c_2cd9",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_2fe3",
-        "value": "coar:c_2fe3",
-        "group": "------------",
-        "level": 1
+        "value": "coar:c_2659",
+        "children": [
+          {
+            "label": "document_type_coar:c_0640",
+            "value": "coar:c_0640"
+          },
+          {
+            "label": "document_type_coar:c_2cd9",
+            "value": "coar:c_2cd9"
+          },
+          {
+            "label": "document_type_coar:c_2fe3",
+            "value": "coar:c_2fe3"
+          }
+        ]
       },
       {
         "label": "document_type_coar:c_816b",
         "value": "coar:c_816b",
-        "group": "------------"
+        "preferred": true
       },
       {
         "label": "document_type_coar:c_93fc",
         "value": "coar:c_93fc",
-        "group": "------------"
-      },
-      {
-        "label": "document_type_coar:c_18ww",
-        "value": "coar:c_18ww",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_18wz",
-        "value": "coar:c_18wz",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_18wq",
-        "value": "coar:c_18wq",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_186u",
-        "value": "coar:c_186u",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_18op",
-        "value": "coar:c_18op",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_ba1f",
-        "value": "coar:c_ba1f",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_18hj",
-        "value": "coar:c_18hj",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_18ws",
-        "value": "coar:c_18ws",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_18gh",
-        "value": "coar:c_18gh",
-        "group": "------------",
-        "level": 1
+        "children": [
+          {
+            "label": "document_type_coar:c_18ww",
+            "value": "coar:c_18ww"
+          },
+          {
+            "label": "document_type_coar:c_18wz",
+            "value": "coar:c_18wz"
+          },
+          {
+            "label": "document_type_coar:c_18wq",
+            "value": "coar:c_18wq"
+          },
+          {
+            "label": "document_type_coar:c_186u",
+            "value": "coar:c_186u"
+          },
+          {
+            "label": "document_type_coar:c_18op",
+            "value": "coar:c_18op"
+          },
+          {
+            "label": "document_type_coar:c_ba1f",
+            "value": "coar:c_ba1f"
+          },
+          {
+            "label": "document_type_coar:c_18hj",
+            "value": "coar:c_18hj"
+          },
+          {
+            "label": "document_type_coar:c_18ws",
+            "value": "coar:c_18ws"
+          },
+          {
+            "label": "document_type_coar:c_18gh",
+            "value": "coar:c_18gh"
+          }
+        ]
       },
       {
         "label": "document_type_coar:c_46ec",
         "value": "coar:c_46ec",
-        "group": "------------"
-      },
-      {
-        "label": "document_type_coar:c_7a1f",
-        "value": "coar:c_7a1f",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_db06",
-        "value": "coar:c_db06",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_coar:c_bdcc",
-        "value": "coar:c_bdcc",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_habilitation_thesis",
-        "value": "habilitation_thesis",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_advanced_studies_thesis",
-        "value": "advanced_studies_thesis",
-        "group": "------------",
-        "level": 1
-      },
-      {
-        "label": "document_type_other",
-        "value": "other",
-        "group": "------------",
-        "level": 1
+        "children": [
+          {
+            "label": "document_type_coar:c_7a1f",
+            "value": "coar:c_7a1f",
+            "preferred": true
+          },
+          {
+            "label": "document_type_coar:c_db06",
+            "value": "coar:c_db06",
+            "preferred": true
+          },
+          {
+            "label": "document_type_coar:c_bdcc",
+            "value": "coar:c_bdcc",
+            "preferred": true
+          },
+          {
+            "label": "document_type_habilitation_thesis",
+            "value": "habilitation_thesis"
+          },
+          {
+            "label": "document_type_advanced_studies_thesis",
+            "value": "advanced_studies_thesis"
+          },
+          {
+            "label": "document_type_other",
+            "value": "other"
+          }
+        ]
       },
       {
         "label": "document_type_coar:c_8042",
-        "value": "coar:c_8042",
-        "group": "------------"
+        "value": "coar:c_8042"
       },
       {
         "label": "document_type_coar:c_1843",
-        "value": "coar:c_1843",
-        "group": "------------"
+        "value": "coar:c_1843"
       }
     ],
     "expressionProperties": {

@@ -1021,16 +1021,15 @@
               "type": {
                 "title": "Type",
                 "type": "string",
-                "enum": [
-                  "bf:ClassificationUdc"
-                ],
+                "readOnly": true,
+                "const": "bf:ClassificationUdc",
+                "default": "bf:ClassificationUdc",
                 "form": {
-                  "options": [
-                    {
-                      "label": "bf:ClassificationUdc",
-                      "value": "bf:ClassificationUdc"
-                    }
-                  ]
+                  "templateOptions": {
+                    "wrappers": [
+                      "hide"
+                    ]
+                  }
                 }
               },
               "classificationPortion": {
@@ -1055,16 +1054,12 @@
                 "readOnly": true,
                 "const": "bf:ClassificationDdc",
                 "default": "bf:ClassificationDdc",
-                "enum": [
-                  "bf:ClassificationDdc"
-                ],
                 "form": {
-                  "options": [
-                    {
-                      "label": "bf:ClassificationDdc",
-                      "value": "bf:ClassificationDdc"
-                    }
-                  ]
+                  "templateOptions": {
+                    "wrappers": [
+                      "hide"
+                    ]
+                  }
                 }
               },
               "classificationPortion": {

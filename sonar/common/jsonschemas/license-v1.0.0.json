@@ -13,6 +13,11 @@
     "Not OA / Rights reserved"
   ],
   "form": {
+    "templateOptions": {
+      "wrappers": [
+        "card"
+      ]
+    },
     "options": [
       {
         "label": "CC0",
