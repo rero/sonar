@@ -392,123 +392,110 @@
                   "pmid"
                 ],
                 "form": {
+                  "templateOptions": {
+                    "wrappers": [
+                      "card"
+                    ]
+                  },
                   "options": [
                     {
                       "label": "bf:Doi",
-                      "value": "bf:Doi"
+                      "value": "bf:Doi",
+                      "preferred": true
                     },
                     {
                       "label": "pmid",
-                      "value": "pmid"
+                      "value": "pmid",
+                      "preferred": true
                     },
                     {
                       "label": "bf:Isbn",
-                      "value": "bf:Isbn"
+                      "value": "bf:Isbn",
+                      "preferred": true
                     },
                     {
                       "label": "bf:AudioIssueNumber",
-                      "value": "bf:AudioIssueNumber",
-                      "group": "------------"
+                      "value": "bf:AudioIssueNumber"
                     },
                     {
                       "label": "bf:Ean",
-                      "value": "bf:Ean",
-                      "group": "------------"
+                      "value": "bf:Ean"
                     },
                     {
                       "label": "bf:Gtin14Number",
-                      "value": "bf:Gtin14Number",
-                      "group": "------------"
+                      "value": "bf:Gtin14Number"
                     },
                     {
                       "label": "bf:Identifier",
-                      "value": "bf:Identifier",
-                      "group": "------------"
+                      "value": "bf:Identifier"
                     },
                     {
                       "label": "bf:Isan",
-                      "value": "bf:Isan",
-                      "group": "------------"
+                      "value": "bf:Isan"
                     },
                     {
                       "label": "bf:Ismn",
-                      "value": "bf:Ismn",
-                      "group": "------------"
+                      "value": "bf:Ismn"
                     },
                     {
                       "label": "bf:Isrc",
-                      "value": "bf:Isrc",
-                      "group": "------------"
+                      "value": "bf:Isrc"
                     },
                     {
                       "label": "bf:Issn",
-                      "value": "bf:Issn",
-                      "group": "------------"
+                      "value": "bf:Issn"
                     },
                     {
                       "label": "bf:IssnL",
-                      "value": "bf:IssnL",
-                      "group": "------------"
+                      "value": "bf:IssnL"
                     },
                     {
                       "label": "bf:Local",
-                      "value": "bf:Local",
-                      "group": "------------"
+                      "value": "bf:Local"
                     },
                     {
                       "label": "bf:MatrixNumber",
-                      "value": "bf:MatrixNumber",
-                      "group": "------------"
+                      "value": "bf:MatrixNumber"
                     },
                     {
                       "label": "bf:MusicDistributorNumber",
-                      "value": "bf:MusicDistributorNumber",
-                      "group": "------------"
+                      "value": "bf:MusicDistributorNumber"
                     },
                     {
                       "label": "bf:MusicPlate",
-                      "value": "bf:MusicPlate",
-                      "group": "------------"
+                      "value": "bf:MusicPlate"
                     },
                     {
                       "label": "bf:MusicPublisherNumber",
-                      "value": "bf:MusicPublisherNumber",
-                      "group": "------------"
+                      "value": "bf:MusicPublisherNumber"
                     },
                     {
                       "label": "bf:PublisherNumber",
-                      "value": "bf:PublisherNumber",
-                      "group": "------------"
+                      "value": "bf:PublisherNumber"
                     },
                     {
                       "label": "bf:Upc",
-                      "value": "bf:Upc",
-                      "group": "------------"
+                      "value": "bf:Upc"
                     },
                     {
                       "label": "bf:Urn",
-                      "value": "bf:Urn",
-                      "group": "------------"
+                      "value": "bf:Urn"
                     },
                     {
                       "label": "bf:VideoRecordingNumber",
-                      "value": "bf:VideoRecordingNumber",
-                      "group": "------------"
+                      "value": "bf:VideoRecordingNumber"
                     },
                     {
                       "label": "uri",
-                      "value": "uri",
-                      "group": "------------"
+                      "value": "uri"
                     },
                     {
                       "label": "bf:ReportNumber",
-                      "value": "bf:ReportNumber",
-                      "group": "------------"
+                      "value": "bf:ReportNumber"
                     },
                     {
                       "label": "bf:Strn",
-                      "value": "bf:Strn",
-                      "group": "------------"
+                      "value": "bf:Strn"
                     }
                   ]
                 }
@@ -860,6 +847,11 @@
               "ctb"
             ],
             "form": {
+              "templateOptions": {
+                "wrappers": [
+                  "card"
+                ]
+              },
               "options": [
                 {
                   "label": "contribution_role_cre",
@@ -996,6 +988,11 @@
                         "coinvestigator"
                       ],
                       "form": {
+                        "templateOptions": {
+                          "wrappers": [
+                            "card"
+                          ]
+                        },
                         "options": [
                           {
                             "label": "investigator",

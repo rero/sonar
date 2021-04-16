@@ -489,2448 +489,1956 @@
     "zza"
   ],
   "form": {
-    "type": "enum",
+    "templateOptions": {
+      "sort": true,
+      "wrappers": [
+        "card"
+      ]
+    },
     "options": [
       {
-        "label": "lang_eng",
-        "value": "eng"
-      },
-      {
-        "label": "lang_fre",
-        "value": "fre"
-      },
-      {
-        "label": "lang_ger",
-        "value": "ger"
-      },
-      {
-        "label": "lang_ita",
-        "value": "ita"
-      },
-      {
         "label": "lang_aar",
-        "value": "aar",
-        "group": "------------"
+        "value": "aar"
       },
       {
         "label": "lang_abk",
-        "value": "abk",
-        "group": "------------"
+        "value": "abk"
       },
       {
         "label": "lang_ace",
-        "value": "ace",
-        "group": "------------"
+        "value": "ace"
       },
       {
         "label": "lang_ach",
-        "value": "ach",
-        "group": "------------"
+        "value": "ach"
       },
       {
         "label": "lang_ada",
-        "value": "ada",
-        "group": "------------"
+        "value": "ada"
       },
       {
         "label": "lang_ady",
-        "value": "ady",
-        "group": "------------"
+        "value": "ady"
       },
       {
         "label": "lang_afa",
-        "value": "afa",
-        "group": "------------"
+        "value": "afa"
       },
       {
         "label": "lang_afh",
-        "value": "afh",
-        "group": "------------"
+        "value": "afh"
       },
       {
         "label": "lang_afr",
-        "value": "afr",
-        "group": "------------"
+        "value": "afr"
       },
       {
         "label": "lang_ain",
-        "value": "ain",
-        "group": "------------"
+        "value": "ain"
       },
       {
         "label": "lang_aka",
-        "value": "aka",
-        "group": "------------"
+        "value": "aka"
       },
       {
         "label": "lang_akk",
-        "value": "akk",
-        "group": "------------"
+        "value": "akk"
       },
       {
         "label": "lang_alb",
-        "value": "alb",
-        "group": "------------"
+        "value": "alb"
       },
       {
         "label": "lang_ale",
-        "value": "ale",
-        "group": "------------"
+        "value": "ale"
       },
       {
         "label": "lang_alg",
-        "value": "alg",
-        "group": "------------"
+        "value": "alg"
       },
       {
         "label": "lang_alt",
-        "value": "alt",
-        "group": "------------"
+        "value": "alt"
       },
       {
         "label": "lang_amh",
-        "value": "amh",
-        "group": "------------"
+        "value": "amh"
       },
       {
         "label": "lang_ang",
-        "value": "ang",
-        "group": "------------"
+        "value": "ang"
       },
       {
         "label": "lang_anp",
-        "value": "anp",
-        "group": "------------"
+        "value": "anp"
       },
       {
         "label": "lang_apa",
-        "value": "apa",
-        "group": "------------"
+        "value": "apa"
       },
       {
         "label": "lang_ara",
-        "value": "ara",
-        "group": "------------"
+        "value": "ara"
       },
       {
         "label": "lang_arc",
-        "value": "arc",
-        "group": "------------"
+        "value": "arc"
       },
       {
         "label": "lang_arg",
-        "value": "arg",
-        "group": "------------"
+        "value": "arg"
       },
       {
         "label": "lang_arm",
-        "value": "arm",
-        "group": "------------"
+        "value": "arm"
       },
       {
         "label": "lang_arn",
-        "value": "arn",
-        "group": "------------"
+        "value": "arn"
       },
       {
         "label": "lang_arp",
-        "value": "arp",
-        "group": "------------"
+        "value": "arp"
       },
       {
         "label": "lang_art",
-        "value": "art",
-        "group": "------------"
+        "value": "art"
       },
       {
         "label": "lang_arw",
-        "value": "arw",
-        "group": "------------"
+        "value": "arw"
       },
       {
         "label": "lang_asm",
-        "value": "asm",
-        "group": "------------"
+        "value": "asm"
       },
       {
         "label": "lang_ast",
-        "value": "ast",
-        "group": "------------"
+        "value": "ast"
       },
       {
         "label": "lang_ath",
-        "value": "ath",
-        "group": "------------"
+        "value": "ath"
       },
       {
         "label": "lang_aus",
-        "value": "aus",
-        "group": "------------"
+        "value": "aus"
       },
       {
         "label": "lang_ava",
-        "value": "ava",
-        "group": "------------"
+        "value": "ava"
       },
       {
         "label": "lang_ave",
-        "value": "ave",
-        "group": "------------"
+        "value": "ave"
       },
       {
         "label": "lang_awa",
-        "value": "awa",
-        "group": "------------"
+        "value": "awa"
       },
       {
         "label": "lang_aym",
-        "value": "aym",
-        "group": "------------"
+        "value": "aym"
       },
       {
         "label": "lang_aze",
-        "value": "aze",
-        "group": "------------"
+        "value": "aze"
       },
       {
         "label": "lang_bad",
-        "value": "bad",
-        "group": "------------"
+        "value": "bad"
       },
       {
         "label": "lang_bai",
-        "value": "bai",
-        "group": "------------"
+        "value": "bai"
       },
       {
         "label": "lang_bak",
-        "value": "bak",
-        "group": "------------"
+        "value": "bak"
       },
       {
         "label": "lang_bal",
-        "value": "bal",
-        "group": "------------"
+        "value": "bal"
       },
       {
         "label": "lang_bam",
-        "value": "bam",
-        "group": "------------"
+        "value": "bam"
       },
       {
         "label": "lang_ban",
-        "value": "ban",
-        "group": "------------"
+        "value": "ban"
       },
       {
         "label": "lang_baq",
-        "value": "baq",
-        "group": "------------"
+        "value": "baq"
       },
       {
         "label": "lang_bas",
-        "value": "bas",
-        "group": "------------"
+        "value": "bas"
       },
       {
         "label": "lang_bat",
-        "value": "bat",
-        "group": "------------"
+        "value": "bat"
       },
       {
         "label": "lang_bej",
-        "value": "bej",
-        "group": "------------"
+        "value": "bej"
       },
       {
         "label": "lang_bel",
-        "value": "bel",
-        "group": "------------"
+        "value": "bel"
       },
       {
         "label": "lang_bem",
-        "value": "bem",
-        "group": "------------"
+        "value": "bem"
       },
       {
         "label": "lang_ben",
-        "value": "ben",
-        "group": "------------"
+        "value": "ben"
       },
       {
         "label": "lang_ber",
-        "value": "ber",
-        "group": "------------"
+        "value": "ber"
       },
       {
         "label": "lang_bho",
-        "value": "bho",
-        "group": "------------"
+        "value": "bho"
       },
       {
         "label": "lang_bih",
-        "value": "bih",
-        "group": "------------"
+        "value": "bih"
       },
       {
         "label": "lang_bik",
-        "value": "bik",
-        "group": "------------"
+        "value": "bik"
       },
       {
         "label": "lang_bin",
-        "value": "bin",
-        "group": "------------"
+        "value": "bin"
       },
       {
         "label": "lang_bis",
-        "value": "bis",
-        "group": "------------"
+        "value": "bis"
       },
       {
         "label": "lang_bla",
-        "value": "bla",
-        "group": "------------"
+        "value": "bla"
       },
       {
         "label": "lang_bnt",
-        "value": "bnt",
-        "group": "------------"
+        "value": "bnt"
       },
       {
         "label": "lang_bos",
-        "value": "bos",
-        "group": "------------"
+        "value": "bos"
       },
       {
         "label": "lang_bra",
-        "value": "bra",
-        "group": "------------"
+        "value": "bra"
       },
       {
         "label": "lang_bre",
-        "value": "bre",
-        "group": "------------"
+        "value": "bre"
       },
       {
         "label": "lang_btk",
-        "value": "btk",
-        "group": "------------"
+        "value": "btk"
       },
       {
         "label": "lang_bua",
-        "value": "bua",
-        "group": "------------"
+        "value": "bua"
       },
       {
         "label": "lang_bug",
-        "value": "bug",
-        "group": "------------"
+        "value": "bug"
       },
       {
         "label": "lang_bul",
-        "value": "bul",
-        "group": "------------"
+        "value": "bul"
       },
       {
         "label": "lang_bur",
-        "value": "bur",
-        "group": "------------"
+        "value": "bur"
       },
       {
         "label": "lang_byn",
-        "value": "byn",
-        "group": "------------"
+        "value": "byn"
       },
       {
         "label": "lang_cad",
-        "value": "cad",
-        "group": "------------"
+        "value": "cad"
       },
       {
         "label": "lang_cai",
-        "value": "cai",
-        "group": "------------"
+        "value": "cai"
       },
       {
         "label": "lang_car",
-        "value": "car",
-        "group": "------------"
+        "value": "car"
       },
       {
         "label": "lang_cat",
-        "value": "cat",
-        "group": "------------"
+        "value": "cat"
       },
       {
         "label": "lang_cau",
-        "value": "cau",
-        "group": "------------"
+        "value": "cau"
       },
       {
         "label": "lang_ceb",
-        "value": "ceb",
-        "group": "------------"
+        "value": "ceb"
       },
       {
         "label": "lang_cel",
-        "value": "cel",
-        "group": "------------"
+        "value": "cel"
       },
       {
         "label": "lang_cha",
-        "value": "cha",
-        "group": "------------"
+        "value": "cha"
       },
       {
         "label": "lang_chb",
-        "value": "chb",
-        "group": "------------"
+        "value": "chb"
       },
       {
         "label": "lang_che",
-        "value": "che",
-        "group": "------------"
+        "value": "che"
       },
       {
         "label": "lang_chg",
-        "value": "chg",
-        "group": "------------"
+        "value": "chg"
       },
       {
         "label": "lang_chi",
-        "value": "chi",
-        "group": "------------"
+        "value": "chi"
       },
       {
         "label": "lang_chk",
-        "value": "chk",
-        "group": "------------"
+        "value": "chk"
       },
       {
         "label": "lang_chm",
-        "value": "chm",
-        "group": "------------"
+        "value": "chm"
       },
       {
         "label": "lang_chn",
-        "value": "chn",
-        "group": "------------"
+        "value": "chn"
       },
       {
         "label": "lang_cho",
-        "value": "cho",
-        "group": "------------"
+        "value": "cho"
       },
       {
         "label": "lang_chp",
-        "value": "chp",
-        "group": "------------"
+        "value": "chp"
       },
       {
         "label": "lang_chr",
-        "value": "chr",
-        "group": "------------"
+        "value": "chr"
       },
       {
         "label": "lang_chu",
-        "value": "chu",
-        "group": "------------"
+        "value": "chu"
       },
       {
         "label": "lang_chv",
-        "value": "chv",
-        "group": "------------"
+        "value": "chv"
       },
       {
         "label": "lang_chy",
-        "value": "chy",
-        "group": "------------"
+        "value": "chy"
       },
       {
         "label": "lang_cmc",
-        "value": "cmc",
-        "group": "------------"
+        "value": "cmc"
       },
       {
         "label": "lang_cnr",
-        "value": "cnr",
-        "group": "------------"
+        "value": "cnr"
       },
       {
         "label": "lang_cop",
-        "value": "cop",
-        "group": "------------"
+        "value": "cop"
       },
       {
         "label": "lang_cor",
-        "value": "cor",
-        "group": "------------"
+        "value": "cor"
       },
       {
         "label": "lang_cos",
-        "value": "cos",
-        "group": "------------"
+        "value": "cos"
       },
       {
         "label": "lang_cpe",
-        "value": "cpe",
-        "group": "------------"
+        "value": "cpe"
       },
       {
         "label": "lang_cpf",
-        "value": "cpf",
-        "group": "------------"
+        "value": "cpf"
       },
       {
         "label": "lang_cpp",
-        "value": "cpp",
-        "group": "------------"
+        "value": "cpp"
       },
       {
         "label": "lang_cre",
-        "value": "cre",
-        "group": "------------"
+        "value": "cre"
       },
       {
         "label": "lang_crh",
-        "value": "crh",
-        "group": "------------"
+        "value": "crh"
       },
       {
         "label": "lang_crp",
-        "value": "crp",
-        "group": "------------"
+        "value": "crp"
       },
       {
         "label": "lang_csb",
-        "value": "csb",
-        "group": "------------"
+        "value": "csb"
       },
       {
         "label": "lang_cus",
-        "value": "cus",
-        "group": "------------"
+        "value": "cus"
       },
       {
         "label": "lang_cze",
-        "value": "cze",
-        "group": "------------"
+        "value": "cze"
       },
       {
         "label": "lang_dak",
-        "value": "dak",
-        "group": "------------"
+        "value": "dak"
       },
       {
         "label": "lang_dan",
-        "value": "dan",
-        "group": "------------"
+        "value": "dan"
       },
       {
         "label": "lang_dar",
-        "value": "dar",
-        "group": "------------"
+        "value": "dar"
       },
       {
         "label": "lang_day",
-        "value": "day",
-        "group": "------------"
+        "value": "day"
       },
       {
         "label": "lang_del",
-        "value": "del",
-        "group": "------------"
+        "value": "del"
       },
       {
         "label": "lang_den",
-        "value": "den",
-        "group": "------------"
+        "value": "den"
       },
       {
         "label": "lang_dgr",
-        "value": "dgr",
-        "group": "------------"
+        "value": "dgr"
       },
       {
         "label": "lang_din",
-        "value": "din",
-        "group": "------------"
+        "value": "din"
       },
       {
         "label": "lang_div",
-        "value": "div",
-        "group": "------------"
+        "value": "div"
       },
       {
         "label": "lang_doi",
-        "value": "doi",
-        "group": "------------"
+        "value": "doi"
       },
       {
         "label": "lang_dra",
-        "value": "dra",
-        "group": "------------"
+        "value": "dra"
       },
       {
         "label": "lang_dsb",
-        "value": "dsb",
-        "group": "------------"
+        "value": "dsb"
       },
       {
         "label": "lang_dua",
-        "value": "dua",
-        "group": "------------"
+        "value": "dua"
       },
       {
         "label": "lang_dum",
-        "value": "dum",
-        "group": "------------"
+        "value": "dum"
       },
       {
         "label": "lang_dut",
-        "value": "dut",
-        "group": "------------"
+        "value": "dut"
       },
       {
         "label": "lang_dyu",
-        "value": "dyu",
-        "group": "------------"
+        "value": "dyu"
       },
       {
         "label": "lang_dzo",
-        "value": "dzo",
-        "group": "------------"
+        "value": "dzo"
       },
       {
         "label": "lang_efi",
-        "value": "efi",
-        "group": "------------"
+        "value": "efi"
       },
       {
         "label": "lang_egy",
-        "value": "egy",
-        "group": "------------"
+        "value": "egy"
       },
       {
         "label": "lang_eka",
-        "value": "eka",
-        "group": "------------"
+        "value": "eka"
       },
       {
         "label": "lang_elx",
-        "value": "elx",
-        "group": "------------"
+        "value": "elx"
       },
       {
         "label": "lang_eng",
         "value": "eng",
-        "group": "------------"
+        "preferred": true
       },
       {
         "label": "lang_enm",
-        "value": "enm",
-        "group": "------------"
+        "value": "enm"
       },
       {
         "label": "lang_epo",
-        "value": "epo",
-        "group": "------------"
+        "value": "epo"
       },
       {
         "label": "lang_est",
-        "value": "est",
-        "group": "------------"
+        "value": "est"
       },
       {
         "label": "lang_ewe",
-        "value": "ewe",
-        "group": "------------"
+        "value": "ewe"
       },
       {
         "label": "lang_ewo",
-        "value": "ewo",
-        "group": "------------"
+        "value": "ewo"
       },
       {
         "label": "lang_fan",
-        "value": "fan",
-        "group": "------------"
+        "value": "fan"
       },
       {
         "label": "lang_fao",
-        "value": "fao",
-        "group": "------------"
+        "value": "fao"
       },
       {
         "label": "lang_fat",
-        "value": "fat",
-        "group": "------------"
+        "value": "fat"
       },
       {
         "label": "lang_fij",
-        "value": "fij",
-        "group": "------------"
+        "value": "fij"
       },
       {
         "label": "lang_fil",
-        "value": "fil",
-        "group": "------------"
+        "value": "fil"
       },
       {
         "label": "lang_fin",
-        "value": "fin",
-        "group": "------------"
+        "value": "fin"
       },
       {
         "label": "lang_fiu",
-        "value": "fiu",
-        "group": "------------"
+        "value": "fiu"
       },
       {
         "label": "lang_fon",
-        "value": "fon",
-        "group": "------------"
+        "value": "fon"
       },
       {
         "label": "lang_fre",
         "value": "fre",
-        "group": "------------"
+        "preferred": true
       },
       {
         "label": "lang_frm",
-        "value": "frm",
-        "group": "------------"
+        "value": "frm"
       },
       {
         "label": "lang_fro",
-        "value": "fro",
-        "group": "------------"
+        "value": "fro"
       },
       {
         "label": "lang_frr",
-        "value": "frr",
-        "group": "------------"
+        "value": "frr"
       },
       {
         "label": "lang_frs",
-        "value": "frs",
-        "group": "------------"
+        "value": "frs"
       },
       {
         "label": "lang_fry",
-        "value": "fry",
-        "group": "------------"
+        "value": "fry"
       },
       {
         "label": "lang_ful",
-        "value": "ful",
-        "group": "------------"
+        "value": "ful"
       },
       {
         "label": "lang_fur",
-        "value": "fur",
-        "group": "------------"
+        "value": "fur"
       },
       {
         "label": "lang_gaa",
-        "value": "gaa",
-        "group": "------------"
+        "value": "gaa"
       },
       {
         "label": "lang_gay",
-        "value": "gay",
-        "group": "------------"
+        "value": "gay"
       },
       {
         "label": "lang_gba",
-        "value": "gba",
-        "group": "------------"
+        "value": "gba"
       },
       {
         "label": "lang_gem",
-        "value": "gem",
-        "group": "------------"
+        "value": "gem"
       },
       {
         "label": "lang_geo",
-        "value": "geo",
-        "group": "------------"
+        "value": "geo"
       },
       {
         "label": "lang_ger",
         "value": "ger",
-        "group": "------------"
+        "preferred": true
       },
       {
         "label": "lang_gez",
-        "value": "gez",
-        "group": "------------"
+        "value": "gez"
       },
       {
         "label": "lang_gil",
-        "value": "gil",
-        "group": "------------"
+        "value": "gil"
       },
       {
         "label": "lang_gla",
-        "value": "gla",
-        "group": "------------"
+        "value": "gla"
       },
       {
         "label": "lang_gle",
-        "value": "gle",
-        "group": "------------"
+        "value": "gle"
       },
       {
         "label": "lang_glg",
-        "value": "glg",
-        "group": "------------"
+        "value": "glg"
       },
       {
         "label": "lang_glv",
-        "value": "glv",
-        "group": "------------"
+        "value": "glv"
       },
       {
         "label": "lang_gmh",
-        "value": "gmh",
-        "group": "------------"
+        "value": "gmh"
       },
       {
         "label": "lang_goh",
-        "value": "goh",
-        "group": "------------"
+        "value": "goh"
       },
       {
         "label": "lang_gon",
-        "value": "gon",
-        "group": "------------"
+        "value": "gon"
       },
       {
         "label": "lang_gor",
-        "value": "gor",
-        "group": "------------"
+        "value": "gor"
       },
       {
         "label": "lang_got",
-        "value": "got",
-        "group": "------------"
+        "value": "got"
       },
       {
         "label": "lang_grb",
-        "value": "grb",
-        "group": "------------"
+        "value": "grb"
       },
       {
         "label": "lang_grc",
-        "value": "grc",
-        "group": "------------"
+        "value": "grc"
       },
       {
         "label": "lang_gre",
-        "value": "gre",
-        "group": "------------"
+        "value": "gre"
       },
       {
         "label": "lang_grn",
-        "value": "grn",
-        "group": "------------"
+        "value": "grn"
       },
       {
         "label": "lang_gsw",
-        "value": "gsw",
-        "group": "------------"
+        "value": "gsw"
       },
       {
         "label": "lang_guj",
-        "value": "guj",
-        "group": "------------"
+        "value": "guj"
       },
       {
         "label": "lang_gwi",
-        "value": "gwi",
-        "group": "------------"
+        "value": "gwi"
       },
       {
         "label": "lang_hai",
-        "value": "hai",
-        "group": "------------"
+        "value": "hai"
       },
       {
         "label": "lang_hat",
-        "value": "hat",
-        "group": "------------"
+        "value": "hat"
       },
       {
         "label": "lang_hau",
-        "value": "hau",
-        "group": "------------"
+        "value": "hau"
       },
       {
         "label": "lang_haw",
-        "value": "haw",
-        "group": "------------"
+        "value": "haw"
       },
       {
         "label": "lang_heb",
-        "value": "heb",
-        "group": "------------"
+        "value": "heb"
       },
       {
         "label": "lang_her",
-        "value": "her",
-        "group": "------------"
+        "value": "her"
       },
       {
         "label": "lang_hil",
-        "value": "hil",
-        "group": "------------"
+        "value": "hil"
       },
       {
         "label": "lang_him",
-        "value": "him",
-        "group": "------------"
+        "value": "him"
       },
       {
         "label": "lang_hin",
-        "value": "hin",
-        "group": "------------"
+        "value": "hin"
       },
       {
         "label": "lang_hit",
-        "value": "hit",
-        "group": "------------"
+        "value": "hit"
       },
       {
         "label": "lang_hmn",
-        "value": "hmn",
-        "group": "------------"
+        "value": "hmn"
       },
       {
         "label": "lang_hmo",
-        "value": "hmo",
-        "group": "------------"
+        "value": "hmo"
       },
       {
         "label": "lang_hrv",
-        "value": "hrv",
-        "group": "------------"
+        "value": "hrv"
       },
       {
         "label": "lang_hsb",
-        "value": "hsb",
-        "group": "------------"
+        "value": "hsb"
       },
       {
         "label": "lang_hun",
-        "value": "hun",
-        "group": "------------"
+        "value": "hun"
       },
       {
         "label": "lang_hup",
-        "value": "hup",
-        "group": "------------"
+        "value": "hup"
       },
       {
         "label": "lang_iba",
-        "value": "iba",
-        "group": "------------"
+        "value": "iba"
       },
       {
         "label": "lang_ibo",
-        "value": "ibo",
-        "group": "------------"
+        "value": "ibo"
       },
       {
         "label": "lang_ice",
-        "value": "ice",
-        "group": "------------"
+        "value": "ice"
       },
       {
         "label": "lang_ido",
-        "value": "ido",
-        "group": "------------"
+        "value": "ido"
       },
       {
         "label": "lang_iii",
-        "value": "iii",
-        "group": "------------"
+        "value": "iii"
       },
       {
         "label": "lang_ijo",
-        "value": "ijo",
-        "group": "------------"
+        "value": "ijo"
       },
       {
         "label": "lang_iku",
-        "value": "iku",
-        "group": "------------"
+        "value": "iku"
       },
       {
         "label": "lang_ile",
-        "value": "ile",
-        "group": "------------"
+        "value": "ile"
       },
       {
         "label": "lang_ilo",
-        "value": "ilo",
-        "group": "------------"
+        "value": "ilo"
       },
       {
         "label": "lang_ina",
-        "value": "ina",
-        "group": "------------"
+        "value": "ina"
       },
       {
         "label": "lang_inc",
-        "value": "inc",
-        "group": "------------"
+        "value": "inc"
       },
       {
         "label": "lang_ind",
-        "value": "ind",
-        "group": "------------"
+        "value": "ind"
       },
       {
         "label": "lang_ine",
-        "value": "ine",
-        "group": "------------"
+        "value": "ine"
       },
       {
         "label": "lang_inh",
-        "value": "inh",
-        "group": "------------"
+        "value": "inh"
       },
       {
         "label": "lang_ipk",
-        "value": "ipk",
-        "group": "------------"
+        "value": "ipk"
       },
       {
         "label": "lang_ira",
-        "value": "ira",
-        "group": "------------"
+        "value": "ira"
       },
       {
         "label": "lang_iro",
-        "value": "iro",
-        "group": "------------"
+        "value": "iro"
       },
       {
         "label": "lang_ita",
         "value": "ita",
-        "group": "------------"
+        "preferred": true
       },
       {
         "label": "lang_jav",
-        "value": "jav",
-        "group": "------------"
+        "value": "jav"
       },
       {
         "label": "lang_jbo",
-        "value": "jbo",
-        "group": "------------"
+        "value": "jbo"
       },
       {
         "label": "lang_jpn",
-        "value": "jpn",
-        "group": "------------"
+        "value": "jpn"
       },
       {
         "label": "lang_jpr",
-        "value": "jpr",
-        "group": "------------"
+        "value": "jpr"
       },
       {
         "label": "lang_jrb",
-        "value": "jrb",
-        "group": "------------"
+        "value": "jrb"
       },
       {
         "label": "lang_kaa",
-        "value": "kaa",
-        "group": "------------"
+        "value": "kaa"
       },
       {
         "label": "lang_kab",
-        "value": "kab",
-        "group": "------------"
+        "value": "kab"
       },
       {
         "label": "lang_kac",
-        "value": "kac",
-        "group": "------------"
+        "value": "kac"
       },
       {
         "label": "lang_kal",
-        "value": "kal",
-        "group": "------------"
+        "value": "kal"
       },
       {
         "label": "lang_kam",
-        "value": "kam",
-        "group": "------------"
+        "value": "kam"
       },
       {
         "label": "lang_kan",
-        "value": "kan",
-        "group": "------------"
+        "value": "kan"
       },
       {
         "label": "lang_kar",
-        "value": "kar",
-        "group": "------------"
+        "value": "kar"
       },
       {
         "label": "lang_kas",
-        "value": "kas",
-        "group": "------------"
+        "value": "kas"
       },
       {
         "label": "lang_kau",
-        "value": "kau",
-        "group": "------------"
+        "value": "kau"
       },
       {
         "label": "lang_kaw",
-        "value": "kaw",
-        "group": "------------"
+        "value": "kaw"
       },
       {
         "label": "lang_kaz",
-        "value": "kaz",
-        "group": "------------"
+        "value": "kaz"
       },
       {
         "label": "lang_kbd",
-        "value": "kbd",
-        "group": "------------"
+        "value": "kbd"
       },
       {
         "label": "lang_kha",
-        "value": "kha",
-        "group": "------------"
+        "value": "kha"
       },
       {
         "label": "lang_khi",
-        "value": "khi",
-        "group": "------------"
+        "value": "khi"
       },
       {
         "label": "lang_khm",
-        "value": "khm",
-        "group": "------------"
+        "value": "khm"
       },
       {
         "label": "lang_kho",
-        "value": "kho",
-        "group": "------------"
+        "value": "kho"
       },
       {
         "label": "lang_kik",
-        "value": "kik",
-        "group": "------------"
+        "value": "kik"
       },
       {
         "label": "lang_kin",
-        "value": "kin",
-        "group": "------------"
+        "value": "kin"
       },
       {
         "label": "lang_kir",
-        "value": "kir",
-        "group": "------------"
+        "value": "kir"
       },
       {
         "label": "lang_kmb",
-        "value": "kmb",
-        "group": "------------"
+        "value": "kmb"
       },
       {
         "label": "lang_kok",
-        "value": "kok",
-        "group": "------------"
+        "value": "kok"
       },
       {
         "label": "lang_kom",
-        "value": "kom",
-        "group": "------------"
+        "value": "kom"
       },
       {
         "label": "lang_kon",
-        "value": "kon",
-        "group": "------------"
+        "value": "kon"
       },
       {
         "label": "lang_kor",
-        "value": "kor",
-        "group": "------------"
+        "value": "kor"
       },
       {
         "label": "lang_kos",
-        "value": "kos",
-        "group": "------------"
+        "value": "kos"
       },
       {
         "label": "lang_kpe",
-        "value": "kpe",
-        "group": "------------"
+        "value": "kpe"
       },
       {
         "label": "lang_krc",
-        "value": "krc",
-        "group": "------------"
+        "value": "krc"
       },
       {
         "label": "lang_krl",
-        "value": "krl",
-        "group": "------------"
+        "value": "krl"
       },
       {
         "label": "lang_kro",
-        "value": "kro",
-        "group": "------------"
+        "value": "kro"
       },
       {
         "label": "lang_kru",
-        "value": "kru",
-        "group": "------------"
+        "value": "kru"
       },
       {
         "label": "lang_kua",
-        "value": "kua",
-        "group": "------------"
+        "value": "kua"
       },
       {
         "label": "lang_kum",
-        "value": "kum",
-        "group": "------------"
+        "value": "kum"
       },
       {
         "label": "lang_kur",
-        "value": "kur",
-        "group": "------------"
+        "value": "kur"
       },
       {
         "label": "lang_kut",
-        "value": "kut",
-        "group": "------------"
+        "value": "kut"
       },
       {
         "label": "lang_lad",
-        "value": "lad",
-        "group": "------------"
+        "value": "lad"
       },
       {
         "label": "lang_lah",
-        "value": "lah",
-        "group": "------------"
+        "value": "lah"
       },
       {
         "label": "lang_lam",
-        "value": "lam",
-        "group": "------------"
+        "value": "lam"
       },
       {
         "label": "lang_lao",
-        "value": "lao",
-        "group": "------------"
+        "value": "lao"
       },
       {
         "label": "lang_lat",
-        "value": "lat",
-        "group": "------------"
+        "value": "lat"
       },
       {
         "label": "lang_lav",
-        "value": "lav",
-        "group": "------------"
+        "value": "lav"
       },
       {
         "label": "lang_lez",
-        "value": "lez",
-        "group": "------------"
+        "value": "lez"
       },
       {
         "label": "lang_lim",
-        "value": "lim",
-        "group": "------------"
+        "value": "lim"
       },
       {
         "label": "lang_lin",
-        "value": "lin",
-        "group": "------------"
+        "value": "lin"
       },
       {
         "label": "lang_lit",
-        "value": "lit",
-        "group": "------------"
+        "value": "lit"
       },
       {
         "label": "lang_lol",
-        "value": "lol",
-        "group": "------------"
+        "value": "lol"
       },
       {
         "label": "lang_loz",
-        "value": "loz",
-        "group": "------------"
+        "value": "loz"
       },
       {
         "label": "lang_ltz",
-        "value": "ltz",
-        "group": "------------"
+        "value": "ltz"
       },
       {
         "label": "lang_lua",
-        "value": "lua",
-        "group": "------------"
+        "value": "lua"
       },
       {
         "label": "lang_lub",
-        "value": "lub",
-        "group": "------------"
+        "value": "lub"
       },
       {
         "label": "lang_lug",
-        "value": "lug",
-        "group": "------------"
+        "value": "lug"
       },
       {
         "label": "lang_lui",
-        "value": "lui",
-        "group": "------------"
+        "value": "lui"
       },
       {
         "label": "lang_lun",
-        "value": "lun",
-        "group": "------------"
+        "value": "lun"
       },
       {
         "label": "lang_luo",
-        "value": "luo",
-        "group": "------------"
+        "value": "luo"
       },
       {
         "label": "lang_lus",
-        "value": "lus",
-        "group": "------------"
+        "value": "lus"
       },
       {
         "label": "lang_mac",
-        "value": "mac",
-        "group": "------------"
+        "value": "mac"
       },
       {
         "label": "lang_mad",
-        "value": "mad",
-        "group": "------------"
+        "value": "mad"
       },
       {
         "label": "lang_mag",
-        "value": "mag",
-        "group": "------------"
+        "value": "mag"
       },
       {
         "label": "lang_mah",
-        "value": "mah",
-        "group": "------------"
+        "value": "mah"
       },
       {
         "label": "lang_mai",
-        "value": "mai",
-        "group": "------------"
+        "value": "mai"
       },
       {
         "label": "lang_mak",
-        "value": "mak",
-        "group": "------------"
+        "value": "mak"
       },
       {
         "label": "lang_mal",
-        "value": "mal",
-        "group": "------------"
+        "value": "mal"
       },
       {
         "label": "lang_man",
-        "value": "man",
-        "group": "------------"
+        "value": "man"
       },
       {
         "label": "lang_mao",
-        "value": "mao",
-        "group": "------------"
+        "value": "mao"
       },
       {
         "label": "lang_map",
-        "value": "map",
-        "group": "------------"
+        "value": "map"
       },
       {
         "label": "lang_mar",
-        "value": "mar",
-        "group": "------------"
+        "value": "mar"
       },
       {
         "label": "lang_mas",
-        "value": "mas",
-        "group": "------------"
+        "value": "mas"
       },
       {
         "label": "lang_may",
-        "value": "may",
-        "group": "------------"
+        "value": "may"
       },
       {
         "label": "lang_mdf",
-        "value": "mdf",
-        "group": "------------"
+        "value": "mdf"
       },
       {
         "label": "lang_mdr",
-        "value": "mdr",
-        "group": "------------"
+        "value": "mdr"
       },
       {
         "label": "lang_men",
-        "value": "men",
-        "group": "------------"
+        "value": "men"
       },
       {
         "label": "lang_mga",
-        "value": "mga",
-        "group": "------------"
+        "value": "mga"
       },
       {
         "label": "lang_mic",
-        "value": "mic",
-        "group": "------------"
+        "value": "mic"
       },
       {
         "label": "lang_min",
-        "value": "min",
-        "group": "------------"
+        "value": "min"
       },
       {
         "label": "lang_mis",
-        "value": "mis",
-        "group": "------------"
+        "value": "mis"
       },
       {
         "label": "lang_mkh",
-        "value": "mkh",
-        "group": "------------"
+        "value": "mkh"
       },
       {
         "label": "lang_mlg",
-        "value": "mlg",
-        "group": "------------"
+        "value": "mlg"
       },
       {
         "label": "lang_mlt",
-        "value": "mlt",
-        "group": "------------"
+        "value": "mlt"
       },
       {
         "label": "lang_mnc",
-        "value": "mnc",
-        "group": "------------"
+        "value": "mnc"
       },
       {
         "label": "lang_mni",
-        "value": "mni",
-        "group": "------------"
+        "value": "mni"
       },
       {
         "label": "lang_mno",
-        "value": "mno",
-        "group": "------------"
+        "value": "mno"
       },
       {
         "label": "lang_moh",
-        "value": "moh",
-        "group": "------------"
+        "value": "moh"
       },
       {
         "label": "lang_mon",
-        "value": "mon",
-        "group": "------------"
+        "value": "mon"
       },
       {
         "label": "lang_mos",
-        "value": "mos",
-        "group": "------------"
+        "value": "mos"
       },
       {
         "label": "lang_mul",
-        "value": "mul",
-        "group": "------------"
+        "value": "mul"
       },
       {
         "label": "lang_mun",
-        "value": "mun",
-        "group": "------------"
+        "value": "mun"
       },
       {
         "label": "lang_mus",
-        "value": "mus",
-        "group": "------------"
+        "value": "mus"
       },
       {
         "label": "lang_mwl",
-        "value": "mwl",
-        "group": "------------"
+        "value": "mwl"
       },
       {
         "label": "lang_mwr",
-        "value": "mwr",
-        "group": "------------"
+        "value": "mwr"
       },
       {
         "label": "lang_myn",
-        "value": "myn",
-        "group": "------------"
+        "value": "myn"
       },
       {
         "label": "lang_myv",
-        "value": "myv",
-        "group": "------------"
+        "value": "myv"
       },
       {
         "label": "lang_nah",
-        "value": "nah",
-        "group": "------------"
+        "value": "nah"
       },
       {
         "label": "lang_nai",
-        "value": "nai",
-        "group": "------------"
+        "value": "nai"
       },
       {
         "label": "lang_nap",
-        "value": "nap",
-        "group": "------------"
+        "value": "nap"
       },
       {
         "label": "lang_nau",
-        "value": "nau",
-        "group": "------------"
+        "value": "nau"
       },
       {
         "label": "lang_nav",
-        "value": "nav",
-        "group": "------------"
+        "value": "nav"
       },
       {
         "label": "lang_nbl",
-        "value": "nbl",
-        "group": "------------"
+        "value": "nbl"
       },
       {
         "label": "lang_nde",
-        "value": "nde",
-        "group": "------------"
+        "value": "nde"
       },
       {
         "label": "lang_ndo",
-        "value": "ndo",
-        "group": "------------"
+        "value": "ndo"
       },
       {
         "label": "lang_nds",
-        "value": "nds",
-        "group": "------------"
+        "value": "nds"
       },
       {
         "label": "lang_nep",
-        "value": "nep",
-        "group": "------------"
+        "value": "nep"
       },
       {
         "label": "lang_new",
-        "value": "new",
-        "group": "------------"
+        "value": "new"
       },
       {
         "label": "lang_nia",
-        "value": "nia",
-        "group": "------------"
+        "value": "nia"
       },
       {
         "label": "lang_nic",
-        "value": "nic",
-        "group": "------------"
+        "value": "nic"
       },
       {
         "label": "lang_niu",
-        "value": "niu",
-        "group": "------------"
+        "value": "niu"
       },
       {
         "label": "lang_nno",
-        "value": "nno",
-        "group": "------------"
+        "value": "nno"
       },
       {
         "label": "lang_nob",
-        "value": "nob",
-        "group": "------------"
+        "value": "nob"
       },
       {
         "label": "lang_nog",
-        "value": "nog",
-        "group": "------------"
+        "value": "nog"
       },
       {
         "label": "lang_non",
-        "value": "non",
-        "group": "------------"
+        "value": "non"
       },
       {
         "label": "lang_nor",
-        "value": "nor",
-        "group": "------------"
+        "value": "nor"
       },
       {
         "label": "lang_nqo",
-        "value": "nqo",
-        "group": "------------"
+        "value": "nqo"
       },
       {
         "label": "lang_nso",
-        "value": "nso",
-        "group": "------------"
+        "value": "nso"
       },
       {
         "label": "lang_nub",
-        "value": "nub",
-        "group": "------------"
+        "value": "nub"
       },
       {
         "label": "lang_nwc",
-        "value": "nwc",
-        "group": "------------"
+        "value": "nwc"
       },
       {
         "label": "lang_nya",
-        "value": "nya",
-        "group": "------------"
+        "value": "nya"
       },
       {
         "label": "lang_nym",
-        "value": "nym",
-        "group": "------------"
+        "value": "nym"
       },
       {
         "label": "lang_nyn",
-        "value": "nyn",
-        "group": "------------"
+        "value": "nyn"
       },
       {
         "label": "lang_nyo",
-        "value": "nyo",
-        "group": "------------"
+        "value": "nyo"
       },
       {
         "label": "lang_nzi",
-        "value": "nzi",
-        "group": "------------"
+        "value": "nzi"
       },
       {
         "label": "lang_oci",
-        "value": "oci",
-        "group": "------------"
+        "value": "oci"
       },
       {
         "label": "lang_oji",
-        "value": "oji",
-        "group": "------------"
+        "value": "oji"
       },
       {
         "label": "lang_ori",
-        "value": "ori",
-        "group": "------------"
+        "value": "ori"
       },
       {
         "label": "lang_orm",
-        "value": "orm",
-        "group": "------------"
+        "value": "orm"
       },
       {
         "label": "lang_osa",
-        "value": "osa",
-        "group": "------------"
+        "value": "osa"
       },
       {
         "label": "lang_oss",
-        "value": "oss",
-        "group": "------------"
+        "value": "oss"
       },
       {
         "label": "lang_ota",
-        "value": "ota",
-        "group": "------------"
+        "value": "ota"
       },
       {
         "label": "lang_oto",
-        "value": "oto",
-        "group": "------------"
+        "value": "oto"
       },
       {
         "label": "lang_paa",
-        "value": "paa",
-        "group": "------------"
+        "value": "paa"
       },
       {
         "label": "lang_pag",
-        "value": "pag",
-        "group": "------------"
+        "value": "pag"
       },
       {
         "label": "lang_pal",
-        "value": "pal",
-        "group": "------------"
+        "value": "pal"
       },
       {
         "label": "lang_pam",
-        "value": "pam",
-        "group": "------------"
+        "value": "pam"
       },
       {
         "label": "lang_pan",
-        "value": "pan",
-        "group": "------------"
+        "value": "pan"
       },
       {
         "label": "lang_pap",
-        "value": "pap",
-        "group": "------------"
+        "value": "pap"
       },
       {
         "label": "lang_pau",
-        "value": "pau",
-        "group": "------------"
+        "value": "pau"
       },
       {
         "label": "lang_peo",
-        "value": "peo",
-        "group": "------------"
+        "value": "peo"
       },
       {
         "label": "lang_per",
-        "value": "per",
-        "group": "------------"
+        "value": "per"
       },
       {
         "label": "lang_phi",
-        "value": "phi",
-        "group": "------------"
+        "value": "phi"
       },
       {
         "label": "lang_phn",
-        "value": "phn",
-        "group": "------------"
+        "value": "phn"
       },
       {
         "label": "lang_pli",
-        "value": "pli",
-        "group": "------------"
+        "value": "pli"
       },
       {
         "label": "lang_pol",
-        "value": "pol",
-        "group": "------------"
+        "value": "pol"
       },
       {
         "label": "lang_pon",
-        "value": "pon",
-        "group": "------------"
+        "value": "pon"
       },
       {
         "label": "lang_por",
-        "value": "por",
-        "group": "------------"
+        "value": "por"
       },
       {
         "label": "lang_pra",
-        "value": "pra",
-        "group": "------------"
+        "value": "pra"
       },
       {
         "label": "lang_pro",
-        "value": "pro",
-        "group": "------------"
+        "value": "pro"
       },
       {
         "label": "lang_pus",
-        "value": "pus",
-        "group": "------------"
+        "value": "pus"
       },
       {
         "label": "lang_que",
-        "value": "que",
-        "group": "------------"
+        "value": "que"
       },
       {
         "label": "lang_raj",
-        "value": "raj",
-        "group": "------------"
+        "value": "raj"
       },
       {
         "label": "lang_rap",
-        "value": "rap",
-        "group": "------------"
+        "value": "rap"
       },
       {
         "label": "lang_rar",
-        "value": "rar",
-        "group": "------------"
+        "value": "rar"
       },
       {
         "label": "lang_roa",
-        "value": "roa",
-        "group": "------------"
+        "value": "roa"
       },
       {
         "label": "lang_roh",
-        "value": "roh",
-        "group": "------------"
+        "value": "roh"
       },
       {
         "label": "lang_rom",
-        "value": "rom",
-        "group": "------------"
+        "value": "rom"
       },
       {
         "label": "lang_rum",
-        "value": "rum",
-        "group": "------------"
+        "value": "rum"
       },
       {
         "label": "lang_run",
-        "value": "run",
-        "group": "------------"
+        "value": "run"
       },
       {
         "label": "lang_rup",
-        "value": "rup",
-        "group": "------------"
+        "value": "rup"
       },
       {
         "label": "lang_rus",
-        "value": "rus",
-        "group": "------------"
+        "value": "rus"
       },
       {
         "label": "lang_sad",
-        "value": "sad",
-        "group": "------------"
+        "value": "sad"
       },
       {
         "label": "lang_sag",
-        "value": "sag",
-        "group": "------------"
+        "value": "sag"
       },
       {
         "label": "lang_sah",
-        "value": "sah",
-        "group": "------------"
+        "value": "sah"
       },
       {
         "label": "lang_sai",
-        "value": "sai",
-        "group": "------------"
+        "value": "sai"
       },
       {
         "label": "lang_sal",
-        "value": "sal",
-        "group": "------------"
+        "value": "sal"
       },
       {
         "label": "lang_sam",
-        "value": "sam",
-        "group": "------------"
+        "value": "sam"
       },
       {
         "label": "lang_san",
-        "value": "san",
-        "group": "------------"
+        "value": "san"
       },
       {
         "label": "lang_sas",
-        "value": "sas",
-        "group": "------------"
+        "value": "sas"
       },
       {
         "label": "lang_sat",
-        "value": "sat",
-        "group": "------------"
+        "value": "sat"
       },
       {
         "label": "lang_scn",
-        "value": "scn",
-        "group": "------------"
+        "value": "scn"
       },
       {
         "label": "lang_sco",
-        "value": "sco",
-        "group": "------------"
+        "value": "sco"
       },
       {
         "label": "lang_sel",
-        "value": "sel",
-        "group": "------------"
+        "value": "sel"
       },
       {
         "label": "lang_sem",
-        "value": "sem",
-        "group": "------------"
+        "value": "sem"
       },
       {
         "label": "lang_sga",
-        "value": "sga",
-        "group": "------------"
+        "value": "sga"
       },
       {
         "label": "lang_sgn",
-        "value": "sgn",
-        "group": "------------"
+        "value": "sgn"
       },
       {
         "label": "lang_shn",
-        "value": "shn",
-        "group": "------------"
+        "value": "shn"
       },
       {
         "label": "lang_sid",
-        "value": "sid",
-        "group": "------------"
+        "value": "sid"
       },
       {
         "label": "lang_sin",
-        "value": "sin",
-        "group": "------------"
+        "value": "sin"
       },
       {
         "label": "lang_sio",
-        "value": "sio",
-        "group": "------------"
+        "value": "sio"
       },
       {
         "label": "lang_sit",
-        "value": "sit",
-        "group": "------------"
+        "value": "sit"
       },
       {
         "label": "lang_sla",
-        "value": "sla",
-        "group": "------------"
+        "value": "sla"
       },
       {
         "label": "lang_slo",
-        "value": "slo",
-        "group": "------------"
+        "value": "slo"
       },
       {
         "label": "lang_slv",
-        "value": "slv",
-        "group": "------------"
+        "value": "slv"
       },
       {
         "label": "lang_sma",
-        "value": "sma",
-        "group": "------------"
+        "value": "sma"
       },
       {
         "label": "lang_sme",
-        "value": "sme",
-        "group": "------------"
+        "value": "sme"
       },
       {
         "label": "lang_smi",
-        "value": "smi",
-        "group": "------------"
+        "value": "smi"
       },
       {
         "label": "lang_smj",
-        "value": "smj",
-        "group": "------------"
+        "value": "smj"
       },
       {
         "label": "lang_smn",
-        "value": "smn",
-        "group": "------------"
+        "value": "smn"
       },
       {
         "label": "lang_smo",
-        "value": "smo",
-        "group": "------------"
+        "value": "smo"
       },
       {
         "label": "lang_sms",
-        "value": "sms",
-        "group": "------------"
+        "value": "sms"
       },
       {
         "label": "lang_sna",
-        "value": "sna",
-        "group": "------------"
+        "value": "sna"
       },
       {
         "label": "lang_snd",
-        "value": "snd",
-        "group": "------------"
+        "value": "snd"
       },
       {
         "label": "lang_snk",
-        "value": "snk",
-        "group": "------------"
+        "value": "snk"
       },
       {
         "label": "lang_sog",
-        "value": "sog",
-        "group": "------------"
+        "value": "sog"
       },
       {
         "label": "lang_som",
-        "value": "som",
-        "group": "------------"
+        "value": "som"
       },
       {
         "label": "lang_son",
-        "value": "son",
-        "group": "------------"
+        "value": "son"
       },
       {
         "label": "lang_sot",
-        "value": "sot",
-        "group": "------------"
+        "value": "sot"
       },
       {
         "label": "lang_spa",
-        "value": "spa",
-        "group": "------------"
+        "value": "spa"
       },
       {
         "label": "lang_srd",
-        "value": "srd",
-        "group": "------------"
+        "value": "srd"
       },
       {
         "label": "lang_srn",
-        "value": "srn",
-        "group": "------------"
+        "value": "srn"
       },
       {
         "label": "lang_srp",
-        "value": "srp",
-        "group": "------------"
+        "value": "srp"
       },
       {
         "label": "lang_srr",
-        "value": "srr",
-        "group": "------------"
+        "value": "srr"
       },
       {
         "label": "lang_ssa",
-        "value": "ssa",
-        "group": "------------"
+        "value": "ssa"
       },
       {
         "label": "lang_ssw",
-        "value": "ssw",
-        "group": "------------"
+        "value": "ssw"
       },
       {
         "label": "lang_suk",
-        "value": "suk",
-        "group": "------------"
+        "value": "suk"
       },
       {
         "label": "lang_sun",
-        "value": "sun",
-        "group": "------------"
+        "value": "sun"
       },
       {
         "label": "lang_sus",
-        "value": "sus",
-        "group": "------------"
+        "value": "sus"
       },
       {
         "label": "lang_sux",
-        "value": "sux",
-        "group": "------------"
+        "value": "sux"
       },
       {
         "label": "lang_swa",
-        "value": "swa",
-        "group": "------------"
+        "value": "swa"
       },
       {
         "label": "lang_swe",
-        "value": "swe",
-        "group": "------------"
+        "value": "swe"
       },
       {
         "label": "lang_syc",
-        "value": "syc",
-        "group": "------------"
+        "value": "syc"
       },
       {
         "label": "lang_syr",
-        "value": "syr",
-        "group": "------------"
+        "value": "syr"
       },
       {
         "label": "lang_tah",
-        "value": "tah",
-        "group": "------------"
+        "value": "tah"
       },
       {
         "label": "lang_tai",
-        "value": "tai",
-        "group": "------------"
+        "value": "tai"
       },
       {
         "label": "lang_tam",
-        "value": "tam",
-        "group": "------------"
+        "value": "tam"
       },
       {
         "label": "lang_tat",
-        "value": "tat",
-        "group": "------------"
+        "value": "tat"
       },
       {
         "label": "lang_tel",
-        "value": "tel",
-        "group": "------------"
+        "value": "tel"
       },
       {
         "label": "lang_tem",
-        "value": "tem",
-        "group": "------------"
+        "value": "tem"
       },
       {
         "label": "lang_ter",
-        "value": "ter",
-        "group": "------------"
+        "value": "ter"
       },
       {
         "label": "lang_tet",
-        "value": "tet",
-        "group": "------------"
+        "value": "tet"
       },
       {
         "label": "lang_tgk",
-        "value": "tgk",
-        "group": "------------"
+        "value": "tgk"
       },
       {
         "label": "lang_tgl",
-        "value": "tgl",
-        "group": "------------"
+        "value": "tgl"
       },
       {
         "label": "lang_tha",
-        "value": "tha",
-        "group": "------------"
+        "value": "tha"
       },
       {
         "label": "lang_tib",
-        "value": "tib",
-        "group": "------------"
+        "value": "tib"
       },
       {
         "label": "lang_tig",
-        "value": "tig",
-        "group": "------------"
+        "value": "tig"
       },
       {
         "label": "lang_tir",
-        "value": "tir",
-        "group": "------------"
+        "value": "tir"
       },
       {
         "label": "lang_tiv",
-        "value": "tiv",
-        "group": "------------"
+        "value": "tiv"
       },
       {
         "label": "lang_tkl",
-        "value": "tkl",
-        "group": "------------"
+        "value": "tkl"
       },
       {
         "label": "lang_tlh",
-        "value": "tlh",
-        "group": "------------"
+        "value": "tlh"
       },
       {
         "label": "lang_tli",
-        "value": "tli",
-        "group": "------------"
+        "value": "tli"
       },
       {
         "label": "lang_tmh",
-        "value": "tmh",
-        "group": "------------"
+        "value": "tmh"
       },
       {
         "label": "lang_tog",
-        "value": "tog",
-        "group": "------------"
+        "value": "tog"
       },
       {
         "label": "lang_ton",
-        "value": "ton",
-        "group": "------------"
+        "value": "ton"
       },
       {
         "label": "lang_tpi",
-        "value": "tpi",
-        "group": "------------"
+        "value": "tpi"
       },
       {
         "label": "lang_tsi",
-        "value": "tsi",
-        "group": "------------"
+        "value": "tsi"
       },
       {
         "label": "lang_tsn",
-        "value": "tsn",
-        "group": "------------"
+        "value": "tsn"
       },
       {
         "label": "lang_tso",
-        "value": "tso",
-        "group": "------------"
+        "value": "tso"
       },
       {
         "label": "lang_tuk",
-        "value": "tuk",
-        "group": "------------"
+        "value": "tuk"
       },
       {
         "label": "lang_tum",
-        "value": "tum",
-        "group": "------------"
+        "value": "tum"
       },
       {
         "label": "lang_tup",
-        "value": "tup",
-        "group": "------------"
+        "value": "tup"
       },
       {
         "label": "lang_tur",
-        "value": "tur",
-        "group": "------------"
+        "value": "tur"
       },
       {
         "label": "lang_tut",
-        "value": "tut",
-        "group": "------------"
+        "value": "tut"
       },
       {
         "label": "lang_tvl",
-        "value": "tvl",
-        "group": "------------"
+        "value": "tvl"
       },
       {
         "label": "lang_twi",
-        "value": "twi",
-        "group": "------------"
+        "value": "twi"
       },
       {
         "label": "lang_tyv",
-        "value": "tyv",
-        "group": "------------"
+        "value": "tyv"
       },
       {
         "label": "lang_udm",
-        "value": "udm",
-        "group": "------------"
+        "value": "udm"
       },
       {
         "label": "lang_uga",
-        "value": "uga",
-        "group": "------------"
+        "value": "uga"
       },
       {
         "label": "lang_uig",
-        "value": "uig",
-        "group": "------------"
+        "value": "uig"
       },
       {
         "label": "lang_ukr",
-        "value": "ukr",
-        "group": "------------"
+        "value": "ukr"
       },
       {
         "label": "lang_umb",
-        "value": "umb",
-        "group": "------------"
+        "value": "umb"
       },
       {
         "label": "lang_und",
-        "value": "und",
-        "group": "------------"
+        "value": "und"
       },
       {
         "label": "lang_urd",
-        "value": "urd",
-        "group": "------------"
+        "value": "urd"
       },
       {
         "label": "lang_uzb",
-        "value": "uzb",
-        "group": "------------"
+        "value": "uzb"
       },
       {
         "label": "lang_vai",
-        "value": "vai",
-        "group": "------------"
+        "value": "vai"
       },
       {
         "label": "lang_ven",
-        "value": "ven",
-        "group": "------------"
+        "value": "ven"
       },
       {
         "label": "lang_vie",
-        "value": "vie",
-        "group": "------------"
+        "value": "vie"
       },
       {
         "label": "lang_vol",
-        "value": "vol",
-        "group": "------------"
+        "value": "vol"
       },
       {
         "label": "lang_vot",
-        "value": "vot",
-        "group": "------------"
+        "value": "vot"
       },
       {
         "label": "lang_wak",
-        "value": "wak",
-        "group": "------------"
+        "value": "wak"
       },
       {
         "label": "lang_wal",
-        "value": "wal",
-        "group": "------------"
+        "value": "wal"
       },
       {
         "label": "lang_war",
-        "value": "war",
-        "group": "------------"
+        "value": "war"
       },
       {
         "label": "lang_was",
-        "value": "was",
-        "group": "------------"
+        "value": "was"
       },
       {
         "label": "lang_wel",
-        "value": "wel",
-        "group": "------------"
+        "value": "wel"
       },
       {
         "label": "lang_wen",
-        "value": "wen",
-        "group": "------------"
+        "value": "wen"
       },
       {
         "label": "lang_wln",
-        "value": "wln",
-        "group": "------------"
+        "value": "wln"
       },
       {
         "label": "lang_wol",
-        "value": "wol",
-        "group": "------------"
+        "value": "wol"
       },
       {
         "label": "lang_xal",
-        "value": "xal",
-        "group": "------------"
+        "value": "xal"
       },
       {
         "label": "lang_xho",
-        "value": "xho",
-        "group": "------------"
+        "value": "xho"
       },
       {
         "label": "lang_yao",
-        "value": "yao",
-        "group": "------------"
+        "value": "yao"
       },
       {
         "label": "lang_yap",
-        "value": "yap",
-        "group": "------------"
+        "value": "yap"
       },
       {
         "label": "lang_yid",
-        "value": "yid",
-        "group": "------------"
+        "value": "yid"
       },
       {
         "label": "lang_yor",
-        "value": "yor",
-        "group": "------------"
+        "value": "yor"
       },
       {
         "label": "lang_ypk",
-        "value": "ypk",
-        "group": "------------"
+        "value": "ypk"
       },
       {
         "label": "lang_zap",
-        "value": "zap",
-        "group": "------------"
+        "value": "zap"
       },
       {
         "label": "lang_zbl",
-        "value": "zbl",
-        "group": "------------"
+        "value": "zbl"
       },
       {
         "label": "lang_zen",
-        "value": "zen",
-        "group": "------------"
+        "value": "zen"
       },
       {
         "label": "lang_zha",
-        "value": "zha",
-        "group": "------------"
+        "value": "zha"
       },
       {
         "label": "lang_znd",
-        "value": "znd",
-        "group": "------------"
+        "value": "znd"
       },
       {
         "label": "lang_zul",
-        "value": "zul",
-        "group": "------------"
+        "value": "zul"
       },
       {
         "label": "lang_zun",
-        "value": "zun",
-        "group": "------------"
+        "value": "zun"
       },
       {
         "label": "lang_zxx",
-        "value": "zxx",
-        "group": "------------"
+        "value": "zxx"
       },
       {
         "label": "lang_zza",
-        "value": "zza",
-        "group": "------------"
+        "value": "zza"
       }
     ]
   }
