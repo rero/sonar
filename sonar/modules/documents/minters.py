@@ -22,8 +22,10 @@ from __future__ import absolute_import, print_function, unicode_literals
 from flask import current_app
 from invenio_oaiserver.minters import oaiid_minter
 from invenio_oaiserver.provider import OAIIDProvider
-from invenio_pidstore.errors import PIDDoesNotExistError
+from invenio_pidstore.errors import PIDAlreadyExists, PIDDoesNotExistError
 from invenio_pidstore.models import PersistentIdentifier, PIDStatus
+
+from ..ark.api import current_ark
 
 
 def id_minter(record_uuid, data, provider, pid_key='pid', object_type='rec'):
@@ -45,13 +47,15 @@ def id_minter(record_uuid, data, provider, pid_key='pid', object_type='rec'):
     except PIDDoesNotExistError:
         oaiid_minter(record_uuid, data)
 
-    rerodoc_minter(record_uuid, data, pid_key)
+    external_minters(record_uuid, data, pid_key)
 
     return pid
 
 
-def rerodoc_minter(record_uuid, data, pid_key='pid'):
-    """RERODOC minter.
+def external_minters(record_uuid, data, pid_key='pid'):
+    """External minters.
+
+    RERO DOC and ARK.
 
     :param record_uuid: Record UUID.
     :param data: Record data.
@@ -67,8 +71,18 @@ def rerodoc_minter(record_uuid, data, pid_key='pid'):
                                                   object_uuid=record_uuid,
                                                   status=PIDStatus.REGISTERED)
                 pid.redirect(PersistentIdentifier.get('doc', data[pid_key]))
-                return pid
-            except Exception:
+            except PIDAlreadyExists:
                 pass
-
-    return None
+    if not data.get('harvested') and current_ark:
+        ark_id = current_ark.ark_from_id(data[pid_key])
+        try:
+            pid = PersistentIdentifier.create(
+                'ark',
+                ark_id,
+                object_type='rec',
+                object_uuid=record_uuid,
+                status=PIDStatus.RESERVED)
+        # TODO: this minter is called twice why?
+        except PIDAlreadyExists:
+            pass
+        data['ark'] = ark_id

@@ -74,6 +74,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     """Schema for the document metadata."""
 
     pid = PersistentIdentifier()
+    ark = SanitizedUnicode()
     documentType = SanitizedUnicode()
     title = fields.List(fields.Dict())
     partOf = fields.List(fields.Dict())

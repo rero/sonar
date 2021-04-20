@@ -78,3 +78,21 @@ SONAR_APP_ORGANISATION_CONFIG = {
     }
 }
 # Custom resources for organisations
+
+# ARK
+# ===
+
+# SONAR_APP_ARK_USER = 'test'
+"""Username for the NMA server."""
+# SONAR_APP_ARK_PASSWORD = 'test'
+"""Password for the NMA server."""
+# SONAR_APP_ARK_RESOLVER = 'https://n2t.net'
+"""ARK resolver URL."""
+# SONAR_APP_ARK_NMA = 'https://www.arketype.ch'
+"""ARK Name Mapping Authority: a service provider server."""
+# SONAR_APP_ARK_NAAN = '99999'
+"""ARK prefix corresponding to an organisation."""
+# SONAR_APP_ARK_SCHEME = 'ark:'
+"""ARK scheme."""
+# SONAR_APP_ARK_SHOULDER = 'ffk3'
+"""ARK Shoulder, can be multiple for a given organisation."""

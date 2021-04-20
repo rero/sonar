@@ -27,6 +27,7 @@ from flask_principal import ActionNeed
 from invenio_access.models import ActionUsers, Role
 from invenio_accounts.ext import hash_password
 from invenio_files_rest.models import Location
+from utils import MockArkServer
 
 from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.deposits.api import DepositRecord
@@ -34,6 +35,21 @@ from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.users.api import UserRecord
 from sonar.proxies import sonar
+
+
+@pytest.fixture(scope='function')
+def mock_ark(app, monkeypatch):
+    """Mock for the ARK module."""
+    # be sure that we do not make any request on the ARK server
+    monkeypatch.setattr('requests.get',
+        lambda *args, **kwargs: MockArkServer.get(*args, **kwargs))
+    monkeypatch.setattr('requests.post',
+        lambda *args, **kwargs: MockArkServer.post(*args, **kwargs))
+    monkeypatch.setattr('requests.put',
+        lambda *args, **kwargs: MockArkServer.put(*args, **kwargs))
+    # enable ARK
+    monkeypatch.setitem(app.config, 'SONAR_APP_ARK_NMA',
+                        'https://www.arketype.ch')
 
 
 @pytest.fixture(scope='module')
@@ -88,6 +104,15 @@ def app_config(app_config):
                      user_unique_id='id',
                  )))
 
+    # ARK
+    app_config['SONAR_APP_ARK_USER'] = 'test'
+    app_config['SONAR_APP_ARK_PASSWORD'] = 'test'
+    app_config['SONAR_APP_ARK_RESOLVER'] = 'https://n2t.net'
+    # ARK is disabled by default
+    app_config['SONAR_APP_ARK_NMA'] = None
+    app_config['SONAR_APP_ARK_NAAN'] = '99999'
+    app_config['SONAR_APP_ARK_SCHEME'] = 'ark:'
+    app_config['SONAR_APP_ARK_SHOULDER'] = 'ffk3'
     return app_config
 
 

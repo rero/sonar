@@ -21,6 +21,7 @@ import json
 
 from flask import url_for
 from invenio_accounts.testutils import login_user_via_session
+from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 
 
 def test_list(app, client, make_document, superuser, admin, moderator,
@@ -88,7 +89,7 @@ def test_list(app, client, make_document, superuser, admin, moderator,
 
 
 def test_create(client, document_json, superuser, admin, moderator, submitter,
-                user):
+                user, mock_ark):
     """Test create documents permissions."""
     headers = {
         'Content-Type': 'application/json',
@@ -141,11 +142,16 @@ def test_create(client, document_json, superuser, admin, moderator, submitter,
     assert res.status_code == 201
     assert res.json['metadata']['organisation'][0][
         '$ref'] == 'https://sonar.ch/api/organisations/org'
+    ark_id = res.json['metadata']['ark']
+    assert ark_id.startswith('ark:/')
+    assert PersistentIdentifier.get('ark', ark_id).status == \
+        PIDStatus.REGISTERED
 
 
 def test_read(client, document, make_user, superuser, admin, moderator,
-              submitter, user):
+              submitter, user, mock_ark):
     """Test read documents permissions."""
+
     # Not logged
     res = client.get(
         url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
@@ -213,6 +219,7 @@ def test_read(client, document, make_user, superuser, admin, moderator,
 def test_update(client, document, make_user, superuser, admin, moderator,
                 submitter, user):
     """Test update documents permissions."""
+
     headers = {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -276,8 +283,9 @@ def test_update(client, document, make_user, superuser, admin, moderator,
 
 
 def test_delete(client, document, make_document, make_user, superuser, admin,
-                moderator, submitter, user):
+                moderator, submitter, user, mock_ark):
     """Test delete documents permissions."""
+
     # Not logged
     res = client.delete(
         url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
@@ -309,6 +317,7 @@ def test_delete(client, document, make_document, make_user, superuser, admin,
 
     # Create a new document
     document = make_document()
+    ark_id = document['ark']
 
     # Logged as admin of other organisation
     other_admin = make_user('admin', 'org2')
@@ -319,6 +328,9 @@ def test_delete(client, document, make_document, make_user, superuser, admin,
 
     # Logged as superuser
     login_user_via_session(client, email=superuser['email'])
+    pid = document['pid']
     res = client.delete(
-        url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
+        url_for('invenio_records_rest.doc_item', pid_value=pid))
     assert res.status_code == 204
+    assert PersistentIdentifier.get('ark', ark_id).status == \
+        PIDStatus.DELETED

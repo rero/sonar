@@ -31,8 +31,10 @@ from sonar.modules.utils import change_filename_extension, \
     create_thumbnail_from_file
 
 from ..api import SonarIndexer, SonarRecord, SonarSearch
+from ..ark.api import current_ark
 from ..fetchers import id_fetcher
 from ..providers import Provider
+from .extensions import ArkDocumentExtension
 
 # provider
 DocumentProvider = type('DocumentProvider', (Provider, ), dict(pid_type='doc'))
@@ -51,7 +53,6 @@ class DocumentSearch(SonarSearch):
         index = 'documents'
         doc_types = []
 
-
 class DocumentRecord(SonarRecord):
     """Document record class."""
 
@@ -59,6 +60,7 @@ class DocumentRecord(SonarRecord):
     fetcher = document_pid_fetcher
     provider = DocumentProvider
     schema = 'documents/document-v1.0.0.json'
+    _extensions = [ArkDocumentExtension()]
 
     @staticmethod
     def get_permanent_link(host, pid, org=None):
@@ -356,6 +358,14 @@ class DocumentRecord(SonarRecord):
                 return embargo_date <= datetime.now()
 
         return True
+
+    def get_ark_resolver_url(self):
+        """Get the ark resolver url.
+
+        :returns: the URL to resolve the current identifier.
+        """
+        if self.get('ark'):
+            return current_ark.resolver_url(self.get('pid'))
 
 
 class DocumentIndexer(SonarIndexer):

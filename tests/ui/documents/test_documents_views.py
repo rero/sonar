@@ -73,7 +73,7 @@ def test_search(app, client, organisation, collection):
                 resource_type='documents')).status_code == 404
 
 
-def test_detail(app, client, document_with_file):
+def test_detail(app, client, document_with_file, mock_ark):
     """Test document detail page."""
     assert client.get(
         url_for('invenio_records_ui.doc',
