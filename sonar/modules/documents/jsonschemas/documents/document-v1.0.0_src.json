@@ -214,10 +214,16 @@
       "type": "string",
       "minLength": 1
     },
+    "ark": {
+      "title": "ARK (Archival Resource Key)",
+      "type": "string",
+      "minLength": 1
+    },
     "organisation": {
       "title": "Organisations",
       "type": "array",
       "minItems": 1,
+      "maxItems": 1,
       "items": {
         "title": "Organisation",
         "type": "object",

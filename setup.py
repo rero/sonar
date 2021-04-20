@@ -51,6 +51,7 @@ setup(
         'flask.commands': [
             'fixtures = sonar.modules.cli:fixtures',
             'documents = sonar.modules.documents.cli.documents:documents',
+            'ark = sonar.modules.ark.cli:ark',
             'oaiharvester = \
                 sonar.modules.documents.cli.oaiharvester:oaiharvester',
             'utils = sonar.modules.cli:utils',

@@ -90,6 +90,9 @@
       "pid": {
         "type": "keyword"
       },
+      "ark": {
+        "type": "keyword"
+      },
       "organisation": {
         "type": "object",
         "properties": {

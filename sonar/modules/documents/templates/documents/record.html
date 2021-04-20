@@ -314,9 +314,9 @@ along with this program. If not, see
         {% endif %}
 
         <!-- PERMANENT LINK -->
-        {% set link = record.get_permanent_link(request.host_url, record.pid, view_code) %}
+        {% set link = record.get_ark_resolver_url() if record.ark else record.get_permanent_link(request.host_url, record.pid, view_code) %}
         <dt class="col-lg-3">
-          {{ _('Permalink') }}
+          {{ _('Persistent URL') }}
         </dt>
         <dd class="col-lg-9 text-truncate">
           <a href="{{ link }}">{{ link }}</a>
