@@ -18,7 +18,6 @@
 """Test documents CLI commands."""
 
 from click.testing import CliRunner
-from invenio_oaiharvester.models import OAIHarvestConfig
 
 import sonar.modules.documents.cli.oaiharvester as Cli
 

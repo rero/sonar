@@ -18,7 +18,6 @@
 """Test documents RERODOC cli commands."""
 
 from click.testing import CliRunner
-from mock import patch
 
 import sonar.modules.documents.cli.rerodoc as cli
 

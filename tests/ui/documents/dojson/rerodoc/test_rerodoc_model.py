@@ -21,7 +21,6 @@ from __future__ import absolute_import, print_function
 
 import pytest
 from dojson.contrib.marc21.utils import create_record
-from utils import mock_response
 
 from sonar.modules.documents.dojson.rerodoc.model import overdo
 

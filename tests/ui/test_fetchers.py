@@ -17,7 +17,6 @@
 
 """Test SONAR fetchers."""
 
-import pytest
 
 from sonar.modules.documents.api import DocumentRecord
 

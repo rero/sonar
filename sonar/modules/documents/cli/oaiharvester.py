@@ -21,10 +21,9 @@ import json
 
 import click
 from click.exceptions import ClickException
-from flask import current_app
 from flask.cli import with_appcontext
 from invenio_db import db
-from invenio_oaiharvester.cli import harvest, oaiharvester
+from invenio_oaiharvester.cli import oaiharvester
 from invenio_oaiharvester.models import OAIHarvestConfig
 
 

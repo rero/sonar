@@ -22,7 +22,6 @@ import re
 from dojson import utils
 from flask import current_app
 
-from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.dojson.rerodoc.overdo import Overdo
 from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.utils import remove_trailing_punctuation
