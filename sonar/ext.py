@@ -20,7 +20,7 @@
 from __future__ import absolute_import, print_function
 
 import jinja2
-from flask import current_app
+from flask import current_app, render_template
 from flask_bootstrap import Bootstrap
 from flask_security import user_registered
 from flask_wiki import Wiki
@@ -41,6 +41,7 @@ from sonar.resources.projects.service import \
     RecordService as ProjectRecordService
 
 from . import config_sonar
+from .route_converters import OrganisationCodeConverter
 
 
 def utility_processor():
@@ -77,6 +78,7 @@ class Sonar():
         """Flask application initialization."""
         self.init_config(app)
         self.create_resources()
+        self.init_views(app)
 
         app.extensions['sonar'] = self
 
@@ -104,6 +106,20 @@ class Sonar():
         for k in dir(config_sonar):
             if k.startswith('SONAR_APP_'):
                 app.config.setdefault(k, getattr(config_sonar, k))
+
+    def init_views(self, app):
+        """Initialize the main flask views."""
+        app.url_map.converters['org_code'] = OrganisationCodeConverter
+
+        @app.route('/<org_code:view>')
+        def index(view):
+            """Homepage."""
+            return render_template('sonar/frontpage.html')
+
+        @app.template_filter()
+        def nl2br(string):
+            r"""Replace \n to <br>."""
+            return string.replace('\n', '<br>')
 
     def create_resources(self):
         """Create resources."""

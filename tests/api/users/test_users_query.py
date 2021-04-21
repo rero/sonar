@@ -22,7 +22,7 @@ from invenio_accounts.testutils import login_user_via_session
 
 
 def test_queries(client, superuser, make_user):
-    """."""
+    """Test the query user list filtering."""
     login_user_via_session(client, email=superuser['email'])
 
     headers = [('Content-Type', 'application/json')]

@@ -100,7 +100,9 @@ def rerodoc_redirection(pid):
         abort(404)
 
     return redirect(
-        url_for('documents.detail', pid_value=pid.get_redirect().pid_value))
+        url_for('invenio_records_ui.doc',
+                view='global',
+                pid_value=pid.get_redirect().pid_value))
 
 
 @blueprint.route('/manage/')

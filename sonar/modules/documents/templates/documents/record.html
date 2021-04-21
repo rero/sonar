@@ -186,7 +186,7 @@ along with this program. If not, see
           <ul class="list-unstyled mb-0">
             {% for project in record.projects %}
             <li class="p-0">
-              <a href="{{ url_for('documents.project_detail', pid_value=project.pid, view=view_code) }}">
+              <a href="{{ url_for('invenio_records_ui.proj', pid_value=project.pid, view=view_code) }}">
                 {{ project.name }}
               </a>
               {%- if project.funding_organisations -%}

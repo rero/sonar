@@ -259,17 +259,27 @@ SECURITY_RESET_PASSWORD_TEMPLATE = 'sonar/accounts/reset_password.html'
 SECURITY_REGISTER_USER_TEMPLATE = 'sonar/accounts/signup.html'
 
 RECORDS_UI_ENDPOINTS = {
+    'doc': {
+        'pid_type': 'doc',
+        'route': '/<org_code:view>/documents/<pid_value>',
+        'view_imp': 'sonar.modules.documents.views:detail',
+        'record_class': 'sonar.modules.documents.api:DocumentRecord',
+        'template': 'documents/record.html',
+        'permission_factory_imp': 'sonar.modules.documents.permissions:only_public'
+    },
     'doc_previewer': {
         'pid_type': 'doc',
         'route': '/documents/<pid_value>/preview/<filename>',
         'view_imp': 'invenio_previewer.views:preview',
-        'record_class': 'sonar.modules.documents.api:DocumentRecord'
+        'record_class': 'sonar.modules.documents.api:DocumentRecord',
+        'permission_factory_imp': 'sonar.modules.documents.permissions:only_public'
     },
     'doc_files': {
         'pid_type': 'doc',
         'route': '/documents/<pid_value>/files/<filename>',
         'view_imp': 'invenio_records_files.utils:file_download_ui',
-        'record_class': 'invenio_records_files.api:Record'
+        'record_class': 'invenio_records_files.api:Record',
+        'permission_factory_imp': 'sonar.modules.documents.permissions:only_public'
     },
     'depo_previewer': {
         'pid_type': 'depo',
@@ -295,6 +305,13 @@ RECORDS_UI_ENDPOINTS = {
         'view_imp': 'invenio_records_files.utils:file_download_ui',
         'record_class': 'invenio_records_files.api:Record'
     },
+    'proj': {
+        'pid_type': 'proj',
+        'route': '/<org_code:view>/projects/<pid_value>',
+        'view_imp': 'sonar.resources.projects.views:detail',
+        'record_class': 'sonar.resources.projects.api:Record',
+        'template': 'sonar/projects/detail.html'
+    }
 }
 """Records UI for sonar."""
 
