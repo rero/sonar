@@ -32,5 +32,6 @@ fi
 safety check -i 39462 && \
 pydocstyle sonar tests docs && \
 isort --check-only --diff "${SCRIPT_PATH}/.." && \
+autoflake  -rc --remove-all-unused-imports --ignore-init-module-imports . && \
 sphinx-build -qnNW docs docs/_build/html && \
 pytest

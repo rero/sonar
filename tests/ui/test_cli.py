@@ -20,7 +20,6 @@
 from io import BytesIO
 from os.path import isdir
 
-import mock
 from click.testing import CliRunner
 from invenio_search.cli import destroy
 

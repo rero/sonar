@@ -21,18 +21,14 @@ from __future__ import absolute_import, print_function
 
 import json
 
-from flask import Blueprint, abort, current_app, g, render_template, request
+from flask import Blueprint, current_app, render_template
 from flask_babelex import gettext as _
 from invenio_i18n.ext import current_i18n
-from invenio_pidstore.models import PersistentIdentifier
 from invenio_records_ui.signals import record_viewed
 
-from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.utils import has_external_urls_for_files, \
     populate_files_properties
-from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.utils import format_date
-from sonar.proxies import sonar
 
 from .utils import publication_statement_text
 

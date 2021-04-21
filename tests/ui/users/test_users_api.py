@@ -17,8 +17,6 @@
 
 """Test API for user records."""
 
-from flask_security import current_user, url_for_security
-from invenio_accounts.testutils import login_user_via_view
 
 from sonar.modules.users.api import UserRecord, UserSearch
 

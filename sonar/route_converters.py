@@ -17,14 +17,14 @@
 
 """Werkzeug Route Converters."""
 
-from flask import current_app, g, request
+from flask import current_app, g
 from werkzeug.routing import BaseConverter, ValidationError
 
 from .modules.organisations.api import OrganisationRecord
 
 
 class OrganisationCodeConverter(BaseConverter):
-    """Werkzeug Organistaion code converter."""
+    """Werkzeug Organisation code converter."""
 
     # any word
     regex = r"\w+"

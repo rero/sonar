@@ -55,6 +55,7 @@ mock = ">=2.0.0"
 pytest-invenio = ">=1.4.1,<1.5.0"
 safety = ">=1.8"
 appnope = { version = "*", optional = true }
+autoflake = "^1.4"
 
 [build-system]
 requires = ["poetry>=0.12"]
