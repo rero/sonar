@@ -40,7 +40,7 @@ blueprint = Blueprint('documents',
                       __name__,
                       template_folder='templates',
                       static_folder='static',
-                      url_prefix='/<view>')
+                      url_prefix='/')
 """Blueprint used for loading templates and static assets
 
 The sole purpose of this blueprint is to ensure that Invenio can find the
@@ -49,56 +49,23 @@ this file.
 """
 
 
-@blueprint.url_defaults
-def default_view_code(endpoint, values):
-    """Add default view code."""
-    values.setdefault('view',
-                      current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'))
-
-
-@blueprint.before_request
-def store_organisation():
-    """Add organisation record to global variables."""
-    view = request.view_args.get(
-        'view', current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'))
-
-    if view != current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'):
-        organisation = OrganisationRecord.get_record_by_pid(view)
-
-        if not organisation or not organisation.get('isShared'):
-            abort(404)
-
-        g.organisation = organisation.dumps()
-
-
-@blueprint.route('/')
-def index(view='global'):
-    """Homepage."""
-    return render_template('sonar/frontpage.html')
-
-
-@blueprint.route('/search/documents')
-def search(view='global'):
+@blueprint.route('/<org_code:view>/search/documents')
+def search(view):
     """Search results page."""
     return render_template('sonar/search.html')
 
 
-@blueprint.route('/documents/<pid_value>')
-def detail(pid_value, view='global'):
-    """Document detail page."""
-    record = DocumentRecord.get_record_by_pid(pid_value)
+def detail(pid, record, template=None, **kwargs):
+    r"""Document detailed view.
 
-    if not record or record.get('hiddenFromPublic'):
-        abort(404)
+    Sends record_viewed signal and renders template.
 
-    # Send signal when record is viewed
-    pid = PersistentIdentifier.get('doc', pid_value)
-    record_viewed.send(
-        current_app._get_current_object(),
-        pid=pid,
-        record=record,
-    )
-
+    :param pid: PID object.
+    :param record: Record object.
+    :param template: Template to render.
+    :param \*\*kwargs: Additional view arguments based on URL rule.
+    :returns: The rendered template.
+    """
     # Add restriction, link and thumbnail to files
     if record.get('_files'):
         # Check if organisation's record forces to point file to an external
@@ -122,37 +89,19 @@ def detail(pid_value, view='global'):
     # Resolve $ref properties
     record = record.replace_refs()
 
-    return render_template('documents/record.html',
-                           pid=pid_value,
+    # Send signal when record is viewed
+    record_viewed.send(
+        current_app._get_current_object(),
+        pid=pid,
+        record=record,
+    )
+
+    return render_template(template,
+                           pid=pid,
                            record=record,
                            schema_org_data=schema_org_data,
                            google_scholar_data=google_scholar_data)
 
-
-@blueprint.route('/projects/<pid_value>')
-def project_detail(pid_value, view='global'):
-    """Project detail view.
-
-    :param pid_value: Project PID.
-    :param view: Organisation's view.
-    :returns: Rendered template.
-    """
-    try:
-        service = sonar.service('projects')
-        result = service.result_item(service, g.identity,
-                                     service.record_cls.pid.resolve(pid_value))
-    except Exception:
-        abort(404)
-
-    return render_template('sonar/projects/detail.html',
-                           pid=pid_value,
-                           record=result.data['metadata'])
-
-
-@blueprint.app_template_filter()
-def nl2br(string):
-    r"""Replace \n to <br>."""
-    return string.replace('\n', '<br>')
 
 
 @blueprint.app_template_filter()

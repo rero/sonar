@@ -24,7 +24,6 @@ from flask import g
 from flask_security import url_for_security
 from invenio_accounts.testutils import login_user_via_view
 
-from sonar.modules.documents.views import store_organisation
 from sonar.modules.utils import *
 
 
@@ -89,15 +88,17 @@ def test_get_current_language(app):
 
 def test_get_view_code(app, organisation):
     """Test get view code stored in organisation."""
-    with app.test_request_context() as req:
-        req.request.view_args['view'] = 'org'
-        store_organisation()
+    with app.test_request_context('/'):
+        assert get_view_code() == 'global'
 
-    assert get_view_code() == 'org'
+    with app.test_request_context('/global'):
+        assert get_view_code() == 'global'
 
-    g.pop('organisation', None)
-    assert get_view_code() == 'global'
+    with app.test_request_context('/org'):
+        assert get_view_code() == 'org'
 
+    with app.test_request_context('/notexists'):
+        assert get_view_code() == 'global'
 
 def test_format_date():
     """Test date formatting."""
@@ -113,25 +114,24 @@ def test_format_date():
 
 def test_get_specific_theme(app, organisation, make_organisation):
     """Test getting a theme by organisation."""
-    with app.test_request_context() as req:
-        req.request.view_args['view'] = 'org'
-        store_organisation()
+    with app.test_request_context('/'):
+        # Not dedicated --> global theme
+        assert get_specific_theme() == 'global-theme.css'
 
-    # Not dedicated --> global theme
-    assert get_specific_theme() == 'global-theme.css'
+    with app.test_request_context('/global'):
+        # Not dedicated --> global theme
+        assert get_specific_theme() == 'global-theme.css'
 
-    # Dedicated, but no specific style --> global theme
-    g.organisation['isDedicated'] = True
-    assert get_specific_theme() == 'global-theme.css'
+    with app.test_request_context('/org'):
+        # # Dedicated, but no specific style --> global theme
+        g.organisation['isDedicated'] = True
+        assert get_specific_theme() == 'global-theme.css'
 
     # Dedicated and specific style --> specific theme
     make_organisation('usi')
-    with app.test_request_context() as req:
-        req.request.view_args['view'] = 'usi'
-        store_organisation()
-
-    g.organisation['isDedicated'] = True
-    assert get_specific_theme() == 'usi-theme.css'
+    with app.test_request_context('/usi'):
+        g.organisation['isDedicated'] = True
+        assert get_specific_theme() == 'usi-theme.css'
 
 
 def test_is_ip_in_list():

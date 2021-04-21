@@ -18,32 +18,27 @@
 """Test documents views."""
 
 import pytest
-from flask import g, url_for
+from flask import g, render_template_string, url_for
 
 import sonar.modules.documents.views as views
-
-
-def test_default_view_code(app):
-    """Test set default view code."""
-    views.default_view_code(None, {'view': 'global'})
 
 
 def test_store_organisation(client, db, organisation):
     """Test store organisation in globals."""
     # Default view, no organisation stored.
-    assert client.get(url_for('documents.index',
+    assert client.get(url_for('index',
                               view='global')).status_code == 200
     assert not g.get('organisation')
 
     # Existing organisation stored, with shared view
-    assert client.get(url_for('documents.index',
+    assert client.get(url_for('index',
                               view='org')).status_code == 200
     assert g.organisation['code'] == 'org'
     assert g.organisation['isShared']
 
     # Non-existing organisation
     g.pop('organisation')
-    assert client.get(url_for('documents.index',
+    assert client.get(url_for('index',
                               view='non-existing')).status_code == 404
     assert not g.get('organisation')
 
@@ -51,31 +46,31 @@ def test_store_organisation(client, db, organisation):
     organisation['isShared'] = False
     organisation.commit()
     db.session.commit()
-    assert client.get(url_for('documents.index',
+    assert client.get(url_for('index',
                               view='org')).status_code == 404
     assert not g.get('organisation')
 
 
 def test_index(client):
     """Test frontpage."""
-    assert isinstance(views.index(), str)
     assert client.get('/').status_code == 200
 
 
 def test_search(app, client):
     """Test search."""
-    assert isinstance(views.search(), str)
-    assert client.get(url_for('documents.search',
+    assert client.get(url_for('documents.search', view='global',
                               resource_type='documents')).status_code == 200
+    assert client.get(url_for('documents.search', view='not-existing',
+                              resource_type='documents')).status_code == 404
 
 
 def test_detail(app, client, document_with_file):
     """Test document detail page."""
     assert client.get(
-        url_for('documents.detail',
+        url_for('invenio_records_ui.doc', view='global',
                 pid_value=document_with_file['pid'])).status_code == 200
 
-    assert client.get(url_for('documents.detail',
+    assert client.get(url_for('invenio_records_ui.doc', view='global',
                               pid_value='not-existing')).status_code == 404
 
 
@@ -130,10 +125,10 @@ def test_create_publication_statement(document):
                       'Impr. Coustaud'
 
 
-def test_nl2br():
+def test_nl2br(app):
     """Test nl2br conversion."""
-    text = 'Multiline text\nMultiline text'
-    assert views.nl2br(text) == 'Multiline text<br>Multiline text'
+    assert render_template_string("{{ 'Multiline text\nMultiline text' | nl2br | safe}}") ==\
+        'Multiline text<br>Multiline text'
 
 
 def test_get_code_from_bibliographic_language(app):
@@ -354,9 +349,10 @@ def test_contribution_text():
 
 def test_project_detail(app, client, project):
     """Test project detail page."""
-    assert client.get(url_for('documents.project_detail',
+    assert client.get(url_for('invenio_records_ui.proj', view='global',
                               pid_value=project.id)).status_code == 200
-
     assert client.get(
-        url_for('documents.project_detail',
+        url_for('invenio_records_ui.proj', view='global',
                 pid_value='not-existing')).status_code == 404
+    assert client.get(url_for('invenio_records_ui.proj', view='not-existing',
+                              pid_value=project.id)).status_code == 404

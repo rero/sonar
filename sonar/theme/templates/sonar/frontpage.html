@@ -26,7 +26,7 @@ along with this program. If not, see
     <div class="row justify-content-center">
       <div class="col-8 col-xs-6 col-lg-3 py-3 py-sm-5 text-center">
         <a
-          href="{{ url_for('documents.index', view=view_code if g.get('organisation', {}).get('isDedicated') else config.SONAR_APP_DEFAULT_ORGANISATION) }}">
+          href="{{ url_for('index', view=view_code if g.get('organisation', {}).get('isDedicated') else config.SONAR_APP_DEFAULT_ORGANISATION) }}">
           {% if g.get('organisation', {}).get('isDedicated') %}
           {% set thumbnail = g.organisation | record_image_url %}
           {% if thumbnail %}
