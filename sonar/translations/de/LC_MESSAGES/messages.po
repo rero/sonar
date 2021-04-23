@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-03-24 11:59+0100\n"
-"PO-Revision-Date: 2021-03-20 14:18+0000\n"
-"Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"PO-Revision-Date: 2021-04-20 09:29+0000\n"
+"Last-Translator: Ambros Gattlen <ambros.gattlen@admin.vs.ch>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"de/>\n"
 "Language: de\n"
-"Language-Team: German "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/de/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.7-dev\n"
 "Generated-By: Babel 2.9.0\n"
 
 #: sonar/theme/views.py:65
@@ -444,15 +445,15 @@ msgstr "Beispiel: 2020-12-01"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:30
 msgid "Example: Doe"
-msgstr "Beispiel: Doe"
+msgstr "Beispiel: Muster"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:22
 msgid "Example: John"
-msgstr "Beispiel: John"
+msgstr "Beispiel: Hans"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1483
 msgid "Example: Muller, Hans"
-msgstr "Beispiel: Muller, Hand"
+msgstr "Beispiel: Muster, Hans"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:651
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:967
@@ -687,7 +688,7 @@ msgstr "Italienisch"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1108
 #: sonar/modules/documents/views.py:288
 msgid "Jury note"
-msgstr "Note des Entscheidungsgremiums"
+msgstr "Anmerkung des Entscheidungsgremiums"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:49
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:47
@@ -727,7 +728,7 @@ msgstr "Nachname"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:842
 msgid "Last name, first name, ex: Doe, John"
-msgstr "Familienname, Vorname, z.B.: Doe, John"
+msgstr "Familienname, Vorname, z.B.: Muster,Hans"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:2
 #: sonar/modules/documents/templates/documents/record.html:273
@@ -771,7 +772,7 @@ msgstr "Anmelden"
 
 #: sonar/theme/templates/sonar/accounts/login.html:26
 msgid "Log in to account"
-msgstr "Anmelden zum Konto"
+msgstr "Anmeldung mit"
 
 #: sonar/theme/templates/sonar/accounts/login.html:41
 #, python-format
@@ -1288,9 +1289,9 @@ msgid ""
 "promotes and preserves the publications of authors affiliated with Swiss "
 "public research institutions."
 msgstr ""
-"Das SONAR-Projekt hat zum Ziel, ein wissenschaftliches Archiv zu "
-"schaffen, das die Veröffentlichungen von Personen an öffentlichen "
-"Schweizer Forschungseinrichtungen sammelt, bekannt macht und konserviert."
+"Das SONAR-Projekt hat zum Ziel, ein wissenschaftliches Archiv zu schaffen, "
+"das die Veröffentlichungen von Personen an öffentlichen Schweizer "
+"Forschungseinrichtungen sammelt, bekanntmacht und konserviert."
 
 #: sonar/templates/security/email/welcome.html:10
 msgid "The SONAR team at RERO"
@@ -4356,4 +4357,3 @@ msgstr "Bd."
 #~ "Liste der IP-Adressen oder -Bereiche,"
 #~ " innerhalb derer die Dokumente angezeigt"
 #~ " werden können. Eine Regel pro Zeile."
-
