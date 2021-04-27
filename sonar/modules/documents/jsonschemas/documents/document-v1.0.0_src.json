@@ -1758,10 +1758,7 @@
     },
     "hiddenFromPublic": {
       "title": "Hidden to public",
-      "type": "boolean",
-      "form": {
-        "hide": true
-      }
+      "type": "boolean"
     }
   },
   "propertiesOrder": [
@@ -1788,8 +1785,7 @@
     "additionalMaterials",
     "contentNote",
     "otherMaterialCharacteristics",
-    "usageAndAccessPolicy",
-    "hiddenFromPublic"
+    "usageAndAccessPolicy"
   ],
   "required": [
     "$schema",
