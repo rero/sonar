@@ -21,7 +21,6 @@ from invenio_pidstore.providers.recordid import \
     RecordIdProvider as BaseRecordIdProvider
 from invenio_records.dumpers import ElasticsearchDumper, ElasticsearchDumperExt
 from invenio_records.systemfields import ConstantField
-from invenio_records_resources.records.api import Record as BaseRecord
 from invenio_records_resources.records.systemfields import IndexField, PIDField
 from invenio_records_resources.services.records.components import \
     ServiceComponent
@@ -32,6 +31,8 @@ from sonar.modules.organisations.api import OrganisationRecord, \
     current_organisation
 from sonar.modules.users.api import UserRecord
 from sonar.modules.utils import has_custom_resource
+from sonar.modules.validation.extensions.validation import ValidationExtension
+from sonar.resources.api import Record as BaseRecord
 
 from . import models
 
@@ -53,10 +54,11 @@ class ElasticsearchDumperObjectsExt(ElasticsearchDumperExt):
             }
 
         if data['metadata'].get('organisation'):
+            organisation = OrganisationRecord.get_record_by_ref_link(
+                data['metadata']['organisation']['$ref'])
             data['metadata']['organisation'] = {
-                'pid':
-                OrganisationRecord.get_pid_by_ref_link(
-                    data['metadata']['organisation']['$ref'])
+                'pid': organisation['pid'],
+                'name': organisation['name']
             }
 
 
@@ -78,6 +80,8 @@ class Record(BaseRecord):
 
     dumper = ElasticsearchDumper(extensions=[ElasticsearchDumperObjectsExt()])
 
+    _extensions = [ValidationExtension()]
+
     @cached_property
     def schema(self):
         """Return the schema."""
@@ -87,6 +91,13 @@ class Record(BaseRecord):
         schema = f'https://sonar.ch/schemas/{schema_key}/project-v1.0.0.json'
 
         return ConstantField('$schema', schema)
+
+    def __repr__(self):
+        """String representation of object.
+
+        :returns: A string representing the object.
+        """
+        return self['metadata']['name']
 
 
 class RecordComponent(ServiceComponent):

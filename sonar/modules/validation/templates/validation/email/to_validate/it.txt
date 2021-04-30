@@ -1,0 +1,7 @@
+Hi,
+
+A record "{{ record | string }}" (#{{ record.pid.pid_value }}) has been submitted by {{ user.first_name }} {{ user.last_name }}.
+
+You can review this record by following this link:
+
+{{ record | get_admin_record_detail_url }}

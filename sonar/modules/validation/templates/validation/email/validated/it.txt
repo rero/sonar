@@ -1,0 +1,10 @@
+Hi {{ user.first_name }},
+
+Your record "{{ record }}" (#{{ record.pid.pid_value }}) has been approved by {{ moderator.first_name }} {{ moderator.last_name }} ({{ moderator.email }}).
+{% if comment %}
+{{ _('Moderator comment') }}:
+==================
+{{ comment }}
+==================
+{% endif %}
+The record will be published shortly, thank you for your submission!

@@ -60,6 +60,12 @@ def test_list(app, client, make_project, superuser, admin, moderator,
     assert 'organisation' not in res.json['aggregations']
     assert 'user' not in res.json['aggregations']
 
+    # Query string
+    res = client.get(
+        url_for('projects.projects_list', q='metadata.name.suggest:Proj'))
+    assert res.status_code == 200
+    assert res.json['hits']['total'] == 2
+
     # Logged as moderator
     login_user_via_session(client, email=moderator['email'])
     res = client.get(url_for('projects.projects_list'))
@@ -278,6 +284,22 @@ def test_update(client, make_project, superuser, admin, moderator, submitter,
                      data=json.dumps(project2.data),
                      headers=headers)
     assert res.status_code == 200
+
+    # Save status rejected --> OK
+    project2.data['metadata']['validation']['status'] = 'rejected'
+    res = client.put(url_for('projects.projects_item',
+                             pid_value=project2['id']),
+                     data=json.dumps(project2.data),
+                     headers=headers)
+    assert res.status_code == 200
+
+    # Record is rejected, new save is not possible
+    project2.data['metadata']['validation']['status'] = 'validated'
+    res = client.put(url_for('projects.projects_item',
+                             pid_value=project2['id']),
+                     data=json.dumps(project2.data),
+                     headers=headers)
+    assert res.status_code == 403
 
 
 def test_delete(client, db, document, make_project, superuser, admin,

@@ -288,7 +288,6 @@
           "type": "object",
           "properties": {
             "$ref": {
-              "title": "Organisation",
               "type": "string",
               "pattern": "^https://sonar.ch/api/organisations/.*?$",
               "form": {

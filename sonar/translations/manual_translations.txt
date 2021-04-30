@@ -45,3 +45,17 @@ _('relatedToMandate_name')
 _('relatedToMandate_briefDescription')
 _('educationalDocument')
 _('searchResultsValorised')
+
+# Validation workflow status
+_('validation_status_in_progress')
+_('validation_status_to_validate')
+_('validation_status_validated')
+_('validation_status_rejected')
+_('validation_status_ask_for_changes')
+
+# Validation workflow actions
+_('validation_action_save')
+_('validation_action_publish')
+_('validation_action_approve')
+_('validation_action_reject')
+_('validation_action_ask_for_changes')

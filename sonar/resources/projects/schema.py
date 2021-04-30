@@ -24,10 +24,11 @@ from marshmallow import Schema, fields, pre_dump, pre_load
 
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.users.api import current_user_record
+from sonar.modules.validation.schemas.validation import ValidationSchemaMixin
 from sonar.proxies import sonar
 
 
-class MetadataSchema(Schema):
+class MetadataSchema(Schema, ValidationSchemaMixin):
     """Schema for the project metadata."""
 
     name = fields.Str(required=True)

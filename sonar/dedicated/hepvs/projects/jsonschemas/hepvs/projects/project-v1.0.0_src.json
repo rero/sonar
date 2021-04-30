@@ -975,6 +975,9 @@
               "rows": 5
             }
           }
+        },
+        "validation": {
+          "$ref": "validation-v1.0.0.json"
         }
       },
       "propertiesOrder": [

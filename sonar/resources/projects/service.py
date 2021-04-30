@@ -52,11 +52,18 @@ class RecordServiceConfig(BaseRecordServiceConfig):
                     'field': 'metadata.organisation.pid',
                     'size': DEFAULT_AGGREGATION_SIZE
                 }
-            }
+            },
+            'status': {
+                'terms': {
+                    'field': 'metadata.validation.status',
+                    'size': DEFAULT_AGGREGATION_SIZE
+                }
+            },
         },
         'filters': {
             'user': and_term_filter('metadata.user.pid'),
-            'organisation': and_term_filter('metadata.organisation.pid')
+            'organisation': and_term_filter('metadata.organisation.pid'),
+            'status': and_term_filter('metadata.validation.status'),
         }
     }
     components = BaseRecordServiceConfig.components + [RecordComponent]
