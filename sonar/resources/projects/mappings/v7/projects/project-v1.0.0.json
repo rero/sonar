@@ -115,6 +115,9 @@
             "properties": {
               "pid": {
                 "type": "keyword"
+              },
+              "name": {
+                "type": "text"
               }
             }
           },
@@ -150,6 +153,20 @@
               "suggest": {
                 "type": "completion",
                 "analyzer": "default"
+              }
+            }
+          },
+          "validation": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "keyword"
+              },
+              "action": {
+                "type": "keyword"
+              },
+              "comment": {
+                "type": "text"
               }
             }
           }

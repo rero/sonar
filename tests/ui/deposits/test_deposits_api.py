@@ -30,22 +30,10 @@ def test_create_document(app, db, project, client, deposit, submitter):
         'Project 1',
         'description':
         'Description',
-        'identifier':
-        'p-1000',
         'startDate':
         '2020-01-01',
         'endDate':
-        '2021-12-31',
-        'investigators': [{
-            'name': 'John Doe',
-            'role': 'investigator',
-            'affiliation': 'RERO',
-            'orcid': '1000-1000-1000-1000'
-        }],
-        'funding_organisations': [{
-            'name': 'Funding organisation',
-            'identifier': 'f-1000'
-        }]
+        '2021-12-31'
     }]
     deposit.commit()
     deposit.reindex()

@@ -28,6 +28,7 @@ from sonar.modules.api import SonarRecord
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.organisations.api import current_organisation
 from sonar.modules.users.api import current_user_record
+from sonar.modules.validation.api import Status
 
 
 class Read(Admin):
@@ -44,8 +45,19 @@ class Read(Admin):
         # TODO: Find a better way for handling typeahead calls..
         if current_user_record.is_moderator or (
                 request.args.get('q') and '.suggest' in request.args['q']):
-            return Q('term',
-                     metadata__organisation__pid=current_organisation['pid'])
+            must = [
+                Q('term',
+                  metadata__organisation__pid=current_organisation['pid'])
+            ]
+
+            # In suggestions only records published can be queried.
+            if request.args.get('q') and '.suggest' in request.args['q']:
+                must.append(
+                    Q('term',
+                      metadata__validation__status=Status.VALIDATED)
+                )
+
+            return Q('bool', must=must)
 
         # For user, only records that belongs to him.
         if current_user_record.is_submitter:
@@ -59,6 +71,11 @@ class Update(Admin):
 
     def excludes(self, record=None, **kwargs):
         """Preventing Needs."""
+        # If record is rejected, the user can't update.
+        if record['metadata'].get('validation', {}).get(
+                'status') == Status.REJECTED:
+            return [any_user]
+
         # If not logged the action cannot be done.
         if not current_user_record:
             return [any_user]

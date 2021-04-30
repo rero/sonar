@@ -1,0 +1,12 @@
+Hi {{ user.first_name }},
+
+{{ moderator.first_name }} {{ moderator.last_name }} ({{ moderator.email }}) requests changes on your record "{{ record }}" (#{{ record.pid.pid_value }}).
+{% if comment %}
+{{ _('Moderator comment') }}:
+==================
+{{ comment }}
+==================
+{% endif %}
+You can follow this link to make changes to your record:
+
+{{ record | get_admin_record_detail_url }}

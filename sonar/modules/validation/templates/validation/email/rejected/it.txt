@@ -1,0 +1,10 @@
+Hi {{ user.first_name }},
+
+We are sorry to inform that your record "{{ record }}" (#{{ record.pid.pid_value }}) has been rejected by {{ moderator.first_name }} {{ moderator.last_name }} ({{ moderator.email }}).
+{% if comment %}
+{{ _('Moderator comment') }}:
+==================
+{{ comment }}
+==================
+{% endif %}
+Thank you for your understanding.

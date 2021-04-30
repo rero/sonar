@@ -325,60 +325,6 @@ class DepositRecord(SonarRecord):
                     # Store organisation
                     data['organisation'] = current_user_record['organisation']
 
-                    # Project identifier
-                    if project.get('identifier'):
-                        data['identifiedBy'] = {
-                            'type': 'bf:Identifier',
-                            'value': project['identifier']
-                        }
-                        data.pop('identifier')
-
-                    # Investigators
-                    if project.get('investigators'):
-                        data['investigators'] = []
-                        for investigator in project['investigators']:
-                            investigator_data = {
-                                'agent': {
-                                    'preferred_name': investigator['name']
-                                },
-                                'role': [investigator['role']],
-                            }
-
-                            if investigator.get('affiliation'):
-                                investigator_data[
-                                    'affiliation'] = investigator.get(
-                                        'affiliation')
-
-                            if investigator.get('orcid'):
-                                investigator_data['identifiedBy'] = {
-                                    'type': 'bf:Local',
-                                    'source': 'ORCID',
-                                    'value': investigator.get('orcid')
-                                }
-
-                            data['investigators'].append(investigator_data)
-
-                    # Funding organisations
-                    if project.get('funding_organisations'):
-                        data['funding_organisations'] = []
-                        for funding_organisation in project[
-                                'funding_organisations']:
-                            funding_organisation_data = {
-                                'agent': {
-                                    'preferred_name':
-                                    funding_organisation['name']
-                                }
-                            }
-
-                            if funding_organisation.get('identifier'):
-                                funding_organisation_data['identifiedBy'] = {
-                                    'type': 'bf:Identifier',
-                                    'value': funding_organisation['identifier']
-                                }
-
-                            data['funding_organisations'].append(
-                                funding_organisation_data)
-
                     project_record = sonar.service('projects').create(
                         g.identity, {'metadata': data})
                     project = {

@@ -138,6 +138,20 @@ class Sonar():
             return get_language_value(values, locale, value_field,
                                       language_field)
 
+        @app.template_filter()
+        def get_admin_record_detail_url(record):
+            r"""Return the frontend application URL for a record detail.
+
+            :param record: Record object.
+            :returns: Absolute URL to recrod detail.
+            :rtype: str
+            """
+            url = [
+                app.config.get('SONAR_APP_ANGULAR_URL')[:-1], 'records',
+                record.index_name, 'detail', record.pid.pid_value
+            ]
+            return '/'.join(url)
+
     def create_resources(self):
         """Create resources."""
         # Initialize the project resource with the corresponding service.
@@ -188,6 +202,5 @@ class SonarAPI(Sonar):
             in flask_resources: https://github.com/inveniosoftware/flask-resources/blob/master/flask_resources/content_negotiation.py#L105
             """
             if request.args.get('format'):
-                request.accept_mimetypes = MIMEAccept([
-                    (request.args['format'], 1)
-                ])
+                request.accept_mimetypes = MIMEAccept([(request.args['format'],
+                                                        1)])

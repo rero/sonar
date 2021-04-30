@@ -636,7 +636,14 @@ def project_json():
                     'source': 'RERO',
                     'value': '3333'
                 }
-            }]
+            }],
+            'validation': {
+                'user': {
+                    '$ref': 'https://sonar.ch/api/users/orgsubmitter'
+                },
+                'status': 'validated',
+                'action': 'save'
+            }
         }
     }
 

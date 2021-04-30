@@ -73,5 +73,35 @@
     "organisation": {
       "$ref": "https://sonar.ch/api/organisations/rero"
     }
+  },
+  {
+    "first_name": "Michèle",
+    "last_name": "Guernon",
+    "email": "rero.sonar+hepvssubmitter@gmail.com",
+    "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
+    "role": "submitter",
+    "birth_date": "1968-04-06",
+    "street": "Glennerstrasse 96",
+    "postal_code": "1202",
+    "city": "Genève",
+    "phone": "+41225022590",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/hepvs"
+    }
+  },
+  {
+    "first_name": "Gabriel",
+    "last_name": "Fortin",
+    "email": "rero.sonar+hepvsmoderator@gmail.com",
+    "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
+    "role": "moderator",
+    "birth_date": "1972-10-28",
+    "street": "Glennerstrasse 96",
+    "postal_code": "3004",
+    "city": "Bern",
+    "phone": "+41914105597",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/hepvs"
+    }
   }
 ]
