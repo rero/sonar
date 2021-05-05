@@ -15,37 +15,38 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Projects resource."""
+"""HEP Valais Projects resource."""
 
 from flask_resources.serializers import JSONSerializer
 from invenio_records_resources.resources import \
     RecordResourceConfig as BaseRecordResourceConfig
 from invenio_records_resources.resources.records.response import RecordResponse
 
-from sonar.resources.projects.serializers.csv import CSVSerializer
-from sonar.resources.resource import RecordResource as BaseRecordResource
+from sonar.dedicated.hepvs.projects.serializers.csv import CSVSerializer
+from sonar.resources.projects.resource import \
+    RecordResourceConfig as BaseRecordResourceConfig
 from sonar.resources.resources.responses import StreamResponse
 
 
 class RecordResourceConfig(BaseRecordResourceConfig):
-    """Projects resource configuration."""
-
-    resource_name = 'projects'
-    list_route = '/projects/'
-    item_route = f'{list_route}/<pid_value>'
+    """HEP Valais Projects resource configuration."""
 
     response_handlers = {
         'application/json':
         RecordResponse(JSONSerializer()),
         'text/csv':
         StreamResponse(CSVSerializer(csv_included_fields=[
-            'pid', 'name', 'description', 'startDate', 'endDate'
+            'pid', 'name', 'approvalDate', 'projectSponsor', 'statusHep',
+            'mainTeam', 'innerSearcher', 'secondaryTeam', 'externalPartners',
+            'status', 'startDate', 'endDate', 'description', 'keywords',
+            'realizationFramework', 'funding_funder_type',
+            'funding_funder_name', 'funding_funder_number',
+            'funding_fundingReceived', 'actorsInvolved', 'benefits',
+            'impactOnFormation', 'impactOnProfessionalEnvironment',
+            'impactOnPublicAction', 'promoteInnovation',
+            'relatedToMandate_mandate', 'relatedToMandate_name',
+            'relatedToMandate_briefDescription', 'educationalDocument',
+            'searchResultsValorised'
         ]),
                        filename='projects.csv')
     }
-
-
-class RecordResource(BaseRecordResource):
-    """Projects resource"."""
-
-    default_config = RecordResourceConfig

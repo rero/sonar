@@ -20,12 +20,13 @@
 from __future__ import absolute_import, print_function
 
 import jinja2
-from flask import current_app, render_template
+from flask import current_app, render_template, request
 from flask_bootstrap import Bootstrap
 from flask_security import user_registered
 from flask_wiki import Wiki
 from invenio_files_rest.signals import file_deleted, file_uploaded
 from invenio_indexer.signals import before_record_index
+from werkzeug.datastructures import MIMEAccept
 
 from sonar.modules.permissions import has_admin_access, has_submitter_access, \
     has_superuser_access
@@ -178,3 +179,15 @@ class SonarAPI(Sonar):
         # Register REST endpoint for projects resource.
         app.register_blueprint(
             self.resources['projects'].as_blueprint('projects'))
+
+        @app.before_request
+        def set_accept_mimetype():
+            """Set the accepted mimetype if a `format` args exists.
+
+            This is necessary because accepted formats are not yet implemented
+            in flask_resources: https://github.com/inveniosoftware/flask-resources/blob/master/flask_resources/content_negotiation.py#L105
+            """
+            if request.args.get('format'):
+                request.accept_mimetypes = MIMEAccept([
+                    (request.args['format'], 1)
+                ])
