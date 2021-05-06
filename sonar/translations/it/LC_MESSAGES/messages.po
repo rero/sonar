@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-03-24 11:59+0100\n"
-"PO-Revision-Date: 2021-03-23 09:35+0000\n"
+"PO-Revision-Date: 2021-05-06 22:33+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"it/>\n"
 "Language: it\n"
-"Language-Team: Italian "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/it/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.7-dev\n"
 "Generated-By: Babel 2.9.0\n"
 
 #: sonar/theme/views.py:65
@@ -873,9 +874,8 @@ msgstr "ORCID"
 
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:24
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:24
-#, fuzzy
 msgid "Object type"
-msgstr "Tipo di documento"
+msgstr "Tipo di oggetto"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1755
 msgid "Open access status"
@@ -941,7 +941,7 @@ msgstr "Altri files"
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:29
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:29
 msgid "PID type"
-msgstr ""
+msgstr "Tipo di PID"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:598
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1432
@@ -964,7 +964,7 @@ msgstr "Permalink"
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:19
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:19
 msgid "Persistent identifier"
-msgstr ""
+msgstr "identificatore persistente"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:75
 msgid "Phone number"
@@ -1019,7 +1019,7 @@ msgstr "Anteprima"
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:34
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:34
 msgid "Primary key"
-msgstr ""
+msgstr "Chiave primaria"
 
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:21
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:24
@@ -1456,12 +1456,12 @@ msgstr "Riferimento dell'editore (documenti audio)"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1040
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1054
 msgid "bf:ClassificationDdc"
-msgstr "DDC Classification"
+msgstr "Classificazione decimale Dewey (DDC)"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1009
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1020
 msgid "bf:ClassificationUdc"
-msgstr "UDC Classification"
+msgstr "Classificazione decimale universale"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:397
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:722
@@ -1583,7 +1583,7 @@ msgstr "Ente"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1190
 msgid "bf:Person"
-msgstr "Person"
+msgstr "Persona"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:478
 msgid "bf:Place"
@@ -4341,4 +4341,3 @@ msgstr "vol."
 #~ "Elenco di indirizzi o intervalli IP "
 #~ "che permettono di visualizzare i file."
 #~ " Una regola per riga."
-
