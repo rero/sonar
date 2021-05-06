@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-03-24 11:59+0100\n"
-"PO-Revision-Date: 2021-04-20 09:29+0000\n"
-"Last-Translator: Ambros Gattlen <ambros.gattlen@admin.vs.ch>\n"
+"PO-Revision-Date: 2021-05-06 22:33+0000\n"
+"Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "de/>\n"
 "Language: de\n"
@@ -183,7 +183,7 @@ msgstr "Stadt"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1005
 #: sonar/modules/documents/templates/documents/record.html:262
 msgid "Classification"
-msgstr "Systematik"
+msgstr "Klassifikation"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1061
 msgid "Classification portion"
@@ -191,7 +191,7 @@ msgstr "Notation"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1001
 msgid "Classifications"
-msgstr "Systematiken"
+msgstr "Klassifikationen"
 
 #: sonar/templates/security/email/reset_instructions.html:18
 msgid "Click here to reset your password"
@@ -875,9 +875,8 @@ msgstr "ORCID"
 
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:24
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:24
-#, fuzzy
 msgid "Object type"
-msgstr "Dokumenttyp"
+msgstr "Objekttyp"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1755
 msgid "Open access status"
@@ -943,7 +942,7 @@ msgstr "Andere Dateien"
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:29
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:29
 msgid "PID type"
-msgstr ""
+msgstr "PID-Typ"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:598
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1432
@@ -966,7 +965,7 @@ msgstr "Permalink"
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:19
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:19
 msgid "Persistent identifier"
-msgstr ""
+msgstr "Persistent Identifier"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:75
 msgid "Phone number"
@@ -1021,7 +1020,7 @@ msgstr "Vorschau"
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:34
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:34
 msgid "Primary key"
-msgstr ""
+msgstr "Primärschlüssel"
 
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:21
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:24
@@ -1459,12 +1458,12 @@ msgstr "Verlagsreferenz (Audiodokumente)"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1040
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1054
 msgid "bf:ClassificationDdc"
-msgstr "DDC Classification"
+msgstr "Dewey-Dezimalklassifikation (DDC)"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1009
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1020
 msgid "bf:ClassificationUdc"
-msgstr "UDC Classification"
+msgstr "Universelle Dezimalklassifikation (UDK)"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:397
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:722
