@@ -29,6 +29,9 @@
       "allowedIps": {
         "type": "text"
       },
+      "platformName": {
+        "type": "text"
+      },
       "_created": {
         "type": "date"
       },

@@ -14,6 +14,24 @@
   You should have received a copy of the GNU Affero General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
- 
+
 @import "variables";
 @import "../common/theme";
+
+.bg-header {
+  background-color: $primary;
+  @extend .navbar-dark;
+}
+
+.bg-organisation {
+  background-color: $primary;
+  @extend .navbar-dark;
+}
+
+body.homepage {
+  .bg-organisation {
+    h1 {
+      @extend .text-light;
+    }
+  }
+}

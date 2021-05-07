@@ -17,3 +17,11 @@
 
 @import "variables";
 @import "../common/theme";
+
+.bg-header {
+  @extend .navbar-dark;
+}
+
+.bg-organisation {
+  @extend .navbar-dark;
+}

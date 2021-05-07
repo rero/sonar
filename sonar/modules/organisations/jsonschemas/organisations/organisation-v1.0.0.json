@@ -73,6 +73,14 @@
         }
       }
     },
+    "platformName": {
+      "title": "Platform name",
+      "type": "string",
+      "minLength": 1,
+      "form": {
+        "hideExpression": "!field.model.isDedicated"
+      }
+    },
     "_bucket": {
       "title": "Bucket UUID",
       "type": "string",
@@ -140,6 +148,7 @@
     "description",
     "isShared",
     "isDedicated",
+    "platformName",
     "allowedIps"
   ],
   "required": [

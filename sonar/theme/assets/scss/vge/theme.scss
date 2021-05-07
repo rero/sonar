@@ -21,14 +21,13 @@
 /* Bandeau supérieur */
 .bg-header {
   background-color: #cb4b40;
-}
-.navbar-dark .navbar-nav .nav-link {
-  color: #205078;
+  @extend .navbar-dark;
 }
 
 /* Bandeau principal */
 .bg-organisation {
   background-color: #eeeeee;
+  @extend .navbar-light;
 
   .btn-outline-light, .form-control {
     color: #8F8F8F;
