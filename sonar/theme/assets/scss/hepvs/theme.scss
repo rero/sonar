@@ -15,7 +15,27 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-$primary: #000 !default;
-$secondary: #000 !default;
+@import "variables";
+@import "../common/theme";
 
-@import "../common/variables";
+.bg-header {
+  background-color: $color-white;
+
+  .nav-link {
+    color: $color-gray !important;
+  }
+
+  .btn-outline-light,
+  .form-control {
+    color: $color-gray;
+    border-color: $color-gray;
+  }
+}
+
+.bg-organisation {
+  color: $color-white !important;
+
+  .nav-link {
+    color: $color-white !important;
+  }
+}

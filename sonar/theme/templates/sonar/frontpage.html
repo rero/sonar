@@ -20,11 +20,13 @@ along with this program. If not, see
 
 {%- extends config.BASE_TEMPLATE %}
 
+{%- set body_css_classes=['homepage'] %}
+
 {% block header %}
 <div class="bg-organisation p-4">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-8 col-xs-6 col-lg-3 py-3 py-sm-5 text-center">
+      <div class="col-8 col-xs-6 col-lg-3 py-3 text-center">
         <a
           href="{{ url_for('index', view=view_code if g.get('organisation', {}).get('isDedicated') else config.SONAR_APP_DEFAULT_ORGANISATION) }}">
           {% if g.get('organisation', {}).get('isDedicated') %}
@@ -39,6 +41,9 @@ along with this program. If not, see
             class="img-fluid" alt="{{ 'SONAR logo' }}">
           {% endif %}
         </a>
+        {% if g.get('organisation', {}).get('isDedicated') and g.get('organisation', {}).get('platformName') %}
+        <h1 class="mt-4 mb-0">{{ g.organisation['platformName'] }}</h1>
+        {% endif%}
       </div>
     </div>
     <div class="row justify-content-center">
@@ -63,7 +68,7 @@ along with this program. If not, see
   </div>
 </div>
 <div class="bg-secondary text-light text-center py-2">
-  {% if config.ENV != 'production' and current_user_record.is_submitter %}
+  {% if not g.get('organisation', {}).get('isDedicated') and config.ENV != 'production' and current_user_record.is_submitter %}
   <h6 class="m-0 mt-1">
     <strong>{{ _('Note: Publications manually deposited in this test portal might occasionally need to be deleted, for operational reasons.') }}</strong>
   </h6>
@@ -74,6 +79,13 @@ along with this program. If not, see
 
 {%- block body %}
 <div class="row justify-content-between">
+  {% if g.get('organisation', {}).get('isDedicated') %}
+    {% if g.organisation.get('description') %}
+    <div class="col-12">
+      {{ g.organisation.description | nl2br | safe }}
+    </div>
+    {% endif %}
+  {% else %}
   <div class="col-lg-7">
     <h5 class="home-text">
       {{ _('The Swiss Open Access Repository is an archive of scholarly publications. It collects and promotes open access publications by authors affiliated with Swiss public research institutions.') }}
@@ -96,5 +108,6 @@ along with this program. If not, see
       <div class="col-10"> <a href="https://twitter.com/sonardotch" target="_blank" rel="noopener">Twitter</a></div>
     </div>
   </div>
+  {% endif %}
 </div>
 {%- endblock %}

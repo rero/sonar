@@ -28,6 +28,7 @@ theme = WebpackBundle(__name__,
                       entry={
                           'global-theme': './scss/global/theme.scss',
                           'usi-theme': './scss/usi/theme.scss',
+                          'hepvs-theme': './scss/hepvs/theme.scss',
                           'vge-theme': './scss/vge/theme.scss',
                           'preview': './scss/preview.scss',
                       },

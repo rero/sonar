@@ -22,7 +22,9 @@
 
 <dl class="row mt-4">
   <dt class="col-sm-3">{{ _('Period') }}</dt>
-  <dd class="col-sm-9">{{ record.startDate | format_date }} - {{ record.endDate | format_date if record.endDate else '' }}</dd>
+  <dd class="col-sm-9">
+    {{ record.startDate | format_date }} - {{ record.endDate | format_date if record.endDate else '' }}
+  </dd>
 
   {% if record.identifiedBy %}
   <dt class="col-sm-3">{{ _('Identifier') }}</dt>
@@ -46,8 +48,9 @@
       {% if investigator.affiliation %}
       {% if investigator.controlledAffiliation %}
       <small class="affiliation-tooltip" data-placement="top"
-        title="{{ investigator.controlledAffiliation | join(' ; ') }}"><i
-          class="text-muted">{{ investigator.affiliation }}</i></small>
+        title="{{ investigator.controlledAffiliation | join(' ; ') }}">
+        <i class="text-muted">{{ investigator.affiliation }}</i>
+      </small>
       {% else %}
       <small><i class="text-muted">{{ investigator.affiliation }}</i></small>
       {% endif %}
@@ -77,7 +80,9 @@
 <ul>
   {% for document in record.documents %}
   <li>
-    <a href="{{ document.permalink }}">{{ document.title[0] | title_format(current_i18n.language) }}</a>
+    <a href="{{ url_for('invenio_records_ui.doc', pid_value=document['pid'], view=view_code) }}">
+      {{ document.title[0] | title_format(current_i18n.language) }}
+    </a>
   </li>
   {% endfor %}
 </ul>
