@@ -17,8 +17,6 @@
 
 """Projects service."""
 
-from invenio_records_resources.services import \
-    RecordServiceConfig as BaseRecordServiceConfig
 from invenio_records_resources.services.records.schema import \
     MarshmallowServiceSchema
 from invenio_records_rest.utils import obj_or_import_string
@@ -29,6 +27,7 @@ from sonar.modules.query import and_term_filter
 from sonar.modules.utils import has_custom_resource
 
 from ..service import RecordService as BaseRecordService
+from ..service import RecordServiceConfig as BaseRecordServiceConfig
 from .api import Record, RecordComponent
 from .permissions import RecordPermissionPolicy
 from .results import RecordList
