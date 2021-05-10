@@ -46,6 +46,9 @@ def import_records(records_to_import):
             record = DocumentRecord.get_record_by_identifier(
                 data.get('identifiedBy', []))
 
+            # Set record as harvested
+            data['harvested'] = True
+
             if not record:
                 record = DocumentRecord.create(data,
                                                dbcommit=False,
