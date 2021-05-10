@@ -39,6 +39,7 @@ def test_import_records(mock_record_by_identifier, app, document_json,
     ids = import_records([document_json])
     record = DocumentRecord.get_record(ids[0])
     assert record
+    assert record['harvested']
 
     # Update
     mock_record_by_identifier.return_value = record

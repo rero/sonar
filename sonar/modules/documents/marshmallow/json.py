@@ -101,6 +101,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     oa_status = SanitizedUnicode()
     hiddenFromPublic = fields.Boolean()
     sections = fields.List(fields.Str())
+    harvested = fields.Boolean()
     _bucket = SanitizedUnicode()
     _files = Nested(FileSchemaV1, many=True)
     _oai = fields.Dict()
