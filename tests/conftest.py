@@ -634,7 +634,7 @@ def project_json():
 
 
 @pytest.fixture()
-def make_project(db, project_json, make_user):
+def make_project(app, db, project_json, make_user):
     """Factory for creating project."""
 
     def _make_project(role='submitter', organisation=None):
@@ -651,13 +651,15 @@ def make_project(db, project_json, make_user):
 
         project_json.pop('id', None)
 
-        return sonar.service('projects').create(None, project_json)
+        project = sonar.service('projects').create(None, project_json)
+        app.extensions['invenio-search'].flush_and_refresh(index='projects')
+        return project
 
     return _make_project
 
 
 @pytest.fixture()
-def project(app, db, admin, organisation, project_json):
+def project(app, db, es, admin, organisation, project_json):
     """Deposit fixture."""
     json = copy.deepcopy(project_json)
     json['metadata']['user'] = {
@@ -669,7 +671,9 @@ def project(app, db, admin, organisation, project_json):
             pid=organisation['pid'])
     }
 
-    return sonar.service('projects').create(None, json)
+    project = sonar.service('projects').create(None, json)
+    app.extensions['invenio-search'].flush_and_refresh(index='projects')
+    return project
 
 
 @pytest.fixture()

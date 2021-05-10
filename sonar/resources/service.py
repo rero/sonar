@@ -19,8 +19,19 @@
 
 from flask_principal import Identity, Need, UserNeed
 from invenio_pidstore.models import PersistentIdentifier, PIDStatus
+from invenio_records_resources.services import \
+    RecordServiceConfig as BaseRecordServiceConfig
 from invenio_records_resources.services.records import \
     RecordService as BaseRecordService
+
+from .params import FilterParams
+
+
+class RecordServiceConfig(BaseRecordServiceConfig):
+    """Service factory configuration."""
+
+    search_params_interpreters_cls = \
+        [FilterParams] + BaseRecordServiceConfig.search_params_interpreters_cls
 
 
 class RecordService(BaseRecordService):
