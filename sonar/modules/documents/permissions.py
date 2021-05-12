@@ -112,12 +112,3 @@ class DocumentPermission(RecordPermission):
 
         # Same rules as read
         return cls.read(user, record)
-
-def only_public(record, *args, **kwargs):
-    """Allow access only for public tagged documents."""
-
-    def can(self):
-        if record.get('hiddenFromPublic'):
-            return False
-        return True
-    return type('OnlyPublicDocument', (), {'can': can})()

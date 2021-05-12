@@ -264,22 +264,19 @@ RECORDS_UI_ENDPOINTS = {
         'route': '/<org_code:view>/documents/<pid_value>',
         'view_imp': 'sonar.modules.documents.views:detail',
         'record_class': 'sonar.modules.documents.api:DocumentRecord',
-        'template': 'documents/record.html',
-        'permission_factory_imp': 'sonar.modules.documents.permissions:only_public'
+        'template': 'documents/record.html'
     },
     'doc_previewer': {
         'pid_type': 'doc',
         'route': '/documents/<pid_value>/preview/<filename>',
         'view_imp': 'invenio_previewer.views:preview',
-        'record_class': 'sonar.modules.documents.api:DocumentRecord',
-        'permission_factory_imp': 'sonar.modules.documents.permissions:only_public'
+        'record_class': 'sonar.modules.documents.api:DocumentRecord'
     },
     'doc_files': {
         'pid_type': 'doc',
         'route': '/documents/<pid_value>/files/<filename>',
         'view_imp': 'invenio_records_files.utils:file_download_ui',
-        'record_class': 'invenio_records_files.api:Record',
-        'permission_factory_imp': 'sonar.modules.documents.permissions:only_public'
+        'record_class': 'invenio_records_files.api:Record'
     },
     'depo_previewer': {
         'pid_type': 'depo',
