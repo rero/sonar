@@ -166,8 +166,8 @@ along with this program. If not, see
         {% for abstract in abstracts %}
         <span id="lang-{{ abstract.language }}" class="abstract-container {{ '' if loop.first else 'd-none' }}">
           {% if abstract.value | length > 400 %}
-          <span data-abstract="{{ abstract.value | nl2br }}">{{ abstract.value | truncate(400) }}</span> <a
-            href="#" class="showMore-abstract">{{ _('Show more') }}&hellip;</a>
+          <span data-abstract="{{ abstract.value | nl2br }}">{{ abstract.value | truncate(400) }}</span> <a href="#"
+            class="showMore-abstract">{{ _('Show more') }}&hellip;</a>
           {% else %}
           {{ abstract.value | nl2br | safe }}
           {% endif %}
@@ -266,6 +266,21 @@ along with this program. If not, see
         </dd>
         {% endfor %}
         {% endif %}
+
+        <!-- CUSTOM FIELDS -->
+        {% for i in range(1, 4) %}
+        {% if record['customField' + i|string] %}
+        <dt class="col-lg-3">
+          {% set label = record | get_custom_field_label(i) %}
+          {% if label %}
+          {{ label }}
+          {% else %}
+          {{ 'Custom field ' + i|string }}
+          {% endif%}
+        </dt>
+        <dd class="col-lg-9">{{ record['customField' + i|string] | join(', ') }}</dd>
+        {% endif %}
+        {% endfor %}
 
         <!-- LICENSE -->
         {% if record.usageAndAccessPolicy %}

@@ -34,9 +34,11 @@ from sonar.modules.documents.serializers.schemas.dc import DublinCoreV1
 from sonar.modules.documents.serializers.schemas.google_scholar import \
     GoogleScholarV1
 from sonar.modules.documents.serializers.schemas.schemaorg import SchemaOrgV1
-from sonar.modules.organisations.api import OrganisationRecord
+from sonar.modules.organisations.api import OrganisationRecord, \
+    current_organisation
 from sonar.modules.serializers import JSONSerializer as _JSONSerializer
 from sonar.modules.users.api import current_user_record
+from sonar.modules.utils import get_language_value
 
 from ..marshmallow import DocumentSchemaV1
 
@@ -72,6 +74,28 @@ class JSONSerializer(_JSONSerializer):
                 org_term['key'])
             if organisation:
                 org_term['name'] = organisation['name']
+
+        # Process facets for custom fields
+        if view and view != current_app.config.get(
+                'SONAR_APP_DEFAULT_ORGANISATION'):
+            organisation = OrganisationRecord.get_record_by_pid(view)
+        else:
+            organisation = current_organisation
+
+        for i in range(1, 4):
+            if results.get('aggregations').get(f'customField{i}'):
+                # The facet is displayed only in dedicated view.
+                if view == current_app.config.get(
+                        'SONAR_APP_DEFAULT_ORGANISATION'
+                ) or not organisation or not organisation.get(
+                        f'documentsCustomField{i}', {}).get('includeInFacets'):
+                    results['aggregations'].pop(f'customField{i}', None)
+                else:
+                    if organisation[f'documentsCustomField{i}'].get('label'):
+                        results['aggregations'][f'customField{i}'][
+                            'name'] = get_language_value(
+                                organisation[f'documentsCustomField{i}']
+                                ['label'])
 
         return super(JSONSerializer,
                      self).post_process_serialize_search(results, pid_fetcher)

@@ -32,6 +32,63 @@
       "platformName": {
         "type": "text"
       },
+      "documentsCustomField1": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "object",
+            "properties": {
+              "language": {
+                "type": "keyword"
+              },
+              "value": {
+                "type": "text"
+              }
+            }
+          },
+          "includeInFacets": {
+            "type": "boolean"
+          }
+        }
+      },
+      "documentsCustomField2": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "object",
+            "properties": {
+              "language": {
+                "type": "keyword"
+              },
+              "value": {
+                "type": "text"
+              }
+            }
+          },
+          "includeInFacets": {
+            "type": "boolean"
+          }
+        }
+      },
+      "documentsCustomField3": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "object",
+            "properties": {
+              "language": {
+                "type": "keyword"
+              },
+              "value": {
+                "type": "text"
+              }
+            }
+          },
+          "includeInFacets": {
+            "type": "boolean"
+          }
+        }
+      },
       "_created": {
         "type": "date"
       },

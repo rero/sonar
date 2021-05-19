@@ -33,18 +33,16 @@ from flask_babelex import lazy_gettext as _
 from flask_breadcrumbs import register_breadcrumb
 from flask_login import current_user, login_required
 from flask_menu import current_menu, register_menu
-from invenio_jsonschemas import current_jsonschemas
 from invenio_jsonschemas.errors import JSONSchemaNotFound
 from invenio_pidstore.models import PersistentIdentifier
 
+from sonar.json_schemas.factory import JSONSchemaFactory
 from sonar.modules.deposits.permissions import DepositPermission
 from sonar.modules.documents.permissions import DocumentPermission
-from sonar.modules.organisations.api import current_organisation
 from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import can_access_manage_view
 from sonar.modules.users.api import current_user_record
 from sonar.modules.users.permissions import UserPermission
-from sonar.modules.utils import has_custom_resource
 from sonar.resources.projects.permissions import RecordPermissionPolicy
 
 blueprint = Blueprint('sonar',
@@ -169,18 +167,9 @@ def schemas(record_type):
     :param record_type: Type of resource.
     :returns: JSONified schema or a 404 if not found.
     """
-    rec_type = record_type
-    rec_type = re.sub('ies$', 'y', rec_type)
-    rec_type = re.sub('s$', '', rec_type)
-
     try:
-        current_jsonschemas.get_schema.cache_clear()
-        schema_name = '{}/{}-v1.0.0.json'.format(record_type, rec_type)
-
-        if has_custom_resource(record_type):
-            schema_name = f'{current_organisation["code"]}/{schema_name}'
-
-        schema = current_jsonschemas.get_schema(schema_name)
+        json_schema = JSONSchemaFactory.create(record_type)
+        schema = json_schema.get_schema()
 
         # TODO: Maybe find a proper way to do this.
         if record_type in [
@@ -230,7 +219,7 @@ def schemas(record_type):
             if 'isShared' in schema.get('propertiesOrder', []):
                 schema['propertiesOrder'].remove('isShared')
 
-        return jsonify({'schema': schema})
+        return jsonify({'schema': json_schema.process()})
     except JSONSchemaNotFound:
         abort(404)
 

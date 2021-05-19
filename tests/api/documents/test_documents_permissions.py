@@ -62,6 +62,7 @@ def test_list(app, client, make_document, superuser, admin, moderator,
     res = client.get(url_for('invenio_records_rest.doc_list'))
     assert res.status_code == 200
     assert res.json['hits']['total']['value'] == 1
+    assert res.json['aggregations']['customField1']['name'] == 'Test'
     assert not res.json['aggregations'].get('organisation')
 
     # Logged as superuser
@@ -75,12 +76,14 @@ def test_list(app, client, make_document, superuser, admin, moderator,
     res = client.get(url_for('invenio_records_rest.doc_list', view='global'))
     assert res.status_code == 200
     assert res.json['hits']['total']['value'] == 2
+    assert not res.json['aggregations'].get('customField1')
     assert res.json['aggregations'].get('organisation')
 
     # Public search for organisation
     res = client.get(url_for('invenio_records_rest.doc_list', view='org'))
     assert res.status_code == 200
     assert res.json['hits']['total']['value'] == 1
+    assert res.json['aggregations']['customField1']['name'] == 'Test'
     assert not res.json['aggregations'].get('organisation')
 
 

@@ -88,6 +88,7 @@ cp ${assets_folder}/node_modules/pdfjs-dist/build/pdf.worker.min.js ${static_fol
 
 # Compile JSON schemas
 section "Compile JSON schemas" "info"
+invenio utils compile-json ./sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json -o ./sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json
 invenio utils compile-json ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json -o ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
 invenio utils compile-json ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json -o ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json
 invenio utils compile-json ./sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json -o ./sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json
