@@ -17,6 +17,7 @@
 
 """Record permissions."""
 
+from sonar.modules.documents.api import DocumentSearch
 from sonar.modules.organisations.api import current_organisation
 from sonar.modules.permissions import RecordPermission as BaseRecordPermission
 
@@ -91,4 +92,11 @@ class RecordPermission(BaseRecordPermission):
         :return: True if action can be done
         :rtype: bool
         """
+        results = DocumentSearch().filter(
+            'term', collections__pid=record['pid']).source(includes=['pid'])
+
+        # Cannot remove collection associated to a record
+        if results.count():
+            return False
+
         return cls.read(user, record)

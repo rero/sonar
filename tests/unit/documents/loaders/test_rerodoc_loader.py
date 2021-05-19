@@ -135,7 +135,9 @@ def test_rerodoc_loader(app, organisation):
             'value':
             '(NATIONALLICENCE)oxford-10.1093/mnras/stu2500'
         }],
-        'specificCollections': ['National Licences: uzh'],
+        'collections': [{
+            '$ref': 'https://sonar.ch/api/collections/1'
+        }],
         'usageAndAccessPolicy': {
             'label':
             '© 2015 The Authors Published by Oxford University Press on '

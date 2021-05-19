@@ -25,6 +25,7 @@ from flask import current_app, request
 from invenio_records_rest.serializers.response import record_responsify, \
     search_responsify
 
+from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.documents.serializers.dc import SonarDublinCoreSerializer
 from sonar.modules.documents.serializers.google_scholar import \
     SonarGoogleScholarSerializer
@@ -96,6 +97,14 @@ class JSONSerializer(_JSONSerializer):
                             'name'] = get_language_value(
                                 organisation[f'documentsCustomField{i}']
                                 ['label'])
+
+        # Add collection name
+        for org_term in results.get('aggregations',
+                                    {}).get('collection',
+                                            {}).get('buckets', []):
+            collection = CollectionRecord.get_record_by_pid(org_term['key'])
+            if collection:
+                org_term['name'] = collection['name'][0]['value']
 
         return super(JSONSerializer,
                      self).post_process_serialize_search(results, pid_fetcher)

@@ -20,6 +20,7 @@
 import json
 
 from flask import url_for
+from invenio_accounts.testutils import login_user_via_view
 
 from sonar.modules.deposits.rest import FilesResource
 from sonar.modules.users.api import UserRecord
@@ -121,6 +122,10 @@ def test_publish(client, db, user, moderator, deposit):
     response = client.post(url, data={})
     assert response.status_code == 400
 
+    login_user_via_view(client,
+                        email=moderator['email'],
+                        password='123456')
+
     # Test the publication by a moderator
     deposit['status'] = 'in_progress'
     deposit.commit()
@@ -175,6 +180,10 @@ def test_review(client, db, user, moderator, deposit):
                            }),
                            headers=headers)
     assert response.status_code == 403
+
+    login_user_via_view(client,
+                        email=moderator['email'],
+                        password='123456')
 
     # Valid approval request
     response = client.post(url,

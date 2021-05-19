@@ -282,6 +282,22 @@ along with this program. If not, see
         {% endif %}
         {% endfor %}
 
+        <!-- COLLECTIONS -->
+        {% if record.collections %}
+        <dt class="col-lg-3">
+          {{ _('Collections') }}
+        </dt>
+        <dd class="col-lg-9">
+          <ul class="list-unstyled mb-0">
+            {% for collection in record.collections %}
+            <li class="p-0">
+              {{ collection.name | language_value }}
+            </li>
+            {% endfor %}
+          </ul>
+        </dd>
+        {% endif %}
+
         <!-- LICENSE -->
         {% if record.usageAndAccessPolicy %}
         <dt class="col-lg-3">

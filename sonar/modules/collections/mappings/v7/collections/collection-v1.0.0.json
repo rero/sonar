@@ -14,6 +14,9 @@
       "pid": {
         "type": "keyword"
       },
+      "hashKey": {
+        "type": "keyword"
+      },
       "name": {
         "type": "object",
         "properties": {
@@ -21,7 +24,14 @@
             "type": "keyword"
           },
           "value": {
-            "type": "text"
+            "type": "text",
+            "fields": {
+              "suggest": {
+                "type": "text",
+                "analyzer": "autocomplete",
+                "search_analyzer": "standard"
+              }
+            }
           }
         }
       },

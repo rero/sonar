@@ -270,7 +270,7 @@
         "publication",
         "dissertation",
         "otherElectronicVersions",
-        "specificCollections",
+        "collections",
         "classification",
         "abstracts",
         "subjects"
@@ -672,13 +672,110 @@
             }
           }
         },
-        "specificCollections": {
-          "title": "Specific collections",
+        "collections": {
+          "title": "Collections",
           "description": "The names of the organisation's specific/patrimonial collections to which this document belongs",
           "type": "array",
           "items": {
-            "type": "string",
-            "minLength": 1
+            "title": "Collection",
+            "type": "object",
+            "additionnalProperties": false,
+            "oneOf": [
+              {
+                "title": "Existing collection",
+                "properties": {
+                  "$ref": {
+                    "type": "string",
+                    "pattern": "^https://sonar.ch/api/collections/.*?$",
+                    "form": {
+                      "remoteTypeahead": {
+                        "type": "collections",
+                        "field": "name.value.suggest",
+                        "label": "label"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "$ref"
+                ]
+              },
+              {
+                "title": "Add a new collection",
+                "properties": {
+                  "name": {
+                    "title": "Names",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "title": "Name",
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "value": {
+                          "title": "Value",
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "language": {
+                          "$ref": "language-v1.0.0.json"
+                        }
+                      },
+                      "propertiesOrder": [
+                        "language",
+                        "value"
+                      ],
+                      "required": [
+                        "value",
+                        "language"
+                      ]
+                    }
+
+                  },
+                  "description": {
+                    "title": "Descriptions",
+                    "type": "array",
+                    "minItems": 0,
+                    "items": {
+                      "title": "Description",
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "value": {
+                          "title": "Value",
+                          "type": "string",
+                          "minLength": 1,
+                          "form": {
+                            "type": "textarea",
+                            "templateOptions": {
+                              "rows": 5
+                            }
+                          }
+                        },
+                        "language": {
+                          "$ref": "language-v1.0.0.json"
+                        }
+                      },
+                      "propertiesOrder": [
+                        "language",
+                        "value"
+                      ],
+                      "required": [
+                        "value",
+                        "language"
+                      ]
+                    }
+                  }
+                },
+                "propertiesOrder": [
+                  "name",
+                  "description"
+                ],
+                "required": [
+                  "name"
+                ]
+              }
+            ]
           },
           "form": {
             "templateOptions": {

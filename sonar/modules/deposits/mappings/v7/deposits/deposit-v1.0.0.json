@@ -165,8 +165,32 @@
               }
             }
           },
-          "specificCollections": {
-            "type": "text"
+          "collections": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "object",
+                "properties": {
+                  "language": {
+                    "type": "keyword"
+                  },
+                  "value": {
+                    "type": "text"
+                  }
+                }
+              },
+              "description": {
+                "type": "object",
+                "properties": {
+                  "language": {
+                    "type": "keyword"
+                  },
+                  "value": {
+                    "type": "text"
+                  }
+                }
+              }
+            }
           },
           "classification": {
             "type": "keyword"

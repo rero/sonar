@@ -429,7 +429,7 @@ def document_with_file(make_document):
 
 
 @pytest.fixture()
-def deposit_json():
+def deposit_json(collection):
     """Deposit JSON."""
     return {
         '$schema':
@@ -473,7 +473,15 @@ def deposit_json():
                 'publicNote': 'Published version',
                 'url': 'https://some.url/document.pdf'
             }],
-            'specificCollections': ['Collection 1', 'Collection 2'],
+            'collections': [{
+                '$ref':
+                f'https://sonar.ch/api/collections/{collection["pid"]}'
+            }, {
+                'name': [{
+                    'language': 'eng',
+                    'value': 'New collection'
+                }]
+            }],
             'classification':
             '543',
             'abstracts': [{

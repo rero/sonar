@@ -14,6 +14,11 @@
       "type": "string",
       "minLength": 1
     },
+    "hashKey": {
+      "title": "Hash key",
+      "type": "string",
+      "minLength": 1
+    },
     "name": {
       "title": "Names",
       "type": "array",
@@ -46,7 +51,7 @@
     "description": {
       "title": "Descriptions",
       "type": "array",
-      "minItems": 1,
+      "minItems": 0,
       "items": {
         "title": "Description",
         "type": "object",

@@ -24,6 +24,7 @@ import pytz
 from flask import g
 
 from sonar.modules.api import SonarRecord
+from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.users.api import current_user_record
 from sonar.proxies import sonar
@@ -102,6 +103,7 @@ class DepositRecord(SonarRecord):
 
     def create_document(self):
         """Create document from deposit."""
+        # TODO : Do this whole process with a marshmallow schema serializer.
         metadata = {}
 
         # Organisation
@@ -225,10 +227,27 @@ class DepositRecord(SonarRecord):
                 'publicNote': link['publicNote']
             } for link in self['metadata']['otherElectronicVersions']]
 
-        # Specific collections
-        if self['metadata'].get('specificCollections'):
-            metadata['specificCollections'] = self['metadata'][
-                'specificCollections']
+        # Collections
+        if self['metadata'].get('collections'):
+            collections = []
+            for collection in self['metadata'].get('collections'):
+                # Create a new project
+                if not collection.get('$ref'):
+                    data = collection.copy()
+                    # Store organisation
+                    data['organisation'] = current_user_record['organisation']
+                    collection_record = CollectionRecord.create(data)
+                    collection_record.reindex()
+                    collection = {
+                        '$ref':
+                        SonarRecord.get_ref_link('collections',
+                                                 collection_record['pid'])
+                    }
+
+                collections.append(collection)
+
+            if collections:
+                metadata['collections'] = collections
 
         # Classification
         if self['metadata'].get('classification'):
