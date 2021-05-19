@@ -29,7 +29,7 @@ from invenio_records_ui.signals import record_viewed
 from sonar.modules.documents.utils import has_external_urls_for_files, \
     populate_files_properties
 from sonar.modules.utils import format_date, \
-    get_bibliographic_code_from_language
+    get_bibliographic_code_from_language, get_language_value
 
 from .utils import publication_statement_text
 
@@ -267,6 +267,23 @@ def contribution_text(contribution):
             role=contribution['role'][0])).lower()))
 
     return ' '.join(data)
+
+
+@blueprint.app_template_filter()
+def get_custom_field_label(record, custom_field_index):
+    """Get the label of a custom field.
+
+    :param record: Record object.
+    :param custom_field_index: Index position of the custom field.
+    :returns: The label found or None.
+    """
+    if record.get('organisation') and record['organisation'][0].get(
+            'documentsCustomField' + str(custom_field_index), {}).get('label'):
+        return get_language_value(
+            record['organisation'][0]['documentsCustomField' +
+                                      str(custom_field_index)]['label'])
+
+    return None
 
 
 def get_language_from_bibliographic_code(language_code):

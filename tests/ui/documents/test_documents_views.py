@@ -366,3 +366,49 @@ def test_language_value(app):
     }]
     assert render_template_string('{{ values | language_value }}',
                                   values=values) == 'Value ENG'
+
+
+def test_get_custom_field_label(app):
+    """Test custom field label."""
+    record = {
+        'organisation': [{
+            'documentsCustomField1': {
+                'label': [{
+                    'language': 'eng',
+                    'value': 'Test ENG'
+                }, {
+                    'language': 'fre',
+                    'value': 'Test FRE'
+                }]
+            }
+        }]
+    }
+    assert render_template_string('{{ record | get_custom_field_label(1) }}',
+                                  record=record) == 'Test ENG'
+
+    # No organisation
+    record = {}
+    assert render_template_string('{{ record | get_custom_field_label(1) }}',
+                                  record=record) == 'None'
+
+    # No index for custom field
+    record = {
+        'organisation': [{
+            'documentsCustomField1': {
+                'label': [{
+                    'language': 'eng',
+                    'value': 'Test ENG'
+                }, {
+                    'language': 'fre',
+                    'value': 'Test FRE'
+                }]
+            }
+        }]
+    }
+    assert render_template_string('{{ record | get_custom_field_label(2) }}',
+                                  record=record) == 'None'
+
+    # No label
+    record = {'organisation': [{'documentsCustomField1': {}}]}
+    assert render_template_string('{{ record | get_custom_field_label(1) }}',
+                                  record=record) == 'None'

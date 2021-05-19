@@ -25,7 +25,7 @@ from flask import request
 from invenio_records_rest.schemas import Nested, StrictKeysMixin
 from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
-from marshmallow import EXCLUDE, fields, pre_dump, pre_load
+from marshmallow import EXCLUDE, fields, pre_dump, pre_load, validate
 
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.permissions import DocumentPermission
@@ -101,6 +101,9 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     oa_status = SanitizedUnicode()
     sections = fields.List(fields.Str())
     harvested = fields.Boolean()
+    customField1 = fields.List(fields.String(validate=validate.Length(min=1)))
+    customField2 = fields.List(fields.String(validate=validate.Length(min=1)))
+    customField3 = fields.List(fields.String(validate=validate.Length(min=1)))
     _bucket = SanitizedUnicode()
     _files = Nested(FileSchemaV1, many=True)
     _oai = fields.Dict()

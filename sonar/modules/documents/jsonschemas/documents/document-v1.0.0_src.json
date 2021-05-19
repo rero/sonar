@@ -1794,6 +1794,66 @@
           }
         ]
       }
+    },
+    "customField1": {
+      "title": "Custom field 1",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "form": {
+          "remoteTypeahead": {
+            "type": "documents",
+            "field": "customField1.suggest",
+            "suggest": "/api/suggestions/completion",
+            "allowAdd": true
+          }
+        }
+      },
+      "form": {
+        "hide": true
+      }
+    },
+    "customField2": {
+      "title": "Custom field 2",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "form": {
+          "remoteTypeahead": {
+            "type": "documents",
+            "field": "customField2.suggest",
+            "suggest": "/api/suggestions/completion",
+            "allowAdd": true
+          }
+        }
+      },
+      "form": {
+        "hide": true
+      }
+    },
+    "customField3": {
+      "title": "Custom field 3",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "form": {
+          "remoteTypeahead": {
+            "type": "documents",
+            "field": "customField3.suggest",
+            "suggest": "/api/suggestions/completion",
+            "allowAdd": true
+          }
+        }
+      },
+      "form": {
+        "hide": true
+      }
     }
   },
   "propertiesOrder": [
@@ -1821,7 +1881,10 @@
     "contentNote",
     "otherMaterialCharacteristics",
     "usageAndAccessPolicy",
-    "oa_status"
+    "oa_status",
+    "customField1",
+    "customField2",
+    "customField3"
   ],
   "required": [
     "$schema",

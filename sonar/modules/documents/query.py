@@ -33,7 +33,8 @@ FIELDS = [
     'otherMaterialCharacteristics', 'formats', 'additionalMaterials',
     'series.*', 'notes', 'abstracts.*', 'identifiedBy.*', 'subjects.*',
     'otherEdition.*', 'classification.*', 'contentNote', 'dissertation.*',
-    'usageAndAccessPolicy', 'contribution.*', 'partOf.*', 'projects.*'
+    'usageAndAccessPolicy', 'contribution.*', 'partOf.*', 'projects.*',
+    'customField1', 'customField2', 'customField3'
 ]
 
 

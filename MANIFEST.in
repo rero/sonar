@@ -12,6 +12,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU Affero General Public License for more details.
 
+exclude sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json
 exclude sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
 exclude sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json
 exclude sonar/modules/projects/jsonschemas/projects/project-v1.0.0.json

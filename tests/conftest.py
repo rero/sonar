@@ -99,7 +99,14 @@ def make_organisation(app, db, bucket_location, without_oaiset_signals):
             'code': code,
             'name': code,
             'isShared': True,
-            'isDedicated': False
+            'isDedicated': False,
+            'documentsCustomField1': {
+                'label': [{
+                    'language': 'eng',
+                    'value': 'Test'
+                }],
+                'includeInFacets': True
+            }
         }
 
         record = OrganisationRecord.get_record_by_pid(code)
@@ -360,7 +367,8 @@ def document_json(app, db, bucket_location, organisation):
             'grantingInstitution': 'Università della Svizzera italiana',
             'date': '2010-12-01',
             'jury_note': 'Jury note'
-        }
+        },
+        'customField1': ['Test']
     }
 
     return data

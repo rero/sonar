@@ -499,7 +499,13 @@ RECORDS_REST_FACETS = {
             field='provisionActivity.startDate',
             interval='year',
             format='yyyy',
-        ))),
+        )),
+        customField1=dict(terms=dict(field='customField1.raw',
+                                     size=DEFAULT_AGGREGATION_SIZE)),
+        customField2=dict(terms=dict(field='customField2.raw',
+                                     size=DEFAULT_AGGREGATION_SIZE)),
+        customField3=dict(terms=dict(field='customField3.raw',
+                                     size=DEFAULT_AGGREGATION_SIZE))),
          filters={
              'sections':
              and_term_filter('sections'),
@@ -522,7 +528,13 @@ RECORDS_REST_FACETS = {
                           format='yyyy',
                           end_date_math='/y'),
              'open_access':
-             and_term_filter('isOpenAccess')
+             and_term_filter('isOpenAccess'),
+             'customField1':
+             and_term_filter('customField1.raw'),
+             'customField2':
+             and_term_filter('customField2.raw'),
+             'customField3':
+             and_term_filter('customField3.raw')
          }),
     'deposits':
     dict(aggs=dict(

@@ -15,26 +15,25 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Extraction from Python source files
-[python: **.py]
-encoding = utf-8
-[python: **/manual_translations.txt]
-encoding = utf-8
+"""Factory for JSON schema."""
 
-# Extraction from Jinja2 templates
-[jinja2: **/templates/**.html]
-encoding = utf-8
-extensions = jinja2.ext.autoescape, jinja2.ext.with_
+from .documents_json_schema import DocumentsJSONSchema
+from .json_schema_base import JSONSchemaBase
 
-# Extraction from JavaScript files
-[javascript: **.js]
-encoding = utf-8
-extract_messages = $._, jQuery._
 
-# Extraction from json files (schema)
-[ignore: **/**/organisation-v1.0.0.json]
-[ignore: **/**/document-v1.0.0.json]
-[ignore: **/**/deposit-v1.0.0.json]
-[ignore: **/**/project-v1.0.0.json]
-[json: **.json]
-keys_to_translate = ['^title$', '^label$', '^description$', '^placeholder$', '^.*Message$']
+class JSONSchemaFactory():
+    """Factory for JSON schema."""
+
+    SCHEMAS = {'documents': DocumentsJSONSchema}
+
+    @staticmethod
+    def create(resource_type):
+        """Create instance of schema based on the given resource.
+
+        :param resource_type: String representing the type of resource.
+        :returns: The schema instance.
+        """
+        if JSONSchemaFactory.SCHEMAS.get(resource_type):
+            return JSONSchemaFactory.SCHEMAS[resource_type](resource_type)
+
+        return JSONSchemaBase(resource_type)

@@ -527,6 +527,42 @@
       "isOpenAccess": {
         "type": "boolean"
       },
+      "customField1": {
+        "type": "text",
+        "fields": {
+          "raw": {
+            "type":  "keyword"
+          },
+          "suggest": {
+            "type": "completion",
+            "analyzer": "default"
+          }
+        }
+      },
+      "customField2": {
+        "type": "text",
+        "fields": {
+          "raw": {
+            "type":  "keyword"
+          },
+          "suggest": {
+            "type": "completion",
+            "analyzer": "default"
+          }
+        }
+      },
+      "customField3": {
+        "type": "text",
+        "fields": {
+          "raw": {
+            "type":  "keyword"
+          },
+          "suggest": {
+            "type": "completion",
+            "analyzer": "default"
+          }
+        }
+      },
       "_created": {
         "type": "date"
       },
