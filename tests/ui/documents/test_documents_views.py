@@ -26,28 +26,24 @@ import sonar.modules.documents.views as views
 def test_store_organisation(client, db, organisation):
     """Test store organisation in globals."""
     # Default view, no organisation stored.
-    assert client.get(url_for('index',
-                              view='global')).status_code == 200
+    assert client.get(url_for('index', view='global')).status_code == 200
     assert not g.get('organisation')
 
     # Existing organisation stored, with shared view
-    assert client.get(url_for('index',
-                              view='org')).status_code == 200
+    assert client.get(url_for('index', view='org')).status_code == 200
     assert g.organisation['code'] == 'org'
     assert g.organisation['isShared']
 
     # Non-existing organisation
     g.pop('organisation')
-    assert client.get(url_for('index',
-                              view='non-existing')).status_code == 404
+    assert client.get(url_for('index', view='non-existing')).status_code == 404
     assert not g.get('organisation')
 
     # Existing organisation without shared view
     organisation['isShared'] = False
     organisation.commit()
     db.session.commit()
-    assert client.get(url_for('index',
-                              view='org')).status_code == 404
+    assert client.get(url_for('index', view='org')).status_code == 404
     assert not g.get('organisation')
 
 
@@ -58,20 +54,26 @@ def test_index(client):
 
 def test_search(app, client):
     """Test search."""
-    assert client.get(url_for('documents.search', view='global',
-                              resource_type='documents')).status_code == 200
-    assert client.get(url_for('documents.search', view='not-existing',
-                              resource_type='documents')).status_code == 404
+    assert client.get(
+        url_for('documents.search', view='global',
+                resource_type='documents')).status_code == 200
+    assert client.get(
+        url_for('documents.search',
+                view='not-existing',
+                resource_type='documents')).status_code == 404
 
 
 def test_detail(app, client, document_with_file):
     """Test document detail page."""
     assert client.get(
-        url_for('invenio_records_ui.doc', view='global',
+        url_for('invenio_records_ui.doc',
+                view='global',
                 pid_value=document_with_file['pid'])).status_code == 200
 
-    assert client.get(url_for('invenio_records_ui.doc', view='global',
-                              pid_value='not-existing')).status_code == 404
+    assert client.get(
+        url_for('invenio_records_ui.doc',
+                view='global',
+                pid_value='not-existing')).status_code == 404
 
 
 def test_title_format(document):
@@ -138,15 +140,6 @@ def test_get_code_from_bibliographic_language(app):
     with pytest.raises(Exception) as e:
         views.get_language_from_bibliographic_code('zzz')
     assert str(e.value) == 'Language code not found for "zzz"'
-
-
-def test_get_bibliographic_code_from_language(app):
-    """Test bibliographic language code to alpha 2 code conversion."""
-    with pytest.raises(Exception) as e:
-        views.get_bibliographic_code_from_language("zz")
-    assert str(e.value) == 'Language code not found for "zz"'
-
-    assert views.get_bibliographic_code_from_language('de') == 'ger'
 
 
 def test_get_preferred_languages(app):
@@ -349,10 +342,27 @@ def test_contribution_text():
 
 def test_project_detail(app, client, project):
     """Test project detail page."""
-    assert client.get(url_for('invenio_records_ui.proj', view='global',
-                              pid_value=project.id)).status_code == 200
     assert client.get(
         url_for('invenio_records_ui.proj', view='global',
+                pid_value=project.id)).status_code == 200
+    assert client.get(
+        url_for('invenio_records_ui.proj',
+                view='global',
                 pid_value='not-existing')).status_code == 404
-    assert client.get(url_for('invenio_records_ui.proj', view='not-existing',
-                              pid_value=project.id)).status_code == 404
+    assert client.get(
+        url_for('invenio_records_ui.proj',
+                view='not-existing',
+                pid_value=project.id)).status_code == 404
+
+
+def test_language_value(app):
+    """Test language value."""
+    values = [{
+        'language': 'eng',
+        'value': 'Value ENG'
+    }, {
+        'language': 'fre',
+        'value': 'Value FRE'
+    }]
+    assert render_template_string('{{ values | language_value }}',
+                                  values=values) == 'Value ENG'

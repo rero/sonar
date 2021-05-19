@@ -237,3 +237,44 @@ def has_custom_resource(resource_type):
 
     return current_app.config.get('SONAR_APP_ORGANISATION_CONFIG').get(
         current_organisation['code'], {}).get(resource_type)
+
+
+def get_language_value(values,
+                       locale=None,
+                       value_field='value',
+                       language_field='language'):
+    """Return the value corresponding to the locale.
+
+    :params values: List of values with the language.
+    :params locale: Two digit locale to find.
+    :params value_field: Name of the property containing the value.
+    :params language_field: Name of the property containing the language.
+    :returns: The value associated with the language.
+    """
+    if not values:
+        return None
+
+    locale = locale or get_current_language()
+    locale = get_bibliographic_code_from_language(locale)
+
+    for value in values:
+        if value[language_field] == locale:
+            return value[value_field]
+
+    return values[0][value_field]
+
+
+def get_bibliographic_code_from_language(language_code):
+    """Return bibliographic language code from language.
+
+    For example, get_bibliographic_code_from_language("de") will
+    return "ger".
+
+    :param language_code: Bibliographic language.
+    :returns: The bibliographic code corresponding to language.
+    """
+    for key, lang in current_app.config.get('SONAR_APP_LANGUAGES_MAP').items():
+        if lang == language_code:
+            return key
+
+    raise Exception(f'Language code not found for "{language_code}"')

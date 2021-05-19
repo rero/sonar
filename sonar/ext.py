@@ -33,8 +33,8 @@ from sonar.modules.receivers import file_deleted_listener, \
     file_uploaded_listener
 from sonar.modules.users.api import current_user_record
 from sonar.modules.users.signals import add_full_name, user_registered_handler
-from sonar.modules.utils import get_specific_theme, get_switch_aai_providers, \
-    get_view_code
+from sonar.modules.utils import get_language_value, get_specific_theme, \
+    get_switch_aai_providers, get_view_code
 from sonar.resources.projects.resource import \
     RecordResource as ProjectRecordResource
 from sonar.resources.projects.service import \
@@ -120,6 +120,22 @@ class Sonar():
         def nl2br(string):
             r"""Replace \n to <br>."""
             return string.replace('\n', '<br>')
+
+        @app.template_filter()
+        def language_value(values,
+                           locale=None,
+                           value_field='value',
+                           language_field='language'):
+            """Get the value of a field corresponding to the current language.
+
+            :params values: List of values with the language.
+            :params locale: Two digit locale to find.
+            :params value_field: Name of the property containing the value.
+            :params language_field: Name of the property containing the language.
+            :returns: The value corresponding to the current language.
+            """
+            return get_language_value(values, locale, value_field,
+                                      language_field)
 
     def create_resources(self):
         """Create resources."""

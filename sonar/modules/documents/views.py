@@ -28,7 +28,8 @@ from invenio_records_ui.signals import record_viewed
 
 from sonar.modules.documents.utils import has_external_urls_for_files, \
     populate_files_properties
-from sonar.modules.utils import format_date
+from sonar.modules.utils import format_date, \
+    get_bibliographic_code_from_language
 
 from .utils import publication_statement_text
 
@@ -284,23 +285,6 @@ def get_language_from_bibliographic_code(language_code):
             language_code=language_code))
 
     return languages_map[language_code]
-
-
-def get_bibliographic_code_from_language(language_code):
-    """Return bibliographic language code from language.
-
-    For example, get_bibliographic_code_from_language("de") will
-    return "ger"
-
-    :param language_code: Bibliographic language
-    :return str
-    """
-    for key, lang in current_app.config.get('SONAR_APP_LANGUAGES_MAP').items():
-        if lang == language_code:
-            return key
-
-    raise Exception('Language code not found for "{language_code}"'.format(
-        language_code=language_code))
 
 
 def get_preferred_languages(force_language=None):
