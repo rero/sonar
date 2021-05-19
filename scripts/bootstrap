@@ -86,10 +86,6 @@ cp -R ${assets_folder}/node_modules/@rero/sonar-ui/dist/sonar/* ${static_folder}
 # Copy worker from pdfjs to avoid a 404 error when previewing PDF files.
 cp ${assets_folder}/node_modules/pdfjs-dist/build/pdf.worker.min.js ${static_folder}/js/pdfjs/
 
-# TODO: Fix for invenio-assets not copying manifest.json to
-# ${INVENIO_INSTANCE_PATH}/static/dist
-cp ${static_folder}/../assets/manifest.json ${static_folder}/dist/manifest.json
-
 # Compile JSON schemas
 section "Compile JSON schemas" "info"
 invenio utils compile-json ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json -o ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
