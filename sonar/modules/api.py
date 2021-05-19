@@ -214,6 +214,8 @@ class SonarRecord(Record, FilesMixin):
             if not record_class:
                 raise Exception('Class for record not found.')
 
+            record_class = obj_or_import_string(record_class)
+
             # Load record by its PID.
             return record_class.get_record_by_pid(pid.pid_value)
         except Exception:

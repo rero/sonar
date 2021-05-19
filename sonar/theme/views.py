@@ -37,6 +37,8 @@ from invenio_jsonschemas.errors import JSONSchemaNotFound
 from invenio_pidstore.models import PersistentIdentifier
 
 from sonar.json_schemas.factory import JSONSchemaFactory
+from sonar.modules.collections.permissions import \
+    RecordPermission as CollectionPermission
 from sonar.modules.deposits.permissions import DepositPermission
 from sonar.modules.documents.permissions import DocumentPermission
 from sonar.modules.organisations.permissions import OrganisationPermission
@@ -151,6 +153,10 @@ def logged_user():
             'projects': {
                 'add': RecordPermissionPolicy('create').can(),
                 'list': RecordPermissionPolicy('search').can()
+            },
+            'collections': {
+                'add': CollectionPermission.create(user),
+                'list': CollectionPermission.list(user)
             }
         }
 

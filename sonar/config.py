@@ -32,6 +32,8 @@ from invenio_oauthclient.contrib import orcid
 from invenio_records_rest.facets import range_filter
 from invenio_stats.processors import EventsIndexer
 
+from sonar.modules.collections.config import \
+    Configuration as CollectionConfiguration
 from sonar.modules.deposits.api import DepositRecord, DepositSearch
 from sonar.modules.deposits.permissions import DepositPermission
 from sonar.modules.documents.api import DocumentRecord, DocumentSearch
@@ -308,7 +310,19 @@ RECORDS_UI_ENDPOINTS = {
         'view_imp': 'sonar.resources.projects.views:detail',
         'record_class': 'sonar.resources.projects.api:Record',
         'template': 'sonar/projects/detail.html'
-    }
+    },
+    'coll_previewer': {
+        'pid_type': 'coll',
+        'route': '/collections/<pid_value>/preview/<filename>',
+        'view_imp': 'invenio_previewer.views:preview',
+        'record_class': 'sonar.modules.collections.api:Record'
+    },
+    'coll_files': {
+        'pid_type': 'coll',
+        'route': '/collections/<pid_value>/files/<filename>',
+        'view_imp': 'invenio_records_files.utils:file_download_ui',
+        'record_class': 'invenio_records_files.api:Record'
+    },
 }
 """Records UI for sonar."""
 
@@ -470,6 +484,9 @@ RECORDS_REST_ENDPOINTS = {
         list_permission_factory_imp=lambda record: record_permission_factory(
             action='list', record=record, cls=DepositPermission)),
 }
+
+# Add endpoint for collections
+RECORDS_REST_ENDPOINTS['coll'] = CollectionConfiguration.rest_endpoint
 """REST endpoints."""
 
 DEFAULT_AGGREGATION_SIZE = 50
@@ -601,7 +618,8 @@ RECORDS_FILES_REST_ENDPOINTS = {
     'RECORDS_REST_ENDPOINTS': {
         'doc': '/files',
         'depo': '/files',
-        'org': '/files'
+        'org': '/files',
+        'coll': '/files'
     }
 }
 

@@ -180,6 +180,12 @@ def test_data_info(client, es_clear, superuser, document, monkeypatch):
                 'es': 1,
                 'db-es': 0,
                 'index': 'users'
+            },
+            'coll': {
+                'db': 0,
+                'es': 0,
+                'db-es': 0,
+                'index': 'collections'
             }
         }
     }
