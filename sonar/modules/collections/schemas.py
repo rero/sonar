@@ -26,6 +26,7 @@ from marshmallow import fields, pre_dump, pre_load
 
 from sonar.modules.serializers import schema_from_context
 from sonar.modules.users.api import current_user_record
+from sonar.modules.utils import get_language_value
 
 from .api import Record
 from .permissions import RecordPermission
@@ -41,6 +42,7 @@ class RecordMetadataSchema(StrictKeysMixin):
     description = fields.List(fields.Dict())
     organisation = fields.Dict()
     permissions = fields.Dict(dump_only=True)
+    label = fields.Method('get_label')
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
     schema = GenFunction(load_only=True,
@@ -49,6 +51,10 @@ class RecordMetadataSchema(StrictKeysMixin):
                          deserialize=schema_from_record)
     _files = fields.List(fields.Dict())
     _bucket = SanitizedUnicode()
+
+    def get_label(self, obj):
+        """Get label."""
+        return get_language_value(obj['name'])
 
     @pre_load
     def remove_fields(self, data, **kwargs):
@@ -59,6 +65,7 @@ class RecordMetadataSchema(StrictKeysMixin):
         :rtype: dict
         """
         data.pop('permissions', None)
+        data.pop('label', None)
 
         return data
 

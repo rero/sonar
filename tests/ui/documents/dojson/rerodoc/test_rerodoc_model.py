@@ -1615,35 +1615,9 @@ def test_marc21_to_other_edition():
     assert not data.get('otherEdition')
 
 
-def test_marc21_to_specific_collection():
+def test_marc21_to_specific_collection(app, bucket_location,
+                                       without_oaiset_signals):
     """Test extracting collection from file 982."""
-    # Extract collection OK
-    marc21xml = """
-    <record>
-        <datafield tag="982" ind1=" " ind2=" ">
-            <subfield code="a">Treize étoiles</subfield>
-        </datafield>
-    </record>
-    """
-    marc21json = create_record(marc21xml)
-    data = overdo.do(marc21json)
-    assert data.get('specificCollections') == ['Treize étoiles']
-
-    # Multiple collections
-    marc21xml = """
-    <record>
-        <datafield tag="982" ind1=" " ind2=" ">
-            <subfield code="a">Collection 1</subfield>
-        </datafield>
-        <datafield tag="982" ind1=" " ind2=" ">
-            <subfield code="a">Collection 2</subfield>
-        </datafield>
-    </record>
-    """
-    marc21json = create_record(marc21xml)
-    data = overdo.do(marc21json)
-    assert data.get('specificCollections') == ['Collection 1', 'Collection 2']
-
     # No code a
     marc21xml = """
     <record>
@@ -1654,7 +1628,7 @@ def test_marc21_to_specific_collection():
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('specificCollections')
+    assert not data.get('collections')
 
     # Not field 982
     marc21xml = """
@@ -1663,7 +1637,52 @@ def test_marc21_to_specific_collection():
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('specificCollections')
+    assert not data.get('collections')
+
+    # No organisation
+    marc21xml = """
+    <record>
+        <datafield tag="982" ind1=" " ind2=" ">
+            <subfield code="a">Treize étoiles</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = overdo.do(marc21json)
+    assert not data.get('collections')
+
+    # OK
+    marc21xml = """
+    <record>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="b">test-org</subfield>
+        </datafield>
+        <datafield tag="982" ind1=" " ind2=" ">
+            <subfield code="a">Treize étoiles</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = overdo.do(marc21json)
+    assert data['collections']
+
+    # Multiple collections
+    marc21xml = """
+    <record>
+        <datafield tag="980" ind1=" " ind2=" ">
+            <subfield code="b">test-org</subfield>
+        </datafield>
+        <datafield tag="982" ind1=" " ind2=" ">
+            <subfield code="a">Collection 1</subfield>
+        </datafield>
+        <datafield tag="982" ind1=" " ind2=" ">
+            <subfield code="a">Collection 2</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = overdo.do(marc21json)
+    assert len(data['collections']) == 2
 
 
 def test_marc21_to_classification_from_field_080():

@@ -266,8 +266,8 @@ def test_update(client, make_organisation, make_collection, superuser, admin,
     assert res.status_code == 200
 
 
-def test_delete(client, collection, make_organisation, make_collection,
-                superuser, admin, moderator, submitter, user):
+def test_delete(client, db, document, collection, make_organisation,
+                make_collection, superuser, admin, moderator, submitter, user):
     """Test delete collections permissions."""
     # Not logged
     res = client.delete(
@@ -320,5 +320,21 @@ def test_delete(client, collection, make_organisation, make_collection,
     # Can remove any collection
     login_user_via_session(client, email=superuser['email'])
     res = client.delete(
-        url_for('invenio_records_rest.coll_item', pid_value=collection2['pid']))
+        url_for('invenio_records_rest.coll_item',
+                pid_value=collection2['pid']))
     assert res.status_code == 204
+
+    collection = make_collection('org')
+
+    # Cannot remove collection as it is linked to document.
+    document['collections'] = [{
+        '$ref':
+        'https://sonar.ch/api/collections/{pid}'.format(pid=collection['pid'])
+    }]
+    document.commit()
+    db.session.commit()
+    document.reindex()
+
+    res = client.delete(
+        url_for('invenio_records_rest.coll_item', pid_value=collection['pid']))
+    assert res.status_code == 403

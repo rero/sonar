@@ -44,14 +44,12 @@ class Overdo(BaseOverdo):
 
         if not organisation:
             # Create organisation record
-            organisation = OrganisationRecord.create(
-                {
-                    'code': organisation_key,
-                    'name': organisation_key,
-                    'isShared': False,
-                    'isDedicated': False
-                },
-                dbcommit=True)
+            organisation = OrganisationRecord.create({
+                'code': organisation_key,
+                'name': organisation_key,
+                'isShared': False,
+                'isDedicated': False
+            })
             organisation.reindex()
 
     @staticmethod

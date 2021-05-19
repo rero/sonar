@@ -503,7 +503,7 @@ RECORDS_REST_FACETS = {
             terms=dict(field='language.value', size=DEFAULT_AGGREGATION_SIZE)),
         subject=dict(
             terms=dict(field='facet_subjects', size=DEFAULT_AGGREGATION_SIZE)),
-        specific_collection=dict(terms=dict(field='specificCollections',
+        collection=dict(terms=dict(field='collections.pid',
                                             size=DEFAULT_AGGREGATION_SIZE)),
         document_type=dict(
             terms=dict(field='documentType', size=DEFAULT_AGGREGATION_SIZE)),
@@ -532,8 +532,8 @@ RECORDS_REST_FACETS = {
              and_term_filter('language.value'),
              'subject':
              and_term_filter('facet_subjects'),
-             'specific_collection':
-             and_term_filter('specificCollections'),
+             'collection':
+             and_term_filter('collections.pid'),
              'document_type':
              and_term_filter('documentType'),
              'controlled_affiliation':

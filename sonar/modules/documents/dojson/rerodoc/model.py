@@ -17,11 +17,14 @@
 
 """RERODOC MARC21 model definition."""
 
+import hashlib
 import re
 
 from dojson import utils
 from flask import current_app
+from invenio_db import db
 
+from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.documents.dojson.rerodoc.overdo import Overdo
 from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.utils import remove_trailing_punctuation
@@ -590,12 +593,47 @@ def marc21_to_other_edition(self, key, value):
     }
 
 
-@overdo.over('specificCollections', '^982..')
+@overdo.over('collections', '^982..')
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_specific_collection(self, key, value):
     """Extract collection for record."""
-    return value.get('a')
+    if not value.get('a'):
+        return None
+
+    # No organisation found, the collection is not imported.
+    if not self.get('organisation'):
+        return None
+
+    organisation_pid = OrganisationRecord.get_pid_by_ref_link(
+        self['organisation'][0]['$ref'])
+
+    hash_key = hashlib.md5(
+        (value.get('a') + organisation_pid).encode()).hexdigest()
+
+    collection_pid = CollectionRecord.get_pid_by_hash_key(hash_key)
+
+    # No collection found
+    if not collection_pid:
+        collection = CollectionRecord.create(
+            {
+                'name': [{
+                    'language': 'eng',
+                    'value': value.get('a')
+                }],
+                'organisation': {
+                    '$ref': self['organisation'][0]['$ref']
+                },
+                'hashKey': hash_key
+            })
+        collection.commit()
+        collection.reindex()
+        db.session.commit()
+        collection_pid = collection['pid']
+
+    return {
+        '$ref': CollectionRecord.get_ref_link('collections', collection_pid)
+    }
 
 
 @overdo.over('classification', '^080..')

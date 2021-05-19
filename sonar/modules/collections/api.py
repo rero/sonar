@@ -60,6 +60,21 @@ class Record(SonarRecord):
                                          with_bucket=with_bucket,
                                          **kwargs)
 
+    @classmethod
+    def get_pid_by_hash_key(cls, hash_key):
+        """Get a record by a hash key.
+
+        :param str hash_key: Hash key to find.
+        :return: The record found.
+        :rtype: SonarRecord.
+        """
+        result = RecordSearch().filter(
+            'term', hashKey=hash_key).source(includes='pid').scan()
+        try:
+            return next(result).pid
+        except StopIteration:
+            return None
+
 
 class RecordSearch(SonarSearch):
     """Record search."""

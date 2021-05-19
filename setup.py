@@ -152,7 +152,8 @@ setup(
             "organisation = sonar.modules.organisations.jsonresolvers",
             "user = sonar.modules.users.jsonresolvers",
             "document = sonar.modules.documents.jsonresolvers",
-            "project = sonar.resources.projects.jsonresolvers"
+            "project = sonar.resources.projects.jsonresolvers",
+            "collections = sonar.modules.collections.jsonresolvers"
         ],
         'invenio_celery.tasks' : [
             'documents = sonar.modules.documents.tasks'
