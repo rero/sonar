@@ -187,3 +187,35 @@ def test_has_custom_resource(client, make_user, monkeypatch):
     monkeypatch.setattr('sonar.modules.organisations.api.current_organisation',
                         {})
     assert not has_custom_resource('projects')
+
+
+def test_get_bibliographic_code_from_language(app):
+    """Test bibliographic language code to alpha 2 code conversion."""
+    with pytest.raises(Exception) as e:
+        get_bibliographic_code_from_language("zz")
+    assert str(e.value) == 'Language code not found for "zz"'
+
+    assert get_bibliographic_code_from_language('de') == 'ger'
+
+
+def test_get_language_value(app):
+    """Test language value."""
+    # No value passed
+    assert get_language_value(None) == None
+    assert get_language_value([]) == None
+
+    # No locale
+    values = [{
+        'language': 'eng',
+        'value': 'Value ENG'
+    }, {
+        'language': 'fre',
+        'value': 'Value FRE'
+    }]
+    assert get_language_value(values) == 'Value ENG'
+
+    # Existing locale
+    assert get_language_value(values, 'fr') == 'Value FRE'
+
+    # Non existing locale
+    assert get_language_value(values, 'de') == 'Value ENG'

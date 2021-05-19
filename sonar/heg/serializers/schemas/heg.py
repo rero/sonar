@@ -19,7 +19,7 @@
 
 from marshmallow import Schema, fields, post_dump, pre_dump
 
-from sonar.modules.documents.views import get_bibliographic_code_from_language
+from sonar.modules.utils import get_bibliographic_code_from_language
 
 
 class HEGSchema(Schema):
