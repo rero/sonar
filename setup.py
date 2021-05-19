@@ -110,6 +110,7 @@ setup(
             'deposits = sonar.modules.deposits.jsonschemas',
             'projects = sonar.resources.projects.jsonschemas',
             'projects_hepvs = sonar.dedicated.hepvs.projects.jsonschemas',
+            'collections = sonar.modules.collections.jsonschemas',
             'common = sonar.common.jsonschemas'
         ],
         'invenio_search.mappings': [
@@ -117,7 +118,8 @@ setup(
             'organisations = sonar.modules.organisations.mappings',
             'users = sonar.modules.users.mappings',
             'deposits = sonar.modules.deposits.mappings',
-            'projects = sonar.resources.projects.mappings'
+            'projects = sonar.resources.projects.mappings',
+            'collections = sonar.modules.collections.mappings'
         ],
         'invenio_search.templates': [
             'base-record = sonar.es_templates:list_es_templates'
@@ -130,7 +132,9 @@ setup(
             'user_id = \
                 sonar.modules.users.api:user_pid_minter',
             'deposit_id = \
-                sonar.modules.deposits.api:deposit_pid_minter'
+                sonar.modules.deposits.api:deposit_pid_minter',
+            'collections_id = \
+                sonar.modules.collections.api:pid_minter'
         ],
         'invenio_pidstore.fetchers': [
             'document_id = \
@@ -140,7 +144,9 @@ setup(
             'user_id = \
                 sonar.modules.users.api:user_pid_fetcher',
             'deposit_id = \
-                sonar.modules.deposits.api:deposit_pid_fetcher'
+                sonar.modules.deposits.api:deposit_pid_fetcher',
+            'collections_id = \
+                sonar.modules.collections.api:pid_fetcher'
         ],
         "invenio_records.jsonresolver": [
             "organisation = sonar.modules.organisations.jsonresolvers",

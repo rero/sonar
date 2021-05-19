@@ -23,6 +23,7 @@ from flask import abort, current_app
 from flask_login import current_user
 from flask_principal import ActionNeed, RoleNeed
 from invenio_access import Permission
+from invenio_records_rest.utils import obj_or_import_string
 
 from sonar.modules.users.api import current_user_record
 
@@ -88,6 +89,8 @@ def record_permission_factory(record=None, action=None, cls=None):
     # No specific class, the base record permission class is taken.
     if not cls:
         cls = RecordPermission
+
+    cls = obj_or_import_string(cls)
 
     return cls.create_permission(record, action)
 

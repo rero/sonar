@@ -28,6 +28,7 @@ from invenio_access.models import ActionUsers, Role
 from invenio_accounts.ext import hash_password
 from invenio_files_rest.models import Location
 
+from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.organisations.api import OrganisationRecord
@@ -689,6 +690,61 @@ def project(app, db, es, admin, organisation, project_json):
     project = sonar.service('projects').create(None, json)
     app.extensions['invenio-search'].flush_and_refresh(index='projects')
     return project
+
+
+@pytest.fixture()
+def collection_json():
+    """Collection JSON."""
+    return {
+        'name': [{
+            'language': 'eng',
+            'value': 'Collection name'
+        }],
+        'description': [{
+            'language': 'eng',
+            'value': 'Collection description'
+        }]
+    }
+
+
+@pytest.fixture()
+def make_collection(app, db, collection_json):
+    """Factory for creating collection."""
+
+    def _make_collection(organisation=None):
+        collection_json['organisation'] = {
+            '$ref':
+            'https://sonar.ch/api/organisations/{pid}'.format(pid=organisation)
+        }
+
+        collection_json.pop('pid', None)
+
+        collection = CollectionRecord.create(collection_json,
+                                             dbcommit=True,
+                                             with_bucket=True)
+        collection.commit()
+        collection.reindex()
+        db.session.commit()
+        return collection
+
+    return _make_collection
+
+
+@pytest.fixture()
+def collection(app, db, es, admin, organisation, collection_json):
+    """Collection fixture."""
+    json = copy.deepcopy(collection_json)
+    json['organisation'] = {
+        '$ref':
+        'https://sonar.ch/api/organisations/{pid}'.format(
+            pid=organisation['pid'])
+    }
+
+    collection = CollectionRecord.create(json, dbcommit=True, with_bucket=True)
+    collection.commit()
+    collection.reindex()
+    db.session.commit()
+    return collection
 
 
 @pytest.fixture()

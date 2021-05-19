@@ -1,0 +1,55 @@
+{
+  "settings": {
+    "number_of_shards": 8,
+    "number_of_replicas": 2,
+    "max_result_window": 20000
+  },
+  "mappings": {
+    "date_detection": false,
+    "numeric_detection": false,
+    "properties": {
+      "$schema": {
+        "type": "keyword"
+      },
+      "pid": {
+        "type": "keyword"
+      },
+      "name": {
+        "type": "object",
+        "properties": {
+          "language": {
+            "type": "keyword"
+          },
+          "value": {
+            "type": "text"
+          }
+        }
+      },
+      "description": {
+        "type": "object",
+        "properties": {
+          "language": {
+            "type": "keyword"
+          },
+          "value": {
+            "type": "text"
+          }
+        }
+      },
+      "organisation": {
+        "type": "object",
+        "properties": {
+          "pid": {
+            "type": "keyword"
+          }
+        }
+      },
+      "_created": {
+        "type": "date"
+      },
+      "_updated": {
+        "type": "date"
+      }
+    }
+  }
+}
