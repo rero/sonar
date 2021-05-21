@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
-"POT-Creation-Date: 2021-05-12 09:10+0200\n"
-"PO-Revision-Date: 2021-05-06 22:33+0000\n"
+"POT-Creation-Date: 2021-06-01 15:56+0200\n"
+"PO-Revision-Date: 2021-05-27 12:34+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language: fr\n"
 "Language-Team: French "
@@ -21,14 +21,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.9.1\n"
 
-#: sonar/theme/views.py:67
+#: sonar/theme/views.py:65
 #, python-format
 msgid "%(icon)s Profile"
 msgstr "%(icon)s Mon compte"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:324
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:324
 msgid "Abandoned"
 msgstr ""
@@ -69,12 +68,10 @@ msgstr "Modalité d'acquisition"
 msgid "Action"
 msgstr "Action"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:586
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:586
 msgid "Actor"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:581
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:581
 msgid "Actor involved"
 msgstr ""
@@ -95,39 +92,32 @@ msgstr "Administration"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:834
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1009
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1367
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:203
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:203
 msgid "Affiliation"
 msgstr "Affiliation"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1180
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:159
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:300
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:159
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:250
 msgid "Agent"
 msgstr "Agent"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:652
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:652
 msgid "Allophone student"
 msgstr ""
 
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:65
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:65
 msgid "Allowed IP addresses"
 msgstr "Adresses IP autorisées"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:716
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:716
 msgid "Animator"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:182
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:182
 msgid "Animators"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:620
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:620
 msgid "Apprentice"
 msgstr ""
@@ -136,7 +126,7 @@ msgstr ""
 msgid "Ask for changes on deposit"
 msgstr "Demander des modifications sur le dépôt"
 
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:19
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:19
 msgid ""
 "At least 3 characters and must contain only lower case characters and "
 "underscores."
@@ -157,7 +147,7 @@ msgstr "Retour"
 msgid "Back to SONAR"
 msgstr "Retour à SONAR"
 
-#: sonar/config.py:575
+#: sonar/config.py:584
 msgid "Best match"
 msgstr "Meilleure correspondance"
 
@@ -165,12 +155,10 @@ msgstr "Meilleure correspondance"
 msgid "Best regards"
 msgstr "Meilleures salutations"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:909
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:909
 msgid "Brief description of the mandate"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:945
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:945
 msgid "Brief description of the report"
 msgstr ""
@@ -179,12 +167,14 @@ msgstr ""
 msgid "Bronze"
 msgstr ""
 
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4993
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:5008
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:20
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:34
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:15
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:29
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:77
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:92
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:226
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:241
 msgid "Bucket UUID"
 msgstr "Seau UUID"
 
@@ -192,7 +182,6 @@ msgstr "Seau UUID"
 msgid "Bucket UUID used to store files"
 msgstr "Seau UUID pour le stockage des fichiers"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:451
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:451
 msgid "CAS or DAS"
 msgstr ""
@@ -225,9 +214,10 @@ msgstr "CC BY-SA"
 msgid "CC0"
 msgstr "CC0"
 
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:5033
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:59
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:58
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:117
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:266
 msgid "Checksum"
 msgstr "Somme de contrôle"
 
@@ -249,7 +239,6 @@ msgstr "Indice de classification"
 msgid "Classifications"
 msgstr "Classifications"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:692
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:692
 msgid "Classroom teacher"
 msgstr ""
@@ -262,7 +251,7 @@ msgstr "Cliquez ici pour réinitialiser votre mot de passe"
 msgid "Closed"
 msgstr ""
 
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:18
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:18
 msgid "Code"
 msgstr "Code"
 
@@ -270,6 +259,7 @@ msgstr "Code"
 msgid "Collection"
 msgstr "Collection"
 
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:995
 msgid "Collections"
 msgstr "Collections"
@@ -278,12 +268,10 @@ msgstr "Collections"
 msgid "Comment"
 msgstr "Commentaire"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:513
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:513
 msgid "Company"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:320
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:320
 msgid "Completed"
 msgstr ""
@@ -322,19 +310,15 @@ msgid "Contributors"
 msgstr "Contributeurs"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1379
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:212
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:212
 msgid "Controlled affiliation"
 msgstr "Affiliation contrôlée"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1375
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:208
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:208
 msgid "Controlled affiliations"
 msgstr "Affiliations contrôlées"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:223
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:285
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:223
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:285
 msgid "Creativity, transformations and innovations in education"
@@ -343,6 +327,18 @@ msgstr ""
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:173
 msgid "Current cataloguing step."
 msgstr "Étape actuelle de catalogage."
+
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1799
+msgid "Custom field 1"
+msgstr ""
+
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1819
+msgid "Custom field 2"
+msgstr ""
+
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1839
+msgid "Custom field 3"
+msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:240
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:777
@@ -356,7 +352,6 @@ msgstr "Date"
 msgid "Date in yyyy-mm-dd format, ex: 1970-01-01"
 msgstr "Date selon le format YYYY-MM-JJ, ex : 1970-01-01"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:141
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:141
 msgid "Date of approval by the Team Leader"
 msgstr ""
@@ -370,7 +365,6 @@ msgstr "Date de naissance"
 msgid "Date of death"
 msgstr "Date de décès"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:640
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:640
 msgid "Dean of a school"
 msgstr ""
@@ -397,28 +391,31 @@ msgstr "Refus du dépôt"
 msgid "Deposit to validate"
 msgstr "Dépôt à valider"
 
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:5003
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:30
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:87
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:236
 msgid "Describes the information of a single file in the record."
 msgstr "Décrit l'information d'un seul fichier dans la ressource."
 
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2497
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:941
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:38
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:55
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:38
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:55
 msgid "Description"
 msgstr "Description"
+
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2493
+msgid "Descriptions"
+msgstr ""
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:401
 msgid "Designation"
 msgstr "Désignation"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:636
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:636
 msgid "Director, head of HE training"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:632
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:632
 msgid "Director, head of establishment"
 msgstr ""
@@ -428,17 +425,14 @@ msgstr ""
 msgid "Dissertation"
 msgstr "Thèse"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:178
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:178
 msgid "Doctoral student"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:435
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:435
 msgid "Doctorate not supported by the HEP-VS"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:431
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:431
 msgid "Doctorate supported by the HEP-VS"
 msgstr ""
@@ -459,6 +453,18 @@ msgstr "Identifiant du document"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1118
 msgid "Document created on basis of this deposit."
 msgstr "Document créé sur la base de ce dépôt."
+
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:85
+msgid "Document custom field 1"
+msgstr ""
+
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:132
+msgid "Document custom field 2"
+msgstr ""
+
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:179
+msgid "Document custom field 3"
+msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:340
 msgid "Document date"
@@ -484,14 +490,11 @@ msgstr "Édition"
 msgid "Editors"
 msgstr "Éditeurs"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:211
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:273
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:211
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:273
 msgid "Education, childhood and the learning Society 21"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:935
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:935
 msgid "Educational document, report"
 msgstr ""
@@ -509,17 +512,13 @@ msgstr "Embargo"
 msgid "Embargo date"
 msgstr "Date d'embargo"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:215
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:277
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:215
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:277
 msgid "Emotions, learning, and well-being at school"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:80
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:80
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:959
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:79
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:79
 msgid "End date"
 msgstr "Date de fin"
@@ -528,12 +527,8 @@ msgstr "Date de fin"
 msgid "End date of publication"
 msgstr "Date 2"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:68
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:81
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:68
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:81
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:67
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:80
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:67
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:80
 msgid "Enter the date in the format YYYY-MM-DD."
@@ -576,12 +571,8 @@ msgstr "Exemple : 2019-05-05"
 msgid "Example: 2020"
 msgstr "Exemple : 2020"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:75
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:88
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:75
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:88
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:74
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:87
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:74
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:87
 msgid "Example: 2020-12-01"
@@ -629,35 +620,35 @@ msgstr "Importance matérielle, par ex. nombre de pages ou de volumes."
 msgid "External URL"
 msgstr "URL externe"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:351
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:351
 msgid "External partner"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:338
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:338
 msgid "External partners"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:343
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:343
 msgid "External partners are involved"
 msgstr ""
 
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:5013
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:39
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:35
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:97
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:246
 msgid "File UUID"
 msgstr "UUID du fichier"
 
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:5002
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:29
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:86
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:235
 msgid "File item"
 msgstr "Fichier"
 
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4998
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:25
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:21
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:82
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:231
 msgid "Files"
 msgstr "Fichiers"
 
@@ -669,7 +660,6 @@ msgstr ""
 "Saisissez vos coordonnées pour valider votre inscription. Vous n'aurez "
 "besoin de le faire qu'une seule fois."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:245
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:245
 msgid "First and last name"
 msgstr ""
@@ -678,7 +668,7 @@ msgstr ""
 msgid "First name"
 msgstr "Prénom"
 
-#: sonar/theme/templates/sonar/frontpage.html:83
+#: sonar/theme/templates/sonar/frontpage.html:95
 msgid "Follow us"
 msgstr "Nous suivre"
 
@@ -710,47 +700,38 @@ msgstr "Formats"
 msgid "French"
 msgstr "Français"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:219
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:281
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:219
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:281
 msgid "Fundamental learning"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:443
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:443
 msgid "Funded research"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:469
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:469
 msgid "Funder"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:524
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:524
 msgid "Funding number"
 msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1048
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:295
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:245
 msgid "Funding organisation"
 msgstr "Agence de financement"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1045
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:291
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:241
-#: sonar/theme/templates/sonar/projects/detail.html:61
+#: sonar/theme/templates/sonar/projects/detail.html:64
 msgid "Funding organisations"
 msgstr "Agences de financement"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:459
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:459
 msgid "Funding request"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:559
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:559
 msgid "Funding was granted for the project"
 msgstr ""
@@ -772,33 +753,33 @@ msgstr "Institution qui contribue"
 msgid "Green"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:628
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:628
 msgid "Guidance counsellor"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:161
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:161
 msgid "HEP status"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:501
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:501
 msgid "HES-SO"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:497
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:497
 msgid "HES-SO Valais-Wallis"
 msgstr ""
 
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:39
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:39
 msgid "HTML markup admitted."
 msgstr "Le balisage HTML est admis."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:943
 msgid "Harvested"
 msgstr "Moissonné"
+
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:18
+msgid "Hash key"
+msgstr ""
 
 #: sonar/theme/templates/sonar/footer.html:24
 msgid "Help & Documentation"
@@ -813,7 +794,6 @@ msgstr ""
 "Document hôte, par exemple une revue pour un article, ou un livre pour un"
 " chapitre de livre."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:969
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:969
 msgid "How are research results used in training?"
 msgstr ""
@@ -837,25 +817,19 @@ msgstr "Identifié par"
 
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:2
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:3
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:9
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:9
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:13
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:15
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:360
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:966
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1058
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:693
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1500
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:13
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:13
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:13
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:9
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:92
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:218
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:219
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:318
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:319
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:9
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:92
-#: sonar/theme/templates/sonar/projects/detail.html:28
+#: sonar/theme/templates/sonar/projects/detail.html:30
 msgid "Identifier"
 msgstr "Identifiant"
 
@@ -874,7 +848,6 @@ msgstr "Si la valeur est sur vrai, le fichier pointera vers le lien externe."
 msgid "If this field is filled in, the file points to the specified URL."
 msgstr "Si ce champ est utilisé, le fichier pointe vers l'URL spécifiée."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:316
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:316
 msgid "In progress"
 msgstr ""
@@ -883,22 +856,24 @@ msgstr ""
 msgid "In the format \\"
 msgstr "Au format \"Nom, prénom\""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:684
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:118
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:165
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:212
+msgid "Include in facets"
+msgstr ""
+
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:684
 msgid "Inspector"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:361
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:361
 msgid "Institution"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:439
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:439
 msgid "Internal research"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:241
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:241
 msgid "Internal research associates"
 msgstr ""
@@ -908,23 +883,21 @@ msgid "Invenio"
 msgstr "Invenio"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:974
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:154
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:154
 msgid "Investigator"
 msgstr "Chercheur"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:971
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:150
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:150
-#: sonar/theme/templates/sonar/projects/detail.html:33
+#: sonar/theme/templates/sonar/projects/detail.html:35
 msgid "Investigators"
 msgstr "Chercheurs"
 
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:56
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:56
 msgid "Is dedicated"
 msgstr "Est une organisation dédiée"
 
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:50
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:50
 msgid "Is shared"
 msgstr "Apparaît dans le portail partagé"
 
@@ -938,13 +911,14 @@ msgstr "Italien"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:767
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1113
-#: sonar/modules/documents/views.py:233
+#: sonar/modules/documents/views.py:234
 msgid "Jury note"
 msgstr "Note du jury"
 
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:5023
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:49
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:47
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:107
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:256
 msgid "Key"
 msgstr "Clé"
 
@@ -952,7 +926,6 @@ msgstr "Clé"
 msgid "Key (filename) of the file."
 msgstr "Clé du fichier (nom de fichier)."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:391
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:391
 msgid "Keywords"
 msgstr ""
@@ -962,10 +935,21 @@ msgstr ""
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:503
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:903
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1154
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:94
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:141
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:188
 msgid "Label"
 msgstr "Label"
 
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:90
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:137
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:184
+msgid "Labels"
+msgstr ""
+
 #: sonar/common/jsonschemas/language-v1.0.0.json:2
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:37
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2513
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:354
 #: sonar/modules/documents/templates/documents/record.html:221
 msgid "Language"
@@ -975,8 +959,6 @@ msgstr "Langue"
 msgid "Languages"
 msgstr "Langues"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:227
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:289
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:227
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:289
 msgid "Languages, arts, cultures: mediation and teaching"
@@ -994,21 +976,20 @@ msgstr "Nom de famille"
 msgid "Last name, first name, ex: Doe, John"
 msgstr "Nom, prénom, ex : Dupont, Jean"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:174
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:174
 msgid "Lecturer/professor"
 msgstr ""
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:2
-#: sonar/modules/documents/templates/documents/record.html:273
+#: sonar/modules/documents/templates/documents/record.html:288
 msgid "License"
 msgstr "Licence"
 
-#: sonar/theme/templates/sonar/projects/detail.html:76
+#: sonar/theme/templates/sonar/projects/detail.html:79
 msgid "Linked documents"
 msgstr "Documents en lien"
 
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:66
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:66
 msgid ""
 "List of IP addresses or ranges that allow access to private files "
 "(access: embargoed or restricted), which are accessible only within the "
@@ -1020,13 +1001,13 @@ msgstr ""
 "uniquement au sein de l'organisation. Note : les notices bibliographiques"
 " (métadonnées) sont toujours publiques. Entrer une règle par ligne."
 
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4999
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:26
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:22
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:83
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:232
 msgid "List of files attached to the record."
 msgstr "Liste des fichiers liés à la ressource."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:878
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:878
 msgid "Locality (Valais)"
 msgstr ""
@@ -1057,7 +1038,6 @@ msgstr "S'identifier avec %(type)s"
 msgid "Log in with SWITCHaai"
 msgstr "S'identifier avec SWITCHaai"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:688
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:688
 msgid "Logopedist"
 msgstr ""
@@ -1070,19 +1050,19 @@ msgstr "Se déconnecter"
 msgid "Logs"
 msgstr "Logs"
 
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:5034
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:60
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:59
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:118
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:267
 msgid "MD5 checksum of the file."
 msgstr "Somme de contrôle MD5 du fichier."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:54
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:53
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:112
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:261
 msgid "MIME type"
 msgstr "Type MIME"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:196
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:196
 msgid "Main team"
 msgstr ""
@@ -1095,45 +1075,46 @@ msgstr "Titre propre"
 msgid "Main titles"
 msgstr "Titres propres"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:836
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:836
 msgid "Mandate"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:423
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:423
 msgid "Master"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:427
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:427
 msgid "Master of Advanced Studies"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:696
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:696
 msgid "Mediator"
 msgstr ""
 
-#: sonar/config.py:569
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:5028
+msgid "Mimetype"
+msgstr ""
+
+#: sonar/config.py:578
 msgid "Most recent"
 msgstr "Plus récent"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:356
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:535
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:898
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:356
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:535
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:898
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:27
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:828
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:936
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:979
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1053
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:33
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:50
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:33
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:50
 msgid "Name"
 msgstr "Nom"
+
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:23
+msgid "Names"
+msgstr ""
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:55
 msgid "Not OA / Rights reserved"
@@ -1145,7 +1126,7 @@ msgstr "Pas OA / Droits réservés"
 msgid "Note"
 msgstr "Note"
 
-#: sonar/theme/templates/sonar/frontpage.html:68
+#: sonar/theme/templates/sonar/frontpage.html:73
 msgid ""
 "Note: Publications manually deposited in this test portal might "
 "occasionally need to be deleted, for operational reasons."
@@ -1157,7 +1138,6 @@ msgstr ""
 msgid "Notes"
 msgstr "Notes"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:741
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:741
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:577
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1303
@@ -1185,9 +1165,7 @@ msgstr "Informations spécifiques à OAI-PMH."
 msgid "ORCID"
 msgstr "ORCID"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:24
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:24
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:24
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:24
 msgid "Object type"
 msgstr "Type d'objet"
@@ -1196,19 +1174,18 @@ msgstr "Type d'objet"
 msgid "Open access status"
 msgstr "Statut Open Access"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:93
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:93
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4969
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4973
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:222
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:5
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:5
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:84
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:387
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:391
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:287
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:291
 msgid "Organisation"
 msgstr "Organisation"
 
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:57
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:57
 msgid "Organisation has a specific theme for his view."
 msgstr "L'organisation a un thème spécifique pour sa vue."
 
@@ -1216,7 +1193,7 @@ msgstr "L'organisation a un thème spécifique pour sa vue."
 msgid "Organisation logo"
 msgstr "Logo de l'organisation"
 
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:51
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:51
 msgid "Organisation records can be accessed by a specific URL."
 msgstr "Les organisations sont accessibles par une URL spécifique."
 
@@ -1224,14 +1201,11 @@ msgstr "Les organisations sont accessibles par une URL spécifique."
 msgid "Organisations"
 msgstr "Organisations"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:720
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:890
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:720
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:890
 msgid "Other"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:517
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:517
 msgid "Other (free field)"
 msgstr ""
@@ -1252,7 +1226,6 @@ msgstr ""
 msgid "Other OA / license undefined"
 msgstr "Autre OA / licence indéfinie"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:882
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:882
 msgid "Other canton (Switzerland)"
 msgstr ""
@@ -1268,18 +1241,15 @@ msgstr "Autre version électronique"
 msgid "Other electronic versions"
 msgstr "Autres versions électroniques"
 
-#: sonar/modules/documents/templates/documents/record.html:296
+#: sonar/modules/documents/templates/documents/record.html:311
 msgid "Other files"
 msgstr "Autres fichiers"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:886
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:886
 msgid "Other locality (Switzerland)"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:29
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:29
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:29
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:29
 msgid "PID type"
 msgstr "Type de PID"
@@ -1289,7 +1259,6 @@ msgstr "Type de PID"
 msgid "Pages"
 msgstr "Pages"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:700
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:700
 msgid "Parents"
 msgstr ""
@@ -1299,7 +1268,6 @@ msgstr ""
 msgid "Part of (host document)"
 msgstr "Contenu dans (document hôte)"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:806
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:806
 msgid "Pedagogical and technological innovation"
 msgstr ""
@@ -1308,13 +1276,11 @@ msgstr ""
 msgid "Period"
 msgstr "Période"
 
-#: sonar/modules/documents/templates/documents/record.html:286
+#: sonar/modules/documents/templates/documents/record.html:301
 msgid "Permalink"
 msgstr "Permalien"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:19
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:19
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:19
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:19
 msgid "Persistent identifier"
 msgstr "Identifiant pérenne"
@@ -1331,6 +1297,10 @@ msgstr "Numéro de téléphone avec l'indicatif international, sans espaces."
 msgid "Place"
 msgstr "Lieu"
 
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:77
+msgid "Platform name"
+msgstr ""
+
 #: sonar/templates/security/email/welcome.html:5
 msgid "Please confirm your e-mail by clicking here"
 msgstr "Veuillez confirmer votre e-mail en cliquant ici"
@@ -1343,7 +1313,6 @@ msgstr "Position"
 msgid "Position of the file, the first file in the list is the main file."
 msgstr "Position du fichier, le premier de la liste est le fichier principal."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:447
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:447
 msgid "Post-doctorate supported by the HEP-VS"
 msgstr ""
@@ -1361,44 +1330,37 @@ msgstr ""
 "Propulsé par <a href=\"%(link)s\" target=\"_blank\" "
 "rel=\"noopener\">RERO</a>"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:704
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:704
 msgid "Practitioner-trainer"
 msgstr ""
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1210
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:164
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:305
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:164
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:255
 msgid "Preferred name"
 msgstr "Nom privilégié"
 
-#: sonar/modules/documents/templates/documents/record.html:314
+#: sonar/modules/documents/templates/documents/record.html:329
 #: sonar/theme/templates/sonar/preview/base.html:23
 msgid "Preview"
 msgstr "Aperçu"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:34
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:34
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:34
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:34
 msgid "Primary key"
 msgstr "Clé primaire"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:660
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:660
 msgid "Primary teacher"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:505
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:505
 msgid "Private foundation"
 msgstr ""
 
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:21
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:24
-#: sonar/theme/views.py:68
+#: sonar/theme/views.py:66
 msgid "Profile"
 msgstr "Profil"
 
@@ -1406,17 +1368,14 @@ msgstr "Profil"
 msgid "Project"
 msgstr "Projet"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:148
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:148
 msgid "Project sponsor"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:303
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:303
 msgid "Project status"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:55
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:55
 msgid "Project summary"
 msgstr ""
@@ -1429,12 +1388,10 @@ msgstr "Production, publication, diffusion, distribution, fabrication"
 msgid "Provision activity"
 msgstr "Production, publication, diffusion, distribution, fabrication"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:708
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:708
 msgid "Psychologist"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:712
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:712
 msgid "Psychomotrician"
 msgstr ""
@@ -1443,7 +1400,6 @@ msgstr ""
 msgid "Public access from"
 msgstr "Accès public depuis"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:509
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:509
 msgid "Public foundation"
 msgstr ""
@@ -1475,16 +1431,13 @@ msgstr "Éditeur"
 msgid "Qualifier"
 msgstr "Qualificatif"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:409
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:409
 msgid "Realization framework"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:4
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:4
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:908
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1732
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:4
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:4
 msgid "Research project"
 msgstr "Projet de recherche"
@@ -1510,13 +1463,11 @@ msgstr "Mention de responsabilité"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:984
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1330
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:99
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:181
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:181
 msgid "Role"
 msgstr "Rôle"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1326
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:177
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:177
 msgid "Roles"
 msgstr "Rôles"
@@ -1533,10 +1484,8 @@ msgstr "Dépôt SONAR v1.0.0"
 msgid "SONAR logo"
 msgstr "Logo de SONAR"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:14
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:14
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:8
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:14
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:14
 msgid "Schema"
 msgstr "Schéma"
@@ -1545,28 +1494,25 @@ msgstr "Schéma"
 msgid "Schema to validate document against."
 msgstr "Schéma de validation des notices bibliographiques."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:186
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:186
 msgid "Scientific collaborator"
 msgstr ""
 
-#: sonar/theme/templates/sonar/frontpage.html:55
+#: sonar/theme/templates/sonar/frontpage.html:60
 #: sonar/theme/templates/sonar/partial/navbar.html:49
 #: sonar/theme/templates/sonar/partial/navbar.html:52
 #: sonar/theme/templates/sonar/partial/organisation.html:21
 msgid "Search"
 msgstr "Recherche"
 
-#: sonar/theme/templates/sonar/frontpage.html:52
+#: sonar/theme/templates/sonar/frontpage.html:57
 msgid "Search publications, authors, projects..."
 msgstr "Rechercher dans les publications, auteurs, projets..."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:664
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:664
 msgid "Secondary teacher"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:259
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:259
 msgid "Secondary team"
 msgstr ""
@@ -1616,19 +1562,20 @@ msgstr "S'inscrire avec %(type)s"
 msgid "Sign-up with SWITCHaai"
 msgstr "S'inscrire avec SWITCHaai"
 
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:5039
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:65
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:64
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:123
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:272
 msgid "Size"
 msgstr "Taille"
 
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:5040
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:66
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:65
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:124
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:273
 msgid "Size of the file in bytes."
 msgstr "Taille du fichier en octets."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:624
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:624
 msgid "Social Assistant"
 msgstr ""
@@ -1639,18 +1586,14 @@ msgstr ""
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:926
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1245
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1656
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:117
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:244
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:344
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:117
 msgid "Source"
 msgstr "Source"
 
-#: sonar/theme/templates/sonar/frontpage.html:88
+#: sonar/theme/templates/sonar/frontpage.html:100
 msgid "Source code on"
 msgstr "Code source sur"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:672
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:672
 msgid "Special education teacher"
 msgstr ""
@@ -1659,11 +1602,9 @@ msgstr ""
 msgid "Specific collections"
 msgstr "Collections spécifiques"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:67
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:67
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:952
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1461
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:66
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:66
 msgid "Start date"
 msgstr "Date de début"
@@ -1672,22 +1613,18 @@ msgstr "Date de début"
 msgid "Start date of publication"
 msgstr "Date 1"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:862
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:862
 msgid "State of Valais, Education service"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:866
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:866
 msgid "State of Valais, Higher education service"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:870
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:870
 msgid "State of Valais, other services"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:874
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:874
 msgid "State of Valais, parastatal institution"
 msgstr ""
@@ -1701,12 +1638,10 @@ msgstr "Mention"
 msgid "Statements"
 msgstr "Mentions"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:39
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:39
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:136
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:860
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1667
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:39
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:39
 msgid "Status"
 msgstr "Statut"
@@ -1723,17 +1658,14 @@ msgstr "Rue"
 msgid "Street and number of the address, separated by a coma."
 msgstr "Rue et numéro de l'adresse, séparés par une virgule."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:648
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:648
 msgid "Student"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:656
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:656
 msgid "Student in special education"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:676
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:676
 msgid "Student in training"
 msgstr ""
@@ -1763,7 +1695,6 @@ msgstr "Compléments de titre"
 msgid "Super administration"
 msgstr "Super administration"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:328
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:328
 msgid "Suspended"
 msgstr ""
@@ -1772,12 +1703,10 @@ msgstr ""
 msgid "Swiss Open Access Repository"
 msgstr "Swiss Open Access Repository"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:493
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:493
 msgid "Swissuniversities"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:668
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:668
 msgid "Tertiary teacher"
 msgstr ""
@@ -1796,7 +1725,7 @@ msgstr ""
 msgid "The SONAR team at RERO"
 msgstr "L'équipe SONAR à RERO"
 
-#: sonar/theme/templates/sonar/frontpage.html:79
+#: sonar/theme/templates/sonar/frontpage.html:91
 msgid ""
 "The Swiss Open Access Repository is an archive of scholarly publications."
 " It collects and promotes open access publications by authors affiliated "
@@ -1814,29 +1743,24 @@ msgstr ""
 "Les noms des collections spécifiques ou patrimoniales de l'organisation "
 "auxquelles ce document appartient"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:464
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:464
 msgid "This project has been submitted for funding"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:940
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:940
 msgid ""
 "This project is the subject of an educational document or a report to the"
 " city or science"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:811
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:811
 msgid "This project promotes pedagogical or technological innovation"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:841
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:841
 msgid "This research is linked to a mandate"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:50
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:50
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:283
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:304
@@ -1867,13 +1791,10 @@ msgstr ""
 "possibilité de créer des listes de documents et de sauvegarder des "
 "demandes."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:680
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:680
 msgid "Trainer"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:231
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:293
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:231
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:293
 msgid "Training and professionalization"
@@ -1894,14 +1815,10 @@ msgstr ""
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1185
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1225
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1505
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:97
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:224
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:324
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:97
 msgid "Type"
 msgstr "Type"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:730
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:730
 msgid "Type of actor"
 msgstr ""
@@ -1931,8 +1848,6 @@ msgstr "UUID du bucket à laquelle est assignée la tuile."
 msgid "Usage and access policy"
 msgstr "Politique d'utilisation et d'accès"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:116
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:121
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:116
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:121
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:120
@@ -1940,14 +1855,14 @@ msgstr "Politique d'utilisation et d'accès"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:198
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:202
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:5
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:411
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:416
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:311
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:316
 msgid "User"
 msgstr "utilisateur"
 
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:39
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:32
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2502
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:505
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:296
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:320
@@ -1959,20 +1874,20 @@ msgstr "utilisateur"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:911
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1256
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1630
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:128
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:255
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:355
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:99
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:146
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:193
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:128
 msgid "Value"
 msgstr "Valeur"
 
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:5018
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:44
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:41
-#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:102
+#: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:251
 msgid "Version UUID"
 msgstr "UUID de la version"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:644
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:644
 msgid "Vice-rector HE"
 msgstr ""
@@ -1990,36 +1905,30 @@ msgstr "Bienvenue sur SONAR"
 msgid "Welcome to SONAR, the Swiss Open Access Repository!"
 msgstr "Bienvenue à SONAR, le Swiss Open Access Repository !"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:758
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:758
 msgid ""
 "What are the benefits and quality improvements in the research in this "
 "project?"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:770
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:770
 msgid "What are the benefits of research in training?"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:794
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:794
 msgid ""
 "What is the impact of research on public action or on internal or "
 "external governance?"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:782
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:782
 msgid "What is the impact of the research on the professional environment?"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:577
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:577
 msgid "Who are the actors involved in the field?"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:816
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:816
 msgid "Why?"
 msgstr ""
@@ -2029,8 +1938,16 @@ msgstr ""
 msgid "Year"
 msgstr "Année"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:489
-msgid "\\u200bSwiss National Science Foundation"
+#: sonar/translations/manual_translations.txt:37
+msgid "actorsInvolved"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:21
+msgid "approvalDate"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:38
+msgid "benefits"
 msgstr ""
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:492
@@ -2074,9 +1991,6 @@ msgstr "GTIN-14"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:744
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1234
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1551
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:106
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:233
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:333
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:106
 msgid "bf:Identifier"
 msgstr "Identifiant"
@@ -2126,9 +2040,6 @@ msgstr "langue"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:772
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1238
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1579
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:110
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:237
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:337
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:110
 msgid "bf:Local"
 msgstr "Identifiant local"
@@ -2582,7 +2493,6 @@ msgid "coar:c_f1cf"
 msgstr "Sous embargo"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1002
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:195
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:195
 msgid "coinvestigator"
 msgstr "co-chercheur"
@@ -2590,7 +2500,7 @@ msgstr "co-chercheur"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:857
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1351
 msgid "contribution_role_cre"
-msgstr "Créateur"
+msgstr "Auteur / créateur"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:861
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1359
@@ -2612,11 +2522,11 @@ msgstr "Éditeur intellectuel"
 msgid "contribution_role_prt"
 msgstr "Imprimeur"
 
-#: sonar/modules/documents/views.py:265
+#: sonar/modules/documents/views.py:266
 msgid "contribution_role_{role}"
 msgstr "contribution_role_{role}"
 
-#: sonar/config.py:540
+#: sonar/config.py:549
 msgid "contributor"
 msgstr "Contributeur"
 
@@ -2655,6 +2565,10 @@ msgstr "À valider"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:157
 msgid "deposit_status_validated"
 msgstr "Validé"
+
+#: sonar/translations/manual_translations.txt:30
+msgid "description"
+msgstr ""
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:252
 msgid "document_type_advanced_studies_thesis"
@@ -2754,7 +2668,7 @@ msgstr "Thèse, mémoire"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:76
 msgid "document_type_coar:c_5794"
-msgstr "Article dans une conférence"
+msgstr "Article de une conférence (publié dans les actes)"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:154
 msgid "document_type_coar:c_5ce6"
@@ -2844,6 +2758,10 @@ msgstr "Objet non-textuel"
 msgid "document_type_other"
 msgstr "Autre"
 
+#: sonar/translations/manual_translations.txt:46
+msgid "educationalDocument"
+msgstr ""
+
 #: sonar/translations/manual_translations.txt:18
 msgid "eduid"
 msgstr "Switch edu-ID"
@@ -2852,1958 +2770,2975 @@ msgstr "Switch edu-ID"
 msgid "eduidtest"
 msgstr "Switch edu-ID Test"
 
+#: sonar/translations/manual_translations.txt:29
+msgid "endDate"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:27
+msgid "externalPartners"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:34
+msgid "funding_funder_name"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:35
+msgid "funding_funder_number"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:33
+msgid "funding_funder_type"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:36
+msgid "funding_fundingReceived"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:39
+msgid "impactOnFormation"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:40
+msgid "impactOnProfessionalEnvironment"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:41
+msgid "impactOnPublicAction"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:25
+msgid "innerSearcher"
+msgstr ""
+
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:998
-#: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:191
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:191
 msgid "investigator"
 msgstr "chercheur"
 
+#: sonar/translations/manual_translations.txt:31
+msgid "keywords"
+msgstr ""
+
 #: sonar/common/jsonschemas/language-v1.0.0.json:500
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:535
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3011
 msgid "lang_aar"
 msgstr "afar"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:504
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:539
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3015
 msgid "lang_abk"
 msgstr "abkhaze"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:508
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:543
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3019
 msgid "lang_ace"
 msgstr "aceh"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:512
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:547
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3023
 msgid "lang_ach"
 msgstr "acoli"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:516
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:551
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3027
 msgid "lang_ada"
 msgstr "adangme"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:520
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:555
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3031
 msgid "lang_ady"
 msgstr "adyguéen"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:524
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:559
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3035
 msgid "lang_afa"
 msgstr "afro-asiatiques, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:528
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:563
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3039
 msgid "lang_afh"
 msgstr "afrihili"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:532
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:567
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3043
 msgid "lang_afr"
 msgstr "afrikaans"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:536
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:571
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3047
 msgid "lang_ain"
 msgstr "aïnou"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:540
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:575
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3051
 msgid "lang_aka"
 msgstr "akan"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:544
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:579
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3055
 msgid "lang_akk"
 msgstr "akkadien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:548
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:583
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3059
 msgid "lang_alb"
 msgstr "albanais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:552
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:587
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3063
 msgid "lang_ale"
 msgstr "aléoute"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:556
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:591
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3067
 msgid "lang_alg"
 msgstr "algonquines, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:560
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:595
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3071
 msgid "lang_alt"
 msgstr "altaï du Sud"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:564
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:599
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3075
 msgid "lang_amh"
 msgstr "amharique"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:568
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:603
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3079
 msgid "lang_ang"
 msgstr "ancien anglais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:572
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:607
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3083
 msgid "lang_anp"
 msgstr "angika"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:576
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:611
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3087
 msgid "lang_apa"
 msgstr "apaches, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:580
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:615
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3091
 msgid "lang_ara"
 msgstr "arabe"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:584
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:619
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3095
 msgid "lang_arc"
 msgstr "araméen"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:588
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:623
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3099
 msgid "lang_arg"
 msgstr "aragonais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:592
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:627
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3103
 msgid "lang_arm"
 msgstr "arménien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:596
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:631
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3107
 msgid "lang_arn"
 msgstr "mapuche"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:600
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:635
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3111
 msgid "lang_arp"
 msgstr "arapaho"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:604
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:639
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3115
 msgid "lang_art"
 msgstr "artificielles, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:608
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:643
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3119
 msgid "lang_arw"
 msgstr "arawak"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:612
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:647
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3123
 msgid "lang_asm"
 msgstr "assamais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:616
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:651
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3127
 msgid "lang_ast"
 msgstr "asturien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:620
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:655
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3131
 msgid "lang_ath"
 msgstr "athapascanes, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:624
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:659
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3135
 msgid "lang_aus"
 msgstr "australiennes, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:628
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:663
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3139
 msgid "lang_ava"
 msgstr "avar"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:632
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:667
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3143
 msgid "lang_ave"
 msgstr "avestique"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:636
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:671
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3147
 msgid "lang_awa"
 msgstr "awadhi"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:640
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:675
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3151
 msgid "lang_aym"
 msgstr "aymara"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:644
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:679
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3155
 msgid "lang_aze"
 msgstr "azéri"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:648
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:683
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3159
 msgid "lang_bad"
 msgstr "banda, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:652
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:687
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3163
 msgid "lang_bai"
 msgstr "bamilékés, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:656
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:691
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3167
 msgid "lang_bak"
 msgstr "bachkir"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:660
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:695
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3171
 msgid "lang_bal"
 msgstr "baloutchi"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:664
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:699
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3175
 msgid "lang_bam"
 msgstr "bambara"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:668
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:703
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3179
 msgid "lang_ban"
 msgstr "balinais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:672
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:707
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3183
 msgid "lang_baq"
 msgstr "basque"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:676
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:711
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3187
 msgid "lang_bas"
 msgstr "bassa"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:680
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:715
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3191
 msgid "lang_bat"
 msgstr "baltes, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:684
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:719
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3195
 msgid "lang_bej"
 msgstr "bedja"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:688
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:723
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3199
 msgid "lang_bel"
 msgstr "biélorusse"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:692
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:727
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3203
 msgid "lang_bem"
 msgstr "bemba"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:696
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:731
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3207
 msgid "lang_ben"
 msgstr "bengali"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:700
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:735
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3211
 msgid "lang_ber"
 msgstr "berbères, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:704
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:739
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3215
 msgid "lang_bho"
 msgstr "bhodjpouri"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:708
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:743
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3219
 msgid "lang_bih"
 msgstr "bihari"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:712
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:747
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3223
 msgid "lang_bik"
 msgstr "bikol"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:716
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:751
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3227
 msgid "lang_bin"
 msgstr "bini"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:720
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:755
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3231
 msgid "lang_bis"
 msgstr "bichelamar"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:724
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:759
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3235
 msgid "lang_bla"
 msgstr "siksika"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:728
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:763
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3239
 msgid "lang_bnt"
 msgstr "bantoues, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:732
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:767
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3243
 msgid "lang_bos"
 msgstr "bosniaque"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:736
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:771
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3247
 msgid "lang_bra"
 msgstr "braj"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:740
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:775
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3251
 msgid "lang_bre"
 msgstr "breton"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:744
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:779
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3255
 msgid "lang_btk"
 msgstr "batak, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:748
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:783
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3259
 msgid "lang_bua"
 msgstr "bouriate"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:752
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:787
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3263
 msgid "lang_bug"
 msgstr "bugi"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:756
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:791
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3267
 msgid "lang_bul"
 msgstr "bulgare"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:760
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:795
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3271
 msgid "lang_bur"
 msgstr "birman"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:764
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:799
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3275
 msgid "lang_byn"
 msgstr "blin"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:768
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:803
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3279
 msgid "lang_cad"
 msgstr "caddo"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:772
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:807
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3283
 msgid "lang_cai"
 msgstr "indiennes d'Amérique centrale, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:776
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:811
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3287
 msgid "lang_car"
 msgstr "caribe"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:780
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:815
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3291
 msgid "lang_cat"
 msgstr "catalan"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:784
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:819
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3295
 msgid "lang_cau"
 msgstr "caucasiens, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:788
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:823
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3299
 msgid "lang_ceb"
 msgstr "cebuano"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:792
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:827
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3303
 msgid "lang_cel"
 msgstr "celtique, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:796
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:831
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3307
 msgid "lang_cha"
 msgstr "chamorro"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:800
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:835
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3311
 msgid "lang_chb"
 msgstr "chibcha"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:804
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:839
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3315
 msgid "lang_che"
 msgstr "tchétchène"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:808
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:843
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3319
 msgid "lang_chg"
 msgstr "tchaghataï"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:812
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:847
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3323
 msgid "lang_chi"
 msgstr "chinois"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:816
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:851
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3327
 msgid "lang_chk"
 msgstr "chuuk"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:820
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:855
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3331
 msgid "lang_chm"
 msgstr "mari"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:824
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:859
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3335
 msgid "lang_chn"
 msgstr "jargon chinook"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:828
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:863
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3339
 msgid "lang_cho"
 msgstr "choctaw"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:832
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:867
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3343
 msgid "lang_chp"
 msgstr "chipewyan"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:836
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:871
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3347
 msgid "lang_chr"
 msgstr "cherokee"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:840
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:875
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3351
 msgid "lang_chu"
 msgstr "slavon d’église"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:844
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:879
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3355
 msgid "lang_chv"
 msgstr "tchouvache"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:848
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:883
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3359
 msgid "lang_chy"
 msgstr "cheyenne"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:852
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:887
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3363
 msgid "lang_cmc"
 msgstr "chamic"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:856
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:891
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3367
 msgid "lang_cnr"
 msgstr "monténégrin"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:860
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:895
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3371
 msgid "lang_cop"
 msgstr "copte"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:864
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:899
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3375
 msgid "lang_cor"
 msgstr "cornique"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:868
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:903
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3379
 msgid "lang_cos"
 msgstr "corse"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:872
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:907
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3383
 msgid "lang_cpe"
 msgstr "créoles et pidgins anglais, autres"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:876
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:911
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3387
 msgid "lang_cpf"
 msgstr "créoles et pidgins français, autres"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:880
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:915
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3391
 msgid "lang_cpp"
 msgstr "créoles et pidgins portugais, autres"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:884
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:919
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3395
 msgid "lang_cre"
 msgstr "cree"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:888
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:923
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3399
 msgid "lang_crh"
 msgstr "turc de Crimée"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:892
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:927
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3403
 msgid "lang_crp"
 msgstr "créoles et pidgins divers"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:896
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:931
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3407
 msgid "lang_csb"
 msgstr "kachoube"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:900
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:935
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3411
 msgid "lang_cus"
 msgstr "couchitiques, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:904
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:939
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3415
 msgid "lang_cze"
 msgstr "tchèque"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:908
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:943
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3419
 msgid "lang_dak"
 msgstr "dakota"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:912
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:947
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3423
 msgid "lang_dan"
 msgstr "danois"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:916
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:951
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3427
 msgid "lang_dar"
 msgstr "dargwa"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:920
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:955
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3431
 msgid "lang_day"
 msgstr "Land Dayak, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:924
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:959
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3435
 msgid "lang_del"
 msgstr "delaware"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:928
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:963
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3439
 msgid "lang_den"
 msgstr "esclave"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:932
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:967
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3443
 msgid "lang_dgr"
 msgstr "dogrib"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:936
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:971
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3447
 msgid "lang_din"
 msgstr "dinka"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:940
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:975
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3451
 msgid "lang_div"
 msgstr "maldivien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:944
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:979
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3455
 msgid "lang_doi"
 msgstr "dogri"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:948
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:983
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3459
 msgid "lang_dra"
 msgstr "dravidiennes, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:952
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:987
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3463
 msgid "lang_dsb"
 msgstr "bas-sorabe"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:956
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:991
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3467
 msgid "lang_dua"
 msgstr "douala"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:960
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:995
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3471
 msgid "lang_dum"
 msgstr "moyen néerlandais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:964
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:999
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3475
 msgid "lang_dut"
 msgstr "néerlandais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:968
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1003
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3479
 msgid "lang_dyu"
 msgstr "dioula"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:972
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1007
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3483
 msgid "lang_dzo"
 msgstr "dzongkha"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:976
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1011
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3487
 msgid "lang_efi"
 msgstr "éfik"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:980
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1015
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3491
 msgid "lang_egy"
 msgstr "égyptien ancien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:984
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1019
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3495
 msgid "lang_eka"
 msgstr "ékadjouk"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:988
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1023
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3499
 msgid "lang_elx"
 msgstr "élamite"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:992
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1027
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3503
 msgid "lang_eng"
 msgstr "anglais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:997
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1032
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3508
 msgid "lang_enm"
 msgstr "moyen anglais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1001
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1036
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3512
 msgid "lang_epo"
 msgstr "espéranto"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1005
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1040
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3516
 msgid "lang_est"
 msgstr "estonien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1009
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1044
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3520
 msgid "lang_ewe"
 msgstr "éwé"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1013
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1048
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3524
 msgid "lang_ewo"
 msgstr "éwondo"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1017
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1052
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3528
 msgid "lang_fan"
 msgstr "fang"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1021
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1056
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3532
 msgid "lang_fao"
 msgstr "féroïen"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1025
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1060
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3536
 msgid "lang_fat"
 msgstr "fanti"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1029
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1064
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3540
 msgid "lang_fij"
 msgstr "fidjien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1033
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1068
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3544
 msgid "lang_fil"
 msgstr "filipino"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1037
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1072
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3548
 msgid "lang_fin"
 msgstr "finnois"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1041
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1076
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3552
 msgid "lang_fiu"
 msgstr "finno-ougriennnes, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1045
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1080
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3556
 msgid "lang_fon"
 msgstr "fon"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1049
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1084
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3560
 msgid "lang_fre"
 msgstr "français"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1054
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1089
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3565
 msgid "lang_frm"
 msgstr "moyen français"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1058
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1093
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3569
 msgid "lang_fro"
 msgstr "ancien français"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1062
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1097
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3573
 msgid "lang_frr"
 msgstr "frison du Nord"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1066
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1101
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3577
 msgid "lang_frs"
 msgstr "frison oriental"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1070
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1105
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3581
 msgid "lang_fry"
 msgstr "frison occidental"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1074
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1109
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3585
 msgid "lang_ful"
 msgstr "peul"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1078
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1113
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3589
 msgid "lang_fur"
 msgstr "frioulan"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1082
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1117
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3593
 msgid "lang_gaa"
 msgstr "ga"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1086
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1121
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3597
 msgid "lang_gay"
 msgstr "gayo"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1090
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1125
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3601
 msgid "lang_gba"
 msgstr "gbaya"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1094
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1129
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3605
 msgid "lang_gem"
 msgstr "germaniques, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1098
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1133
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3609
 msgid "lang_geo"
 msgstr "géorgien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1102
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1137
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3613
 msgid "lang_ger"
 msgstr "allemand"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1107
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1142
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3618
 msgid "lang_gez"
 msgstr "guèze"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1111
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1146
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3622
 msgid "lang_gil"
 msgstr "gilbertin"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1115
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1150
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3626
 msgid "lang_gla"
 msgstr "gaélique écossais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1119
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1154
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3630
 msgid "lang_gle"
 msgstr "irlandais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1123
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1158
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3634
 msgid "lang_glg"
 msgstr "galicien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1127
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1162
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3638
 msgid "lang_glv"
 msgstr "mannois"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1131
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1166
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3642
 msgid "lang_gmh"
 msgstr "moyen haut-allemand"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1135
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1170
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3646
 msgid "lang_goh"
 msgstr "ancien haut allemand"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1139
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1174
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3650
 msgid "lang_gon"
 msgstr "gondi"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1143
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1178
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3654
 msgid "lang_gor"
 msgstr "gorontalo"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1147
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1182
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3658
 msgid "lang_got"
 msgstr "gotique"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1151
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1186
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3662
 msgid "lang_grb"
 msgstr "grebo"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1155
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1190
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3666
 msgid "lang_grc"
 msgstr "grec ancien (jusqu'à 1453)"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1159
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1194
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3670
 msgid "lang_gre"
 msgstr "grec moderne (après 1453)"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1163
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1198
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3674
 msgid "lang_grn"
 msgstr "guarani"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1167
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1202
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3678
 msgid "lang_gsw"
 msgstr "suisse allemand"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1171
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1206
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3682
 msgid "lang_guj"
 msgstr "goudjerati"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1175
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1210
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3686
 msgid "lang_gwi"
 msgstr "gwichʼin"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1179
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1214
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3690
 msgid "lang_hai"
 msgstr "haida"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1183
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1218
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3694
 msgid "lang_hat"
 msgstr "créole haïtien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1187
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1222
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3698
 msgid "lang_hau"
 msgstr "haoussa"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1191
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1226
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3702
 msgid "lang_haw"
 msgstr "hawaïen"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1195
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1230
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3706
 msgid "lang_heb"
 msgstr "hébreu"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1199
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1234
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3710
 msgid "lang_her"
 msgstr "héréro"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1203
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1238
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3714
 msgid "lang_hil"
 msgstr "hiligaynon"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1207
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1242
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3718
 msgid "lang_him"
 msgstr "himachali"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1211
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1246
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3722
 msgid "lang_hin"
 msgstr "hindi"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1215
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1250
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3726
 msgid "lang_hit"
 msgstr "hittite"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1219
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1254
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3730
 msgid "lang_hmn"
 msgstr "hmong"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1223
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1258
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3734
 msgid "lang_hmo"
 msgstr "hiri motu"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1227
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1262
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3738
 msgid "lang_hrv"
 msgstr "croate"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1231
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1266
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3742
 msgid "lang_hsb"
 msgstr "haut-sorabe"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1235
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1270
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3746
 msgid "lang_hun"
 msgstr "hongrois"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1239
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1274
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3750
 msgid "lang_hup"
 msgstr "hupa"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1243
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1278
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3754
 msgid "lang_iba"
 msgstr "iban"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1247
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1282
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3758
 msgid "lang_ibo"
 msgstr "igbo"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1251
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1286
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3762
 msgid "lang_ice"
 msgstr "islandais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1255
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1290
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3766
 msgid "lang_ido"
 msgstr "ido"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1259
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1294
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3770
 msgid "lang_iii"
 msgstr "yi du Sichuan"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1263
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1298
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3774
 msgid "lang_ijo"
 msgstr "ijo, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1267
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1302
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3778
 msgid "lang_iku"
 msgstr "inuktitut"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1271
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1306
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3782
 msgid "lang_ile"
 msgstr "interlingue"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1275
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1310
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3786
 msgid "lang_ilo"
 msgstr "ilocano"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1279
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1314
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3790
 msgid "lang_ina"
 msgstr "interlingua"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1283
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1318
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3794
 msgid "lang_inc"
 msgstr "indo-aryennes, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1287
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1322
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3798
 msgid "lang_ind"
 msgstr "indonésien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1291
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1326
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3802
 msgid "lang_ine"
 msgstr "indo-européennes, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1295
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1330
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3806
 msgid "lang_inh"
 msgstr "ingouche"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1299
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1334
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3810
 msgid "lang_ipk"
 msgstr "inupiaq"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1303
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1338
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3814
 msgid "lang_ira"
 msgstr "iraniennes, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1307
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1342
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3818
 msgid "lang_iro"
 msgstr "iroquois, langues (famille)"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1311
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1346
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3822
 msgid "lang_ita"
 msgstr "italien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1316
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1351
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3827
 msgid "lang_jav"
 msgstr "javanais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1320
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1355
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3831
 msgid "lang_jbo"
 msgstr "lojban"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1324
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1359
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3835
 msgid "lang_jpn"
 msgstr "japonais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1328
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1363
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3839
 msgid "lang_jpr"
 msgstr "judéo-persan"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1332
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1367
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3843
 msgid "lang_jrb"
 msgstr "judéo-arabe"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1336
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1371
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3847
 msgid "lang_kaa"
 msgstr "karakalpak"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1340
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1375
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3851
 msgid "lang_kab"
 msgstr "kabyle"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1344
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1379
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3855
 msgid "lang_kac"
 msgstr "kachin"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1348
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1383
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3859
 msgid "lang_kal"
 msgstr "groenlandais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1352
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1387
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3863
 msgid "lang_kam"
 msgstr "kamba"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1356
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1391
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3867
 msgid "lang_kan"
 msgstr "kannada"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1360
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1395
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3871
 msgid "lang_kar"
 msgstr "karen, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1364
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1399
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3875
 msgid "lang_kas"
 msgstr "cachemiri"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1368
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1403
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3879
 msgid "lang_kau"
 msgstr "kanouri"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1372
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1407
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3883
 msgid "lang_kaw"
 msgstr "kawi"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1376
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1411
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3887
 msgid "lang_kaz"
 msgstr "kazakh"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1380
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1415
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3891
 msgid "lang_kbd"
 msgstr "kabarde"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1384
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1419
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3895
 msgid "lang_kha"
 msgstr "khasi"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1388
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1423
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3899
 msgid "lang_khi"
 msgstr "khoisan, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1392
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1427
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3903
 msgid "lang_khm"
 msgstr "khmer"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1396
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1431
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3907
 msgid "lang_kho"
 msgstr "khotanais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1400
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1435
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3911
 msgid "lang_kik"
 msgstr "kikuyu"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1404
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1439
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3915
 msgid "lang_kin"
 msgstr "kinyarwanda"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1408
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1443
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3919
 msgid "lang_kir"
 msgstr "kirghize"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1412
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1447
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3923
 msgid "lang_kmb"
 msgstr "kimboundou"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1416
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1451
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3927
 msgid "lang_kok"
 msgstr "konkani"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1420
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1455
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3931
 msgid "lang_kom"
 msgstr "komi"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1424
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1459
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3935
 msgid "lang_kon"
 msgstr "kikongo"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1428
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1463
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3939
 msgid "lang_kor"
 msgstr "coréen"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1432
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1467
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3943
 msgid "lang_kos"
 msgstr "kosraéen"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1436
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1471
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3947
 msgid "lang_kpe"
 msgstr "kpellé"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1440
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1475
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3951
 msgid "lang_krc"
 msgstr "karatchaï balkar"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1444
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1479
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3955
 msgid "lang_krl"
 msgstr "carélien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1448
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1483
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3959
 msgid "lang_kro"
 msgstr "krou, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1452
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1487
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3963
 msgid "lang_kru"
 msgstr "kouroukh"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1456
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1491
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3967
 msgid "lang_kua"
 msgstr "kuanyama"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1460
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1495
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3971
 msgid "lang_kum"
 msgstr "koumyk"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1464
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1499
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3975
 msgid "lang_kur"
 msgstr "kurde"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1468
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1503
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3979
 msgid "lang_kut"
 msgstr "kutenai"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1472
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1507
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3983
 msgid "lang_lad"
 msgstr "ladino"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1476
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1511
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3987
 msgid "lang_lah"
 msgstr "lahnda"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1480
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1515
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3991
 msgid "lang_lam"
 msgstr "lamba"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1484
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1519
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3995
 msgid "lang_lao"
 msgstr "lao"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1488
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1523
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:3999
 msgid "lang_lat"
 msgstr "latin"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1492
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1527
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4003
 msgid "lang_lav"
 msgstr "letton"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1496
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1531
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4007
 msgid "lang_lez"
 msgstr "lezghien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1500
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1535
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4011
 msgid "lang_lim"
 msgstr "limbourgeois"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1504
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1539
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4015
 msgid "lang_lin"
 msgstr "lingala"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1508
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1543
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4019
 msgid "lang_lit"
 msgstr "lituanien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1512
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1547
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4023
 msgid "lang_lol"
 msgstr "mongo"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1516
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1551
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4027
 msgid "lang_loz"
 msgstr "lozi"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1520
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1555
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4031
 msgid "lang_ltz"
 msgstr "luxembourgeois"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1524
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1559
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4035
 msgid "lang_lua"
 msgstr "luba-kasaï (ciluba)"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1528
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1563
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4039
 msgid "lang_lub"
 msgstr "luba-katanga (kiluba)"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1532
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1567
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4043
 msgid "lang_lug"
 msgstr "ganda"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1536
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1571
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4047
 msgid "lang_lui"
 msgstr "luiseño"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1540
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1575
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4051
 msgid "lang_lun"
 msgstr "lunda"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1544
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1579
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4055
 msgid "lang_luo"
 msgstr "luo"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1548
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1583
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4059
 msgid "lang_lus"
 msgstr "lushaï"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1552
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1587
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4063
 msgid "lang_mac"
 msgstr "macédonien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1556
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1591
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4067
 msgid "lang_mad"
 msgstr "madurais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1560
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1595
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4071
 msgid "lang_mag"
 msgstr "magahi"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1564
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1599
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4075
 msgid "lang_mah"
 msgstr "marshallais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1568
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1603
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4079
 msgid "lang_mai"
 msgstr "maïthili"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1572
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1607
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4083
 msgid "lang_mak"
 msgstr "makassar"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1576
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1611
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4087
 msgid "lang_mal"
 msgstr "malayalam"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1580
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1615
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4091
 msgid "lang_man"
 msgstr "mandingue"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1584
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1619
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4095
 msgid "lang_mao"
 msgstr "maori"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1588
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1623
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4099
 msgid "lang_map"
 msgstr "malayo-polynésiennes, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1592
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1627
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4103
 msgid "lang_mar"
 msgstr "marathi"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1596
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1631
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4107
 msgid "lang_mas"
 msgstr "maasaï"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1600
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1635
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4111
 msgid "lang_may"
 msgstr "malais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1604
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1639
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4115
 msgid "lang_mdf"
 msgstr "mokcha"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1608
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1643
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4119
 msgid "lang_mdr"
 msgstr "mandar"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1612
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1647
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4123
 msgid "lang_men"
 msgstr "mendé"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1616
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1651
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4127
 msgid "lang_mga"
 msgstr "moyen irlandais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1620
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1655
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4131
 msgid "lang_mic"
 msgstr "micmac"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1624
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1659
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4135
 msgid "lang_min"
 msgstr "minangkabau"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1628
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1663
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4139
 msgid "lang_mis"
 msgstr "diverses, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1632
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1667
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4143
 msgid "lang_mkh"
 msgstr "môn-khmer, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1636
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1671
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4147
 msgid "lang_mlg"
 msgstr "malgache"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1640
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1675
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4151
 msgid "lang_mlt"
 msgstr "maltais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1644
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1679
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4155
 msgid "lang_mnc"
 msgstr "mandchou"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1648
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1683
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4159
 msgid "lang_mni"
 msgstr "manipuri"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1652
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1687
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4163
 msgid "lang_mno"
 msgstr "manobo, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1656
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1691
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4167
 msgid "lang_moh"
 msgstr "mohawk"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1660
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1695
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4171
 msgid "lang_mon"
 msgstr "mongol"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1664
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1699
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4175
 msgid "lang_mos"
 msgstr "moré"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1668
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1703
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4179
 msgid "lang_mul"
 msgstr "multilingue"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1672
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1707
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4183
 msgid "lang_mun"
 msgstr "mounda, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1676
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1711
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4187
 msgid "lang_mus"
 msgstr "muskogee"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1680
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1715
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4191
 msgid "lang_mwl"
 msgstr "mirandais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1684
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1719
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4195
 msgid "lang_mwr"
 msgstr "marwarî"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1688
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1723
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4199
 msgid "lang_myn"
 msgstr "maya, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1692
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1727
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4203
 msgid "lang_myv"
 msgstr "erzya"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1696
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1731
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4207
 msgid "lang_nah"
 msgstr "nahuatl, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1700
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1735
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4211
 msgid "lang_nai"
 msgstr "indiennes d'Amérique du Nord, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1704
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1739
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4215
 msgid "lang_nap"
 msgstr "napolitain"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1708
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1743
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4219
 msgid "lang_nau"
 msgstr "nauruan"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1712
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1747
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4223
 msgid "lang_nav"
 msgstr "navajo"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1716
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1751
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4227
 msgid "lang_nbl"
 msgstr "ndébélé du Sud"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1720
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1755
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4231
 msgid "lang_nde"
 msgstr "ndébélé du Nord"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1724
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1759
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4235
 msgid "lang_ndo"
 msgstr "ndonga"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1728
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1763
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4239
 msgid "lang_nds"
 msgstr "bas-allemand"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1732
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1767
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4243
 msgid "lang_nep"
 msgstr "népalais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1736
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1771
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4247
 msgid "lang_new"
 msgstr "newari"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1740
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1775
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4251
 msgid "lang_nia"
 msgstr "niha"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1744
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1779
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4255
 msgid "lang_nic"
 msgstr "nigéro-congolaises,langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1748
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1783
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4259
 msgid "lang_niu"
 msgstr "niuéen"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1752
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1787
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4263
 msgid "lang_nno"
 msgstr "norvégien nynorsk"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1756
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1791
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4267
 msgid "lang_nob"
 msgstr "norvégien bokmål"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1760
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1795
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4271
 msgid "lang_nog"
 msgstr "nogaï"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1764
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1799
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4275
 msgid "lang_non"
 msgstr "vieux norrois"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1768
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1803
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4279
 msgid "lang_nor"
 msgstr "norvégien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1772
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1807
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4283
 msgid "lang_nqo"
 msgstr "n’ko"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1776
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1811
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4287
 msgid "lang_nso"
 msgstr "sotho du Nord"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1780
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1815
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4291
 msgid "lang_nub"
 msgstr "nubiennes, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1784
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1819
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4295
 msgid "lang_nwc"
 msgstr "newarî classique"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1788
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1823
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4299
 msgid "lang_nya"
 msgstr "chewa"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1792
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1827
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4303
 msgid "lang_nym"
 msgstr "nyamwezi"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1796
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1831
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4307
 msgid "lang_nyn"
 msgstr "nyankolé"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1800
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1835
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4311
 msgid "lang_nyo"
 msgstr "nyoro"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1804
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1839
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4315
 msgid "lang_nzi"
 msgstr "nzema"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1808
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1843
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4319
 msgid "lang_oci"
 msgstr "occitan"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1812
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1847
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4323
 msgid "lang_oji"
 msgstr "ojibwa"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1816
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1851
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4327
 msgid "lang_ori"
 msgstr "odia"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1820
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1855
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4331
 msgid "lang_orm"
 msgstr "oromo"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1824
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1859
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4335
 msgid "lang_osa"
 msgstr "osage"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1828
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1863
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4339
 msgid "lang_oss"
 msgstr "ossète"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1832
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1867
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4343
 msgid "lang_ota"
 msgstr "turc ottoman"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1836
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1871
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4347
 msgid "lang_oto"
 msgstr "otomi, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1840
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1875
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4351
 msgid "lang_paa"
 msgstr "papoues, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1844
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1879
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4355
 msgid "lang_pag"
 msgstr "pangasinan"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1848
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1883
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4359
 msgid "lang_pal"
 msgstr "pahlavi"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1852
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1887
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4363
 msgid "lang_pam"
 msgstr "pampangan"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1856
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1891
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4367
 msgid "lang_pan"
 msgstr "pendjabi"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1860
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1895
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4371
 msgid "lang_pap"
 msgstr "papiamento"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1864
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1899
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4375
 msgid "lang_pau"
 msgstr "paluan"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1868
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1903
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4379
 msgid "lang_peo"
 msgstr "persan ancien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1872
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1907
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4383
 msgid "lang_per"
 msgstr "persan"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1876
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1911
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4387
 msgid "lang_phi"
 msgstr "philippin, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1880
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1915
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4391
 msgid "lang_phn"
 msgstr "phénicien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1884
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1919
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4395
 msgid "lang_pli"
 msgstr "pali"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1888
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1923
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4399
 msgid "lang_pol"
 msgstr "polonais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1892
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1927
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4403
 msgid "lang_pon"
 msgstr "pohnpei"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1896
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1931
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4407
 msgid "lang_por"
 msgstr "portugais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1900
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1935
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4411
 msgid "lang_pra"
 msgstr "prâkrit"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1904
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1939
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4415
 msgid "lang_pro"
 msgstr "provençal ancien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1908
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1943
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4419
 msgid "lang_pus"
 msgstr "pachto"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1912
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1947
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4423
 msgid "lang_que"
 msgstr "quechua"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1916
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1951
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4427
 msgid "lang_raj"
 msgstr "rajasthani"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1920
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1955
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4431
 msgid "lang_rap"
 msgstr "rapanui"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1924
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1959
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4435
 msgid "lang_rar"
 msgstr "rarotongien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1928
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1963
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4439
 msgid "lang_roa"
 msgstr "romanes, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1932
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1967
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4443
 msgid "lang_roh"
 msgstr "romanche"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1936
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1971
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4447
 msgid "lang_rom"
 msgstr "romani"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1940
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1975
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4451
 msgid "lang_rum"
 msgstr "roumain"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1944
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1979
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4455
 msgid "lang_run"
 msgstr "roundi"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1948
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1983
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4459
 msgid "lang_rup"
 msgstr "aroumain"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1952
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1987
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4463
 msgid "lang_rus"
 msgstr "russe"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1956
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1991
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4467
 msgid "lang_sad"
 msgstr "sandawe"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1960
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1995
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4471
 msgid "lang_sag"
 msgstr "sango"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1964
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:1999
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4475
 msgid "lang_sah"
 msgstr "iakoute"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1968
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2003
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4479
 msgid "lang_sai"
 msgstr "indiennes d'Amérique du Sud, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1972
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2007
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4483
 msgid "lang_sal"
 msgstr "salish, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1976
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2011
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4487
 msgid "lang_sam"
 msgstr "araméen samaritain"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1980
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2015
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4491
 msgid "lang_san"
 msgstr "sanskrit"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1984
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2019
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4495
 msgid "lang_sas"
 msgstr "sasak"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1988
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2023
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4499
 msgid "lang_sat"
 msgstr "santali"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1992
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2027
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4503
 msgid "lang_scn"
 msgstr "sicilien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:1996
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2031
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4507
 msgid "lang_sco"
 msgstr "écossais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2000
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2035
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4511
 msgid "lang_sel"
 msgstr "selkoupe"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2004
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2039
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4515
 msgid "lang_sem"
 msgstr "sémitiques, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2008
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2043
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4519
 msgid "lang_sga"
 msgstr "ancien irlandais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2012
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2047
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4523
 msgid "lang_sgn"
 msgstr "langue des signes"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2016
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2051
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4527
 msgid "lang_shn"
 msgstr "shan"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2020
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2055
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4531
 msgid "lang_sid"
 msgstr "sidamo"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2024
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2059
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4535
 msgid "lang_sin"
 msgstr "cingalais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2028
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2063
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4539
 msgid "lang_sio"
 msgstr "sioux, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2032
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2067
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4543
 msgid "lang_sit"
 msgstr "sino-tibétaines, autres langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2036
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2071
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4547
 msgid "lang_sla"
 msgstr "slaves, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2040
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2075
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4551
 msgid "lang_slo"
 msgstr "slovaque"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2044
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2079
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4555
 msgid "lang_slv"
 msgstr "slovène"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2048
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2083
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4559
 msgid "lang_sma"
 msgstr "same du Sud"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2052
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2087
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4563
 msgid "lang_sme"
 msgstr "same du Nord"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2056
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2091
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4567
 msgid "lang_smi"
 msgstr "sâmes, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2060
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2095
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4571
 msgid "lang_smj"
 msgstr "same de Lule"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2064
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2099
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4575
 msgid "lang_smn"
 msgstr "same d’Inari"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2068
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2103
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4579
 msgid "lang_smo"
 msgstr "samoan"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2072
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2107
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4583
 msgid "lang_sms"
 msgstr "same skolt"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2076
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2111
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4587
 msgid "lang_sna"
 msgstr "shona"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2080
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2115
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4591
 msgid "lang_snd"
 msgstr "sindhi"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2084
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2119
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4595
 msgid "lang_snk"
 msgstr "soninké"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2088
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2123
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4599
 msgid "lang_sog"
 msgstr "sogdien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2092
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2127
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4603
 msgid "lang_som"
 msgstr "somali"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2096
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2131
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4607
 msgid "lang_son"
 msgstr "songhai"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2100
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2135
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4611
 msgid "lang_sot"
 msgstr "sotho du Sud"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2104
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2139
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4615
 msgid "lang_spa"
 msgstr "espagnol"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2108
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2143
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4619
 msgid "lang_srd"
 msgstr "sarde"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2112
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2147
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4623
 msgid "lang_srn"
 msgstr "sranan tongo"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2116
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2151
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4627
 msgid "lang_srp"
 msgstr "serbe"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2120
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2155
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4631
 msgid "lang_srr"
 msgstr "sérère"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2124
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2159
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4635
 msgid "lang_ssa"
 msgstr "nilo-sahariennes, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2128
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2163
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4639
 msgid "lang_ssw"
 msgstr "swati"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2132
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2167
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4643
 msgid "lang_suk"
 msgstr "soukouma"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2136
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2171
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4647
 msgid "lang_sun"
 msgstr "soundanais"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2140
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2175
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4651
 msgid "lang_sus"
 msgstr "soussou"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2144
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2179
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4655
 msgid "lang_sux"
 msgstr "sumérien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2148
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2183
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4659
 msgid "lang_swa"
 msgstr "swahili"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2152
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2187
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4663
 msgid "lang_swe"
 msgstr "suédois"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2156
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2191
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4667
 msgid "lang_syc"
 msgstr "syriaque classique"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2160
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2195
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4671
 msgid "lang_syr"
 msgstr "syriaque"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2164
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2199
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4675
 msgid "lang_tah"
 msgstr "tahitien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2168
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2203
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4679
 msgid "lang_tai"
 msgstr "tai, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2172
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2207
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4683
 msgid "lang_tam"
 msgstr "tamoul"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2176
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2211
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4687
 msgid "lang_tat"
 msgstr "tatar"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2180
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2215
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4691
 msgid "lang_tel"
 msgstr "télougou"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2184
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2219
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4695
 msgid "lang_tem"
 msgstr "timné"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2188
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2223
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4699
 msgid "lang_ter"
 msgstr "tereno"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2192
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2227
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4703
 msgid "lang_tet"
 msgstr "tétoum"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2196
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2231
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4707
 msgid "lang_tgk"
 msgstr "tadjik"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2200
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2235
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4711
 msgid "lang_tgl"
 msgstr "tagalog"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2204
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2239
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4715
 msgid "lang_tha"
 msgstr "thaï"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2208
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2243
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4719
 msgid "lang_tib"
 msgstr "tibétain"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2212
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2247
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4723
 msgid "lang_tig"
 msgstr "tigré"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2216
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2251
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4727
 msgid "lang_tir"
 msgstr "tigrigna"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2220
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2255
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4731
 msgid "lang_tiv"
 msgstr "tiv"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2224
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2259
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4735
 msgid "lang_tkl"
 msgstr "tokelau"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2228
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2263
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4739
 msgid "lang_tlh"
 msgstr "klingon"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2232
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2267
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4743
 msgid "lang_tli"
 msgstr "tlingit"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2236
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2271
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4747
 msgid "lang_tmh"
 msgstr "tamacheq"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2240
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2275
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4751
 msgid "lang_tog"
 msgstr "tonga nyasa"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2244
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2279
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4755
 msgid "lang_ton"
 msgstr "tongien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2248
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2283
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4759
 msgid "lang_tpi"
 msgstr "tok pisin"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2252
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2287
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4763
 msgid "lang_tsi"
 msgstr "tsimshian"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2256
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2291
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4767
 msgid "lang_tsn"
 msgstr "tswana"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2260
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2295
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4771
 msgid "lang_tso"
 msgstr "tsonga"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2264
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2299
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4775
 msgid "lang_tuk"
 msgstr "turkmène"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2268
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2303
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4779
 msgid "lang_tum"
 msgstr "tumbuka"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2272
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2307
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4783
 msgid "lang_tup"
 msgstr "tupi, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2276
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2311
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4787
 msgid "lang_tur"
 msgstr "turc"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2280
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2315
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4791
 msgid "lang_tut"
 msgstr "altaïques, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2284
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2319
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4795
 msgid "lang_tvl"
 msgstr "tuvalu"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2288
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2323
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4799
 msgid "lang_twi"
 msgstr "twi"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2292
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2327
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4803
 msgid "lang_tyv"
 msgstr "touvain"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2296
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2331
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4807
 msgid "lang_udm"
 msgstr "oudmourte"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2300
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2335
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4811
 msgid "lang_uga"
 msgstr "ougaritique"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2304
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2339
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4815
 msgid "lang_uig"
 msgstr "ouïghour"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2308
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2343
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4819
 msgid "lang_ukr"
 msgstr "ukrainien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2312
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2347
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4823
 msgid "lang_umb"
 msgstr "umbundu"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2316
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2351
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4827
 msgid "lang_und"
 msgstr "langue indéterminée"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2320
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2355
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4831
 msgid "lang_urd"
 msgstr "ourdou"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2324
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2359
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4835
 msgid "lang_uzb"
 msgstr "ouzbek"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2328
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2363
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4839
 msgid "lang_vai"
 msgstr "vaï"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2332
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2367
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4843
 msgid "lang_ven"
 msgstr "venda"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2336
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2371
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4847
 msgid "lang_vie"
 msgstr "vietnamien"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2340
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2375
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4851
 msgid "lang_vol"
 msgstr "volapük"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2344
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2379
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4855
 msgid "lang_vot"
 msgstr "vote"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2348
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2383
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4859
 msgid "lang_wak"
 msgstr "wakashennes, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2352
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2387
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4863
 msgid "lang_wal"
 msgstr "walamo"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2356
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2391
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4867
 msgid "lang_war"
 msgstr "waray"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2360
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2395
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4871
 msgid "lang_was"
 msgstr "washo"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2364
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2399
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4875
 msgid "lang_wel"
 msgstr "gallois"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2368
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2403
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4879
 msgid "lang_wen"
 msgstr "sorabes, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2372
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2407
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4883
 msgid "lang_wln"
 msgstr "wallon"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2376
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2411
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4887
 msgid "lang_wol"
 msgstr "wolof"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2380
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2415
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4891
 msgid "lang_xal"
 msgstr "kalmouk"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2384
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2419
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4895
 msgid "lang_xho"
 msgstr "xhosa"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2388
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2423
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4899
 msgid "lang_yao"
 msgstr "yao"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2392
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2427
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4903
 msgid "lang_yap"
 msgstr "yapois"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2396
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2431
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4907
 msgid "lang_yid"
 msgstr "yiddish"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2400
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2435
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4911
 msgid "lang_yor"
 msgstr "yoruba"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2404
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2439
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4915
 msgid "lang_ypk"
 msgstr "yupik, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2408
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2443
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4919
 msgid "lang_zap"
 msgstr "zapotèque"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2412
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2447
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4923
 msgid "lang_zbl"
 msgstr "symboles Bliss"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2416
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2451
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4927
 msgid "lang_zen"
 msgstr "zenaga"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2420
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2455
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4931
 msgid "lang_zha"
 msgstr "zhuang"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2424
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2459
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4935
 msgid "lang_znd"
 msgstr "zandé, langues"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2428
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2463
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4939
 msgid "lang_zul"
 msgstr "zoulou"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2432
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2467
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4943
 msgid "lang_zun"
 msgstr "zuñi"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2436
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2471
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4947
 msgid "lang_zxx"
 msgstr "sans contenu linguistique"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2440
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:2475
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:4951
 msgid "lang_zza"
 msgstr "zazaki"
+
+#: sonar/translations/manual_translations.txt:24
+msgid "mainTeam"
+msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:923
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1743
 msgid "name"
 msgstr "nom"
 
-#: sonar/modules/documents/views.py:171
+#: sonar/modules/documents/views.py:172
 msgid "no."
 msgstr "no."
 
@@ -4811,17 +5746,41 @@ msgstr "no."
 msgid "other files"
 msgstr "autres fichiers"
 
-#: sonar/modules/documents/views.py:175
+#: sonar/modules/documents/views.py:176
 msgid "p."
 msgstr "p."
 
-#: sonar/config.py:537
+#: sonar/config.py:546
 msgid "pid"
 msgstr "pid"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:407
 msgid "pmid"
 msgstr "PMID"
+
+#: sonar/translations/manual_translations.txt:22
+msgid "projectSponsor"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:42
+msgid "promoteInnovation"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:32
+msgid "realizationFramework"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:45
+msgid "relatedToMandate_briefDescription"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:43
+msgid "relatedToMandate_mandate"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:44
+msgid "relatedToMandate_name"
+msgstr ""
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:116
 msgid "role_admin"
@@ -4843,9 +5802,25 @@ msgstr "Super utilisateur"
 msgid "role_user"
 msgstr "Utilisateur"
 
-#: sonar/config.py:538
+#: sonar/translations/manual_translations.txt:47
+msgid "searchResultsValorised"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:26
+msgid "secondaryTeam"
+msgstr ""
+
+#: sonar/translations/manual_translations.txt:28
+msgid "startDate"
+msgstr ""
+
+#: sonar/config.py:547
 msgid "status"
 msgstr "statut"
+
+#: sonar/translations/manual_translations.txt:23
+msgid "statusHep"
+msgstr ""
 
 #: sonar/modules/documents/templates/documents/record.html:193
 msgid "supported by"
@@ -4857,11 +5832,11 @@ msgstr "avec le soutien de"
 msgid "uri"
 msgstr "URI"
 
-#: sonar/config.py:539
+#: sonar/config.py:548
 msgid "user"
 msgstr "utilisateur"
 
-#: sonar/modules/documents/views.py:167
+#: sonar/modules/documents/views.py:168
 msgid "vol."
 msgstr "vol."
 
@@ -4926,4 +5901,7 @@ msgstr ""
 
 #~ msgid "Hidden to public"
 #~ msgstr "Caché au public"
+
+#~ msgid "\\u200bSwiss National Science Foundation"
+#~ msgstr ""
 
