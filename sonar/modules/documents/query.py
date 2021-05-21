@@ -85,6 +85,10 @@ def search_factory(self, search, query_parser=None):
         if view != current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'):
             search = search.filter('term', organisation__pid=view)
 
+        # Filter collection
+        if request.args.get('collection_view'):
+            search = search.filter(
+                'term', collections__pid=request.args['collection_view'])
     # Admin
     else:
         # Filters records by user's organisation

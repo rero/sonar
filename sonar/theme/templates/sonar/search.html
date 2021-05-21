@@ -1,6 +1,10 @@
 {% extends 'sonar/page.html' %}
 
 {%- block body %}
+{% if collection %}
+{% include 'collections/item.html' %}
+<hr class="my-4">
+{% endif %}
 <sonar-root></sonar-root>
 {% endblock %}
 
