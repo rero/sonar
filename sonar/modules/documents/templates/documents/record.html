@@ -291,7 +291,9 @@ along with this program. If not, see
           <ul class="list-unstyled mb-0">
             {% for collection in record.collections %}
             <li class="p-0">
-              {{ collection.name | language_value }}
+              <a href="{{ url_for('documents.search', view=view_code, collection_view=collection.pid) }}">
+                {{ collection.name | language_value }}
+              </a>
             </li>
             {% endfor %}
           </ul>

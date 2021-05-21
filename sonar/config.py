@@ -311,6 +311,13 @@ RECORDS_UI_ENDPOINTS = {
         'record_class': 'sonar.resources.projects.api:Record',
         'template': 'sonar/projects/detail.html'
     },
+    'coll': {
+        'pid_type': 'coll',
+        'route': '/<org_code:view>/collections/<pid_value>',
+        'view_imp': 'sonar.modules.collections.views:detail',
+        'record_class': 'sonar.modules.collections.api:Record',
+        'template': 'sonar/collections/detail.html'
+    },
     'coll_previewer': {
         'pid_type': 'coll',
         'route': '/collections/<pid_value>/preview/<filename>',

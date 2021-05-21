@@ -21,11 +21,12 @@ from __future__ import absolute_import, print_function
 
 import json
 
-from flask import Blueprint, current_app, render_template
+from flask import Blueprint, current_app, render_template, request
 from flask_babelex import gettext as _
 from invenio_i18n.ext import current_i18n
 from invenio_records_ui.signals import record_viewed
 
+from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.documents.utils import has_external_urls_for_files, \
     populate_files_properties
 from sonar.modules.utils import format_date, \
@@ -49,7 +50,13 @@ this file.
 @blueprint.route('/<org_code:view>/search/documents')
 def search(view):
     """Search results page."""
-    return render_template('sonar/search.html')
+    # Load collection if arg is in URL.
+    collection = None
+    if request.args.get('collection_view'):
+        collection = CollectionRecord.get_record_by_pid(
+            request.args['collection_view'])
+
+    return render_template('sonar/search.html', collection=collection)
 
 
 def detail(pid, record, template=None, **kwargs):
@@ -98,7 +105,6 @@ def detail(pid, record, template=None, **kwargs):
                            record=record,
                            schema_org_data=schema_org_data,
                            google_scholar_data=google_scholar_data)
-
 
 
 @blueprint.app_template_filter()

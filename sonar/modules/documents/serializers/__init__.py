@@ -98,6 +98,10 @@ class JSONSerializer(_JSONSerializer):
                                 organisation[f'documentsCustomField{i}']
                                 ['label'])
 
+        # Dont display collection aggregation in the collection context
+        if request.args.get('collection_view'):
+            results['aggregations'].pop('collection', None)
+
         # Add collection name
         for org_term in results.get('aggregations',
                                     {}).get('collection',

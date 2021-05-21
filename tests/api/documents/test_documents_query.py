@@ -15,29 +15,24 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""JSON resolvers."""
+"""Test documents query."""
 
-import jsonresolver
-from invenio_pidstore.resolver import Resolver
-from invenio_records.api import Record
-
-from ...config import JSONSCHEMAS_HOST
-from .config import Configuration
+from flask import url_for
 
 
-@jsonresolver.route(Configuration.resolver_url, host=JSONSCHEMAS_HOST)
-def json_resolver(pid):
-    """Resolve record.
+def test_collection_query(db, client, document, collection):
+    document['collections'] = [{
+        '$ref':
+        'https://sonar.ch/api/collections/{pid}'.format(pid=collection['pid'])
+    }]
+    document.commit()
+    db.session.commit()
+    document.reindex()
 
-    :param str pid: PID value.
-    :return: Record instance.
-    :rtype: Record
-    """
-    resolver = Resolver(pid_type=Configuration.pid_type,
-                        object_type="rec",
-                        getter=Record.get_record)
-    _, record = resolver.resolve(pid)
-
-    record.pop('$schema', None)
-
-    return record
+    res = client.get(
+        url_for('invenio_records_rest.doc_list',
+                view='org',
+                collection_view=collection['pid']))
+    assert res.status_code == 200
+    assert res.json['hits']['total']['value'] == 1
+    assert not res.json['aggregations'].get('collection')

@@ -52,11 +52,21 @@ def test_index(client):
     assert client.get('/').status_code == 200
 
 
-def test_search(app, client):
+def test_search(app, client, organisation, collection):
     """Test search."""
     assert client.get(
         url_for('documents.search', view='global',
                 resource_type='documents')).status_code == 200
+
+    # Test search with collection
+    result = client.get(
+        url_for('documents.search',
+                view=organisation['pid'],
+                collection_view=collection['pid'],
+                resource_type='documents'))
+    assert result.status_code == 200
+    assert result.data.find(b'<h3>Collection name</h3>') != -1
+
     assert client.get(
         url_for('documents.search',
                 view='not-existing',
