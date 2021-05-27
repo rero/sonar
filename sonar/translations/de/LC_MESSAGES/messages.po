@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-05-12 09:10+0200\n"
-"PO-Revision-Date: 2021-05-21 09:33+0000\n"
+"PO-Revision-Date: 2021-05-27 12:34+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "de/>\n"
@@ -2592,27 +2592,27 @@ msgstr "Mitgesuchstellende"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:857
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1351
 msgid "contribution_role_cre"
-msgstr "Creator"
+msgstr "Verfasser / Schöpfer"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:861
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1359
 msgid "contribution_role_ctb"
-msgstr "Contributor"
+msgstr "Mitwirkende"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:869
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1343
 msgid "contribution_role_dgs"
-msgstr "Degree supervisor"
+msgstr "Akademischer Betreuer"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:865
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1355
 msgid "contribution_role_edt"
-msgstr "Editor"
+msgstr "Herausgeber"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:873
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1347
 msgid "contribution_role_prt"
-msgstr "Printer"
+msgstr "Drucker"
 
 #: sonar/modules/documents/views.py:265
 msgid "contribution_role_{role}"
@@ -2756,7 +2756,7 @@ msgstr "Schriftliche Abschlussarbeit"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:76
 msgid "document_type_coar:c_5794"
-msgstr "Konferenzartikel"
+msgstr "Konferenzartikel (in Tagungsband)"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:154
 msgid "document_type_coar:c_5ce6"
