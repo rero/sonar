@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-05-12 09:10+0200\n"
-"PO-Revision-Date: 2021-05-06 22:33+0000\n"
+"PO-Revision-Date: 2021-05-27 12:34+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"it/>\n"
 "Language: it\n"
-"Language-Team: Italian "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/it/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.7-dev\n"
 "Generated-By: Babel 2.9.0\n"
 
 #: sonar/theme/views.py:67
@@ -2589,27 +2590,27 @@ msgstr "co-ricercatore"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:857
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1351
 msgid "contribution_role_cre"
-msgstr "Creator"
+msgstr "Autore / creatore"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:861
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1359
 msgid "contribution_role_ctb"
-msgstr "Contributor"
+msgstr "Contributore"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:869
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1343
 msgid "contribution_role_dgs"
-msgstr "Degree supervisor"
+msgstr "Supervisore accademico"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:865
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1355
 msgid "contribution_role_edt"
-msgstr "Editor"
+msgstr "Curatore"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:873
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1347
 msgid "contribution_role_prt"
-msgstr "Printer"
+msgstr "Stampatore"
 
 #: sonar/modules/documents/views.py:265
 msgid "contribution_role_{role}"
@@ -2753,7 +2754,7 @@ msgstr "Tesi"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:76
 msgid "document_type_coar:c_5794"
-msgstr "Articolo di congresso"
+msgstr "Articolo di congresso (pubblicato in atti)"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:154
 msgid "document_type_coar:c_5ce6"
@@ -4923,4 +4924,3 @@ msgstr ""
 
 #~ msgid "Hidden to public"
 #~ msgstr "Nascosto al pubblico"
-
