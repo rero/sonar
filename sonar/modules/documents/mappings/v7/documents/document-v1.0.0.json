@@ -313,7 +313,7 @@
         }
       },
       "collections": {
-        "type": "object",
+        "type": "nested",
         "properties": {
           "pid": {
             "type": "keyword"

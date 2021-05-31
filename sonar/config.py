@@ -43,7 +43,8 @@ from sonar.modules.organisations.api import OrganisationRecord, \
 from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import record_permission_factory, \
     wiki_edit_permission
-from sonar.modules.query import and_term_filter, missing_field_filter
+from sonar.modules.query import and_term_filter, collection_filter, \
+    missing_field_filter
 from sonar.modules.users.api import UserRecord, UserSearch
 from sonar.modules.users.permissions import UserPermission
 from sonar.modules.utils import get_current_language
@@ -502,16 +503,41 @@ DEFAULT_AGGREGATION_SIZE = 50
 RECORDS_REST_FACETS = {
     'documents':
     dict(aggs=dict(
-        sections=dict(terms=dict(field='sections',
-                                     size=DEFAULT_AGGREGATION_SIZE)),
+        sections=dict(
+            terms=dict(field='sections', size=DEFAULT_AGGREGATION_SIZE)),
         organisation=dict(terms=dict(field='organisation.pid',
                                      size=DEFAULT_AGGREGATION_SIZE)),
         language=dict(
             terms=dict(field='language.value', size=DEFAULT_AGGREGATION_SIZE)),
         subject=dict(
             terms=dict(field='facet_subjects', size=DEFAULT_AGGREGATION_SIZE)),
-        collection=dict(terms=dict(field='collections.pid',
-                                            size=DEFAULT_AGGREGATION_SIZE)),
+        collection={
+            'nested': {
+                'path': 'collections'
+            },
+            'aggs': {
+                'collection': {
+                    'terms': {
+                        'field': 'collections.collection0.keyword'
+                    },
+                    'aggs': {
+                        'collection1': {
+                            'terms': {
+                                'field': 'collections.collection1.keyword'
+                            },
+                            'aggs': {
+                                'collection2': {
+                                    'terms': {
+                                        'field':
+                                        'collections.collection2.keyword'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         document_type=dict(
             terms=dict(field='documentType', size=DEFAULT_AGGREGATION_SIZE)),
         controlled_affiliation=dict(
@@ -540,7 +566,11 @@ RECORDS_REST_FACETS = {
              'subject':
              and_term_filter('facet_subjects'),
              'collection':
-             and_term_filter('collections.pid'),
+             collection_filter('collections.collection0.keyword'),
+             'collection1':
+             collection_filter('collections.collection1.keyword'),
+             'collection2':
+             collection_filter('collections.collection2.keyword'),
              'document_type':
              and_term_filter('documentType'),
              'controlled_affiliation':

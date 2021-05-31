@@ -20,15 +20,29 @@
 from flask import url_for
 
 
-def test_index(app, client, organisation):
+def test_index(app, db, client, document, organisation, collection):
     """Test list of collections."""
     # No collection index for global view
     assert client.get(url_for('collections.index',
                               view='global')).status_code == 404
 
-    # OK in organisation context
-    assert client.get(url_for('collections.index',
-                              view='org')).status_code == 200
+    # OK in organisation context but no collection listed because there's no
+    # document linked.
+    result = client.get(url_for('collections.index', view='org'))
+    assert result.status_code == 200
+    assert b'No collection found' in result.data
+
+    # OK in organisation context and the collection has a document linked.
+    document['collections'] = [{
+        '$ref':
+        'https://sonar.ch/api/collections/{pid}'.format(pid=collection['pid'])
+    }]
+    document.commit()
+    db.session.commit()
+    document.reindex()
+    result = client.get(url_for('collections.index', view='org'))
+    assert result.status_code == 200
+    assert b'<h3>Collection name</h3>' in result.data
 
 
 def test_detail(app, client, organisation, collection):

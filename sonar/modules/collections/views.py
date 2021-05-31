@@ -17,10 +17,12 @@
 
 """Collections views."""
 
+from elasticsearch_dsl import Q
 from flask import Blueprint, abort, current_app, redirect, render_template, \
     url_for
 
 from sonar.modules.collections.api import RecordSearch
+from sonar.modules.documents.api import DocumentSearch
 
 blueprint = Blueprint('collections',
                       __name__,
@@ -43,7 +45,17 @@ def index(**kwargs):
     records = RecordSearch().filter('term',
                                     organisation__pid=kwargs['view']).scan()
 
-    return render_template('collections/index.html', records=list(records))
+    def filter_result(item):
+        """Keep only collections that have documents attached."""
+        documents = DocumentSearch().query(
+            Q('nested',
+              path='collections',
+              query=Q('bool', must=Q('term', collections__pid=item['pid']))))
+
+        return documents.count()
+
+    return render_template('collections/index.html',
+                           records=list(filter(filter_result, records)))
 
 
 def detail(pid, record, **kwargs):

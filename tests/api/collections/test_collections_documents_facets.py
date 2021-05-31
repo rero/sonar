@@ -39,6 +39,34 @@ def test_list(app, db, client, document, collection, superuser):
         '2',
         'doc_count':
         1,
+        'collection1': {
+            'doc_count_error_upper_bound':
+            0,
+            'sum_other_doc_count':
+            0,
+            'buckets': [{
+                'key': '3',
+                'doc_count': 1,
+                'collection2': {
+                    'doc_count_error_upper_bound': 0,
+                    'sum_other_doc_count': 0,
+                    'buckets': []
+                },
+                'name': 'Collection name'
+            }]
+        },
         'name':
-        'Collection name'
+        'Parent collection'
     }]
+
+    # Test with collection filter
+    login_user_via_session(client, email=superuser['email'])
+    res = client.get(url_for('invenio_records_rest.doc_list', collection='2'))
+    assert res.status_code == 200
+    assert res.json['hits']['total']['value'] == 1
+
+    # Test with sub collection filter
+    login_user_via_session(client, email=superuser['email'])
+    res = client.get(url_for('invenio_records_rest.doc_list', collection1='3'))
+    assert res.status_code == 200
+    assert res.json['hits']['total']['value'] == 1

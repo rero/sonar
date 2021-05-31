@@ -46,7 +46,6 @@
           "language"
         ]
       }
-
     },
     "description": {
       "title": "Descriptions",
@@ -80,6 +79,12 @@
           "value",
           "language"
         ]
+      },
+      "form": {
+        "hide": true,
+        "navigation": {
+          "essential": true
+        }
       }
     },
     "organisation": {
@@ -103,6 +108,33 @@
       "form": {
         "expressionProperties": {
           "templateOptions.required": "true"
+        }
+      }
+    },
+    "parent": {
+      "title": "Parent collection",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$ref": {
+          "type": "string",
+          "pattern": "^https://sonar.ch/api/collections/.*?$",
+          "form": {
+            "remoteTypeahead": {
+              "type": "collections",
+              "field": "name.value.suggest",
+              "label": "label"
+            }
+          }
+        }
+      },
+      "required": [
+        "$ref"
+      ],
+      "form": {
+        "hide": true,
+        "navigation": {
+          "essential": true
         }
       }
     },
@@ -169,7 +201,8 @@
   },
   "propertiesOrder": [
     "name",
-    "description"
+    "description",
+    "parent"
   ],
   "required": [
     "name"

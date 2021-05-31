@@ -109,6 +109,27 @@ def enrich_document_data(sender=None,
     # Check if record is open access.
     json['isOpenAccess'] = record.is_open_access()
 
+    # Adds collections for building aggregations.
+    def _get_collections_pids(collection):
+        """Builds the list of collections PIDs from parent to leaf.
+
+        :param dict collection: Collection dictionary.
+        :returns: List of PIDs.
+        :rtype: list
+        """
+        pids = [collection['pid']]
+        if collection.get('parent'):
+            pids = _get_collections_pids(collection['parent']) + pids
+
+        return pids
+
+    for collection in json.get('collections', []):
+        pids = _get_collections_pids(collection)
+        i = 0
+        while i < len(pids):
+            collection[f'collection{i}'] = pids[i]
+            i += 1
+
     # No files are present in record
     if not record.files:
         return

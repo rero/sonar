@@ -17,7 +17,8 @@
 
 """Query."""
 
-from flask import current_app
+from elasticsearch_dsl import Q
+from flask import current_app, request
 
 from sonar.modules.organisations.api import current_organisation
 from sonar.modules.query import default_search_factory
@@ -35,6 +36,15 @@ def search_factory(self, search):
 
     if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
         return (search, urlkwargs)
+
+    # Cannot suggest a record which is the current collection or the current
+    # collection is one of the parents.
+    if '.suggest' in request.args.get('q',
+                                      '') and request.args.get('currentPid'):
+        search = search.query(
+            Q('bool',
+              must_not=[Q('match',
+                          path='/' + request.args.get('currentPid'))]))
 
     # Records are not filtered for superusers.
     if current_user_record.is_superuser:

@@ -30,9 +30,6 @@ along with this program. If not, see
       {{ collection.description | language_value | markdown_filter | safe }}
     </div>
     {% endif %}
-    <p>
-
-    </p>
     <div class="row">
       <div class="col-sm-6 pt-2">
         <a href="{{ url_for('invenio_records_ui.coll', pid_value=collection.pid, view=view_code) }}">

@@ -766,11 +766,29 @@ def make_collection(app, db, collection_json):
 @pytest.fixture()
 def collection(app, db, es, admin, organisation, collection_json):
     """Collection fixture."""
+    parent_collection_json = {
+        'name': [{
+            'language': 'eng',
+            'value': 'Parent collection'
+        }]
+    }
+    parent_collection = CollectionRecord.create(parent_collection_json,
+                                                dbcommit=True,
+                                                with_bucket=True)
+    parent_collection.commit()
+    parent_collection.reindex()
+    db.session.commit()
+
     json = copy.deepcopy(collection_json)
     json['organisation'] = {
         '$ref':
         'https://sonar.ch/api/organisations/{pid}'.format(
             pid=organisation['pid'])
+    }
+    json['parent'] = {
+        '$ref':
+        'https://sonar.ch/api/collections/{pid}'.format(
+            pid=parent_collection['pid'])
     }
 
     collection = CollectionRecord.create(json, dbcommit=True, with_bucket=True)

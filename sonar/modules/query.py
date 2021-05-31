@@ -125,3 +125,17 @@ def missing_field_filter(field):
     def inner(values):
         return Q('bool', must_not=[Q('exists', field=field)])
     return inner
+
+
+def collection_filter(field):
+    """Filter for collections."""
+    def inner(values):
+        must = []
+        for value in values:
+            must.append(
+                Q('nested',
+                  path='collections',
+                  query=Q('bool', must=Q('term', **{field: value}))))
+        return Q('bool', must=must)
+
+    return inner

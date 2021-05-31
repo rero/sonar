@@ -41,6 +41,7 @@ class RecordMetadataSchema(StrictKeysMixin):
     name = fields.List(fields.Dict(), required=True)
     description = fields.List(fields.Dict())
     organisation = fields.Dict()
+    parent = fields.Dict()
     permissions = fields.Dict(dump_only=True)
     label = fields.Method('get_label')
     # When loading, if $schema is not provided, it's retrieved by

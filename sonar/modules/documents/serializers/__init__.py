@@ -102,13 +102,29 @@ class JSONSerializer(_JSONSerializer):
         if request.args.get('collection_view'):
             results['aggregations'].pop('collection', None)
 
-        # Add collection name
-        for org_term in results.get('aggregations',
-                                    {}).get('collection',
-                                            {}).get('buckets', []):
-            collection = CollectionRecord.get_record_by_pid(org_term['key'])
-            if collection:
-                org_term['name'] = collection['name'][0]['value']
+        if results['aggregations'].get('collection'):
+            # Normalize collections as it is a nested aggregation.
+            results['aggregations']['collection'] = results['aggregations'][
+                'collection']['collection']
+
+            # Add collection name
+            def _process_collection_level(buckets, level=1):
+                """Recursively add collection names for each buckets."""
+                for bucket in buckets:
+                    collection = CollectionRecord.get_record_by_pid(
+                        bucket['key'])
+                    if collection:
+                        bucket['name'] = collection['name'][0]['value']
+
+                    facet_name = f'collection{level}'
+                    if bucket.get(facet_name):
+                        level += 1
+                        _process_collection_level(
+                            bucket[facet_name]['buckets'], level)
+
+            _process_collection_level(
+                results.get('aggregations', {}).get('collection',
+                                                    {}).get('buckets', []))
 
         return super(JSONSerializer,
                      self).post_process_serialize_search(results, pid_fetcher)

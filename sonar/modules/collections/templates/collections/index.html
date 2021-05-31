@@ -18,7 +18,7 @@ along with this program. If not, see
 {%- extends config.RECORDS_UI_BASE_TEMPLATE %}
 
 {%- block body %}
-<h1>{{ _('Collections') }}</h1>
+<h1 class="mb-4">{{ _('Collections') }}</h1>
 {% if records | length %}
 <ul class="list-group list-group-flush">
   {% for record in records %}

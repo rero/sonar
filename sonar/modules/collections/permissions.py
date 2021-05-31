@@ -17,6 +17,8 @@
 
 """Record permissions."""
 
+from elasticsearch_dsl import Q
+
 from sonar.modules.documents.api import DocumentSearch
 from sonar.modules.organisations.api import current_organisation
 from sonar.modules.permissions import RecordPermission as BaseRecordPermission
@@ -92,8 +94,12 @@ class RecordPermission(BaseRecordPermission):
         :return: True if action can be done
         :rtype: bool
         """
-        results = DocumentSearch().filter(
-            'term', collections__pid=record['pid']).source(includes=['pid'])
+        results = DocumentSearch().query(
+            Q('nested',
+              path='collections',
+              query=Q('bool', must=Q(
+                  'term',
+                  collections__pid=record['pid'])))).source(includes=['pid'])
 
         # Cannot remove collection associated to a record
         if results.count():

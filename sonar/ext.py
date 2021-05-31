@@ -29,6 +29,7 @@ from invenio_files_rest.signals import file_deleted, file_uploaded
 from invenio_indexer.signals import before_record_index
 from werkzeug.datastructures import MIMEAccept
 
+from sonar.modules.collections.receivers import enrich_collection_data
 from sonar.modules.permissions import has_admin_access, has_submitter_access, \
     has_superuser_access
 from sonar.modules.receivers import file_deleted_listener, \
@@ -102,6 +103,9 @@ class Sonar():
 
         # Add user's full name before record index
         before_record_index.connect(add_full_name, weak=False)
+
+        # Enrich collection's data
+        before_record_index.connect(enrich_collection_data, weak=False)
 
     def init_config(self, app):
         """Initialize configuration."""

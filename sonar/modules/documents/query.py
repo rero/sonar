@@ -90,8 +90,14 @@ def search_factory(self, search, query_parser=None):
 
         # Filter collection
         if request.args.get('collection_view'):
-            search = search.filter(
-                'term', collections__pid=request.args['collection_view'])
+            search = search.query(
+                Q('nested',
+                  path='collections',
+                  query=Q(
+                      'bool',
+                      must=Q(
+                          'term',
+                          collections__pid=request.args['collection_view']))))
     # Admin
     else:
         # Filters records by user's organisation
