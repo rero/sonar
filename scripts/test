@@ -27,9 +27,8 @@ if [[ -z "${VIRTUAL_ENV}" ]]; then
   exit 1
 fi
 
-# TODO: remove the ignored ID when this will corrected in Invenio:
-# https://github.com/inveniosoftware/invenio-previewer/blob/master/setup.py#L59
-safety check -i 39462 && \
+# Ignore 40459 until the next release of flask-caching will be available.
+safety check -i 40459 && \
 pydocstyle sonar tests docs && \
 isort --check-only --diff "${SCRIPT_PATH}/.." && \
 autoflake  -rc --remove-all-unused-imports --ignore-init-module-imports . && \
