@@ -1395,17 +1395,13 @@
               "title": "Controlled affiliation",
               "type": "string",
               "minLength": 1
-            },
-            "form": {
-              "hideExpression": "field.parent.model.agent.type !== 'bf:Person'"
             }
           }
         },
         "propertiesOrder": [
           "agent",
           "role",
-          "affiliation",
-          "controlledAffiliation"
+          "affiliation"
         ],
         "required": [
           "agent",
