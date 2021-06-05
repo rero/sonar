@@ -462,7 +462,6 @@ def deposit_json():
             '2020',
             'publication': {
                 'publishedIn': 'Journal',
-                'year': '2019',
                 'volume': '12',
                 'number': '2',
                 'pages': '1-12',
@@ -509,7 +508,8 @@ def deposit_json():
             }]
         },
         'diffusion': {
-            'license': 'CC0'
+            'license': 'CC0',
+            'oa_status': 'green'
         },
         'status':
         'in_progress',

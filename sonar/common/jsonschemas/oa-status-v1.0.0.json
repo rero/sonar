@@ -1,0 +1,39 @@
+{
+  "title": "Open access status",
+  "type": "string",
+  "enum": [
+    "green",
+    "gold",
+    "hybrid",
+    "bronze",
+    "closed"
+  ],
+  "form": {
+    "hide": true,
+    "navigation": {
+      "essential": true
+    },
+    "options": [
+      {
+        "label": "Green",
+        "value": "green"
+      },
+      {
+        "label": "Gold",
+        "value": "gold"
+      },
+      {
+        "label": "Hybrid",
+        "value": "hybrid"
+      },
+      {
+        "label": "Bronze",
+        "value": "bronze"
+      },
+      {
+        "label": "Closed",
+        "value": "closed"
+      }
+    ]
+  }
+}

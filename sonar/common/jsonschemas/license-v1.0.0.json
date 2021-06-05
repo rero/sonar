@@ -9,9 +9,10 @@
     "CC BY-NC-SA",
     "CC BY-ND",
     "CC BY-SA",
-    "Other OA / license undefined",
-    "Not OA / Rights reserved"
+    "License undefined",
+    "Rights reserved"
   ],
+  "default": "License undefined",
   "form": {
     "templateOptions": {
       "wrappers": [
@@ -48,12 +49,12 @@
         "value": "CC BY-SA"
       },
       {
-        "label": "Other OA / license undefined",
-        "value": "Other OA / license undefined"
+        "label": "License undefined",
+        "value": "License undefined"
       },
       {
-        "label": "Not OA / Rights reserved",
-        "value": "Not OA / Rights reserved"
+        "label": "Rights reserved",
+        "value": "Rights reserved"
       }
     ]
   }

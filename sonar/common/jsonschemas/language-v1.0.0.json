@@ -490,10 +490,7 @@
   ],
   "form": {
     "templateOptions": {
-      "sort": true,
-      "wrappers": [
-        "card"
-      ]
+      "sort": true
     },
     "options": [
       {
