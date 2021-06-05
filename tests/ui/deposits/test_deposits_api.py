@@ -88,7 +88,7 @@ def test_create_document(app, db, project, client, deposit, submitter):
         }]
     }]
     assert document['partOf'] == [{
-        'numberingYear': '2019',
+        'numberingYear': '2020',
         'numberingPages': '1-12',
         'document': {
             'title': 'Journal',

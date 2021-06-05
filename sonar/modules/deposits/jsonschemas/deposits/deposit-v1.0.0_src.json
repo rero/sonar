@@ -537,16 +537,14 @@
           }
         },
         "publication": {
-          "title": "Part of (host document)",
+          "title": "Contained in (journal, book, proceedings)",
           "type": "object",
           "required": [
-            "publishedIn",
-            "year"
+            "publishedIn"
           ],
           "additionalProperties": false,
           "propertiesOrder": [
             "publishedIn",
-            "year",
             "volume",
             "number",
             "pages",
@@ -560,25 +558,38 @@
               "type": "string",
               "minLength": 1
             },
-            "year": {
-              "title": "Year",
-              "type": "string",
-              "minLength": 1
-            },
             "volume": {
               "title": "Volume",
               "type": "string",
               "minLength": 1,
+              "pattern": "^[0-9]+$",
               "form": {
-                "hideExpression": "!['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)"
+                "hideExpression": "!['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)",
+                "templateOptions": {
+                  "placeholder": "Example: 1"
+                },
+                "validation": {
+                  "messages": {
+                    "patternMessage": "Please enter a valid number."
+                  }
+                }
               }
             },
             "number": {
               "title": "Number",
               "type": "string",
               "minLength": 1,
+              "pattern": "^[0-9]+$",
               "form": {
-                "hideExpression": "!['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)"
+                "hideExpression": "!['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)",
+                "templateOptions": {
+                  "placeholder": "Example: 10"
+                },
+                "validation": {
+                  "messages": {
+                    "patternMessage": "Please enter a valid number."
+                  }
+                }
               }
             },
             "pages": {
@@ -589,17 +600,23 @@
               "form": {
                 "templateOptions": {
                   "placeholder": "Examples: 135, 5-27, …"
+                },
+                "validation": {
+                  "messages": {
+                    "patternMessage": "Please enter a valid pages range, example: 135, 5-27."
+                  }
                 }
               }
             },
             "editors": {
-              "title": "Editors",
-              "description": "In the format \"Last name, First name\". For example, \"Doe, John\"",
+              "title": "Authors / Editors",
               "type": "array",
               "items": {
                 "type": "string",
-                "minLength": 1,
-                "pattern": "^[^,]+, [^,]+$"
+                "minLength": 1
+              },
+              "form": {
+                "hideExpression": "['coar:c_6501'].includes(field.parent.parent.model.documentType)"
               }
             },
             "publisher": {
@@ -609,7 +626,7 @@
             }
           },
           "form": {
-            "hideExpression": "!['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)",
+            "hideExpression": "!['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_3e5a', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)",
             "templateOptions": {
               "wrappers": [
                 "card"
@@ -715,10 +732,10 @@
           }
         },
         "subjects": {
-          "title": "Subjects",
+          "title": "Keywords",
           "type": "array",
           "items": {
-            "title": "Subject",
+            "title": "Keyword",
             "type": "object",
             "required": [
               "language",
@@ -734,10 +751,10 @@
                 "$ref": "language-v1.0.0.json"
               },
               "subjects": {
-                "title": "Subjects",
+                "title": "Values",
                 "type": "array",
                 "minItems": 1,
-                "default": [],
+                "default": [null],
                 "items": {
                   "type": "string",
                   "minLength": 1
@@ -900,9 +917,6 @@
     "projects": {
       "title": "Research projects",
       "type": "array",
-      "default": [
-        {}
-      ],
       "minItems": 0,
       "items": {
         "title": "Research project",
@@ -950,17 +964,27 @@
               },
               "startDate": {
                 "title": "Start date",
-                "description": "Example: 2019-05-05",
                 "type": "string",
                 "format": "date",
-                "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
+                "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
+                "form": {
+                  "type": "datepicker",
+                  "templateOptions": {
+                    "placeholder": "Example: 2020-12-01"
+                  }
+                }
               },
               "endDate": {
                 "title": "End date",
-                "description": "Example: 2019-05-05",
                 "type": "string",
                 "format": "date",
-                "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
+                "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
+                "form": {
+                  "type": "datepicker",
+                  "templateOptions": {
+                    "placeholder": "Example: 2020-12-01"
+                  }
+                }
               }
             },
             "propertiesOrder": [
@@ -990,6 +1014,9 @@
       "properties": {
         "license": {
           "$ref": "license-v1.0.0.json"
+        },
+        "oa_status": {
+          "$ref": "oa-status-v1.0.0.json"
         }
       },
       "required": [

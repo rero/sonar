@@ -187,7 +187,7 @@ class DepositRecord(SonarRecord):
         # Published in
         if self['metadata'].get('publication'):
             part_of = {
-                'numberingYear': self['metadata']['publication']['year'],
+                'numberingYear': self['metadata']['documentDate'],
                 'document': {
                     'title': self['metadata']['publication']['publishedIn']
                 }
@@ -342,6 +342,10 @@ class DepositRecord(SonarRecord):
         metadata['usageAndAccessPolicy'] = {
             'license': self['diffusion']['license']
         }
+
+        # Open access status
+        if self['diffusion'].get('oa_status'):
+            metadata['oa_status'] = self['diffusion']['oa_status']
 
         document = DocumentRecord.create(metadata,
                                          dbcommit=True,
