@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-06-01 15:56+0200\n"
-"PO-Revision-Date: 2021-05-27 12:34+0000\n"
+"PO-Revision-Date: 2021-06-06 13:32+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"de/>\n"
 "Language: de\n"
-"Language-Team: German "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/de/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.7-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: sonar/theme/views.py:65
@@ -154,11 +155,11 @@ msgstr "Freundliche Grüsse"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:909
 msgid "Brief description of the mandate"
-msgstr ""
+msgstr "Kurzbeschreibung des Auftrags"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:945
 msgid "Brief description of the report"
-msgstr ""
+msgstr "Kurzbeschreibung des Berichts"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1788
 msgid "Bronze"
@@ -246,7 +247,7 @@ msgstr "Hier klicken, um Ihr Passwort zurückzusetzen"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1792
 msgid "Closed"
-msgstr ""
+msgstr "Geschlossen"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:18
 msgid "Code"
@@ -351,7 +352,7 @@ msgstr "Datum im Format JJJJ-MM-TT, z.B. 1970-01-31"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:141
 msgid "Date of approval by the Team Leader"
-msgstr ""
+msgstr "Datum der Genehmigung durch den Teamleiter"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1271
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:34
@@ -625,7 +626,7 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:338
 msgid "External partners"
-msgstr ""
+msgstr "Externe Partner"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:343
 msgid "External partners are involved"
@@ -795,7 +796,7 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:969
 msgid "How are research results used in training?"
-msgstr ""
+msgstr "Wie werden Forschungsergebnisse in der Ausbildung genutzt?"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1784
 msgid "Hybrid"
@@ -877,7 +878,7 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:241
 msgid "Internal research associates"
-msgstr ""
+msgstr "Interne Forschungsmitarbeitenden"
 
 #: sonar/theme/templates/sonar/page.html:47
 msgid "Invenio"
@@ -1066,7 +1067,7 @@ msgstr "MIME-Typ"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:196
 msgid "Main team"
-msgstr ""
+msgstr "Hauptteam"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:291
 msgid "Main title"
@@ -1078,7 +1079,7 @@ msgstr "Haupttitel"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:836
 msgid "Mandate"
-msgstr ""
+msgstr "Auftrag"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:423
 msgid "Master"
@@ -1371,7 +1372,7 @@ msgstr "Projekt"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:148
 msgid "Project sponsor"
-msgstr ""
+msgstr "Projektträger"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:303
 msgid "Project status"
@@ -1379,7 +1380,7 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:55
 msgid "Project summary"
-msgstr ""
+msgstr "Projekt-Zusammenfassung"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:440
 msgid "Provision activities"
@@ -1434,7 +1435,7 @@ msgstr "Erläuterung"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:409
 msgid "Realization framework"
-msgstr ""
+msgstr "Realisierungsrahmen"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:4
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:908
@@ -1516,7 +1517,7 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:259
 msgid "Secondary team"
-msgstr ""
+msgstr "Sekundäres Team"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:251
 msgid "Section"
@@ -1911,6 +1912,8 @@ msgid ""
 "What are the benefits and quality improvements in the research in this "
 "project?"
 msgstr ""
+"Was sind die Vorteile und Qualitätsverbesserungen der Forschung in diesem "
+"Projekt?"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:770
 msgid "What are the benefits of research in training?"
@@ -1921,10 +1924,12 @@ msgid ""
 "What is the impact of research on public action or on internal or "
 "external governance?"
 msgstr ""
+"Welche Auswirkungen hat die Forschung auf das öffentliche Handeln oder auf "
+"die interne oder externe Steuerung?"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:782
 msgid "What is the impact of the research on the professional environment?"
-msgstr ""
+msgstr "Welche Auswirkungen hat die Forschung auf das berufliche Umfeld?"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:577
 msgid "Who are the actors involved in the field?"
@@ -5916,4 +5921,3 @@ msgstr ""
 
 #~ msgid "\\u200bSwiss National Science Foundation"
 #~ msgstr ""
-
