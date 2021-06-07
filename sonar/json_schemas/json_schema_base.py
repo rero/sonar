@@ -51,6 +51,7 @@ class JSONSchemaBase:
         rec_type = re.sub('ies$', 'y', rec_type)
         rec_type = re.sub('s$', '', rec_type)
 
+        current_jsonschemas.get_schema.cache_clear()
         schema_name = f'{self._resource_type}/{rec_type}-v1.0.0.json'
 
         if has_custom_resource(self._resource_type):
