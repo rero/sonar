@@ -27,7 +27,7 @@ along with this program. If not, see
     <h3>{{ name }}</h3>
     {% if collection.description %}
     <div class="mb-2">
-      {{ collection.description | language_value | safe }}
+      {{ collection.description | language_value | markdown_filter | safe }}
     </div>
     {% endif %}
     <p>

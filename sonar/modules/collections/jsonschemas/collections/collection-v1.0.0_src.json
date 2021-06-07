@@ -62,7 +62,7 @@
             "type": "string",
             "minLength": 1,
             "form": {
-              "type": "textarea",
+              "type": "markdown",
               "templateOptions": {
                 "rows": 5
               }
