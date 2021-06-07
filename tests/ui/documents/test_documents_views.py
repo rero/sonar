@@ -422,3 +422,12 @@ def test_get_custom_field_label(app):
     record = {'organisation': [{'documentsCustomField1': {}}]}
     assert render_template_string('{{ record | get_custom_field_label(1) }}',
                                   record=record) == 'None'
+
+
+def test_markdown_filter(app):
+    """Test markdown to HTML conversion."""
+    assert render_template_string(
+        "{{ 'Markdown text\nwith **strong** and *italic*' | markdown_filter" \
+        " | safe}}"
+    ) == '<p>Markdown text\nwith <strong>strong</strong> and <em>italic</em>'\
+        '</p>'

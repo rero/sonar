@@ -82,7 +82,7 @@ along with this program. If not, see
   {% if g.get('organisation', {}).get('isDedicated') %}
     {% if g.organisation.get('description') %}
     <div class="col-12">
-      {{ g.organisation.description | nl2br | safe }}
+      {{ g.organisation.description | markdown_filter | safe }}
     </div>
     {% endif %}
   {% else %}

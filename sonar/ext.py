@@ -20,6 +20,7 @@
 from __future__ import absolute_import, print_function
 
 import jinja2
+import markdown
 from flask import current_app, render_template, request
 from flask_bootstrap import Bootstrap
 from flask_security import user_registered
@@ -151,6 +152,16 @@ class Sonar():
                 record.index_name, 'detail', record.pid.pid_value
             ]
             return '/'.join(url)
+
+        @app.template_filter()
+        def markdown_filter(content):
+            """Markdown filter.
+
+            :param str content: Content to convert
+            :returns: HTML corresponding to markdown
+            :rtype: str
+            """
+            return markdown.markdown(content)
 
     def create_resources(self):
         """Create resources."""

@@ -11,7 +11,7 @@
       <div class="col-12 col-lg-{{ '10' if thumbnail else '12' }}">
         <h1 class="mb-2">{{ g.organisation.name }}</h1>
         {% if g.organisation.get('description') %}
-        <p class="mb-3 text-justify">{{ g.organisation.description | nl2br | safe }}</p>
+        <p class="mb-3 text-justify">{{ g.organisation.description | markdown_filter | safe }}</p>
         {% endif %}
         <div class="row">
           <div class="col-12 col-lg-4">
