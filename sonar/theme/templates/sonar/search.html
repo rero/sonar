@@ -10,8 +10,11 @@
 
 {%- block javascript %}
 {{ super() }}
-<script src="/static/sonar-ui/runtime.js?{{ ui_version }}"></script>
-<script src="/static/sonar-ui/polyfills.js?{{ ui_version }}"></script>
+<script src="/static/sonar-ui/runtime-es5.js?{{ ui_version }}" nomodule defer></script>
+<script src="/static/sonar-ui/runtime-es2015.js?{{ ui_version }}" type="module"></script>
+<script src="/static/sonar-ui/polyfills-es5.js?{{ ui_version }}" nomodule defer></script>
+<script src="/static/sonar-ui/polyfills-es2015.js?{{ ui_version }}" type="module"></script>
 <script src="/static/sonar-ui/scripts.js?{{ ui_version }}"></script>
-<script src="/static/sonar-ui/main.js?{{ ui_version }}"></script>
+<script src="/static/sonar-ui/main-es5.js?{{ ui_version }}" nomodule defer></script>
+<script src="/static/sonar-ui/main-es2015.js?{{ ui_version }}" type="module"></script>
 {%- endblock javascript %}
