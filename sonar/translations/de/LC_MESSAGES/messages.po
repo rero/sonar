@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-06-01 15:56+0200\n"
-"PO-Revision-Date: 2021-06-06 13:32+0000\n"
+"PO-Revision-Date: 2021-06-11 07:32+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "de/>\n"
@@ -1071,11 +1071,11 @@ msgstr "Hauptteam"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:291
 msgid "Main title"
-msgstr "Haupttitel"
+msgstr "Titel"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:287
 msgid "Main titles"
-msgstr "Haupttitel"
+msgstr "Titel"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:836
 msgid "Mandate"
@@ -2118,7 +2118,7 @@ msgstr "STRN"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:280
 msgid "bf:Title"
-msgstr "Titel"
+msgstr "Haupttitel"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:477
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:796
