@@ -41,11 +41,15 @@ along with this program. If not, see
             class="img-fluid" alt="{{ 'SONAR logo' }}">
           {% endif %}
         </a>
-        {% if g.get('organisation', {}).get('isDedicated') and g.get('organisation', {}).get('platformName') %}
-        <h1 class="mt-4 mb-0">{{ g.organisation['platformName'] }}</h1>
-        {% endif%}
       </div>
     </div>
+    {% if g.get('organisation', {}).get('isDedicated') and g.get('organisation', {}).get('platformName') %}
+    <div class="row justify-content-center">
+      <div class="col text-center">
+        <div class="mt-4 mb-0">{{ g.organisation['platformName'] | markdown_filter | safe }}</div>
+      </div>
+    </div>
+    {% endif%}
     <div class="row justify-content-center">
       <div class="col-lg-8 text-right my-4">
         <form class="justify-content-end"
@@ -80,11 +84,15 @@ along with this program. If not, see
 {%- block body %}
 <div class="row justify-content-between">
   {% if g.get('organisation', {}).get('isDedicated') %}
+  <div class="col-12">
+    {% if config.get('SONAR_APP_ORGANISATION_CONFIG', {}).get(g.organisation.pid, {}).get('home_template') %}
+    {% include config['SONAR_APP_ORGANISATION_CONFIG'][g.organisation.pid]['home_template'] %}
+    {% else %}
     {% if g.organisation.get('description') %}
-    <div class="col-12">
-      {{ g.organisation.description | markdown_filter | safe }}
-    </div>
+    {{ g.organisation.description | markdown_filter | safe }}
     {% endif %}
+    {% endif %}
+  </div>
   {% else %}
   <div class="col-lg-7">
     <h5 class="home-text">

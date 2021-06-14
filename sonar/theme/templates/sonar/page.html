@@ -144,8 +144,29 @@ along with this program. If not, see
   {%- block javascript %}
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      // Toggle display
+      const toggleDisplay = document.getElementsByClassName('toggle-display');
+      Array.prototype.forEach.call(toggleDisplay, function (el, i) {
+        el.addEventListener('click', function (event) {
+          const targetElement = document.getElementById(el.dataset.target);
+          if (targetElement) {
+            if (targetElement.className.search('d-none') !== -1) {
+              targetElement.classList.remove('d-none')
+            } else {
+              targetElement.classList.add('d-none')
+            }
+          }
+          event.preventDefault();
+        });
+      });
+
       document.addEventListener('click', function (event) {
         let link = event.target;
+
+        // Don't do anything if .toggle-display, the process is just above.
+        if (link.matches('.toggle-display')) {
+          return;
+        }
 
         const dropdowns = document.getElementsByClassName('dropdown-menu show');
 

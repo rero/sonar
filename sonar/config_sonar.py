@@ -74,6 +74,7 @@ SONAR_APP_HEG_DATA_DIRECTORY = './data/heg'
 
 SONAR_APP_ORGANISATION_CONFIG = {
     'hepvs': {
+        'home_template': 'dedicated/hepvs/home.html',
         'projects': True
     }
 }
