@@ -70,7 +70,8 @@
         "type": "textarea",
         "templateOptions": {
           "rows": 10
-        }
+        },
+        "hideExpression": "!field.model.isShared"
       }
     },
     "platformName": {
@@ -78,6 +79,10 @@
       "type": "string",
       "minLength": 1,
       "form": {
+        "type": "markdown",
+        "templateOptions": {
+          "rows": 5
+        },
         "hideExpression": "!field.model.isDedicated"
       }
     },
@@ -89,7 +94,7 @@
         "label": {
           "title": "Labels",
           "type": "array",
-          "minItems": 1,
+          "default": [],
           "items": {
             "title": "Label",
             "type": "object",
@@ -136,7 +141,7 @@
         "label": {
           "title": "Labels",
           "type": "array",
-          "minItems": 1,
+          "default": [],
           "items": {
             "title": "Label",
             "type": "object",
@@ -183,7 +188,7 @@
         "label": {
           "title": "Labels",
           "type": "array",
-          "minItems": 1,
+          "default": [],
           "items": {
             "title": "Label",
             "type": "object",
@@ -289,8 +294,8 @@
     "description",
     "isShared",
     "isDedicated",
-    "platformName",
     "allowedIps",
+    "platformName",
     "documentsCustomField1",
     "documentsCustomField2",
     "documentsCustomField3"

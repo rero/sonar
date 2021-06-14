@@ -79,7 +79,8 @@ setup(
             'pdf_extractor = \
                 sonar.modules.pdf_extractor.views.client:blueprint',
             'validation = sonar.modules.validation.views:blueprint',
-            'collections = sonar.modules.collections.views:blueprint'
+            'collections = sonar.modules.collections.views:blueprint',
+            'dedicated = sonar.dedicated.views:blueprint'
         ],
         'invenio_base.api_blueprints': [
             'pdf_extractor = sonar.modules.pdf_extractor.views.api:blueprint',
