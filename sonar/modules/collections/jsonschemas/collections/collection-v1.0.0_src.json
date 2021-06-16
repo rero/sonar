@@ -45,8 +45,21 @@
           "value",
           "language"
         ]
+      },
+      "form": {
+        "validation": {
+          "validators": {
+            "uniqueValueKeysInObject": {
+              "keys": [
+                "language"
+              ]
+            }
+          },
+          "messages": {
+            "uniqueValueKeysInObjectMessage": "Only one value per language is allowed"
+          }
+        }
       }
-
     },
     "description": {
       "title": "Descriptions",

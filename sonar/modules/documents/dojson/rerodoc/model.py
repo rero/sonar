@@ -27,6 +27,7 @@ from invenio_db import db
 from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.documents.dojson.rerodoc.overdo import Overdo
 from sonar.modules.organisations.api import OrganisationRecord
+from sonar.modules.subdivisions.api import Record as SubdivisionRecord
 from sonar.modules.utils import remove_trailing_punctuation
 
 overdo = Overdo()
@@ -69,12 +70,12 @@ def marc21_to_type_and_organisation(self, key, value):
 
         # Specific transformation for `bpuge` and `mhnge`, because the real
         # acronym is `vge`.
+        subdivision_name = None
+
         if organisation in [
                 'bpuge', 'mhnge', 'baage', 'bmuge', 'imvge', 'mhsge'
         ]:
-            # Store section
-            self['sections'] = [organisation
-                                ] if organisation != 'bpuge' else ['bge']
+            subdivision_name = 'bge' if organisation == 'bpuge' else organisation
             organisation = 'vge'
 
         if organisation not in overdo.registererd_organisations:
@@ -85,6 +86,38 @@ def marc21_to_type_and_organisation(self, key, value):
             '$ref':
             OrganisationRecord.get_ref_link('organisations', organisation)
         }]
+
+        if subdivision_name:
+            # Store subdivision
+            hash_key = hashlib.md5(
+                (subdivision_name + organisation).encode()).hexdigest()
+
+            subdivision_pid = SubdivisionRecord.get_pid_by_hash_key(hash_key)
+
+            # No subdivision found
+            if not subdivision_pid:
+                subdivision = SubdivisionRecord.create({
+                    'name': [{
+                        'language': 'eng',
+                        'value': subdivision_name
+                    }],
+                    'organisation': {
+                        '$ref':
+                        OrganisationRecord.get_ref_link(
+                            'organisations', organisation)
+                    },
+                    'hashKey':
+                    hash_key
+                })
+                subdivision.commit()
+                subdivision.reindex()
+                db.session.commit()
+                subdivision_pid = subdivision['pid']
+
+            self['subdivisions'] = [{
+                '$ref':
+                SubdivisionRecord.get_ref_link('subdivisions', subdivision_pid)
+            }]
 
     # get doc type by mapping
     key = value.get('a', '') + '|' + value.get('f', '')

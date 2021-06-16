@@ -65,17 +65,35 @@ class DepositPermission(RecordPermission):
         if not user or not user.is_submitter:
             return False
 
-        # Superuser is allowd
         if user.is_superuser:
             return True
 
         deposit = DepositRecord.get_record_by_pid(record['pid'])
         deposit = deposit.replace_refs()
 
-        # Moderators are allowed only for their organisation's deposits.
-        if user.is_moderator:
+        # Admin is allowed only for same organisation's records
+        if user.is_admin:
             return current_organisation['pid'] == deposit['user'][
                 'organisation']['pid']
+
+        # Special rules for moderators
+        if user.is_moderator:
+            user = user.replace_refs()
+
+            # Deposit does not belong to user's organisation
+            if current_organisation['pid'] != deposit['user']['organisation'][
+                    'pid']:
+                return False
+
+            # Moderator has no subdivision, he can read the deposit
+            if not user.get('subdivision'):
+                return True
+
+            # User has a subdivision, he can only read his own deposits and
+            # deposits from the same subdivision
+            return user['pid'] == deposit['user'][
+                'pid'] or deposit.has_subdivision(
+                    user.get('subdivision', {}).get('pid'))
 
         # Submitters have only access to their own deposits.
         return user['pid'] == deposit['user']['pid']

@@ -68,25 +68,45 @@ class UserSearch(SonarSearch):
         index = 'users'
         doc_types = []
 
-    def get_moderators(self, organisation_pid=None):
+    def get_moderators(self, organisation_pid=None, subdivision_pid=None):
         """Get moderators corresponding to organisation.
 
         If no organisation provided, return moderators not associated with
         organisations.
-        """
-        filter_roles = []
-        roles = UserRecord.get_all_roles_for_role(UserRecord.ROLE_MODERATOR)
-        for role in roles:
-            filter_roles.append(Q('term', role=role))
 
-        query = self.query(
-            'bool',
-            filter=[Q('bool', should=filter_roles, minimum_should_match=1)])
+        :param organisation_pid: Organisation PID.
+        :param subdivision_pid: Subdivision PID.
+        :returns: List of results
+        """
+        must = []
 
         if organisation_pid:
-            query = query.filter('term', organisation__pid=organisation_pid)
+            must.append(Q('term', organisation__pid=organisation_pid))
 
-        return query.source(includes=['pid', 'email']).scan()
+        if not subdivision_pid:
+            must.append(
+                Q('bool',
+                  should=[
+                      Q('term', role=UserRecord.ROLE_ADMIN),
+                      Q('bool',
+                        must=Q('term', role=UserRecord.ROLE_MODERATOR),
+                        must_not=Q('exists', field='subdivision'))
+                  ]))
+
+        else:
+            must.append(
+                Q('bool',
+                  should=[
+                      Q('term', role=UserRecord.ROLE_ADMIN),
+                      Q('bool',
+                        must=[
+                            Q('term', role=UserRecord.ROLE_MODERATOR),
+                            Q('term', subdivision__pid=subdivision_pid)
+                        ])
+                  ]))
+
+        return self.query('bool', filter=Q(
+            'bool', must=must)).source(includes=['pid', 'email']).scan()
 
 
 class UserRecord(SonarRecord):
@@ -271,15 +291,21 @@ class UserRecord(SonarRecord):
         datastore.remove_role_from_user(self.user, role)
         datastore.commit()
 
-    def get_moderators_emails(self):
-        """Get the list of moderators emails."""
+    def get_moderators_emails(self, subdivision_pid=None):
+        """Get the list of moderators emails.
+
+        :param subdivision_pid: PID of a subdivision.
+        :returns: List of emails.
+        :rtype: list
+        """
         organisation_pid = None
 
         if 'organisation' in self:
             organisation_pid = UserRecord.get_pid_by_ref_link(
                 self['organisation']['$ref'])
 
-        moderators = UserSearch().get_moderators(organisation_pid)
+        moderators = UserSearch().get_moderators(organisation_pid,
+                                                 subdivision_pid)
 
         return [result['email'] for result in moderators]
 

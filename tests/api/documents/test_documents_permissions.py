@@ -216,8 +216,8 @@ def test_read(client, document, make_user, superuser, admin, moderator,
     }
 
 
-def test_update(client, document, make_user, superuser, admin, moderator,
-                submitter, user):
+def test_update(client, db, document, make_user, superuser, admin, moderator,
+                submitter, user, subdivision, make_subdivision):
     """Test update documents permissions."""
 
     headers = {
@@ -255,6 +255,58 @@ def test_update(client, document, make_user, superuser, admin, moderator,
                      data=json.dumps(document.dumps()),
                      headers=headers)
     assert res.status_code == 200
+
+    # Document has a subdivision, user have not.
+    document['subdivisions'] = [{
+        '$ref':
+        f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
+    }]
+    document.commit()
+    document.reindex()
+    db.session.commit()
+    res = client.put(url_for('invenio_records_rest.doc_item',
+                             pid_value=document['pid']),
+                     data=json.dumps(document.dumps()),
+                     headers=headers)
+    assert res.status_code == 200
+
+    # Document has a subdivision, and user have a different.
+    new_subdivision = make_subdivision('org')
+    moderator['subdivision'] = {
+        '$ref': f'https://sonar.ch/api/subdivisions/{new_subdivision["pid"]}'
+    }
+    moderator.commit()
+    moderator.reindex()
+    db.session.commit()
+    res = client.put(url_for('invenio_records_rest.doc_item',
+                             pid_value=document['pid']),
+                     data=json.dumps(document.dumps()),
+                     headers=headers)
+    assert res.status_code == 403
+
+    # Document has a subdivision, and user have the same.
+    moderator['subdivision'] = {
+        '$ref': f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
+    }
+    moderator.commit()
+    moderator.reindex()
+    db.session.commit()
+    res = client.put(url_for('invenio_records_rest.doc_item',
+                             pid_value=document['pid']),
+                     data=json.dumps(document.dumps()),
+                     headers=headers)
+    assert res.status_code == 200
+
+    # Document has no subdivision, and user has one.
+    document.pop('subdivisions', None)
+    document.commit()
+    document.reindex()
+    db.session.commit()
+    res = client.put(url_for('invenio_records_rest.doc_item',
+                             pid_value=document['pid']),
+                     data=json.dumps(document.dumps()),
+                     headers=headers)
+    assert res.status_code == 403
 
     # Logged as admin
     login_user_via_session(client, email=admin['email'])
@@ -329,8 +381,8 @@ def test_delete(client, document, make_document, make_user, superuser, admin,
     # Logged as superuser
     login_user_via_session(client, email=superuser['email'])
     pid = document['pid']
-    res = client.delete(
-        url_for('invenio_records_rest.doc_item', pid_value=pid))
+    res = client.delete(url_for('invenio_records_rest.doc_item',
+                                pid_value=pid))
     assert res.status_code == 204
     assert PersistentIdentifier.get('ark', ark_id).status == \
         PIDStatus.DELETED

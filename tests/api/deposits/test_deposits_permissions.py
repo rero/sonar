@@ -138,8 +138,8 @@ def test_create(client, deposit_json, bucket_location, superuser, admin,
     assert res.status_code == 201
 
 
-def test_read(client, make_deposit, make_user, superuser, admin, moderator,
-              submitter, user):
+def test_read(client, db, make_deposit, make_user, superuser, admin, moderator,
+              submitter, user, subdivision):
     """Test read deposits permissions."""
     deposit1 = make_deposit('submitter', 'org')
     deposit2 = make_deposit('submitter', 'org2')
@@ -171,6 +171,19 @@ def test_read(client, make_deposit, make_user, superuser, admin, moderator,
         url_for('invenio_records_rest.depo_item', pid_value=deposit1['pid']))
     assert res.status_code == 200
 
+    # Moderator has subdivision, I cannot read deposit outside of his
+    # subdivision
+    moderator['subdivision'] = {
+        '$ref': f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
+    }
+    moderator.commit()
+    moderator.reindex()
+    db.session.commit()
+    res = client.get(
+        url_for('invenio_records_rest.depo_item', pid_value=deposit1['pid']))
+    assert res.status_code == 403
+
+    # Cannot read deposit of other organisations
     res = client.get(
         url_for('invenio_records_rest.depo_item', pid_value=deposit2['pid']))
     assert res.status_code == 403
@@ -181,6 +194,7 @@ def test_read(client, make_deposit, make_user, superuser, admin, moderator,
         url_for('invenio_records_rest.depo_item', pid_value=deposit1['pid']))
     assert res.status_code == 200
 
+    # Cannot read deposit of other organisations
     res = client.get(
         url_for('invenio_records_rest.depo_item', pid_value=deposit2['pid']))
     assert res.status_code == 403

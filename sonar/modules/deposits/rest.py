@@ -32,8 +32,9 @@ from invenio_rest import ContentNegotiatedMethodView
 from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.pdf_extractor.pdf_extractor import PDFExtractor
 from sonar.modules.pdf_extractor.utils import format_extracted_data
+from sonar.modules.subdivisions.api import Record as SubdivisionRecord
 from sonar.modules.users.api import UserRecord
-from sonar.modules.utils import send_email
+from sonar.modules.utils import get_language_value, send_email
 
 
 class FilesResource(ContentNegotiatedMethodView):
@@ -140,12 +141,20 @@ def publish(pid=None):
     else:
         deposit['status'] = DepositRecord.STATUS_TO_VALIDATE
 
-        moderators_emails = user.get_moderators_emails()
+        subdivision = SubdivisionRecord.get_record_by_ref_link(
+            user['subdivision']['$ref']) if user.get('subdivision') else None
+
+        moderators_emails = user.get_moderators_emails(
+            subdivision['pid'] if subdivision else None)
+
+        email_subject = _('Deposit to validate')
+        if subdivision:
+            email_subject += f' ({get_language_value(subdivision["name"])})'
 
         if moderators_emails:
             # Send an email to validators
             send_email(
-                moderators_emails, _('Deposit to validate'),
+                moderators_emails, email_subject,
                 'deposits/email/validation', {
                     'deposit': deposit,
                     'user': user,

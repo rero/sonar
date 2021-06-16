@@ -114,6 +114,7 @@ setup(
             'projects = sonar.resources.projects.jsonschemas',
             'projects_hepvs = sonar.dedicated.hepvs.projects.jsonschemas',
             'collections = sonar.modules.collections.jsonschemas',
+            'subdivisions = sonar.modules.subdivisions.jsonschemas',
             'common = sonar.common.jsonschemas'
         ],
         'invenio_search.mappings': [
@@ -122,7 +123,8 @@ setup(
             'users = sonar.modules.users.mappings',
             'deposits = sonar.modules.deposits.mappings',
             'projects = sonar.resources.projects.mappings',
-            'collections = sonar.modules.collections.mappings'
+            'collections = sonar.modules.collections.mappings',
+            'subdivisions = sonar.modules.subdivisions.mappings'
         ],
         'invenio_search.templates': [
             'base-record = sonar.es_templates:list_es_templates'
@@ -137,7 +139,9 @@ setup(
             'deposit_id = \
                 sonar.modules.deposits.api:deposit_pid_minter',
             'collections_id = \
-                sonar.modules.collections.api:pid_minter'
+                sonar.modules.collections.api:pid_minter',
+            'subdivisions_id = \
+                sonar.modules.subdivisions.api:pid_minter'
         ],
         'invenio_pidstore.fetchers': [
             'document_id = \
@@ -149,14 +153,17 @@ setup(
             'deposit_id = \
                 sonar.modules.deposits.api:deposit_pid_fetcher',
             'collections_id = \
-                sonar.modules.collections.api:pid_fetcher'
+                sonar.modules.collections.api:pid_fetcher',
+            'subdivisions_id = \
+                sonar.modules.subdivisions.api:pid_fetcher',
         ],
         "invenio_records.jsonresolver": [
             "organisation = sonar.modules.organisations.jsonresolvers",
             "user = sonar.modules.users.jsonresolvers",
             "document = sonar.modules.documents.jsonresolvers",
             "project = sonar.resources.projects.jsonresolvers",
-            "collections = sonar.modules.collections.jsonresolvers"
+            "collections = sonar.modules.collections.jsonresolvers",
+            "subdivisions = sonar.modules.subdivisions.jsonresolvers"
         ],
         'invenio_celery.tasks' : [
             'documents = sonar.modules.documents.tasks'

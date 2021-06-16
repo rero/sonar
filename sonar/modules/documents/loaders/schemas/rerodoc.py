@@ -52,7 +52,7 @@ class RerodocSchema(Marc21Schema):
     otherEdition = fields.List(fields.Dict())
     usageAndAccessPolicy = fields.Dict()
     files = fields.List(fields.Dict())
-    sections = fields.List(fields.Str())
+    subdivisions = fields.List(fields.Dict())
 
     @pre_dump
     def process(self, obj, **kwargs):

@@ -1114,6 +1114,39 @@
         },
         "oa_status": {
           "$ref": "oa-status-v1.0.0.json"
+        },
+        "subdivisions": {
+          "title": "Subdivisions",
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "title": "Subdivision",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "$ref": {
+                "type": "string",
+                "pattern": "^https://sonar.ch/api/subdivisions/.*?$",
+                "form": {
+                  "remoteTypeahead": {
+                    "type": "subdivisions",
+                    "field": "name.value.suggest",
+                    "label": "label"
+                  }
+                }
+              }
+            },
+            "required": [
+              "$ref"
+            ]
+          },
+          "form": {
+            "templateOptions": {
+              "wrappers": [
+                "card"
+              ]
+            }
+          }
         }
       },
       "required": [

@@ -17,30 +17,72 @@
 
 """Test API for user records."""
 
-
 from sonar.modules.users.api import UserRecord, UserSearch
 
 
-def test_get_moderators(app, organisation, roles):
+def test_get_moderators(app, db, organisation, subdivision, roles, es_clear):
     """Test search for moderators."""
-    user = UserRecord.create(
-        {
+    for item in [{
+            'email': 'moderator@gmail.com',
+            'role': UserRecord.ROLE_MODERATOR,
+            'subdivision': False
+    }, {
+            'email': 'moderator+subdivision@gmail.com',
+            'role': UserRecord.ROLE_MODERATOR,
+            'subdivision': True
+    }, {
+            'email': 'admin@gmail.com',
+            'role': UserRecord.ROLE_ADMIN,
+            'subdivision': False
+    }, {
+            'email': 'admin+subdivision@gmail.com',
+            'role': UserRecord.ROLE_ADMIN,
+            'subdivision': True
+    }]:
+        data = {
             'first_name': 'John',
             'last_name': 'Doe',
-            'email': 'john.doe@rero.ch',
-            'role': UserRecord.ROLE_MODERATOR,
+            'email': item['email'],
+            'role': item['role'],
             'organisation': {
                 '$ref': 'https://sonar.ch/api/organisations/org'
             }
-        },
-        dbcommit=True)
-    user.reindex()
+        }
 
-    moderators = UserSearch().get_moderators()
-    assert list(moderators)
+        if item['subdivision']:
+            data['subdivision'] = {
+                '$ref':
+                f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
+            }
+        user = UserRecord.create(data, dbcommit=True)
+        user.reindex()
 
-    moderators = UserSearch().get_moderators('not_existing_organisation')
-    assert not list(moderators)
+    moderators = [result['email'] for result in UserSearch().get_moderators()]
+    assert 'moderator@gmail.com' in moderators
+    assert 'admin@gmail.com' in moderators
+    assert 'admin+subdivision@gmail.com' in moderators
+
+    moderators = [
+        result['email']
+        for result in UserSearch().get_moderators('not_existing_organisation')
+    ]
+    assert not moderators
+
+    moderators = [
+        result['email'] for result in UserSearch().get_moderators('org')
+    ]
+    assert 'moderator@gmail.com' in moderators
+    assert 'admin@gmail.com' in moderators
+    assert 'admin+subdivision@gmail.com' in moderators
+
+    # Get moderators from the same subdivision
+    moderators = [
+        result['email']
+        for result in UserSearch().get_moderators('org', subdivision['pid'])
+    ]
+    assert 'moderator+subdivision@gmail.com' in moderators
+    assert 'admin@gmail.com' in moderators
+    assert 'admin+subdivision@gmail.com' in moderators
 
 
 def test_get_reachable_roles(app):
@@ -129,8 +171,7 @@ def test_delete(app, admin):
     """Test removing record."""
     admin.delete(dbcommit=True, delindex=True)
 
-    deleted = UserRecord.get_record(admin.id,
-                                    with_deleted=True)
+    deleted = UserRecord.get_record(admin.id, with_deleted=True)
     assert deleted.id == admin.id
 
     with app.app_context():

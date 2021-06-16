@@ -24,6 +24,9 @@ from invenio_jsonschemas import current_jsonschemas
 from invenio_records_rest.serializers.json import \
     JSONSerializer as _JSONSerializer
 
+from sonar.modules.subdivisions.api import Record as SubdivisionRecord
+from sonar.modules.utils import get_language_value
+
 
 class JSONSerializer(_JSONSerializer):
     """JSON serializer for SONAR."""
@@ -56,6 +59,14 @@ class JSONSerializer(_JSONSerializer):
 
     def post_process_serialize_search(self, results, pid_fetcher):
         """Post process the search results."""
+        # Add subdivision name
+        for org_term in results.get('aggregations',
+                                    {}).get('subdivision',
+                                            {}).get('buckets', []):
+            subdivision = SubdivisionRecord.get_record_by_pid(org_term['key'])
+            if subdivision:
+                org_term['name'] = get_language_value(subdivision['name'])
+
         return results
 
     def serialize_search(self,

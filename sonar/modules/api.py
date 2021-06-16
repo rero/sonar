@@ -109,9 +109,8 @@ class SonarRecord(Record, FilesMixin):
         :param pid_type: PID type.
         :returns: Record class.
         """
-        return current_app.config.get(
-                'RECORDS_REST_ENDPOINTS',
-                {}).get(pid_type, {}).get('record_class')
+        return current_app.config.get('RECORDS_REST_ENDPOINTS',
+                                      {}).get(pid_type, {}).get('record_class')
 
     @classmethod
     def get_all_pids(cls, with_deleted=False):
@@ -121,8 +120,7 @@ class SonarRecord(Record, FilesMixin):
         :returns: A generator iterator.
         """
         query = PersistentIdentifier.query.filter_by(
-            pid_type=cls.provider.pid_type
-        )
+            pid_type=cls.provider.pid_type)
         if not with_deleted:
             query = query.filter_by(status=PIDStatus.REGISTERED)
 
@@ -312,6 +310,41 @@ class SonarRecord(Record, FilesMixin):
             indexer().delete(self)
 
         return self
+
+    def has_organisation(self, organisation_pid):
+        """Check if record belongs to the organisation.
+
+        :param str organisation_pid: Organisation PID
+        :returns: True if record has organisation
+        :rtype: Bool
+        """
+        for org in self.get('organisation', []):
+            if organisation_pid == org['pid']:
+                return True
+
+        return False
+
+    def has_subdivision(self, subdivision_pid):
+        """Check if record belongs to the subdivision.
+
+        :param str subdivision_pid: Subdivision PID
+        :returns: True if record has subdivision
+        :rtype: Bool
+        """
+        # No subdivision passed, means no check to do.
+        if not subdivision_pid:
+            return True
+
+        # No subdivision in record, the document is accessible.
+        if not self.get('subdivisions'):
+            return False
+
+        for subdivision in self['subdivisions']:
+            if subdivision_pid == subdivision['pid']:
+                return True
+
+        # Subdivision not found, record is inaccessible
+        return False
 
 
 class SonarSearch(RecordsSearch):

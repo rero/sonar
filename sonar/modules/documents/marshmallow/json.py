@@ -100,7 +100,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     usageAndAccessPolicy = fields.Dict()
     projects = fields.List(fields.Dict())
     oa_status = SanitizedUnicode()
-    sections = fields.List(fields.Str())
+    subdivisions = fields.List(fields.Dict())
     harvested = fields.Boolean()
     customField1 = fields.List(fields.String(validate=validate.Length(min=1)))
     customField2 = fields.List(fields.String(validate=validate.Length(min=1)))

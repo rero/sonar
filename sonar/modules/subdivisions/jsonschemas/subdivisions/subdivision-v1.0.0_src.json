@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "https://sonar.ch/schemas/subdivisions/subdivision-v1.0.0.json",
+  "title": "Subdivisions",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "default": "https://sonar.ch/schemas/subdivisions/subdivision-v1.0.0.json"
+    },
+    "pid": {
+      "title": "Identifier",
+      "type": "string",
+      "minLength": 1
+    },
+    "hashKey": {
+      "title": "Hash key",
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "title": "Names",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Name",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "value": {
+            "title": "Value",
+            "type": "string",
+            "minLength": 1
+          },
+          "language": {
+            "$ref": "language-v1.0.0.json"
+          }
+        },
+        "propertiesOrder": [
+          "language",
+          "value"
+        ],
+        "required": [
+          "value",
+          "language"
+        ]
+      },
+      "form": {
+        "validation": {
+          "validators": {
+            "uniqueValueKeysInObject": {
+              "keys": [
+                "language"
+              ]
+            }
+          },
+          "messages": {
+            "uniqueValueKeysInObjectMessage": "Only one value per language is allowed"
+          }
+        }
+      }
+    },
+    "organisation": {
+      "title": "Organisation",
+      "type": "object",
+      "properties": {
+        "$ref": {
+          "title": "Organisation",
+          "type": "string",
+          "pattern": "^https://sonar.ch/api/organisations/.*?$",
+          "form": {
+            "remoteOptions": {
+              "type": "organisations"
+            }
+          }
+        }
+      },
+      "required": [
+        "$ref"
+      ],
+      "form": {
+        "expressionProperties": {
+          "templateOptions.required": "true"
+        }
+      }
+    }
+  },
+  "propertiesOrder": [
+    "name"
+  ],
+  "required": [
+    "name"
+  ]
+}

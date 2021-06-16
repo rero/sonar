@@ -17,6 +17,7 @@
 
 """Query for deposits."""
 
+from elasticsearch_dsl import Q
 from flask import current_app
 
 from sonar.modules.organisations.api import current_organisation
@@ -36,19 +37,32 @@ def search_factory(self, search, query_parser=None):
     if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
         return (search, urlkwargs)
 
+    user = current_user_record
+
     # For superusers, records are not filtered.
-    if current_user_record.is_superuser:
+    if user.is_superuser:
         return (search, urlkwargs)
 
     # For admin and moderator, only records that belongs to his organisation.
-    if current_user_record.is_admin or current_user_record.is_moderator:
+    if user.is_admin or user.is_moderator:
         search = search.filter(
             'term', user__organisation__pid=current_organisation['pid'])
+
+        # For moderators having a subdivision, records are filtered by
+        # subdivision or by owned deposits
+        if not user.is_admin and user.is_moderator and user.get('subdivision'):
+            user = user.replace_refs()
+            search = search.query(
+                'bool',
+                should=[
+                    Q('term', subdivision__pid=user['subdivision']['pid']),
+                    Q('term', user__pid=user['pid'])
+                ])
+
         return (search, urlkwargs)
 
     # For user, only records that belongs to him.
-    if current_user_record.is_submitter:
-        search = search.filter(
-            'term', user__pid=current_user_record['pid'])
+    if user.is_submitter:
+        search = search.filter('term', user__pid=user['pid'])
 
     return (search, urlkwargs)

@@ -20,20 +20,27 @@
 from invenio_accounts.testutils import login_user_via_view
 
 
-def test_create_document(app, db, project, client, deposit, submitter):
+def test_create_document(app, db, project, client, deposit, submitter,
+                         subdivision):
     """Test create document based on it."""
+    submitter['subdivision'] = {
+        '$ref': f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
+    }
+    submitter.commit()
+    submitter.reindex()
+    db.session.commit()
+
+    deposit['user'] = {
+        '$ref': f'https://sonar.ch/api/users/{submitter["pid"]}'
+    }
     deposit['projects'] = [{
         '$ref':
         f'https://sonar.ch/api/projects/{project.id}'
     }, {
-        'name':
-        'Project 1',
-        'description':
-        'Description',
-        'startDate':
-        '2020-01-01',
-        'endDate':
-        '2021-12-31'
+        'name': 'Project 1',
+        'description': 'Description',
+        'startDate': '2020-01-01',
+        'endDate': '2021-12-31'
     }]
     deposit.commit()
     deposit.reindex()
@@ -188,3 +195,8 @@ def test_create_document(app, db, project, client, deposit, submitter):
         },
         'role': ['cre']
     }]
+
+    # Test subdivision
+    deposit['diffusion'].pop('subdivisions', None)
+    document = deposit.create_document()
+    assert document['subdivisions'][0] == submitter['subdivision']

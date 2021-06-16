@@ -33,6 +33,7 @@ from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.organisations.api import OrganisationRecord
+from sonar.modules.subdivisions.api import Record as SubdivisionRecord
 from sonar.modules.users.api import UserRecord
 from sonar.proxies import sonar
 
@@ -41,12 +42,15 @@ from sonar.proxies import sonar
 def mock_ark(app, monkeypatch):
     """Mock for the ARK module."""
     # be sure that we do not make any request on the ARK server
-    monkeypatch.setattr('requests.get',
-        lambda *args, **kwargs: MockArkServer.get(*args, **kwargs))
-    monkeypatch.setattr('requests.post',
-        lambda *args, **kwargs: MockArkServer.post(*args, **kwargs))
-    monkeypatch.setattr('requests.put',
-        lambda *args, **kwargs: MockArkServer.put(*args, **kwargs))
+    monkeypatch.setattr(
+        'requests.get', lambda *args, **kwargs: MockArkServer.get(
+            *args, **kwargs))
+    monkeypatch.setattr(
+        'requests.post', lambda *args, **kwargs: MockArkServer.post(
+            *args, **kwargs))
+    monkeypatch.setattr(
+        'requests.put', lambda *args, **kwargs: MockArkServer.put(
+            *args, **kwargs))
     # enable ARK
     monkeypatch.setitem(app.config, 'SONAR_APP_ARK_NMA',
                         'https://www.arketype.ch')
@@ -454,7 +458,7 @@ def document_with_file(make_document):
 
 
 @pytest.fixture()
-def deposit_json(collection):
+def deposit_json(collection, subdivision):
     """Deposit JSON."""
     return {
         '$schema':
@@ -542,8 +546,14 @@ def deposit_json(collection):
             }]
         },
         'diffusion': {
-            'license': 'CC0',
-            'oa_status': 'green'
+            'license':
+            'CC0',
+            'oa_status':
+            'green',
+            'subdivisions': [{
+                '$ref':
+                f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
+            }],
         },
         'status':
         'in_progress',
@@ -778,6 +788,50 @@ def collection(app, db, es, admin, organisation, collection_json):
     collection.reindex()
     db.session.commit()
     return collection
+
+
+@pytest.fixture()
+def subdivision_json():
+    """Subdivision JSON."""
+    return {'name': [{'language': 'eng', 'value': 'Subdivision name'}]}
+
+
+@pytest.fixture()
+def make_subdivision(app, db, subdivision_json):
+    """Factory for creating subdivision."""
+
+    def _make_subdivision(organisation=None):
+        subdivision_json['organisation'] = {
+            '$ref':
+            'https://sonar.ch/api/organisations/{pid}'.format(pid=organisation)
+        }
+
+        subdivision_json.pop('pid', None)
+
+        subdivision = SubdivisionRecord.create(subdivision_json, dbcommit=True)
+        subdivision.commit()
+        subdivision.reindex()
+        db.session.commit()
+        return subdivision
+
+    return _make_subdivision
+
+
+@pytest.fixture()
+def subdivision(app, db, es, admin, organisation, subdivision_json):
+    """Subdivision fixture."""
+    json = copy.deepcopy(subdivision_json)
+    json['organisation'] = {
+        '$ref':
+        'https://sonar.ch/api/organisations/{pid}'.format(
+            pid=organisation['pid'])
+    }
+
+    subdivision = SubdivisionRecord.create(json, dbcommit=True)
+    subdivision.commit()
+    subdivision.reindex()
+    db.session.commit()
+    return subdivision
 
 
 @pytest.fixture()

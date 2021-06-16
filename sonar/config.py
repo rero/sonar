@@ -44,6 +44,8 @@ from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import record_permission_factory, \
     wiki_edit_permission
 from sonar.modules.query import and_term_filter, missing_field_filter
+from sonar.modules.subdivisions.config import \
+    Configuration as SubdivisionConfiguration
 from sonar.modules.users.api import UserRecord, UserSearch
 from sonar.modules.users.permissions import UserPermission
 from sonar.modules.utils import get_current_language
@@ -494,6 +496,9 @@ RECORDS_REST_ENDPOINTS = {
 
 # Add endpoint for collections
 RECORDS_REST_ENDPOINTS['coll'] = CollectionConfiguration.rest_endpoint
+
+# Add endpoint for subdivisions
+RECORDS_REST_ENDPOINTS['subd'] = SubdivisionConfiguration.rest_endpoint
 """REST endpoints."""
 
 DEFAULT_AGGREGATION_SIZE = 50
@@ -502,8 +507,8 @@ DEFAULT_AGGREGATION_SIZE = 50
 RECORDS_REST_FACETS = {
     'documents':
     dict(aggs=dict(
-        sections=dict(terms=dict(field='sections',
-                                     size=DEFAULT_AGGREGATION_SIZE)),
+        subdivision=dict(terms=dict(field='subdivisions.pid',
+                                    size=DEFAULT_AGGREGATION_SIZE)),
         organisation=dict(terms=dict(field='organisation.pid',
                                      size=DEFAULT_AGGREGATION_SIZE)),
         language=dict(
@@ -511,7 +516,7 @@ RECORDS_REST_FACETS = {
         subject=dict(
             terms=dict(field='facet_subjects', size=DEFAULT_AGGREGATION_SIZE)),
         collection=dict(terms=dict(field='collections.pid',
-                                            size=DEFAULT_AGGREGATION_SIZE)),
+                                   size=DEFAULT_AGGREGATION_SIZE)),
         document_type=dict(
             terms=dict(field='documentType', size=DEFAULT_AGGREGATION_SIZE)),
         controlled_affiliation=dict(
@@ -531,8 +536,8 @@ RECORDS_REST_FACETS = {
         customField3=dict(terms=dict(field='customField3.raw',
                                      size=DEFAULT_AGGREGATION_SIZE))),
          filters={
-             'sections':
-             and_term_filter('sections'),
+             'subdivision':
+             and_term_filter('subdivisions.pid'),
              'organisation':
              and_term_filter('organisation.pid'),
              'language':
@@ -562,11 +567,14 @@ RECORDS_REST_FACETS = {
          }),
     'deposits':
     dict(aggs=dict(
+        subdivision=dict(terms=dict(field='diffusion.subdivisions.pid',
+                                    size=DEFAULT_AGGREGATION_SIZE)),
         status=dict(terms=dict(field='status', size=DEFAULT_AGGREGATION_SIZE)),
         user=dict(terms=dict(field='user.pid', size=DEFAULT_AGGREGATION_SIZE)),
         contributor=dict(terms=dict(field='facet_contributors',
                                     size=DEFAULT_AGGREGATION_SIZE))),
          filters={
+             'subdivision': and_term_filter('diffusion.subdivisions.pid'),
              _('pid'): and_term_filter('pid'),
              _('status'): and_term_filter('status'),
              _('user'): and_term_filter('user.pid'),
@@ -584,10 +592,17 @@ RECORDS_REST_FACETS = {
                         }
                     }
                 }
+            },
+            'subdivision': {
+                'terms': {
+                    'field': 'subdivision.pid',
+                    'size': DEFAULT_AGGREGATION_SIZE
+                }
             }
         },
         'filters': {
-            'missing_organisation': missing_field_filter('organisation')
+            'missing_organisation': missing_field_filter('organisation'),
+            'subdivision': and_term_filter('subdivision.pid')
         }
     }
 }

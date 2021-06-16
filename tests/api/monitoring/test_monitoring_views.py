@@ -186,6 +186,12 @@ def test_data_info(client, es_clear, superuser, document, monkeypatch):
                 'es': 0,
                 'db-es': 0,
                 'index': 'collections'
+            },
+            'subd': {
+                'db': 0,
+                'es': 0,
+                'db-es': 0,
+                'index': 'subdivisions'
             }
         }
     }
