@@ -22,9 +22,27 @@ from __future__ import absolute_import, print_function
 from invenio_records_rest.serializers.response import record_responsify, \
     search_responsify
 
-from sonar.modules.serializers import JSONSerializer
+from sonar.modules.serializers import JSONSerializer as _JSONSerializer
+from sonar.modules.subdivisions.api import Record as SubdivisionRecord
 
 from ..marshmallow import UserSchemaV1
+
+
+class JSONSerializer(_JSONSerializer):
+    """JSON serializer for users."""
+
+    def post_process_serialize_search(self, results, pid_fetcher):
+        """Post process the search results."""
+        # Add subdivision name
+        for org_term in results.get('aggregations',
+                                    {}).get('subdivision',
+                                            {}).get('buckets', []):
+            subdivision = SubdivisionRecord.get_record_by_pid(org_term['key'])
+            if subdivision:
+                org_term['name'] = subdivision['name'][0]['value']
+
+        return super(JSONSerializer,
+                     self).post_process_serialize_search(results, pid_fetcher)
 
 # Serializers
 # ===========

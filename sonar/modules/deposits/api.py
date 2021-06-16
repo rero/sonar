@@ -26,7 +26,7 @@ from flask import g
 from sonar.modules.api import SonarRecord
 from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.documents.api import DocumentRecord
-from sonar.modules.users.api import current_user_record
+from sonar.modules.users.api import UserRecord, current_user_record
 from sonar.proxies import sonar
 
 from ..api import SonarIndexer, SonarRecord, SonarSearch
@@ -365,6 +365,15 @@ class DepositRecord(SonarRecord):
         # Open access status
         if self['diffusion'].get('oa_status'):
             metadata['oa_status'] = self['diffusion']['oa_status']
+
+        # Subdivisions
+        if self['diffusion'].get('subdivisions'):
+            metadata['subdivisions'] = self['diffusion']['subdivisions']
+        else:
+            # Guess from submitter
+            user = UserRecord.get_record_by_ref_link(self['user']['$ref'])
+            if user and user.is_submitter and user.get('subdivision'):
+                metadata['subdivisions'] = [user['subdivision']]
 
         document = DocumentRecord.create(metadata,
                                          dbcommit=True,

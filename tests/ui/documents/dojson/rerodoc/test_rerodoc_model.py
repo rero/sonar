@@ -133,7 +133,7 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
         '$ref':
         'https://sonar.ch/api/organisations/vge'
     }]
-    assert data['sections'] == ['bge']
+    assert len(data['subdivisions']) == 1
 
     # Specific conversion for mhnge
     marc21xml = """
@@ -150,7 +150,7 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
         '$ref':
         'https://sonar.ch/api/organisations/vge'
     }]
-    assert data['sections'] == ['mhnge']
+    assert len(data['subdivisions']) == 1
 
 
 def test_marc21_to_title_245():

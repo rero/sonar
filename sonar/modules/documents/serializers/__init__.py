@@ -38,6 +38,7 @@ from sonar.modules.documents.serializers.schemas.schemaorg import SchemaOrgV1
 from sonar.modules.organisations.api import OrganisationRecord, \
     current_organisation
 from sonar.modules.serializers import JSONSerializer as _JSONSerializer
+from sonar.modules.subdivisions.api import Record as SubdivisionRecord
 from sonar.modules.users.api import current_user_record
 from sonar.modules.utils import get_language_value
 
@@ -108,7 +109,12 @@ class JSONSerializer(_JSONSerializer):
                                             {}).get('buckets', []):
             collection = CollectionRecord.get_record_by_pid(org_term['key'])
             if collection:
-                org_term['name'] = collection['name'][0]['value']
+                org_term['name'] = get_language_value(collection['name'])
+
+        # Don't display subdivision in global context
+        if view and view == current_app.config.get(
+                'SONAR_APP_DEFAULT_ORGANISATION'):
+            results['aggregations'].pop('subdivision', {})
 
         return super(JSONSerializer,
                      self).post_process_serialize_search(results, pid_fetcher)

@@ -17,6 +17,7 @@ exclude sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
 exclude sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json
 exclude sonar/modules/projects/jsonschemas/projects/project-v1.0.0.json
 exclude sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json
+exclude sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0.json
 
 include *.html
 include *.inv

@@ -43,8 +43,7 @@ class DocumentPermission(RecordPermission):
             return True
 
         # Only for moderators users.
-        if (not user or not user.is_moderator or
-                not current_organisation):
+        if (not user or not user.is_moderator or not current_organisation):
             return False
 
         return True
@@ -79,13 +78,7 @@ class DocumentPermission(RecordPermission):
         document = DocumentRecord.get_record_by_pid(record['pid'])
         document = document.replace_refs()
 
-        # For admin or moderators users, they can access only to their
-        # organisation's documents.
-        for organisation in document['organisation']:
-            if current_organisation['pid'] == organisation['pid']:
-                return True
-
-        return False
+        return document.has_organisation(current_organisation['pid'])
 
     @classmethod
     def update(cls, user, record):
@@ -96,7 +89,20 @@ class DocumentPermission(RecordPermission):
         :returns: True is action can be done.
         """
         # Same rules as read
-        return cls.read(user, record)
+        can_read = cls.read(user, record)
+
+        if not can_read:
+            return False
+
+        if user.is_admin:
+            return True
+
+        document = DocumentRecord.get_record_by_pid(record['pid'])
+        document = document.replace_refs()
+
+        user = user.replace_refs()
+
+        return document.has_subdivision(user.get('subdivision', {}).get('pid'))
 
     @classmethod
     def delete(cls, user, record):
@@ -110,5 +116,5 @@ class DocumentPermission(RecordPermission):
         if not user or not user.is_admin:
             return False
 
-        # Same rules as read
-        return cls.read(user, record)
+        # Same rules as update
+        return cls.update(user, record)

@@ -43,6 +43,8 @@ from sonar.modules.deposits.permissions import DepositPermission
 from sonar.modules.documents.permissions import DocumentPermission
 from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import can_access_manage_view
+from sonar.modules.subdivisions.permissions import \
+    RecordPermission as SubdivisionPermission
 from sonar.modules.users.api import current_user_record
 from sonar.modules.users.permissions import UserPermission
 from sonar.resources.projects.permissions import RecordPermissionPolicy
@@ -157,6 +159,10 @@ def logged_user():
             'collections': {
                 'add': CollectionPermission.create(user),
                 'list': CollectionPermission.list(user)
+            },
+            'subdivisions': {
+                'add': SubdivisionPermission.create(user),
+                'list': SubdivisionPermission.list(user)
             }
         }
 

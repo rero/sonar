@@ -17,6 +17,7 @@
 
 """Factory for JSON schema."""
 
+from .deposits_json_schema import DepositsJSONSchema
 from .documents_json_schema import DocumentsJSONSchema
 from .json_schema_base import JSONSchemaBase
 
@@ -24,7 +25,10 @@ from .json_schema_base import JSONSchemaBase
 class JSONSchemaFactory():
     """Factory for JSON schema."""
 
-    SCHEMAS = {'documents': DocumentsJSONSchema}
+    SCHEMAS = {
+        'documents': DocumentsJSONSchema,
+        'deposits': DepositsJSONSchema
+    }
 
     @staticmethod
     def create(resource_type):

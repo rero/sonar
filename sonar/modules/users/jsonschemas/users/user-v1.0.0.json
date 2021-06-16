@@ -130,11 +130,33 @@
           }
         ]
       }
+    },
+    "subdivision": {
+      "title": "Subdivision",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$ref": {
+          "type": "string",
+          "pattern": "^https://sonar.ch/api/subdivisions/.*?$",
+          "form": {
+            "remoteTypeahead": {
+              "type": "subdivisions",
+              "field": "name.value.suggest",
+              "label": "label"
+            }
+          }
+        }
+      },
+      "required": [
+        "$ref"
+      ]
     }
   },
   "propertiesOrder": [
     "organisation",
     "role",
+    "subdivision",
     "first_name",
     "last_name",
     "email",

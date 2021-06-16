@@ -107,8 +107,22 @@ def test_file_put(client, deposit):
     assert not response.json.get('embargoDate')
 
 
-def test_publish(client, db, user, moderator, deposit):
+def test_publish(client, db, user, moderator, subdivision, deposit):
     """Test publishing a deposit."""
+    # Add a subdivision to moderator and user
+    user['subdivision'] = {
+        '$ref': f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
+    }
+    user.commit()
+    user.reindex()
+
+    moderator['subdivision'] = {
+        '$ref': f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
+    }
+    moderator.commit()
+    moderator.reindex()
+    db.session.commit()
+
     url = url_for('deposits.publish', pid=deposit['pid'])
 
     # Everything OK
@@ -122,9 +136,7 @@ def test_publish(client, db, user, moderator, deposit):
     response = client.post(url, data={})
     assert response.status_code == 400
 
-    login_user_via_view(client,
-                        email=moderator['email'],
-                        password='123456')
+    login_user_via_view(client, email=moderator['email'], password='123456')
 
     # Test the publication by a moderator
     deposit['status'] = 'in_progress'
@@ -181,9 +193,7 @@ def test_review(client, db, user, moderator, deposit):
                            headers=headers)
     assert response.status_code == 403
 
-    login_user_via_view(client,
-                        email=moderator['email'],
-                        password='123456')
+    login_user_via_view(client, email=moderator['email'], password='123456')
 
     # Valid approval request
     response = client.post(url,

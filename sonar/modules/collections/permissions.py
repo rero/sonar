@@ -36,7 +36,7 @@ class RecordPermission(BaseRecordPermission):
         :return: True is action can be done
         :rtype: bool
         """
-        return user and user.is_moderator
+        return user and user.is_admin
 
     @classmethod
     def create(cls, user, record=None):
@@ -47,7 +47,7 @@ class RecordPermission(BaseRecordPermission):
         :return: True is action can be done
         :rtype: bool
         """
-        return user and user.is_moderator
+        return cls.list(user, record)
 
     @classmethod
     def read(cls, user, record):
@@ -58,18 +58,15 @@ class RecordPermission(BaseRecordPermission):
         :return: True is action can be done
         :rtype: bool
         """
-        # Only for moderator users
-        if not user or not user.is_moderator:
-            return False
-
-        # Super user is allowed
-        if user.is_superuser:
+        if user and user.is_superuser:
             return True
+
+        if not cls.create(user, record):
+            return False
 
         record = Record.get_record_by_pid(record['pid'])
         record = record.replace_refs()
 
-        # For moderator users, they can read only their own records.
         return current_organisation['pid'] == record['organisation']['pid']
 
     @classmethod

@@ -107,9 +107,6 @@
           }
         }
       },
-      "sections": {
-        "type": "keyword"
-      },
       "documentType": {
         "type": "keyword"
       },
@@ -554,7 +551,7 @@
         "type": "text",
         "fields": {
           "raw": {
-            "type":  "keyword"
+            "type": "keyword"
           },
           "suggest": {
             "type": "completion",
@@ -566,7 +563,7 @@
         "type": "text",
         "fields": {
           "raw": {
-            "type":  "keyword"
+            "type": "keyword"
           },
           "suggest": {
             "type": "completion",
@@ -578,7 +575,7 @@
         "type": "text",
         "fields": {
           "raw": {
-            "type":  "keyword"
+            "type": "keyword"
           },
           "suggest": {
             "type": "completion",
@@ -588,6 +585,25 @@
       },
       "masked": {
         "type": "boolean"
+      },
+      "subdivisions": {
+        "type": "object",
+        "properties": {
+          "pid": {
+            "type": "keyword"
+          },
+          "name": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "text"
+              },
+              "language": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
       },
       "_created": {
         "type": "date"

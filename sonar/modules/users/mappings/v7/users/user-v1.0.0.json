@@ -67,6 +67,25 @@
           }
         }
       },
+      "subdivision": {
+        "type": "object",
+        "properties": {
+          "pid": {
+            "type": "keyword"
+          },
+          "name": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "text"
+              },
+              "language": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
+      },
       "_created": {
         "type": "date"
       },

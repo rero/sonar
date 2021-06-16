@@ -92,6 +92,7 @@ invenio utils compile-json ./sonar/modules/organisations/jsonschemas/organisatio
 invenio utils compile-json ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json -o ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
 invenio utils compile-json ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json -o ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json
 invenio utils compile-json ./sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json -o ./sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json
+invenio utils compile-json ./sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0_src.json -o ./sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0.json
 invenio utils compile-json ./sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json -o ./sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json
 invenio utils compile-json ./sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json -o ./sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json
 

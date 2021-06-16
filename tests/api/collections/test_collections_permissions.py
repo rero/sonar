@@ -54,8 +54,7 @@ def test_list(app, client, make_organisation, make_collection, superuser,
     # Logged as moderator
     login_user_via_session(client, email=moderator['email'])
     res = client.get(url_for('invenio_records_rest.coll_list'))
-    assert res.status_code == 200
-    assert res.json['hits']['total']['value'] == 1
+    assert res.status_code == 403
 
     # Logged as admin
     login_user_via_session(client, email=admin['email'])
@@ -104,7 +103,7 @@ def test_create(client, superuser, admin, moderator, submitter, user):
     res = client.post(url_for('invenio_records_rest.coll_list'),
                       data=json.dumps(data),
                       headers=headers)
-    assert res.status_code == 201
+    assert res.status_code == 403
 
     # Admin
     login_user_via_session(client, email=admin['email'])
@@ -153,7 +152,7 @@ def test_read(client, make_organisation, make_collection, superuser, admin,
     res = client.get(
         url_for('invenio_records_rest.coll_item',
                 pid_value=collection1['pid']))
-    assert res.status_code == 200
+    assert res.status_code == 403
 
     # Logged as admin
     login_user_via_session(client, email=admin['email'])
@@ -233,7 +232,7 @@ def test_update(client, make_organisation, make_collection, superuser, admin,
                              pid_value=collection1['pid']),
                      data=json.dumps(collection1.dumps()),
                      headers=headers)
-    assert res.status_code == 200
+    assert res.status_code == 403
 
     # Logged as admin
     login_user_via_session(client, email=admin['email'])
@@ -251,13 +250,6 @@ def test_update(client, make_organisation, make_collection, superuser, admin,
     assert res.status_code == 403
 
     # Logged as superuser
-    login_user_via_session(client, email=superuser['email'])
-    res = client.put(url_for('invenio_records_rest.coll_item',
-                             pid_value=collection1['pid']),
-                     data=json.dumps(collection1.dumps()),
-                     headers=headers)
-    assert res.status_code == 200
-
     login_user_via_session(client, email=superuser['email'])
     res = client.put(url_for('invenio_records_rest.coll_item',
                              pid_value=collection1['pid']),
@@ -290,7 +282,7 @@ def test_delete(client, db, document, collection, make_organisation,
     login_user_via_session(client, email=moderator['email'])
     res = client.delete(
         url_for('invenio_records_rest.coll_item', pid_value=collection['pid']))
-    assert res.status_code == 204
+    assert res.status_code == 403
 
     make_organisation('org2')
     collection2 = make_collection('org2')
