@@ -1927,7 +1927,7 @@ def test_marc21_to_usage_and_access_policy():
     data = overdo.do(marc21json)
     assert data.get('usageAndAccessPolicy') == {
         'label': 'Springer-Verlag Berlin',
-        'license': 'Other OA / license undefined'
+        'license': 'License undefined'
     }
 
     # Multiple
@@ -1945,7 +1945,7 @@ def test_marc21_to_usage_and_access_policy():
     data = overdo.do(marc21json)
     assert data.get('usageAndAccessPolicy') == {
         'label': 'Usage 2',
-        'license': 'Other OA / license undefined'
+        'license': 'License undefined'
     }
 
     # Without $a
@@ -1957,7 +1957,7 @@ def test_marc21_to_usage_and_access_policy():
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
     assert data.get('usageAndAccessPolicy') == {
-        'license': 'Other OA / license undefined'
+        'license': 'License undefined'
     }
 
     # Without 540
@@ -1967,7 +1967,7 @@ def test_marc21_to_usage_and_access_policy():
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
     assert data.get('usageAndAccessPolicy') == {
-        'license': 'Other OA / license undefined'
+        'license': 'License undefined'
     }
 
 

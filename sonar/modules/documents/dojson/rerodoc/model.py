@@ -725,7 +725,7 @@ def marc21_to_usage_and_access_policy(self, key, value):
     if not value.get('a'):
         return None
 
-    return {'label': value.get('a'), 'license': 'Other OA / license undefined'}
+    return {'label': value.get('a'), 'license': 'License undefined'}
 
 
 @overdo.over('contribution', '^100..')

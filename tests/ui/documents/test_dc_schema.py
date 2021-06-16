@@ -318,11 +318,11 @@ def test_rights(app, minimal_document):
     assert result['rights'] == ['CC BY-NC-SA']
 
     minimal_document['usageAndAccessPolicy'] = {
-        'license': 'Other OA / license undefined',
+        'license': 'License undefined',
         'label': 'Custom license'
     }
     result = dc_v1.transform_record(minimal_document['pid'], minimal_document)
-    assert result['rights'] == ['Other OA / license undefined, Custom license']
+    assert result['rights'] == ['License undefined, Custom license']
 
     minimal_document.pop('usageAndAccessPolicy', None)
     with app.test_request_context() as req:

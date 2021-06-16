@@ -142,7 +142,7 @@ def test_rerodoc_loader(app, organisation):
             'label':
             '© 2015 The Authors Published by Oxford University Press on '
             'behalf of the Royal Astronomical Society',
-            'license': 'Other OA / license undefined'
+            'license': 'License undefined'
         },
         'abstracts': [{
             'value':
