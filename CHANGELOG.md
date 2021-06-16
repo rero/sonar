@@ -1,5 +1,90 @@
 # Changelog
 
+## [v1.1.0](https://github.com/rero/sonar/tree/v1.1.0) (2021-06-16)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.0.0...v1.1.0)
+
+**Implemented enhancements:**
+
+- Hide `hiddenFromPublic` field on document editor [\#537](https://github.com/rero/sonar/issues/537)
+- Improve monitoring [\#502](https://github.com/rero/sonar/issues/502)
+
+**Fixed bugs:**
+
+- Facets with `invenio-records-resources` don't work as expected [\#554](https://github.com/rero/sonar/issues/554)
+- Controlled affiliations are not shown in the interface and can be edited [\#541](https://github.com/rero/sonar/issues/541)
+- Button "Search in full-text" is ineffective [\#510](https://github.com/rero/sonar/issues/510)
+- Dedicated context is lost, when coming back to public interface from administration. [\#499](https://github.com/rero/sonar/issues/499)
+- The language change in the admin interface does not work properly. [\#493](https://github.com/rero/sonar/issues/493)
+- The admin has no full permissions to update his/her own organisation. [\#492](https://github.com/rero/sonar/issues/492)
+- The suppression of a user as an admin does not really delete the user. [\#491](https://github.com/rero/sonar/issues/491)
+
+**Closed issues:**
+
+- Custom homepage template for organisation [\#583](https://github.com/rero/sonar/issues/583)
+- Improve deposit editor [\#569](https://github.com/rero/sonar/issues/569)
+- Remove default project entry in deposit process [\#560](https://github.com/rero/sonar/issues/560)
+- Mark documents as `harvested` when they are import from an external source [\#556](https://github.com/rero/sonar/issues/556)
+- Set the current language based on the `lang` cookie [\#535](https://github.com/rero/sonar/issues/535)
+- Import BGE records from RERODOC [\#528](https://github.com/rero/sonar/issues/528)
+- Change the way select options are hierarchized [\#530](https://github.com/rero/sonar/issues/530)
+- Allow the definition of custom collections [\#521](https://github.com/rero/sonar/issues/521)
+- Allow the definition of custom metadata fields and facets \[5\] [\#512](https://github.com/rero/sonar/issues/512)
+- Add "Open access" button above the facets [\#511](https://github.com/rero/sonar/issues/511)
+- Organisation editor: adjust the caption text of the field "Allowed IP addresses" [\#495](https://github.com/rero/sonar/issues/495)
+- Create maintenance page [\#481](https://github.com/rero/sonar/issues/481)
+- Create dedicated view HEP-VS [\#459](https://github.com/rero/sonar/issues/459)
+- Authentication by API key for requesting API endpoints. [\#415](https://github.com/rero/sonar/issues/415)
+- Every deposited document is assigned a persistent identifier \(ARK\) \[5\] [\#399](https://github.com/rero/sonar/issues/399)
+- Record validation workflow [\#457](https://github.com/rero/sonar/issues/457)
+- Export search results in CSV [\#456](https://github.com/rero/sonar/issues/456)
+- Adapt detailed views for projects [\#455](https://github.com/rero/sonar/issues/455)
+- Add / Edit custom project [\#454](https://github.com/rero/sonar/issues/454)
+
+**Merged pull requests:**
+
+- homepage: custom description for organisations [\#585](https://github.com/rero/sonar/pull/585) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- translations: update catalog [\#584](https://github.com/rero/sonar/pull/584) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- ui: update scripts [\#580](https://github.com/rero/sonar/pull/580) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- records: configure markdown fields [\#579](https://github.com/rero/sonar/pull/579) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- json schemas: force the cache to be cleared. [\#578](https://github.com/rero/sonar/pull/578) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- deposits: improve editor and process [\#577](https://github.com/rero/sonar/pull/577) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- documents: fix controlled affiliations [\#574](https://github.com/rero/sonar/pull/574) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- tests: fix temporarly safety check [\#572](https://github.com/rero/sonar/pull/572) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- project: add `collection` resource [\#566](https://github.com/rero/sonar/pull/566) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- templates: add language value filter [\#565](https://github.com/rero/sonar/pull/565) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- assets: remove manifest fix [\#564](https://github.com/rero/sonar/pull/564) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- assets: copy manifest.json to fix webpack error [\#563](https://github.com/rero/sonar/pull/563) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- identifiers: add ARK identifiers [\#561](https://github.com/rero/sonar/pull/561) ([jma](https://github.com/jma))
+- translations: update catalog [\#558](https://github.com/rero/sonar/pull/558) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- documents: flag record as `harvested` [\#557](https://github.com/rero/sonar/pull/557) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- resources: apply filters [\#555](https://github.com/rero/sonar/pull/555) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- projects: CSV export for projects [\#553](https://github.com/rero/sonar/pull/553) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- projects: dedicated view for HEP Valais. [\#552](https://github.com/rero/sonar/pull/552) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- projects: validation workflow [\#549](https://github.com/rero/sonar/pull/549) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- view: change the view routes [\#533](https://github.com/rero/sonar/pull/533) ([jma](https://github.com/jma))
+- json schemas: configure options tree for select [\#531](https://github.com/rero/sonar/pull/531) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- documents: import BGE set from RERODOC [\#529](https://github.com/rero/sonar/pull/529) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- search: suggestions completion API endpoint [\#527](https://github.com/rero/sonar/pull/527) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- projects: create custom resource for HEP-VS [\#526](https://github.com/rero/sonar/pull/526) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- documents: custom fields for documents [\#525](https://github.com/rero/sonar/pull/525) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- dependencies: fix security issues [\#524](https://github.com/rero/sonar/pull/524) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- translations: update catalog [\#520](https://github.com/rero/sonar/pull/520) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- search: add filter for open access documents [\#519](https://github.com/rero/sonar/pull/519) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- projects: editor for HEP Valais [\#517](https://github.com/rero/sonar/pull/517) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- records: improve indexing [\#513](https://github.com/rero/sonar/pull/513) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- translations: update catalog [\#509](https://github.com/rero/sonar/pull/509) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- projects: refactor resource [\#508](https://github.com/rero/sonar/pull/508) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- project: upgrade to Invenio 3.4 [\#505](https://github.com/rero/sonar/pull/505) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- monitoring: improve returned information [\#503](https://github.com/rero/sonar/pull/503) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- stats: configure stats for documents and files [\#501](https://github.com/rero/sonar/pull/501) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- organisations: update `allowedIps` description [\#500](https://github.com/rero/sonar/pull/500) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- users: remove Flask user [\#498](https://github.com/rero/sonar/pull/498) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- organisations: fix editor with admin role [\#497](https://github.com/rero/sonar/pull/497) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- translations: create REST endpoint [\#494](https://github.com/rero/sonar/pull/494) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- user: enable applications menu entry [\#490](https://github.com/rero/sonar/pull/490) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- organisation: theme for VGE [\#488](https://github.com/rero/sonar/pull/488) ([sebastiendeleze](https://github.com/sebastiendeleze))
+
 ## [v1.0.0](https://github.com/rero/sonar/tree/v1.0.0) (2021-02-16)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v0.7.0...v1.0.0)
@@ -420,7 +505,6 @@
 
 **Merged pull requests:**
 
-- records: integrate public search [\#122](https://github.com/rero/sonar/pull/122) ([sebastiendeleze](https://github.com/sebastiendeleze))
 - documents: data model refactor [\#116](https://github.com/rero/sonar/pull/116) ([sebastiendeleze](https://github.com/sebastiendeleze))
 
 ## [v0.2.1](https://github.com/rero/sonar/tree/v0.2.1) (2020-01-10)
@@ -440,6 +524,7 @@
 
 **Merged pull requests:**
 
+- records: integrate public search [\#122](https://github.com/rero/sonar/pull/122) ([sebastiendeleze](https://github.com/sebastiendeleze))
 - ui: update project name [\#120](https://github.com/rero/sonar/pull/120) ([sebastiendeleze](https://github.com/sebastiendeleze))
 - project: upgrade Invenio [\#118](https://github.com/rero/sonar/pull/118) ([sebastiendeleze](https://github.com/sebastiendeleze))
 
