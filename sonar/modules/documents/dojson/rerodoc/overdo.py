@@ -94,9 +94,7 @@ class Overdo(BaseOverdo):
 
         # Add default license if not set.
         if not result.get('usageAndAccessPolicy'):
-            result['usageAndAccessPolicy'] = {
-                'license': 'Other OA / license undefined'
-            }
+            result['usageAndAccessPolicy'] = {'license': 'License undefined'}
 
         return result
 

@@ -301,12 +301,12 @@ def test_license(app, minimal_document):
     assert result['license'] == 'CC BY-NC-SA'
 
     minimal_document['usageAndAccessPolicy'] = {
-        'license': 'Other OA / license undefined',
+        'license': 'License undefined',
         'label': 'Custom license'
     }
     result = schemaorg_v1.transform_record(minimal_document['pid'],
                                            minimal_document)
-    assert result['license'] == 'Other OA / license undefined, Custom license'
+    assert result['license'] == 'License undefined, Custom license'
 
 
 def test_image(app, minimal_document):
