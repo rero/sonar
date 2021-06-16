@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.1.1](https://github.com/rero/sonar/tree/v1.1.1) (2021-06-16)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.1.0...v1.1.1)
+
+**Merged pull requests:**
+
+- documents: fix license for RERO DOC publications [\#587](https://github.com/rero/sonar/pull/587) ([sebastiendeleze](https://github.com/sebastiendeleze))
+
 ## [v1.1.0](https://github.com/rero/sonar/tree/v1.1.0) (2021-06-16)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.0.0...v1.1.0)
@@ -505,6 +513,7 @@
 
 **Merged pull requests:**
 
+- records: integrate public search [\#122](https://github.com/rero/sonar/pull/122) ([sebastiendeleze](https://github.com/sebastiendeleze))
 - documents: data model refactor [\#116](https://github.com/rero/sonar/pull/116) ([sebastiendeleze](https://github.com/sebastiendeleze))
 
 ## [v0.2.1](https://github.com/rero/sonar/tree/v0.2.1) (2020-01-10)
@@ -524,7 +533,6 @@
 
 **Merged pull requests:**
 
-- records: integrate public search [\#122](https://github.com/rero/sonar/pull/122) ([sebastiendeleze](https://github.com/sebastiendeleze))
 - ui: update project name [\#120](https://github.com/rero/sonar/pull/120) ([sebastiendeleze](https://github.com/sebastiendeleze))
 - project: upgrade Invenio [\#118](https://github.com/rero/sonar/pull/118) ([sebastiendeleze](https://github.com/sebastiendeleze))
 
