@@ -44,6 +44,8 @@ from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import record_permission_factory, \
     wiki_edit_permission
 from sonar.modules.query import and_term_filter, missing_field_filter
+from sonar.modules.subdivisions.config import \
+    Configuration as SubdivisionConfiguration
 from sonar.modules.users.api import UserRecord, UserSearch
 from sonar.modules.users.permissions import UserPermission
 from sonar.modules.utils import get_current_language
@@ -494,6 +496,9 @@ RECORDS_REST_ENDPOINTS = {
 
 # Add endpoint for collections
 RECORDS_REST_ENDPOINTS['coll'] = CollectionConfiguration.rest_endpoint
+
+# Add endpoint for subdivisions
+RECORDS_REST_ENDPOINTS['subd'] = SubdivisionConfiguration.rest_endpoint
 """REST endpoints."""
 
 DEFAULT_AGGREGATION_SIZE = 50

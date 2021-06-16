@@ -75,6 +75,7 @@ sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json
 sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
 sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json
 sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json
+sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0.json
 sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json
 sonar/dedicated/*/*/jsonschemas/*/*/*-v1.0.0.json
 

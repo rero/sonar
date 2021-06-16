@@ -33,6 +33,7 @@ from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.organisations.api import OrganisationRecord
+from sonar.modules.subdivisions.api import Record as SubdivisionRecord
 from sonar.modules.users.api import UserRecord
 from sonar.proxies import sonar
 
@@ -778,6 +779,55 @@ def collection(app, db, es, admin, organisation, collection_json):
     collection.reindex()
     db.session.commit()
     return collection
+
+
+@pytest.fixture()
+def subdivision_json():
+    """Subdivision JSON."""
+    return {
+        'name': [{
+            'language': 'eng',
+            'value': 'Subdivision name'
+        }]
+    }
+
+
+@pytest.fixture()
+def make_subdivision(app, db, subdivision_json):
+    """Factory for creating subdivision."""
+
+    def _make_subdivision(organisation=None):
+        subdivision_json['organisation'] = {
+            '$ref':
+            'https://sonar.ch/api/organisations/{pid}'.format(pid=organisation)
+        }
+
+        subdivision_json.pop('pid', None)
+
+        subdivision = SubdivisionRecord.create(subdivision_json, dbcommit=True)
+        subdivision.commit()
+        subdivision.reindex()
+        db.session.commit()
+        return subdivision
+
+    return _make_subdivision
+
+
+@pytest.fixture()
+def subdivision(app, db, es, admin, organisation, subdivision_json):
+    """Subdivision fixture."""
+    json = copy.deepcopy(subdivision_json)
+    json['organisation'] = {
+        '$ref':
+        'https://sonar.ch/api/organisations/{pid}'.format(
+            pid=organisation['pid'])
+    }
+
+    subdivision = SubdivisionRecord.create(json, dbcommit=True)
+    subdivision.commit()
+    subdivision.reindex()
+    db.session.commit()
+    return subdivision
 
 
 @pytest.fixture()
