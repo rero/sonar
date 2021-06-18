@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
-"POT-Creation-Date: 2021-06-16 09:50+0200\n"
-"PO-Revision-Date: 2021-06-11 07:32+0000\n"
+"POT-Creation-Date: 2021-07-14 10:32+0200\n"
+"PO-Revision-Date: 2021-06-25 05:39+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language: it\n"
 "Language-Team: Italian "
@@ -258,7 +258,7 @@ msgstr "Cliccare qui per ripristinare la parola d'ordine"
 
 #: sonar/common/jsonschemas/oa-status-v1.0.0.json:34
 msgid "Closed"
-msgstr ""
+msgstr "Chiuso"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:18
 msgid "Code"
@@ -273,7 +273,7 @@ msgstr "Collezione"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:676
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1001
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1005
-#: sonar/modules/documents/templates/documents/record.html:288
+#: sonar/modules/documents/templates/documents/record.html:292
 msgid "Collections"
 msgstr "Collezioni"
 
@@ -358,15 +358,15 @@ msgstr "Tappa attuale di catalogazione."
 msgid "Current status of the record in the validation process."
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1780
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1781
 msgid "Custom field 1"
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1800
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1801
 msgid "Custom field 2"
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1820
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1821
 msgid "Custom field 3"
 msgstr ""
 
@@ -583,7 +583,7 @@ msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:569
 msgid "Example: 1"
-msgstr ""
+msgstr "Esempio: 1"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:586
 msgid "Example: 10"
@@ -878,7 +878,7 @@ msgstr "identificatore"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:357
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:695
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1514
-#: sonar/modules/documents/templates/documents/record.html:237
+#: sonar/modules/documents/templates/documents/record.html:238
 msgid "Identifiers"
 msgstr "Identificatori"
 
@@ -986,11 +986,11 @@ msgstr "Etichetta"
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:142
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:189
 msgid "Labels"
-msgstr ""
+msgstr "Etichette"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:360
-#: sonar/modules/documents/templates/documents/record.html:221
+#: sonar/modules/documents/templates/documents/record.html:222
 msgid "Language"
 msgstr "Lingua"
 
@@ -1020,7 +1020,7 @@ msgid "Lecturer/professor"
 msgstr ""
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:2
-#: sonar/modules/documents/templates/documents/record.html:306
+#: sonar/modules/documents/templates/documents/record.html:310
 msgid "License"
 msgstr "Licenza"
 
@@ -1252,7 +1252,7 @@ msgstr "Organizzazioni"
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:720
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:890
 msgid "Other"
-msgstr ""
+msgstr "Altro"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:517
 msgid "Other (free field)"
@@ -1276,7 +1276,7 @@ msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:641
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:959
-#: sonar/modules/documents/templates/documents/record.html:208
+#: sonar/modules/documents/templates/documents/record.html:209
 msgid "Other electronic version"
 msgstr "Altra versione elettronica"
 
@@ -1285,7 +1285,7 @@ msgstr "Altra versione elettronica"
 msgid "Other electronic versions"
 msgstr "Altre versioni elettroniche"
 
-#: sonar/modules/documents/templates/documents/record.html:329
+#: sonar/modules/documents/templates/documents/record.html:334
 msgid "Other files"
 msgstr "Altri files"
 
@@ -1319,7 +1319,7 @@ msgstr ""
 msgid "Period"
 msgstr "Periodo"
 
-#: sonar/modules/documents/templates/documents/record.html:319
+#: sonar/modules/documents/templates/documents/record.html:324
 msgid "Persistent URL"
 msgstr ""
 
@@ -1392,7 +1392,7 @@ msgstr ""
 msgid "Preferred name"
 msgstr "Nome preferito"
 
-#: sonar/modules/documents/templates/documents/record.html:347
+#: sonar/modules/documents/templates/documents/record.html:352
 #: sonar/theme/templates/sonar/preview/base.html:23
 msgid "Preview"
 msgstr "Anteprima"
@@ -1500,7 +1500,7 @@ msgstr "Progetto di ricerca"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1015
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1746
-#: sonar/modules/documents/templates/documents/record.html:183
+#: sonar/modules/documents/templates/documents/record.html:184
 msgid "Research projects"
 msgstr "Progetto di ricerca"
 
@@ -1601,7 +1601,7 @@ msgid "Series the resource belongs to."
 msgstr "Serie a cui la risorsa appartiene."
 
 #: sonar/modules/documents/templates/documents/record.html:99
-#: sonar/modules/documents/templates/documents/record.html:170
+#: sonar/modules/documents/templates/documents/record.html:171
 msgid "Show more"
 msgstr "Mostra di più"
 
@@ -1906,7 +1906,7 @@ msgstr "UUID del bucket a cui è assegnato il tile."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1168
 msgid "Usage and access policy"
-msgstr "Politica di utilizzo e accesso"
+msgstr "Condizione d'uso e di accesso"
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:90
 #: sonar/common/jsonschemas/validation-v1.0.0.json:96
@@ -1955,7 +1955,7 @@ msgstr "Valore"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:851
 msgid "Values"
-msgstr ""
+msgstr "Valori"
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:135
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:44
@@ -2895,7 +2895,7 @@ msgstr ""
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:694
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1016
 msgid "label"
-msgstr ""
+msgstr "etichetta"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:497
 msgid "lang_aar"
@@ -4842,6 +4842,7 @@ msgid "mainTeam"
 msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1034
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1760
 msgid "name"
 msgstr "nome"
 
@@ -4929,7 +4930,7 @@ msgstr "statuto"
 msgid "statusHep"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:193
+#: sonar/modules/documents/templates/documents/record.html:194
 msgid "supported by"
 msgstr "sostenuto da"
 
