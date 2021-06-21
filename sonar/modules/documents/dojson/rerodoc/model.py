@@ -69,7 +69,9 @@ def marc21_to_type_and_organisation(self, key, value):
 
         # Specific transformation for `bpuge` and `mhnge`, because the real
         # acronym is `vge`.
-        if organisation in ['bpuge', 'mhnge']:
+        if organisation in [
+                'bpuge', 'mhnge', 'baage', 'bmuge', 'imvge', 'mhsge'
+        ]:
             # Store section
             self['sections'] = [organisation
                                 ] if organisation != 'bpuge' else ['bge']
@@ -615,17 +617,17 @@ def marc21_to_specific_collection(self, key, value):
 
     # No collection found
     if not collection_pid:
-        collection = CollectionRecord.create(
-            {
-                'name': [{
-                    'language': 'eng',
-                    'value': value.get('a')
-                }],
-                'organisation': {
-                    '$ref': self['organisation'][0]['$ref']
-                },
-                'hashKey': hash_key
-            })
+        collection = CollectionRecord.create({
+            'name': [{
+                'language': 'eng',
+                'value': value.get('a')
+            }],
+            'organisation': {
+                '$ref': self['organisation'][0]['$ref']
+            },
+            'hashKey':
+            hash_key
+        })
         collection.commit()
         collection.reindex()
         db.session.commit()
