@@ -135,7 +135,7 @@ def marc21_to_title_245(self, key, value):
     title = {
         'type': 'bf:Title',
         'mainTitle': [{
-            'value': main_title,
+            'value': main_title.rstrip(':'),
             'language': language
         }]
     }

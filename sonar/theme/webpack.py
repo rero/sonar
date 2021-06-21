@@ -30,6 +30,7 @@ theme = WebpackBundle(__name__,
                           'usi-theme': './scss/usi/theme.scss',
                           'hepvs-theme': './scss/hepvs/theme.scss',
                           'vge-theme': './scss/vge/theme.scss',
+                          'hepbejune-theme': './scss/hepbejune/theme.scss',
                           'preview': './scss/preview.scss',
                       },
                       dependencies={
