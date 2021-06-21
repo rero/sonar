@@ -49,7 +49,7 @@ class Overdo(BaseOverdo):
                 'name': organisation_key,
                 'isShared': False,
                 'isDedicated': False
-            })
+            }, dbcommit=True)
             organisation.reindex()
 
     @staticmethod

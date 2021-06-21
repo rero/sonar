@@ -47,7 +47,7 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
     <record>
         <datafield tag="980" ind1=" " ind2=" ">
             <subfield code="a">BOOK</subfield>
-            <subfield code="b">BAAGE</subfield>
+            <subfield code="b">TEST</subfield>
         </datafield>
         <datafield tag="269" ind1=" " ind2=" ">
             <subfield code="c">1966</subfield>
@@ -59,7 +59,7 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
     assert data.get('documentType') == 'coar:c_2f33'
     assert data.get('organisation') == [{
         '$ref':
-        'https://sonar.ch/api/organisations/baage'
+        'https://sonar.ch/api/organisations/test'
     }]
 
     # Type, subtype and organisation
@@ -67,7 +67,7 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
     <record>
         <datafield tag="980" ind1=" " ind2=" ">
             <subfield code="a">POSTPRINT</subfield>
-            <subfield code="b">BAAGE</subfield>
+            <subfield code="b">TEST</subfield>
             <subfield code="f">ART_JOURNAL</subfield>
         </datafield>
         <datafield tag="269" ind1=" " ind2=" ">
@@ -80,14 +80,14 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
     assert data.get('documentType') == 'coar:c_6501'
     assert data.get('organisation') == [{
         '$ref':
-        'https://sonar.ch/api/organisations/baage'
+        'https://sonar.ch/api/organisations/test'
     }]
 
     # Organisation only
     marc21xml = """
     <record>
         <datafield tag="980" ind1=" " ind2=" ">
-            <subfield code="b">BAAGE</subfield>
+            <subfield code="b">TEST</subfield>
         </datafield>
         <datafield tag="269" ind1=" " ind2=" ">
             <subfield code="c">1966</subfield>
@@ -99,7 +99,7 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
     assert not data.get('documentType')
     assert data.get('organisation') == [{
         '$ref':
-        'https://sonar.ch/api/organisations/baage'
+        'https://sonar.ch/api/organisations/test'
     }]
 
     # Specific conversion for unisi
