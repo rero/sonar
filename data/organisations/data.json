@@ -23,5 +23,18 @@
         "path": "./hepvs/hepvs.png"
       }
     ]
+  },
+  {
+    "code": "hepbejune",
+    "name": "Haute École Pédagogique BEJUNE",
+    "isShared": true,
+    "isDedicated": true,
+    "platformName": "# ROAR\n#### Répertoire ouvert et archives BEJUNE",
+    "files": [
+      {
+        "key": "logo.jpg",
+        "path": "./hepbejune/logo.png"
+      }
+    ]
   }
 ]

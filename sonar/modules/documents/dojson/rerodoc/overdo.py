@@ -44,12 +44,14 @@ class Overdo(BaseOverdo):
 
         if not organisation:
             # Create organisation record
-            organisation = OrganisationRecord.create({
-                'code': organisation_key,
-                'name': organisation_key,
-                'isShared': False,
-                'isDedicated': False
-            }, dbcommit=True)
+            organisation = OrganisationRecord.create(
+                {
+                    'code': organisation_key,
+                    'name': organisation_key,
+                    'isShared': False,
+                    'isDedicated': False
+                },
+                dbcommit=True)
             organisation.reindex()
 
     @staticmethod
@@ -94,7 +96,12 @@ class Overdo(BaseOverdo):
 
         # Add default license if not set.
         if not result.get('usageAndAccessPolicy'):
-            result['usageAndAccessPolicy'] = {'license': 'License undefined'}
+            default_license = 'License undefined'
+            if result.get('organisation') and result['organisation'][0][
+                    '$ref'] == 'https://sonar.ch/api/organisations/hepbejune':
+                default_license = 'CC BY-NC-SA'
+
+            result['usageAndAccessPolicy'] = {'license': default_license}
 
         return result
 
