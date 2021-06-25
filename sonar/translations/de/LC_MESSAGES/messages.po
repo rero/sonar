@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-06-14 13:34+0200\n"
-"PO-Revision-Date: 2021-06-16 08:28+0000\n"
+"PO-Revision-Date: 2021-06-25 05:39+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "de/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.7.1-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: sonar/theme/views.py:67
@@ -66,7 +66,7 @@ msgstr "Begleitmaterial der Ressource, z.B. Landkarten."
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:850
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1669
 msgid "Acquisition terms"
-msgstr "Bezugsbedingung"
+msgstr "Bezugsbedingungen"
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:77
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:210
@@ -1909,7 +1909,7 @@ msgstr "UUID des Buckets, dem die Kachel zugewiesen ist."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1168
 msgid "Usage and access policy"
-msgstr "Nutzungs- und Zugangs-Richtlinien"
+msgstr "Zugang- und Benutzungsbedingung"
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:90
 #: sonar/common/jsonschemas/validation-v1.0.0.json:96
