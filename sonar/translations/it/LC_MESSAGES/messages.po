@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-06-16 09:50+0200\n"
-"PO-Revision-Date: 2021-06-18 15:54+0000\n"
+"PO-Revision-Date: 2021-06-25 05:39+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "it/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7\n"
+"X-Generator: Weblate 4.7.1-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: sonar/theme/views.py:67
@@ -1907,7 +1907,7 @@ msgstr "UUID del bucket a cui è assegnato il tile."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1168
 msgid "Usage and access policy"
-msgstr "Politica di utilizzo e accesso"
+msgstr "Condizione d'uso e di accesso"
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:90
 #: sonar/common/jsonschemas/validation-v1.0.0.json:96
