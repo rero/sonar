@@ -25,10 +25,12 @@ this file.
 from __future__ import absolute_import, print_function
 
 import re
+from datetime import datetime
 
 import dateutil.parser
-from flask import Blueprint, abort, jsonify, redirect, render_template, \
-    request, url_for
+import pytz
+from flask import Blueprint, abort, current_app, jsonify, redirect, \
+    render_template, request, url_for
 from flask_babelex import lazy_gettext as _
 from flask_breadcrumbs import register_breadcrumb
 from flask_login import current_user, login_required
@@ -274,4 +276,16 @@ def format_date(date, format='%d/%m/%Y'):
     :param format: Output format.
     :returns: Formatted date string.
     """
-    return dateutil.parser.isoparse(date).strftime('%d/%m/%Y')
+    # Parse date
+    if not isinstance(date, datetime):
+        date = dateutil.parser.isoparse(date)
+
+    # Add timezone info
+    if not date.tzinfo:
+        date = pytz.utc.localize(date)
+
+    # Change date to the right timezone
+    timezone = pytz.timezone(current_app.config.get('BABEL_DEFAULT_TIMEZONE'))
+    date = date.astimezone(timezone)
+
+    return date.strftime(format)

@@ -1,0 +1,44 @@
+{# -*- coding: utf-8 -*-
+Swiss Open Access Repository
+Copyright (C) 2021 RERO
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, version 3 of the License.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see
+<http: //www.gnu.org/licenses />.
+#}
+{%- extends 'sonar/page_admin.html' %}
+
+{%- block body %}
+<div class="pull-right mt-2">
+  <a href="{{ url_for('documentsstats.collect') }}" class="btn btn-primary btn-sm">
+    <i class="fa fa-refresh mr-2"></i>{{ _('See live') }}
+  </a>
+  <a href="{{ url_for('documentsstats.collect', save=1) }}" class="btn btn-primary btn-sm">
+    <i class="fa fa-save mr-2"></i>{{ _('Collect now') }}
+  </a>
+</div>
+<h1>{{ _('Stats') }}</h1>
+{% if records %}
+<div class="list-group">
+  {% for record in records %}
+  <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+    <a href="{{ url_for('documentsstats.detail', pid=record._source.pid) }}">
+      {{ record._source._created | format_date('%d/%m/%Y %H:%M') }}
+    </a>
+    <a href="/api/stats/{{record._source.pid}}?format=text/csv" class="btn btn-outline-primary btn-sm">
+      <i class="fa fa-download"></i>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
