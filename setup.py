@@ -116,6 +116,7 @@ setup(
             'projects_hepvs = sonar.dedicated.hepvs.projects.jsonschemas',
             'collections = sonar.modules.collections.jsonschemas',
             'subdivisions = sonar.modules.subdivisions.jsonschemas',
+            'stats = sonar.modules.stats.jsonschemas',
             'common = sonar.common.jsonschemas'
         ],
         'invenio_search.mappings': [
@@ -125,7 +126,8 @@ setup(
             'deposits = sonar.modules.deposits.mappings',
             'projects = sonar.resources.projects.mappings',
             'collections = sonar.modules.collections.mappings',
-            'subdivisions = sonar.modules.subdivisions.mappings'
+            'subdivisions = sonar.modules.subdivisions.mappings',
+            'stats = sonar.modules.stats.mappings'
         ],
         'invenio_search.templates': [
             'base-record = sonar.es_templates:list_es_templates'
@@ -142,7 +144,9 @@ setup(
             'collections_id = \
                 sonar.modules.collections.api:pid_minter',
             'subdivisions_id = \
-                sonar.modules.subdivisions.api:pid_minter'
+                sonar.modules.subdivisions.api:pid_minter',
+            'stats_id = \
+                sonar.modules.stats.api:pid_minter'
         ],
         'invenio_pidstore.fetchers': [
             'document_id = \
@@ -157,6 +161,8 @@ setup(
                 sonar.modules.collections.api:pid_fetcher',
             'subdivisions_id = \
                 sonar.modules.subdivisions.api:pid_fetcher',
+            'stats_id = \
+                sonar.modules.stats.api:pid_fetcher'
         ],
         "invenio_records.jsonresolver": [
             "organisation = sonar.modules.organisations.jsonresolvers",
@@ -167,7 +173,11 @@ setup(
             "subdivisions = sonar.modules.subdivisions.jsonresolvers"
         ],
         'invenio_celery.tasks' : [
-            'documents = sonar.modules.documents.tasks'
+            'documents = sonar.modules.documents.tasks',
+            'stats = sonar.modules.stats.tasks',
+        ],
+        'invenio_admin.views': [
+            'stats = sonar.modules.stats.admin:stats_adminview'
         ],
         'babel.extractors': [
             'json = sonar.modules.babel_extractors:extract_json'

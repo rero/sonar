@@ -66,6 +66,24 @@ class OrganisationSearch(SonarSearch):
         index = 'organisations'
         doc_types = []
 
+    def get_shared_or_dedicated_list(self):
+        """Get the list of dedicated or shared organisations.
+
+        :returns: Iterator of dedicated or shared organisations.
+        """
+        return self.filter('bool',
+                           should=[{
+                               'term': {
+                                   'isDedicated': True
+                               }
+                           }, {
+                               'term': {
+                                   'isShared': True
+                               }
+                           }]).source(
+                               ['pid', 'name', 'isShared',
+                                'isDedicated']).execute().hits
+
 
 class OrganisationRecord(SonarRecord):
     """Organisation record class."""

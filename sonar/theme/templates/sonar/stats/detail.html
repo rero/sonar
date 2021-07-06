@@ -1,0 +1,51 @@
+{# -*- coding: utf-8 -*-
+Swiss Open Access Repository
+Copyright (C) 2021 RERO
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, version 3 of the License.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see
+<http: //www.gnu.org/licenses />.
+#}
+{%- extends 'sonar/page_admin.html' %}
+
+{%- block body %}
+{% if not live %}
+<div class="pull-right mt-2">
+  <a href="/api/stats/{{record.pid}}?format=text/csv" class="btn btn-primary btn-sm">
+    <i class="fa fa-download mr-2"></i>{{ _('Download') }}
+  </a>
+</div>
+{% endif %}
+<h1>{{ _('Stats for') }}: {{ record.model.created | format_date('%d/%m/%Y %H:%M') }}</h1>
+{% if record['values'] %}
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>{{ _('Organisation') }}</th>
+      <th>{{ _('Type') }}</th>
+      <th>{{ _('Documents') }}</th>
+      <th>{{ _('Full-text') }}</th>
+      <th>{{ _('No full-text') }}</th>
+    </tr>
+  </thead>
+  {% for value in record['values'] %}
+  <tr>
+    <td>{{ value.organisation }}</td>
+    <td>{{ value.type }}</td>
+    <td>{{ value.pids | length }}</td>
+    <td>{{ value.full_text }}</td>
+    <td>{{ value.pids | length - value.full_text }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

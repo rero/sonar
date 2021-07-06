@@ -28,6 +28,7 @@ from __future__ import absolute_import, print_function
 import os
 from datetime import timedelta
 
+from celery.schedules import crontab
 from invenio_oauthclient.contrib import orcid
 from invenio_records_rest.facets import range_filter
 from invenio_stats.processors import EventsIndexer
@@ -44,6 +45,7 @@ from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import record_permission_factory, \
     wiki_edit_permission
 from sonar.modules.query import and_term_filter, missing_field_filter
+from sonar.modules.stats.config import Configuration as StatConfiguration
 from sonar.modules.subdivisions.config import \
     Configuration as SubdivisionConfiguration
 from sonar.modules.users.api import UserRecord, UserSearch
@@ -165,6 +167,11 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'invenio_stats.tasks.process_events',
         'schedule': timedelta(minutes=30),
         'args': [('record-view', 'file-download')],
+    },
+    # Documents stats
+    'documents-stats': {
+        'task': ('sonar.modules.stats.tasks.collect_stats'),
+        'schedule': crontab(minute=0, hour=1),  # Every day at 01:00 UTC,
     }
 }
 CELERY_BROKER_HEARTBEAT = 0
@@ -502,6 +509,10 @@ RECORDS_REST_ENDPOINTS['coll'] = CollectionConfiguration.rest_endpoint
 # Add endpoint for subdivisions
 RECORDS_REST_ENDPOINTS['subd'] = SubdivisionConfiguration.rest_endpoint
 """REST endpoints."""
+
+# Add endpoint for stats
+RECORDS_REST_ENDPOINTS['stat'] = StatConfiguration.rest_endpoint
+"""REST endpoints for statistics."""
 
 DEFAULT_AGGREGATION_SIZE = 50
 """Default size for aggregations."""
