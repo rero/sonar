@@ -258,21 +258,17 @@ along with this program. If not, see
 
         <!-- CLASSIFICATION -->
         {% if record.classification and record.classification | length > 0 %}
-        {% for classification in record.classification %}
         <dt class="col-lg-3">
           {{ _('Classification') }}
         </dt>
         <dd class="col-lg-9">
-          {% if classification.type == 'bf:ClassificationUdc' %}
+          {% for classification in record.classification if classification.type == 'bf:ClassificationUdc' -%}
           <a
-            href="{{ url_for('documents.search', view=view_code, q='classification.classificationPortion:' + classification.classificationPortion) }}">
-            {{ _('classification_' + classification.classificationPortion) }}
-          </a>
-          {% else %}
-          {{ _('classification_' + classification.classificationPortion) }}
-          {% endif %}
+            href="{{ url_for('documents.search', view=view_code, q='classification.classificationPortion:' + classification.classificationPortion) }}">{{
+            _('classification_' + classification.classificationPortion) }}</a>{% if not loop.last %}&nbsp;;&nbsp;{%
+          endif %}
+          {%- endfor %}
         </dd>
-        {% endfor %}
         {% endif %}
 
         <!-- CUSTOM FIELDS -->
