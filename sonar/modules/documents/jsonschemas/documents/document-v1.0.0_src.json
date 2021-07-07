@@ -1757,6 +1757,7 @@
             "form": {
               "remoteTypeahead": {
                 "type": "projects",
+                "label": "name",
                 "field": "metadata.name.suggest"
               }
             }
