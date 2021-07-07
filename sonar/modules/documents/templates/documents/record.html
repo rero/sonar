@@ -146,9 +146,10 @@ along with this program. If not, see
         {% for subject in record.subjects %}
         {% for value in subject.label.value %}
         <h5 class="d-inline">
-          <span class="badge badge-secondary text-light font-weight-light">
-            <i class="fa fa-tag mx-1"></i> {{ value }}
-          </span>
+          <a href="{{ url_for('documents.search', view=view_code, q=value) }}">
+            <span class="badge badge-secondary text-light font-weight-light">
+              <i class="fa fa-tag mx-1"></i> {{ value }}
+            </span></a>
         </h5>
         {% endfor %}
         {% endfor %}
@@ -262,7 +263,14 @@ along with this program. If not, see
           {{ _('Classification') }}
         </dt>
         <dd class="col-lg-9">
+          {% if classification.type == 'bf:ClassificationUdc' %}
+          <a
+            href="{{ url_for('documents.search', view=view_code, q='classification.classificationPortion:' + classification.classificationPortion) }}">
+            {{ _('classification_' + classification.classificationPortion) }}
+          </a>
+          {% else %}
           {{ _('classification_' + classification.classificationPortion) }}
+          {% endif %}
         </dd>
         {% endfor %}
         {% endif %}
@@ -314,7 +322,8 @@ along with this program. If not, see
         {% endif %}
 
         <!-- PERMANENT LINK -->
-        {% set link = record.get_ark_resolver_url() if record.ark else record.get_permanent_link(request.host_url, record.pid, view_code) %}
+        {% set link = record.get_ark_resolver_url() if record.ark else record.get_permanent_link(request.host_url,
+        record.pid, view_code) %}
         <dt class="col-lg-3">
           {{ _('Persistent URL') }}
         </dt>
