@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-06-14 13:34+0200\n"
-"PO-Revision-Date: 2021-06-25 05:39+0000\n"
-"Last-Translator: Pascal Repond <pascalr.92@gmail.com>\n"
+"PO-Revision-Date: 2021-07-09 20:47+0000\n"
+"Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "fr/>\n"
 "Language: fr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.7.1-dev\n"
+"X-Generator: Weblate 4.8-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: sonar/theme/views.py:67
@@ -76,11 +76,11 @@ msgstr "Action"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:586
 msgid "Actor"
-msgstr ""
+msgstr "Acteurs·trices"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:581
 msgid "Actor involved"
-msgstr ""
+msgstr "Acteurs·trices impliqué·e·s"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:704
 msgid "Add a new collection"
@@ -128,9 +128,8 @@ msgid "Animators"
 msgstr "Animateurs"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:620
-#, fuzzy
 msgid "Apprentice"
-msgstr "Apprenti"
+msgstr "Apprenti·e"
 
 #: sonar/modules/deposits/rest.py:203
 msgid "Ask for changes on deposit"
@@ -150,7 +149,7 @@ msgstr "Auteur ou éditeur"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:612
 msgid "Authors / Editors"
-msgstr ""
+msgstr "Auteurs / éditeurs intellectuels"
 
 #: sonar/modules/documents/templates/documents/record.html:44
 #: sonar/theme/templates/sonar/projects/detail.html:15
@@ -170,13 +169,12 @@ msgid "Best regards"
 msgstr "Meilleures salutations"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:909
-#, fuzzy
 msgid "Brief description of the mandate"
 msgstr "Brève description du mandat"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:945
 msgid "Brief description of the report"
-msgstr ""
+msgstr "Brève description du rapport"
 
 #: sonar/common/jsonschemas/oa-status-v1.0.0.json:30
 msgid "Bronze"
@@ -256,7 +254,7 @@ msgstr "Classifications"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:692
 msgid "Classroom teacher"
-msgstr ""
+msgstr "Maître·sse de classe"
 
 #: sonar/templates/security/email/reset_instructions.html:18
 msgid "Click here to reset your password"
@@ -290,7 +288,7 @@ msgstr "Commentaire"
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:107
 msgid "Comment associated with the current action."
-msgstr ""
+msgstr "Commentaire lié à l'action actuelle."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:513
 msgid "Company"
@@ -309,9 +307,8 @@ msgid "Contact"
 msgstr "Contact"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:540
-#, fuzzy
 msgid "Contained in (journal, book, proceedings)"
-msgstr "Contenu dans (journal, livre, actes)"
+msgstr "Contenu dans (revue, livre, actes)"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1116
 msgid "Content note"
@@ -351,10 +348,9 @@ msgstr "Affiliations contrôlées"
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:223
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:285
 msgid "Creativity, transformations and innovations in education"
-msgstr ""
+msgstr "Créativité, transformations et innovations en éducation"
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:78
-#, fuzzy
 msgid "Current action done in the validation process."
 msgstr "Action en cours dans le processus de validation."
 
@@ -363,7 +359,6 @@ msgid "Current cataloguing step."
 msgstr "Étape actuelle de catalogage."
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:65
-#, fuzzy
 msgid "Current status of the record in the validation process."
 msgstr "Statut actuel de la ressource dans le processus de validation."
 
@@ -393,9 +388,8 @@ msgid "Date in yyyy-mm-dd format, ex: 1970-01-01"
 msgstr "Date selon le format YYYY-MM-JJ, ex : 1970-01-01"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:141
-#, fuzzy
 msgid "Date of approval by the Team Leader"
-msgstr "Date d'approbation par le responsable d'équipe"
+msgstr "Date d'approbation par le·la responsable d'équipe"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1293
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:34
@@ -408,12 +402,11 @@ msgstr "Date de décès"
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:43
 msgid "Date when the log is created."
-msgstr ""
+msgstr "Date de création du log."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:640
-#, fuzzy
 msgid "Dean of a school"
-msgstr "Doyen d'école"
+msgstr "Doyen·ne d'établissement"
 
 #: sonar/templates/security/email/welcome.html:1
 #, python-format
@@ -461,9 +454,8 @@ msgid "Designation"
 msgstr "Désignation"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:636
-#, fuzzy
 msgid "Director, head of HE training"
-msgstr "Directeur, responsable de la formation"
+msgstr "Directeur·trice, responsable de formation HE"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:632
 msgid "Director, head of establishment"
@@ -538,7 +530,7 @@ msgstr "Édition"
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:211
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:273
 msgid "Education, childhood and the learning Society 21"
-msgstr ""
+msgstr "Éducation, enfance et société apprenante 21"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:935
 msgid "Educational document, report"
@@ -685,7 +677,6 @@ msgid "External partners"
 msgstr "Partenaires externes"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:343
-#, fuzzy
 msgid "External partners are involved"
 msgstr "Des partenaires externes sont impliqués"
 
@@ -760,20 +751,19 @@ msgstr "Français"
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:219
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:281
 msgid "Fundamental learning"
-msgstr ""
+msgstr "Apprentissages fondamentaux"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:443
-#, fuzzy
 msgid "Funded research"
 msgstr "Recherche financée"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:469
 msgid "Funder"
-msgstr ""
+msgstr "Agence de financement"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:524
 msgid "Funding number"
-msgstr ""
+msgstr "Numéro du financement"
 
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:245
 msgid "Funding organisation"
@@ -786,11 +776,11 @@ msgstr "Agences de financement"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:459
 msgid "Funding request"
-msgstr ""
+msgstr "Demande de financement"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:559
 msgid "Funding was granted for the project"
-msgstr ""
+msgstr "Ce projet a obtenu un financement"
 
 #: sonar/config.py:74
 msgid "German"
@@ -798,7 +788,7 @@ msgstr "Allemand"
 
 #: sonar/common/jsonschemas/oa-status-v1.0.0.json:22
 msgid "Gold"
-msgstr ""
+msgstr "Gold"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:886
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1140
@@ -807,23 +797,23 @@ msgstr "Institution qui contribue"
 
 #: sonar/common/jsonschemas/oa-status-v1.0.0.json:18
 msgid "Green"
-msgstr ""
+msgstr "Green"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:628
 msgid "Guidance counsellor"
-msgstr ""
+msgstr "Conseiller·ère en orientation"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:161
 msgid "HEP status"
-msgstr ""
+msgstr "Statut HEP"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:501
 msgid "HES-SO"
-msgstr ""
+msgstr "HES-SO"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:497
 msgid "HES-SO Valais-Wallis"
-msgstr ""
+msgstr "HES-SO Valais-Wallis"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:39
 msgid "HTML markup admitted."
@@ -835,7 +825,7 @@ msgstr "Moissonné"
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:18
 msgid "Hash key"
-msgstr ""
+msgstr "Clé de hachage"
 
 #: sonar/theme/templates/sonar/footer.html:24
 msgid "Help & Documentation"
@@ -853,10 +843,11 @@ msgstr ""
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:969
 msgid "How are research results used in training?"
 msgstr ""
+"Comment les résultats de la recherche sont-ils valorisés dans la formation ?"
 
 #: sonar/common/jsonschemas/oa-status-v1.0.0.json:26
 msgid "Hybrid"
-msgstr ""
+msgstr "Hybride"
 
 #: sonar/theme/templates/sonar/footer.html:28
 msgid "IR hosting service"
@@ -904,29 +895,29 @@ msgstr "Si ce champ est utilisé, le fichier pointe vers l'URL spécifiée."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:316
 msgid "In progress"
-msgstr ""
+msgstr "En cours"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:123
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:170
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:217
 msgid "Include in facets"
-msgstr ""
+msgstr "Inclure dans les facettes"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:684
 msgid "Inspector"
-msgstr ""
+msgstr "Inspecteur·trice"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:361
 msgid "Institution"
-msgstr ""
+msgstr "Institution"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:439
 msgid "Internal research"
-msgstr ""
+msgstr "Recherche interne"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:241
 msgid "Internal research associates"
-msgstr ""
+msgstr "Chercheur·euse·s associé·e·s internes"
 
 #: sonar/theme/templates/sonar/page.html:47
 msgid "Invenio"
@@ -976,12 +967,12 @@ msgstr "Clé du fichier (nom de fichier)."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:835
 msgid "Keyword"
-msgstr ""
+msgstr "Mot-clé"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:391
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:832
 msgid "Keywords"
-msgstr ""
+msgstr "Mots-clés"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:70
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:69
@@ -998,7 +989,7 @@ msgstr "Label"
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:142
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:189
 msgid "Labels"
-msgstr ""
+msgstr "Labels"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:360
@@ -1013,7 +1004,7 @@ msgstr "Langues"
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:227
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:289
 msgid "Languages, arts, cultures: mediation and teaching"
-msgstr ""
+msgstr "Langues, arts, cultures : médiation et enseignement"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:201
 msgid "Last OAI-PMH set update (ISO8601 formatted timestamp)"
@@ -1029,7 +1020,7 @@ msgstr "Nom, prénom, ex : Dupont, Jean"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:174
 msgid "Lecturer/professor"
-msgstr ""
+msgstr "Chargé·e d’enseignement/professeur·e"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:2
 #: sonar/modules/documents/templates/documents/record.html:306
@@ -1038,7 +1029,7 @@ msgstr "Licence"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:52
 msgid "License undefined"
-msgstr ""
+msgstr "Licence non définie"
 
 #: sonar/theme/templates/sonar/projects/detail.html:79
 msgid "Linked documents"
@@ -1065,11 +1056,11 @@ msgstr "Liste des fichiers liés à la ressource."
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:21
 msgid "List of logs."
-msgstr ""
+msgstr "Liste des logs."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:878
 msgid "Locality (Valais)"
-msgstr ""
+msgstr "Commune (Valais)"
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:25
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:188
@@ -1100,7 +1091,7 @@ msgstr "S'identifier avec SWITCHaai"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:688
 msgid "Logopedist"
-msgstr ""
+msgstr "Logopédiste"
 
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:32
 msgid "Logout"
@@ -1126,7 +1117,7 @@ msgstr "Type MIME"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:196
 msgid "Main team"
-msgstr ""
+msgstr "Équipe principale"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:297
 msgid "Main title"
@@ -1138,23 +1129,23 @@ msgstr "Titres"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:836
 msgid "Mandate"
-msgstr ""
+msgstr "Mandat"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:423
 msgid "Master"
-msgstr ""
+msgstr "Master"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:427
 msgid "Master of Advanced Studies"
-msgstr ""
+msgstr "Master of Advanced Studies"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:696
 msgid "Mediator"
-msgstr ""
+msgstr "Médiateur·trice"
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:145
 msgid "Mimetype"
-msgstr ""
+msgstr "Type MIME"
 
 #: sonar/config.py:602
 msgid "Most recent"
@@ -1175,11 +1166,11 @@ msgstr "Nom"
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:23
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:707
 msgid "Names"
-msgstr ""
+msgstr "Noms"
 
 #: sonar/modules/collections/templates/collections/index.html:32
 msgid "No collection found"
-msgstr ""
+msgstr "Aucune collection trouvée"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:656
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:834
@@ -1267,7 +1258,7 @@ msgstr "Autre"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:517
 msgid "Other (free field)"
-msgstr ""
+msgstr "Autre (champ libre)"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:592
 msgid "Other Material Characteristics"
@@ -1283,7 +1274,7 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:882
 msgid "Other canton (Switzerland)"
-msgstr ""
+msgstr "Autre canton (Suisse)"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:641
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:959
@@ -1302,7 +1293,7 @@ msgstr "Autres fichiers"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:886
 msgid "Other locality (Switzerland)"
-msgstr ""
+msgstr "Autre commune (Suisse)"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:29
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:29
@@ -1316,7 +1307,7 @@ msgstr "Pages"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:700
 msgid "Parents"
-msgstr ""
+msgstr "Parents"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1425
 msgid "Part of (host document)"
@@ -1324,7 +1315,7 @@ msgstr "Contenu dans (document hôte)"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:806
 msgid "Pedagogical and technological innovation"
-msgstr ""
+msgstr "Innovation pédagogique et technologique"
 
 #: sonar/theme/templates/sonar/projects/detail.html:24
 msgid "Period"
@@ -1332,7 +1323,7 @@ msgstr "Période"
 
 #: sonar/modules/documents/templates/documents/record.html:319
 msgid "Persistent URL"
-msgstr ""
+msgstr "URL persistante"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:19
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:19
@@ -1353,7 +1344,7 @@ msgstr "Lieu"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:78
 msgid "Platform name"
-msgstr ""
+msgstr "Nom de la plateforme"
 
 #: sonar/templates/security/email/welcome.html:5
 msgid "Please confirm your e-mail by clicking here"
@@ -1362,11 +1353,11 @@ msgstr "Veuillez confirmer votre e-mail en cliquant ici"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:573
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:590
 msgid "Please enter a valid number."
-msgstr ""
+msgstr "Veuillez saisir un numéro valide."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:606
 msgid "Please enter a valid pages range, example: 135, 5-27."
-msgstr ""
+msgstr "Veuillez saisir une plage de pages valide, exemple : 135, 5-27."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:85
 msgid "Position"
@@ -1378,7 +1369,7 @@ msgstr "Position du fichier, le premier de la liste est le fichier principal."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:447
 msgid "Post-doctorate supported by the HEP-VS"
-msgstr ""
+msgstr "Post doctorat soutenu par la HEP-VS"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:65
 msgid "Postal code"
@@ -1395,7 +1386,7 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:704
 msgid "Practitioner-trainer"
-msgstr ""
+msgstr "Praticien·ne formateur·trice"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1232
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:164
@@ -1415,11 +1406,11 @@ msgstr "Clé primaire"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:660
 msgid "Primary teacher"
-msgstr ""
+msgstr "Enseignant·e primaire"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:505
 msgid "Private foundation"
-msgstr ""
+msgstr "Fondation privée"
 
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:21
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:24
@@ -1433,15 +1424,15 @@ msgstr "Projet"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:148
 msgid "Project sponsor"
-msgstr ""
+msgstr "Répondant·e du projet"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:303
 msgid "Project status"
-msgstr ""
+msgstr "Statut du projet"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:55
 msgid "Project summary"
-msgstr ""
+msgstr "Résumé du projet"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:446
 msgid "Provision activities"
@@ -1453,11 +1444,11 @@ msgstr "Production, publication, diffusion, distribution, fabrication"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:708
 msgid "Psychologist"
-msgstr ""
+msgstr "Psychologue"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:712
 msgid "Psychomotrician"
-msgstr ""
+msgstr "Pychomotricien·ne"
 
 #: sonar/theme/templates/sonar/macros/macro.html:33
 msgid "Public access from"
@@ -1465,7 +1456,7 @@ msgstr "Accès public depuis"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:509
 msgid "Public foundation"
-msgstr ""
+msgstr "Fondation publique"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:650
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:979
@@ -1496,11 +1487,11 @@ msgstr "Qualificatif"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:409
 msgid "Realization framework"
-msgstr ""
+msgstr "Cadre de réalisation"
 
 #: sonar/modules/validation/api.py:216
 msgid "Record validation"
-msgstr ""
+msgstr "Validation de la ressource"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:4
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1019
@@ -1528,7 +1519,7 @@ msgstr "Mention de responsabilité"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:56
 msgid "Rights reserved"
-msgstr ""
+msgstr "Droits réservés"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:953
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1352
@@ -1562,7 +1553,7 @@ msgstr "Schéma"
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:3
 msgid "Schema representing a validation workflow."
-msgstr ""
+msgstr "Schéma d'un processus de validation."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:9
 msgid "Schema to validate document against."
@@ -1570,7 +1561,7 @@ msgstr "Schéma de validation des notices bibliographiques."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:186
 msgid "Scientific collaborator"
-msgstr ""
+msgstr "Collaborateur·trice scientifique"
 
 #: sonar/theme/templates/sonar/frontpage.html:64
 #: sonar/theme/templates/sonar/partial/navbar.html:49
@@ -1581,7 +1572,7 @@ msgstr "Recherche"
 
 #: sonar/modules/collections/templates/collections/item.html:48
 msgid "Search in collection"
-msgstr ""
+msgstr "Rechercher dans la collection"
 
 #: sonar/theme/templates/sonar/frontpage.html:61
 msgid "Search publications, authors, projects..."
@@ -1589,19 +1580,19 @@ msgstr "Rechercher dans les publications, auteurs, projets..."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:664
 msgid "Secondary teacher"
-msgstr ""
+msgstr "Enseignant·e secondaire"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:259
 msgid "Secondary team"
-msgstr ""
+msgstr "Équipe secondaire"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:257
 msgid "Section"
-msgstr ""
+msgstr "Section"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:253
 msgid "Sections"
-msgstr ""
+msgstr "Sections"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:624
 msgid "Series"
@@ -1656,7 +1647,7 @@ msgstr "Taille du fichier en octets."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:624
 msgid "Social Assistant"
-msgstr ""
+msgstr "Assistant·e social·e"
 
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:28
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:510
@@ -1674,7 +1665,7 @@ msgstr "Code source sur"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:672
 msgid "Special education teacher"
-msgstr ""
+msgstr "Enseignant·e spécialisé·e"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:67
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1063
@@ -1689,19 +1680,19 @@ msgstr "Date 1"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:862
 msgid "State of Valais, Education service"
-msgstr ""
+msgstr "État du Valais, Service de l’enseignement"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:866
 msgid "State of Valais, Higher education service"
-msgstr ""
+msgstr "État du Valais, Service des hautes écoles"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:870
 msgid "State of Valais, other services"
-msgstr ""
+msgstr "État du Valais, autre service"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:874
 msgid "State of Valais, parastatal institution"
-msgstr ""
+msgstr "État du Valais, institution paraétatique"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:480
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1484
@@ -1735,15 +1726,15 @@ msgstr "Rue et numéro de l'adresse, séparés par une virgule."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:648
 msgid "Student"
-msgstr ""
+msgstr "Élève"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:656
 msgid "Student in special education"
-msgstr ""
+msgstr "Élève en enseignement spécialisé"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:676
 msgid "Student in training"
-msgstr ""
+msgstr "Étudiant·e en formation"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:904
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:921
@@ -1769,7 +1760,7 @@ msgstr "Super administration"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:328
 msgid "Suspended"
-msgstr ""
+msgstr "Suspendu"
 
 #: sonar/config.py:96 sonar/config.py:100
 msgid "Swiss Open Access Repository"
@@ -1777,11 +1768,11 @@ msgstr "Swiss Open Access Repository"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:493
 msgid "Swissuniversities"
-msgstr ""
+msgstr "Swissuniversities"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:668
 msgid "Tertiary teacher"
-msgstr ""
+msgstr "Enseignant·e tertiaire"
 
 #: sonar/theme/templates/sonar/page.html:20
 msgid ""
@@ -1817,21 +1808,23 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:464
 msgid "This project has been submitted for funding"
-msgstr ""
+msgstr "Ce projet a fait l’objet d’une demande de financement"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:940
 msgid ""
 "This project is the subject of an educational document or a report to the"
 " city or science"
 msgstr ""
+"Ce projet fait l’objet d’un document pédagogique ou d'un rapport à la cité "
+"ou la science"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:811
 msgid "This project promotes pedagogical or technological innovation"
-msgstr ""
+msgstr "Ce projet favorise l'innovation pédagogique ou technologique"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:841
 msgid "This research is linked to a mandate"
-msgstr ""
+msgstr "Cette recherche est liée à un mandat"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:50
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:283
@@ -1865,12 +1858,12 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:680
 msgid "Trainer"
-msgstr ""
+msgstr "Formateur·trice"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:231
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:293
 msgid "Training and professionalization"
-msgstr ""
+msgstr "Formation et professionnalisation"
 
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:8
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:75
@@ -1893,7 +1886,7 @@ msgstr "Type"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:730
 msgid "Type of actor"
-msgstr ""
+msgstr "Type d'acteur·trice"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:75
 msgid "Type of the file"
@@ -1936,11 +1929,11 @@ msgstr "utilisateur"
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:91
 msgid "User which created the record."
-msgstr ""
+msgstr "Utilisateur qui a créé la ressource."
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:2
 msgid "Validation"
-msgstr ""
+msgstr "Validation"
 
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:39
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:32
@@ -1967,7 +1960,7 @@ msgstr "Valeur"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:851
 msgid "Values"
-msgstr ""
+msgstr "Valeurs"
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:135
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:44
@@ -1978,7 +1971,7 @@ msgstr "UUID de la version"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:644
 msgid "Vice-rector HE"
-msgstr ""
+msgstr "Vice-recteur·trice HE"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:562
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1439
@@ -1998,10 +1991,12 @@ msgid ""
 "What are the benefits and quality improvements in the research in this "
 "project?"
 msgstr ""
+"Quels sont les bénéfices et améliorations de la qualité dans la recherche "
+"dans ce projet ?"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:770
 msgid "What are the benefits of research in training?"
-msgstr ""
+msgstr "Quelles sont les retombées de la recherche en formation ?"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:794
 msgid ""
@@ -2009,19 +2004,20 @@ msgid ""
 "external governance?"
 msgstr ""
 "Quelles sont les retombées de la recherche sur l’action publique ou sur la "
-"gouvernance interne ou externe?"
+"gouvernance interne ou externe ?"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:782
 msgid "What is the impact of the research on the professional environment?"
-msgstr "Quelles sont les retombées de la recherche sur le milieu professionnel?"
+msgstr ""
+"Quelles sont les retombées de la recherche sur le milieu professionnel ?"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:577
 msgid "Who are the actors involved in the field?"
-msgstr ""
+msgstr "Qui sont les acteurs·trices impliqué·e·s dans le terrain ?"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:816
 msgid "Why?"
-msgstr ""
+msgstr "Pourquoi ?"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1434
 msgid "Year"
@@ -2029,15 +2025,15 @@ msgstr "Année"
 
 #: sonar/translations/manual_translations.txt:37
 msgid "actorsInvolved"
-msgstr ""
+msgstr "acteurs·trices impliqué·e·s"
 
 #: sonar/translations/manual_translations.txt:21
 msgid "approvalDate"
-msgstr ""
+msgstr "date de validation"
 
 #: sonar/translations/manual_translations.txt:38
 msgid "benefits"
-msgstr ""
+msgstr "bénéfices"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:498
 msgid "bf:Agent"
@@ -2656,7 +2652,7 @@ msgstr "Validé"
 
 #: sonar/translations/manual_translations.txt:30
 msgid "description"
-msgstr ""
+msgstr "description"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:252
 msgid "document_type_advanced_studies_thesis"
@@ -2848,7 +2844,7 @@ msgstr "Autre"
 
 #: sonar/translations/manual_translations.txt:46
 msgid "educationalDocument"
-msgstr ""
+msgstr "document pédagogique"
 
 #: sonar/translations/manual_translations.txt:18
 msgid "eduid"
@@ -2860,43 +2856,43 @@ msgstr "Switch edu-ID Test"
 
 #: sonar/translations/manual_translations.txt:29
 msgid "endDate"
-msgstr ""
+msgstr "date de fin"
 
 #: sonar/translations/manual_translations.txt:27
 msgid "externalPartners"
-msgstr ""
+msgstr "partenaires externes"
 
 #: sonar/translations/manual_translations.txt:34
 msgid "funding_funder_name"
-msgstr ""
+msgstr "nom de l'agence de financement"
 
 #: sonar/translations/manual_translations.txt:35
 msgid "funding_funder_number"
-msgstr ""
+msgstr "numéro du financement"
 
 #: sonar/translations/manual_translations.txt:33
 msgid "funding_funder_type"
-msgstr ""
+msgstr "type de financement"
 
 #: sonar/translations/manual_translations.txt:36
 msgid "funding_fundingReceived"
-msgstr ""
+msgstr "financement reçu"
 
 #: sonar/translations/manual_translations.txt:39
 msgid "impactOnFormation"
-msgstr ""
+msgstr "retombée sur la formation"
 
 #: sonar/translations/manual_translations.txt:40
 msgid "impactOnProfessionalEnvironment"
-msgstr ""
+msgstr "retombée dans le milieu professionnel"
 
 #: sonar/translations/manual_translations.txt:41
 msgid "impactOnPublicAction"
-msgstr ""
+msgstr "retombée sur l'action publique"
 
 #: sonar/translations/manual_translations.txt:25
 msgid "innerSearcher"
-msgstr ""
+msgstr "chercheur·e interne"
 
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:191
 msgid "investigator"
@@ -2904,12 +2900,12 @@ msgstr "chercheur"
 
 #: sonar/translations/manual_translations.txt:31
 msgid "keywords"
-msgstr ""
+msgstr "mots-clés"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:694
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1016
 msgid "label"
-msgstr ""
+msgstr "label"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:497
 msgid "lang_aar"
@@ -4853,7 +4849,7 @@ msgstr "zazaki"
 
 #: sonar/translations/manual_translations.txt:24
 msgid "mainTeam"
-msgstr ""
+msgstr "équipe principale"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1034
 msgid "name"
@@ -4881,19 +4877,19 @@ msgstr "PMID"
 
 #: sonar/translations/manual_translations.txt:22
 msgid "projectSponsor"
-msgstr ""
+msgstr "répondant·e du projet"
 
 #: sonar/translations/manual_translations.txt:42
 msgid "promoteInnovation"
-msgstr ""
+msgstr "favorise l'innovation"
 
 #: sonar/translations/manual_translations.txt:32
 msgid "realizationFramework"
-msgstr ""
+msgstr "cadre de réalisation"
 
 #: sonar/translations/manual_translations.txt:45
 msgid "relatedToMandate_briefDescription"
-msgstr ""
+msgstr "description brève du mandat"
 
 #: sonar/translations/manual_translations.txt:43
 msgid "relatedToMandate_mandate"
@@ -4959,43 +4955,43 @@ msgstr "utilisateur"
 
 #: sonar/translations/manual_translations.txt:59
 msgid "validation_action_approve"
-msgstr ""
+msgstr "Valider"
 
 #: sonar/translations/manual_translations.txt:61
 msgid "validation_action_ask_for_changes"
-msgstr ""
+msgstr "Demander des modifications"
 
 #: sonar/translations/manual_translations.txt:58
 msgid "validation_action_publish"
-msgstr ""
+msgstr "Publier"
 
 #: sonar/translations/manual_translations.txt:60
 msgid "validation_action_reject"
-msgstr ""
+msgstr "Refuser"
 
 #: sonar/translations/manual_translations.txt:57
 msgid "validation_action_save"
-msgstr ""
+msgstr "Enregistrer"
 
 #: sonar/translations/manual_translations.txt:54
 msgid "validation_status_ask_for_changes"
-msgstr ""
+msgstr "Demande de modifications"
 
 #: sonar/translations/manual_translations.txt:50
 msgid "validation_status_in_progress"
-msgstr ""
+msgstr "En cours"
 
 #: sonar/translations/manual_translations.txt:53
 msgid "validation_status_rejected"
-msgstr ""
+msgstr "Refusé"
 
 #: sonar/translations/manual_translations.txt:51
 msgid "validation_status_to_validate"
-msgstr ""
+msgstr "À valider"
 
 #: sonar/translations/manual_translations.txt:52
 msgid "validation_status_validated"
-msgstr ""
+msgstr "Validé"
 
 #: sonar/modules/documents/views.py:174
 msgid "vol."
@@ -5003,7 +4999,7 @@ msgstr "vol."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:489
 msgid "​Swiss National Science Foundation"
-msgstr ""
+msgstr "Fonds national suisse de la recherche scientifique"
 
 #~ msgid "Series to which belongs the resource."
 #~ msgstr "Collection à laquelle appartient la ressource."
