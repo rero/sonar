@@ -146,7 +146,7 @@ along with this program. If not, see
         {% for subject in record.subjects %}
         {% for value in subject.label.value %}
         <h5 class="d-inline">
-          <a href="{{ url_for('documents.search', view=view_code, q=value) }}">
+          <a href="{{ url_for('documents.search', view=view_code, q='subjects.label.value:' + value) }}">
             <span class="badge badge-secondary text-light font-weight-light">
               <i class="fa fa-tag mx-1"></i> {{ value }}
             </span></a>
