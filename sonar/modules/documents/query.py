@@ -81,6 +81,9 @@ def search_factory(self, search, query_parser=None):
 
     # Public search
     if view:
+        # Don't display masked records
+        search = search.filter('bool', must_not={'term': {'masked': True}})
+
         # Filter record by organisation view.
         if view != current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'):
             search = search.filter('term', organisation__pid=view)

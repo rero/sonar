@@ -1836,6 +1836,17 @@
       "form": {
         "hide": true
       }
+    },
+    "masked": {
+      "title": "Masked",
+      "type": "boolean",
+      "description": "A masked document is visible in the professional interface, but not in the public interface.",
+      "default": false,
+      "form": {
+        "expressionProperties": {
+          "templateOptions.required": "true"
+        }
+      }
     }
   },
   "propertiesOrder": [
@@ -1866,7 +1877,8 @@
     "oa_status",
     "customField1",
     "customField2",
-    "customField3"
+    "customField3",
+    "masked"
   ],
   "required": [
     "$schema",

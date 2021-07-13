@@ -20,7 +20,7 @@
 from flask import url_for
 
 
-def test_collection_query(db, client, document, collection):
+def test_collection_query(db, client, document, collection, es_clear):
     document['collections'] = [{
         '$ref':
         'https://sonar.ch/api/collections/{pid}'.format(pid=collection['pid'])
@@ -36,3 +36,29 @@ def test_collection_query(db, client, document, collection):
     assert res.status_code == 200
     assert res.json['hits']['total']['value'] == 1
     assert not res.json['aggregations'].get('collection')
+
+
+def test_masked_document(db, client, document, es_clear):
+    """Test masked document."""
+    # Not masked (property not exists)
+    res = client.get(url_for('invenio_records_rest.doc_list', view='global'))
+    assert res.status_code == 200
+    assert res.json['hits']['total']['value'] == 1
+
+    # Not masked
+    document['masked'] = False
+    document.commit()
+    document.reindex()
+    db.session.commit()
+    res = client.get(url_for('invenio_records_rest.doc_list', view='global'))
+    assert res.status_code == 200
+    assert res.json['hits']['total']['value'] == 1
+
+    # Masked
+    document['masked'] = True
+    document.commit()
+    document.reindex()
+    db.session.commit()
+    res = client.get(url_for('invenio_records_rest.doc_list', view='global'))
+    assert res.status_code == 200
+    assert res.json['hits']['total']['value'] == 0
