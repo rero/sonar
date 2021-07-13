@@ -105,6 +105,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     customField1 = fields.List(fields.String(validate=validate.Length(min=1)))
     customField2 = fields.List(fields.String(validate=validate.Length(min=1)))
     customField3 = fields.List(fields.String(validate=validate.Length(min=1)))
+    masked = fields.Boolean()
     _bucket = SanitizedUnicode()
     _files = Nested(FileSchemaV1, many=True)
     _oai = fields.Dict()
