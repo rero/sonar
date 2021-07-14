@@ -1,5 +1,32 @@
 # Changelog
 
+## [v1.2.0](https://github.com/rero/sonar/tree/v1.2.0) (2021-07-14)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.1.1...v1.2.0)
+
+**Implemented enhancements:**
+
+- Keywords and classifications are clickable [\#367](https://github.com/rero/sonar/issues/367)
+
+**Fixed bugs:**
+
+- Facets are not translated when the language is changed [\#598](https://github.com/rero/sonar/issues/598)
+- Research projects  not correct in document editor [\#593](https://github.com/rero/sonar/issues/593)
+- Hide the Dewey classification [\#550](https://github.com/rero/sonar/issues/550)
+
+**Closed issues:**
+
+- Create dedicated view HEP-BEJUNE [\#571](https://github.com/rero/sonar/issues/571)
+
+**Merged pull requests:**
+
+- translations: update catalog [\#602](https://github.com/rero/sonar/pull/602) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- documents: subjects search [\#599](https://github.com/rero/sonar/pull/599) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- documents: hide Dewey classification [\#597](https://github.com/rero/sonar/pull/597) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- documents: fix projects typehead [\#595](https://github.com/rero/sonar/pull/595) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- projects: dedicated view for HEP BEJUNE. [\#591](https://github.com/rero/sonar/pull/591) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- vge: add sources for OAI harvesting from RERO DOC [\#590](https://github.com/rero/sonar/pull/590) ([sebastiendeleze](https://github.com/sebastiendeleze))
+
 ## [v1.1.1](https://github.com/rero/sonar/tree/v1.1.1) (2021-06-16)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.1.0...v1.1.1)
