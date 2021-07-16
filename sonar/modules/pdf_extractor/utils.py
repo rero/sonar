@@ -157,7 +157,10 @@ def format_extracted_data(data):
                     '@from'] + '-' + item['@to']
 
         if monogr['imprint'].get('date').get('@when'):
-            publication['year'] = monogr['imprint']['date']['@when']
+            match = re.search(r'^([0-9]{4}).*$',
+                              monogr['imprint']['date']['@when'])
+            if match:
+                formatted_data['documentDate'] = match.group(1)
 
     if publication:
         formatted_data['publication'] = publication
