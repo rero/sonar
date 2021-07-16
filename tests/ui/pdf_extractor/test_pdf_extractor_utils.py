@@ -74,3 +74,4 @@ def test_format_extracted_data(app):
         assert formatted_data['publication'][
             'publishedIn'] == 'Frontiers in Earth Science'
         assert formatted_data['publication']['volume'] == '7'
+        assert formatted_data['documentDate'] == '2019'
