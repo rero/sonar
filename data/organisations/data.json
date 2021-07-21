@@ -32,8 +32,22 @@
     "platformName": "# ROAR\n#### Répertoire ouvert et archives BEJUNE",
     "files": [
       {
-        "key": "logo.jpg",
+        "key": "logo.png",
         "path": "./hepbejune/logo.png"
+      }
+    ]
+  },
+  {
+    "code": "unifr",
+    "name": "Université de Fribourg",
+    "description": "#### Français\nFOLIA est le serveur de dépôt institutionnel de l'Université de Fribourg (Suisse). Il fournit un accès libre aux publications des chercheurs et chercheuses de l'Université. FOLIA est géré par la Bibliothèque cantonale et universitaire de Fribourg.\n#### Deutsch\nFOLIA ist das institutionelle Repositorium der Universität Freiburg (Schweiz). Es bietet freien Zugang zu den Publikationen der Forschenden der Universität. FOLIA wird von der Kantons- und Universitätsbibliothek Freiburg betreut.\n#### English\nFOLIA is the institutional repository of the University of Fribourg (Switzerland). It provides free access to the publications of the researchers of the University. FOLIA is managed by the Bibliothèque cantonale et universitaire de Fribourg.\n#### Italiano\nFOLIA è l'archivio istituzionale dell'Università di Friburgo (Svizzera). Fornisce un accesso gratuito alle pubblicazioni dei ricercatrici e ricercatori dell'Università. FOLIA è gestito dalla Bibliothèque cantonale et universitaire de Fribourg.",
+    "isShared": true,
+    "isDedicated": true,
+    "platformName": "# FOLIA\n#### Fribourg Open Library and Archive",
+    "files": [
+      {
+        "key": "logo.png",
+        "path": "./unifr/logo.png"
       }
     ]
   }
