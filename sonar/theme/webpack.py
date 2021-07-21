@@ -31,6 +31,7 @@ theme = WebpackBundle(__name__,
                           'hepvs-theme': './scss/hepvs/theme.scss',
                           'vge-theme': './scss/vge/theme.scss',
                           'hepbejune-theme': './scss/hepbejune/theme.scss',
+                          'unifr-theme': './scss/unifr/theme.scss',
                           'preview': './scss/preview.scss',
                       },
                       dependencies={
