@@ -12,15 +12,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-07-14 10:32+0200\n"
-"PO-Revision-Date: 2021-07-09 20:47+0000\n"
+"PO-Revision-Date: 2021-07-22 21:33+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"fr/>\n"
 "Language: fr\n"
-"Language-Team: French "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/fr/>\n"
-"Plural-Forms: nplurals=2; plural=n > 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.7.2-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: sonar/theme/views.py:67
@@ -4893,11 +4894,11 @@ msgstr "description brève du mandat"
 
 #: sonar/translations/manual_translations.txt:43
 msgid "relatedToMandate_mandate"
-msgstr ""
+msgstr "lié à un mandat"
 
 #: sonar/translations/manual_translations.txt:44
 msgid "relatedToMandate_name"
-msgstr ""
+msgstr "nom du mandant"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:116
 msgid "role_admin"
@@ -4921,15 +4922,15 @@ msgstr "Utilisateur"
 
 #: sonar/translations/manual_translations.txt:47
 msgid "searchResultsValorised"
-msgstr ""
+msgstr "valorisation des résultats de la recherche"
 
 #: sonar/translations/manual_translations.txt:26
 msgid "secondaryTeam"
-msgstr ""
+msgstr "équipe secondaire"
 
 #: sonar/translations/manual_translations.txt:28
 msgid "startDate"
-msgstr ""
+msgstr "date de début"
 
 #: sonar/config.py:571
 msgid "status"
@@ -4937,7 +4938,7 @@ msgstr "statut"
 
 #: sonar/translations/manual_translations.txt:23
 msgid "statusHep"
-msgstr ""
+msgstr "statut HEP"
 
 #: sonar/modules/documents/templates/documents/record.html:194
 msgid "supported by"
@@ -5079,4 +5080,3 @@ msgstr "Fonds national suisse de la recherche scientifique"
 
 #~ msgid "Permalink"
 #~ msgstr "Permalien"
-
