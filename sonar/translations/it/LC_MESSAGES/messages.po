@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
-"POT-Creation-Date: 2021-07-14 10:32+0200\n"
-"PO-Revision-Date: 2021-06-25 05:39+0000\n"
+"POT-Creation-Date: 2021-08-03 08:43+0200\n"
+"PO-Revision-Date: 2021-07-22 21:33+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language: it\n"
 "Language-Team: Italian "
@@ -26,6 +26,12 @@ msgstr ""
 #, python-format
 msgid "%(icon)s Profile"
 msgstr "%(icon)s Il mio account"
+
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1843
+msgid ""
+"A masked document is visible in the professional interface, but not in "
+"the public interface."
+msgstr ""
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:218
 msgid "ARK (Archival Resource Key)"
@@ -166,11 +172,11 @@ msgstr "Cordiali saluti"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:909
 msgid "Brief description of the mandate"
-msgstr ""
+msgstr "Breve descrizione del mandato"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:945
 msgid "Brief description of the report"
-msgstr ""
+msgstr "Breve descrizione del rapporto"
 
 #: sonar/common/jsonschemas/oa-status-v1.0.0.json:30
 msgid "Bronze"
@@ -360,15 +366,15 @@ msgstr ""
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1781
 msgid "Custom field 1"
-msgstr ""
+msgstr "Campo personalizzato 1"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1801
 msgid "Custom field 2"
-msgstr ""
+msgstr "Campo personalizzato 2"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1821
 msgid "Custom field 3"
-msgstr ""
+msgstr "Campo personalizzato 3"
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:42
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:240
@@ -493,15 +499,15 @@ msgstr "Documento creato sulla base di questo deposito."
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:90
 msgid "Document custom field 1"
-msgstr ""
+msgstr "Campo personalizzato del documento 1"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:137
 msgid "Document custom field 2"
-msgstr ""
+msgstr "Campo personalizzato del documento 2"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:184
 msgid "Document custom field 3"
-msgstr ""
+msgstr "Campo personalizzato del documento 3"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:340
 msgid "Document date"
@@ -648,7 +654,7 @@ msgstr "Eccetto all'interno dell'organizzazione"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:685
 msgid "Existing collection"
-msgstr ""
+msgstr "Collezione esistente"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1024
 msgid "Existing project"
@@ -898,7 +904,7 @@ msgstr ""
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:170
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:217
 msgid "Include in facets"
-msgstr ""
+msgstr "Includere nelle faccette"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:684
 msgid "Inspector"
@@ -1126,6 +1132,10 @@ msgstr "Titoli"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:836
 msgid "Mandate"
+msgstr ""
+
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1841
+msgid "Masked"
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:423
@@ -1928,7 +1938,7 @@ msgstr ""
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:2
 msgid "Validation"
-msgstr ""
+msgstr "Convalida"
 
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:39
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:32

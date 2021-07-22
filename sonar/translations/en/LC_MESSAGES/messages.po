@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
-"POT-Creation-Date: 2021-07-14 10:32+0200\n"
+"POT-Creation-Date: 2021-08-03 08:43+0200\n"
 "PO-Revision-Date: 2021-06-25 05:39+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language: en\n"
@@ -25,6 +25,12 @@ msgstr ""
 #, python-format
 msgid "%(icon)s Profile"
 msgstr "%(icon)s My account"
+
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1843
+msgid ""
+"A masked document is visible in the professional interface, but not in "
+"the public interface."
+msgstr ""
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:218
 msgid "ARK (Archival Resource Key)"
@@ -1125,6 +1131,10 @@ msgstr "Titles"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:836
 msgid "Mandate"
+msgstr ""
+
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1841
+msgid "Masked"
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:423
