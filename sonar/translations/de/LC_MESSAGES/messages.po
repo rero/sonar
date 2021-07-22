@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
-"POT-Creation-Date: 2021-08-03 08:43+0200\n"
-"PO-Revision-Date: 2021-06-25 05:39+0000\n"
+"POT-Creation-Date: 2021-08-27 14:03+0200\n"
+"PO-Revision-Date: 2021-08-06 07:33+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language: de\n"
 "Language-Team: German "
@@ -22,24 +22,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: sonar/theme/views.py:67
+#: sonar/theme/views.py:71
 #, python-format
 msgid "%(icon)s Profile"
 msgstr "%(icon)s Mein Konto"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1843
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1839
 msgid ""
 "A masked document is visible in the professional interface, but not in "
 "the public interface."
 msgstr ""
+"Ein ausgeblendetes Dokument ist in der professionellen Oberfläche "
+"sichtbar, aber nicht in der öffentlichen Oberfläche."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:218
 msgid "ARK (Archival Resource Key)"
-msgstr ""
+msgstr "ARK (Archival Resource Key)"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:324
 msgid "Abandoned"
-msgstr ""
+msgstr "Aufgegeben"
 
 #: sonar/theme/templates/sonar/footer.html:32
 msgid "About SONAR"
@@ -47,12 +49,12 @@ msgstr "Über SONAR"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:795
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:811
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:669
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:659
 msgid "Abstract"
 msgstr "Zusammenfassung"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:792
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:665
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:655
 msgid "Abstracts"
 msgstr "Abstracts"
 
@@ -64,12 +66,12 @@ msgstr "Zugang"
 msgid "Access allowed from the organisation's IP addresses"
 msgstr "Zugang erlaubt aus dem IP-Range der Institution"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:616
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:606
 msgid "Accompanying material of the resource, i.e. maps."
 msgstr "Begleitmaterial der Ressource, z.B. Landkarten."
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:850
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1669
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:840
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1665
 msgid "Acquisition terms"
 msgstr "Bezugsbedingungen"
 
@@ -80,21 +82,21 @@ msgstr "Aktion"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:586
 msgid "Actor"
-msgstr ""
+msgstr "Akteur"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:581
 msgid "Actor involved"
-msgstr ""
+msgstr "Beteiligter Akteur"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:704
 msgid "Add a new collection"
-msgstr ""
+msgstr "Neue Sammlung hinzufügen"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1044
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1052
 msgid "Add a new project"
 msgstr "Neues Projekt hinzufügen"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:615
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:605
 msgid "Additional materials"
 msgstr "Zusätzliche Materialien"
 
@@ -103,13 +105,13 @@ msgstr "Zusätzliche Materialien"
 msgid "Administration"
 msgstr "Administration"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:948
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1389
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:956
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1385
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:203
 msgid "Affiliation"
 msgstr "Zugehörigkeit"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1202
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1192
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:159
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:250
 msgid "Agent"
@@ -117,7 +119,7 @@ msgstr "Akteur"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:652
 msgid "Allophone student"
-msgstr ""
+msgstr "Allophoner Student"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:65
 msgid "Allowed IP addresses"
@@ -125,17 +127,17 @@ msgstr "Zulässige IP-Adressen"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:716
 msgid "Animator"
-msgstr ""
+msgstr "Animateur"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:182
 msgid "Animators"
-msgstr ""
+msgstr "Animateure"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:620
 msgid "Apprentice"
-msgstr ""
+msgstr "Lehrling"
 
-#: sonar/modules/deposits/rest.py:203
+#: sonar/modules/deposits/rest.py:212
 msgid "Ask for changes on deposit"
 msgstr "Um Änderungen an der Ablage bitten"
 
@@ -145,13 +147,13 @@ msgid ""
 "underscores."
 msgstr "Mindestens drei Buchstaben, nur Kleinbuchstaben und Unterstriche erlaubt."
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1502
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1498
 msgid "Author or editor"
 msgstr "Autor oder Herausgeber"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:612
 msgid "Authors / Editors"
-msgstr ""
+msgstr "Autoren / Herausgeber"
 
 #: sonar/modules/documents/templates/documents/record.html:44
 #: sonar/theme/templates/sonar/projects/detail.html:15
@@ -162,10 +164,12 @@ msgstr "Zurück"
 msgid "Back to SONAR"
 msgstr "Zurück an SONAR"
 
-#: sonar/config.py:608
+#: sonar/config.py:636
 msgid "Best match"
 msgstr "Bestmöglicher Treffer"
 
+#: sonar/templates/security/email/reset_instructions.html:30
+#: sonar/templates/security/email/reset_notice.html:25
 #: sonar/templates/security/email/welcome.html:9
 msgid "Best regards"
 msgstr "Freundliche Grüsse"
@@ -182,8 +186,8 @@ msgstr "Kurzbeschreibung des Berichts"
 msgid "Bronze"
 msgstr ""
 
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:110
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:125
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:123
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:138
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:20
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:34
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:15
@@ -229,7 +233,7 @@ msgstr "CC BY-SA"
 msgid "CC0"
 msgstr "CC0"
 
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:150
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:163
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:59
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:58
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:271
@@ -241,26 +245,22 @@ msgid "City"
 msgstr "Stadt"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:2
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1037
-#: sonar/modules/documents/templates/documents/record.html:262
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1027
+#: sonar/modules/documents/templates/documents/record.html:274
 msgid "Classification"
 msgstr "Klassifikation"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1088
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1078
 msgid "Classification portion"
 msgstr "Notation"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1033
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1023
 msgid "Classifications"
 msgstr "Klassifikationen"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:692
 msgid "Classroom teacher"
 msgstr ""
-
-#: sonar/templates/security/email/reset_instructions.html:18
-msgid "Click here to reset your password"
-msgstr "Hier klicken, um Ihr Passwort zurückzusetzen"
 
 #: sonar/common/jsonschemas/oa-status-v1.0.0.json:34
 msgid "Closed"
@@ -270,6 +270,10 @@ msgstr "Geschlossen"
 msgid "Code"
 msgstr "Code"
 
+#: sonar/theme/templates/sonar/stats/index.html:26
+msgid "Collect now"
+msgstr ""
+
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:680
 msgid "Collection"
 msgstr "Sammlung"
@@ -277,9 +281,9 @@ msgstr "Sammlung"
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:4
 #: sonar/modules/collections/templates/collections/index.html:21
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:676
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1001
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1005
-#: sonar/modules/documents/templates/documents/record.html:292
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:991
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:995
+#: sonar/modules/documents/templates/documents/record.html:304
 msgid "Collections"
 msgstr "Sammlungen"
 
@@ -312,20 +316,20 @@ msgstr "Kontakt"
 msgid "Contained in (journal, book, proceedings)"
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1116
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1106
 msgid "Content note"
 msgstr "Anmerkung zum Inhalt"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1112
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1102
 msgid "Content notes"
 msgstr "Anmerkungen zum Inhalt"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1197
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1498
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1187
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1494
 msgid "Contribution"
 msgstr "Beitrag"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1193
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1183
 msgid "Contributions"
 msgstr "Beiträge"
 
@@ -337,12 +341,12 @@ msgstr "Mitwirkende"
 msgid "Contributors"
 msgstr "Mitwirkenden"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1401
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1397
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:212
 msgid "Controlled affiliation"
 msgstr "Institutszugehörigkeit (überprüft)"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1397
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1393
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:208
 msgid "Controlled affiliations"
 msgstr "Institutszugehörigkeiten (überprüft)"
@@ -364,24 +368,24 @@ msgstr "Aktueller Katalogisierungsschritt."
 msgid "Current status of the record in the validation process."
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1781
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1777
 msgid "Custom field 1"
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1801
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1797
 msgid "Custom field 2"
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1821
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1817
 msgid "Custom field 3"
 msgstr ""
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:42
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:240
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:891
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:502
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1145
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1317
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:492
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1135
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1313
 msgid "Date"
 msgstr "Datum"
 
@@ -393,12 +397,12 @@ msgstr "Datum im Format JJJJ-MM-TT, z.B. 1970-01-31"
 msgid "Date of approval by the Team Leader"
 msgstr "Datum der Genehmigung durch den Teamleiter"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1293
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1289
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:34
 msgid "Date of birth"
 msgstr "Geburtsdatum"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1301
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1297
 msgid "Date of death"
 msgstr "Todesdatum"
 
@@ -410,48 +414,58 @@ msgstr ""
 msgid "Dean of a school"
 msgstr ""
 
+#: sonar/templates/security/email/reset_instructions.html:20
+#: sonar/templates/security/email/reset_notice.html:20
+msgid "Dear"
+msgstr ""
+
 #: sonar/templates/security/email/welcome.html:1
 #, python-format
 msgid "Dear %(email)s"
 msgstr "Sehr geehrte(r) %(email)s"
 
+#: sonar/templates/security/email/reset_instructions.html:22
+#: sonar/templates/security/email/reset_notice.html:22
+msgid "Dear user"
+msgstr ""
+
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:876
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1130
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1120
 msgid "Degree"
 msgstr "Akademischer Abschluss"
 
-#: sonar/modules/deposits/rest.py:194
+#: sonar/modules/deposits/rest.py:203
 msgid "Deposit approval"
 msgstr "Bestätigung der Ablage"
 
-#: sonar/modules/deposits/rest.py:200
+#: sonar/modules/deposits/rest.py:209
 msgid "Deposit rejection"
 msgstr "Ablehnung der Ablage"
 
-#: sonar/modules/deposits/rest.py:148
+#: sonar/modules/deposits/rest.py:150
 msgid "Deposit to validate"
 msgstr "Ablage zur Validierung"
 
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:120
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:133
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:30
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:241
 msgid "Describes the information of a single file in the record."
 msgstr "Beschreibt die Information einer einzelnen Datei der Ressource."
 
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:56
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:69
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:740
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1052
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1060
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:38
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:55
 msgid "Description"
 msgstr "Beschreibung"
 
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:52
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:65
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:736
 msgid "Descriptions"
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:407
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:397
 msgid "Designation"
 msgstr "Bezeichnung"
 
@@ -464,7 +478,7 @@ msgid "Director, head of establishment"
 msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:871
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1125
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1115
 msgid "Dissertation"
 msgstr "These"
 
@@ -481,11 +495,11 @@ msgid "Doctorate supported by the HEP-VS"
 msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:556
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1124
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1165
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:3
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:964
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1429
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1463
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:954
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1425
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1459
 msgid "Document"
 msgstr "Dokument"
 
@@ -493,7 +507,7 @@ msgstr "Dokument"
 msgid "Document ID"
 msgstr "Dokument-ID"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1125
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1166
 msgid "Document created on basis of this deposit."
 msgstr "Dokument erstellt auf Grundlage dieser Ablage."
 
@@ -513,7 +527,7 @@ msgstr ""
 msgid "Document date"
 msgstr "Datum des Dokuments"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:950
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:940
 msgid "Document is harvested or not, will disable record edition or similar."
 msgstr ""
 "Dokument wird gesammelt oder nicht ; dies deaktiviert die Bearbeitung der"
@@ -523,11 +537,19 @@ msgstr ""
 msgid "Document type"
 msgstr "Dokumenttyp"
 
+#: sonar/theme/templates/sonar/stats/detail.html:35
+msgid "Documents"
+msgstr ""
+
+#: sonar/theme/templates/sonar/stats/detail.html:24
+msgid "Download"
+msgstr ""
+
 #: sonar/templates/security/email/welcome.html:12
 msgid "E-mail"
 msgstr "E-Mail"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:402
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:392
 msgid "Edition"
 msgstr "Ausgabe"
 
@@ -559,12 +581,12 @@ msgid "Emotions, learning, and well-being at school"
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:80
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1075
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1083
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:79
 msgid "End date"
 msgstr "Enddatum"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:556
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:546
 msgid "End date of publication"
 msgstr "Datum 2"
 
@@ -595,17 +617,17 @@ msgstr "Beispiel: 1"
 msgid "Example: 10"
 msgstr ""
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1000
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1008
 msgid "Example: 1111-2222-3333-4444"
 msgstr "Beispiel: 1111-2222-3333-4444"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:549
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:561
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:539
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:551
 msgid "Example: 2019 or 2019-01-01"
 msgstr "Beispiel: 2019 oder 2019-01-01"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:896
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1149
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1139
 msgid "Example: 2019 or 2019-05-05"
 msgstr "Beispiel: 2019 oder 2019-05-05"
 
@@ -619,8 +641,8 @@ msgstr "Beispiel: 2020"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:75
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:88
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1070
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1082
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1078
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1090
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:74
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:87
 msgid "Example: 2020-12-01"
@@ -634,17 +656,17 @@ msgstr "Beispiel: Muster"
 msgid "Example: John"
 msgstr "Beispiel: Hans"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1506
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1502
 msgid "Example: Muller, Hans"
 msgstr "Beispiel: Muster, Hans"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:655
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:983
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:973
 msgid "Example: Published version"
 msgstr "Beispiel: Veröffentlichte Version"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:602
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1459
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1455
 msgid "Examples: 135, 5-27, …"
 msgstr "Beispiele: 135, 5-27, …"
 
@@ -656,15 +678,15 @@ msgstr "Ausgenommen innerhalb der Institution"
 msgid "Existing collection"
 msgstr "Bestehende Sammlung"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1024
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1032
 msgid "Existing project"
 msgstr "Bestehendes Projekt"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:583
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:573
 msgid "Extent"
 msgstr "Umfang"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:584
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:574
 msgid "Extent of the resource, i.e. the number of pages or volumes."
 msgstr "Umfang der Ressource, d.h. Anzahl der Seiten oder Bände."
 
@@ -684,20 +706,20 @@ msgstr "Externe Partner"
 msgid "External partners are involved"
 msgstr ""
 
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:130
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:143
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:39
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:35
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:251
 msgid "File UUID"
 msgstr "Datei-UUID"
 
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:119
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:132
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:29
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:240
 msgid "File item"
 msgstr "Datei-Item"
 
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:115
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:128
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:25
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:21
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:236
@@ -732,7 +754,7 @@ msgstr "Externe URL zweigen"
 msgid "Forgot password?"
 msgstr "Passwort vergessen?"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:606
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:596
 msgid "Format"
 msgstr "Format"
 
@@ -740,17 +762,21 @@ msgstr "Format"
 msgid "Format is not valid: YYYY."
 msgstr "Muss im folgenden Format sein: JJJJ."
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:602
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:592
 msgid "Format of the resource, i.e. dimensions in cm."
 msgstr "Format, d.h. Masse in cm."
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:601
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:591
 msgid "Formats"
 msgstr "Formate"
 
-#: sonar/config.py:74
+#: sonar/config.py:78
 msgid "French"
 msgstr "Französisch"
+
+#: sonar/theme/templates/sonar/stats/detail.html:36
+msgid "Full-text"
+msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:219
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:281
@@ -786,7 +812,7 @@ msgstr ""
 msgid "Funding was granted for the project"
 msgstr ""
 
-#: sonar/config.py:74
+#: sonar/config.py:78
 msgid "German"
 msgstr "Deutsch"
 
@@ -795,7 +821,7 @@ msgid "Gold"
 msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:886
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1140
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1130
 msgid "Granting institution"
 msgstr "Verleihende Institution"
 
@@ -823,11 +849,12 @@ msgstr ""
 msgid "HTML markup admitted."
 msgstr "HTML markup zugelassen."
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:949
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:939
 msgid "Harvested"
 msgstr "Gesammelt"
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:18
+#: sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0_src.json:18
 msgid "Hash key"
 msgstr ""
 
@@ -836,7 +863,7 @@ msgid "Help & Documentation"
 msgstr "Hilfe & Dokumentation"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:557
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1469
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1465
 msgid ""
 "Host document, for example a journal for an article, or a book for a book"
 " chapter."
@@ -856,12 +883,12 @@ msgstr ""
 msgid "IR hosting service"
 msgstr "IR Hosting-Service"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:873
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1692
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:863
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1688
 msgid "ISBN/ISSN status should be selected in the list below."
 msgstr "Der ISBN/ISSN-Status muss in der Liste ausgewählt werden."
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1242
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1238
 msgid "Identified by"
 msgstr "Identifikator"
 
@@ -871,9 +898,10 @@ msgstr "Identifikator"
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:13
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:15
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:360
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:699
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1518
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:689
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1514
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:13
+#: sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0_src.json:13
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:13
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:9
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:92
@@ -882,9 +910,9 @@ msgid "Identifier"
 msgstr "Identifikator"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:357
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:695
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1514
-#: sonar/modules/documents/templates/documents/record.html:238
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:685
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1510
+#: sonar/modules/documents/templates/documents/record.html:250
 msgid "Identifiers"
 msgstr "Identifikatoren"
 
@@ -897,6 +925,13 @@ msgstr ""
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:93
 msgid "If this field is filled in, the file points to the specified URL."
 msgstr "Wenn dieses Feld ausgefüllt ist, leitet die Datei zum angegebenen URL."
+
+#: sonar/templates/security/email/reset_instructions.html:28
+msgid ""
+"If you didn't request this, you can ignore this e-mail. Your password "
+"won't change until you create a new\n"
+"  password."
+msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:316
 msgid "In progress"
@@ -945,21 +980,25 @@ msgstr "Ist eine dedizierte Organisation"
 msgid "Is shared"
 msgstr "Wird im gemeinsamen Portal gezeigt"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1447
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1443
 msgid "Issue"
 msgstr "Lieferung"
 
-#: sonar/config.py:75
+#: sonar/config.py:79
 msgid "Italian"
 msgstr "Italienisch"
 
+#: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:5
+msgid "JSON schema for statistics."
+msgstr ""
+
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:881
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1135
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1125
 #: sonar/modules/documents/views.py:240
 msgid "Jury note"
 msgstr "Anmerkung des Entscheidungsgremiums"
 
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:140
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:153
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:49
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:47
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:261
@@ -981,9 +1020,9 @@ msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:70
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:69
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:509
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:909
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1176
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:499
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:899
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1166
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:99
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:146
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:193
@@ -997,12 +1036,12 @@ msgid "Labels"
 msgstr "Labels"
 
 #: sonar/common/jsonschemas/language-v1.0.0.json:2
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:360
-#: sonar/modules/documents/templates/documents/record.html:222
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:350
+#: sonar/modules/documents/templates/documents/record.html:234
 msgid "Language"
 msgstr "Sprache"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:356
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:346
 msgid "Languages"
 msgstr "Sprachen"
 
@@ -1028,7 +1067,7 @@ msgid "Lecturer/professor"
 msgstr ""
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:2
-#: sonar/modules/documents/templates/documents/record.html:310
+#: sonar/modules/documents/templates/documents/record.html:322
 msgid "License"
 msgstr "Lizenz"
 
@@ -1052,7 +1091,7 @@ msgstr ""
 "der Organisation zugänglich sind. Hinweis: der bibliografische Datensatz "
 "(Metadaten) ist immer öffentlich. Geben Sie eine Regel pro Zeile ein."
 
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:116
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:129
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:26
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:22
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:237
@@ -1107,7 +1146,7 @@ msgstr "Abmelden"
 msgid "Logs"
 msgstr "Logs"
 
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:151
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:164
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:60
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:59
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:272
@@ -1124,11 +1163,11 @@ msgstr "MIME-Typ"
 msgid "Main team"
 msgstr "Hauptteam"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:297
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:287
 msgid "Main title"
 msgstr "Titel"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:293
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:283
 msgid "Main titles"
 msgstr "Titel"
 
@@ -1136,9 +1175,9 @@ msgstr "Titel"
 msgid "Mandate"
 msgstr "Auftrag"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1841
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1837
 msgid "Masked"
-msgstr ""
+msgstr "Ausgeblendet"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:423
 msgid "Master"
@@ -1152,11 +1191,11 @@ msgstr ""
 msgid "Mediator"
 msgstr ""
 
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:145
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:158
 msgid "Mimetype"
 msgstr ""
 
-#: sonar/config.py:602
+#: sonar/config.py:630
 msgid "Most recent"
 msgstr "Neueste(r)"
 
@@ -1166,14 +1205,16 @@ msgstr "Neueste(r)"
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:27
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:711
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:942
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1047
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1055
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:33
+#: sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0_src.json:27
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:50
 msgid "Name"
 msgstr "Name"
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:23
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:707
+#: sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0_src.json:23
 msgid "Names"
 msgstr ""
 
@@ -1181,9 +1222,13 @@ msgstr ""
 msgid "No collection found"
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:656
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:834
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1653
+#: sonar/theme/templates/sonar/stats/detail.html:37
+msgid "No full-text"
+msgstr ""
+
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:646
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:824
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1649
 msgid "Note"
 msgstr "Anmerkung"
 
@@ -1195,17 +1240,17 @@ msgstr ""
 "Anmerkung: Publikation, die manuell über dieses Portal hochgeladen "
 "wurden, müssen manchmal aus betrieblichen Gründen gelöscht werden."
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:652
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:642
 msgid "Notes"
 msgstr "Anmerkungen"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:741
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:579
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1325
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1321
 msgid "Number"
 msgstr "Heft"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:638
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:628
 msgid "Numbering"
 msgstr "Zählung"
 
@@ -1221,7 +1266,7 @@ msgstr "OAI-PMH Sets."
 msgid "OAI-PMH specific information."
 msgstr "OAI-PMH-spezifische Information."
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:994
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1002
 msgid "ORCID"
 msgstr "ORCID"
 
@@ -1230,17 +1275,25 @@ msgstr "ORCID"
 msgid "Object type"
 msgstr "Objekttyp"
 
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:59
+#: sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0_src.json:59
+msgid "Only one value per language is allowed"
+msgstr ""
+
 #: sonar/common/jsonschemas/oa-status-v1.0.0.json:2
 msgid "Open access status"
 msgstr "Open Access Status"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:93
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:86
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:90
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:99
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:103
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:228
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:5
+#: sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0_src.json:65
+#: sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0_src.json:69
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:84
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:287
+#: sonar/theme/templates/sonar/stats/detail.html:33
 msgid "Organisation"
 msgstr "Organisation"
 
@@ -1269,11 +1322,11 @@ msgstr "Anderes"
 msgid "Other (free field)"
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:592
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:582
 msgid "Other Material Characteristics"
 msgstr "Sonstige Materialeigenschaften"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:593
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:583
 msgid ""
 "Other Material Characteristics, i.e. illustrations, black and white, or "
 "coloured."
@@ -1286,17 +1339,17 @@ msgid "Other canton (Switzerland)"
 msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:641
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:959
-#: sonar/modules/documents/templates/documents/record.html:209
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:949
+#: sonar/modules/documents/templates/documents/record.html:221
 msgid "Other electronic version"
 msgstr "Andere elektronische Version"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:638
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:955
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:945
 msgid "Other electronic versions"
 msgstr "Andere elektronische Versionen"
 
-#: sonar/modules/documents/templates/documents/record.html:334
+#: sonar/modules/documents/templates/documents/record.html:346
 msgid "Other files"
 msgstr "Andere Dateien"
 
@@ -1310,7 +1363,7 @@ msgid "PID type"
 msgstr "PID-Typ"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:596
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1455
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1451
 msgid "Pages"
 msgstr "Seiten"
 
@@ -1318,7 +1371,7 @@ msgstr "Seiten"
 msgid "Parents"
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1425
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1421
 msgid "Part of (host document)"
 msgstr "Enthalten in (Übergeordnetes Dokument)"
 
@@ -1330,7 +1383,7 @@ msgstr ""
 msgid "Period"
 msgstr "Zeitraum"
 
-#: sonar/modules/documents/templates/documents/record.html:324
+#: sonar/modules/documents/templates/documents/record.html:336
 msgid "Persistent URL"
 msgstr ""
 
@@ -1347,7 +1400,7 @@ msgstr "Telefonnummer"
 msgid "Phone number with the international prefix, without spaces."
 msgstr "Telefonnummer mit Landesvorwahl, ohne Leerzeichen."
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1309
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1305
 msgid "Place"
 msgstr "Ort"
 
@@ -1397,13 +1450,13 @@ msgstr ""
 msgid "Practitioner-trainer"
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1232
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1222
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:164
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:255
 msgid "Preferred name"
 msgstr "Bevorzugter Name"
 
-#: sonar/modules/documents/templates/documents/record.html:352
+#: sonar/modules/documents/templates/documents/record.html:364
 #: sonar/theme/templates/sonar/preview/base.html:23
 msgid "Preview"
 msgstr "Vorschau"
@@ -1423,11 +1476,11 @@ msgstr ""
 
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:21
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:24
-#: sonar/theme/views.py:68
+#: sonar/theme/views.py:72
 msgid "Profile"
 msgstr "Profil"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1027
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1035
 msgid "Project"
 msgstr "Projekt"
 
@@ -1443,11 +1496,11 @@ msgstr ""
 msgid "Project summary"
 msgstr "Projekt-Zusammenfassung"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:446
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:436
 msgid "Provision activities"
 msgstr "Veröffentlichung, Herstellung, Vertrieb, Entstehung"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:450
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:440
 msgid "Provision activity"
 msgstr "Veröffentlichung, Herstellung, Vertrieb, Entstehung"
 
@@ -1468,11 +1521,11 @@ msgid "Public foundation"
 msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:650
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:979
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:969
 msgid "Public note"
 msgstr "Öffentliche Anmerkung"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1474
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1470
 msgid "Publication"
 msgstr "Veröffentlichung"
 
@@ -1480,7 +1533,7 @@ msgstr "Veröffentlichung"
 msgid "Publication place"
 msgstr "Veröffentlichungsort"
 
-#: sonar/modules/documents/templates/documents/record.html:132
+#: sonar/modules/documents/templates/documents/record.html:144
 msgid "Published in"
 msgstr "Veröffentlicht in"
 
@@ -1489,8 +1542,8 @@ msgstr "Veröffentlicht in"
 msgid "Publisher"
 msgstr "Verlag"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:842
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1661
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:832
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1657
 msgid "Qualifier"
 msgstr "Erläuterung"
 
@@ -1503,15 +1556,15 @@ msgid "Record validation"
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:4
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1019
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1750
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1027
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1746
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:4
 msgid "Research project"
 msgstr "Forschungsprojekt"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1015
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1746
-#: sonar/modules/documents/templates/documents/record.html:184
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1023
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1742
+#: sonar/modules/documents/templates/documents/record.html:196
 msgid "Research projects"
 msgstr "Forschungsprojekte"
 
@@ -1522,7 +1575,11 @@ msgstr "Forschungsprojekte"
 msgid "Reset Password"
 msgstr "Passwort zurücksetzen"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:421
+#: sonar/templates/security/email/reset_instructions.html:26
+msgid "Reset my password"
+msgstr ""
+
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:411
 msgid "Responsibility"
 msgstr "Verantwortlichkeit"
 
@@ -1530,14 +1587,14 @@ msgstr "Verantwortlichkeit"
 msgid "Rights reserved"
 msgstr ""
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:953
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1352
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:961
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1348
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:99
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:181
 msgid "Role"
 msgstr "Rolle"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1348
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1344
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:177
 msgid "Roles"
 msgstr "Rollen"
@@ -1554,8 +1611,13 @@ msgstr "SONAR-Ablage v.1.0.0"
 msgid "SONAR logo"
 msgstr "Logo von SONAR"
 
+#: sonar/config.py:271
+msgid "SONAR password reset"
+msgstr ""
+
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:14
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:8
+#: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:9
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:14
 msgid "Schema"
 msgstr "Schema"
@@ -1567,6 +1629,10 @@ msgstr ""
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:9
 msgid "Schema to validate document against."
 msgstr "Schema zur Validierung von bibliographischen Aufnahmen."
+
+#: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:10
+msgid "Schema to validate stats records against."
+msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:186
 msgid "Scientific collaborator"
@@ -1595,24 +1661,20 @@ msgstr ""
 msgid "Secondary team"
 msgstr "Sekundäres Team"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:257
-msgid "Section"
+#: sonar/theme/templates/sonar/stats/index.html:23
+msgid "See live"
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:253
-msgid "Sections"
-msgstr ""
-
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:624
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:614
 msgid "Series"
 msgstr "Reihe"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:625
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:615
 msgid "Series the resource belongs to."
 msgstr "Reihe, zu der die Ressource gehört."
 
-#: sonar/modules/documents/templates/documents/record.html:99
-#: sonar/modules/documents/templates/documents/record.html:171
+#: sonar/modules/documents/templates/documents/record.html:111
+#: sonar/modules/documents/templates/documents/record.html:183
 msgid "Show more"
 msgstr "Mehr anzeigen"
 
@@ -1640,14 +1702,14 @@ msgstr "Registrieren mit %(type)s"
 msgid "Sign-up with SWITCHaai"
 msgstr "Registrieren mit SWITCHaai"
 
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:156
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:169
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:65
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:64
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:277
 msgid "Size"
 msgstr "Grösse"
 
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:157
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:170
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:66
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:65
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:278
@@ -1658,12 +1720,16 @@ msgstr "Dateigrösse in Bytes."
 msgid "Social Assistant"
 msgstr ""
 
+#: sonar/templates/security/email/reset_instructions.html:24
+msgid "Someone requested that the password for your SONAR account be reset."
+msgstr ""
+
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:28
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:510
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:855
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:932
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1267
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1674
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:845
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:922
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1263
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1670
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:117
 msgid "Source"
 msgstr "Quelle"
@@ -1677,15 +1743,19 @@ msgid "Special education teacher"
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:67
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1063
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1479
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1071
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1475
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:66
 msgid "Start date"
 msgstr "Startdatum"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:544
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:534
 msgid "Start date of publication"
 msgstr "Datum 1"
+
+#: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:16
+msgid "Stat ID."
+msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:862
 msgid "State of Valais, Education service"
@@ -1703,20 +1773,37 @@ msgstr ""
 msgid "State of Valais, parastatal institution"
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:480
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1484
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:470
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1480
 msgid "Statement"
 msgstr "Angabe"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:476
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:466
 msgid "Statements"
 msgstr "Angaben"
+
+#: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:25
+msgid "Statistic"
+msgstr ""
+
+#: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:21
+msgid "Statistics"
+msgstr ""
+
+#: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:4
+#: sonar/theme/templates/sonar/stats/index.html:29
+msgid "Stats"
+msgstr ""
+
+#: sonar/theme/templates/sonar/stats/detail.html:28
+msgid "Stats for"
+msgstr ""
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:64
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:39
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:136
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:866
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1685
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:856
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1681
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:39
 msgid "Status"
 msgstr "Status"
@@ -1745,21 +1832,33 @@ msgstr ""
 msgid "Student in training"
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:904
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:921
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1131
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1852
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:135
+msgid "Subdivision"
+msgstr ""
+
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1127
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1848
+#: sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0_src.json:4
+msgid "Subdivisions"
+msgstr ""
+
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:894
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:911
 msgid "Subject"
 msgstr "Thema"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:900
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:890
 msgid "Subjects"
 msgstr "Themen"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:294
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:321
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:311
 msgid "Subtitle"
 msgstr "Titelzusatz"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:317
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:307
 msgid "Subtitles"
 msgstr "Titelzusätze"
 
@@ -1771,7 +1870,7 @@ msgstr "Super-Administration"
 msgid "Suspended"
 msgstr ""
 
-#: sonar/config.py:96 sonar/config.py:100
+#: sonar/config.py:100 sonar/config.py:104
 msgid "Swiss Open Access Repository"
 msgstr "Swiss Open Access Repository"
 
@@ -1837,9 +1936,9 @@ msgstr ""
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:50
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:283
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:304
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:270
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:633
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1468
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:260
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:623
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1464
 msgid "Title"
 msgstr "Titel"
 
@@ -1847,7 +1946,7 @@ msgstr "Titel"
 msgid "Title in other language"
 msgstr "Titel in einer anderen Sprache"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:266
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:256
 msgid "Titles"
 msgstr "Titel"
 
@@ -1877,17 +1976,18 @@ msgstr ""
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:84
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:366
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:74
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:275
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:365
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:455
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:484
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:704
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1044
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1074
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1207
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1247
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1523
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:265
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:355
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:445
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:474
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:694
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1034
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1064
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1197
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1243
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1519
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:97
+#: sonar/theme/templates/sonar/stats/detail.html:34
 msgid "Type"
 msgstr "Typ"
 
@@ -1900,7 +2000,7 @@ msgid "Type of the file"
 msgstr "Dateityp"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:660
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:969
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:959
 msgid "URL"
 msgstr "URL"
 
@@ -1916,7 +2016,7 @@ msgstr "UUID des ObjectVersion-Objekts."
 msgid "UUID of the bucket the tile is assigned to."
 msgstr "UUID des Buckets, dem die Kachel zugewiesen ist."
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1168
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1158
 msgid "Usage and access policy"
 msgstr "Zugang- und Benutzungsbedingung"
 
@@ -1944,23 +2044,24 @@ msgstr "Validierung"
 
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:39
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:32
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:61
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:74
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:505
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:716
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:745
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:302
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:326
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:411
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:425
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:516
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:674
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:829
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:917
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1278
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1648
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:292
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:316
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:401
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:415
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:506
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:664
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:819
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:907
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1274
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1644
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:104
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:151
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:198
+#: sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0_src.json:32
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:128
 msgid "Value"
 msgstr "Wert"
@@ -1969,7 +2070,7 @@ msgstr "Wert"
 msgid "Values"
 msgstr "Werte"
 
-#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:135
+#: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:148
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:44
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:41
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:256
@@ -1981,7 +2082,7 @@ msgid "Vice-rector HE"
 msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:562
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1439
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1435
 msgid "Volume"
 msgstr "Band"
 
@@ -1989,7 +2090,7 @@ msgstr "Band"
 msgid "Welcome to SONAR"
 msgstr "Willkommen bei SONAR"
 
-#: sonar/config.py:127
+#: sonar/config.py:131
 msgid "Welcome to SONAR, the Swiss Open Access Repository!"
 msgstr "Willkommen bei SONAR, dem Swiss Open Access Repository!"
 
@@ -2025,9 +2126,22 @@ msgstr ""
 msgid "Why?"
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1434
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1430
 msgid "Year"
 msgstr "Jahr"
+
+#: sonar/config.py:272
+msgid "Your SONAR password has been reset"
+msgstr ""
+
+#: sonar/templates/security/email/reset_instructions.html:31
+#: sonar/templates/security/email/reset_notice.html:26
+msgid "Your institution"
+msgstr ""
+
+#: sonar/templates/security/email/reset_notice.html:24
+msgid "Your password has been successfully reset."
+msgstr ""
 
 #: sonar/translations/manual_translations.txt:37
 msgid "actorsInvolved"
@@ -2041,185 +2155,185 @@ msgstr ""
 msgid "benefits"
 msgstr ""
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:498
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:488
 msgid "bf:Agent"
 msgstr "Akteur"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:417
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:734
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1553
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:724
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1549
 msgid "bf:AudioIssueNumber"
 msgstr "Verlagsreferenz (Audiodokumente)"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1071
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1061
 msgid "bf:ClassificationDdc"
 msgstr "Dewey-Dezimalklassifikation (DDC)"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1041
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1031
 msgid "bf:ClassificationUdc"
 msgstr "Universelle Dezimalklassifikation (UDK)"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:402
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:738
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1557
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:728
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1553
 msgid "bf:Doi"
 msgstr "DOI"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:421
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:742
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1561
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:732
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1557
 msgid "bf:Ean"
 msgstr "EAN"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:425
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:746
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1565
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:736
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1561
 msgid "bf:Gtin14Number"
 msgstr "GTIN-14"
 
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:17
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:429
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:750
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1256
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1569
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:740
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1252
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1565
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:106
 msgid "bf:Identifier"
 msgstr "Identifikator"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:433
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:754
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1573
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:744
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1569
 msgid "bf:Isan"
 msgstr "ISAN"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:412
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:758
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1577
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:748
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1573
 msgid "bf:Isbn"
 msgstr "ISBN"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:437
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:762
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1581
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:752
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1577
 msgid "bf:Ismn"
 msgstr "ISMN"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:441
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:766
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1585
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:756
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1581
 msgid "bf:Isrc"
 msgstr "ISRC"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:445
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:770
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1589
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:760
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1585
 msgid "bf:Issn"
 msgstr "ISSN"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:449
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:774
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1593
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:764
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1589
 msgid "bf:IssnL"
 msgstr "ISSN-L"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:376
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:366
 msgid "bf:Language"
 msgstr "Sprache"
 
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:21
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:453
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:778
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1260
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1597
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:768
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1256
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1593
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:110
 msgid "bf:Local"
 msgstr "Lokaler Identifikator"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:469
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:459
 msgid "bf:Manufacture"
 msgstr "Herstellung"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:457
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:782
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1601
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:772
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1597
 msgid "bf:MatrixNumber"
 msgstr "Matrix-Nummer (Tone)"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1225
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1215
 msgid "bf:Meeting"
 msgstr "Konferenz"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:461
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:786
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1605
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:776
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1601
 msgid "bf:MusicDistributorNumber"
 msgstr "Vertriebsnummer (Musik)"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:465
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:790
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1609
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:780
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1605
 msgid "bf:MusicPlate"
 msgstr "Druckplattennummer (Partituren)"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:469
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:794
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1613
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:784
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1609
 msgid "bf:MusicPublisherNumber"
 msgstr "Verlagsnummer (Musik)"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1221
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1211
 msgid "bf:Organization"
 msgstr "Körperschaft"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1217
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1207
 msgid "bf:Person"
 msgstr "Person"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:494
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:484
 msgid "bf:Place"
 msgstr "Ort"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:465
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:455
 msgid "bf:Publication"
 msgstr "Veröffentlichung"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:473
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:798
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1617
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:788
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1613
 msgid "bf:PublisherNumber"
 msgstr "Verlagsnummer"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:493
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:818
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1637
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:808
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1633
 msgid "bf:ReportNumber"
 msgstr "Berichtsnummer"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:497
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:822
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1641
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:812
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1637
 msgid "bf:Strn"
 msgstr "STRN"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:286
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:276
 msgid "bf:Title"
 msgstr "Haupttitel"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:477
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:802
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1621
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:792
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1617
 msgid "bf:Upc"
 msgstr "UPC"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:481
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:806
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1625
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:796
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1621
 msgid "bf:Urn"
 msgstr "URN"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:485
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:810
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1629
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:800
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1625
 msgid "bf:VideoRecordingNumber"
 msgstr "Videoaufzeichnungsnummer"
 
@@ -2587,28 +2701,28 @@ msgstr "Unterliegt Embargo"
 msgid "coinvestigator"
 msgstr "Mitgesuchstellende"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:971
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1373
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:979
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1369
 msgid "contribution_role_cre"
 msgstr "Verfasser / Schöpfer"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:975
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1381
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:983
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1377
 msgid "contribution_role_ctb"
 msgstr "Mitwirkende"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:983
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1365
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:991
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1361
 msgid "contribution_role_dgs"
 msgstr "Akademischer Betreuer"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:979
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1377
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:987
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1373
 msgid "contribution_role_edt"
 msgstr "Herausgeber"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:987
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1369
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:995
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1365
 msgid "contribution_role_prt"
 msgstr "Drucker"
 
@@ -2616,7 +2730,7 @@ msgstr "Drucker"
 msgid "contribution_role_{role}"
 msgstr "contribution_role_{role}"
 
-#: sonar/config.py:573
+#: sonar/config.py:594
 msgid "contributor"
 msgstr "Mitwirkende"
 
@@ -2909,7 +3023,10 @@ msgid "keywords"
 msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:694
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1016
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1142
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1006
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1863
+#: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:146
 msgid "label"
 msgstr "Label"
 
@@ -4857,8 +4974,8 @@ msgstr "Zazaisch"
 msgid "mainTeam"
 msgstr ""
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1034
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1760
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1042
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1756
 msgid "name"
 msgstr "Name"
 
@@ -4874,7 +4991,7 @@ msgstr "andere Dateien"
 msgid "p."
 msgstr "S."
 
-#: sonar/config.py:570
+#: sonar/config.py:591
 msgid "pid"
 msgstr "PID"
 
@@ -4938,7 +5055,7 @@ msgstr ""
 msgid "startDate"
 msgstr ""
 
-#: sonar/config.py:571
+#: sonar/config.py:592
 msgid "status"
 msgstr "Status"
 
@@ -4946,17 +5063,17 @@ msgstr "Status"
 msgid "statusHep"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:194
+#: sonar/modules/documents/templates/documents/record.html:206
 msgid "supported by"
 msgstr "gefördert durch"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:489
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:814
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1633
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:804
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1629
 msgid "uri"
 msgstr "URI"
 
-#: sonar/config.py:572
+#: sonar/config.py:593
 msgid "user"
 msgstr "Benutzer"
 
@@ -5097,4 +5214,13 @@ msgstr ""
 
 #~ msgid "Permalink"
 #~ msgstr "Permalink"
+
+#~ msgid "Click here to reset your password"
+#~ msgstr "Hier klicken, um Ihr Passwort zurückzusetzen"
+
+#~ msgid "Section"
+#~ msgstr ""
+
+#~ msgid "Sections"
+#~ msgstr ""
 
