@@ -87,5 +87,4 @@ class OrganisationPermission(RecordPermission):
         :param recor: Record to check.
         :returns: True if action can be done.
         """
-        # Nobody can remove an organisation
-        return False
+        return bool(user and user.is_superuser)

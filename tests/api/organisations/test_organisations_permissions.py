@@ -168,7 +168,7 @@ def test_read(client, make_organisation, superuser, admin, moderator,
                              pid_value='org2'))
     assert res.status_code == 200
     assert res.json['metadata']['permissions'] == {
-        'delete': False,
+        'delete': True,
         'read': True,
         'update': True
     }
@@ -289,4 +289,4 @@ def test_delete(client, superuser, admin, moderator, submitter, user):
     login_user_via_session(client, email=superuser['email'])
     res = client.delete(
         url_for('invenio_records_rest.org_item', pid_value='org'))
-    assert res.status_code == 403
+    assert res.status_code == 204
