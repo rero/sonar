@@ -388,6 +388,10 @@
                 "fields": {
                   "raw": {
                     "type": "keyword"
+                  },
+                  "suggest": {
+                    "type": "completion",
+                    "analyzer": "default"
                   }
                 }
               },

@@ -1235,6 +1235,12 @@
                 "form": {
                   "expressionProperties": {
                     "templateOptions.required": "['bf:Person', 'bf:Organization', 'bf:Meeting'].includes(model.type)"
+                  },
+                  "remoteTypeahead": {
+                    "type": "documents",
+                    "field": "contribution.agent.preferred_name.suggest",
+                    "suggest": "/api/suggestions/completion",
+                    "allowAdd": true
                   }
                 }
               },
