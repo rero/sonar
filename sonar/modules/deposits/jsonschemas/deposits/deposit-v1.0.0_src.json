@@ -942,7 +942,15 @@
             "title": "Name",
             "description": "Last name, first name, ex: Doe, John",
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "form": {
+              "remoteTypeahead": {
+                "type": "documents",
+                "field": "contribution.agent.preferred_name.suggest",
+                "suggest": "/api/suggestions/completion",
+                "allowAdd": true
+              }
+            }
           },
           "affiliation": {
             "title": "Affiliation",
