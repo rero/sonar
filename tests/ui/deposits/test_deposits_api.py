@@ -89,7 +89,7 @@ def test_create_document(app, db, project, client, deposit, submitter,
             'type': 'bf:Agent'
         }, {
             'label': [{
-                'value': '2020'
+                'value': '2019'
             }],
             'type': 'Date'
         }]
@@ -98,11 +98,19 @@ def test_create_document(app, db, project, client, deposit, submitter,
         'numberingYear': '2020',
         'numberingPages': '1-12',
         'document': {
-            'title': 'Journal',
+            'title':
+            'Journal',
             'contribution': ['Denson, Edward', 'Worth, James'],
             'publication': {
                 'statement': 'Publisher'
-            }
+            },
+            'identifiedBy': [{
+                'type': 'bf:Isbn',
+                'value': 'ISBN'
+            }, {
+                'type': 'bf:Issn',
+                'value': 'ISSN'
+            }]
         },
         'numberingVolume': '12',
         'numberingIssue': '2'
@@ -171,6 +179,21 @@ def test_create_document(app, db, project, client, deposit, submitter,
         'type': 'bf:Doi',
         'value': '10.1038/nphys1170'
     }]
+
+    assert document['contentNote'] == ['Note 1', 'Note 2']
+    assert document['extent'] == 'Extent value'
+    assert document['additionalMaterials'] == 'Additional materials'
+    assert document['formats'] == ['Format 1', 'Format 2']
+    assert document[
+        'otherMaterialCharacteristics'] == 'Other material characteristics'
+    assert document['editionStatement'] == {
+        'editionDesignation': {
+            'value': '1st edition'
+        },
+        'responsibility': {
+            'value': 'Resp.'
+        }
+    }
 
     assert len(document['projects']) == 2
 

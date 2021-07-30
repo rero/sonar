@@ -102,6 +102,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     oa_status = SanitizedUnicode()
     subdivisions = fields.List(fields.Dict())
     harvested = fields.Boolean()
+    contentNote = fields.List(SanitizedUnicode())
     customField1 = fields.List(fields.String(validate=validate.Length(min=1)))
     customField2 = fields.List(fields.String(validate=validate.Length(min=1)))
     customField3 = fields.List(fields.String(validate=validate.Length(min=1)))
