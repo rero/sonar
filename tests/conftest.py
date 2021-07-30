@@ -490,13 +490,27 @@ def deposit_json(collection, subdivision):
             'Publisher name',
             'documentDate':
             '2020',
+            'statementDate':
+            '2019',
             'publication': {
-                'publishedIn': 'Journal',
-                'volume': '12',
-                'number': '2',
-                'pages': '1-12',
+                'publishedIn':
+                'Journal',
+                'volume':
+                '12',
+                'number':
+                '2',
+                'pages':
+                '1-12',
                 'editors': ['Denson, Edward', 'Worth, James'],
-                'publisher': 'Publisher'
+                'publisher':
+                'Publisher',
+                'identifiedBy': [{
+                    'type': 'bf:Isbn',
+                    'value': 'ISBN'
+                }, {
+                    'type': 'bf:Issn',
+                    'value': 'ISSN'
+                }]
             },
             'otherElectronicVersions': [{
                 'publicNote': 'Published version',
@@ -543,6 +557,47 @@ def deposit_json(collection, subdivision):
             }, {
                 'type': 'bf:Doi',
                 'value': '10.1038/nphys1170'
+            }],
+            'contentNote': ['Note 1', 'Note 2'],
+            'extent':
+            'Extent value',
+            'additionalMaterials':
+            'Additional materials',
+            'formats': ['Format 1', 'Format 2'],
+            'otherMaterialCharacteristics':
+            'Other material characteristics',
+            'editionStatement': {
+                'editionDesignation': {
+                    'value': '1st edition'
+                },
+                'responsibility': {
+                    'value': 'Resp.'
+                }
+            },
+            'notes': ['Note 1', 'Note 2'],
+            'series': [{
+                'name': 'Serie 1',
+                'number': '12'
+            }, {
+                'name': 'Serie 2'
+            }],
+            'partOf': [{
+                'document': {
+                    'contribution': ['Renato, Ferrari', 'Albano, Mesta'],
+                    'title':
+                    'Journal du dimanche',
+                    'identifiedBy': [{
+                        'type': 'bf:Isbn',
+                        'value': '958710532X'
+                    }, {
+                        'type': 'bf:Issn',
+                        'value': '958710532X'
+                    }]
+                },
+                'numberingPages': '135-139',
+                'numberingYear': '2020',
+                'numberingVolume': '6',
+                'numberingIssue': '12'
             }]
         },
         'diffusion': {

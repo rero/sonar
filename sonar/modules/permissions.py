@@ -111,6 +111,22 @@ def can_access_manage_view(func):
     return decorated_view
 
 
+def is_user_logged_and_submitter(func):
+    """Check if user is logged and submitter."""
+
+    @wraps(func)
+    def decorated_view(*args, **kwargs):
+        if not current_user.is_authenticated:
+            abort(401)
+        else:
+            if has_submitter_access():
+                return func(*args, **kwargs)
+
+            abort(403)
+
+    return decorated_view
+
+
 def admin_permission_factory(admin_view):
     """Admin permission factory."""
     if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):

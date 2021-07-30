@@ -353,6 +353,12 @@
             }
           }
         },
+        "statementDate": {
+          "title": "Statement date",
+          "type": "string",
+          "minLength": 1
+        },
+
         "identifiedBy": {
           "title": "Identifiers",
           "type": "array",
@@ -608,6 +614,14 @@
                 }
               }
             },
+            "year": {
+              "title": "Year",
+              "type": "string",
+              "minLength": 1,
+              "form": {
+                "hide": true
+              }
+            },
             "editors": {
               "title": "Authors / Editors",
               "type": "array",
@@ -623,6 +637,59 @@
               "title": "Publisher",
               "type": "string",
               "minLength": 1
+            },
+            "identifiedBy": {
+              "title": "Identifiers",
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "title": "Identifier",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "type": {
+                    "title": "Type",
+                    "type": "string",
+                    "enum": [
+                      "bf:AudioIssueNumber",
+                      "bf:Doi",
+                      "bf:Ean",
+                      "bf:Gtin14Number",
+                      "bf:Identifier",
+                      "bf:Isan",
+                      "bf:Isbn",
+                      "bf:Ismn",
+                      "bf:Isrc",
+                      "bf:Issn",
+                      "bf:Local",
+                      "bf:IssnL",
+                      "bf:MatrixNumber",
+                      "bf:MusicDistributorNumber",
+                      "bf:MusicPlate",
+                      "bf:MusicPublisherNumber",
+                      "bf:PublisherNumber",
+                      "bf:Upc",
+                      "bf:Urn",
+                      "bf:VideoRecordingNumber",
+                      "uri",
+                      "bf:ReportNumber",
+                      "bf:Strn"
+                    ]
+                  },
+                  "value": {
+                    "title": "Value",
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "type",
+                  "value"
+                ]
+              },
+              "form": {
+                "hide": true
+              }
             }
           },
           "form": {
@@ -914,6 +981,118 @@
                 "card"
               ]
             }
+          }
+        },
+        "contentNote": {
+          "title": "Content notes",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "title": "Content note",
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "extent": {
+          "title": "Extent",
+          "description": "Extent of the resource, i.e. the number of pages or volumes.",
+          "type": "string",
+          "minLength": 1
+        },
+        "additionalMaterials": {
+          "title": "Additional materials",
+          "description": "Accompanying material of the resource, i.e. maps.",
+          "type": "string",
+          "minLength": 1
+        },
+        "formats": {
+          "title": "Formats",
+          "description": "Format of the resource, i.e. dimensions in cm.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "title": "Format",
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "otherMaterialCharacteristics": {
+          "title": "Other Material Characteristics",
+          "description": "Other Material Characteristics, i.e. illustrations, black and white, or coloured.",
+          "type": "string",
+          "minLength": 1
+        },
+        "editionStatement": {
+          "title": "Edition",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "editionDesignation": {
+              "title": "Designation",
+              "type": "object",
+              "properties": {
+                "value": {
+                  "title": "Value",
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "value"
+              ]
+            },
+            "responsibility": {
+              "title": "Responsibility",
+              "type": "object",
+              "properties": {
+                "value": {
+                  "title": "Value",
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "value"
+              ]
+            }
+          },
+          "required": [
+            "editionDesignation"
+          ]
+        },
+        "notes": {
+          "title": "Notes",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "title": "Note",
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "series": {
+          "title": "Series",
+          "description": "Series the resource belongs to.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "title": "Title",
+                "type": "string",
+                "minLength": 1
+              },
+              "number": {
+                "title": "Numbering",
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "name"
+            ]
           }
         }
       }
