@@ -377,7 +377,7 @@ def test_sources(minimal_document):
     assert result['sources'] == [
         'Document 1, 2020',
         'Document 2, 2020, vol. 6, no. 12, p. 135-139',
-        'Document 3, 2019',
+        'Document 3, 2019, no. 12, p. 135-139',
     ]
 
 
