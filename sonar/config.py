@@ -259,6 +259,8 @@ SECURITY_LOGIN_USER_TEMPLATE = 'sonar/accounts/login.html'
 SECURITY_FORGOT_PASSWORD_TEMPLATE = 'sonar/accounts/forgot_password.html'
 SECURITY_RESET_PASSWORD_TEMPLATE = 'sonar/accounts/reset_password.html'
 SECURITY_REGISTER_USER_TEMPLATE = 'sonar/accounts/signup.html'
+SECURITY_EMAIL_SUBJECT_PASSWORD_RESET = _('SONAR password reset')
+SECURITY_EMAIL_SUBJECT_PASSWORD_NOTICE = _('Your SONAR password has been reset')
 
 RECORDS_UI_ENDPOINTS = {
     'doc': {
