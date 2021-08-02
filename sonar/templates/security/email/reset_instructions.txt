@@ -1,3 +1,16 @@
-{{ _('Click the link below to reset your password:') }}
+{%- if user.profile.first_name and user.profile.last_name -%}
+{{ _('Dear') }} {{ user.profile.first_name }} {{ user.profile.last_name }},
+{%- else %}
+{{ _('Dear user') }},
+{%- endif %}
 
-{{ reset_link.replace('/api', '') }}
+{{ _('Someone requested that the password for your SONAR account be reset.') }}
+
+{{ _('Reset my password') }}: {{ reset_link.replace('/api', '') }}
+
+{{ _('If you didn\'t request this, you can ignore this e-mail. Your password won\'t change until you create a new
+  password.') }}
+
+{{ _('Best regards') }}
+
+{{ _('Your institution') }}
