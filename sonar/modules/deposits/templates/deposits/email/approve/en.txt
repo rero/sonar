@@ -1,6 +1,6 @@
-Hi {{ deposit_user.last_name }},
+Hi {{ deposit_user.first_name }},
 
-Your deposit "{{ deposit.metadata.title }}" has been approved by {{ user.first_name }} {{ user.last_name }} ({{ user.email }}).
+Your institution approved your deposit "{{ deposit.metadata.title }}".
 
 {{ _('ID') }}: {{ deposit.pid }}
 {{ _('Date') }}: {{ date }}
