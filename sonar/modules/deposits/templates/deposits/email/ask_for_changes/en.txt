@@ -1,6 +1,6 @@
 Hi {{ deposit_user.first_name }},
 
-{{ user.first_name }} {{ user.last_name }} ({{ user.email }}) requests changes on your deposit "{{ deposit.metadata.title }}".
+Your institution requests changes on your deposit "{{ deposit.metadata.title }}".
 
 {{ _('ID') }}: {{ deposit.pid }}
 {{ _('Date') }}: {{ date }}
