@@ -41,7 +41,7 @@ jobs:
     - name: Run Bootstrap
       run: |
         poetry run ./scripts/bootstrap
-        poetry run pip install --upgrade coveralls
+        pip install --upgrade coveralls
 
     - name: Run Test
       run: poetry run ./scripts/test
@@ -50,4 +50,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COVERALLS_SERVICE_NAME: github
-      run: poetry run coveralls
+      run: coveralls
