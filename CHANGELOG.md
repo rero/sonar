@@ -1,5 +1,28 @@
 # Changelog
 
+## [v1.3.0](https://github.com/rero/sonar/tree/v1.3.0) (2021-08-03)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.2.0...v1.3.0)
+
+**Fixed bugs:**
+
+- Error after PDF extraction in deposits [\#603](https://github.com/rero/sonar/issues/603)
+
+**Closed issues:**
+
+- Create Uni Fribourg dedicated view [\#605](https://github.com/rero/sonar/issues/605)
+- Mask a document from the public view [\#570](https://github.com/rero/sonar/issues/570)
+
+**Merged pull requests:**
+
+- translations: update catalog [\#618](https://github.com/rero/sonar/pull/618) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- translations: update catalog [\#617](https://github.com/rero/sonar/pull/617) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- security: update dependencies [\#616](https://github.com/rero/sonar/pull/616) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- organisations: remove an organisation [\#611](https://github.com/rero/sonar/pull/611) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- organisations: dedicated view for `bcufr` [\#608](https://github.com/rero/sonar/pull/608) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- deposits: fix PDF date extraction [\#604](https://github.com/rero/sonar/pull/604) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- documents: add `masked` property [\#601](https://github.com/rero/sonar/pull/601) ([sebastiendeleze](https://github.com/sebastiendeleze))
+
 ## [v1.2.0](https://github.com/rero/sonar/tree/v1.2.0) (2021-07-14)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.1.1...v1.2.0)
