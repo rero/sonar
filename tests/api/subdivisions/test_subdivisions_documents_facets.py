@@ -43,9 +43,3 @@ def test_list(app, db, client, document, subdivision, superuser):
         'name':
         'Subdivision name'
     }]
-
-    # Don't display aggregation in global context
-    res = client.get(url_for('invenio_records_rest.doc_list', view='global'))
-    assert res.status_code == 200
-    assert res.json['hits']['total']['value'] == 1
-    assert 'subdivision' not in res.json['aggregations']

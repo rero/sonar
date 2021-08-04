@@ -20,6 +20,7 @@
 import json
 
 from flask import url_for
+from invenio_accounts.testutils import login_user_via_session
 
 
 def test_put(app, client, document_with_file):
@@ -39,3 +40,56 @@ def test_put(app, client, document_with_file):
                           headers=headers,
                           data=json.dumps(response.json['metadata']))
     assert response.status_code == 200
+
+
+def test_aggregations(app, client, document, superuser, admin):
+    """Test aggregations."""
+    # No context
+    res = client.get(url_for('documents.aggregations'))
+    assert res.json == [
+        'document_type', 'controlled_affiliation', 'year', 'collection',
+        'language', 'author', 'subject', 'organisation', 'subdivision'
+    ]
+
+    # Collection view
+    res = client.get(url_for('documents.aggregations', collection='coll'))
+    assert res.json == [
+        'document_type', 'controlled_affiliation', 'year', 'language',
+        'author', 'subject', 'organisation', 'subdivision'
+    ]
+
+    # Dedicated view
+    res = client.get(url_for('documents.aggregations', view='rero'))
+    assert res.json == [
+        'document_type', 'controlled_affiliation', 'year', 'collection',
+        'language', 'author', 'subject', 'subdivision'
+    ]
+
+    # Global view
+    res = client.get(url_for('documents.aggregations', view='global'))
+    assert res.json == [
+        'document_type', 'controlled_affiliation', 'year', 'collection',
+        'language', 'author', 'subject', 'organisation'
+    ]
+
+    # Logged as superuser
+    login_user_via_session(client, email=superuser['email'])
+    res = client.get(url_for('documents.aggregations'))
+    assert res.json == [
+        'document_type', 'controlled_affiliation', 'year', 'collection',
+        'language', 'author', 'subject', 'organisation', 'subdivision', {
+            'key': 'customField1',
+            'name': 'Test'
+        }
+    ]
+
+    # Logged as admin
+    login_user_via_session(client, email=admin['email'])
+    res = client.get(url_for('documents.aggregations'))
+    assert res.json == [
+        'document_type', 'controlled_affiliation', 'year', 'collection',
+        'language', 'author', 'subject', 'subdivision', {
+            'key': 'customField1',
+            'name': 'Test'
+        }
+    ]
