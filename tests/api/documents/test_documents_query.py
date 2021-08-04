@@ -35,7 +35,6 @@ def test_collection_query(db, client, document, collection, es_clear):
                 collection_view=collection['pid']))
     assert res.status_code == 200
     assert res.json['hits']['total']['value'] == 1
-    assert not res.json['aggregations'].get('collection')
 
 
 def test_masked_document(db, client, organisation, document, es_clear):

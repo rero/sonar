@@ -92,7 +92,8 @@ setup(
             'translations = sonar.translations.rest:blueprint',
             'suggestions = sonar.suggestions.rest:blueprint',
             'validation = sonar.modules.validation.views:blueprint',
-            'swisscovery = sonar.modules.swisscovery.rest:blueprint'
+            'swisscovery = sonar.modules.swisscovery.rest:blueprint',
+            'documents = sonar.modules.documents.rest:blueprint'
         ],
         'invenio_assets.webpack': [
             'sonar_theme = sonar.theme.webpack:theme'

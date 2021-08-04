@@ -35,8 +35,7 @@ from sonar.modules.documents.serializers.schemas.dc import DublinCoreV1
 from sonar.modules.documents.serializers.schemas.google_scholar import \
     GoogleScholarV1
 from sonar.modules.documents.serializers.schemas.schemaorg import SchemaOrgV1
-from sonar.modules.organisations.api import OrganisationRecord, \
-    current_organisation
+from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.serializers import JSONSerializer as _JSONSerializer
 from sonar.modules.subdivisions.api import Record as SubdivisionRecord
 from sonar.modules.users.api import current_user_record
@@ -51,14 +50,6 @@ class JSONSerializer(_JSONSerializer):
     def post_process_serialize_search(self, results, pid_fetcher):
         """Post process the search results."""
         view = request.args.get('view')
-
-        if view:
-            if view != current_app.config.get(
-                    'SONAR_APP_DEFAULT_ORGANISATION'):
-                results['aggregations'].pop('organisation', {})
-        else:
-            if current_user_record and not current_user_record.is_superuser:
-                results['aggregations'].pop('organisation', {})
 
         if results['aggregations'].get('year'):
             results['aggregations']['year']['type'] = 'range'
@@ -77,32 +68,6 @@ class JSONSerializer(_JSONSerializer):
             if organisation:
                 org_term['name'] = organisation['name']
 
-        # Process facets for custom fields
-        if view and view != current_app.config.get(
-                'SONAR_APP_DEFAULT_ORGANISATION'):
-            organisation = OrganisationRecord.get_record_by_pid(view)
-        else:
-            organisation = current_organisation
-
-        for i in range(1, 4):
-            if results.get('aggregations').get(f'customField{i}'):
-                # The facet is displayed only in dedicated view.
-                if view == current_app.config.get(
-                        'SONAR_APP_DEFAULT_ORGANISATION'
-                ) or not organisation or not organisation.get(
-                        f'documentsCustomField{i}', {}).get('includeInFacets'):
-                    results['aggregations'].pop(f'customField{i}', None)
-                else:
-                    if organisation[f'documentsCustomField{i}'].get('label'):
-                        results['aggregations'][f'customField{i}'][
-                            'name'] = get_language_value(
-                                organisation[f'documentsCustomField{i}']
-                                ['label'])
-
-        # Dont display collection aggregation in the collection context
-        if request.args.get('collection_view'):
-            results['aggregations'].pop('collection', None)
-
         # Add collection name
         for org_term in results.get('aggregations',
                                     {}).get('collection',
@@ -110,11 +75,6 @@ class JSONSerializer(_JSONSerializer):
             collection = CollectionRecord.get_record_by_pid(org_term['key'])
             if collection:
                 org_term['name'] = get_language_value(collection['name'])
-
-        # Don't display subdivision in global context
-        if view and view == current_app.config.get(
-                'SONAR_APP_DEFAULT_ORGANISATION'):
-            results['aggregations'].pop('subdivision', {})
 
         return super(JSONSerializer,
                      self).post_process_serialize_search(results, pid_fetcher)
