@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-07-14 10:32+0200\n"
-"PO-Revision-Date: 2021-07-22 21:33+0000\n"
+"PO-Revision-Date: 2021-08-06 07:33+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "fr/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.7.2-dev\n"
+"X-Generator: Weblate 4.8-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: sonar/theme/views.py:67
@@ -34,6 +34,8 @@ msgid ""
 "A masked document is visible in the professional interface, but not in "
 "the public interface."
 msgstr ""
+"Un document masqué est visible dans l'interface professionnelle, mais pas "
+"dans l'interface publique."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:218
 msgid "ARK (Archival Resource Key)"
@@ -127,11 +129,11 @@ msgstr "Adresses IP autorisées"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:716
 msgid "Animator"
-msgstr "Animateur"
+msgstr "Animateur·trice"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:182
 msgid "Animators"
-msgstr "Animateurs"
+msgstr "Animateurs·trices"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:620
 msgid "Apprentice"
@@ -1140,7 +1142,7 @@ msgstr "Mandat"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1841
 msgid "Masked"
-msgstr ""
+msgstr "Masqué"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:423
 msgid "Master"
