@@ -23,7 +23,7 @@ from os.path import isdir
 from click.testing import CliRunner
 from invenio_search.cli import destroy
 
-import sonar.modules.cli as Cli
+import sonar.modules.cli.utils as Cli
 
 
 def test_compile_json(app, script_info):
