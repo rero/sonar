@@ -49,15 +49,16 @@ setup(
             'sonar = invenio_app.cli:cli',
         ],
         'flask.commands': [
-            'fixtures = sonar.modules.cli:fixtures',
             'documents = sonar.modules.documents.cli.documents:documents',
             'ark = sonar.modules.ark.cli:ark',
             'oaiharvester = \
                 sonar.modules.documents.cli.oaiharvester:oaiharvester',
-            'utils = sonar.modules.cli:utils',
             'es = sonar.elasticsearch.cli:es',
             'heg = sonar.heg.cli:heg',
-            'resources = sonar.resources.cli:resources'
+            'resources = sonar.resources.cli:resources',
+            'imports = sonar.modules.cli.imports:imports',
+            'fixtures = sonar.modules.cli.fixtures:fixtures',
+            'utils = sonar.modules.cli.utils:utils'
         ],
         'invenio_base.apps': [
             'sonar = sonar.ext:Sonar',

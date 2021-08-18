@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""SONAR CLI commands."""
+"""Utils commands."""
 
 import json
 import pathlib
@@ -35,20 +35,6 @@ from invenio_search.proxies import current_search
 from jsonref import JsonLoader
 
 from sonar.modules.api import SonarRecord
-
-from .deposits.cli import deposits
-from .organisations.cli.organisations import organisations
-from .users.cli import users
-
-
-@click.group()
-def fixtures():
-    """Fixtures management commands."""
-
-
-fixtures.add_command(users)
-fixtures.add_command(organisations)
-fixtures.add_command(deposits)
 
 
 @click.group()

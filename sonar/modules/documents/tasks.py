@@ -66,7 +66,12 @@ def import_records(records_to_import):
                 key = file_data.pop('key')
 
                 try:
-                    record.add_file_from_url(url, key, **file_data)
+                    if url.startswith('http'):
+                        record.add_file_from_url(url, key, **file_data)
+                    else:
+                        with open(url, 'rb') as pdf_file:
+                            record.add_file(pdf_file.read(), key,
+                                            **file_data)
                 except Exception as exception:
                     current_app.logger.warning(
                         'Error during import of file {file} of record '
