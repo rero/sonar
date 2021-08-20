@@ -72,6 +72,13 @@ along with this program. If not, see
         </li>
         {% endif %}
         {% else %}
+        {% if current_user.roles and current_user.roles[0].name == 'submitter' %}
+        <li class="nav-item">
+          <a class="btn btn-outline-light" href="{{ url_for('sonar.manage', path='deposit/0/create')}}">
+            {{ _('Deposit a publication') }}
+          </a>
+        </li>
+        {% endif %}
         <li class="nav-item dropdown pl-3">
           {% with dropdownId='userLinkDropdown' %}
           <a class="nav-link dropdown-toggle" href="#" id="{{ dropdownId }}" role="button" data-toggle="dropdown"
