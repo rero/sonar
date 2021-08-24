@@ -5,7 +5,7 @@
     "url": "http://doc.rero.ch/oai2d",
     "metadataprefix": "marcxml",
     "comment": "",
-    "setspecs": "unisi unifr nl-epfl nl-ethz nl-fachhochschulen nl-lib4ri nl-unibas nl-unibe nl-unifr nl-unige nl-unil nl-unilu nl-unine nl-unisg nl-usi nl-uzh bge mhnge baage bmuge imvge mhsge hepbejune"
+    "setspecs": "unisi unifr nl-epfl nl-ethz nl-fachhochschulen nl-lib4ri nl-unibas nl-unibe nl-unifr nl-unige nl-unil nl-unilu nl-unine nl-unisg nl-usi nl-uzh bge mhnge baage bmuge imvge mhsge hepbejune unifr"
   },
   {
     "key": "archive_ouverte_unige",
