@@ -20,7 +20,7 @@
 import datetime
 import re
 
-from flask import current_app, g
+from flask import current_app, g, request
 from invenio_i18n.ext import current_i18n
 from invenio_mail.api import TemplatedMessage
 from netaddr import IPAddress, IPGlob, IPNetwork, IPSet
@@ -278,3 +278,41 @@ def get_bibliographic_code_from_language(language_code):
             return key
 
     raise Exception(f'Language code not found for "{language_code}"')
+
+
+def get_current_ip():
+    """Get current IP address.
+
+    :returns: Current IP address.
+    :rtype: str
+    """
+    ip_address = request.environ.get('X-Forwarded-For', request.remote_addr)
+    # Take only the first IP, as X-Forwarded for gives the real IP + the
+    # proxy IP.
+    return ip_address.split(', ')[0]
+
+
+def get_ips_list(ranges):
+    """Get the IP addresses list from a list of ranges.
+
+    :param list ranges: List of ranges.
+    :returns: List of IP addresses.
+    :rtype: list
+    """
+    ip_set = IPSet()
+
+    for ip_range in ranges:
+        try:
+            # It's a glob
+            if '*' in ip_range or '-' in ip_range:
+                ip_set.add(IPGlob(ip_range))
+            # It's a network
+            elif '/' in ip_range:
+                ip_set.add(IPNetwork(ip_range))
+            # Simple IP
+            else:
+                ip_set.add(IPAddress(ip_range))
+        except Exception:
+            pass
+
+    return [str(ip) for ip in ip_set]

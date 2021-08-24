@@ -100,6 +100,7 @@ def test_get_view_code(app, organisation):
     with app.test_request_context('/notexists'):
         assert get_view_code() == 'global'
 
+
 def test_format_date():
     """Test date formatting."""
     # Just year
@@ -219,3 +220,18 @@ def test_get_language_value(app):
 
     # Non existing locale
     assert get_language_value(values, 'de') == 'Value ENG'
+
+
+def test_get_current_ip(app):
+    """Test get current ip."""
+    with app.test_request_context(
+            environ_base={'X-Forwarded-For': '127.0.0.1'}):
+        assert get_current_ip() == '127.0.0.1'
+
+
+def test_get_ips_list():
+    """Test get IP list."""
+    ranges = ['127.0.0.1', '192.168.1.3-5', '12.13.14.15/32']
+    assert get_ips_list(ranges) == [
+        '12.13.14.15', '127.0.0.1', '192.168.1.3', '192.168.1.4', '192.168.1.5'
+    ]

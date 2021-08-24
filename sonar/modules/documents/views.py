@@ -21,7 +21,7 @@ from __future__ import absolute_import, print_function
 
 import json
 
-from flask import Blueprint, current_app, render_template, request
+from flask import Blueprint, abort, current_app, render_template, request
 from flask_babelex import gettext as _
 from invenio_i18n.ext import current_i18n
 from invenio_records_ui.signals import record_viewed
@@ -30,7 +30,8 @@ from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.documents.utils import has_external_urls_for_files, \
     populate_files_properties
 from sonar.modules.utils import format_date, \
-    get_bibliographic_code_from_language, get_language_value
+    get_bibliographic_code_from_language, get_current_ip, get_language_value, \
+    is_ip_in_list
 
 from .utils import publication_statement_text
 
@@ -70,6 +71,28 @@ def detail(pid, record, template=None, **kwargs):
     :param \*\*kwargs: Additional view arguments based on URL rule.
     :returns: The rendered template.
     """
+
+    def is_masked(record):
+        """Check if record is masked.
+
+        :param record: Record object
+        :returns: True if record is masked
+        :rtype: boolean
+        """
+        if not record.get('masked'):
+            return False
+
+        if record['masked'] == 'masked_for_all':
+            return True
+
+        if record['masked'] == 'masked_for_external_ips' and record.get(
+                'organisation') and not is_ip_in_list(
+                    get_current_ip(), record['organisation'][0].get(
+                        'allowedIps', '').split('\n')):
+            return True
+
+        return False
+
     # Add restriction, link and thumbnail to files
     if record.get('_files'):
         # Check if organisation's record forces to point file to an external
@@ -92,6 +115,10 @@ def detail(pid, record, template=None, **kwargs):
 
     # Resolve $ref properties
     record = record.replace_refs()
+
+    # Record is masked
+    if is_masked(record):
+        abort(404)
 
     # Send signal when record is viewed
     record_viewed.send(
@@ -174,12 +201,12 @@ def part_of_format(part_of):
             label=_('vol.'), value=part_of['numberingVolume']))
 
     if 'numberingIssue' in part_of:
-        items.append('{label} {value}'.format(
-            label=_('no.'), value=part_of['numberingIssue']))
+        items.append('{label} {value}'.format(label=_('no.'),
+                                              value=part_of['numberingIssue']))
 
     if 'numberingPages' in part_of:
-        items.append('{label} {value}'.format(
-            label=_('p.'), value=part_of['numberingPages']))
+        items.append('{label} {value}'.format(label=_('p.'),
+                                              value=part_of['numberingPages']))
 
     return ', '.join(items)
 
