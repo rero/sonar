@@ -26,6 +26,7 @@ from sonar.modules.organisations.api import current_organisation
 from sonar.modules.query import default_search_factory, \
     get_operator_and_query_type
 from sonar.modules.users.api import current_user_record
+from sonar.modules.utils import get_current_ip
 
 FIELDS = [
     '_bucket', '_files.*', 'pid', 'organisation.*', 'title.*^3',
@@ -82,7 +83,38 @@ def search_factory(self, search, query_parser=None):
     # Public search
     if view:
         # Don't display masked records
-        search = search.filter('bool', must_not={'term': {'masked': True}})
+        search = search.filter('bool',
+                               should=[{
+                                   'bool': {
+                                       'must_not': [{
+                                           'exists': {
+                                               'field': 'masked'
+                                           }
+                                       }]
+                                   }
+                               }, {
+                                   'bool': {
+                                       'filter': [{
+                                           'term': {
+                                               'masked': 'not_masked'
+                                           }
+                                       }]
+                                   }
+                               }, {
+                                   'bool': {
+                                       'must': [{
+                                           'term': {
+                                               'masked':
+                                               'masked_for_external_ips'
+                                           }
+                                       }, {
+                                           'term': {
+                                               'organisation.ips':
+                                               get_current_ip()
+                                           }
+                                       }]
+                                   }
+                               }])
 
         # Filter record by organisation view.
         if view != current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'):
