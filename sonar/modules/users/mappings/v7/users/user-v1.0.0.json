@@ -26,6 +26,10 @@
           "suggest": {
             "type": "completion",
             "analyzer": "default"
+          },
+          "raw": {
+            "type": "keyword",
+            "normalizer": "sort_normalizer"
           }
         }
       },

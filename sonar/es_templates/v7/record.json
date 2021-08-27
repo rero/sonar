@@ -18,6 +18,15 @@
           ]
         }
       },
+      "normalizer": {
+        "sort_normalizer": {
+          "type": "custom",
+          "filter": [
+            "lowercase",
+            "asciifolding"
+          ]
+        }
+      },
       "analyzer": {
         "default": {
           "type": "custom",

@@ -120,7 +120,13 @@
             "type": "object",
             "properties": {
               "value": {
-                "type": "text"
+                "type": "text",
+                "fields": {
+                  "raw": {
+                    "type": "keyword",
+                    "normalizer": "sort_normalizer"
+                  }
+                }
               },
               "language": {
                 "type": "keyword"

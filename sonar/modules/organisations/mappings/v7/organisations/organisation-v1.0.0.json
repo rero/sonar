@@ -17,6 +17,15 @@
       "description": {
         "type": "text"
       },
+      "name": {
+        "type": "text",
+        "fields": {
+          "raw": {
+            "type": "keyword",
+            "normalizer": "sort_normalizer"
+          }
+        }
+      },
       "code": {
         "type": "keyword"
       },
