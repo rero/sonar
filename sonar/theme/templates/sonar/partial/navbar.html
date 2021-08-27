@@ -81,7 +81,7 @@ along with this program. If not, see
         {% endif %}
         <li class="nav-item dropdown pl-3">
           {% with dropdownId='userLinkDropdown' %}
-          <a class="nav-link dropdown-toggle" href="#" id="{{ dropdownId }}" role="button" data-toggle="dropdown"
+          <a class="nav-link dropdown-toggle dropdown-toggle-custom" href="#" id="{{ dropdownId }}" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-user mr-2"></i>
             {% if current_user_record %}
@@ -96,7 +96,7 @@ along with this program. If not, see
         {% endif %}
         {%- if config.I18N_LANGUAGES %}
         <li class="nav-item dropdown pl-3">
-          <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-toggle="dropdown"
+          <a class="nav-link dropdown-toggle dropdown-toggle-custom" href="#" id="languageDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             {{ current_i18n.language|upper }}
           </a>
