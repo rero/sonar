@@ -39,6 +39,22 @@ class RecordServiceConfig(BaseRecordServiceConfig):
     permission_policy_cls = RecordPermissionPolicy
     record_cls = Record
     result_list_cls = RecordList
+    search_sort_default = 'relevance'
+    search_sort_default_no_query = 'newest'
+    search_sort_options = {
+        'relevance': {
+            'fields': ['_score'],
+        },
+        'name': {
+            'fields': ['metadata.name.raw']
+        },
+        'newest': {
+            'fields': ['-metadata.startDate']
+        },
+        'oldest': {
+            'fields': ['metadata.startDate']
+        }
+    }
     search_facets_options = {
         'aggs': {
             'user': {

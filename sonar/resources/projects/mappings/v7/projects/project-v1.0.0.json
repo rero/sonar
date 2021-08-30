@@ -21,6 +21,10 @@
                 "type": "text",
                 "analyzer": "autocomplete",
                 "search_analyzer": "standard"
+              },
+              "raw": {
+                "type": "keyword",
+                "normalizer": "sort_normalizer"
               }
             }
           },
