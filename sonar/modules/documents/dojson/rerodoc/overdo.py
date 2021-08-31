@@ -17,8 +17,6 @@
 
 """Overdo specialized class for RERODOC DOJSON transformation."""
 
-import re
-
 from flask import current_app
 
 from sonar.modules.documents.dojson.overdo import Overdo as BaseOverdo
@@ -53,37 +51,6 @@ class Overdo(BaseOverdo):
                 },
                 dbcommit=True)
             organisation.reindex()
-
-    @staticmethod
-    def extract_date(date=None):
-        """Try to extract date of birth and date of death from field.
-
-        :param date: String, date to parse
-        :returns: Tuple containing date of birth and date of death
-        """
-        if not date:
-            return (None, None)
-
-        # Match a full date
-        match = re.search(r'^([0-9]{4}-[0-9]{2}-[0-9]{2})$', date)
-        if match:
-            return (match.group(1), None)
-
-        match = re.search(r'^([0-9]{2}-[0-9]{2}-[0-9]{4})$', date)
-        if match:
-            return (match.group(1), None)
-
-        # Match these value: "1980-2010"
-        match = re.search(r'^([0-9]{4})-([0-9]{4})$', date)
-        if match:
-            return (match.group(1), match.group(2))
-
-        # Match these value: "1980-" or "1980"
-        match = re.search(r'^([0-9]{4})-?', date)
-        if match:
-            return (match.group(1), None)
-
-        raise Exception('Date "{date}" is not recognized'.format(date=date))
 
     def do(self, blob, ignore_missing=True, exception_handlers=None):
         """Do transformation."""

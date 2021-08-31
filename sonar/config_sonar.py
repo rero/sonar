@@ -97,3 +97,6 @@ SONAR_APP_ORGANISATION_CONFIG = {
 """ARK scheme."""
 # SONAR_APP_ARK_SHOULDER = 'ffk3'
 """ARK Shoulder, can be multiple for a given organisation."""
+
+SONAR_APP_SWISSCOVERY_SEARCH_URL = 'https://swisscovery.slsp.ch/view/sru/41SLSP_NETWORK'
+SONAR_APP_SWISSCOVERY_SEARCH_VERSION = '1.1'
