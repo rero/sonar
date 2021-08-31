@@ -521,6 +521,8 @@ DEFAULT_AGGREGATION_SIZE = 50
 RECORDS_REST_FACETS = {
     'documents':
     dict(aggs=dict(
+        masked=dict(terms=dict(field='masked',
+                                    size=DEFAULT_AGGREGATION_SIZE)),
         subdivision=dict(terms=dict(field='subdivisions.pid',
                                     size=DEFAULT_AGGREGATION_SIZE)),
         organisation=dict(terms=dict(field='organisation.pid',
@@ -550,6 +552,8 @@ RECORDS_REST_FACETS = {
         customField3=dict(terms=dict(field='customField3.raw',
                                      size=DEFAULT_AGGREGATION_SIZE))),
          filters={
+             'masked':
+             and_term_filter('masked'),
              'subdivision':
              and_term_filter('subdivisions.pid'),
              'organisation':

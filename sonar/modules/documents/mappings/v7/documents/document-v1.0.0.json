@@ -104,6 +104,9 @@
           },
           "name": {
             "type": "text"
+          },
+          "ips": {
+            "type": "keyword"
           }
         }
       },
@@ -590,7 +593,7 @@
         }
       },
       "masked": {
-        "type": "boolean"
+        "type": "keyword"
       },
       "subdivisions": {
         "type": "object",
