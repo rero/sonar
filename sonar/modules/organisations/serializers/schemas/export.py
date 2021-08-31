@@ -29,6 +29,11 @@ class ExportSchemaV1(Schema):
     isShared = fields.Boolean(dump_only=True)
     isDedicated = fields.Boolean(dump_only=True)
     files = fields.Method('get_files', dump_only=True)
+    allowedIps = fields.String(dump_only=True)
+    platformName = fields.String(dump_only=True)
+    documentsCustomField1 = fields.Dict(dump_only=True)
+    documentsCustomField2 = fields.Dict(dump_only=True)
+    documentsCustomField3 = fields.Dict(dump_only=True)
 
     def get_files(self, obj):
         """Get files."""
