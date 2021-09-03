@@ -29,11 +29,11 @@ msgstr "%(icon)s My account"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1844
 msgid ""
-"A masked document is visible in the professional interface, but not in "
-"the public interface."
+"A masked document is visible in the professional interface, but not in the "
+"public interface."
 msgstr ""
-"A masked document is visible in the professional interface, but not in "
-"the public interface."
+"A masked document is visible in the professional interface, but not in the "
+"public interface."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:218
 msgid "ARK (Archival Resource Key)"
@@ -736,11 +736,11 @@ msgstr "Files"
 
 #: sonar/theme/templates/sonar/oauth/signup.html:35
 msgid ""
-"Fill in your details to complete your registration. You only have to do "
-"this once."
+"Fill in your details to complete your registration. You only have to do this "
+"once."
 msgstr ""
-"Fill in your details to complete your registration. You only have to do "
-"this once."
+"Fill in your details to complete your registration. You only have to do this "
+"once."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:245
 msgid "First and last name"
@@ -876,11 +876,11 @@ msgstr "Help & documentation"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:563
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1465
 msgid ""
-"Host document, for example a journal for an article, or a book for a book"
-" chapter."
+"Host document, for example a journal for an article, or a book for a book "
+"chapter."
 msgstr ""
-"Host document, for example a journal for an article, or a book for a book"
-" chapter."
+"Host document, for example a journal for an article, or a book for a book "
+"chapter."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:969
 msgid "How are research results used in training?"
@@ -939,8 +939,8 @@ msgstr "If this field is filled in, the file points to the specified URL."
 
 #: sonar/templates/security/email/reset_instructions.html:28
 msgid ""
-"If you didn't request this, you can ignore this e-mail. Your password "
-"won't change until you create a new\n"
+"If you didn't request this, you can ignore this e-mail. Your password won't "
+"change until you create a new\n"
 "  password."
 msgstr ""
 "If you didn't request this, you can ignore this e-mail. Your password won't "
@@ -1094,15 +1094,15 @@ msgstr "Linked documents"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:66
 msgid ""
-"List of IP addresses or ranges that allow access to private files "
-"(access: embargoed or restricted), which are accessible only within the "
-"organisation. Note: the bibliographic record (metadata) is always public."
-" Enter one rule per line."
+"List of IP addresses or ranges that allow access to private files (access: "
+"embargoed or restricted), which are accessible only within the organisation. "
+"Note: the bibliographic record (metadata) is always public. Enter one rule "
+"per line."
 msgstr ""
-"List of IP addresses or ranges that allow access to private files "
-"(access: embargoed or restricted), which are accessible only within the "
-"organisation. Note: the bibliographic record (metadata) is always public."
-" Enter one rule per line."
+"List of IP addresses or ranges that allow access to private files (access: "
+"embargoed or restricted), which are accessible only within the organisation. "
+"Note: the bibliographic record (metadata) is always public. Enter one rule "
+"per line."
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:129
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:26
@@ -1256,11 +1256,11 @@ msgstr "Note"
 
 #: sonar/theme/templates/sonar/frontpage.html:77
 msgid ""
-"Note: Publications manually deposited in this test portal might "
-"occasionally need to be deleted, for operational reasons."
+"Note: Publications manually deposited in this test portal might occasionally "
+"need to be deleted, for operational reasons."
 msgstr ""
-"Note: Publications manually deposited in this test portal might "
-"occasionally need to be deleted, for operational reasons."
+"Note: Publications manually deposited in this test portal might occasionally "
+"need to be deleted, for operational reasons."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1064
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:642
@@ -1466,11 +1466,9 @@ msgstr "Postal code"
 #: sonar/theme/templates/sonar/footer.html:41
 #, python-format
 msgid ""
-"Powered by <a href=\"%(link)s\" target=\"_blank\" "
-"rel=\"noopener\">RERO</a>"
+"Powered by <a href=\"%(link)s\" target=\"_blank\" rel=\"noopener\">RERO</a>"
 msgstr ""
-"Powered by <a href=\"%(link)s\" target=\"_blank\" "
-"rel=\"noopener\">RERO</a>"
+"Powered by <a href=\"%(link)s\" target=\"_blank\" rel=\"noopener\">RERO</a>"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:704
 msgid "Practitioner-trainer"
@@ -1917,13 +1915,13 @@ msgstr ""
 
 #: sonar/theme/templates/sonar/page.html:20
 msgid ""
-"The SONAR project aims to create a scholarly archive that collects, "
-"promotes and preserves the publications of authors affiliated with Swiss "
-"public research institutions."
+"The SONAR project aims to create a scholarly archive that collects, promotes "
+"and preserves the publications of authors affiliated with Swiss public "
+"research institutions."
 msgstr ""
-"The SONAR project aims to create a scholarly archive that collects, "
-"promotes and preserves the publications of authors affiliated with Swiss "
-"public research institutions."
+"The SONAR project aims to create a scholarly archive that collects, promotes "
+"and preserves the publications of authors affiliated with Swiss public "
+"research institutions."
 
 #: sonar/templates/security/email/welcome.html:10
 msgid "The SONAR team at RERO"
@@ -1931,21 +1929,21 @@ msgstr "The SONAR team at RERO"
 
 #: sonar/theme/templates/sonar/frontpage.html:99
 msgid ""
-"The Swiss Open Access Repository is an archive of scholarly publications."
-" It collects and promotes open access publications by authors affiliated "
-"with Swiss public research institutions."
+"The Swiss Open Access Repository is an archive of scholarly publications. It "
+"collects and promotes open access publications by authors affiliated with "
+"Swiss public research institutions."
 msgstr ""
-"The Swiss Open Access Repository is an archive of scholarly publications."
-" It collects and promotes open access publications by authors affiliated "
-"with Swiss public research institutions."
+"The Swiss Open Access Repository is an archive of scholarly publications. It "
+"collects and promotes open access publications by authors affiliated with "
+"Swiss public research institutions."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:744
 msgid ""
-"The names of the organisation's specific/patrimonial collections to which"
-" this document belongs"
+"The names of the organisation's specific/patrimonial collections to which "
+"this document belongs"
 msgstr ""
-"The names of the organisation's specific/patrimonial collections to which"
-" this document belongs"
+"The names of the organisation's specific/patrimonial collections to which "
+"this document belongs"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:464
 msgid "This project has been submitted for funding"
@@ -1953,8 +1951,8 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:940
 msgid ""
-"This project is the subject of an educational document or a report to the"
-" city or science"
+"This project is the subject of an educational document or a report to the "
+"city or science"
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:811
@@ -1985,15 +1983,13 @@ msgstr "Titles"
 
 #: sonar/templates/security/email/welcome.html:8
 msgid ""
-"To be able to deposit publications, you must be registered against a "
-"SONAR institution. For now, your account does not provide additional "
-"features, but in the future you will be able to create document lists and"
-" save requests."
+"To be able to deposit publications, you must be registered against a SONAR "
+"institution. For now, your account does not provide additional features, but "
+"in the future you will be able to create document lists and save requests."
 msgstr ""
 "To be able to deposit publications, you must be registered with a SONAR "
-"institution. For now, your account does not provide additional features, "
-"but in the future you will be able to create document lists and save "
-"requests."
+"institution. For now, your account does not provide additional features, but "
+"in the future you will be able to create document lists and save requests."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:680
 msgid "Trainer"
@@ -2143,8 +2139,8 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:794
 msgid ""
-"What is the impact of research on public action or on internal or "
-"external governance?"
+"What is the impact of research on public action or on internal or external "
+"governance?"
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:782
@@ -5163,12 +5159,10 @@ msgstr ""
 #~ msgstr "Series to which belongs the resource."
 
 #~ msgid ""
-#~ "This field corresponds to the exact "
-#~ "publication date of the article, if "
+#~ "This field corresponds to the exact publication date of the article, if "
 #~ "known."
 #~ msgstr ""
-#~ "This field corresponds to the exact "
-#~ "publication date of the article, if "
+#~ "This field corresponds to the exact publication date of the article, if "
 #~ "known."
 
 #~ msgid "Welcome on SONAR"
@@ -5205,19 +5199,14 @@ msgstr ""
 #~ msgstr "The project"
 
 #~ msgid ""
-#~ "List of IP addresses or ranges "
-#~ "that allows to display files. One "
-#~ "rule per line."
+#~ "List of IP addresses or ranges that allows to display files. One rule per "
+#~ "line."
 #~ msgstr ""
-#~ "List of IP addresses or ranges "
-#~ "that allows to display files. One "
-#~ "rule per line."
+#~ "List of IP addresses or ranges that allows to display files. One rule per "
+#~ "line."
 
 #~ msgid "Hidden to public"
 #~ msgstr "Hidden to public"
-
-#~ msgid "\\u200bSwiss National Science Foundation"
-#~ msgstr ""
 
 #~ msgid "Editors"
 #~ msgstr "Editors"
@@ -5239,12 +5228,6 @@ msgstr ""
 
 #~ msgid "Click here to reset your password"
 #~ msgstr "Click here to reset your password"
-
-#~ msgid "Section"
-#~ msgstr ""
-
-#~ msgid "Sections"
-#~ msgstr ""
 
 #~ msgid "Best match"
 #~ msgstr "Best match"
