@@ -29,7 +29,7 @@ from flask import current_app
 from sonar.modules.api import SonarRecord
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.loaders.schemas.factory import LoaderSchemaFactory
-from sonar.modules.utils import chunks
+from sonar.modules.utils import chunks, get_ips_list
 from sonar.webdav import HegClient
 
 from .api import DocumentRecord
@@ -108,6 +108,14 @@ def enrich_document_data(sender=None,
 
     # Check if record is open access.
     json['isOpenAccess'] = record.is_open_access()
+
+    # Compile allowed IPs in document
+    if json.get('organisation'):
+        if json['organisation'][0].get('allowedIps'):
+            json['organisation'][0]['ips'] = get_ips_list(
+                json['organisation'][0]['allowedIps'].split('\n'))
+        else:
+            json['organisation'][0]['ips'] = []
 
     # No files are present in record
     if not record.files:

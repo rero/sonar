@@ -104,6 +104,9 @@
           },
           "name": {
             "type": "text"
+          },
+          "ips": {
+            "type": "keyword"
           }
         }
       },
@@ -120,7 +123,13 @@
             "type": "object",
             "properties": {
               "value": {
-                "type": "text"
+                "type": "text",
+                "fields": {
+                  "raw": {
+                    "type": "keyword",
+                    "normalizer": "sort_normalizer"
+                  }
+                }
               },
               "language": {
                 "type": "keyword"
@@ -584,7 +593,7 @@
         }
       },
       "masked": {
-        "type": "boolean"
+        "type": "keyword"
       },
       "subdivisions": {
         "type": "object",

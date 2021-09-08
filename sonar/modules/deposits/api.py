@@ -180,7 +180,10 @@ class DepositRecord(SonarRecord):
         # Add a statement for date
         metadata['provisionActivity'][0]['statement'].append({
             'label': [{
-                'value': self['metadata']['documentDate']
+                'value':
+                self['metadata']['statementDate']
+                if self['metadata'].get('statementDate') else
+                self['metadata']['documentDate']
             }],
             'type':
             'Date'
@@ -188,8 +191,11 @@ class DepositRecord(SonarRecord):
 
         # Published in
         if self['metadata'].get('publication'):
+            year = self['metadata']['publication']['year'] if self['metadata'][
+                'publication'].get(
+                    'year') else self['metadata']['documentDate']
             part_of = {
-                'numberingYear': self['metadata']['documentDate'],
+                'numberingYear': year,
                 'document': {
                     'title': self['metadata']['publication']['publishedIn']
                 }
@@ -215,6 +221,10 @@ class DepositRecord(SonarRecord):
                 part_of['document']['publication'] = {
                     'statement': self['metadata']['publication']['publisher']
                 }
+
+            if self['metadata']['publication'].get('identifiedBy'):
+                part_of['document']['identifiedBy'] = self['metadata'][
+                    'publication']['identifiedBy']
 
             metadata['partOf'] = [part_of]
 
@@ -301,6 +311,40 @@ class DepositRecord(SonarRecord):
 
         if identifiers:
             metadata['identifiedBy'] = identifiers
+
+        # Content note
+        if self['metadata'].get('contentNote'):
+            metadata['contentNote'] = self['metadata']['contentNote']
+
+        # Extent
+        if self['metadata'].get('extent'):
+            metadata['extent'] = self['metadata']['extent']
+
+        # Additional materials
+        if self['metadata'].get('additionalMaterials'):
+            metadata['additionalMaterials'] = self['metadata'][
+                'additionalMaterials']
+
+        # Formats
+        if self['metadata'].get('formats'):
+            metadata['formats'] = self['metadata']['formats']
+
+        # Other material characteristics
+        if self['metadata'].get('otherMaterialCharacteristics'):
+            metadata['otherMaterialCharacteristics'] = self['metadata'][
+                'otherMaterialCharacteristics']
+
+        # Edition statement
+        if self['metadata'].get('editionStatement'):
+            metadata['editionStatement'] = self['metadata']['editionStatement']
+
+        # Notes
+        if self['metadata'].get('notes'):
+            metadata['notes'] = self['metadata']['notes']
+
+        # Series
+        if self['metadata'].get('series'):
+            metadata['series'] = self['metadata']['series']
 
         # Contributors
         contributors = []

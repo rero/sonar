@@ -269,7 +269,8 @@ SECURITY_FORGOT_PASSWORD_TEMPLATE = 'sonar/accounts/forgot_password.html'
 SECURITY_RESET_PASSWORD_TEMPLATE = 'sonar/accounts/reset_password.html'
 SECURITY_REGISTER_USER_TEMPLATE = 'sonar/accounts/signup.html'
 SECURITY_EMAIL_SUBJECT_PASSWORD_RESET = _('SONAR password reset')
-SECURITY_EMAIL_SUBJECT_PASSWORD_NOTICE = _('Your SONAR password has been reset')
+SECURITY_EMAIL_SUBJECT_PASSWORD_NOTICE = _(
+    'Your SONAR password has been reset')
 
 RECORDS_UI_ENDPOINTS = {
     'doc': {
@@ -520,6 +521,8 @@ DEFAULT_AGGREGATION_SIZE = 50
 RECORDS_REST_FACETS = {
     'documents':
     dict(aggs=dict(
+        masked=dict(terms=dict(field='masked',
+                                    size=DEFAULT_AGGREGATION_SIZE)),
         subdivision=dict(terms=dict(field='subdivisions.pid',
                                     size=DEFAULT_AGGREGATION_SIZE)),
         organisation=dict(terms=dict(field='organisation.pid',
@@ -549,6 +552,8 @@ RECORDS_REST_FACETS = {
         customField3=dict(terms=dict(field='customField3.raw',
                                      size=DEFAULT_AGGREGATION_SIZE))),
          filters={
+             'masked':
+             and_term_filter('masked'),
              'subdivision':
              and_term_filter('subdivisions.pid'),
              'organisation':
@@ -621,31 +626,98 @@ RECORDS_REST_FACETS = {
 }
 """REST search facets."""
 
-INDEXES = ['documents', 'organisations', 'users', 'deposits']
-
-RECORDS_REST_SORT_OPTIONS = {}
-for index in INDEXES:
-    RECORDS_REST_SORT_OPTIONS[index] = {
-        'mostrecent': {
-            'title': _('Most recent'),
-            'fields': ['-_created'],
-            'default_order': 'desc',
-            'order': 1,
-        },
-        'bestmatch': {
-            'title': _('Best match'),
+RECORDS_REST_SORT_OPTIONS = {
+    'documents': {
+        'relevance': {
             'fields': ['-_score'],
-            'default_order': 'asc',
-            'order': 2,
+        },
+        'newest': {
+            'fields': ['-provisionActivity.startDate']
+        },
+        'oldest': {
+            'fields': ['provisionActivity.startDate']
+        },
+        'title': {
+            'fields': ['title.mainTitle.value.raw']
+        }
+    },
+    'users': {
+        'relevance': {
+            'fields': ['-_score'],
+        },
+        'newest': {
+            'fields': ['-_created']
+        },
+        'oldest': {
+            'fields': ['_created']
+        },
+        'name': {
+            'fields': ['full_name.raw']
+        }
+    },
+    'organisations': {
+        'relevance': {
+            'fields': ['-_score'],
+        },
+        'newest': {
+            'fields': ['-_created']
+        },
+        'oldest': {
+            'fields': ['_created']
+        },
+        'name': {
+            'fields': ['name.raw']
+        }
+    },
+    'collections': {
+        'relevance': {
+            'fields': ['-_score'],
+        },
+        'newest': {
+            'fields': ['-_created']
+        },
+        'oldest': {
+            'fields': ['_created']
+        },
+        'name': {
+            'fields': ['name.value.raw']
+        }
+    },
+    'deposits': {
+        'relevance': {
+            'fields': ['-_score'],
+        },
+        'newest': {
+            'fields': ['-_created']
+        },
+        'oldest': {
+            'fields': ['_created']
+        }
+    },
+    'subdivisions': {
+        'relevance': {
+            'fields': ['-_score'],
+        },
+        'newest': {
+            'fields': ['-_created']
+        },
+        'oldest': {
+            'fields': ['_created']
+        },
+        'name': {
+            'fields': ['name.value.raw']
         }
     }
+}
 """Setup sorting options."""
+
+INDEXES = ['documents', 'organisations', 'users', 'deposits', 'subdivisions']
 
 RECORDS_REST_DEFAULT_SORT = {}
 for index in INDEXES:
     RECORDS_REST_DEFAULT_SORT[index] = {
-        'query': 'bestmatch',
-        'noquery': 'mostrecent'
+        'query': 'relevance',
+        'noquery': 'newest'
     }
 """Set default sorting options."""
 
