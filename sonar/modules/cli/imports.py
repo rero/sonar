@@ -61,6 +61,14 @@ def hepbejune(data_file, pdf_directory):
             if row[1] == 'SKIP':
                 continue
 
+            degree = row[14]
+            if degree == 'bachelor thesis':
+                degree = 'Mémoire de bachelor'
+            elif degree == 'master thesis':
+                degree = 'Mémoire de master'
+            else:
+                degree = 'Mémoire'
+
             data = {
                 'title': [{
                     'type': 'bf:Title',
@@ -86,16 +94,22 @@ def hepbejune(data_file, pdf_directory):
                     'role': ['cre']
                 }],
                 'dissertation': {
-                    'degree': row[12],
-                    'grantingInstitution': row[10],
+                    'degree': degree,
+                    'grantingInstitution': 'Haute école pédagogique BEJUNE',
                     'date': date.strftime('%Y-%m-%d')
                 },
                 'provisionActivity': [{
                     'type': 'bf:Publication',
-                    'startDate': row[11]
+                    'startDate': date.strftime('%Y')
                 }],
+                'customField1': [
+                    row[12]
+                ],
+                'customField2': [
+                    row[13]
+                ],
                 'documentType':
-                DOCUMENT_TYPE_MAPPING.get(row[13], 'coar:c_1843'),
+                DOCUMENT_TYPE_MAPPING.get(row[14], 'coar:c_1843'),
                 'usageAndAccessPolicy': {
                     'license': 'CC BY-NC-ND'
                 },
@@ -106,10 +120,10 @@ def hepbejune(data_file, pdf_directory):
                 'harvested':
                 True,
                 'masked':
-                True
+                'masked_for_external_ips'
             }
 
-            file_path = os.path.join(pdf_directory, row[15])
+            file_path = os.path.join(pdf_directory, row[16])
             if os.path.isfile(file_path):
                 data['files'] = [{
                     'key': 'fulltext.pdf',
