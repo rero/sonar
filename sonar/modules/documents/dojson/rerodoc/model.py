@@ -716,6 +716,16 @@ def marc21_to_dissertation_field_502(self, key, value):
         dissertation['degree'] = value.get('a')
         self['dissertation'] = dissertation
 
+        # try to parse the thesis note more precisely
+        matches = re.match(r'^(?P<degree>[^:]+) : (?P<grantingInstitution>[^,]+) ?[,:] (?P<date>\d{4})( ; .*)?$', value.get('a'))
+        if matches:
+            if matches.group("degree"):
+                dissertation['degree'] = matches.group("degree")
+            if matches.group("grantingInstitution"):
+                dissertation['grantingInstitution'] = matches.group("grantingInstitution")
+            if matches.group("date"):
+                dissertation['date'] = matches.group("date")
+
     # Try to get start date and store in provision activity
     # 260$c and 269$c have priority to this date
     record = overdo.blob_record

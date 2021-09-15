@@ -153,7 +153,7 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
     assert len(data['subdivisions']) == 1
 
 
-def test_marc21_to_title_245():
+def test_marc21_to_title_245(app):
     """Test dojson marc21_to_title."""
 
     # One title with subtitle
@@ -304,7 +304,7 @@ def test_marc21_to_title_245():
     }]
 
 
-def test_marc21_to_title_246():
+def test_marc21_to_title_246(app):
     """Test dojson marc21_to_title."""
 
     # One title 246 without 245
@@ -699,7 +699,7 @@ def test_marc21_to_provision_activity_field_269(app):
     assert not data.get('provisionActivity')
 
 
-def test_marc21_to_provision_activity_all():
+def test_marc21_to_provision_activity_all(app):
     """Test provision activity with both 260 and 269 fields."""
     marc21xml = """
     <record>
@@ -761,7 +761,7 @@ def test_marc21_to_provision_activity_all():
     }]
 
 
-def test_marc21_to_edition_statement():
+def test_marc21_to_edition_statement(app):
     """Test edition statement dojson from field 250."""
     # OK
     marc21xml = """
@@ -835,7 +835,7 @@ def test_marc21_to_edition_statement():
 # extent: 300$a (the first one if many)
 # otherMaterialCharacteristics: 300$b (the first one if many)
 # formats: 300 [$c repetitive]
-def test_marc21_to_description():
+def test_marc21_to_description(app):
     """Test dojson extent, otherMaterialCharacteristics, formats."""
 
     marc21xml = """
@@ -891,7 +891,7 @@ def test_marc21_to_description():
 
 # series.name: [490$a repetitive]
 # series.number: [490$v repetitive]
-def test_marc21_to_series():
+def test_marc21_to_series(app):
     """Test dojson series."""
 
     marc21xml = """
@@ -916,7 +916,7 @@ def test_marc21_to_series():
     }]
 
 
-def test_marc21_to_abstract():
+def test_marc21_to_abstract(app):
     """Test dojson abstract."""
 
     # One abstract without language
@@ -994,7 +994,7 @@ def test_marc21_to_abstract():
 
 
 # notes: [500$a repetitive]
-def test_marc21_to_notes():
+def test_marc21_to_notes(app):
     """Test dojson notes."""
 
     marc21xml = """
@@ -1014,7 +1014,7 @@ def test_marc21_to_notes():
 
 # subjects: 6xx [duplicates could exist between several vocabularies,
 # if possible deduplicate]
-def test_marc21_to_subjects():
+def test_marc21_to_subjects(app):
     """Test dojson subjects."""
 
     marc21xml = """
@@ -1088,7 +1088,7 @@ def test_marc21_to_subjects():
     assert not data.get('subjects')
 
 
-def test_marc21_to_identified_by_from_001():
+def test_marc21_to_identified_by_from_001(app):
     """Test identifiedBy from 001."""
 
     marc21xml = """
@@ -1110,7 +1110,7 @@ def test_marc21_to_identified_by_from_001():
     assert not data.get('identifiedBy')
 
 
-def test_marc21_to_identified_by_from_020():
+def test_marc21_to_identified_by_from_020(app):
     """Test identifiedBy from 020."""
 
     marc21xml = """
@@ -1140,7 +1140,7 @@ def test_marc21_to_identified_by_from_020():
     assert not data.get('identifiedBy')
 
 
-def test_marc21_to_identified_by_from_024():
+def test_marc21_to_identified_by_from_024(app):
     """Test identifiedBy from 024."""
 
     marc21xml = """
@@ -1209,7 +1209,7 @@ def test_marc21_to_identified_by_from_024():
     assert not data.get('identifiedBy')
 
 
-def test_marc21_to_identified_by_from_027():
+def test_marc21_to_identified_by_from_027(app):
     """Test identifiedBy from 027."""
 
     marc21xml = """
@@ -1239,7 +1239,7 @@ def test_marc21_to_identified_by_from_027():
     assert not data.get('identifiedBy')
 
 
-def test_marc21_to_identified_by_from_035():
+def test_marc21_to_identified_by_from_035(app):
     """Test identifiedBy from 035."""
 
     marc21xml = """
@@ -1270,7 +1270,7 @@ def test_marc21_to_identified_by_from_035():
     assert not data.get('identifiedBy')
 
 
-def test_marc21_to_identified_by_from_037():
+def test_marc21_to_identified_by_from_037(app):
     """Test identifiedBy from 037."""
 
     marc21xml = """
@@ -1308,7 +1308,7 @@ def test_marc21_to_identified_by_from_037():
     assert not data.get('identifiedBy')
 
 
-def test_marc21_to_identified_by_from_088():
+def test_marc21_to_identified_by_from_088(app):
     """Test identifiedBy from 088."""
 
     marc21xml = """
@@ -1338,7 +1338,7 @@ def test_marc21_to_identified_by_from_088():
     assert not data.get('identifiedBy')
 
 
-def test_marc21_to_identified_by_from_091():
+def test_marc21_to_identified_by_from_091(app):
     """Test identifiedBy from 091."""
 
     marc21xml = """
@@ -1395,7 +1395,7 @@ def test_marc21_to_identified_by_from_091():
     assert not data.get('identifiedBy')
 
 
-def test_marc21_to_identified_by_full():
+def test_marc21_to_identified_by_full(app):
     """Test full identified by."""
     marc21xml = """
     <record>
@@ -1543,7 +1543,7 @@ def test_marc21_to_files(app):
     assert not data.get('files')
 
 
-def test_marc21_to_other_edition():
+def test_marc21_to_other_edition(app):
     """Test other edition extraction."""
     # One other edition
     marc21xml = """
@@ -1685,7 +1685,7 @@ def test_marc21_to_specific_collection(app, bucket_location,
     assert len(data['collections']) == 2
 
 
-def test_marc21_to_classification_from_field_080():
+def test_marc21_to_classification_from_field_080(app):
     """Test classification from field 080."""
     # OK
     marc21xml = """
@@ -1714,7 +1714,7 @@ def test_marc21_to_classification_from_field_080():
     assert not data.get('classification')
 
 
-def test_marc21_to_classification_from_field_084():
+def test_marc21_to_classification_from_field_084(app):
     """Test classification from field 084."""
     # OK
     marc21xml = """
@@ -1757,7 +1757,7 @@ def test_marc21_to_classification_from_field_084():
     assert not data.get('classification')
 
 
-def test_marc21_to_classification_from_all():
+def test_marc21_to_classification_from_all(app):
     """Test classification from all field."""
     marc21xml = """
     <record>
@@ -1781,7 +1781,7 @@ def test_marc21_to_classification_from_all():
     }]
 
 
-def test_marc21_to_content_note():
+def test_marc21_to_content_note(app):
     """Test extracting content notes from field 505."""
     # OK
     marc21xml = """
@@ -1812,7 +1812,7 @@ def test_marc21_to_content_note():
     assert not data.get('contentNote')
 
 
-def test_marc21_to_dissertation_field_502():
+def test_marc21_to_dissertation_field_502(app):
     """Test extracting dissertation degree from field 502."""
     # OK
     marc21xml = """
@@ -1826,6 +1826,20 @@ def test_marc21_to_dissertation_field_502():
     data = overdo.do(marc21json)
     assert data.get('dissertation') == {'degree': 'Thèse de doctorat'}
 
+    # thesis note decomposition
+    marc21xml = """
+    <datafield tag="502" ind1=" " ind2=" ">
+        <subfield code="a">Thèse de doctorat : Université de Fribourg, 2010 ; Nr. 1671</subfield>
+    </datafield>
+    """
+    marc21json = create_record(marc21xml)
+    data = overdo.do(marc21json)
+    assert data.get('dissertation') == {
+        'degree': 'Thèse de doctorat',
+        'grantingInstitution': 'Université de Fribourg',
+        'date': '2010'
+    }
+    
     # Multiple --> keep always last value
     marc21xml = """
     <record>
@@ -1852,7 +1866,7 @@ def test_marc21_to_dissertation_field_502():
     assert not data.get('dissertation')
 
 
-def test_marc21_to_dissertation_field_508():
+def test_marc21_to_dissertation_field_508(app):
     """Test extracting dissertation notes from field 508."""
     # OK
     marc21xml = """
@@ -1892,7 +1906,7 @@ def test_marc21_to_dissertation_field_508():
     assert not data.get('dissertation')
 
 
-def test_marc21_to_dissertation_all():
+def test_marc21_to_dissertation_all(app):
     """Test extracting dissertation notes and degree."""
     # OK
     marc21xml = """
@@ -1913,7 +1927,7 @@ def test_marc21_to_dissertation_all():
     }
 
 
-def test_marc21_to_usage_and_access_policy():
+def test_marc21_to_usage_and_access_policy(app):
     """Test extracting usage and access policy."""
     # OK
     marc21xml = """
@@ -1971,7 +1985,7 @@ def test_marc21_to_usage_and_access_policy():
     }
 
 
-def test_marc21_to_contribution_field_100():
+def test_marc21_to_contribution_field_100(app):
     """Test extracting contribution from field 100."""
     # OK
     marc21xml = """
@@ -2095,7 +2109,7 @@ def test_marc21_to_contribution_field_100():
     }]
 
 
-def test_marc21_to_contribution_field_700():
+def test_marc21_to_contribution_field_700(app):
     """Test extracting contribution from field 700."""
     # OK
     marc21xml = """
@@ -2263,7 +2277,7 @@ def test_marc21_to_contribution_field_700():
     assert data.get('contribution')[0]['role'] == ['cre']
 
 
-def test_marc21_to_contribution_field_710():
+def test_marc21_to_contribution_field_710(app):
     """Test extracting contribution from field 710."""
     # OK
     marc21xml = """
@@ -2295,7 +2309,7 @@ def test_marc21_to_contribution_field_710():
     assert not data.get('contribution')
 
 
-def test_marc21_to_contribution_field_711():
+def test_marc21_to_contribution_field_711(app):
     """Test extracting contribution from field 711."""
     # OK
     marc21xml = """
