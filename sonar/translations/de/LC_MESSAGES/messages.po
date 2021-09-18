@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-09-09 08:16+0200\n"
-"PO-Revision-Date: 2021-08-06 07:33+0000\n"
+"PO-Revision-Date: 2021-09-18 11:38+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"de/>\n"
 "Language: de\n"
-"Language-Team: German "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/de/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.9-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: sonar/theme/views.py:71
@@ -5072,11 +5073,11 @@ msgstr "Moderator"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:124
 msgid "role_submitter"
-msgstr "Submitter"
+msgstr "Einreicher"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:112
 msgid "role_superuser"
-msgstr "Super user"
+msgstr "Superuser"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:128
 msgid "role_user"
@@ -5268,4 +5269,3 @@ msgstr ""
 
 #~ msgid "Most recent"
 #~ msgstr "Neueste(r)"
-
