@@ -419,6 +419,9 @@ class DepositRecord(SonarRecord):
             if user and user.is_submitter and user.get('subdivision'):
                 metadata['subdivisions'] = [user['subdivision']]
 
+        # Masked
+        if self['diffusion'].get('masked') is not None:
+            metadata['masked'] = self['diffusion']['masked']
         document = DocumentRecord.create(metadata,
                                          dbcommit=True,
                                          with_bucket=True)

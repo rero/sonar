@@ -346,6 +346,9 @@
                 }
               }
             }
+          },
+          "masked": {
+            "type": "keyword"
           }
         }
       },

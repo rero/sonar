@@ -6,6 +6,7 @@
   "required": [
     "pid"
   ],
+  "additionalProperties": false,
   "properties": {
     "$schema": {
       "type": "string",
@@ -1295,6 +1296,12 @@
     "diffusion": {
       "type": "object",
       "additionalProperties": false,
+      "propertiesOrder": [
+        "license",
+        "oa_status",
+        "masked",
+        "subdivisions"
+      ],
       "properties": {
         "license": {
           "$ref": "license-v1.0.0.json"
@@ -1334,6 +1341,9 @@
               ]
             }
           }
+        },
+        "masked": {
+          "$ref":"masked-v1.0.0.json"
         }
       },
       "required": [

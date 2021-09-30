@@ -609,6 +609,7 @@ def deposit_json(collection, subdivision):
                 '$ref':
                 f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
             }],
+            'masked': 'not_masked'
         },
         'status':
         'in_progress',
