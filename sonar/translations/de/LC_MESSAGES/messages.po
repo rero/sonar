@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-09-09 08:16+0200\n"
-"PO-Revision-Date: 2021-09-18 11:38+0000\n"
+"PO-Revision-Date: 2021-09-30 19:37+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "de/>\n"
@@ -1004,7 +1004,7 @@ msgstr "Italienisch"
 
 #: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:5
 msgid "JSON schema for statistics."
-msgstr ""
+msgstr "JSON schema für Statistiken."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:948
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1125
@@ -1195,11 +1195,11 @@ msgstr "Ausgeblendet"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1853
 msgid "Masked for all"
-msgstr ""
+msgstr "Ausgeblendet für alle"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1857
 msgid "Masked for external IP addresses"
-msgstr ""
+msgstr "Ausgeblendet für externe IP-Adressen"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:423
 msgid "Master"
@@ -1785,7 +1785,7 @@ msgstr "Datum 1"
 
 #: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:16
 msgid "Stat ID."
-msgstr ""
+msgstr "ID der Statistik."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:862
 msgid "State of Valais, Education service"
@@ -1870,13 +1870,13 @@ msgstr ""
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1871
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:135
 msgid "Subdivision"
-msgstr ""
+msgstr "Unterteilung"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1306
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1867
 #: sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0_src.json:4
 msgid "Subdivisions"
-msgstr ""
+msgstr "Unterteilungen"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:894
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:911
