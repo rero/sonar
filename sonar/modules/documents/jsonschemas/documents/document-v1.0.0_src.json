@@ -1834,34 +1834,7 @@
       }
     },
     "masked": {
-      "title": "Masked",
-      "type": "string",
-      "enum": [
-        "not_masked",
-        "masked_for_all",
-        "masked_for_external_ips"
-      ],
-      "description": "A masked document is visible in the professional interface, but not in the public interface.",
-      "default": "not_masked",
-      "form": {
-        "options": [
-          {
-            "label": "Not masked",
-            "value": "not_masked"
-          },
-          {
-            "label": "Masked for all",
-            "value": "masked_for_all"
-          },
-          {
-            "label": "Masked for external IP addresses",
-            "value": "masked_for_external_ips"
-          }
-        ],
-        "expressionProperties": {
-          "templateOptions.required": "true"
-        }
-      }
+      "$ref":"masked-v1.0.0.json"
     },
     "subdivisions": {
       "title": "Subdivisions",
