@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-09-09 08:16+0200\n"
-"PO-Revision-Date: 2021-08-06 07:33+0000\n"
+"PO-Revision-Date: 2021-09-30 19:37+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"it/>\n"
 "Language: it\n"
-"Language-Team: Italian "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/it/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.9-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: sonar/theme/views.py:71
@@ -395,7 +396,7 @@ msgstr "Data secondo il formato YYYY-MM-JJ, es: 1970-01-01"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:141
 msgid "Date of approval by the Team Leader"
-msgstr ""
+msgstr "Data di approvazione da parte del·la Team Leader"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1289
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:34
@@ -708,7 +709,7 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:338
 msgid "External partners"
-msgstr ""
+msgstr "Partner esterni"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:343
 msgid "External partners are involved"
@@ -884,7 +885,7 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:969
 msgid "How are research results used in training?"
-msgstr ""
+msgstr "Come vengono utilizzati i risultati della ricerca nella formazione?"
 
 #: sonar/common/jsonschemas/oa-status-v1.0.0.json:26
 msgid "Hybrid"
@@ -968,7 +969,7 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:241
 msgid "Internal research associates"
-msgstr ""
+msgstr "Collaboratori di ricerca interni·e"
 
 #: sonar/theme/templates/sonar/page.html:47
 msgid "Invenio"
@@ -1001,7 +1002,7 @@ msgstr "Italiano"
 
 #: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:5
 msgid "JSON schema for statistics."
-msgstr ""
+msgstr "JSON schema per statistiche."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:948
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1125
@@ -1172,7 +1173,7 @@ msgstr "Tipo MIME"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:196
 msgid "Main team"
-msgstr ""
+msgstr "Squadra principale"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:287
 msgid "Main title"
@@ -1184,7 +1185,7 @@ msgstr "Titoli"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:836
 msgid "Mandate"
-msgstr ""
+msgstr "Mandato"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1837
 msgid "Masked"
@@ -1192,11 +1193,11 @@ msgstr "Mascherato"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1853
 msgid "Masked for all"
-msgstr ""
+msgstr "Mascherato per tutti"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1857
 msgid "Masked for external IP addresses"
-msgstr ""
+msgstr "Mascherato per indirizzi IP esterni"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:423
 msgid "Master"
@@ -1519,7 +1520,7 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:55
 msgid "Project summary"
-msgstr ""
+msgstr "Riassunto del progetto"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:436
 msgid "Provision activities"
@@ -1574,7 +1575,7 @@ msgstr "Qualificazione"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:409
 msgid "Realization framework"
-msgstr ""
+msgstr "Quadro di realizzazione"
 
 #: sonar/modules/validation/api.py:216
 msgid "Record validation"
@@ -1685,7 +1686,7 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:259
 msgid "Secondary team"
-msgstr ""
+msgstr "Squadra secondaria"
 
 #: sonar/theme/templates/sonar/stats/index.html:23
 msgid "See live"
@@ -1783,7 +1784,7 @@ msgstr "Data 1"
 
 #: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:16
 msgid "Stat ID."
-msgstr ""
+msgstr "ID della statistica."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:862
 msgid "State of Valais, Education service"
@@ -1868,13 +1869,13 @@ msgstr ""
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1871
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:135
 msgid "Subdivision"
-msgstr ""
+msgstr "Suddivisione"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1306
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1867
 #: sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0_src.json:4
 msgid "Subdivisions"
-msgstr ""
+msgstr "Suddivisioni"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:894
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:911
@@ -2135,6 +2136,8 @@ msgid ""
 "What are the benefits and quality improvements in the research in this "
 "project?"
 msgstr ""
+"Quali sono i vantaggi e i miglioramenti di qualità nella ricerca in questo "
+"progetto?"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:770
 msgid "What are the benefits of research in training?"
@@ -2145,10 +2148,12 @@ msgid ""
 "What is the impact of research on public action or on internal or "
 "external governance?"
 msgstr ""
+"Qual è l'impatto della ricerca sull'azione pubblica o sulla governance "
+"interna o esterna?"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:782
 msgid "What is the impact of the research on the professional environment?"
-msgstr ""
+msgstr "Qual è l'impatto della ricerca sull'ambiente professionale?"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:577
 msgid "Who are the actors involved in the field?"
@@ -5249,4 +5254,3 @@ msgstr ""
 
 #~ msgid "Most recent"
 #~ msgstr "Più recente"
-
