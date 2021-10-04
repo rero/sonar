@@ -68,6 +68,24 @@ def marc21_to_type_and_organisation(self, key, value):
         if organisation == 'unisi':
             organisation = 'usi'
 
+        # Specific transformation for `hep bejune`, in order to fill out
+        # custom fields `Filière` (`customField1`) and `Titre obtenu`
+        # (`customField2`)
+        if organisation == 'hepbejune' and value.get('f'):
+            document_subtype = value.get('f').lower()
+            customField1 = ''
+            customField2 = ''
+            if document_subtype == 'diss_bachelor':
+                customField1 = 'Enseignement primaire'
+                customField2 = 'Bachelor of Arts in Pre-Primary and Primary Education'
+            elif  document_subtype == 'diss_master':
+                customField1 = 'Enseignement secondaire'
+                customField2 = 'Master of Arts or of Science in Secondary Education'
+            if customField1:
+                self['customField1'] = [customField1]
+            if customField2:
+                self['customField2'] = [customField2]
+
         # Specific transformation for `bpuge` and `mhnge`, because the real
         # acronym is `vge`.
         subdivision_name = None

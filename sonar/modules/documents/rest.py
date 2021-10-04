@@ -82,7 +82,7 @@ def aggregations():
                 aggregations_list[aggregations_list.index(
                     f'customField{i}')] = {
                         'key':
-                        f'customField{1}',
+                        f'customField{i}',
                         'name':
                         get_language_value(
                             organisation[f'documentsCustomField{i}']['label'])
