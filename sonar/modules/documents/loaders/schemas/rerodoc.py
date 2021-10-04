@@ -53,6 +53,9 @@ class RerodocSchema(Marc21Schema):
     usageAndAccessPolicy = fields.Dict()
     files = fields.List(fields.Dict())
     subdivisions = fields.List(fields.Dict())
+    customField1 = fields.List(fields.String())
+    customField2 = fields.List(fields.String())
+    customField3 = fields.List(fields.String())
 
     @pre_dump
     def process(self, obj, **kwargs):
