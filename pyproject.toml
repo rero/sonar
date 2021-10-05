@@ -48,7 +48,7 @@ idutils = "^1.1.8"
 invenio-records-resources = "^0.12.5"
 urllib3 = ">=1.26.4"
 coverage = {version = ">=6.0b1", allow-prereleases = true}
-pillow = ">=8.2.0"
+pillow = ">=8.3.2"
 # TODO: change back to: celery = ">=5.0.0" after
 # `unexpected keyword argument 'ignore_result'` is solved in version 5.0.6
 celery = "5.0.5"
