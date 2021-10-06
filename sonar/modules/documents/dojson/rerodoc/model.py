@@ -729,6 +729,7 @@ def marc21_to_content_note(self, key, value):
 @utils.ignore_value
 def marc21_to_dissertation_field_502(self, key, value):
     """Extract dissertation degree."""
+    record = overdo.blob_record
     if value.get('a'):
         dissertation = self.get('dissertation', {})
         dissertation['degree'] = value.get('a')
@@ -744,9 +745,33 @@ def marc21_to_dissertation_field_502(self, key, value):
             if matches.group("date"):
                 dissertation['date'] = matches.group("date")
 
+            # Specific transformation for `hep bejune`, in order to fill out
+            # custom fields `Filière` (`customField1`) and `Titre obtenu`
+            # (`customField2`)
+            organisation = record.get('980__', {}).get('b')
+            if (organisation and organisation.lower() == 'hepbejune'):
+                degree = matches.group("degree").lower()
+                customField1 = None
+                customField2 = None
+                if 'mémoire de master spécialisé' in degree:
+                    customField1 = 'Enseignement spécialisé'
+                    customField2 = 'Master of Arts in special needs ' \
+                            'education, orientation enseignement spécialisé'
+                elif 'mémoire de master' in degree:
+                    customField1 = 'Enseignement secondaire'
+                    customField2 = 'Master of Arts or of Science ' \
+                            'in Secondary Education'
+                elif 'mémoire de bachelor' in degree:
+                    customField1 = 'Enseignement primaire'
+                    customField2 = 'Bachelor of Arts in Pre-Primary and ' \
+                            'Primary Education'
+                if customField1:
+                    self['customField1'] = [customField1]
+                if customField2:
+                    self['customField2'] = [customField2]
+
     # Try to get start date and store in provision activity
     # 260$c and 269$c have priority to this date
-    record = overdo.blob_record
     if (record.get('260__', {}).get('c') or record.get('269__', {}).get('c') or
             record.get('773__', {}).get('g')):
         return None
