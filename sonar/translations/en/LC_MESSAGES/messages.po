@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-09-09 08:16+0200\n"
-"PO-Revision-Date: 2021-09-30 19:37+0000\n"
-"Last-Translator: iGor milhit <igor.milhit@rero.ch>\n"
+"PO-Revision-Date: 2021-10-13 16:27+0000\n"
+"Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: English <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "en/>\n"
 "Language: en\n"
@@ -272,7 +272,7 @@ msgstr "Code"
 
 #: sonar/theme/templates/sonar/stats/index.html:26
 msgid "Collect now"
-msgstr ""
+msgstr "Collect now"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:747
 msgid "Collection"
@@ -419,7 +419,7 @@ msgstr ""
 #: sonar/templates/security/email/reset_instructions.html:20
 #: sonar/templates/security/email/reset_notice.html:20
 msgid "Dear"
-msgstr ""
+msgstr "Dear"
 
 #: sonar/templates/security/email/welcome.html:1
 #, python-format
@@ -429,7 +429,7 @@ msgstr "Dear %(email)s"
 #: sonar/templates/security/email/reset_instructions.html:22
 #: sonar/templates/security/email/reset_notice.html:22
 msgid "Dear user"
-msgstr ""
+msgstr "Dear user"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:943
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1120
@@ -438,7 +438,7 @@ msgstr "Degree"
 
 #: sonar/theme/templates/sonar/partial/navbar.html:78
 msgid "Deposit a publication"
-msgstr ""
+msgstr "Deposit a publication"
 
 #: sonar/modules/deposits/rest.py:203
 msgid "Deposit approval"
@@ -548,7 +548,7 @@ msgstr ""
 
 #: sonar/theme/templates/sonar/stats/detail.html:24
 msgid "Download"
-msgstr ""
+msgstr "Download"
 
 #: sonar/templates/security/email/welcome.html:12
 msgid "E-mail"
@@ -787,7 +787,7 @@ msgstr "French"
 
 #: sonar/theme/templates/sonar/stats/detail.html:36
 msgid "Full-text"
-msgstr ""
+msgstr "Full-text"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:219
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:281
@@ -943,6 +943,8 @@ msgid ""
 "won't change until you create a new\n"
 "  password."
 msgstr ""
+"If you didn't request this, you can ignore this e-mail. Your password won't "
+"change until you create a new password."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:316
 msgid "In progress"
@@ -968,7 +970,7 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:241
 msgid "Internal research associates"
-msgstr ""
+msgstr "Internal research associates"
 
 #: sonar/theme/templates/sonar/page.html:47
 msgid "Invenio"
@@ -1192,7 +1194,7 @@ msgstr "Masked"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1853
 msgid "Masked for all"
-msgstr ""
+msgstr "Masked for all"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1857
 msgid "Masked for external IP addresses"
@@ -1239,11 +1241,11 @@ msgstr ""
 
 #: sonar/theme/templates/sonar/stats/detail.html:37
 msgid "No full-text"
-msgstr ""
+msgstr "No full-text"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1849
 msgid "Not masked"
-msgstr ""
+msgstr "Not masked"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1068
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:646
@@ -1300,7 +1302,7 @@ msgstr "Object type"
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:59
 #: sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0_src.json:59
 msgid "Only one value per language is allowed"
-msgstr ""
+msgstr "Only one value per language is allowed"
 
 #: sonar/common/jsonschemas/oa-status-v1.0.0.json:2
 msgid "Open access status"
@@ -1601,7 +1603,7 @@ msgstr "Reset password"
 
 #: sonar/templates/security/email/reset_instructions.html:26
 msgid "Reset my password"
-msgstr ""
+msgstr "Reset my password"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1045
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:411
@@ -1638,7 +1640,7 @@ msgstr "SONAR logo"
 
 #: sonar/config.py:271
 msgid "SONAR password reset"
-msgstr ""
+msgstr "SONAR password reset"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:14
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:8
@@ -1657,7 +1659,7 @@ msgstr "Schema to validate document against."
 
 #: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:10
 msgid "Schema to validate stats records against."
-msgstr ""
+msgstr "Schema to validate stats records against."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:186
 msgid "Scientific collaborator"
@@ -1684,11 +1686,11 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:259
 msgid "Secondary team"
-msgstr ""
+msgstr "Secondary team"
 
 #: sonar/theme/templates/sonar/stats/index.html:23
 msgid "See live"
-msgstr ""
+msgstr "See live"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1074
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:614
@@ -1749,7 +1751,7 @@ msgstr ""
 
 #: sonar/templates/security/email/reset_instructions.html:24
 msgid "Someone requested that the password for your SONAR account be reset."
-msgstr ""
+msgstr "Someone requested that the password for your SONAR account be reset."
 
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:28
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:516
@@ -1807,7 +1809,7 @@ msgstr "Statement"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:357
 msgid "Statement date"
-msgstr ""
+msgstr "Statement date"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:466
 msgid "Statements"
@@ -1815,11 +1817,11 @@ msgstr "Statements"
 
 #: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:25
 msgid "Statistic"
-msgstr ""
+msgstr "Statistic"
 
 #: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:21
 msgid "Statistics"
-msgstr ""
+msgstr "Statistics"
 
 #: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:4
 #: sonar/theme/templates/sonar/stats/index.html:29
@@ -1828,7 +1830,7 @@ msgstr ""
 
 #: sonar/theme/templates/sonar/stats/detail.html:28
 msgid "Stats for"
-msgstr ""
+msgstr "Statistics for"
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:64
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:39
@@ -2072,7 +2074,7 @@ msgstr ""
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:2
 msgid "Validation"
-msgstr ""
+msgstr "Validation"
 
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:39
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:32
@@ -2164,16 +2166,16 @@ msgstr "Year"
 
 #: sonar/config.py:272
 msgid "Your SONAR password has been reset"
-msgstr ""
+msgstr "Your SONAR password has been reset"
 
 #: sonar/templates/security/email/reset_instructions.html:31
 #: sonar/templates/security/email/reset_notice.html:26
 msgid "Your institution"
-msgstr ""
+msgstr "Your institution"
 
 #: sonar/templates/security/email/reset_notice.html:24
 msgid "Your password has been successfully reset."
-msgstr ""
+msgstr "Your password has been successfully reset."
 
 #: sonar/translations/manual_translations.txt:37
 msgid "actorsInvolved"
