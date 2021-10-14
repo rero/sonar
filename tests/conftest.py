@@ -886,6 +886,23 @@ def subdivision(app, db, es, admin, organisation, subdivision_json):
 
 
 @pytest.fixture()
+def subdivision2(app, db, es, admin, organisation, subdivision_json):
+    """Second subdivision fixture."""
+    json = copy.deepcopy(subdivision_json)
+    json['organisation'] = {
+        '$ref':
+        'https://sonar.ch/api/organisations/{pid}'.format(
+            pid=organisation['pid'])
+    }
+
+    subdivision = SubdivisionRecord.create(json, dbcommit=True)
+    subdivision.commit()
+    subdivision.reindex()
+    db.session.commit()
+    return subdivision
+
+
+@pytest.fixture()
 def bucket_location(app, db):
     """Create a default location for managing files."""
     tmppath = tempfile.mkdtemp()

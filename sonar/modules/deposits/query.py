@@ -52,10 +52,10 @@ def search_factory(self, search, query_parser=None):
         # subdivision or by owned deposits
         if not user.is_admin and user.is_moderator and user.get('subdivision'):
             user = user.replace_refs()
-            search = search.query(
+            search = search.filter(
                 'bool',
                 should=[
-                    Q('term', subdivision__pid=user['subdivision']['pid']),
+                    Q('term', user__subdivision__pid=user['subdivision']['pid']),
                     Q('term', user__pid=user['pid'])
                 ])
 

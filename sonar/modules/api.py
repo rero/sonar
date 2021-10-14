@@ -324,6 +324,11 @@ class SonarRecord(Record, FilesMixin):
 
         return False
 
+    @property
+    def subdivisions(self):
+        """Getter for subdivisions."""
+        return self.get('subdivisions', [])
+
     def has_subdivision(self, subdivision_pid):
         """Check if record belongs to the subdivision.
 
@@ -336,10 +341,10 @@ class SonarRecord(Record, FilesMixin):
             return True
 
         # No subdivision in record, the document is accessible.
-        if not self.get('subdivisions'):
+        if not self.subdivisions:
             return False
 
-        for subdivision in self['subdivisions']:
+        for subdivision in self.subdivisions:            
             if subdivision_pid == subdivision['pid']:
                 return True
 
