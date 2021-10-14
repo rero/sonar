@@ -1266,10 +1266,7 @@
         "masked": {
           "$ref":"masked-v1.0.0.json"
         }
-      },
-      "required": [
-        "license"
-      ]
+      }
     },
     "document": {
       "title": "Document",

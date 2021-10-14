@@ -220,7 +220,6 @@ def test_create_document(app, db, project, client, deposit, submitter,
     }]
 
     # Test subdivision
-    deposit['diffusion'].pop('subdivisions', None)
     document = deposit.create_document()
     assert document['subdivisions'][0] == submitter['subdivision']
     assert document['masked'] == deposit['diffusion']['masked']

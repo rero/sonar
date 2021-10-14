@@ -26,7 +26,7 @@ from flask import g
 from sonar.modules.api import SonarRecord
 from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.documents.api import DocumentRecord
-from sonar.modules.users.api import UserRecord, current_user_record
+from sonar.modules.users.api import current_user_record
 from sonar.proxies import sonar
 
 from ..api import SonarIndexer, SonarRecord, SonarSearch
@@ -72,10 +72,22 @@ class DepositRecord(SonarRecord):
     provider = DepositProvider
     schema = 'deposits/deposit-v1.0.0.json'
 
+    @property
+    def subdivisions(self):
+        """Getter for subdivisions."""
+        return self.get('diffusion', {}).get('subdivisions', [])
+
     @classmethod
     def create(cls, data, id_=None, dbcommit=False, with_bucket=True,
                **kwargs):
         """Create deposit record."""
+        if not data.get('diffusion', {}).get('subdivisions'):
+            # Guess from submitter
+            if (
+                current_user_record and current_user_record.is_submitter
+                and current_user_record.get('subdivision')
+            ):
+                data.setdefault('diffusion', {})['subdivisions'] = [current_user_record['subdivision']]
         record = super(DepositRecord, cls).create(data,
                                                   id_=id_,
                                                   dbcommit=dbcommit,
@@ -413,11 +425,6 @@ class DepositRecord(SonarRecord):
         # Subdivisions
         if self['diffusion'].get('subdivisions'):
             metadata['subdivisions'] = self['diffusion']['subdivisions']
-        else:
-            # Guess from submitter
-            user = UserRecord.get_record_by_ref_link(self['user']['$ref'])
-            if user and user.is_submitter and user.get('subdivision'):
-                metadata['subdivisions'] = [user['subdivision']]
 
         # Masked
         if self['diffusion'].get('masked') is not None:

@@ -73,8 +73,8 @@ def test_list(app, client, make_deposit, superuser, admin, moderator,
     assert res.json['hits']['total']['value'] == 3
 
 
-def test_create(client, deposit_json, bucket_location, superuser, admin,
-                moderator, submitter, user):
+def test_create(client, db, deposit_json, bucket_location, superuser, admin,
+                moderator, submitter, user, subdivision):
     """Test create deposits permissions."""
     headers = {
         'Content-Type': 'application/json',
@@ -99,13 +99,23 @@ def test_create(client, deposit_json, bucket_location, superuser, admin,
 
     # submitter
     login_user_via_session(client, email=submitter['email'])
+    submitter['subdivision'] = {
+                '$ref':
+                'https://sonar.ch/api/subdivisions/{subdivision}'.format(
+                    subdivision=subdivision['pid'])
+            }
+    submitter.commit()
+    submitter.reindex()
+    db.session.commit()
     deposit_json['user'] = {
         '$ref': 'https://sonar.ch/api/users/{pid}'.format(pid=submitter['pid'])
     }
+    del deposit_json['diffusion']['subdivisions']
     res = client.post(url_for('invenio_records_rest.depo_list'),
                       data=json.dumps(deposit_json),
                       headers=headers)
     assert res.status_code == 201
+    assert res.json['metadata']['diffusion']['subdivisions']
 
     # Moderator
     login_user_via_session(client, email=moderator['email'])
@@ -139,7 +149,7 @@ def test_create(client, deposit_json, bucket_location, superuser, admin,
 
 
 def test_read(client, db, make_deposit, make_user, superuser, admin, moderator,
-              submitter, user, subdivision):
+              submitter, user, subdivision, subdivision2):
     """Test read deposits permissions."""
     deposit1 = make_deposit('submitter', 'org')
     deposit2 = make_deposit('submitter', 'org2')
@@ -171,10 +181,22 @@ def test_read(client, db, make_deposit, make_user, superuser, admin, moderator,
         url_for('invenio_records_rest.depo_item', pid_value=deposit1['pid']))
     assert res.status_code == 200
 
+    # Moderator has subdivision, I can read a deposit of my subdivision
+    sub_pid = deposit1["diffusion"]["subdivisions"][0]["$ref"].split('/')[-1]
+    moderator['subdivision'] = {
+        '$ref': f'https://sonar.ch/api/subdivisions/{sub_pid}'
+    }
+    moderator.commit()
+    moderator.reindex()
+    db.session.commit()
+    res = client.get(
+        url_for('invenio_records_rest.depo_item', pid_value=deposit1['pid']))
+    assert res.status_code == 200
+
     # Moderator has subdivision, I cannot read deposit outside of his
     # subdivision
     moderator['subdivision'] = {
-        '$ref': f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
+        '$ref': f'https://sonar.ch/api/subdivisions/{subdivision2["pid"]}'
     }
     moderator.commit()
     moderator.reindex()
