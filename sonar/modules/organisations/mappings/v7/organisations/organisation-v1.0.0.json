@@ -15,7 +15,15 @@
         "type": "keyword"
       },
       "description": {
-        "type": "text"
+        "type": "object",
+        "properties": {
+          "language": {
+            "type": "keyword"
+          },
+          "value": {
+            "type": "text"
+          }
+        }
       },
       "name": {
         "type": "text",

@@ -1,3 +1,20 @@
+{# -*- coding: utf-8 -*-
+  Swiss Open Access Repository
+  Copyright (C) 2021 RERO
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published by
+  the Free Software Foundation, version 3 of the License.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#}
+
 {% if g.get('organisation') and not g.organisation['isDedicated'] %}
 <div class="bg-light py-4">
   <div class="container">
@@ -11,7 +28,7 @@
       <div class="col-12 col-lg-{{ '10' if thumbnail else '12' }}">
         <h1 class="mb-2">{{ g.organisation.name }}</h1>
         {% if g.organisation.get('description') %}
-        <p class="mb-3 text-justify">{{ g.organisation.description | markdown_filter | safe }}</p>
+        <p class="mb-3 text-justify">{{ g.organisation.description | language_value | markdown_filter | safe }}</p>
         {% endif %}
         <div class="row">
           <div class="col-12 col-lg-4">
