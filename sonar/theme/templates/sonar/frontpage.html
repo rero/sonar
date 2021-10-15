@@ -89,7 +89,7 @@ along with this program. If not, see
     {% include config['SONAR_APP_ORGANISATION_CONFIG'][g.organisation.pid]['home_template'] %}
     {% else %}
     {% if g.organisation.get('description') %}
-    {{ g.organisation.description | markdown_filter | safe }}
+    {{ g.organisation.description | language_value | markdown_filter | safe }}
     {% endif %}
     {% endif %}
   </div>
