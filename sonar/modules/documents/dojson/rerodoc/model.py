@@ -638,12 +638,23 @@ def marc21_to_other_edition(self, key, value):
     if not electronic_locator or not public_note:
         return None
 
-    return {
-        'document': {
-            'electronicLocator': electronic_locator
-        },
-        'publicNote': public_note
-    }
+    # if the value matches a DOI, apply `identifiedBy[type:bf:Doi]`
+    matches = re.search(r'(?P<doi>10\.\d{4,9}/[-._;()/:a-zA-Z0-9]+)', value.get('o'))
+    if matches and matches.group('doi'):
+        identified_by = self.get('identifiedBy', [])
+        identified_by.append({
+            'type': 'bf:Doi',
+            'value': matches.group('doi')
+        })
+        self['identifiedBy'] = identified_by
+        return None
+    else:
+        return {
+            'document': {
+                'electronicLocator': electronic_locator
+            },
+            'publicNote': public_note
+        }
 
 
 @overdo.over('collections', '^982..')

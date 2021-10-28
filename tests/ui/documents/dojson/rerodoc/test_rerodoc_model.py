@@ -1614,6 +1614,121 @@ def test_marc21_to_other_edition(app):
     data = overdo.do(marc21json)
     assert not data.get('otherEdition')
 
+    # Incorrect DOIs - they do get collected in `otherEdition`
+    # instead of `identifiedBy`
+    marc21xml = """
+    <record>
+        <datafield tag="775" ind1=" " ind2=" ">
+            <subfield code="o">http://dx.doi.org/10.1130%2F0091-7613(2002)030%3C0655:CWCIAP%3E2.0.CO%3B2</subfield>
+            <subfield code="g">version publiée</subfield>
+        </datafield>
+        <datafield tag="775" ind1=" " ind2=" ">
+            <subfield code="o">http://dx.doi.org/0.1021/jp0558775</subfield>
+            <subfield code="g">version publiée</subfield>
+        </datafield>
+        <datafield tag="775" ind1=" " ind2=" ">
+            <subfield code="o">http://dx.doi.org/1017/S0031182010000296</subfield>
+            <subfield code="g">version publiée</subfield>
+        </datafield>
+        <datafield tag="775" ind1=" " ind2=" ">
+            <subfield code="o">http://dx.doi.org/1039/B926873A</subfield>
+            <subfield code="g">version publiée</subfield>
+        </datafield>
+        <datafield tag="775" ind1=" " ind2=" ">
+            <subfield code="o">http://dx.doi.org/0.1016/j.str.2012.09.019</subfield>
+            <subfield code="g">version publiée</subfield>
+        </datafield>
+        <datafield tag="775" ind1=" " ind2=" ">
+            <subfield code="o">https://doi.org/10.1111%2Fj.1467-9280.2009.02364.x</subfield>
+            <subfield code="g">version publiée</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = overdo.do(marc21json)
+    assert data.get('otherEdition') == [{
+        'document': {
+            'electronicLocator': 'http://dx.doi.org/10.1130%2F0091-7613(2002)030%3C0655:CWCIAP%3E2.0.CO%3B2'
+        },
+        'publicNote': 'version publiée'
+    }, {
+        'document': {
+            'electronicLocator': 'http://dx.doi.org/0.1021/jp0558775'
+        },
+        'publicNote': 'version publiée'
+    }, {
+        'document': {
+            'electronicLocator': 'http://dx.doi.org/1017/S0031182010000296'
+        },
+        'publicNote': 'version publiée'
+    }, {
+        'document': {
+            'electronicLocator': 'http://dx.doi.org/1039/B926873A'
+        },
+        'publicNote': 'version publiée'
+    }, {
+        'document': {
+            'electronicLocator': 'http://dx.doi.org/0.1016/j.str.2012.09.019'
+        },
+        'publicNote': 'version publiée'
+    }, {
+        'document': {
+            'electronicLocator': 'https://doi.org/10.1111%2Fj.1467-9280.2009.02364.x'
+        },
+        'publicNote': 'version publiée'
+    }]
+    assert not data.get('identifiedBy')
+
+    # Well-formed DOIs - they get collected in `identifiedBy`
+    # instead of`otherEdition`
+    marc21xml = """
+    <record>
+        <datafield tag="775" ind1=" " ind2=" ">
+            <subfield code="o">http://dx.doi.org/10.1002/1521-3773(20020104)41:1</subfield>
+            <subfield code="g">version publiée</subfield>
+        </datafield>
+        <datafield tag="775" ind1=" " ind2=" ">
+            <subfield code="o">10.1016/j.apergo.2008.03.002</subfield>
+            <subfield code="g">version publiée</subfield>
+        </datafield>
+        <datafield tag="775" ind1=" " ind2=" ">
+            <subfield code="o">: https://doi.pangaea.de/10.1594/PANGAEA.914883</subfield>
+            <subfield code="g">version publiée</subfield>
+        </datafield>
+        <datafield tag="775" ind1=" " ind2=" ">
+            <subfield code="o">https://www.brepolsonline.net/doi/abs/10.1484/J.BPM.5.110808</subfield>
+            <subfield code="g">version publiée</subfield>
+        </datafield>
+        <datafield tag="775" ind1=" " ind2=" ">
+            <subfield code="o">https://doi.org710.35662/unine-thesis-2747</subfield>
+            <subfield code="g">version publiée</subfield>
+        </datafield>
+    </record>
+    """
+    marc21json = create_record(marc21xml)
+    data = overdo.do(marc21json)
+    assert not data.get('otherEdition')
+    assert data.get('identifiedBy') == [{
+        'type': 'bf:Doi',
+        'value': '10.1002/1521-3773(20020104)41:1'
+    },
+    {
+        'type': 'bf:Doi',
+        'value': '10.1016/j.apergo.2008.03.002'
+    },
+    {
+        'type': 'bf:Doi',
+        'value': '10.1594/PANGAEA.914883'
+    },
+    {
+        'type': 'bf:Doi',
+        'value': '10.1484/J.BPM.5.110808'
+    },
+    {
+        'type': 'bf:Doi',
+        'value': '10.35662/unine-thesis-2747'
+    }]
+
 
 def test_marc21_to_specific_collection(app, bucket_location,
                                        without_oaiset_signals):

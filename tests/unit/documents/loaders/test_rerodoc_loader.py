@@ -105,6 +105,10 @@ def test_rerodoc_loader(app, organisation):
                     <marc:subfield code="g">Publisher's version</marc:subfield>
                     <marc:subfield code="o">https://doi.org/10.1093/mnras/stu2500</marc:subfield>
                 </marc:datafield>
+                <marc:datafield tag="775" ind1=" " ind2=" ">
+                    <marc:subfield code="g">Alternative version</marc:subfield>
+                    <marc:subfield code="o">http://www-geol.unine.ch/GEOMAGNETISME/tract.html</marc:subfield>
+                </marc:datafield>
                 <marc:datafield tag="919" ind1=" " ind2=" ">
                     <marc:subfield code="a">Consortium of Swiss Academic Libraries</marc:subfield>
                     <marc:subfield code="b">Zurich</marc:subfield>
@@ -134,6 +138,11 @@ def test_rerodoc_loader(app, organisation):
             'Swissbib',
             'value':
             '(NATIONALLICENCE)oxford-10.1093/mnras/stu2500'
+        }, {
+            'type':
+            'bf:Doi',
+            'value':
+            '10.1093/mnras/stu2500'
         }],
         'collections': [{
             '$ref': 'https://sonar.ch/api/collections/1'
@@ -167,9 +176,9 @@ def test_rerodoc_loader(app, organisation):
         }],
         'otherEdition': [{
             'document': {
-                'electronicLocator': 'https://doi.org/10.1093/mnras/stu2500'
+                'electronicLocator': 'http://www-geol.unine.ch/GEOMAGNETISME/tract.html'
             },
-            'publicNote': "Publisher's version"
+            'publicNote': "Alternative version"
         }],
         'language': [{
             'type': 'bf:Language',
