@@ -31,7 +31,7 @@ marshmallow = ">=3.0.0,<4.0.0"
 pycountry = "*"
 flask-wiki = {git = "https://github.com/rero/flask-wiki.git"}
 markdown-captions = "*"
-bleach = ">=3.1.4"
+bleach = ">3.11"
 wand = ">=0.5.0,<0.6.0"
 python-dotenv = "*"
 flask-cors = ">3.0.8"
