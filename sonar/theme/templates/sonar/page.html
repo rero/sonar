@@ -163,11 +163,6 @@ along with this program. If not, see
       document.addEventListener('click', function (event) {
         let link = event.target;
 
-        // Don't do anything if element don't have custom class.
-        if (!link.matches('.dropdown-toggle-custom')) {
-          return;
-        }
-
         const dropdowns = document.getElementsByClassName('dropdown-menu show');
 
         // If the clicked element doesn't have the right selector, bail
