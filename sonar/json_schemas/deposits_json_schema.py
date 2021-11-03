@@ -32,10 +32,14 @@ class DepositsJSONSchema(JSONSchemaBase):
         """
         schema = super().process()
 
-        if current_user_record.is_moderator:
+        if not current_user_record or current_user_record.is_moderator:
             return schema
 
         schema['properties']['diffusion']['properties'].pop(
             'subdivisions', None)
+        order = schema['properties']['diffusion']['propertiesOrder']
+        schema['properties']['diffusion']['propertiesOrder'] = [
+            v for v in order if v != 'subdivisions'
+        ]
 
         return schema

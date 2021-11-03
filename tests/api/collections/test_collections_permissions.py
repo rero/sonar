@@ -49,12 +49,13 @@ def test_list(app, client, make_organisation, make_collection, superuser,
     # Logged as submitter
     login_user_via_session(client, email=submitter['email'])
     res = client.get(url_for('invenio_records_rest.coll_list'))
-    assert res.status_code == 403
+    assert res.status_code == 200
 
     # Logged as moderator
     login_user_via_session(client, email=moderator['email'])
     res = client.get(url_for('invenio_records_rest.coll_list'))
-    assert res.status_code == 403
+    assert res.status_code == 200
+    assert res.json['hits']['total']['value'] == 1
 
     # Logged as admin
     login_user_via_session(client, email=admin['email'])
@@ -145,14 +146,14 @@ def test_read(client, make_organisation, make_collection, superuser, admin,
     res = client.get(
         url_for('invenio_records_rest.coll_item',
                 pid_value=collection1['pid']))
-    assert res.status_code == 403
+    assert res.status_code == 200
 
     # Logged as moderator
     login_user_via_session(client, email=moderator['email'])
     res = client.get(
         url_for('invenio_records_rest.coll_item',
                 pid_value=collection1['pid']))
-    assert res.status_code == 403
+    assert res.status_code == 200
 
     # Logged as admin
     login_user_via_session(client, email=admin['email'])

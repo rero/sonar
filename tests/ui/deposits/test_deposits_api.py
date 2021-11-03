@@ -121,7 +121,7 @@ def test_create_document(app, db, project, client, deposit, submitter,
         },
         'publicNote': 'Published version'
     }]
-    assert len(document['collections']) == 2
+    assert len(document['collections']) == 1
     assert document['classification'] == [{
         'type': 'bf:ClassificationUdc',
         'classificationPortion': '543'

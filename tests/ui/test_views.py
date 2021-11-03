@@ -134,7 +134,7 @@ def test_logged_user(app, client, superuser, admin, moderator, submitter,
     assert not res.json['metadata']['permissions']['deposits']['list']
 
 
-def test_schemas(client, admin, user):
+def test_schemas(client, admin, user, submitter, moderator):
     """Test JSON schemas endpoint."""
     res = client.get(url_for('sonar.schemas', record_type='documents'))
     assert res.status_code == 200
@@ -145,11 +145,17 @@ def test_schemas(client, admin, user):
     assert res.json['schema']['properties'].get('organisation')
     assert res.json['schema']['properties'].get('role')
 
+    res = client.get(url_for('sonar.schemas', record_type='deposits'))
+    assert res.status_code == 200
+
     login_user_via_session(client, email=admin['email'])
 
     res = client.get(url_for('sonar.schemas', record_type='documents'))
     assert res.status_code == 200
     assert not res.json['schema']['properties'].get('organisation')
+
+    res = client.get(url_for('sonar.schemas', record_type='deposits'))
+    assert res.status_code == 200
 
     res = client.get(url_for('sonar.schemas', record_type='users'))
     assert res.status_code == 200
@@ -181,6 +187,22 @@ def test_schemas(client, admin, user):
     assert not res.json['schema']['properties'].get('role')
     assert 'organisation' not in res.json['schema']['properties']['metadata'][
         'propertiesOrder']
+
+    login_user_via_session(client, email=moderator['email'])
+    res = client.get(url_for('sonar.schemas', record_type='deposits'))
+    assert res.status_code == 200
+    assert res.json[
+        'schema']['properties']['diffusion']['properties'].get('subdivisions')
+    assert 'subdivisions' in res.json[
+        'schema']['properties']['diffusion']['propertiesOrder']
+
+    login_user_via_session(client, email=submitter['email'])
+    res = client.get(url_for('sonar.schemas', record_type='deposits'))
+    assert res.status_code == 200
+    assert not res.json[
+        'schema']['properties']['diffusion']['properties'].get('subdivisions')
+    assert  not 'subdivisions' in res.json[
+        'schema']['properties']['diffusion']['propertiesOrder']
 
 
 def test_profile(client, user):
