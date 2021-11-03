@@ -15,10 +15,19 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #}
 
-<footer id="footer" class="bg-light mt-5">
+<footer id="footer" class="mt-5">
   <div class="container">
-    <div class="row justify-content-center align-items-center">
-      <div class="col-lg-8 py-4 py-lg-5 text-center text-lg-left">
+    {% if g.get('organisation', {}).get('isDedicated') and g.organisation.get('footer') %}
+    <div class="row justify-content-center align-items-center bg-light">
+      <div class="col py-4 py-lg-5 text-center text-lg-left">
+        <div class="d-lg-flex flex-row">
+          {{ g.organisation.footer | language_value | markdown_filter | safe }}
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="row justify-content-center align-items-center bg-light">
+      <div class="col py-4 py-lg-5 text-center text-lg-left">
         <div class="d-lg-flex flex-row">
           <div>
             <a href="{{ url_for('wiki.index') }}">{{ _('Help & Documentation') }}</a>
@@ -37,8 +46,16 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 py-2 py-lg-5 text-center text-lg-right">
-        {% trans link="https://www.rero.ch" %}Powered by <a href="{{ link }}" target="_blank" rel="noopener">RERO</a>{% endtrans %}
+    </div>
+    {% endif %}
+    <div class="row justify-content-center align-items-center mt-2">
+      <div class="col text-center p-0">
+        <div class="d-lg-flex flex-row">
+          <div class="col-lg text-center text-lg-right">
+            {% set link = 'https://www.rero.ch/de/products/sonar' if current_i18n.locale.language == 'de' else 'https://www.rero.ch/produits/sonar' %}
+            {% trans %}Powered by <a href="{{ link }}" target="_blank" rel="noopener">SONAR</a>{% endtrans %}
+          </div>
+        </div>
       </div>
     </div>
   </div>

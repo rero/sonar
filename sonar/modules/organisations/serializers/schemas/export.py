@@ -26,6 +26,7 @@ class ExportSchemaV1(Schema):
     code = fields.String(dump_only=True)
     name = fields.String(dump_only=True)
     description = fields.List(fields.Dict(dump_only=True))
+    footer = fields.List(fields.Dict(dump_only=True))
     isShared = fields.Boolean(dump_only=True)
     isDedicated = fields.Boolean(dump_only=True)
     files = fields.Method('get_files', dump_only=True)

@@ -44,6 +44,7 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
     code = SanitizedUnicode(required=True)
     name = SanitizedUnicode(required=True)
     description = fields.List(fields.Dict())
+    footer = fields.List(fields.Dict())
     isShared = fields.Boolean()
     isDedicated = fields.Boolean()
     allowedIps = SanitizedUnicode()
