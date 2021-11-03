@@ -25,6 +25,17 @@
           }
         }
       },
+      "footer": {
+        "type": "object",
+        "properties": {
+          "language": {
+            "type": "keyword"
+          },
+          "value": {
+            "type": "text"
+          }
+        }
+      },
       "name": {
         "type": "text",
         "fields": {

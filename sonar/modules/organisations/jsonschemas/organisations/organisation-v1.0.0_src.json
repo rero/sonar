@@ -82,6 +82,55 @@
         }
       }
     },
+    "footer": {
+      "title": "Footers",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Footer",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "value": {
+            "title": "Value",
+            "type": "string",
+            "minLength": 1,
+            "form": {
+              "type": "markdown",
+              "templateOptions": {
+                "rows": 5
+              }
+            }
+          },
+          "language": {
+            "$ref": "interface_language-v1.0.0.json"
+          }
+        },
+        "propertiesOrder": [
+          "language",
+          "value"
+        ],
+        "required": [
+          "value",
+          "language"
+        ]
+      },
+      "form": {
+        "hideExpression": "!field.parent.model.isDedicated",
+        "validation": {
+          "validators": {
+            "uniqueValueKeysInObject": {
+              "keys": [
+                "language"
+              ]
+            }
+          },
+          "messages": {
+            "uniqueValueKeysInObjectMessage": "Only one value per language is allowed"
+          }
+        }
+      }
+    },
     "isShared": {
       "title": "Is shared",
       "description": "Organisation records can be accessed by a specific URL.",
@@ -328,6 +377,7 @@
     "code",
     "name",
     "description",
+    "footer",
     "isShared",
     "isDedicated",
     "allowedIps",

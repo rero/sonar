@@ -31,6 +31,24 @@
         "value": "Description in Italian in **markdown** format"
       }
     ],
+    "footer": [
+      {
+        "language": "ger",
+        "value": "Footer GER **markdown** format"
+      },
+      {
+        "language": "eng",
+        "value": "Footer ENG **markdown** format"
+      },
+      {
+        "language": "fre",
+        "value": "Footer FRE **markdown** format"
+      },
+      {
+        "language": "ita",
+        "value": "Footer ITA **markdown** format"
+      }
+    ],
     "isShared": true,
     "isDedicated": true,
     "platformName": "FREDI",
@@ -73,6 +91,24 @@
       {
         "language": "ita",
         "value": "FOLIA è l'archivio istituzionale dell'Università di Friburgo (Svizzera). Fornisce un accesso gratuito alle pubblicazioni dei ricercatrici e ricercatori dell'Università. FOLIA è gestito dalla Bibliothèque cantonale et universitaire de Fribourg."
+      }
+    ],
+    "footer": [
+      {
+        "language": "ger",
+        "value": "Footer GER **markdown** format"
+      },
+      {
+        "language": "eng",
+        "value": "Footer ENG **markdown** format"
+      },
+      {
+        "language": "fre",
+        "value": "Footer FRE **markdown** format"
+      },
+      {
+        "language": "ita",
+        "value": "Footer ITA **markdown** format"
       }
     ],
     "isShared": true,
