@@ -519,11 +519,6 @@ def deposit_json(collection, subdivision):
             'collections': [{
                 '$ref':
                 f'https://sonar.ch/api/collections/{collection["pid"]}'
-            }, {
-                'name': [{
-                    'language': 'eng',
-                    'value': 'New collection'
-                }]
             }],
             'classification':
             '543',

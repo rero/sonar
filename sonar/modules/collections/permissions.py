@@ -36,7 +36,7 @@ class RecordPermission(BaseRecordPermission):
         :return: True is action can be done
         :rtype: bool
         """
-        return user and user.is_admin
+        return user and (user.is_admin or user.is_submitter)
 
     @classmethod
     def create(cls, user, record=None):
@@ -47,7 +47,7 @@ class RecordPermission(BaseRecordPermission):
         :return: True is action can be done
         :rtype: bool
         """
-        return cls.list(user, record)
+        return bool(user and user.is_admin)
 
     @classmethod
     def read(cls, user, record):
@@ -61,7 +61,7 @@ class RecordPermission(BaseRecordPermission):
         if user and user.is_superuser:
             return True
 
-        if not cls.create(user, record):
+        if not (user and user.is_submitter):
             return False
 
         record = Record.get_record_by_pid(record['pid'])
@@ -78,6 +78,9 @@ class RecordPermission(BaseRecordPermission):
         :return: True is action can be done
         :rtype: bool
         """
+        # not admin
+        if not (user and user.is_admin):
+            return False
         return cls.read(user, record)
 
     @classmethod
@@ -89,6 +92,10 @@ class RecordPermission(BaseRecordPermission):
         :return: True if action can be done
         :rtype: bool
         """
+        # not admin
+        if not (user and user.is_admin):
+            return False
+
         results = DocumentSearch().filter(
             'term', collections__pid=record['pid']).source(includes=['pid'])
 
