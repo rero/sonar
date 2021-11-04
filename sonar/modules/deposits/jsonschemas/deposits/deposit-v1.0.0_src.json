@@ -635,7 +635,8 @@
               }
             },
             "publisher": {
-              "title": "Publisher",
+              "title": "Publication statement",
+              "definition": "Place, publisher and date of the host document. For example: Paris : PUF, 2016)",
               "type": "string",
               "minLength": 1
             },
