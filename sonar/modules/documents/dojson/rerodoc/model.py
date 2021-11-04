@@ -927,6 +927,22 @@ def marc21_to_contribution_field_711(self, key, value):
     return None
 
 
+@overdo.over('customField1', '^918..')
+@utils.ignore_value
+def marc21_to_faculty_and_department(self, key, value):
+    """Extract faculty and department for UNIFR."""
+    record = overdo.blob_record
+    org = record.get('980__', {}).get('b')
+    if org and org == 'UNIFR':
+        faculty = value.get('a')
+        if faculty:
+            self['customField1'] = [faculty]
+        dep = value.get('c')
+        if dep:
+            self['customField2'] = [dep]
+    return None
+
+
 @overdo.over('partOf', '^773..')
 @utils.for_each_value
 @utils.ignore_value
