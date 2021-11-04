@@ -326,7 +326,7 @@
           "type": "string",
           "minLength": 1,
           "form": {
-            "hideExpression": "!model.documentType || !['coar:c_2f33', 'coar:c_f744', 'coar:c_8a7e', 'coar:c_ecc8', 'coar:c_12cc', 'coar:c_18cc', 'coar:c_18cw', 'coar:c_5ce6', 'coar:c_15cd', 'coar:c_2659', 'coar:c_0640', 'coar:c_2cd9', 'coar:c_2fe3', 'coar:c_93fc', 'coar:c_18ww', 'coar:c_18wz', 'coar:c_18wq', 'coar:c_186u', 'coar:c_18op', 'coar:c_ba1f', 'coar:c_18hj', 'coar:c_18ws', 'coar:c_18gh', 'coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'coar:c_8042', 'coar:c_1843'].includes(model.documentType)"
+            "hideExpression": "!model || !model.documentType || !['coar:c_2f33', 'coar:c_f744', 'coar:c_8a7e', 'coar:c_ecc8', 'coar:c_12cc', 'coar:c_18cc', 'coar:c_18cw', 'coar:c_5ce6', 'coar:c_15cd', 'coar:c_2659', 'coar:c_0640', 'coar:c_2cd9', 'coar:c_2fe3', 'coar:c_93fc', 'coar:c_18ww', 'coar:c_18wz', 'coar:c_18wq', 'coar:c_186u', 'coar:c_18op', 'coar:c_ba1f', 'coar:c_18hj', 'coar:c_18ws', 'coar:c_18gh', 'coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'coar:c_8042', 'coar:c_1843'].includes(model.documentType)"
           }
         },
         "publisher": {
@@ -334,7 +334,7 @@
           "type": "string",
           "minLength": 1,
           "form": {
-            "hideExpression": "!model.documentType || !['coar:c_2f33', 'coar:c_f744', 'coar:c_8a7e', 'coar:c_ecc8', 'coar:c_12cc', 'coar:c_18cc', 'coar:c_18cw', 'coar:c_5ce6', 'coar:c_15cd', 'coar:c_2659', 'coar:c_0640', 'coar:c_2cd9', 'coar:c_2fe3', 'coar:c_93fc', 'coar:c_18ww', 'coar:c_18wz', 'coar:c_18wq', 'coar:c_186u', 'coar:c_18op', 'coar:c_ba1f', 'coar:c_18hj', 'coar:c_18ws', 'coar:c_18gh', 'coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'coar:c_8042', 'coar:c_1843'].includes(model.documentType)"
+            "hideExpression": "!model || !model.documentType || !['coar:c_2f33', 'coar:c_f744', 'coar:c_8a7e', 'coar:c_ecc8', 'coar:c_12cc', 'coar:c_18cc', 'coar:c_18cw', 'coar:c_5ce6', 'coar:c_15cd', 'coar:c_2659', 'coar:c_0640', 'coar:c_2cd9', 'coar:c_2fe3', 'coar:c_93fc', 'coar:c_18ww', 'coar:c_18wz', 'coar:c_18wq', 'coar:c_186u', 'coar:c_18op', 'coar:c_ba1f', 'coar:c_18hj', 'coar:c_18ws', 'coar:c_18gh', 'coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'coar:c_8042', 'coar:c_1843'].includes(model.documentType)"
           }
         },
         "documentDate": {
@@ -519,9 +519,9 @@
                 "minLength": 1,
                 "form": {
                   "expressionProperties": {
-                    "templateOptions.required": "model.type === 'bf:Local'"
+                    "templateOptions.required": "model && model.type === 'bf:Local'"
                   },
-                  "hideExpression": "model.type !== 'bf:Local'"
+                  "hideExpression": "!model ||  (model.type !== 'bf:Local')"
                 }
               }
             },
@@ -571,7 +571,7 @@
               "minLength": 1,
               "pattern": "^[0-9]+$",
               "form": {
-                "hideExpression": "!['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)",
+                "hideExpression": "!model || !['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)",
                 "templateOptions": {
                   "placeholder": "Example: 1"
                 },
@@ -588,7 +588,7 @@
               "minLength": 1,
               "pattern": "^[0-9]+$",
               "form": {
-                "hideExpression": "!['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)",
+                "hideExpression": "!model || !['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)",
                 "templateOptions": {
                   "placeholder": "Example: 10"
                 },
@@ -694,7 +694,7 @@
             }
           },
           "form": {
-            "hideExpression": "!['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_3e5a', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)",
+            "hideExpression": "!model || !['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_3e5a', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)",
             "templateOptions": {
               "wrappers": [
                 "card"
