@@ -404,7 +404,11 @@ def marc21_to_contribution_from_100_700(self, key, value):
     data = {'agent': {'type': type, 'preferred_name': name}, 'role': [role]}
 
     if is_100_or_700 and value.get('d'):
-        date_of_birth, date_of_death = overdo.extract_date(value['d'][:9])
+        date_of_birth = date_of_death = None
+        try:
+            date_of_birth, date_of_death = overdo.extract_date(value['d'][:9])
+        except Exception:
+            pass
 
         if date_of_birth:
             data['agent']['date_of_birth'] = date_of_birth
@@ -498,6 +502,29 @@ def marc21_to_edition_statement_from_250(self, key, value):
 @utils.ignore_value
 def marc21_to_document_type_from_leader(self, key, value):
     """Get document type from leader."""
+
+    def determine_type(field):
+        """Determine type of document."""
+        # Bachelor thesis
+        if 'bachelor' in field.get(
+                'a', '') or 'bachelor' in field.get('b', ''):
+            return 'coar:c_7a1f'
+
+        # Master thesis
+        if 'master' in field.get('a', '') or 'master' in field.get(
+                'b', ''):
+            return 'coar:c_bdcc'
+
+        # Doctoral thesis
+        if 'dissertation' in field.get(
+                'a', '') or 'dissertation' in field.get(
+                    'b', '') or 'thèse' in field.get(
+                        'a', '') or 'thèse' in field.get('b', ''):
+            return 'coar:c_db06'
+
+        # Thesis
+        return 'coar:c_46ec'
+
     leader_06 = value[6]
 
     # Still image
@@ -541,26 +568,13 @@ def marc21_to_document_type_from_leader(self, key, value):
 
         field_502 = overdo.blob_record.get('502__')
         if field_502:
-            # Bachelor thesis
-            if 'bachelor' in field_502.get(
-                    'a', '') or 'bachelor' in field_502.get('b', ''):
-                return 'coar:c_7a1f'
-
-            # Master thesis
-            if 'master' in field_502.get('a', '') or 'master' in field_502.get(
-                    'b', ''):
-                return 'coar:c_bdcc'
-
-            # Doctoral thesis
-            if 'dissertation' in field_502.get(
-                    'a', '') or 'dissertation' in field_502.get(
-                        'b', '') or 'thèse' in field_502.get(
-                            'a', '') or 'thèse' in field_502.get('b', ''):
-                return 'coar:c_db06'
-
-            # Thesis
-            return 'coar:c_46ec'
-
+            if type(field_502) == tuple:
+                for fld502 in field_502:
+                    # Bachelor thesis
+                    return determine_type(fld502)
+            else:
+                # Bachelor thesis
+                return determine_type(field_502)
         # Book
         if leader_07 == 'm':
             return 'coar:c_2f33'
