@@ -142,9 +142,9 @@
             "type": "boolean",
             "default": true,
             "form": {
-              "hideExpression": "!model.access || model.access === 'coar:c_abf2'",
+              "hideExpression": "!model || !model.access || model.access === 'coar:c_abf2'",
               "expressionProperties": {
-                "templateOptions.required": "model.access && model.access !== 'coar:c_abf2'"
+                "templateOptions.required": "model && model.access && model.access !== 'coar:c_abf2'"
               }
             }
           },
@@ -156,9 +156,9 @@
             "format": "date",
             "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
             "form": {
-              "hideExpression": "!model.access || model.access !== 'coar:c_f1cf'",
+              "hideExpression": "!model || !model.access || model.access !== 'coar:c_f1cf'",
               "expressionProperties": {
-                "templateOptions.required": "model.access && model.access === 'coar:c_f1cf'"
+                "templateOptions.required": "model && model.access && model.access === 'coar:c_f1cf'"
               }
             }
           }
@@ -549,7 +549,7 @@
             "pattern": "^[0-9]{4}(-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]))?$",
             "form": {
               "placeholder": "Example: 2019 or 2019-01-01",
-              "hideExpression": "model.type !== 'bf:Publication' || !model.startDate"
+              "hideExpression": "!model ||  (model.type !== 'bf:Publication' || !model.startDate)"
             }
           }
         },
@@ -846,9 +846,9 @@
             "type": "string",
             "minLength": 1,
             "form": {
-              "hideExpression": "model.type !== 'bf:Local'",
+              "hideExpression": "!model || model.type !== 'bf:Local'",
               "expressionProperties": {
-                "templateOptions.required": "model.type === 'bf:Local'"
+                "templateOptions.required": "model && model.type === 'bf:Local'"
               }
             }
           },
@@ -1264,7 +1264,7 @@
                     "type": "string",
                     "minLength": 1,
                     "form": {
-                      "hideExpression": "model && model.type !== 'bf:Local'",
+                      "hideExpression": "!model ||  model.type !== 'bf:Local'",
                       "expressionProperties": {
                         "templateOptions.required": "model && model.type === 'bf:Local'"
                       }
@@ -1671,9 +1671,9 @@
                       "type": "string",
                       "minLength": 1,
                       "form": {
-                        "hideExpression": "model.type !== 'bf:Local'",
+                        "hideExpression": "!model ||  model.type !== 'bf:Local'",
                         "expressionProperties": {
-                          "templateOptions.required": "model.type === 'bf:Local'"
+                          "templateOptions.required": "model && model.type === 'bf:Local'"
                         }
                       }
                     },

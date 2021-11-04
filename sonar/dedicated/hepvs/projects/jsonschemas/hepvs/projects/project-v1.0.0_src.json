@@ -731,7 +731,7 @@
                 "type": "string",
                 "minLength": 1,
                 "form": {
-                  "hideExpression": "!model.choice || model.choice !== 'Other'",
+                  "hideExpression": "!model || !model.choice || model.choice !== 'Other'",
                   "expressionProperties": {
                     "templateOptions.required": "model && model.choice === 'Other'"
                   }
