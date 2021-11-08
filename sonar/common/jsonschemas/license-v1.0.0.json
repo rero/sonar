@@ -19,6 +19,9 @@
         "card"
       ]
     },
+    "expressionProperties": {
+      "templateOptions.required": "true"
+    },
     "options": [
       {
         "label": "CC0",
