@@ -507,23 +507,22 @@ def marc21_to_document_type_from_leader(self, key, value):
         """Determine type of document."""
         # Bachelor thesis
         if 'bachelor' in field.get(
-                'a', '') or 'bachelor' in field.get('b', ''):
+                'a', '').lower() or 'bachelor' in field.get('b', '').lower():
             return 'coar:c_7a1f'
 
         # Master thesis
-        if 'master' in field.get('a', '') or 'master' in field.get(
-                'b', ''):
+        if 'master' in field.get('a', '').lower() or 'master' in field.get(
+                'b', '').lower():
             return 'coar:c_bdcc'
 
         # Doctoral thesis
         if 'dissertation' in field.get(
-                'a', '') or 'dissertation' in field.get(
-                    'b', '') or 'thèse' in field.get(
-                        'a', '') or 'thèse' in field.get('b', ''):
+                'a', '').lower() or 'dissertation' in field.get(
+                    'b', '').lower() or 'thèse' in field.get(
+                        'a', '').lower() or 'thèse' in field.get('b', '')\
+                            .lower():
             return 'coar:c_db06'
 
-        # Thesis
-        return 'coar:c_46ec'
 
     leader_06 = value[6]
 
@@ -570,11 +569,15 @@ def marc21_to_document_type_from_leader(self, key, value):
         if field_502:
             if type(field_502) == tuple:
                 for fld502 in field_502:
-                    # Bachelor thesis
-                    return determine_type(fld502)
+                    doctype = determine_type(fld502)
+                    if doctype:
+                        return doctype
             else:
-                # Bachelor thesis
-                return determine_type(field_502)
+                doctype = determine_type(field_502)
+                if doctype:
+                    return doctype
+            # Thesis
+            return 'coar:c_46ec'
         # Book
         if leader_07 == 'm':
             return 'coar:c_2f33'

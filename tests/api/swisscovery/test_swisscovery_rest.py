@@ -22,6 +22,7 @@ from invenio_accounts.testutils import login_user_via_session
 
 
 def test_get_record(client, user, submitter):
+    """Test get record on swisscovery."""
     url = url_for('swisscovery.get_record')
 
     # Not logged
@@ -184,3 +185,16 @@ def test_get_record(client, user, submitter):
             }
         }
     }
+
+
+def test_document_type(client, submitter):
+    """Test of the document type with the content of field 502."""
+    login_user_via_session(client, email=submitter['email'])
+    res = client.get(
+        url_for('swisscovery.get_record',
+                query='991050676859705501',
+                type='mms_id',
+                format='deposit'))
+    assert res.status_code == 200
+    data = res.json
+    assert data['metadata']['documentType'] == 'coar:c_db06'
