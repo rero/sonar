@@ -1,5 +1,84 @@
 # Changelog
 
+## [v1.4.0](https://github.com/rero/sonar/tree/v1.4.0) (2021-11-10)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.3.0...v1.4.0)
+
+**Implemented enhancements:**
+
+- Allow document visibility to be set during deposit \[3\] [\#640](https://github.com/rero/sonar/issues/640)
+- Allow to display documents only for allowed IP addresses [\#632](https://github.com/rero/sonar/issues/632)
+- Remove the moderator/administrator name in the e-mails of the validation process [\#551](https://github.com/rero/sonar/issues/551)
+- The semi-controlled suggestions should be activated for contributors [\#542](https://github.com/rero/sonar/issues/542)
+- Call to action button for submitting a deposit [\#366](https://github.com/rero/sonar/issues/366)
+- Messages sent for "Forgot password" should be improved. [\#343](https://github.com/rero/sonar/issues/343)
+
+**Fixed bugs:**
+
+- Impossible to save a document after opening it for editing [\#689](https://github.com/rero/sonar/issues/689)
+- A moderator cannot select an existing collection in the document editor [\#683](https://github.com/rero/sonar/issues/683)
+- Error in swisscovery metadata import \[2\] [\#674](https://github.com/rero/sonar/issues/674)
+- Fix responsive menu \(TEST env\) \[2\] [\#667](https://github.com/rero/sonar/issues/667)
+- Facet display conditions need adjustments [\#634](https://github.com/rero/sonar/issues/634)
+- Display facets depending on context [\#623](https://github.com/rero/sonar/issues/623)
+- Number/pages missing in OAI export \(oai\_dc\), field `dc:source` when no volume exists [\#370](https://github.com/rero/sonar/issues/370)
+
+**Closed issues:**
+
+- Import faculty and department data from RERO DOC for FOLIA [\#691](https://github.com/rero/sonar/issues/691)
+- Field `publication.publisher` to be renamed \(with description\) in the deposit [\#690](https://github.com/rero/sonar/issues/690)
+- Allow each dedicated repository to configure its footer links [\#682](https://github.com/rero/sonar/issues/682)
+- Display Series fields in the detailed view [\#660](https://github.com/rero/sonar/issues/660)
+- Identify all DOIs imported from RERO DOC [\#659](https://github.com/rero/sonar/issues/659)
+- Make a real test with an external domain name \[1\] [\#647](https://github.com/rero/sonar/issues/647)
+- Make the organisation home page multilingual \[3\] [\#639](https://github.com/rero/sonar/issues/639)
+- ROAR: Load documents from RERO DOC and from the provided export [\#620](https://github.com/rero/sonar/issues/620)
+- FOLIA: Load documents from RERO DOC [\#619](https://github.com/rero/sonar/issues/619)
+- Import publications from swisscovery [\#610](https://github.com/rero/sonar/issues/610)
+- Export usage data for invoicing [\#562](https://github.com/rero/sonar/issues/562)
+- Option to sort results by publication year, date added and relevance \(ev. title\) [\#402](https://github.com/rero/sonar/issues/402)
+- Group users by sections [\#145](https://github.com/rero/sonar/issues/145)
+
+**Merged pull requests:**
+
+- Change color scheme for two dedicated repositories \(tentative\) [\#700](https://github.com/rero/sonar/pull/700) ([mmo](https://github.com/mmo))
+- deposit: improve document type detection. [\#698](https://github.com/rero/sonar/pull/698) ([Garfield-fr](https://github.com/Garfield-fr))
+- deposit: fix moderator validation [\#697](https://github.com/rero/sonar/pull/697) ([jma](https://github.com/jma))
+- Identify DOI in RERO DOC field 775 $o [\#696](https://github.com/rero/sonar/pull/696) ([mmo](https://github.com/mmo))
+- documents: import faculty and department from RERO DOC for UNIFR [\#695](https://github.com/rero/sonar/pull/695) ([mmo](https://github.com/mmo))
+- deposits: fix swisscovery import [\#694](https://github.com/rero/sonar/pull/694) ([Garfield-fr](https://github.com/Garfield-fr))
+- deposits: change title and add description on publisher field [\#693](https://github.com/rero/sonar/pull/693) ([Garfield-fr](https://github.com/Garfield-fr))
+- documents: fix document edition [\#692](https://github.com/rero/sonar/pull/692) ([jma](https://github.com/jma))
+- collections: allow submitter to search in collections. [\#688](https://github.com/rero/sonar/pull/688) ([jma](https://github.com/jma))
+- organisations: implement multilingual footer for dedicated [\#687](https://github.com/rero/sonar/pull/687) ([Garfield-fr](https://github.com/Garfield-fr))
+- dependencies: fix several packages version for security reasons [\#686](https://github.com/rero/sonar/pull/686) ([jma](https://github.com/jma))
+- application: fix responsive design menu [\#685](https://github.com/rero/sonar/pull/685) ([Garfield-fr](https://github.com/Garfield-fr))
+- subdivisions: fix moderator access bug [\#678](https://github.com/rero/sonar/pull/678) ([mmo](https://github.com/mmo))
+- documents: improve custom field import from RERO DOC for ROAR [\#658](https://github.com/rero/sonar/pull/658) ([mmo](https://github.com/mmo))
+- dependencies: fix pillow version for security reasons [\#657](https://github.com/rero/sonar/pull/657) ([mmo](https://github.com/mmo))
+- documents: fill out custom fields for ROAR during RERO DOC import [\#656](https://github.com/rero/sonar/pull/656) ([mmo](https://github.com/mmo))
+- deposit: allow to set document visibility [\#654](https://github.com/rero/sonar/pull/654) ([jma](https://github.com/jma))
+- documents: try to parse the thesis note from RERO DOC more precisely [\#650](https://github.com/rero/sonar/pull/650) ([mmo](https://github.com/mmo))
+- documents: adapt import from HEP BEJUNE [\#649](https://github.com/rero/sonar/pull/649) ([mmo](https://github.com/mmo))
+- search: aggregations order endpoint [\#645](https://github.com/rero/sonar/pull/645) ([jma](https://github.com/jma))
+- organisations: fix export serialization [\#637](https://github.com/rero/sonar/pull/637) ([sebdeleze](https://github.com/sebdeleze))
+- translations: update catalog [\#636](https://github.com/rero/sonar/pull/636) ([sebdeleze](https://github.com/sebdeleze))
+- documents: import `unifr` records from RERO DOC [\#635](https://github.com/rero/sonar/pull/635) ([sebdeleze](https://github.com/sebdeleze))
+- documents: `masked` property enhancement [\#633](https://github.com/rero/sonar/pull/633) ([sebdeleze](https://github.com/sebdeleze))
+- records: configure sorting behavior [\#631](https://github.com/rero/sonar/pull/631) ([sebdeleze](https://github.com/sebdeleze))
+- api: search swisscovery records [\#630](https://github.com/rero/sonar/pull/630) ([sebdeleze](https://github.com/sebdeleze))
+- deposit: add a call to action [\#629](https://github.com/rero/sonar/pull/629) ([sebdeleze](https://github.com/sebdeleze))
+- documents: import records from HEP BEJUNE [\#628](https://github.com/rero/sonar/pull/628) ([sebdeleze](https://github.com/sebdeleze))
+- docker: change always to unless-stopped on restart parameter [\#627](https://github.com/rero/sonar/pull/627) ([Garfield-fr](https://github.com/Garfield-fr))
+- accounts: password forgotten emails [\#615](https://github.com/rero/sonar/pull/615) ([sebdeleze](https://github.com/sebdeleze))
+- documents: fix `partOf` format [\#614](https://github.com/rero/sonar/pull/614) ([sebdeleze](https://github.com/sebdeleze))
+- deposits: change validation process emails [\#613](https://github.com/rero/sonar/pull/613) ([sebdeleze](https://github.com/sebdeleze))
+- contributors: add suggestions for name [\#612](https://github.com/rero/sonar/pull/612) ([sebdeleze](https://github.com/sebdeleze))
+- subdivisions: create resource [\#606](https://github.com/rero/sonar/pull/606) ([sebdeleze](https://github.com/sebdeleze))
+- stats: collect and display stats for organisations [\#594](https://github.com/rero/sonar/pull/594) ([sebdeleze](https://github.com/sebdeleze))
+
+# Changelog
+
 ## [v1.3.0](https://github.com/rero/sonar/tree/v1.3.0) (2021-08-03)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.2.0...v1.3.0)
