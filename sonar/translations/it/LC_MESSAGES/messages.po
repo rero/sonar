@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2021-09-09 08:16+0200\n"
-"PO-Revision-Date: 2021-10-13 16:27+0000\n"
+"PO-Revision-Date: 2021-11-19 22:49+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "it/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.9.1\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: sonar/theme/views.py:71
@@ -203,7 +203,7 @@ msgstr "Bucket UUID utilizzato per archiviare i file"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:451
 msgid "CAS or DAS"
-msgstr ""
+msgstr "CAS o DAS"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:28
 msgid "CC BY"
@@ -294,15 +294,15 @@ msgstr "Commento"
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:107
 msgid "Comment associated with the current action."
-msgstr ""
+msgstr "Commento associato all'azione corrente."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:513
 msgid "Company"
-msgstr ""
+msgstr "Impresa"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:320
 msgid "Completed"
-msgstr ""
+msgstr "Completato"
 
 #: sonar/templates/security/email/welcome.html:5
 msgid "Confirm e-mail"
@@ -314,7 +314,7 @@ msgstr "Contatto"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:546
 msgid "Contained in (journal, book, proceedings)"
-msgstr ""
+msgstr "Contenuto in (rivista, libro, atti)"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:991
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1106
@@ -410,7 +410,7 @@ msgstr "Data di morte"
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:43
 msgid "Date when the log is created."
-msgstr ""
+msgstr "Data di creazione del log."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:640
 msgid "Dean of a school"
@@ -469,7 +469,7 @@ msgstr "Descrizione"
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:65
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:803
 msgid "Descriptions"
-msgstr ""
+msgstr "Descrizioni"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1031
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:397
@@ -546,7 +546,7 @@ msgstr "Tipo di documento"
 
 #: sonar/theme/templates/sonar/stats/detail.html:35
 msgid "Documents"
-msgstr ""
+msgstr "Documenti"
 
 #: sonar/theme/templates/sonar/stats/detail.html:24
 msgid "Download"
@@ -623,7 +623,7 @@ msgstr "Esempio: 1"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:592
 msgid "Example: 10"
-msgstr ""
+msgstr "Esempio: 10"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1187
 msgid "Example: 1111-2222-3333-4444"
@@ -831,7 +831,7 @@ msgstr "Tedesco"
 
 #: sonar/common/jsonschemas/oa-status-v1.0.0.json:22
 msgid "Gold"
-msgstr ""
+msgstr "Gold"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:953
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1130
@@ -840,11 +840,11 @@ msgstr "Istituzione che eroga il contributo"
 
 #: sonar/common/jsonschemas/oa-status-v1.0.0.json:18
 msgid "Green"
-msgstr ""
+msgstr "Green"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:628
 msgid "Guidance counsellor"
-msgstr ""
+msgstr "Orientatore·trice professionale"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:161
 msgid "HEP status"
@@ -869,7 +869,7 @@ msgstr "Raccolto"
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:18
 #: sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0_src.json:18
 msgid "Hash key"
-msgstr ""
+msgstr "Chiave hash"
 
 #: sonar/theme/templates/sonar/footer.html:24
 msgid "Help & Documentation"
@@ -890,7 +890,7 @@ msgstr "Come vengono utilizzati i risultati della ricerca nella formazione?"
 
 #: sonar/common/jsonschemas/oa-status-v1.0.0.json:26
 msgid "Hybrid"
-msgstr ""
+msgstr "Ibrido"
 
 #: sonar/theme/templates/sonar/footer.html:28
 msgid "IR hosting service"
@@ -1026,12 +1026,12 @@ msgstr "Chiave (nome) del file."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:902
 msgid "Keyword"
-msgstr ""
+msgstr "Parola chiave"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:391
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:899
 msgid "Keywords"
-msgstr ""
+msgstr "Parole chiave"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:70
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:69
@@ -1088,7 +1088,7 @@ msgstr "Licenza"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:52
 msgid "License undefined"
-msgstr ""
+msgstr "Licenza non definita"
 
 #: sonar/theme/templates/sonar/projects/detail.html:79
 msgid "Linked documents"
@@ -1115,7 +1115,7 @@ msgstr "Lista dei files legati alla risorsa."
 
 #: sonar/common/jsonschemas/validation-v1.0.0.json:21
 msgid "List of logs."
-msgstr ""
+msgstr "Elenco dei logs."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:878
 msgid "Locality (Valais)"
@@ -1235,11 +1235,11 @@ msgstr "Nome"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:774
 #: sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0_src.json:23
 msgid "Names"
-msgstr ""
+msgstr "Nomi"
 
 #: sonar/modules/collections/templates/collections/index.html:32
 msgid "No collection found"
-msgstr ""
+msgstr "Nessuna collezione trovata"
 
 #: sonar/theme/templates/sonar/stats/detail.html:37
 msgid "No full-text"
