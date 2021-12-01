@@ -1224,7 +1224,7 @@
                 "minLength": 1,
                 "form": {
                   "expressionProperties": {
-                    "templateOptions.required": "['bf:Person', 'bf:Organization', 'bf:Meeting'].includes(model.type)"
+                    "templateOptions.required": "model && ['bf:Person', 'bf:Organization', 'bf:Meeting'].includes(model.type)"
                   },
                   "remoteTypeahead": {
                     "type": "documents",

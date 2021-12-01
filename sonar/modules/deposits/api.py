@@ -358,6 +358,13 @@ class DepositRecord(SonarRecord):
         if self['metadata'].get('series'):
             metadata['series'] = self['metadata']['series']
 
+        # Custom fields
+        for field_number in range(1, 4):
+            field = f'customField{field_number}'
+            document_field = self['metadata'].get(field)
+            if document_field:
+                metadata[field] = document_field
+
         # Contributors
         contributors = []
         for contributor in self.get('contributors', []):
@@ -425,6 +432,7 @@ class DepositRecord(SonarRecord):
         # Subdivisions
         if self['diffusion'].get('subdivisions'):
             metadata['subdivisions'] = self['diffusion']['subdivisions']
+
 
         # Masked
         if self['diffusion'].get('masked') is not None:
