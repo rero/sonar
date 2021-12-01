@@ -274,7 +274,10 @@
         "collections",
         "classification",
         "abstracts",
-        "subjects"
+        "subjects",
+        "customField1",
+        "customField2",
+        "customField3"
       ],
       "properties": {
         "documentType": {
@@ -359,7 +362,6 @@
           "type": "string",
           "minLength": 1
         },
-
         "identifiedBy": {
           "title": "Identifiers",
           "type": "array",
@@ -1015,6 +1017,54 @@
             "required": [
               "name"
             ]
+          }
+        },
+        "customField1": {
+          "title": "Custom field 1",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "form": {
+              "remoteTypeahead": {
+                "type": "documents",
+                "field": "customField1.suggest",
+                "suggest": "/api/suggestions/completion",
+                "allowAdd": true
+              }
+            }
+          }
+        },
+        "customField2": {
+          "title": "Custom field 2",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "form": {
+              "remoteTypeahead": {
+                "type": "documents",
+                "field": "customField2.suggest",
+                "suggest": "/api/suggestions/completion",
+                "allowAdd": true
+              }
+            }
+          }
+        },
+        "customField3": {
+          "title": "Custom field 3",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "form": {
+              "remoteTypeahead": {
+                "type": "documents",
+                "field": "customField3.suggest",
+                "suggest": "/api/suggestions/completion",
+                "allowAdd": true
+              }
+            }
           }
         }
       }

@@ -17,7 +17,7 @@
 
 """Test JSON schema factory."""
 
-from sonar.json_schemas.documents_json_schema import DocumentsJSONSchema
+from sonar.json_schemas.deposits_json_schema import DepositsJSONSchema
 from sonar.json_schemas.factory import JSONSchemaFactory
 from sonar.json_schemas.json_schema_base import JSONSchemaBase
 
@@ -29,5 +29,5 @@ def test_create(app):
     assert isinstance(schema, JSONSchemaBase)
 
     # Specific schema
-    schema = JSONSchemaFactory.create('documents')
-    assert isinstance(schema, DocumentsJSONSchema)
+    schema = JSONSchemaFactory.create('deposits')
+    assert isinstance(schema, DepositsJSONSchema)
