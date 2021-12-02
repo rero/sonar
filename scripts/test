@@ -28,7 +28,7 @@ if [[ -z "${VIRTUAL_ENV}" ]]; then
 fi
 
 # Ignore 40459 until the next release of flask-caching will be available.
-safety check -i 42194 -i 40459 -i 42050&& \
+safety check -i 42194 -i 40459 -i 42050 -i 42852 -i 42497 -i 42498&& \
 pydocstyle sonar tests docs && \
 isort --check-only --diff "${SCRIPT_PATH}/.." && \
 autoflake -c -r --remove-all-unused-imports --ignore-init-module-imports . &> /dev/null || {
