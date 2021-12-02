@@ -1,5 +1,26 @@
 # Changelog
 
+## [v1.4.1](https://github.com/rero/sonar/tree/v1.4.1) (2021-12-02)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.4.0...v1.4.1)
+
+**Fixed bugs:**
+
+- When importing from swisscovery, impossible to add contributors \[2\] [\#707](https://github.com/rero/sonar/issues/707)
+- User welcome email focuses on global SONAR instead of the user's organisation \(dedicated only\) [\#684](https://github.com/rero/sonar/issues/684)
+- Moderator has no access to deposits of his/her subdivision [\#673](https://github.com/rero/sonar/issues/673)
+
+**Closed issues:**
+
+- Go-live FOLIA check-list [\#699](https://github.com/rero/sonar/issues/699)
+- Create a backup/restore script for the parameters of an organisation [\#681](https://github.com/rero/sonar/issues/681)
+
+**Merged pull requests:**
+
+- fix user welcome email [\#703](https://github.com/rero/sonar/pull/703) ([rerowep](https://github.com/rerowep))
+
+# Changelog
+
 ## [v1.4.0](https://github.com/rero/sonar/tree/v1.4.0) (2021-11-10)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.3.0...v1.4.0)
