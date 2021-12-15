@@ -27,7 +27,7 @@ from invenio_db import db
 from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.documents.dojson.rerodoc.overdo import Overdo
 from sonar.modules.organisations.api import OrganisationRecord
-from sonar.modules.subdivisions.api import Record as SubdivisionRecord
+from sonar.modules.subdivisions.api import RecordSearch, Record as SubdivisionRecord
 from sonar.modules.utils import remove_trailing_punctuation
 
 overdo = Overdo()
@@ -59,6 +59,8 @@ TYPE_MAPPINGS = {
 @utils.ignore_value
 def marc21_to_type_and_organisation(self, key, value):
     """Get document type and organisation from 980 field."""
+    subdivision_name = None
+
     # organisation
     if value.get('b'):
         organisation = value.get('b').lower()
@@ -85,6 +87,33 @@ def marc21_to_type_and_organisation(self, key, value):
                 self['customField1'] = [customField1]
             if customField2:
                 self['customField2'] = [customField2]
+
+        # Specific transformation for `hepfr`, which should be imported as
+        # a faculty AND a subdivision of FOLIA/unifr
+        if organisation  == 'hepfr':
+            organisation = 'unifr'
+            self['organisation'] = [{
+                '$ref':
+                OrganisationRecord.get_ref_link('organisations', organisation)
+            }]
+            # `hepfr` is a faculty of FOLIA/unifr
+            self['customField1'] = ['HEP|PH FR']
+            # `hepfr` is a subdivision of FOLIA/unifr
+            subdivision_name = 'HEP Fribourg'
+            # Store subdivision
+            # TODO: avoid possible clashes between subdivision
+            # names in different languages
+            result = RecordSearch()\
+                .filter('term', organisation__pid=organisation)\
+                .filter('term', name__value__raw=subdivision_name)\
+                .source(includes='pid').scan()
+            subdivision_pid = next(result).pid
+            # If the subdivision exists, assign it to the record
+            if subdivision_pid:
+                self['subdivisions'] = [{
+                    '$ref':
+                    SubdivisionRecord.get_ref_link('subdivisions', subdivision_pid)
+                }]
 
         # Specific transformation for `bpuge` and `mhnge`, because the real
         # acronym is `vge`.
