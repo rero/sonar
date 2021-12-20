@@ -1,5 +1,25 @@
 # Changelog
 
+## [v1.4.2](https://github.com/rero/sonar/tree/v1.4.2) (2021-12-20)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.4.1...v1.4.2)
+
+**Implemented enhancements:**
+
+- Allow custom fields to be entered during deposit [\#706](https://github.com/rero/sonar/issues/706)
+
+**Fixed bugs:**
+
+- In the document editor, I have no way to add the following sub-fields: `numberingVolume`, `numberingIssues` [\#626](https://github.com/rero/sonar/issues/626)
+
+**Merged pull requests:**
+
+- deposit: limit the upload file size to 500Mb [\#738](https://github.com/rero/sonar/pull/738) ([jma](https://github.com/jma))
+- documents: import HEP FR publications from RERO DOC to FOLIA [\#737](https://github.com/rero/sonar/pull/737) ([mmo](https://github.com/mmo))
+- dependencies: add ignores on safety check [\#721](https://github.com/rero/sonar/pull/721) ([Garfield-fr](https://github.com/Garfield-fr))
+- deposit: allow custom fields to be entered on submission [\#720](https://github.com/rero/sonar/pull/720) ([Garfield-fr](https://github.com/Garfield-fr))
+
+
 ## [v1.4.1](https://github.com/rero/sonar/tree/v1.4.1) (2021-12-02)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.4.0...v1.4.1)
@@ -19,7 +39,7 @@
 
 - fix user welcome email [\#703](https://github.com/rero/sonar/pull/703) ([rerowep](https://github.com/rerowep))
 
-# Changelog
+
 
 ## [v1.4.0](https://github.com/rero/sonar/tree/v1.4.0) (2021-11-10)
 
@@ -98,7 +118,6 @@
 - subdivisions: create resource [\#606](https://github.com/rero/sonar/pull/606) ([sebdeleze](https://github.com/sebdeleze))
 - stats: collect and display stats for organisations [\#594](https://github.com/rero/sonar/pull/594) ([sebdeleze](https://github.com/sebdeleze))
 
-# Changelog
 
 ## [v1.3.0](https://github.com/rero/sonar/tree/v1.3.0) (2021-08-03)
 
