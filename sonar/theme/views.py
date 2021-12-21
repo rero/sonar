@@ -42,6 +42,7 @@ from sonar.json_schemas.factory import JSONSchemaFactory
 from sonar.modules.collections.permissions import \
     RecordPermission as CollectionPermission
 from sonar.modules.deposits.permissions import DepositPermission
+from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.permissions import DocumentPermission
 from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import can_access_manage_view
@@ -92,7 +93,8 @@ def error():
 
 
 @blueprint.route('/rerodoc/<pid>')
-def rerodoc_redirection(pid):
+@blueprint.route('/rerodoc/<pid>/files/<filename>')
+def rerodoc_redirection(pid, filename=None):
     """Redirection to document with identifier from RERODOC.
 
     :param pid: PID from RERODOC.
@@ -103,9 +105,30 @@ def rerodoc_redirection(pid):
     except Exception:
         abort(404)
 
+    # Files URLs does not contains view
+    if filename:
+        return redirect(
+            url_for('invenio_records_ui.doc_files',
+            pid_value=pid.get_redirect().pid_value,
+            filename=filename))
+    doc_pid = pid.get_redirect().pid_value
+    doc = DocumentRecord.get_record_by_pid(doc_pid)
+    if doc:
+        doc = doc.replace_refs()
+        orgs = doc.get('organisation', [])
+        # In case of multiple organisations we redirect to the global view
+        if len(orgs) == 1:
+            org = orgs.pop()
+            # Only for dedicated or shared
+            if org.get('isDedicated') or org.get('isShared'):
+                return redirect(
+                    url_for('invenio_records_ui.doc',
+                    view=org.get('code'),
+                    pid_value=pid.get_redirect().pid_value))
+    global_view = current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION')
     return redirect(
         url_for('invenio_records_ui.doc',
-                view='global',
+                view=global_view,
                 pid_value=pid.get_redirect().pid_value))
 
 
