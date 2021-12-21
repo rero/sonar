@@ -260,15 +260,47 @@ def test_record_image_url():
     assert record_image_url(record, 'test2.jpg') == '/api/files/1234/test2.jpg'
 
 
-def test_rerodoc_redirection(client, document):
+def test_rerodoc_redirection(client, app, document, organisation):
     """Test redirection with RERODOC identifier."""
+    global_view = app.config.get('SONAR_APP_DEFAULT_ORGANISATION')
+    # Does not exists
     res = client.get(url_for('sonar.rerodoc_redirection', pid='NOT-EXISTING'))
     assert res.status_code == 404
 
+    # Files
+    res = client.get(url_for('sonar.rerodoc_redirection', pid='111111', filename='test.pdf'))
+    assert res.status_code == 302
+    assert res.location.find(
+        f'/documents/{document["pid"]}/files/test.pdf') != -1
+
+    def changeOrg(key, value):
+        organisation[key] = value
+        organisation.commit()
+        organisation.dbcommit()
+        # Note: this is not needed as all is done from the db
+        # organisation.reindex()
+
+    # No dedicated
+    changeOrg('isShared', False)
     res = client.get(url_for('sonar.rerodoc_redirection', pid='111111'))
     assert res.status_code == 302
     assert res.location.find(
-        '/global/documents/{pid}'.format(pid=document['pid'])) != -1
+        f'/{global_view}/documents/{document["pid"]}') != -1
+
+    # Dedicated
+    changeOrg('isDedicated', True)
+    res = client.get(url_for('sonar.rerodoc_redirection', pid='111111'))
+    assert res.status_code == 302
+    assert res.location.find(
+        f'/{organisation["code"]}/documents/{document["pid"]}') != -1
+
+    # Shared
+    changeOrg('isDedicated', False)
+    changeOrg('isShared', True)
+    res = client.get(url_for('sonar.rerodoc_redirection', pid='111111'))
+    assert res.status_code == 302
+    assert res.location.find(
+        f'/{organisation["code"]}/documents/{document["pid"]}') != -1
 
 
 def test_format_date(app):
