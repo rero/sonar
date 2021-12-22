@@ -237,6 +237,8 @@ def test_contributors():
     contributors = [{
         'role': ['dgs']
     }, {
+        'role': ['dgc']
+    }, {
         'role': ['ctb']
     }, {
         'role': ['prt']
@@ -246,7 +248,7 @@ def test_contributors():
         'role': ['cre']
     }]
 
-    priorities = ['cre', 'ctb', 'dgs', 'edt', 'prt']
+    priorities = ['cre', 'ctb', 'dgs', 'dgc', 'edt', 'prt']
 
     for index, contributor in enumerate(
             views.contributors({'contribution': contributors})):

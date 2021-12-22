@@ -1354,6 +1354,7 @@
                         "allowAdd": true
                       }
                     }
+
                   }
                 },
                 "propertiesOrder": [
@@ -1978,15 +1979,32 @@
         "title": "Role",
         "type": "string",
         "enum": [
-          "dgs",
-          "prt",
           "cre",
+          "ctb",
           "edt",
-          "ctb"
+          "dgc",
+          "dgs",
+          "prt"
         ],
         "default": "cre",
         "form": {
           "options": [
+            {
+              "label": "contribution_role_cre",
+              "value": "cre"
+            },
+            {
+              "label": "contribution_role_ctb",
+              "value": "ctb"
+            },
+            {
+              "label": "contribution_role_edt",
+              "value": "edt"
+            },
+            {
+              "label": "contribution_role_dgc",
+              "value": "dgc"
+            },
             {
               "label": "contribution_role_dgs",
               "value": "dgs"
@@ -1994,18 +2012,6 @@
             {
               "label": "contribution_role_prt",
               "value": "prt"
-            },
-            {
-              "label": "contribution_role_cre",
-              "value": "cre"
-            },
-            {
-              "label": "contribution_role_edt",
-              "value": "edt"
-            },
-            {
-              "label": "contribution_role_ctb",
-              "value": "ctb"
             }
           ]
         }
