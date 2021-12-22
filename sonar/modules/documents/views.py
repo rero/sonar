@@ -194,7 +194,7 @@ def contributors(record):
     if not record.get('contribution'):
         return []
 
-    priorities = ['cre', 'ctb', 'dgs', 'edt', 'prt']
+    priorities = ['cre', 'ctb', 'dgs', 'dgc', 'edt', 'prt']
 
     return sorted(record['contribution'],
                   key=lambda i: priorities.index(i['role'][0]))

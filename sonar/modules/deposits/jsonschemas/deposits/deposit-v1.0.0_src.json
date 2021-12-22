@@ -1113,11 +1113,12 @@
             "type": "string",
             "default": "cre",
             "enum": [
-              "dgs",
-              "prt",
               "cre",
+              "ctb",
               "edt",
-              "ctb"
+              "dgc",
+              "dgs",
+              "prt"
             ],
             "form": {
               "templateOptions": {
@@ -1137,6 +1138,10 @@
                 {
                   "label": "contribution_role_edt",
                   "value": "edt"
+                },
+                {
+                  "label": "contribution_role_dgc",
+                  "value": "dgc"
                 },
                 {
                   "label": "contribution_role_dgs",
