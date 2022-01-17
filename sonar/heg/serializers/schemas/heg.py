@@ -42,10 +42,6 @@ class HEGSchema(Schema):
         if item.get('language'):
             language = item['language']
 
-            # As spanish code is `sp` in config.py
-            if language == 'es':
-                language = 'sp'
-
             item['language'] = get_bibliographic_code_from_language(language)
         else:
             item['language'] = 'eng'
