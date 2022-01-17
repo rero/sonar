@@ -1,0 +1,62 @@
+{# -*- coding: utf-8 -*-
+  Swiss Open Access Repository
+  Copyright (C) 2022 RERO
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published by
+  the Free Software Foundation, version 3 of the License.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#}
+
+{% extends 'sonar/page_wiki.html' %}
+{% set active_page = "page" %}
+
+{% block navigation %}
+{%- include "help/page_wiki_search_navigation.html" %}
+{%- endblock navigation %}
+
+{% block content %}
+<main class="row mt-4 wiki-page">
+    <article class="col-md-8 offset-md-1">
+        <header class="d-flex flex-column justify-content-lg-between mb-4 pb-2 border-bottom">
+            <header class="wiki-page-header d-flex flex-column flex-lg-row justify-content-lg-between mb-2 mb-lg-0">
+            <h1 class="wiki-page-title mb-0">{{ page.title }}</h1>
+            </header>
+            <footer class="wiki-page-info d-flex flex-column flex-lg-row justify-content-lg-between">
+            {% if page.tags %}
+            <ul class="wiki-page-tags m-0 p-0">
+                {% for tag in page.tags.split(',') %}
+                <li class="badge badge-primary">{{ tag }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <div class="text-muted small">
+                <span>{{ _('Created:')}} {{ page.creation_datetime | date_format }} - {{ _('Last updated:')}} {{ page.modification_datetime | date_format }}</span>
+            </div>
+            </footer>
+        </header>
+        <article>
+          {{ page.body.replace('](/help', '](/{view}/help'.format(view=view)) | markdown_filter | safe }}
+        </article>
+    </article>
+    <aside class="col-md-3">
+        <div class="sticky-top pt-3">
+            {% if page.toc %}
+            <h5>{{ _('Table of contents') }}</h5>
+            {{ page.toc }}
+            {% endif %}
+        </div>
+    </aside>
+</main>
+{% endblock %}
+
+{%- block javascript %}
+{{ super() }}
+{%- endblock javascript %}

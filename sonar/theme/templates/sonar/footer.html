@@ -15,13 +15,14 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #}
 
+{% set organisation = g.get('organisation', {}) %}
 <footer id="footer" class="mt-5">
   <div class="container">
-    {% if g.get('organisation', {}).get('isDedicated') and g.organisation.get('footer') %}
+    {% if organisation.get('isDedicated') and organisation.get('footer') %}
     <div class="row justify-content-center align-items-center bg-light">
       <div class="col py-4 py-lg-5 text-center text-lg-left">
         <div class="d-lg-flex flex-row">
-          {{ g.organisation.footer | language_value | markdown_filter | safe }}
+          {{ organisation.footer | language_value | markdown_filter | safe }}
         </div>
       </div>
     </div>
@@ -30,7 +31,8 @@
       <div class="col py-4 py-lg-5 text-center text-lg-left">
         <div class="d-lg-flex flex-row">
           <div>
-            <a href="{{ url_for('wiki.index') }}">{{ _('Help & Documentation') }}</a>
+            {% set helplink = url_for('help.index', view=organisation.get('pid')) if organisation.get('isDedicated') else url_for('wiki.index') %}
+            <a href="{{ helplink }}">{{ _('Help & Documentation') }}</a>
           </div>
           <div class="d-none d-lg-block mx-3">|</div>
           <div>
