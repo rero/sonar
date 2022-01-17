@@ -147,6 +147,8 @@ def test_get_code_from_bibliographic_language(app):
     """Test bibliographic language code to alpha 2 code conversion."""
     assert views.get_language_from_bibliographic_code('ger') == 'de'
 
+    assert views.get_language_from_bibliographic_code('ace') == ''
+
     with pytest.raises(Exception) as e:
         views.get_language_from_bibliographic_code('zzz')
     assert str(e.value) == 'Language code not found for "zzz"'

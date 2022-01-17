@@ -333,8 +333,11 @@ def get_language_from_bibliographic_code(language_code):
     if language_code not in languages_map:
         raise Exception('Language code not found for "{language_code}"'.format(
             language_code=language_code))
+    code = languages_map.get(language_code)
+    if not code:
+        return '';
 
-    return languages_map[language_code]
+    return code
 
 
 def get_preferred_languages(force_language=None):
