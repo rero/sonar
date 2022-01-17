@@ -45,6 +45,7 @@ from sonar.resources.projects.service import \
 from . import config_sonar
 from .route_converters import OrganisationCodeConverter
 
+from flask_wiki.markdown_ext import BootstrapExtension
 
 def utility_processor():
     """Dictionary for passing data to templates."""
@@ -161,7 +162,14 @@ class Sonar():
             :returns: HTML corresponding to markdown
             :rtype: str
             """
-            return markdown.markdown(content)
+            return markdown.markdown(content, extensions=[
+                BootstrapExtension(),
+                'codehilite',
+                'fenced_code',
+                'toc',
+                'meta',
+                'tables'
+            ])
 
     def create_resources(self):
         """Create resources."""

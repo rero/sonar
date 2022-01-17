@@ -229,7 +229,8 @@ APP_DEFAULT_SECURE_HEADERS = {
             'https://code.jquery.com', 'https://cdnjs.cloudflare.com',
             'https://stackpath.bootstrapcdn.com',
             'https://www.googletagmanager.com',
-            'https://www.google-analytics.com'
+            'https://www.google-analytics.com',
+            'https://cdn.jsdelivr.net'
         ],
         'style-src': [
             "'self'", "'unsafe-inline'", 'https://cdnjs.cloudflare.com',
