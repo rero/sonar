@@ -49,7 +49,7 @@ def test_get_operator_and_query_type(app):
                                                        'simple_query_string')
 
 
-def test_open_access_filter(app, document):
+def test_open_access_filter(app, document, embargo_date):
     """Test open access filter."""
     # No filter
     search = Search(index='documents', using=current_search_client)
@@ -91,7 +91,7 @@ def test_open_access_filter(app, document):
     # Files with document, access property is embargo access and date is in the
     # future --> not open access.
     document.files['test1.pdf']['access'] = 'coar:c_f1cf'
-    document.files['test1.pdf']['embargo_date'] = '2025-01-01'
+    document.files['test1.pdf']['embargo_date'] = embargo_date.isoformat()
     document.commit()
     document.reindex()
     search = search.query(and_term_filter('isOpenAccess')([True]))

@@ -107,7 +107,7 @@ def test_get_documents_by_project(db, project, document):
         'permalink'] == f'http://localhost/global/documents/{document["pid"]}'
 
 
-def test_is_open_access(document):
+def test_is_open_access(document, embargo_date):
     """Test if document is open access."""
     assert not document.is_open_access()
 
@@ -129,7 +129,7 @@ def test_is_open_access(document):
 
     # Embargo access with future date --> not open access
     document.files['test1.pdf']['access'] = 'coar:c_f1cf'
-    document.files['test1.pdf']['embargo_date'] = '2025-01-01'
+    document.files['test1.pdf']['embargo_date'] = embargo_date.isoformat()
     assert not document.is_open_access()
 
     # Embargo access with past date --> open access

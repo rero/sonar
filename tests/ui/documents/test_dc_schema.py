@@ -124,7 +124,7 @@ def test_creators(minimal_document, contributors):
     ]
 
 
-def test_dates(app, minimal_document):
+def test_dates(app, minimal_document, embargo_date):
     result = dc_v1.transform_record(minimal_document['pid'], minimal_document)
     assert result['dates'] == []
 
@@ -155,15 +155,17 @@ def test_dates(app, minimal_document):
     result = dc_v1.transform_record(minimal_document['pid'], minimal_document)
     assert result['dates'] == []
 
+    iso_embargo_date = embargo_date.isoformat()
     with app.test_request_context() as req:
         req.request.args = {'view': 'global'}
         minimal_document.files['test.pdf']['type'] = 'file'
         minimal_document.files['test.pdf']['access'] = 'coar:c_f1cf'
         minimal_document.files['test.pdf']['restricted'] = 'full'
-        minimal_document.files['test.pdf']['embargo_date'] = '2022-01-01'
+        minimal_document.files['test.pdf']['embargo_date'] = iso_embargo_date
         result = dc_v1.transform_record(minimal_document['pid'],
                                         minimal_document)
-        assert result['dates'] == ['info:eu-repo/date/embargoEnd/2022-01-01']
+        assert result['dates'] == [
+            f'info:eu-repo/date/embargoEnd/{iso_embargo_date}']
 
 
 def test_descriptions(minimal_document):
@@ -308,7 +310,7 @@ def test_relations(minimal_document):
     ]
 
 
-def test_rights(app, minimal_document):
+def test_rights(app, minimal_document, embargo_date):
     """Test rights serialization."""
     result = dc_v1.transform_record(minimal_document['pid'], minimal_document)
     assert result['rights'] == []
@@ -341,7 +343,8 @@ def test_rights(app, minimal_document):
         assert result['rights'] == ['info:eu-repo/semantics/restrictedAccess']
 
         minimal_document.files['test.pdf']['access'] = 'coar:c_f1cf'
-        minimal_document.files['test.pdf']['embargo_date'] = '2022-01-01'
+        minimal_document.files['test.pdf'][
+            'embargo_date'] = embargo_date.isoformat()
         result = dc_v1.transform_record(minimal_document['pid'],
                                         minimal_document)
         assert result['rights'] == ['info:eu-repo/semantics/embargoedAccess']
