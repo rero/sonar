@@ -61,7 +61,8 @@ def test_publication_statement_text():
     }) == '31.12.1990'
 
 
-def test_get_file_restriction(app, organisation, admin, monkeypatch):
+def test_get_file_restriction(app, organisation, admin, monkeypatch,
+                              embargo_date):
     """Test if a file is restricted by embargo date and/or organisation."""
     # No view arg, file is allowed
     assert utils.get_file_restriction({}, [organisation]) == {
@@ -123,9 +124,9 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
         assert utils.get_file_restriction(
             {
                 'access': 'coar:c_f1cf',
-                'embargo_date': '2022-01-01'
+                'embargo_date': embargo_date.isoformat()
             }, [organisation]) == {
-                'date': '01/01/2022',
+                'date': embargo_date.strftime('%d/%m/%Y'),
                 'restricted': True
             }
 
@@ -134,9 +135,9 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
             {
                 'access': 'coar:c_f1cf',
                 'restricted_outside_organisation': False,
-                'embargo_date': '2022-01-01'
+                'embargo_date': embargo_date.isoformat()
             }, [organisation]) == {
-                'date': '01/01/2022',
+                'date': embargo_date.strftime('%d/%m/%Y'),
                 'restricted': True
             }
 
@@ -146,9 +147,9 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
             {
                 'access': 'coar:c_f1cf',
                 'restricted_outside_organisation': True,
-                'embargo_date': '2022-01-01'
+                'embargo_date': embargo_date.isoformat()
             }, []) == {
-                'date': '01/01/2022',
+                'date': embargo_date.strftime('%d/%m/%Y'),
                 'restricted': True
             }
 
@@ -158,9 +159,9 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
             {
                 'access': 'coar:c_f1cf',
                 'restricted_outside_organisation': True,
-                'embargo_date': '2022-01-01'
+                'embargo_date': embargo_date.isoformat()
             }, []) == {
-                'date': '01/01/2022',
+                'date': embargo_date.strftime('%d/%m/%Y'),
                 'restricted': True
             }
 
@@ -173,9 +174,9 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
             {
                 'access': 'coar:c_f1cf',
                 'restricted_outside_organisation': True,
-                'embargo_date': '2022-01-01'
+                'embargo_date': embargo_date.isoformat()
             }, [organisation]) == {
-                'date': '01/01/2022',
+                'date': embargo_date.strftime('%d/%m/%Y'),
                 'restricted': True
             }
 
@@ -188,7 +189,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
             {
                 'access': 'coar:c_f1cf',
                 'restricted_outside_organisation': True,
-                'embargo_date': '2022-01-01'
+                'embargo_date': embargo_date.isoformat()
             }, [organisation]) == {
                 'date': None,
                 'restricted': False
@@ -204,9 +205,9 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
             {
                 'access': 'coar:c_f1cf',
                 'restricted_outside_organisation': True,
-                'embargo_date': '2022-01-01'
+                'embargo_date': embargo_date.isoformat()
             }, [organisation]) == {
-                'date': '01/01/2022',
+                'date': embargo_date.strftime('%d/%m/%Y'),
                 'restricted': True
             }
 
@@ -217,7 +218,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch):
             {
                 'access': 'coar:c_f1cf',
                 'restricted_outside_organisation': True,
-                'embargo_date': '2022-01-01'
+                'embargo_date': embargo_date.isoformat()
             }, [organisation]) == {
                 'date': None,
                 'restricted': False

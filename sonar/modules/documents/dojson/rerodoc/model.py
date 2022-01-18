@@ -27,7 +27,8 @@ from invenio_db import db
 from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.documents.dojson.rerodoc.overdo import Overdo
 from sonar.modules.organisations.api import OrganisationRecord
-from sonar.modules.subdivisions.api import RecordSearch, Record as SubdivisionRecord
+from sonar.modules.subdivisions.api import Record as SubdivisionRecord
+from sonar.modules.subdivisions.api import RecordSearch
 from sonar.modules.utils import remove_trailing_punctuation
 
 overdo = Overdo()

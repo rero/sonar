@@ -20,6 +20,7 @@
 import copy
 import os
 import tempfile
+from datetime import date
 from io import BytesIO
 
 import pytest
@@ -36,6 +37,13 @@ from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.subdivisions.api import Record as SubdivisionRecord
 from sonar.modules.users.api import UserRecord
 from sonar.proxies import sonar
+
+
+@pytest.fixture(scope='module')
+def embargo_date():
+    """Embargo date in one year from now."""
+    today = date.today()
+    return today.replace(year=today.year+1)
 
 
 @pytest.fixture(scope='function')
@@ -405,7 +413,7 @@ def document_json(app, db, bucket_location, organisation):
 
 
 @pytest.fixture()
-def make_document(db, document_json, make_organisation, pdf_file):
+def make_document(db, document_json, make_organisation, pdf_file, embargo_date):
     """Factory for creating document."""
 
     def _make_document(organisation='org', with_file=False, pid=None):
@@ -435,7 +443,7 @@ def make_document(db, document_json, make_organisation, pdf_file):
                                 order=1,
                                 access='coar:c_f1cf',
                                 restricted_outside_organisation=False,
-                                embargo_date='2022-01-01')
+                                embargo_date=embargo_date.isoformat())
                 record.commit()
 
         db.session.commit()
@@ -614,7 +622,7 @@ def deposit_json(collection, subdivision):
 
 
 @pytest.fixture()
-def make_deposit(db, deposit_json, bucket_location, pdf_file, make_user):
+def make_deposit(db, deposit_json, bucket_location, pdf_file, make_user, embargo_date):
     """Factory for creating deposit."""
 
     def _make_deposit(role='submitter', organisation=None):
@@ -638,7 +646,7 @@ def make_deposit(db, deposit_json, bucket_location, pdf_file, make_user):
         record.files['main.pdf']['category'] = 'main'
         record.files['main.pdf']['type'] = 'file'
         record.files['main.pdf']['embargo'] = True
-        record.files['main.pdf']['embargoDate'] = '2022-01-01'
+        record.files['main.pdf']['embargoDate'] = embargo_date.isoformat()
         record.files['main.pdf']['exceptInOrganisation'] = True
 
         record.files['additional.pdf'] = BytesIO(content)
@@ -658,7 +666,8 @@ def make_deposit(db, deposit_json, bucket_location, pdf_file, make_user):
 
 
 @pytest.fixture()
-def deposit(app, db, user, pdf_file, bucket_location, deposit_json):
+def deposit(
+    app, db, user, pdf_file, bucket_location, deposit_json, embargo_date):
     """Deposit fixture."""
     json = copy.deepcopy(deposit_json)
     json['user'] = {
@@ -675,7 +684,7 @@ def deposit(app, db, user, pdf_file, bucket_location, deposit_json):
     deposit.files['main.pdf']['category'] = 'main'
     deposit.files['main.pdf']['type'] = 'file'
     deposit.files['main.pdf']['embargo'] = True
-    deposit.files['main.pdf']['embargoDate'] = '2022-01-01'
+    deposit.files['main.pdf']['embargoDate'] = embargo_date.isoformat()
     deposit.files['main.pdf']['exceptInOrganisation'] = True
 
     deposit.files['additional.pdf'] = BytesIO(content)

@@ -27,7 +27,7 @@ from utils import VerifyRecordPermissionPatch
 
 @mock.patch('invenio_records_rest.views.verify_record_permission',
             mock.MagicMock(return_value=VerifyRecordPermissionPatch))
-def test_simple_flow(client, document_json, admin):
+def test_simple_flow(client, document_json, admin, embargo_date):
     """Test simple flow using REST API."""
     headers = [('Content-Type', 'application/json')]
 
@@ -46,7 +46,7 @@ def test_simple_flow(client, document_json, admin):
         'value'] == 'Title of the document'
 
 
-def test_add_files_restrictions(client, document_with_file, superuser):
+def test_add_files_restrictions(client, document_with_file, superuser, embargo_date):
     """Test adding file restrictions before dumping object."""
     login_user_via_session(client, email=superuser['email'])
     res = client.get(
@@ -57,5 +57,5 @@ def test_add_files_restrictions(client, document_with_file, superuser):
     assert res.status_code == 200
     assert res.json['metadata']['_files'][0]['restriction'] == {
         'restricted': True,
-        'date': '01/01/2022'
+        'date': embargo_date.strftime('%d/%m/%Y')
     }

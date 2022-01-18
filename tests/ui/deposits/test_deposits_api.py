@@ -21,7 +21,7 @@ from invenio_accounts.testutils import login_user_via_view
 
 
 def test_create_document(app, db, project, client, deposit, submitter,
-                         subdivision):
+                         subdivision, embargo_date):
     """Test create document based on it."""
     submitter['subdivision'] = {
         '$ref': f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
@@ -199,7 +199,7 @@ def test_create_document(app, db, project, client, deposit, submitter,
 
     assert document.files['main.pdf']['access'] == 'coar:c_f1cf'
     assert document.files['main.pdf']['restricted_outside_organisation']
-    assert document.files['main.pdf']['embargo_date'] == '2022-01-01'
+    assert document.files['main.pdf']['embargo_date'] == embargo_date.isoformat()
     assert len(document.files) == 6
 
     # Test without affiliation
