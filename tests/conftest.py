@@ -164,6 +164,15 @@ def organisation(make_organisation):
     """Create an organisation."""
     return make_organisation('org')
 
+@pytest.fixture()
+def organisation_with_file(organisation, pdf_file):
+    """Create an organisation with a file attached."""
+    with open(pdf_file, 'rb') as file:
+        organisation.add_file(file.read(),
+            'test1.pdf'
+        )
+        organisation.commit()
+    return organisation
 
 @pytest.fixture()
 def roles(base_app, db):
@@ -254,6 +263,12 @@ def user_without_role(app, db):
     db.session.commit()
 
     return user
+
+
+@pytest.fixture()
+def user_without_org(make_user):
+    """Create user without organisation."""
+    return make_user('user', None)
 
 
 @pytest.fixture()
@@ -847,6 +862,17 @@ def collection(app, db, es, admin, organisation, collection_json):
     collection.commit()
     collection.reindex()
     db.session.commit()
+    return collection
+
+
+@pytest.fixture()
+def collection_with_file(collection, pdf_file):
+    """Create a collection with a file attached."""
+    with open(pdf_file, 'rb') as file:
+        collection.add_file(file.read(),
+            'test1.pdf'
+        )
+        collection.commit()
     return collection
 
 

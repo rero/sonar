@@ -30,7 +30,7 @@ along with this program. If not, see
         <a
           href="{{ url_for('index', view=view_code if g.get('organisation', {}).get('isDedicated') else config.SONAR_APP_DEFAULT_ORGANISATION) }}">
           {% if g.get('organisation', {}).get('isDedicated') %}
-          {% set thumbnail = g.organisation | record_image_url %}
+          {% set thumbnail = g.organisation | record_image_url('org') %}
           {% if thumbnail %}
           <img src="{{ thumbnail }}" class="img-fluid" alt="{{ 'Organisation logo' }}">
           {% else %}

@@ -30,8 +30,7 @@ from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.documents.utils import has_external_urls_for_files, \
     populate_files_properties
 from sonar.modules.utils import format_date, \
-    get_bibliographic_code_from_language, get_current_ip, get_language_value, \
-    is_ip_in_list
+    get_bibliographic_code_from_language, get_language_value
 
 from .utils import publication_statement_text
 
@@ -71,28 +70,6 @@ def detail(pid, record, template=None, **kwargs):
     :param \*\*kwargs: Additional view arguments based on URL rule.
     :returns: The rendered template.
     """
-
-    def is_masked(record):
-        """Check if record is masked.
-
-        :param record: Record object
-        :returns: True if record is masked
-        :rtype: boolean
-        """
-        if not record.get('masked'):
-            return False
-
-        if record['masked'] == 'masked_for_all':
-            return True
-
-        if record['masked'] == 'masked_for_external_ips' and record.get(
-                'organisation') and not is_ip_in_list(
-                    get_current_ip(), record['organisation'][0].get(
-                        'allowedIps', '').split('\n')):
-            return True
-
-        return False
-
     # Add restriction, link and thumbnail to files
     if record.get('_files'):
         # Check if organisation's record forces to point file to an external
@@ -117,8 +94,8 @@ def detail(pid, record, template=None, **kwargs):
     record = record.replace_refs()
 
     # Record is masked
-    if is_masked(record):
-        abort(404)
+    if record.is_masked:
+        abort(403)
 
     # Send signal when record is viewed
     record_viewed.send(

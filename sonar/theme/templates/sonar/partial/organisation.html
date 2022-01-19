@@ -19,7 +19,7 @@
 <div class="bg-light py-4">
   <div class="container">
     <div class="row justify-content-center">
-      {% set thumbnail = g.organisation | record_image_url %}
+      {% set thumbnail = g.organisation | record_image_url('org') %}
       {% if thumbnail %}
       <div class="col-6 col-lg-2">
         <img src="{{ thumbnail }}" alt="{{ g.organisation.name }}" class="img-fluid">

@@ -159,14 +159,14 @@ def test_unknown_permission_factory(app, client, superuser, document):
     assert not record_permission_factory(document, 'unknown').can()
 
 
-def test_files_permission_factory(app, client, admin):
+def test_files_permission_factory(app, client, superuser):
     """Test files permission factory."""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
-    assert files_permission_factory().can()
+    assert files_permission_factory(None, 'object-read').can()
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
-    login_user_via_view(client, email=admin['email'], password='123456')
-    assert files_permission_factory().can()
+    login_user_via_view(client, email=superuser['email'], password='123456')
+    assert files_permission_factory(None, 'object-read').can()
 
 
 def test_admin_permission_factory(app, client, superuser):

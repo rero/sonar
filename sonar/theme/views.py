@@ -239,32 +239,24 @@ def schemas(record_type):
 
 
 @blueprint.app_template_filter()
-def record_image_url(record, key=None):
+def record_image_url(record, code, key=None):
     """Get image URL for a record.
 
     :param files: Liste of files of the record.
     :param key: The key of the file to be rendered, if no key, takes the first.
     :returns: Image url corresponding to key, or the first one.
     """
-    if not record.get('_files'):
+    if not (record.get('_files') and record.get('pid')):
         return None
-
-    def image_url(file):
-        """Return image URL for a file.
-
-        :param file: File to get the URL from.
-        :returns: URL of the file.
-        """
-        return '/api/files/{bucket}/{key}'.format(key=file['key'],
-                                                  bucket=file['bucket'])
-
     for file in record['_files']:
         if re.match(r'^.*\.(jpe?g|png|gif|svg)$',
                     file['key'],
                     flags=re.IGNORECASE):
             if not key or file['key'] == key:
-                return image_url(file)
-
+                return url_for(
+                    f'invenio_records_ui.{code}_files',
+                    pid_value=record.get('pid'),
+                    filename=file['key'])
     return None
 
 

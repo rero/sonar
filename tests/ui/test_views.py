@@ -228,22 +228,29 @@ def test_profile(client, user):
     assert res.status_code == 403
 
 
-def test_record_image_url():
+def test_record_image_url(client):
     """Test getting record image url."""
     # No file key
-    assert not record_image_url({})
+    assert not record_image_url({}, 'org')
 
     # No files
-    assert not record_image_url({'_files': []})
+    assert not record_image_url({'_files': []}, 'org')
 
     # No images
-    assert not record_image_url(
-        {'_files': [{
+    assert not record_image_url({'_files': [{
             'bucket': '1234',
             'key': 'test.pdf'
-        }]})
+        }]}, 'org')
+
+    # No pid
+    assert not record_image_url({
+        '_files': [{
+            'bucket': '1234',
+            'key': 'test.pdf'
+        }]}, 'org')
 
     record = {
+        'pid': '1',
         '_files': [{
             'bucket': '1234',
             'key': 'test.jpg'
@@ -254,10 +261,11 @@ def test_record_image_url():
     }
 
     # Take the first file
-    assert record_image_url(record) == '/api/files/1234/test.jpg'
+    assert record_image_url(record, 'org') == '/organisations/1/files/test.jpg'
 
     # Take files corresponding to key
-    assert record_image_url(record, 'test2.jpg') == '/api/files/1234/test2.jpg'
+    assert record_image_url(record, 'org', 'test2.jpg') == \
+        '/organisations/1/files/test2.jpg'
 
 
 def test_rerodoc_redirection(client, document):

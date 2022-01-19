@@ -19,11 +19,11 @@
 
 from functools import wraps
 
-from flask import abort, current_app
+from flask import abort, current_app, request
 from flask_login import current_user
 from flask_principal import ActionNeed, RoleNeed
 from invenio_access import Permission
-from invenio_records_rest.utils import obj_or_import_string
+from invenio_base.utils import obj_or_import_string
 
 from sonar.modules.users.api import current_user_record
 
@@ -31,6 +31,10 @@ superuser_access_permission = Permission(ActionNeed('superuser-access'))
 admin_access_permission = Permission(ActionNeed('admin-access'))
 submitter_access_permission = Permission(RoleNeed('submitter'),
                                          RoleNeed('moderator'),
+                                         RoleNeed('admin'),
+                                         RoleNeed('superuser'))
+
+moderator_access_permission = Permission(RoleNeed('moderator'),
                                          RoleNeed('admin'),
                                          RoleNeed('superuser'))
 
@@ -135,13 +139,31 @@ def admin_permission_factory(admin_view):
     return superuser_access_permission
 
 
-def files_permission_factory(*kwargs):
-    """Files rest permission factory."""
+def files_permission_factory(obj, action, pid=None, record=None):
+    """Files rest permission factory.
+
+    admin: all
+    moderator: write(organisation only)
+               read(organisation + as anonymous for other)
+    anonymous: write(none)
+               read(record masked, restricted: embargo etc, text never)
+    """
+    # Permission is allowed for all actions.
     if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
         return allow_access
 
-    # TODO: Add checks for accessing files and buckets
-    return allow_access
+    pid_type = None
+    if pid:
+        pid_type = pid.pid_type
+    elif request.view_args.get('pid_value'):
+        (pid, record) = request.view_args.get('pid_value').data
+        pid_type = pid.pid_type
+
+    files_permission_cls = obj_or_import_string(
+        current_app.config.get(
+            'SONAR_APP_FILES_REST_PERMISSION', {}).get(pid_type, FilesPermission))
+    return files_permission_cls.create_permission(
+        obj, action, user=None, pid=pid, parent_record=record)
 
 
 def wiki_edit_permission():
@@ -161,7 +183,7 @@ class RecordPermission:
     update_actions = ['update']
     delete_actions = ['delete']
 
-    def __init__(self, record, func, user):
+    def __init__(self, record, func, user=None, **kwargs):
         """Initialize a file permission object.
 
         :param record: Record to check.
@@ -180,7 +202,7 @@ class RecordPermission:
         return self.func(self.user, self.record)
 
     @classmethod
-    def create_permission(cls, record, action, user=None):
+    def create_permission(cls, record, action, **kwargs):
         """Create a record permission.
 
         :param action: Action to check.
@@ -188,19 +210,19 @@ class RecordPermission:
         :returns: Permission object.
         """
         if action in cls.list_actions:
-            return cls(record, cls.list, user)
+            return cls(record, cls.list, **kwargs)
 
         if action in cls.create_actions:
-            return cls(record, cls.create, user)
+            return cls(record, cls.create, **kwargs)
 
         if action in cls.read_actions:
-            return cls(record, cls.read, user)
+            return cls(record, cls.read, **kwargs)
 
         if action in cls.update_actions:
-            return cls(record, cls.update, user)
+            return cls(record, cls.update, **kwargs)
 
         if action in cls.delete_actions:
-            return cls(record, cls.delete, user)
+            return cls(record, cls.delete, **kwargs)
 
         # Deny access by default
         return deny_access
@@ -210,7 +232,7 @@ class RecordPermission:
         """List permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         if not user:
@@ -223,7 +245,7 @@ class RecordPermission:
         """Create permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         if not user:
@@ -232,11 +254,11 @@ class RecordPermission:
         return has_superuser_access()
 
     @classmethod
-    def read(cls, user, record):
+    def read(cls, user, record, **kwargs):
         """Read permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         if not user:
@@ -245,11 +267,11 @@ class RecordPermission:
         return has_superuser_access()
 
     @classmethod
-    def update(cls, user, record):
+    def update(cls, user, record, **kwargs):
         """Update permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         if not user:
@@ -258,14 +280,58 @@ class RecordPermission:
         return has_superuser_access()
 
     @classmethod
-    def delete(cls, user, record):
+    def delete(cls, user, record, **kwargs):
         """Delete permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         if not user:
             return False
 
         return has_superuser_access()
+
+
+class FilesPermission(RecordPermission):
+    """Record files permissions for CRUD operations."""
+
+    list_actions = []
+    create_actions = []
+    read_actions = [
+        'bucket-read', 'bucket-read-versions',
+        'bucket-listmultiparts',
+        'object-read', 'multipart-read',
+        'object-read-version'
+    ]
+    update_actions = [
+        'location-update',
+        'bucket-update',
+    ]
+    delete_actions = [
+        'object-delete',
+        'object-delete-version',
+        'multipart-delete'
+    ]
+
+    def __init__(self, record, func, user=None, pid=None, parent_record={}):
+        """Initialize a file permission object.
+
+        :param record: Record to check.
+        :param fund: method of the class to call.
+        :param user: Object representing current logged user.
+        :param pid: The :class:`invenio_pidstore.models.PersistentIdentifier`
+        instance.
+        :param parent_record: the record related to the bucket.
+        """
+        self.pid = pid
+        self.parent_record = parent_record
+        super().__init__(record, func, user)
+
+    def can(self):
+        """Return the permission object determining if the action can be done.
+
+        :returns: Permission object.
+        """
+        return self.func(user=self.user, record=self.record, pid=self.pid,
+                         parent_record=self.parent_record)

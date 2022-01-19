@@ -31,7 +31,7 @@ class UserPermission(RecordPermission):
         """List permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         if not user:
@@ -44,7 +44,7 @@ class UserPermission(RecordPermission):
         """Create permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         if not user:
@@ -57,7 +57,7 @@ class UserPermission(RecordPermission):
         """Read permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         if not user:
@@ -92,7 +92,7 @@ class UserPermission(RecordPermission):
         """Update permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         # Same rules as read permission.
@@ -103,7 +103,7 @@ class UserPermission(RecordPermission):
         """Delete permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         # At least for admin logged users.
