@@ -27,9 +27,9 @@ orcid = "*"
 python-slugify = "*"
 python3-saml = "*"
 xmltodict = "*"
-marshmallow = ">=3.0.0,<4.0.0"
+marshmallow = ">=3.0.0,<3.5.1"
 pycountry = "*"
-flask-wiki = {git = "https://github.com/rero/flask-wiki.git"}
+flask-wiki = {git = "https://github.com/rero/flask-wiki.git", rev = "v0.0.1"}
 markdown-captions = "*"
 bleach = ">3.11"
 wand = ">=0.5.0,<0.6.0"
