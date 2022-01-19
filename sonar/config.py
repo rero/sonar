@@ -289,8 +289,9 @@ RECORDS_UI_ENDPOINTS = {
     },
     'doc_files': {
         'pid_type': 'doc',
+        'record_class': 'sonar.modules.documents.api:DocumentRecord',
         'route': '/documents/<pid_value>/files/<filename>',
-        'view_imp': 'invenio_records_files.utils:file_download_ui',
+        'view_imp': 'sonar.modules.utils:file_download_ui',
         'record_class': 'invenio_records_files.api:Record'
     },
     'depo_previewer': {
@@ -302,7 +303,7 @@ RECORDS_UI_ENDPOINTS = {
     'depo_files': {
         'pid_type': 'depo',
         'route': '/deposits/<pid_value>/files/<filename>',
-        'view_imp': 'invenio_records_files.utils:file_download_ui',
+        'view_imp': 'sonar.modules.utils:file_download_ui',
         'record_class': 'invenio_records_files.api:Record'
     },
     'org_previewer': {
@@ -314,7 +315,7 @@ RECORDS_UI_ENDPOINTS = {
     'org_files': {
         'pid_type': 'org',
         'route': '/organisations/<pid_value>/files/<filename>',
-        'view_imp': 'invenio_records_files.utils:file_download_ui',
+        'view_imp': 'sonar.modules.utils:file_download_ui',
         'record_class': 'invenio_records_files.api:Record'
     },
     'proj': {
@@ -340,7 +341,7 @@ RECORDS_UI_ENDPOINTS = {
     'coll_files': {
         'pid_type': 'coll',
         'route': '/collections/<pid_value>/files/<filename>',
-        'view_imp': 'invenio_records_files.utils:file_download_ui',
+        'view_imp': 'sonar.modules.utils:file_download_ui',
         'record_class': 'invenio_records_files.api:Record'
     },
 }
@@ -801,6 +802,14 @@ applications."""
 
 FILES_REST_PERMISSION_FACTORY = \
     'sonar.modules.permissions.files_permission_factory'
+
+SONAR_APP_FILES_REST_PERMISSION = {
+    'doc': 'sonar.modules.documents.permissions:DocumentFilesPermission',
+    'org': 'sonar.modules.organisations.permissions:OrganisationFilesPermission',
+    'coll': 'sonar.modules.collections.permissions:FilesPermission',
+    'depo': 'sonar.modules.deposits.permissions:DepositFilesPermission'
+}
+"""FilesPermission class to make the invenio files permission more flexible"""
 
 # Database
 # =========================

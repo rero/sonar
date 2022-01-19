@@ -28,7 +28,7 @@ from sonar.affiliations import AffiliationResolver
 from sonar.modules.documents.minters import id_minter
 from sonar.modules.pdf_extractor.utils import extract_text_from_content
 from sonar.modules.utils import change_filename_extension, \
-    create_thumbnail_from_file
+    create_thumbnail_from_file, get_current_ip, is_ip_in_list
 
 from ..api import SonarIndexer, SonarRecord, SonarSearch
 from ..ark.api import current_ark
@@ -358,6 +358,27 @@ class DocumentRecord(SonarRecord):
                 return embargo_date <= datetime.now()
 
         return True
+
+    @property
+    def is_masked(self):
+        """Check if record is masked.
+
+        :returns: True if record is masked
+        :rtype: boolean
+        """
+        if not self.get('masked'):
+            return False
+
+        if self['masked'] == 'masked_for_all':
+            return True
+
+        if self['masked'] == 'masked_for_external_ips' and self.get(
+                'organisation') and not is_ip_in_list(
+                    get_current_ip(), self['organisation'][0].get(
+                        'allowedIps', '').split('\n')):
+            return True
+
+        return False
 
     def get_ark_resolver_url(self):
         """Get the ark resolver url.

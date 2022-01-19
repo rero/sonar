@@ -18,7 +18,9 @@
 """Permissions for organisations."""
 
 from sonar.modules.organisations.api import current_organisation
-from sonar.modules.permissions import RecordPermission
+from sonar.modules.permissions import FilesPermission, RecordPermission
+
+from .api import OrganisationRecord
 
 
 class OrganisationPermission(RecordPermission):
@@ -29,7 +31,7 @@ class OrganisationPermission(RecordPermission):
         """List permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         # Only for admin users at least.
@@ -43,7 +45,7 @@ class OrganisationPermission(RecordPermission):
         """Create permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         # Only superuser can create an organisation.
@@ -54,7 +56,7 @@ class OrganisationPermission(RecordPermission):
         """Read permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         # Only for admin users
@@ -73,7 +75,7 @@ class OrganisationPermission(RecordPermission):
         """Update permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         # Same rules as read.
@@ -84,7 +86,66 @@ class OrganisationPermission(RecordPermission):
         """Delete permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True if action can be done.
         """
         return bool(user and user.is_superuser)
+
+class OrganisationFilesPermission(FilesPermission):
+    """Organisation files permissions.
+
+    Follows the same rules than the corresponding organisation except for read
+    which is always accessible.
+    """
+
+    @classmethod
+    def get_organisation(cls, parent_record):
+        """Get the organisation from the parent record."""
+        return OrganisationRecord.get_record_by_pid(parent_record['pid'])
+
+    @classmethod
+    def read(cls, user, record, pid, parent_record):
+        """Read permission check.
+
+        :param user: Current user record.
+        :param record: Record to check.
+        :param pid: The :class:`invenio_pidstore.models.PersistentIdentifier`
+        instance.
+        :param parent_record: the record related to the bucket.
+        :returns: True is action can be done.
+        """
+        # allowed for anyone
+        return True
+
+    @classmethod
+    def update(cls, user, record, pid, parent_record):
+        """Update permission check.
+
+        Mainly the same behavior than the corresponding organisation record.
+
+        :param user: Current user record.
+        :param record: Record to check.
+        :param pid: The :class:`invenio_pidstore.models.PersistentIdentifier`
+        instance.
+        :param parent_record: the record related to the bucket.
+        :returns: True is action can be done.
+        """
+        # Superuser is allowed.
+        if user and user.is_superuser:
+            return True
+        organisation = cls.get_organisation(parent_record)
+        return organisation and \
+            OrganisationPermission.update(user, organisation)
+
+    @classmethod
+    def delete(cls, user, record, pid, parent_record):
+        """Delete permission check.
+
+        :param user: Current user record.
+        :param record: Record to check.
+        :param pid: The :class:`invenio_pidstore.models.PersistentIdentifier`
+        instance.
+        :param parent_record: the record related to the bucket.
+        :returns: True is action can be done.
+        """
+        return cls.update(user, record, pid, parent_record)

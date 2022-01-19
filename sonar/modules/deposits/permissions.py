@@ -19,7 +19,7 @@
 
 from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.organisations.api import current_organisation
-from sonar.modules.permissions import RecordPermission
+from sonar.modules.permissions import FilesPermission, RecordPermission
 
 
 class DepositPermission(RecordPermission):
@@ -30,7 +30,7 @@ class DepositPermission(RecordPermission):
         """List permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         # At least for submitters logged users.
@@ -44,7 +44,7 @@ class DepositPermission(RecordPermission):
         """Create permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         # No logged user.
@@ -58,7 +58,7 @@ class DepositPermission(RecordPermission):
         """Read permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         # At least for submitters logged users.
@@ -103,7 +103,7 @@ class DepositPermission(RecordPermission):
         """Update permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         # Same rules as read.
@@ -114,7 +114,7 @@ class DepositPermission(RecordPermission):
         """Delete permission check.
 
         :param user: Current user record.
-        :param recor: Record to check.
+        :param record: Record to check.
         :returns: True is action can be done.
         """
         # Cannot delete a validated deposit.
@@ -123,3 +123,65 @@ class DepositPermission(RecordPermission):
 
         # Same rules as read.
         return cls.read(user, record)
+
+class DepositFilesPermission(FilesPermission):
+    """Deposits files permissions.
+
+    Follows the same rules than the corresponding deposit.
+    """
+
+    @classmethod
+    def get_deposit(cls, parent_record):
+        """Get the deposit from the parent record."""
+        return DepositRecord.get_record_by_pid(parent_record.get('pid'))
+
+    @classmethod
+    def read(cls, user, record, pid, parent_record):
+        """Read permission check.
+
+        :param user: Current user record.
+        :param record: Record to check.
+        :param pid: The :class:`invenio_pidstore.models.PersistentIdentifier`
+        instance.
+        :param parent_record: the record related to the bucket.
+        :returns: True is action can be done.
+        """
+        # Superuser is allowed.
+        if user and user.is_superuser:
+            return True
+        deposit = cls.get_deposit(parent_record)
+        return deposit and DepositPermission.read(user, deposit)
+
+    @classmethod
+    def update(cls, user, record, pid, parent_record):
+        """Update permission check.
+
+        :param user: Current user record.
+        :param record: Record to check.
+        :param pid: The :class:`invenio_pidstore.models.PersistentIdentifier`
+        instance.
+        :param parent_record: the record related to the bucket.
+        :returns: True is action can be done.
+        """
+        # Superuser is allowed.
+        if user and user.is_superuser:
+            return True
+        deposit = cls.get_deposit(parent_record)
+        return deposit and DepositPermission.update(user, deposit)
+
+    @classmethod
+    def delete(cls, user, record, pid, parent_record):
+        """Delete permission check.
+
+        :param user: Current user record.
+        :param record: Record to check.
+        :param pid: The :class:`invenio_pidstore.models.PersistentIdentifier`
+        instance.
+        :param parent_record: the record related to the bucket.
+        :returns: True is action can be done.
+        """
+        # Superuser is allowed.
+        if user and user.is_superuser:
+            return True
+        deposit = cls.get_deposit(parent_record)
+        return deposit and DepositPermission.delete(user, deposit)

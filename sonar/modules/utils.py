@@ -316,3 +316,70 @@ def get_ips_list(ranges):
             pass
 
     return [str(ip) for ip in ip_set]
+
+
+def file_download_ui(pid, record, _record_file_factory=None, **kwargs):
+    """File download view for a given record.
+
+    RERO: Invenio do not pass pid and record to the files permission factory:
+    we need to overwrite
+    Plug this method into your ``RECORDS_UI_ENDPOINTS`` configuration:
+
+    .. code-block:: python
+
+        RECORDS_UI_ENDPOINTS = dict(
+            recid=dict(
+                # ...
+                route='/records/<pid_value>/files/<filename>',
+                view_imp='invenio_records_files.utils:file_download_ui',
+                record_class='invenio_records_files.api:Record',
+            )
+        )
+
+    If ``download`` is passed as a querystring argument, the file is sent as an
+    attachment.
+
+    :param pid: The :class:`invenio_pidstore.models.PersistentIdentifier`
+        instance.
+    :param record: The record metadata.
+    """
+    from invenio_files_rest.views import ObjectResource, check_permission
+    from invenio_records_files.utils import record_file_factory
+
+    from .permissions import files_permission_factory
+    _record_file_factory = _record_file_factory or record_file_factory
+    # Extract file from record.
+    fileobj = _record_file_factory(
+        pid, record, kwargs.get('filename')
+    )
+
+    if not fileobj:
+        abort(404)
+
+    obj = fileobj.obj
+    # Check permissions
+    # Invenio do not pass pid and record to the files permission factory:
+    # we need to overwrite
+    check_permission(files_permission_factory(
+        obj,
+        'object-read',
+        pid,
+        record
+    ))
+    if not obj.is_head:
+        check_permission(
+            files_permission_factory(obj, 'object-read-version', pid, record),
+            hidden=False
+        )
+
+    # Send file.
+    return ObjectResource.send_object(
+        obj.bucket, obj,
+        expected_chksum=fileobj.get('checksum'),
+        logger_data={
+            'bucket_id': obj.bucket_id,
+            'pid_type': pid.pid_type,
+            'pid_value': pid.pid_value,
+        },
+        as_attachment=('download' in request.args)
+    )

@@ -17,7 +17,7 @@ along with this program. If not, see
 #}
 {% set name = collection.name | language_value %}
 <div class="row">
-  {% set thumbnail = collection | record_image_url %}
+  {% set thumbnail = collection | record_image_url('coll') %}
   {% if thumbnail %}
   <div class="col-sm-3">
     <img src="{{ thumbnail }}" alt="{{ name }}" class="img-fluid img-thumbnail">

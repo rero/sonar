@@ -20,7 +20,7 @@ along with this program. If not, see
     {% if page != 'home' %}
     <a class="navbar-brand" href="{{ url_for('index', view=view_code) }}">
       {% if g.get('organisation', {}).get('isDedicated') %}
-      {% set thumbnail = g.organisation | record_image_url %}
+      {% set thumbnail = g.organisation | record_image_url('org') %}
       {% if thumbnail %}
       <img src="{{ thumbnail }}" alt="{{ _('Organisation logo') }}" height="50"
         class="d-inline-block align-top mr-3 my-2" alt="">

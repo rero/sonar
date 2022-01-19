@@ -109,14 +109,14 @@ def get_file_links(file, record):
     return links
 
 
-def get_file_restriction(file, organisations):
+def get_file_restriction(file, organisations, for_permission=True):
     """Check if current file can be displayed.
 
     :param file: File dict.
     :param organisations: List of organisations.
+    :param for_permission: True if it is used to compute permissions.
     :returns: Object containing result as boolean and possibly embargo date.
     """
-
     def is_allowed_by_scope():
         """Check if file is fully restricted or only outside organisation.
 
@@ -149,21 +149,20 @@ def get_file_restriction(file, organisations):
 
     not_restricted = {'restricted': False, 'date': None}
 
-    # We are in admin, no restrictions are applied.
-    if not request.args.get('view') and not request.view_args.get(
-            'view') and request.url_rule.rule != '/oai2d':
+    # We are in admin, no restrictions are applied except for permissions.
+    if not for_permission and not request.args.get('view') and\
+            not request.view_args.get('view') and\
+            request.url_rule.rule != '/oai2d':
         return not_restricted
 
     # No specific access or specific access is open access
     if not file.get('access') or file['access'] == 'coar:c_abf2':
         return not_restricted
-
     # Access is embargoed
     if file['access'] == 'coar:c_f1cf':
         # No embargo date
         if not file.get('embargo_date'):
             return not_restricted
-
         try:
             embargo_date = datetime.strptime(file['embargo_date'], '%Y-%m-%d')
         except Exception:

@@ -19,6 +19,7 @@
 
 import json
 
+import mock
 from flask import url_for
 from invenio_accounts.testutils import login_user_via_session
 from invenio_pidstore.models import PersistentIdentifier, PIDStatus
@@ -147,19 +148,29 @@ def test_read(client, document, make_user, superuser, admin, moderator,
     # Not logged
     res = client.get(
         url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
-    assert res.status_code == 401
+    assert res.status_code == 200
+
+    # masked document
+    magic_mock = mock.MagicMock(return_value=True)
+    with mock.patch(
+        'sonar.modules.documents.api.DocumentRecord.is_masked',
+        magic_mock
+    ):
+        res = client.get(
+            url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
+        assert res.status_code == 401
 
     # Logged as user
     login_user_via_session(client, email=user['email'])
     res = client.get(
         url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
-    assert res.status_code == 403
+    assert res.status_code == 200
 
     # Logged as submitter
     login_user_via_session(client, email=submitter['email'])
     res = client.get(
         url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
-    assert res.status_code == 403
+    assert res.status_code == 200
 
     # Logged as moderator
     login_user_via_session(client, email=moderator['email'])
@@ -194,7 +205,7 @@ def test_read(client, document, make_user, superuser, admin, moderator,
     login_user_via_session(client, email=other_admin['email'])
     res = client.get(
         url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
-    assert res.status_code == 403
+    assert res.status_code == 200
 
     # Logged as superuser
     login_user_via_session(client, email=superuser['email'])
