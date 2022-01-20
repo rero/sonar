@@ -35,6 +35,7 @@ class ExportSchemaV1(Schema):
     documentsCustomField1 = fields.Dict(dump_only=True)
     documentsCustomField2 = fields.Dict(dump_only=True)
     documentsCustomField3 = fields.Dict(dump_only=True)
+    publicDocumentFacets = fields.List(fields.String(dump_only=True))
 
     def get_files(self, obj):
         """Get files."""

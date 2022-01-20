@@ -117,6 +117,10 @@
           }
         }
       },
+      "publicDocumentFacets": {
+        "type": "keyword",
+        "index": false
+      },
       "_created": {
         "type": "date"
       },

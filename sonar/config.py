@@ -233,7 +233,8 @@ APP_DEFAULT_SECURE_HEADERS = {
         ],
         'style-src': [
             "'self'", "'unsafe-inline'", 'https://cdnjs.cloudflare.com',
-            'https://fonts.googleapis.com'
+            'https://fonts.googleapis.com',
+            'https://maxcdn.bootstrapcdn.com'
         ],
         'font-src': [
             "'self'", "data:", "blob:", "'unsafe-inline'",
