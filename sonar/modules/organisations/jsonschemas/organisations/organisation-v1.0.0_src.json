@@ -312,6 +312,67 @@
         "hideExpression": "!field.parent.model.isDedicated"
       }
     },
+    "publicDocumentFacets": {
+      "title": "Visible facets in the public interface for documents",
+      "type":"array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "document_type",
+          "controlled_affiliation",
+          "year",
+          "collection",
+          "language",
+          "author",
+          "subject",
+          "subdivision"
+        ]
+      },
+      "form": {
+        "type": "multicheckbox",
+        "templateOptions": {
+          "type": "array",
+          "wrappers": [],
+          "translate": true,
+          "options": [
+            {
+              "label": "document_type",
+              "value": "document_type"
+            },
+            {
+              "label": "controlled_affiliation",
+              "value": "controlled_affiliation"
+            },
+            {
+              "label": "year",
+              "value": "year"
+            },
+            {
+              "label": "collection",
+              "value": "collection"
+            },
+            {
+              "label": "language",
+              "value": "language"
+            },
+            {
+              "label": "author",
+              "value": "author"
+            },
+            {
+              "label": "subject",
+              "value": "subject"
+            },
+            {
+              "label": "subdivision",
+              "value": "subdivision"
+            }
+          ]
+        },
+        "hideExpression": "!field.parent.model.isDedicated"
+      }
+    },
     "_bucket": {
       "title": "Bucket UUID",
       "type": "string",
@@ -384,7 +445,8 @@
     "platformName",
     "documentsCustomField1",
     "documentsCustomField2",
-    "documentsCustomField3"
+    "documentsCustomField3",
+    "publicDocumentFacets"
   ],
   "required": [
     "pid",

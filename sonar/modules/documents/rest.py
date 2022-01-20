@@ -33,6 +33,12 @@ def aggregations():
     view = request.args.get('view')
     collection = request.args.get('collection')
 
+    customFields = [
+        'customField1',
+        'customField2',
+        'customField3',
+    ]
+
     aggregations_list = [
         'document_type',
         'controlled_affiliation',
@@ -43,31 +49,31 @@ def aggregations():
         'subject',
         'organisation',
         'subdivision',
-        'customField1',
-        'customField2',
-        'customField3',
-    ]
+    ] + customFields
 
-    if view:
-        # Remove organisation in dedicated view
-        if view != current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'):
-            aggregations_list.remove('organisation')
-    else:
-        # Remove organisation for non superusers.
-        if current_user_record and not current_user_record.is_superuser:
-            aggregations_list.remove('organisation')
-
-    # Remove collection in collection context
-    if collection:
-        aggregations_list.remove('collection')
-
-    # Custom fields
     if view and view != current_app.config.get(
             'SONAR_APP_DEFAULT_ORGANISATION'):
         organisation = OrganisationRecord.get_record_by_pid(view)
+        if organisation and organisation.get('isDedicated') \
+        and organisation.get('publicDocumentFacets'):
+            aggregations_list = organisation.get('publicDocumentFacets')\
+                + customFields
     else:
         organisation = current_organisation
 
+    # Remove organisation in dedicated view
+    if 'organisation' in aggregations_list:
+        if view and view != current_app.config.get(
+            'SONAR_APP_DEFAULT_ORGANISATION'):
+            aggregations_list.remove('organisation')
+        elif current_user_record and not current_user_record.is_superuser:
+                aggregations_list.remove('organisation')
+
+    # Remove collection in collection context
+    if collection and 'collection' in aggregations_list:
+        aggregations_list.remove('collection')
+
+    # Custom fields
     for i in range(1, 4):
         # Remove custom fields if we are in global view, or the fields is not
         # configured in organisation.
@@ -76,9 +82,7 @@ def aggregations():
         ) or not organisation or not organisation.get(
                 f'documentsCustomField{i}', {}).get('includeInFacets'):
             aggregations_list.remove(f'customField{i}')
-        else:
-            # Add the right label
-            if organisation[f'documentsCustomField{i}'].get('label'):
+        elif organisation[f'documentsCustomField{i}'].get('label'):
                 aggregations_list[aggregations_list.index(
                     f'customField{i}')] = {
                         'key':
@@ -89,8 +93,8 @@ def aggregations():
                     }
 
     # Don't display subdivision in global context
-    if view and view == current_app.config.get(
-            'SONAR_APP_DEFAULT_ORGANISATION'):
+    if view and 'subdivision' in aggregations_list and \
+        view == current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'):
         aggregations_list.remove('subdivision')
 
     return jsonify(aggregations_list)

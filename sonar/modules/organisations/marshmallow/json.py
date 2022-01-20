@@ -52,6 +52,7 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
     documentsCustomField1 = fields.Dict()
     documentsCustomField2 = fields.Dict()
     documentsCustomField3 = fields.Dict()
+    publicDocumentFacets = fields.List(fields.String())
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
     schema = GenFunction(load_only=True,
