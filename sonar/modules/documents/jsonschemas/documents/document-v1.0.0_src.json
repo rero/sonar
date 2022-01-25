@@ -264,19 +264,14 @@
           "type": {
             "title": "Type",
             "type": "string",
-            "readOnly": true,
             "const": "bf:Title",
             "default": "bf:Title",
-            "enum": [
-              "bf:Title"
-            ],
             "form": {
-              "options": [
-                {
-                  "label": "bf:Title",
-                  "value": "bf:Title"
-                }
-              ]
+              "templateOptions": {
+                "wrappers": [
+                  "hide"
+                ]
+              }
             }
           },
           "mainTitle": {
@@ -354,19 +349,14 @@
           "type": {
             "title": "Type",
             "type": "string",
-            "readOnly": true,
             "const": "bf:Language",
             "default": "bf:Language",
-            "enum": [
-              "bf:Language"
-            ],
             "form": {
-              "options": [
-                {
-                  "label": "bf:Language",
-                  "value": "bf:Language"
-                }
-              ]
+              "templateOptions": {
+                "wrappers": [
+                  "hide"
+                ]
+              }
             }
           },
           "value": {
@@ -565,7 +555,7 @@
       },
       "form": {
         "expressionProperties": {
-          "templateOptions.required": "!['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc', 'coar:c_3e5a', 'coar:c_5794', 'coar:c_6670'].includes(field.parent.model.documentType)"
+          "templateOptions.required": "field.parent.model && !['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc', 'coar:c_3e5a', 'coar:c_5794', 'coar:c_6670'].includes(field.parent.model.documentType)"
         }
       }
     },
@@ -1152,7 +1142,7 @@
       "form": {
         "hide": true
       },
-      "hideExpression": "!['coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'habilitation_thesis', 'advanced_studies_thesis', 'other'].includes(field.parent.model.documentType)"
+      "hideExpression": "field.parent.model && !['coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'habilitation_thesis', 'advanced_studies_thesis', 'other'].includes(field.parent.model.documentType)"
     },
     "usageAndAccessPolicy": {
       "title": "Usage and access policy",
@@ -1186,228 +1176,300 @@
       "items": {
         "title": "Contribution",
         "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "agent": {
-            "title": "Agent",
+        "oneOf": [
+          {
+            "title": "Person",
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "type": {
-                "title": "Type",
-                "type": "string",
-                "enum": [
-                  "bf:Person",
-                  "bf:Organization",
-                  "bf:Meeting"
-                ],
-                "form": {
-                  "options": [
-                    {
-                      "label": "bf:Person",
-                      "value": "bf:Person"
-                    },
-                    {
-                      "label": "bf:Organization",
-                      "value": "bf:Organization"
-                    },
-                    {
-                      "label": "bf:Meeting",
-                      "value": "bf:Meeting"
-                    }
-                  ]
-                }
-              },
-              "preferred_name": {
-                "title": "Preferred name",
-                "type": "string",
-                "minLength": 1,
-                "form": {
-                  "expressionProperties": {
-                    "templateOptions.required": "model && ['bf:Person', 'bf:Organization', 'bf:Meeting'].includes(model.type)"
-                  },
-                  "remoteTypeahead": {
-                    "type": "documents",
-                    "field": "contribution.agent.preferred_name.suggest",
-                    "suggest": "/api/suggestions/completion",
-                    "allowAdd": true
-                  }
-                }
-              },
-              "identifiedBy": {
-                "title": "Identified by",
+               "agent": {
+                "title": "Agent",
                 "type": "object",
                 "additionalProperties": false,
                 "properties": {
                   "type": {
                     "title": "Type",
                     "type": "string",
-                    "enum": [
-                      "bf:Identifier",
-                      "bf:Local"
-                    ],
+                    "const": "bf:Person",
+                    "default": "bf:Person",
                     "form": {
-                      "options": [
-                        {
-                          "label": "bf:Identifier",
-                          "value": "bf:Identifier"
-                        },
-                        {
-                          "label": "bf:Local",
-                          "value": "bf:Local"
-                        }
-                      ]
-                    }
-                  },
-                  "source": {
-                    "title": "Source",
-                    "type": "string",
-                    "minLength": 1,
-                    "form": {
-                      "hideExpression": "!model ||  model.type !== 'bf:Local'",
-                      "expressionProperties": {
-                        "templateOptions.required": "model && model.type === 'bf:Local'"
+                      "templateOptions": {
+                        "wrappers": [
+                          "hide"
+                        ]
                       }
                     }
                   },
-                  "value": {
-                    "title": "Value",
+                  "preferred_name": {
+                    "title": "Preferred name",
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "form": {
+                      "remoteTypeahead": {
+                        "type": "documents",
+                        "field": "contribution.agent.preferred_name.suggest",
+                        "suggest": "/api/suggestions/completion",
+                        "allowAdd": true
+                      }
+                    }
+                  },
+                  "identifiedBy": {
+                    "title": "Identified by",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "type": {
+                        "title": "Type",
+                        "type": "string",
+                        "enum": [
+                          "bf:Identifier",
+                          "bf:Local"
+                        ],
+                        "form": {
+                          "options": [
+                            {
+                              "label": "bf:Identifier",
+                              "value": "bf:Identifier"
+                            },
+                            {
+                              "label": "bf:Local",
+                              "value": "bf:Local"
+                            }
+                          ]
+                        }
+                      },
+                      "source": {
+                        "title": "Source",
+                        "type": "string",
+                        "minLength": 1,
+                        "form": {
+                          "hideExpression": "!model ||  model.type !== 'bf:Local'",
+                          "expressionProperties": {
+                            "templateOptions.required": "model && model.type === 'bf:Local'"
+                          }
+                        }
+                      },
+                      "value": {
+                        "title": "Value",
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "propertiesOrder": [
+                      "type",
+                      "source",
+                      "value"
+                    ],
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "form": {
+                      "hide": true
+                    }
+                  },
+                  "date_of_birth": {
+                    "title": "Date of birth",
+                    "type": "string",
+                    "minLength": 4,
+                    "form": {
+                      "hide": true
+                    }
+                  },
+                  "date_of_death": {
+                    "title": "Date of death",
+                    "type": "string",
+                    "minLength": 4,
+                    "form": {
+                      "hide": true
+                    }
                   }
                 },
                 "propertiesOrder": [
                   "type",
-                  "source",
-                  "value"
+                  "preferred_name",
+                  "identifiedBy",
+                  "date_of_birth",
+                  "date_of_death"
                 ],
-                "form": {
-                  "hideExpression": "field.parent.model.type !== 'bf:Person'"
-                }
+                "required": [
+                  "type",
+                  "preferred_name"
+                ]
               },
-              "date_of_birth": {
-                "title": "Date of birth",
-                "type": "string",
-                "minLength": 4,
-                "form": {
-                  "hideExpression": "field.model.type !== 'bf:Person'"
-                }
+              "role": {
+                "$ref": "#/definitions/role"
               },
-              "date_of_death": {
-                "title": "Date of death",
+              "affiliation": {
+                "title": "Affiliation",
                 "type": "string",
-                "minLength": 4,
-                "form": {
-                  "hideExpression": "field.model.type !== 'bf:Person'"
-                }
+                "minLength": 1
               },
-              "place": {
-                "title": "Place",
-                "type": "string",
-                "minLength": 1,
-                "form": {
-                  "hideExpression": "field.model.type !== 'bf:Meeting'"
-                }
-              },
-              "date": {
-                "title": "Date",
-                "type": "string",
-                "minLength": 1,
-                "form": {
-                  "hideExpression": "field.model.type !== 'bf:Meeting'"
-                }
-              },
-              "number": {
-                "title": "Number",
-                "type": "string",
-                "minLength": 1,
-                "form": {
-                  "hideExpression": "field.model.type !== 'bf:Meeting'"
-                }
+              "controlledAffiliation": {
+                "$ref": "#/definitions/controlledAffiliation"
               }
             },
             "propertiesOrder": [
-              "type",
-              "preferred_name",
-              "place",
-              "number",
-              "date",
-              "identifiedBy",
-              "date_of_birth",
-              "date_of_death"
+              "agent",
+              "role",
+              "affiliation"
             ],
             "required": [
-              "type"
+              "agent",
+              "role"
             ]
           },
-          "role": {
-            "title": "Roles",
-            "type": "array",
-            "minItems": 1,
-            "items": {
-              "title": "Role",
-              "type": "string",
-              "enum": [
-                "dgs",
-                "prt",
-                "cre",
-                "edt",
-                "ctb"
-              ],
-              "default": "cre",
-              "form": {
-                "options": [
-                  {
-                    "label": "contribution_role_dgs",
-                    "value": "dgs"
+          {
+            "title": "Organization",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "agent": {
+                "title": "Agent",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "type": {
+                    "title": "Type",
+                    "type": "string",
+                    "const": "bf:Organization",
+                    "default": "bf:Organization",
+                    "form": {
+                      "templateOptions": {
+                        "wrappers": [
+                          "hide"
+                        ]
+                      }
+                    }
                   },
-                  {
-                    "label": "contribution_role_prt",
-                    "value": "prt"
-                  },
-                  {
-                    "label": "contribution_role_cre",
-                    "value": "cre"
-                  },
-                  {
-                    "label": "contribution_role_edt",
-                    "value": "edt"
-                  },
-                  {
-                    "label": "contribution_role_ctb",
-                    "value": "ctb"
+                  "preferred_name": {
+                    "title": "Preferred name",
+                    "type": "string",
+                    "minLength": 1,
+                    "form": {
+                      "remoteTypeahead": {
+                        "type": "documents",
+                        "field": "contribution.agent.preferred_name.suggest",
+                        "suggest": "/api/suggestions/completion",
+                        "allowAdd": true
+                      }
+                    }
                   }
+                },
+                "propertiesOrder": [
+                  "type",
+                  "preferred_name"
+                ],
+                "required": [
+                  "type",
+                  "preferred_name"
                 ]
+              },
+              "role": {
+                "$ref": "#/definitions/role"
+              },
+              "controlledAffiliation": {
+                "$ref": "#/definitions/controlledAffiliation"
               }
-            }
+            },
+            "propertiesOrder": [
+              "agent",
+              "role"
+            ],
+            "required": [
+              "agent",
+              "role"
+            ]
           },
-          "affiliation": {
-            "title": "Affiliation",
-            "type": "string",
-            "minLength": 1,
-            "form": {
-              "hideExpression": "field.parent.model.agent.type !== 'bf:Person'"
-            }
-          },
-          "controlledAffiliation": {
-            "title": "Controlled affiliations",
-            "type": "array",
-            "minItems": 1,
-            "items": {
-              "title": "Controlled affiliation",
-              "type": "string",
-              "minLength": 1
-            }
+          {
+            "title": "Meeting",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "agent": {
+                "title": "Agent",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "type": {
+                    "title": "Type",
+                    "type": "string",
+                    "const": "bf:Meeting",
+                    "default": "bf:Meeting",
+                    "form": {
+                      "templateOptions": {
+                        "wrappers": [
+                          "hide"
+                        ]
+                      }
+                    }
+                  },
+                  "preferred_name": {
+                    "title": "Preferred name",
+                    "type": "string",
+                    "minLength": 1,
+                    "form": {
+                      "remoteTypeahead": {
+                        "type": "documents",
+                        "field": "contribution.agent.preferred_name.suggest",
+                        "suggest": "/api/suggestions/completion",
+                        "allowAdd": true
+                      }
+                    }
+                  },
+                  "place": {
+                    "title": "Place",
+                    "type": "string",
+                    "minLength": 1,
+                    "form": {
+                      "hide": true
+                    }
+                  },
+                  "date": {
+                    "title": "Date",
+                    "type": "string",
+                    "minLength": 1,
+                    "form": {
+                      "hide": true
+                    }
+                  },
+                  "number": {
+                    "title": "Number",
+                    "type": "string",
+                    "minLength": 1,
+                    "form": {
+                      "hide": true
+                    }
+                  }
+                },
+                "propertiesOrder": [
+                  "type",
+                  "preferred_name",
+                  "place",
+                  "number",
+                  "date"
+                ],
+                "required": [
+                  "type",
+                  "preferred_name"
+                ]
+              },
+              "role": {
+                "$ref": "#/definitions/role"
+              },
+              "controlledAffiliation": {
+                "$ref": "#/definitions/controlledAffiliation"
+              }
+            },
+            "propertiesOrder": [
+              "agent",
+              "role"
+            ],
+            "required": [
+              "agent",
+              "role"
+            ]
           }
-        },
-        "propertiesOrder": [
-          "agent",
-          "role",
-          "affiliation"
-        ],
-        "required": [
-          "agent",
-          "role"
         ]
       },
       "form": {
@@ -1478,6 +1540,7 @@
                   },
                   "statement": {
                     "title": "Statement",
+                    "description": "Publication statement of the host document if it is a book, for example \"Paris : PUF, 2016\"",
                     "type": "string",
                     "minLength": 1
                   }
@@ -1734,7 +1797,7 @@
       "form": {
         "hide": true,
         "expressionProperties": {
-          "templateOptions.required": "['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_3e5a', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)"
+          "templateOptions.required": "field.parent.model && ['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_3e5a', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)"
         }
       }
     },
@@ -1905,5 +1968,60 @@
     "$schema",
     "pid",
     "title"
-  ]
+  ],
+  "definitions": {
+    "role": {
+      "title": "Roles",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Role",
+        "type": "string",
+        "enum": [
+          "dgs",
+          "prt",
+          "cre",
+          "edt",
+          "ctb"
+        ],
+        "default": "cre",
+        "form": {
+          "options": [
+            {
+              "label": "contribution_role_dgs",
+              "value": "dgs"
+            },
+            {
+              "label": "contribution_role_prt",
+              "value": "prt"
+            },
+            {
+              "label": "contribution_role_cre",
+              "value": "cre"
+            },
+            {
+              "label": "contribution_role_edt",
+              "value": "edt"
+            },
+            {
+              "label": "contribution_role_ctb",
+              "value": "ctb"
+            }
+          ]
+        }
+      }
+    },
+    "controlledAffiliation": {
+      "title": "Controlled affiliations",
+      "type": "array",
+      "items": {
+        "title": "Controlled affiliation",
+        "type": "string",
+        "minLength": 1
+      },
+      "form": {
+        "hide": true
+      }
+    }
+  }
 }

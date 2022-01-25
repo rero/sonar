@@ -573,7 +573,7 @@
               "minLength": 1,
               "pattern": "^[0-9]+$",
               "form": {
-                "hideExpression": "!['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)",
+                "hideExpression": "field.parent.parent.model && !['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)",
                 "templateOptions": {
                   "placeholder": "Example: 1"
                 },
@@ -590,7 +590,7 @@
               "minLength": 1,
               "pattern": "^[0-9]+$",
               "form": {
-                "hideExpression": "!['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)",
+                "hideExpression": "field.parent.parent.model && !['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)",
                 "templateOptions": {
                   "placeholder": "Example: 10"
                 },
@@ -633,12 +633,12 @@
                 "minLength": 1
               },
               "form": {
-                "hideExpression": "['coar:c_6501'].includes(field.parent.parent.model.documentType)"
+                "hideExpression": "field.parent.parent.model && ['coar:c_6501'].includes(field.parent.parent.model.documentType)"
               }
             },
             "publisher": {
               "title": "Publication statement",
-              "definition": "Place, publisher and date of the host document. For example: Paris : PUF, 2016",
+              "description": "Publication statement of the host document if it is a book, for example \"Paris : PUF, 2016\"",
               "type": "string",
               "minLength": 1
             },
@@ -697,7 +697,7 @@
             }
           },
           "form": {
-            "hideExpression": "!['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_3e5a', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)",
+            "hideExpression": "field.parent.model && !['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_3e5a', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)",
             "templateOptions": {
               "wrappers": [
                 "card"
@@ -899,7 +899,7 @@
             "degree"
           ],
           "form": {
-            "hideExpression": "!['coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'habilitation_thesis', 'advanced_studies_thesis', 'other'].includes(field.parent.model.documentType)",
+            "hideExpression": "field.parent.model && !['coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'habilitation_thesis', 'advanced_studies_thesis', 'other'].includes(field.parent.model.documentType)",
             "templateOptions": {
               "wrappers": [
                 "card"
