@@ -58,9 +58,19 @@ class AffiliationResolver():
         if not searched_affiliation:
             return None
 
+        collected_affiliations = []
         for affiliations in self.affiliations:
+            # the first string in the row is the standard form, to be stored
+            standard_form = affiliations[0]
             for affiliation in affiliations:
-                if fuzz.partial_ratio(searched_affiliation, affiliation) > 92:
-                    return affiliations[0]
-
-        return None
+                score = fuzz.partial_ratio(searched_affiliation, affiliation)
+                if (score > 92 and standard_form not in collected_affiliations):
+                    # handle special case UZH / ZHdK
+                    # TODO: solve this special case by converting the CSV file to JSON
+                    # using rejected forms https://github.com/rero/sonar/issues/824
+                    if (affiliation.lower() == 'zurich university' and
+                            'zurich university of the arts' in searched_affiliation.lower()
+                    ):
+                        continue
+                    collected_affiliations.append(standard_form)
+        return collected_affiliations
