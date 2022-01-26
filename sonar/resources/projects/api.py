@@ -119,9 +119,8 @@ class RecordComponent(ServiceComponent):
         affiliation_resolver = AffiliationResolver()
         for investigator in data.get('investigators', []):
             if investigator.get('affiliation'):
-                controlled_affiliation = affiliation_resolver.resolve(
+                controlled_affiliations = affiliation_resolver.resolve(
                     investigator['affiliation'])
-                if controlled_affiliation:
-                    investigator['controlledAffiliation'] = [
-                        controlled_affiliation
-                    ]
+                if controlled_affiliations:
+                    investigator[
+                        'controlledAffiliation'] = controlled_affiliations

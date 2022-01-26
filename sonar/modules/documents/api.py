@@ -117,12 +117,12 @@ class DocumentRecord(SonarRecord):
         affiliation_resolver = AffiliationResolver()
         for contributor in data.get('contribution', []):
             if contributor.get('affiliation'):
-                controlled_affiliation = affiliation_resolver.resolve(
+                controlled_affiliations = affiliation_resolver.resolve(
                     contributor['affiliation'])
-                if controlled_affiliation:
-                    contributor['controlledAffiliation'] = [
-                        controlled_affiliation
-                    ]
+                if controlled_affiliations:
+                    contributor[
+                        'controlledAffiliation'] = controlled_affiliations
+
 
     @classmethod
     def get_record_by_identifier(cls, identifiers):
