@@ -13,11 +13,12 @@ invenio-oaiharvester = {tag = "v1.0.0a4", git = "https://github.com/inveniosoftw
 # Invenio 3.4 base modules. Same as invenio metadata extras without invenio-search-ui
 invenio-indexer = ">=1.2.0,<1.3.0"
 invenio-jsonschemas = ">=1.1.1,<1.2.0"
-invenio-oaiserver = ">=1.2.0,<1.3.0"
+# invenio-oaiserver = ">=1.2.0,<1.3.0"
+invenio-oaiserver = {branch = "sets", git = "https://github.com/rero/invenio-oaiserver.git"}
 invenio-pidstore = ">=1.2.1,<1.3.0"
 invenio-records-rest = ">=1.8.0,<1.9.0"
 invenio-records-ui= ">=1.2.0,<1.3.0"
-invenio-records = {version = ">=1.4.0,<1.6.0", allow-prereleases = true}
+invenio-records = "<=1.6.0"
 
 invenio = {version = ">=3.4.0,<3.5.0", extras = ["base", "files", "postgresql", "auth", "elasticsearch7", "docs", "tests"]}
 uwsgi = ">=2.0"
