@@ -134,52 +134,79 @@ def test_logged_user(app, client, superuser, admin, moderator, submitter,
     assert not res.json['metadata']['permissions']['deposits']['list']
 
 
-def test_schemas(client, admin, user, submitter, moderator):
-    """Test JSON schemas endpoint."""
+def test_non_existing_schema(client, user):
+    """Test schema no existing."""
+    login_user_via_session(client, email=user['email'])
+    res = client.get(url_for('sonar.schemas', record_type='not_existing'))
+    assert res.status_code == 404
+
+
+def test_schema_documents(client, user, superuser):
+    """Test schema documents."""
     res = client.get(url_for('sonar.schemas', record_type='documents'))
     assert res.status_code == 200
     assert res.json['schema']['properties'].get('organisation')
 
+    login_user_via_session(client, email=user['email'])
+    res = client.get(url_for('sonar.schemas', record_type='documents'))
+    assert res.status_code == 200
+    assert not res.json['schema']['properties'].get('collections')
+    assert 'collections' not in res.json['schema']['propertiesOrder']
+    assert not res.json['schema']['properties'].get('subdivisions')
+    assert 'subdivisions' not in res.json['schema']['propertiesOrder']
+    assert not res.json['schema']['properties'].get('organisations')
+    assert 'organisations' not in res.json['schema']['propertiesOrder']
+
+    login_user_via_session(client, email=superuser['email'])
+    res = client.get(url_for('sonar.schemas', record_type='documents'))
+    assert res.status_code == 200
+    assert not res.json['schema']['properties'].get('collections')
+    assert 'collections' not in res.json['schema']['propertiesOrder']
+    assert not res.json['schema']['properties'].get('subdivisions')
+    assert 'subdivisions' not in res.json['schema']['propertiesOrder']
+    assert res.json['schema']['properties'].get('organisation')
+    assert 'organisation' in res.json['schema']['propertiesOrder']
+
+
+def test_schema_users(client, admin, admin_shared):
+    """Test schema users."""
     res = client.get(url_for('sonar.schemas', record_type='users'))
     assert res.status_code == 200
     assert res.json['schema']['properties'].get('organisation')
     assert res.json['schema']['properties'].get('role')
 
-    res = client.get(url_for('sonar.schemas', record_type='deposits'))
-    assert res.status_code == 200
-
     login_user_via_session(client, email=admin['email'])
-
-    res = client.get(url_for('sonar.schemas', record_type='documents'))
-    assert res.status_code == 200
-    assert not res.json['schema']['properties'].get('organisation')
-
-    res = client.get(url_for('sonar.schemas', record_type='deposits'))
-    assert res.status_code == 200
-
     res = client.get(url_for('sonar.schemas', record_type='users'))
     assert res.status_code == 200
     assert not res.json['schema']['properties'].get('organisation')
     assert res.json['schema']['properties'].get('role')
     assert len(res.json['schema']['properties']['role']['enum']) == 4
 
-    res = client.get(url_for('sonar.schemas', record_type='not_existing'))
-    assert res.status_code == 404
+    login_user_via_session(client, email=admin_shared['email'])
+    res = client.get(url_for('sonar.schemas', record_type='users'))
+    assert res.status_code == 200
+    assert not res.json['schema']['properties'].get('subdivision')
 
-    # Organisations, with admin user --> no fields `isShared` and `isDedicated`
+
+def test_schema_organisations(client, admin, user):
+    """Test schema organisations."""
+    login_user_via_session(client, email=admin['email'])
+    # admin user --> no fields `isShared` and `isDedicated`
     res = client.get(url_for('sonar.schemas', record_type='organisations'))
     assert res.status_code == 200
     assert 'isShared' not in res.json['schema']['propertiesOrder']
     assert 'isDedicated' not in res.json['schema']['propertiesOrder']
 
     login_user_via_session(client, email=user['email'])
-
     res = client.get(url_for('sonar.schemas', record_type='users'))
     assert res.status_code == 200
     assert not res.json['schema']['properties'].get('organisation')
     assert not res.json['schema']['properties'].get('role')
 
-    # Projects
+
+def test_schema_projects(client, user):
+    """Test schema projects."""
+    login_user_via_session(client, email=user['email'])
     res = client.get(url_for('sonar.schemas', record_type='projects'))
     assert res.status_code == 200
     assert not res.json['schema']['properties']['metadata']['properties'].get(
@@ -188,20 +215,45 @@ def test_schemas(client, admin, user, submitter, moderator):
     assert 'organisation' not in res.json['schema']['properties']['metadata'][
         'propertiesOrder']
 
+
+def test_schema_deposits(client, moderator, submitter, moderator_dedicated):
+    """Test schema deposits."""
     login_user_via_session(client, email=moderator['email'])
     res = client.get(url_for('sonar.schemas', record_type='deposits'))
     assert res.status_code == 200
-    assert res.json[
+    # Moderator with shared organisation
+    assert not res.json[
         'schema']['properties']['diffusion']['properties'].get('subdivisions')
-    assert 'subdivisions' in res.json[
+    assert 'subdivisions' not in res.json[
         'schema']['properties']['diffusion']['propertiesOrder']
+    assert not res.json[
+        'schema']['properties']['metadata']['properties'].get('collections')
+    assert 'collections' not in res.json[
+        'schema']['properties']['metadata']['propertiesOrder']
 
     login_user_via_session(client, email=submitter['email'])
     res = client.get(url_for('sonar.schemas', record_type='deposits'))
     assert res.status_code == 200
     assert not res.json[
         'schema']['properties']['diffusion']['properties'].get('subdivisions')
-    assert  not 'subdivisions' in res.json[
+    assert 'subdivisions' not in res.json[
+        'schema']['properties']['diffusion']['propertiesOrder']
+    assert not res.json[
+        'schema']['properties']['metadata']['properties'].get('collections')
+    assert 'collections' not in res.json[
+        'schema']['properties']['metadata']['propertiesOrder']
+
+    # Moderator with dedicated organisation
+    login_user_via_session(client, email=moderator_dedicated['email'])
+    res = client.get(url_for('sonar.schemas', record_type='deposits'))
+    assert res.status_code == 200
+    assert res.json[
+        'schema']['properties']['metadata']['properties'].get('collections')
+    assert 'collections' in res.json[
+        'schema']['properties']['metadata']['propertiesOrder']
+    assert res.json[
+        'schema']['properties']['diffusion']['properties'].get('subdivisions')
+    assert 'subdivisions' in res.json[
         'schema']['properties']['diffusion']['propertiesOrder']
 
 

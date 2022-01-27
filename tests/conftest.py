@@ -132,12 +132,12 @@ def app_config(app_config):
 def make_organisation(app, db, bucket_location, without_oaiset_signals):
     """Factory for creating organisation."""
 
-    def _make_organisation(code):
+    def _make_organisation(code, is_shared=True):
         data = {
             'code': code,
             'name': code,
-            'isShared': True,
-            'isDedicated': False,
+            'isShared': is_shared,
+            'isDedicated': not is_shared,
             'documentsCustomField1': {
                 'label': [{
                     'language': 'eng',
@@ -194,11 +194,13 @@ def roles(base_app, db):
 def make_user(app, db, make_organisation):
     """Factory for creating user."""
 
-    def _make_user(role_name, organisation='org', access=None):
+    def _make_user(
+        role_name, organisation='org', organisation_is_shared=True,
+        access=None):
         name = role_name
 
         if organisation:
-            make_organisation(organisation)
+            make_organisation(organisation, is_shared=organisation_is_shared)
             name = organisation + name
 
         email = '{name}@rero.ch'.format(name=name)
@@ -284,6 +286,16 @@ def moderator(make_user):
 
 
 @pytest.fixture()
+def moderator_dedicated(make_user):
+    """Create moderator organisation dedicated."""
+    return make_user(
+        'moderator',
+        organisation='dedicated',
+        organisation_is_shared=False,
+        access='admin-access')
+
+
+@pytest.fixture()
 def submitter(make_user):
     """Create submitter."""
     return make_user('submitter', access='admin-access')
@@ -296,6 +308,16 @@ def admin(make_user):
 
 
 @pytest.fixture()
+def admin_shared(make_user):
+    """Create shared admin user."""
+    return make_user(
+        'admin',
+        organisation='shared',
+        organisation_is_shared=True,
+        access='admin-access')
+
+
+@pytest.fixture()
 def superuser(make_user):
     """Create super user."""
     return make_user('superuser', access='superuser-access')
@@ -304,7 +326,7 @@ def superuser(make_user):
 @pytest.fixture()
 def document_json(app, db, bucket_location, organisation):
     """JSON document fixture."""
-    data = {
+    return {
         'identifiedBy': [{
             'value': 'urn:nbn:ch:rero-006-108713',
             'type': 'bf:Urn'
@@ -423,8 +445,6 @@ def document_json(app, db, bucket_location, organisation):
         },
         'customField1': ['Test']
     }
-
-    return data
 
 
 @pytest.fixture()
