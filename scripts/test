@@ -17,6 +17,8 @@
 # removed when https://github.com/pyupio/safety-db/pull/2274 is merged and
 # released.
 
+set -e
+
 SCRIPT_PATH=$(dirname "$0")
 
 source ${SCRIPT_PATH}/functions
@@ -31,18 +33,21 @@ fi
 # +============================+===========+==========================+==========+
 # | package                    | installed | affected                 | ID       |
 # +============================+===========+==========================+==========+
+# | wtforms                    | 2.3.3     | <3.0.0a1                 | 42852    |
 # | sqlalchemy-utils           | 0.35.0    | >=0.27.0                 | 42194    |
 # | flask-caching              | 1.10.1    | <=1.10.1                 | 40459    |
+# | celery                     | 5.0.5     | <5.2.0                   | 42498    |
+# | celery                     | 5.0.5     | <5.2.2                   | 43738    |
 # | werkzeug                   | 1.0.1     | <2.0.2                   | 42050    |
-# | wtforms                    | 2.3.3     | <3.0.0a1                 | 42852    |
 # | kombu                      | 5.1.0     | <5.2.1                   | 42497    |
-# | celery                     | 5.1.2     | <5.2.0                   | 42498    |
 # +============================+===========+==========================+==========+
-safety check -i 42194 -i 40459 -i 42050 -i 42852 -i 42497 -i 42498 && \
-pydocstyle sonar tests docs && \
-isort --check-only --diff "${SCRIPT_PATH}/.." && \
+safety check -i 42852 -i 42194 -i 40459 -i 42498 -i 43738 -i 42050 -i 42497
+pydocstyle sonar tests docs
+isort --check-only --diff "${SCRIPT_PATH}/.."
 autoflake -c -r --remove-all-unused-imports --ignore-init-module-imports . &> /dev/null || {
   autoflake --remove-all-unused-imports -r --ignore-init-module-imports .
-} && \
-sphinx-build -qnNW docs docs/_build/html && \
+  exit 1
+}
+sphinx-build -qnNW docs docs/_build/html
 pytest
+
