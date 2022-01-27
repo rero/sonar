@@ -120,5 +120,10 @@
         "path": "./unifr/logo.png"
       }
     ]
+  },
+  {
+    "code": "shared",
+    "name": "Organisation shared",
+    "isShared": true
   }
 ]

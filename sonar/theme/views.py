@@ -206,56 +206,6 @@ def schemas(record_type):
     """
     try:
         json_schema = JSONSchemaFactory.create(record_type)
-        schema = json_schema.get_schema()
-
-        # TODO: Maybe find a proper way to do this.
-        if record_type in [
-                'users', 'documents'
-        ] and not current_user.is_anonymous and current_user_record:
-            if record_type == 'users':
-                # If user is admin, restrict available roles list.
-                if current_user_record.is_admin:
-                    reachable_roles = current_user_record.\
-                        get_all_reachable_roles()
-
-                    schema['properties']['role']['form']['options'] = []
-                    for role in reachable_roles:
-                        schema['properties']['role']['form']['options'].append(
-                            {
-                                'label': 'role_{role}'.format(role=role),
-                                'value': role
-                            })
-
-                    schema['properties']['role'][
-                        'enum'] = current_user_record.get_all_reachable_roles(
-                        )
-                # User cannot select role
-                else:
-                    schema['properties'].pop('role')
-                    if 'role' in schema.get('propertiesOrder', []):
-                        schema['propertiesOrder'].remove('role')
-
-            if not current_user_record.is_superuser:
-                schema['properties'].pop('organisation')
-                if 'organisation' in schema.get('propertiesOrder', []):
-                    schema['propertiesOrder'].remove('organisation')
-
-        if (record_type == 'projects' and not current_user.is_anonymous and
-                current_user_record and not current_user_record.is_superuser):
-            schema['properties']['metadata']['properties'].pop(
-                'organisation', None)
-            schema['properties']['metadata']['propertiesOrder'].remove(
-                'organisation')
-
-        # Remove modes fields if user does not have superuser role.
-        if (record_type == 'organisations' and
-                not current_user_record.is_superuser):
-            if 'isDedicated' in schema.get('propertiesOrder', []):
-                schema['propertiesOrder'].remove('isDedicated')
-
-            if 'isShared' in schema.get('propertiesOrder', []):
-                schema['propertiesOrder'].remove('isShared')
-
         return jsonify({'schema': json_schema.process()})
     except JSONSchemaNotFound:
         abort(404)
