@@ -25,6 +25,7 @@ from flask import current_app, render_template, request
 from flask_bootstrap import Bootstrap
 from flask_security import user_registered
 from flask_wiki import Wiki
+from flask_wiki.markdown_ext import BootstrapExtension
 from invenio_files_rest.signals import file_deleted, file_uploaded
 from invenio_indexer.signals import before_record_index
 from werkzeug.datastructures import MIMEAccept
@@ -45,7 +46,6 @@ from sonar.resources.projects.service import \
 from . import config_sonar
 from .route_converters import OrganisationCodeConverter
 
-from flask_wiki.markdown_ext import BootstrapExtension
 
 def utility_processor():
     """Dictionary for passing data to templates."""
