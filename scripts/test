@@ -34,20 +34,14 @@ fi
 # | package                    | installed | affected                 | ID       |
 # +============================+===========+==========================+==========+
 # | wtforms                    | 2.3.3     | <3.0.0a1                 | 42852    |
-# | sqlalchemy-utils           | 0.35.0    | >=0.27.0                 | 42194    |
-# | flask-caching              | 1.10.1    | <=1.10.1                 | 40459    |
-# | celery                     | 5.0.5     | <5.2.0                   | 42498    |
-# | celery                     | 5.0.5     | <5.2.2                   | 43738    |
 # | werkzeug                   | 1.0.1     | <2.0.2                   | 42050    |
-# | kombu                      | 5.1.0     | <5.2.1                   | 42497    |
-# | pillow                     | 8.4.0     | <9.0.0                   | 44487    |
-# | pillow                     | 8.4.0     | <9.0.0                   | 44485    |
-# | pillow                     | 8.4.0     | <9.0.0                   | 44524    |
-# | pillow                     | 8.4.0     | <9.0.0                   | 44525    |
-# | pillow                     | 8.4.0     | <9.0.0                   | 44486    |
+# | sqlalchemy-utils           | 0.35.0    | >=0.27.0                 | 42194    |
 # | flask-security             | 3.0.0     | >0                       | 44501    |
+# | flask-caching              | 1.10.1    | <=1.10.1                 | 40459    |
+# | celery                     | 5.1.2     | <5.2.0                   | 42498    |
+# | celery                     | 5.1.2     | <5.2.2                   | 43738    |
 # +============================+===========+==========================+==========+
-safety check -i 42852 -i 42194 -i 40459 -i 42498 -i 43738 -i 42050 -i 42497 -i 44487 -i 44485 -i 44524 -i 44524 -i 44525 -i 44486 -i 44501
+safety check -i 42852 -i 42050 -i 42194 -i 44501 -i 40459 -i 42498 -i 43738
 pydocstyle sonar tests docs
 isort --check-only --diff "${SCRIPT_PATH}/.."
 autoflake -c -r --remove-all-unused-imports --ignore-init-module-imports . &> /dev/null || {

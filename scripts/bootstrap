@@ -52,6 +52,10 @@ title "Bootstrap script"
 section "Upgrading pip..." "info"
 poetry run pip install --upgrade pip
 
+# Install setuptools <58 needed to install fs 0.5.4
+section "Install setuptools<58" "info"
+poetry run pip install "setuptools<58"
+
 # Installs all packages specified in poetry.lock
 if [ "$deploy" = false ]; then
   section "Updating dependencies" "info"

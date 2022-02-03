@@ -21,20 +21,20 @@ jobs:
         sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
 
     - name: Setup node
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2
       with:
         node-version: '12'
 
     - name: Docker compose up
       run: docker-compose up -d
 
-    - name: Setup Python 3.6
+    - name: Setup Python 3.9
       uses: actions/setup-python@v2
       with:
-        python-version: 3.6
+        python-version: 3.9
 
     - name: Install Poetry
-      uses: snok/install-poetry@v1.1.1
+      uses: snok/install-poetry@v1
       with:
         version: 1.0.10
 

@@ -6,7 +6,8 @@ authors = ["RERO <software@rero.ch>"]
 license = "GNU Affero General Public License v3.0"
 
 [tool.poetry.dependencies]
-python = ">= 3.6, <3.8"
+python = ">= 3.7, <3.10"
+
 invenio-logging = { version = ">=1.3.0,<1.4.0", extras = ["sentry-sdk", "sentry"] }
 invenio-oaiharvester = {tag = "v1.0.0a4", git = "https://github.com/inveniosoftware/invenio-oaiharvester.git"}
 
@@ -19,8 +20,11 @@ invenio-pidstore = ">=1.2.1,<1.3.0"
 invenio-records-rest = ">=1.8.0,<1.9.0"
 invenio-records-ui= ">=1.2.0,<1.3.0"
 invenio-records = "<=1.6.0"
-
+invenio-stats = "^1.0.0-alpha.18"
+# TODO: update invenio-records-resources
+invenio-records-resources = "==0.12.5"
 invenio = {version = ">=3.4.0,<3.5.0", extras = ["base", "files", "postgresql", "auth", "elasticsearch7", "docs", "tests"]}
+
 uwsgi = ">=2.0"
 uwsgitop = ">=0.11"
 uwsgi-tools = ">=1.1.1"
@@ -40,21 +44,20 @@ cryptography = ">=3.2"
 netaddr = "*"
 dcxml = "*"
 lxml = ">=4.6.3,<5.0.0"
-webdavclient3 = "^3.14.5"
-fuzzywuzzy = "^0.18.0"
-python-Levenshtein = "^0.12.0"
-invenio-stats = "^1.0.0-alpha.18"
-polib = "^1.1.0"
-idutils = "^1.1.8"
-invenio-records-resources = "^0.12.5"
+webdavclient3 = ">=3.14.5"
+fuzzywuzzy = ">=0.18.0"
+python-Levenshtein = ">=0.12.0"
+polib = ">=1.1.0"
+idutils = ">=1.1.8"
 urllib3 = ">=1.26.4"
 coverage = {version = ">=6.0b1", allow-prereleases = true}
-pillow = ">=8.3.2"
-# TODO: change back to: celery = ">=5.0.0" after
-# `unexpected keyword argument 'ignore_result'` is solved in version 5.0.6
-celery = "5.0.5"
+pillow = ">=9.0.0"
+celery = ">=5.0.0"
 jedi = "<0.18.0"
-mistune = "<2.0.0"
+wtforms = "<3.0.0"
+flask-wtf = "<1.0.0"
+zipp = "*"
+pycparser = "*"
 
 [tool.poetry.dev-dependencies]
 Flask-Debugtoolbar = ">=0.10.1"
@@ -63,8 +66,8 @@ mock = ">=2.0.0"
 pytest-invenio = ">=1.4.1,<1.5.0"
 safety = ">=1.8"
 appnope = { version = "*", optional = true }
-autoflake = "^1.4"
+autoflake = ">=1.4"
 
 [build-system]
-requires = ["poetry>=0.12"]
+requires = ["poetry>=0.12", "setuptools<58"]
 build-backend = "poetry.core.masonry.api"
