@@ -12,9 +12,12 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU Affero General Public License for more details.
 
-"""SONAR is a future archive of scholarly publications. It intends to collect,
-promote and preserve the publications of authors affiliated with Swiss public
-research institutions"""
+"""
+SONAR is a future archive of scholarly publications.
+
+It intends to collect, promote and preserve the publications of authors
+affiliated with Swiss publicresearch institutions
+"""
 
 import os
 
@@ -175,7 +178,7 @@ setup(
             "collections = sonar.modules.collections.jsonresolvers",
             "subdivisions = sonar.modules.subdivisions.jsonresolvers"
         ],
-        'invenio_celery.tasks' : [
+        'invenio_celery.tasks': [
             'documents = sonar.modules.documents.tasks',
             'stats = sonar.modules.stats.tasks',
         ],
@@ -194,7 +197,9 @@ setup(
         'Programming Language :: Python',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Development Status :: 3 - Alpha',
     ]
 )

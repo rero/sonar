@@ -22,17 +22,16 @@
 # and includes Pip, Pipenv, Node.js, NPM and some few standard libraries
 # Invenio usually needs.
 
-FROM python:3.6-slim-stretch
+FROM python:3.9-slim-buster
 
 # require debian packages
 RUN apt-get upgrade -y && apt-get update -y
-RUN apt-get install --no-install-recommends -y git vim-tiny curl gcc gnupg libc6-dev libxml2-dev libxmlsec1-dev libxmlsec1-openssl xpdf xpdf-utils ghostscript imagemagick && rm -rf /var/lib/apt/lists/*
-RUN pip install --upgrade setuptools wheel pip "poetry<1.1.0"
+RUN apt-get install --no-install-recommends -y git vim-tiny curl gcc g++ pkg-config gnupg libc6-dev libxml2-dev libxmlsec1-dev libxmlsec1-openssl xpdf xpdf-utils ghostscript imagemagick && rm -rf /var/lib/apt/lists/*
+RUN pip install --upgrade wheel pip "poetry<1.1.0"
 
 # # Install Node
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get install --no-install-recommends -y nodejs && rm -rf /var/lib/apt/lists/*
-RUN npm install --silent  node-sass@4.14.1 clean-css-cli@4.3.0 uglify-js@3.9.4 requirejs@2.3.6
 
 # Env variables
 ENV WORKING_DIR=/invenio
@@ -57,5 +56,7 @@ RUN useradd invenio --uid ${INVENIO_USER_ID}  --home ${WORKING_DIR} && \
     chmod -R go+w ${WORKING_DIR}
 
 # Install dependencies
-RUN poetry run pip install --upgrade pip
+RUN poetry run pip install --upgrade pip "setuptools<58"
 RUN poetry install --no-dev
+
+

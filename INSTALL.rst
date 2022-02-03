@@ -30,9 +30,9 @@ among other things.
 
 .. code-block:: console
 
-    $ pyenv install 3.6.10
+    $ pyenv install 3.9.9
     $ cd sonar
-    $ pyenv local 3.6.10
+    $ pyenv local 3.9.9
     $ pip install poetry
 
 Next, ``cd`` into the project directory and bootstrap the instance (this will install
