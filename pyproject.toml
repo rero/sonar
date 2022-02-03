@@ -54,6 +54,7 @@ pillow = ">=8.3.2"
 # `unexpected keyword argument 'ignore_result'` is solved in version 5.0.6
 celery = "5.0.5"
 jedi = "<0.18.0"
+mistune = "<2.0.0"
 
 [tool.poetry.dev-dependencies]
 Flask-Debugtoolbar = ">=0.10.1"
