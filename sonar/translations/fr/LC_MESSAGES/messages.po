@@ -12,15 +12,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2022-02-03 08:24+0100\n"
-"PO-Revision-Date: 2021-11-19 22:49+0000\n"
+"PO-Revision-Date: 2022-02-03 16:16+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"fr/>\n"
 "Language: fr\n"
-"Language-Team: French "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/fr/>\n"
-"Plural-Forms: nplurals=2; plural=n > 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.11-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: sonar/theme/views.py:72
@@ -119,9 +120,8 @@ msgid "Agent"
 msgstr "Agent"
 
 #: sonar/help/templates/help/page_wiki_search.html:33
-#, fuzzy
 msgid "All languages"
-msgstr "Langues"
+msgstr "Toutes les langues"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:652
 msgid "Allophone student"
@@ -359,7 +359,7 @@ msgstr "Affiliations contrôlées"
 
 #: sonar/help/templates/help/page_wiki.html:41
 msgid "Created:"
-msgstr ""
+msgstr "Créé :"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:223
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:285
@@ -761,14 +761,12 @@ msgid "Follow us"
 msgstr "Nous suivre"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:90
-#, fuzzy
 msgid "Footer"
-msgstr "Note"
+msgstr "Pied de page"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:86
-#, fuzzy
 msgid "Footers"
-msgstr "Notes"
+msgstr "Pieds de page"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:103
 msgid "Force external URL"
@@ -886,9 +884,8 @@ msgid "Help & Documentation"
 msgstr "Aide & documentation"
 
 #: sonar/help/templates/help/page_wiki_search_navigation.html:26
-#, fuzzy
 msgid "Home"
-msgstr "Montrer plus"
+msgstr "Page d'accueil"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:566
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1528
@@ -1096,9 +1093,8 @@ msgid "Last name, first name, ex: Doe, John"
 msgstr "Nom, prénom, ex : Dupont, Jean"
 
 #: sonar/help/templates/help/page_wiki.html:41
-#, fuzzy
 msgid "Last updated:"
-msgstr "Date de début"
+msgstr "Dernière mise à jour :"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:174
 msgid "Lecturer/professor"
@@ -1226,7 +1222,6 @@ msgid "Mediator"
 msgstr "Médiateur·trice"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1386
-#, fuzzy
 msgid "Meeting"
 msgstr "Conférence"
 
@@ -1352,7 +1347,6 @@ msgid "Organisations"
 msgstr "Organisations"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1323
-#, fuzzy
 msgid "Organization"
 msgstr "Organisation"
 
@@ -1438,7 +1432,6 @@ msgid "Persistent identifier"
 msgstr "Identifiant pérenne"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1181
-#, fuzzy
 msgid "Person"
 msgstr "Personne"
 
@@ -1488,13 +1481,13 @@ msgid "Postal code"
 msgstr "Code postal"
 
 #: sonar/theme/templates/sonar/footer.html:58
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Powered by <a href=\"%(link)s\" target=\"_blank\" "
 "rel=\"noopener\">SONAR</a>"
 msgstr ""
-"Propulsé par <a href=\"%(link)s\" target=\"_blank\" "
-"rel=\"noopener\">RERO</a>"
+"Propulsé par <a href=\"%(link)s\" target=\"_blank\" rel=\"noopener\""
+">SONAR</a>"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:704
 msgid "Practitioner-trainer"
@@ -1523,9 +1516,8 @@ msgid "Primary teacher"
 msgstr "Enseignant·e primaire"
 
 #: sonar/common/jsonschemas/masked-v1.0.0.json:18
-#, fuzzy
 msgid "Private"
-msgstr "date de validation"
+msgstr "Privé"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:505
 msgid "Private foundation"
@@ -1571,7 +1563,7 @@ msgstr "Pychomotricien·ne"
 
 #: sonar/common/jsonschemas/masked-v1.0.0.json:14
 msgid "Public"
-msgstr ""
+msgstr "Public"
 
 #: sonar/theme/templates/sonar/macros/macro.html:33
 msgid "Public access from"
@@ -1595,14 +1587,15 @@ msgid "Publication place"
 msgstr "Lieu de publication"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:640
-#, fuzzy
 msgid "Publication statement"
-msgstr "Lieu de publication"
+msgstr "Mention de publication"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:641
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1544
 msgid "Publication statement of the host document if it is a book, for example \\"
 msgstr ""
+"Mention de publication du document hôte (s'il s'agit d'un livre), par "
+"exemple \"Paris : PUF, 2016\""
 
 #: sonar/modules/documents/templates/documents/record.html:144
 msgid "Published in"
@@ -1655,9 +1648,8 @@ msgid "Responsibility"
 msgstr "Mention de responsabilité"
 
 #: sonar/common/jsonschemas/masked-v1.0.0.json:22
-#, fuzzy
 msgid "Restricted to the organisation"
-msgstr "Sauf au sein de l'organisation"
+msgstr "Limité à l'organisation"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:59
 msgid "Rights reserved"
@@ -1967,7 +1959,7 @@ msgstr "Swissuniversities"
 
 #: sonar/help/templates/help/page_wiki.html:52
 msgid "Table of contents"
-msgstr ""
+msgstr "Table des matières"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:668
 msgid "Tertiary teacher"
@@ -2182,13 +2174,12 @@ msgid "Vice-rector HE"
 msgstr "Vice-recteur·trice HE"
 
 #: sonar/common/jsonschemas/masked-v1.0.0.json:2
-#, fuzzy
 msgid "Visibility"
-msgstr "Mention de responsabilité"
+msgstr "Visibilité"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:316
 msgid "Visible facets in the public interface for documents"
-msgstr ""
+msgstr "Facettes visibles dans l'interface publique pour les documents"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:571
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1498
@@ -2259,7 +2250,7 @@ msgstr "date de validation"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:360
 msgid "author"
-msgstr ""
+msgstr "auteur"
 
 #: sonar/translations/manual_translations.txt:38
 msgid "benefits"
@@ -2792,9 +2783,8 @@ msgid "coinvestigator"
 msgstr "co-chercheur"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:352
-#, fuzzy
 msgid "collection"
-msgstr "Collection"
+msgstr "collection"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1131
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1993
@@ -2808,9 +2798,8 @@ msgstr "Contributeur"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1143
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:2005
-#, fuzzy
 msgid "contribution_role_dgc"
-msgstr "Superviseur académique"
+msgstr "Membre du jury"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1147
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:2009
@@ -2836,7 +2825,6 @@ msgid "contributor"
 msgstr "Contributeur"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:344
-#, fuzzy
 msgid "controlled_affiliation"
 msgstr "Affiliation contrôlée"
 
@@ -2881,9 +2869,8 @@ msgid "description"
 msgstr "description"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:340
-#, fuzzy
 msgid "document_type"
-msgstr "Type de document"
+msgstr "type de document"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:252
 msgid "document_type_advanced_studies_thesis"
@@ -5087,9 +5074,8 @@ msgstr "zazaki"
 
 #: sonar/common/jsonschemas/interface_language-v1.0.0.json:2
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:356
-#, fuzzy
 msgid "language"
-msgstr "Langue"
+msgstr "langue"
 
 #: sonar/translations/manual_translations.txt:24
 msgid "mainTeam"
@@ -5147,8 +5133,8 @@ msgstr "nom du mandant"
 #: sonar/help/templates/help/page_wiki_search.html:32
 msgid "result"
 msgid_plural "results"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "résultat"
+msgstr[1] "résultats"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:116
 msgid "role_admin"
@@ -5191,14 +5177,12 @@ msgid "statusHep"
 msgstr "statut HEP"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:368
-#, fuzzy
 msgid "subdivision"
-msgstr "Subdivision"
+msgstr "subdivision"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:364
-#, fuzzy
 msgid "subject"
-msgstr "Sujet"
+msgstr "sujet"
 
 #: sonar/modules/documents/templates/documents/record.html:206
 msgid "supported by"
@@ -5259,9 +5243,8 @@ msgid "vol."
 msgstr "vol."
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:348
-#, fuzzy
 msgid "year"
-msgstr "Année"
+msgstr "année"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:489
 msgid "​Swiss National Science Foundation"
@@ -5390,4 +5373,3 @@ msgstr "Fonds national suisse de la recherche scientifique"
 
 #~ msgid "bf:Title"
 #~ msgstr "titre propre"
-
