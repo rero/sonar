@@ -1,5 +1,53 @@
 # Changelog
 
+## [v1.5.0](https://github.com/rero/sonar/tree/v1.5.0) (2022-02-03)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.4.2...v1.5.0)
+
+**Implemented enhancements:**
+
+- distinguish between thesis supervisor and co-supervisors \[1\] [\#733](https://github.com/rero/sonar/issues/733)
+- add popup info to the field `partOf.document.publication.statement` [\#728](https://github.com/rero/sonar/issues/728)
+- Allow facet display to be configured for dedicated repositories \[3\] [\#702](https://github.com/rero/sonar/issues/702)
+- Make the "Collection" facet hierarchical. [\#545](https://github.com/rero/sonar/issues/545)
+- Improve search field in organisation's pages [\#406](https://github.com/rero/sonar/issues/406)
+- Highlight search terms in brief view [\#404](https://github.com/rero/sonar/issues/404)
+
+**Fixed bugs:**
+
+- Documents in some languages produce a server error [\#748](https://github.com/rero/sonar/issues/748)
+- Files in masked records: access rights should be limited to those of its record [\#746](https://github.com/rero/sonar/issues/746)
+- The public and professional interfaces switch language unexpectedly [\#741](https://github.com/rero/sonar/issues/741)
+- Various problems in the document editor [\#740](https://github.com/rero/sonar/issues/740)
+- Problems in the document editor: impossible to save [\#739](https://github.com/rero/sonar/issues/739)
+- Bugs in the help editor: impossible to upload a file, impossible to preview a page in the editor \[0\] [\#712](https://github.com/rero/sonar/issues/712)
+- Help contents should not redirect to SONAR global for dedicated repositories \[3\] [\#709](https://github.com/rero/sonar/issues/709)
+
+**Closed issues:**
+
+- Improve OAI sets creation [\#504](https://github.com/rero/sonar/issues/504)
+- Manage controlled affiliations in backend in organisation resource. [\#417](https://github.com/rero/sonar/issues/417)
+- In the deposit form, automatic control that the affiliations correspond to organisation. [\#416](https://github.com/rero/sonar/issues/416)
+- Login via an organisation with a switch edu-ID account. [\#413](https://github.com/rero/sonar/issues/413)
+- Explain to user how to join an organisation in welcome email. [\#410](https://github.com/rero/sonar/issues/410)
+- Extract full-text from other types than PDF. [\#408](https://github.com/rero/sonar/issues/408)
+- Manage file access with switch AAI scopes [\#405](https://github.com/rero/sonar/issues/405)
+- Email template [\#252](https://github.com/rero/sonar/issues/252)
+
+**Merged pull requests:**
+
+- safety: Add pillow exclusions [\#762](https://github.com/rero/sonar/pull/762) ([rerowep](https://github.com/rerowep))
+- security: Add config: [\#761](https://github.com/rero/sonar/pull/761) ([rerowep](https://github.com/rerowep))
+- oaiserver: fix sets [\#759](https://github.com/rero/sonar/pull/759) ([rerowep](https://github.com/rerowep))
+- editor: adjust some elements on document jsonschema [\#756](https://github.com/rero/sonar/pull/756) ([Garfield-fr](https://github.com/Garfield-fr))
+- organisation: custom facet implementation for dedicated customers [\#755](https://github.com/rero/sonar/pull/755) ([Garfield-fr](https://github.com/Garfield-fr))
+- files: fix files permissions [\#754](https://github.com/rero/sonar/pull/754) ([jma](https://github.com/jma))
+- tests: fix hardcoded embargo date [\#750](https://github.com/rero/sonar/pull/750) ([jma](https://github.com/jma))
+- languages: add some mapping alpha-3 to alpha-2 [\#749](https://github.com/rero/sonar/pull/749) ([Garfield-fr](https://github.com/Garfield-fr))
+- help: display with the organization's code [\#747](https://github.com/rero/sonar/pull/747) ([Garfield-fr](https://github.com/Garfield-fr))
+- schema: distinguish supervisor co-supervisors [\#745](https://github.com/rero/sonar/pull/745) ([rerowep](https://github.com/rerowep))
+- rerodoc: redirection to the correct views [\#743](https://github.com/rero/sonar/pull/743) ([jma](https://github.com/jma))
+
 ## [v1.4.2](https://github.com/rero/sonar/tree/v1.4.2) (2021-12-20)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.4.1...v1.4.2)

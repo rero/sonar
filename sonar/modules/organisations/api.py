@@ -98,7 +98,10 @@ class OrganisationRecord(SonarRecord):
                **kwargs):
         """Create organisation record."""
         # Create OAI set
-        oaiset = OAISet(spec=data['code'], name=data['name'])
+        code = data['code']
+        oaiset = OAISet(
+            spec=code, name=data['name'],
+            search_pattern=f'organisation.code:"{code}"')
         db.session.add(oaiset)
 
         return super(OrganisationRecord, cls).create(data,
