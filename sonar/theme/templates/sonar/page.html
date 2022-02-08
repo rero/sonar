@@ -18,7 +18,6 @@ along with this program. If not, see
 
 {% set page = page|default('int') %}
 {% set description = _('The SONAR project aims to create a scholarly archive that collects, promotes and preserves the publications of authors affiliated with Swiss public research institutions.') %}
-
 <!DOCTYPE html>
 <html {% if html_css_classes %} class="{{ html_css_classes|join(' ') }}" {% endif %}
   lang="{{ current_i18n.locale.language|safe }}" dir="{{ current_i18n.locale.text_direction }}"
@@ -47,11 +46,25 @@ along with this program. If not, see
   {%- endblock head_meta %}
 
   {%- block head_title %}
-  {%- set title = title or _(config.THEME_SITENAME) or _('Invenio') %}
+  {# Platform name if defined on the organisation #}
+  {%- if  g.organisation and config.SONAR_APP_DEFAULT_ORGANISATION != view %}
+    {%- if title %}
+    {%- set title = title ~ ' | ' ~  g.organisation|organisation_platform_name %}
+    {%- else %}
+    {%- set title = g.organisation|organisation_platform_name %}
+    {%- endif %}
+  {%- else %}
+    {%- set title = title or _(config.THEME_SITENAME) or _('Invenio') %}
+  {%- endif %}
   <title>{{ title }}</title>
   {%- endblock head_title %}
 
   {%- block head_links %}
+  {# show favicon only for dedicated organisation #}
+  {%- set favicon = g.organisation|favicon if g.organisation and g.organisation['isDedicated'] %}
+  {%- if favicon %}
+  <link rel="icon" type="{{ favicon.mimetype }}" href="{{ favicon.url }}">
+  {%- else %}
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="/static/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
@@ -69,10 +82,11 @@ along with this program. If not, see
   <link rel="icon" type="image/png" sizes="96x96" href="/static/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
   <link rel="manifest" href="/static/manifest.json">
+  {%- endif %}
 
   {%- if canonical_url %}
   <link rel="canonical" href="{{ canonical_url }}">
-  {% endif %}
+  {%- endif %}
 
   {%- block head_links_langs %}
   {%- if alternate_urls %}

@@ -17,12 +17,11 @@
 
 """Utils functions for user module."""
 
-import markdown
-from bs4 import BeautifulSoup
 from flask_babelex import _
 from flask_security import url_for_security
 from flask_security.recoverable import generate_reset_password_token
 
+from sonar.modules.organisations.utils import platform_name
 from sonar.modules.utils import send_email
 
 
@@ -35,11 +34,9 @@ def send_welcome_email(user_record, user):
     user_record = user_record.replace_refs()
     code = user_record['organisation'].get('code', '')
     plain_platform_name = 'SONAR'
-    platform_name = user_record['organisation'].get('platformName')
-    if platform_name:
-        html = markdown.markdown(platform_name)
-        plain_platform_name = ''.join(
-            BeautifulSoup(html).findAll(text=True)).replace('\n', ' - ')
+    pname = platform_name(user_record['organisation'])
+    if pname:
+        plain_platform_name = pname
 
     token = generate_reset_password_token(user)
     reset_link = url_for_security(
