@@ -34,7 +34,7 @@ export FLASK_ENV=development
 
 # Start Worker and Server
 section "Start celery worker" "info"
-celery --app invenio_app.celery worker --loglevel INFO --beat & pid_celery=$!
+celery --app sonar.celery worker --loglevel INFO --beat & pid_celery=$!
 message "Done" "success"
 
 # Start web server
