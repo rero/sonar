@@ -72,6 +72,26 @@ def test_masked_document(db, client, organisation, document, es_clear):
     assert res.json['hits']['total']['value'] == 0
 
     # Masked for external IPs, IP is allowed
+    organisation['allowedIps'] = '127.0.0.1/32'
+    organisation.commit()
+    db.session.commit()
+    organisation.reindex()
+    document.reindex()
+    res = client.get(url_for('invenio_records_rest.doc_list', view='global'))
+    assert res.status_code == 200
+    assert res.json['hits']['total']['value'] == 1
+
+    # Masked for external IPs, IP is allowed
+    organisation['allowedIps'] = '127.0.0.*'
+    organisation.commit()
+    db.session.commit()
+    organisation.reindex()
+    document.reindex()
+    res = client.get(url_for('invenio_records_rest.doc_list', view='global'))
+    assert res.status_code == 200
+    assert res.json['hits']['total']['value'] == 1
+
+    # Masked for external IPs, IP is allowed
     organisation['allowedIps'] = '127.0.0.1'
     organisation.commit()
     db.session.commit()
@@ -80,3 +100,13 @@ def test_masked_document(db, client, organisation, document, es_clear):
     res = client.get(url_for('invenio_records_rest.doc_list', view='global'))
     assert res.status_code == 200
     assert res.json['hits']['total']['value'] == 1
+
+    # Masked for external IPs, IP is not allowed
+    organisation['allowedIps'] = '192.168.1.1'
+    organisation.commit()
+    db.session.commit()
+    organisation.reindex()
+    document.reindex()
+    res = client.get(url_for('invenio_records_rest.doc_list', view='global'))
+    assert res.status_code == 200
+    assert res.json['hits']['total']['value'] == 0

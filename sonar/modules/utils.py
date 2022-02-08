@@ -297,7 +297,8 @@ def get_ips_list(ranges):
 
     :param list ranges: List of ranges.
     :returns: List of IP addresses.
-    :rtype: list
+    :rtype: list of cidr ips
+            (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
     """
     ip_set = IPSet()
 
@@ -315,7 +316,7 @@ def get_ips_list(ranges):
         except Exception:
             pass
 
-    return [str(ip) for ip in ip_set]
+    return [str(ip.cidr) for ip in ip_set.iter_cidrs()]
 
 
 def file_download_ui(pid, record, _record_file_factory=None, **kwargs):
