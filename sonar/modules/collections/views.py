@@ -43,7 +43,8 @@ def index(**kwargs):
     records = RecordSearch().filter('term',
                                     organisation__pid=kwargs['view']).scan()
 
-    return render_template('collections/index.html', records=list(records))
+    return render_template(
+        'collections/index.html', records=list(records), view=kwargs['view'])
 
 
 def detail(pid, record, **kwargs):

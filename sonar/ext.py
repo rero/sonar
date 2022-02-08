@@ -21,7 +21,7 @@ from __future__ import absolute_import, print_function
 
 import jinja2
 import markdown
-from flask import current_app, render_template, request
+from flask import current_app, render_template, request, url_for
 from flask_bootstrap import Bootstrap
 from flask_security import user_registered
 from flask_wiki import Wiki
@@ -30,6 +30,7 @@ from invenio_files_rest.signals import file_deleted, file_uploaded
 from invenio_indexer.signals import before_record_index
 from werkzeug.datastructures import MIMEAccept
 
+from sonar.modules.organisations.utils import platform_name
 from sonar.modules.permissions import has_admin_access, has_submitter_access, \
     has_superuser_access
 from sonar.modules.receivers import file_deleted_listener, \
@@ -172,6 +173,30 @@ class Sonar():
                 'meta',
                 'tables'
             ])
+
+        @app.template_filter()
+        def organisation_platform_name(org):
+            """Get organisation platform name."""
+            name = platform_name(org)
+            if not name:
+                return app.config.get('THEME_SITENAME')
+            return name
+
+        @app.template_filter()
+        def favicon(org):
+            """Fav icon for current organisation."""
+            if org and '_files' in org:
+                favicon = list(filter(
+                    lambda d: d['mimetype'] in [
+                        'image/x-icon', 'image/vnd.microsoft.icon'
+                    ], org['_files']))
+                if favicon:
+                    return {
+                        'mimetype': favicon[0]['mimetype'],
+                        'url': url_for(
+                        'invenio_records_ui.org_files',
+                        pid_value=org.get('pid'), filename=favicon[0]['key'])
+                    }
 
     def create_resources(self):
         """Create resources."""
