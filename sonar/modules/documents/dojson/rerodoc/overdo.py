@@ -78,8 +78,11 @@ class Overdo(BaseOverdo):
         :param role_700: String, role found in field 700$e
         :returns: String containing the mapped role or None
         """
-        if role_700 in ['Dir.', 'Codir.']:
+        if role_700 == 'Dir.':
             return 'dgs'
+
+        if role_700 == 'Codir.':
+            return 'dgc'
 
         if role_700 == 'Libr./Impr.':
             return 'prt'

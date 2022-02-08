@@ -41,7 +41,7 @@ TYPE_MAPPINGS = {
     'BOOK|': 'coar:c_2f33',
     'DISSERTATION|DISS_MASTER': 'coar:c_bdcc',
     'DISSERTATION|DISS_BACHELOR': 'coar:c_7a1f',
-    'DISSERTATION|DISS_CONT_EDU': 'coar:c_46ec',
+    'DISSERTATION|DISS_CONT_EDU': 'advanced_studies_thesis',
     'THESIS|': 'coar:c_db06',
     'THESIS|TH_PHD': 'coar:c_db06',
     'THESIS|TH_HABILIT': 'coar:c_46ec',
@@ -252,17 +252,19 @@ def marc21_to_title_246(self, key, value):
 @utils.ignore_value
 def marc21_to_edition_statement(self, key, value):
     """Get edition statement data."""
-    if not value.get('a') or not value.get('b'):
+    if not value.get('a'):
         return None
-
-    return {
+    
+    editionStatement = {
         'editionDesignation': {
             'value': value.get('a')
-        },
-        'responsibility': {
-            'value': value.get('b')
-        },
+        }
     }
+    if value.get('b'):
+        editionStatement['responsibility'] = {
+            'value': value.get('b')
+        }
+    return editionStatement
 
 
 @overdo.over('provisionActivity', '^260..')
@@ -762,7 +764,7 @@ def marc21_to_classification_field_084(self, key, value):
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_content_note(self, key, value):
-    """Extract collection for record."""
+    """Extract content note for record."""
     return value.get('a')
 
 
@@ -776,8 +778,10 @@ def marc21_to_dissertation_field_502(self, key, value):
         dissertation['degree'] = value.get('a')
         self['dissertation'] = dissertation
 
+        organisation = record.get('980__', {}).get('b')
+
         # try to parse the thesis note more precisely
-        matches = re.match(r'^(?P<degree>[^:]+) : (?P<grantingInstitution>[^,]+) ?[,:] (?P<date>\d{4})( ; .*)?$', value.get('a'))
+        matches = re.match(r'^(?P<degree>[^:]+) : (?P<grantingInstitution>[^,]+) ?[,:] (?P<date>\d{4})( ; (?P<sequenceNr>.*))?$', value.get('a'))
         if matches:
             if matches.group("degree"):
                 dissertation['degree'] = matches.group("degree")
@@ -786,10 +790,23 @@ def marc21_to_dissertation_field_502(self, key, value):
             if matches.group("date"):
                 dissertation['date'] = matches.group("date")
 
+            # Specific transformations for USI
+            if organisation and organisation.lower() in ['usi', 'unisi']:
+                # sequence number is added as a local identifier for USI
+                if matches.group("sequenceNr"):
+                    self.setdefault('identifiedBy', []).append({
+                        'type': 'bf:Local',
+                        'source': 'USI',
+                        'value': matches.group("sequenceNr")
+                    })
+                # theses degree in italian
+                if (matches.group("degree") and
+                        matches.group("degree") == 'Thèse de doctorat'):
+                    dissertation['degree'] = 'Tesi di dottorato'
+
             # Specific transformation for `hep bejune`, in order to fill out
             # custom fields `Filière` (`customField1`) and `Titre obtenu`
             # (`customField2`)
-            organisation = record.get('980__', {}).get('b')
             if (organisation and organisation.lower() == 'hepbejune'):
                 degree = matches.group("degree").lower()
                 customField1 = None
@@ -1014,35 +1031,36 @@ def marc21_to_faculty_and_department(self, key, value):
 @utils.ignore_value
 def marc21_to_part_of(self, key, value):
     """Extract related document for record."""
-    if not value.get('g'):
-        return None
-
-    # Split value for getting numbering values
-    numbering = value.get('g').split('/')
-
-    # Numbering year
-    if not numbering[0]:
-        return None
-
-    data = {'numberingYear': numbering[0]}
-
-    # Volume
-    if len(numbering) > 1 and numbering[1]:
-        data['numberingVolume'] = numbering[1]
-
-    # Issue
-    if len(numbering) > 2 and numbering[2]:
-        data['numberingIssue'] = numbering[2]
-
-    # Pages
-    if len(numbering) > 3 and numbering[3] and numbering[3] != '-':
-        data['numberingPages'] = numbering[3]
-
     document = {}
 
     # Title is found
     if value.get('t'):
         document['title'] = value.get('t')
+
+    # Year, volume, number, pages
+    data = {}
+    numbering = []
+    if value.get('g'):
+        # Split value for getting numbering values
+        numbering = value.get('g').split('/')
+
+        # Numbering year
+        if not numbering[0]:
+            return None
+
+        data = {'numberingYear': numbering[0]}
+
+        # Volume
+        if len(numbering) > 1 and numbering[1]:
+            data['numberingVolume'] = numbering[1]
+
+        # Issue
+        if len(numbering) > 2 and numbering[2]:
+            data['numberingIssue'] = numbering[2]
+
+        # Pages
+        if len(numbering) > 3 and numbering[3] and numbering[3] != '-':
+            data['numberingPages'] = numbering[3]
 
     # Contribution
     if value.get('c'):
@@ -1064,14 +1082,14 @@ def marc21_to_part_of(self, key, value):
         if value.get('d'):
             document['publication']['statement'] = value.get('d')
 
-        if sub_type == 'ART_INBOOK':
-            document['publication']['startDate'] = numbering[0]
+        if sub_type == 'ART_INBOOK' and 'numberingYear' in data:
+            document['publication']['startDate'] = data['numberingYear']
 
     # If no field 260$c or 269$c, store start date
     if (not record.get('260__', {}).get('c') and
-            not record.get('269__', {}).get('c')):
+            not record.get('269__', {}).get('c') and
+            len(numbering)):
         add_provision_activity_start_date(self, numbering[0])
-
     if document:
         data['document'] = document
 

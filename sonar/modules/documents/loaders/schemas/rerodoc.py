@@ -47,6 +47,7 @@ class RerodocSchema(Marc21Schema):
     identifiedBy = fields.List(fields.Dict())
     subjects = fields.List(fields.Dict())
     classification = fields.List(fields.Dict())
+    contentNote = fields.List(SanitizedUnicode())
     collections = fields.List(fields.Dict())
     dissertation = fields.Dict()
     otherEdition = fields.List(fields.Dict())

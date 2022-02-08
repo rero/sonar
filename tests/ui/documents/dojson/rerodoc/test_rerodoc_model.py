@@ -805,7 +805,11 @@ def test_marc21_to_edition_statement(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('editionStatement')
+    assert data.get('editionStatement') == {
+        'editionDesignation': {
+            'value': 'Reproduction numérique'
+        },
+    }
 
     # Multiple --> keep only one value
     marc21xml = """
@@ -2546,7 +2550,15 @@ def test_marc21_to_part_of(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('partOf')
+    assert data.get('partOf') == [{
+        'document': {
+            'contribution': ['Belser, Eva Maria'], 
+            'publication': {
+                'statement': 'Stämpfli Verlag, Bern'
+            }, 
+            'title': 'Mehr oder weniger Staat?'
+        }
+    }]
     assert not data.get('provisionActivity')
 
     # Without empty numbering year
@@ -2584,7 +2596,15 @@ def test_marc21_to_part_of(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('partOf')
+    assert data.get('partOf') == [
+        {'document': {
+            'contribution': ['Belser, Eva Maria'], 
+            'publication': {
+                'statement': 'Stämpfli Verlag, Bern'
+            }, 
+            'title': 'Mehr oder weniger Staat?'
+        }
+    }]
     assert not data.get('provisionActivity')
 
     # Without title
