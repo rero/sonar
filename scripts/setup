@@ -62,9 +62,12 @@ if $import; then
     message "Size of import sets is set to \"$size\"" "info"
 fi
 
+# Try to create database and tables if does not exists
+invenio db init create || true
+
 # Purge celery
 section "Purge celery tasks" "info"
-celery --app invenio_app.celery purge -f
+celery --app sonar.celery purge -f
 
 # Clean redis
 section "Clear redis cache" "info"
@@ -76,7 +79,6 @@ if [ $clear_data = false ]; then
     invenio utils export --pid-type org --output-dir "${fixtures_folder}/organisations"
     invenio utils export --pid-type user --output-dir "${fixtures_folder}/users"
 fi
-
 section "Clear files" "info"
 invenio utils clear-files
 
