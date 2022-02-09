@@ -844,6 +844,10 @@ PREVIEWER_MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024
 OAISERVER_RECORD_INDEX = 'documents'
 #: OAI identifier prefix
 OAISERVER_ID_PREFIX = 'oai:sonar.ch:'
+#: The e-mail addresses of administrators of the repository.
+OAISERVER_ADMIN_EMAILS = [
+    'info.sonar@rero.ch',
+]
 #: XSL file
 OAISERVER_XSL_URL = 'static/xsl/oai2.xsl'
 #: Export formats
