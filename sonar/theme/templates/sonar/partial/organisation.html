@@ -31,7 +31,7 @@
         <p class="mb-3 text-justify">{{ g.organisation.description | language_value | markdown_filter | safe }}</p>
         {% endif %}
         <div class="row">
-          <div class="col-12 col-lg-4">
+          <div class="col-12 col-lg-6">
             <form action="{{ url_for('documents.search', view=view_code) }}" role="search">
               <div class="input-group mb-2">
                 <input type="text" name="q" value="{{ request.args.get('q', '') }}" class="form-control"
@@ -45,7 +45,7 @@
             </form>
           </div>
           <div class="col text-right">
-            <a href="{{ url_for('index', view=config.SONAR_APP_DEFAULT_ORGANISATION) }}"
+            <a href="{{ url_for('index') }}"
               class="btn btn-outline-primary btn-sm">
               {{ _('Back to SONAR') }}
             </a>

@@ -16,19 +16,20 @@ along with this program. If not, see
 <http: //www.gnu.org/licenses />.
 #}
 
-{% set page = 'home' %}
+{% set page = 'organisation' if g.get('organisation') and g.get('organisation')['isShared'] and not g.get('organisation')['isDedicated'] else 'home' %}
 
 {%- extends config.BASE_TEMPLATE %}
 
 {%- set body_css_classes=['homepage'] %}
 
 {% block header %}
+{%- if not g.get('organisation') or (g.get('organisation') and g.organisation['isShared'] and g.organisation['isDedicated']) %}
 <div class="bg-organisation p-4">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-8 col-xs-6 col-lg-3 py-3 text-center">
         <a
-          href="{{ url_for('index', view=view_code if g.get('organisation', {}).get('isDedicated') else config.SONAR_APP_DEFAULT_ORGANISATION) }}">
+          href="{{ url_for('index') if view_code == config.SONAR_APP_DEFAULT_ORGANISATION else url_for('index', view=view_code) }}">
           {% if g.get('organisation', {}).get('isDedicated') %}
           {% set thumbnail = g.organisation | record_image_url('org') %}
           {% if thumbnail %}
@@ -71,6 +72,7 @@ along with this program. If not, see
     </div>
   </div>
 </div>
+{%- endif %}
 <div class="bg-secondary text-light text-center py-2">
   {% if not g.get('organisation', {}).get('isDedicated') and config.ENV != 'production' and current_user_record.is_submitter %}
   <h6 class="m-0 mt-1">

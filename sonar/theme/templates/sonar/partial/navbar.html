@@ -18,7 +18,8 @@ along with this program. If not, see
 <nav class="navbar navbar-expand-lg bg-{{ 'header' if page == 'home' else 'organisation' }}">
   <div class="container">
     {% if page != 'home' %}
-    <a class="navbar-brand" href="{{ url_for('index', view=view_code) }}">
+    {% set url = url_for('index', view=view_code) if g.get('organisation', {}).get('isDedicated') and view_code != config.SONAR_APP_DEFAULT_ORGANISATION else url_for('index') %}
+    <a class="navbar-brand" href="{{ url }}">
       {% if g.get('organisation', {}).get('isDedicated') %}
       {% set thumbnail = g.organisation | record_image_url('org') %}
       {% if thumbnail %}
@@ -29,11 +30,10 @@ along with this program. If not, see
       {% endif %}
       {% else %}
       <img src="{{ url_for('static', filename='images/global-logo.svg') }}"
-        height="{{ '30' if g.get('organisation') else '50' }}"
-        class="d-inline-block align-top {{ '' if g.get('organisation') else 'my-2' }}" alt="{{ _('SONAR logo') }}">
+        height="{{ '30' if g.get('organisation') and page == 'home' else '50' }}"
+        class="d-inline-block align-top {{ '' if g.get('organisation') and page == 'home' else 'my-2' }}" alt="{{ _('SONAR logo') }}">
       {% endif %}
     </a>
-
     {% endif %}
     <button class="ml-auto navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@ along with this program. If not, see
       <form
         action="{{ url_for('documents.search', view=view_code if g.get('organisation', {}).get('isDedicated') else config.SONAR_APP_DEFAULT_ORGANISATION) }}"
         class="form-inline my-2 my-lg-0 ml-lg-3">
-        <input name="q" class="form-control {{ 'form-control-sm' if g.get('organisation') else '' }} mr-sm-2"
+        <input name="q" class="form-control {{ 'form-control-sm' if g.get('organisation') and page == 'home' else '' }} mr-sm-2"
           type="search" placeholder="{{ _('Search') }}" aria-label="{{ _('Search') }}"
           value="{{ request.args.get('q', '') }}">
         <button class="btn btn-outline-light {{ 'btn-sm' if g.get('organisation') else '' }} my-2 my-sm-0" type="submit"
