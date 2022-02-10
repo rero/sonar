@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.5.1](https://github.com/rero/sonar/tree/v1.5.1) (2022-02-10)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.5.0...v1.5.1)
+
+**Merged pull requests:**
+
+- documents: store allowed ips addresses in CIDR format [\#769](https://github.com/rero/sonar/pull/769) ([jma](https://github.com/jma))
+
 ## [v1.5.0](https://github.com/rero/sonar/tree/v1.5.0) (2022-02-03)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.4.2...v1.5.0)
