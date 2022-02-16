@@ -67,18 +67,26 @@ along with this program. If not, see
     </div>
     <div class="col">
       <h1 class="text-primary">{{ title | nl2br | safe }}</h1>
+      {% set infoOrgSub = true %}
+      {%- if view != config.SONAR_APP_DEFAULT_ORGANISATION %}
+        {% set infoOrgSub = false if record.get('subdivisions', [])|length == 0 else true %}
+      {%- endif %}
+      {%- if infoOrgSub %}
       <h4 class="m-0">
-        {%- for organisation in record.get('organisation', []) -%}
-        <span class="badge badge-secondary text-light mr-1 font-weight-normal">
-          {{ organisation.name }}
-        </span>
-        {%- endfor -%}
+        {%- if view == config.SONAR_APP_DEFAULT_ORGANISATION %}
+          {%- for organisation in record.get('organisation', []) -%}
+          <span class="badge badge-secondary text-light mr-1 font-weight-normal">
+            {{ organisation.name }}
+          </span>
+          {%- endfor -%}
+        {%- endif %}
         {%- for subdivision in record.get('subdivisions', []) -%}
         <span class="badge badge-secondary text-light mr-1 font-weight-normal">
           {{ subdivision.name | language_value }}
         </span>
         {%- endfor -%}
       </h4>
+      {%- endif %}
 
       <!-- CONTRIBUTORS-->
       {% set contributors = record | contributors %}

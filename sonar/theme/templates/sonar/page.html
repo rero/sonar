@@ -21,7 +21,10 @@ along with this program. If not, see
 
 <!DOCTYPE html>
 <html {% if html_css_classes %} class="{{ html_css_classes|join(' ') }}" {% endif %}
-  lang="{{ current_i18n.locale.language|safe }}" dir="{{ current_i18n.locale.text_direction }}">
+  lang="{{ current_i18n.locale.language|safe }}" dir="{{ current_i18n.locale.text_direction }}"
+  {%- block view %}{%- endblock %}
+>
+
 
 <head>
   {% include config.THEME_TRACKINGCODE_TEMPLATE %}

@@ -56,7 +56,8 @@ def search(view):
         collection = CollectionRecord.get_record_by_pid(
             request.args['collection_view'])
 
-    return render_template('sonar/search.html', collection=collection)
+    return render_template('sonar/search.html',
+                           collection=collection, view=view)
 
 
 def detail(pid, record, template=None, **kwargs):
@@ -107,6 +108,7 @@ def detail(pid, record, template=None, **kwargs):
     return render_template(template,
                            pid=pid,
                            record=record,
+                           view=kwargs.get('view'),
                            schema_org_data=schema_org_data,
                            google_scholar_data=google_scholar_data)
 
