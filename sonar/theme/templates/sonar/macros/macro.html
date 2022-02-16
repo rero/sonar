@@ -26,7 +26,6 @@
   {% else %}
   {{ thumbnail_image(file.thumbnail, file.label) }}
   {% endif %}
-  <div class="my-1 small">{{ file.label }}</div>
   {% if file.restriction and file.restriction.restricted and file.restriction.date %}
   <div class="my-1">
     <span class="badge badge-secondary text-light">
@@ -34,7 +33,7 @@
     </span>
   </div>
   {% endif %}
-  <div class="my-1">
+  <div class="my-2">
     {% if file.links.external %}
     <a href="{{ file.links.external }}" target="_blank">
       <i class="fa fa-external-link mx-1"></i>
