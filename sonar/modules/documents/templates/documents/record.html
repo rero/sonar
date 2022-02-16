@@ -18,7 +18,7 @@ along with this program. If not, see
 
 {%- extends config.RECORDS_UI_BASE_TEMPLATE %}
 
-{% from 'sonar/macros/macro.html' import thumbnail %}
+{% from 'sonar/macros/macro.html' import thumbnail, identifier_link %}
 
 {% set title = record.title[0] | title_format(current_i18n.language) %}
 {% set description = record.abstracts[0].value if record.abstracts else None %}
@@ -97,10 +97,7 @@ along with this program. If not, see
           <li class="creator {{ 'd-none' if loop.index > 3 }}">
             {{ contribution | contribution_text }}
             {% if contribution.agent.get('identifiedBy', {}).get('value') %}
-            <a href="https://orcid.org/{{ contribution.agent.identifiedBy.value }}" target="_blank"
-              class="badge badge-secondary text-light">
-              ORCID
-            </a>
+            {{ identifier_link(contribution.agent.identifiedBy, 'agent')}}
             {% endif %}
 
             {% if contribution.get('affiliation') %}
@@ -261,15 +258,7 @@ along with this program. If not, see
           <ul class="list-unstyled mb-0">
             {% for identifier in record.identifiedBy %}
             <li>
-              <span class="badge badge-secondary text-light mr-1">{{ _(identifier.type) }}</span>
-              {% if identifier.type == 'bf:Doi' %}
-              <a href="https://doi.org/{{ identifier.value }}" target="_blank">{{ identifier.value }}</a>
-              {% else %}
-              {{ identifier.value }}
-              {% endif %}
-              {% if identifier.source %}
-              <i class="text-muted ml-1">{{ identifier.source }}</i>
-              {% endif %}
+              {{ identifier_link(identifier, 'identifiedBy') }}
             </li>
             {% endfor %}
           </ul>

@@ -81,6 +81,9 @@ def test_logged_user(app, client, superuser, admin, moderator, submitter,
     assert b'"email":"orgadmin@rero.ch"' in res.data
     assert b'"pid":"org"' in res.data
 
+    # Check settings
+    assert 'settings' in res.json
+
     # Logged as superuser
     login_user_via_session(client, email=superuser['email'])
     res = client.get(url)

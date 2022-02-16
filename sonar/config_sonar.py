@@ -576,3 +576,18 @@ SONAR_APP_ORGANISATION_CONFIG = {
 
 SONAR_APP_SWISSCOVERY_SEARCH_URL = 'https://swisscovery.slsp.ch/view/sru/41SLSP_NETWORK'
 SONAR_APP_SWISSCOVERY_SEARCH_VERSION = '1.1'
+
+# Link on document identifier
+# Add the source identifier in lowercase (Ex: orcid)
+SONAR_APP_DOCUMENT_IDENTIFIER_LINK = {
+    'bf:Doi': {
+        'default': 'https://doi.org/_identifier_'
+    },
+    'bf:Local': {
+        'orcid': 'https://orcid.org/_identifier_',
+        'swisscovery': 'https://swisscovery.slsp.ch/permalink/41SLSP_NETWORK/1ufb5t2/alma_identifier_'
+    },
+    'bf:Urn': {
+        'default': 'https://nbn-resolving.org/_identifier_'
+    }
+}
