@@ -1,5 +1,6 @@
 {% extends 'sonar/page.html' %}
 
+{%- block view %} data-view="{{ view }}"{%- endblock %}
 {%- block body %}
 {% if collection %}
 {% include 'collections/item.html' %}
