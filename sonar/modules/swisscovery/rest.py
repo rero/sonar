@@ -17,6 +17,8 @@
 
 """Swisscovery rest views."""
 
+import re
+
 import requests
 import xmltodict
 from flask import Blueprint, current_app, jsonify, request
@@ -66,8 +68,16 @@ def get_record():
 
     record = SRUSchema().dump(record)
 
+    # Regular expression to remove the << and >> around a value in the title
+    # Ex: <<La>> vie est belle => La vie est belle
+    pattern = re.compile('<<(.+)>>', re.S)
+    for title in record.get('title',[]):
+        for mainTitle in title.get('mainTitle', []):
+            mainTitle['value'] = re.sub(pattern, r'\1', mainTitle['value'])
+
     # Serialize for deposit.
     if format == 'deposit':
         record = DepositDocumentSchema().dump(record)
+
 
     return jsonify(record)
