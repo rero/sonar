@@ -198,3 +198,11 @@ def test_document_type(client, submitter):
     assert res.status_code == 200
     data = res.json
     assert data['metadata']['documentType'] == 'coar:c_db06'
+
+
+def test_title_remove_char(client, submitter):
+    """Test for the removal of << and >> characters in the title."""
+    login_user_via_session(client, email=submitter['email'])
+    res = client.get(url_for('swisscovery.get_record', query='2070406237'))
+    assert res.status_code == 200
+    assert res.json['title'][0]['mainTitle'][0]['value'] == 'La vie est belle'
