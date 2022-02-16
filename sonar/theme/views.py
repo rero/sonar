@@ -151,7 +151,12 @@ def logged_user():
     if user and 'resolve' in request.args:
         user = user.replace_refs()
 
-    data = {}
+    data = {
+        'settings': {
+            'document_identifier_link': current_app.config \
+                .get('SONAR_APP_DOCUMENT_IDENTIFIER_LINK')
+        }
+    }
 
     if user:
         data['metadata'] = user.dumps()

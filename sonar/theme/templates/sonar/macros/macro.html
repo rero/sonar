@@ -62,3 +62,38 @@
 <img src="{{ image }}" class="img-fluid" alt="{{ label }}">
 {% endif%}
 {% endmacro %}
+
+{% macro identifier_link(identifier, field) %}
+{% set linkText = _('External link to the source') %}
+{% if identifier.type in config.SONAR_APP_DOCUMENT_IDENTIFIER_LINK %}
+  {% set source = 'default' if not identifier.source else identifier.source|lower %}
+  {% if source in config.SONAR_APP_DOCUMENT_IDENTIFIER_LINK[identifier.type] %}
+    {% set link = config.SONAR_APP_DOCUMENT_IDENTIFIER_LINK[identifier.type][source].replace('_identifier_', identifier.value) %}
+    {% else %}
+    {% set link = null %}
+  {% endif %}
+{% endif %}
+
+{% if 'identifiedBy' == field %}
+  <span class="badge badge-secondary text-light mr-1">{{ identifier.source|upper if identifier.source else _(identifier.type)|upper }}</span>
+  {% if link %}
+    <a href="{{ link }}" title="{{ linkText }}" target="_blank">{{ identifier.value }}</a>
+  {% else %}
+    {% if identifier.value.startswith('http') %}
+      <a href="{{ link }}" title="{{ linkText }}" target="_blank">{{ identifier.value }}</a>
+    {% else %}
+      {{ identifier.value }}
+    {% endif %}
+  {% endif %}
+{% endif %}
+
+{% if 'agent' == field %}
+  {% if link %}
+    <a class="badge badge-secondary text-light mr-1" href="{{ link }}" title="{{ linkText }}" target="_blank">
+      {{ identifier.source|upper if identifier.source else _(identifier.type) }}
+    </a>
+  {% else %}
+    <span class="badge badge-secondary text-light mr-1">{{ identifier.source|upper if identifier.source else _(identifier.type)|upper }}</span>
+  {% endif %}
+{% endif %}
+{% endmacro %}
