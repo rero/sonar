@@ -1001,7 +1001,7 @@ def mock_thumbnail_creation(monkeypatch):
                         b'Fake thumbnail image content')
 
 
-@pytest.yield_fixture
+@pytest.fixture
 def without_oaiset_signals(app):
     """Temporary disable oaiset signals."""
     from invenio_oaiserver import current_oaiserver

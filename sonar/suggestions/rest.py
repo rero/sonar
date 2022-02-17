@@ -46,10 +46,10 @@ def completion():
     search = None
     try:
         service = sonar.service(resource)
-        search = service.config.search_cls(index=resource)
-    except Exception:
-        for doc_type, config in current_app.config.get(
-                'RECORDS_REST_ENDPOINTS').items():
+        search = service.config.search.search_cls(index=resource)
+    except Exception as err:
+        endpoints = current_app.config.get('RECORDS_REST_ENDPOINTS')
+        for doc_type, config in endpoints.items():
             if config.get('search_index') == resource:
                 search = config['search_class']()
 
@@ -68,7 +68,7 @@ def completion():
                                         'field': field,
                                         'skip_duplicates': True
                                     })
-        for i, suggestion in search.execute().suggest.to_dict().items():
+        for _, suggestion in search.execute().suggest.to_dict().items():
             results = results + [
                 option['text'] for option in suggestion[0]['options']
             ]

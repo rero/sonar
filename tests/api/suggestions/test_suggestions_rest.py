@@ -30,7 +30,7 @@ def test_completion(client, project_json, make_user):
     login_user_via_session(client, email=user['email'])
 
     project_json['metadata']['projectSponsor'] = 'Sponsor 1'
-    res = client.post(url_for('projects.projects_list'),
+    res = client.post(url_for('projects.search'),
                       data=json.dumps(project_json))
     # Ensure project is indexed
     current_search.flush_and_refresh(index='projects')

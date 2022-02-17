@@ -23,6 +23,7 @@ from datetime import datetime
 from os import makedirs
 from os.path import exists, join
 
+import click
 import pytz
 from flask import current_app
 
@@ -57,7 +58,8 @@ def transform_harvested_records(sender=None, records=None, **kwargs):
         max_records = None
 
     if kwargs.get('name'):
-        print('Harvesting records from "{set}"'.format(set=kwargs.get('name')))
+        click.echo(
+            'Harvesting records from "{set}"'.format(set=kwargs.get('name')))
 
     harvested_records = list(records)
 
@@ -80,7 +82,7 @@ def transform_harvested_records(sender=None, records=None, **kwargs):
     for chunk in list(chunks(records, CHUNK_SIZE)):
         import_records.delay(chunk)
 
-    print('{count} records harvested in {time} seconds'.format(
+    click.echo('{count} records harvested in {time} seconds'.format(
         count=len(records), time=time.time() - start_time))
 
 
@@ -175,7 +177,7 @@ def export_json(sender=None, records=None, **kwargs):
 
     records_to_export = []
 
-    print('{count} records harvested'.format(count=len(records)))
+    click.echo('{count} records harvested'.format(count=len(records)))
 
     for record in records:
         loader_schema = LoaderSchemaFactory.create(kwargs['name'])
@@ -192,4 +194,4 @@ def export_json(sender=None, records=None, **kwargs):
     client = HegClient()
     client.upload_file(file_name, file_path)
 
-    print('{count} records exported'.format(count=len(records_to_export)))
+    click.echo('{count} records exported'.format(count=len(records_to_export)))

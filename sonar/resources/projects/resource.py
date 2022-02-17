@@ -17,35 +17,52 @@
 
 """Projects resource."""
 
+from flask_resources import ResponseHandler
 from flask_resources.serializers import JSONSerializer
-from invenio_records_resources.resources import \
-    RecordResourceConfig as BaseRecordResourceConfig
-from invenio_records_resources.resources.records.response import RecordResponse
+from invenio_records_resources.resources import RecordResourceConfig
+from invenio_records_resources.resources.records.headers import etag_headers
 
 from sonar.resources.projects.serializers.csv import CSVSerializer
-from sonar.resources.resource import RecordResource as BaseRecordResource
-from sonar.resources.resources.responses import StreamResponse
+from sonar.resources.resource import RecordResource
+from sonar.resources.resources.responses import StreamResponseHandler
 
 
-class RecordResourceConfig(BaseRecordResourceConfig):
+class ProjectsRecordResourceConfig(RecordResourceConfig):
     """Projects resource configuration."""
 
+    blueprint_name = 'projects'
+    url_prefix = "/projects/"
     resource_name = 'projects'
-    list_route = '/projects/'
-    item_route = f'{list_route}/<pid_value>'
 
     response_handlers = {
-        'application/json':
-        RecordResponse(JSONSerializer()),
-        'text/csv':
-        StreamResponse(CSVSerializer(csv_included_fields=[
-            'pid', 'name', 'description', 'startDate', 'endDate'
-        ]),
-                       filename='projects.csv')
+        'application/json': ResponseHandler(
+            JSONSerializer(),
+            headers=etag_headers),
+        'text/csv': StreamResponseHandler(
+            CSVSerializer(csv_included_fields=[
+                'pid', 'name', 'description', 'startDate', 'endDate'
+            ]),
+            filename='projects.csv',
+            headers=etag_headers)
     }
 
+    # # Request parsing
+    # request_read_args = {}
+    # request_view_args = {"pid_value": ma.fields.Str()}
+    # request_search_args = SearchRequestArgsSchema
+    # request_headers = {"if_match": ma.fields.Int()}
+    # request_body_parsers = {
+    #     "application/json": RequestBodyParser(JSONDeserializer())
+    # }
+    # default_content_type = "application/json"
 
-class RecordResource(BaseRecordResource):
+    # # Response handling
+    # response_handlers = {
+    #     "application/json": ResponseHandler(
+    #         JSONSerializer(), headers=etag_headers)
+    # }
+    # default_accept_mimetype = "application/json"
+
+
+class ProjectsRecordResource(RecordResource):
     """Projects resource"."""
-
-    default_config = RecordResourceConfig

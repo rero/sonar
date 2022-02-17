@@ -28,17 +28,6 @@ from sonar.modules.utils import has_custom_resource
 class RecordResource(BaseRecordResource):
     """Base record resource."""
 
-    def __init__(self, service=None):
-        """Constructor.
-
-        Needed to override parent constructor because `config` must not be set
-        as it is calculated when calling the property.
-
-        :param service: Record service.
-        """
-        self.bp_name = None
-        self.service = service
-
     @property
     def config(self):
         """Get the configuration depending on the orgnanisation.
@@ -56,3 +45,7 @@ class RecordResource(BaseRecordResource):
                            f'{resource_name}.resource:RecordResourceConfig')
 
         return obj_or_import_string(resource_config)
+
+    @config.setter
+    def config(self, value):
+        self.default_config = value

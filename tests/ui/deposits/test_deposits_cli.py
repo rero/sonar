@@ -29,7 +29,7 @@ def test_create(app, script_info):
 
     directory = os.path.join(app.instance_path, 'files')
 
-    os.mkdir(directory, 0o755)
+    os.makedirs(directory, 0o755, exist_ok=True)
 
     result = runner.invoke(cli.create, obj=script_info)
     assert 'Location #1 created successfully' in result.output
