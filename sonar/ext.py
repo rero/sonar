@@ -40,10 +40,10 @@ from sonar.modules.users.api import current_user_record
 from sonar.modules.users.signals import add_full_name, user_registered_handler
 from sonar.modules.utils import get_language_value, get_specific_theme, \
     get_switch_aai_providers, get_view_code
-from sonar.resources.projects.resource import \
-    RecordResource as ProjectRecordResource
-from sonar.resources.projects.service import \
-    RecordService as ProjectRecordService
+from sonar.resources.projects.resource import ProjectsRecordResource, \
+    ProjectsRecordResourceConfig
+from sonar.resources.projects.service import ProjectsRecordService, \
+    ProjectsRecordServiceConfig
 from sonar.signals import file_download_proxy
 
 from . import config_sonar
@@ -122,6 +122,8 @@ class Sonar():
 
         @app.route('/', defaults={
             'view': app.config.get('SONAR_APP_DEFAULT_ORGANISATION')})
+
+
         @app.route('/<org_code:view>/')
         def index(view):
             """Homepage."""
@@ -206,8 +208,10 @@ class Sonar():
     def create_resources(self):
         """Create resources."""
         # Initialize the project resource with the corresponding service.
-        projects_resource = ProjectRecordResource(
-            service=ProjectRecordService())
+        project_service = ProjectsRecordService(ProjectsRecordServiceConfig())
+        projects_resource = ProjectsRecordResource(
+            service=project_service,
+            config=ProjectsRecordResourceConfig)
         self.resources['projects'] = projects_resource
 
     def get_endpoints(self):
@@ -243,7 +247,7 @@ class SonarAPI(Sonar):
         """Register the blueprints."""
         # Register REST endpoint for projects resource.
         app.register_blueprint(
-            self.resources['projects'].as_blueprint('projects'))
+            self.resources['projects'].as_blueprint())
 
         @app.before_request
         def set_accept_mimetype():
@@ -253,5 +257,5 @@ class SonarAPI(Sonar):
             in flask_resources: https://github.com/inveniosoftware/flask-resources/blob/master/flask_resources/content_negotiation.py#L105
             """
             if request.args.get('format'):
-                request.accept_mimetypes = MIMEAccept([(request.args['format'],
-                                                        1)])
+                request.accept_mimetypes = MIMEAccept([
+                    (request.args['format'],1)])

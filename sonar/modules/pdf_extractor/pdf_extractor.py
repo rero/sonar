@@ -52,7 +52,7 @@ class PDFExtractor:
         """
         try:
             response, status = self.do_request('isalive', 'get')
-        except Exception:
+        except Exception as err:
             return False
 
         if status != 200:

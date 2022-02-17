@@ -17,38 +17,45 @@
 
 """SONAR resources responses."""
 
-from flask import Response, make_response
-from flask_resources.responses import Response as ResourceResponse
+from flask import Response
+from flask import make_response as flask_make_response
+from flask_resources.responses import ResponseHandler
 
 
-class StreamResponse(ResourceResponse):
+class StreamResponseHandler(ResponseHandler):
     """Stream response."""
 
     filename = None
 
-    def __init__(self, serializer=None, **kwargs):
+    def __init__(self, serializer, filename='records', headers=None):
         """Stream response initialization.
 
-        Sets the filename for attachment if present in kwargs.
-
+        :param filename: File name.
         :param serializer: Record serializer.
         """
-        self.filename = kwargs.pop('filename', 'records')
-        super().__init__(serializer)
+        self.filename = filename
+        super().__init__(serializer=serializer, headers=headers)
 
-    def make_list_response(self, content, code=200):
-        """Builds a response for a list of objects.
 
-        :param content: Content to send.
-        :param code: Status code.
-        :returns: Response object.
-        """
-        response = make_response(
-            "" if content is None else Response(
-                self.serializer.serialize_object_list(content)),
-            code,
-            self.make_headers(),
+    def make_response(self, obj_or_list, code, many=False):
+        """Builds a response for one object."""
+        # If view returns a response, bypass the serialization.
+        if isinstance(obj_or_list, Response):
+            return obj_or_list
+
+        # https://flask.palletsprojects.com/en/1.1.x/api/#flask.Flask.make_response
+        # (body, status, header)
+        if many:
+            serialize = self.serializer.serialize_object_list
+        else:
+            serialize = self.serializer.serialize_object
+
+        response = flask_make_response(
+            "" if obj_or_list is None else Response(
+                self.serializer.serialize_object_list(obj_or_list)),
+            code
         )
+
         response.headers[
             'Content-Disposition'] = f'attachment; filename={self.filename}'
         return response

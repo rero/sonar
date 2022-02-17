@@ -17,36 +17,39 @@
 
 """HEP Valais Projects resource."""
 
+from flask_resources import ResponseHandler
 from flask_resources.serializers import JSONSerializer
 from invenio_records_resources.resources import \
     RecordResourceConfig as BaseRecordResourceConfig
-from invenio_records_resources.resources.records.response import RecordResponse
+from invenio_records_resources.resources.records.headers import etag_headers
 
 from sonar.dedicated.hepvs.projects.serializers.csv import CSVSerializer
 from sonar.resources.projects.resource import \
     RecordResourceConfig as BaseRecordResourceConfig
-from sonar.resources.resources.responses import StreamResponse
+from sonar.resources.resources.responses import StreamResponseHandler
 
 
 class RecordResourceConfig(BaseRecordResourceConfig):
     """HEP Valais Projects resource configuration."""
 
     response_handlers = {
-        'application/json':
-        RecordResponse(JSONSerializer()),
-        'text/csv':
-        StreamResponse(CSVSerializer(csv_included_fields=[
-            'pid', 'name', 'approvalDate', 'projectSponsor', 'statusHep',
-            'mainTeam', 'innerSearcher', 'secondaryTeam', 'externalPartners',
-            'status', 'startDate', 'endDate', 'description', 'keywords',
-            'realizationFramework', 'funding_funder_type',
-            'funding_funder_name', 'funding_funder_number',
-            'funding_fundingReceived', 'actorsInvolved', 'benefits',
-            'impactOnFormation', 'impactOnProfessionalEnvironment',
-            'impactOnPublicAction', 'promoteInnovation',
-            'relatedToMandate_mandate', 'relatedToMandate_name',
-            'relatedToMandate_briefDescription', 'educationalDocument',
-            'searchResultsValorised'
-        ]),
-                       filename='projects.csv')
+        'application/json': ResponseHandler(
+            JSONSerializer(),
+            headers=etag_headers),
+        'text/csv': StreamResponseHandler(
+            CSVSerializer(csv_included_fields=[
+                'pid', 'name', 'approvalDate', 'projectSponsor', 'statusHep',
+                'mainTeam', 'innerSearcher', 'secondaryTeam',
+                'externalPartners', 'status', 'startDate', 'endDate',
+                'description', 'keywords', 'realizationFramework',
+                'funding_funder_type', 'funding_funder_name',
+                'funding_funder_number', 'funding_fundingReceived',
+                'actorsInvolved', 'benefits', 'impactOnFormation',
+                'impactOnProfessionalEnvironment', 'impactOnPublicAction',
+                'promoteInnovation', 'relatedToMandate_mandate',
+                'relatedToMandate_name', 'relatedToMandate_briefDescription',
+                'educationalDocument', 'searchResultsValorised'
+            ]),
+            filename='projects.csv',
+            headers=etag_headers)
     }

@@ -38,7 +38,6 @@ def mock_grobid_response(monkeypatch):
 
         status_code = 200
         text = output
-
     monkeypatch.setattr(requests, 'post', lambda *args, **kwargs: MockResponse)
 
 

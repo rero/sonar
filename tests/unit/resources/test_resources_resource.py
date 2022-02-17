@@ -22,7 +22,7 @@ from invenio_accounts.testutils import login_user_via_view
 
 from sonar.dedicated.hepvs.projects.resource import \
     RecordResourceConfig as HEPVSRecordResourceConfig
-from sonar.resources.projects.resource import RecordResourceConfig
+from sonar.resources.projects.resource import ProjectsRecordResourceConfig
 
 
 def test_config(app, client, make_user, admin):
@@ -31,12 +31,12 @@ def test_config(app, client, make_user, admin):
 
     # Not logged
     assert isinstance(app.extensions['sonar'].resources['projects'].config(),
-                      RecordResourceConfig)
+                      ProjectsRecordResourceConfig)
 
     # Logged as user not belonging to HEPVS.
     login_user_via_view(client, email=admin['email'], password='123456')
     assert isinstance(app.extensions['sonar'].resources['projects'].config(),
-                      RecordResourceConfig)
+                      ProjectsRecordResourceConfig)
 
     client.get(url_for_security('logout'))
 
@@ -51,4 +51,4 @@ def test_config(app, client, make_user, admin):
     delattr(app.extensions['sonar'].resources['projects'].default_config,
             'resource_name')
     assert isinstance(app.extensions['sonar'].resources['projects'].config(),
-                      RecordResourceConfig)
+                      ProjectsRecordResourceConfig)

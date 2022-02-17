@@ -24,20 +24,15 @@ from invenio_records_resources.services import \
 from invenio_records_resources.services.records import \
     RecordService as BaseRecordService
 
-from .params import FilterParams
-
 
 class RecordServiceConfig(BaseRecordServiceConfig):
     """Service factory configuration."""
-
-    search_params_interpreters_cls = \
-        [FilterParams] + BaseRecordServiceConfig.search_params_interpreters_cls
 
 
 class RecordService(BaseRecordService):
     """SONAR resources base service class."""
 
-    def create(self, identity, data, links_config=None):
+    def create(self, identity, data):
         """Create a record.
 
         :param identity: Identity of user creating the record.
@@ -48,7 +43,7 @@ class RecordService(BaseRecordService):
             identity.provides.add(UserNeed(1))
             identity.provides.add(Need(method='system_role', value='any_user'))
 
-        return super().create(identity, data, links_config)
+        return super().create(identity, data)
 
     def bulk_reindex(self):
         """Send all records to the index queue and process indexing."""

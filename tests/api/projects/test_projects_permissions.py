@@ -36,17 +36,17 @@ def test_list(app, client, make_project, superuser, admin, moderator,
     time.sleep(1)
 
     # Not logged
-    res = client.get(url_for('projects.projects_list'))
+    res = client.get(url_for('projects.search'))
     assert res.status_code == 403
 
     # Logged as user
     login_user_via_session(client, email=user['email'])
-    res = client.get(url_for('projects.projects_list'))
+    res = client.get(url_for('projects.search'))
     assert res.status_code == 403
 
     # Logged as superuser
     login_user_via_session(client, email=superuser['email'])
-    res = client.get(url_for('projects.projects_list'))
+    res = client.get(url_for('projects.search'))
     assert res.status_code == 200
     assert res.json['hits']['total'] == 3
     assert 'organisation' in res.json['aggregations']
@@ -54,7 +54,7 @@ def test_list(app, client, make_project, superuser, admin, moderator,
 
     # Logged as submitter
     login_user_via_session(client, email=submitter['email'])
-    res = client.get(url_for('projects.projects_list'))
+    res = client.get(url_for('projects.search'))
     assert res.status_code == 200
     assert res.json['hits']['total'] == 1
     assert 'organisation' not in res.json['aggregations']
@@ -62,13 +62,13 @@ def test_list(app, client, make_project, superuser, admin, moderator,
 
     # Query string
     res = client.get(
-        url_for('projects.projects_list', q='metadata.name.suggest:Proj'))
+        url_for('projects.search', q='metadata.name.suggest:Proj'))
     assert res.status_code == 200
     assert res.json['hits']['total'] == 2
 
     # Logged as moderator
     login_user_via_session(client, email=moderator['email'])
-    res = client.get(url_for('projects.projects_list'))
+    res = client.get(url_for('projects.search'))
     assert res.status_code == 200
     assert res.json['hits']['total'] == 2
     assert 'organisation' not in res.json['aggregations']
@@ -76,7 +76,7 @@ def test_list(app, client, make_project, superuser, admin, moderator,
 
     # Logged as admin
     login_user_via_session(client, email=admin['email'])
-    res = client.get(url_for('projects.projects_list'))
+    res = client.get(url_for('projects.search'))
     assert res.status_code == 200
     assert res.json['hits']['total'] == 2
     assert 'organisation' not in res.json['aggregations']
@@ -87,7 +87,7 @@ def test_list(app, client, make_project, superuser, admin, moderator,
                         lambda *args, **kwargs: [any_user])
     new_user = make_user('user', 'org', 'admin_access')
     login_user_via_session(client, email=new_user['email'])
-    res = client.get(url_for('projects.projects_list'))
+    res = client.get(url_for('projects.search'))
     assert res.status_code == 200
     assert res.json['hits']['total'] == 3
 
@@ -101,42 +101,42 @@ def test_create(client, project_json, superuser, admin, moderator, submitter,
     }
 
     # Not logged
-    res = client.post(url_for('projects.projects_list'),
+    res = client.post(url_for('projects.search'),
                       data=json.dumps(project_json),
                       headers=headers)
     assert res.status_code == 403
 
     # User
     login_user_via_session(client, email=user['email'])
-    res = client.post(url_for('projects.projects_list'),
+    res = client.post(url_for('projects.search'),
                       data=json.dumps(project_json),
                       headers=headers)
     assert res.status_code == 403
 
     # submitter
     login_user_via_session(client, email=submitter['email'])
-    res = client.post(url_for('projects.projects_list'),
+    res = client.post(url_for('projects.search'),
                       data=json.dumps(project_json),
                       headers=headers)
     assert res.status_code == 201
 
     # Moderator
     login_user_via_session(client, email=moderator['email'])
-    res = client.post(url_for('projects.projects_list'),
+    res = client.post(url_for('projects.search'),
                       data=json.dumps(project_json),
                       headers=headers)
     assert res.status_code == 201
 
     # Admin
     login_user_via_session(client, email=admin['email'])
-    res = client.post(url_for('projects.projects_list'),
+    res = client.post(url_for('projects.search'),
                       data=json.dumps(project_json),
                       headers=headers)
     assert res.status_code == 201
 
     # Super user
     login_user_via_session(client, email=superuser['email'])
-    res = client.post(url_for('projects.projects_list'),
+    res = client.post(url_for('projects.search'),
                       data=json.dumps(project_json),
                       headers=headers)
     assert res.status_code == 201
@@ -150,56 +150,56 @@ def test_read(client, make_project, make_user, superuser, admin, moderator,
 
     # Not logged
     res = client.get(
-        url_for('projects.projects_item', pid_value=project1['id']))
+        url_for('projects.read', pid_value=project1['id']))
     assert res.status_code == 403
 
     # Logged as user
     login_user_via_session(client, email=user['email'])
     res = client.get(
-        url_for('projects.projects_item', pid_value=project1['id']))
+        url_for('projects.read', pid_value=project1['id']))
     assert res.status_code == 403
 
     # Logged as submitter
     login_user_via_session(client, email=submitter['email'])
     res = client.get(
-        url_for('projects.projects_item', pid_value=project1['id']))
+        url_for('projects.read', pid_value=project1['id']))
     assert res.status_code == 200
 
     res = client.get(
-        url_for('projects.projects_item', pid_value=project2['id']))
+        url_for('projects.read', pid_value=project2['id']))
     assert res.status_code == 200
 
     # Logged as moderator
     login_user_via_session(client, email=moderator['email'])
     res = client.get(
-        url_for('projects.projects_item', pid_value=project1['id']))
+        url_for('projects.read', pid_value=project1['id']))
     assert res.status_code == 200
 
     res = client.get(
-        url_for('projects.projects_item', pid_value=project2['id']))
+        url_for('projects.read', pid_value=project2['id']))
     assert res.status_code == 200
 
     # Logged as admin
     login_user_via_session(client, email=admin['email'])
     res = client.get(
-        url_for('projects.projects_item', pid_value=project1['id']))
+        url_for('projects.read', pid_value=project1['id']))
     assert res.status_code == 200
 
     res = client.get(
-        url_for('projects.projects_item', pid_value=project2['id']))
+        url_for('projects.read', pid_value=project2['id']))
     assert res.status_code == 200
 
     # Logged as admin of other organisation
     other_admin = make_user('admin', 'org2', access='admin-access')
     login_user_via_session(client, email=other_admin['email'])
     res = client.get(
-        url_for('projects.projects_item', pid_value=project1['id']))
+        url_for('projects.read', pid_value=project1['id']))
     assert res.status_code == 200
 
     # Logged as superuser
     login_user_via_session(client, email=superuser['email'])
     res = client.get(
-        url_for('projects.projects_item', pid_value=project1['id']))
+        url_for('projects.read', pid_value=project1['id']))
     assert res.status_code == 200
 
 
@@ -215,7 +215,7 @@ def test_update(client, make_project, superuser, admin, moderator, submitter,
     }
 
     # Not logged
-    res = client.put(url_for('projects.projects_item',
+    res = client.put(url_for('projects.read',
                              pid_value=project1['id']),
                      data=json.dumps(project1.data),
                      headers=headers)
@@ -223,7 +223,7 @@ def test_update(client, make_project, superuser, admin, moderator, submitter,
 
     # Logged as user
     login_user_via_session(client, email=user['email'])
-    res = client.put(url_for('projects.projects_item',
+    res = client.put(url_for('projects.read',
                              pid_value=project1['id']),
                      data=json.dumps(project1.data),
                      headers=headers)
@@ -231,13 +231,13 @@ def test_update(client, make_project, superuser, admin, moderator, submitter,
 
     # Logged as submitter
     login_user_via_session(client, email=submitter['email'])
-    res = client.put(url_for('projects.projects_item',
+    res = client.put(url_for('projects.read',
                              pid_value=project1['id']),
                      data=json.dumps(project1.data),
                      headers=headers)
     assert res.status_code == 200
 
-    res = client.put(url_for('projects.projects_item',
+    res = client.put(url_for('projects.read',
                              pid_value=project2['id']),
                      data=json.dumps(project2.data),
                      headers=headers)
@@ -245,13 +245,13 @@ def test_update(client, make_project, superuser, admin, moderator, submitter,
 
     # Logged as moderator
     login_user_via_session(client, email=moderator['email'])
-    res = client.put(url_for('projects.projects_item',
+    res = client.put(url_for('projects.read',
                              pid_value=project1['id']),
                      data=json.dumps(project1.data),
                      headers=headers)
     assert res.status_code == 200
 
-    res = client.put(url_for('projects.projects_item',
+    res = client.put(url_for('projects.read',
                              pid_value=project2['id']),
                      data=json.dumps(project2.data),
                      headers=headers)
@@ -259,13 +259,13 @@ def test_update(client, make_project, superuser, admin, moderator, submitter,
 
     # Logged as admin
     login_user_via_session(client, email=admin['email'])
-    res = client.put(url_for('projects.projects_item',
+    res = client.put(url_for('projects.read',
                              pid_value=project1['id']),
                      data=json.dumps(project1.data),
                      headers=headers)
     assert res.status_code == 200
 
-    res = client.put(url_for('projects.projects_item',
+    res = client.put(url_for('projects.read',
                              pid_value=project2['id']),
                      data=json.dumps(project2.data),
                      headers=headers)
@@ -273,13 +273,13 @@ def test_update(client, make_project, superuser, admin, moderator, submitter,
 
     # Logged as superuser
     login_user_via_session(client, email=superuser['email'])
-    res = client.put(url_for('projects.projects_item',
+    res = client.put(url_for('projects.read',
                              pid_value=project1['id']),
                      data=json.dumps(project1.data),
                      headers=headers)
     assert res.status_code == 200
 
-    res = client.put(url_for('projects.projects_item',
+    res = client.put(url_for('projects.read',
                              pid_value=project2['id']),
                      data=json.dumps(project2.data),
                      headers=headers)
@@ -287,7 +287,7 @@ def test_update(client, make_project, superuser, admin, moderator, submitter,
 
     # Save status rejected --> OK
     project2.data['metadata']['validation']['status'] = 'rejected'
-    res = client.put(url_for('projects.projects_item',
+    res = client.put(url_for('projects.read',
                              pid_value=project2['id']),
                      data=json.dumps(project2.data),
                      headers=headers)
@@ -295,7 +295,7 @@ def test_update(client, make_project, superuser, admin, moderator, submitter,
 
     # Record is rejected, new save is not possible
     project2.data['metadata']['validation']['status'] = 'validated'
-    res = client.put(url_for('projects.projects_item',
+    res = client.put(url_for('projects.read',
                              pid_value=project2['id']),
                      data=json.dumps(project2.data),
                      headers=headers)
@@ -310,19 +310,19 @@ def test_delete(client, db, document, make_project, superuser, admin,
 
     # Not logged
     res = client.delete(
-        url_for('projects.projects_item', pid_value=project1['id']))
+        url_for('projects.read', pid_value=project1['id']))
     assert res.status_code == 403
 
     # Logged as user
     login_user_via_session(client, email=user['email'])
     res = client.delete(
-        url_for('projects.projects_item', pid_value=project1['id']))
+        url_for('projects.read', pid_value=project1['id']))
     assert res.status_code == 403
 
     # Logged as submitter
     login_user_via_session(client, email=submitter['email'])
     res = client.delete(
-        url_for('projects.projects_item', pid_value=project2['id']))
+        url_for('projects.read', pid_value=project2['id']))
     assert res.status_code == 403
 
     project1 = make_project('submitter', 'org')
@@ -330,11 +330,11 @@ def test_delete(client, db, document, make_project, superuser, admin,
     # Logged as moderator
     login_user_via_session(client, email=moderator['email'])
     res = client.delete(
-        url_for('projects.projects_item', pid_value=project2['id']))
+        url_for('projects.read', pid_value=project2['id']))
     assert res.status_code == 403
 
     res = client.delete(
-        url_for('projects.projects_item', pid_value=project1['id']))
+        url_for('projects.read', pid_value=project1['id']))
     assert res.status_code == 204
 
     project1 = make_project('submitter', 'org')
@@ -342,11 +342,11 @@ def test_delete(client, db, document, make_project, superuser, admin,
     # Logged as admin
     login_user_via_session(client, email=admin['email'])
     res = client.delete(
-        url_for('projects.projects_item', pid_value=project2['id']))
+        url_for('projects.read', pid_value=project2['id']))
     assert res.status_code == 403
 
     res = client.delete(
-        url_for('projects.projects_item', pid_value=project1['id']))
+        url_for('projects.read', pid_value=project1['id']))
     assert res.status_code == 204
 
     project1 = make_project('submitter', 'org')
@@ -354,7 +354,7 @@ def test_delete(client, db, document, make_project, superuser, admin,
     # Logged as superuser
     login_user_via_session(client, email=superuser['email'])
     res = client.delete(
-        url_for('projects.projects_item', pid_value=project1['id']))
+        url_for('projects.read', pid_value=project1['id']))
     assert res.status_code == 204
 
     project1 = make_project('submitter', 'org')
@@ -369,5 +369,5 @@ def test_delete(client, db, document, make_project, superuser, admin,
     document.reindex()
 
     res = client.delete(
-        url_for('projects.projects_item', pid_value=project1['id']))
+        url_for('projects.read', pid_value=project1['id']))
     assert res.status_code == 403

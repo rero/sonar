@@ -17,31 +17,49 @@
 
 """Projects service."""
 
+from invenio_records_resources.services import \
+    SearchOptions as BaseSearchOptions
+from invenio_records_resources.services.records.facets import TermsFacet
+from invenio_records_resources.services.records.params import FacetsParam, \
+    PaginationParam, QueryStrParam, SortParam
+from invenio_records_resources.services.records.params.querystr import \
+    SuggestQueryParser
 from invenio_records_resources.services.records.schema import \
-    MarshmallowServiceSchema
+    ServiceSchemaWrapper
 from invenio_records_rest.utils import obj_or_import_string
 
-from sonar.config import DEFAULT_AGGREGATION_SIZE
 from sonar.modules.organisations.api import current_organisation
-from sonar.modules.query import and_term_filter
 from sonar.modules.utils import has_custom_resource
 
-from ..service import RecordService as BaseRecordService
-from ..service import RecordServiceConfig as BaseRecordServiceConfig
+from ..service import RecordService, RecordServiceConfig
 from .api import Record, RecordComponent
 from .permissions import RecordPermissionPolicy
 from .results import RecordList
 
 
-class RecordServiceConfig(BaseRecordServiceConfig):
-    """Projects service configuration."""
+class PreFacetsParam(FacetsParam):
+    """."""
 
-    permission_policy_cls = RecordPermissionPolicy
-    record_cls = Record
-    result_list_cls = RecordList
-    search_sort_default = 'relevance'
-    search_sort_default_no_query = 'newest'
-    search_sort_options = {
+    def filter(self, search):
+        """Apply a pre filter on the search."""
+        if not self._filters:
+            return search
+
+        filters = list(self._filters.values())
+
+        post_filter = filters[0]
+        for f in filters[1:]:
+            post_filter |= f
+
+        return search.filter(post_filter)
+
+
+class SearchOptions(BaseSearchOptions):
+    """Search options."""
+
+    sort_default = 'relevance'
+    sort_default_no_query = 'newest'
+    sort_options = {
         'relevance': {
             'fields': ['_score'],
         },
@@ -55,40 +73,50 @@ class RecordServiceConfig(BaseRecordServiceConfig):
             'fields': ['metadata.startDate']
         }
     }
-    search_facets_options = {
-        'aggs': {
-            'user': {
-                'terms': {
-                    'field': 'metadata.user.pid',
-                    'size': DEFAULT_AGGREGATION_SIZE
-                }
-            },
-            'organisation': {
-                'terms': {
-                    'field': 'metadata.organisation.pid',
-                    'size': DEFAULT_AGGREGATION_SIZE
-                }
-            },
-            'status': {
-                'terms': {
-                    'field': 'metadata.validation.status',
-                    'size': DEFAULT_AGGREGATION_SIZE
-                }
-            },
-        },
-        'filters': {
-            'user': and_term_filter('metadata.user.pid'),
-            'organisation': and_term_filter('metadata.organisation.pid'),
-            'status': and_term_filter('metadata.validation.status'),
-        }
+
+    pagination_options = {
+        "default_results_per_page": 10,
+        "default_max_results": 10000
     }
-    components = BaseRecordServiceConfig.components + [RecordComponent]
+
+    params_interpreters_cls = [
+        QueryStrParam,
+        PaginationParam,
+        SortParam,
+        PreFacetsParam
+    ]
+
+    facets = {
+        'user': TermsFacet(field='metadata.user.pid'),
+        'organisation': TermsFacet(field='metadata.organisation.pid'),
+        'status': TermsFacet(field='metadata.validation.status')
+    }
+
+    suggest_parser_cls = SuggestQueryParser.factory(fields=[
+        "metadata.name.suggest", "metadata.projectSponsor.suggest",
+        "metadata.innerSearcher.suggest", "metadata.keywords.suggest"
+    ])
 
 
-class RecordService(BaseRecordService):
+
+class ProjectsRecordServiceConfig(RecordServiceConfig):
+    """Projects service configuration."""
+
+    permission_policy_cls = RecordPermissionPolicy
+
+    record_cls = Record
+
+    result_list_cls = RecordList
+
+    search = SearchOptions
+
+    components = RecordServiceConfig.components + [RecordComponent]
+
+
+class ProjectsRecordService(RecordService):
     """Projects service."""
 
-    default_config = RecordServiceConfig
+    default_config = ProjectsRecordServiceConfig
 
     @property
     def schema(self):
@@ -101,4 +129,4 @@ class RecordService(BaseRecordService):
 
         schema = obj_or_import_string(schema_path)
 
-        return MarshmallowServiceSchema(self, schema=schema)
+        return ServiceSchemaWrapper(self, schema=schema)
