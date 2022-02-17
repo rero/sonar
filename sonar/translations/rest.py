@@ -23,10 +23,10 @@ import polib
 from flask import Blueprint, abort, current_app, jsonify
 from flask_babelex import get_domain
 
-blueprint = Blueprint('translations', __name__)
+api_blueprint = Blueprint('translations', __name__)
 
 
-@blueprint.route('/translations/<lang>.json')
+@api_blueprint.route('/translations/<lang>.json')
 def get_translations(lang):
     """Exposes translations in JSON format.
 

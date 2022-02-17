@@ -28,10 +28,10 @@ from sonar.modules.deposits.serializers.schemas.document import \
 from sonar.modules.documents.loaders.schemas.sru import SRUSchema
 from sonar.modules.permissions import is_user_logged_and_submitter
 
-blueprint = Blueprint('swisscovery', __name__, url_prefix='/swisscovery')
+api_blueprint = Blueprint('swisscovery', __name__, url_prefix='/swisscovery')
 
 
-@blueprint.route('/', methods=['GET'])
+@api_blueprint.route('/', methods=['GET'])
 @is_user_logged_and_submitter
 def get_record():
     """Get record."""

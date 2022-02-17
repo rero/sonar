@@ -109,15 +109,14 @@ class FileResource(ContentNegotiatedMethodView):
 files_view = FilesResource.as_view('files')
 file_view = FileResource.as_view('file')
 
-blueprint = Blueprint('deposits',
-                      __name__,
-                      url_prefix='/deposits/<pid>/',
-                      template_folder='templates')
-blueprint.add_url_rule('/custom-files/<key>', view_func=file_view)
-blueprint.add_url_rule('/custom-files', view_func=files_view)
+api_blueprint = Blueprint('deposits', __name__,
+                          url_prefix='/deposits/<pid>/',
+                          template_folder='templates')
+api_blueprint.add_url_rule('/custom-files/<key>', view_func=file_view)
+api_blueprint.add_url_rule('/custom-files', view_func=files_view)
 
 
-@blueprint.route('/publish', methods=['POST'])
+@api_blueprint.route('/publish', methods=['POST'])
 def publish(pid=None):
     """Publish a deposit or send a message for review."""
     deposit = DepositRecord.get_record_by_pid(pid)
@@ -170,7 +169,7 @@ def publish(pid=None):
     return make_response()
 
 
-@blueprint.route('/review', methods=['POST'])
+@api_blueprint.route('/review', methods=['POST'])
 def review(pid=None):
     """Review a deposit and change the deposit status depending on action."""
     deposit = DepositRecord.get_record_by_pid(pid)
@@ -238,7 +237,7 @@ def review(pid=None):
     return make_response(jsonify(deposit))
 
 
-@blueprint.route('/extract-pdf-metadata', methods=['GET'])
+@api_blueprint.route('/extract-pdf-metadata', methods=['GET'])
 def extract_metadata(pid=None):
     """Publish a deposit or send a message for review."""
     deposit = DepositRecord.get_record_by_pid(pid)

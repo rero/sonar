@@ -27,7 +27,7 @@ from sonar.modules.permissions import superuser_access_permission
 from sonar.monitoring.api.data_integrity import DataIntegrityMonitoring
 from sonar.monitoring.api.database import DatabaseMonitoring
 
-blueprint = Blueprint('monitoring_api', __name__, url_prefix='/monitoring')
+api_blueprint = Blueprint('monitoring_api', __name__, url_prefix='/monitoring')
 
 
 def is_superuser(func):
@@ -46,13 +46,13 @@ def is_superuser(func):
     return decorated_view
 
 
-@blueprint.before_request
+@api_blueprint.before_request
 @is_superuser
 def check_for_superuser():
     """Check if user is superuser before each request, with decorator."""
 
 
-@blueprint.route('/db/connections/count')
+@api_blueprint.route('/db/connections/count')
 def db_connection_count():
     """Information about current database connections."""
     try:
@@ -62,7 +62,7 @@ def db_connection_count():
         return jsonify({'error': str(exception)}), 500
 
 
-@blueprint.route('/db/activity')
+@api_blueprint.route('/db/activity')
 def db_activity():
     """Current database activity."""
     try:
@@ -72,7 +72,7 @@ def db_activity():
         return jsonify({'error': str(exception)}), 500
 
 
-@blueprint.route('/data/status')
+@api_blueprint.route('/data/status')
 def data_status():
     """Status of data integrity."""
     try:
@@ -86,7 +86,7 @@ def data_status():
         return jsonify({'error': str(exception)}), 500
 
 
-@blueprint.route('/data/info')
+@api_blueprint.route('/data/info')
 def data_info():
     """Info of data integrity."""
     try:
@@ -99,7 +99,7 @@ def data_info():
         return jsonify({'error': str(exception)}), 500
 
 
-@blueprint.route('/es')
+@api_blueprint.route('/es')
 def elastic_search():
     """Displays elastic search cluster info.
 
