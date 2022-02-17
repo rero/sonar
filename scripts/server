@@ -19,12 +19,30 @@
 source $(dirname "$0")/functions
 
 set -e
+PORT=5000
 
 # Poetry is a mandatory condition to launch this program!
 if [[ -z "${VIRTUAL_ENV}" ]]; then
   message "Launch this script via poetry command: poetry run ${PROGRAM}" "error"
   exit 1
 fi
+
+if ! options=$(getopt -o p: port: -- "$@")
+then
+  # something went wrong, getopt will put out an error message for us
+  exit 1
+fi
+
+while [ $# -gt 0 ]
+do
+  case $1 in
+    -p|--port) PORT=$2; shift;;
+    (--) shift; break;;
+    (-*) error_msg+exit "$0: Unrecognized option $1";;
+  esac
+  shift
+done
+
 
 title "Start web server and celery"
 
@@ -41,7 +59,9 @@ message "Done" "success"
 section "Start web server" "info"
 invenio run \
        --cert "$script_path"/../docker/nginx/test.crt \
-       --key "$script_path"/../docker/nginx/test.key & pid_server=$!
+       --key "$script_path"/../docker/nginx/test.key \
+       -p $PORT & pid_server=$!
+
 message "Done" "success"
 
 trap 'kill $pid_celery $pid_server &>/dev/null' EXIT

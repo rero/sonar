@@ -21,10 +21,10 @@ from flask import Blueprint, current_app, jsonify, request
 
 from sonar.proxies import sonar
 
-blueprint = Blueprint('suggestions', __name__, url_prefix='/suggestions')
+api_blueprint = Blueprint('suggestions', __name__, url_prefix='/suggestions')
 
 
-@blueprint.route('/completion', methods=['GET'])
+@api_blueprint.route('/completion', methods=['GET'])
 def completion():
     """Suggestions completion."""
     query = request.args.get('q')

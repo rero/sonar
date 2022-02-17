@@ -24,10 +24,10 @@ from sonar.modules.organisations.api import OrganisationRecord, \
 from sonar.modules.users.api import current_user_record
 from sonar.modules.utils import get_language_value
 
-blueprint = Blueprint('documents', __name__, url_prefix='/documents')
+api_blueprint = Blueprint('documents', __name__, url_prefix='/documents')
 
 
-@blueprint.route('/aggregations', methods=['GET'])
+@api_blueprint.route('/aggregations', methods=['GET'])
 def aggregations():
     """Get aggregations list."""
     view = request.args.get('view')

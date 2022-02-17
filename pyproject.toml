@@ -8,21 +8,24 @@ license = "GNU Affero General Public License v3.0"
 [tool.poetry.dependencies]
 python = ">= 3.7, <3.10"
 
+invenio-oaiharvester = {git = "https://github.com/inveniosoftware/invenio-oaiharvester.git", tag = "v1.0.0a4"}
+invenio-circulation = {version = ">=1.0.0a36", allow-prereleases = true}
+
 invenio-logging = { version = ">=1.3.0,<1.4.0", extras = ["sentry-sdk", "sentry"] }
-invenio-oaiharvester = {tag = "v1.0.0a4", git = "https://github.com/inveniosoftware/invenio-oaiharvester.git"}
 
 # Invenio 3.4 base modules. Same as invenio metadata extras without invenio-search-ui
 invenio-indexer = ">=1.2.0,<1.3.0"
 invenio-jsonschemas = ">=1.1.1,<1.2.0"
-invenio-oaiserver = "^1.4.1"
+invenio-oaiserver = ">1.4.0,<1.5.0"
 invenio-pidstore = ">=1.2.1,<1.3.0"
 invenio-records-rest = ">=1.8.0,<1.9.0"
 invenio-records-ui= ">=1.2.0,<1.3.0"
-invenio-records = "<=1.6.0"
-invenio-stats = "^1.0.0-alpha.18"
-# TODO: update invenio-records-resources
+invenio-records = "<=1.7.0"
+invenio-stats = "^1.0.0a18"
+# TODO: update invenio-records-resourcces
 invenio-records-resources = "==0.12.5"
 invenio = {version = ">=3.4.0,<3.5.0", extras = ["base", "files", "postgresql", "auth", "elasticsearch7", "docs", "tests"]}
+invenio-previewer = ">=1.3.5"
 
 uwsgi = ">=2.0"
 uwsgitop = ">=0.11"
@@ -36,7 +39,7 @@ pycountry = "*"
 flask-wiki = {git = "https://github.com/rero/flask-wiki.git"}
 markdown-captions = "*"
 bleach = ">3.11"
-wand = ">=0.5.0,<0.6.0"
+wand = ">0.6.0"
 python-dotenv = "*"
 flask-cors = ">3.0.8"
 cryptography = ">=3.2"
@@ -49,7 +52,7 @@ python-Levenshtein = ">=0.12.0"
 polib = ">=1.1.0"
 idutils = ">=1.1.8"
 urllib3 = ">=1.26.4"
-coverage = {version = ">=6.0b1", allow-prereleases = true}
+coverage = "*"
 pillow = ">=9.0.0"
 celery = ">=5.0.0"
 jedi = "<0.18.0"
@@ -57,11 +60,10 @@ wtforms = "<3.0.0"
 flask-wtf = "<1.0.0"
 zipp = "*"
 pycparser = "*"
-invenio-previewer = ">=1.3.5"
-markupsafe = "<2.1.0"
-# TODO: normaly not needed with invenio-records[postgresql]
-sqlalchemy-continuum = "<2.0.0"
-psycopg2-binary = "<3.0.0"
+poethepoet = "*"
+Flask = "<2.0.0"
+MarkupSafe = "<2.0.0"
+SQLAlchemy = "<1.4.0"
 
 [tool.poetry.dev-dependencies]
 Flask-Debugtoolbar = ">=0.10.1"
@@ -71,6 +73,135 @@ pytest-invenio = ">=1.4.1,<1.5.0"
 safety = ">=1.8"
 appnope = { version = "*", optional = true }
 autoflake = ">=1.4"
+
+[project.console_scripts]
+sonar = "invenio_app.cli:cli"
+
+[tool.poetry.plugins."flask.commands"]
+documents = "sonar.modules.documents.cli.documents:documents"
+ark = "sonar.modules.ark.cli:ark"
+oaiharvester = "sonar.modules.documents.cli.oaiharvester:oaiharvester"
+es = "sonar.elasticsearch.cli:es"
+heg = "sonar.heg.cli:heg"
+resources = "sonar.resources.cli:resources"
+imports = "sonar.modules.cli.imports:imports"
+fixtures = "sonar.modules.cli.fixtures:fixtures"
+utils = "sonar.modules.cli.utils:utils"
+
+[tool.poetry.plugins."invenio_base.apps"]
+sonar = "sonar.ext:Sonar"
+documents = "sonar.modules.documents:Documents"
+shibboleth_authenticator = "sonar.modules.shibboleth_authenticator:ShibbolethAuthenticator"
+
+[tool.poetry.plugins."invenio_base.api_apps"]
+sonar = "sonar.ext:SonarAPI"
+documents = "sonar.modules.documents:Documents"
+organisations = "sonar.modules.organisations:Organisations"
+invenio_i18n = "invenio_i18n:InvenioI18N"
+
+[tool.poetry.plugins."invenio_base.blueprints"]
+dedicated = "sonar.dedicated.views:blueprint"
+help = "sonar.help.views:blueprint"
+collections = "sonar.modules.collections.views:blueprint"
+documents = "sonar.modules.documents.views:blueprint"
+pdf_extractor = "sonar.modules.pdf_extractor.views.client:blueprint"
+shibboleth_authenticator = "sonar.modules.shibboleth_authenticator.views.client:blueprint"
+theme = "sonar.theme.views:blueprint"
+validation = "sonar.modules.validation.views:blueprint"
+users = "sonar.modules.users.views:blueprint"
+
+[tool.poetry.plugins."invenio_base.api_blueprints"]
+deposits = "sonar.modules.deposits.rest:api_blueprint"
+documents = "sonar.modules.documents.rest:api_blueprint"
+pdf_extractor = "sonar.modules.pdf_extractor.views.api:api_blueprint"
+swisscovery = "sonar.modules.swisscovery.rest:api_blueprint"
+monitoring = "sonar.monitoring.views:api_blueprint"
+suggestions = "sonar.suggestions.rest:api_blueprint"
+translations = "sonar.translations.rest:api_blueprint"
+users = "sonar.modules.users.views:blueprint"
+
+[tool.poetry.plugins."invenio_assets.webpack"]
+sonar_theme = "sonar.theme.webpack:theme"
+
+[tool.poetry.plugins."invenio_config.module"]
+sonar = "sonar.config"
+sonar_documents = "sonar.modules.documents.config"
+shibboleth_authenticator = "sonar.modules.shibboleth_authenticator.config"
+pdf_extractor = "sonar.modules.pdf_extractor.config"
+
+[tool.poetry.plugins."invenio_i18n.translations"]
+messages = "sonar"
+messages_wiki = "flask_wiki"
+
+[tool.poetry.plugins."invenio_jsonschemas.schemas"]
+documents = "sonar.modules.documents.jsonschemas"
+organisations = "sonar.modules.organisations.jsonschemas"
+users = "sonar.modules.users.jsonschemas"
+deposits = "sonar.modules.deposits.jsonschemas"
+projects = "sonar.resources.projects.jsonschemas"
+projects_hepvs = "sonar.dedicated.hepvs.projects.jsonschemas"
+collections = "sonar.modules.collections.jsonschemas"
+subdivisions = "sonar.modules.subdivisions.jsonschemas"
+stats = "sonar.modules.stats.jsonschemas"
+common = "sonar.common.jsonschemas"
+
+[tool.poetry.plugins."invenio_search.mappings"]
+documents = "sonar.modules.documents.mappings"
+organisations = "sonar.modules.organisations.mappings"
+users = "sonar.modules.users.mappings"
+deposits = "sonar.modules.deposits.mappings"
+projects = "sonar.resources.projects.mappings"
+collections = "sonar.modules.collections.mappings"
+subdivisions = "sonar.modules.subdivisions.mappings"
+stats = "sonar.modules.stats.mappings"
+
+[tool.poetry.plugins."invenio_search.templates"]
+base-record = "sonar.es_templates:list_es_templates"
+
+[tool.poetry.plugins."invenio_pidstore.minters"]
+document_id = "sonar.modules.documents.api:document_pid_minter"
+organisation_id = "sonar.modules.organisations.api:organisation_pid_minter"
+user_id = "sonar.modules.users.api:user_pid_minter"
+deposit_id = "sonar.modules.deposits.api:deposit_pid_minter"
+collections_id = "sonar.modules.collections.api:pid_minter"
+subdivisions_id = "sonar.modules.subdivisions.api:pid_minter"
+stats_id = "sonar.modules.stats.api:pid_minter"
+
+[tool.poetry.plugins."invenio_pidstore.fetchers"]
+document_id = "sonar.modules.documents.api:document_pid_fetcher"
+organisation_id = "sonar.modules.organisations.api:organisation_pid_fetcher"
+user_id = "sonar.modules.users.api:user_pid_fetcher"
+deposit_id = "sonar.modules.deposits.api:deposit_pid_fetcher"
+collections_id = "sonar.modules.collections.api:pid_fetcher"
+subdivisions_id = "sonar.modules.subdivisions.api:pid_fetcher"
+stats_id = "sonar.modules.stats.api:pid_fetcher"
+
+[tool.poetry.plugins."invenio_records.jsonresolver"]
+organisation = "sonar.modules.organisations.jsonresolvers"
+user = "sonar.modules.users.jsonresolvers"
+document = "sonar.modules.documents.jsonresolvers"
+project = "sonar.resources.projects.jsonresolvers"
+collections = "sonar.modules.collections.jsonresolvers"
+subdivisions = "sonar.modules.subdivisions.jsonresolvers"
+
+[tool.poetry.plugins."invenio_celery.tasks"]
+documents = "sonar.modules.documents.tasks"
+stats = "sonar.modules.stats.tasks"
+
+[tool.poetry.plugins."invenio_admin.views"]
+stats = "sonar.modules.stats.admin:stats_adminview"
+
+[tool.poetry.plugins."babel.extractors"]
+json = "sonar.modules.babel_extractors:extract_json"
+
+[tool.poe.tasks]
+bootstrap = {cmd = "./scripts/bootstrap", help = "Runs bootstrap"}
+console = {cmd = "./scripts/console", help = "Opens invenio shell"}
+run_tests = {cmd = "./scripts/test", help = "Runs all tests"}
+tests = {cmd = "pytest", help = "pytest"}
+tests_debug = {cmd = "./scripts/pytest -s --v --no-cov", help = "pytest -s --v --no-cov"}
+server = {cmd = "./scripts/server", help = "Starts the server "}
+setup = {cmd = "./scripts/setup", help = "Runs setup"}
 
 [build-system]
 requires = ["poetry>=0.12", "setuptools<58"]

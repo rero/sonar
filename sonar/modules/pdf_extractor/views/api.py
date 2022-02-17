@@ -24,14 +24,13 @@ from flask import Blueprint, jsonify, request
 from sonar.modules.pdf_extractor.pdf_extractor import PDFExtractor
 from sonar.modules.pdf_extractor.utils import extract_text_from_content
 
-blueprint = Blueprint('pdf_extractor',
-                      __name__,
-                      template_folder='templates',
-                      static_folder='static',
-                      url_prefix='/pdf-extractor')
+api_blueprint = Blueprint('pdf_extractor', __name__,
+                          template_folder='templates',
+                          static_folder='static',
+                          url_prefix='/pdf-extractor')
 
 
-@blueprint.route('/metadata', methods=['POST'])
+@api_blueprint.route('/metadata', methods=['POST'])
 def metadata():
     """Extract PDF metadata and return as a json object."""
     try:
@@ -49,7 +48,7 @@ def metadata():
         return jsonify(dict(error=str(exception))), 400
 
 
-@blueprint.route('/full-text', methods=['POST'])
+@api_blueprint.route('/full-text', methods=['POST'])
 def full_text():
     """Extract PDF metadata and return as a json object."""
     try:
