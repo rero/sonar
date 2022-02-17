@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2022-02-03 08:24+0100\n"
-"PO-Revision-Date: 2022-02-03 16:16+0000\n"
+"PO-Revision-Date: 2022-02-17 13:57+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "it/>\n"
@@ -914,7 +914,7 @@ msgstr "ISBN/ISSN statuto deve essere selezionato nell'elenco sottostante."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1217
 msgid "Identified by"
-msgstr "Identificato da"
+msgstr "Identificatore"
 
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:2
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:3
