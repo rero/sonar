@@ -171,7 +171,9 @@ def test_contribution():
     assert DepositDocumentSchema().dump(document) == {
         'contributors': [{
             'name': 'Thilmany, Christian. Herrmann',
-            'role': 'cre'
+            'role': 'cre',
+            'date_of_birth': '1710',
+            'date_of_death': '1767'
         }]
     }
 

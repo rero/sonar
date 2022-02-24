@@ -1084,6 +1084,8 @@
         ],
         "propertiesOrder": [
           "name",
+          "date_of_birth",
+          "date_of_death",
           "affiliation",
           "role",
           "orcid"
@@ -1164,6 +1166,16 @@
                 "placeholder": "Example: 1111-2222-3333-4444"
               }
             }
+          },
+          "date_of_birth": {
+            "title": "Date of birth",
+            "type": "string",
+            "minLength": 4
+          },
+          "date_of_death": {
+            "title": "Date of death",
+            "type": "string",
+            "minLength": 4
           }
         }
       },
