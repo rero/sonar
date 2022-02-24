@@ -173,7 +173,8 @@ def part_of_format(part_of):
     if part_of.get('document', {}).get('title'):
         items.append(part_of['document']['title'])
 
-    items.append(part_of['numberingYear'])
+    if 'numberingYear' in part_of:
+        items.append(part_of['numberingYear'])
 
     if 'numberingVolume' in part_of:
         items.append('{label} {value}'.format(
