@@ -1481,7 +1481,7 @@
       }
     },
     "partOf": {
-      "title": "Part of (host document)",
+      "title": "Contained in or submitted to (journal, book, proceedings)",
       "type": "array",
       "minItems": 1,
       "items": {
@@ -1492,7 +1492,12 @@
           "numberingYear": {
             "title": "Year",
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "form": {
+              "expressionProperties": {
+                "templateOptions.required": "!['coar:c_816b'].includes(field.parent.parent.parent.model.documentType)"
+              }
+            }
           },
           "numberingVolume": {
             "title": "Volume",
@@ -1791,8 +1796,7 @@
           "numberingPages"
         ],
         "required": [
-          "document",
-          "numberingYear"
+          "document"
         ]
       },
       "form": {
