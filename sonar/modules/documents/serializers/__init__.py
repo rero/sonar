@@ -21,24 +21,20 @@ from __future__ import absolute_import, print_function
 
 from datetime import datetime
 
-from flask import current_app, request
+from flask import request
 from invenio_records_rest.serializers.response import record_responsify, \
     search_responsify
 
 from sonar.modules.collections.api import Record as CollectionRecord
-from sonar.modules.documents.serializers.dc import SonarDublinCoreSerializer
 from sonar.modules.documents.serializers.google_scholar import \
     SonarGoogleScholarSerializer
 from sonar.modules.documents.serializers.schemaorg import \
     SonarSchemaOrgSerializer
-from sonar.modules.documents.serializers.schemas.dc import DublinCoreV1
 from sonar.modules.documents.serializers.schemas.google_scholar import \
     GoogleScholarV1
 from sonar.modules.documents.serializers.schemas.schemaorg import SchemaOrgV1
 from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.serializers import JSONSerializer as _JSONSerializer
-from sonar.modules.subdivisions.api import Record as SubdivisionRecord
-from sonar.modules.users.api import current_user_record
 from sonar.modules.utils import get_language_value
 
 from ..marshmallow import DocumentSchemaV1
@@ -84,8 +80,6 @@ class JSONSerializer(_JSONSerializer):
 # ===========
 #: JSON serializer definition.
 json_v1 = JSONSerializer(DocumentSchemaV1)
-#: Dublin Core serializer
-dc_v1 = SonarDublinCoreSerializer(DublinCoreV1, replace_refs=True)
 #: schema.org serializer
 schemaorg_v1 = SonarSchemaOrgSerializer(SchemaOrgV1, replace_refs=True)
 #: google scholar serializer
@@ -104,8 +98,3 @@ __all__ = (
     'json_v1_response',
     'json_v1_search',
 )
-
-# OAI-PMH record serializers.
-# ===========================
-#: OAI-PMH OAI Dublin Core record serializer.
-oaipmh_oai_dc = dc_v1.serialize_oaipmh

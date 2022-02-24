@@ -28,7 +28,7 @@ from sonar.modules.documents.views import part_of_format
 from .base_schema import BaseSchema
 
 
-class DublinCoreV1(BaseSchema):
+class DublinCoreSchema(BaseSchema):
     """Schema for records v1 in JSON."""
 
     contributors = fields.Method('get_contributors')
@@ -249,11 +249,12 @@ class DublinCoreV1(BaseSchema):
 
     def get_types(self, obj):
         """Get types."""
-        if obj['metadata'].get('documentType'):
-            return [
-                'http://purl.org/coar/resource_type/{type}'.format(
-                    type=obj['metadata']['documentType'].split(':')[1])
-            ]
+        if obj['metadata'].get('documentType', ''):
+            types = obj['metadata'].get('documentType', '').split(':')
+            if len(types) == 1:
+                return [f'{types[0]}']
+            if len(types) == 2:
+                return [f'http://purl.org/coar/resource_type/{types[1]}']
 
         return []
 
