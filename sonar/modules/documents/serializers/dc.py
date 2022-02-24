@@ -17,16 +17,34 @@
 
 """Dublin Core serializer."""
 
-from invenio_records_rest.serializers.dc import DublinCoreSerializer
+from dcxml import simpledc
+from flask_resources.serializers import SerializerMixin
+
+from sonar.modules.documents.serializers.schemas.dc import DublinCoreSchema
 
 
-class SonarDublinCoreSerializer(DublinCoreSerializer):
-    """Marshmallow based DublinCore serializer for records."""
+class SonarDublinCoreXMLSerializer(SerializerMixin):
+    """DublinCore serializer for records."""
 
-    def dump(self, obj, context=None):
-        """Serialize object with schema.
+    def __init__(self, **options):
+        """Constructor."""
+        self.schema_class = DublinCoreSchema
 
-        Mandatory to override this method, as invenio-records-rest does not
-        use the right way to dump objects (compatible with marshmallow 3.9).
+    def transform_record(self, obj):
+        """Tranform record."""
+        # TODO: Remove this hack after migrate to invenio ressources
+        return self.schema_class().dump(dict(metadata=obj))
+
+    def serialize_object_xml(self, obj):
+        """Serialize a single record and persistent identifier to etree.
+
+        :param obj: Record instance
         """
-        return self.schema_class(context=context).dump(obj)
+        json = self.transform_record(obj["_source"])
+        return simpledc.dump_etree(json)
+
+
+def sonar_dublin_core(pid, record):
+    """Get DublinCore XML for OAI-PMH."""
+    return SonarDublinCoreXMLSerializer()\
+        .serialize_object_xml(record)

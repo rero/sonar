@@ -851,7 +851,7 @@ OAISERVER_METADATA_FORMATS = {
     'oai_dc': {
         'namespace': 'http://www.openarchives.org/OAI/2.0/oai_dc/',
         'schema': 'http://www.openarchives.org/OAI/2.0/oai_dc.xsd',
-        'serializer': 'sonar.modules.documents.serializers.oaipmh_oai_dc',
+        'serializer': 'sonar.modules.documents.serializers.dc.sonar_dublin_core',
     }
 }
 #: Number of records to return per page in OAI-PMH results.
