@@ -168,7 +168,17 @@ class DocumentSchema(Schema, RemoveEmptyValuesMixin):
         if not obj.get('contribution'):
             return None
 
-        return [{
-            'name': item['agent']['preferred_name'],
-            'role': item['role'][0]
-        } for item in obj['contribution']]
+        contributors = []
+        for item in obj['contribution']:
+            contributor = {
+                'name': item['agent']['preferred_name'],
+                'role': item['role'][0]
+            }
+            if 'date_of_birth' in item['agent']:
+                contributor['date_of_birth'] = item['agent']['date_of_birth']
+            if 'date_of_death' in item['agent']:
+                contributor['date_of_death'] = item['agent']['date_of_death']
+            contributors.append(contributor)
+
+        return contributors
+

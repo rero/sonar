@@ -316,6 +316,12 @@
           },
           "orcid": {
             "type": "keyword"
+          },
+          "date_of_birth": {
+            "type": "keyword"
+          },
+          "date_of_death": {
+            "type": "keyword"
           }
         }
       },

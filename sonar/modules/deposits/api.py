@@ -376,6 +376,12 @@ class DepositRecord(SonarRecord):
                 'role': [contributor['role']]
             }
 
+            if contributor.get('date_of_birth'):
+                 data['agent']['date_of_birth'] = contributor['date_of_birth']
+
+            if contributor.get('date_of_death'):
+                 data['agent']['date_of_death'] = contributor['date_of_death']
+
             if contributor.get('affiliation'):
                 data['affiliation'] = contributor['affiliation']
 
