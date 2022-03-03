@@ -4,46 +4,34 @@
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.5.0...v1.5.1)
 
-**Merged pull requests:**
+**Fixed bugs:**
 
 - documents: store allowed ips addresses in CIDR format [\#769](https://github.com/rero/sonar/pull/769) ([jma](https://github.com/jma))
 
-## [v1.5.0](https://github.com/rero/sonar/tree/v1.5.0) (2022-02-03)
+## [v1.5.0](https://github.com/rero/sonar/tree/v1.5.0) (2022-02-07)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.4.2...v1.5.0)
 
 **Implemented enhancements:**
 
 - distinguish between thesis supervisor and co-supervisors \[1\] [\#733](https://github.com/rero/sonar/issues/733)
-- add popup info to the field `partOf.document.publication.statement` [\#728](https://github.com/rero/sonar/issues/728)
-- Allow facet display to be configured for dedicated repositories \[3\] [\#702](https://github.com/rero/sonar/issues/702)
-- Make the "Collection" facet hierarchical. [\#545](https://github.com/rero/sonar/issues/545)
-- Improve search field in organisation's pages [\#406](https://github.com/rero/sonar/issues/406)
-- Highlight search terms in brief view [\#404](https://github.com/rero/sonar/issues/404)
+- add popup info to the field `partOf.document.publication.statement` [\#728](https://github.com/rero/sonar/issues/728) [[f: editor](https://github.com/rero/sonar/labels/f:%20editor)] [[f: professional ui](https://github.com/rero/sonar/labels/f:%20professional%20ui)]
+- Allow facet display to be configured for dedicated repositories \[3\] [\#702](https://github.com/rero/sonar/issues/702) [[f: public ui](https://github.com/rero/sonar/labels/f:%20public%20ui)]
 
 **Fixed bugs:**
 
 - Documents in some languages produce a server error [\#748](https://github.com/rero/sonar/issues/748)
-- Files in masked records: access rights should be limited to those of its record [\#746](https://github.com/rero/sonar/issues/746)
-- The public and professional interfaces switch language unexpectedly [\#741](https://github.com/rero/sonar/issues/741)
-- Various problems in the document editor [\#740](https://github.com/rero/sonar/issues/740)
-- Problems in the document editor: impossible to save [\#739](https://github.com/rero/sonar/issues/739)
+- Files in masked records: access rights should be limited to those of its record [\#746](https://github.com/rero/sonar/issues/746) [[f: public ui](https://github.com/rero/sonar/labels/f:%20public%20ui)] [[f: permissions](https://github.com/rero/sonar/labels/f:%20permissions)]
+- The public and professional interfaces switch language unexpectedly [\#741](https://github.com/rero/sonar/issues/741) [[f: public ui](https://github.com/rero/sonar/labels/f:%20public%20ui)] [[f: professional ui](https://github.com/rero/sonar/labels/f:%20professional%20ui)]
+- Various problems in the document editor [\#740](https://github.com/rero/sonar/issues/740) [[f: editor](https://github.com/rero/sonar/labels/f:%20editor)]
+- Problems in the document editor: impossible to save [\#739](https://github.com/rero/sonar/issues/739) [[f: editor](https://github.com/rero/sonar/labels/f:%20editor)]
 - Bugs in the help editor: impossible to upload a file, impossible to preview a page in the editor \[0\] [\#712](https://github.com/rero/sonar/issues/712)
 - Help contents should not redirect to SONAR global for dedicated repositories \[3\] [\#709](https://github.com/rero/sonar/issues/709)
 
-**Closed issues:**
-
-- Improve OAI sets creation [\#504](https://github.com/rero/sonar/issues/504)
-- Manage controlled affiliations in backend in organisation resource. [\#417](https://github.com/rero/sonar/issues/417)
-- In the deposit form, automatic control that the affiliations correspond to organisation. [\#416](https://github.com/rero/sonar/issues/416)
-- Login via an organisation with a switch edu-ID account. [\#413](https://github.com/rero/sonar/issues/413)
-- Explain to user how to join an organisation in welcome email. [\#410](https://github.com/rero/sonar/issues/410)
-- Extract full-text from other types than PDF. [\#408](https://github.com/rero/sonar/issues/408)
-- Manage file access with switch AAI scopes [\#405](https://github.com/rero/sonar/issues/405)
-- Email template [\#252](https://github.com/rero/sonar/issues/252)
-
 **Merged pull requests:**
 
+- document: fix file preview. [\#765](https://github.com/rero/sonar/pull/765) ([rerowep](https://github.com/rerowep))
+- release: v1.5.0 [\#764](https://github.com/rero/sonar/pull/764) ([jma](https://github.com/jma))
 - safety: Add pillow exclusions [\#762](https://github.com/rero/sonar/pull/762) ([rerowep](https://github.com/rerowep))
 - security: Add config: [\#761](https://github.com/rero/sonar/pull/761) ([rerowep](https://github.com/rerowep))
 - oaiserver: fix sets [\#759](https://github.com/rero/sonar/pull/759) ([rerowep](https://github.com/rerowep))
@@ -75,7 +63,6 @@
 - dependencies: add ignores on safety check [\#721](https://github.com/rero/sonar/pull/721) ([Garfield-fr](https://github.com/Garfield-fr))
 - deposit: allow custom fields to be entered on submission [\#720](https://github.com/rero/sonar/pull/720) ([Garfield-fr](https://github.com/Garfield-fr))
 
-
 ## [v1.4.1](https://github.com/rero/sonar/tree/v1.4.1) (2021-12-02)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.4.0...v1.4.1)
@@ -94,8 +81,6 @@
 **Merged pull requests:**
 
 - fix user welcome email [\#703](https://github.com/rero/sonar/pull/703) ([rerowep](https://github.com/rerowep))
-
-
 
 ## [v1.4.0](https://github.com/rero/sonar/tree/v1.4.0) (2021-11-10)
 
@@ -173,7 +158,6 @@
 - contributors: add suggestions for name [\#612](https://github.com/rero/sonar/pull/612) ([sebdeleze](https://github.com/sebdeleze))
 - subdivisions: create resource [\#606](https://github.com/rero/sonar/pull/606) ([sebdeleze](https://github.com/sebdeleze))
 - stats: collect and display stats for organisations [\#594](https://github.com/rero/sonar/pull/594) ([sebdeleze](https://github.com/sebdeleze))
-
 
 ## [v1.3.0](https://github.com/rero/sonar/tree/v1.3.0) (2021-08-03)
 
