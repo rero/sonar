@@ -1,5 +1,47 @@
 # Changelog
 
+## [v1.6.0](https://github.com/rero/sonar/tree/v1.6.0) (2022-03-10)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.5.1...v1.6.0)
+
+**Implemented enhancements:**
+
+- `editionStatement` field should be displayed in the document detailed view [\#778](https://github.com/rero/sonar/issues/778)
+- Hide the label of the main file in the document detailed view [\#732](https://github.com/rero/sonar/issues/732) [[f: public ui](https://github.com/rero/sonar/labels/f:%20public%20ui)] [[f: professional ui](https://github.com/rero/sonar/labels/f:%20professional%20ui)]
+- remove the `organisation` tag from the document brief and detailed views in dedicated and shared repositories [\#726](https://github.com/rero/sonar/issues/726)
+- contributors of type `meeting` should be displayed separately in the document detailed view [\#724](https://github.com/rero/sonar/issues/724) [[f: public ui](https://github.com/rero/sonar/labels/f:%20public%20ui)] [[f: professional ui](https://github.com/rero/sonar/labels/f:%20professional%20ui)]
+- For preprints, field `partOf` should be labelled into "Submitted to" [\#722](https://github.com/rero/sonar/issues/722) [[f: public ui](https://github.com/rero/sonar/labels/f:%20public%20ui)] [[f: professional ui](https://github.com/rero/sonar/labels/f:%20professional%20ui)]
+- Make `swisscovery` identifiers clickable [\#711](https://github.com/rero/sonar/issues/711)
+- Customise favicon and title for dedicated repositories [\#705](https://github.com/rero/sonar/issues/705)
+- Import from swisscovery: some `<<` and `>>` characters should be removed from the title [\#701](https://github.com/rero/sonar/issues/701)
+- Improve storage of organisation's IP ranges in documents [\#662](https://github.com/rero/sonar/issues/662) [[f: search](https://github.com/rero/sonar/labels/f:%20search)]
+- Adjust header size in SONAR shared home pages [\#641](https://github.com/rero/sonar/issues/641) [[f: shared](https://github.com/rero/sonar/labels/f:%20shared)]
+
+**Fixed bugs:**
+
+- OAI-DC export bug if the document type is not a COAR type [\#789](https://github.com/rero/sonar/issues/789) [[f: data](https://github.com/rero/sonar/labels/f:%20data)]
+- Affiliation display format is incorrect [\#787](https://github.com/rero/sonar/issues/787) [[f: public ui](https://github.com/rero/sonar/labels/f:%20public%20ui)]
+- In a shared repository, fields `subdivision` and `collection` should not be available [\#752](https://github.com/rero/sonar/issues/752) [[f: editor](https://github.com/rero/sonar/labels/f:%20editor)] [[f: professional ui](https://github.com/rero/sonar/labels/f:%20professional%20ui)] [[f: permissions](https://github.com/rero/sonar/labels/f:%20permissions)] [[f: shared](https://github.com/rero/sonar/labels/f:%20shared)]
+- An administrator of a shared repository should not be able to access the subdivisions and collections menu [\#751](https://github.com/rero/sonar/issues/751) [[f: professional ui](https://github.com/rero/sonar/labels/f:%20professional%20ui)] [[f: shared](https://github.com/rero/sonar/labels/f:%20shared)]
+
+**Merged pull requests:**
+
+- documentation: add issue templates [\#796](https://github.com/rero/sonar/pull/796) ([PascalRepond](https://github.com/PascalRepond))
+- package: update invenio-previewer to version 1.3.5 [\#795](https://github.com/rero/sonar/pull/795) ([Garfield-fr](https://github.com/Garfield-fr))
+- oai: fix error on document type processing [\#793](https://github.com/rero/sonar/pull/793) ([Garfield-fr](https://github.com/Garfield-fr))
+- documents: label change for preprint [\#790](https://github.com/rero/sonar/pull/790) ([Garfield-fr](https://github.com/Garfield-fr))
+- translation: reset password translation fix [\#788](https://github.com/rero/sonar/pull/788) ([Garfield-fr](https://github.com/Garfield-fr))
+- documents: add a configuration for links on identifiers [\#782](https://github.com/rero/sonar/pull/782) ([Garfield-fr](https://github.com/Garfield-fr))
+- swisscovery: remove \<\< and \>\> characters in the title when importing [\#781](https://github.com/rero/sonar/pull/781) ([Garfield-fr](https://github.com/Garfield-fr))
+- documents: hide label file in the detailed view [\#780](https://github.com/rero/sonar/pull/780) ([Garfield-fr](https://github.com/Garfield-fr))
+- documents: remove organisation tag [\#779](https://github.com/rero/sonar/pull/779) ([Garfield-fr](https://github.com/Garfield-fr))
+- oai-pmh: configure admin email [\#772](https://github.com/rero/sonar/pull/772) ([mmo](https://github.com/mmo))
+- frontend: header size for shared organisation [\#771](https://github.com/rero/sonar/pull/771) ([Garfield-fr](https://github.com/Garfield-fr))
+- celery: add dotenv support [\#770](https://github.com/rero/sonar/pull/770) ([jma](https://github.com/jma))
+- organisations: favicon and platform name [\#768](https://github.com/rero/sonar/pull/768) ([Garfield-fr](https://github.com/Garfield-fr))
+- dependencies: update [\#763](https://github.com/rero/sonar/pull/763) ([rerowep](https://github.com/rerowep))
+- schemas: remove fields on documents, deposits and users [\#758](https://github.com/rero/sonar/pull/758) ([Garfield-fr](https://github.com/Garfield-fr))
+
 ## [v1.5.1](https://github.com/rero/sonar/tree/v1.5.1) (2022-02-10)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.5.0...v1.5.1)
