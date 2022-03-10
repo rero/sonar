@@ -9,7 +9,6 @@
 - `editionStatement` field should be displayed in the document detailed view [\#778](https://github.com/rero/sonar/issues/778)
 - Hide the label of the main file in the document detailed view [\#732](https://github.com/rero/sonar/issues/732) [[f: public ui](https://github.com/rero/sonar/labels/f:%20public%20ui)] [[f: professional ui](https://github.com/rero/sonar/labels/f:%20professional%20ui)]
 - remove the `organisation` tag from the document brief and detailed views in dedicated and shared repositories [\#726](https://github.com/rero/sonar/issues/726)
-- contributors of type `meeting` should be displayed separately in the document detailed view [\#724](https://github.com/rero/sonar/issues/724) [[f: public ui](https://github.com/rero/sonar/labels/f:%20public%20ui)] [[f: professional ui](https://github.com/rero/sonar/labels/f:%20professional%20ui)]
 - For preprints, field `partOf` should be labelled into "Submitted to" [\#722](https://github.com/rero/sonar/issues/722) [[f: public ui](https://github.com/rero/sonar/labels/f:%20public%20ui)] [[f: professional ui](https://github.com/rero/sonar/labels/f:%20professional%20ui)]
 - Make `swisscovery` identifiers clickable [\#711](https://github.com/rero/sonar/issues/711)
 - Customise favicon and title for dedicated repositories [\#705](https://github.com/rero/sonar/issues/705)
@@ -20,7 +19,6 @@
 **Fixed bugs:**
 
 - OAI-DC export bug if the document type is not a COAR type [\#789](https://github.com/rero/sonar/issues/789) [[f: data](https://github.com/rero/sonar/labels/f:%20data)]
-- Affiliation display format is incorrect [\#787](https://github.com/rero/sonar/issues/787) [[f: public ui](https://github.com/rero/sonar/labels/f:%20public%20ui)]
 - In a shared repository, fields `subdivision` and `collection` should not be available [\#752](https://github.com/rero/sonar/issues/752) [[f: editor](https://github.com/rero/sonar/labels/f:%20editor)] [[f: professional ui](https://github.com/rero/sonar/labels/f:%20professional%20ui)] [[f: permissions](https://github.com/rero/sonar/labels/f:%20permissions)] [[f: shared](https://github.com/rero/sonar/labels/f:%20shared)]
 - An administrator of a shared repository should not be able to access the subdivisions and collections menu [\#751](https://github.com/rero/sonar/issues/751) [[f: professional ui](https://github.com/rero/sonar/labels/f:%20professional%20ui)] [[f: shared](https://github.com/rero/sonar/labels/f:%20shared)]
 
