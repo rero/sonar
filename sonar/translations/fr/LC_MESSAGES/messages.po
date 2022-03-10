@@ -12,15 +12,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2022-03-08 16:26+0100\n"
-"PO-Revision-Date: 2022-02-17 13:57+0000\n"
+"PO-Revision-Date: 2022-03-10 09:40+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"fr/>\n"
 "Language: fr\n"
-"Language-Team: French "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/fr/>\n"
-"Plural-Forms: nplurals=2; plural=n > 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.12-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: sonar/theme/views.py:72
@@ -317,9 +318,8 @@ msgstr "Contact"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:549
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1484
-#, fuzzy
 msgid "Contained in or submitted to (journal, book, proceedings)"
-msgstr "Contenu dans (revue, livre, actes)"
+msgstr "Contenu dans ou soumis à (revue, livre, actes)"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:915
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1096
@@ -711,7 +711,7 @@ msgstr "URL externe"
 
 #: sonar/theme/templates/sonar/macros/macro.html:67
 msgid "External link to the source"
-msgstr ""
+msgstr "Lien externe"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:351
 msgid "External partner"
@@ -853,7 +853,7 @@ msgstr "Gold"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:877
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1120
 msgid "Granting institution"
-msgstr "Institution qui contribue"
+msgstr "Institution qui délivre le titre"
 
 #: sonar/common/jsonschemas/oa-status-v1.0.0.json:18
 msgid "Green"
@@ -1934,9 +1934,8 @@ msgid "Subjects"
 msgstr "Sujets"
 
 #: sonar/modules/documents/templates/documents/record.html:150
-#, fuzzy
 msgid "Submitted to"
-msgstr "Déposant"
+msgstr "Soumis à"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:298
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:306
@@ -5382,4 +5381,3 @@ msgstr "Fonds national suisse de la recherche scientifique"
 
 #~ msgid "Part of (host document)"
 #~ msgstr "Contenu dans (document hôte)"
-
