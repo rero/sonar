@@ -14,8 +14,7 @@ invenio-oaiharvester = {tag = "v1.0.0a4", git = "https://github.com/inveniosoftw
 # Invenio 3.4 base modules. Same as invenio metadata extras without invenio-search-ui
 invenio-indexer = ">=1.2.0,<1.3.0"
 invenio-jsonschemas = ">=1.1.1,<1.2.0"
-# invenio-oaiserver = ">=1.2.0,<1.3.0"
-invenio-oaiserver = {branch = "sets", git = "https://github.com/rero/invenio-oaiserver.git"}
+invenio-oaiserver = "^1.4.1"
 invenio-pidstore = ">=1.2.1,<1.3.0"
 invenio-records-rest = ">=1.8.0,<1.9.0"
 invenio-records-ui= ">=1.2.0,<1.3.0"
@@ -59,6 +58,8 @@ flask-wtf = "<1.0.0"
 zipp = "*"
 pycparser = "*"
 invenio-previewer = ">=1.3.5"
+markupsafe = "<2.1.0"
+sqlalchemy-continuum = "^1.3.12"
 
 [tool.poetry.dev-dependencies]
 Flask-Debugtoolbar = ">=0.10.1"
