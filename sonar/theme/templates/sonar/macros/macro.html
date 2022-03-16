@@ -97,3 +97,20 @@
   {% endif %}
 {% endif %}
 {% endmacro %}
+
+{% macro contributors_format(contribution) %}
+{{ contribution | contribution_text }}
+{% if contribution.agent.get('identifiedBy', {}).get('value') %}
+{{ identifier_link(contribution.agent.identifiedBy, 'agent')}}
+{% endif %}
+
+{% if contribution.get('affiliation') %}
+{% if contribution.get('controlledAffiliation') %}
+<small class="affiliation-tooltip" data-placement="top"
+  title="{{ contribution.controlledAffiliation | join(' ; ') }}"><i class="text-muted">{{
+    contribution.affiliation }}</i></small>
+{% else %}
+<small><i class="text-muted">{{ contribution.affiliation }}</i></small>
+{% endif %}
+{% endif %}
+{% endmacro %}

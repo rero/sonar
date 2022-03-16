@@ -18,7 +18,7 @@ along with this program. If not, see
 
 {%- extends config.RECORDS_UI_BASE_TEMPLATE %}
 
-{% from 'sonar/macros/macro.html' import thumbnail, identifier_link %}
+{% from 'sonar/macros/macro.html' import thumbnail, identifier_link, contributors_format %}
 
 {% set title = record.title[0] | title_format(current_i18n.language) %}
 {% set description = record.abstracts[0].value if record.abstracts else None %}
@@ -67,6 +67,7 @@ along with this program. If not, see
     </div>
     <div class="col">
       <h1 class="text-primary">{{ title | nl2br | safe }}</h1>
+      <!-- SUBDIVISIONS -->
       {% set infoOrgSub = true %}
       {%- if view != config.SONAR_APP_DEFAULT_ORGANISATION %}
         {% set infoOrgSub = false if record.get('subdivisions', [])|length == 0 else true %}
@@ -88,31 +89,18 @@ along with this program. If not, see
       </h4>
       {%- endif %}
 
-      <!-- CONTRIBUTORS-->
+      <!-- CONTRIBUTORS Not bf:Meeting -->
       {% set contributors = record | contributors %}
       {% if contributors | length > 0 %}
       <div class="my-2">
         <ul class="list-unstyled m-0">
           {% for contribution in contributors %}
           <li class="creator {{ 'd-none' if loop.index > 3 }}">
-            {{ contribution | contribution_text }}
-            {% if contribution.agent.get('identifiedBy', {}).get('value') %}
-            {{ identifier_link(contribution.agent.identifiedBy, 'agent')}}
-            {% endif %}
-
-            {% if contribution.get('affiliation') %}
-            {% if contribution.get('controlledAffiliation') %}
-            <small class="affiliation-tooltip" data-placement="top"
-              title="{{ contribution.controlledAffiliation | join(' ; ') }}"><i class="text-muted">{{
-                contribution.affiliation }}</i></small>
-            {% else %}
-            <small><i class="text-muted">{{ contribution.affiliation }}</i></small>
-            {% endif %}
-            {% endif %}
+            {{ contributors_format(contribution) }}
           </li>
           {% endfor %}
         </ul>
-        {% if record.contribution | length > 3 %}
+        {% if contributors | length > 3 %}
         <a href="#" id="show-more-contributors">{{ _('Show more') }}&hellip;</a>
         {% endif %}
       </div>
@@ -133,8 +121,22 @@ along with this program. If not, see
       {% endfor %}
 
       <!-- EXTENT -->
-      {% if record.extent %}
-      <p class="my-2">{{ record.extent }}</p>
+      {% if record.extent or record.formats %}
+      <p class="my-2">
+        {% if record.extent %}{{ record.extent }}{% endif %}
+        {% if record.extent and record.formats %} ; {% endif %}
+        {% if record.extent %}{{ record.formats|join(', ') }}{% endif %}
+      </p>
+      {% endif %}
+
+      <!-- EDITION STATEMENT -->
+      {% if record.editionStatement %}
+      <p class="my-2">
+        {{ record.editionStatement.editionDesignation.value }}
+        {% if record.editionStatement.responsibility %}
+        / {{ record.editionStatement.responsibility.value }}
+        {% endif %}
+      </p>
       {% endif %}
 
       <!-- DISSERTATION -->
@@ -158,7 +160,7 @@ along with this program. If not, see
       </div>
       {% endif %}
 
-      <!-- SUBJECTS -->
+      <!-- ---------------------- SUBJECTS ---------------------- -->
       {% if record.subjects|length > 0 %}
       <div class="my-3">
         {% for subject in record.subjects %}
@@ -174,7 +176,7 @@ along with this program. If not, see
       </div>
       {% endif %}
 
-      <!-- ABSTRACT -->
+       <!-- ---------------------- ABSTRACT ---------------------- -->
       {% set abstracts = record | abstracts %}
       {% if abstracts|length > 0 %}
       <div class="my-4 text-justify">
@@ -195,6 +197,7 @@ along with this program. If not, see
       </div>
       {% endif %}
 
+      <!-- ---------------------- ADDITIONAL INFOS / FIELDS ---------------------- -->
       <dl class="row mb-0">
         <!-- PROJECTS -->
         {% if record.projects %}
@@ -221,18 +224,38 @@ along with this program. If not, see
         </dd>
         {% endif %}
 
-        <!-- OTHER EDITION -->
-        {% if record.otherEdition %}
+        <!-- COLLECTIONS -->
+        {% if record.collections %}
         <dt class="col-lg-3">
-          {{ _('Other electronic version') }}
+          {{ _('Collections') }}
         </dt>
         <dd class="col-lg-9">
-          {% for otherEdition in record.otherEdition %}
-          <p class="m-0">{{ otherEdition.publicNote }} : <a href="{{ otherEdition.document.electronicLocator }}"
-              target="_blank">{{ otherEdition.document.electronicLocator }}</a></p>
-          {% endfor %}
+          <ul class="list-unstyled mb-0">
+            {% for collection in record.collections %}
+            <li class="p-0">
+              <a href="{{ url_for('documents.search', view=view_code, collection_view=collection.pid) }}">
+                {{ collection.name | language_value }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
         </dd>
         {% endif %}
+
+        <!-- CUSTOM FIELDS -->
+        {% for i in range(1, 4) %}
+        {% if record['customField' + i|string] %}
+        <dt class="col-lg-3">
+          {% set label = record | get_custom_field_label(i) %}
+          {% if label %}
+          {{ label }}
+          {% else %}
+          {{ 'Custom field ' + i|string }}
+          {% endif%}
+        </dt>
+        <dd class="col-lg-9">{{ record['customField' + i|string] | join(', ') }}</dd>
+        {% endif %}
+        {% endfor %}
 
         <!-- LANGUAGE -->
         {% if record.language %}
@@ -250,17 +273,32 @@ along with this program. If not, see
         </dd>
         {% endif %}
 
-        <!-- IDENTIFIED BY -->
-        {% if record.identifiedBy %}
+        <!-- CONTRIBUTIONS -> TYPE: bf:Meeting -->
+        {% set meettings = record | contributors(true) %}
+        {% if meettings %}
         <dt class="col-lg-3">
-          {{ _('Identifiers') }}
+          {{ _('Conference') }}
         </dt>
         <dd class="col-lg-9">
           <ul class="list-unstyled mb-0">
-            {% for identifier in record.identifiedBy %}
+            {% for contribution in meettings %}
             <li>
-              {{ identifier_link(identifier, 'identifiedBy') }}
+              {{ contributors_format(contribution) }}
             </li>
+            {% endfor %}
+          </ul>
+        </dd>
+        {% endif %}
+
+        <!-- CONTENT NOTE -->
+        {% if record.contentNote %}
+        <dt class="col-lg-3">
+          {{ _('Content') }}
+        </dt>
+        <dd class="col-lg-9">
+          <ul class="list-unstyled mb-0">
+            {% for content in record.contentNote %}
+            <li>{{ content }}</li>
             {% endfor %}
           </ul>
         </dd>
@@ -281,36 +319,65 @@ along with this program. If not, see
         </dd>
         {% endif %}
 
-        <!-- CUSTOM FIELDS -->
-        {% for i in range(1, 4) %}
-        {% if record['customField' + i|string] %}
+        <!-- OTHER EDITION -->
+        {% if record.otherEdition %}
         <dt class="col-lg-3">
-          {% set label = record | get_custom_field_label(i) %}
-          {% if label %}
-          {{ label }}
-          {% else %}
-          {{ 'Custom field ' + i|string }}
-          {% endif%}
-        </dt>
-        <dd class="col-lg-9">{{ record['customField' + i|string] | join(', ') }}</dd>
-        {% endif %}
-        {% endfor %}
-
-        <!-- COLLECTIONS -->
-        {% if record.collections %}
-        <dt class="col-lg-3">
-          {{ _('Collections') }}
+          {{ _('Other electronic version') }}
         </dt>
         <dd class="col-lg-9">
-          <ul class="list-unstyled mb-0">
-            {% for collection in record.collections %}
-            <li class="p-0">
-              <a href="{{ url_for('documents.search', view=view_code, collection_view=collection.pid) }}">
-                {{ collection.name | language_value }}
-              </a>
-            </li>
-            {% endfor %}
-          </ul>
+          {% for otherEdition in record.otherEdition %}
+          <p class="m-0">{{ otherEdition.publicNote }} : <a href="{{ otherEdition.document.electronicLocator }}"
+              target="_blank">{{ otherEdition.document.electronicLocator }}</a></p>
+          {% endfor %}
+        </dd>
+        {% endif %}
+
+        <!-- SERIES -->
+        {% if record.series %}
+        <dt class="col-lg-3">
+          {{ _('Series statement') }}
+        </dt>
+        <dd class="col-lg-9">
+            <ul class="list-unstyled mb-0">
+              {% for serie in record.series %}
+              <li>{{ serie.name }}{% if serie.number %} ; {{ serie.number }}{% endif %}</li>
+              {% endfor %}
+            </ul>
+        </dd>
+        {% endif %}
+
+        <!-- NOTES -->
+        {% if record.notes %}
+        <dt class="col-lg-3">
+          {{ _('Notes') }}
+        </dt>
+        <dd class="col-lg-9">
+            <ul class="list-unstyled mb-0">
+              {% for note in record.notes %}
+              <li>{{ note }}</li>
+              {% endfor %}
+            </ul>
+        </dd>
+        {% endif %}
+
+        <!-- OTHER MATERIAL CHARACTERISTICS -->
+        {% if record.otherMaterialCharacteristics %}
+        <dt class="col-lg-3">
+          {{ _('Other material characteristics') }}
+        </dt>
+        <dd class="col-lg-9">
+          {{ record.otherMaterialCharacteristics }}
+        </dd>
+        {% endif %}
+
+
+        <!-- ADDITIONAL MATERIALS -->
+        {% if record.additionalMaterials %}
+        <dt class="col-lg-3">
+          {{ _('Accompanying material') }}
+        </dt>
+        <dd class="col-lg-9">
+          {{ record.additionalMaterials }}
         </dd>
         {% endif %}
 
@@ -327,7 +394,33 @@ along with this program. If not, see
         </dd>
         {% endif %}
 
-        <!-- PERMANENT LINK -->
+        <!-- OA STATUS -->
+        {% if record.oa_status %}
+        <dt class="col-lg-3">
+          {{ _('Open Access status') }}
+        </dt>
+        <dd class="col-lg-9">
+          {{ _(record.oa_status) }}
+        </dd>
+        {% endif %}
+
+        <!-- IDENTIFIED BY -->
+        {% if record.identifiedBy %}
+        <dt class="col-lg-3">
+          {{ _('Identifiers') }}
+        </dt>
+        <dd class="col-lg-9">
+          <ul class="list-unstyled mb-0">
+            {% for identifier in record.identifiedBy %}
+            <li>
+              {{ identifier_link(identifier, 'identifiedBy') }}
+            </li>
+            {% endfor %}
+          </ul>
+        </dd>
+        {% endif %}
+
+        <!-- PERMALINK -->
         {% set link = record.get_ark_resolver_url() if record.ark else record.get_permanent_link(request.host_url,
         record.pid, view_code) %}
         <dt class="col-lg-3">

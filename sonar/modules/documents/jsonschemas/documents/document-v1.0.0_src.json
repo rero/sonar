@@ -608,6 +608,7 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
+        "title": "Serie",
         "properties": {
           "name": {
             "title": "Title",
