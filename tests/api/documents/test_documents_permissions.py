@@ -183,7 +183,8 @@ def test_read(client, document, make_user, superuser, admin, moderator,
         'update': True
     }
     assert res.json['metadata']['partOf'][0][
-        'text'] == 'Journal du dimanche, 2020, vol. 6, no. 12, p. 135-139'
+        'text'] == 'Journal du dimanche / Renato, Ferrari ; Albano, Mesta. ' \
+            '- John Doe Publications inc.. - 2020, vol. 6, no. 12, p. 135-139'
     assert res.json['metadata']['provisionActivity'][0]['text'] == {
         'default':
         'Bienne : Impr. Weber, [2006] ; Lausanne ; Rippone : Impr. Coustaud'

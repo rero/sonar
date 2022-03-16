@@ -194,25 +194,87 @@ def test_part_of_format():
     """Test part of format for displaying."""
     assert views.part_of_format({
         'document': {
-            'title': 'Mehr oder weniger Staat?'
+            'title': 'Mehr oder weniger Staat?',
+            'publication': {
+                'statement': 'doc statement'
+            },
+            'contribution': [
+                'contrib 1',
+                'contrib 2',
+                'contrib 3'
+            ]
         },
         'numberingYear': '2015',
         'numberingVolume': '28',
         'numberingIssue': '2',
         'numberingPages': '469-480'
-    }) == 'Mehr oder weniger Staat?, 2015, vol. 28, no. 2, p. 469-480'
+    }) == 'Mehr oder weniger Staat? / contrib 1 ; contrib 2. contrib 3. ' \
+        '- doc statement. - 2015, vol. 28, no. 2, p. 469-480'
+
+    assert views.part_of_format({
+        'document': {
+            'title': 'Mehr oder weniger Staat?',
+            'publication': {
+                'statement': 'doc statement'
+            },
+            'contribution': [
+                'contrib 1'
+            ]
+        },
+        'numberingYear': '2015',
+        'numberingVolume': '28',
+        'numberingIssue': '2',
+        'numberingPages': '469-480'
+    }) == 'Mehr oder weniger Staat? / contrib 1. - doc statement. ' \
+        '- 2015, vol. 28, no. 2, p. 469-480'
+
+
+    assert views.part_of_format({
+        'document': {
+            'title': 'Mehr oder weniger Staat?',
+            'publication': {
+                'statement': 'doc statement'
+            }
+        },
+        'numberingYear': '2015',
+        'numberingVolume': '28',
+        'numberingIssue': '2',
+        'numberingPages': '469-480'
+    }) == 'Mehr oder weniger Staat?. - doc statement. - 2015, vol. 28, no. 2, p. 469-480'
+
+    assert views.part_of_format({
+        'document': {
+            'title': 'Mehr oder weniger Staat?',
+            'publication': {
+                'statement': 'doc statement'
+            }
+        }
+    }) == 'Mehr oder weniger Staat?. - doc statement.'
 
     assert views.part_of_format({
         'document': {
             'title': 'Mehr oder weniger Staat?'
         },
         'numberingYear': '2015',
+        'numberingVolume': '28',
         'numberingIssue': '2',
         'numberingPages': '469-480'
-    }) == 'Mehr oder weniger Staat?, 2015, no. 2, p. 469-480'
+    }) == 'Mehr oder weniger Staat?. - 2015, vol. 28, no. 2, p. 469-480'
 
     assert views.part_of_format({
         'numberingYear': '2015',
+        'numberingVolume': '28',
+        'numberingIssue': '2',
+        'numberingPages': '469-480'
+    }) == '2015, vol. 28, no. 2, p. 469-480'
+
+    assert views.part_of_format({
+        'numberingVolume': '28',
+        'numberingIssue': '2'
+    }) == 'vol. 28, no. 2'
+
+    assert views.part_of_format({
+        'numberingYear': '2015'
     }) == '2015'
 
 
@@ -233,7 +295,7 @@ def test_abstracts(app):
 
 
 def test_contributors():
-    """Test ordering contributors."""
+    """Test ordering and filtering contributors."""
     contributors = [{
         'role': ['dgs']
     }, {
@@ -256,6 +318,31 @@ def test_contributors():
 
     # No contributors
     assert views.contributors({}) == []
+
+    contributors = [
+        {
+            'agent': {'preferred_name': 'name 1', 'type': 'bf:Person'},
+            'role': ['cre']
+        },
+        {
+            'agent': {'preferred_name': 'name 2', 'type': 'bf:Person'},
+            'role': ['cre']
+        },
+        {
+            'agent': {'preferred_name': 'name 3', 'type': 'bf:Person'},
+            'role': ['cre']
+        },
+        {
+            'agent': {'preferred_name': 'org 1', 'type': 'bf:Organization'},
+            'role': ['cre']
+        },
+        {
+            'agent': {'preferred_name': 'metting 1', 'type': 'bf:Meeting'},
+            'role': ['cre']
+        },
+    ]
+    assert 4 == len(views.contributors({'contribution': contributors}));
+    assert 1 == len(views.contributors({'contribution': contributors}, True));
 
 
 def test_dissertation():

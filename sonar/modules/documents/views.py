@@ -170,36 +170,70 @@ def part_of_format(part_of):
     :param part_of: Object representing partOf property
     """
     items = []
-    if part_of.get('document', {}).get('title'):
-        items.append(part_of['document']['title'])
+    contributions = []
+    document = part_of.get('document', {})
+    if document.get('title'):
+        items.append(document['title'])
+    if 'contribution' in document:
+        contribution = document['contribution'].pop(0);
+        if len(document['contribution']) > 0:
+            contributions.append(' / {value} ; '.format(value=contribution))
+            contributions.extend(
+                '{value}. '.format(value=contrib)
+                for contrib in document['contribution']
+            )
+        else:
+            contributions.append(' / {value}. '.format(value=contribution))
+    if contributions:
+        items.append(''.join(contributions))
+    if items and not contributions:
+        items.append('. ')
 
+    if 'publication' in document and 'statement' in document['publication']:
+        items.append('- {value}.'.format(
+            value=document['publication']['statement']))
+
+    item = ''.join(items).strip() if items else ''
+
+    numbers = []
     if 'numberingYear' in part_of:
-        items.append(part_of['numberingYear'])
+        numbers.append(part_of['numberingYear'])
 
     if 'numberingVolume' in part_of:
-        items.append('{label} {value}'.format(
+        numbers.append('{label} {value}'.format(
             label=_('vol.'), value=part_of['numberingVolume']))
 
     if 'numberingIssue' in part_of:
-        items.append('{label} {value}'.format(label=_('no.'),
+        numbers.append('{label} {value}'.format(label=_('no.'),
                                               value=part_of['numberingIssue']))
 
     if 'numberingPages' in part_of:
-        items.append('{label} {value}'.format(label=_('p.'),
+        numbers.append('{label} {value}'.format(label=_('p.'),
                                               value=part_of['numberingPages']))
-
-    return ', '.join(items)
+    if item and numbers:
+        item += ' - '
+    if numbers:
+        item += ', '.join(numbers)
+    return item
 
 
 @blueprint.app_template_filter()
-def contributors(record):
+def contributors(record, meeting=False):
     """Get ordered list of contributors."""
     if not record.get('contribution'):
         return []
 
+    if list(filter(lambda d: 'agent' in d, record.get('contribution'))):
+        contributors = list(filter(lambda d:
+            d['agent']['type'] == 'bf:Meeting'
+            if meeting else d['agent']['type'] != 'bf:Meeting',
+            record.get('contribution')))
+    else:
+        contributors = record.get('contribution');
+
     priorities = ['cre', 'ctb', 'dgs', 'dgc', 'edt', 'prt']
 
-    return sorted(record['contribution'],
+    return sorted(contributors,
                   key=lambda i: priorities.index(i['role'][0]))
 
 
@@ -271,7 +305,8 @@ def contribution_text(contribution):
         if contribution['agent'].get('place'):
             meeting.append(contribution['agent']['place'])
 
-        data.append('({meeting})'.format(meeting=' : '.join(meeting)))
+        if meeting:
+            data.append('({meeting})'.format(meeting=' : '.join(meeting)))
 
     # Person
     if contribution['agent'][
