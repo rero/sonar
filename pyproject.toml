@@ -59,7 +59,9 @@ zipp = "*"
 pycparser = "*"
 invenio-previewer = ">=1.3.5"
 markupsafe = "<2.1.0"
-sqlalchemy-continuum = "^1.3.12"
+# TODO: normaly not needed with invenio-records[postgresql]
+sqlalchemy-continuum = "<2.0.0"
+psycopg2-binary = "<3.0.0"
 
 [tool.poetry.dev-dependencies]
 Flask-Debugtoolbar = ">=0.10.1"
