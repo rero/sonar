@@ -231,6 +231,37 @@ def test_abstracts(app):
     # No abstract
     assert views.abstracts({}) == []
 
+    # Abstract with not defined key on preferred languages
+    abstracts = [{
+        'language': 'fre',
+        'value': 'Résumé'
+    }, {
+        'language': 'eng',
+        'value': 'Summary'
+    }, {
+        'language': 'roh',
+        'value': 'Romancio'
+    }]
+    abstracts_sort = views.abstracts({'abstracts': abstracts})
+    assert ['eng', 'fre', 'roh'] == [abs['language'] for abs in abstracts_sort]
+
+    abstracts = [{
+        'language': 'fre',
+        'value': 'Résumé'
+    }, {
+        'language': 'roh',
+        'value': 'Romancio'
+    }, {
+        'language': 'eng',
+        'value': 'Summary'
+    }, {
+        'language': 'kin',
+        'value': 'kin Summary'
+    }]
+    abstracts_sort = views.abstracts({'abstracts': abstracts})
+    assert ['eng', 'fre', 'kin', 'roh'] == [
+        abs['language'] for abs in abstracts_sort]
+
 
 def test_contributors():
     """Test ordering contributors."""
