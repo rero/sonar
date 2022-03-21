@@ -247,9 +247,22 @@ def abstracts(record):
         current_i18n.locale.language)
     preferred_languages = get_preferred_languages(language)
 
-    return sorted(
-        record['abstracts'],
-        key=lambda abstract: preferred_languages.index(abstract['language']))
+    abstractLanguage = []
+    abstractCode = []
+    for abstract in record['abstracts']:
+        if abstract['language'] in preferred_languages:
+            abstractLanguage.append(abstract)
+        else:
+            abstractCode.append(abstract)
+    abstractSortedLanguage = sorted(
+        abstractLanguage,
+        key=lambda abstract: preferred_languages.index(abstract['language'])
+    )
+    abstractSortedCode = sorted(
+        abstractCode,
+        key=lambda abstract: abstract['language']
+    )
+    return abstractSortedLanguage + abstractSortedCode
 
 
 @blueprint.app_template_filter()
