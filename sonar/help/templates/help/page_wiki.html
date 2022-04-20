@@ -43,7 +43,7 @@
             </footer>
         </header>
         <article>
-          {{ page.body.replace('](/help', '](/{view}/help'.format(view=view)) | markdown_filter | safe }}
+          {{ page.body | process_link(view) | markdown_filter | safe }}
         </article>
     </article>
     <aside class="col-md-3">

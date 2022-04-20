@@ -25,6 +25,7 @@ from flask import url_for
 from invenio_accounts.testutils import login_user_via_session, \
     login_user_via_view
 
+from sonar.help.views import process_link
 from sonar.theme.views import format_date, record_image_url
 
 
@@ -377,3 +378,14 @@ def test_format_date(app):
     timezone = pytz.timezone('Europe/Zurich')
     date = datetime(1984, 5, 10, 14, 30, tzinfo=timezone)
     assert format_date(date, '%d/%m/%Y %H:%M') == '10/05/1984 14:30'
+
+
+def test_process_link():
+    """Test process_link filter."""
+    assert '[search tips](/view/help/search_tips/)' == \
+        process_link('[search tips](/help/search_tips/)', 'view')
+
+    assert '![SONAR_collection.JPG](/help/files/SONAR_collection.JPG'\
+        ' "SONAR_collection.JPG")' == \
+        process_link('![SONAR_collection.JPG](/help/files/'\
+            'SONAR_collection.JPG "SONAR_collection.JPG")', 'view')
