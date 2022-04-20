@@ -19,9 +19,8 @@
 
 import datetime
 import re
-from os import abort
 
-from flask import current_app, g, request
+from flask import abort, current_app, g, request
 from invenio_i18n.ext import current_i18n
 from invenio_mail.api import TemplatedMessage
 from netaddr import IPAddress, IPGlob, IPNetwork, IPSet
