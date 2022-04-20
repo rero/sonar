@@ -17,6 +17,8 @@
 
 """help organisation views."""
 
+import re
+
 from flask import Blueprint, current_app, redirect, render_template, request, \
     url_for
 from flask_wiki.api import current_wiki
@@ -55,3 +57,18 @@ def search(view):
         query=query,
         view=view
     )
+
+@blueprint.app_template_filter()
+def process_link(body, view):
+    """Process help body to transform link with viewcode.
+
+    The transformation is only done on the link and not on the image.
+
+    :param body: the html body to process.
+    :param view: viewcode to actual view.
+    :return: processed body.
+    """
+    return re.sub(
+        r'\]\((\/help)(?!\/files\/)',
+        rf'](/{view}\1',
+        body)
