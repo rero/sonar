@@ -271,6 +271,7 @@
         "publication",
         "dissertation",
         "otherElectronicVersions",
+        "relatedTo",
         "collections",
         "classification",
         "abstracts",
@@ -731,7 +732,17 @@
                 "title": "URL",
                 "type": "string",
                 "minLength": 1,
-                "pattern": "^https?://.+"
+                "pattern": "^https?://.+",
+                "form": {
+                  "templateOptions": {
+                    "placeholder": "Example: https://www.rero.ch"
+                  },
+                  "validation": {
+                    "messages": {
+                      "patternMessage": "Should be a valid URL format."
+                    }
+                  }
+                }
               }
             }
           },
@@ -1064,6 +1075,59 @@
                 "suggest": "/api/suggestions/completion",
                 "allowAdd": true
               }
+            }
+          }
+        },
+        "relatedTo": {
+          "title": "Related to",
+          "type": "array",
+          "items": {
+            "title": "Related to",
+            "description": "Relationship with a document, dataset, etc.",
+            "type": "object",
+            "propertiesOrder": [
+              "publicNote",
+              "url"
+            ],
+            "required": [
+              "publicNote",
+              "url"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "publicNote": {
+                "title": "Public note",
+                "type": "string",
+                "minLength": 1,
+                "form": {
+                  "templateOptions": {
+                    "placeholder": "Example: Research dataset"
+                  }
+                }
+              },
+              "url": {
+                "title": "URL",
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^https?://.+",
+                "form": {
+                  "templateOptions": {
+                    "placeholder": "Example: https://www.rero.ch"
+                  },
+                  "validation": {
+                    "messages": {
+                      "patternMessage": "Should be a valid URL format."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "form": {
+            "templateOptions": {
+              "wrappers": [
+                "card"
+              ]
             }
           }
         }

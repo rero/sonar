@@ -249,6 +249,15 @@ class DepositRecord(SonarRecord):
                 'publicNote': link['publicNote']
             } for link in self['metadata']['otherElectronicVersions']]
 
+        # related to
+        if self['metadata'].get('relatedTo'):
+            metadata['relatedTo'] = [{
+                'document': {
+                    'electronicLocator': link['url']
+                },
+                'publicNote': link['publicNote']
+            } for link in self['metadata']['relatedTo']]
+
         # Collections
         if self['metadata'].get('collections'):
             collections = []

@@ -320,17 +320,14 @@ along with this program. If not, see
         {% endif %}
 
         <!-- OTHER EDITION -->
-        {% if record.otherEdition %}
-        <dt class="col-lg-3">
-          {{ _('Other electronic version') }}
-        </dt>
-        <dd class="col-lg-9">
-          {% for otherEdition in record.otherEdition %}
-          <p class="m-0">{{ otherEdition.publicNote }} : <a href="{{ otherEdition.document.electronicLocator }}"
-              target="_blank">{{ otherEdition.document.electronicLocator }}</a></p>
-          {% endfor %}
-        </dd>
-        {% endif %}
+        {% with fieldLabel=_('Other electronic version'), data=record.otherEdition %}
+          {% include 'documents/_other_edition.html' %}
+        {% endwith %}
+
+        <!-- RELATED TO -->
+        {% with fieldLabel=_('Related to'), data=record.relatedTo %}
+          {% include 'documents/_other_edition.html' %}
+        {% endwith %}
 
         <!-- SERIES -->
         {% if record.series %}

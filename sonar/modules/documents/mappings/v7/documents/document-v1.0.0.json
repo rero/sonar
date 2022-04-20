@@ -321,6 +321,22 @@
           }
         }
       },
+      "relatedTo": {
+        "type": "object",
+        "properties": {
+          "document": {
+            "type": "object",
+            "properties": {
+              "electronicLocator": {
+                "type": "keyword"
+              }
+            }
+          },
+          "publicNote": {
+            "type": "text"
+          }
+        }
+      },
       "collections": {
         "type": "object",
         "properties": {
