@@ -96,7 +96,12 @@
             "format": "uri",
             "pattern": "^https?://.*",
             "form": {
-              "hideExpression": "true"
+              "hideExpression": "true",
+              "validation": {
+                "messages": {
+                  "patternMessage": "Should be a valid URL format."
+                }
+              }
             }
           },
           "force_external_url": {
@@ -949,7 +954,16 @@
               "electronicLocator": {
                 "title": "URL",
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "pattern": "^https?://.+",
+                "form": {
+                  "placeholder": "Example: https://www.rero.ch",
+                  "validation": {
+                    "messages": {
+                      "patternMessage": "Should be a valid URL format."
+                    }
+                  }
+                }
               }
             },
             "required": [
@@ -962,6 +976,62 @@
             "minLength": 1,
             "form": {
               "placeholder": "Example: Published version"
+            }
+          }
+        },
+        "propertiesOrder": [
+          "publicNote",
+          "document"
+        ],
+        "required": [
+          "document",
+          "publicNote"
+        ]
+      },
+      "form": {
+        "hide": true
+      }
+    },
+    "relatedTo": {
+      "title": "Related to",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Related to",
+        "description": "Relationship with a document, dataset, etc.",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "document": {
+            "title": "Document",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "electronicLocator": {
+                "title": "URL",
+                "type": "string",
+                "pattern": "^https?://.+",
+                "minLength": 1,
+                "form": {
+                  "placeholder": "Example: https://www.rero.ch",
+                  "validation": {
+                    "messages": {
+                      "patternMessage": "Should be a valid URL format."
+                    }
+                  }
+                }
+              }
+            },
+            "required": [
+              "electronicLocator"
+            ]
+          },
+          "publicNote": {
+            "title": "Public note",
+            "type": "string",
+            "minLength": 1,
+            "form": {
+              "placeholder": "Example: Research dataset"
             }
           }
         },
@@ -1952,6 +2022,7 @@
     "dissertation",
     "editionStatement",
     "otherEdition",
+    "relatedTo",
     "provisionActivity",
     "partOf",
     "collections",

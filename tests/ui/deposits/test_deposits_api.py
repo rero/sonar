@@ -121,6 +121,12 @@ def test_create_document(app, db, project, client, deposit, submitter,
         },
         'publicNote': 'Published version'
     }]
+    assert document['relatedTo'] == [{
+        'document': {
+            'electronicLocator': 'https://some.url/related.pdf'
+        },
+        'publicNote': 'Related to version'
+    }]
     assert len(document['collections']) == 1
     assert document['classification'] == [{
         'type': 'bf:ClassificationUdc',

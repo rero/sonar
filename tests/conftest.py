@@ -559,6 +559,10 @@ def deposit_json(collection, subdivision):
                 'publicNote': 'Published version',
                 'url': 'https://some.url/document.pdf'
             }],
+            'relatedTo': [{
+                'publicNote': 'Related to version',
+                'url': 'https://some.url/related.pdf'
+            }],
             'collections': [{
                 '$ref':
                 f'https://sonar.ch/api/collections/{collection["pid"]}'

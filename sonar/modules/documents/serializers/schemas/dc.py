@@ -174,6 +174,9 @@ class DublinCoreSchema(BaseSchema):
         items = [
             other_edition['document']['electronicLocator']
             for other_edition in obj['metadata'].get('otherEdition', [])
+        ] + [
+            other_edition['document']['electronicLocator']
+            for other_edition in obj['metadata'].get('relatedTo', [])
         ]
 
         result = 'info:eu-repo/semantics/altIdentifier/{schema}/{identifier}'

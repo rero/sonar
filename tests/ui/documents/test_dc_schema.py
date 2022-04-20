@@ -285,10 +285,25 @@ def test_relations(minimal_document):
             'electronicLocator': 'https://some.url.2'
         }
     }]
-    result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['relations'] == ['https://some.url.1', 'https://some.url.2']
 
+    minimal_document['relatedTo'] = [{
+        'document': {
+            'electronicLocator': 'https://some.url.3'
+        }
+    }, {
+        'document': {
+            'electronicLocator': 'https://some.url.4'
+        }
+    }]
+
+    result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
+    assert result['relations'] == [
+        'https://some.url.1', 'https://some.url.2',
+        'https://some.url.3', 'https://some.url.4',
+    ]
     minimal_document.pop('otherEdition', None)
+    minimal_document.pop('relatedTo', None)
+
     minimal_document['identifiedBy'] = [{
         'type': 'bf:Identifier',
         'value': 'ark:/13030/tf5p30086k'

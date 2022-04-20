@@ -97,6 +97,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     collections = fields.List(fields.Dict())
     dissertation = fields.Dict()
     otherEdition = fields.List(fields.Dict())
+    relatedTo = fields.List(fields.Dict())
     usageAndAccessPolicy = fields.Dict()
     projects = fields.List(fields.Dict())
     oa_status = SanitizedUnicode()
