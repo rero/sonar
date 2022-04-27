@@ -19,7 +19,7 @@
 
 import re
 
-from flask import request
+from flask import current_app, request
 from marshmallow import fields
 
 from sonar.modules.documents.api import DocumentRecord
@@ -45,6 +45,17 @@ class DublinCoreSchema(BaseSchema):
     subjects = fields.Method('get_subjects')
     titles = fields.Method('get_titles')
     types = fields.Method('get_types')
+
+    def translate_language(self, language):
+        """Translate language code ISO-639-3 to ISO-639-2 if possible.
+
+        :param language: language with ISO-639-3 format.
+        :returns: language code ISO-639-2 if possible or ISO-639-3.
+        """
+        langs = current_app.config['SONAR_APP_LANGUAGES_MAP']
+        if language in langs and langs[language]:
+            return langs[language]
+        return language
 
     def get_contributors(self, obj):
         """Get contributors."""
@@ -85,7 +96,21 @@ class DublinCoreSchema(BaseSchema):
 
     def get_descriptions(self, obj):
         """Get descriptions."""
-        return [file['value'] for file in obj['metadata'].get('abstracts', [])]
+        items = []
+        for abstract in obj['metadata'].get('abstracts', []):
+            if 'language' in abstract:
+                items.append({
+                '@attrs': [{
+                    'prefix':'xml',
+                    'name':'lang',
+                    'value': self.translate_language(abstract['language'])
+                }],
+                'value':abstract['value']
+            })
+            else:
+                items.append(abstract['value'])
+
+        return items
 
     def get_formats(self, obj):
         """Get formats."""
@@ -98,10 +123,27 @@ class DublinCoreSchema(BaseSchema):
 
     def get_identifiers(self, obj):
         """Get identifiers."""
-        return [
+        items = [
             DocumentRecord.get_permanent_link(request.host_url,
                                               obj['metadata']['pid'])
         ]
+        # If files on the document
+        if '_files' in obj['metadata']:
+            # Extraction of files only with a type file
+            files = filter(
+                lambda f: ('type' in f and f['type'] == 'file'),
+                obj['metadata']['_files'])
+            # Files sorting
+            files = sorted(files, key=lambda file: file.get('order', 100))
+            # Remove / at the end of host_url
+            host = request.host_url[:-1]
+            # Add file only the the link is defined in download
+            for file in files:
+                links = file.get('links', {})
+                if 'download' in links and links.get('download'):
+                    items.append(host + links.get('download'))
+
+        return items
 
     def get_languages(self, obj):
         """Get languages."""
@@ -222,7 +264,19 @@ class DublinCoreSchema(BaseSchema):
 
         # Subjects
         for subjects in obj['metadata'].get('subjects', []):
-            items = items + subjects['label']['value']
+            if 'language' in subjects['label']:
+                for value in subjects['label']['value']:
+                    items.append({
+                        '@attrs': [{
+                            'prefix': 'xml',
+                            'name': 'lang',
+                            'value': self.translate_language(
+                                subjects['label']['language'])
+                        }],
+                        'value': value
+                    })
+            else:
+                items = items + subjects['label']['value']
 
         # Classification
         for classification in obj['metadata'].get('classification', []):
@@ -240,12 +294,22 @@ class DublinCoreSchema(BaseSchema):
 
     def get_titles(self, obj):
         """Get titles."""
-        title = [obj['metadata']['title'][0]['mainTitle'][0]['value']]
-
+        title = {
+            '@attrs': [{
+                'prefix': 'xml',
+                'name': 'lang',
+                'value': self.translate_language(
+                    obj['metadata']['title'][0]['mainTitle'][0]['language'])
+            }],
+            'value': obj['metadata']['title'][0]['mainTitle'][0]['value']\
+                .strip()
+        }
         if obj['metadata']['title'][0].get('subtitle'):
-            title.append(obj['metadata']['title'][0]['subtitle'][0]['value'])
+            subtitle = obj['metadata']['title'][0]['subtitle'][0]['value']\
+                .strip()
+            title['value'] = f"{title['value']} : {subtitle}"
 
-        return [' : '.join(title)]
+        return [title]
 
     def get_types(self, obj):
         """Get types."""

@@ -17,8 +17,8 @@
 
 """Dublin Core serializer."""
 
-from dcxml import simpledc
 from flask_resources.serializers import SerializerMixin
+from lxml import etree
 
 from sonar.modules.documents.serializers.schemas.dc import DublinCoreSchema
 
@@ -38,10 +38,72 @@ class SonarDublinCoreXMLSerializer(SerializerMixin):
     def serialize_object_xml(self, obj):
         """Serialize a single record and persistent identifier to etree.
 
-        :param obj: Record instance
+        :param obj: Record instance.
+        :returns: an etree element.
         """
-        json = self.transform_record(obj["_source"])
-        return simpledc.dump_etree(json)
+        data = self.transform_record(obj["_source"])
+        return self.serialize_dict_to_etree(data)
+
+    def serialize_dict_to_etree(self, data):
+        """Serialize json to etree.
+
+        :param data: transformed record to dict.
+        :returns: an etree element.
+        """
+        ns = {
+            'dc': 'http://purl.org/dc/elements/1.1/',
+            'oai_dc': 'http://www.openarchives.org/OAI/2.0/oai_dc/',
+            'xml': 'xml',
+            'xsi': 'http://www.w3.org/2001/XMLSchema-instance',
+        }
+        container = '{http://www.openarchives.org/OAI/2.0/oai_dc/}dc'
+        """Default container element."""
+        attrib = {
+            '{http://www.w3.org/2001/XMLSchema-instance}schemaLocation':
+            'http://www.openarchives.org/OAI/2.0/oai_dc/ '
+            'http://www.openarchives.org/OAI/2.0/oai_dc.xsd'
+        }
+        """Default container element attributes."""
+        elements = {
+            'contributors': 'contributor',
+            'creators': 'creator',
+            'dates': 'date',
+            'descriptions': 'description',
+            'formats': 'format',
+            'identifiers': 'identifier',
+            'languages': 'language',
+            'publishers': 'publisher',
+            'relations': 'relation',
+            'rights': 'rights',
+            'sources': 'source',
+            'subjects': 'subject',
+            'titles': 'title',
+            'types': 'type'
+        }
+
+        root = etree.Element(container, nsmap=ns, attrib=attrib)
+
+        for key, values in data.items():
+            if key in elements:
+                for value in values:
+                    attrs = {}
+                    if isinstance(value, dict):
+                        val = value['value']
+                        if '@attrs' in value:
+                            for attr in value['@attrs']:
+                                prefix = attr['prefix'] \
+                                    if 'prefix' in attr else 'xml'
+                                attrs[f'{{{prefix}}}{attr["name"]}'] = \
+                                    attr['value']
+                    else:
+                        val = value
+                    field = etree.SubElement(
+                        root,
+                        f'{{http://purl.org/dc/elements/1.1/}}{elements[key]}',
+                        attrs
+                        )
+                    field.text = val
+        return root
 
 
 def sonar_dublin_core(pid, record):
