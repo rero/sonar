@@ -29,11 +29,9 @@ from sonar.modules.documents.serializers.dc import SonarDublinCoreXMLSerializer
 def minimal_document(db, bucket_location, organisation):
     record = DocumentRecord.create(
         {
-            'pid':
-            '1000',
+            'pid': '1000',
             'title': [{
-                'type':
-                'bf:Title',
+                'type': 'bf:Title',
                 'mainTitle': [{
                     'language': 'eng',
                     'value': 'Title of the document'
@@ -180,6 +178,29 @@ def test_descriptions(minimal_document):
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
     assert result['descriptions'] == ['Description 1', 'Description 2']
 
+
+def test_descriptions_attributes(minimal_document):
+    result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
+    assert result['descriptions'] == []
+
+    minimal_document['abstracts'] = [{
+        'language': 'fre',
+        'value': 'Description 1'
+    }, {
+        'language': 'ace',
+        'value': 'Description 2'
+    }]
+    result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
+    assert result['descriptions'] == [
+        {
+            '@attrs': [{'prefix': 'xml', 'name': 'lang', 'value': 'fr'}],
+            'value': 'Description 1'
+        },
+        {
+            '@attrs': [{'prefix': 'xml', 'name': 'lang', 'value': 'ace'}],
+            'value': 'Description 2'
+        }
+    ]
 
 def test_formats(minimal_document):
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
@@ -402,7 +423,22 @@ def test_subjects(minimal_document):
     }]
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
     assert result['subjects'] == [
-        'Subject 1', 'Subject 2', 'Sujet 1', 'Sujet 2'
+        {
+            '@attrs': [{'prefix': 'xml', 'name': 'lang', 'value': 'en'}],
+            'value': 'Subject 1'
+        },
+        {
+            '@attrs': [{'prefix': 'xml', 'name': 'lang', 'value': 'en'}],
+            'value': 'Subject 2'
+        },
+        {
+            '@attrs': [{'prefix': 'xml', 'name': 'lang', 'value': 'fr'}],
+            'value': 'Sujet 1'
+        },
+        {
+            '@attrs': [{'prefix': 'xml', 'name': 'lang', 'value': 'fr'}],
+            'value': 'Sujet 2'
+        }
     ]
 
     minimal_document.pop('subjects', None)
@@ -423,7 +459,12 @@ def test_subjects(minimal_document):
 def test_titles(minimal_document):
     """Test titles serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['titles'] == ['Title of the document']
+    assert result['titles'] == [
+        {
+            '@attrs': [{'prefix': 'xml', 'name': 'lang', 'value': 'en'}],
+            'value': 'Title of the document'
+        }
+    ]
 
     minimal_document['title'] = [{
         'mainTitle': [{
@@ -437,7 +478,12 @@ def test_titles(minimal_document):
         }]
     }]
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['titles'] == ['Title 1']
+    assert result['titles'] == [
+        {
+            '@attrs': [{'prefix': 'xml', 'name': 'lang', 'value': 'en'}],
+            'value': 'Title 1'
+        }
+    ]
 
     minimal_document['title'] = [{
         'mainTitle': [{
@@ -450,7 +496,12 @@ def test_titles(minimal_document):
         }]
     }]
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['titles'] == ['Title 1 : Subtitle 1']
+    assert result['titles'] == [
+        {
+            '@attrs': [{'prefix': 'xml', 'name': 'lang', 'value': 'en'}],
+            'value': 'Title 1 : Subtitle 1'
+        }
+    ]
 
 
 def test_types(minimal_document):
