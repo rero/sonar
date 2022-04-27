@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "SONAR"
-version = "1.6.0"
-description = "SONAR is a future archive of scholarly publications. It intends to collect, promote and preserve the publications of authors affiliated with Swiss public research institutions."
+version = "1.7.0"
+description = "SONAR is an archive of scholarly publications. It intends to collect, promote and preserve the publications of authors affiliated with Swiss public research institutions."
 authors = ["RERO <software@rero.ch>"]
 license = "GNU Affero General Public License v3.0"
 
