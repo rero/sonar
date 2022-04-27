@@ -1,5 +1,36 @@
 # Changelog
 
+## [v1.7.0](https://github.com/rero/sonar/tree/v1.7.0) (2022-05-05)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.6.0...v1.7.0)
+
+**Implemented enhancements:**
+
+- Add direct link to main file in `oai_dc` export \(OAI-PMH\) [\#800](https://github.com/rero/sonar/issues/800) ([Garfield-fr](https://github.com/Garfield-fr))
+- allow multiple affiliations for authors \[1\] [\#727](https://github.com/rero/sonar/issues/727) ([rerowep](https://github.com/rerowep), [mmo](https://github.com/mmo)) 
+- Improvements and corrections of the document detailed view \[3\] [\#723](https://github.com/rero/sonar/issues/723) ([Garfield-fr](https://github.com/Garfield-fr))
+- Dublin Core export: add language attribute for abstracts and keywords [\#661](https://github.com/rero/sonar/issues/661) ([Garfield-fr](https://github.com/Garfield-fr))
+
+**Fixed bugs:**
+
+- The hover tooltip to show `controlledAffiliation` doesn't appear in the admin UI [\#841](https://github.com/rero/sonar/issues/841) ([Garfield-fr](https://github.com/Garfield-fr))
+- Help: files are not displayed in case of a view code [\#817](https://github.com/rero/sonar/issues/817) ([Garfield-fr](https://github.com/Garfield-fr))
+- Thumbnails not generated for new deposited files [\#816](https://github.com/rero/sonar/issues/816) ([rerowep](https://github.com/rerowep))
+- Import swisscovery: the author's birth and death dates are not imported [\#791](https://github.com/rero/sonar/issues/791) ([Garfield-fr](https://github.com/Garfield-fr))
+- documents: fix abstracts sort [\#812](https://github.com/rero/sonar/pull/812) ([Garfield-fr](https://github.com/Garfield-fr))
+
+**Other changes:**
+
+- dependencies: remove invenio-circulation [\#839](https://github.com/rero/sonar/pull/839) ([Garfield-fr](https://github.com/Garfield-fr))
+- deployment: fix bootstrap --deploy [\#835](https://github.com/rero/sonar/pull/835) ([rerowep](https://github.com/rerowep))
+- utils: fix abort import [\#827](https://github.com/rero/sonar/pull/827) ([Garfield-fr](https://github.com/Garfield-fr))
+- pdf-extractor: update grobit [\#823](https://github.com/rero/sonar/pull/823) ([rerowep](https://github.com/rerowep))
+- security: exclude click [\#822](https://github.com/rero/sonar/pull/822) ([rerowep](https://github.com/rerowep))
+- utils: add missing import for abort [\#813](https://github.com/rero/sonar/pull/813) ([Garfield-fr](https://github.com/Garfield-fr))
+- dependencies: update [\#810](https://github.com/rero/sonar/pull/810) ([rerowep](https://github.com/rerowep))
+- dependencies: update [\#805](https://github.com/rero/sonar/pull/805) ([rerowep](https://github.com/rerowep))
+- deployment: update poetry [\#803](https://github.com/rero/sonar/pull/803) ([rerowep](https://github.com/rerowep))
+
 ## [v1.6.0](https://github.com/rero/sonar/tree/v1.6.0) (2022-03-10)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.5.1...v1.6.0)
