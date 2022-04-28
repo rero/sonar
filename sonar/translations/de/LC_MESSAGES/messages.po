@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2022-04-27 11:14+0200\n"
-"PO-Revision-Date: 2022-04-02 14:08+0000\n"
+"PO-Revision-Date: 2022-04-28 11:09+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"de/>\n"
 "Language: de\n"
-"Language-Team: German "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/de/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.12.1-dev\n"
 "Generated-By: Babel 2.10.1\n"
 
 #: sonar/theme/views.py:72
@@ -68,7 +69,7 @@ msgstr "Zugang erlaubt aus dem IP-Range der Institution"
 
 #: sonar/modules/documents/templates/documents/record.html:377
 msgid "Accompanying material"
-msgstr ""
+msgstr "Begleitmaterial"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:928
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:596
@@ -310,7 +311,7 @@ msgstr "Abgeschlossen"
 
 #: sonar/modules/documents/templates/documents/record.html:280
 msgid "Conference"
-msgstr ""
+msgstr "Konferenz"
 
 #: sonar/templates/security/email/welcome.html:5
 msgid "Confirm e-mail"
@@ -326,9 +327,8 @@ msgid "Contained in or submitted to (journal, book, proceedings)"
 msgstr "Enthalten in oder eingereicht zu (Zeitschrift, Buch, Tagungsband)"
 
 #: sonar/modules/documents/templates/documents/record.html:296
-#, fuzzy
 msgid "Content"
-msgstr "Anmerkung zum Inhalt"
+msgstr "Inhalt"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:915
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1097
@@ -1333,7 +1333,6 @@ msgid "Only one value per language is allowed"
 msgstr "Pro Sprache ist nur ein Wert zulässig"
 
 #: sonar/modules/documents/templates/documents/record.html:400
-#, fuzzy
 msgid "Open Access status"
 msgstr "Open Access Status"
 
@@ -1418,10 +1417,9 @@ msgstr "Andere Dateien"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:886
 msgid "Other locality (Switzerland)"
-msgstr ""
+msgstr "Andere Ortschaft (Schweiz)"
 
 #: sonar/modules/documents/templates/documents/record.html:366
-#, fuzzy
 msgid "Other material characteristics"
 msgstr "Sonstige Materialeigenschaften"
 
@@ -1437,7 +1435,7 @@ msgstr "Seiten"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:700
 msgid "Parents"
-msgstr ""
+msgstr "Eltern"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:806
 msgid "Pedagogical and technological innovation"
@@ -1762,7 +1760,6 @@ msgid "See live"
 msgstr "Live ansehen"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:611
-#, fuzzy
 msgid "Serie"
 msgstr "Reihe"
 
@@ -1772,9 +1769,8 @@ msgid "Series"
 msgstr "Reihe"
 
 #: sonar/modules/documents/templates/documents/record.html:338
-#, fuzzy
 msgid "Series statement"
-msgstr "Angabe"
+msgstr "Gesamttitelangabe"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:999
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:605
@@ -5391,4 +5387,3 @@ msgstr ""
 
 #~ msgid "Contained in (journal, book, proceedings)"
 #~ msgstr "Enthalten in (Zeitschrift, Buch, Tagungsband)"
-
