@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: sonar 1.0.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2022-04-27 11:14+0200\n"
-"PO-Revision-Date: 2022-02-03 16:16+0000\n"
+"PO-Revision-Date: 2022-04-28 11:09+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Language-Team: Esperanto <https://hosted.weblate.org/projects/rero_plus/"
+"sonar/eo/>\n"
 "Language: eo\n"
-"Language-Team: Esperanto "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/eo/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.12.1-dev\n"
 "Generated-By: Babel 2.10.1\n"
 
 #: sonar/theme/views.py:72
@@ -322,9 +323,8 @@ msgid "Contained in or submitted to (journal, book, proceedings)"
 msgstr ""
 
 #: sonar/modules/documents/templates/documents/record.html:296
-#, fuzzy
 msgid "Content"
-msgstr "Noto pri enhavo"
+msgstr "Enhavo"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:915
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1097
@@ -5332,4 +5332,3 @@ msgstr ""
 
 #~ msgid "Part of (host document)"
 #~ msgstr ""
-
