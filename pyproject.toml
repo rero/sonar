@@ -9,7 +9,6 @@ license = "GNU Affero General Public License v3.0"
 python = ">= 3.7, <3.10"
 
 invenio-oaiharvester = {git = "https://github.com/inveniosoftware/invenio-oaiharvester.git", tag = "v1.0.0a4"}
-invenio-circulation = {version = ">=1.0.0a36", allow-prereleases = true}
 
 invenio-logging = { version = ">=1.3.0,<1.4.0", extras = ["sentry-sdk", "sentry"] }
 
