@@ -91,6 +91,10 @@ invenio index destroy --force --yes-i-know
 invenio utils es-init --force # To take templates into account
 invenio index queue init purge
 
+section "Initialize invenio queues."
+invenio queues delete
+invenio queues declare
+
 # Create admin role to restrict access
 section "Create roles for users" "info"
 invenio roles create superuser
