@@ -28,6 +28,7 @@ from flask_principal import ActionNeed
 from invenio_access.models import ActionUsers, Role
 from invenio_accounts.ext import hash_password
 from invenio_files_rest.models import Location
+from invenio_queues.proxies import current_queues
 from utils import MockArkServer
 
 from sonar.modules.collections.api import Record as CollectionRecord
@@ -37,6 +38,17 @@ from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.subdivisions.api import Record as SubdivisionRecord
 from sonar.modules.users.api import UserRecord
 from sonar.proxies import sonar
+
+
+@pytest.fixture()
+def event_queues(app):
+    """Delete and declare test queues."""
+    current_queues.delete()
+    try:
+        current_queues.declare()
+        yield
+    finally:
+        current_queues.delete()
 
 
 @pytest.fixture(scope='module')
@@ -125,6 +137,11 @@ def app_config(app_config):
     app_config['SONAR_APP_ARK_NAAN'] = '99999'
     app_config['SONAR_APP_ARK_SCHEME'] = 'ark:'
     app_config['SONAR_APP_ARK_SHOULDER'] = 'ffk3'
+
+    # Celery
+    app_config['CELERY_BROKER_URL'] = 'memory://'
+    app_config['CELERY_TASK_ALWAYS_EAGER'] = True
+    app_config['CELERY_TASK_EAGER_PROPAGATES'] = True
     return app_config
 
 

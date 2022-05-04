@@ -26,7 +26,8 @@ from flask_bootstrap import Bootstrap
 from flask_security import user_registered
 from flask_wiki import Wiki
 from flask_wiki.markdown_ext import BootstrapExtension
-from invenio_files_rest.signals import file_deleted, file_uploaded
+from invenio_files_rest.signals import file_deleted, file_downloaded, \
+    file_uploaded
 from invenio_indexer.signals import before_record_index
 from werkzeug.datastructures import MIMEAccept
 
@@ -43,6 +44,7 @@ from sonar.resources.projects.resource import \
     RecordResource as ProjectRecordResource
 from sonar.resources.projects.service import \
     RecordService as ProjectRecordService
+from sonar.signals import file_download_proxy
 
 from . import config_sonar
 from .route_converters import OrganisationCodeConverter
@@ -100,6 +102,7 @@ class Sonar():
 
         # Connect to signal sent when a file is uploaded or deleted
         file_uploaded.connect(file_uploaded_listener, weak=False)
+        file_downloaded.connect(file_download_proxy, weak=False)
         file_deleted.connect(file_deleted_listener, weak=False)
 
         # Add user's full name before record index

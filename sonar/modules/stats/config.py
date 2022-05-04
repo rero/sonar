@@ -38,7 +38,7 @@ class Configuration:
     index = f'{RESOURCE_NAME}'
     schema = f'{RESOURCE_NAME}/{JSON_SCHEMA_NAME}-v1.0.0.json'
     pid_type = PID_TYPE
-    resolver_url = f'/api/{RESOURCE_NAME}/<pid>'
+    resolver_url = f'/api/billing/{RESOURCE_NAME}/<pid>'
     rest_endpoint = {
         'pid_type':
         PID_TYPE,
@@ -72,9 +72,9 @@ class Configuration:
                                  ':json_v1'),
         },
         'list_route':
-        f'/{RESOURCE_NAME}/',
+        f'/billing/{RESOURCE_NAME}/',
         'item_route':
-        f'/{RESOURCE_NAME}/<pid({PID_TYPE}, record_class="{MODULE_PATH}.api:Record"):pid_value>',
+        f'/billing/{RESOURCE_NAME}/<pid({PID_TYPE}, record_class="{MODULE_PATH}.api:Record"):pid_value>',
         'default_media_type':
         'application/json',
         'max_result_window':

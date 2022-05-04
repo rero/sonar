@@ -18,7 +18,9 @@
 """Test REST endpoint for documents."""
 
 
+from elasticsearch_dsl import Search
 from flask import url_for
+from invenio_stats.tasks import process_events
 
 
 def test_get_content(app, client, document_with_file):
@@ -28,7 +30,6 @@ def test_get_content(app, client, document_with_file):
     file_name = 'test1.pdf'
     fulltext_file_name = 'test1-pdf.txt'
     thumbnail_file_name = 'test1-pdf.jpg'
-
     # get the pdf file
     url_file_content = url_for('invenio_records_files.doc_object_api', pid_value=document_with_file.get('pid'), key=file_name)
     res = client.get(url_file_content)
@@ -133,3 +134,25 @@ def test_put_delete(app, client, document, pdf_file):
     # TODO: is it the right approach? Do we need to remove files and
     # the bucket?
     assert len(content) == 2
+
+
+def test_stats(app, client, document_with_file, es, event_queues):
+    """Test get existing stats for file downloads."""
+    app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
+
+    file_name = 'test1.pdf'
+    # get the pdf file
+    url_file_content = url_for('invenio_records_files.doc_object_api', pid_value=document_with_file.get('pid'), key=file_name)
+    res = client.get(url_file_content)
+    assert res.status_code == 200
+    assert res.content_type == 'application/octet-stream'
+    assert res.content_length > 0
+
+    # process the task
+    process_events(['file-download'])
+
+    es.indices.refresh(index='events-stats-file-download')
+    search = Search(using=es).index('events-stats-file-download')
+
+    # should have at least one stats in the index
+    assert search.execute().hits.total.value > 0

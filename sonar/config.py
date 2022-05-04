@@ -31,7 +31,9 @@ from datetime import timedelta
 from celery.schedules import crontab
 from invenio_oauthclient.contrib import orcid
 from invenio_records_rest.facets import range_filter
+from invenio_stats.aggregations import StatAggregator
 from invenio_stats.processors import EventsIndexer
+from invenio_stats.queries import ESTermsQuery
 
 from sonar.modules.collections.config import \
     Configuration as CollectionConfiguration
@@ -167,6 +169,15 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'invenio_stats.tasks.process_events',
         'schedule': timedelta(minutes=30),
         'args': [('record-view', 'file-download')],
+    },
+    # Stats Agg events
+    'stats-aggregate-events': {
+        'task': 'invenio_stats.tasks.aggregate_events',
+        'schedule': timedelta(minutes=35),
+        'args': [(
+            'record-view-agg', 'record-view-agg',
+            'file-download-agg', 'file-download-agg',
+        )],
     },
     # Documents stats
     'documents-stats': {
@@ -866,16 +877,16 @@ OAISERVER_PAGE_SIZE = 100
 
 # Stats
 # =====
+
 STATS_EVENTS = {
     'file-download': {
-        'signal':
-        'invenio_files_rest.signals.file_downloaded',
-        'templates':
-        'invenio_stats.contrib.file_download',
-        'event_builders':
-        ['invenio_stats.contrib.event_builders.file_download_event_builder'],
-        'cls':
-        EventsIndexer,
+        'signal': 'sonar.signals.file_downloaded',
+        'templates': 'invenio_stats.contrib.file_download',
+        'event_builders': [
+            'invenio_stats.contrib.event_builders'
+            '.file_download_event_builder'
+        ],
+        'cls': EventsIndexer,
         'params': {
             'preprocessors': [
                 'invenio_stats.processors:flag_robots',
@@ -894,14 +905,13 @@ STATS_EVENTS = {
         }
     },
     'record-view': {
-        'signal':
-        'invenio_records_ui.signals.record_viewed',
-        'templates':
-        'invenio_stats.contrib.record_view',
-        'event_builders':
-        ['invenio_stats.contrib.event_builders.record_view_event_builder'],
-        'cls':
-        EventsIndexer,
+        'signal': 'invenio_records_ui.signals.record_viewed',
+        'templates': 'invenio_stats.contrib.record_view',
+        'event_builders': [
+            'invenio_stats.contrib.event_builders'
+            '.record_view_event_builder'
+        ],
+        'cls': EventsIndexer,
         'params': {
             'preprocessors': [
                 'invenio_stats.processors:flag_robots',
@@ -917,6 +927,88 @@ STATS_EVENTS = {
             # Create one index per year which will store file download events
             'suffix':
             '%Y',
-        },
+        }
+    }
+}
+
+STATS_AGGREGATIONS = {
+    'file-download-agg': dict(
+        templates='invenio_stats.contrib.aggregations.aggr_file_download',
+        cls=StatAggregator,
+        params=dict(
+            event='file-download',
+            field='unique_id',
+            interval='day',
+            index_interval='month',
+            copy_fields=dict(
+                unique_id='unique_id',
+                unique_session_id='unique_session_id',
+                file_key='file_key',
+                bucket_id='bucket_id',
+                file_id='file_id',
+            ),
+            metric_fields={
+                'unique_count': (
+                    'cardinality', 'unique_session_id',
+                    {'precision_threshold': 1000},
+                ),
+                'volume': ('sum', 'size', {}),
+            },
+        )
+    ),
+    'record-view-agg': dict(
+        templates='invenio_stats.contrib.aggregations.aggr_record_view',
+        cls=StatAggregator,
+        params=dict(
+            event='record-view',
+            field='unique_id',
+            interval='day',
+            index_interval='month',
+            copy_fields=dict(
+                # record_id='record_id',
+                unique_id='unique_id',
+                unique_session_id='unique_session_id',
+                pid_type='pid_type',
+                pid_value='pid_value',
+            ),
+            metric_fields={
+                'unique_count': (
+                    'cardinality', 'unique_session_id',
+                    {'precision_threshold': 1000},
+                )
+            },
+        )
+    )
+}
+
+STATS_QUERIES = {
+    'file-download': {
+        'cls': ESTermsQuery,
+        'params': dict(
+            index='stats-file-download',
+            required_filters={
+                'bucket_id': 'bucket_id',
+            },
+            copy_fields={
+                'bucket_id': 'bucket_id'
+            },
+            aggregated_fields=['file_key'],
+            metric_fields=dict(
+                count=("sum", "count", {}),
+                unique_count=("sum", "unique_count", {}),
+            )
+        )
     },
+    "record-view": dict(
+        cls=ESTermsQuery,
+        params=dict(
+            index="stats-record-view",
+            copy_fields=dict(pid_type="pid_type", pid_value="pid_value"),
+            required_filters=dict(pid_value="pid_value", pid_type="pid_type"),
+            metric_fields=dict(
+                count=("sum", "count", {}),
+                unique_count=("sum", "unique_count", {}),
+            )
+        )
+    )
 }

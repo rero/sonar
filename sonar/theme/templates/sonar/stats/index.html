@@ -34,7 +34,7 @@ along with this program. If not, see
     <a href="{{ url_for('documentsstats.detail', pid=record._source.pid) }}">
       {{ record._source._created | format_date('%d/%m/%Y %H:%M') }}
     </a>
-    <a href="/api/stats/{{record._source.pid}}?format=text/csv" class="btn btn-outline-primary btn-sm">
+    <a href="/api/billing/stats/{{record._source.pid}}?format=text/csv" class="btn btn-outline-primary btn-sm">
       <i class="fa fa-download"></i>
     </a>
   </div>
