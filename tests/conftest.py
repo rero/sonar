@@ -125,6 +125,15 @@ def app_config(app_config):
     app_config['SONAR_APP_ARK_NAAN'] = '99999'
     app_config['SONAR_APP_ARK_SCHEME'] = 'ark:'
     app_config['SONAR_APP_ARK_SHOULDER'] = 'ffk3'
+    app_config['SONAR_APP_DOCUMENT_URN'] = {
+        'organisations': {
+            'org': {
+                'types': ['coar:c_db06'],
+                'code': 6,
+                'namespace': 'urn:nbn:ch:rero'
+            }
+        }
+    }
     return app_config
 
 
