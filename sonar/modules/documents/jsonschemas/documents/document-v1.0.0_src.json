@@ -659,7 +659,13 @@
           "value": {
             "title": "Value",
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "form": {
+              "type": "textarea",
+              "templateOptions": {
+                "rows": 3
+              }
+            }
           },
           "language": {
             "$ref": "language-v1.0.0.json"

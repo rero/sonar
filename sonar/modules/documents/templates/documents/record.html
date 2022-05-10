@@ -185,13 +185,8 @@ along with this program. If not, see
           data-lang="{{ abstract.language }}">{{ _('lang_' + abstract.language) }}</a>
         {% endfor %}
         {% for abstract in abstracts %}
-        <span id="lang-{{ abstract.language }}" class="abstract-container {{ '' if loop.first else 'd-none' }}">
-          {% if abstract.value | length > 400 %}
-          <span data-abstract="{{ abstract.value | nl2br }}">{{ abstract.value | truncate(400) }}</span> <a href="#"
-            class="showMore-abstract">{{ _('Show more') }}&hellip;</a>
-          {% else %}
+        <span id="lang-{{ abstract.language }}" class="abstract-container abstract-data {{ '' if loop.first else 'd-none' }}">
           {{ abstract.value | nl2br | safe }}
-          {% endif %}
         </span>
         {% endfor %}
       </div>
@@ -494,12 +489,6 @@ along with this program. If not, see
     $('#show-more-contributors').click(function (event) {
       event.preventDefault();
       $('li.creator.d-none').removeClass('d-none');
-      $(this).remove();
-    });
-
-    $('.showMore-abstract').click(function (event) {
-      event.preventDefault();
-      $(this).prev().html($(this).prev().data('abstract'))
       $(this).remove();
     });
 
