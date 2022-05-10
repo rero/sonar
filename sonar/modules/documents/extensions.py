@@ -20,6 +20,8 @@
 from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 from invenio_records.extensions import RecordExtension
 
+from sonar.modules.documents.urn import Urn
+
 from ..ark.api import current_ark
 
 
@@ -61,9 +63,19 @@ class ArkDocumentExtension(RecordExtension):
             org = record.replace_refs().get('organisation', [{}])[0]
             pid = record.get('pid')
             ark_id = current_ark.create(
-                pid,
-                current_ark.target_url(pid, org.get('code', 'global')))
+                pid, current_ark.target_url(pid, org.get('code', 'global'))
+            )
             p = PersistentIdentifier.get('ark', ark_id)
             if p.status == PIDStatus.RESERVED:
                 p.register()
 
+
+class UrnDocumentExtension(RecordExtension):
+    """Create URN identifiers."""
+
+    def pre_create(self, record):
+        """Called before a record is created.
+
+        :param record: the invenio record instance to be processed.
+        """
+        Urn.create_urn(record)

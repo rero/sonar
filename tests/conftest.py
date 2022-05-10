@@ -142,6 +142,15 @@ def app_config(app_config):
     app_config['CELERY_BROKER_URL'] = 'memory://'
     app_config['CELERY_TASK_ALWAYS_EAGER'] = True
     app_config['CELERY_TASK_EAGER_PROPAGATES'] = True
+    app_config['SONAR_APP_DOCUMENT_URN'] = {
+        'organisations': {
+            'org': {
+                'types': ['coar:c_db06'],
+                'code': 6,
+                'namespace': 'urn:nbn:ch:rero'
+            }
+        }
+    }
     return app_config
 
 
