@@ -597,3 +597,17 @@ SONAR_APP_DOCUMENT_IDENTIFIER_LINK = {
         'default': 'https://nbn-resolving.org/_identifier_'
     }
 }
+
+# URN
+# ===
+# Config to generate URN identifiers for organisations. The real configuration
+# should be set during the deployment.
+SONAR_APP_DOCUMENT_URN = {
+    'organisations': {
+        'unifr': {
+            'types': ['coar:c_db06'],
+            'code': 6,
+            'namespace': 'urn:nbn:ch:rero'
+        }
+    }
+}
