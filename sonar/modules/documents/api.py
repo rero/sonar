@@ -38,7 +38,7 @@ from ..api import SonarIndexer, SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
 from ..providers import Provider
 from .dumpers import ReplaceRefsDumper, document_indexer_dumper
-from .extensions import ArkDocumentExtension
+from .extensions import ArkDocumentExtension, UrnDocumentExtension
 
 # provider
 DocumentProvider = type('DocumentProvider', (Provider, ), dict(pid_type='doc'))
@@ -64,8 +64,8 @@ class DocumentRecord(SonarRecord):
     fetcher = document_pid_fetcher
     provider = DocumentProvider
     schema = 'documents/document-v1.0.0.json'
-    _extensions = [ArkDocumentExtension()]
     enable_jsonref = False
+    _extensions = [ArkDocumentExtension(), UrnDocumentExtension()]
 
     @staticmethod
     def get_permanent_link(host, pid, org=None, ignore_ark=False):

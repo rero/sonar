@@ -187,6 +187,15 @@ def app_config(app_config):
     # Config
     app_config['SONAR_APP_SERVER_NAME'] = 'sonar.rero.ch'
     app_config['SONAR_APP_DEFAULT_ORGANISATION'] = 'global'
+    app_config['SONAR_APP_DOCUMENT_URN'] = {
+        'organisations': {
+            'org': {
+                'types': ['coar:c_db06'],
+                'code': 6,
+                'namespace': 'urn:nbn:ch:rero'
+            }
+        }
+    }
     return app_config
 
 
