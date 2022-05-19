@@ -235,11 +235,14 @@ APP_DEFAULT_SECURE_HEADERS = {
         'style-src': [
             "'self'", "'unsafe-inline'", 'https://cdnjs.cloudflare.com',
             'https://fonts.googleapis.com',
-            'https://maxcdn.bootstrapcdn.com'
+            'https://maxcdn.bootstrapcdn.com',
+            'https://cdn.jsdelivr.net'
         ],
         'font-src': [
             "'self'", "data:", "blob:", "'unsafe-inline'",
-            'https://cdnjs.cloudflare.com', 'https://fonts.gstatic.com'
+            'https://cdnjs.cloudflare.com', 'https://fonts.gstatic.com',
+            'https://maxcdn.bootstrapcdn.com',
+            'https://cdn.jsdelivr.net'
         ],
         'img-src':
         ["'self'", "data:", "blob:", 'https://www.google-analytics.com']
