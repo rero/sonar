@@ -241,3 +241,20 @@ def test_elastic_search(client, superuser, monkeypatch):
     response = client.get(url_for('monitoring_api.elastic_search'))
     assert response.status_code == 500
     assert response.json == {'error': 'Unknown exception'}
+
+
+def test_unregistered_urn(client, es_clear, organisation, superuser,
+                          monkeypatch, minimal_thesis_document):
+    """Test unregistered urn counts."""
+
+    login_user_via_session(client, email=superuser['email'])
+
+    response = client.get(
+        url_for('monitoring_api.unregistered_urn'))
+    assert response.status_code == 200
+    assert response.json == {'data': 1}
+
+    response = client.get(
+        url_for('monitoring_api.unregistered_urn', days=100))
+    assert response.status_code == 200
+    assert response.json == {'data': 0}

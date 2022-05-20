@@ -608,6 +608,11 @@ SONAR_APP_DOCUMENT_URN = {
             'types': ['coar:c_db06'],
             'code': 6,
             'namespace': 'urn:nbn:ch:rero'
+        },
+        'usi': {
+            'types': ['coar:c_db06'],
+            'code': 1,
+            'namespace': 'urn:nbn:ch:rero'
         }
-    }
+    },
 }
