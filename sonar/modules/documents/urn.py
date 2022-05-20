@@ -18,6 +18,8 @@
 """Urn API."""
 
 
+from datetime import datetime, timedelta, timezone
+
 from flask import current_app
 from invenio_pidstore.errors import PIDAlreadyExists
 from invenio_pidstore.models import PersistentIdentifier, PIDStatus
@@ -25,6 +27,8 @@ from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 
 class Urn:
     """Urn class."""
+
+    urn_pid_type = 'urn'
 
     @classmethod
     def _calculateCheckDigit(cls, urn):
@@ -97,3 +101,25 @@ class Urn:
                 except PIDAlreadyExists:
                     current_app.logger.error(
                         f'generated urn already exist for document: {doc_pid}')
+
+    @classmethod
+    def get_urn_pids(cls, status=PIDStatus.NEW, days=None):
+        """Get count of URN pids by status and creation date.
+
+        :param status: PID status by default N.
+        :param days: Number of days passed since the creation of the document.
+        :returns: Documents count.
+        """
+        count = 0
+        query = PersistentIdentifier.query\
+                .filter_by(pid_type=cls.urn_pid_type)\
+                .filter_by(status=status)
+        if uuuids := [str(uuid.object_uuid) for uuid in query.all()]:
+            from sonar.modules.documents.api import DocumentSearch
+            query = DocumentSearch()\
+                .filter('terms', _id=uuuids)
+            if days:
+                date = datetime.now(timezone.utc) - timedelta(days=days)
+                query = query.filter('range', _created={'lte': date})
+            count = query.count()
+        return count
