@@ -23,6 +23,7 @@ from flask import Blueprint, abort, jsonify, request
 from flask_security import current_user
 from invenio_search import current_search_client
 
+from sonar.modules.documents.urn import Urn
 from sonar.modules.permissions import superuser_access_permission
 from sonar.monitoring.api.data_integrity import DataIntegrityMonitoring
 from sonar.monitoring.api.database import DatabaseMonitoring
@@ -107,6 +108,20 @@ def elastic_search():
     """
     try:
         info = current_search_client.cluster.health()
+        return jsonify({'data': info})
+    except Exception as exception:
+        return jsonify({'error': str(exception)}), 500
+
+
+@api_blueprint.route('/urn')
+def unregistered_urn():
+    """Count of unregistered urn pids.
+
+    :return: jsonified count information.
+    """
+    try:
+        days = int(args.get('days', 0)) if (args := request.args) else 0
+        info = Urn.get_urn_pids(days=days)
         return jsonify({'data': info})
     except Exception as exception:
         return jsonify({'error': str(exception)}), 500
