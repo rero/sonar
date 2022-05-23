@@ -48,6 +48,7 @@ def minimal_document(db, bucket_location, organisation):
     )
     record.commit()
     db.session.commit()
+    record.reindex()
     return record
 
 
