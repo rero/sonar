@@ -18,8 +18,12 @@
 """Utils functions for application."""
 
 import datetime
+import itertools
 import re
+from time import sleep
 
+import click
+from celery import current_app as current_celery
 from flask import abort, current_app, g, request
 from invenio_i18n.ext import current_i18n
 from invenio_mail.api import TemplatedMessage
@@ -384,3 +388,40 @@ def file_download_ui(pid, record, _record_file_factory=None, **kwargs):
         },
         as_attachment=('download' in request.args)
     )
+
+
+def queue_count():
+    """Count tasks in celery."""
+    inspector = current_celery.control.inspect()
+    task_count = 0
+    if reserved := inspector.reserved():
+        for _, values in reserved.items():
+            task_count += len(values)
+    if active := inspector.active():
+        for _, values in active.items():
+            task_count += len(values)
+    return task_count
+
+
+
+def wait_empty_tasks(delay, verbose=False):
+    """Wait for tasks to be empty."""
+    if verbose:
+        spinner = itertools.cycle(['-', '\\', '|', '/'])
+        click.echo(
+            f'Waiting: {next(spinner)}\r',
+            nl=False
+        )
+    count = queue_count()
+    sleep(5)
+    count += queue_count()
+    while count:
+        if verbose:
+            click.echo(
+                f'Waiting: {next(spinner)}\r',
+                nl=False
+            )
+        sleep(delay)
+        count = queue_count()
+        sleep(5)
+        count += queue_count()

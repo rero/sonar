@@ -22,7 +22,19 @@ from flask import current_app
 from invenio_db import db
 from invenio_indexer.api import RecordIndexer
 
-from sonar.modules.documents.api import DocumentRecord
+from sonar.modules.documents.urn import Urn
+
+
+@shared_task(ignore_result=True)
+def register_urn_code_from_document(record):
+    """Register the urn pid for a given document.
+
+    :param record records_to_import: the document.
+    """
+    # TODO: return a reponse when implementing the real registration
+    from sonar.modules.documents.api import DocumentRecord
+    if DocumentRecord.get_urn_codes(record):
+        Urn.register_urn_code_from_document(record)
 
 
 @shared_task(ignore_result=True)
@@ -35,6 +47,7 @@ def import_records(records_to_import):
     :param list records_to_import: List of records to import.
     :returns: List of IDs.
     """
+    from sonar.modules.documents.api import DocumentRecord
     indexer = RecordIndexer()
 
     ids = []

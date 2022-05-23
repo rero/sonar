@@ -20,6 +20,7 @@
 from flask import url_for
 from invenio_accounts.testutils import login_user_via_session
 from invenio_db import db
+from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 
 
 def test_db_connection_count(client, es_clear, monkeypatch, admin, superuser):
@@ -246,15 +247,24 @@ def test_elastic_search(client, superuser, monkeypatch):
 def test_unregistered_urn(client, es_clear, organisation, superuser,
                           monkeypatch, minimal_thesis_document):
     """Test unregistered urn counts."""
-
     login_user_via_session(client, email=superuser['email'])
-
     response = client.get(
         url_for('monitoring_api.unregistered_urn'))
     assert response.status_code == 200
-    assert response.json == {'data': 1}
+    assert response.json == {'data': 0}
 
     response = client.get(
         url_for('monitoring_api.unregistered_urn', days=100))
     assert response.status_code == 200
     assert response.json == {'data': 0}
+
+    query = PersistentIdentifier.query\
+                .filter_by(pid_type='urn')\
+                .filter_by(status=PIDStatus.REGISTERED)
+    pid = query.first()
+    pid.status = PIDStatus.NEW
+    db.session.commit()
+    response = client.get(
+        url_for('monitoring_api.unregistered_urn'))
+    assert response.status_code == 200
+    assert response.json == {'data': 1}

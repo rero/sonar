@@ -422,6 +422,17 @@ class DocumentRecord(SonarRecord):
             return current_ark.resolver_url(self.get('pid'))
 
 
+    @classmethod
+    def get_urn_codes(cls, record):
+        """Get list of urn codes for document.
+
+        :param record: dictionary of document.
+        :returns: list of urns codes.
+        """
+        return [identifier['value'] for identifier in record.get(
+            'identifiedBy', []) if identifier['type'] == 'bf:Urn']
+
+
 class DocumentIndexer(SonarIndexer):
     """Indexing documents in Elasticsearch."""
 
