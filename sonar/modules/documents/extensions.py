@@ -22,9 +22,8 @@ import contextlib
 
 from invenio_pidstore.models import PersistentIdentifier, PIDDoesNotExistError
 from invenio_records.extensions import RecordExtension
+from sonar.modules.documents.tasks import register_urn_code_from_document
 from sonar.modules.documents.urn import Urn
-
-from ..ark.api import current_ark
 
 
 class ArkDocumentExtension(RecordExtension):
@@ -49,4 +48,13 @@ class UrnDocumentExtension(RecordExtension):
 
         :param record: the invenio record instance to be processed.
         """
-        Urn.create_urn(record)
+        # Generate URN codes for documents without URNs.
+        if not record.get_urn_codes(record):
+            Urn.create_urn(record)
+
+    def post_create(self, record):
+        """Called after a record is created.
+
+        :param record: the invenio record instance to be processed.
+        """
+        register_urn_code_from_document.delay(record)

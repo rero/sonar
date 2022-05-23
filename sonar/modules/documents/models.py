@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # Swiss Open Access Repository
-# Copyright (C) 2021 RERO
+# Copyright (C) 2022 RERO
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -15,17 +15,22 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Documents CLI commands."""
 
-import click
+"""Define relation between records and buckets."""
 
-from sonar.modules.documents.cli.rerodoc import rerodoc
-from sonar.modules.documents.cli.urn import urn
+from __future__ import absolute_import
+
+from invenio_db import db
+from invenio_pidstore.models import RecordIdentifier
 
 
-@click.group()
-def documents():
-    """Commands for documents."""
+class UrnIdentifier(RecordIdentifier):
+    """Sequence generator for Urn identifiers."""
 
-documents.add_command(rerodoc)
-documents.add_command(urn)
+    __tablename__ = 'urn_id'
+    __mapper_args__ = {'concrete': True}
+
+    recid = db.Column(
+        db.BigInteger().with_variant(db.Integer, 'sqlite'),
+        primary_key=True, autoincrement=True,
+    )
