@@ -18,21 +18,26 @@
 """Test Dublic Core marshmallow schema."""
 
 
-import pytest
+
 from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 
 from sonar.modules.documents.api import DocumentRecord
+from sonar.modules.documents.urn import Urn
+from sonar.modules.utils import wait_empty_tasks
 
 
-@pytest.fixture()
-def minimal_document(db, bucket_location, organisation):
+def test_urn_create(db, bucket_location, organisation):
+    """Test create URN identifier."""
     record = DocumentRecord.create(
         {
             "title": [
                 {
                     "type": "bf:Title",
                     "mainTitle": [
-                        {"language": "eng", "value": "Title of the document"}
+                        {
+                            "language": "eng",
+                            "value": "Title of the document"
+                        }
                     ],
                 }
             ],
@@ -49,16 +54,10 @@ def minimal_document(db, bucket_location, organisation):
     record.commit()
     db.session.commit()
     record.reindex()
-    return record
-
-
-def test_urn_create(minimal_document):
-    """Test create URN identifier."""
-    urn_code = [
-        identifier["value"]
-        for identifier in minimal_document.get("identifiedBy")
-        if identifier["type"] == "bf:Urn"
-    ][0]
+    wait_empty_tasks(delay=3, verbose=True)
+    urn_code = DocumentRecord.get_urn_codes(record)[0]
     assert urn_code == 'urn:nbn:ch:rero-006-17'
-    urn_pid = PersistentIdentifier.get('urn', minimal_document.get('pid'))
-    assert urn_pid.status == PIDStatus.NEW
+    urn_pid = PersistentIdentifier.get('urn', urn_code)
+    assert urn_pid.status == PIDStatus.REGISTERED
+    urns = Urn.get_unregistered_urns()
+    assert 'urn:nbn:ch:rero-006-17' not in urns

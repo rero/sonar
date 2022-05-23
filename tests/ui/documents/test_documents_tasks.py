@@ -24,7 +24,7 @@ from sonar.modules.documents.tasks import import_records
 
 
 @mock.patch(
-    'sonar.modules.documents.tasks.DocumentRecord.get_record_by_identifier')
+    'sonar.modules.documents.api.DocumentRecord.get_record_by_identifier')
 def test_import_records(mock_record_by_identifier, app, document_json,
                         bucket_location):
     """Test import records."""
