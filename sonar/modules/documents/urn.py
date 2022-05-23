@@ -17,12 +17,14 @@
 
 """Urn API."""
 
-
 from datetime import datetime, timedelta, timezone
 
 from flask import current_app
+from invenio_db import db
 from invenio_pidstore.errors import PIDAlreadyExists
 from invenio_pidstore.models import PersistentIdentifier, PIDStatus
+
+from sonar.modules.documents.models import UrnIdentifier
 
 
 class Urn:
@@ -85,22 +87,34 @@ class Urn:
         org_pid = record.replace_refs().get("organisation", [{}])[0].get("pid")
         if config := urn_config.get("organisations", {}).get(org_pid):
             if record.get("documentType") in config.get("types"):
-                doc_pid = record.get("pid")
+                urn_next_pid = str(UrnIdentifier.next())
                 try:
+                    urn_code = cls._generate_urn(int(urn_next_pid), config)
                     pid = PersistentIdentifier.create(
-                        "urn",
-                        doc_pid,
+                        cls.urn_pid_type,
+                        urn_code,
                         object_type="rec",
                         object_uuid=record.id,
                         status=PIDStatus.NEW,
                     )
-                    urn_value = cls._generate_urn(int(pid.pid_value), config)
                     record["identifiedBy"].append(
-                        {"type": "bf:Urn", "value": urn_value}
+                        {"type": "bf:Urn", "value": urn_code}
                     )
                 except PIDAlreadyExists:
                     current_app.logger.error(
                         f'generated urn already exist for document: {doc_pid}')
+
+    @classmethod
+    def urn_query(cls, status=None):
+        """Build URN query.
+
+        :param status: PID status by default N.
+        :returns: Base query.
+        """
+        return PersistentIdentifier.query\
+                .filter_by(pid_type=cls.urn_pid_type)\
+                .filter_by(status=status)
+
 
     @classmethod
     def get_urn_pids(cls, status=PIDStatus.NEW, days=None):
@@ -111,9 +125,7 @@ class Urn:
         :returns: Documents count.
         """
         count = 0
-        query = PersistentIdentifier.query\
-                .filter_by(pid_type=cls.urn_pid_type)\
-                .filter_by(status=status)
+        query = cls.urn_query(status=status)
         if uuuids := [str(uuid.object_uuid) for uuid in query.all()]:
             from sonar.modules.documents.api import DocumentSearch
             query = DocumentSearch()\
@@ -123,3 +135,53 @@ class Urn:
                 query = query.filter('range', _created={'lte': date})
             count = query.count()
         return count
+
+
+    @classmethod
+    def get_unregistered_urns(cls):
+        """Get list of unregistered URNs.
+
+        :returns: List of unregistered URNs .
+        """
+        query = cls.urn_query(status=PIDStatus.NEW)
+        return [str(uuid.pid_value) for uuid in query.all()]
+
+    @classmethod
+    def register_urn(cls, urn=None):
+        """Register a urn at the DNB library.
+
+        :param pid: The URN  to register.
+        :returns: True if urn is registered, otherwise False.
+        """
+        # TODO: write the code to register urns at the DNB library.
+        return True
+
+
+    @classmethod
+    def register_urn_code_from_document(cls, record):
+        """Register the urn pid for a given document.
+
+        :param record: The document.
+        """
+        from sonar.modules.documents.api import DocumentRecord
+        for urn_code in DocumentRecord.get_urn_codes(record):
+            if reponse := cls.register_urn(urn=urn_code):
+                pid = PersistentIdentifier.query\
+                        .filter_by(pid_type=cls.urn_pid_type)\
+                        .filter_by(pid_value=urn_code).first()
+                if pid and pid.status == PIDStatus.NEW:
+                    pid.status = PIDStatus.REGISTERED
+                    db.session.commit()
+
+    @classmethod
+    def register_urn_pid(cls, urn=None):
+        """Register the urn pid.
+
+        :param pid: The corresponding URN code to register.
+        """
+        pid = PersistentIdentifier.query\
+                .filter_by(pid_type=cls.urn_pid_type)\
+                .filter_by(pid_value=urn).first()
+        if pid:
+            pid.status = PIDStatus.REGISTERED
+            db.session.commit()
