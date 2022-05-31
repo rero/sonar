@@ -33,7 +33,7 @@ def register_urn_code_from_document(record):
     """
     # TODO: return a reponse when implementing the real registration
     from sonar.modules.documents.api import DocumentRecord
-    if DocumentRecord.get_urn_codes(record):
+    if DocumentRecord.get_rero_urn_code(record):
         Urn.register_urn_code_from_document(record)
 
 

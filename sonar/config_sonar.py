@@ -19,9 +19,11 @@
 
 SONAR_APP_SERVER_NAME = 'sonar.rero.ch'
 
-SONAR_APP_API_URL = 'https://localhost:5000/api/'
+SONAR_APP_BASE_URL = 'https://localhost:5000'
 
-SONAR_APP_ANGULAR_URL = 'https://localhost:5000/manage/'
+SONAR_APP_API_URL = f'{SONAR_APP_BASE_URL}/api/'
+
+SONAR_APP_ANGULAR_URL = f'{SONAR_APP_BASE_URL}/manage/'
 """Link to angular integrated app root."""
 
 SONAR_APP_PRODUCTION_STATE = False
@@ -598,13 +600,18 @@ SONAR_APP_DOCUMENT_URN = {
     'organisations': {
         'unifr': {
             'types': ['coar:c_db06'],
-            'code': 6,
-            'namespace': 'urn:nbn:ch:rero'
+            'code': 6
         },
         'usi': {
             'types': ['coar:c_db06'],
-            'code': 1,
-            'namespace': 'urn:nbn:ch:rero'
+            'code': 1
         }
-    },
+    }
 }
+
+# DNB REST API config
+# The real configuration should be set during the deployment.
+SONAR_APP_URN_DNB_BASE_URL = ''
+SONAR_APP_URN_DNB_USERNAME = ''
+SONAR_APP_URN_DNB_PASSWORD = ''
+SONAR_APP_URN_DNB_BASE_URN = 'urn:nbn:ch:rero-'
