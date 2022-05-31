@@ -74,6 +74,7 @@ charset-normalizer = "<2.1.0"
 python-levenshtein = "<0.20.0"
 jsonschema = "<4.0.0"
 pydocstyle = ">=6.1.1,<6.2"
+requests-mock = "^1.9.3"
 
 [tool.poetry.dev-dependencies]
 Flask-Debugtoolbar = ">=0.10.1"

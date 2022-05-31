@@ -17,8 +17,7 @@
 
 """Test Dublic Core marshmallow schema."""
 
-
-
+import requests_mock
 from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 
 from sonar.modules.documents.api import DocumentRecord
@@ -28,36 +27,38 @@ from sonar.modules.utils import wait_empty_tasks
 
 def test_urn_create(db, bucket_location, organisation):
     """Test create URN identifier."""
-    record = DocumentRecord.create(
-        {
-            "title": [
-                {
-                    "type": "bf:Title",
-                    "mainTitle": [
-                        {
-                            "language": "eng",
-                            "value": "Title of the document"
-                        }
-                    ],
-                }
-            ],
-            "documentType": "coar:c_db06",
-            "organisation": [
-                {"$ref": "https://sonar.ch/api/organisations/org"}],
-            "identifiedBy": [
-                {"type": "bf:Local", "value": "10.1186"},
-            ],
-        },
-        dbcommit=True,
-        with_bucket=True,
-    )
-    record.commit()
-    db.session.commit()
-    record.reindex()
-    wait_empty_tasks(delay=3, verbose=True)
-    urn_code = DocumentRecord.get_urn_codes(record)[0]
-    assert urn_code == 'urn:nbn:ch:rero-006-17'
-    urn_pid = PersistentIdentifier.get('urn', urn_code)
-    assert urn_pid.status == PIDStatus.REGISTERED
-    urns = Urn.get_unregistered_urns()
-    assert 'urn:nbn:ch:rero-006-17' not in urns
+    with requests_mock.mock() as response:
+        response.post(requests_mock.ANY, status_code=201)
+        record = DocumentRecord.create(
+            {
+                "title": [
+                    {
+                        "type": "bf:Title",
+                        "mainTitle": [
+                            {
+                                "language": "eng",
+                                "value": "Title of the document"
+                            }
+                        ],
+                    }
+                ],
+                "documentType": "coar:c_db06",
+                "organisation": [
+                    {"$ref": "https://sonar.ch/api/organisations/org"}],
+                "identifiedBy": [
+                    {"type": "bf:Local", "value": "10.1186"},
+                ],
+            },
+            dbcommit=True,
+            with_bucket=True,
+        )
+        record.commit()
+        db.session.commit()
+        record.reindex()
+        wait_empty_tasks(delay=3, verbose=True)
+        urn_code = DocumentRecord.get_rero_urn_code(record)
+        assert urn_code == 'urn:nbn:ch:rero-006-17'
+        urn_pid = PersistentIdentifier.get('urn', urn_code)
+        assert urn_pid.status == PIDStatus.REGISTERED
+        urns = Urn.get_unregistered_urns()
+        assert 'urn:nbn:ch:rero-006-17' not in urns
