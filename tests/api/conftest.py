@@ -20,6 +20,7 @@
 from __future__ import absolute_import, print_function
 
 import pytest
+import requests_mock
 from invenio_app.factory import create_api
 
 from sonar.modules.documents.api import DocumentRecord
@@ -34,27 +35,32 @@ def create_app():
 @pytest.fixture()
 def minimal_thesis_document(db, bucket_location, organisation):
     """Return a minimal thesis document."""
-    record = DocumentRecord.create(
-        {
-            "title": [
-                {
-                    "type": "bf:Title",
-                    "mainTitle": [
-                        {"language": "eng", "value": "Title of the document"}
-                    ],
-                }
-            ],
-            "documentType": "coar:c_db06",
-            "organisation": [
-                {"$ref": "https://sonar.ch/api/organisations/org"}],
-            "identifiedBy": [
-                {"type": "bf:Local", "value": "10.1186"},
-            ],
-        },
-        dbcommit=True,
-        with_bucket=True,
-    )
-    record.commit()
-    db.session.commit()
-    record.reindex()
-    return record
+    with requests_mock.mock() as response:
+        response.post(requests_mock.ANY, status_code=201)
+        record = DocumentRecord.create(
+            {
+                "title": [
+                    {
+                        "type": "bf:Title",
+                        "mainTitle": [
+                            {
+                                "language": "eng",
+                                "value": "Title of the document"
+                            }
+                        ],
+                    }
+                ],
+                "documentType": "coar:c_db06",
+                "organisation": [
+                    {"$ref": "https://sonar.ch/api/organisations/org"}],
+                "identifiedBy": [
+                    {"type": "bf:Local", "value": "10.1186"},
+                ],
+            },
+            dbcommit=True,
+            with_bucket=True,
+        )
+        record.commit()
+        db.session.commit()
+        record.reindex()
+        return record

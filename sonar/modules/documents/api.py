@@ -131,17 +131,21 @@ class DocumentRecord(SonarRecord):
 
 
     @classmethod
-    def get_record_by_identifier(cls, identifiers):
+    def get_record_by_identifier(cls, identifiers, types=None):
         """Get a record by its identifier.
 
         :param list identifiers: List of identifiers
+        :param list types: List of types
         """
+        if types is None:
+            types = ['bf:Local', 'bf:Doi']
+
         search = DocumentSearch()
 
-        # Search only for DOI or local indeitifiers.
+        # Search identifiers.
         search_identifiers = [
             identifier for identifier in identifiers
-            if identifier['type'] in ['bf:Local', 'bf:Doi']
+            if identifier['type'] in types
         ]
 
         # No identifiers to analyze
@@ -166,8 +170,7 @@ class DocumentRecord(SonarRecord):
                   query=Q('bool', filter=identifier_filters)))
 
         search = search.query('bool', filter=filters).source(includes=['pid'])
-        results = list(search)
-        if results:
+        if results := list(search):
             return cls.get_record_by_pid(results[0]['pid'])
 
         return None
@@ -425,14 +428,17 @@ class DocumentRecord(SonarRecord):
 
 
     @classmethod
-    def get_urn_codes(cls, record):
-        """Get list of urn codes for document.
+    def get_rero_urn_code(cls, record):
+        """Get the rero urn code for document.
 
         :param record: dictionary of document.
-        :returns: list of urns codes.
+        :returns: urn code.
         """
-        return [identifier['value'] for identifier in record.get(
-            'identifiedBy', []) if identifier['type'] == 'bf:Urn']
+        base_urn = current_app.config.get('SONAR_APP_URN_DNB_BASE_URN')
+        for identifier in record.get('identifiedBy', []):
+            if identifier['type'] == 'bf:Urn' and \
+                    base_urn in identifier['value']:
+                return identifier['value']
 
 
 class DocumentIndexer(SonarIndexer):

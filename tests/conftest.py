@@ -186,12 +186,15 @@ def app_config(app_config):
     # Config
     app_config['SONAR_APP_SERVER_NAME'] = 'sonar.rero.ch'
     app_config['SONAR_APP_DEFAULT_ORGANISATION'] = 'global'
+    app_config['SONAR_APP_URN_DNB_BASE_URL'] = 'https://api.nbn-resolving.org/sandbox/v2'
+    app_config['SONAR_APP_URN_DNB_USERNAME'] = ''
+    app_config['SONAR_APP_URN_DNB_PASSWORD'] = ''
+    app_config['SONAR_APP_URN_DNB_BASE_URN'] = 'urn:nbn:ch:rero-'
     app_config['SONAR_APP_DOCUMENT_URN'] = {
         'organisations': {
             'org': {
                 'types': ['coar:c_db06'],
-                'code': 6,
-                'namespace': 'urn:nbn:ch:rero'
+                'code': 6
             }
         }
     }
