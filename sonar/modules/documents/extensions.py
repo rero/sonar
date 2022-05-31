@@ -80,7 +80,7 @@ class UrnDocumentExtension(RecordExtension):
         :param record: the invenio record instance to be processed.
         """
         # Generate URN codes for documents without URNs.
-        if not record.get_urn_codes(record):
+        if not record.get_rero_urn_code(record):
             Urn.create_urn(record)
 
     def post_create(self, record):

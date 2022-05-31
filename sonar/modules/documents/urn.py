@@ -64,7 +64,7 @@ class Urn:
         last_number = int(digit_sequence[-1])
         quotient = int(product_sum/last_number)
         quotient_string = str(quotient)
-        # read the check-digit from the quotient value string        
+        # read the check-digit from the quotient value string
         return quotient_string[-1]
 
     @classmethod
@@ -74,7 +74,8 @@ class Urn:
         :param pid: the pid of the urn identifier.
         :param config: organisation related configuration.
         """
-        new_urn = f'{config.get("namespace")}-{config.get("code"):03}-{pid}'
+        base_urn = current_app.config.get("SONAR_APP_URN_DNB_BASE_URN")
+        new_urn = f'{base_urn}{config.get("code"):03}-{pid}'
         return f'{new_urn}{cls._calculateCheckDigit(new_urn)}'
 
     @classmethod
@@ -102,7 +103,8 @@ class Urn:
                     )
                 except PIDAlreadyExists:
                     current_app.logger.error(
-                        f'generated urn already exist for document: {doc_pid}')
+                        'generated urn already exist for document: '
+                            + record.get('pid'))
 
     @classmethod
     def urn_query(cls, status=None):
@@ -164,14 +166,17 @@ class Urn:
         :param record: The document.
         """
         from sonar.modules.documents.api import DocumentRecord
-        for urn_code in DocumentRecord.get_urn_codes(record):
-            if reponse := cls.register_urn(urn=urn_code):
-                pid = PersistentIdentifier.query\
-                        .filter_by(pid_type=cls.urn_pid_type)\
-                        .filter_by(pid_value=urn_code).first()
-                if pid and pid.status == PIDStatus.NEW:
-                    pid.status = PIDStatus.REGISTERED
-                    db.session.commit()
+        from sonar.modules.documents.dnb import DnbUrnService
+
+        # TODO: verify the urn, it could be already registered
+        if DnbUrnService.register_document(record):
+            urn_code = DocumentRecord.get_rero_urn_code(record)
+            pid = PersistentIdentifier.query\
+                    .filter_by(pid_type=cls.urn_pid_type)\
+                    .filter_by(pid_value=urn_code).first()
+            if pid and pid.status == PIDStatus.NEW:
+                pid.status = PIDStatus.REGISTERED
+                db.session.commit()
 
     @classmethod
     def register_urn_pid(cls, urn=None):
@@ -179,9 +184,6 @@ class Urn:
 
         :param pid: The corresponding URN code to register.
         """
-        pid = PersistentIdentifier.query\
-                .filter_by(pid_type=cls.urn_pid_type)\
-                .filter_by(pid_value=urn).first()
-        if pid:
+        if pid := PersistentIdentifier.get(cls.urn_pid_type, urn):
             pid.status = PIDStatus.REGISTERED
             db.session.commit()
