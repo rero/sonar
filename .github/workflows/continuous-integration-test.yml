@@ -8,7 +8,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Install Libraries
       run: |
@@ -22,7 +22,7 @@ jobs:
         sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
 
     - name: Setup node
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: '12'
 
@@ -30,7 +30,7 @@ jobs:
       run: docker-compose up -d
 
     - name: Setup Python 3.9
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version: 3.9
 
