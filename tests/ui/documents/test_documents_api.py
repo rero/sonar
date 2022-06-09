@@ -17,6 +17,9 @@
 
 """Test documents API."""
 
+from flask import url_for
+from invenio_stats.tasks import aggregate_events, process_events
+
 from sonar.modules.documents.api import DocumentRecord
 
 
@@ -141,3 +144,43 @@ def test_is_open_access(document, embargo_date):
     document.files['test1.pdf']['access'] = 'coar:c_f1cf'
     document.files['test1.pdf']['embargo_date'] = 'WRONG'
     assert not document.is_open_access()
+
+
+def test_stats(app, client, document_with_file, es, db, event_queues):
+    """Test get existing stats for file downloads."""
+    app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
+
+    # read the record detailed view
+    assert client.get(
+        url_for('invenio_records_ui.doc',
+                view='global',
+                pid_value=document_with_file['pid'])).status_code == 200
+
+    # download the file
+    assert client.get(
+        url_for(
+            'invenio_records_ui.doc_files',
+            pid_value=document_with_file['pid'],
+            filename='test1.pdf')
+    ).status_code == 200
+
+    # download the thumbnail
+    assert client.get(
+        url_for(
+            'invenio_records_ui.doc_files',
+            pid_value=document_with_file['pid'],
+            filename='test1-pdf.jpg')
+    ).status_code == 200
+
+    # process the task
+    process_events(['file-download', 'record-view'])
+    es.indices.refresh(index='events-stats-file-download')
+    es.indices.refresh(index='events-stats-record-view')
+
+    aggregate_events(['file-download-agg', 'record-view-agg'])
+    es.indices.refresh(index='stats-file-download')
+    es.indices.refresh(index='stats-record-view')
+    assert document_with_file.statistics['record-view'] == 1
+    assert document_with_file.statistics['file-download']['test1.pdf'] == 1
+    # the thumbnail should not be in the statistics
+    assert not 'test1-pdf.jpg' in document_with_file.statistics['file-download']

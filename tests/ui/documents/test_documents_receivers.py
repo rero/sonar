@@ -77,7 +77,7 @@ def test_enrich_document_data(app, db, document, pdf_file):
     enrich_document_data(record=document, index='documents', json=json)
 
     assert len(json['fulltext']) == 1
-    assert json['fulltext'][0].startswith('PHYSICAL REVIEW B 99')
+    assert 'PHYSICAL REVIEW B 99' in json['fulltext'][0]
 
 
 def test_chunks():
