@@ -42,6 +42,8 @@ class ShibbolethAuthenticator(object):
         service_provider = app.config.get('SHIBBOLETH_SERVICE_PROVIDER')
         service_provider['x509cert'] = app.config.get(
             'SHIBBOLETH_SERVICE_PROVIDER_CERTIFICATE')
+        service_provider['x509certNew'] = app.config.get(
+            'SHIBBOLETH_SERVICE_PROVIDER_NEW_CERTIFICATE')
         service_provider['private_key'] = app.config.get(
             'SHIBBOLETH_SERVICE_PROVIDER_PRIVATE_KEY')
 

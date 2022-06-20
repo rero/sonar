@@ -57,6 +57,13 @@ def init_saml_auth(req, remote_app):
     with open(sp_config['private_key'], 'r') as content_file:
         private_key = content_file.read()
 
+    # Rollover
+    x509cert_new = None
+    if sp_config.get('x509certNew'):
+        with open(sp_config['x509certNew'], 'r') as content_file:
+            x509cert_new = content_file.read()
+
+
     with open(
             './data/idp_certificates/{remote_app}.crt'.format(
                 remote_app=remote_app), 'r') as content_file:
@@ -88,8 +95,10 @@ def init_saml_auth(req, remote_app):
             'x509cert': idp_cert
         }
     }
-    auth = OneLogin_Saml2_Auth(req, settings)
-    return auth
+    if x509cert_new:
+        settings['sp']['x509certNew'] = x509cert_new
+
+    return OneLogin_Saml2_Auth(req, settings)
 
 
 def get_identity_provider_configuration(remote_app):

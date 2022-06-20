@@ -31,6 +31,9 @@
 SHIBBOLETH_SERVICE_PROVIDER_CERTIFICATE = './docker/nginx/sp.pem'
 """Path to certificate."""
 
+# SHIBBOLETH_SERVICE_PROVIDER_NEW_CERTIFICATE = './docker/nginx/sp.pem'
+"""Path to new certificate."""
+
 SHIBBOLETH_SERVICE_PROVIDER_PRIVATE_KEY = './docker/nginx/sp.key'
 """Path to certificate private key."""
 

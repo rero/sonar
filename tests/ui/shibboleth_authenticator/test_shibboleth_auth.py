@@ -53,6 +53,19 @@ def test_init_saml_auth(app, request):
         private_key='./docker/nginx/sp.key'))
     assert isinstance(auth.init_saml_auth(request, 'idp'), OneLogin_Saml2_Auth)
 
+    # not yet thge new service provider certificate
+    assert not auth.init_saml_auth(request, 'idp').get_settings().get_sp_cert_new()
+
+    # add the new certificate for service provider
+    app.config.update(SHIBBOLETH_SERVICE_PROVIDER=dict(
+        strict=True,
+        entity_id='entity_id',
+        x509cert='./docker/nginx/sp.pem',
+        private_key='./docker/nginx/sp.key',
+        x509certNew='./docker/nginx/sp.pem'
+    ))
+    assert auth.init_saml_auth(request, 'idp').get_settings().get_sp_cert_new()
+
     # Init failed caused by certificate lack
     app.config.update(SHIBBOLETH_SERVICE_PROVIDER=dict(
         debug=True,
