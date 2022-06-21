@@ -29,6 +29,16 @@ def urn():
     """URN specific commands."""
 
 
+@urn.command('urn-for-loaded-records')
+@with_appcontext
+def urn_for_loaded_records():
+    """Generate and register urns for loaded records."""
+    for idx, document in enumerate(Urn.get_documents_to_generate_urns(), 1):
+        click.secho(
+            f'\t{idx}: generate urn code for pid: {document.pid}', fg='green')
+        Urn.create_urn(document)
+
+
 @urn.command('register-urn-pids')
 @with_appcontext
 def register_urn_identifiers():
@@ -38,7 +48,7 @@ def register_urn_identifiers():
         click.secho(f'Found  {count} urns to register', fg='yellow')
         registered = 0
         for urn_code in urn_codes:
-            if Urn.register_urn(urn=urn_code):
+            if Urn.register_urn_pid(urn=urn_code):
                 click.secho(
                     f'\turn code: {urn_code} successfully registered', fg='green')
                 registered += 1
