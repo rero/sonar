@@ -19,9 +19,9 @@
 
 SONAR_APP_BASE_URL = 'https://localhost:5000'
 
-SONAR_APP_API_URL = f'{SONAR_APP_BASE_URL}/api/'
+SONAR_APP_API_URL = 'https://localhost:5000/api/'
 
-SONAR_APP_ANGULAR_URL = f'{SONAR_APP_BASE_URL}/manage/'
+SONAR_APP_ANGULAR_URL = 'https://localhost:5000/manage/'
 """Link to angular integrated app root."""
 
 SONAR_APP_LANGUAGES_MAP = {

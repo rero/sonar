@@ -149,17 +149,6 @@ class Urn:
         return [str(uuid.pid_value) for uuid in query.all()]
 
     @classmethod
-    def register_urn(cls, urn=None):
-        """Register a urn at the DNB library.
-
-        :param pid: The URN  to register.
-        :returns: True if urn is registered, otherwise False.
-        """
-        # TODO: write the code to register urns at the DNB library.
-        return True
-
-
-    @classmethod
     def register_urn_code_from_document(cls, record):
         """Register the urn pid for a given document.
 
@@ -187,3 +176,28 @@ class Urn:
         if pid := PersistentIdentifier.get(cls.urn_pid_type, urn):
             pid.status = PIDStatus.REGISTERED
             db.session.commit()
+
+
+    @classmethod
+    def get_documents_to_generate_urns(cls):
+        """Get documents that need a URN code..
+
+        :returns: generator of document records.
+        """
+        from sonar.modules.documents.api import DocumentRecord, DocumentSearch
+        urn_config = current_app.config.get("SONAR_APP_DOCUMENT_URN")
+        configs = urn_config.get('organisations', {})
+        pids = []
+        for org_pid in configs.items():
+            config = configs.get(org_pid)
+            doc_types = config.get('types')
+            query = DocumentSearch()\
+                .filter('terms', documentType=doc_types)\
+                .filter('exists', field='identifiedBy')\
+                .filter('bool', must_not=[
+                    Q('term', identifiedBy__type='bf:Urn')])\
+                .source(['pid'])
+            pids.extend(hit.pid for hit in query.scan())
+
+        for pid in pids:
+            yield DocumentRecord.get_record_by_pid(pid)
