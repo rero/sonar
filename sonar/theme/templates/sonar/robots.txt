@@ -1,0 +1,9 @@
+{%- if not state -%}
+User-agent: *
+Disallow: /
+{%- else -%}
+User-agent: *
+Allow: /
+
+Sitemap: {{ sitemap }}
+{% endif %}

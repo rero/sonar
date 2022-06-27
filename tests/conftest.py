@@ -142,6 +142,10 @@ def app_config(app_config):
     app_config['CELERY_BROKER_URL'] = 'memory://'
     app_config['CELERY_TASK_ALWAYS_EAGER'] = True
     app_config['CELERY_TASK_EAGER_PROPAGATES'] = True
+
+    # Config
+    app_config['SONAR_APP_SERVER_NAME'] = 'sonar.rero.ch'
+    app_config['SONAR_APP_DEFAULT_ORGANISATION'] = 'global'
     return app_config
 
 
@@ -472,9 +476,8 @@ def make_document(db, document_json, make_organisation, pdf_file, embargo_date):
         if organisation:
             make_organisation(organisation)
             document_json['organisation'] = [{
-                '$ref':
-                'https://sonar.ch/api/organisations/org'
-            }]
+                '$ref': 'https://sonar.ch/api/organisations/org'}]
+
 
         if pid:
             document_json['pid'] = pid

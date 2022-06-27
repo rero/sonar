@@ -183,6 +183,11 @@ CELERY_BEAT_SCHEDULE = {
     'documents-stats': {
         'task': ('sonar.modules.stats.tasks.collect_stats'),
         'schedule': crontab(minute=0, hour=1),  # Every day at 01:00 UTC,
+    },
+    # Sitemap
+    'sitemap': {
+        'task': 'sonar.modules.sitemap.tasks.sitemap_generate_task',
+        'schedule': crontab(minute=0, hour=2),  # Every day at 02:00 UTC,
     }
 }
 CELERY_BROKER_HEARTBEAT = 0

@@ -54,6 +54,9 @@
       "isDedicated": {
         "type": "boolean"
       },
+      "serverName": {
+        "type": "keyword"
+      },
       "allowedIps": {
         "type": "text"
       },
