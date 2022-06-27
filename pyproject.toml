@@ -89,6 +89,7 @@ resources = "sonar.resources.cli:resources"
 imports = "sonar.modules.cli.imports:imports"
 fixtures = "sonar.modules.cli.fixtures:fixtures"
 utils = "sonar.modules.cli.utils:utils"
+sitemap = "sonar.modules.sitemap.cli.sitemap:sitemap"
 
 [tool.poetry.plugins."invenio_base.apps"]
 sonar = "sonar.ext:Sonar"
@@ -111,6 +112,7 @@ shibboleth_authenticator = "sonar.modules.shibboleth_authenticator.views.client:
 theme = "sonar.theme.views:blueprint"
 validation = "sonar.modules.validation.views:blueprint"
 users = "sonar.modules.users.views:blueprint"
+sitemap = "sonar.modules.sitemap.views:blueprint"
 
 [tool.poetry.plugins."invenio_base.api_blueprints"]
 deposits = "sonar.modules.deposits.rest:api_blueprint"
@@ -189,6 +191,7 @@ subdivisions = "sonar.modules.subdivisions.jsonresolvers"
 [tool.poetry.plugins."invenio_celery.tasks"]
 documents = "sonar.modules.documents.tasks"
 stats = "sonar.modules.stats.tasks"
+sitemap = "sonar.modules.sitemap.tasks"
 
 [tool.poetry.plugins."invenio_admin.views"]
 stats = "sonar.modules.stats.admin:stats_adminview"

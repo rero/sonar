@@ -146,6 +146,29 @@
         "hideExpression": "!field.model.isShared"
       }
     },
+    "serverName": {
+      "title": "Server name (without http)",
+      "description": "Organisation server name for dedicated.",
+      "type": "string",
+      "form": {
+        "hideExpression": "!field.model.isDedicated",
+        "expressionProperties": {
+          "templateOptions.required": "field.model.isDedicated"
+        },
+        "validation": {
+          "validators": {
+            "uniqueValueKeysInObject": {
+              "keys": [
+                "serverName"
+              ]
+            }
+          },
+          "messages": {
+            "uniqueValueKeysInObjectMessage": "This domain name must be unique."
+          }
+        }
+      }
+    },
     "allowedIps": {
       "title": "Allowed IP addresses",
       "description": "List of IP addresses or ranges that allow access to private files (access: embargoed or restricted), which are accessible only within the organisation. Note: the bibliographic record (metadata) is always public. Enter one rule per line.",
@@ -441,6 +464,7 @@
     "footer",
     "isShared",
     "isDedicated",
+    "serverName",
     "allowedIps",
     "platformName",
     "documentsCustomField1",

@@ -19,6 +19,8 @@
 
 from __future__ import absolute_import, print_function
 
+import os
+
 import jinja2
 import markdown
 from flask import current_app, render_template, request, url_for
@@ -116,6 +118,12 @@ class Sonar():
         for k in dir(config_sonar):
             if k.startswith('SONAR_APP_'):
                 app.config.setdefault(k, getattr(config_sonar, k))
+
+        # Set default if not exists.
+        if not app.config.get('SONAR_APP_SITEMAP_FOLDER_PATH'):
+            app.config.setdefault(
+                'SONAR_APP_SITEMAP_FOLDER_PATH',
+                os.path.join(app.instance_path, 'sitemap'))
 
     def init_views(self, app):
         """Initialize the main flask views."""

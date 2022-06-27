@@ -26,6 +26,7 @@ from __future__ import absolute_import, print_function
 
 import re
 from datetime import datetime
+from urllib.parse import urlparse
 
 import dateutil.parser
 import pytz
@@ -44,6 +45,7 @@ from sonar.modules.collections.permissions import \
 from sonar.modules.deposits.permissions import DepositPermission
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.permissions import DocumentPermission
+from sonar.modules.organisations.api import OrganisationSearch
 from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import can_access_manage_view
 from sonar.modules.subdivisions.permissions import \
@@ -63,6 +65,34 @@ def init_view():
     """Do some stuff before rendering any view."""
     current_menu.submenu('settings').submenu('security').hide()
     current_menu.submenu('settings').submenu('admin').hide()
+
+
+@blueprint.route('/robots.txt')
+def robots_txt():
+    """Generate dynamically robots.txt."""
+    template = 'sonar/robots.txt'
+    if not current_app.config.get('SONAR_APP_PRODUCTION_STATE'):
+        # If we are not in production status, we disable all robots
+        return current_app.response_class(
+            response=render_template(template, state=False),
+            status=200,
+            mimetype='text/plain')
+    url_data = urlparse(request.url)
+    scheme = url_data.scheme
+    server_name = url_data.netloc.split(':')[0]
+    if org_pid := OrganisationSearch() \
+        .get_organisation_pid_by_server_name(server_name):
+        sitemap = f'{scheme}://{server_name}/{org_pid}/sitemap.xml'
+    else:
+        view = current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION')
+        sitemap = f'{scheme}://{url_data.netloc}/{view}/sitemap.xml'
+    return current_app.response_class(
+        response=render_template(
+            template,
+            state=current_app.config.get('SONAR_APP_PRODUCTION_STATE'),
+            sitemap=sitemap),
+        status=200,
+        mimetype='text/plain')
 
 
 @blueprint.route('/users/profile')

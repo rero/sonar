@@ -35,6 +35,22 @@ def test_error(client):
         assert client.get(url_for('sonar.error'))
 
 
+def test_robots_txt(app):
+    """Test le robots.txt file."""
+    with app.test_client() as client:
+        url = url_for('sonar.robots_txt')
+        app.config.update(SONAR_APP_PRODUCTION_STATE=False)
+        res = client.get(url)
+        assert res.status_code == 200
+        assert b'User-agent: *\nDisallow: /' in res.data
+
+        app.config.update(SONAR_APP_PRODUCTION_STATE=True)
+        res = client.get(url)
+        assert res.status_code == 200
+        assert b'User-agent: *\nAllow: /\n\n'\
+            b'Sitemap: http://localhost/global/sitemap.xml' in res.data
+
+
 def test_admin_record_page(app, admin, user_without_role):
     """Test admin page redirection to defaults."""
     with app.test_client() as client:

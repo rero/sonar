@@ -84,6 +84,23 @@ class OrganisationSearch(SonarSearch):
                                ['pid', 'name', 'isShared',
                                 'isDedicated']).execute().hits
 
+    def get_organisation_pid_by_server_name(self, server_name):
+        """Get organisation by server_name.
+
+        :param server_name: server name for the dedicated organisation.
+        :returns: pid of the dedicated organisation.
+        """
+        if hits := self.filter('term', serverName=server_name) \
+            .source(['pid']).execute().hits:
+            return hits[0].pid
+
+    def get_dedicated_list(self):
+        """Get the list of dedicated organisations.
+
+        :returns: Iterator of dedicated organisations.
+        """
+        return self.filter('term', isDedicated=True).execute().hits
+
 
 class OrganisationRecord(SonarRecord):
     """Organisation record class."""

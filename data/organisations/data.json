@@ -51,6 +51,7 @@
     ],
     "isShared": true,
     "isDedicated": true,
+    "serverName": "fredi.hepvs.ch",
     "platformName": "FREDI",
     "files": [
       {
@@ -64,6 +65,7 @@
     "name": "Haute École Pédagogique BEJUNE",
     "isShared": true,
     "isDedicated": true,
+    "serverName": "roar.hep-bejune.ch",
     "platformName": "# ROAR\n#### Répertoire ouvert et archives BEJUNE",
     "files": [
       {
@@ -113,6 +115,7 @@
     ],
     "isShared": true,
     "isDedicated": true,
+    "serverName": "folia.unifr.ch",
     "platformName": "# FOLIA\n#### Fribourg Open Library and Archive",
     "files": [
       {
