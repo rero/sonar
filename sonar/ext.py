@@ -48,6 +48,7 @@ from sonar.signals import file_download_proxy
 
 from . import config_sonar
 from .route_converters import OrganisationCodeConverter
+from .version import __version__
 
 
 def utility_processor():
@@ -79,6 +80,7 @@ class Sonar():
             sonar_loader = jinja2.ChoiceLoader(
                 [jinja2.PackageLoader('sonar', 'templates'), app.jinja_loader])
             app.jinja_loader = sonar_loader
+            app.jinja_env.globals['version'] = __version__
 
     def init_app(self, app):
         """Flask application initialization."""

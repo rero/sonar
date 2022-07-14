@@ -36,15 +36,11 @@
           </div>
           <div class="d-none d-lg-block mx-3">|</div>
           <div>
-            <a href="https://about.sonar.ch/iraas/" target="_blank" rel="noopener">{{ _('IR hosting service') }}</a>
+            <a href="https://www.rero.ch/produits/sonar" target="_blank" rel="noopener">{{ _('About SONAR') }}</a>
           </div>
           <div class="d-none d-lg-block mx-3">|</div>
           <div>
-            <a href="https://about.sonar.ch" target="_blank" rel="noopener">{{ _('About SONAR') }}</a>
-          </div>
-          <div class="d-none d-lg-block mx-3">|</div>
-          <div>
-            <a href="https://about.sonar.ch/contact/" target="_blank" rel="noopener">{{ _('Contact') }}</a>
+            <a href="https://www.rero.ch/contact" target="_blank" rel="noopener">{{ _('Contact') }}</a>
           </div>
         </div>
       </div>
@@ -54,8 +50,9 @@
       <div class="col text-center p-0">
         <div class="d-lg-flex flex-row">
           <div class="col-lg text-center text-lg-right">
-            {% set link = 'https://www.rero.ch/de/products/sonar' if current_i18n.locale.language == 'de' else 'https://www.rero.ch/produits/sonar' %}
-            {% trans %}Powered by <a href="{{ link }}" target="_blank" rel="noopener">SONAR</a>{% endtrans %}
+            {% trans %}Powered by <a href="https://www.rero.ch/produits/sonar" target="_blank" rel="noopener">SONAR</a>{% endtrans %} |
+            {{ _('Version') }} <a href="https://github.com/rero/sonar/releases/tag/v{{ version }}">v{{ version }}</a> |
+            <a href="https://www.rero.ch/legal/privacy/declaration_protection_donnees_SONAR.pdf">{{ _('Privacy policy') }}</a>
           </div>
         </div>
       </div>
