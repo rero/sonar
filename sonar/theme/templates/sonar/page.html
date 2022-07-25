@@ -141,7 +141,7 @@ along with this program. If not, see
     {% include 'sonar/partial/organisation.html' %}
     {%- endblock header %}
   </header>
-
+  {%- block page_body %}
   <div class="container my-5">
     {%- block breadcrumbs %}
     {%- include "sonar/breadcrumbs.html" %}
@@ -154,6 +154,7 @@ along with this program. If not, see
 
     {%- block body %}{%- endblock body %}
   </div>
+  {%- endblock page_body %}
 
   {% include 'sonar/footer.html' %}
   {%- endblock body_inner %}

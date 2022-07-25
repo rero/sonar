@@ -63,7 +63,9 @@ jedi = "<0.18.0"
 ipython_genutils = "^0.2.0"
 Flask = "<2.0.0"
 SQLAlchemy = "<1.4.0"
-flask-wiki = {git = "https://github.com/rero/flask-wiki.git", rev = "v0.1.0"}
+flask-wiki = {git = "https://github.com/rero/flask-wiki.git", rev = "v0.2.1"}
+sentry-sdk = "<1.6.1"
+pytest-invenio = ">=1.4.0,<1.4.12"
 
 [tool.poetry.dev-dependencies]
 Flask-Debugtoolbar = ">=0.10.1"
