@@ -771,6 +771,9 @@ OAUTHCLIENT_REMOTE_APPS['orcid']['params'].update(
 
 OAUTHCLIENT_SIGNUP_TEMPLATE = 'sonar/oauth/signup.html'
 
+USERPROFILES_EXTEND_SECURITY_FORMS = True
+"""Extend account registration form with user profiles fields."""
+
 # Must be set as environment variable
 ORCID_APP_CREDENTIALS = dict(
     consumer_key=os.environ.get('ORCID_CONSUMER_KEY', ''),
