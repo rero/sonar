@@ -27,15 +27,16 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde@2.16.1/dist/easymde.min.css">
 {%- endblock %}
 
-
-{%- block body %}
-
-{% block navigation %}
-{%- include "wiki/navigation.html" %}
-{%- endblock navigation %}
-
-{% block content %} {% endblock %}
-{%- endblock body %}
+{%- block page_body %}
+  <div class="container-fluid">
+    {%- block body %}
+      {% block navigation %}
+        {%- include "wiki/navigation.html" %}
+      {%- endblock navigation %}
+      {% block content %} {% endblock %}
+    {%- endblock body %}
+  </div>
+{%- endblock page_body %}
 
 {%- block javascript %}
 {{ super() }}
