@@ -1,6 +1,6 @@
 {# -*- coding: utf-8 -*-
 Swiss Open Access Repository
-Copyright (C) 2021 RERO
+Copyright (C) 2021-2022 RERO
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
@@ -96,7 +96,7 @@ along with this program. If not, see
         <ul class="list-unstyled m-0">
           {% for contribution in contributors %}
           <li class="creator {{ 'd-none' if loop.index > 3 }}">
-            {{ contributors_format(contribution) }}
+            {{ contributors_format(contribution, view_code) }}
           </li>
           {% endfor %}
         </ul>
@@ -278,7 +278,7 @@ along with this program. If not, see
           <ul class="list-unstyled mb-0">
             {% for contribution in meettings %}
             <li>
-              {{ contributors_format(contribution) }}
+              {{ contributors_format(contribution, view_code) }}
             </li>
             {% endfor %}
           </ul>
