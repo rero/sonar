@@ -25,7 +25,8 @@
         "fields": {
           "suggest": {
             "type": "completion",
-            "analyzer": "default"
+            "analyzer": "default",
+            "max_input_length": 100
           },
           "raw": {
             "type": "keyword",

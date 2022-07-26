@@ -416,7 +416,8 @@
                   },
                   "suggest": {
                     "type": "completion",
-                    "analyzer": "default"
+                    "analyzer": "default",
+                    "max_input_length": 100
                   }
                 }
               },
@@ -583,7 +584,8 @@
           },
           "suggest": {
             "type": "completion",
-            "analyzer": "default"
+            "analyzer": "default",
+            "max_input_length": 100
           }
         }
       },
@@ -595,7 +597,8 @@
           },
           "suggest": {
             "type": "completion",
-            "analyzer": "default"
+            "analyzer": "default",
+            "max_input_length": 100
           }
         }
       },
@@ -607,7 +610,8 @@
           },
           "suggest": {
             "type": "completion",
-            "analyzer": "default"
+            "analyzer": "default",
+            "max_input_length": 100
           }
         }
       },
