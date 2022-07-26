@@ -1,6 +1,6 @@
 {# -*- coding: utf-8 -*-
   Swiss Open Access Repository
-  Copyright (C) 2021 RERO
+  Copyright (C) 2021-2022 RERO
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU Affero General Public License as published by
@@ -101,19 +101,28 @@
 {% endif %}
 {% endmacro %}
 
-{% macro contributors_format(contribution) %}
-{{ contribution | contribution_text }}
+{% macro contributors_format(contribution, view_code) %}
+<!-- contribution name -->
+<a href="{{ url_for('documents.search', view=view_code,
+  q='contribution.agent.preferred_name:' + contribution.agent.preferred_name) }}"
+>{{ contribution.agent.preferred_name }}</a>
+<!-- meeting -->
+{% if contribution.agent.type == 'bf:Meeting' %}
+{% set meeting_text = contribution | meeting_text %}
+{% if meeting_text %}({{ meeting_text }}){% endif %}
+{% endif %}
+<!-- role for person -->
+{% if contribution.agent.type == 'bf:Person' and contribution.role and contribution.role[0] != 'cre' %}
+({{ _('contribution_role_' + contribution.role[0]) | lower }})
+{% endif %}
 {% if contribution.agent.get('identifiedBy', {}).get('value') %}
 {{ identifier_link(contribution.agent.identifiedBy, 'agent')}}
 {% endif %}
-
-{% if contribution.get('affiliation') %}
-{% if contribution.get('controlledAffiliation') %}
-<small class="affiliation-tooltip" data-placement="top"
-  title="{{ contribution.controlledAffiliation | join(' ; ') }}"><i class="text-muted">{{
-    contribution.affiliation }}</i></small>
+<!-- affiliation -->
+{% if contribution.get('affiliation') and contribution.get('controlledAffiliation') %}
+<small class="affiliation-tooltip" data-placement="top" title="{{ contribution.controlledAffiliation | join(' ; ') }}">
+  <i class="text-muted">{{ contribution.affiliation }}</i></small>
 {% else %}
 <small><i class="text-muted">{{ contribution.affiliation }}</i></small>
-{% endif %}
 {% endif %}
 {% endmacro %}

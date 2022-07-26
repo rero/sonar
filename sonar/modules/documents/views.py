@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # Swiss Open Access Repository
-# Copyright (C) 2021 RERO
+# Copyright (C) 2021-2022 RERO
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -308,18 +308,8 @@ def contribution_text(contribution):
 
     # Meeting
     if contribution['agent']['type'] == 'bf:Meeting':
-        meeting = []
-        if contribution['agent'].get('number'):
-            meeting.append(contribution['agent']['number'])
-
-        if contribution['agent'].get('date'):
-            meeting.append(contribution['agent']['date'])
-
-        if contribution['agent'].get('place'):
-            meeting.append(contribution['agent']['place'])
-
-        if meeting:
-            data.append('({meeting})'.format(meeting=' : '.join(meeting)))
+        if meeting := meeting_text(contribution):
+            data.append(f'({meeting})')
 
     # Person
     if contribution['agent'][
@@ -328,6 +318,19 @@ def contribution_text(contribution):
             role=contribution['role'][0])).lower()))
 
     return ' '.join(data)
+
+
+@blueprint.app_template_filter()
+def meeting_text(contribution):
+    """Format the meeting field for display.
+
+    :param contribution: Dict representing the contribution.
+    :returns: Formatted text.
+    """
+    contrib = contribution['agent']
+    return ' : '.join([
+        contrib[key] for key in ['number', 'date', 'place']
+        if key in contrib.keys()])
 
 
 @blueprint.app_template_filter()
@@ -359,11 +362,9 @@ def get_language_from_bibliographic_code(language_code):
     languages_map = current_app.config.get('SONAR_APP_LANGUAGES_MAP')
 
     if language_code not in languages_map:
-        raise Exception('Language code not found for "{language_code}"'.format(
-            language_code=language_code))
+        raise Exception(f'Language code not found for "{language_code}"')
     code = languages_map.get(language_code)
-    if not code:
-        return '';
+    return code or '';
 
     return code
 
