@@ -572,16 +572,10 @@
               "title": "Volume",
               "type": "string",
               "minLength": 1,
-              "pattern": "^[0-9]+$",
               "form": {
                 "hideExpression": "field.parent.parent.model && !['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)",
                 "templateOptions": {
-                  "placeholder": "Example: 1"
-                },
-                "validation": {
-                  "messages": {
-                    "patternMessage": "Please enter a valid number."
-                  }
+                  "placeholder": "Example: 1, 4-5, …"
                 }
               }
             },
@@ -589,16 +583,10 @@
               "title": "Number",
               "type": "string",
               "minLength": 1,
-              "pattern": "^[0-9]+$",
               "form": {
                 "hideExpression": "field.parent.parent.model && !['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)",
                 "templateOptions": {
-                  "placeholder": "Example: 10"
-                },
-                "validation": {
-                  "messages": {
-                    "patternMessage": "Please enter a valid number."
-                  }
+                  "placeholder": "Example: 10, 22-24, …"
                 }
               }
             },
@@ -606,15 +594,9 @@
               "title": "Pages",
               "type": "string",
               "minLength": 1,
-              "pattern": "^[0-9]+(-[0-9]+)?$",
               "form": {
                 "templateOptions": {
                   "placeholder": "Examples: 135, 5-27, …"
-                },
-                "validation": {
-                  "messages": {
-                    "patternMessage": "Please enter a valid pages range, example: 135, 5-27."
-                  }
                 }
               }
             },
