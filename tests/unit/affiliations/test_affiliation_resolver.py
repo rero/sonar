@@ -51,11 +51,11 @@ def test_resolve():
 
     test_string = (
         'Institute for Research in Biomedicine (IRB), '
-        'Faculty of Biomedical Sciences, Università della Svizzera italiana, '
+        'Faculty of Biomedical Sciences, USI, '
         'Switzerland - Graduate School for Cellular and Biomedical Sciences, '
         'University of Bern, 3012 Bern, Switzerland')
     assert affiliation_resolver.resolve(test_string) == [
-        'Uni of Bern and Hospital', 'Uni of Italian Switzerland'
+        'Uni of Bern and Hospital', 'Università della Svizzera italiana'
     ]
 
     test_string = (
