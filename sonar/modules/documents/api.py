@@ -17,12 +17,16 @@
 
 """Document Api."""
 
+
+import contextlib
 from datetime import datetime
 from functools import partial
 from io import BytesIO
 
+from elasticsearch.exceptions import NotFoundError
 from elasticsearch_dsl import Q
 from flask import current_app, request
+from invenio_stats import current_stats
 
 from sonar.affiliations import AffiliationResolver
 from sonar.modules.documents.minters import id_minter
@@ -379,6 +383,35 @@ class DocumentRecord(SonarRecord):
             return True
 
         return False
+
+    @property
+    def statistics(self):
+        """Collect the statistics.
+
+        Collect the number of view for a given record (detailed view)
+        and the number of download for the related files.
+
+        :returns: the collected statistics
+        :rtype: dict
+        """
+        res = {}
+        query_cfg = current_stats.queries['record-view']
+        query  = query_cfg.cls(name='record-view', **query_cfg.params)
+        try:
+            res['record-view'] = int(query.run(pid_type='doc', pid_value=self['pid'])['unique_count'])
+        except NotFoundError:
+            res['record-view'] = 0
+        query_cfg = current_stats.queries['file-download']
+        query  = query_cfg.cls(name='file-download', **query_cfg.params)
+        res['file-download'] = {f['key']: 0 for f in self.get_files_list()}
+        with contextlib.suppress(NotFoundError):
+            res_query = query.run(bucket_id=self.bucket_id)
+            file_keys = res['file-download'].keys()
+            for b in res_query['buckets']:
+                if b.get('key') in file_keys:
+                    res['file-download'][b['key']] = int(b['unique_count'])
+        return res
+
 
     def get_ark_resolver_url(self):
         """Get the ark resolver url.

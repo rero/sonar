@@ -38,6 +38,10 @@ along with this program. If not, see
 
 {% set files = record.get_files_list() %}
 
+{% set first_file = files | first %}
+
+{% set stats = record.statistics %}
+
 <section class="mt-3">
   <div class="mb-3">
     <a href="javascript: history.back(-1)">
@@ -48,7 +52,8 @@ along with this program. If not, see
     <div class="col-lg-3 text-center">
       {% if files and files | length > 0 %}
       <div class="mb-4">
-        {{ thumbnail(record, files | first) }}
+        {{ thumbnail(record, first_file,
+        stats['file-download'][first_file['key']] or 0) }}
       </div>
       {% else %}
       <img src="{{ url_for('static', filename='images/no-image.png') }}" alt="{{ title }}" class="img-fluid">
@@ -432,12 +437,27 @@ along with this program. If not, see
     {% for file in files %}
     {% if loop.index > 1 %}
     <div class="col-lg-2 mb-5">
-      {{ thumbnail(record, file) }}
+      {{ thumbnail(record, file, stats['file-download'][file['key']] or 0) }}
     </div>
     {% endif %}
     {% endfor %}
   </div>
   {% endif %}
+
+  <!-- Statistics -->
+  <h5 id="stats" class="mt-5">{{ _('Statistics') }}</h5>
+  <hr class="mb-4 mt-0" />
+  <div class="row">
+    <div class="col">
+      <strong>{{ _('Document views') }}:</strong> {{ stats['record-view'] }}
+      <strong class="mt-2 d-block">{{ _('File downloads') }}:</strong>
+      <ul>
+        {% for key, value in stats['file-download'].items() %}
+        <li>{{ key }}: {{ value }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
 
   <!-- Preview modal -->
   <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -484,6 +504,7 @@ along with this program. If not, see
     });
 
     $('.affiliation-tooltip').tooltip();
+    $(".sonar-tooltip").tooltip();
 
     // Show all contributors
     $('#show-more-contributors').click(function (event) {

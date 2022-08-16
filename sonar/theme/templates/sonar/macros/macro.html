@@ -15,7 +15,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #}
 
-{% macro thumbnail(record, file) %}
+{% macro thumbnail(record, file, n_download) %}
 <div class="text-center">
   {% if file.links.external %}
   {{ thumbnail_image(file.thumbnail, file.label, file.links.external, '_blank') }}
@@ -49,6 +49,9 @@
       <i class="fa fa-download mx-1"></i>
     </a>
     {% endif %}
+    <a href="{{ request.url }}#stats" class="sonar-tooltip" data-toggle="tooltip" data-placement="top" title="Download: {{ n_download }}">
+      <i class="fa fa-bar-chart mx-1"></i>
+    </a>
   </div>
 </div>
 {% endmacro %}
