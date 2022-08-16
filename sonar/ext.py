@@ -40,6 +40,7 @@ from sonar.modules.users.api import current_user_record
 from sonar.modules.users.signals import add_full_name, user_registered_handler
 from sonar.modules.utils import get_language_value, get_specific_theme, \
     get_switch_aai_providers, get_view_code
+from sonar.modules.validation.views import blueprint as validationBlueprint
 from sonar.resources.projects.resource import ProjectsRecordResource, \
     ProjectsRecordResourceConfig
 from sonar.resources.projects.service import ProjectsRecordService, \
@@ -248,6 +249,9 @@ class SonarAPI(Sonar):
         # Register REST endpoint for projects resource.
         app.register_blueprint(
             self.resources['projects'].as_blueprint())
+
+        # Register REST endpoint for validation module.
+        app.register_blueprint(validationBlueprint)
 
         @app.before_request
         def set_accept_mimetype():
