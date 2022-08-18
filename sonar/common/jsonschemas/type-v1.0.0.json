@@ -9,6 +9,8 @@
     "coar:c_18cp",
     "coar:c_6670",
     "coar:c_18co",
+    "coar:R60J-J5BD",
+    "coar:c_ba08",
     "coar:c_f744",
     "coar:c_ddb1",
     "coar:c_3e5a",
@@ -46,7 +48,7 @@
     "coar:c_bdcc",
     "habilitation_thesis",
     "advanced_studies_thesis",
-    "other",
+    "other_thesis",
     "coar:c_8042",
     "coar:c_1843"
   ],
@@ -92,6 +94,10 @@
           {
             "label": "document_type_coar:c_f744",
             "value": "coar:c_f744"
+          },
+          {
+            "label": "document_type_coar:R60J-J5BD",
+            "value": "coar:R60J-J5BD"
           }
         ]
       },
@@ -121,6 +127,10 @@
             "value": "coar:c_dcae04bc"
           }
         ]
+      },
+      {
+        "label": "document_type_coar:c_ba08",
+        "value": "coar:c_ba08"
       },
       {
         "label": "document_type_coar:c_8544",
@@ -253,8 +263,8 @@
             "value": "advanced_studies_thesis"
           },
           {
-            "label": "document_type_other",
-            "value": "other"
+            "label": "document_type_other_thesis",
+            "value": "other_thesis"
           }
         ]
       },

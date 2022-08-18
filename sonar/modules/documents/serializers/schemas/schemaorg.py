@@ -69,9 +69,11 @@ TYPE_MAPPING = {
     'coar:c_bdcc': 'Thesis',
     'habilitation_thesis': 'Thesis',
     'advanced_studies_thesis': 'Thesis',
-    'other': 'Thesis',
+    'other_thesis': 'Thesis',
     'coar:c_8042': 'CreativeWork',
-    'coar:c_1843': 'CreativeWork'
+    'coar:c_1843': 'CreativeWork',
+    'coar:R60J-J5BD': 'CreativeWork',
+    'coar:c_ba08': 'Review'
 }
 
 
