@@ -680,7 +680,7 @@
             }
           },
           "form": {
-            "hideExpression": "field.parent.model && !['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_3e5a', 'coar:c_beb9', 'coar:c_6501', 'coar:c_816b', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)",
+            "hideExpression": "field.parent.model && !['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_816b', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)",
             "templateOptions": {
               "wrappers": [
                 "card"
@@ -892,7 +892,7 @@
             "degree"
           ],
           "form": {
-            "hideExpression": "field.parent.model && !['coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'habilitation_thesis', 'advanced_studies_thesis', 'other'].includes(field.parent.model.documentType)",
+            "hideExpression": "field.parent.model && !['coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'habilitation_thesis', 'advanced_studies_thesis', 'other_thesis'].includes(field.parent.model.documentType)",
             "templateOptions": {
               "wrappers": [
                 "card"

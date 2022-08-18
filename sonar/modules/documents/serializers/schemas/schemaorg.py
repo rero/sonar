@@ -71,7 +71,9 @@ TYPE_MAPPING = {
     'advanced_studies_thesis': 'Thesis',
     'other': 'Thesis',
     'coar:c_8042': 'CreativeWork',
-    'coar:c_1843': 'CreativeWork'
+    'coar:c_1843': 'CreativeWork',
+    'coar:R60J-J5BD': 'CreativeWork',
+    'coar:c_ba08': 'Review'
 }
 
 

@@ -133,6 +133,9 @@ sonar_documents = "sonar.modules.documents.config"
 shibboleth_authenticator = "sonar.modules.shibboleth_authenticator.config"
 pdf_extractor = "sonar.modules.pdf_extractor.config"
 
+[tool.poetry.plugins."invenio_db.alembic"]
+sonar = "sonar:alembic"
+
 [tool.poetry.plugins."invenio_i18n.translations"]
 messages = "sonar"
 messages_wiki = "flask_wiki"
