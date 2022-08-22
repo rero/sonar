@@ -47,7 +47,7 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
     footer = fields.List(fields.Dict())
     isShared = fields.Boolean()
     isDedicated = fields.Boolean()
-    serverName = fields.Str(dump_only=True)
+    serverName = fields.Str()
     allowedIps = SanitizedUnicode()
     platformName = SanitizedUnicode()
     documentsCustomField1 = fields.Dict()
