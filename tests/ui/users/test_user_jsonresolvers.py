@@ -37,6 +37,7 @@ def test_user_resolver(app, organisation, roles):
     record = DepositRecord.create(
         {'user': {
             '$ref': 'https://sonar.ch/api/users/1'
-        }}, with_bucket=False)
+        },
+        'status': 'in_progress'}, with_bucket=False)
 
     assert record.replace_refs().get('user')['email'] == 'admin@test.com'

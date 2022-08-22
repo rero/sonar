@@ -1581,7 +1581,7 @@
             "type": "string",
             "minLength": 1,
             "form": {
-              "hideExpression": "!['coar:c_3e5a', 'coar:c_ba08', coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.parent.model.documentType)"
+              "hideExpression": "!['coar:c_3248', 'coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc', 'coar:c_816b', 'coar:c_5794', 'coar:c_6670', 'coar:c_c94f'].includes(field.parent.parent.parent.model.documentType)"
             }
           },
           "numberingIssue": {
@@ -1589,7 +1589,7 @@
             "type": "string",
             "minLength": 1,
             "form": {
-              "hideExpression": "!['coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.parent.model.documentType)"
+              "hideExpression": "!['coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc', 'coar:c_816b', 'coar:c_5794', 'coar:c_6670', 'coar:c_c94f'].includes(field.parent.parent.parent.model.documentType)"
             }
           },
           "numberingPages": {

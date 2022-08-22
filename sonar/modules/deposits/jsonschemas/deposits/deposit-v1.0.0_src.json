@@ -4,7 +4,8 @@
   "title": "SONAR deposit v1.0.0",
   "type": "object",
   "required": [
-    "pid"
+    "pid",
+    "status"
   ],
   "additionalProperties": false,
   "properties": {
@@ -573,7 +574,7 @@
               "type": "string",
               "minLength": 1,
               "form": {
-                "hideExpression": "field.parent.parent.model && !['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)",
+                "hideExpression": "field.parent.parent.model && !['coar:c_3248', 'coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc', 'coar:c_816b', 'coar:c_5794', 'coar:c_6670', 'coar:c_c94f'].includes(field.parent.parent.model.documentType)",
                 "templateOptions": {
                   "placeholder": "Example: 1, 4-5, …"
                 }
@@ -584,7 +585,7 @@
               "type": "string",
               "minLength": 1,
               "form": {
-                "hideExpression": "field.parent.parent.model && !['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.parent.model.documentType)",
+                "hideExpression": "field.parent.parent.model && !['coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc', 'coar:c_816b', 'coar:c_5794', 'coar:c_6670', 'coar:c_c94f'].includes(field.parent.parent.model.documentType)",
                 "templateOptions": {
                   "placeholder": "Example: 10, 22-24, …"
                 }
