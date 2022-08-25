@@ -170,23 +170,23 @@ def part_of_format(part_of):
     :param part_of: Object representing partOf property
     """
     items = []
-    contributions = []
     document = part_of.get('document', {})
     if document.get('title'):
         items.append(document['title'])
+
     if 'contribution' in document:
-        contribution = document['contribution'].pop(0);
-        if len(document['contribution']) > 0:
-            contributions.append(' / {value} ; '.format(value=contribution))
-            contributions.extend(
-                '{value}. '.format(value=contrib)
-                for contrib in document['contribution']
+        formated_contribs = []
+        first_contrib = document['contribution'][0]
+        other_contribs = document['contribution'][1:]
+        if other_contribs:
+            formated_contribs.append(f' / {first_contrib} ; ')
+            formated_contribs.append(
+                ' ; '.join(other_contribs)
             )
         else:
-            contributions.append(' / {value}. '.format(value=contribution))
-    if contributions:
-        items.append(''.join(contributions))
-    if items and not contributions:
+            formated_contribs.append(f' / {first_contrib}')
+        items.append(''.join(formated_contribs))
+    if items:
         items.append('. ')
 
     if 'publication' in document and 'statement' in document['publication']:
