@@ -208,7 +208,7 @@ def test_part_of_format():
         'numberingVolume': '28',
         'numberingIssue': '2',
         'numberingPages': '469-480'
-    }) == 'Mehr oder weniger Staat? / contrib 1 ; contrib 2. contrib 3. ' \
+    }) == 'Mehr oder weniger Staat? / contrib 1 ; contrib 2 ; contrib 3. ' \
         '- doc statement. - 2015, vol. 28, no. 2, p. 469-480'
 
     assert views.part_of_format({

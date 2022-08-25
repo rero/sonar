@@ -19,11 +19,14 @@
 
 import copy
 import os
+import shutil
+import sys
 import tempfile
 from datetime import date
 from io import BytesIO
 
 import pytest
+from dotenv import load_dotenv
 from flask_principal import ActionNeed
 from invenio_access.models import ActionUsers, Role
 from invenio_accounts.ext import hash_password
@@ -107,6 +110,43 @@ def es(appctx):
     finally:
         current_search_client.indices.delete(index='*')
         current_search_client.indices.delete_template('*')
+
+
+@pytest.fixture(scope='module')
+def instance_path():
+    """Temporary instance path.
+
+    Scope: module
+
+    This fixture creates a temporary directory if the
+    environment variable ``INVENIO_INSTANCE_PATH`` is not be set.
+    This directory is then automatically removed.
+    """
+    # load .env, .flaskenv
+    load_dotenv()
+    invenio_instance_path = os.environ.get('INVENIO_INSTANCE_PATH')
+    invenio_static_folder = os.environ.get('INVENIO_STATIC_FOLDER')
+    path = invenio_instance_path
+    # static folder
+    if not invenio_static_folder:
+        if invenio_instance_path:
+            os.environ['INVENIO_STATIC_FOLDER'] = os.path.join(
+                invenio_instance_path, 'static')
+        else:
+            os.environ['INVENIO_STATIC_FOLDER'] = os.path.join(
+                sys.prefix, 'var/instance/static')
+    # instance path
+    if not path:
+        path = tempfile.mkdtemp()
+        os.environ['INVENIO_INSTANCE_PATH'] = path
+    yield path
+    # clean static folder variable
+    if not invenio_static_folder:
+        os.environ.pop('INVENIO_STATIC_FOLDER', None)
+    # clean instance path variable and remove temp dir
+    if not invenio_instance_path:
+        os.environ.pop('INVENIO_INSTANCE_PATH', None)
+        shutil.rmtree(path)
 
 
 @pytest.fixture(scope='module', autouse=True)
