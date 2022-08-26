@@ -514,6 +514,11 @@
               "value": {
                 "key": "identified_by_value",
                 "title": "Value",
+                "form" : {
+                  "templateOptions" : {
+                    "placeholder" : "Example (DOI): 10.3406/spira.2016.1748"
+                  }
+                },
                 "type": "string",
                 "minLength": 1
               },
@@ -814,10 +819,10 @@
           }
         },
         "subjects": {
-          "title": "Keywords",
+          "title": "Subjects",
           "type": "array",
           "items": {
-            "title": "Keyword",
+            "title": "Subject",
             "type": "object",
             "required": [
               "language",
@@ -1350,6 +1355,7 @@
           "minItems": 0,
           "items": {
             "title": "Subdivision",
+            "description": "Select a subdivision (department, institute, faculty, other) if this publication belongs to it in your organisation.",
             "type": "object",
             "additionalProperties": false,
             "properties": {
