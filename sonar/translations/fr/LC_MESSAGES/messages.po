@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2022-04-27 11:14+0200\n"
-"PO-Revision-Date: 2022-04-28 11:09+0000\n"
-"Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"PO-Revision-Date: 2022-08-26 14:14+0000\n"
+"Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "fr/>\n"
 "Language: fr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.12.1-dev\n"
+"X-Generator: Weblate 4.14-dev\n"
 "Generated-By: Babel 2.10.1\n"
 
 #: sonar/theme/views.py:72
@@ -1486,7 +1486,7 @@ msgstr "Veuillez saisir un numéro valide."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:615
 msgid "Please enter a valid pages range, example: 135, 5-27."
-msgstr "Veuillez saisir une plage de pages valide, exemple : 135, 5-27."
+msgstr "Veuillez saisir une plage de pages valide, par exemple : 135, 5-27."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:85
 msgid "Position"
@@ -5174,11 +5174,11 @@ msgstr[1] "résultats"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:116
 msgid "role_admin"
-msgstr "Admin"
+msgstr "administrateur"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:120
 msgid "role_moderator"
-msgstr "Modérateur"
+msgstr "modérateur"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:124
 msgid "role_submitter"
@@ -5186,11 +5186,11 @@ msgstr "Déposant"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:112
 msgid "role_superuser"
-msgstr "Super utilisateur"
+msgstr "super utilisateur"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:128
 msgid "role_user"
-msgstr "Utilisateur"
+msgstr "utilisateur"
 
 #: sonar/translations/manual_translations.txt:47
 msgid "searchResultsValorised"
