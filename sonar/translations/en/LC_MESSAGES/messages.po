@@ -10,15 +10,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2022-08-30 11:34+0200\n"
-"PO-Revision-Date: 2022-08-10 11:20+0000\n"
-"Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"PO-Revision-Date: 2022-08-30 10:20+0000\n"
+"Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
+"Language-Team: English <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"en/>\n"
 "Language: en\n"
-"Language-Team: English "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/en/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1-dev\n"
 "Generated-By: Babel 2.10.1\n"
 
 #: sonar/theme/views.py:102
@@ -566,9 +567,8 @@ msgid "Document type"
 msgstr "Document type"
 
 #: sonar/modules/documents/templates/documents/record.html:452
-#, fuzzy
 msgid "Document views"
-msgstr "Documents"
+msgstr "Document views"
 
 #: sonar/theme/templates/sonar/stats/detail.html:35
 msgid "Documents"
@@ -707,9 +707,8 @@ msgstr "Example: Published version"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1092
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1040
-#, fuzzy
 msgid "Example: Research dataset"
-msgstr "Internal research associates"
+msgstr "Example: Research dataset"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:726
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1103
@@ -769,9 +768,8 @@ msgid "File UUID"
 msgstr "File UUID"
 
 #: sonar/modules/documents/templates/documents/record.html:453
-#, fuzzy
 msgid "File downloads"
-msgstr "Download"
+msgstr "File downloads"
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:132
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:31
@@ -1518,9 +1516,8 @@ msgid "Postal code"
 msgstr "Postal code"
 
 #: sonar/theme/templates/sonar/footer.html:53
-#, fuzzy
 msgid "Powered by"
-msgstr "supported by"
+msgstr "Powered by"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:704
 msgid "Practitioner-trainer"
@@ -1662,9 +1659,8 @@ msgstr ""
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1002
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1006
 #: sonar/modules/documents/templates/documents/record.html:328
-#, fuzzy
 msgid "Related to"
-msgstr "Created:"
+msgstr "Related to"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1074
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1007
@@ -2959,9 +2955,8 @@ msgid "document_type_advanced_studies_thesis"
 msgstr "Advanced studies thesis"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:99
-#, fuzzy
 msgid "document_type_coar:R60J-J5BD"
-msgstr "Master thesis"
+msgstr "Conference presentation"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:178
 msgid "document_type_coar:c_0640"
@@ -3100,9 +3095,8 @@ msgid "document_type_coar:c_998f"
 msgstr "Newspaper article"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:132
-#, fuzzy
 msgid "document_type_coar:c_ba08"
-msgstr "Doctoral thesis"
+msgstr "Book review"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:221
 msgid "document_type_coar:c_ba1f"
@@ -3149,9 +3143,8 @@ msgid "document_type_non_textual_object"
 msgstr "Non-textual object"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:266
-#, fuzzy
 msgid "document_type_other_thesis"
-msgstr "Other"
+msgstr "Other thesis"
 
 #: sonar/translations/manual_translations.txt:46
 msgid "educationalDocument"
@@ -5481,4 +5474,3 @@ msgstr "​Swiss National Science Foundation"
 #~ msgstr ""
 #~ "Powered by <a href=\"%(link)s\" "
 #~ "target=\"_blank\" rel=\"noopener\">SONAR</a>"
-
