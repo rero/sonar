@@ -18,6 +18,7 @@
 """Test documents permissions."""
 
 import json
+from io import BytesIO
 
 import mock
 from flask import url_for
@@ -403,3 +404,18 @@ def test_delete(client, document, make_document, make_user, superuser, admin,
     assert res.status_code == 204
     assert PersistentIdentifier.get('ark', ark_id).status == \
         PIDStatus.DELETED
+
+
+def test_document_with_urn_delete(client, superuser, minimal_thesis_document):
+    """Test delete document with registered URN identifier."""
+    # Add file to document
+    minimal_thesis_document.files['test.pdf'] = BytesIO(b'File content')
+    minimal_thesis_document.files['test.pdf']['type'] = 'file'
+    minimal_thesis_document.commit()
+
+    # Logged as superuser
+    login_user_via_session(client, email=superuser['email'])
+    pid = minimal_thesis_document['pid']
+    res = client.delete(url_for('invenio_records_rest.doc_item',
+                                pid_value=pid))
+    assert res.status_code == 403

@@ -22,6 +22,7 @@ import contextlib
 
 from invenio_pidstore.models import PersistentIdentifier, PIDDoesNotExistError
 from invenio_records.extensions import RecordExtension
+
 from sonar.modules.documents.tasks import register_urn_code_from_document
 from sonar.modules.documents.urn import Urn
 
