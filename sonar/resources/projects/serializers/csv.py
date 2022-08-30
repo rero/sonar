@@ -20,7 +20,6 @@
 import csv
 
 from flask import stream_with_context
-from flask_babelex import _
 from flask_resources.serializers import SerializerMixin
 from invenio_records_rest.serializers.csv import \
     CSVSerializer as BaseCSVSerializer
@@ -41,7 +40,7 @@ class CSVSerializer(BaseCSVSerializer, SerializerMixin):
             headers = dict.fromkeys(self.csv_included_fields)
             # Translate header values.
             for key, value in headers.items():
-                headers[key] = _(key)
+                headers[key] = key
 
             # Write the CSV output in memory
             line = Line()
