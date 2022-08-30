@@ -98,13 +98,17 @@ class Urn:
                         object_uuid=record.id,
                         status=PIDStatus.NEW,
                     )
-                    record["identifiedBy"].append(
-                        {"type": "bf:Urn", "value": urn_code}
-                    )
+                    if "identifiedBy" in record:
+                        record["identifiedBy"].append(
+                            {"type": "bf:Urn", "value": urn_code}
+                        )
+                    else:
+                        record["identifiedBy"] = \
+                            [{"type": "bf:Urn", "value": urn_code}]
                 except PIDAlreadyExists:
                     current_app.logger.error(
                         'generated urn already exist for document: '
-                            + record.get('pid'))
+                        + record.get('pid'))
 
     @classmethod
     def urn_query(cls, status=None):
@@ -114,9 +118,8 @@ class Urn:
         :returns: Base query.
         """
         return PersistentIdentifier.query\
-                .filter_by(pid_type=cls.urn_pid_type)\
-                .filter_by(status=status)
-
+            .filter_by(pid_type=cls.urn_pid_type)\
+            .filter_by(status=status)
 
     @classmethod
     def get_urn_pids(cls, status=PIDStatus.NEW, days=None):
@@ -137,7 +140,6 @@ class Urn:
                 query = query.filter('range', _created={'lte': date})
             count = query.count()
         return count
-
 
     @classmethod
     def get_unregistered_urns(cls):
@@ -161,8 +163,8 @@ class Urn:
         if DnbUrnService.register_document(record):
             urn_code = DocumentRecord.get_rero_urn_code(record)
             pid = PersistentIdentifier.query\
-                    .filter_by(pid_type=cls.urn_pid_type)\
-                    .filter_by(pid_value=urn_code).first()
+                .filter_by(pid_type=cls.urn_pid_type)\
+                .filter_by(pid_value=urn_code).first()
             if pid and pid.status == PIDStatus.NEW:
                 pid.status = PIDStatus.REGISTERED
                 db.session.commit()
@@ -176,7 +178,6 @@ class Urn:
         if pid := PersistentIdentifier.get(cls.urn_pid_type, urn):
             pid.status = PIDStatus.REGISTERED
             db.session.commit()
-
 
     @classmethod
     def get_documents_to_generate_urns(cls):

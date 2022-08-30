@@ -17,21 +17,25 @@
 
 """Test documents files permissions."""
 
+from io import BytesIO
 
 from flask import url_for
 from flask_security import url_for_security
 from invenio_accounts.testutils import login_user_via_session
 
+from sonar.modules.utils import wait_empty_tasks
+
 
 def test_update_delete(client, superuser, admin, moderator,
-              submitter, user, document, pdf_file):
+                       submitter, user, document, pdf_file):
     """Test permissions for uploading and deleting files."""
     file_name = 'test.pdf'
     users = [superuser, admin, moderator, submitter, user, None]
 
     # upload the file
     url_file_content = url_for(
-        'invenio_records_files.doc_object_api', pid_value=document.get('pid'), key=file_name)
+        'invenio_records_files.doc_object_api',
+        pid_value=document.get('pid'), key=file_name)
     for u, status in zip(users, [200, 200, 200, 404, 404, 404]):
         if u:
             login_user_via_session(client, email=u['email'])
@@ -46,9 +50,8 @@ def test_update_delete(client, superuser, admin, moderator,
             assert res.status_code == status
 
 
-
 def test_read_metadata(client, superuser, admin, moderator,
-              submitter, user, document_with_file):
+                       submitter, user, document_with_file):
     """Test read files permissions."""
 
     users = [superuser, admin, moderator, submitter, user, None]
@@ -74,8 +77,9 @@ def test_read_metadata(client, superuser, admin, moderator,
         res = client.get(url_files)
         assert res.status_code == status
 
+
 def test_read_content(client, superuser, admin, moderator,
-              submitter, user, user_without_org, document_with_file):
+                      submitter, user, user_without_org, document_with_file):
     """Test read documents permissions."""
 
     file_name = 'test1.pdf'
@@ -84,7 +88,7 @@ def test_read_content(client, superuser, admin, moderator,
     url_file_content = url_for(
         'invenio_records_files.doc_object_api',
         pid_value=document_with_file.get('pid'),
-    key=file_name)
+        key=file_name)
     open_access_code = "coar:c_abf2"
     document_with_file.files[file_name]['access'] = open_access_code
     document_with_file.commit()
@@ -111,7 +115,8 @@ def test_read_content(client, superuser, admin, moderator,
     # restricted files
     restricted_code = "coar:c_16ec"
     document_with_file.files[file_name]['access'] = restricted_code
-    document_with_file.files[file_name]['restricted_outside_organisation'] = True
+    document_with_file.files[file_name]['restricted_outside_organisation'] \
+        = True
     document_with_file.commit()
     for u, status in zip(users, [200, 200, 200, 200, 200, 404, 404]):
         if u:
@@ -120,3 +125,36 @@ def test_read_content(client, superuser, admin, moderator,
             client.get(url_for_security('logout'))
         res = client.get(url_file_content)
         assert res.status_code == status
+
+
+def test_file_of_document_with_urn_delete(client, superuser,
+                                          minimal_thesis_document):
+    """Test delete file of document with registered URN identifier."""
+    # Logged as superuser
+    login_user_via_session(client, email=superuser['email'])
+
+    # Add pdf file to document
+    minimal_thesis_document.files['test.pdf'] = BytesIO(b'File content')
+    minimal_thesis_document.files['test.pdf']['type'] = 'file'
+    minimal_thesis_document.commit()
+
+    wait_empty_tasks(delay=3, verbose=True)
+
+    url_file_content = url_for(
+        'invenio_records_files.doc_object_api',
+        pid_value=minimal_thesis_document['pid'], key='test.pdf')
+    res = client.delete(url_file_content)
+    assert res.status_code == 403
+
+    # Add png file to document
+    minimal_thesis_document.files['test.png'] = BytesIO(b'File content')
+    minimal_thesis_document.files['test.png']['type'] = 'file'
+    minimal_thesis_document.commit()
+
+    wait_empty_tasks(delay=3, verbose=True)
+
+    url_file_content = url_for(
+        'invenio_records_files.doc_object_api',
+        pid_value=minimal_thesis_document['pid'], key='test.png')
+    res = client.delete(url_file_content)
+    assert res.status_code == 204
