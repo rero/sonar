@@ -259,7 +259,8 @@ class DocumentRecord(SonarRecord):
                 'Error during fulltext extraction of {file} of record '
                 '{record}: {error}'.format(file=file.key,
                                            error=exception,
-                                           record=self['identifiedBy']))
+                                           record=self.get(
+                                               'identifiedBy', self['pid'])))
 
     def create_thumbnail(self, file):
         """Create a thumbnail for record.

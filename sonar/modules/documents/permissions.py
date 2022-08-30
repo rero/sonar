@@ -17,8 +17,10 @@
 
 """Permissions for documents."""
 
-from flask import request
-from invenio_files_rest.models import Bucket
+from flask import current_app, request
+from invenio_files_rest.models import Bucket, ObjectVersion
+from invenio_pidstore.errors import PIDDoesNotExistError
+from invenio_pidstore.models import PersistentIdentifier
 
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.organisations.api import current_organisation
@@ -119,8 +121,36 @@ class DocumentPermission(RecordPermission):
         if not user or not user.is_admin:
             return False
 
-        # Same rules as update
-        return cls.update(user, record)
+        # Check delete conditions and consider same rules as update
+        return cls.can_delete(user, record) and cls.update(user, record)
+
+    @classmethod
+    def can_delete(cls, user, record):
+        """Delete permission conditions.
+
+        :param user: Current user record.
+        :param record: Record to check.
+        :returns: True is action can be done.
+        """
+        # Delete only documents with no registred URN
+        try:
+            document = DocumentRecord.get_record_by_pid(record['pid'])
+            if document:
+                urn_identifier = PersistentIdentifier\
+                    .get_by_object('urn', 'rec', document.id)
+                urn_config = current_app.config.get("SONAR_APP_DOCUMENT_URN")
+                org_pid = document.replace_refs()\
+                    .get("organisation", [{}])[0].get("pid")
+
+                if config := urn_config.get("organisations", {}).get(org_pid):
+                    if record.get("documentType") in config.get("types")\
+                        and urn_identifier\
+                            and urn_identifier.is_registered():
+                        return False
+        except PIDDoesNotExistError:
+            pass
+
+        return True
 
 class DocumentFilesPermission(FilesPermission):
     """Documents files permissions.
@@ -195,4 +225,10 @@ class DocumentFilesPermission(FilesPermission):
         :param parent_record: the record related to the bucket.
         :returns: True is action can be done.
         """
+        document = cls.get_document(parent_record)
+        if isinstance(record, ObjectVersion):
+            file_type = document.files[record.key]['type']
+            if file_type == 'file' and record.mimetype == 'application/pdf':
+                return DocumentPermission.can_delete(user, parent_record)\
+                    and cls.update(user, record, pid, parent_record)
         return cls.update(user, record, pid, parent_record)
