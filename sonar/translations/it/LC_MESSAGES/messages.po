@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2022-08-30 11:34+0200\n"
-"PO-Revision-Date: 2022-08-26 14:14+0000\n"
+"PO-Revision-Date: 2022-08-30 10:20+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"it/>\n"
 "Language: it\n"
-"Language-Team: Italian "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/it/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1-dev\n"
 "Generated-By: Babel 2.10.1\n"
 
 #: sonar/theme/views.py:102
@@ -567,9 +568,8 @@ msgid "Document type"
 msgstr "Tipo di documento"
 
 #: sonar/modules/documents/templates/documents/record.html:452
-#, fuzzy
 msgid "Document views"
-msgstr "Documenti"
+msgstr "Visualizzazioni del documento"
 
 #: sonar/theme/templates/sonar/stats/detail.html:35
 msgid "Documents"
@@ -646,7 +646,7 @@ msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:519
 msgid "Example (DOI): 10.3406/spira.2016.1748"
-msgstr ""
+msgstr "Esempio (DOI): 10.3406/spira.2016.1748"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:584
 #, fuzzy
@@ -717,7 +717,7 @@ msgstr "Collaboratori di ricerca interni·e"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:966
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1022
 msgid "Example: https://www.rero.ch"
-msgstr ""
+msgstr "Esempio: https://www.rero.ch"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:605
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1600
@@ -770,9 +770,8 @@ msgid "File UUID"
 msgstr "UUID del file"
 
 #: sonar/modules/documents/templates/documents/record.html:453
-#, fuzzy
 msgid "File downloads"
-msgstr "Scaricare"
+msgstr "File downloads"
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:132
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:31
@@ -1385,7 +1384,7 @@ msgstr "Le organizzazione sono accessibile tramite un URL specifico."
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:151
 msgid "Organisation server name for dedicated."
-msgstr ""
+msgstr "Nome del server dell'organizzazione per dedicato."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:228
 msgid "Organisations"
@@ -1517,9 +1516,8 @@ msgid "Postal code"
 msgstr "Codice postale"
 
 #: sonar/theme/templates/sonar/footer.html:53
-#, fuzzy
 msgid "Powered by"
-msgstr "sostenuto da"
+msgstr "Alimentato da"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:704
 msgid "Practitioner-trainer"
@@ -1549,7 +1547,7 @@ msgstr ""
 
 #: sonar/theme/templates/sonar/footer.html:56
 msgid "Privacy policy"
-msgstr ""
+msgstr "Politica sulla riservatezza"
 
 #: sonar/common/jsonschemas/masked-v1.0.0.json:18
 msgid "Private"
@@ -1661,14 +1659,13 @@ msgstr "Convalida della risorsa"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1002
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1006
 #: sonar/modules/documents/templates/documents/record.html:328
-#, fuzzy
 msgid "Related to"
-msgstr "Creato:"
+msgstr "Collegato a"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1074
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1007
 msgid "Relationship with a document, dataset, etc."
-msgstr ""
+msgstr "Relazione con un documento, un set di dati, ecc."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:4
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1247
@@ -1793,6 +1790,8 @@ msgid ""
 "Select a subdivision (department, institute, faculty, other) if this "
 "publication belongs to it in your organisation."
 msgstr ""
+"Selezionare una suddivisione (dipartimento, istituto, facoltà, altro) se la "
+"pubblicazione appartiene ad essa nella vostra organizzazione."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:616
 msgid "Serie"
@@ -1814,7 +1813,7 @@ msgstr "Serie a cui la risorsa appartiene."
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:150
 msgid "Server name (without http)"
-msgstr ""
+msgstr "Nome del server (senza http)"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:730
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1107
@@ -1822,7 +1821,7 @@ msgstr ""
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:969
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1025
 msgid "Should be a valid URL format."
-msgstr ""
+msgstr "Deve essere un formato URL valido."
 
 #: sonar/modules/documents/templates/documents/record.html:109
 msgid "Show more"
@@ -2083,7 +2082,7 @@ msgstr ""
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:167
 msgid "This domain name must be unique."
-msgstr ""
+msgstr "Questo nome di dominio deve essere unico."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:464
 msgid "This project has been submitted for funding"
@@ -2961,12 +2960,11 @@ msgstr "tipo di documento"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:262
 msgid "document_type_advanced_studies_thesis"
-msgstr "Advanced studies thesis"
+msgstr "Tesi di studi avanzati"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:99
-#, fuzzy
 msgid "document_type_coar:R60J-J5BD"
-msgstr "Tesi di master"
+msgstr "Presentazione a convegno"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:178
 msgid "document_type_coar:c_0640"
@@ -3105,9 +3103,8 @@ msgid "document_type_coar:c_998f"
 msgstr "Articolo di giornale"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:132
-#, fuzzy
 msgid "document_type_coar:c_ba08"
-msgstr "Tesi di dottorato"
+msgstr "Recensione di libro"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:221
 msgid "document_type_coar:c_ba1f"
@@ -3147,16 +3144,15 @@ msgstr "Atti di congresso"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:258
 msgid "document_type_habilitation_thesis"
-msgstr "Habilitation thesis"
+msgstr "Tesi di abilitazione"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:140
 msgid "document_type_non_textual_object"
 msgstr "Non-textual object"
 
 #: sonar/common/jsonschemas/type-v1.0.0.json:266
-#, fuzzy
 msgid "document_type_other_thesis"
-msgstr "Other"
+msgstr "Altre tesi"
 
 #: sonar/translations/manual_translations.txt:46
 msgid "educationalDocument"
@@ -5494,4 +5490,3 @@ msgstr "Fondo nazionale svizzero per la ricerca scientifica"
 #~ msgstr ""
 #~ "Powered by <a href=\"%(link)s\" "
 #~ "target=\"_blank\" rel=\"noopener\">SONAR</a>"
-
