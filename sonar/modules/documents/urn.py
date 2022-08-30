@@ -98,9 +98,13 @@ class Urn:
                         object_uuid=record.id,
                         status=PIDStatus.NEW,
                     )
-                    record["identifiedBy"].append(
-                        {"type": "bf:Urn", "value": urn_code}
-                    )
+                    if "identifiedBy" in record:
+                        record["identifiedBy"].append(
+                            {"type": "bf:Urn", "value": urn_code}
+                        )
+                    else:
+                        record["identifiedBy"] = \
+                            [{"type": "bf:Urn", "value": urn_code}]
                 except PIDAlreadyExists:
                     current_app.logger.error(
                         'generated urn already exist for document: '
@@ -176,7 +180,6 @@ class Urn:
         if pid := PersistentIdentifier.get(cls.urn_pid_type, urn):
             pid.status = PIDStatus.REGISTERED
             db.session.commit()
-
 
     @classmethod
     def get_documents_to_generate_urns(cls):
