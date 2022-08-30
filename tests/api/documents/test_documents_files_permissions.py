@@ -17,6 +17,7 @@
 
 """Test documents files permissions."""
 
+from io import BytesIO
 
 from flask import url_for
 from flask_security import url_for_security
@@ -46,7 +47,6 @@ def test_update_delete(client, superuser, admin, moderator,
             assert res.status_code == status
 
 
-
 def test_read_metadata(client, superuser, admin, moderator,
               submitter, user, document_with_file):
     """Test read files permissions."""
@@ -73,6 +73,7 @@ def test_read_metadata(client, superuser, admin, moderator,
             client.get(url_for_security('logout'))
         res = client.get(url_files)
         assert res.status_code == status
+
 
 def test_read_content(client, superuser, admin, moderator,
               submitter, user, user_without_org, document_with_file):
@@ -120,3 +121,32 @@ def test_read_content(client, superuser, admin, moderator,
             client.get(url_for_security('logout'))
         res = client.get(url_file_content)
         assert res.status_code == status
+
+
+def test_file_of_document_with_urn_delete(client, superuser,
+                                          minimal_thesis_document):
+    """Test delete file of document with registered URN identifier."""
+    # Logged as superuser
+    login_user_via_session(client, email=superuser['email'])
+
+    # Add pdf file to document
+    minimal_thesis_document.files['test.pdf'] = BytesIO(b'File content')
+    minimal_thesis_document.files['test.pdf']['type'] = 'file'
+    minimal_thesis_document.commit()
+
+    url_file_content = url_for(
+        'invenio_records_files.doc_object_api',
+        pid_value=minimal_thesis_document['pid'], key='test.pdf')
+    res = client.delete(url_file_content)
+    assert res.status_code == 403
+
+    # Add png file to document
+    minimal_thesis_document.files['test.png'] = BytesIO(b'File content')
+    minimal_thesis_document.files['test.png']['type'] = 'file'
+    minimal_thesis_document.commit()
+
+    url_file_content = url_for(
+        'invenio_records_files.doc_object_api',
+        pid_value=minimal_thesis_document['pid'], key='test.png')
+    res = client.delete(url_file_content)
+    assert res.status_code == 204

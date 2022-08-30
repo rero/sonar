@@ -18,7 +18,9 @@
 """Permissions for documents."""
 
 from flask import request
-from invenio_files_rest.models import Bucket
+from invenio_files_rest.models import Bucket, ObjectVersion
+from invenio_pidstore.errors import PIDDoesNotExistError
+from invenio_pidstore.models import PersistentIdentifier
 
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.organisations.api import current_organisation
@@ -104,7 +106,6 @@ class DocumentPermission(RecordPermission):
             return False
 
         user = user.replace_refs()
-
         return document.has_subdivision(user.get('subdivision', {}).get('pid'))
 
     @classmethod
@@ -119,8 +120,33 @@ class DocumentPermission(RecordPermission):
         if not user or not user.is_admin:
             return False
 
-        # Same rules as update
-        return cls.update(user, record)
+        # Check delete conditions and consider same rules as update
+        return cls.can_delete(record) and cls.update(user, record)
+
+    @classmethod
+    def can_delete(cls, record):
+        """Delete permission conditions.
+
+        :param record: Record to check.
+        :returns: True if action can be done.
+        """
+        # Delete only documents with no URN or no registred URN
+        document = DocumentRecord.get_record_by_pid(record['pid'])
+
+        if document:
+            # check if document has urn
+            try:
+                urn_identifier = PersistentIdentifier\
+                    .get_by_object('urn', 'rec', document.id)
+            except PIDDoesNotExistError:
+                return True
+
+            # check if urn is registered
+            if urn_identifier.is_registered():
+                return False
+
+        return True
+
 
 class DocumentFilesPermission(FilesPermission):
     """Documents files permissions.
@@ -193,6 +219,12 @@ class DocumentFilesPermission(FilesPermission):
         :param pid: The :class:`invenio_pidstore.models.PersistentIdentifier`
         instance.
         :param parent_record: the record related to the bucket.
-        :returns: True is action can be done.
+        :returns: True if action can be done.
         """
+        document = cls.get_document(parent_record)
+        if isinstance(record, ObjectVersion):
+            file_type = document.files[record.key]['type']
+            if file_type == 'file' and record.mimetype == 'application/pdf':
+                return DocumentPermission.can_delete(parent_record)\
+                    and cls.update(user, record, pid, parent_record)
         return cls.update(user, record, pid, parent_record)
