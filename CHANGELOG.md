@@ -1,5 +1,49 @@
 # Changelog
 
+## [v1.8.0](https://github.com/rero/sonar/tree/v1.8.0) (2022-08-30)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.7.0...v1.8.0)
+
+**New features:**
+
+* Display in pro and public detailed view the number of views and downloads per file (stats) [\#400](https://github.com/rero/sonar/issues/400) (by @jma)
+* Add a field `relatedTo` to the document, allowing to refer to related material, such as a dataset. [\#544](https://github.com/rero/sonar/issues/544) (by @Garfield-fr)
+
+**Enhancements:**
+
+* Small improvement in the deposit editor [\#715](https://github.com/rero/sonar/issues/715) (by @PascalRepond)
+* Add the software version in the first page footer [\#806](https://github.com/rero/sonar/issues/806) (by @PascalRepond)
+* Add 2 document types: conference object, book review [\#881](https://github.com/rero/sonar/issues/881) (by @PascalRepond)
+* Remove the preview area in the "diffusion" step of the deposit process [1] [\#263](https://github.com/rero/sonar/issues/263) (by @PascalRepond)
+* Editor: adapt to new ng-core version [\#860](https://github.com/rero/sonar/issues/860) (by @PascalRepond)
+* Optimise Google Scholar indexation [\#798](https://github.com/rero/sonar/issues/798) (by @Garfield-fr)
+* document: update of the abstract display [\#845](https://github.com/rero/sonar/pull/845) (by @Garfield-fr)
+* Allow to relaunch a search by clicking on the author's name [\#744](https://github.com/rero/sonar/issues/744) (by @Garfield-fr)
+* Add direct link to main file in `oai_dc` export (OAI-PMH) [\#800](https://github.com/rero/sonar/issues/800) (by @Garfield-fr)
+
+**Fixes:**
+
+* templates: fix display problems [\#895](https://github.com/rero/sonar/pull/895) (by @PascalRepond)
+* dependencies: fix vulnerabilities [\#897](https://github.com/rero/sonar/pull/897) (by @jma)
+* controlled affiliations: fix USI affiliation name [\#880](https://github.com/rero/sonar/pull/880) (by @PascalRepond)
+* Problems in the document editor within field `partOf` [\#626](https://github.com/rero/sonar/issues/626) (by @PascalRepond, @jma)
+* Impossible to submit a research project (hepvs): it spins forever [\#858](https://github.com/rero/sonar/issues/858) (by @vgranata)
+* Field `volume` in the deposit should not be stricter than its equivalent in the document [\#878](https://github.com/rero/sonar/issues/878) (by @PascalRepond)
+* Truncated values in autocomplete lists [\#853](https://github.com/rero/sonar/issues/853) (by @Garfield-fr)
+* Activate the recording of file access statistics [\#829](https://github.com/rero/sonar/issues/829) (by @jma)
+* tests: fix csv serializer test [\#892](https://github.com/rero/sonar/pull/892) (by @PascalRepond)
+* documents api: fix missing contribution [\#889](https://github.com/rero/sonar/pull/889) (by @jma)
+* Problem with login via SWITCH edu-ID [\#844](https://github.com/rero/sonar/issues/844) (by @jma)
+
+**Other changes:**
+
+* organisations: fix editor ValidationError [\#888](https://github.com/rero/sonar/pull/888) (by @PascalRepond)
+* update flask-wiki to 0.2.1 [\#869](https://github.com/rero/sonar/pull/869) (by @PascalRepond)
+* module: invenio-record-resources [\#786](https://github.com/rero/sonar/pull/786) (by @rerowep)
+* templates: update footer info [\#872](https://github.com/rero/sonar/pull/872) (by @PascalRepond)
+* uwsgi: suppress unimportant errors [\#865](https://github.com/rero/sonar/pull/865) (by @rerowep)
+* footer: update links [\#868](https://github.com/rero/sonar/pull/868) (by @PascalRepond)
+
 ## [v1.7.0](https://github.com/rero/sonar/tree/v1.7.0) (2022-05-05)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.6.0...v1.7.0)
