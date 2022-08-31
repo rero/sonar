@@ -33,6 +33,10 @@
       {% block navigation %}
         {%- include "wiki/navigation.html" %}
       {%- endblock navigation %}
+      {%- block flashmessages %}
+      {%- from "sonar/macros/messages.html" import flashed_messages with context -%}
+      <div class="container my-3">{{ flashed_messages() }}</div>
+      {%- endblock %}
       {% block content %} {% endblock %}
     {%- endblock body %}
   </div>

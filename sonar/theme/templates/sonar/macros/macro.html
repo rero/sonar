@@ -49,7 +49,7 @@
       <i class="fa fa-download mx-1"></i>
     </a>
     {% endif %}
-    <a href="{{ request.url }}#stats" class="sonar-tooltip" data-toggle="tooltip" data-placement="top" title="Download: {{ n_download }}">
+    <a href="{{ request.url }}#stats" class="sonar-tooltip" data-toggle="tooltip" data-placement="top" title="{{ _('File downloads') }}: {{ n_download }}">
       <i class="fa fa-bar-chart mx-1"></i>
     </a>
   </div>
