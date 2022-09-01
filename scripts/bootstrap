@@ -59,6 +59,10 @@ poetry run pip install "setuptools<58"
 section "Install poethepoet"
 poetry run pip install poethepoet
 
+# Needed for poetry > 1.1
+section "Install fs"
+poetry run pip install "fs<2.0.0"
+
 # Installs all packages specified in poetry.lock
 if [ "$deploy" = false ]; then
   section "Updating dependencies" "info"
