@@ -1,0 +1,21 @@
+From : info.sonar@rero.ch
+To : Info.E-Helvetica@nb.admin.ch
+Cc : info.sonar@rero.ch
+Objet : Nouvelle version du contenu de la thèse: <URN>
+
+Bonjour,
+
+Nous vous signalons une nouvelle version de l'un ou plusieurs fichiers relatifs à une thèse:
+
+URN: <URN>
+URL: <URL>
+
+Le ou les fichiers respectifs sont disponibles sur l'espace WebDAV dédié à RERO+.
+
+Nous vous remercions de mettre l'information à jour dans votre système d'archivage et de nous le confirmer.
+
+Cordiales salutations,
+
+L'équipe SONAR à RERO+
+
+info.sonar@rero.ch

@@ -562,6 +562,18 @@ SONAR_APP_ORGANISATION_CONFIG = {
         'projects': True
     }
 }
+
+# FTP
+# ===
+SONAR_APP_FTP_SNL_HOST = 'https://change.me'
+SONAR_APP_FTP_SNL_USER = 'changeMe'
+SONAR_APP_FTP_SNL_PASSWORD = 'changeMe'
+SONAR_APP_FTP_SNL_PATH = 'changeMe'
+SONAR_APP_SNL_EMAIL_TEMPLATE = \
+    'sonar/modules/documents/templates/documents/emailSNL.txt'
+
+"""FTP connection to SNL server."""
+
 # Custom resources for organisations
 
 # ARK
