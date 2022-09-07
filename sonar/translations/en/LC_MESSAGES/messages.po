@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2022-08-30 11:34+0200\n"
-"PO-Revision-Date: 2022-08-30 10:20+0000\n"
+"PO-Revision-Date: 2022-09-07 07:22+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
 "Language-Team: English <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "en/>\n"
@@ -1475,7 +1475,6 @@ msgid "Persistent identifier"
 msgstr "Persistent identifier"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1258
-#, fuzzy
 msgid "Person"
 msgstr "Person"
 
@@ -1547,7 +1546,7 @@ msgstr ""
 
 #: sonar/theme/templates/sonar/footer.html:56
 msgid "Privacy policy"
-msgstr ""
+msgstr "Privacy policy"
 
 #: sonar/common/jsonschemas/masked-v1.0.0.json:18
 msgid "Private"
