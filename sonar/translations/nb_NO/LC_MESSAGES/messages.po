@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.5.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
-"POT-Creation-Date: 2022-08-30 11:34+0200\n"
+"POT-Creation-Date: 2022-11-24 10:51+0100\n"
 "PO-Revision-Date: 2022-02-03 16:16+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language: nb_NO\n"
@@ -762,6 +762,7 @@ msgid "File UUID"
 msgstr "Fil-UUID"
 
 #: sonar/modules/documents/templates/documents/record.html:453
+#: sonar/theme/templates/sonar/macros/macro.html:52
 msgid "File downloads"
 msgstr ""
 

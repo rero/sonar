@@ -10,17 +10,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
-"POT-Creation-Date: 2022-08-30 11:34+0200\n"
-"PO-Revision-Date: 2022-08-30 10:20+0000\n"
+"POT-Creation-Date: 2022-11-24 10:51+0100\n"
+"PO-Revision-Date: 2022-09-07 07:22+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
-"de/>\n"
 "Language: de\n"
+"Language-Team: German "
+"<https://hosted.weblate.org/projects/rero_plus/sonar/de/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1-dev\n"
 "Generated-By: Babel 2.10.1\n"
 
 #: sonar/theme/views.py:102
@@ -769,6 +768,7 @@ msgid "File UUID"
 msgstr "Datei-UUID"
 
 #: sonar/modules/documents/templates/documents/record.html:453
+#: sonar/theme/templates/sonar/macros/macro.html:52
 msgid "File downloads"
 msgstr "Datei-Downloads"
 
@@ -1791,8 +1791,8 @@ msgid ""
 "Select a subdivision (department, institute, faculty, other) if this "
 "publication belongs to it in your organisation."
 msgstr ""
-"Wählen Sie eine Unterteilung (Abteilung, Institut, Fakultät, andere), wenn "
-"diese Veröffentlichung in Ihrer Organisation dazu gehört."
+"Wählen Sie eine Unterteilung (Abteilung, Institut, Fakultät, andere), "
+"wenn diese Veröffentlichung in Ihrer Organisation dazu gehört."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:616
 msgid "Serie"
@@ -5477,3 +5477,4 @@ msgstr "Schweizerische Nationalfonds"
 #~ msgstr ""
 #~ "Angetrieben von <a href=\"%(link)s\" "
 #~ "target=\"_blank\" rel=\"noopener\">SONAR</a>"
+
