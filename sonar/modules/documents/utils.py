@@ -19,8 +19,10 @@
 
 from __future__ import absolute_import, print_function
 
-import re
+import os
+import unicodedata
 from datetime import datetime
+from urllib.parse import quote
 
 from flask import current_app, request
 
@@ -81,6 +83,8 @@ def get_file_links(file, record):
     :param record: Record.
     :returns: Dict containing the URL, the download URL and the type of link.
     """
+    key = quote(unicodedata.normalize('NFD', file['key']))
+
     links = {'external': None, 'preview': None, 'download': None}
 
     # File is restricted, no link.
@@ -93,19 +97,20 @@ def get_file_links(file, record):
         links['external'] = file['external_url']
         return links
 
-    match = re.search(r'\.(.*)$', file['key'])
-    if not match:
+    match = os.path.splitext(file['key'])
+    if not match[1]:
         return links
 
     links['download'] = '/documents/{pid}/files/{key}'.format(
-        pid=record['pid'], key=file['key'])
+        pid=record['pid'], key=key)
 
-    if not match.group(1) in current_app.config.get(
+    if not match[1][1:] in current_app.config.get(
             'SONAR_APP_FILE_PREVIEW_EXTENSIONS', []):
         return links
 
     links['preview'] = '/documents/{pid}/preview/{key}'.format(
-        pid=record['pid'], key=file['key'])
+        pid=record['pid'], key=key)
+
     return links
 
 
@@ -224,6 +229,7 @@ def get_thumbnail(file, record):
     if not matches:
         return 'static/images/no-image.png'
 
+    key = quote(unicodedata.normalize('NFD', key))
     return '/documents/{pid}/files/{key}'.format(pid=record['pid'], key=key)
 
 

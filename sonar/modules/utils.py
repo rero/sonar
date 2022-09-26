@@ -18,6 +18,7 @@
 """Utils functions for application."""
 
 import datetime
+import os
 import re
 
 from flask import abort, current_app, g, request
@@ -65,15 +66,14 @@ def change_filename_extension(filename, extension):
     Additionally, the original extension is appended to the filename, to avoid
     conflict with other files having the same name (without extension).
     """
-    matches = re.search(r'(.*)\.(.*)$', filename)
-
-    if matches is None:
+    matches = os.path.splitext(filename)
+    if not matches[1]:
         raise Exception(
             '{filename} is not a valid filename'.format(filename=filename))
 
     return '{name}-{source_extension}.{extension}'.format(
-        name=matches.group(1),
-        source_extension=matches.group(2),
+        name=matches[0],
+        source_extension=matches[1][1:],
         extension=extension)
 
 
