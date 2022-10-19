@@ -173,14 +173,6 @@ def manage(path=None):
 @blueprint.route('/logged-user/', methods=['GET'])
 def logged_user():
     """Current logged user informations in JSON."""
-    if current_user.is_anonymous:
-        return jsonify({})
-
-    user = current_user_record
-
-    if user and 'resolve' in request.args:
-        user = user.replace_refs()
-
     data = {
         'settings': {
             'document_identifier_link': current_app.config \
@@ -188,43 +180,48 @@ def logged_user():
         }
     }
 
-    if user:
-        data['metadata'] = user.dumps()
-        data['metadata']['is_superuser'] = user.is_superuser
-        data['metadata']['is_admin'] = user.is_admin
-        data['metadata']['is_moderator'] = user.is_moderator
-        data['metadata']['is_submitter'] = user.is_submitter
-        data['metadata']['is_user'] = user.is_user
-        data['metadata']['permissions'] = {
-            'users': {
-                'add': UserPermission.create(user),
-                'list': UserPermission.list(user)
-            },
-            'documents': {
-                'add': DocumentPermission.create(user),
-                'list': DocumentPermission.list(user)
-            },
-            'organisations': {
-                'add': OrganisationPermission.create(user),
-                'list': OrganisationPermission.list(user)
-            },
-            'deposits': {
-                'add': DepositPermission.create(user),
-                'list': DepositPermission.list(user)
-            },
-            'projects': {
-                'add': RecordPermissionPolicy('create').can(),
-                'list': RecordPermissionPolicy('search').can()
-            },
-            'collections': {
-                'add': CollectionPermission.create(user),
-                'list': CollectionPermission.list(user)
-            },
-            'subdivisions': {
-                'add': SubdivisionPermission.create(user),
-                'list': SubdivisionPermission.list(user)
+    if not current_user.is_anonymous:
+        user = current_user_record
+        if user and 'resolve' in request.args:
+            user = user.replace_refs()
+
+        if user:
+            data['metadata'] = user.dumps()
+            data['metadata']['is_superuser'] = user.is_superuser
+            data['metadata']['is_admin'] = user.is_admin
+            data['metadata']['is_moderator'] = user.is_moderator
+            data['metadata']['is_submitter'] = user.is_submitter
+            data['metadata']['is_user'] = user.is_user
+            data['metadata']['permissions'] = {
+                'users': {
+                    'add': UserPermission.create(user),
+                    'list': UserPermission.list(user)
+                },
+                'documents': {
+                    'add': DocumentPermission.create(user),
+                    'list': DocumentPermission.list(user)
+                },
+                'organisations': {
+                    'add': OrganisationPermission.create(user),
+                    'list': OrganisationPermission.list(user)
+                },
+                'deposits': {
+                    'add': DepositPermission.create(user),
+                    'list': DepositPermission.list(user)
+                },
+                'projects': {
+                    'add': RecordPermissionPolicy('create').can(),
+                    'list': RecordPermissionPolicy('search').can()
+                },
+                'collections': {
+                    'add': CollectionPermission.create(user),
+                    'list': CollectionPermission.list(user)
+                },
+                'subdivisions': {
+                    'add': SubdivisionPermission.create(user),
+                    'list': SubdivisionPermission.list(user)
+                }
             }
-        }
 
     # TODO: If an organisation is associated to user and only when running
     # tests, organisation cannot not be encoded to JSON after call of

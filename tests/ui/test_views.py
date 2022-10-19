@@ -83,7 +83,8 @@ def test_logged_user(app, client, superuser, admin, moderator, submitter,
     url = url_for('sonar.logged_user')
 
     res = client.get(url)
-    assert b'{}' in res.data
+    assert b'settings' in res.data
+    assert b'metadata' not in res.data
 
     # Logged as admin
     login_user_via_session(client, email=admin['email'])
