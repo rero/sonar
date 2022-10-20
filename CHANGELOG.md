@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.8.1](https://github.com/rero/sonar/tree/v1.8.1) (2022-10-20)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.8.0...v1.8.1)
+
+**Bug fixes:**
+
+* logged user: fix settings [\#905](https://github.com/rero/sonar/pull/905) (by @Garfield-fr)
+
 ## [v1.8.0](https://github.com/rero/sonar/tree/v1.8.0) (2022-08-30)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.7.0...v1.8.0)
