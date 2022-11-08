@@ -18,6 +18,7 @@
 """Dublin Core serializer."""
 
 from flask_resources.serializers import SerializerMixin
+from invenio_oaiserver.utils import sanitize_unicode
 from lxml import etree
 
 from sonar.modules.documents.serializers.schemas.dc import DublinCoreSchema
@@ -102,7 +103,7 @@ class SonarDublinCoreXMLSerializer(SerializerMixin):
                         f'{{http://purl.org/dc/elements/1.1/}}{elements[key]}',
                         attrs
                         )
-                    field.text = val
+                    field.text = sanitize_unicode(val)
         return root
 
 

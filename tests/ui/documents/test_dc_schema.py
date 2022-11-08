@@ -202,6 +202,15 @@ def test_descriptions_attributes(minimal_document):
         }
     ]
 
+
+def test_descriptions_xml_control_char(minimal_document):
+    minimal_document['abstracts'] = [{
+        'language': 'fre',
+        'value': 'sous\x02évalués'
+    }]
+    assert SonarDublinCoreXMLSerializer().serialize_object_xml(dict(_source=minimal_document))
+
+
 def test_formats(minimal_document):
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
     assert result['formats'] == []
