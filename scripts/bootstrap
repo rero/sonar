@@ -21,6 +21,7 @@ source $(dirname "$0")/functions
 set -e
 
 deploy=false
+ci=false
 ui_tgz=""
 
 # Poetry is a mandatory condition to launch this program!
@@ -38,6 +39,9 @@ while test $# -gt 0; do
               shift
             fi
             ;;
+        -c|--ci)
+          # We are probably running webaction, check for env variables
+          ci=true ;;
         --deploy)
             deploy=true
             ;;
@@ -45,6 +49,7 @@ while test $# -gt 0; do
     esac
     shift
 done
+
 
 title "Bootstrap script"
 
@@ -63,10 +68,19 @@ poetry run pip install poethepoet
 section "Install fs"
 poetry run pip install "fs<2.0.0"
 
-# Installs all packages specified in poetry.lock
-if [ "$deploy" = false ]; then
-  section "Updating dependencies" "info"
+if ! $deploy ; then
+  if $ci ; then
+    section "Updating dependencies" "info"
+    poetry update
+  fi
+fi
+
+if ! $deploy ; then
+  section "Install the application" "info"
   poetry install
+else
+  section "Install the application for production" "info"
+  poetry install --only main
 fi
 
 # Collect static files

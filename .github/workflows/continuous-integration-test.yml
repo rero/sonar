@@ -7,8 +7,11 @@ env:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dependencies: ['dev', 'deploy']
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Install Libraries
       run: |
@@ -22,9 +25,9 @@ jobs:
         sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
 
     - name: Setup node
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
-        node-version: '12'
+        node-version: '14'
 
     - name: Docker compose up
       run: docker-compose up -d
@@ -41,6 +44,17 @@ jobs:
       run: |
         poetry run ./scripts/bootstrap
         pip install --upgrade coveralls
+
+    - name: Bootstrap
+      if: ${{ matrix.dependencies == 'dev' }}
+      run: |
+        poetry run ./scripts/bootstrap --ci
+        pip install --upgrade coveralls
+
+    - name: Bootstrap deploy
+      if: ${{ matrix.dependencies == 'deploy' }}
+      run: |
+        poetry run ./scripts/bootstrap --ci --deploy E2E=yes
 
     - name: Run Test
       run: poetry run ./scripts/test
