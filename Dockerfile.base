@@ -22,7 +22,7 @@
 # and includes Pip, Pipenv, Node.js, NPM and some few standard libraries
 # Invenio usually needs.
 
-FROM python:3.9-slim-buster
+FROM python:3.9-slim-bullseye
 
 # require debian packages
 RUN apt-get upgrade -y && apt-get update -y
@@ -56,8 +56,4 @@ RUN useradd invenio --uid ${INVENIO_USER_ID}  --home ${WORKING_DIR} && \
     chown -R invenio:invenio ${WORKING_DIR} && \
     chmod -R go+w ${WORKING_DIR}
 
-# Install dependencies
-RUN poetry run pip install --upgrade pip "setuptools<58"
-RUN poetry install --no-dev
-
-
+USER 1000
