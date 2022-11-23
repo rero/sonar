@@ -17,6 +17,8 @@
 
 """Test documents API."""
 
+from copy import deepcopy
+
 from flask import url_for
 from invenio_stats.tasks import aggregate_events, process_events
 
@@ -184,3 +186,19 @@ def test_stats(app, client, document_with_file, es, db, event_queues):
     assert document_with_file.statistics['file-download']['test1.pdf'] == 1
     # the thumbnail should not be in the statistics
     assert not 'test1-pdf.jpg' in document_with_file.statistics['file-download']
+
+
+def test_affiliations(document):
+    """Test controlled affiliation."""
+    data = deepcopy(dict(document))
+    data['contribution'][0]['affiliation'] = 'foo'
+    document.update(data)
+    assert 'controlledAffiliation' not in document['contribution'][0]
+
+    data['contribution'][0]['affiliation'] = 'Uni of Geneva and HUG, Uni of Lausanne and CHUV'
+    document.update(data)
+    assert len(document['contribution'][0]['controlledAffiliation']) == 2
+
+    data['contribution'][0].pop('affiliation', None)
+    document.update(data)
+    assert 'controlledAffiliation' not in document['contribution'][0]
