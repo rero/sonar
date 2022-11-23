@@ -121,9 +121,11 @@ class DocumentRecord(SonarRecord):
         affiliation_resolver = AffiliationResolver()
         for contributor in data.get('contribution', []):
             if contributor.get('affiliation'):
-                controlled_affiliations = affiliation_resolver.resolve(
-                    contributor['affiliation'])
-                if controlled_affiliations:
+                # remove existing controlled affiliation
+                with contextlib.suppress(KeyError):
+                    del contributor['controlledAffiliation']
+                if controlled_affiliations := affiliation_resolver.resolve(
+                        contributor['affiliation']):
                     contributor[
                         'controlledAffiliation'] = controlled_affiliations
 
