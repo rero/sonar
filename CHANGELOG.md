@@ -1,5 +1,14 @@
 # Changelog
 
+## [v1.8.2](https://github.com/rero/sonar/tree/v1.8.2) (2022-11-24)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.8.1...v1.8.2)
+
+**Bug fixes:**
+
+* Controlled affiliation should be cleared when affiliation is modified to empty or unrecognized value [\#807](https://github.com/rero/sonar/issues/807)
+* The editor or API should prevent bad character encodings [\#867](https://github.com/rero/sonar/issues/867)
+
 ## [v1.8.1](https://github.com/rero/sonar/tree/v1.8.1) (2022-10-20)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.8.0...v1.8.1)
