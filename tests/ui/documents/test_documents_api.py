@@ -198,3 +198,7 @@ def test_affiliations(document):
     data['contribution'][0]['affiliation'] = 'Uni of Geneva and HUG, Uni of Lausanne and CHUV'
     document.update(data)
     assert len(document['contribution'][0]['controlledAffiliation']) == 2
+
+    data['contribution'][0].pop('affiliation', None)
+    document.update(data)
+    assert 'controlledAffiliation' not in document['contribution'][0]
