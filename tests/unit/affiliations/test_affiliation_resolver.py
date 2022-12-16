@@ -46,7 +46,7 @@ def test_resolve():
     test_string = ('Clinic for Cardiovascular Surgery, University Hospital'
                    'Zurich, Raemistrasse 100, 8091 Zurich, Switzerland')
     assert affiliation_resolver.resolve(test_string) == [
-        'Uni of Zurich and Hospital'
+        'University of Zurich and Hospital'
     ]
 
     test_string = (
@@ -55,7 +55,7 @@ def test_resolve():
         'Switzerland - Graduate School for Cellular and Biomedical Sciences, '
         'University of Bern, 3012 Bern, Switzerland')
     assert affiliation_resolver.resolve(test_string) == [
-        'Uni of Bern and Hospital', 'Università della Svizzera italiana'
+        'University of Bern and Hospital', 'Università della Svizzera italiana'
     ]
 
     test_string = (

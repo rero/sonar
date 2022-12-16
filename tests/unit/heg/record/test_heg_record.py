@@ -25,7 +25,7 @@ def test_serialize(app):
     record = HEGRecord({
         'identified_affiliations': [{
             'i_aff': '7',
-            'aff': 'Uni of Bern',
+            'aff': 'University of Bern',
         }],
         "RERO_ids": [],
         'CrossRef_record': {
