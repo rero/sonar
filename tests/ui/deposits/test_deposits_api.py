@@ -162,7 +162,7 @@ def test_create_document(app, db, project, client, deposit, submitter,
                 'value': '1234-5678-1234-5678'
             }
         },
-        'controlledAffiliation': ['Uni of Bern and Hospital'],
+        'controlledAffiliation': ['University of Bern and Hospital'],
         'role': ['cre']
     }]
 

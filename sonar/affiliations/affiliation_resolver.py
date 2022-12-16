@@ -72,5 +72,10 @@ class AffiliationResolver():
                             'zurich university of the arts' in searched_affiliation.lower()
                     ):
                         continue
+                    # handle special case CERN/Lucerne
+                    if (affiliation.lower() == 'cern' and
+                        'lucerne' in searched_affiliation.lower()
+                    ):
+                        continue
                     collected_affiliations.append(standard_form)
         return collected_affiliations
