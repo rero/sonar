@@ -73,12 +73,17 @@ def test_search(app, client, organisation, collection):
                 resource_type='documents')).status_code == 404
 
 
-def test_detail(app, client, document_with_file, mock_ark):
+def test_detail(app, client, organisation, document_with_file):
     """Test document detail page."""
-    assert client.get(
+    res = client.get(
         url_for('invenio_records_ui.doc',
                 view='global',
-                pid_value=document_with_file['pid'])).status_code == 200
+                pid_value=document_with_file['pid']))
+    from bs4 import BeautifulSoup
+    soup = BeautifulSoup(res.data, 'html.parser')
+    assert organisation.get('pid') in soup.find(id='organisation').contents[0]
+
+    assert res.status_code == 200
 
     assert client.get(
         url_for('invenio_records_ui.doc',

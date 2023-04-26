@@ -58,22 +58,14 @@
             "$ref": "interface_language-v1.0.0.json"
           }
         },
-        "propertiesOrder": [
-          "language",
-          "value"
-        ],
-        "required": [
-          "value",
-          "language"
-        ]
+        "propertiesOrder": ["language", "value"],
+        "required": ["value", "language"]
       },
       "form": {
         "validation": {
           "validators": {
             "uniqueValueKeysInObject": {
-              "keys": [
-                "language"
-              ]
+              "keys": ["language"]
             }
           },
           "messages": {
@@ -106,23 +98,15 @@
             "$ref": "interface_language-v1.0.0.json"
           }
         },
-        "propertiesOrder": [
-          "language",
-          "value"
-        ],
-        "required": [
-          "value",
-          "language"
-        ]
+        "propertiesOrder": ["language", "value"],
+        "required": ["value", "language"]
       },
       "form": {
         "hideExpression": "!field.parent.model.isDedicated",
         "validation": {
           "validators": {
             "uniqueValueKeysInObject": {
-              "keys": [
-                "language"
-              ]
+              "keys": ["language"]
             }
           },
           "messages": {
@@ -158,9 +142,7 @@
         "validation": {
           "validators": {
             "uniqueValueKeysInObject": {
-              "keys": [
-                "serverName"
-              ]
+              "keys": ["serverName"]
             }
           },
           "messages": {
@@ -181,6 +163,11 @@
         },
         "hideExpression": "!field.model.isShared"
       }
+    },
+    "arkNAAN": {
+      "title": "Ark Name Assigning Authority Number (NAAN)",
+      "type": "string",
+      "minLength": 1
     },
     "platformName": {
       "title": "Platform name",
@@ -217,14 +204,8 @@
                 "$ref": "language-v1.0.0.json"
               }
             },
-            "propertiesOrder": [
-              "language",
-              "value"
-            ],
-            "required": [
-              "value",
-              "language"
-            ]
+            "propertiesOrder": ["language", "value"],
+            "required": ["value", "language"]
           }
         },
         "includeInFacets": {
@@ -233,10 +214,7 @@
           "default": false
         }
       },
-      "propertiesOrder": [
-        "label",
-        "includeInFacets"
-      ],
+      "propertiesOrder": ["label", "includeInFacets"],
       "form": {
         "hideExpression": "!field.parent.model.isDedicated"
       }
@@ -264,14 +242,8 @@
                 "$ref": "language-v1.0.0.json"
               }
             },
-            "propertiesOrder": [
-              "language",
-              "value"
-            ],
-            "required": [
-              "value",
-              "language"
-            ]
+            "propertiesOrder": ["language", "value"],
+            "required": ["value", "language"]
           }
         },
         "includeInFacets": {
@@ -280,10 +252,7 @@
           "default": false
         }
       },
-      "propertiesOrder": [
-        "label",
-        "includeInFacets"
-      ],
+      "propertiesOrder": ["label", "includeInFacets"],
       "form": {
         "hideExpression": "!field.parent.model.isDedicated"
       }
@@ -311,14 +280,8 @@
                 "$ref": "language-v1.0.0.json"
               }
             },
-            "propertiesOrder": [
-              "language",
-              "value"
-            ],
-            "required": [
-              "value",
-              "language"
-            ]
+            "propertiesOrder": ["language", "value"],
+            "required": ["value", "language"]
           }
         },
         "includeInFacets": {
@@ -327,18 +290,16 @@
           "default": false
         }
       },
-      "propertiesOrder": [
-        "label",
-        "includeInFacets"
-      ],
+      "propertiesOrder": ["label", "includeInFacets"],
       "form": {
         "hideExpression": "!field.parent.model.isDedicated"
       }
     },
     "publicDocumentFacets": {
       "title": "Visible facets in the public interface for documents",
-      "type":"array",
+      "type": "array",
       "uniqueItems": true,
+      "minItems": 1,
       "items": {
         "type": "string",
         "enum": [
@@ -356,7 +317,6 @@
         "type": "multicheckbox",
         "templateOptions": {
           "type": "array",
-          "wrappers": [],
           "translate": true,
           "options": [
             {
@@ -448,25 +408,21 @@
             "type": "integer"
           }
         },
-        "required": [
-          "bucket",
-          "file_id",
-          "version_id",
-          "key"
-        ]
+        "required": ["bucket", "file_id", "version_id", "key"]
       }
     }
   },
   "propertiesOrder": [
-    "code",
     "name",
-    "description",
-    "footer",
+    "code",
     "isShared",
     "isDedicated",
     "serverName",
-    "allowedIps",
     "platformName",
+    "arkNAAN",
+    "allowedIps",
+    "description",
+    "footer",
     "documentsCustomField1",
     "documentsCustomField2",
     "documentsCustomField3",

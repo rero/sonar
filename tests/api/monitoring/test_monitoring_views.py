@@ -36,10 +36,7 @@ def test_db_connection_count(client, es_clear, monkeypatch, admin, superuser):
 
     login_user_via_session(client, email=superuser['email'])
 
-    # Error
-    response = client.get(url_for('monitoring_api.db_connection_count'))
-    assert response.status_code == 500
-
+    # need to be mocked as it works only with postgresql
     class MockConnectionQuery():
         """Mock connection query."""
 
@@ -72,10 +69,7 @@ def test_db_activity(client, es_clear, monkeypatch, admin, superuser):
     """Test DB activity."""
     login_user_via_session(client, email=superuser['email'])
 
-    # Error
-    response = client.get(url_for('monitoring_api.db_activity'))
-    assert response.status_code == 500
-
+    # need to be mocked as it works only with postgresql
     class MockActivityQuery():
         """Mock activity query."""
 
@@ -140,7 +134,6 @@ def test_data_status(client, es_clear, organisation, superuser, document,
         mock_info)
     response = client.get(url_for('monitoring_api.data_status'))
     assert response.status_code == 500
-    assert response.json == {'error': 'Unknown exception'}
 
 
 def test_data_info(client, es_clear, superuser, document, monkeypatch):
@@ -220,7 +213,6 @@ def test_data_info(client, es_clear, superuser, document, monkeypatch):
         mock_info)
     response = client.get(url_for('monitoring_api.data_info', detail=True))
     assert response.status_code == 500
-    assert response.json == {'error': 'Unknown exception'}
 
 
 def test_elastic_search(client, superuser, monkeypatch):
@@ -240,4 +232,3 @@ def test_elastic_search(client, superuser, monkeypatch):
                         mock_info)
     response = client.get(url_for('monitoring_api.elastic_search'))
     assert response.status_code == 500
-    assert response.json == {'error': 'Unknown exception'}

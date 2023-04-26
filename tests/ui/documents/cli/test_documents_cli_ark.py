@@ -20,10 +20,13 @@
 from click.testing import CliRunner
 
 from sonar.modules.ark import cli
+from sonar.modules.documents.api import DocumentRecord
 
 
 def test_ark_disabled_cli(app, script_info):
     """Test ARK command line interface with ARK disabled."""
+    resolver = app.config['SONAR_APP_ARK_RESOLVER']
+    app.config['SONAR_APP_ARK_RESOLVER'] = None
 
     runner = CliRunner()
 
@@ -34,82 +37,13 @@ def test_ark_disabled_cli(app, script_info):
         obj=script_info)
     assert 'ARK is not enabled.' in result.output
 
-
-def test_ark_bad_auth_cli(app, script_info, monkeypatch, mock_ark):
-    """Test ARK command line interface with bad authentication."""
-
-    # enable ARK with bad credential
-    monkeypatch.setitem(app.config, 'SONAR_APP_ARK_USER', 'unauthorized')
-
-    runner = CliRunner()
-
-    # server login
-    result = runner.invoke(
-        cli.ark,
-        ['login'],
-        obj=script_info)
-    assert 'unauthorized' in result.output
-
-    # mint a new ark id
-    result = runner.invoke(
-        cli.mint,
-        ['https://sonar.ch/global/documents/1'],
-        obj=script_info)
-    assert 'unauthorized' in result.output
-
-    # create a new ark id
-    result = runner.invoke(
-        cli.create,
-        ['1', 'https://sonar.ch/global/documents/1'],
-        obj=script_info)
-    assert 'unauthorized' in result.output
-
-    # update the target of an existing ark id
-    result = runner.invoke(
-        cli.update,
-        ['1', 'https://sonar.ch/view1/documents/1'],
-        obj=script_info)
-    assert 'unauthorized' in result.output
-
-    # invalidate a an existing ark id
-    result = runner.invoke(
-        cli.delete,
-        ['1'],
-        obj=script_info)
-    assert 'unauthorized' in result.output
+    app.config['SONAR_APP_ARK_RESOLVER'] = resolver
 
 
-def test_ark_cli(app, script_info, mock_ark):
+def test_ark_cli_cfg(app, script_info):
     """Test ARK command line interface."""
 
     runner = CliRunner()
-
-    # server status
-    result = runner.invoke(
-        cli.status,
-        obj=script_info)
-    assert 'message: EZID is up' in result.output
-
-    # get ark information
-    # monkeypatch.setattr(Ark, 'get', ArkMock.get)
-    result = runner.invoke(
-        cli.get,
-        ['7'],
-        obj=script_info)
-    assert '"success": "ark:/99999/ffk37"' in result.output
-
-    # ark resolution
-    result = runner.invoke(
-        cli.resolve,
-        ['7'],
-        obj=script_info)
-    assert result.output.startswith('http')
-
-    # ark server login
-    result = runner.invoke(
-        cli.login,
-        obj=script_info)
-    assert 'session cookie returned' in result.output
 
     # ark server config
     result = runner.invoke(
@@ -117,30 +51,73 @@ def test_ark_cli(app, script_info, mock_ark):
         obj=script_info)
     assert 'config' in result.output
 
-    # mint a new ark id
-    result = runner.invoke(
-        cli.mint,
-        ['https://sonar.ch/global/documents/1'],
-        obj=script_info)
-    assert result.output.startswith('ark:/')
 
-    # create a new ark id
+def test_ark_cli_create_missing_org_not_exists(app, script_info):
+    """Test create missing ark with the given org pid does not exist."""
+    runner = CliRunner()
+    # ark server config
     result = runner.invoke(
-        cli.create,
-        ['1', 'https://sonar.ch/global/documents/1'],
+        cli.create_missing,
+        ['foo'],
         obj=script_info)
-    assert result.output.startswith('ark:/')
+    assert 'not exist' in result.output
 
-    # update the target of an existing ark id
-    result = runner.invoke(
-        cli.update,
-        ['1', 'https://sonar.ch/view1/documents/1'],
-        obj=script_info)
-    assert result.output.startswith('ark:/')
 
-    # invalidate a an existing ark id
+def test_ark_cli_create_missing_no_doc(app, script_info, organisation):
+    """Test create missing ark with no doc to update."""
+    runner = CliRunner()
     result = runner.invoke(
-        cli.delete,
-        ['1'],
+        cli.create_missing,
+        ['org'],
         obj=script_info)
-    assert result.output.startswith('ark:/')
+    assert 'No document found.' in result.output
+
+
+def test_ark_cli_create_missing(app, db, script_info, organisation, make_document):
+    """Test create missing ark."""
+    runner = CliRunner()
+
+    # remove the naan configuration in the organisation
+    naan = organisation['arkNAAN']
+    del organisation['arkNAAN']
+    organisation.commit()
+
+    result = runner.invoke(
+        cli.create_missing,
+         ['org'],
+        obj=script_info)
+    assert 'NAAN configuration does not exist' in result.output
+
+    # Create a document without an ark
+    doc = make_document()
+    assert not doc.get_ark()
+    #restore the configuration
+    organisation['arkNAAN'] = naan
+    organisation.commit()
+
+    # remove the should to disable the ARK in the instance
+    shoulder = app.config.get('SONAR_APP_ARK_SHOULDER')
+    app.config['SONAR_APP_ARK_SHOULDER'] = None
+    result = runner.invoke(
+        cli.create_missing,
+        ['org'],
+        obj=script_info)
+    assert 'Ark is not enabled' in result.output
+
+    # restore the ARK config
+    app.config['SONAR_APP_ARK_SHOULDER'] = shoulder
+    # document should be processed
+    result = runner.invoke(
+        cli.create_missing,
+        ['org'],
+        obj=script_info)
+    assert 'has been updated' in result.output
+    # the ark exists in the document
+    assert DocumentRecord.get_record_by_pid(doc['pid']).get_ark()
+
+    # the second call do nothing
+    result = runner.invoke(
+        cli.create_missing,
+        ['org'],
+        obj=script_info)
+    assert 'No document found.' in result.output

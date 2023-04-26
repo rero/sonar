@@ -24,5 +24,5 @@ def test_organisation_resolver(document):
     assert document['organisation'][0][
         '$ref'] == 'https://sonar.ch/api/organisations/org'
 
-    assert document.replace_refs().get(
+    assert document.resolve().get(
         'organisation')[0]['name'] == 'org'

@@ -366,6 +366,7 @@ RECORDS_UI_ENDPOINTS = {
     },
 }
 """Records UI for sonar."""
+REST_MIMETYPE_QUERY_ARG_NAME = 'format'
 
 RECORDS_REST_ENDPOINTS = {
     'doc':
@@ -382,10 +383,22 @@ RECORDS_REST_ENDPOINTS = {
         record_serializers={
             'application/json': ('sonar.modules.documents.serializers'
                                  ':json_v1_response'),
+            'text/xml': ('sonar.modules.documents.serializers'
+                                 ':dc_v1_response'),
+        },
+        record_serializers_aliases={
+            'json': 'application/json',
+            'dc': 'text/xml',
         },
         search_serializers={
             'application/json': ('sonar.modules.documents.serializers'
                                  ':json_v1_search'),
+            'text/xml': ('sonar.modules.documents.serializers'
+                                 ':dc_v1_search'),
+        },
+        search_serializers_aliases={
+            'json': 'application/json',
+            'dc': 'text/xml',
         },
         record_loaders={
             'application/json': ('sonar.modules.documents.loaders'
@@ -874,7 +887,7 @@ OAISERVER_METADATA_FORMATS = {
     'oai_dc': {
         'namespace': 'http://www.openarchives.org/OAI/2.0/oai_dc/',
         'schema': 'http://www.openarchives.org/OAI/2.0/oai_dc.xsd',
-        'serializer': 'sonar.modules.documents.serializers.dc.sonar_dublin_core',
+        'serializer': 'sonar.modules.documents.serializers.oai_dc.sonar_dublin_core',
     }
 }
 #: Number of records to return per page in OAI-PMH results.

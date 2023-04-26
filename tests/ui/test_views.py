@@ -83,21 +83,21 @@ def test_logged_user(app, client, superuser, admin, moderator, submitter,
     url = url_for('sonar.logged_user')
 
     res = client.get(url)
-    assert b'settings' in res.data
-    assert b'metadata' not in res.data
+    assert res.json['settings']
+    assert not res.json.get('metadata')
 
     # Logged as admin
     login_user_via_session(client, email=admin['email'])
     res = client.get(url)
-    assert b'"email":"orgadmin@rero.ch"' in res.data
+    assert res.json['metadata']['email'] == "orgadmin@rero.ch"
     assert res.json['metadata']['permissions']['documents']['add']
     assert not res.json['metadata']['permissions']['organisations']['add']
     assert res.json['metadata']['permissions']['users']['add']
     assert res.json['metadata']['permissions']['deposits']['add']
 
     res = client.get(url + '?resolve=1')
-    assert b'"email":"orgadmin@rero.ch"' in res.data
-    assert b'"pid":"org"' in res.data
+    assert res.json['metadata']['email'] == "orgadmin@rero.ch"
+    assert res.json['metadata']['pid'] ==  "orgadmin"
 
     # Check settings
     assert 'settings' in res.json
@@ -105,7 +105,7 @@ def test_logged_user(app, client, superuser, admin, moderator, submitter,
     # Logged as superuser
     login_user_via_session(client, email=superuser['email'])
     res = client.get(url)
-    assert b'"email":"orgsuperuser@rero.ch"' in res.data
+    assert res.json['metadata']['email'] == "orgsuperuser@rero.ch"
     assert res.json['metadata']['permissions']['documents']['add']
     assert res.json['metadata']['permissions']['organisations']['add']
     assert res.json['metadata']['permissions']['users']['add']
@@ -118,7 +118,7 @@ def test_logged_user(app, client, superuser, admin, moderator, submitter,
     # Logged as moderator
     login_user_via_session(client, email=moderator['email'])
     res = client.get(url)
-    assert b'"email":"orgmoderator@rero.ch"' in res.data
+    assert res.json['metadata']['email'] == "orgmoderator@rero.ch"
     assert res.json['metadata']['permissions']['documents']['add']
     assert not res.json['metadata']['permissions']['organisations']['add']
     assert not res.json['metadata']['permissions']['users']['add']
@@ -131,7 +131,7 @@ def test_logged_user(app, client, superuser, admin, moderator, submitter,
     # Logged as submitter
     login_user_via_session(client, email=submitter['email'])
     res = client.get(url)
-    assert b'"email":"orgsubmitter@rero.ch"' in res.data
+    assert res.json['metadata']['email'] == "orgsubmitter@rero.ch"
     assert not res.json['metadata']['permissions']['documents']['add']
     assert not res.json['metadata']['permissions']['organisations']['add']
     assert not res.json['metadata']['permissions']['users']['add']
@@ -144,7 +144,7 @@ def test_logged_user(app, client, superuser, admin, moderator, submitter,
     # Logged as user
     login_user_via_session(client, email=user['email'])
     res = client.get(url)
-    assert b'"email":"orguser@rero.ch"' in res.data
+    assert res.json['metadata']['email'] == "orguser@rero.ch"
     assert not res.json['metadata']['permissions']['documents']['add']
     assert not res.json['metadata']['permissions']['organisations']['add']
     assert not res.json['metadata']['permissions']['users']['add']
@@ -209,7 +209,7 @@ def test_schema_users(client, admin, admin_shared):
     assert not res.json['schema']['properties'].get('subdivision')
 
 
-def test_schema_organisations(client, admin, user):
+def test_schema_organisations(client, admin, user, superuser):
     """Test schema organisations."""
     login_user_via_session(client, email=admin['email'])
     # admin user --> no fields `isShared` and `isDedicated`
@@ -217,12 +217,20 @@ def test_schema_organisations(client, admin, user):
     assert res.status_code == 200
     assert 'isShared' not in res.json['schema']['propertiesOrder']
     assert 'isDedicated' not in res.json['schema']['propertiesOrder']
+    assert 'arkNAAN' not in res.json['schema']['propertiesOrder']
 
     login_user_via_session(client, email=user['email'])
     res = client.get(url_for('sonar.schemas', record_type='users'))
     assert res.status_code == 200
     assert not res.json['schema']['properties'].get('organisation')
     assert not res.json['schema']['properties'].get('role')
+
+    login_user_via_session(client, email=superuser['email'])
+    res = client.get(url_for('sonar.schemas', record_type='organisations'))
+    assert res.status_code == 200
+    assert 'isShared' in res.json['schema']['propertiesOrder']
+    assert 'isDedicated' in res.json['schema']['propertiesOrder']
+    assert 'arkNAAN' in res.json['schema']['propertiesOrder']
 
 
 def test_schema_projects(client, user):
@@ -344,7 +352,7 @@ def test_record_image_url(client):
 def test_rerodoc_redirection(client, app, document, organisation):
     """Test redirection with RERODOC identifier."""
     global_view = app.config.get('SONAR_APP_DEFAULT_ORGANISATION')
-    # Does not exists
+    # does not exist
     res = client.get(url_for('sonar.rerodoc_redirection', pid='NOT-EXISTING'))
     assert res.status_code == 404
 

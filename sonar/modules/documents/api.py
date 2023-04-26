@@ -35,9 +35,9 @@ from sonar.modules.utils import change_filename_extension, \
     create_thumbnail_from_file, get_current_ip, is_ip_in_list
 
 from ..api import SonarIndexer, SonarRecord, SonarSearch
-from ..ark.api import current_ark
 from ..fetchers import id_fetcher
 from ..providers import Provider
+from .dumpers import ReplaceRefsDumper, document_indexer_dumper
 from .extensions import ArkDocumentExtension
 
 # provider
@@ -65,9 +65,10 @@ class DocumentRecord(SonarRecord):
     provider = DocumentProvider
     schema = 'documents/document-v1.0.0.json'
     _extensions = [ArkDocumentExtension()]
+    enable_jsonref = False
 
     @staticmethod
-    def get_permanent_link(host, pid, org=None):
+    def get_permanent_link(host, pid, org=None, ignore_ark=False):
         """Return the permanent link for the document.
 
         :param host: Application server host.
@@ -75,6 +76,9 @@ class DocumentRecord(SonarRecord):
         :param pid: PID of the document.
         :returns: Document's full URL as string.
         """
+        doc = DocumentRecord.get_record_by_pid(pid)
+        if (ark_url := doc.get_ark_resolver_url()) and not ignore_ark:
+            return ark_url
         if not org:
             org = current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION')
 
@@ -127,8 +131,6 @@ class DocumentRecord(SonarRecord):
                         contributor['affiliation']):
                     contributor[
                         'controlledAffiliation'] = controlled_affiliations
-
-
 
     @classmethod
     def get_record_by_identifier(cls, identifiers):
@@ -365,6 +367,7 @@ class DocumentRecord(SonarRecord):
 
         return True
 
+
     @property
     def is_masked(self):
         """Check if record is masked.
@@ -414,17 +417,34 @@ class DocumentRecord(SonarRecord):
                     res['file-download'][b['key']] = int(b['unique_count'])
         return res
 
+    def get_ark(self):
+        """Get the ARK identifier."""
+        for identifier in self.get('identifiedBy', []):
+            if identifier.get('type') == 'ark':
+                return identifier.get('value')
 
     def get_ark_resolver_url(self):
         """Get the ark resolver url.
 
         :returns: the URL to resolve the current identifier.
         """
-        if self.get('ark'):
-            return current_ark.resolver_url(self.get('pid'))
+        if ark := self.get_ark():
+            resolver_url = current_app.config.get('SONAR_APP_ARK_RESOLVER')
+            return f'{resolver_url}/{ark}'
 
+    def resolve(self):
+        """Resolve references data.
+
+        Uses the dumper to do the job.
+        Mainly used by the `resolve=1` URL parameter.
+
+        :returns: a fresh copy of the resolved data.
+        """
+        return self.dumps(ReplaceRefsDumper())
 
 class DocumentIndexer(SonarIndexer):
     """Indexing documents in Elasticsearch."""
 
     record_cls = DocumentRecord
+
+    record_dumper = document_indexer_dumper

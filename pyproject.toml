@@ -121,6 +121,7 @@ theme = "sonar.theme.views:blueprint"
 validation = "sonar.modules.validation.views:blueprint"
 users = "sonar.modules.users.views:blueprint"
 sitemap = "sonar.modules.sitemap.views:blueprint"
+ark = "sonar.modules.ark.views:blueprint"
 
 [tool.poetry.plugins."invenio_base.api_blueprints"]
 deposits = "sonar.modules.deposits.rest:api_blueprint"

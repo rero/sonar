@@ -112,7 +112,7 @@ def test_context(minimal_document):
     """Test @context serialization."""
     result = schemaorg_v1.transform_record(minimal_document['pid'],
                                            minimal_document)
-    assert result['@context'] == 'http://schema.org'
+    assert result['@context'] == 'http://schema.org/'
 
 
 def test_abstract(minimal_document):
@@ -255,14 +255,14 @@ def test_identifier(minimal_document):
     """Test identifier serialization."""
     result = schemaorg_v1.transform_record(minimal_document['pid'],
                                            minimal_document)
-    assert result['identifier'] == 'http://localhost/global/documents/1000'
+    assert result['identifier'] == 'https://n2t.net/ark:/99999/ffk31000'
 
 
 def test_id(minimal_document):
     """Test @id serialization."""
     result = schemaorg_v1.transform_record(minimal_document['pid'],
                                            minimal_document)
-    assert result['@id'] == 'http://localhost/global/documents/1000'
+    assert result['@id'] == 'https://n2t.net/ark:/99999/ffk31000'
 
 
 def test_keywords(minimal_document):

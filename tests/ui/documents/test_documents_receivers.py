@@ -22,8 +22,8 @@ from os.path import exists, join
 
 from invenio_oaiharvester.tasks import get_records
 
-from sonar.modules.documents.receivers import chunks, enrich_document_data, \
-    export_json, transform_harvested_records
+from sonar.modules.documents.receivers import chunks, export_json, \
+    transform_harvested_records
 
 
 def test_transform_harvested_records(app, bucket_location,
@@ -59,25 +59,6 @@ def test_transform_harvested_records(app, bucket_location,
         })
     captured = capsys.readouterr()
     assert captured.out == ''
-
-
-def test_enrich_document_data(app, db, document, pdf_file):
-    """Test add full text to document."""
-    with open(pdf_file, 'rb') as file:
-        content = file.read()
-
-    # Successful file add
-    document.add_file(content, 'test1.pdf', type='file')
-    assert document.files['test1.pdf']
-    assert document.files['test1-pdf.txt']
-
-    db.session.commit()
-
-    json = {}
-    enrich_document_data(record=document, index='documents', json=json)
-
-    assert len(json['fulltext']) == 1
-    assert 'PHYSICAL REVIEW B 99' in json['fulltext'][0]
 
 
 def test_chunks():

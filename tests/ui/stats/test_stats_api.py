@@ -18,6 +18,13 @@
 """Test stats API."""
 
 from sonar.modules.stats.api import Record
+from sonar.modules.stats.tasks import collect_stats
+
+
+def test_collect_task(document, document_with_file, es_clear):
+    """Test collect stats."""
+    assert collect_stats().startswith(
+        'New stat has been created with a pid of: ')
 
 
 def test_collect(document, document_with_file, es_clear):

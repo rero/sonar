@@ -69,7 +69,7 @@ def test_list(app, client, make_organisation, superuser, admin, moderator,
 
 def test_create(client, superuser, admin, moderator, submitter, user):
     """Test create organisations permissions."""
-    data = {'code': 'org2', 'name': 'org2'}
+    data = {'code': 'org2', 'name': 'org2', 'arkNAAN': '99999'}
 
     headers = {
         'Content-Type': 'application/json',
@@ -223,11 +223,14 @@ def test_update(client, make_organisation, superuser, admin, moderator,
 
     # Logged as admin and try to modify organisation's modes
     org['isDedicated'] = True
+    org['arkNAAN'] = '99FOO'
+    ark_naan = org.get('arkNAAN')
     res = client.put(url_for('invenio_records_rest.org_item', pid_value='org'),
                      data=json.dumps(org.dumps()),
                      headers=headers)
     assert res.status_code == 200
     assert not res.json['metadata']['isDedicated']
+    assert res.json['metadata'].get('arkNAAN') != ark_naan
 
     # Logged as admin of other organisation
     res = client.put(url_for('invenio_records_rest.org_item',
@@ -239,12 +242,14 @@ def test_update(client, make_organisation, superuser, admin, moderator,
     # Logged as superuser
     org['isDedicated'] = True
     org['isShared'] = True
+    org['arkNAAN'] = 'FOO9999'
     login_user_via_session(client, email=superuser['email'])
     res = client.put(url_for('invenio_records_rest.org_item',
                              pid_value=org['pid']),
                      data=json.dumps(org.dumps()),
                      headers=headers)
     assert res.status_code == 200
+    assert res.json['metadata'].get('arkNAAN') == 'FOO9999'
 
     login_user_via_session(client, email=superuser['email'])
     res = client.put(url_for('invenio_records_rest.org_item',

@@ -24,6 +24,7 @@ import sys
 import tempfile
 from datetime import date
 from io import BytesIO
+from os.path import dirname, join
 
 import pytest
 from dotenv import load_dotenv
@@ -32,7 +33,6 @@ from invenio_access.models import ActionUsers, Role
 from invenio_accounts.ext import hash_password
 from invenio_files_rest.models import Location
 from invenio_queues.proxies import current_queues
-from utils import MockArkServer
 
 from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.deposits.api import DepositRecord
@@ -59,24 +59,6 @@ def embargo_date():
     """Embargo date in one year from now."""
     today = date.today()
     return today.replace(year=today.year+1)
-
-
-@pytest.fixture(scope='function')
-def mock_ark(app, monkeypatch):
-    """Mock for the ARK module."""
-    # be sure that we do not make any request on the ARK server
-    monkeypatch.setattr(
-        'requests.get', lambda *args, **kwargs: MockArkServer.get(
-            *args, **kwargs))
-    monkeypatch.setattr(
-        'requests.post', lambda *args, **kwargs: MockArkServer.post(
-            *args, **kwargs))
-    monkeypatch.setattr(
-        'requests.put', lambda *args, **kwargs: MockArkServer.put(
-            *args, **kwargs))
-    # enable ARK
-    monkeypatch.setitem(app.config, 'SONAR_APP_ARK_NMA',
-                        'https://www.arketype.ch')
 
 
 @pytest.fixture(scope='module')
@@ -152,6 +134,28 @@ def instance_path():
 @pytest.fixture(scope='module', autouse=True)
 def app_config(app_config):
     """Define configuration for module."""
+    app_config['CELERY_BROKER_URL'] = 'memory://'
+    app_config['RATELIMIT_STORAGE_URL'] = 'memory://'
+    app_config['CACHE_TYPE'] = 'simple'
+    app_config['SEARCH_ELASTIC_HOSTS'] = None
+    # app_config['SQLALCHEMY_DATABASE_URI'] = \
+    #         'postgresql+psycopg2://sonar:sonar@localhost/sonar'
+    # app_config['DB_VERSIONING'] = True
+    app_config['CELERY_CACHE_BACKEND'] = "memory"
+    app_config['CELERY_RESULT_BACKEND'] = "cache"
+    app_config['CELERY_TASK_ALWAYS_EAGER'] = True
+    app_config['CELERY_TASK_EAGER_PROPAGATES'] = True
+    help_test_dir = join(dirname(__file__), 'data', 'help')
+    app_config['WIKI_CONTENT_DIR'] = help_test_dir
+    app_config['WIKI_UPLOAD_FOLDER'] = join(help_test_dir, 'files')
+    app_config['CACHE_REDIS_URL'] = 'redis://localhost:6379/0'
+    app_config['ACCOUNTS_SESSION_REDIS_URL'] = 'redis://localhost:6379/1'
+    app_config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/2'
+    app_config['RATELIMIT_STORAGE_URL'] = 'redis://localhost:6379/3'
+    app_config['CELERY_REDIS_SCHEDULER_URL'] = 'redis://localhost:6379/4'
+    app_config['WTF_CSRF_ENABLED'] = False
+    app_config['PDF_EXTRACTOR_GROBID_PORT'] = '8070'
+
     app_config['SHIBBOLETH_SERVICE_PROVIDER'] = dict(
         strict=True,
         debug=True,
@@ -169,11 +173,8 @@ def app_config(app_config):
                  )))
 
     # ARK
-    app_config['SONAR_APP_ARK_USER'] = 'test'
-    app_config['SONAR_APP_ARK_PASSWORD'] = 'test'
     app_config['SONAR_APP_ARK_RESOLVER'] = 'https://n2t.net'
     # ARK is disabled by default
-    app_config['SONAR_APP_ARK_NMA'] = None
     app_config['SONAR_APP_ARK_NAAN'] = '99999'
     app_config['SONAR_APP_ARK_SCHEME'] = 'ark:'
     app_config['SONAR_APP_ARK_SHOULDER'] = 'ffk3'
@@ -198,6 +199,7 @@ def make_organisation(app, db, bucket_location, without_oaiset_signals):
             'code': code,
             'name': code,
             'isShared': is_shared,
+            'arkNAAN': '99999',
             'isDedicated': not is_shared,
             'documentsCustomField1': {
                 'label': [{
@@ -548,7 +550,7 @@ def make_document(db, document_json, make_organisation, pdf_file, embargo_date):
     return _make_document
 
 
-@pytest.fixture()
+@pytest.fixture(scope='function')
 def document(make_document):
     """Create a document."""
     return make_document('org', False)

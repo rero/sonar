@@ -22,7 +22,8 @@ from io import BytesIO
 import pytest
 
 from sonar.modules.documents.api import DocumentRecord
-from sonar.modules.documents.serializers.dc import SonarDublinCoreXMLSerializer
+from sonar.modules.documents.serializers.oai_dc import \
+    SonarDublinCoreXMLSerializer
 
 
 @pytest.fixture()
@@ -228,7 +229,10 @@ def test_formats(minimal_document):
 def test_identifiers(minimal_document):
     """Test identifiers serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['identifiers'] == ['http://localhost/global/documents/1000']
+    assert set(result['identifiers']) == {
+        'https://n2t.net/ark:/99999/ffk31000',
+        'http://localhost/global/documents/1000'
+    }
 
 
 def test_languages(minimal_document):
@@ -283,7 +287,8 @@ def test_publishers(minimal_document):
 def test_relations(minimal_document):
     """Test relations serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['relations'] == []
+    assert result['relations'] ==  [
+        'info:eu-repo/semantics/altIdentifier/ark/99999/ffk31000']
 
     minimal_document['otherEdition'] = [{
         'document': {
@@ -309,6 +314,7 @@ def test_relations(minimal_document):
     assert result['relations'] == [
         'https://some.url.1', 'https://some.url.2',
         'https://some.url.3', 'https://some.url.4',
+        'info:eu-repo/semantics/altIdentifier/ark/99999/ffk31000'
     ]
     minimal_document.pop('otherEdition', None)
     minimal_document.pop('relatedTo', None)

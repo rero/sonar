@@ -26,10 +26,10 @@ from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 
 
 def test_list(app, client, make_document, superuser, admin, moderator,
-              submitter, user):
+              submitter, user, organisation):
     """Test list documents permissions."""
     make_document(None, with_file=True)
-    make_document('org', with_file=True)
+    doc = make_document('org', with_file=True)
 
     # Not logged
     res = client.get(url_for('invenio_records_rest.doc_list'))
@@ -78,11 +78,20 @@ def test_list(app, client, make_document, superuser, admin, moderator,
     # Public search for organisation
     res = client.get(url_for('invenio_records_rest.doc_list', view='org'))
     assert res.status_code == 200
+    data = res.json['hits']['hits'][0]['metadata']
     assert res.json['hits']['total']['value'] == 1
+    assert data['identifiers']
+    ark_identifier = [
+        r for r in data['identifiedBy']
+        if r.get('type') == 'ark'
+    ][0]
+    from sonar.modules.ark.api import Ark
+    ark = Ark(naan=organisation.get('arkNAAN'))
+    assert ark.resolver_url(data['pid']) == ark_identifier['uri']
 
 
 def test_create(client, document_json, superuser, admin, moderator, submitter,
-                user, mock_ark):
+                user):
     """Test create documents permissions."""
     headers = {
         'Content-Type': 'application/json',
@@ -135,14 +144,18 @@ def test_create(client, document_json, superuser, admin, moderator, submitter,
     assert res.status_code == 201
     assert res.json['metadata']['organisation'][0][
         '$ref'] == 'https://sonar.ch/api/organisations/org'
-    ark_id = res.json['metadata']['ark']
-    assert ark_id.startswith('ark:/')
-    assert PersistentIdentifier.get('ark', ark_id).status == \
+    ark = [
+        r for r in res.json['metadata']['identifiedBy']
+        if r.get('type') == 'ark'
+    ][0]
+    assert ark.get('value').startswith('ark:/')
+
+    assert PersistentIdentifier.get('ark', ark.get('value')).status == \
         PIDStatus.REGISTERED
 
 
 def test_read(client, document, make_user, superuser, admin, moderator,
-              submitter, user, mock_ark):
+              submitter, user):
     """Test read documents permissions."""
 
     # Not logged
@@ -339,7 +352,7 @@ def test_update(client, db, document, make_user, superuser, admin, moderator,
 
 
 def test_delete(client, document, make_document, make_user, superuser, admin,
-                moderator, submitter, user, mock_ark):
+                moderator, submitter, user):
     """Test delete documents permissions."""
 
     # Not logged
@@ -373,7 +386,7 @@ def test_delete(client, document, make_document, make_user, superuser, admin,
 
     # Create a new document
     document = make_document()
-    ark_id = document['ark']
+    ark_id = document.get_ark()
 
     # Logged as admin of other organisation
     other_admin = make_user('admin', 'org2')

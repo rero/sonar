@@ -101,6 +101,17 @@ class OrganisationSearch(SonarSearch):
         """
         return self.filter('term', isDedicated=True).execute().hits
 
+    def get_organisation_from_naan(self, naan):
+        """Get organisation from a given naan.
+
+        :param naan: Name Assigning Authority Number for the dedicated
+                     organisation.
+        :returns: pid of the dedicated organisation.
+        """
+        try:
+            return next(self.filter('term', arkNAAN=naan).scan())
+        except StopIteration:
+            return None
 
 class OrganisationRecord(SonarRecord):
     """Organisation record class."""

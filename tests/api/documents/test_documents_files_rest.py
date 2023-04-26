@@ -119,11 +119,11 @@ def test_put_delete(app, client, document, pdf_file):
     res = client.delete(url_delete_file_content)
     assert res.status_code == 204
 
-    # the file does not exists anymore
+    # the file does not exist anymore
     res = client.get(url_file_content)
     assert res.status_code == 404
 
-    # the file does not exists anymore
+    # the file does not exist anymore
     url_file = url_for(
         'invenio_records_files.doc_bucket_api',
         pid_value=document.get('pid'), key=file_name)

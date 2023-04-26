@@ -37,7 +37,7 @@ def test_get_record_class_by_pid_type(app):
     assert record.__name__ == 'DocumentRecord'
 
 
-def test_get_all_pids(app, document):
+def test_get_all_pids(document):
     """Test get all identifiers for a record type."""
     result = list(DocumentRecord.get_all_pids())
     assert result == ['1']
@@ -52,7 +52,7 @@ def test_get_all_pids(app, document):
     assert result == ['1']
 
 
-def test_create(app, document_json):
+def test_create(document_json):
     """Test creating a record."""
     record = DocumentRecord.create(document_json)
     assert DocumentRecord.get_record_by_pid(
@@ -62,7 +62,7 @@ def test_create(app, document_json):
         record['pid'])['pid'] == record['pid']
 
 
-def test_get_ref_link(app):
+def test_get_ref_link():
     """Test ref link."""
     assert DocumentRecord.get_ref_link('document', '1') == 'https://sonar.ch' \
         '/api/document/1'
@@ -84,17 +84,16 @@ def test_get_record_by_pid(app, document_json):
 
 def test_dbcommit(app, document_json):
     """Test record commit to db."""
-    record = DocumentRecord.create(document_json)
-    record.dbcommit()
+    record = DocumentRecord.create(document_json, dbcommit=True)
 
     assert DocumentRecord.get_record_by_pid(
         record['pid'])['pid'] == record['pid']
+    record.delete()
 
 
-def test_reindex(app, db, client, document_json, superuser):
+def test_reindex(client, document_json, superuser):
     """Test record reindex."""
     record = DocumentRecord.create(document_json)
-    db.session.commit()
 
     indexer = DocumentIndexer()
     indexer.index(record)
@@ -110,9 +109,10 @@ def test_reindex(app, db, client, document_json, superuser):
 
     assert response.status_code == 200
     assert data['metadata']['pid'] == record['pid']
+    record.delete(delindex=True)
 
 
-def test_get_pid_by_ref_link(app):
+def test_get_pid_by_ref_link(document):
     """Test resolving PID by the given reference link."""
     with pytest.raises(Exception) as e:
         SonarRecord.get_pid_by_ref_link('falsy-link')
@@ -126,7 +126,7 @@ def test_get_pid_by_ref_link(app):
     assert pid == '10000'
 
 
-def test_get_record_by_ref_link(app, document):
+def test_get_record_by_ref_link(document):
     """Test getting a record by a reference link."""
     link = url_for('invenio_records_rest.doc_item',
                    _external=True,
@@ -136,17 +136,17 @@ def test_get_record_by_ref_link(app, document):
     assert record['pid'] == document['pid']
 
 
-def test_add_file_from_url(app, document):
+def test_add_file_from_url(document):
     """Test add file to document by giving its URL."""
     # OK
     document.add_file_from_url(
-        'http://doc.rero.ch/record/328028/files/nor_irc.pdf', 'test.pdf')
+        'https://doc.rero.ch/record/328028/files/nor_irc.pdf', 'test.pdf')
     assert len(document.files) == 3
     assert document.files['test.pdf']['label'] == 'test.pdf'
 
     # Non existing file URL
     document.add_file_from_url(
-        'http://doc.rero.ch/pdf-url', 'test2.pdf')
+        'https://doc.rero.ch/pdf-url', 'test2.pdf')
     assert len(document.files) == 4
     assert document.files['test2.pdf']['label'] == 'test2.pdf'
 
@@ -233,16 +233,14 @@ def test_create_thumbnail(document, pdf_file):
     assert len(document.files) == 1
 
 
-def test_index_record(client, db, document_json, superuser):
+def test_index_record(client, document, document_json, superuser):
     """Test index a record."""
     login_user_via_session(client, email=superuser['email'])
-
     res = client.get(url_for('invenio_records_rest.doc_list'))
     assert res.status_code == 200
     total = res.json['hits']['total']['value']
 
-    record = DocumentRecord.create(document_json, dbcommit=True)
-    db.session.commit()
+    record = DocumentRecord.create(document_json)
 
     indexer = DocumentIndexer()
     indexer.index(record)
@@ -252,7 +250,7 @@ def test_index_record(client, db, document_json, superuser):
     assert res.json['hits']['total']['value'] == (total + 1)
 
 
-def test_remove_from_index(client, db, document, superuser):
+def test_remove_from_index(client, document, superuser):
     """Test remove a record from index."""
     login_user_via_session(client, email=superuser['email'])
 

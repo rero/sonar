@@ -25,7 +25,7 @@ from invenio_oaiserver.provider import OAIIDProvider
 from invenio_pidstore.errors import PIDAlreadyExists, PIDDoesNotExistError
 from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 
-from ..ark.api import current_ark
+from sonar.modules.ark.api import Ark
 
 
 def id_minter(record_uuid, data, provider, pid_key='pid', object_type='rec'):
@@ -73,16 +73,13 @@ def external_minters(record_uuid, data, pid_key='pid'):
                 pid.redirect(PersistentIdentifier.get('doc', data[pid_key]))
             except PIDAlreadyExists:
                 pass
-    if not data.get('harvested') and current_ark:
-        ark_id = current_ark.ark_from_id(data[pid_key])
+    new_data = current_app.extensions.get('invenio-records').replace_refs(data.get('organisation', [{}])[0])
+    naan = new_data.get('arkNAAN')
+
+    if not data.get('harvested') and (ark := Ark(naan=naan)):
         try:
-            pid = PersistentIdentifier.create(
-                'ark',
-                ark_id,
-                object_type='rec',
-                object_uuid=record_uuid,
-                status=PIDStatus.RESERVED)
-        # TODO: this minter is called twice why?
+            pid = ark.create(data[pid_key], record_uuid=record_uuid)
+            data.setdefault('identifiedBy', []).append(
+                dict(type='ark', value=pid.pid_value))
         except PIDAlreadyExists:
             pass
-        data['ark'] = ark_id

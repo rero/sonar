@@ -30,7 +30,7 @@ from flask import current_app
 from sonar.modules.api import SonarRecord
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.loaders.schemas.factory import LoaderSchemaFactory
-from sonar.modules.utils import chunks, get_ips_list
+from sonar.modules.utils import chunks
 from sonar.webdav import HegClient
 
 from .api import DocumentRecord
@@ -84,52 +84,6 @@ def transform_harvested_records(sender=None, records=None, **kwargs):
 
     click.echo('{count} records harvested in {time} seconds'.format(
         count=len(records), time=time.time() - start_time))
-
-
-def enrich_document_data(sender=None,
-                         record=None,
-                         json=None,
-                         index=None,
-                         **kwargs):
-    """Receive a signal before record is indexed, to add fulltext.
-
-    This function is called just before a record is sent to index.
-
-    :param sender: Sender of the signal.
-    :param Record record: Record to index.
-    :param dict json: JSON that will be indexed.
-    :param str index: Name of the index in which record will be sent.
-    """
-    # Takes care only about documents indexing
-    if not index.startswith('documents'):
-        return
-
-    # Transform record in DocumentRecord
-    if not isinstance(record, DocumentRecord):
-        record = DocumentRecord.get_record(record.id)
-
-    # Check if record is open access.
-    json['isOpenAccess'] = record.is_open_access()
-
-    # Compile allowed IPs in document
-    if json.get('organisation'):
-        if json['organisation'][0].get('allowedIps'):
-            json['organisation'][0]['ips'] = get_ips_list(
-                json['organisation'][0]['allowedIps'].split('\n'))
-        else:
-            json['organisation'][0]['ips'] = []
-
-    # No files are present in record
-    if not record.files:
-        return
-
-    # Store fulltext in array for indexing
-    json['fulltext'] = []
-    for file in record.files:
-        if file.get('type') == 'fulltext':
-            with file.file.storage().open() as pdf_file:
-                json['fulltext'].append(pdf_file.read().decode('utf-8'))
-
 
 def update_oai_property(sender, record):
     """Called when a document is created or updated.

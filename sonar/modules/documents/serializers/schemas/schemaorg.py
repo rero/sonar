@@ -81,7 +81,7 @@ class SchemaOrgV1(BaseSchema):
     """Marshmallow schema for schema.org/ScholarlyArticle."""
 
     type_ = fields.Method('get_type', data_key='@type')
-    context_ = fields.Constant('http://schema.org', data_key='@context')
+    context_ = fields.Constant('http://schema.org/', data_key='@context')
     id_ = fields.Method('get_id', data_key='@id')
     name = fields.Method('get_title')
     abstract = fields.Method('get_abstract')

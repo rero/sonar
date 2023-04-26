@@ -19,8 +19,10 @@
 
 from __future__ import absolute_import, print_function, unicode_literals
 
+from flask import request
 from marshmallow import fields, post_dump
 
+from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.views import get_language_from_bibliographic_code
 
 from .base_schema import BaseSchema
@@ -37,12 +39,19 @@ class GoogleScholarV1(BaseSchema):
     online_date = fields.Method('get_start_date')
     author = fields.Method('get_author')
     doi = fields.Method('get_doi')
-    abstract_html_url = fields.Method('get_id')
+    abstract_html_url = fields.Method('get_abstract_url')
     pages = fields.Method('get_pages')
     firstpage = fields.Method('get_first_page')
     lastpage = fields.Method('get_last_page')
     volume = fields.Method('get_volume')
     journal_title = fields.Method('get_host_document_title')
+
+
+    def get_abstract_url(self, obj):
+        """Get id."""
+        return DocumentRecord.get_permanent_link(request.host_url,
+                                                 obj['metadata']['pid'],
+                                                 ignore_ark=True)
 
     def get_language(self, obj):
         """Get language."""

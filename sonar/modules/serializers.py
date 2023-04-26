@@ -49,7 +49,7 @@ class JSONSerializer(_JSONSerializer):
     def preprocess_record(self, pid, record, links_factory=None, **kwargs):
         """Prepare record for serialization."""
         if request and request.args.get('resolve') == '1':
-            record = record.replace_refs()
+            record = record.resolve()
 
         return super(JSONSerializer,
                      self).preprocess_record(pid=pid,

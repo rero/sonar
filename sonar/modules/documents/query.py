@@ -28,23 +28,14 @@ from sonar.modules.query import default_search_factory, \
 from sonar.modules.users.api import current_user_record
 from sonar.modules.utils import get_current_ip
 
-FIELDS = [
-    '_bucket', '_files.*', 'pid', 'organisation.*', 'title.*^3',
-    'editionStatement.*', 'provisionActivity.*', 'extent',
-    'otherMaterialCharacteristics', 'formats', 'additionalMaterials',
-    'series.*', 'notes', 'abstracts.*', 'identifiedBy.*', 'subjects.*',
-    'otherEdition.*', 'classification.*', 'contentNote', 'dissertation.*',
-    'usageAndAccessPolicy', 'contribution.*', 'partOf.*', 'projects.*',
-    'customField1', 'customField2', 'customField3'
-]
-
 
 def documents_query_parser(qstr=None):
     """Custom query parser for documents."""
     if not qstr:
         return Q()
 
-    fields = FIELDS.copy()
+    fields = current_app.config.get(
+        'SONAR_DOCUMENT_QUERY_BOOSTING', ['*']).copy()
 
     # Special treatment for fulltext, we want to search in all fields and
     # additionally in the fulltext field.

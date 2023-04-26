@@ -75,7 +75,7 @@ class DocumentPermission(RecordPermission):
             return True
 
         document = DocumentRecord.get_record_by_pid(record['pid'])
-        document = document.replace_refs()
+        document = document.resolve()
         # Moderator can read their own documents.
         if user and user.is_moderator:
             if document.has_organisation(current_organisation['pid']):
@@ -97,7 +97,7 @@ class DocumentPermission(RecordPermission):
             return True
 
         document = DocumentRecord.get_record_by_pid(record['pid'])
-        document = document.replace_refs()
+        document = document.resolve()
 
         # Moderator can update their own documents.
         if not document.has_organisation(current_organisation['pid']):

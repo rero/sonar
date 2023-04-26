@@ -123,10 +123,16 @@ class DublinCoreSchema(BaseSchema):
 
     def get_identifiers(self, obj):
         """Get identifiers."""
-        items = [
-            DocumentRecord.get_permanent_link(request.host_url,
-                                              obj['metadata']['pid'])
-        ]
+        items = list(
+            {
+                DocumentRecord.get_permanent_link(
+                    request.host_url, obj['metadata']['pid'], ignore_ark=True
+                ),
+                DocumentRecord.get_permanent_link(
+                    request.host_url, obj['metadata']['pid']
+                ),
+            }
+        )
         # If files on the document
         if '_files' in obj['metadata']:
             # Extraction of files only with a type file

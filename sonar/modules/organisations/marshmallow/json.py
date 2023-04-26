@@ -49,6 +49,7 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
     isDedicated = fields.Boolean()
     serverName = fields.Str()
     allowedIps = SanitizedUnicode()
+    arkNAAN = SanitizedUnicode()
     platformName = SanitizedUnicode()
     documentsCustomField1 = fields.Dict()
     documentsCustomField2 = fields.Dict()
@@ -101,6 +102,20 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
             data['isShared'] = current_organisation.get('isShared', False)
             data['isDedicated'] = current_organisation.get(
                 'isDedicated', False)
+        return data
+
+    @pre_load
+    def override_ark_naan(self, data, **kwargs):
+        """Override ARK naan.
+
+        For non super users, the NAAN ark is not saved
+        by posting the data, but guessed from user's organisation.
+        """
+        if not has_superuser_access():
+            if arkNAAN := current_organisation.get('arkNAAN'):
+                data['arkNAAN'] = arkNAAN
+            else:
+                data.pop('arkNAAN', None)
         return data
 
 

@@ -17,28 +17,15 @@
 
 """DocumentRecord Extensions."""
 
-from invenio_pidstore.models import PersistentIdentifier, PIDStatus
-from invenio_records.extensions import RecordExtension
 
-from ..ark.api import current_ark
+import contextlib
+
+from invenio_pidstore.models import PersistentIdentifier, PIDDoesNotExistError
+from invenio_records.extensions import RecordExtension
 
 
 class ArkDocumentExtension(RecordExtension):
     """Register/unregister Ark identifiers."""
-
-    def post_create(self, record):
-        """Called after a record is created.
-
-        :param record: the invenio record instance to be processed.
-        """
-        self._create_or_update_ark(record)
-
-    def pre_commit(self, record):
-        """Called before a record is committed.
-
-        :param record: the invenio record instance to be processed.
-        """
-        self._create_or_update_ark(record)
 
     def post_delete(self, record, force=False):
         """Called after a record is deleted.
@@ -46,24 +33,6 @@ class ArkDocumentExtension(RecordExtension):
         :param record: the invenio record instance to be processed.
         :param force: unused.
         """
-        if record.get('ark'):
-            response = current_ark.delete(record.get('pid'))
-            ark_id = response.replace('success: ', '')
-            p = PersistentIdentifier.get('ark', ark_id)
-            p.delete()
-
-    def _create_or_update_ark(self, record):
-        """Create or update the ARK identifier.
-
-        :param record: the invenio record instance to be processed.
-        """
-        if record.get('ark'):
-            org = record.replace_refs().get('organisation', [{}])[0]
-            pid = record.get('pid')
-            ark_id = current_ark.create(
-                pid,
-                current_ark.target_url(pid, org.get('code', 'global')))
-            p = PersistentIdentifier.get('ark', ark_id)
-            if p.status == PIDStatus.RESERVED:
-                p.register()
-
+        if ark_id := record.get_ark():
+            with contextlib.suppress(PIDDoesNotExistError):
+                PersistentIdentifier.get('ark', ark_id).delete()

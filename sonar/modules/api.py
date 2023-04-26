@@ -19,6 +19,7 @@
 
 import os.path
 import re
+from copy import deepcopy
 from io import BytesIO
 from uuid import uuid4
 
@@ -219,6 +220,15 @@ class SonarRecord(Record, FilesMixin):
         except Exception:
             return None
 
+    def resolve(self):
+        """Resolve references data.
+
+        Mainly used by the `resolve=1` URL parameter.
+
+        :returns: a fresh copy of the resolved data.
+        """
+        return deepcopy(self.replace_refs())
+
     def reindex(self):
         """Reindex record."""
         indexer = self.get_indexer_class()
@@ -344,7 +354,7 @@ class SonarRecord(Record, FilesMixin):
         if not self.subdivisions:
             return False
 
-        for subdivision in self.subdivisions:            
+        for subdivision in self.subdivisions:
             if subdivision_pid == subdivision['pid']:
                 return True
 
