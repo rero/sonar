@@ -64,17 +64,18 @@ def test_create_thumbnail_from_file():
 
 def test_get_switch_aai_providers(app):
     """Test getting the list of SWITCHaai providers."""
+    app.config['ENV'] = 'production'
     # Full list of providers
     app.config.update(SHIBBOLETH_IDENTITY_PROVIDERS={'idp': {}, 'idpdev': {}})
     assert get_switch_aai_providers() == ['idp', 'idpdev']
 
     # Removes providers containing dev
-    app.config.update(SHIBBOLETH_IDENTITY_PROVIDERS={
+    app.config['SHIBBOLETH_IDENTITY_PROVIDERS'] ={
         'idp': {},
         'idpdev': {
             'dev': True
         }
-    })
+    }
     assert get_switch_aai_providers() == ['idp']
 
 

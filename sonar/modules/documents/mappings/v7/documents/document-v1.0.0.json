@@ -6,9 +6,7 @@
   },
   "mappings": {
     "_source": {
-      "excludes": [
-        "fulltext"
-      ]
+      "excludes": ["fulltext"]
     },
     "date_detection": false,
     "numeric_detection": false,
@@ -88,9 +86,6 @@
         "type": "object"
       },
       "pid": {
-        "type": "keyword"
-      },
-      "ark": {
         "type": "keyword"
       },
       "organisation": {
@@ -435,6 +430,83 @@
                   }
                 }
               },
+              "identifiers": {
+                "type": "object",
+                "properties": {
+                  "audioissuenumber": {
+                    "type": "keyword"
+                  },
+                  "doi": {
+                    "type": "keyword"
+                  },
+                  "ean": {
+                    "type": "keyword"
+                  },
+                  "gtin14number": {
+                    "type": "keyword"
+                  },
+                  "ark": {
+                    "type": "keyword"
+                  },
+                  "identifier": {
+                    "type": "keyword"
+                  },
+                  "isan": {
+                    "type": "keyword"
+                  },
+                  "isbn": {
+                    "type": "keyword"
+                  },
+                  "ismn": {
+                    "type": "keyword"
+                  },
+                  "isrc": {
+                    "type": "keyword"
+                  },
+                  "issn": {
+                    "type": "keyword"
+                  },
+                  "local": {
+                    "type": "keyword"
+                  },
+                  "issnl": {
+                    "type": "keyword"
+                  },
+                  "matrixnumber": {
+                    "type": "keyword"
+                  },
+                  "musicdistributornumber": {
+                    "type": "keyword"
+                  },
+                  "musicplate": {
+                    "type": "keyword"
+                  },
+                  "musicpublishernumber": {
+                    "type": "keyword"
+                  },
+                  "publishernumber": {
+                    "type": "keyword"
+                  },
+                  "upc": {
+                    "type": "keyword"
+                  },
+                  "urn": {
+                    "type": "keyword"
+                  },
+                  "videorecordingnumber": {
+                    "type": "keyword"
+                  },
+                  "uri": {
+                    "type": "keyword"
+                  },
+                  "reportnumber": {
+                    "type": "keyword"
+                  },
+                  "strn": {
+                    "type": "keyword"
+                  }
+                }
+              },
               "date_of_birth": {
                 "type": "keyword"
               },
@@ -634,6 +706,83 @@
                 "type": "keyword"
               }
             }
+          }
+        }
+      },
+      "identifiers": {
+        "type": "object",
+        "properties": {
+          "audioissuenumber": {
+            "type": "keyword"
+          },
+          "doi": {
+            "type": "keyword"
+          },
+          "ean": {
+            "type": "keyword"
+          },
+          "gtin14number": {
+            "type": "keyword"
+          },
+          "ark": {
+            "type": "keyword"
+          },
+          "identifier": {
+            "type": "keyword"
+          },
+          "isan": {
+            "type": "keyword"
+          },
+          "isbn": {
+            "type": "keyword"
+          },
+          "ismn": {
+            "type": "keyword"
+          },
+          "isrc": {
+            "type": "keyword"
+          },
+          "issn": {
+            "type": "keyword"
+          },
+          "local": {
+            "type": "keyword"
+          },
+          "issnl": {
+            "type": "keyword"
+          },
+          "matrixnumber": {
+            "type": "keyword"
+          },
+          "musicdistributornumber": {
+            "type": "keyword"
+          },
+          "musicplate": {
+            "type": "keyword"
+          },
+          "musicpublishernumber": {
+            "type": "keyword"
+          },
+          "publishernumber": {
+            "type": "keyword"
+          },
+          "upc": {
+            "type": "keyword"
+          },
+          "urn": {
+            "type": "keyword"
+          },
+          "videorecordingnumber": {
+            "type": "keyword"
+          },
+          "uri": {
+            "type": "keyword"
+          },
+          "reportnumber": {
+            "type": "keyword"
+          },
+          "strn": {
+            "type": "keyword"
           }
         }
       },

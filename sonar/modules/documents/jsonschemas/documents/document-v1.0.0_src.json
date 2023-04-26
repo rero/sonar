@@ -219,13 +219,9 @@
       "type": "string",
       "minLength": 1
     },
-    "ark": {
-      "title": "ARK (Archival Resource Key)",
-      "type": "string",
-      "minLength": 1
-    },
     "organisation": {
       "title": "Organisations",
+      "description": "This property should only be changed in test environments. In production, it can have undesired effects, such as invalidating existing persistent identifiers (ARK).",
       "type": "array",
       "minItems": 1,
       "maxItems": 1,
@@ -700,6 +696,7 @@
               "bf:Doi",
               "bf:Ean",
               "bf:Gtin14Number",
+              "ark",
               "bf:Identifier",
               "bf:Isan",
               "bf:Isbn",

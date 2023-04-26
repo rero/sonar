@@ -73,8 +73,8 @@ class BaseSchema(Schema):
 
     def get_id(self, obj):
         """Get id."""
-        return DocumentRecord.get_permanent_link(request.host_url,
-                                                 obj['metadata']['pid'])
+        return DocumentRecord.get_permanent_link(host=request.host_url,
+                                                 pid=obj['metadata']['pid'])
 
     def get_title(self, obj):
         """Get title."""

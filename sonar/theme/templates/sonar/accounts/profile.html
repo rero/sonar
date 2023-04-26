@@ -25,13 +25,10 @@ along with this program. If not, see
 {%- endblock settings_body %}
 
 {%- block javascript %}
-<script src="/static/sonar-ui/runtime-es5.js?{{ ui_version }}" nomodule defer></script>
-<script src="/static/sonar-ui/runtime-es2015.js?{{ ui_version }}" type="module"></script>
-<script src="/static/sonar-ui/polyfills-es5.js?{{ ui_version }}" nomodule defer></script>
-<script src="/static/sonar-ui/polyfills-es2015.js?{{ ui_version }}" type="module"></script>
-<script src="/static/sonar-ui/scripts.js?{{ ui_version }}"></script>
-<script src="/static/sonar-ui/main-es5.js?{{ ui_version }}" nomodule defer></script>
-<script src="/static/sonar-ui/main-es2015.js?{{ ui_version }}" type="module"></script>
+  <script src="/static/sonar-ui/runtime.js?{{ ui_version }}" module></script>
+  <script src="/static/sonar-ui/polyfills.js?{{ ui_version }}" module></script>
+  <script src="/static/sonar-ui/scripts.js?{{ ui_version }}"></script>
+  <script src="/static/sonar-ui/main.js?{{ ui_version }}" module></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
   integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"

@@ -92,7 +92,7 @@ def detail(pid, record, template=None, **kwargs):
         record['pid'], record)
 
     # Resolve $ref properties
-    record = record.replace_refs()
+    record = record.resolve()
 
     # Record is masked
     if record.is_masked:

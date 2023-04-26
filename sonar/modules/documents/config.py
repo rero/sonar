@@ -31,3 +31,6 @@ SONAR_DOCUMENTS_ORGANISATIONS_EXTERNAL_FILES = ['csal']
 
 SONAR_DOCUMENTS_PERMALINK = '{host}{org}/documents/{pid}'
 """Permalink for accessing documents details."""
+
+SONAR_DOCUMENT_QUERY_BOOSTING = ['title.*^3', '*']
+"""Search query boosting parameters for documents."""

@@ -66,12 +66,12 @@ def test_get_orcid_record_email(mock_api_read_record, app, orcid_record):
                                                orcid_record['access_token'])
     assert email == 'john.doe@test.com'
 
-    # Test when record id does not exists
+    # Test when record id does not exist
     email = sonar_orcid.get_orcid_record_email('NOT_EXISTING',
                                                orcid_record['access_token'])
     assert email == ''
 
-    # Test when access token does not exists
+    # Test when access token does not exist
     email = sonar_orcid.get_orcid_record_email(orcid_record['orcid'],
                                                'NOT_EXISTING')
     assert email == ''

@@ -3,6 +3,7 @@
       "code": "rero",
       "name": "RERO",
       "isShared": true,
+      "arkNAAN": "99999",
       "files": [
         {
           "key": "rero.jpg",

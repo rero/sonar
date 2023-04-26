@@ -565,19 +565,11 @@ SONAR_APP_ORGANISATION_CONFIG = {
 # ARK
 # ===
 
-# SONAR_APP_ARK_USER = 'test'
-"""Username for the NMA server."""
-# SONAR_APP_ARK_PASSWORD = 'test'
-"""Password for the NMA server."""
-# SONAR_APP_ARK_RESOLVER = 'https://n2t.net'
+SONAR_APP_ARK_RESOLVER = 'https://localhost:5000'
 """ARK resolver URL."""
-# SONAR_APP_ARK_NMA = 'https://www.arketype.ch'
-"""ARK Name Mapping Authority: a service provider server."""
-# SONAR_APP_ARK_NAAN = '99999'
-"""ARK prefix corresponding to an organisation."""
-# SONAR_APP_ARK_SCHEME = 'ark:'
+SONAR_APP_ARK_SCHEME = 'ark:'
 """ARK scheme."""
-# SONAR_APP_ARK_SHOULDER = 'ffk3'
+SONAR_APP_ARK_SHOULDER = 'ffk3'
 """ARK Shoulder, can be multiple for a given organisation."""
 
 SONAR_APP_SWISSCOVERY_SEARCH_URL = 'https://swisscovery.slsp.ch/view/sru/41SLSP_NETWORK'

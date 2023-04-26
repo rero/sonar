@@ -62,7 +62,7 @@ if $import; then
     message "Size of import sets is set to \"$size\"" "info"
 fi
 
-# Try to create database and tables if does not exists
+# Try to create database and tables if does not exist
 invenio db init create || true
 
 # Purge celery

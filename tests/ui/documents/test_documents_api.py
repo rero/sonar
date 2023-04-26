@@ -109,7 +109,7 @@ def test_get_documents_by_project(db, project, document):
     documents = DocumentRecord.get_documents_by_project(project.id)
     assert documents[0]['pid'] == document['pid']
     assert documents[0][
-        'permalink'] == f'http://localhost/global/documents/{document["pid"]}'
+        'permalink'] == f'https://n2t.net/ark:/99999/ffk32'
 
 
 def test_is_open_access(document, embargo_date):

@@ -125,6 +125,14 @@ class Sonar():
                 'SONAR_APP_SITEMAP_FOLDER_PATH',
                 os.path.join(app.instance_path, 'sitemap'))
 
+        # add keep alive support for angular application
+        # NOTE: this will not work for werkzeug> 2.1.2
+        # https://werkzeug.palletsprojects.com/en/2.2.x/changes/#version-2-1-2
+        if app.config.get('DEBUG'): # pragma: no cover
+            # debug code do not need to be cover by the tests
+            from werkzeug.serving import WSGIRequestHandler
+            WSGIRequestHandler.protocol_version = "HTTP/1.1"
+
     def init_views(self, app):
         """Initialize the main flask views."""
         app.url_map.converters['org_code'] = OrganisationCodeConverter

@@ -184,6 +184,9 @@ def test_create_document(app, db, project, client, deposit, submitter,
     }, {
         'type': 'bf:Doi',
         'value': '10.1038/nphys1170'
+    }, {
+        'type': 'ark',
+        'value': 'ark:/99999/ffk36'
     }]
 
     assert document['contentNote'] == ['Note 1', 'Note 2']

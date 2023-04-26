@@ -38,6 +38,7 @@ from sonar.modules.users.api import current_user_record
 
 schema_from_document = partial(schema_from_context,
                                schema=DocumentRecord.schema)
+from flask import current_app
 
 
 class FileSchemaV1(StrictKeysMixin):
@@ -92,6 +93,7 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     series = fields.List(fields.Dict())
     notes = fields.List(fields.String())
     identifiedBy = fields.List(fields.Dict())
+    identifiers = fields.Dict()
     subjects = fields.List(fields.Dict())
     classification = fields.List(fields.Dict())
     collections = fields.List(fields.Dict())
@@ -165,7 +167,17 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     def add_permalink(self, item, **kwargs):
         """Add permanent link to document."""
         item['permalink'] = DocumentRecord.get_permanent_link(
-            request.host_url, item['pid'])
+            host=request.host_url, pid=item['pid'])
+        return item
+
+    @pre_dump
+    def add_ark_uri(self, item, **kwargs):
+        """Add permanent link to document."""
+        resolver_url = current_app.config.get('SONAR_APP_ARK_RESOLVER')
+        for itm in item.get('identifiedBy', []):
+            if itm.get('type') == 'ark':
+                itm['uri'] = f'{resolver_url}/{itm["value"]}'
+                break
         return item
 
     @pre_dump
@@ -232,6 +244,11 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
 
         data.pop('permalink', None)
         data.pop('permissions', None)
+        data.pop('external_url', None)
+        for itm in data.get('identifiedBy', []):
+            if itm.get('type') == 'ark':
+                itm.pop('uri', None)
+                break
 
         return data
 

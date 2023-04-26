@@ -17,64 +17,16 @@
 
 """Document serializers."""
 
-from __future__ import absolute_import, print_function
-
-from datetime import datetime
-
-from flask import request
 from invenio_records_rest.serializers.response import record_responsify, \
     search_responsify
 
-from sonar.modules.collections.api import Record as CollectionRecord
-from sonar.modules.documents.serializers.google_scholar import \
-    SonarGoogleScholarSerializer
-from sonar.modules.documents.serializers.schemaorg import \
-    SonarSchemaOrgSerializer
-from sonar.modules.documents.serializers.schemas.google_scholar import \
-    GoogleScholarV1
-from sonar.modules.documents.serializers.schemas.schemaorg import SchemaOrgV1
-from sonar.modules.organisations.api import OrganisationRecord
-from sonar.modules.serializers import JSONSerializer as _JSONSerializer
-from sonar.modules.utils import get_language_value
-
 from ..marshmallow import DocumentSchemaV1
-
-
-class JSONSerializer(_JSONSerializer):
-    """JSON serializer for documents."""
-
-    def post_process_serialize_search(self, results, pid_fetcher):
-        """Post process the search results."""
-        view = request.args.get('view')
-
-        if results['aggregations'].get('year'):
-            results['aggregations']['year']['type'] = 'range'
-            results['aggregations']['year']['config'] = {
-                'min': 1950,
-                'max': int(datetime.now().year),
-                'step': 1
-            }
-
-        # Add organisation name
-        for org_term in results.get('aggregations',
-                                    {}).get('organisation',
-                                            {}).get('buckets', []):
-            organisation = OrganisationRecord.get_record_by_pid(
-                org_term['key'])
-            if organisation:
-                org_term['name'] = organisation['name']
-
-        # Add collection name
-        for org_term in results.get('aggregations',
-                                    {}).get('collection',
-                                            {}).get('buckets', []):
-            collection = CollectionRecord.get_record_by_pid(org_term['key'])
-            if collection:
-                org_term['name'] = get_language_value(collection['name'])
-
-        return super(JSONSerializer,
-                     self).post_process_serialize_search(results, pid_fetcher)
-
+from .dc import DublinCoreSerializer
+from .google_scholar import SonarGoogleScholarSerializer
+from .json import JSONSerializer
+from .schemaorg import SonarSchemaOrgSerializer
+from .schemas.google_scholar import GoogleScholarV1
+from .schemas.schemaorg import SchemaOrgV1
 
 # Serializers
 # ===========
@@ -85,6 +37,9 @@ schemaorg_v1 = SonarSchemaOrgSerializer(SchemaOrgV1, replace_refs=True)
 #: google scholar serializer
 google_scholar_v1 = SonarGoogleScholarSerializer(GoogleScholarV1,
                                                  replace_refs=True)
+from sonar.modules.documents.serializers.schemas.dc import DublinCoreSchema
+
+dc_v1 = DublinCoreSerializer(DublinCoreSchema)
 
 # Records-REST serializers
 # ========================
@@ -93,8 +48,15 @@ json_v1_response = record_responsify(json_v1, 'application/json')
 #: JSON record serializer for search results.
 json_v1_search = search_responsify(json_v1, 'application/json')
 
+#: JSON record serializer for individual records.
+dc_v1_response = record_responsify(dc_v1, 'text/xml')
+#: JSON record serializer for search results.
+dc_v1_search = search_responsify(dc_v1, 'text/xml')
+
 __all__ = (
     'json_v1',
     'json_v1_response',
     'json_v1_search',
+    'dc_v1_response',
+    'dc_v1_search',
 )

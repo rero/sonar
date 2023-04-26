@@ -57,6 +57,9 @@
       "serverName": {
         "type": "keyword"
       },
+      "arkNAAN": {
+        "type": "keyword"
+      },
       "allowedIps": {
         "type": "text"
       },

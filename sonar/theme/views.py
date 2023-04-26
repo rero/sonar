@@ -144,7 +144,7 @@ def rerodoc_redirection(pid, filename=None):
     doc_pid = pid.get_redirect().pid_value
     doc = DocumentRecord.get_record_by_pid(doc_pid)
     if doc:
-        doc = doc.replace_refs()
+        doc = doc.resolve()
         orgs = doc.get('organisation', [])
         # In case of multiple organisations we redirect to the global view
         if len(orgs) == 1:
