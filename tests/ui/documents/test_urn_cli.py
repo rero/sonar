@@ -17,8 +17,8 @@
 
 """Test URN cli."""
 
-import os
-import tempfile
+
+from io import BytesIO
 
 import mock
 from click.testing import CliRunner
@@ -28,22 +28,22 @@ from sonar.modules.documents.cli.urn import snl_upload_file
 from sonar.snl.ftp import SNLRepository
 
 
-@mock.patch('sonar.snl.ftp.FTP', autospec=True)
-def test_snl_upload_file(mock_ftp_constructor, app, script_info):
+@mock.patch('sonar.snl.ftp.Connection', autospec=True)
+def test_snl_upload_file(mock_ftp_constructor, app, script_info, minimal_thesis_document_with_urn):
     """Test upload file."""
+    app.config['SONAR_APP_FTP_SNL_PATH'] = '/rero'
 
     mock_ftp = mock_ftp_constructor.return_value
-    mock_ftp.getwelcome.return_value = '220'
 
     repository = SNLRepository('snl_host', 'user', 'password', 'snl_folder')
     repository.connect()
 
     runner = CliRunner()
-    result = runner.invoke(snl_upload_file, ['006-72', '/test/test.pdf'],
+    result = runner.invoke(snl_upload_file, ['006-72'],
         obj=script_info)
 
     assert result.output == \
-        'Persistent identifier does not exist for urn:nbn:ch:rero-006-72\n'
+        'Error: URN does not exists.\n'
 
     with app.app_context():
         # create pid identifier
@@ -62,16 +62,12 @@ def test_snl_upload_file(mock_ftp_constructor, app, script_info):
         provider.update()
 
         # create file to upload
-        path = tempfile.mkdtemp()
-        filepath = os.path.join(path, 'test.pdf')
-        f = open(filepath, 'w')
-        f.write('Test')
-        f.close()
+        minimal_thesis_document_with_urn.files['test.pdf'] = BytesIO(b'File content')
+        minimal_thesis_document_with_urn.files['test.pdf']['type'] = 'file'
+        minimal_thesis_document_with_urn.commit()
 
         # upload file
-        result = runner.invoke(snl_upload_file, ['006-72', filepath],
+        result = runner.invoke(snl_upload_file, [minimal_thesis_document_with_urn.get_rero_urn_code(minimal_thesis_document_with_urn)],
             obj=script_info)
-
-        assert result.output == 'Successfully uploaded file test.pdf.\n'
-        mock_ftp.mkd.assert_called_with('urn:nbn:ch:rero-006-72')
-        mock_ftp.cwd.assert_called_with('urn:nbn:ch:rero-006-72')
+        assert "Template of email to send to SNL:"  in result.output
+        mock_ftp.mkdir.assert_called_with('/rero/rero-006-17')

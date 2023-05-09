@@ -27,6 +27,11 @@ from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 from sonar.modules.documents.models import UrnIdentifier
 
 
+class URNAlreadyRegisterd(Exception):
+    """The URN identifier is already registered."""
+
+
+
 class Urn:
     """Urn class."""
 
@@ -84,8 +89,13 @@ class Urn:
 
         :param record: the invenio record instance to be processed.
         """
+        from sonar.modules.documents.api import DocumentRecord
         urn_config = current_app.config.get("SONAR_APP_DOCUMENT_URN")
-        org_pid = record.replace_refs().get("organisation", [{}])[0].get("pid")
+        org_pid = record.resolve().get("organisation", [{}])[0].get("pid")
+        if DocumentRecord.get_rero_urn_code(record):
+            current_app.logger.warning(
+                    f'generated urn already exist for document: {record["pid"]}')
+            return
         if config := urn_config.get("organisations", {}).get(org_pid):
             if record.get("documentType") in config.get("types"):
                 urn_next_pid = str(UrnIdentifier.next())
@@ -96,7 +106,7 @@ class Urn:
                         urn_code,
                         object_type="rec",
                         object_uuid=record.id,
-                        status=PIDStatus.NEW,
+                        status=PIDStatus.RESERVED,
                     )
                     if "identifiedBy" in record:
                         record["identifiedBy"].append(
@@ -105,13 +115,13 @@ class Urn:
                     else:
                         record["identifiedBy"] = \
                             [{"type": "bf:Urn", "value": urn_code}]
+                    return pid
                 except PIDAlreadyExists:
                     current_app.logger.error(
-                        'generated urn already exist for document: '
-                            + record.get('pid'))
+                        f'generated urn already exist for document: {record["pid"]}')
 
     @classmethod
-    def urn_query(cls, status=None):
+    def _urn_query(cls, status=None):
         """Build URN query.
 
         :param status: PID status by default N.
@@ -123,24 +133,26 @@ class Urn:
 
 
     @classmethod
-    def get_urn_pids(cls, status=PIDStatus.NEW, days=None):
+    def get_urn_pids(cls, status=PIDStatus.RESERVED, days=None):
         """Get count of URN pids by status and creation date.
 
         :param status: PID status by default N.
         :param days: Number of days passed since the creation of the document.
         :returns: Documents count.
         """
-        count = 0
-        query = cls.urn_query(status=status)
+        query = cls._urn_query(status=status)
         if uuuids := [str(uuid.object_uuid) for uuid in query.all()]:
             from sonar.modules.documents.api import DocumentSearch
             query = DocumentSearch()\
                 .filter('terms', _id=uuuids)
             if days:
                 date = datetime.now(timezone.utc) - timedelta(days=days)
-                query = query.filter('range', _created={'lte': date})
-            count = query.count()
-        return count
+                query = query.filter('range', _created={'gte': date})
+            def get_pids(query):
+                for hit in query.source('pid').scan():
+                    yield hit.pid
+            return query.count(), get_pids(query)
+        return 0, []
 
 
     @classmethod
@@ -149,7 +161,7 @@ class Urn:
 
         :returns: List of unregistered URNs .
         """
-        query = cls.urn_query(status=PIDStatus.NEW)
+        query = cls._urn_query(status=PIDStatus.RESERVED)
         return [str(uuid.pid_value) for uuid in query.all()]
 
     @classmethod
@@ -161,46 +173,44 @@ class Urn:
         from sonar.modules.documents.api import DocumentRecord
         from sonar.modules.documents.dnb import DnbUrnService
 
-        # TODO: verify the urn, it could be already registered
+        urn_code = DocumentRecord.get_rero_urn_code(record)
+        if not urn_code:
+            return False
+        pid = PersistentIdentifier.get(cls.urn_pid_type, urn_code)
+        if pid.is_registered():
+            current_app.logger.warning(
+                f'URU {urn_code} is already registered for the document: '
+                f'{record["pid"]}'
+            )
+            return False
         if DnbUrnService.register_document(record):
-            urn_code = DocumentRecord.get_rero_urn_code(record)
-            pid = PersistentIdentifier.query\
-                    .filter_by(pid_type=cls.urn_pid_type)\
-                    .filter_by(pid_value=urn_code).first()
-            if pid and pid.status == PIDStatus.NEW:
-                pid.status = PIDStatus.REGISTERED
-                db.session.commit()
-
-    @classmethod
-    def register_urn_pid(cls, urn=None):
-        """Register the urn pid.
-
-        :param pid: The corresponding URN code to register.
-        """
-        if pid := PersistentIdentifier.get(cls.urn_pid_type, urn):
-            pid.status = PIDStatus.REGISTERED
+            pid.register()
             db.session.commit()
+            return True
+        return False
 
     @classmethod
     def get_documents_to_generate_urns(cls):
-        """Get documents that need a URN code..
+        """Get documents that need a URN code.
 
         :returns: generator of document records.
         """
+        from elasticsearch_dsl import Q
+
         from sonar.modules.documents.api import DocumentRecord, DocumentSearch
         urn_config = current_app.config.get("SONAR_APP_DOCUMENT_URN")
         configs = urn_config.get('organisations', {})
         pids = []
-        for org_pid in configs.items():
+        for org_pid in configs.keys():
             config = configs.get(org_pid)
             doc_types = config.get('types')
             query = DocumentSearch()\
                 .filter('terms', documentType=doc_types)\
-                .filter('exists', field='identifiedBy')\
+                .filter('term', organisation__pid=org_pid)\
                 .filter('bool', must_not=[
-                    Q('term', identifiedBy__type='bf:Urn')])\
+                    Q('nested', path='identifiedBy', query=Q('term', identifiedBy__type='bf:Urn'))])\
                 .source(['pid'])
             pids.extend(hit.pid for hit in query.scan())
 
-        for pid in pids:
+        for pid in set(pids):
             yield DocumentRecord.get_record_by_pid(pid)

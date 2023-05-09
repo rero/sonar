@@ -36,7 +36,10 @@ def create_app():
 def minimal_thesis_document(db, bucket_location, organisation):
     """Return a minimal thesis document."""
     with requests_mock.mock() as response:
-        response.post(requests_mock.ANY, status_code=201)
+        response.head(requests_mock.ANY, status_code=404)
+        response.post(
+            requests_mock.ANY, status_code=201,
+            json={'urn': 'urn:nbn:ch:rero-006-17'})
         record = DocumentRecord.create(
             {
                 "title": [

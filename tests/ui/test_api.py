@@ -17,6 +17,8 @@
 
 """Test SONAR api."""
 
+from copy import deepcopy
+
 import mock
 import pytest
 from flask import url_for
@@ -29,6 +31,39 @@ from sonar.modules.api import SonarRecord
 from sonar.modules.documents.api import DocumentIndexer, DocumentRecord
 
 create_app = create_api
+
+
+def test_index_record(client, db, document_json, superuser):
+    """Test index a record."""
+    login_user_via_session(client, email=superuser['email'])
+
+    res = client.get(url_for('invenio_records_rest.doc_list'))
+    assert res.status_code == 200
+    total = res.json['hits']['total']['value']
+    record = DocumentRecord.create(deepcopy(document_json), commit=True)
+
+    indexer = DocumentIndexer()
+    indexer.index(record)
+
+    res = client.get(url_for('invenio_records_rest.doc_list'))
+    assert res.status_code == 200
+    assert res.json['hits']['total']['value'] == (total + 1)
+
+
+def test_remove_from_index(client, db, document, superuser):
+    """Test remove a record from index."""
+    login_user_via_session(client, email=superuser['email'])
+
+    res = client.get(url_for('invenio_records_rest.doc_list'))
+    assert res.status_code == 200
+    total = res.json['hits']['total']['value']
+
+    indexer = DocumentIndexer()
+    indexer.delete(document)
+
+    res = client.get(url_for('invenio_records_rest.doc_list'))
+    assert res.status_code == 200
+    assert res.json['hits']['total']['value'] == (total - 1)
 
 
 def test_get_record_class_by_pid_type(app):
@@ -54,10 +89,10 @@ def test_get_all_pids(document):
 
 def test_create(document_json):
     """Test creating a record."""
-    record = DocumentRecord.create(document_json)
+    record = DocumentRecord.create(deepcopy(document_json))
     assert DocumentRecord.get_record_by_pid(
         record['pid'])['pid'] == record['pid']
-    DocumentRecord.create(document_json, dbcommit=True)
+    DocumentRecord.create(deepcopy(document_json), dbcommit=True)
     assert DocumentRecord.get_record_by_pid(
         record['pid'])['pid'] == record['pid']
 
@@ -72,7 +107,7 @@ def test_get_record_by_pid(app, document_json):
     """Test get record by PID."""
     assert DocumentRecord.get_record_by_pid('not-existing') is None
 
-    record = DocumentRecord.create(document_json)
+    record = DocumentRecord.create(deepcopy(document_json))
 
     assert DocumentRecord.get_record_by_pid(
         record['pid'])['pid'] == record['pid']
@@ -84,7 +119,8 @@ def test_get_record_by_pid(app, document_json):
 
 def test_dbcommit(app, document_json):
     """Test record commit to db."""
-    record = DocumentRecord.create(document_json, dbcommit=True)
+    record = DocumentRecord.create(deepcopy(document_json))
+    record.dbcommit()
 
     assert DocumentRecord.get_record_by_pid(
         record['pid'])['pid'] == record['pid']
@@ -93,7 +129,7 @@ def test_dbcommit(app, document_json):
 
 def test_reindex(client, document_json, superuser):
     """Test record reindex."""
-    record = DocumentRecord.create(document_json)
+    record = DocumentRecord.create(deepcopy(document_json), commit=True)
 
     indexer = DocumentIndexer()
     indexer.index(record)
@@ -231,39 +267,6 @@ def test_create_thumbnail(document, pdf_file):
     document.files['test.txt'] = BytesIO(b'Hello, World')
     document.create_thumbnail(document.files['test.txt'])
     assert len(document.files) == 1
-
-
-def test_index_record(client, document, document_json, superuser):
-    """Test index a record."""
-    login_user_via_session(client, email=superuser['email'])
-    res = client.get(url_for('invenio_records_rest.doc_list'))
-    assert res.status_code == 200
-    total = res.json['hits']['total']['value']
-
-    record = DocumentRecord.create(document_json)
-
-    indexer = DocumentIndexer()
-    indexer.index(record)
-
-    res = client.get(url_for('invenio_records_rest.doc_list'))
-    assert res.status_code == 200
-    assert res.json['hits']['total']['value'] == (total + 1)
-
-
-def test_remove_from_index(client, document, superuser):
-    """Test remove a record from index."""
-    login_user_via_session(client, email=superuser['email'])
-
-    res = client.get(url_for('invenio_records_rest.doc_list'))
-    assert res.status_code == 200
-    total = res.json['hits']['total']['value']
-
-    indexer = DocumentIndexer()
-    indexer.delete(document)
-
-    res = client.get(url_for('invenio_records_rest.doc_list'))
-    assert res.status_code == 200
-    assert res.json['hits']['total']['value'] == (total - 1)
 
 
 def test_get_record_by_bucket(app, db, document_with_file):

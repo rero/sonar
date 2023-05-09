@@ -21,6 +21,7 @@ from functools import wraps
 
 from flask import Blueprint, abort, jsonify, request
 from flask_security import current_user
+from invenio_pidstore.models import PIDStatus
 from invenio_search import current_search_client
 
 from sonar.modules.documents.urn import Urn
@@ -114,14 +115,18 @@ def elastic_search():
 
 
 @api_blueprint.route('/urn')
-def unregistered_urn():
+def urn():
     """Count of unregistered urn pids.
 
     :return: jsonified count information.
     """
+    data = dict()
     try:
         days = int(args.get('days', 0)) if (args := request.args) else 0
-        info = Urn.get_urn_pids(days=days)
-        return jsonify({'data': info})
+        count, pids = Urn.get_urn_pids(days=days)
+        data['reserved'] = dict(count=count, pids=list(pids))
+        count, pids = Urn.get_urn_pids(days=days, status=PIDStatus.REGISTERED)
+        data['registered'] = dict(count=count)
+        return jsonify(dict(data=data))
     except Exception as exception:
         return jsonify({'error': str(exception)}), 500

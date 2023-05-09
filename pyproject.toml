@@ -75,6 +75,7 @@ python-levenshtein = "<0.20.0"
 jsonschema = "<4.0.0"
 pydocstyle = ">=6.1.1,<6.2"
 requests-mock = "^1.11.0"
+pysftp = "^0.2.9"
 
 [tool.poetry.dev-dependencies]
 Flask-Debugtoolbar = ">=0.10.1"

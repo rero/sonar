@@ -10,7 +10,7 @@ Nous vous signalons une nouvelle version de l'un ou plusieurs fichiers relatifs 
 URN: <URN>
 URL: <URL>
 
-Le ou les fichiers respectifs sont disponibles sur l'espace WebDAV dédié à RERO+.
+Le ou les fichiers respectifs sont disponibles sur le serveur ftp dédié à RERO+.
 
 Nous vous remercions de mettre l'information à jour dans votre système d'archivage et de nous le confirmer.
 

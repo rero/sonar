@@ -27,6 +27,7 @@ from io import BytesIO
 from os.path import dirname, join
 
 import pytest
+import requests_mock
 from dotenv import load_dotenv
 from flask_principal import ActionNeed
 from invenio_access.models import ActionUsers, Role
@@ -134,27 +135,7 @@ def instance_path():
 @pytest.fixture(scope='module', autouse=True)
 def app_config(app_config):
     """Define configuration for module."""
-    app_config['CELERY_BROKER_URL'] = 'memory://'
-    app_config['RATELIMIT_STORAGE_URL'] = 'memory://'
-    app_config['CACHE_TYPE'] = 'simple'
-    app_config['SEARCH_ELASTIC_HOSTS'] = None
-    # app_config['SQLALCHEMY_DATABASE_URI'] = \
-    #         'postgresql+psycopg2://sonar:sonar@localhost/sonar'
-    # app_config['DB_VERSIONING'] = True
-    app_config['CELERY_CACHE_BACKEND'] = "memory"
-    app_config['CELERY_RESULT_BACKEND'] = "cache"
-    app_config['CELERY_TASK_ALWAYS_EAGER'] = True
-    app_config['CELERY_TASK_EAGER_PROPAGATES'] = True
     help_test_dir = join(dirname(__file__), 'data', 'help')
-    app_config['WIKI_CONTENT_DIR'] = help_test_dir
-    app_config['WIKI_UPLOAD_FOLDER'] = join(help_test_dir, 'files')
-    app_config['CACHE_REDIS_URL'] = 'redis://localhost:6379/0'
-    app_config['ACCOUNTS_SESSION_REDIS_URL'] = 'redis://localhost:6379/1'
-    app_config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/2'
-    app_config['RATELIMIT_STORAGE_URL'] = 'redis://localhost:6379/3'
-    app_config['CELERY_REDIS_SCHEDULER_URL'] = 'redis://localhost:6379/4'
-    app_config['WTF_CSRF_ENABLED'] = False
-    app_config['PDF_EXTRACTOR_GROBID_PORT'] = '8070'
 
     app_config['SHIBBOLETH_SERVICE_PROVIDER'] = dict(
         strict=True,
@@ -180,25 +161,31 @@ def app_config(app_config):
     app_config['SONAR_APP_ARK_SHOULDER'] = 'ffk3'
 
     # Celery
+    app_config['CACHE_TYPE'] = 'simple'
     app_config['CELERY_BROKER_URL'] = 'memory://'
+    app_config['CELERY_CACHE_BACKEND'] = "memory"
+    app_config['CELERY_RESULT_BACKEND'] = "cache"
     app_config['CELERY_TASK_ALWAYS_EAGER'] = True
     app_config['CELERY_TASK_EAGER_PROPAGATES'] = True
+    app_config['CELERY_REDIS_SCHEDULER_URL'] = 'redis://localhost:6379/4'
 
-    # Config
-    app_config['SONAR_APP_SERVER_NAME'] = 'sonar.rero.ch'
+    # Other configs
+    app_config['ACCOUNTS_SESSION_REDIS_URL'] = 'redis://localhost:6379/1'
+    app_config['CACHE_REDIS_URL'] = 'redis://cache:6379/0'
+    app_config['CELERY_REDIS_SCHEDULER_URL'] = 'redis://localhost:6379/4'
+    app_config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/2'
+    app_config['PDF_EXTRACTOR_GROBID_PORT'] = '8070'
+    app_config['RATELIMIT_STORAGE_URL'] = 'redis://localhost:6379/3'
+    app_config['SEARCH_ELASTIC_HOSTS'] = ['localhost:9200']
     app_config['SONAR_APP_DEFAULT_ORGANISATION'] = 'global'
+    app_config['SONAR_APP_SERVER_NAME'] = 'sonar.rero.ch'
     app_config['SONAR_APP_URN_DNB_BASE_URL'] = 'https://api.nbn-resolving.org/sandbox/v2'
-    app_config['SONAR_APP_URN_DNB_USERNAME'] = ''
-    app_config['SONAR_APP_URN_DNB_PASSWORD'] = ''
     app_config['SONAR_APP_URN_DNB_BASE_URN'] = 'urn:nbn:ch:rero-'
-    app_config['SONAR_APP_DOCUMENT_URN'] = {
-        'organisations': {
-            'org': {
-                'types': ['coar:c_db06'],
-                'code': 6
-            }
-        }
-    }
+    app_config['SONAR_APP_URN_DNB_PASSWORD'] = ''
+    app_config['SONAR_APP_URN_DNB_USERNAME'] = ''
+    app_config['WIKI_CONTENT_DIR'] = help_test_dir
+    app_config['WIKI_UPLOAD_FOLDER'] = join(help_test_dir, 'files')
+    app_config['WTF_CSRF_ENABLED'] = False
     return app_config
 
 
@@ -237,6 +224,19 @@ def make_organisation(app, db, bucket_location, without_oaiset_signals):
 @pytest.fixture()
 def organisation(make_organisation):
     """Create an organisation."""
+    return make_organisation('org')
+
+@pytest.fixture()
+def organisation_with_urn(app, make_organisation):
+    """Create an organisation."""
+    app.config['SONAR_APP_DOCUMENT_URN'] = {
+        'organisations': {
+            'org': {
+                'types': ['coar:c_db06'],
+                'code': 6
+            }
+        }
+    }
     return make_organisation('org')
 
 @pytest.fixture()
@@ -402,10 +402,8 @@ def superuser(make_user):
 def document_json(app, db, bucket_location, organisation):
     """JSON document fixture."""
     return {
-        'identifiedBy': [{
-            'value': 'urn:nbn:ch:rero-006-108713',
-            'type': 'bf:Urn'
-        }, {
+        'identifiedBy': [
+        {
             'value': 'oai:doc.rero.ch:20050302172954-WU',
             'type': 'bf:Identifier'
         }, {
@@ -526,18 +524,18 @@ def document_json(app, db, bucket_location, organisation):
 def make_document(db, document_json, make_organisation, pdf_file, embargo_date):
     """Factory for creating document."""
 
-    def _make_document(organisation='org', with_file=False, pid=None):
+    def _make_document(data=document_json, organisation='org', with_file=False, pid=None):
         if organisation:
             make_organisation(organisation)
-            document_json['organisation'] = [{
+            data['organisation'] = [{
                 '$ref': 'https://sonar.ch/api/organisations/org'}]
 
 
         if pid:
-            document_json['pid'] = pid
+            data['pid'] = pid
         else:
-            document_json.pop('pid', None)
-            document_json.pop('_oai', None)
+            data.pop('pid', None)
+            data.pop('_oai', None)
 
         record = DocumentRecord.create(document_json,
                                        dbcommit=True,
@@ -565,13 +563,13 @@ def make_document(db, document_json, make_organisation, pdf_file, embargo_date):
 @pytest.fixture(scope='function')
 def document(make_document):
     """Create a document."""
-    return make_document('org', False)
+    return make_document(organisation='org', with_file=False)
 
 
 @pytest.fixture()
 def document_with_file(make_document):
     """Create a document with a file associated."""
-    return make_document('org', True)
+    return make_document(organisation='org', with_file=True)
 
 
 @pytest.fixture()
@@ -1065,3 +1063,40 @@ def without_oaiset_signals(app):
     current_oaiserver.unregister_signals_oaiset()
     yield
     current_oaiserver.register_signals_oaiset()
+
+
+@pytest.fixture()
+def minimal_thesis_document_with_urn(db, bucket_location, organisation_with_urn):
+    """Return a minimal thesis document."""
+    with requests_mock.mock() as response:
+        response.head(requests_mock.ANY, status_code=404)
+        response.post(
+            requests_mock.ANY, status_code=201,
+            json={'urn': 'urn:nbn:ch:rero-006-17'})
+        record = DocumentRecord.create(
+            {
+                "title": [
+                    {
+                        "type": "bf:Title",
+                        "mainTitle": [
+                            {
+                                "language": "eng",
+                                "value": "Title of the document"
+                            }
+                        ],
+                    }
+                ],
+                "documentType": "coar:c_db06",
+                "organisation": [
+                    {"$ref": "https://sonar.ch/api/organisations/org"}],
+                "identifiedBy": [
+                    {"type": "bf:Local", "value": "10.1186"},
+                ],
+            },
+            dbcommit=True,
+            with_bucket=True,
+        )
+        record.commit()
+        db.session.commit()
+        record.reindex()
+        return record
