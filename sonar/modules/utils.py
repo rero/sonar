@@ -18,16 +18,15 @@
 """Utils functions for application."""
 
 import datetime
-import itertools
 import re
-from time import sleep
 
-import click
-from celery import current_app as current_celery
+import requests
 from flask import abort, current_app, g, request
 from invenio_i18n.ext import current_i18n
 from invenio_mail.api import TemplatedMessage
 from netaddr import IPAddress, IPGlob, IPNetwork, IPSet
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 from wand.color import Color
 from wand.image import Image
 
@@ -390,38 +389,26 @@ def file_download_ui(pid, record, _record_file_factory=None, **kwargs):
     )
 
 
-def queue_count():
-    """Count tasks in celery."""
-    inspector = current_celery.control.inspect()
-    task_count = 0
-    if reserved := inspector.reserved():
-        for _, values in reserved.items():
-            task_count += len(values)
-    if active := inspector.active():
-        for _, values in active.items():
-            task_count += len(values)
-    return task_count
+def requests_retry_session(retries=5, backoff_factor=0.5,
+                           status_forcelist=(500, 502, 504), session=None):
+    """Request retry session.
 
+    :params retries: The total number of retry attempts to make.
+    :params backoff_factor: Sleep between failed requests.
+        {backoff factor} * (2 ** ({number of total retries} - 1))
+    :params status_forcelist: The HTTP response codes to retry on..
+    :params session: Session to use.
 
-
-def wait_empty_tasks(delay, verbose=False):
-    """Wait for tasks to be empty."""
-    if verbose:
-        spinner = itertools.cycle(['-', '\\', '|', '/'])
-        click.echo(
-            f'Waiting: {next(spinner)}\r',
-            nl=False
-        )
-    count = queue_count()
-    sleep(5)
-    count += queue_count()
-    while count:
-        if verbose:
-            click.echo(
-                f'Waiting: {next(spinner)}\r',
-                nl=False
-            )
-        sleep(delay)
-        count = queue_count()
-        sleep(5)
-        count += queue_count()
+    """
+    session = session or requests.Session()
+    retry = Retry(
+        total=retries,
+        read=retries,
+        connect=retries,
+        backoff_factor=backoff_factor,
+        status_forcelist=status_forcelist,
+    )
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount('http://', adapter)
+    session.mount('https://', adapter)
+    return session

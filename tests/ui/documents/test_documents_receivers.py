@@ -73,6 +73,8 @@ def test_chunks():
 def test_export_json(app, bucket_location, monkeypatch):
     """Test export records to file."""
     # Patch the file upload to webdav.
+    import tempfile
+    app.config['SONAR_APP_STORAGE_PATH'] = tempfile.mkdtemp()
     monkeypatch.setattr(
         'webdav3.client.Client.upload_file', lambda *args: True)
 
@@ -82,7 +84,7 @@ def test_export_json(app, bucket_location, monkeypatch):
         url='http://doc.rero.ch/oai2d',
     )
 
-    data_directory = join(app.instance_path, 'data')
+    data_directory = join(app.config['SONAR_APP_STORAGE_PATH'], 'data')
 
     export_json(None, records, **{'name': 'rerodoc', 'action': 'not-existing'})
     assert not exists(data_directory)

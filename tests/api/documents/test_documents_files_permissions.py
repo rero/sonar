@@ -123,9 +123,35 @@ def test_read_content(client, superuser, admin, moderator,
         assert res.status_code == status
 
 
-def test_file_of_document_with_urn_delete(client, superuser,
-                                          minimal_thesis_document):
+def test_file_of_document_with_urn_delete(client, superuser, admin,
+                                          minimal_thesis_document_with_urn):
     """Test delete file of document with registered URN identifier."""
+    # Logged as admin
+    login_user_via_session(client, email=admin['email'])
+
+    minimal_thesis_document = minimal_thesis_document_with_urn
+    # Add pdf file to document
+    minimal_thesis_document.files['test.pdf'] = BytesIO(b'File content')
+    minimal_thesis_document.files['test.pdf']['type'] = 'file'
+    minimal_thesis_document.commit()
+
+    url_file_content = url_for(
+        'invenio_records_files.doc_object_api',
+        pid_value=minimal_thesis_document['pid'], key='test.pdf')
+    res = client.delete(url_file_content)
+    assert res.status_code == 403
+
+    # Add png file to document
+    minimal_thesis_document.files['test.png'] = BytesIO(b'File content')
+    minimal_thesis_document.files['test.png']['type'] = 'file'
+    minimal_thesis_document.commit()
+
+    url_file_content = url_for(
+        'invenio_records_files.doc_object_api',
+        pid_value=minimal_thesis_document['pid'], key='test.png')
+    res = client.delete(url_file_content)
+    assert res.status_code == 204
+
     # Logged as superuser
     login_user_via_session(client, email=superuser['email'])
 
@@ -138,7 +164,7 @@ def test_file_of_document_with_urn_delete(client, superuser,
         'invenio_records_files.doc_object_api',
         pid_value=minimal_thesis_document['pid'], key='test.pdf')
     res = client.delete(url_file_content)
-    assert res.status_code == 403
+    assert res.status_code == 204
 
     # Add png file to document
     minimal_thesis_document.files['test.png'] = BytesIO(b'File content')

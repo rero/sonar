@@ -133,21 +133,17 @@ class DocumentRecord(SonarRecord):
                         'controlledAffiliation'] = controlled_affiliations
 
     @classmethod
-    def get_record_by_identifier(cls, identifiers, types=None):
+    def get_record_by_identifier(cls, identifiers):
         """Get a record by its identifier.
 
         :param list identifiers: List of identifiers
-        :param list types: List of types
         """
-        if types is None:
-            types = ['bf:Local', 'bf:Doi']
-
         search = DocumentSearch()
 
-        # Search identifiers.
+        # Search only for DOI or local indentifiers.
         search_identifiers = [
             identifier for identifier in identifiers
-            if identifier['type'] in types
+            if identifier['type'] in ['bf:Local', 'bf:Doi']
         ]
 
         # No identifiers to analyze

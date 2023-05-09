@@ -41,7 +41,6 @@ class PDFExtractor:
         self.api_url = "http://{server}:{port}/api".format(
             server=current_app.config.get('PDF_EXTRACTOR_GROBID_SERVER'),
             port=current_app.config.get('PDF_EXTRACTOR_GROBID_PORT'))
-
         if not self.api_is_alive():
             raise ConnectionRefusedError
 

@@ -120,32 +120,31 @@ class DocumentPermission(RecordPermission):
         if not user or not user.is_admin:
             return False
 
+        if user.is_superuser:
+            return True
+
         # Check delete conditions and consider same rules as update
-        return cls.can_delete(record) and cls.update(user, record)
+        return not cls.has_urn(record) and cls.update(user, record)
 
     @classmethod
-    def can_delete(cls, record):
-        """Delete permission conditions.
+    def has_urn(cls, record):
+        """The record has an SONAR URN.
 
         :param record: Record to check.
         :returns: True if action can be done.
         """
         # Delete only documents with no URN or no registred URN
         document = DocumentRecord.get_record_by_pid(record['pid'])
-
         if document:
             # check if document has urn
             try:
                 urn_identifier = PersistentIdentifier\
                     .get_by_object('urn', 'rec', document.id)
             except PIDDoesNotExistError:
-                return True
-
-            # check if urn is registered
-            if urn_identifier.is_registered():
                 return False
 
-        return True
+            return True
+        return False
 
 
 class DocumentFilesPermission(FilesPermission):
@@ -182,11 +181,15 @@ class DocumentFilesPermission(FilesPermission):
         # TODO: filter the list of files based on embargo
         if isinstance(record, Bucket):
             return True
-        file_type = document.files[record.key]['type']
+        if hasattr(record, 'key'):
+            file = document.files[record.key]
+        else:
+            file = document.files[record['key']]
+        file_type = file['type']
         if file_type == 'fulltext' and (not user or not user.is_admin):
             return False
         file_restriction = get_file_restriction(
-            document.files[record.key],
+            file,
             get_organisations(document),
             True
         )
@@ -206,7 +209,17 @@ class DocumentFilesPermission(FilesPermission):
         if user and user.is_superuser:
             return True
         document = cls.get_document(parent_record)
-        if document:
+        if isinstance(record, ObjectVersion):
+            file_type = document.files[record.key]['type']
+            if file_type == 'file' and record.mimetype == 'application/pdf':
+                return not DocumentPermission.has_urn(parent_record)\
+                    and DocumentPermission.update(user, parent_record)
+        if isinstance(record, dict):
+            file_type = record['type']
+            if file_type == 'file' and record['mimetype'] == 'application/pdf':
+                return not DocumentPermission.has_urn(parent_record)\
+                    and DocumentPermission.update(user, parent_record)
+        if document := cls.get_document(parent_record):
             return DocumentPermission.update(user, document)
         return False
 
@@ -221,10 +234,4 @@ class DocumentFilesPermission(FilesPermission):
         :param parent_record: the record related to the bucket.
         :returns: True if action can be done.
         """
-        document = cls.get_document(parent_record)
-        if isinstance(record, ObjectVersion):
-            file_type = document.files[record.key]['type']
-            if file_type == 'file' and record.mimetype == 'application/pdf':
-                return DocumentPermission.can_delete(parent_record)\
-                    and cls.update(user, record, pid, parent_record)
         return cls.update(user, record, pid, parent_record)

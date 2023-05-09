@@ -59,7 +59,6 @@ def _(x):
     """Identity function used to trigger string extraction."""
     return x
 
-
 # Application default theme, used in several modules (previewer, admin, ...)
 APP_THEME = ['bootstrap3']
 

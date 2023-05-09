@@ -23,11 +23,21 @@ import json
 import requests
 from flask import current_app
 
-from sonar.modules.documents.api import DocumentRecord
 
+class DnbServerError(Exception):
+    """The Dnb Server returns an error."""
 
 class DnbUrnService:
     """Dnb URN service class."""
+
+    @classmethod
+    def base_url(cls):
+        """Base DBN URL.
+
+        :rtype: str.
+        :returns: the DBN base server URL.
+        """
+        return f"{current_app.config.get('SONAR_APP_URN_DNB_BASE_URL')}/urns"
 
     @classmethod
     def headers(cls):
@@ -46,27 +56,116 @@ class DnbUrnService:
         }
 
     @classmethod
-    def verify(cls, urn_code):
-        """Verify the existence for a URN.
+    def exists(cls, urn_code):
+        """Check the existence for a URN.
 
         :param urn_code: the urn code.
-        :returns: True if urn is registered, otherwise False.
+        :returns: True if urn is exists, otherwise False.
+        """
+        # Documentation: https://wiki.dnb.de/display/URNSERVDOK/URN-Service+API
+        # https://wiki.dnb.de/display/URNSERVDOK/Beispiele%3A+URN-Verwaltung
+        try:
+            response = requests.request(
+                'HEAD',
+                f"{cls.base_url()}/urn/{urn_code}",
+                headers=cls.headers()
+            )
+            if not response.status_code in [200, 404]:
+                raise DnbServerError(
+                    f'Bad DNB server response status {response.status_code}, '
+                    f'when we check the existence of the following '
+                    f'urn: {urn_code}')
+            return response.status_code == 200
+        except Exception as error:
+            raise DnbServerError(error)
+
+    @classmethod
+    def get_urls(cls, urn_code):
+        """Get the URN information.
+
+        :param urn_code: the urn code.
+        :returns: the raw server data.
+        """
+        # Documentation: https://wiki.dnb.de/display/URNSERVDOK/URN-Service+API
+        # https://wiki.dnb.de/display/URNSERVDOK/Beispiele%3A+URN-Verwaltung
+        try:
+            response = requests.get(
+                f'{cls.base_url()}/urn/{urn_code}/urls',
+                headers=cls.headers()
+            )
+            if not response.status_code == 200:
+                raise DnbServerError(
+                    f'Bad DNB server response status {response.status_code}, '
+                    f'when we get the information of the following '
+                    f'urn: {urn_code}')
+            return response.json()
+        except Exception as error:
+            raise DnbServerError(error)
+
+
+    @classmethod
+    def get(cls, urn_code):
+        """Get the URN information.
+
+        :param urn_code: the urn code.
+        :rtype: dict.
+        :returns: the raw data from the server.
         """
         # Documentation: https://wiki.dnb.de/display/URNSERVDOK/URN-Service+API
         # https://wiki.dnb.de/display/URNSERVDOK/Beispiele%3A+URN-Verwaltung
         answer = False
         try:
-            response = requests.request(
-                'HEAD',
-                f"{current_app.config.get('SONAR_APP_URN_DNB_BASE_URL')}"\
-                f"/urns/urn/{urn_code}",
+            response = requests.get(
+                f'{cls.base_url()}/urn/{urn_code}',
                 headers=cls.headers()
             )
-            answer = response.status_code == 200
+            if response.status_code != 200:
+                raise DnbServerError(
+                    f'Bad DNB server response status {response.status_code}, '
+                    f'when we get the information of the following '
+                    f'urn: {urn_code}')
+            return response.json()
         except Exception as error:
-            current_app.logger.error(
-                'unable to connect to DNB verify service.')
-        return answer
+            raise DnbServerError(error) from error
+
+    @classmethod
+    def update(cls, urn_code, urls):
+        """Update the list of urs registered to a given URN.
+
+        :param urn_code: the urn code.
+        :param urls: list of str - list of the target URL.
+
+        """
+        response = requests.request(
+            'PATCH',
+            f"{cls.base_url()}/urn/{urn_code}/my-urls",
+            headers=cls.headers(),
+            data=json.dumps(urls)
+        )
+        if response.status_code != 204:
+            raise DnbServerError(
+                f'Bad DNB server response status {response.status_code}, '
+                f'when we update the information of the following '
+                f'urn: {urn_code}')
+
+    @classmethod
+    def create(cls, data):
+        """Register a new URN to the DBN service with a list of urls.
+
+        :param data: dict - the request body see https://tinyurl.com/mtpfaz5z
+                     for more details.
+        """
+        response = requests.request(
+            'POST',
+            cls.base_url(),
+            headers=cls.headers(),
+            data=json.dumps(data)
+        )
+        if response.status_code != 201:
+            raise DnbServerError(
+                f'Bad DNB server response status {response.status_code}, '
+                f'when we update the information of the following '
+                f'urn: {data.get("urn")}')
 
 
     @classmethod
@@ -77,21 +176,12 @@ class DnbUrnService:
         :returns: True if urn is registered, otherwise False.
         """
         from sonar.modules.documents.api import DocumentRecord
-        from sonar.modules.organisations.api import OrganisationRecord
-        answer = False
-        sonar_base_url = current_app.config.get('SONAR_APP_BASE_URL')
         if not isinstance(document, DocumentRecord):
             document = DocumentRecord(document)
-        if orgs := document.get('organisation', []):
-            org_code = current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION')
-            if org := orgs[0]:
-                org = OrganisationRecord(org)
-                org = org.replace_refs()
-                if org.get('isDedicated') or org.get('isShared'):
-                    org_code = org.get('code')
-            url = f"{sonar_base_url}/{org_code}/documents/{document.get('pid')}"
+        if url := cls.get_url(document):
+            urn = document.get_rero_urn_code(document)
             data = {
-                'urn': document.get_rero_urn_code(document),
+                'urn': urn,
                 'urls': [
                     {
                         'url': url,
@@ -99,28 +189,27 @@ class DnbUrnService:
                     }
                 ]
             }
-            try:
-                response = requests.request(
-                    'POST',
-                    f"{current_app.config.get('SONAR_APP_URN_DNB_BASE_URL')}/urns",
-                    headers=cls.headers(),
-                    data=json.dumps(data)
-                )
-                answer = response.status_code == 201
-            except Exception as error:
-                current_app.logger.error(
-                    'unable to connect to DNB register service.')
-        return answer
-
+            if cls.exists(urn):
+                cls.update(urn, data['urls'])
+            else:
+                cls.create(data)
+            return True
+        return False
 
     @classmethod
-    def register(cls, urn_code):
-        """Register a new URN code.
+    def get_url(cls, document):
+        """Get the target url depending to the organization.
 
-        :param urn_code: the urn code.
-        :returns: True if urn is registered, otherwise False.
+        :param document: Document - the document containing the URN.
+        :rtype: str.
+        :returns: the target URL.
         """
-        identifiers = [{'type': 'bf:Urn', 'value': urn_code}]
-        document = DocumentRecord.get_record_by_identifier(
-            identifiers, ['bf:Urn'])
-        return cls.register_document(document)
+        base_url = f'https://{current_app.config.get("SONAR_APP_SERVER_NAME")}'
+        if orgs := document.resolve().get('organisation', []):
+            org_code = current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION')
+            if org := orgs[0]:
+                if org.get('isDedicated') or org.get('isShared'):
+                    org_code = org.get('code')
+                if org.get('isDedicated') and (server_name := org.get('serverName')):
+                    base_url = f'https://{server_name}'
+            return f"{base_url}/{org_code}/documents/{document.get('pid')}"

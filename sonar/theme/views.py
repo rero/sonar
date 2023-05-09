@@ -121,7 +121,6 @@ def error():
     """Error to generate exception for test purposes."""
     raise Exception('this is an error for test purposes')
 
-
 @blueprint.route('/rerodoc/<pid>')
 @blueprint.route('/rerodoc/<pid>/files/<filename>')
 def rerodoc_redirection(pid, filename=None):

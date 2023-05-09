@@ -29,8 +29,8 @@ from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 def test_list(app, client, make_document, superuser, admin, moderator,
               submitter, user, organisation):
     """Test list documents permissions."""
-    make_document(None, with_file=True)
-    doc = make_document('org', with_file=True)
+    make_document(organisation=None, with_file=True)
+    make_document(organisation='org', with_file=True)
 
     # Not logged
     res = client.get(url_for('invenio_records_rest.doc_list'))
@@ -406,16 +406,16 @@ def test_delete(client, document, make_document, make_user, superuser, admin,
         PIDStatus.DELETED
 
 
-def test_document_with_urn_delete(client, superuser, minimal_thesis_document):
+def test_document_with_urn_delete(client, superuser, admin, minimal_thesis_document_with_urn):
     """Test delete document with registered URN identifier."""
     # Add file to document
-    minimal_thesis_document.files['test.pdf'] = BytesIO(b'File content')
-    minimal_thesis_document.files['test.pdf']['type'] = 'file'
-    minimal_thesis_document.commit()
+    minimal_thesis_document_with_urn.files['test.pdf'] = BytesIO(b'File content')
+    minimal_thesis_document_with_urn.files['test.pdf']['type'] = 'file'
+    minimal_thesis_document_with_urn.commit()
 
     # Logged as superuser
-    login_user_via_session(client, email=superuser['email'])
-    pid = minimal_thesis_document['pid']
+    login_user_via_session(client, email=admin['email'])
+    pid = minimal_thesis_document_with_urn['pid']
     res = client.delete(url_for('invenio_records_rest.doc_item',
                                 pid_value=pid))
     assert res.status_code == 403
