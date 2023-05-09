@@ -17,22 +17,11 @@
 
 """SNL FTP repository."""
 
-import os
-from ftplib import FTP
-
-from flask import current_app
+from pysftp import Connection
 
 
 class SNLRepository():
     """SNL FTP repository."""
-
-    host = None
-    user = None
-    password = None
-    directory = None
-
-    # FTP connection
-    _ftp = None
 
     def __init__(self, host, user, password, directory):
         """Init class.
@@ -49,31 +38,29 @@ class SNLRepository():
 
     def connect(self):
         """Connect to FTP server and change directory."""
-        self._ftp = FTP(self.host)
-        self._ftp.login(self.user, self.password)
-        self._ftp.cwd(self.directory)
+        self.client = Connection(
+            self.host, username=self.user,
+            password=self.password, default_path=self.directory)
 
     def make_dir(self, pathname):
         """Make new directory via FTP connection."""
-        self._ftp.mkd(pathname)
+        self.client.mkdir(pathname)
 
     def cwd(self, pathname):
         """Move to directory via FTP connection."""
-        self._ftp.cwd(pathname)
+        self.client.cd(pathname)
 
     def list(self):
         """List directory via FTP connection."""
-        return self._ftp.nlst()
+        self.client.walktree('.', lambda x: print(x), lambda x: print(x), lambda x: print(x))
 
-    def upload_file(self, filepath):
+    def upload_file(self, file_path, file_name):
         """Upload file to SNL server via FTP connection.
 
         :param filepath: local filepath of file to upload
         """
-        filename = os.path.basename(filepath)
-        with open(filepath, "rb") as file:
-            self._ftp.storbinary(f"STOR {filename}", file)
+        self.client.put(file_path, file_name)
 
     def close(self):
         """Close FTP connection."""
-        self._ftp.close()
+        self.client.close()

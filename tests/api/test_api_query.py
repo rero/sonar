@@ -128,7 +128,7 @@ def test_api_query(client, document_with_file, document_json, make_document,
         },
         'source': 'RERO'
     }]
-    make_document('org')
+    make_document(organisation='org')
     response = client.get(url_for(
         'invenio_records_rest.doc_list',
         subject=['Time series models', 'GARCH models']),

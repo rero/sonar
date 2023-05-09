@@ -236,27 +236,27 @@ def test_elastic_search(client, superuser, monkeypatch):
     assert response.json == {'error': 'Unknown exception'}
 
 
-def test_unregistered_urn(client, es_clear, organisation, superuser,
-                          monkeypatch, minimal_thesis_document):
+def test_urn(client, es_clear, superuser, monkeypatch,
+             minimal_thesis_document_with_urn):
     """Test unregistered urn counts."""
     login_user_via_session(client, email=superuser['email'])
     response = client.get(
-        url_for('monitoring_api.unregistered_urn'))
+        url_for('monitoring_api.urn'))
     assert response.status_code == 200
-    assert response.json == {'data': 0}
+    assert response.json['data']['reserved']['count'] == 0
 
     response = client.get(
-        url_for('monitoring_api.unregistered_urn', days=100))
+        url_for('monitoring_api.urn', days=100))
     assert response.status_code == 200
-    assert response.json == {'data': 0}
+    assert response.json['data']['reserved']['count'] == 0
 
     query = PersistentIdentifier.query\
                 .filter_by(pid_type='urn')\
                 .filter_by(status=PIDStatus.REGISTERED)
     pid = query.first()
-    pid.status = PIDStatus.NEW
+    pid.status = PIDStatus.RESERVED
     db.session.commit()
     response = client.get(
-        url_for('monitoring_api.unregistered_urn'))
+        url_for('monitoring_api.urn'))
     assert response.status_code == 200
-    assert response.json == {'data': 1}
+    assert response.json['data']['reserved']['count'] == 1

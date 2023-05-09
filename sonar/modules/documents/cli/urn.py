@@ -23,67 +23,118 @@ import click
 from flask import current_app
 from flask.cli import with_appcontext
 from invenio_db import db
-from invenio_files_rest.models import ObjectVersion
 from invenio_pidstore.errors import PIDDoesNotExistError
-from invenio_pidstore.models import PersistentIdentifier
+from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 
 from sonar.modules.documents.api import DocumentRecord
+from sonar.modules.documents.dnb import DnbUrnService
 from sonar.modules.documents.urn import Urn
 from sonar.snl.ftp import SNLRepository
+
+from ..api import DocumentRecord
 
 
 @click.group()
 def urn():
     """URN specific commands."""
 
-
-@urn.command('urn-for-loaded-records')
+@urn.command()
+@click.argument('urn')
 @with_appcontext
-def urn_for_loaded_records():
-    """Generate and register urns for loaded records."""
+def get(urn):
+    """Get a URN information.
+
+    :param urn: str - URN identifier
+    """
+    p = PersistentIdentifier.get('urn', urn)
+    if not p.is_registered():
+       click.secho(
+            f'error: bad pid status ({p.status})',
+            fg='red'
+        )
+    dnb_urn = DnbUrnService.get(urn)
+    dnb_urls = DnbUrnService.get_urls(urn)
+    document = DocumentRecord.get_record(p.object_uuid)
+    url = DnbUrnService.get_url(document)
+    if dnb_urls['items'][0]['url'] != url:
+        click.secho(
+            f'error: DNB has the wrong url ({dnb_urls["items"][0]["url"]} != {url})',
+            fg='red'
+        )
+    if len(dnb_urls['items']) > 1:
+        urls = [item['url'] for item in dnb_urls["items"]]
+        click.secho(
+            f'error: DNB has more than one urls ({", ".join(urls)})',
+            fg='red'
+        )
+
+    click.echo(f'urn created: {dnb_urn["created"]}')
+    click.echo(f'urn modified: {dnb_urn["lastModified"]}')
+    dnb_url = dnb_urls['items'][0]
+    click.echo(f'url created: {dnb_url["created"]}')
+    click.echo(f'url modified: {dnb_url["lastModified"]}')
+    click.echo(f'url: {url}')
+
+
+@urn.command()
+@with_appcontext
+def create():
+    """Create and register urns for loaded records."""
+    idx = 0
     for idx, document in enumerate(Urn.get_documents_to_generate_urns(), 1):
         click.secho(
-            f'\t{idx}: generate urn code for pid: {document.pid}', fg='green')
+            f'\t{idx}: generate urn code for pid: {document["pid"]}', fg='green')
         Urn.create_urn(document)
+        document.commit()
+        db.session.commit()
+        document.reindex()
+        Urn.register_urn_code_from_document(document)
+    click.secho(f'{idx} URN created.', fg='green')
 
 
-@urn.command('register-urn-pids')
+@urn.command()
 @with_appcontext
-def register_urn_identifiers():
-    """Register URN identifiers with status NEW."""
-    urn_codes = Urn.get_unregistered_urns()
-    if count := len(urn_codes):
-        click.secho(f'Found  {count} urns to register', fg='yellow')
-        registered = 0
-        for urn_code in urn_codes:
-            if Urn.register_urn_pid(urn=urn_code):
-                click.secho(
-                    f'\turn code: {urn_code} successfully registered', fg='green')
-                registered += 1
-            else:
-                click.secho(
-                    f'\turn code: {urn_code} still pending', fg='red')
-
-        click.secho(f'Found  {count} urns to register', fg='yellow')
-        click.secho(
-            f'Number URNs successfully registered: {registered}', fg='green')
-        click.secho(
-            f'Number URNs pending: {count-registered}', fg='red')
-    else:
-        click.secho('No urns found to register', fg='yellow')
+def register():
+    """Register urns for reserved URN pids."""
+    query =  PersistentIdentifier.query.filter_by(
+            pid_type='urn').filter_by(status=PIDStatus.RESERVED)
+    for idx, pid in enumerate(query.all()):
+        doc = DocumentRecord.get_record(pid.object_uuid)
+        click.secho(f'Registering document (pid: {doc["pid"]})', fg='yellow')
+        Urn.register_urn_code_from_document(doc)
+    click.secho(f'{idx} URN registered.', fg='green')
 
 
 @urn.command('snl-upload-file')
 @click.argument('urn_code')
-@click.argument('filepath')
 @with_appcontext
-def snl_upload_file(urn_code, filepath):
+def snl_upload_file(urn_code):
     r"""Upload file on the SNL server via FTP for REGISTRED urn.
 
     Ex. invenio documents urn snl-upload-file 006-72 ~/my_dir/a.pdf
     :param urn_code: urn code of the document. Ex. 006-72
     :param filepath: local filepath of file to upload
     """
+    try:
+        pid = PersistentIdentifier.get(Urn.urn_pid_type, urn_code)
+    except PIDDoesNotExistError:
+        click.secho('Error: URN does not exists.')
+        return
+
+    if not pid.is_registered():
+        click.secho('Error: the given urn is not registered.')
+        return
+
+    doc = DocumentRecord.get_record(pid.object_uuid)
+    if not doc:
+        click.secho('Error: the given urn is not linked to any document.')
+        return
+
+    files = [file for file in doc.files if file.get('type') == 'file']
+    if not files:
+        click.secho('Error: the document does not contains any files.')
+        return
+
     snl_repository = SNLRepository(
         host=current_app.config.get('SONAR_APP_FTP_SNL_HOST'),
         user=current_app.config.get('SONAR_APP_FTP_SNL_USER'),
@@ -92,114 +143,33 @@ def snl_upload_file(urn_code, filepath):
     )
     snl_repository.connect()
 
-    dnb_base_urn = current_app.config.get('SONAR_APP_URN_DNB_BASE_URN')
-    urn = ''.join([dnb_base_urn, urn_code])
-
-    try:
-        urn_identifier = PersistentIdentifier.get('urn', urn)
-    except PIDDoesNotExistError:
-        click.secho(f'Persistent identifier does not exist for {urn}',
-                    fg='red')
-        return
-
-    # check urn is registred
-    if not urn_identifier.is_registered():
-        click.secho(f'Urn: {urn} is not registred', fg='red')
-        return
+    dnb_base_urn = current_app.config.get('SONAR_APP_FTP_SNL_PATH')
+    urn_dir = '/'.join([dnb_base_urn, urn_code.split(':')[-1]])
 
     # create directory for urn
-    snl_repository.make_dir(urn)
-
-    # move to the urn directory
-    snl_repository.cwd(urn)
+    snl_repository.make_dir(urn_dir)
 
     # upload file
-    try:
-        snl_repository.upload_file(filepath)
-        click.secho(
-            f'Successfully uploaded file {os.path.basename(filepath)}.',
-            fg='green')
-    except Exception as exception:
-        click.secho(str(exception), fg='red')
+    for _file in files:
+        try:
+            snl_repository.upload_file(_file.file.uri, os.path.join(urn_dir, _file.key))
+            click.secho(
+                f'Successfully uploaded file {os.path.basename(_file.key)}.',
+                fg='green')
+        except Exception as exception:
+            click.secho(str(exception), fg='red')
 
     # print email template
-    template_emailSNL = current_app.config.get('SONAR_APP_SNL_EMAIL_TEMPLATE')
-
-    pid = PersistentIdentifier.get(Urn.urn_pid_type, urn)
-    record = DocumentRecord.get_record(pid.object_uuid)
+    template_email_SNL = current_app.config.get('SONAR_APP_SNL_EMAIL_TEMPLATE')
 
     click.secho('Template of email to send to SNL:', fg='green')
-    with open(template_emailSNL, 'r') as file:
+    with open(template_email_SNL, 'r') as file:
         email_txt = file.read()
-        email_txt = email_txt.replace("<URN>", urn)
+        email_txt = email_txt.replace("<URN>", urn_code)
         email_txt = email_txt.replace(
-            "<URL>", f'https://sonar.ch/global/documents/{record.get("pid")}'
+            "<URL>", f'https://sonar.ch/global/documents/{doc.get("pid")}'
         )
         click.secho(email_txt)
-
-
-@urn.command('replace-pdf-file')
-@click.argument('urn_code')
-@click.argument('filename')
-@click.argument('filepath')
-@with_appcontext
-def replace_pdf_file(urn_code, filename, filepath):
-    r"""Replace file in document with REGISTRED URN.
-
-    Delete pdf file from record and upload new file.
-    Ex. invenio documents urn replace-pdf-file 006-72 a.pdf ~/my_dir/b.pdf
-    :param urn_code: urn code of the document. Ex. 006-72
-    :param filename: filename of the file to delete
-    :param filepath: filepath of the file to upload
-    """
-    dnb_base_urn = current_app.config.get('SONAR_APP_URN_DNB_BASE_URN')
-    urn = ''.join([dnb_base_urn, urn_code])
-
-    try:
-        urn_identifier = PersistentIdentifier.get('urn', urn)
-    except PIDDoesNotExistError:
-        click.secho(f'Persistent identifier does not exist for {urn}',
-                    fg='red')
-        return
-
-    # check urn is registred
-    if not urn_identifier.is_registered():
-        click.secho(f'Urn: {urn} is not registred', fg='red')
-        return
-
-    pid = PersistentIdentifier.get(Urn.urn_pid_type, urn)
-    record = DocumentRecord.get_record(pid.object_uuid)
-
-    try:
-        f = record.files[filename]
-    except KeyError:
-        click.secho(f'File {filename} does not exist for urn: {urn}', fg='red')
-        return
-
-    if f.mimetype == 'application/pdf' and f.is_head:
-        # get metadata of file to remove.
-        pdf_dump = f.dumps()
-
-        # remove file (soft delete)
-        ObjectVersion.delete(bucket=f.bucket, key=f.key)
-
-        # upload file
-        new_filename = os.path.basename(filepath)
-        with open(filepath, 'rb') as file:
-            content = file.read()
-        record.add_file(content, new_filename)
-
-        # set file order from metadata of deleted file
-        record.files[new_filename]['order'] = pdf_dump.get('order')
-
-        record.commit()
-        record.reindex()
-        db.session.commit()
-
-        click.secho(f'Removed file: {f.key}', fg='green')
-        click.secho(f'Uploaded file: {filepath}', fg='green')
-    else:
-        click.secho(f'File {filename} is not pdf or is not head', fg='red')
 
 
 @urn.command('snl-list-files')

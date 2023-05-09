@@ -28,7 +28,8 @@ from invenio_records_rest.schemas.fields import GenFunction, \
 from marshmallow import EXCLUDE, fields, pre_dump, pre_load, validate
 
 from sonar.modules.documents.api import DocumentRecord
-from sonar.modules.documents.permissions import DocumentPermission
+from sonar.modules.documents.permissions import DocumentFilesPermission, \
+    DocumentPermission
 from sonar.modules.documents.utils import has_external_urls_for_files, \
     populate_files_properties
 from sonar.modules.documents.views import contribution_text, \
@@ -69,6 +70,35 @@ class FileSchemaV1(StrictKeysMixin):
     restriction = fields.Dict(dump_only=True)
     links = fields.Dict(dump_only=True)
     thumbnail = SanitizedUnicode(dump_only=True)
+    permissions = fields.Dict(dump_only=True)
+
+    @pre_dump
+    def add_permissions(self, item, **kwargs):
+        """Add permissions to record.
+
+        :param item: Dict representing the record.
+        :returns: Modified dict.
+        """
+        if not item.get('bucket'):
+            return item
+        doc = DocumentRecord.get_record_by_bucket(item.get('bucket'))
+        item['permissions'] = {
+            'read': DocumentFilesPermission.read(current_user_record, item, doc['pid'], doc),
+            'update': DocumentFilesPermission.update(current_user_record, item, doc['pid'], doc),
+            'delete': DocumentFilesPermission.delete(current_user_record, item, doc['pid'], doc)
+        }
+
+        return item
+
+    @pre_load
+    def remove_fields(self, data, **kwargs):
+        """Removes computed fields.
+
+        :param data: Dict of record data.
+        :returns: Modified data.
+        """
+        data.pop('permissions', None)
+        return data
 
 
 class DocumentMetadataSchemaV1(StrictKeysMixin):

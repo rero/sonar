@@ -17,11 +17,7 @@
 
 """Specific configuration SONAR."""
 
-SONAR_APP_SERVER_NAME = 'sonar.rero.ch'
-
-SONAR_APP_BASE_URL = 'https://localhost:5000'
-
-SONAR_APP_API_URL = 'https://localhost:5000/api/'
+SONAR_APP_SERVER_NAME = 'localhost:5000'
 
 SONAR_APP_ANGULAR_URL = 'https://localhost:5000/manage/'
 """Link to angular integrated app root."""
