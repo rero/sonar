@@ -73,20 +73,14 @@ def test_activity(app, monkeypatch):
     monkeypatch.setattr(db.session,
                         'execute', lambda *args: MockActivityQuery())
     assert db_monitoring.activity() == [{
-        'application_name':
-        '',
-        'client_address':
-        '10.233.92.25',
-        'client_port':
-        33382,
-        'query':
+        'application_name': '',
+        'backend_start': 'Mon, 08 Feb 2021 10:46:55 GMT',
+        'client_addr': '10.233.92.25',
+        'client_port': 33382,
+        'left':
         '\n        SELECT\n            pid, application_name, client',
-        'query_start':
-        'Mon, 08 Feb 2021 10:46:55 GMT',
-        'state':
-        'active',
-        'wait_event':
-        None,
-        'transaction_start':
-        'Mon, 08 Feb 2021 10:46:55 GMT'
+        'query_start': 'Mon, 08 Feb 2021 10:46:55 GMT',
+        'state': 'active',
+        'wait_event': None,
+        'xact_start': 'Mon, 08 Feb 2021 10:46:55 GMT'
     }]

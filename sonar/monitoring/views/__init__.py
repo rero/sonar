@@ -19,10 +19,11 @@
 
 from functools import wraps
 
-from flask import Blueprint, abort, jsonify, request
+from flask import Blueprint, current_app, jsonify, request
 from flask_security import current_user
 from invenio_pidstore.models import PIDStatus
 from invenio_search import current_search_client
+from redis import Redis
 
 from sonar.modules.documents.urn import Urn
 from sonar.modules.permissions import superuser_access_permission
@@ -54,7 +55,7 @@ def check_for_superuser():
     """Check if user is superuser before each request, with decorator."""
 
 
-@api_blueprint.route('/db/connections/count')
+@api_blueprint.route('/db_connection_counts')
 def db_connection_count():
     """Information about current database connections."""
     try:
@@ -64,7 +65,7 @@ def db_connection_count():
         return jsonify({'error': str(exception)}), 500
 
 
-@api_blueprint.route('/db/activity')
+@api_blueprint.route('db_connections')
 def db_activity():
     """Current database activity."""
     try:
@@ -74,21 +75,21 @@ def db_activity():
         return jsonify({'error': str(exception)}), 500
 
 
-@api_blueprint.route('/data/status')
+@api_blueprint.route('/es_db_status')
 def data_status():
     """Status of data integrity."""
     try:
         data_monitoring = DataIntegrityMonitoring()
         return jsonify({
             'data': {
-                'status': 'green' if not data_monitoring.has_error() else 'red'
+                'status': 'red' if data_monitoring.has_error() else 'green'
             }
         })
     except Exception as exception:
         return jsonify({'error': str(exception)}), 500
 
 
-@api_blueprint.route('/data/info')
+@api_blueprint.route('/es_db_counts')
 def data_info():
     """Info of data integrity."""
     try:
@@ -100,6 +101,18 @@ def data_info():
     except Exception as exception:
         return jsonify({'error': str(exception)}), 500
 
+
+@api_blueprint.route('/redis')
+def redis():
+    """Displays redis info.
+
+    :return: jsonified redis info.
+    """
+    url = current_app.config.get('ACCOUNTS_SESSION_REDIS_URL',
+                                 'redis://localhost:6379')
+    redis = Redis.from_url(url)
+    info = redis.info()
+    return jsonify({'data': info})
 
 @api_blueprint.route('/es')
 def elastic_search():
@@ -130,3 +143,15 @@ def urn():
         return jsonify(dict(data=data))
     except Exception as exception:
         return jsonify({'error': str(exception)}), 500
+
+
+@api_blueprint.route('/es_indices')
+def elastic_search_indices():
+    """Displays Elasticsearch indices info.
+
+    :return: jsonified Elasticsearch indices info.
+    """
+    info = current_search_client.cat.indices(
+        bytes='b', format='json', s='index')
+    info = {data['index']: data for data in info}
+    return jsonify({'data': info})
