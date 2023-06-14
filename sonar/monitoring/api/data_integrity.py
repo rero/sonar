@@ -36,7 +36,7 @@ class DataIntegrityMonitoring():
         :param with_deleted: Count also deleted items.
         :returns: Items count.
         """
-        if not sonar.endpoints.get(doc_type):
+        if not sonar.endpoints.get(doc_type) or doc_type == 'proj':
             raise Exception(
                 'No endpoint configured for "{type}"'.format(type=doc_type))
 

@@ -75,13 +75,14 @@ class DatabaseMonitoring():
             """Format returned row from DB."""
             return {
                 'application_name': row['application_name'],
-                'client_address': row['client_addr'],
+                'client_addr': row['client_addr'],
                 'client_port': row['client_port'],
-                'query': row['left'],
+                'backend_start': row['backend_start'],
+                'xact_start': row['xact_start'],
                 'query_start': row['query_start'],
-                'state': row['state'],
                 'wait_event': row['wait_event'],
-                'transaction_start': row['xact_start']
+                'state': row['state'],
+                'left': row['left'],
             }
 
         return list(map(format_row, db.session.execute(query).fetchall()))
