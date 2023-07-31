@@ -12,15 +12,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2022-11-24 10:51+0100\n"
-"PO-Revision-Date: 2022-09-07 07:22+0000\n"
+"PO-Revision-Date: 2023-07-31 07:53+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"fr/>\n"
 "Language: fr\n"
-"Language-Team: French "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/fr/>\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.0-dev\n"
 "Generated-By: Babel 2.10.1\n"
 
 #: sonar/theme/views.py:102
@@ -1238,7 +1239,7 @@ msgstr "Titre"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:283
 msgid "Main titles"
-msgstr "Titres"
+msgstr "Titres principaux"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:836
 msgid "Mandate"
@@ -2509,7 +2510,7 @@ msgstr "Numéro d'enregistrement vidéo"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:107
 msgid "classification_004"
-msgstr "Informatique"
+msgstr "Science et technologie de l’informatique"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:427
 msgid "classification_02"
@@ -2517,7 +2518,7 @@ msgstr "Bibliothéconomie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:323
 msgid "classification_1"
-msgstr "Philosophie"
+msgstr "Philosophie, psychologie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:461
 msgid "classification_159.9"
@@ -2529,7 +2530,7 @@ msgstr "Mémoire et apprentissage"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:327
 msgid "classification_16"
-msgstr "Logique"
+msgstr "Logique, épistémologie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:333
 msgid "classification_2"
@@ -2545,7 +2546,7 @@ msgstr "Sciences sociales"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:347
 msgid "classification_31"
-msgstr "Démographie, sociologie, statistique"
+msgstr "Démographie, sociologie, statistiques"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:381
 msgid "classification_32"
@@ -2557,11 +2558,11 @@ msgstr "Économie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:389
 msgid "classification_34"
-msgstr "Droit"
+msgstr "Droit, jurisprudence"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:393
 msgid "classification_35"
-msgstr "Administration publique"
+msgstr "Administration publique, gouvernement, affaires militaires"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:397
 msgid "classification_36"
@@ -2585,7 +2586,7 @@ msgstr "Institutions d'enseignement supérieur"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:417
 msgid "classification_39"
-msgstr "Anthropologie, ethnologie"
+msgstr "Anthropologie, ethnographie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:224
 msgid "classification_51"
@@ -2593,15 +2594,15 @@ msgstr "Mathématiques"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:228
 msgid "classification_519.2"
-msgstr "Probabilités, statistiques"
+msgstr "Probabilités, statistiques mathématiques"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:234
 msgid "classification_52"
-msgstr "Astronomie, astrophysique"
+msgstr "Astronomie, astrophysique, recherche spatiale"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:238
 msgid "classification_524.8"
-msgstr "Cosmologie"
+msgstr "L'Univers, métagalaxie, cosmologie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:244
 msgid "classification_53"
@@ -2633,7 +2634,7 @@ msgstr "Sciences de la terre"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:278
 msgid "classification_551"
-msgstr "Climat"
+msgstr "Météorologie, climatologie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:282
 msgid "classification_556"
@@ -2653,7 +2654,7 @@ msgstr "Biologie, sciences de la vie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:266
 msgid "classification_574"
-msgstr "Écologie générale et biodiversité"
+msgstr "Écologie et biodiversité"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:302
 msgid "classification_58"
@@ -2665,7 +2666,7 @@ msgstr "Zoologie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:111
 msgid "classification_6"
-msgstr "Sciences appliquées. Médecine. Technologie"
+msgstr "Sciences appliquées"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:310
 msgid "classification_60"
@@ -2677,7 +2678,7 @@ msgstr "Sciences médicales"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:179
 msgid "classification_613.2"
-msgstr "Nutrition et diététique"
+msgstr "Diététique, nutrition"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:183
 msgid "classification_614.253.5"
@@ -2685,7 +2686,7 @@ msgstr "Sage-femme"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:189
 msgid "classification_615"
-msgstr "Pharmacologie. Thérapeutique. Toxicologie"
+msgstr "Pharmacologie, thérapeutique, toxicologie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:193
 msgid "classification_615.8"
@@ -2697,7 +2698,7 @@ msgstr "Technique en radiologie médicale"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:203
 msgid "classification_616"
-msgstr "Médecine clinique"
+msgstr "Pathologie, médecine clinique"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:211
 msgid "classification_616-083"
@@ -2705,7 +2706,7 @@ msgstr "Soins infirmiers"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:207
 msgid "classification_616.31"
-msgstr "Médecine dentaire"
+msgstr "Stomatologie, cavité orale, affections de la bouche et des dents"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:175
 msgid "classification_61_2"
@@ -2713,7 +2714,7 @@ msgstr "Santé"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:133
 msgid "classification_620.1"
-msgstr "Matériaux"
+msgstr "Matériaux d'ingénierie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:137
 msgid "classification_620.9"
@@ -2721,7 +2722,7 @@ msgstr "Énergie"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:141
 msgid "classification_621"
-msgstr "Génie industriel"
+msgstr "Mécanique industrielle, technologie nucléaire"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:145
 msgid "classification_621.01"
@@ -2757,7 +2758,8 @@ msgstr "Chimie industrielle"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:123
 msgid "classification_663"
-msgstr "Industrie des boissons"
+msgstr ""
+"Microbiologie industrielle, mycologie industrielle, industrie des boissons"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:127
 msgid "classification_664"
@@ -2765,11 +2767,11 @@ msgstr "Fabrication et conservation des aliments"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:165
 msgid "classification_681"
-msgstr "Microtechnique"
+msgstr "Mécanismes et instruments de précision"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:353
 msgid "classification_7"
-msgstr "Arts"
+msgstr "Arts, divertissements, sport"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:357
 msgid "classification_7.071"
@@ -2853,7 +2855,7 @@ msgstr "Sciences exactes et naturelles"
 
 #: sonar/common/jsonschemas/classification-v1.0.0.json:318
 msgid "classification_root_3"
-msgstr "Lettres, sciences humaines et sociales"
+msgstr "Arts, sciences humaines et sociales"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:136
 msgid "coar:c_16ec"
@@ -5501,4 +5503,3 @@ msgstr "Fonds national suisse de la recherche scientifique"
 #~ msgstr ""
 #~ "Propulsé par <a href=\"%(link)s\" "
 #~ "target=\"_blank\" rel=\"noopener\">SONAR</a>"
-
