@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2022-11-24 10:51+0100\n"
-"PO-Revision-Date: 2022-08-30 10:20+0000\n"
+"PO-Revision-Date: 2023-07-14 10:50+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"it/>\n"
 "Language: it\n"
-"Language-Team: Italian "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/it/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.0-dev\n"
 "Generated-By: Babel 2.10.1\n"
 
 #: sonar/theme/views.py:102
@@ -641,7 +642,7 @@ msgid ""
 "password."
 msgstr ""
 "Inserisca il suo e-mail qui sotto e le invieremo un collegamento per "
-"ripristinare la sua parola d'ordine."
+"ripristinare la sua password."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:519
 msgid "Example (DOI): 10.3406/spira.2016.1748"
@@ -820,7 +821,7 @@ msgstr "Forzare l'URL esterno"
 
 #: sonar/theme/templates/sonar/accounts/login.html:54
 msgid "Forgot password?"
-msgstr "Avete dimenticato la parola d'ordine?"
+msgstr "Avete dimenticato la password?"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:937
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:591
@@ -1000,7 +1001,7 @@ msgid ""
 "  password."
 msgstr ""
 "Se non hai fatto questa richiesta, puoi ignorare questa e-mail. La tua "
-"parola d'ordine non cambierà finché non creerai una nuova."
+"password non cambierà finché non creerai una nuova."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:316
 msgid "In progress"
@@ -1685,11 +1686,11 @@ msgstr "Progetto di ricerca"
 #: sonar/theme/templates/sonar/accounts/reset_password.html:20
 #: sonar/theme/templates/sonar/accounts/reset_password.html:30
 msgid "Reset Password"
-msgstr "Reimpostare la parola d'ordine"
+msgstr "Reimpostare la password"
 
 #: sonar/templates/security/email/reset_instructions.html:26
 msgid "Reset my password"
-msgstr "Reimpostare la mia parola d'ordine"
+msgstr "Reimpostare la mia password"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:968
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:406
@@ -1730,7 +1731,7 @@ msgstr "Logo di SONAR"
 
 #: sonar/config.py:292
 msgid "SONAR password reset"
-msgstr "Reimpostazione della parola d'ordine SONAR"
+msgstr "Reimpostazione della password SONAR"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:14
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:8
@@ -1872,8 +1873,8 @@ msgstr ""
 #: sonar/templates/security/email/reset_instructions.html:24
 msgid "Someone requested that the password for your SONAR account be reset."
 msgstr ""
-"Qualcuno ha richiesto la reimpostazione della parola d'ordine per il tuo "
-"account SONAR."
+"Qualcuno ha richiesto la reimpostazione della password per il tuo account "
+"SONAR."
 
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:28
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:526
@@ -2315,7 +2316,7 @@ msgstr "Anno"
 
 #: sonar/config.py:293
 msgid "Your SONAR password has been reset"
-msgstr "La tua parola d'ordine SONAR è stata reimpostata"
+msgstr "La tua password SONAR è stata reimpostata"
 
 #: sonar/templates/security/email/reset_instructions.html:31
 #: sonar/templates/security/email/reset_notice.html:26
@@ -2324,7 +2325,7 @@ msgstr "La tua istituzione"
 
 #: sonar/templates/security/email/reset_notice.html:24
 msgid "Your password has been successfully reset."
-msgstr "La tua parola d'ordine è stata reimposta con successo."
+msgstr "La tua password è stata reimposta con successo."
 
 #: sonar/translations/manual_translations.txt:37
 msgid "actorsInvolved"
@@ -5490,4 +5491,3 @@ msgstr "Fondo nazionale svizzero per la ricerca scientifica"
 #~ msgstr ""
 #~ "Powered by <a href=\"%(link)s\" "
 #~ "target=\"_blank\" rel=\"noopener\">SONAR</a>"
-
