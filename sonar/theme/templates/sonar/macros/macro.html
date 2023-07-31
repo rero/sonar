@@ -113,7 +113,7 @@
 {% endif %}
 <!-- role for person -->
 {% if contribution.agent.type == 'bf:Person' and contribution.role and contribution.role[0] != 'cre' %}
-({{ _('contribution_role_' + contribution.role[0]) | lower }})
+({{ _('contribution_role_' + contribution.role[0]) }})
 {% endif %}
 {% if contribution.agent.get('identifiedBy', {}).get('value') %}
 {{ identifier_link(contribution.agent.identifiedBy, 'agent')}}
