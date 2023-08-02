@@ -50,8 +50,10 @@ fi
 # | celery                     | 5.1.2     | <5.2.0                   | 42498    |
 # | celery                     | 5.1.2     | <5.2.2                   | 43738    |
 # | cryptography               | 39.0.2    | <41.0.0                  | 59062    |
+# | cryptography               | 39.0.2    | <41.0.2                  | 59473    |
+# | certifi                    | 2022.12.7 | >=2015.04.28,<2023.07.22 | 59956    |
 # +==============================================================================+
-safety check -i 45183 -i 44501 -i 51668 -i 42194 -i 42852 -i 53325 -i 53326 -i 54456 -i 42498 -i 43738 -i 47833 -i 51457 -i 51358 -i 53812 -i 52495 -i 50792 -i 55261 -i 59062
+safety check -i 45183 -i 44501 -i 51668 -i 42194 -i 42852 -i 53325 -i 53326 -i 54456 -i 42498 -i 43738 -i 47833 -i 51457 -i 51358 -i 53812 -i 52495 -i 50792 -i 55261 -i 59062 -i 59473 -i 59956
 pydocstyle sonar tests docs
 isort --check-only --diff "${SCRIPT_PATH}/.."
 autoflake -c -r --remove-all-unused-imports --ignore-init-module-imports . &> /dev/null || {
