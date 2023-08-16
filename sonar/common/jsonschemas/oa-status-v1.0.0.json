@@ -6,6 +6,7 @@
     "gold",
     "hybrid",
     "bronze",
+    "diamond",
     "closed"
   ],
   "form": {
@@ -29,6 +30,10 @@
       {
         "label": "Bronze",
         "value": "bronze"
+      },
+      {
+        "label": "Diamond",
+        "value": "diamond"
       },
       {
         "label": "Closed",
