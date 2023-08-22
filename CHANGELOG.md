@@ -1,5 +1,28 @@
 # Changelog
 
+## [v1.9.0](https://github.com/rero/sonar/tree/v1.9.0) (2023-08-22)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.8.2...v1.9.0)
+
+**New features:**
+* Activate URN assignment and registration [\#811](https://github.com/rero/sonar/issues/811) (by @jma)
+* ARK persistent identifiers: activate storage, display and redirection [\#652](https://github.com/rero/sonar/issues/652) (by @jma)
+
+**Enhancements:**
+* documents and deposits: add diamond OA status [\#940](https://github.com/rero/sonar/pull/940) (by @PascalRepond)
+* controlled affiliations: add terms for HEP BEJUNE [\#939](https://github.com/rero/sonar/pull/939) (by @PascalRepond)
+
+**Fixes:**
+* documents: fix lowercase contributor role [\#937](https://github.com/rero/sonar/pull/937) (by @PascalRepond)
+* controlledAffiliation: fix resolver [\#918](https://github.com/rero/sonar/pull/918) (by @PascalRepond)
+* files: fix record retrieval from the file bucket [\#950](https://github.com/rero/sonar/pull/950) (by @jma)
+* orcid: change legacy URL [\#947](https://github.com/rero/sonar/pull/947) (by @jma)
+
+**Other changes:**
+* dependencies: fix vulnerabilities [\#935](https://github.com/rero/sonar/pull/935) (by @jma)
+* dependencies: update [\#927](https://github.com/rero/sonar/pull/927) (by @PascalRepond)
+* dependencies: fix vulnerabilities [\#924](https://github.com/rero/sonar/pull/924) (by @jma)
+
 ## [v1.8.2](https://github.com/rero/sonar/tree/v1.8.2) (2022-11-24)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.8.1...v1.8.2)
@@ -69,7 +92,7 @@
 **Implemented enhancements:**
 
 - Add direct link to main file in `oai_dc` export \(OAI-PMH\) [\#800](https://github.com/rero/sonar/issues/800) ([Garfield-fr](https://github.com/Garfield-fr))
-- allow multiple affiliations for authors \[1\] [\#727](https://github.com/rero/sonar/issues/727) ([rerowep](https://github.com/rerowep), [mmo](https://github.com/mmo)) 
+- allow multiple affiliations for authors \[1\] [\#727](https://github.com/rero/sonar/issues/727) ([rerowep](https://github.com/rerowep), [mmo](https://github.com/mmo))
 - Improvements and corrections of the document detailed view \[3\] [\#723](https://github.com/rero/sonar/issues/723) ([Garfield-fr](https://github.com/Garfield-fr))
 - Dublin Core export: add language attribute for abstracts and keywords [\#661](https://github.com/rero/sonar/issues/661) ([Garfield-fr](https://github.com/Garfield-fr))
 
