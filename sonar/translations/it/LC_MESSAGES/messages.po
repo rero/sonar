@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2023-08-22 11:19+0200\n"
-"PO-Revision-Date: 2023-07-14 10:50+0000\n"
+"PO-Revision-Date: 2023-08-22 10:35+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"it/>\n"
 "Language: it\n"
-"Language-Team: Italian "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/it/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.0-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: sonar/theme/views.py:102
@@ -143,7 +144,7 @@ msgstr ""
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:168
 msgid "Ark Name Assigning Authority Number (NAAN)"
-msgstr ""
+msgstr "Ark Name Assigning Authority Number (NAAN)"
 
 #: sonar/modules/deposits/rest.py:211
 msgid "Ask for changes on deposit"
@@ -161,7 +162,7 @@ msgstr "Autore o editore"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:618
 msgid "Authors / Editors"
-msgstr ""
+msgstr "Autori / Redattori"
 
 #: sonar/modules/documents/templates/documents/record.html:48
 #: sonar/theme/templates/sonar/projects/detail.html:15
@@ -188,7 +189,7 @@ msgstr "Breve descrizione del rapporto"
 
 #: sonar/common/jsonschemas/oa-status-v1.0.0.json:31
 msgid "Bronze"
-msgstr ""
+msgstr "Bronzo"
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:123
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:138
@@ -499,7 +500,7 @@ msgstr "Designazione"
 
 #: sonar/common/jsonschemas/oa-status-v1.0.0.json:35
 msgid "Diamond"
-msgstr ""
+msgstr "Diamante"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:636
 msgid "Director, head of HE training"
@@ -2108,6 +2109,9 @@ msgid ""
 " it can have undesired effects, such as invalidating existing persistent "
 "identifiers (ARK)."
 msgstr ""
+"Questa proprietà deve essere modificata solo in una situazione di test. In "
+"produzione, può avere effetti indesiderati, come l'invalidazione degli "
+"identificatori persistenti esistenti (ARK)."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:841
 msgid "This research is linked to a mandate"
@@ -5354,4 +5358,3 @@ msgstr "anno"
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:489
 msgid "​Swiss National Science Foundation"
 msgstr "Fondo nazionale svizzero per la ricerca scientifica"
-
