@@ -779,8 +779,8 @@ OAUTHCLIENT_REMOTE_APPS['orcid']['signup_handler']['setup'] = \
     'sonar.modules.oauth.orcid:account_setup'
 OAUTHCLIENT_REMOTE_APPS['orcid']['params'].update(
     dict(
-        base_url='https://pub.{domain}/'.format(domain=ORCID_DOMAIN),
-        access_token_url='https://pub.{domain}/oauth/token'.format(
+        base_url='https://{domain}/'.format(domain=ORCID_DOMAIN),
+        access_token_url='https://{domain}/oauth/token'.format(
             domain=ORCID_DOMAIN),
         authorize_url='https://{domain}/oauth/authorize#show_login'.format(
             domain=ORCID_DOMAIN),
