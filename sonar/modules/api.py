@@ -197,9 +197,16 @@ class SonarRecord(Record, FilesMixin):
                 raise Exception('`records_buckets` object not found.')
 
             # Find the record PID.
+
+            # Filter by the declared REST endpoints to avoid identifiers as
+            # oai, urn, etc.
+            pid_types = [
+                v['pid_type'] for v in
+                    current_app.config.get('RECORDS_REST_ENDPOINTS',{}).values()
+            ]
             pid = PersistentIdentifier.query.filter_by(
                 object_uuid=records_buckets.record_id).filter(
-                    ~PersistentIdentifier.pid_type.in_(['oai', 'rerod'])
+                    PersistentIdentifier.pid_type.in_(pid_types)
                 ).first()
 
             if not pid:
