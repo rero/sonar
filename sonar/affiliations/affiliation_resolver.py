@@ -77,5 +77,9 @@ class AffiliationResolver():
                         'lucerne' in searched_affiliation.lower()
                     ):
                         continue
+                    # handle special case Freiburg im Breisgau
+                    if 'university of freiburg' in searched_affiliation.lower():
+                        break
+
                     collected_affiliations.append(standard_form)
         return collected_affiliations

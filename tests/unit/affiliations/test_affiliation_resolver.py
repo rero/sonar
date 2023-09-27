@@ -68,3 +68,6 @@ def test_resolve():
 
     test_string = 'Not existing'
     assert not affiliation_resolver.resolve(test_string)
+
+    test_string = 'University of Freiburg'
+    assert not affiliation_resolver.resolve(test_string)
