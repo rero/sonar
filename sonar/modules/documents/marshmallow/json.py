@@ -101,7 +101,7 @@ class FileSchemaV1(StrictKeysMixin):
         return data
 
 
-class DocumentMetadataSchemaV1(StrictKeysMixin):
+class DocumentListMetadataSchemaV1(StrictKeysMixin):
     """Schema for the document metadata."""
 
     pid = PersistentIdentifier()
@@ -141,7 +141,6 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
     customField3 = fields.List(fields.String(validate=validate.Length(min=1)))
     masked = SanitizedUnicode()
     _bucket = SanitizedUnicode()
-    _files = Nested(FileSchemaV1, many=True)
     _oai = fields.Dict()
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
@@ -283,10 +282,25 @@ class DocumentMetadataSchemaV1(StrictKeysMixin):
         return data
 
 
+class DocumentMetadataSchemaV1(DocumentListMetadataSchemaV1):
+    """Schema for the document metadata."""
+
+    _files = Nested(FileSchemaV1, many=True)
+
+
 class DocumentSchemaV1(StrictKeysMixin):
     """Document schema."""
 
     id = PersistentIdentifier()
     metadata = fields.Nested(DocumentMetadataSchemaV1)
+    links = fields.Dict(dump_only=True)
+    explanation = fields.Raw(dump_only=True)
+
+
+class DocumentListSchemaV1(StrictKeysMixin):
+    """Document schema."""
+
+    id = PersistentIdentifier()
+    metadata = fields.Nested(DocumentListMetadataSchemaV1)
     links = fields.Dict(dump_only=True)
     explanation = fields.Raw(dump_only=True)

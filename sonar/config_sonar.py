@@ -608,11 +608,11 @@ SONAR_APP_DOCUMENT_URN = {
     'organisations': {
         'unifr': {
             'types': ['coar:c_db06'],
-            'code': 6
+            'code': 2
         },
         'usi': {
             'types': ['coar:c_db06'],
-            'code': 1
+            'code': 6
         }
     }
 }
