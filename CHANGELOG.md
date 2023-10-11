@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.9.1](https://github.com/rero/sonar/tree/v1.9.1) (2023-10-11)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.9.0...v1.9.1)
+
+**Fixes:**
+* deployement: fix nginx configuration [\#953](https://github.com/rero/sonar/pull/953) (by @jma)
+* documents: fix poor performance on serializer [\#955](https://github.com/rero/sonar/pull/955) (by @jma)
+
 ## [v1.9.0](https://github.com/rero/sonar/tree/v1.9.0) (2023-08-22)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.8.2...v1.9.0)

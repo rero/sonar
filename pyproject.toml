@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "SONAR"
-version = "1.9.0"
+version = "1.9.1"
 description = "SONAR is an archive of scholarly publications. It intends to collect, promote and preserve the publications of authors affiliated with Swiss public research institutions."
 authors = ["RERO <software@rero.ch>"]
 license = "GNU Affero General Public License v3.0"
@@ -76,6 +76,7 @@ jsonschema = "<4.0.0"
 pydocstyle = ">=6.1.1,<6.2"
 requests-mock = "^1.11.0"
 pysftp = "^0.2.9"
+rero-invenio-base = "^0.2.1"
 
 [tool.poetry.dev-dependencies]
 Flask-Debugtoolbar = ">=0.10.1"
