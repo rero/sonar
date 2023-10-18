@@ -7,8 +7,7 @@ assignees: ''
 
 ---
 
-<!-- Please, fill the report as precisely as possible.
-Be clear and concise. Write a full sentence in the issue title.
+<!-- Be clear and precise. Write a full sentence in the issue title.
 Thanks for your help! -->
 
 ### Bug description:
@@ -25,25 +24,7 @@ Thanks for your help! -->
 4. See error -->
 
 ### Context
-<!-- In which environment did the problem occur? -->
-
-**Server:**
-* [ ] production (specify your instance if relevant)
-* [ ] test: [sonar.test.rero.ch](https://sonar.test.rero.ch)
-* [ ] dev: [sonardev.test.rero.ch](https://sonardev.test.rero.ch/)
-
-**Version:**
-<!-- In which version of SONAR did this problem happen? -->
-
-`v1.5.1` ; commit hash : `XXXX`
-
-**Browser:**
 <!-- If relevant -->
 
-Chrome, Safari, Firefox; version XX
-
-### Screenshots
-<!-- If relevant, screenshots to help ilustrate the problem -->
-
-### Anything else?
-<!-- Any other useful information about the problem -->
+- Versions:
+- Browser:
