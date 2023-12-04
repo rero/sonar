@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
-"POT-Creation-Date: 2023-08-22 11:19+0200\n"
-"PO-Revision-Date: 2023-07-31 07:53+0000\n"
+"POT-Creation-Date: 2023-12-20 09:34+0100\n"
+"PO-Revision-Date: 2023-10-10 09:35+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
 "Language: en\n"
 "Language-Team: English "
@@ -959,7 +959,7 @@ msgstr "The ISBN/ISSN status should be selected in the list below."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1291
 msgid "Identified by"
-msgstr "Identifier"
+msgstr "Identified by"
 
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:2
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:3
@@ -1647,7 +1647,7 @@ msgstr "Publisher"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:831
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1800
 msgid "Qualifier"
-msgstr "Qualification"
+msgstr "Qualifier"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:409
 msgid "Realization framework"
@@ -2356,7 +2356,7 @@ msgstr "Audio issue number"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1125
 msgid "bf:ClassificationDdc"
-msgstr "DDC classification"
+msgstr "Dewey Decimal Classification (DDC)"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1095
 msgid "bf:ClassificationUdc"
