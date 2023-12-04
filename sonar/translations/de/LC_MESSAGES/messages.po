@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: sonar 0.4.0\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2023-08-22 11:19+0200\n"
-"PO-Revision-Date: 2023-08-22 10:33+0000\n"
+"PO-Revision-Date: 2023-11-04 10:34+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "de/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: sonar/theme/views.py:102
@@ -2892,7 +2892,7 @@ msgstr "Sammlung"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1185
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:2072
 msgid "contribution_role_cre"
-msgstr "Verfasser / Schöpfer"
+msgstr "Urheber"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1189
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:2076
