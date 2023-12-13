@@ -42,7 +42,15 @@ schema_from_document = partial(schema_from_context,
 from flask import current_app
 
 
-class FileSchemaV1(StrictKeysMixin):
+class ThumbnailSchemaV1(StrictKeysMixin):
+    """Thumbnail only schema."""
+
+    class Meta:
+        """Meta for file schema."""
+    thumbnail = SanitizedUnicode(dump_only=True)
+
+
+class FileSchemaV1(ThumbnailSchemaV1):
     """File schema."""
 
     class Meta:
@@ -141,6 +149,7 @@ class DocumentListMetadataSchemaV1(StrictKeysMixin):
     customField3 = fields.List(fields.String(validate=validate.Length(min=1)))
     masked = SanitizedUnicode()
     _bucket = SanitizedUnicode()
+    _files = Nested(FileSchemaV1, many=True)
     _oai = fields.Dict()
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.

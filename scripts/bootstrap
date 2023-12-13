@@ -55,7 +55,7 @@ title "Bootstrap script"
 
 # Update pip version
 section "Upgrading pip..." "info"
-poetry run pip install --upgrade pip
+poetry run pip install "pip<=23.0.0"
 
 # Install setuptools <58 needed to install fs 0.5.4
 section "Install setuptools<58" "info"
