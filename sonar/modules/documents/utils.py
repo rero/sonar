@@ -19,7 +19,7 @@
 
 from __future__ import absolute_import, print_function
 
-import re
+import os
 from datetime import datetime
 
 from flask import current_app, request
@@ -93,17 +93,19 @@ def get_file_links(file, record):
         links['external'] = file['external_url']
         return links
 
-    match = re.search(r'\.(.*)$', file['key'])
-    if not match:
+    if not file.get('mimetype'):
         return links
 
     links['download'] = '/documents/{pid}/files/{key}'.format(
         pid=record['pid'], key=file['key'])
 
-    if not match.group(1) in current_app.config.get(
-            'SONAR_APP_FILE_PREVIEW_EXTENSIONS', []):
+    if file['mimetype'] not in current_app.config.get(
+            'SONAR_APP_FILE_PREVIEW_MIMETYPES', []):
         return links
-
+    # only markdown is supported
+    if file['mimetype'] == 'application/octet-stream':
+        if os.path.splitext(file['key'])[-1] != '.md':
+            return links
     links['preview'] = '/documents/{pid}/preview/{key}'.format(
         pid=record['pid'], key=file['key'])
     return links

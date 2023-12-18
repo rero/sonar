@@ -540,10 +540,17 @@ SONAR_APP_EXPORT_SERIALIZERS = {
              'ExportSchemaV1'),
 }
 
-SONAR_APP_FILE_PREVIEW_EXTENSIONS = [
-    'jpeg', 'jpg', 'gif', 'png', 'pdf', 'json', 'xml', 'csv', 'zip', 'md'
+SONAR_APP_FILE_PREVIEW_MIMETYPES = [
+    'application/pdf',
+    'image/jpeg',
+    'image/png',
+    'application/octet-stream',
+    'image/gif',
+    'text/csv',
+    'application/json',
+    'application/xml'
 ]
-"""List of extensions for which files can be previewed."""
+"""List of the mimetype for which files can be previewed."""
 
 SONAR_APP_WEBDAV_HEG_HOST = 'https://share.rero.ch/HEG'
 SONAR_APP_WEBDAV_HEG_USER = None

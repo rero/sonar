@@ -326,7 +326,11 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch,
 def test_get_file_links(app):
     """Test getting links for a file."""
     document = {'pid': 1, 'external_url': True}
-    file = {'key': 'test.pdf', 'restriction': {'restricted': True}}
+    file = {
+        'key': 'test.pdf',
+        'restriction': {'restricted': True},
+        'mimetype': 'application/pdf'
+    }
 
     # File is restricted
     assert utils.get_file_links(file, document) == {
@@ -347,6 +351,7 @@ def test_get_file_links(app):
     # File key has no extension, no preview possible
     file['key'] = 'test'
     file['external_url'] = None
+    del file['mimetype']
     assert utils.get_file_links(file, document) == {
         'download': None,
         'external': None,
@@ -354,21 +359,47 @@ def test_get_file_links(app):
     }
 
     # Preview not possible
-    file['key'] = 'test.unknown'
+    file['key'] = 'test.tiff'
     file['external_url'] = None
+    file['mimetype'] = 'image/tiff'
     assert utils.get_file_links(file, document) == {
-        'download': '/documents/1/files/test.unknown',
+        'download': '/documents/1/files/test.tiff',
+        'external': None,
+        'preview': None
+    }
+
+    # File key has no extension, no preview possible
+    file['key'] = 'test.foo'
+    file['external_url'] = None
+    file['mimetype'] = 'application/octet-stream'
+    assert utils.get_file_links(file, document) == {
+        'download': f'/documents/1/files/test.foo',
         'external': None,
         'preview': None
     }
 
     # Preview OK
-    file['key'] = 'test.pdf'
-    assert utils.get_file_links(file, document) == {
-        'download': '/documents/1/files/test.pdf',
-        'external': None,
-        'preview': '/documents/1/preview/test.pdf'
-    }
+    mimetypes = [
+        'application/pdf',
+        'image/jpeg',
+        'image/png',
+        'application/octet-stream',
+        'image/gif',
+        'text/csv',
+        'application/json',
+        'application/xml'
+    ]
+    for mimetype in mimetypes:
+        ext = mimetype.split('/')[1]
+        if ext == 'octet-stream':
+            ext = 'md'
+        file['key'] = f'test.{ext}'
+        file['mimetype'] = mimetype
+        assert utils.get_file_links(file, document) == {
+            'download': f'/documents/1/files/test.{ext}',
+            'external': None,
+            'preview': f'/documents/1/preview/test.{ext}'
+        }
 
 
 def test_get_thumbnail():
