@@ -30,10 +30,11 @@ from sonar.modules.utils import *
 def test_change_filename_extension(app):
     """Test change filename extension."""
     with pytest.raises(Exception) as e:
-        change_filename_extension('test', 'txt')
-    assert str(e.value) == 'test is not a valid filename'
+        change_filename_extension('', 'txt')
+    assert str(e.value) == ' is not a valid filename'
 
     assert change_filename_extension('test.pdf', 'txt') == 'test-pdf.txt'
+    assert change_filename_extension('test', 'txt') == 'test.txt'
 
 
 def test_create_thumbnail_from_file():

@@ -75,7 +75,7 @@ def test_get_metadata(app, client, document_with_file):
 def test_put_delete(app, client, document, pdf_file):
     """Test create and delete a file."""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
-    file_name = 'test.pdf'
+    file_name = 'testé.pdf'
 
     # upload the file
     url_file_content = url_for(

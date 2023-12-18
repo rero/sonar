@@ -18,6 +18,7 @@
 """Utils functions for application."""
 
 import datetime
+import os
 import re
 
 import requests
@@ -68,16 +69,16 @@ def change_filename_extension(filename, extension):
     Additionally, the original extension is appended to the filename, to avoid
     conflict with other files having the same name (without extension).
     """
-    matches = re.search(r'(.*)\.(.*)$', filename)
+    basename, ext = os.path.splitext(filename)
 
-    if matches is None:
-        raise Exception(
-            '{filename} is not a valid filename'.format(filename=filename))
+    if not basename:
+        raise Exception(f'{filename} is not a valid filename')
 
-    return '{name}-{source_extension}.{extension}'.format(
-        name=matches.group(1),
-        source_extension=matches.group(2),
-        extension=extension)
+    if not ext:
+        return f'{basename}.{extension}'
+    # remove dot
+    ext = ext.replace('.', '')
+    return f'{basename}-{ext}.{extension}'
 
 
 def send_email(recipients, subject, template, ctx=None, html=True, lang='en'):
