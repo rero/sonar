@@ -37,6 +37,17 @@ def test_collection_query(db, client, document, collection, es_clear):
     assert res.json['hits']['total']['value'] == 1
 
 
+def test_identifiers_query(client, document, es_clear):
+    """Test identifiers search query."""
+
+    res = client.get(
+        url_for('invenio_records_rest.doc_list',
+                view='org',
+                q='identifiers.local.text:(R003415*)'))
+    assert res.status_code == 200
+    assert res.json['hits']['total']['value'] == 1
+
+
 def test_masked_document(db, client, organisation, document, es_clear):
     """Test masked document."""
     # Not masked (property not exists)
