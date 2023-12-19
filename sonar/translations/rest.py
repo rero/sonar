@@ -21,9 +21,10 @@ import os
 
 import polib
 from flask import Blueprint, abort, current_app, jsonify
-from flask_babelex import get_domain
 
 api_blueprint = Blueprint('translations', __name__)
+
+
 
 
 @api_blueprint.route('/translations/<lang>.json')
@@ -32,25 +33,21 @@ def get_translations(lang):
 
     :param lang: language ISO 639-1 Code (two chars).
     """
-    domain = get_domain()
+    babel = current_app.extensions['babel']
+    paths = babel.default_directories
+    try:
+        path = next(p for p in paths if p.find('sonar/translations') > -1)
+    except StopIteration:
+        current_app.logger.error(f'translations for {lang} does not exist')
+        abort(404)
 
-    path = next(p for p in domain.paths if p.find('sonar/translations') > -1)
-
-    po_file_name = f'{path}/{lang}/LC_MESSAGES/{domain.domain}.po'
-
+    po_file_name = f'{path}/{lang}/LC_MESSAGES/{babel.default_domain}.po'
     if not os.path.isfile(po_file_name):
         abort(404)
-
-    data = {}
-
     try:
-        translations = polib.pofile(po_file_name)
+        po = polib.pofile(po_file_name)
     except Exception:
-        current_app.logger.error(
-            'unable to open po file: {po}'.format(po=po_file_name))
+        current_app.logger.error(f'unable to open po file: {po_file_name}')
         abort(404)
-
-    for entry in translations:
-        data[entry.msgid] = entry.msgstr or entry.msgid
-
+    data = {entry.msgid: entry.msgstr or entry.msgid for entry in po}
     return jsonify(data)

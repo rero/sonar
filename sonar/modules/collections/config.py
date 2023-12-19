@@ -56,8 +56,6 @@ class Configuration:
         f'{MODULE_PATH}.api:RecordIndexer',
         'search_index':
         RESOURCE_NAME,
-        'search_type':
-        None,
         'record_serializers': {
             'application/json': (f'{MODULE_PATH}.serializers'
                                  ':json_v1_response'),

@@ -25,7 +25,7 @@ _signals = Namespace()
 file_downloaded = _signals.signal('file-downloaded')
 """File downloaded signal."""
 
-def file_download_proxy(obj):
+def file_download_proxy(sender, obj):
     """This proxy add a sender to the original signal.
 
     TODO: this is a workaround that can be remove once invenio-stats has

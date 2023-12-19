@@ -30,9 +30,9 @@ from flask.cli import with_appcontext
 from invenio_files_rest.models import Location
 from invenio_jsonschemas import current_jsonschemas
 from invenio_records_rest.utils import obj_or_import_string
-from invenio_search.cli import es_version_check
+from invenio_search.cli import search_version_check
 from invenio_search.proxies import current_search
-from jsonref import JsonLoader
+from jsonref import jsonloader
 
 from sonar.modules.api import SonarRecord
 
@@ -45,7 +45,7 @@ def utils():
 @utils.command()
 @click.option('--force', is_flag=True, default=False)
 @with_appcontext
-@es_version_check
+@search_version_check
 def es_init(force):
     """Initialize registered templates, aliases and mappings."""
     # TODO: to remove once it is fixed in invenio-search module
@@ -87,25 +87,21 @@ def compile_json(src_json_file, output):
     click.secho('Compile json file (resolve $ref): ', fg='green', nl=False)
     click.secho(src_json_file.name)
 
-    data = jsonref.load(src_json_file, loader=CustomJsonLoader())
+    data = jsonref.load(src_json_file, loader=custom_json_loader)
     if not output:
         output = sys.stdout
     json.dump(data, fp=output, indent=2)
 
 
-class CustomJsonLoader(JsonLoader):
-    """Custom JSON ref loader."""
+def custom_json_loader(uri, **kwargs):
+    """Method invoked when an uri has to be resolved.
 
-    def __call__(self, uri, **kwargs):
-        """Method invoked when an uri has to be resolved.
-
-        If URI is present in registered JSON schemas list, it resolves in the
-        common schemas, else lets the loader from jsonref do the job.
-        """
-        if uri in current_jsonschemas.list_schemas():
-            return current_jsonschemas.get_schema(uri)
-
-        return super(CustomJsonLoader, self).__call__(uri, *kwargs)
+    If URI is present in registered JSON schemas list, it resolves in the
+    common schemas, else lets the loader from jsonref do the job.
+    """
+    if uri in current_jsonschemas.list_schemas():
+        return current_jsonschemas.get_schema(uri)
+    return jsonloader(uri, *kwargs)
 
 
 @utils.command('export')

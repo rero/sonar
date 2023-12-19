@@ -83,7 +83,7 @@ def test_list(app, client, make_project, superuser, admin, moderator,
     assert 'user' in res.json['aggregations']
 
     # Logged as user, with admin-access, no query filters
-    monkeypatch.setattr('invenio_records_permissions.generators.Admin.needs',
+    monkeypatch.setattr('invenio_records_permissions.generators.AdminAction.needs',
                         lambda *args, **kwargs: [any_user])
     new_user = make_user('user', 'org', 'admin_access')
     login_user_via_session(client, email=new_user['email'])

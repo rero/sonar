@@ -37,12 +37,12 @@ def test_file_listener(db, document_with_file):
     assert not record['_files']
 
     object_version = ObjectVersion.get_by_bucket(document_with_file['_bucket'])
-    file_uploaded_listener(object_version)
+    file_uploaded_listener('', object_version)
 
     assert len(document_with_file.files) == 3
 
     object_version = ObjectVersion.get_by_bucket(document_with_file['_bucket'])
-    file_deleted_listener(object_version)
+    file_deleted_listener('', object_version)
 
 
 def test_sync_record_files(db, document_with_file, bucket_location):

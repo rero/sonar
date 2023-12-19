@@ -19,10 +19,11 @@
 
 from elasticsearch_dsl.query import Q
 from flask import request
+from flask_principal import ActionNeed
 from invenio_access.permissions import any_user
 from invenio_records_permissions import \
     RecordPermissionPolicy as BaseRecordPermissionPolicy
-from invenio_records_permissions.generators import Admin
+from invenio_records_permissions.generators import AdminAction
 
 from sonar.modules.api import SonarRecord
 from sonar.modules.documents.api import DocumentRecord
@@ -31,7 +32,7 @@ from sonar.modules.users.api import current_user_record
 from sonar.modules.validation.api import Status
 
 
-class Read(Admin):
+class Read(AdminAction):
     """Read projects permissions."""
 
     def query_filter(self, **kwargs):
@@ -66,7 +67,7 @@ class Read(Admin):
         return Q('match_all')
 
 
-class Update(Admin):
+class Update(AdminAction):
     """Update project permissions."""
 
     def excludes(self, record=None, **kwargs):
@@ -122,8 +123,8 @@ class Delete(Update):
 class RecordPermissionPolicy(BaseRecordPermissionPolicy):
     """Projects permission policy."""
 
-    can_search = [Read()]
-    can_create = [Admin()]
-    can_read = [Read()]
-    can_update = [Update()]
-    can_delete = [Delete()]
+    can_search = [Read(ActionNeed("admin-access"))]
+    can_create = [AdminAction(ActionNeed("admin-access"))]
+    can_read = [Read(ActionNeed("admin-access"))]
+    can_update = [Update(ActionNeed("admin-access"))]
+    can_delete = [Delete(ActionNeed("admin-access"))]

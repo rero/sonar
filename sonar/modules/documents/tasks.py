@@ -20,7 +20,6 @@
 from celery import shared_task
 from flask import current_app
 from invenio_db import db
-from invenio_indexer.api import RecordIndexer
 
 
 @shared_task(ignore_result=True)
@@ -33,8 +32,8 @@ def import_records(records_to_import):
     :param list records_to_import: List of records to import.
     :returns: List of IDs.
     """
-    from sonar.modules.documents.api import DocumentRecord
-    indexer = RecordIndexer()
+    from sonar.modules.documents.api import DocumentIndexer, DocumentRecord
+    indexer = DocumentIndexer(record_cls=DocumentRecord)
 
     ids = []
 

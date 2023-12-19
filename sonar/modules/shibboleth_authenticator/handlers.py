@@ -26,9 +26,10 @@ from invenio_db import db
 from invenio_oauthclient.errors import AlreadyLinkedError
 from invenio_oauthclient.handlers import get_session_next_url, \
     oauth_error_handler, token_session_key
+from invenio_oauthclient.oauth import oauth_authenticate, oauth_get_user, \
+    oauth_link_external_id, oauth_register
 from invenio_oauthclient.utils import create_csrf_disabled_registrationform, \
-    fill_form, oauth_authenticate, oauth_get_user, oauth_link_external_id, \
-    oauth_register
+    fill_form
 from sqlalchemy import func
 from werkzeug.local import LocalProxy
 
@@ -76,7 +77,7 @@ def authorized_signup_handler(auth, remote=None, *args, **kwargs):
 
     if user is None:
         # Auto sign-up if user not found
-        form = create_csrf_disabled_registrationform()
+        form = create_csrf_disabled_registrationform(remote)
 
         # Fill form with user data
         form = fill_form(form, account_info['user'])

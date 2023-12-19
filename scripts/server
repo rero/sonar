@@ -58,9 +58,6 @@ script_path=$(dirname "$0")
 if [[ -z "${FLASK_DEBUG}" ]]; then
   export FLASK_DEBUG=True
 fi
-if [[ -z "${FLASK_ENV}" ]]; then
-  export FLASK_ENV="development"
-fi
 
 # Start Worker and Beat
 if $worker; then

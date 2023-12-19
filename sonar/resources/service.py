@@ -32,7 +32,7 @@ class RecordServiceConfig(BaseRecordServiceConfig):
 class RecordService(BaseRecordService):
     """SONAR resources base service class."""
 
-    def create(self, identity, data):
+    def create(self, identity, data, **kwargs):
         """Create a record.
 
         :param identity: Identity of user creating the record.
@@ -43,7 +43,7 @@ class RecordService(BaseRecordService):
             identity.provides.add(UserNeed(1))
             identity.provides.add(Need(method='system_role', value='any_user'))
 
-        return super().create(identity, data)
+        return super().create(identity, data, **kwargs)
 
     def bulk_reindex(self):
         """Send all records to the index queue and process indexing."""

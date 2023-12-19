@@ -24,9 +24,8 @@ import click
 from flask import current_app
 from flask.cli import with_appcontext
 from invenio_db import db
-from invenio_indexer.api import RecordIndexer
 
-from sonar.modules.documents.api import DocumentRecord
+from sonar.modules.documents.api import DocumentIndexer, DocumentRecord
 
 
 @click.group()
@@ -47,7 +46,7 @@ def update_file_permissions(permissions_file, chunk_size):
 
     :param permissions_file: CSV file containing files permissions.
     """
-    indexer = RecordIndexer()
+    indexer = DocumentIndexer(record_cls=DocumentRecord)
 
     def save_records(ids):
         """Save current records set into database and re-index.

@@ -30,9 +30,12 @@ RUN apt-get install --no-install-recommends -y git vim-tiny curl gcc g++ pkg-con
 RUN sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
 RUN pip install --upgrade wheel pip poetry
 
-# # Install Node
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
-RUN apt-get install --no-install-recommends -y nodejs && rm -rf /var/lib/apt/lists/*
+# Install Node
+RUN apt-get update && apt-get install -y ca-certificates curl gnupg
+RUN mkdir -p /etc/apt/keyrings
+RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
+RUN apt-get update && apt-get install nodejs -y && rm -rf /var/lib/apt/lists/*
 
 # Env variables
 ENV WORKING_DIR=/invenio

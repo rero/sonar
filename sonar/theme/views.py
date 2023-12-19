@@ -32,7 +32,7 @@ import dateutil.parser
 import pytz
 from flask import Blueprint, abort, current_app, jsonify, redirect, \
     render_template, request, url_for
-from flask_babelex import lazy_gettext as _
+from flask_babel import lazy_gettext as _
 from flask_breadcrumbs import register_breadcrumb
 from flask_login import current_user, login_required
 from flask_menu import current_menu, register_menu

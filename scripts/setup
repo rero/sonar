@@ -132,4 +132,8 @@ if $import; then
     invenio oaiharvester harvest -n rerodoc -q -a max=${size}
 fi
 
+section "Initialize wiki search"
+invenio flask_wiki init-index
+invenio flask_wiki index
+
 message "\nInstallation finished successfully" "success"

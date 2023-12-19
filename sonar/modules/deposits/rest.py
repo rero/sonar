@@ -25,7 +25,7 @@ from io import BytesIO
 
 from flask import Blueprint, abort, current_app, jsonify, make_response, \
     request
-from flask_babelex import _
+from flask_babel import _
 from invenio_db import db
 from invenio_rest import ContentNegotiatedMethodView
 

@@ -17,7 +17,7 @@
 
 """Utils functions for user module."""
 
-from flask_babelex import _
+from flask_babel import _
 from flask_security import url_for_security
 from flask_security.recoverable import generate_reset_password_token
 

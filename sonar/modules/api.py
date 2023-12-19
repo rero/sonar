@@ -259,6 +259,13 @@ class SonarRecord(Record, FilesMixin):
             kwargs['force_external_url'] = True
             self.add_file(b'', key, **kwargs)
 
+    def replace_refs(self):
+        """Replace the ``$ref`` keys within the JSON.
+
+        Note: needed for jsonref>=1.0.0
+        """
+        return (type(self))(super().replace_refs())
+
     def add_file(self, data, key, **kwargs):
         """Create file and add it to record.
 
@@ -391,7 +398,7 @@ class SonarIndexer(RecordIndexer):
         """
         return_value = super(SonarIndexer, self).index(record)
 
-        index_name, doc_type = current_record_to_index(record)
+        index_name = current_record_to_index(record)
         current_search.flush_and_refresh(index_name)
         return return_value
 
@@ -402,6 +409,6 @@ class SonarIndexer(RecordIndexer):
         :returns: Indexation result
         """
         return_value = super(SonarIndexer, self).delete(record)
-        index_name, doc_type = current_record_to_index(record)
+        index_name = current_record_to_index(record)
         current_search.flush_and_refresh(index_name)
         return return_value

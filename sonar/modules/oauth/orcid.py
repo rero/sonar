@@ -20,7 +20,7 @@
 import orcid
 from flask import current_app
 from invenio_db import db
-from invenio_oauthclient.utils import oauth_link_external_id
+from invenio_oauthclient.oauth import oauth_link_external_id
 from requests import RequestException
 from slugify import slugify
 

@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Document",
   "type": "object",
   "additionalProperties": false,
@@ -1089,10 +1089,11 @@
       "minItems": 1,
       "items": {
         "title": "Classification",
-        "type": "object",
         "oneOf": [
           {
             "title": "bf:ClassificationUdc",
+            "type": "object",
+            "additionalProperties": false,
             "properties": {
               "type": {
                 "title": "Type",
@@ -1123,6 +1124,8 @@
           },
           {
             "title": "bf:ClassificationDdc",
+            "type": "object",
+            "additionalProperties": false,
             "properties": {
               "type": {
                 "title": "Type",
