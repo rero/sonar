@@ -1,5 +1,5 @@
-{%- if user.profile.first_name and user.profile.last_name -%}
-{{ _('Dear') }} {{ user.profile.first_name }} {{ user.profile.last_name }},
+{%- if user.user_profile.full_name -%}
+{{ _('Dear') }} {{ user.user_profile.full_name }},
 {%- else %}
 {{ _('Dear user') }},
 {%- endif %}

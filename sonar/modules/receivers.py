@@ -20,7 +20,7 @@
 from sonar.modules.api import SonarRecord
 
 
-def file_uploaded_listener(obj):
+def file_uploaded_listener(sender, obj):
     """Function executed when a file is uploaded.
 
     :param obj: Object version.
@@ -31,7 +31,7 @@ def file_uploaded_listener(obj):
         pass
 
 
-def file_deleted_listener(obj):
+def file_deleted_listener(sender, obj):
     """Function executed when a file is deleted.
 
     :param obj: Object version.

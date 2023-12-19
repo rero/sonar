@@ -27,6 +27,9 @@ from .oai_dc import SonarDublinCoreXMLSerializer
 class DublinCoreSerializer(BaseDublinCoreSerializer, SonarDublinCoreXMLSerializer):
     """Dublin Core REST serializer."""
 
+    def serialize_object(self, obj):
+        """Serialize a single object according to the response ctx."""
+
     def serialize(self, pid, record, links_factory=None):
         """Serialize a single record and persistent identifier.
 

@@ -21,7 +21,7 @@ from datetime import datetime
 
 import pytz
 from flask import current_app
-from flask_babelex import _
+from flask_babel import _
 from invenio_i18n.ext import current_i18n
 
 from sonar.modules.users.api import UserRecord, current_user_record

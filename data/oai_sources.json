@@ -10,7 +10,7 @@
   {
     "key": "archive_ouverte_unige",
     "name": "Archive ouverte UNIGE",
-    "url": "https://archive-ouverte.unige.ch/oaiprovider/",
+    "url": "https://archive-ouverte.unige.ch/oai",
     "metadataprefix": "marc21",
     "comment": "",
     "setspecs": ""

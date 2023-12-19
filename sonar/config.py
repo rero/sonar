@@ -206,7 +206,9 @@ SQLALCHEMY_DATABASE_URI = \
 # JSONSchemas
 # ===========
 #: Hostname used in URLs for local JSONSchemas.
+JSONSCHEMAS_URL_SCHEME = 'https'
 JSONSCHEMAS_HOST = 'sonar.ch'
+JSONSCHEMAS_REPLACE_REFS = True
 
 # Flask configuration
 # ===================
@@ -291,6 +293,7 @@ SECURITY_REGISTER_USER_TEMPLATE = 'sonar/accounts/signup.html'
 SECURITY_EMAIL_SUBJECT_PASSWORD_RESET = _('SONAR password reset')
 SECURITY_EMAIL_SUBJECT_PASSWORD_NOTICE = _(
     'Your SONAR password has been reset')
+SECURITY_PASSWORD_SINGLE_HASH = True
 
 RECORDS_UI_ENDPOINTS = {
     'doc': {
@@ -378,7 +381,6 @@ RECORDS_REST_ENDPOINTS = {
         search_class=DocumentSearch,
         indexer_class='sonar.modules.documents.api:DocumentIndexer',
         search_index='documents',
-        search_type=None,
         record_serializers={
             'application/json': ('sonar.modules.documents.serializers'
                                  ':json_v1_response'),
@@ -429,7 +431,6 @@ RECORDS_REST_ENDPOINTS = {
         search_class=OrganisationSearch,
         indexer_class='sonar.modules.organisations.api:OrganisationIndexer',
         search_index='organisations',
-        search_type=None,
         record_serializers={
             'application/json': ('sonar.modules.organisations.serializers'
                                  ':json_v1_response'),
@@ -468,7 +469,6 @@ RECORDS_REST_ENDPOINTS = {
         search_class=UserSearch,
         indexer_class='sonar.modules.users.api:UserIndexer',
         search_index='users',
-        search_type=None,
         record_serializers={
             'application/json': ('sonar.modules.users.serializers'
                                  ':json_v1_response'),
@@ -507,7 +507,6 @@ RECORDS_REST_ENDPOINTS = {
         search_class=DepositSearch,
         indexer_class='sonar.modules.deposits.api:DepositIndexer',
         search_index='deposits',
-        search_type=None,
         record_serializers={
             'application/json': ('sonar.modules.deposits.serializers'
                                  ':json_v1_response'),
@@ -852,8 +851,14 @@ DB_VERSIONING = False
 # WIKI
 # ====
 WIKI_CONTENT_DIR = './wiki'
+WIKI_INDEX_DIR = './wiki/_index'
 WIKI_URL_PREFIX = '/help'
-WIKI_LANGUAGES = ['en', 'fr', 'de', 'it']
+WIKI_LANGUAGES = {
+    'en': 'English',
+    'fr': 'French',
+    'de': 'German',
+    'it': 'Italian'
+}
 WIKI_CURRENT_LANGUAGE = get_current_language
 WIKI_UPLOAD_FOLDER = os.path.join(WIKI_CONTENT_DIR, 'files')
 WIKI_BASE_TEMPLATE = 'sonar/page_wiki.html'
@@ -894,7 +899,6 @@ OAISERVER_PAGE_SIZE = 100
 
 # Stats
 # =====
-
 STATS_EVENTS = {
     'file-download': {
         'signal': 'sonar.signals.file_downloaded',
@@ -925,7 +929,7 @@ STATS_EVENTS = {
         'signal': 'invenio_records_ui.signals.record_viewed',
         'templates': 'invenio_stats.contrib.record_view',
         'event_builders': [
-            'invenio_stats.contrib.event_builders'
+            'sonar.stats_event_builders'
             '.record_view_event_builder'
         ],
         'cls': EventsIndexer,

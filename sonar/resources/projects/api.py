@@ -19,7 +19,7 @@
 
 from invenio_pidstore.providers.recordid import \
     RecordIdProvider as BaseRecordIdProvider
-from invenio_records.dumpers import ElasticsearchDumper, ElasticsearchDumperExt
+from invenio_records.dumpers import SearchDumper, SearchDumperExt
 from invenio_records.systemfields import ConstantField
 from invenio_records_resources.records.systemfields import IndexField, PIDField
 from invenio_records_resources.services.records.components import \
@@ -41,7 +41,7 @@ RecordIdProvider = type('RecordIdProvider', (BaseRecordIdProvider, ),
                         dict(pid_type='proj'))
 
 
-class ElasticsearchDumperObjectsExt(ElasticsearchDumperExt):
+class SearchDumperObjectsExt(SearchDumperExt):
     """Interface for Elasticsearch dumper extensions."""
 
     def dump(self, record, data):
@@ -78,7 +78,7 @@ class Record(BaseRecord):
     # PID type retrieved from provider
     pid_type = RecordIdProvider.pid_type
 
-    dumper = ElasticsearchDumper(extensions=[ElasticsearchDumperObjectsExt()])
+    dumper = SearchDumper(extensions=[SearchDumperObjectsExt()])
 
     _extensions = [ValidationExtension()]
 

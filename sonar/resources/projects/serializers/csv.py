@@ -20,14 +20,17 @@
 import csv
 
 from flask import stream_with_context
-from flask_resources.serializers import SerializerMixin
+from flask_resources.serializers import BaseSerializer
 from invenio_records_rest.serializers.csv import \
     CSVSerializer as BaseCSVSerializer
 from invenio_records_rest.serializers.csv import Line
 
 
-class CSVSerializer(BaseCSVSerializer, SerializerMixin):
+class CSVSerializer(BaseCSVSerializer, BaseSerializer):
     """CSV serializer for HEP Valais projects."""
+
+    def serialize_object(self, obj):
+        """Serialize a single object according to the response ctx."""
 
     def serialize_object_list(self, results):
         """Serialize list to CSV.

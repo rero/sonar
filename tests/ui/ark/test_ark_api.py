@@ -77,7 +77,7 @@ def test_create_doc_with_ark(document, client, organisation):
 
     # the redirect to the right location
     assert res.location == \
-        f'http://localhost/{organisation.get("code")}/documents/1'
+        f'/{organisation.get("code")}/documents/1'
 
     # the redirected URL give a valid response
     res = client.get(
@@ -99,7 +99,7 @@ def test_create_doc_with_ark(document, client, organisation):
     # redirect to the existing document and thumbstone
     assert res.status_code == 302
     assert res.location == \
-        f'http://localhost/{organisation.get("code")}/documents/1'
+        f'/{organisation.get("code")}/documents/1'
 
     # the redirected URL is deleted
     res = client.get(

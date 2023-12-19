@@ -22,7 +22,7 @@ from __future__ import absolute_import, print_function
 import json
 
 from flask import Blueprint, abort, current_app, render_template, request
-from flask_babelex import gettext as _
+from flask_babel import gettext as _
 from invenio_i18n.ext import current_i18n
 from invenio_records_ui.signals import record_viewed
 

@@ -141,7 +141,7 @@ class Sonar():
             'view': app.config.get('SONAR_APP_DEFAULT_ORGANISATION')})
 
 
-        @app.route('/<org_code:view>/')
+        @app.route('/<org_code:view>')
         def index(view):
             """Homepage."""
             return render_template('sonar/frontpage.html', view=view)

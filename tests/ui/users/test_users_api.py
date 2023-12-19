@@ -174,10 +174,11 @@ def test_delete(app, admin):
     deleted = UserRecord.get_record(admin.id, with_deleted=True)
     assert deleted.id == admin.id
 
+    # the user still exist and should have only the user role
     with app.app_context():
         datastore = app.extensions['security'].datastore
         user = datastore.find_user(email='orgadmin@rero.ch')
-        assert not user
+        assert user.roles == [datastore.find_role('user')]
 
 
 def test_update(app, admin, roles):

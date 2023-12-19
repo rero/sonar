@@ -30,8 +30,8 @@ import pytest
 import requests_mock
 from dotenv import load_dotenv
 from flask_principal import ActionNeed
+from flask_security.utils import hash_password
 from invenio_access.models import ActionUsers, Role
-from invenio_accounts.ext import hash_password
 from invenio_files_rest.models import Location
 from invenio_queues.proxies import current_queues
 
@@ -63,7 +63,7 @@ def embargo_date():
 
 
 @pytest.fixture(scope='module')
-def es(appctx):
+def search(appctx):
     """Setup and teardown all registered Elasticsearch indices.
 
     Scope: module
@@ -266,7 +266,7 @@ def roles(base_app, db):
 
 
 @pytest.fixture
-def make_user(app, db, make_organisation):
+def make_user(app, db, make_organisation, roles):
     """Factory for creating user."""
 
     def _make_user(

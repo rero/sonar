@@ -129,7 +129,8 @@ class OrganisationRecord(SonarRecord):
         code = data['code']
         oaiset = OAISet(
             spec=code, name=data['name'],
-            search_pattern=f'organisation.code:"{code}"')
+            search_pattern=f'organisation.code:"{code}"',
+            system_created=True)
         db.session.add(oaiset)
 
         return super(OrganisationRecord, cls).create(data,

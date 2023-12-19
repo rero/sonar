@@ -58,7 +58,7 @@ def format_extracted_data(data):
     if title:
         formatted_data['title'] = title
 
-    if data['text']['@xml:lang']:
+    if data.get('text') and data.get('text', {}).get('@xml:lang'):
         language = pycountry.languages.get(alpha_2=data['text']['@xml:lang'])
         if language:
             if hasattr(language, 'bibliographic'):

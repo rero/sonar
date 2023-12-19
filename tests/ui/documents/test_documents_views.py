@@ -23,6 +23,57 @@ from flask import g, render_template_string, url_for
 import sonar.modules.documents.views as views
 
 
+def test_contribution_text():
+    """Test contribution text formatting."""
+    # Just creator
+    assert views.contribution_text({
+        'agent': {
+            'type': 'bf:Person',
+            'preferred_name': 'John Doe'
+        },
+        'role': ['cre']
+    }) == 'John Doe'
+
+    # Contributor
+    assert views.contribution_text({
+        'agent': {
+            'type': 'bf:Person',
+            'preferred_name': 'John Doe'
+        },
+        'role': ['ctb']
+    }) == 'John Doe (contribution_role_ctb)'
+
+    # Meeting with only number
+    assert views.contribution_text({
+        'agent': {
+            'type': 'bf:Meeting',
+            'preferred_name': 'Meeting',
+            'number': '1234'
+        }
+    }) == 'Meeting (1234)'
+
+    # Meeting with number and date
+    assert views.contribution_text({
+        'agent': {
+            'type': 'bf:Meeting',
+            'preferred_name': 'Meeting',
+            'number': '1234',
+            'date': '2019',
+        }
+    }) == 'Meeting (1234 : 2019)'
+
+    # Meeting with number, date and place
+    assert views.contribution_text({
+        'agent': {
+            'type': 'bf:Meeting',
+            'preferred_name': 'Meeting',
+            'number': '1234',
+            'date': '2019',
+            'place': 'Place'
+        }
+    }) == 'Meeting (1234 : 2019 : Place)'
+
+
 def test_store_organisation(client, db, organisation):
     """Test store organisation in globals."""
     # Default view, no organisation stored.
@@ -424,57 +475,6 @@ def test_dissertation():
         }
     ) == 'Thèse de doctorat: Università della Svizzera italiana, 01.01.2010 ' \
          '(jury note: Jury note)'
-
-
-def test_contribution_text():
-    """Test contribution text formatting."""
-    # Just creator
-    assert views.contribution_text({
-        'agent': {
-            'type': 'bf:Person',
-            'preferred_name': 'John Doe'
-        },
-        'role': ['cre']
-    }) == 'John Doe'
-
-    # Contributor
-    assert views.contribution_text({
-        'agent': {
-            'type': 'bf:Person',
-            'preferred_name': 'John Doe'
-        },
-        'role': ['ctb']
-    }) == 'John Doe (contribution_role_ctb)'
-
-    # Meeting with only number
-    assert views.contribution_text({
-        'agent': {
-            'type': 'bf:Meeting',
-            'preferred_name': 'Meeting',
-            'number': '1234'
-        }
-    }) == 'Meeting (1234)'
-
-    # Meeting with number and date
-    assert views.contribution_text({
-        'agent': {
-            'type': 'bf:Meeting',
-            'preferred_name': 'Meeting',
-            'number': '1234',
-            'date': '2019',
-        }
-    }) == 'Meeting (1234 : 2019)'
-
-    # Meeting with number, date and place
-    assert views.contribution_text({
-        'agent': {
-            'type': 'bf:Meeting',
-            'preferred_name': 'Meeting',
-            'number': '1234',
-            'date': '2019',
-            'place': 'Place'
-        }
-    }) == 'Meeting (1234 : 2019 : Place)'
 
 
 def test_project_detail(app, client, project):

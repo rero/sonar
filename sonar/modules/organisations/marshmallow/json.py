@@ -21,14 +21,15 @@ from __future__ import absolute_import, print_function
 
 from functools import partial
 
-from invenio_records_rest.schemas import StrictKeysMixin
+from invenio_records_rest.schemas import Nested, StrictKeysMixin
 from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
-from marshmallow import fields, pre_dump, pre_load
+from marshmallow import EXCLUDE, fields, pre_dump, pre_load
 
 from sonar.modules.organisations.api import OrganisationRecord, \
     current_organisation
-from sonar.modules.organisations.permissions import OrganisationPermission
+from sonar.modules.organisations.permissions import \
+    OrganisationFilesPermission, OrganisationPermission
 from sonar.modules.permissions import has_superuser_access
 from sonar.modules.serializers import schema_from_context
 from sonar.modules.users.api import current_user_record
@@ -36,6 +37,63 @@ from sonar.modules.users.api import current_user_record
 schema_from_organisation = partial(schema_from_context,
                                    schema=OrganisationRecord.schema)
 
+class FileSchemaV1(StrictKeysMixin):
+    """File schema."""
+
+    class Meta:
+        """Meta for file schema."""
+
+        # Specifically exclude unknown fields, as in the new version of
+        # marshmallow, dump_only fields are treated as included.
+        # https://github.com/marshmallow-code/marshmallow/issues/875
+        unknown = EXCLUDE
+
+    bucket = SanitizedUnicode()
+    file_id = SanitizedUnicode()
+    version_id = SanitizedUnicode()
+    key = SanitizedUnicode()
+    mimetype = SanitizedUnicode()
+    checksum = SanitizedUnicode()
+    size = fields.Integer()
+    label = SanitizedUnicode()
+    type = SanitizedUnicode()
+    order = fields.Integer()
+    external_url = SanitizedUnicode()
+    access = SanitizedUnicode()
+    restricted_outside_organisation = fields.Boolean()
+    embargo_date = SanitizedUnicode()
+    restriction = fields.Dict(dump_only=True)
+    links = fields.Dict(dump_only=True)
+    thumbnail = SanitizedUnicode(dump_only=True)
+    permissions = fields.Dict(dump_only=True)
+
+    @pre_dump
+    def add_permissions(self, item, **kwargs):
+        """Add permissions to record.
+
+        :param item: Dict representing the record.
+        :returns: Modified dict.
+        """
+        if not item.get('bucket'):
+            return item
+        doc = OrganisationRecord.get_record_by_bucket(item.get('bucket'))
+        item['permissions'] = {
+            'read': OrganisationFilesPermission.read(current_user_record, item, doc['pid'], doc),
+            'update': OrganisationFilesPermission.update(current_user_record, item, doc['pid'], doc),
+            'delete': OrganisationFilesPermission.delete(current_user_record, item, doc['pid'], doc)
+        }
+
+        return item
+
+    @pre_load
+    def remove_fields(self, data, **kwargs):
+        """Removes computed fields.
+
+        :param data: Dict of record data.
+        :returns: Modified data.
+        """
+        data.pop('permissions', None)
+        return data
 
 class OrganisationMetadataSchemaV1(StrictKeysMixin):
     """Schema for the organisation metadata."""
@@ -62,7 +120,7 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
                          data_key="$schema",
                          deserialize=schema_from_organisation)
     permissions = fields.Dict(dump_only=True)
-    _files = fields.List(fields.Dict())
+    _files = Nested(FileSchemaV1, many=True)
     _bucket = SanitizedUnicode()
 
     @pre_dump

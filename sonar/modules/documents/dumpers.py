@@ -35,9 +35,11 @@ class ReplaceRefsDumper(Dumper):
         :param record: The record to dump.
         :param data: The initial dump data passed in by ``record.dumps()``.
         """
+        from .api import DocumentRecord
+
         # do a fresh copy
         data = deepcopy(record)
-        data = deepcopy(_records_state.replace_refs(data))
+        data = deepcopy(DocumentRecord(_records_state.replace_refs(data)))
         return data
 
 class IndexerDumper(Dumper):

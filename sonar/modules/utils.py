@@ -23,7 +23,7 @@ import re
 
 import requests
 from flask import abort, current_app, g, request
-from invenio_i18n.ext import current_i18n
+from invenio_i18n.selectors import get_locale
 from invenio_mail.api import TemplatedMessage
 from netaddr import IPAddress, IPGlob, IPNetwork, IPSet
 from requests.adapters import HTTPAdapter
@@ -135,7 +135,7 @@ def remove_trailing_punctuation(data,
 
 def get_current_language():
     """Return the current selected locale."""
-    return current_i18n.locale.language
+    return get_locale()
 
 
 def get_view_code():

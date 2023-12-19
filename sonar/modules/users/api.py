@@ -23,7 +23,7 @@ from elasticsearch_dsl.query import Q
 from flask import _request_ctx_stack, current_app, has_request_context
 from flask_security import current_user
 from flask_security.confirmable import confirm_user
-from invenio_accounts.ext import hash_password
+from flask_security.utils import hash_password
 from werkzeug.local import LocalProxy
 from werkzeug.utils import cached_property
 
@@ -176,9 +176,6 @@ class UserRecord(SonarRecord):
         # Remove roles from user account.
         self.remove_roles()
 
-        # Delete account.
-        datastore.delete_user(self.user)
-
         return super(UserRecord, self).delete(force=force,
                                               dbcommit=dbcommit,
                                               delindex=delindex)
@@ -225,13 +222,17 @@ class UserRecord(SonarRecord):
 
             if not in_record and in_db:
                 self.remove_role_from_account(role)
+        # add user in any cases if does not exists
+        if 'user' not in [r.name for r in self.user.roles]:
+            self.add_role_to_account('user')
+
 
     def remove_roles(self):
         """Remove roles from user account."""
         db_roles = self.user.roles
-
         for role in self.available_roles:
-            if role in db_roles:
+            # keep the user role
+            if role in db_roles and role != UserRecord.ROLE_USER:
                 self.remove_role_from_account(role)
 
     @classmethod

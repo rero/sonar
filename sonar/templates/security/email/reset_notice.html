@@ -16,8 +16,8 @@ along with this program. If not, see
 <http: //www.gnu.org/licenses />.
 #}
 
-{%- if user.profile.first_name and user.profile.last_name %}
-<p>{{ _('Dear') }} {{ user.profile.first_name }} {{ user.profile.last_name }},</p>
+{%- if user.user_profile.full_name %}
+<p>{{ _('Dear') }} {{ user.user_profile.full_name }},</p>
 {%- else %}
 <p>{{ _('Dear user') }},</p>
 {%- endif %}

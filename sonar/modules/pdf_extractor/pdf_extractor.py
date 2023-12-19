@@ -67,7 +67,7 @@ class PDFExtractor:
         :param files: (dict) files to post (Multipart-encoded files)
         :returns: (tuple) Tuple containing response text and status
         """
-        url = self.api_url + '/' + endpoint
+        url = f'{self.api_url}/{endpoint}'
 
         if request_type.lower() not in ['get', 'post']:
             raise ValueError
@@ -77,7 +77,9 @@ class PDFExtractor:
             return response.content, response.status_code
 
         if request_type.lower() == 'post':
-            response = requests.post(url, files=files)
+            headers = {'Accept': 'application/xml'}
+            response = requests.post(
+                url, headers=headers, files=files)
             return response.text, response.status_code
 
     def process(self, input_file, output_file=None, dict_output=True):
@@ -136,7 +138,8 @@ class PDFExtractor:
                                            files={
                                                'input':
                                                (file, open(file, 'rb'),
-                                                'application/pdf')
+                                                'application/pdf'),
+                                                'consolidateHeader':1
                                            })
 
         if status != 200:

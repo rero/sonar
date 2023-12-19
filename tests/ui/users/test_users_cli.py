@@ -22,12 +22,11 @@ from click.testing import CliRunner
 import sonar.modules.users.cli as Cli
 
 
-def test_import_users(app, script_info, organisation):
+def test_import_users(app, script_info, organisation, roles):
     """Test import users."""
     runner = CliRunner()
 
     datastore = app.extensions['security'].datastore
-    datastore.create_role(name='admin')
 
     # Test valid user import
     result = runner.invoke(Cli.import_users,
