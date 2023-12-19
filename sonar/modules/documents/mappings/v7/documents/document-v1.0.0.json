@@ -430,83 +430,6 @@
                   }
                 }
               },
-              "identifiers": {
-                "type": "object",
-                "properties": {
-                  "audioissuenumber": {
-                    "type": "keyword"
-                  },
-                  "doi": {
-                    "type": "keyword"
-                  },
-                  "ean": {
-                    "type": "keyword"
-                  },
-                  "gtin14number": {
-                    "type": "keyword"
-                  },
-                  "ark": {
-                    "type": "keyword"
-                  },
-                  "identifier": {
-                    "type": "keyword"
-                  },
-                  "isan": {
-                    "type": "keyword"
-                  },
-                  "isbn": {
-                    "type": "keyword"
-                  },
-                  "ismn": {
-                    "type": "keyword"
-                  },
-                  "isrc": {
-                    "type": "keyword"
-                  },
-                  "issn": {
-                    "type": "keyword"
-                  },
-                  "local": {
-                    "type": "keyword"
-                  },
-                  "issnl": {
-                    "type": "keyword"
-                  },
-                  "matrixnumber": {
-                    "type": "keyword"
-                  },
-                  "musicdistributornumber": {
-                    "type": "keyword"
-                  },
-                  "musicplate": {
-                    "type": "keyword"
-                  },
-                  "musicpublishernumber": {
-                    "type": "keyword"
-                  },
-                  "publishernumber": {
-                    "type": "keyword"
-                  },
-                  "upc": {
-                    "type": "keyword"
-                  },
-                  "urn": {
-                    "type": "keyword"
-                  },
-                  "videorecordingnumber": {
-                    "type": "keyword"
-                  },
-                  "uri": {
-                    "type": "keyword"
-                  },
-                  "reportnumber": {
-                    "type": "keyword"
-                  },
-                  "strn": {
-                    "type": "keyword"
-                  }
-                }
-              },
               "date_of_birth": {
                 "type": "keyword"
               },
@@ -713,76 +636,196 @@
         "type": "object",
         "properties": {
           "audioissuenumber": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "doi": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "ean": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "gtin14number": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "ark": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "identifier": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "isan": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "isbn": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "ismn": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "isrc": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "issn": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "local": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "issnl": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "matrixnumber": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "musicdistributornumber": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "musicplate": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "musicpublishernumber": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "publishernumber": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "upc": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "urn": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "videorecordingnumber": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "uri": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "reportnumber": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           },
           "strn": {
-            "type": "keyword"
+            "type": "keyword",
+            "fields": {
+              "text": {
+                "type": "text"
+              }
+            }
           }
         }
       },
