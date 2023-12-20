@@ -1,5 +1,25 @@
 # Changelog
 
+## [v1.10.0](https://github.com/rero/sonar/tree/v1.10.0) (2024-01-23)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.9.1...v1.10.0)
+
+**Enhancements:**
+* documents: add wildcard query to document identifiers [\#963](https://github.com/rero/sonar/pull/963) (by @jma)
+* monitoring: REDIS, ES indicies [\#932](https://github.com/rero/sonar/pull/932) (by @rerowep)
+* dependencies: upgrade invenio packages [\#966](https://github.com/rero/sonar/pull/966) (by @jma)
+
+**Fixes:**
+* The button "search in full-text" doesn't work [\#965](https://github.com/rero/sonar/issues/965) (by @jma)
+* translations: translate "full-text" field name in UI [\#957](https://github.com/rero/sonar/issues/957) (by @PascalRepond)
+* Thumbnails not displayed in brief view [\#959](https://github.com/rero/sonar/issues/959) (by @jma)
+* Link to file is broken when the file name contains special characters [\#861](https://github.com/rero/sonar/issues/861) (by @jma)
+* monitoring: fix projects database count [\#971](https://github.com/rero/sonar/issues/971) (by @jma)
+* monitoring: access token [\#968](https://github.com/rero/sonar/issues/968) (by @rerowep)
+
+**Other changes:**
+* chore: update github templates and workflows [\#958](https://github.com/rero/sonar/pull/958) (by @PascalRepond)
+
 ## [v1.9.1](https://github.com/rero/sonar/tree/v1.9.1) (2023-10-11)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.9.0...v1.9.1)
