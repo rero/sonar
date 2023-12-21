@@ -18,6 +18,7 @@
 """Signals connections for documents."""
 
 import json
+import re
 import time
 from datetime import datetime
 from os import makedirs
@@ -26,9 +27,10 @@ from os.path import exists, join
 import click
 import pytz
 from flask import current_app
+from invenio_search import current_search
 
 from sonar.modules.api import SonarRecord
-from sonar.modules.documents.api import DocumentRecord
+from sonar.modules.documents.api import DocumentRecord, DocumentSearch
 from sonar.modules.documents.loaders.schemas.factory import LoaderSchemaFactory
 from sonar.modules.utils import chunks
 from sonar.webdav import HegClient
@@ -149,3 +151,49 @@ def export_json(sender=None, records=None, **kwargs):
     client.upload_file(file_name, file_path)
 
     click.echo('{count} records exported'.format(count=len(records_to_export)))
+
+
+def process_boosting(config):
+    """Expand the '*' using the mapping file.
+
+    :param config: array of es fields.
+    :returns: the expanded version of *.
+    """
+    config = config.copy()
+    try:
+        config.remove('*')
+    except ValueError:
+        # nothing to replace
+        return config
+    # list of existing fields without the boosting factor
+    existing_fields = [re.sub(r'\^\d+$', '', field) for field in config]
+    index_name = DocumentSearch.Meta.index
+    doc_mappings = list(current_search.aliases[index_name].values())
+    assert len(doc_mappings) == 1
+    mapping_path = doc_mappings.pop()
+    with open(mapping_path, "r") as body:
+        mapping = json.load(body)
+    fields = []
+    for prop, conf in mapping['mappings']['properties'].items():
+        field = prop
+        # add .* for field with children
+        if conf.get('properties'):
+            field = f'{field}.*'
+        # do nothing for existing fields
+        if field in existing_fields:
+            continue
+        fields.append(field)
+    return config + fields
+
+def set_boosting_query_fields(sender, app=None, **kwargs):
+    """Expand '*' in the boosting configuration.
+
+    :param sender: sender of the signal
+    :param app: the flask app
+    """
+    # required to access to the flask extension
+    with app.app_context():
+        app.config['SONAR_DOCUMENT_QUERY_BOOSTING'] = \
+            process_boosting(
+                app.config.get('SONAR_DOCUMENT_QUERY_BOOSTING', ['*']))
+
