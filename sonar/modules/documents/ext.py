@@ -19,11 +19,13 @@
 
 from __future__ import absolute_import, print_function
 
+from invenio_base.signals import app_loaded
 from invenio_oaiharvester.signals import oaiharvest_finished
 from invenio_records.signals import before_record_insert, before_record_update
 
 from sonar.modules.documents.receivers import export_json, \
-    transform_harvested_records, update_oai_property
+    set_boosting_query_fields, transform_harvested_records, \
+    update_oai_property
 
 from . import config
 
@@ -48,9 +50,12 @@ class Documents(object):
         # Adds `_oai` property
         before_record_insert.connect(update_oai_property)
         before_record_update.connect(update_oai_property)
+        # Expand configuration.
+        app_loaded.connect(set_boosting_query_fields)
+
 
     def init_config(self, app):
         """Initialize configuration."""
-        for k in dir(config):
+        for k in dir(app.config):
             if k.startswith('SONAR_DOCUMENTS_'):
                 app.config.setdefault(k, getattr(config, k))

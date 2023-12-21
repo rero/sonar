@@ -21,6 +21,20 @@ import pytest
 from flask import url_for
 from invenio_accounts.testutils import login_user_via_session
 
+from sonar.modules.documents.receivers import process_boosting
+
+
+def test_boosting_fields(app):
+    """Test the boosting configuration."""
+    # the configuration should exists
+    assert app.config.get('SONAR_DOCUMENT_QUERY_BOOSTING')
+    # it should be expanded
+    assert "'*'" not in app.config.get('SONAR_DOCUMENT_QUERY_BOOSTING')
+
+    # several cases of configurations
+    assert process_boosting(['title.*']) == ['title.*']
+    assert 'title.*' in process_boosting(['*'])
+    assert 'title.*^2' in process_boosting(['title.*^2', '*'])
 
 def test_api_query(client, document_with_file, document_json, make_document,
                    superuser):
@@ -95,12 +109,19 @@ def test_api_query(client, document_with_file, document_json, make_document,
 
     # Test search in fulltext
     response = client.get(url_for('invenio_records_rest.doc_list',
-                                  q='fulltext:the',
+                                  q='fulltext:(theoretically study the high-harmonic)',
                                   debug=1),
                           headers=headers)
     assert response.status_code == 200
     assert response.json['hits']['total']['value'] == 1
     assert response.json['hits']['hits'][0]['explanation']['details']
+
+    response = client.get(url_for('invenio_records_rest.doc_list',
+                                  q='(theoretically study the high-harmonic)',
+                                  debug=1),
+                          headers=headers)
+    assert response.status_code == 200
+    assert response.json['hits']['total']['value'] == 0
 
     # Not allowed operator
     with pytest.raises(Exception) as exception:

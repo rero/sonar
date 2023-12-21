@@ -33,7 +33,6 @@ def documents_query_parser(qstr=None):
     """Custom query parser for documents."""
     if not qstr:
         return Q()
-
     fields = current_app.config.get(
         'SONAR_DOCUMENT_QUERY_BOOSTING', ['*']).copy()
 
@@ -42,7 +41,9 @@ def documents_query_parser(qstr=None):
     if 'fulltext:' in qstr:
         result = re.match(r'^fulltext:(.*)$', qstr)
         qstr = result.group(1)
-        fields.append('fulltext')
+    else:
+        # remove the fulltext field
+        fields = [field for field in fields if not field.startswith('fulltext')]
 
     operator, query_type = get_operator_and_query_type(qstr)
 
