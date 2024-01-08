@@ -20,6 +20,7 @@
 from io import BytesIO
 from os.path import isdir
 
+import invenio_accounts.cli as CliUsers
 from click.testing import CliRunner
 from invenio_search.cli import destroy
 
@@ -90,3 +91,27 @@ def test_export(app, script_info, document, organisation):
                            ['--pid-type', 'org', '--output-dir', '/tmp/org'],
                            obj=script_info)
     assert result.output.find('Export "org" records') != -1
+
+
+def test_cli_access_token(app, script_info):
+    """Test access token cli."""
+    runner = CliRunner()
+    email = 'test@test.com'
+    res = runner.invoke(
+        CliUsers.users_create,
+        ['--active', '--confirm', '--password', 'PWD_TEST', email],
+        obj=script_info
+    )
+    res = runner.invoke(
+        Cli.token_create,
+        ['-n', 'test_good', '-u', email, '-t', 'my_token'],
+        obj=script_info
+    )
+    assert res.output.strip().split('\n') == ['my_token']
+
+    res = runner.invoke(
+        Cli.token_create,
+        ['-n', 'test_fail', '-u', 'fail@test.com', '-t', 'my_token'],
+        obj=script_info
+    )
+    assert res.output.strip().split('\n') == ['No user found']

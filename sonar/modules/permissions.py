@@ -37,6 +37,8 @@ submitter_access_permission = Permission(RoleNeed('submitter'),
 moderator_access_permission = Permission(RoleNeed('moderator'),
                                          RoleNeed('admin'),
                                          RoleNeed('superuser'))
+monitoring_access_permission = Permission(RoleNeed('superuser'),
+                                          RoleNeed('monitoring'))
 
 # Allow access without permission check
 allow_access = type('Allow', (), {'can': lambda self: True})()

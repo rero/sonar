@@ -27,14 +27,21 @@ import click
 import jsonref
 from flask import current_app
 from flask.cli import with_appcontext
+from invenio_db import db
 from invenio_files_rest.models import Location
 from invenio_jsonschemas import current_jsonschemas
+from invenio_oauth2server.cli import process_scopes, process_user
+from invenio_oauth2server.models import Client, Token
 from invenio_records_rest.utils import obj_or_import_string
 from invenio_search.cli import search_version_check
 from invenio_search.proxies import current_search
 from jsonref import jsonloader
+from werkzeug.local import LocalProxy
+from werkzeug.security import gen_salt
 
 from sonar.modules.api import SonarRecord
+
+_datastore = LocalProxy(lambda: current_app.extensions['security'].datastore)
 
 
 @click.group()
@@ -71,9 +78,10 @@ def clear_files():
         try:
             shutil.rmtree(location.uri)
         except Exception:
-            click.secho('Directory {directory} cannot be cleaned'.format(
-                directory=location.uri),
-                        fg='yellow')
+            click.secho(
+                f'Directory {location.uri} cannot be cleaned',
+                fg='yellow'
+            )
 
     click.secho('Finished', fg='green')
 
@@ -119,16 +127,14 @@ def export(pid_type, serializer_key, output_dir):
     :param pid_type: record type
     :param output_dir: Output directory
     """
-    click.secho('Export "{pid_type}" records in {dir}'.format(
-        pid_type=pid_type, dir=output_dir.name))
+    click.secho(f'Export "{pid_type}" records in {output_dir.name}')
 
     try:
         # Get the correct record class
         record_class = SonarRecord.get_record_class_by_pid_type(pid_type)
 
         if not record_class:
-            raise Exception('No record class found for type "{type}"'.format(
-                type=pid_type))
+            raise Exception(f'No record class found for type "{pid_type}"')
 
         # Load the serializer
         serializer_class = current_app.config.get(
@@ -164,8 +170,7 @@ def export(pid_type, serializer_key, output_dir):
                                                              exist_ok=True)
                     shutil.copyfile(file['uri'], target_path)
                     file.pop('uri')
-                    file['path'] = './{pid}/{key}'.format(pid=pid,
-                                                          key=file['key'])
+                    file['path'] = f'./{pid}/{file["key"]}'
 
             records.append(record)
 
@@ -178,7 +183,77 @@ def export(pid_type, serializer_key, output_dir):
 
         click.secho('Finished', fg='green')
 
-    except Exception as exception:
-        click.secho('An error occured during export: {error}'.format(
-            error=str(exception)),
-                    fg='red')
+    except Exception as err:
+        click.secho(f'An error occured during export: {err}', fg='red')
+
+
+def create_personal(
+        name, user_id, scopes=None, is_internal=False, access_token=None):
+    """Create a personal access token.
+
+    A token that is bound to a specific user and which doesn't expire, i.e.
+    similar to the concept of an API key.
+
+    :param name: Client name.
+    :param user_id: User ID.
+    :param scopes: The list of permitted scopes. (Default: ``None``)
+    :param is_internal: If ``True`` it's a internal access token.
+            (Default: ``False``)
+    :param access_token: personalized access_token.
+    :returns: A new access token.
+    """
+    with db.session.begin_nested():
+        scopes = " ".join(scopes) if scopes else ""
+
+        client = Client(
+            name=name,
+            user_id=user_id,
+            is_internal=True,
+            is_confidential=False,
+            _default_scopes=scopes
+        )
+        client.gen_salt()
+
+        if not access_token:
+            access_token = gen_salt(
+                current_app.config.get(
+                    'OAUTH2SERVER_TOKEN_PERSONAL_SALT_LEN')
+            )
+        token = Token(
+            client_id=client.client_id,
+            user_id=user_id,
+            access_token=access_token,
+            expires=None,
+            _scopes=scopes,
+            is_personal=True,
+            is_internal=is_internal,
+        )
+        db.session.add(client)
+        db.session.add(token)
+
+    return token
+
+
+@utils.command()
+@click.option('-n', '--name', required=True)
+@click.option(
+    '-u', '--user', required=True, callback=process_user,
+    help='User ID or email.')
+@click.option(
+    '-s', '--scope', 'scopes', multiple=True, callback=process_scopes)
+@click.option('-i', '--internal', is_flag=True)
+@click.option(
+    '-t', '--access_token', 'access_token', required=False,
+    help='personalized access_token.')
+@with_appcontext
+def token_create(name, user, scopes, internal, access_token):
+    """Create a personal OAuth token."""
+    if user:
+        token = create_personal(
+            name, user.id, scopes=scopes, is_internal=internal,
+            access_token=access_token
+        )
+        db.session.commit()
+        click.secho(token.access_token, fg='blue')
+    else:
+        click.secho('No user found', fg='red')

@@ -166,17 +166,14 @@ CELERY_BEAT_SCHEDULE = {
     # Stats
     'stats-process-events': {
         'task': 'invenio_stats.tasks.process_events',
-        'schedule': timedelta(minutes=30),
+        'schedule': crontab(minute='5,35', hour='*'),
         'args': [('record-view', 'file-download')],
     },
     # Stats Agg events
     'stats-aggregate-events': {
         'task': 'invenio_stats.tasks.aggregate_events',
-        'schedule': timedelta(minutes=35),
-        'args': [(
-            'record-view-agg', 'record-view-agg',
-            'file-download-agg', 'file-download-agg',
-        )],
+        'schedule': crontab(minute='10,40', hour='*'),
+        'args': [('record-view-agg', 'file-download-agg')],
     },
     # Documents stats
     'documents-stats': {

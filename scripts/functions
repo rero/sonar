@@ -61,3 +61,12 @@ function section {
     color $2
     echo -e "$(tput setaf 0; tput setab $color)\n $1 $(tput sgr0)"
 }
+
+token_create() {
+  if [ -z ${3} ]
+  then
+      invenio utils token-create -n ${1} -u ${2}
+  else
+      invenio utils token-create -n ${1} -u ${2} -t ${3}
+  fi
+}
