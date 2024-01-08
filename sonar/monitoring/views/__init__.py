@@ -26,33 +26,30 @@ from invenio_search import current_search_client
 from redis import Redis
 
 from sonar.modules.documents.urn import Urn
-from sonar.modules.permissions import superuser_access_permission
+from sonar.modules.permissions import monitoring_access_permission
 from sonar.monitoring.api.data_integrity import DataIntegrityMonitoring
 from sonar.monitoring.api.database import DatabaseMonitoring
 
 api_blueprint = Blueprint('monitoring_api', __name__, url_prefix='/monitoring')
 
 
-def is_superuser(func):
-    """Decorator checking if a user is logged and has role `superuser`."""
+def is_monitoring_user(func):
+    """Decorator checking if a user is logged and has `monitoring` rights."""
 
     @wraps(func)
     def decorated_view(*args, **kwargs):
         if not current_user.is_authenticated:
             return jsonify({'error': 'Unauthorized'}), 401
-
-        if not superuser_access_permission.can():
+        if not monitoring_access_permission.require().can():
             return jsonify({'error': 'Forbidden'}), 403
-
         return func(*args, **kwargs)
-
     return decorated_view
 
 
 @api_blueprint.before_request
-@is_superuser
-def check_for_superuser():
-    """Check if user is superuser before each request, with decorator."""
+@is_monitoring_user
+def check_for_monitoring_user():
+    """Check if user is superuser or monitoring before each request."""
 
 
 @api_blueprint.route('/db_connection_counts')
@@ -65,7 +62,7 @@ def db_connection_count():
         return jsonify({'error': str(exception)}), 500
 
 
-@api_blueprint.route('db_connections')
+@api_blueprint.route('/db_connections')
 def db_activity():
     """Current database activity."""
     try:

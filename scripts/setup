@@ -111,6 +111,13 @@ invenio access allow admin-access role moderator
 invenio access allow admin-access role submitter
 message "Done" "success"
 
+section "Create user for monitoring" "info"
+invenio users create --active --confirm --password monitor monitoring@rero.ch
+invenio roles create monitoring
+invenio roles add monitoring@rero.ch monitoring
+# create token access for monitoring
+token_create monitoring monitoring@rero.ch ${INVENIO_RERO_ACCESS_TOKEN_MONITORING}
+
 # Create a default location for depositing files
 section "Create location for storing files" "info"
 invenio fixtures deposits create
