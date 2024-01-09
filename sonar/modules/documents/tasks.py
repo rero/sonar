@@ -84,6 +84,7 @@ def import_records(records_to_import):
 
             # Pushing record to database, not yet persisted into DB
             db.session.flush()
+            record.reindex()
 
             # Add ID for bulk index in elasticsearch
             ids.append(str(record.id))
@@ -99,7 +100,5 @@ def import_records(records_to_import):
 
     # Commit and index records
     db.session.commit()
-    indexer.bulk_index(ids)
-    indexer.process_bulk_queue()
 
     return ids

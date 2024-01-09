@@ -55,8 +55,6 @@ def update_file_permissions(permissions_file, chunk_size):
         :param ids: List of records to save
         """
         db.session.commit()
-        indexer.bulk_index(ids)
-        indexer.process_bulk_queue()
 
     try:
         with open(permissions_file.name, 'r') as file:
@@ -133,6 +131,7 @@ def update_file_permissions(permissions_file, chunk_size):
 
                     record.commit()
                     db.session.flush()
+                    record.reindex()
                     ids.append(str(record.id))
 
                     current_app.logger.warning(
