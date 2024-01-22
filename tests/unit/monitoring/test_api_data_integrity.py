@@ -29,9 +29,7 @@ def test_db_count(app, es_clear, document):
     monitoring = DataIntegrityMonitoring()
 
     # Resource not configured
-    with pytest.raises(Exception) as exception:
-        monitoring.get_db_count('not-existing')
-    assert str(exception.value) == 'No endpoint configured for "not-existing"'
+    assert not monitoring.get_db_count('not-existing')
 
     # OK
     assert monitoring.get_db_count('doc') == 1
@@ -111,16 +109,27 @@ def test_missing_pids(app, es_clear, document_json):
         'RECORDS_REST_ENDPOINTS')['doc']['search_index'] = 'documents'
 
 
-def test_info(app, es_clear, document, deposit):
+def test_info(app, es_clear, document, project, deposit):
     """Test info."""
     monitoring = DataIntegrityMonitoring()
     info = monitoring.info()
-    for doc_type in ['depo', 'doc', 'org', 'projects', 'user']:
-        assert doc_type in info
+    for rec_type in ['depo', 'doc', 'org', 'projects', 'user']:
+        assert rec_type in info
 
     # With detail
     info = monitoring.info(with_detail=True)
     assert info['doc']['detail'] == {'db': [], 'es': [], 'es_double': []}
+    assert info['doc']['db-es'] == 0
+    assert info['doc']['db'] == 1
+    assert info['doc']['db'] == 1
+    assert info['depo']['detail'] == {'db': [], 'es': [], 'es_double': []}
+    assert info['depo']['db-es'] == 0
+    assert info['depo']['db'] == 1
+    assert info['depo']['es'] == 1
+    assert info['projects']['detail'] == {'db': [], 'es': [], 'es_double': []}
+    assert info['projects']['db-es'] == 0
+    assert info['projects']['db'] == 1
+    assert info['projects']['es'] == 1
 
 
 def test_has_error(app, es_clear, document):

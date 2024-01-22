@@ -55,8 +55,7 @@ class SonarProxy():
         :returns: A service instance
         """
         if not self.resources.get(resource_type):
-            raise Exception(
-                f'No service configured for resource "{resource_type}"')
+            return None
 
         return self.resources[resource_type].service
 
