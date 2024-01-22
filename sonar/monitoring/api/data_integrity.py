@@ -27,20 +27,19 @@ from sonar.proxies import sonar
 class DataIntegrityMonitoring():
     """Data integrity monitoring."""
 
-    def get_db_count(self, doc_type, with_deleted=False):
+    def get_db_count(self, rec_type, with_deleted=False):
         """Get database count.
 
         Get count of items in the database for the given document type.
 
-        :param doc_type: Resource type.
+        :param rec_type: Record type.
         :param with_deleted: Count also deleted items.
         :returns: Items count.
         """
-        if not sonar.endpoints.get(doc_type) or doc_type == 'proj':
-            raise Exception(
-                'No endpoint configured for "{type}"'.format(type=doc_type))
+        if service := sonar.service(rec_type):
+            rec_type = service.record_cls.pid_type
 
-        query = PersistentIdentifier.query.filter_by(pid_type=doc_type)
+        query = PersistentIdentifier.query.filter_by(pid_type=rec_type)
         if not with_deleted:
             query = query.filter_by(status=PIDStatus.REGISTERED)
 
@@ -59,29 +58,35 @@ class DataIntegrityMonitoring():
         except NotFoundError:
             raise Exception('No index found for "{type}"'.format(type=index))
 
-    def missing_pids(self, doc_type, with_deleted=False):
+    def missing_pids(self, rec_type, with_deleted=False):
         """Get ES and DB counts.
 
-        :param doc_type: Resource type.
+        :param rec_type: Record type.
         :param with_deleted: Check also delete items in database.
         """
-        index = sonar.endpoints.get(doc_type, None)
+        index = sonar.endpoints.get(rec_type, None)
 
         if not index:
             raise Exception('No index configured for resource "{type}"'.format(
-                type=doc_type))
+                type=rec_type))
 
         result = {'es': [], 'es_double': [], 'db': []}
 
         # Elastic search PIDs
         es_pids = {}
-        for hit in RecordsSearch(index=index).source('pid').scan():
-            if es_pids.get(hit.pid):
+        for hit in RecordsSearch(index=index).source(['pid', 'id']).scan():
+            pid_value = hit.pid
+            # for resources pid is a dict
+            if not isinstance(pid_value, str):
+                pid_value = hit.id
+            if es_pids.get(pid_value):
                 result['es_double'].append(hit.pid)
-            es_pids[hit.pid] = 1
+            es_pids[pid_value] = 1
 
         # Database PIDs
-        query = PersistentIdentifier.query.filter_by(pid_type=doc_type)
+        if service := sonar.service(rec_type):
+            rec_type = service.record_cls.pid_type
+        query = PersistentIdentifier.query.filter_by(pid_type=rec_type)
         if not with_deleted:
             query = query.filter_by(status=PIDStatus.REGISTERED)
 
@@ -105,11 +110,11 @@ class DataIntegrityMonitoring():
         """
         info = {}
 
-        for doc_type, index in sonar.endpoints.items():
+        for rec_type, index in sonar.endpoints.items():
             es_count = self.get_es_count(index)
-            db_count = self.get_db_count(doc_type)
+            db_count = self.get_db_count(rec_type)
 
-            info[doc_type] = {
+            info[rec_type] = {
                 'db': db_count,
                 'es': es_count,
                 'db-es': db_count - es_count,
@@ -117,8 +122,8 @@ class DataIntegrityMonitoring():
             }
 
             if with_detail:
-                info[doc_type]['detail'] = self.missing_pids(
-                    doc_type, with_deleted)
+                info[rec_type]['detail'] = self.missing_pids(
+                    rec_type, with_deleted)
 
         return info
 
@@ -128,7 +133,7 @@ class DataIntegrityMonitoring():
         :param with_deleted: Count also deleted items in database.
         :returns: True if an error is found
         """
-        for doc_type, item in self.info(with_deleted).items():
+        for rec_type, item in self.info(with_deleted).items():
             if item['db-es'] != 0:
                 return True
 

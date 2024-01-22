@@ -17,8 +17,6 @@
 
 """Test SONAR proxy."""
 
-import pytest
-
 from sonar.proxies import sonar
 from sonar.resources.projects.service import RecordService
 
@@ -38,7 +36,4 @@ def test_service(app):
     service = sonar.service('projects')
     assert isinstance(service, RecordService)
 
-    with pytest.raises(Exception) as exception:
-        sonar.service('unknown')
-    assert str(
-        exception.value) == 'No service configured for resource "unknown"'
+    assert not sonar.service('unknown')
