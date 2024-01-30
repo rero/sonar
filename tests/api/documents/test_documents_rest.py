@@ -23,6 +23,21 @@ from flask import url_for
 from invenio_accounts.testutils import login_user_via_session
 
 
+def test_get(client, document_with_file):
+    """Get REST methods."""
+    res = client.get(url_for('invenio_records_rest.doc_list', view='global'))
+    assert res.status_code == 200
+    assert res.json['hits']['total']['value'] == 1
+    # the search results does not contains permissions
+    assert not res.json['hits']['hits'][0]['metadata']['_files'][0].get("permissions")
+
+    # the item result should contains permissions
+    res = client.get(url_for('invenio_records_rest.doc_item', pid_value=document_with_file['pid']))
+    assert res.status_code == 200
+    assert res.json['metadata']['_files'][0]['permissions'] == {
+        'delete': False, 'read': False,'update': False}
+
+
 def test_put(app, client, document_with_file):
     """Test putting metadata on existing file."""
     # Disable configuration

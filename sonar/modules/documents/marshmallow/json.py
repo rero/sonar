@@ -149,7 +149,7 @@ class DocumentListMetadataSchemaV1(StrictKeysMixin):
     customField3 = fields.List(fields.String(validate=validate.Length(min=1)))
     masked = SanitizedUnicode()
     _bucket = SanitizedUnicode()
-    _files = Nested(FileSchemaV1, many=True)
+    _files = Nested(ThumbnailSchemaV1, many=True)
     _oai = fields.Dict()
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
