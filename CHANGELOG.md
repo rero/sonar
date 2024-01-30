@@ -1,5 +1,12 @@
 # Changelog
 
+## [v1.10.1](https://github.com/rero/sonar/tree/v1.10.1) (2024-01-30)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.10.0...v1.10.1)
+
+**Fixes:**
+* documents: removes permssions from the search list [\#972](https://github.com/rero/sonar/issues/972) (by @jma)
+
 ## [v1.10.0](https://github.com/rero/sonar/tree/v1.10.0) (2024-01-23)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.9.1...v1.10.0)
