@@ -47,7 +47,17 @@ class ThumbnailSchemaV1(StrictKeysMixin):
 
     class Meta:
         """Meta for file schema."""
+
+        unknown = EXCLUDE
+
+    key = SanitizedUnicode()
+    label = SanitizedUnicode()
+    type = SanitizedUnicode()
+    order = fields.Integer()
+    restriction = fields.Dict(dump_only=True)
+    links = fields.Dict(dump_only=True)
     thumbnail = SanitizedUnicode(dump_only=True)
+
 
 
 class FileSchemaV1(ThumbnailSchemaV1):
@@ -64,20 +74,13 @@ class FileSchemaV1(ThumbnailSchemaV1):
     bucket = SanitizedUnicode()
     file_id = SanitizedUnicode()
     version_id = SanitizedUnicode()
-    key = SanitizedUnicode()
     mimetype = SanitizedUnicode()
     checksum = SanitizedUnicode()
     size = fields.Integer()
-    label = SanitizedUnicode()
-    type = SanitizedUnicode()
-    order = fields.Integer()
     external_url = SanitizedUnicode()
     access = SanitizedUnicode()
     restricted_outside_organisation = fields.Boolean()
     embargo_date = SanitizedUnicode()
-    restriction = fields.Dict(dump_only=True)
-    links = fields.Dict(dump_only=True)
-    thumbnail = SanitizedUnicode(dump_only=True)
     permissions = fields.Dict(dump_only=True)
 
     @pre_dump
@@ -149,7 +152,7 @@ class DocumentListMetadataSchemaV1(StrictKeysMixin):
     customField3 = fields.List(fields.String(validate=validate.Length(min=1)))
     masked = SanitizedUnicode()
     _bucket = SanitizedUnicode()
-    _files = Nested(FileSchemaV1, many=True)
+    _files = Nested(ThumbnailSchemaV1, many=True)
     _oai = fields.Dict()
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
