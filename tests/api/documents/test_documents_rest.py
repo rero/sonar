@@ -29,7 +29,11 @@ def test_get(client, document_with_file):
     assert res.status_code == 200
     assert res.json['hits']['total']['value'] == 1
     # the search results does not contains permissions
-    assert not res.json['hits']['hits'][0]['metadata']['_files'][0].get("permissions")
+    fdata = res.json['hits']['hits'][0]['metadata']['_files'][0]
+    assert list(fdata.keys()) == [
+        'key', 'label', 'type', 'order', 'restriction', 'links', 'thumbnail'
+    ]
+    assert not fdata.get("permissions")
 
     # the item result should contains permissions
     res = client.get(url_for('invenio_records_rest.doc_item', pid_value=document_with_file['pid']))
