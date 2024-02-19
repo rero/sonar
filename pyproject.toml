@@ -243,7 +243,6 @@ stats = "sonar.modules.stats.admin:stats_adminview"
 [tool.poetry.plugins."babel.extractors"]
 json = "sonar.modules.babel_extractors:extract_json"
 
-
 [tool.poetry.group.dev.dependencies]
 requests-mock = "^1.11.0"
 

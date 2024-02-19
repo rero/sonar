@@ -35,6 +35,8 @@ def test_boosting_fields(app):
     assert process_boosting(['title.*']) == ['title.*']
     assert 'title.*' in process_boosting(['*'])
     assert 'title.*^2' in process_boosting(['title.*^2', '*'])
+    assert 'customField1' in process_boosting(['*'])
+    assert 'customField1.*' in process_boosting(['*'])
 
 def test_api_query(client, document_with_file, document_json, make_document,
                    superuser):
