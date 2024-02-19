@@ -176,6 +176,13 @@ def process_boosting(config):
     fields = []
     for prop, conf in mapping['mappings']['properties'].items():
         field = prop
+        # fields for multiple mapping configurations
+        if conf.get('fields'):
+            tmp_fields = [field, f'{field}.*']
+            for tmp_f in tmp_fields:
+                if tmp_f not in existing_fields:
+                    fields.append(tmp_f)
+            continue
         # add .* for field with children
         if conf.get('properties'):
             field = f'{field}.*'
