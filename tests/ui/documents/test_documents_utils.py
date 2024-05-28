@@ -43,9 +43,15 @@ def test_publication_statement_text():
                 "value": "1798-1799"
             }],
             "type": "Date"
+        },
+        {
+            "label": [{
+                "value": "1900-1999"
+            }],
+            "type": "Date"
         }]
     }) == {
-        'default': 'Lausanne : Bulletin officiel du Directoire, 1798-1799'
+        'default': 'Lausanne : Bulletin officiel du Directoire, 1798-1799, 1900-1999'
     }
 
     # Without statement

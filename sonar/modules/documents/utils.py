@@ -38,7 +38,11 @@ def publication_statement_text(provision_activity):
     if 'statement' not in provision_activity:
         return format_date(provision_activity['startDate'])
 
-    punctuation = {'bf:Place': ' ; ', 'bf:Agent': ', '}
+    punctuation = {
+        'bf:Place': ' ; ',
+        'bf:Agent': ', ',
+        'Date': ', '
+    }
 
     statement_with_language = {'default': ''}
     statement_type = None
@@ -49,8 +53,7 @@ def publication_statement_text(provision_activity):
         for label in labels:
             language = label.get('language', 'default')
 
-            if not statement_with_language.get(language):
-                statement_with_language[language] = ''
+            statement_with_language.setdefault(language, '')
 
             if statement_with_language[language]:
                 if statement_type == statement['type']:
