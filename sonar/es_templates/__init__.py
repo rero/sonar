@@ -20,6 +20,4 @@
 
 def list_es_templates():
     """Elasticsearch Templates path."""
-    return [
-        'sonar.es_templates'
-    ]
+    return ["sonar.es_templates"]

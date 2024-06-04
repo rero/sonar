@@ -23,8 +23,7 @@ import re
 from datetime import datetime
 from io import BytesIO
 
-from flask import Blueprint, abort, current_app, jsonify, make_response, \
-    request
+from flask import Blueprint, abort, current_app, jsonify, make_response, request
 from flask_babel import _
 from invenio_db import db
 from invenio_rest import ContentNegotiatedMethodView
@@ -54,20 +53,19 @@ class FilesResource(ContentNegotiatedMethodView):
         if not deposit:
             abort(400)
 
-        if 'key' not in request.args or 'type' not in request.args:
+        if "key" not in request.args or "type" not in request.args:
             abort(400)
 
         # Type must be either "main" or "additional"
-        if request.args['type'] not in ['main', 'additional']:
+        if request.args["type"] not in ["main", "additional"]:
             abort(400)
 
-        key = request.args['key']
+        key = request.args["key"]
 
         # Store document
         deposit.files[key] = BytesIO(request.get_data())
-        deposit.files[key]['label'] = re.search(r'(.*)\..*$', key).group(1)
-        deposit.files[key]['category'] = request.args['type']
-        deposit.files[key]['type'] = 'file'
+        deposit.files[key]["label"] = re.search(r"(.*)\..*$", key).group(1)
+        deposit.files[key]["type"] = "file"
 
         deposit.commit()
         db.session.commit()
@@ -94,8 +92,8 @@ class FileResource(ContentNegotiatedMethodView):
         for item in json.items():
             deposit.files[key][item[0]] = item[1]
 
-        if not deposit.files[key].get('embargoDate'):
-            deposit.files[key].data.pop('embargoDate')
+        if not deposit.files[key].get("embargoDate"):
+            deposit.files[key].data.pop("embargoDate")
 
         try:
             deposit.commit()
@@ -106,61 +104,69 @@ class FileResource(ContentNegotiatedMethodView):
         return make_response(jsonify(deposit.files[key].dumps()))
 
 
-files_view = FilesResource.as_view('files')
-file_view = FileResource.as_view('file')
+files_view = FilesResource.as_view("files")
+file_view = FileResource.as_view("file")
 
-api_blueprint = Blueprint('deposits', __name__,
-                          url_prefix='/deposits/<pid>/',
-                          template_folder='templates')
-api_blueprint.add_url_rule('/custom-files/<key>', view_func=file_view)
-api_blueprint.add_url_rule('/custom-files', view_func=files_view)
+api_blueprint = Blueprint(
+    "deposits", __name__, url_prefix="/deposits/<pid>/", template_folder="templates"
+)
+api_blueprint.add_url_rule("/custom-files/<key>", view_func=file_view)
+api_blueprint.add_url_rule("/custom-files", view_func=files_view)
 
 
-@api_blueprint.route('/publish', methods=['POST'])
+@api_blueprint.route("/publish", methods=["POST"])
 def publish(pid=None):
     """Publish a deposit or send a message for review."""
     deposit = DepositRecord.get_record_by_pid(pid)
 
-    if not deposit or deposit[
-            'step'] != DepositRecord.STEP_DIFFUSION or deposit[
-                'status'] not in [
-                    DepositRecord.STATUS_IN_PROGRESS,
-                    DepositRecord.STATUS_ASK_FOR_CHANGES
-                ]:
+    if (
+        not deposit
+        or deposit["step"] != DepositRecord.STEP_DIFFUSION
+        or deposit["status"]
+        not in [DepositRecord.STATUS_IN_PROGRESS, DepositRecord.STATUS_ASK_FOR_CHANGES]
+    ):
         abort(400)
 
-    user = UserRecord.get_record_by_ref_link(deposit['user']['$ref'])
+    user = UserRecord.get_record_by_ref_link(deposit["user"]["$ref"])
 
     # Deposit can be validated directly
     if user.is_granted(UserRecord.ROLE_MODERATOR):
-        deposit['status'] = DepositRecord.STATUS_VALIDATED
+        deposit["status"] = DepositRecord.STATUS_VALIDATED
 
         # Create document based on deposit
         deposit.create_document()
     else:
-        deposit['status'] = DepositRecord.STATUS_TO_VALIDATE
+        deposit["status"] = DepositRecord.STATUS_TO_VALIDATE
 
-        subdivision = SubdivisionRecord.get_record_by_ref_link(
-            user['subdivision']['$ref']) if user.get('subdivision') else None
+        subdivision = (
+            SubdivisionRecord.get_record_by_ref_link(user["subdivision"]["$ref"])
+            if user.get("subdivision")
+            else None
+        )
 
         moderators_emails = user.get_moderators_emails(
-            subdivision['pid'] if subdivision else None)
+            subdivision["pid"] if subdivision else None
+        )
 
-        email_subject = _('Deposit to validate')
+        email_subject = _("Deposit to validate")
         if subdivision:
             email_subject += f' ({get_language_value(subdivision["name"])})'
 
         if moderators_emails:
             # Send an email to validators
             send_email(
-                moderators_emails, email_subject,
-                'deposits/email/validation', {
-                    'deposit': deposit,
-                    'user': user,
-                    'link': current_app.config.get('SONAR_APP_ANGULAR_URL')
-                }, False)
+                moderators_emails,
+                email_subject,
+                "deposits/email/validation",
+                {
+                    "deposit": deposit,
+                    "user": user,
+                    "link": current_app.config.get("SONAR_APP_ANGULAR_URL"),
+                },
+                False,
+            )
 
-    deposit.log_action(user, 'submit')
+    deposit.log_action(user, "submit")
 
     deposit.commit()
     deposit.reindex()
@@ -169,12 +175,12 @@ def publish(pid=None):
     return make_response()
 
 
-@api_blueprint.route('/review', methods=['POST'])
+@api_blueprint.route("/review", methods=["POST"])
 def review(pid=None):
     """Review a deposit and change the deposit status depending on action."""
     deposit = DepositRecord.get_record_by_pid(pid)
 
-    if not deposit or deposit['status'] != DepositRecord.STATUS_TO_VALIDATE:
+    if not deposit or deposit["status"] != DepositRecord.STATUS_TO_VALIDATE:
         abort(400)
 
     payload = request.get_json()
@@ -182,15 +188,19 @@ def review(pid=None):
     if not payload:
         abort(400)
 
-    if 'action' not in payload or 'user' not in payload or payload[
-            'action'] not in [
-                DepositRecord.REVIEW_ACTION_APPROVE,
-                DepositRecord.REVIEW_ACTION_REJECT,
-                DepositRecord.REVIEW_ACTION_ASK_FOR_CHANGES
-            ]:
+    if (
+        "action" not in payload
+        or "user" not in payload
+        or payload["action"]
+        not in [
+            DepositRecord.REVIEW_ACTION_APPROVE,
+            DepositRecord.REVIEW_ACTION_REJECT,
+            DepositRecord.REVIEW_ACTION_ASK_FOR_CHANGES,
+        ]
+    ):
         abort(400)
 
-    user = UserRecord.get_record_by_ref_link(payload['user']['$ref'])
+    user = UserRecord.get_record_by_ref_link(payload["user"]["$ref"])
 
     if not user or not user.is_moderator:
         abort(403)
@@ -198,37 +208,41 @@ def review(pid=None):
     subject = None
     status = None
 
-    if payload['action'] == DepositRecord.REVIEW_ACTION_APPROVE:
-        subject = _('Deposit approval')
+    if payload["action"] == DepositRecord.REVIEW_ACTION_APPROVE:
+        subject = _("Deposit approval")
         status = DepositRecord.STATUS_VALIDATED
 
         # Create document based on deposit
         deposit.create_document()
-    elif payload['action'] == DepositRecord.REVIEW_ACTION_REJECT:
-        subject = _('Deposit rejection')
+    elif payload["action"] == DepositRecord.REVIEW_ACTION_REJECT:
+        subject = _("Deposit rejection")
         status = DepositRecord.STATUS_REJECTED
     else:
-        subject = _('Ask for changes on deposit')
+        subject = _("Ask for changes on deposit")
         status = DepositRecord.STATUS_ASK_FOR_CHANGES
 
-    deposit['status'] = status
+    deposit["status"] = status
 
     # Log action
-    deposit.log_action(payload['user'], payload['action'], payload['comment'])
+    deposit.log_action(payload["user"], payload["action"], payload["comment"])
 
     # Load user who creates the deposit
-    deposit_user = UserRecord.get_record_by_ref_link(deposit['user']['$ref'])
+    deposit_user = UserRecord.get_record_by_ref_link(deposit["user"]["$ref"])
 
     send_email(
-        [deposit_user['email']], subject,
-        'deposits/email/{action}'.format(action=payload['action']), {
-            'deposit': deposit,
-            'deposit_user': deposit_user,
-            'user': user,
-            'date': datetime.now().strftime('%d.%m.%Y %H:%M:%S'),
-            'comment': payload['comment'],
-            'link': current_app.config.get('SONAR_APP_ANGULAR_URL')
-        }, False)
+        [deposit_user["email"]],
+        subject,
+        "deposits/email/{action}".format(action=payload["action"]),
+        {
+            "deposit": deposit,
+            "deposit_user": deposit_user,
+            "user": user,
+            "date": datetime.now().strftime("%d.%m.%Y %H:%M:%S"),
+            "comment": payload["comment"],
+            "link": current_app.config.get("SONAR_APP_ANGULAR_URL"),
+        },
+        False,
+    )
 
     deposit.commit()
     deposit.reindex()
@@ -237,17 +251,18 @@ def review(pid=None):
     return make_response(jsonify(deposit))
 
 
-@api_blueprint.route('/extract-pdf-metadata', methods=['GET'])
+@api_blueprint.route("/extract-pdf-metadata", methods=["GET"])
 def extract_metadata(pid=None):
     """Publish a deposit or send a message for review."""
     deposit = DepositRecord.get_record_by_pid(pid)
 
     if not deposit:
         abort(400)
-
+    # TODO: check if order should be required
     main_file = [
-        file for file in deposit.files
-        if file['category'] == 'main' and file.mimetype == 'application/pdf'
+        file
+        for file in deposit.files
+        if file.get("order") == 1 and file.mimetype == "application/pdf"
     ]
 
     if not main_file:

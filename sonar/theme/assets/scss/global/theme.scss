@@ -15,13 +15,15 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-@import "variables";
-@import "../common/theme";
+@layer bootstrap {
+  @import "variables";
+  @import "../common/theme";
 
-.bg-header {
-  @extend .navbar-dark;
-}
+  .bg-header {
+    @extend .navbar-dark;
+  }
 
-.bg-organisation {
-  @extend .navbar-dark;
+  .bg-organisation {
+    @extend .navbar-dark;
+  }
 }

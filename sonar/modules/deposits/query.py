@@ -34,7 +34,7 @@ def search_factory(self, search, query_parser=None):
     """
     search, urlkwargs = default_search_factory(self, search)
 
-    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
+    if current_app.config.get("SONAR_APP_DISABLE_PERMISSION_CHECKS"):
         return (search, urlkwargs)
 
     user = current_user_record
@@ -46,23 +46,25 @@ def search_factory(self, search, query_parser=None):
     # For admin and moderator, only records that belongs to his organisation.
     if user.is_admin or user.is_moderator:
         search = search.filter(
-            'term', user__organisation__pid=current_organisation['pid'])
+            "term", user__organisation__pid=current_organisation["pid"]
+        )
 
         # For moderators having a subdivision, records are filtered by
         # subdivision or by owned deposits
-        if not user.is_admin and user.is_moderator and user.get('subdivision'):
+        if not user.is_admin and user.is_moderator and user.get("subdivision"):
             user = user.replace_refs()
             search = search.filter(
-                'bool',
+                "bool",
                 should=[
-                    Q('term', user__subdivision__pid=user['subdivision']['pid']),
-                    Q('term', user__pid=user['pid'])
-                ])
+                    Q("term", user__subdivision__pid=user["subdivision"]["pid"]),
+                    Q("term", user__pid=user["pid"]),
+                ],
+            )
 
         return (search, urlkwargs)
 
     # For user, only records that belongs to him.
     if user.is_submitter:
-        search = search.filter('term', user__pid=user['pid'])
+        search = search.filter("term", user__pid=user["pid"])
 
     return (search, urlkwargs)

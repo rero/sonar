@@ -68,35 +68,33 @@ class DepositPermission(RecordPermission):
         if user.is_superuser:
             return True
 
-        deposit = DepositRecord.get_record_by_pid(record['pid'])
+        deposit = DepositRecord.get_record_by_pid(record["pid"])
         deposit = deposit.replace_refs()
 
         # Admin is allowed only for same organisation's records
         if user.is_admin:
-            return current_organisation['pid'] == deposit['user'][
-                'organisation']['pid']
+            return current_organisation["pid"] == deposit["user"]["organisation"]["pid"]
 
         # Special rules for moderators
         if user.is_moderator:
             user = user.replace_refs()
 
             # Deposit does not belong to user's organisation
-            if current_organisation['pid'] != deposit['user']['organisation'][
-                    'pid']:
+            if current_organisation["pid"] != deposit["user"]["organisation"]["pid"]:
                 return False
 
             # Moderator has no subdivision, he can read the deposit
-            if not user.get('subdivision'):
+            if not user.get("subdivision"):
                 return True
 
             # User has a subdivision, he can only read his own deposits and
             # deposits from the same subdivision
-            return user['pid'] == deposit['user'][
-                'pid'] or deposit.has_subdivision(
-                    user.get('subdivision', {}).get('pid'))
+            return user["pid"] == deposit["user"]["pid"] or deposit.has_subdivision(
+                user.get("subdivision", {}).get("pid")
+            )
 
         # Submitters have only access to their own deposits.
-        return user['pid'] == deposit['user']['pid']
+        return user["pid"] == deposit["user"]["pid"]
 
     @classmethod
     def update(cls, user, record):
@@ -118,11 +116,12 @@ class DepositPermission(RecordPermission):
         :returns: True is action can be done.
         """
         # Cannot delete a validated deposit.
-        if record['status'] == DepositRecord.STATUS_VALIDATED:
+        if record["status"] == DepositRecord.STATUS_VALIDATED:
             return False
 
         # Same rules as read.
         return cls.read(user, record)
+
 
 class DepositFilesPermission(FilesPermission):
     """Deposits files permissions.
@@ -133,7 +132,7 @@ class DepositFilesPermission(FilesPermission):
     @classmethod
     def get_deposit(cls, parent_record):
         """Get the deposit from the parent record."""
-        return DepositRecord.get_record_by_pid(parent_record.get('pid'))
+        return DepositRecord.get_record_by_pid(parent_record.get("pid"))
 
     @classmethod
     def read(cls, user, record, pid, parent_record):

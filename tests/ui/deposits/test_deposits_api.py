@@ -20,215 +20,171 @@
 from invenio_accounts.testutils import login_user_via_view
 
 
-def test_create_document(app, db, project, client, deposit, submitter,
-                         subdivision, embargo_date):
+def test_create_document(
+    app, db, project, client, deposit, submitter, subdivision, embargo_date
+):
     """Test create document based on it."""
-    submitter['subdivision'] = {
-        '$ref': f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
+    submitter["subdivision"] = {
+        "$ref": f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
     }
     submitter.commit()
     submitter.reindex()
     db.session.commit()
 
-    deposit['user'] = {
-        '$ref': f'https://sonar.ch/api/users/{submitter["pid"]}'
-    }
-    deposit['projects'] = [{
-        '$ref':
-        f'https://sonar.ch/api/projects/{project.id}'
-    }, {
-        'name': 'Project 1',
-        'description': 'Description',
-        'startDate': '2020-01-01',
-        'endDate': '2021-12-31'
-    }]
+    deposit["user"] = {"$ref": f'https://sonar.ch/api/users/{submitter["pid"]}'}
+    deposit["projects"] = [
+        {"$ref": f"https://sonar.ch/api/projects/{project.id}"},
+        {
+            "name": "Project 1",
+            "description": "Description",
+            "startDate": "2020-01-01",
+            "endDate": "2021-12-31",
+        },
+    ]
     deposit.commit()
     deposit.reindex()
     db.session.commit()
 
-    login_user_via_view(client, email=submitter['email'], password='123456')
+    login_user_via_view(client, email=submitter["email"], password="123456")
 
     document = deposit.create_document()
 
-    assert document['organisation'] == [{
-        '$ref':
-        'https://sonar.ch/api/organisations/org'
-    }]
+    assert document["organisation"] == [
+        {"$ref": "https://sonar.ch/api/organisations/org"}
+    ]
 
-    assert document['documentType'] == 'coar:c_816b'
-    assert document['title'] == [{
-        'type':
-        'bf:Title',
-        'mainTitle': [{
-            'language': 'eng',
-            'value': 'Title of the document'
-        }, {
-            'language': 'fre',
-            'value': 'Titre du document'
-        }],
-        'subtitle': [{
-            'language': 'eng',
-            'value': 'Subtitle of the document'
-        }]
-    }]
-    assert document['language'] == [{'value': 'eng', 'type': 'bf:Language'}]
-    assert document['provisionActivity'] == [{
-        'type':
-        'bf:Publication',
-        'startDate':
-        '2020',
-        'statement': [{
-            'label': [{
-                'value': 'Place'
-            }],
-            'type': 'bf:Place'
-        }, {
-            'label': [{
-                'value': 'Publisher name'
-            }],
-            'type': 'bf:Agent'
-        }, {
-            'label': [{
-                'value': '2019'
-            }],
-            'type': 'Date'
-        }]
-    }]
-    assert document['partOf'] == [{
-        'numberingYear': '2020',
-        'numberingPages': '1-12',
-        'document': {
-            'title':
-            'Journal',
-            'contribution': ['Denson, Edward', 'Worth, James'],
-            'publication': {
-                'statement': 'Publisher'
+    assert document["documentType"] == "coar:c_816b"
+    assert document["title"] == [
+        {
+            "type": "bf:Title",
+            "mainTitle": [
+                {"language": "eng", "value": "Title of the document"},
+                {"language": "fre", "value": "Titre du document"},
+            ],
+            "subtitle": [{"language": "eng", "value": "Subtitle of the document"}],
+        }
+    ]
+    assert document["language"] == [{"value": "eng", "type": "bf:Language"}]
+    assert document["provisionActivity"] == [
+        {
+            "type": "bf:Publication",
+            "startDate": "2020",
+            "statement": [
+                {"label": [{"value": "Place"}], "type": "bf:Place"},
+                {"label": [{"value": "Publisher name"}], "type": "bf:Agent"},
+                {"label": [{"value": "2019"}], "type": "Date"},
+            ],
+        }
+    ]
+    assert document["partOf"] == [
+        {
+            "numberingYear": "2020",
+            "numberingPages": "1-12",
+            "document": {
+                "title": "Journal",
+                "contribution": ["Denson, Edward", "Worth, James"],
+                "publication": {"statement": "Publisher"},
+                "identifiedBy": [
+                    {"type": "bf:Isbn", "value": "ISBN"},
+                    {"type": "bf:Issn", "value": "ISSN"},
+                ],
             },
-            'identifiedBy': [{
-                'type': 'bf:Isbn',
-                'value': 'ISBN'
-            }, {
-                'type': 'bf:Issn',
-                'value': 'ISSN'
-            }]
-        },
-        'numberingVolume': '12',
-        'numberingIssue': '2'
-    }]
-    assert document['otherEdition'] == [{
-        'document': {
-            'electronicLocator': 'https://some.url/document.pdf'
-        },
-        'publicNote': 'Published version'
-    }]
-    assert document['relatedTo'] == [{
-        'document': {
-            'electronicLocator': 'https://some.url/related.pdf'
-        },
-        'publicNote': 'Related to version'
-    }]
-    assert len(document['collections']) == 1
-    assert document['classification'] == [{
-        'type': 'bf:ClassificationUdc',
-        'classificationPortion': '543'
-    }]
-    assert document['abstracts'] == [{
-        'language': 'eng',
-        'value': 'Abstract of the document'
-    }, {
-        'language': 'fre',
-        'value': 'Résumé du document'
-    }]
-    assert document['subjects'] == [{
-        'label': {
-            'language': 'eng',
-            'value': ['Subject 1', 'Subject 2']
+            "numberingVolume": "12",
+            "numberingIssue": "2",
         }
-    }, {
-        'label': {
-            'language': 'fre',
-            'value': ['Sujet 1', 'Sujet 2']
+    ]
+    assert document["otherEdition"] == [
+        {
+            "document": {"electronicLocator": "https://some.url/document.pdf"},
+            "publicNote": "Published version",
         }
-    }]
-    assert document['contribution'] == [{
-        'affiliation':
-        'University of Bern, Switzerland',
-        'agent': {
-            'preferred_name': 'Takayoshi, Shintaro',
-            'type': 'bf:Person',
-            'identifiedBy': {
-                'source': 'ORCID',
-                'type': 'bf:Local',
-                'value': '1234-5678-1234-5678'
-            }
-        },
-        'controlledAffiliation': ['University of Bern and Hospital'],
-        'role': ['cre']
-    }]
+    ]
+    assert document["relatedTo"] == [
+        {
+            "document": {"electronicLocator": "https://some.url/related.pdf"},
+            "publicNote": "Related to version",
+        }
+    ]
+    assert len(document["collections"]) == 1
+    assert document["classification"] == [
+        {"type": "bf:ClassificationUdc", "classificationPortion": "543"}
+    ]
+    assert document["abstracts"] == [
+        {"language": "eng", "value": "Abstract of the document"},
+        {"language": "fre", "value": "Résumé du document"},
+    ]
+    assert document["subjects"] == [
+        {"label": {"language": "eng", "value": ["Subject 1", "Subject 2"]}},
+        {"label": {"language": "fre", "value": ["Sujet 1", "Sujet 2"]}},
+    ]
+    assert document["contribution"] == [
+        {
+            "affiliation": "University of Bern, Switzerland",
+            "agent": {
+                "preferred_name": "Takayoshi, Shintaro",
+                "type": "bf:Person",
+                "identifiedBy": {
+                    "source": "ORCID",
+                    "type": "bf:Local",
+                    "value": "1234-5678-1234-5678",
+                },
+            },
+            "controlledAffiliation": ["University of Bern and Hospital"],
+            "role": ["cre"],
+        }
+    ]
 
-    assert document['dissertation'] == {
-        'degree': 'Doctoral thesis',
-        'grantingInstitution': 'Università della Svizzera italiana',
-        'date': '2010-12-01',
-        'jury_note': 'Jury note'
+    assert document["dissertation"] == {
+        "degree": "Doctoral thesis",
+        "grantingInstitution": "Università della Svizzera italiana",
+        "date": "2010-12-01",
+        "jury_note": "Jury note",
     }
 
-    assert document['identifiedBy'] == [{
-        'type': 'bf:Local',
-        'value': '123456',
-        'source': 'PMID'
-    }, {
-        'type': 'bf:Local',
-        'value': '9999',
-        'source': 'RERO'
-    }, {
-        'type': 'bf:Doi',
-        'value': '10.1038/nphys1170'
-    }, {
-        'type': 'ark',
-        'value': 'ark:/99999/ffk36'
-    }]
+    assert document["identifiedBy"] == [
+        {"type": "bf:Local", "value": "123456", "source": "PMID"},
+        {"type": "bf:Local", "value": "9999", "source": "RERO"},
+        {"type": "bf:Doi", "value": "10.1038/nphys1170"},
+        {"type": "ark", "value": "ark:/99999/ffk36"},
+    ]
 
-    assert document['contentNote'] == ['Note 1', 'Note 2']
-    assert document['extent'] == 'Extent value'
-    assert document['additionalMaterials'] == 'Additional materials'
-    assert document['formats'] == ['Format 1', 'Format 2']
-    assert document[
-        'otherMaterialCharacteristics'] == 'Other material characteristics'
-    assert document['editionStatement'] == {
-        'editionDesignation': {
-            'value': '1st edition'
-        },
-        'responsibility': {
-            'value': 'Resp.'
-        }
+    assert document["contentNote"] == ["Note 1", "Note 2"]
+    assert document["extent"] == "Extent value"
+    assert document["additionalMaterials"] == "Additional materials"
+    assert document["formats"] == ["Format 1", "Format 2"]
+    assert document["otherMaterialCharacteristics"] == "Other material characteristics"
+    assert document["editionStatement"] == {
+        "editionDesignation": {"value": "1st edition"},
+        "responsibility": {"value": "Resp."},
     }
 
-    assert len(document['projects']) == 2
+    assert len(document["projects"]) == 2
 
-    assert document.files['main.pdf']['access'] == 'coar:c_f1cf'
-    assert document.files['main.pdf']['restricted_outside_organisation']
-    assert document.files['main.pdf']['embargo_date'] == embargo_date.isoformat()
+    assert document.files["main.pdf"]["access"] == "coar:c_f1cf"
+    assert document.files["main.pdf"]["restricted_outside_organisation"]
+    assert document.files["main.pdf"]["embargo_date"] == embargo_date.isoformat()
     assert len(document.files) == 6
 
     # Test without affiliation
-    deposit['contributors'][0]['affiliation'] = None
+    deposit["contributors"][0]["affiliation"] = None
     document = deposit.create_document()
 
-    assert document['contribution'] == [{
-        'agent': {
-            'preferred_name': 'Takayoshi, Shintaro',
-            'type': 'bf:Person',
-            'identifiedBy': {
-                'source': 'ORCID',
-                'type': 'bf:Local',
-                'value': '1234-5678-1234-5678'
-            }
-        },
-        'role': ['cre']
-    }]
+    assert document["contribution"] == [
+        {
+            "agent": {
+                "preferred_name": "Takayoshi, Shintaro",
+                "type": "bf:Person",
+                "identifiedBy": {
+                    "source": "ORCID",
+                    "type": "bf:Local",
+                    "value": "1234-5678-1234-5678",
+                },
+            },
+            "role": ["cre"],
+        }
+    ]
 
     # Test subdivision
     document = deposit.create_document()
-    assert document['subdivisions'][0] == submitter['subdivision']
-    assert document['masked'] == deposit['diffusion']['masked']
+    assert document["subdivisions"][0] == submitter["subdivision"]
+    assert document["masked"] == deposit["diffusion"]["masked"]

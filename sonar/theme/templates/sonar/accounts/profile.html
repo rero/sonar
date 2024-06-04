@@ -19,19 +19,18 @@ along with this program. If not, see
 {% extends 'sonar/page_settings.html' %}
 
 {%- block settings_body scoped %}
-<div class="standalone-editor">
-  <sonar-root></sonar-root>
-</div>
+  <sonar-root class="sonar-ui"></sonar-root>
 {%- endblock settings_body %}
 
+{%- block css %}
+  <style>
+    @layer bootstrap, theme, sonar-ui, primeng, utilities;
+  </style>
+  <link rel="stylesheet" href="/static/sonar-ui/browser/styles.css?{{ ui_version }}">
+  {{ webpack[get_specific_theme()] }}
+{%- endblock %}
+
 {%- block javascript %}
-  <script src="/static/sonar-ui/runtime.js?{{ ui_version }}" module></script>
-  <script src="/static/sonar-ui/polyfills.js?{{ ui_version }}" module></script>
-  <script src="/static/sonar-ui/main.js?{{ ui_version }}" module></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="/static/sonar-ui/browser/polyfills.js?{{ ui_version }}" type="module"></script>
+  <script src="/static/sonar-ui/browser/main.js?{{ ui_version }}" type="module"></script>
 {%- endblock javascript %}

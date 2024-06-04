@@ -23,4 +23,4 @@ from sonar.webdav import HegClient
 def test_init(app):
     """Test init."""
     client = HegClient()
-    assert client.webdav.hostname == 'https://share.rero.ch/HEG'
+    assert client.webdav.hostname == "https://share.rero.ch/HEG"

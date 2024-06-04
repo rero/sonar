@@ -22,8 +22,9 @@ from flask import current_app
 
 _signals = Namespace()
 
-file_downloaded = _signals.signal('file-downloaded')
+file_downloaded = _signals.signal("file-downloaded")
 """File downloaded signal."""
+
 
 def file_download_proxy(sender, obj):
     """This proxy add a sender to the original signal.

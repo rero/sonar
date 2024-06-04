@@ -22,7 +22,7 @@ import re
 KEY_VAL_REGEX = re.compile(r'"(.*?)"\s*:\s*"(.*?)"')
 
 
-def extract(fileobj, keys=['title']):
+def extract(fileobj, keys=["title"]):
     """Extract translation from a json file.
 
     :param fileobj: File object to extract translations from.
@@ -31,12 +31,12 @@ def extract(fileobj, keys=['title']):
     translations = []
     line = 1
     for v in fileobj:
-        for match in KEY_VAL_REGEX.finditer(v.decode('utf-8')):
+        for match in KEY_VAL_REGEX.finditer(v.decode("utf-8")):
             k_match, v_match = match.groups()
             # if k_match in keys and v_match:
             for regexkey in keys:
                 if re.match(regexkey, k_match):
-                    translations.append((line, 'gettext', v_match, []))
+                    translations.append((line, "gettext", v_match, []))
                     continue
         line += 1
     return translations
@@ -56,5 +56,5 @@ def extract_json(fileobj, keywords, comment_tags, options):
              tuples
     :rtype: ``iterator``
     """
-    keys_to_translate = eval(options.get('keys_to_translate', "['title']"))
+    keys_to_translate = eval(options.get("keys_to_translate", "['title']"))
     return extract(fileobj, keys_to_translate)

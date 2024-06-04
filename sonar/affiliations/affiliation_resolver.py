@@ -22,10 +22,10 @@ import csv
 from fuzzywuzzy import fuzz
 from werkzeug.utils import cached_property
 
-CSV_FILE = './data/affiliations.csv'
+CSV_FILE = "./data/affiliations.csv"
 
 
-class AffiliationResolver():
+class AffiliationResolver:
     """Affiliation resolver."""
 
     @cached_property
@@ -36,8 +36,8 @@ class AffiliationResolver():
         """
         affiliations = []
 
-        with open(CSV_FILE, 'r') as file:
-            reader = csv.reader(file, delimiter='\t')
+        with open(CSV_FILE, "r") as file:
+            reader = csv.reader(file, delimiter="\t")
             for row in reader:
                 affiliation = []
                 for index, value in enumerate(row):
@@ -64,21 +64,24 @@ class AffiliationResolver():
             standard_form = affiliations[0]
             for affiliation in affiliations:
                 score = fuzz.partial_ratio(searched_affiliation, affiliation)
-                if (score > 92 and standard_form not in collected_affiliations):
+                if score > 92 and standard_form not in collected_affiliations:
                     # handle special case UZH / ZHdK
                     # TODO: solve this special case by converting the CSV file to JSON
                     # using rejected forms https://github.com/rero/sonar/issues/824
-                    if (affiliation.lower() == 'zurich university' and
-                            'zurich university of the arts' in searched_affiliation.lower()
+                    if (
+                        affiliation.lower() == "zurich university"
+                        and "zurich university of the arts"
+                        in searched_affiliation.lower()
                     ):
                         continue
                     # handle special case CERN/Lucerne
-                    if (affiliation.lower() == 'cern' and
-                        'lucerne' in searched_affiliation.lower()
+                    if (
+                        affiliation.lower() == "cern"
+                        and "lucerne" in searched_affiliation.lower()
                     ):
                         continue
                     # handle special case Freiburg im Breisgau
-                    if 'university of freiburg' in searched_affiliation.lower():
+                    if "university of freiburg" in searched_affiliation.lower():
                         break
 
                     collected_affiliations.append(standard_form)

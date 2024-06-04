@@ -25,15 +25,15 @@ from .projects_json_schema import ProjectsJSONSchema
 from .users_json_schema import UsersJSONSchema
 
 
-class JSONSchemaFactory():
+class JSONSchemaFactory:
     """Factory for JSON schema."""
 
     SCHEMAS = {
-        'deposits': DepositsJSONSchema,
-        'documents': DocumentsJSONSchema,
-        'organisations': OrganisationsJSONSchema,
-        'projects': ProjectsJSONSchema,
-        'users': UsersJSONSchema
+        "deposits": DepositsJSONSchema,
+        "documents": DocumentsJSONSchema,
+        "organisations": OrganisationsJSONSchema,
+        "projects": ProjectsJSONSchema,
+        "users": UsersJSONSchema,
     }
 
     @staticmethod

@@ -32,42 +32,45 @@ def test_resolve():
 
     assert not affiliation_resolver.resolve(None)
 
-    test_string = ('Institute for Computer Music and Sound Technology, Zurich'
-                   ' University of the Arts, Switzerland')
-    assert affiliation_resolver.resolve(test_string) == [
-        'ZHdK (Zurich)'
-    ]
+    test_string = (
+        "Institute for Computer Music and Sound Technology, Zurich"
+        " University of the Arts, Switzerland"
+    )
+    assert affiliation_resolver.resolve(test_string) == ["ZHdK (Zurich)"]
 
-    test_string = 'IST'
-    assert affiliation_resolver.resolve(test_string) == [
-        'IST'
-    ]
+    test_string = "IST"
+    assert affiliation_resolver.resolve(test_string) == ["IST"]
 
-    test_string = ('Clinic for Cardiovascular Surgery, University Hospital'
-                   'Zurich, Raemistrasse 100, 8091 Zurich, Switzerland')
+    test_string = (
+        "Clinic for Cardiovascular Surgery, University Hospital"
+        "Zurich, Raemistrasse 100, 8091 Zurich, Switzerland"
+    )
     assert affiliation_resolver.resolve(test_string) == [
-        'University of Zurich and Hospital'
+        "University of Zurich and Hospital"
     ]
 
     test_string = (
-        'Institute for Research in Biomedicine (IRB), '
-        'Faculty of Biomedical Sciences, USI, '
-        'Switzerland - Graduate School for Cellular and Biomedical Sciences, '
-        'University of Bern, 3012 Bern, Switzerland')
+        "Institute for Research in Biomedicine (IRB), "
+        "Faculty of Biomedical Sciences, USI, "
+        "Switzerland - Graduate School for Cellular and Biomedical Sciences, "
+        "University of Bern, 3012 Bern, Switzerland"
+    )
     assert affiliation_resolver.resolve(test_string) == [
-        'University of Bern and Hospital', 'Università della Svizzera italiana'
+        "University of Bern and Hospital",
+        "Università della Svizzera italiana",
     ]
 
     test_string = (
-        'Centre for Research in Environmental Epidemiology (CREAL), Barcelona '
-        '08003, Spain; CIBER Epidemiología y Salud Pública (CIBERESP), '
-        'Barcelona 08003, Spain; Universitat Pompeu Fabra (UPF), Barcelona '
-        '08003, Spain; Hospital del Mar Medical Research Institute (IMIM), '
-        'Barcelona 08003, Spain.')
+        "Centre for Research in Environmental Epidemiology (CREAL), Barcelona "
+        "08003, Spain; CIBER Epidemiología y Salud Pública (CIBERESP), "
+        "Barcelona 08003, Spain; Universitat Pompeu Fabra (UPF), Barcelona "
+        "08003, Spain; Hospital del Mar Medical Research Institute (IMIM), "
+        "Barcelona 08003, Spain."
+    )
     assert not affiliation_resolver.resolve(test_string)
 
-    test_string = 'Not existing'
+    test_string = "Not existing"
     assert not affiliation_resolver.resolve(test_string)
 
-    test_string = 'University of Freiburg'
+    test_string = "University of Freiburg"
     assert not affiliation_resolver.resolve(test_string)

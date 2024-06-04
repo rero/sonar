@@ -21,8 +21,7 @@ import csv
 
 from flask import stream_with_context
 from flask_resources.serializers import BaseSerializer
-from invenio_records_rest.serializers.csv import \
-    CSVSerializer as BaseCSVSerializer
+from invenio_records_rest.serializers.csv import CSVSerializer as BaseCSVSerializer
 from invenio_records_rest.serializers.csv import Line
 
 
@@ -47,16 +46,15 @@ class CSVSerializer(BaseCSVSerializer, BaseSerializer):
 
             # Write the CSV output in memory
             line = Line()
-            writer = csv.DictWriter(line,
-                                    delimiter=';',
-                                    quoting=csv.QUOTE_ALL,
-                                    fieldnames=headers)
+            writer = csv.DictWriter(
+                line, delimiter=";", quoting=csv.QUOTE_ALL, fieldnames=headers
+            )
             writer.writerow(headers)
             yield line.read()
 
-            for result in results['hits']['hits']:
-                data = result['metadata']
-                data['pid'] = result['id']
+            for result in results["hits"]["hits"]:
+                data = result["metadata"]
+                data["pid"] = result["id"]
 
                 self.format_row(data)
 

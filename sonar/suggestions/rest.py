@@ -21,40 +21,40 @@ from flask import Blueprint, current_app, jsonify, request
 
 from sonar.proxies import sonar
 
-api_blueprint = Blueprint('suggestions', __name__, url_prefix='/suggestions')
+api_blueprint = Blueprint("suggestions", __name__, url_prefix="/suggestions")
 
 
-@api_blueprint.route('/completion', methods=['GET'])
+@api_blueprint.route("/completion", methods=["GET"])
 def completion():
     """Suggestions completion."""
-    query = request.args.get('q')
-    field = request.args.get('field')
-    resource = request.args.get('resource')
+    query = request.args.get("q")
+    field = request.args.get("field")
+    resource = request.args.get("resource")
 
     if not query:
-        return jsonify({'error': 'No query parameter given'}), 400
+        return jsonify({"error": "No query parameter given"}), 400
 
     if not field:
-        return jsonify({'error': 'No field parameter given'}), 400
+        return jsonify({"error": "No field parameter given"}), 400
 
     if not resource:
-        return jsonify({'error': 'No resource parameter given'}), 400
+        return jsonify({"error": "No resource parameter given"}), 400
 
     # Suggestions from multiple fields possible
-    fields = field.split(',')
+    fields = field.split(",")
 
     search = None
     try:
         service = sonar.service(resource)
         search = service.config.search.search_cls(index=resource)
     except Exception as err:
-        endpoints = current_app.config.get('RECORDS_REST_ENDPOINTS')
+        endpoints = current_app.config.get("RECORDS_REST_ENDPOINTS")
         for doc_type, config in endpoints.items():
-            if config.get('search_index') == resource:
-                search = config['search_class']()
+            if config.get("search_index") == resource:
+                search = config["search_class"]()
 
     if not search:
-        return jsonify({'error': 'Search class not found'}), 404
+        return jsonify({"error": "Search class not found"}), 404
 
     results = []
 
@@ -62,18 +62,13 @@ def completion():
         search = search.source(excludes="*")
 
         for field in fields:
-            search = search.suggest(field,
-                                    query,
-                                    completion={
-                                        'field': field,
-                                        'skip_duplicates': True
-                                    })
+            search = search.suggest(
+                field, query, completion={"field": field, "skip_duplicates": True}
+            )
         for _, suggestion in search.execute().suggest.to_dict().items():
-            results = results + [
-                option['text'] for option in suggestion[0]['options']
-            ]
+            results = results + [option["text"] for option in suggestion[0]["options"]]
     except Exception:
-        return jsonify({'error': 'Bad request'}), 400
+        return jsonify({"error": "Bad request"}), 400
 
     # Remove duplicates
     results = list(dict.fromkeys(results))

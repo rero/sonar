@@ -26,8 +26,7 @@ from click.exceptions import ClickException
 from flask.cli import with_appcontext
 from invenio_db import db
 
-from sonar.modules.organisations.api import OrganisationIndexer, \
-    OrganisationRecord
+from sonar.modules.organisations.api import OrganisationIndexer, OrganisationRecord
 
 
 @click.group()
@@ -35,12 +34,12 @@ def organisations():
     """Organisations CLI commands."""
 
 
-@organisations.command('import')
-@click.argument('file', type=click.File('r'))
+@organisations.command("import")
+@click.argument("file", type=click.File("r"))
 @with_appcontext
 def import_organisations(file):
     """Import organisations from JSON file."""
-    click.secho('Importing organisations from {file}'.format(file=file.name))
+    click.secho("Importing organisations from {file}".format(file=file.name))
 
     directory = os.path.dirname(file.name)
 
@@ -49,22 +48,22 @@ def import_organisations(file):
     for record in json.load(file):
         try:
             # Check existence in DB
-            db_record = OrganisationRecord.get_record_by_pid(record['code'])
+            db_record = OrganisationRecord.get_record_by_pid(record["code"])
 
             if db_record:
-                raise ClickException('Record already exists in DB')
+                raise ClickException("Record already exists in DB")
 
-            files = record.pop('files', [])
+            files = record.pop("files", [])
 
             # Register record to DB
             db_record = OrganisationRecord.create(record)
 
             # Add files
             for file in files:
-                file_path = os.path.join(directory, file['path'])
+                file_path = os.path.join(directory, file["path"])
                 if os.path.isfile(file_path):
-                    with open(file_path, 'rb') as f:
-                        db_record.files[file['key']] = BytesIO(f.read())
+                    with open(file_path, "rb") as f:
+                        db_record.files[file["key"]] = BytesIO(f.read())
 
             db_record.commit()
             db.session.commit()
@@ -72,8 +71,10 @@ def import_organisations(file):
             indexer.index(db_record)
         except Exception as error:
             click.secho(
-                'Organisation {org} could not be imported: {error}'.format(
-                    org=record, error=str(error)),
-                fg='red')
+                "Organisation {org} could not be imported: {error}".format(
+                    org=record, error=str(error)
+                ),
+                fg="red",
+            )
 
-    click.secho('Finished', fg='green')
+    click.secho("Finished", fg="green")

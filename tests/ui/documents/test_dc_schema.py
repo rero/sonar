@@ -22,28 +22,27 @@ from io import BytesIO
 import pytest
 
 from sonar.modules.documents.api import DocumentRecord
-from sonar.modules.documents.serializers.oai_dc import \
-    SonarDublinCoreXMLSerializer
+from sonar.modules.documents.serializers.oai_dc import SonarDublinCoreXMLSerializer
 
 
 @pytest.fixture()
 def minimal_document(db, bucket_location, organisation):
     record = DocumentRecord.create(
         {
-            'pid': '1000',
-            'title': [{
-                'type': 'bf:Title',
-                'mainTitle': [{
-                    'language': 'eng',
-                    'value': 'Title of the document'
-                }]
-            }],
-            'organisation': [{
-                '$ref': 'https://sonar.ch/api/organisations/org'
-            }]
+            "pid": "1000",
+            "title": [
+                {
+                    "type": "bf:Title",
+                    "mainTitle": [
+                        {"language": "eng", "value": "Title of the document"}
+                    ],
+                }
+            ],
+            "organisation": [{"$ref": "https://sonar.ch/api/organisations/org"}],
         },
         dbcommit=True,
-        with_bucket=True)
+        with_bucket=True,
+    )
     record.commit()
     db.session.commit()
     return record
@@ -51,187 +50,174 @@ def minimal_document(db, bucket_location, organisation):
 
 @pytest.fixture()
 def contributors():
-    return [{
-        'agent': {
-            'preferred_name': 'Creator 1'
+    return [
+        {
+            "agent": {"preferred_name": "Creator 1"},
+            "role": ["cre"],
         },
-        'role': ['cre'],
-    }, {
-        'agent': {
-            'preferred_name': 'Creator 2',
-            'number': '123',
-            'date': '2019',
-            'place': 'Martigny'
+        {
+            "agent": {
+                "preferred_name": "Creator 2",
+                "number": "123",
+                "date": "2019",
+                "place": "Martigny",
+            },
+            "role": ["cre"],
         },
-        'role': ['cre'],
-    }, {
-        'agent': {
-            'preferred_name': 'Contributor 1'
+        {
+            "agent": {"preferred_name": "Contributor 1"},
+            "role": ["ctb"],
         },
-        'role': ['ctb'],
-    }, {
-        'agent': {
-            'preferred_name': 'Contributor 2',
-            'number': '999',
-            'date': '2010',
-            'place': 'Sion'
+        {
+            "agent": {
+                "preferred_name": "Contributor 2",
+                "number": "999",
+                "date": "2010",
+                "place": "Sion",
+            },
+            "role": ["ctb"],
         },
-        'role': ['ctb'],
-    }, {
-        'agent': {
-            'preferred_name': 'Degree supervisor'
+        {
+            "agent": {"preferred_name": "Degree supervisor"},
+            "role": ["dgs"],
         },
-        'role': ['dgs'],
-    }, {
-        'agent': {
-            'preferred_name': 'Printer'
+        {
+            "agent": {"preferred_name": "Printer"},
+            "role": ["prt"],
         },
-        'role': ['prt'],
-    }, {
-        'agent': {
-            'preferred_name': 'Editor'
+        {
+            "agent": {"preferred_name": "Editor"},
+            "role": ["edt"],
         },
-        'role': ['edt'],
-    }]
+    ]
 
 
 def test_contributors(minimal_document, contributors):
     """Test contributors serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['contributors'] == []
+    assert result["contributors"] == []
 
-    minimal_document.update({'contribution': contributors})
+    minimal_document.update({"contribution": contributors})
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['contributors'] == [
-        'Contributor 1',
-        'Contributor 2 (999 : 2010 : Sion)',
-        'Degree supervisor',
-        'Printer',
-        'Editor',
+    assert result["contributors"] == [
+        "Contributor 1",
+        "Contributor 2 (999 : 2010 : Sion)",
+        "Degree supervisor",
+        "Printer",
+        "Editor",
     ]
 
 
 def test_creators(minimal_document, contributors):
     """Test creators serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['contributors'] == []
+    assert result["contributors"] == []
 
-    minimal_document.update({'contribution': contributors})
+    minimal_document.update({"contribution": contributors})
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['creators'] == [
-        'Creator 1', 'Creator 2 (123 : 2019 : Martigny)'
-    ]
+    assert result["creators"] == ["Creator 1", "Creator 2 (123 : 2019 : Martigny)"]
 
 
 def test_dates(app, minimal_document, embargo_date):
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['dates'] == []
+    assert result["dates"] == []
 
-    minimal_document.update({
-        'provisionActivity': [{
-            'type': 'bf:Agent',
-            'startDate': '2019'
-        }, {
-            'type': 'bf:Publication',
-        }, {
-            'type': 'bf:Publication',
-            'startDate': '2019'
-        }, {
-            'type': 'bf:Publication',
-            'startDate': '2020-01-01'
-        }]
-    })
-    result =SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['dates'] == ['2019', '2020-01-01']
-
-    minimal_document.pop('provisionActivity', None)
-
-    minimal_document.files['test.pdf'] = BytesIO(b'File content')
+    minimal_document.update(
+        {
+            "provisionActivity": [
+                {"type": "bf:Agent", "startDate": "2019"},
+                {
+                    "type": "bf:Publication",
+                },
+                {"type": "bf:Publication", "startDate": "2019"},
+                {"type": "bf:Publication", "startDate": "2020-01-01"},
+            ]
+        }
+    )
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['dates'] == []
+    assert result["dates"] == ["2019", "2020-01-01"]
 
-    minimal_document.files['test.pdf']['type'] = 'file'
+    minimal_document.pop("provisionActivity", None)
+
+    minimal_document.files["test.pdf"] = BytesIO(b"File content")
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['dates'] == []
+    assert result["dates"] == []
+
+    minimal_document.files["test.pdf"]["type"] = "file"
+    result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
+    assert result["dates"] == []
 
     iso_embargo_date = embargo_date.isoformat()
     with app.test_request_context() as req:
-        req.request.args = {'view': 'global'}
-        minimal_document.files['test.pdf']['type'] = 'file'
-        minimal_document.files['test.pdf']['access'] = 'coar:c_f1cf'
-        minimal_document.files['test.pdf']['restricted'] = 'full'
-        minimal_document.files['test.pdf']['embargo_date'] = iso_embargo_date
-        result = SonarDublinCoreXMLSerializer()\
-            .transform_record(minimal_document)
-        assert result['dates'] == [
-            f'info:eu-repo/date/embargoEnd/{iso_embargo_date}']
+        req.request.args = {"view": "global"}
+        minimal_document.files["test.pdf"]["type"] = "file"
+        minimal_document.files["test.pdf"]["access"] = "coar:c_f1cf"
+        minimal_document.files["test.pdf"]["restricted"] = "full"
+        minimal_document.files["test.pdf"]["embargo_date"] = iso_embargo_date
+        result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
+        assert result["dates"] == [f"info:eu-repo/date/embargoEnd/{iso_embargo_date}"]
 
 
 def test_descriptions(minimal_document):
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['descriptions'] == []
+    assert result["descriptions"] == []
 
-    minimal_document['abstracts'] = [{
-        'value': 'Description 1'
-    }, {
-        'value': 'Description 2'
-    }]
+    minimal_document["abstracts"] = [
+        {"value": "Description 1"},
+        {"value": "Description 2"},
+    ]
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['descriptions'] == ['Description 1', 'Description 2']
+    assert result["descriptions"] == ["Description 1", "Description 2"]
 
 
 def test_descriptions_attributes(minimal_document):
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['descriptions'] == []
+    assert result["descriptions"] == []
 
-    minimal_document['abstracts'] = [{
-        'language': 'fre',
-        'value': 'Description 1'
-    }, {
-        'language': 'ace',
-        'value': 'Description 2'
-    }]
+    minimal_document["abstracts"] = [
+        {"language": "fre", "value": "Description 1"},
+        {"language": "ace", "value": "Description 2"},
+    ]
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['descriptions'] == [
+    assert result["descriptions"] == [
         {
-            '@attrs': [{'prefix': 'xml', 'name': 'lang', 'value': 'fr'}],
-            'value': 'Description 1'
+            "@attrs": [{"prefix": "xml", "name": "lang", "value": "fr"}],
+            "value": "Description 1",
         },
         {
-            '@attrs': [{'prefix': 'xml', 'name': 'lang', 'value': 'ace'}],
-            'value': 'Description 2'
-        }
+            "@attrs": [{"prefix": "xml", "name": "lang", "value": "ace"}],
+            "value": "Description 2",
+        },
     ]
 
 
 def test_descriptions_xml_control_char(minimal_document):
-    minimal_document['abstracts'] = [{
-        'language': 'fre',
-        'value': 'sous\x02évalués'
-    }]
-    assert SonarDublinCoreXMLSerializer().serialize_object_xml(dict(_source=minimal_document))
+    minimal_document["abstracts"] = [{"language": "fre", "value": "sous\x02évalués"}]
+    assert SonarDublinCoreXMLSerializer().serialize_object_xml(
+        dict(_source=minimal_document)
+    )
 
 
 def test_formats(minimal_document):
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['formats'] == []
+    assert result["formats"] == []
 
-    minimal_document.files['test.pdf'] = BytesIO(b'File content')
+    minimal_document.files["test.pdf"] = BytesIO(b"File content")
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['formats'] == []
+    assert result["formats"] == []
 
-    minimal_document.files['test.pdf'] = BytesIO(b'File content')
-    minimal_document.files['test.pdf']['type'] = 'file'
+    minimal_document.files["test.pdf"] = BytesIO(b"File content")
+    minimal_document.files["test.pdf"]["type"] = "file"
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['formats'] == ['application/pdf']
+    assert result["formats"] == ["application/pdf"]
 
 
 def test_identifiers(minimal_document):
     """Test identifiers serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert set(result['identifiers']) == {
-        'https://n2t.net/ark:/99999/ffk31000',
-        'http://localhost/global/documents/1000'
+    assert set(result["identifiers"]) == {
+        "https://n2t.net/ark:/99999/ffk31000",
+        "http://localhost/global/documents/1000",
     }
 
 
@@ -248,298 +234,227 @@ def test_identifiers_with_files(document_with_file):
 def test_languages(minimal_document):
     """Test languages serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['languages'] == []
+    assert result["languages"] == []
 
-    minimal_document['language'] = [{'value': 'eng'}, {'value': 'fre'}]
+    minimal_document["language"] = [{"value": "eng"}, {"value": "fre"}]
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['languages'] == ['eng', 'fre']
+    assert result["languages"] == ["eng", "fre"]
 
 
 def test_publishers(minimal_document):
     """Test publishers serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['publishers'] == []
+    assert result["publishers"] == []
 
-    minimal_document['provisionActivity'] = [{
-        'type':
-        'bf:Manufacture',
-        'statement': [{
-            'type': 'bf:Agent',
-            'label': [{
-                'value': 'Publisher'
-            }]
-        }]
-    }, {
-        'type': 'bf:Publication'
-    }, {
-        'type':
-        'bf:Publication',
-        'statement': [{
-            'type': 'bf:Place',
-            'label': [{
-                'value': 'Place'
-            }]
-        }]
-    }, {
-        'type':
-        'bf:Publication',
-        'statement': [{
-            'type': 'bf:Agent',
-            'label': [{
-                'value': 'Publisher 1'
-            }]
-        }]
-    }]
+    minimal_document["provisionActivity"] = [
+        {
+            "type": "bf:Manufacture",
+            "statement": [{"type": "bf:Agent", "label": [{"value": "Publisher"}]}],
+        },
+        {"type": "bf:Publication"},
+        {
+            "type": "bf:Publication",
+            "statement": [{"type": "bf:Place", "label": [{"value": "Place"}]}],
+        },
+        {
+            "type": "bf:Publication",
+            "statement": [{"type": "bf:Agent", "label": [{"value": "Publisher 1"}]}],
+        },
+    ]
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['publishers'] == ['Publisher 1']
+    assert result["publishers"] == ["Publisher 1"]
 
 
 def test_relations(minimal_document):
     """Test relations serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['relations'] ==  [
-        'info:eu-repo/semantics/altIdentifier/ark/99999/ffk31000']
-
-    minimal_document['otherEdition'] = [{
-        'document': {
-            'electronicLocator': 'https://some.url.1'
-        }
-    }, {
-        'document': {
-            'electronicLocator': 'https://some.url.2'
-        }
-    }]
-
-    minimal_document['relatedTo'] = [{
-        'document': {
-            'electronicLocator': 'https://some.url.3'
-        }
-    }, {
-        'document': {
-            'electronicLocator': 'https://some.url.4'
-        }
-    }]
-
-    result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['relations'] == [
-        'https://some.url.1', 'https://some.url.2',
-        'https://some.url.3', 'https://some.url.4',
-        'info:eu-repo/semantics/altIdentifier/ark/99999/ffk31000'
+    assert result["relations"] == [
+        "info:eu-repo/semantics/altIdentifier/ark/99999/ffk31000"
     ]
-    minimal_document.pop('otherEdition', None)
-    minimal_document.pop('relatedTo', None)
 
-    minimal_document['identifiedBy'] = [{
-        'type': 'bf:Identifier',
-        'value': 'ark:/13030/tf5p30086k'
-    }, {
-        'type': 'bf:Local',
-        'value': '10.1186'
-    }, {
-        'type': 'bf:Doi',
-        'value': '09.1186'
-    }, {
-        'type': 'bf:Doi',
-        'value': '10.1186/2041-1480-3-9'
-    }, {
-        'type': 'bf:Isbn',
-        'value': '123456'
-    }, {
-        'type': 'bf:Issn',
-        'value': '987654321'
-    }, {
-        'type': 'bf:Local',
-        'source': 'some pmid',
-        'value': '1111111'
-    }, {
-        'type': 'bf:Local',
-        'source': 'PMID',
-        'value': '2222222'
-    }, {
-        'type': 'bf:Urn',
-        'value': '1.2.3.4'
-    }]
+    minimal_document["otherEdition"] = [
+        {"document": {"electronicLocator": "https://some.url.1"}},
+        {"document": {"electronicLocator": "https://some.url.2"}},
+    ]
+
+    minimal_document["relatedTo"] = [
+        {"document": {"electronicLocator": "https://some.url.3"}},
+        {"document": {"electronicLocator": "https://some.url.4"}},
+    ]
+
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['relations'] == [
-        'info:eu-repo/semantics/altIdentifier/ark/13030/tf5p30086k',
-        'info:eu-repo/semantics/altIdentifier/doi/10.1186/2041-1480-3-9',
-        'info:eu-repo/semantics/altIdentifier/isbn/123456',
-        'info:eu-repo/semantics/altIdentifier/issn/987654321',
-        'info:eu-repo/semantics/altIdentifier/pmid/1111111',
-        'info:eu-repo/semantics/altIdentifier/pmid/2222222',
-        'info:eu-repo/semantics/altIdentifier/urn/1.2.3.4'
+    assert result["relations"] == [
+        "https://some.url.1",
+        "https://some.url.2",
+        "https://some.url.3",
+        "https://some.url.4",
+        "info:eu-repo/semantics/altIdentifier/ark/99999/ffk31000",
+    ]
+    minimal_document.pop("otherEdition", None)
+    minimal_document.pop("relatedTo", None)
+
+    minimal_document["identifiedBy"] = [
+        {"type": "bf:Identifier", "value": "ark:/13030/tf5p30086k"},
+        {"type": "bf:Local", "value": "10.1186"},
+        {"type": "bf:Doi", "value": "09.1186"},
+        {"type": "bf:Doi", "value": "10.1186/2041-1480-3-9"},
+        {"type": "bf:Isbn", "value": "123456"},
+        {"type": "bf:Issn", "value": "987654321"},
+        {"type": "bf:Local", "source": "some pmid", "value": "1111111"},
+        {"type": "bf:Local", "source": "PMID", "value": "2222222"},
+        {"type": "bf:Urn", "value": "1.2.3.4"},
+    ]
+    result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
+    assert result["relations"] == [
+        "info:eu-repo/semantics/altIdentifier/ark/13030/tf5p30086k",
+        "info:eu-repo/semantics/altIdentifier/doi/10.1186/2041-1480-3-9",
+        "info:eu-repo/semantics/altIdentifier/isbn/123456",
+        "info:eu-repo/semantics/altIdentifier/issn/987654321",
+        "info:eu-repo/semantics/altIdentifier/pmid/1111111",
+        "info:eu-repo/semantics/altIdentifier/pmid/2222222",
+        "info:eu-repo/semantics/altIdentifier/urn/1.2.3.4",
     ]
 
 
 def test_rights(app, minimal_document, embargo_date):
     """Test rights serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['rights'] == []
+    assert result["rights"] == []
 
-    minimal_document['usageAndAccessPolicy'] = {'license': 'CC BY-NC-SA'}
+    minimal_document["usageAndAccessPolicy"] = {"license": "CC BY-NC-SA"}
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['rights'] == ['CC BY-NC-SA']
+    assert result["rights"] == ["CC BY-NC-SA"]
 
-    minimal_document['usageAndAccessPolicy'] = {
-        'license': 'License undefined',
-        'label': 'Custom license'
+    minimal_document["usageAndAccessPolicy"] = {
+        "license": "License undefined",
+        "label": "Custom license",
     }
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['rights'] == ['License undefined, Custom license']
+    assert result["rights"] == ["License undefined, Custom license"]
 
-    minimal_document.pop('usageAndAccessPolicy', None)
+    minimal_document.pop("usageAndAccessPolicy", None)
     with app.test_request_context() as req:
-        req.request.args = {'view': 'global'}
+        req.request.args = {"view": "global"}
 
-        minimal_document.files['test.pdf'] = BytesIO(b'File content')
-        minimal_document.files['test.pdf']['type'] = 'file'
-        result = SonarDublinCoreXMLSerializer()\
-            .transform_record(minimal_document)
-        assert result['rights'] == ['info:eu-repo/semantics/openAccess']
+        minimal_document.files["test.pdf"] = BytesIO(b"File content")
+        minimal_document.files["test.pdf"]["type"] = "file"
+        result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
+        assert result["rights"] == ["info:eu-repo/semantics/openAccess"]
 
-        minimal_document.files['test.pdf']['access'] = 'coar:c_16ec'
-        minimal_document.files['test.pdf']['restricted'] = 'full'
-        result = SonarDublinCoreXMLSerializer()\
-            .transform_record(minimal_document)
-        assert result['rights'] == ['info:eu-repo/semantics/restrictedAccess']
+        minimal_document.files["test.pdf"]["access"] = "coar:c_16ec"
+        minimal_document.files["test.pdf"]["restricted"] = "full"
+        result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
+        assert result["rights"] == ["info:eu-repo/semantics/restrictedAccess"]
 
-        minimal_document.files['test.pdf']['access'] = 'coar:c_f1cf'
-        minimal_document.files['test.pdf'][
-            'embargo_date'] = embargo_date.isoformat()
-        result = SonarDublinCoreXMLSerializer()\
-            .transform_record(minimal_document)
-        assert result['rights'] == ['info:eu-repo/semantics/embargoedAccess']
+        minimal_document.files["test.pdf"]["access"] = "coar:c_f1cf"
+        minimal_document.files["test.pdf"]["embargo_date"] = embargo_date.isoformat()
+        result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
+        assert result["rights"] == ["info:eu-repo/semantics/embargoedAccess"]
 
 
 def test_sources(minimal_document):
     """Test sources serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['sources'] == []
+    assert result["sources"] == []
 
-    minimal_document['partOf'] = [{
-        'document': {
-            'title': 'Document 1'
+    minimal_document["partOf"] = [
+        {"document": {"title": "Document 1"}, "numberingYear": "2020"},
+        {
+            "document": {"title": "Document 2"},
+            "numberingYear": "2020",
+            "numberingVolume": "6",
+            "numberingPages": "135-139",
+            "numberingIssue": "12",
         },
-        'numberingYear': '2020'
-    }, {
-        'document': {
-            'title': 'Document 2'
+        {
+            "document": {"title": "Document 3"},
+            "numberingYear": "2019",
+            "numberingPages": "135-139",
+            "numberingIssue": "12",
         },
-        'numberingYear': '2020',
-        'numberingVolume': '6',
-        'numberingPages': '135-139',
-        'numberingIssue': '12'
-    }, {
-        'document': {
-            'title': 'Document 3'
-        },
-        'numberingYear': '2019',
-        'numberingPages': '135-139',
-        'numberingIssue': '12'
-    }]
+    ]
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['sources'] == [
-        'Document 1. - 2020',
-        'Document 2. - 2020, vol. 6, no. 12, p. 135-139',
-        'Document 3. - 2019, no. 12, p. 135-139',
+    assert result["sources"] == [
+        "Document 1. - 2020",
+        "Document 2. - 2020, vol. 6, no. 12, p. 135-139",
+        "Document 3. - 2019, no. 12, p. 135-139",
     ]
 
 
 def test_subjects(minimal_document):
     """Test subjects serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['subjects'] == []
+    assert result["subjects"] == []
 
-    minimal_document['subjects'] = [{
-        'label': {
-            'language': 'eng',
-            'value': ['Subject 1', 'Subject 2']
-        }
-    }, {
-        'label': {
-            'language': 'fre',
-            'value': ['Sujet 1', 'Sujet 2']
-        }
-    }]
+    minimal_document["subjects"] = [
+        {"label": {"language": "eng", "value": ["Subject 1", "Subject 2"]}},
+        {"label": {"language": "fre", "value": ["Sujet 1", "Sujet 2"]}},
+    ]
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['subjects'] == [
+    assert result["subjects"] == [
         {
-            '@attrs': [{'prefix': 'xml', 'name': 'lang', 'value': 'en'}],
-            'value': 'Subject 1'
+            "@attrs": [{"prefix": "xml", "name": "lang", "value": "en"}],
+            "value": "Subject 1",
         },
         {
-            '@attrs': [{'prefix': 'xml', 'name': 'lang', 'value': 'en'}],
-            'value': 'Subject 2'
+            "@attrs": [{"prefix": "xml", "name": "lang", "value": "en"}],
+            "value": "Subject 2",
         },
         {
-            '@attrs': [{'prefix': 'xml', 'name': 'lang', 'value': 'fr'}],
-            'value': 'Sujet 1'
+            "@attrs": [{"prefix": "xml", "name": "lang", "value": "fr"}],
+            "value": "Sujet 1",
         },
         {
-            '@attrs': [{'prefix': 'xml', 'name': 'lang', 'value': 'fr'}],
-            'value': 'Sujet 2'
-        }
+            "@attrs": [{"prefix": "xml", "name": "lang", "value": "fr"}],
+            "value": "Sujet 2",
+        },
     ]
 
-    minimal_document.pop('subjects', None)
-    minimal_document['classification'] = [{
-        'type': 'bf:ClassificationUdc',
-        'classificationPortion': '54'
-    }, {
-        'type': 'bf:ClassificationDdc',
-        'classificationPortion': 'Portion'
-    }]
+    minimal_document.pop("subjects", None)
+    minimal_document["classification"] = [
+        {"type": "bf:ClassificationUdc", "classificationPortion": "54"},
+        {"type": "bf:ClassificationDdc", "classificationPortion": "Portion"},
+    ]
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['subjects'] == [
-        'info:eu-repo/classification/udc/54',
-        'info:eu-repo/classification/ddc/Portion'
+    assert result["subjects"] == [
+        "info:eu-repo/classification/udc/54",
+        "info:eu-repo/classification/ddc/Portion",
     ]
 
 
 def test_titles(minimal_document):
     """Test titles serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['titles'] == [
+    assert result["titles"] == [
         {
-            '@attrs': [{'prefix': 'xml', 'name': 'lang', 'value': 'en'}],
-            'value': 'Title of the document'
+            "@attrs": [{"prefix": "xml", "name": "lang", "value": "en"}],
+            "value": "Title of the document",
         }
     ]
 
-    minimal_document['title'] = [{
-        'mainTitle': [{
-            'language': 'eng',
-            'value': 'Title 1'
-        }]
-    }, {
-        'mainTitle': [{
-            'language': 'eng',
-            'value': 'Title 2'
-        }]
-    }]
+    minimal_document["title"] = [
+        {"mainTitle": [{"language": "eng", "value": "Title 1"}]},
+        {"mainTitle": [{"language": "eng", "value": "Title 2"}]},
+    ]
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['titles'] == [
+    assert result["titles"] == [
         {
-            '@attrs': [{'prefix': 'xml', 'name': 'lang', 'value': 'en'}],
-            'value': 'Title 1'
+            "@attrs": [{"prefix": "xml", "name": "lang", "value": "en"}],
+            "value": "Title 1",
         }
     ]
 
-    minimal_document['title'] = [{
-        'mainTitle': [{
-            'language': 'eng',
-            'value': 'Title 1'
-        }],
-        'subtitle': [{
-            'language': 'eng',
-            'value': 'Subtitle 1'
-        }]
-    }]
-    result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['titles'] == [
+    minimal_document["title"] = [
         {
-            '@attrs': [{'prefix': 'xml', 'name': 'lang', 'value': 'en'}],
-            'value': 'Title 1 : Subtitle 1'
+            "mainTitle": [{"language": "eng", "value": "Title 1"}],
+            "subtitle": [{"language": "eng", "value": "Subtitle 1"}],
+        }
+    ]
+    result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
+    assert result["titles"] == [
+        {
+            "@attrs": [{"prefix": "xml", "name": "lang", "value": "en"}],
+            "value": "Title 1 : Subtitle 1",
         }
     ]
 
@@ -547,12 +462,12 @@ def test_titles(minimal_document):
 def test_types(minimal_document):
     """Test types serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['types'] == []
+    assert result["types"] == []
 
-    minimal_document['documentType'] = 'advanced_studies_thesis'
+    minimal_document["documentType"] = "advanced_studies_thesis"
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['types'] == ['advanced_studies_thesis']
+    assert result["types"] == ["advanced_studies_thesis"]
 
-    minimal_document['documentType'] = 'coar:c_2f33'
+    minimal_document["documentType"] = "coar:c_2f33"
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result['types'] == ['http://purl.org/coar/resource_type/c_2f33']
+    assert result["types"] == ["http://purl.org/coar/resource_type/c_2f33"]

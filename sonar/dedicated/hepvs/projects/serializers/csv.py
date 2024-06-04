@@ -17,15 +17,14 @@
 
 """CSV serializer for HEP Valais projects."""
 
-from sonar.resources.projects.serializers.csv import \
-    CSVSerializer as BaseCSVSerializer
+from sonar.resources.projects.serializers.csv import CSVSerializer as BaseCSVSerializer
 
 
 class CSVSerializer(BaseCSVSerializer):
     """CSV serializer for HEP Valais projects."""
 
     chunk_size = 1000
-    list_separator = '|'
+    list_separator = "|"
 
     def format_row(self, data):
         """Format the data for a single row.
@@ -39,8 +38,8 @@ class CSVSerializer(BaseCSVSerializer):
             :param external_partner: External partner dictionary.
             :returns: String representation of the partner.
             """
-            text = external_partner['searcherName']
-            if external_partner.get('institution'):
+            text = external_partner["searcherName"]
+            if external_partner.get("institution"):
                 text = f'{text} ({external_partner["institution"]})'
             return text
 
@@ -50,50 +49,55 @@ class CSVSerializer(BaseCSVSerializer):
             :param actor: Actor dictionary.
             :returns: String representation of the actor.
             """
-            text = actor['choice'] if actor['choice'] != 'Other' else actor[
-                'other']
-            if actor.get('count'):
+            text = actor["choice"] if actor["choice"] != "Other" else actor["other"]
+            if actor.get("count"):
                 text = f'{text} ({actor["count"]})'
             return text
 
-        for key in ['innerSearcher', 'keywords', 'realizationFramework']:
+        for key in ["innerSearcher", "keywords", "realizationFramework"]:
             if data.get(key):
                 data[key] = self.list_separator.join(data[key])
 
         # External partners
-        if data.get('externalPartners'):
-            if not data['externalPartners']['choice']:
-                data.pop('externalPartners')
+        if data.get("externalPartners"):
+            if not data["externalPartners"]["choice"]:
+                data.pop("externalPartners")
             else:
-                data['externalPartners'] = self.list_separator.join(
+                data["externalPartners"] = self.list_separator.join(
                     list(
-                        map(transform_external_partners,
-                            data['externalPartners']['list'])))
+                        map(
+                            transform_external_partners,
+                            data["externalPartners"]["list"],
+                        )
+                    )
+                )
 
         # Actors involved
-        if data.get('actorsInvolved'):
-            data['actorsInvolved'] = self.list_separator.join(
-                list(map(transform_actors_involved, data['actorsInvolved'])))
+        if data.get("actorsInvolved"):
+            data["actorsInvolved"] = self.list_separator.join(
+                list(map(transform_actors_involved, data["actorsInvolved"]))
+            )
 
         # Educational document
-        if data.get('educationalDocument'):
-            if not data['educationalDocument']['choice']:
-                data.pop('educationalDocument')
+        if data.get("educationalDocument"):
+            if not data["educationalDocument"]["choice"]:
+                data.pop("educationalDocument")
             else:
-                data['educationalDocument'] = data['educationalDocument'][
-                    'briefDescription']
+                data["educationalDocument"] = data["educationalDocument"][
+                    "briefDescription"
+                ]
 
         # Funder
-        if not data.get('funding', {}).get('choice'):
-            data.pop('funding', None)
+        if not data.get("funding", {}).get("choice"):
+            data.pop("funding", None)
 
         # Related to mandate
-        if not data.get('relatedToMandate', {}).get('choice'):
-            data.pop('relatedToMandate', None)
+        if not data.get("relatedToMandate", {}).get("choice"):
+            data.pop("relatedToMandate", None)
 
         # Promote innovation
-        if data.get('promoteInnovation'):
-            if not data['promoteInnovation']['choice']:
-                data.pop('promoteInnovation')
+        if data.get("promoteInnovation"):
+            if not data["promoteInnovation"]["choice"]:
+                data.pop("promoteInnovation")
             else:
-                data['promoteInnovation'] = data['promoteInnovation']['reason']
+                data["promoteInnovation"] = data["promoteInnovation"]["reason"]

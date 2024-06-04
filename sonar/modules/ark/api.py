@@ -21,14 +21,17 @@
 import re
 
 from flask import current_app
-from invenio_pidstore.models import PersistentIdentifier, \
-    PIDDoesNotExistError, PIDStatus
+from invenio_pidstore.models import (
+    PersistentIdentifier,
+    PIDDoesNotExistError,
+    PIDStatus,
+)
 
 
 class Ark:
     """ARK Management API."""
 
-    def __new__(cls, naan='99999'):
+    def __new__(cls, naan="99999"):
         """Constructor.
 
         :returns: None if the configuration is not complete.
@@ -38,7 +41,9 @@ class Ark:
         if naan and cls._scheme and cls._shoulder and cls._resolver:
             cls._naan = naan
             cls._url_resolve = cls._resolver
-            cls._regex = re.compile(rf'{cls._scheme}/{cls._naan}/{cls._shoulder}(?P<pid>\w+)')
+            cls._regex = re.compile(
+                rf"{cls._scheme}/{cls._naan}/{cls._shoulder}(?P<pid>\w+)"
+            )
             return super(Ark, cls).__new__(cls)
 
     def config(self):
@@ -50,22 +55,25 @@ config:
     shoulder: {self._shoulder}
     naan: {self._naan}
 """
+
     @classmethod
     def init_config(cls):
         """Read the configuation from the current app."""
         config = current_app.config
         for conf_key in config.keys():
-            if conf_key.startswith('SONAR_APP_ARK_'):
-                setattr(cls,
-                        conf_key.replace('SONAR_APP_ARK', '').lower(),
-                        config.get(conf_key))
+            if conf_key.startswith("SONAR_APP_ARK_"):
+                setattr(
+                    cls,
+                    conf_key.replace("SONAR_APP_ARK", "").lower(),
+                    config.get(conf_key),
+                )
 
     def ark_from_id(self, pid):
         """Translate an ARK from an id.
 
         :returns: an ARK identifier.
         """
-        return f'{self._scheme}/{self._naan}/{self._shoulder}{pid}'
+        return f"{self._scheme}/{self._naan}/{self._shoulder}{pid}"
 
     def resolver_url(self, pid):
         """Translate an ARK from an id.
@@ -74,7 +82,7 @@ config:
         :returns: The URL to resolve the given identifier.
         """
         ark_id = self.ark_from_id(pid)
-        return f'{self._url_resolve}/{ark_id}'
+        return f"{self._url_resolve}/{ark_id}"
 
     def resolve(self, ark_id):
         """Resolve an ARK and return the target.
@@ -83,7 +91,7 @@ config:
         :returns: The related document pid.
         """
         if match := self._regex.match(ark_id):
-            return match.groupdict().get('pid')
+            return match.groupdict().get("pid")
 
     def get(self, _id):
         """Get the persistent identifier.
@@ -95,7 +103,7 @@ config:
         if not self._regex.match(_id):
             _id = self.ark_from_id(_id)
         try:
-            return PersistentIdentifier.get('ark', _id)
+            return PersistentIdentifier.get("ark", _id)
         except PIDDoesNotExistError:
             return None
 
@@ -109,9 +117,10 @@ config:
         """
         ark_id = self.ark_from_id(pid)
         pid = PersistentIdentifier.create(
-                'ark',
-                ark_id,
-                object_type='rec',
-                object_uuid=record_uuid,
-                status=PIDStatus.REGISTERED)
+            "ark",
+            ark_id,
+            object_type="rec",
+            object_uuid=record_uuid,
+            status=PIDStatus.REGISTERED,
+        )
         return pid

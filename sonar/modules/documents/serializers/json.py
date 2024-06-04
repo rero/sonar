@@ -33,30 +33,29 @@ class JSONSerializer(BasedJSONSerializer):
 
     def post_process_serialize_search(self, results, pid_fetcher):
         """Post process the search results."""
-        view = request.args.get('view')
+        view = request.args.get("view")
 
-        if results['aggregations'].get('year'):
-            results['aggregations']['year']['type'] = 'range'
-            results['aggregations']['year']['config'] = {
-                'min': 1950,
-                'max': int(datetime.now().year),
-                'step': 1
+        if results["aggregations"].get("year"):
+            results["aggregations"]["year"]["type"] = "range"
+            results["aggregations"]["year"]["config"] = {
+                "min": 1950,
+                "max": int(datetime.now().year),
+                "step": 1,
             }
 
         # Add organisation name
-        for org_term in results.get('aggregations',
-                                    {}).get('organisation',
-                                            {}).get('buckets', []):
-            if organisation := OrganisationRecord.get_record_by_pid(
-                org_term['key']
-            ):
-                org_term['name'] = organisation['name']
+        for org_term in (
+            results.get("aggregations", {}).get("organisation", {}).get("buckets", [])
+        ):
+            if organisation := OrganisationRecord.get_record_by_pid(org_term["key"]):
+                org_term["name"] = organisation["name"]
 
         # Add collection name
-        for org_term in results.get('aggregations',
-                                    {}).get('collection',
-                                            {}).get('buckets', []):
-            if collection := CollectionRecord.get_record_by_pid(org_term['key']):
-                org_term['name'] = get_language_value(collection['name'])
-        return super(JSONSerializer,
-                     self).post_process_serialize_search(results, pid_fetcher)
+        for org_term in (
+            results.get("aggregations", {}).get("collection", {}).get("buckets", [])
+        ):
+            if collection := CollectionRecord.get_record_by_pid(org_term["key"]):
+                org_term["name"] = get_language_value(collection["name"])
+        return super(JSONSerializer, self).post_process_serialize_search(
+            results, pid_fetcher
+        )

@@ -70,10 +70,10 @@ class RecordPermission(BaseRecordPermission):
         if not current_organisation:
             return False
 
-        record = Record.get_record_by_pid(record['pid'])
+        record = Record.get_record_by_pid(record["pid"])
         record = record.replace_refs()
 
-        return current_organisation['pid'] == record['organisation']['pid']
+        return current_organisation["pid"] == record["organisation"]["pid"]
 
     @classmethod
     def update(cls, user, record):
@@ -98,8 +98,11 @@ class RecordPermission(BaseRecordPermission):
         :return: True if action can be done
         :rtype: bool
         """
-        results = DocumentSearch().filter(
-            'term', subdivisions__pid=record['pid']).source(includes=['pid'])
+        results = (
+            DocumentSearch()
+            .filter("term", subdivisions__pid=record["pid"])
+            .source(includes=["pid"])
+        )
 
         # Cannot remove subdivision associated to a record
         if results.count():

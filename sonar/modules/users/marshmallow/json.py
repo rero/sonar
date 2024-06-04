@@ -22,8 +22,11 @@ from __future__ import absolute_import, print_function
 from functools import partial
 
 from invenio_records_rest.schemas import StrictKeysMixin
-from invenio_records_rest.schemas.fields import GenFunction, \
-    PersistentIdentifier, SanitizedUnicode
+from invenio_records_rest.schemas.fields import (
+    GenFunction,
+    PersistentIdentifier,
+    SanitizedUnicode,
+)
 from marshmallow import fields, pre_dump, pre_load
 
 from sonar.modules.serializers import schema_from_context
@@ -51,10 +54,12 @@ class UserMetadataSchemaV1(StrictKeysMixin):
     subdivision = fields.Dict()
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
-    schema = GenFunction(load_only=True,
-                         attribute="$schema",
-                         data_key="$schema",
-                         deserialize=schema_from_user)
+    schema = GenFunction(
+        load_only=True,
+        attribute="$schema",
+        data_key="$schema",
+        deserialize=schema_from_user,
+    )
     permissions = fields.Dict(dump_only=True)
 
     @pre_load
@@ -65,12 +70,12 @@ class UserMetadataSchemaV1(StrictKeysMixin):
         :returns: Modified dict of user data.
         """
         # Organisation already attached to user, we do nothing.
-        if data.get('organisation'):
+        if data.get("organisation"):
             return data
 
         # Store current user organisation in new user.
-        if current_user_record.get('organisation'):
-            data['organisation'] = current_user_record['organisation']
+        if current_user_record.get("organisation"):
+            data["organisation"] = current_user_record["organisation"]
 
         return data
 
@@ -81,7 +86,7 @@ class UserMetadataSchemaV1(StrictKeysMixin):
         :param data: Dict of record data.
         :returns: Modified data.
         """
-        data.pop('permissions', None)
+        data.pop("permissions", None)
 
         return data
 
@@ -92,10 +97,10 @@ class UserMetadataSchemaV1(StrictKeysMixin):
         :param data: Dict of user data.
         :returns: Modified dict of user data.
         """
-        item['permissions'] = {
-            'read': UserPermission.read(current_user_record, item),
-            'update': UserPermission.update(current_user_record, item),
-            'delete': UserPermission.delete(current_user_record, item)
+        item["permissions"] = {
+            "read": UserPermission.read(current_user_record, item),
+            "update": UserPermission.update(current_user_record, item),
+            "delete": UserPermission.delete(current_user_record, item),
         }
 
         return item

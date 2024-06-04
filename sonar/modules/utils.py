@@ -41,24 +41,26 @@ def create_thumbnail_from_file(file_path, mimetype):
     :param mimetype: Mime type of the file.
     """
     # Thumbnail can only be done from images or PDFs.
-    if not mimetype.startswith('image/') and mimetype != 'application/pdf':
+    if not mimetype.startswith("image/") and mimetype != "application/pdf":
         raise Exception(
-            'Cannot create thumbnail from file {file} with mimetype'
+            "Cannot create thumbnail from file {file} with mimetype"
             ' "{mimetype}", only images and PDFs are allowed'.format(
-                file=file_path, mimetype=mimetype))
+                file=file_path, mimetype=mimetype
+            )
+        )
 
     # For PDF, we take only the first page
-    if mimetype == 'application/pdf':
+    if mimetype == "application/pdf":
         # Append [0] force to take only the first page
-        file_path = file_path + '[0]'
+        file_path = file_path + "[0]"
 
     # Create the image thumbnail
     with Image(filename=file_path) as img:
-        img.format = 'jpg'
-        img.background_color = Color('white')
-        img.alpha_channel = 'remove'
-        img.border('#dee2e6', 3, 3)
-        img.transform(resize='200x')
+        img.format = "jpg"
+        img.background_color = Color("white")
+        img.alpha_channel = "remove"
+        img.border("#dee2e6", 3, 3)
+        img.transform(resize="200x")
 
         return img.make_blob()
 
@@ -72,40 +74,41 @@ def change_filename_extension(filename, extension):
     basename, ext = os.path.splitext(filename)
 
     if not basename:
-        raise Exception(f'{filename} is not a valid filename')
+        raise Exception(f"{filename} is not a valid filename")
 
     if not ext:
-        return f'{basename}.{extension}'
+        return f"{basename}.{extension}"
     # remove dot
-    ext = ext.replace('.', '')
-    return f'{basename}-{ext}.{extension}'
+    ext = ext.replace(".", "")
+    return f"{basename}-{ext}.{extension}"
 
 
-def send_email(recipients, subject, template, ctx=None, html=True, lang='en'):
+def send_email(recipients, subject, template, ctx=None, html=True, lang="en"):
     """Send email."""
-    email_type = 'html' if html else 'txt'
+    email_type = "html" if html else "txt"
 
-    template = '{template}/{lang}.{type}'.format(template=template,
-                                                 lang=lang,
-                                                 type=email_type)
+    template = "{template}/{lang}.{type}".format(
+        template=template, lang=lang, type=email_type
+    )
     msg = TemplatedMessage(
         template_body=template if not html else None,
         template_html=template if html else None,
-        sender=current_app.config.get('SECURITY_EMAIL_SENDER'),
+        sender=current_app.config.get("SECURITY_EMAIL_SENDER"),
         recipients=recipients,
         subject=subject,
-        ctx=ctx)
-    current_app.extensions['mail'].send(msg)
+        ctx=ctx,
+    )
+    current_app.extensions["mail"].send(msg)
 
 
 def get_switch_aai_providers():
     """Return the list of available SWITCHaai providers."""
     providers = []
     for provider, data in current_app.config.get(
-            'SHIBBOLETH_IDENTITY_PROVIDERS').items():
+        "SHIBBOLETH_IDENTITY_PROVIDERS"
+    ).items():
         # Don't take providers flagged as dev in production mode
-        if current_app.config.get('ENV') != 'development' and data.get(
-                'dev', False):
+        if current_app.config.get("ENV") != "development" and data.get("dev", False):
             continue
 
         providers.append(provider)
@@ -113,9 +116,7 @@ def get_switch_aai_providers():
     return providers
 
 
-def remove_trailing_punctuation(data,
-                                punctuation=',',
-                                spaced_punctuation=':;/-'):
+def remove_trailing_punctuation(data, punctuation=",", spaced_punctuation=":;/-"):
     """Remove trailing punctuation from data.
 
     The punctuation parameter list the
@@ -126,11 +127,11 @@ def remove_trailing_punctuation(data,
     punctuation characters needing one or more preceding space(s)
     in order to be removed.
     """
-    punctuation = punctuation.replace('.', r'\.').replace('-', r'\-')
-    spaced_punctuation = \
-        spaced_punctuation.replace('.', r'\.').replace('-', r'\-')
-    return re.sub(r'([{0}]|\s+[{1}])$'.format(punctuation, spaced_punctuation),
-                  '', data.rstrip()).rstrip()
+    punctuation = punctuation.replace(".", r"\.").replace("-", r"\-")
+    spaced_punctuation = spaced_punctuation.replace(".", r"\.").replace("-", r"\-")
+    return re.sub(
+        r"([{0}]|\s+[{1}])$".format(punctuation, spaced_punctuation), "", data.rstrip()
+    ).rstrip()
 
 
 def get_current_language():
@@ -143,10 +144,10 @@ def get_view_code():
 
     :returns: View code as string.
     """
-    if g.get('organisation'):
-        return g.organisation['code']
+    if g.get("organisation"):
+        return g.organisation["code"]
 
-    return current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION')
+    return current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION")
 
 
 def format_date(date):
@@ -157,9 +158,8 @@ def format_date(date):
     :returns: The formatted date.
     """
     # Complete date (eg. 2020-12-31)
-    if re.match(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}$', date):
-        return datetime.datetime.strptime(date,
-                                          '%Y-%m-%d').strftime('%d.%m.%Y')
+    if re.match(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$", date):
+        return datetime.datetime.strptime(date, "%Y-%m-%d").strftime("%d.%m.%Y")
 
     return date
 
@@ -169,14 +169,13 @@ def get_specific_theme():
 
     :returns: String representing the webpack entry. Default to `global`.
     """
-    if g.get('organisation', {}).get('isDedicated'):
-        theme_name = '{organisation}-theme'.format(
-            organisation=g.organisation['pid'])
+    if g.get("organisation", {}).get("isDedicated"):
+        theme_name = "{organisation}-theme".format(organisation=g.organisation["pid"])
 
         if theme.entry.get(theme_name):
-            return '{theme}.css'.format(theme=theme_name)
+            return "{theme}.css".format(theme=theme_name)
 
-    return 'global-theme.css'
+    return "global-theme.css"
 
 
 def is_ip_in_list(ip_address, addresses_list):
@@ -187,17 +186,17 @@ def is_ip_in_list(ip_address, addresses_list):
     :returns: True if given IP is in list.
     """
     if not isinstance(addresses_list, list):
-        raise Exception('Given parameter is not a list.')
+        raise Exception("Given parameter is not a list.")
 
     ip_set = IPSet()
 
     for ip_range in addresses_list:
         try:
             # It's a glob
-            if '*' in ip_range or '-' in ip_range:
+            if "*" in ip_range or "-" in ip_range:
                 ip_set.add(IPGlob(ip_range))
             # It's a network
-            elif '/' in ip_range:
+            elif "/" in ip_range:
                 ip_set.add(IPNetwork(ip_range))
             # Simple IP
             else:
@@ -218,12 +217,12 @@ def chunks(records, size):
     :param int size: Size of chunks.
     """
     for i in range(0, len(records), size):
-        yield records[i:i + size]
+        yield records[i : i + size]
 
 
 def remove_html(content):
     """Remove html tags from content."""
-    return re.sub(re.compile('<.*?>'), '', content)
+    return re.sub(re.compile("<.*?>"), "", content)
 
 
 def has_custom_resource(resource_type):
@@ -236,17 +235,19 @@ def has_custom_resource(resource_type):
     # tests.
     from sonar.modules.organisations.api import current_organisation
 
-    if not current_organisation or not current_organisation.get('code'):
+    if not current_organisation or not current_organisation.get("code"):
         return False
 
-    return current_app.config.get('SONAR_APP_ORGANISATION_CONFIG').get(
-        current_organisation['code'], {}).get(resource_type)
+    return (
+        current_app.config.get("SONAR_APP_ORGANISATION_CONFIG")
+        .get(current_organisation["code"], {})
+        .get(resource_type)
+    )
 
 
-def get_language_value(values,
-                       locale=None,
-                       value_field='value',
-                       language_field='language'):
+def get_language_value(
+    values, locale=None, value_field="value", language_field="language"
+):
     """Return the value corresponding to the locale.
 
     :params values: List of values with the language.
@@ -277,7 +278,7 @@ def get_bibliographic_code_from_language(language_code):
     :param language_code: Bibliographic language.
     :returns: The bibliographic code corresponding to language.
     """
-    for key, lang in current_app.config.get('SONAR_APP_LANGUAGES_MAP').items():
+    for key, lang in current_app.config.get("SONAR_APP_LANGUAGES_MAP").items():
         if lang == language_code:
             return key
 
@@ -290,10 +291,10 @@ def get_current_ip():
     :returns: Current IP address.
     :rtype: str
     """
-    ip_address = request.environ.get('X-Forwarded-For', request.remote_addr)
+    ip_address = request.environ.get("X-Forwarded-For", request.remote_addr)
     # Take only the first IP, as X-Forwarded for gives the real IP + the
     # proxy IP.
-    return ip_address.split(', ')[0]
+    return ip_address.split(", ")[0]
 
 
 def get_ips_list(ranges):
@@ -309,10 +310,10 @@ def get_ips_list(ranges):
     for ip_range in ranges:
         try:
             # It's a glob
-            if '*' in ip_range or '-' in ip_range:
+            if "*" in ip_range or "-" in ip_range:
                 ip_set.add(IPGlob(ip_range))
             # It's a network
-            elif '/' in ip_range:
+            elif "/" in ip_range:
                 ip_set.add(IPNetwork(ip_range))
             # Simple IP
             else:
@@ -352,11 +353,10 @@ def file_download_ui(pid, record, _record_file_factory=None, **kwargs):
     from invenio_records_files.utils import record_file_factory
 
     from .permissions import files_permission_factory
+
     _record_file_factory = _record_file_factory or record_file_factory
     # Extract file from record.
-    fileobj = _record_file_factory(
-        pid, record, kwargs.get('filename')
-    )
+    fileobj = _record_file_factory(pid, record, kwargs.get("filename"))
 
     if not fileobj:
         abort(404)
@@ -365,33 +365,30 @@ def file_download_ui(pid, record, _record_file_factory=None, **kwargs):
     # Check permissions
     # Invenio do not pass pid and record to the files permission factory:
     # we need to overwrite
-    check_permission(files_permission_factory(
-        obj,
-        'object-read',
-        pid,
-        record
-    ))
+    check_permission(files_permission_factory(obj, "object-read", pid, record))
     if not obj.is_head:
         check_permission(
-            files_permission_factory(obj, 'object-read-version', pid, record),
-            hidden=False
+            files_permission_factory(obj, "object-read-version", pid, record),
+            hidden=False,
         )
 
     # Send file.
     return ObjectResource.send_object(
-        obj.bucket, obj,
-        expected_chksum=fileobj.get('checksum'),
+        obj.bucket,
+        obj,
+        expected_chksum=fileobj.get("checksum"),
         logger_data={
-            'bucket_id': obj.bucket_id,
-            'pid_type': pid.pid_type,
-            'pid_value': pid.pid_value,
+            "bucket_id": obj.bucket_id,
+            "pid_type": pid.pid_type,
+            "pid_value": pid.pid_value,
         },
-        as_attachment=('download' in request.args)
+        as_attachment=("download" in request.args),
     )
 
 
-def requests_retry_session(retries=5, backoff_factor=0.5,
-                           status_forcelist=(500, 502, 504), session=None):
+def requests_retry_session(
+    retries=5, backoff_factor=0.5, status_forcelist=(500, 502, 504), session=None
+):
     """Request retry session.
 
     :params retries: The total number of retry attempts to make.
@@ -410,6 +407,6 @@ def requests_retry_session(retries=5, backoff_factor=0.5,
         status_forcelist=status_forcelist,
     )
     adapter = HTTPAdapter(max_retries=retry)
-    session.mount('http://', adapter)
-    session.mount('https://', adapter)
+    session.mount("http://", adapter)
+    session.mount("https://", adapter)
     return session

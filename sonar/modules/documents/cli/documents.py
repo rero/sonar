@@ -27,5 +27,6 @@ from sonar.modules.documents.cli.urn import urn
 def documents():
     """Commands for documents."""
 
+
 documents.add_command(rerodoc)
 documents.add_command(urn)

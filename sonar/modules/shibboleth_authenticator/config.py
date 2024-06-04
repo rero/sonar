@@ -28,10 +28,10 @@
     )
 """
 
-SHIBBOLETH_SERVICE_PROVIDER_CERTIFICATE = './docker/nginx/sp.pem'
+SHIBBOLETH_SERVICE_PROVIDER_CERTIFICATE = "./docker/nginx/sp.pem"
 """Path to certificate."""
 
-SHIBBOLETH_SERVICE_PROVIDER_PRIVATE_KEY = './docker/nginx/sp.key'
+SHIBBOLETH_SERVICE_PROVIDER_PRIVATE_KEY = "./docker/nginx/sp.key"
 """Path to certificate private key."""
 
 SHIBBOLETH_SERVICE_PROVIDER = {}

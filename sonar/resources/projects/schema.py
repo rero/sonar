@@ -50,8 +50,8 @@ class MetadataSchema(Schema, ValidationSchemaMixin):
         :param data: Dict of record data.
         :returns: Modified data.
         """
-        data.pop('permissions', None)
-        data.pop('documents', None)
+        data.pop("permissions", None)
+        data.pop("documents", None)
 
         return data
 
@@ -63,12 +63,12 @@ class MetadataSchema(Schema, ValidationSchemaMixin):
         :returns: Modified dict of record data.
         """
         # Organisation already attached to project, we do nothing.
-        if data.get('organisation'):
+        if data.get("organisation"):
             return data
 
         # Store current user organisation in new project.
-        if current_user_record.get('organisation'):
-            data['organisation'] = current_user_record['organisation']
+        if current_user_record.get("organisation"):
+            data["organisation"] = current_user_record["organisation"]
 
         return data
 
@@ -80,14 +80,14 @@ class MetadataSchema(Schema, ValidationSchemaMixin):
         :returns: Modified dict of record data.
         """
         # If user is already set, we don't set it.
-        if data.get('user') or not current_user_record:
+        if data.get("user") or not current_user_record:
             return data
 
         # Store current user in project.
-        data['user'] = {
-            '$ref':
-            current_user_record.get_ref_link('users',
-                                             current_user_record['pid'])
+        data["user"] = {
+            "$ref": current_user_record.get_ref_link(
+                "users", current_user_record["pid"]
+            )
         }
 
         return data
@@ -106,8 +106,9 @@ class RecordSchema(BaseRecordSchema):
         `add_permission` need this property and we cannot be sure that this
         hook will be executed first.
         """
-        obj['metadata']['documents'] = DocumentRecord.get_documents_by_project(
-            obj['id'])
+        obj["metadata"]["documents"] = DocumentRecord.get_documents_by_project(
+            obj["id"]
+        )
         return super().dump(obj, *args, **kwargs)
 
     @pre_dump
@@ -117,22 +118,19 @@ class RecordSchema(BaseRecordSchema):
         :param item: Dict representing the record.
         :returns: Modified dict.
         """
-        service = sonar.service('projects')
-        identity = g.get('identity', AnonymousIdentity())
+        service = sonar.service("projects")
+        identity = g.get("identity", AnonymousIdentity())
 
-        item['metadata']['permissions'] = {
-            'read':
-            service.permission_policy('read', **{
-                'record': item
-            }).allows(identity),
-            'update':
-            service.permission_policy('update', **{
-                'record': item
-            }).allows(identity),
-            'delete':
-            service.permission_policy('delete', **{
-                'record': item
-            }).allows(identity)
+        item["metadata"]["permissions"] = {
+            "read": service.permission_policy("read", **{"record": item}).allows(
+                identity
+            ),
+            "update": service.permission_policy("update", **{"record": item}).allows(
+                identity
+            ),
+            "delete": service.permission_policy("delete", **{"record": item}).allows(
+                identity
+            ),
         }
 
         return item

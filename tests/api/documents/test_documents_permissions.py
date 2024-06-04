@@ -26,363 +26,421 @@ from invenio_accounts.testutils import login_user_via_session
 from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 
 
-def test_list(app, client, make_document, superuser, admin, moderator,
-              submitter, user, organisation):
+def test_list(
+    app,
+    client,
+    make_document,
+    superuser,
+    admin,
+    moderator,
+    submitter,
+    user,
+    organisation,
+):
     """Test list documents permissions."""
     make_document(organisation=None, with_file=True)
-    make_document(organisation='org', with_file=True)
+    make_document(organisation="org", with_file=True)
 
     # Not logged
-    res = client.get(url_for('invenio_records_rest.doc_list'))
+    res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 401
 
     # Not logged but permission checks disabled
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
-    res = client.get(url_for('invenio_records_rest.doc_list'))
+    res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    assert res.json['hits']['total']['value'] == 2
+    assert res.json["hits"]["total"]["value"] == 2
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
 
     # Logged as user
-    login_user_via_session(client, email=user['email'])
-    res = client.get(url_for('invenio_records_rest.doc_list'))
+    login_user_via_session(client, email=user["email"])
+    res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 403
 
     # Logged as submitter
-    login_user_via_session(client, email=submitter['email'])
-    res = client.get(url_for('invenio_records_rest.doc_list'))
+    login_user_via_session(client, email=submitter["email"])
+    res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 403
 
     # Logged as moderator
-    login_user_via_session(client, email=moderator['email'])
-    res = client.get(url_for('invenio_records_rest.doc_list'))
+    login_user_via_session(client, email=moderator["email"])
+    res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    assert res.json['hits']['total']['value'] == 1
+    assert res.json["hits"]["total"]["value"] == 1
 
     # Logged as admin
-    login_user_via_session(client, email=admin['email'])
-    res = client.get(url_for('invenio_records_rest.doc_list'))
+    login_user_via_session(client, email=admin["email"])
+    res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    assert res.json['hits']['total']['value'] == 1
+    assert res.json["hits"]["total"]["value"] == 1
 
     # Logged as superuser
-    login_user_via_session(client, email=superuser['email'])
-    res = client.get(url_for('invenio_records_rest.doc_list'))
+    login_user_via_session(client, email=superuser["email"])
+    res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    assert res.json['hits']['total']['value'] == 2
+    assert res.json["hits"]["total"]["value"] == 2
 
     # Public search
-    res = client.get(url_for('invenio_records_rest.doc_list', view='global'))
+    res = client.get(url_for("invenio_records_rest.doc_list", view="global"))
     assert res.status_code == 200
-    assert res.json['hits']['total']['value'] == 2
+    assert res.json["hits"]["total"]["value"] == 2
 
     # Public search for organisation
-    res = client.get(url_for('invenio_records_rest.doc_list', view='org'))
+    res = client.get(url_for("invenio_records_rest.doc_list", view="org"))
     assert res.status_code == 200
-    data = res.json['hits']['hits'][0]['metadata']
-    assert res.json['hits']['total']['value'] == 1
-    assert data['identifiers']
-    ark_identifier = [
-        r for r in data['identifiedBy']
-        if r.get('type') == 'ark'
-    ][0]
+    data = res.json["hits"]["hits"][0]["metadata"]
+    assert res.json["hits"]["total"]["value"] == 1
+    assert data["identifiers"]
+    ark_identifier = [r for r in data["identifiedBy"] if r.get("type") == "ark"][0]
     from sonar.modules.ark.api import Ark
-    ark = Ark(naan=organisation.get('arkNAAN'))
-    assert ark.resolver_url(data['pid']) == ark_identifier['uri']
+
+    ark = Ark(naan=organisation.get("arkNAAN"))
+    assert ark.resolver_url(data["pid"]) == ark_identifier["uri"]
 
 
-def test_create(client, document_json, superuser, admin, moderator, submitter,
-                user):
+def test_create(client, document_json, superuser, admin, moderator, submitter, user):
     """Test create documents permissions."""
-    headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    }
+    headers = {"Content-Type": "application/json", "Accept": "application/json"}
 
     # Not logged
-    res = client.post(url_for('invenio_records_rest.doc_list'),
-                      data=json.dumps(document_json),
-                      headers=headers)
+    res = client.post(
+        url_for("invenio_records_rest.doc_list"),
+        data=json.dumps(document_json),
+        headers=headers,
+    )
     assert res.status_code == 401
 
     # User
-    login_user_via_session(client, email=user['email'])
-    res = client.post(url_for('invenio_records_rest.doc_list'),
-                      data=json.dumps(document_json),
-                      headers=headers)
+    login_user_via_session(client, email=user["email"])
+    res = client.post(
+        url_for("invenio_records_rest.doc_list"),
+        data=json.dumps(document_json),
+        headers=headers,
+    )
     assert res.status_code == 403
 
     # submitter
-    login_user_via_session(client, email=submitter['email'])
-    res = client.post(url_for('invenio_records_rest.doc_list'),
-                      data=json.dumps(document_json),
-                      headers=headers)
+    login_user_via_session(client, email=submitter["email"])
+    res = client.post(
+        url_for("invenio_records_rest.doc_list"),
+        data=json.dumps(document_json),
+        headers=headers,
+    )
     assert res.status_code == 403
 
     # Moderator
-    login_user_via_session(client, email=moderator['email'])
-    res = client.post(url_for('invenio_records_rest.doc_list'),
-                      data=json.dumps(document_json),
-                      headers=headers)
+    login_user_via_session(client, email=moderator["email"])
+    res = client.post(
+        url_for("invenio_records_rest.doc_list"),
+        data=json.dumps(document_json),
+        headers=headers,
+    )
     assert res.status_code == 201
-    assert res.json['metadata']['organisation'][0][
-        '$ref'] == 'https://sonar.ch/api/organisations/org'
+    assert (
+        res.json["metadata"]["organisation"][0]["$ref"]
+        == "https://sonar.ch/api/organisations/org"
+    )
 
     # Admin
-    login_user_via_session(client, email=admin['email'])
-    res = client.post(url_for('invenio_records_rest.doc_list'),
-                      data=json.dumps(document_json),
-                      headers=headers)
+    login_user_via_session(client, email=admin["email"])
+    res = client.post(
+        url_for("invenio_records_rest.doc_list"),
+        data=json.dumps(document_json),
+        headers=headers,
+    )
     assert res.status_code == 201
-    assert res.json['metadata']['organisation'][0][
-        '$ref'] == 'https://sonar.ch/api/organisations/org'
+    assert (
+        res.json["metadata"]["organisation"][0]["$ref"]
+        == "https://sonar.ch/api/organisations/org"
+    )
 
     # Super user
-    login_user_via_session(client, email=superuser['email'])
-    res = client.post(url_for('invenio_records_rest.doc_list'),
-                      data=json.dumps(document_json),
-                      headers=headers)
+    login_user_via_session(client, email=superuser["email"])
+    res = client.post(
+        url_for("invenio_records_rest.doc_list"),
+        data=json.dumps(document_json),
+        headers=headers,
+    )
     assert res.status_code == 201
-    assert res.json['metadata']['organisation'][0][
-        '$ref'] == 'https://sonar.ch/api/organisations/org'
-    ark = [
-        r for r in res.json['metadata']['identifiedBy']
-        if r.get('type') == 'ark'
-    ][0]
-    assert ark.get('value').startswith('ark:/')
+    assert (
+        res.json["metadata"]["organisation"][0]["$ref"]
+        == "https://sonar.ch/api/organisations/org"
+    )
+    ark = [r for r in res.json["metadata"]["identifiedBy"] if r.get("type") == "ark"][0]
+    assert ark.get("value").startswith("ark:/")
 
-    assert PersistentIdentifier.get('ark', ark.get('value')).status == \
-        PIDStatus.REGISTERED
+    assert (
+        PersistentIdentifier.get("ark", ark.get("value")).status == PIDStatus.REGISTERED
+    )
 
 
-def test_read(client, document, make_user, superuser, admin, moderator,
-              submitter, user):
+def test_read(
+    client, document, make_user, superuser, admin, moderator, submitter, user
+):
     """Test read documents permissions."""
 
     # Not logged
     res = client.get(
-        url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
+    )
     assert res.status_code == 200
 
     # masked document
     magic_mock = mock.MagicMock(return_value=True)
-    with mock.patch(
-        'sonar.modules.documents.api.DocumentRecord.is_masked',
-        magic_mock
-    ):
+    with mock.patch("sonar.modules.documents.api.DocumentRecord.is_masked", magic_mock):
         res = client.get(
-            url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
+            url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
+        )
         assert res.status_code == 401
 
     # Logged as user
-    login_user_via_session(client, email=user['email'])
+    login_user_via_session(client, email=user["email"])
     res = client.get(
-        url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
+    )
     assert res.status_code == 200
 
     # Logged as submitter
-    login_user_via_session(client, email=submitter['email'])
+    login_user_via_session(client, email=submitter["email"])
     res = client.get(
-        url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
+    )
     assert res.status_code == 200
 
     # Logged as moderator
-    login_user_via_session(client, email=moderator['email'])
+    login_user_via_session(client, email=moderator["email"])
     res = client.get(
-        url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
+    )
     assert res.status_code == 200
-    assert res.json['metadata']['permissions'] == {
-        'delete': False,
-        'read': True,
-        'update': True
+    assert res.json["metadata"]["permissions"] == {
+        "delete": False,
+        "read": True,
+        "update": True,
     }
-    assert res.json['metadata']['partOf'][0][
-        'text'] == 'Journal du dimanche / Renato, Ferrari ; Albano, Mesta. ' \
-            '- John Doe Publications inc.. - 2020, vol. 6, no. 12, p. 135-139'
-    assert res.json['metadata']['provisionActivity'][0]['text'] == {
-        'default':
-        'Bienne : Impr. Weber, [2006] ; Lausanne ; Rippone : Impr. Coustaud'
+    assert (
+        res.json["metadata"]["partOf"][0]["text"]
+        == "Journal du dimanche / Renato, Ferrari ; Albano, Mesta. "
+        "- John Doe Publications inc.. - 2020, vol. 6, no. 12, p. 135-139"
+    )
+    assert res.json["metadata"]["provisionActivity"][0]["text"] == {
+        "default": "Bienne : Impr. Weber, [2006] ; Lausanne ; Rippone : Impr. Coustaud"
     }
 
     # Logged as admin
-    login_user_via_session(client, email=admin['email'])
+    login_user_via_session(client, email=admin["email"])
     res = client.get(
-        url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
+    )
     assert res.status_code == 200
-    assert res.json['metadata']['permissions'] == {
-        'delete': True,
-        'read': True,
-        'update': True
+    assert res.json["metadata"]["permissions"] == {
+        "delete": True,
+        "read": True,
+        "update": True,
     }
 
     # Logged as admin of other organisation
-    other_admin = make_user('admin', 'org2')
-    login_user_via_session(client, email=other_admin['email'])
+    other_admin = make_user("admin", "org2")
+    login_user_via_session(client, email=other_admin["email"])
     res = client.get(
-        url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
+    )
     assert res.status_code == 200
 
     # Logged as superuser
-    login_user_via_session(client, email=superuser['email'])
+    login_user_via_session(client, email=superuser["email"])
     res = client.get(
-        url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
+    )
     assert res.status_code == 200
-    assert res.json['metadata']['permissions'] == {
-        'delete': True,
-        'read': True,
-        'update': True
+    assert res.json["metadata"]["permissions"] == {
+        "delete": True,
+        "read": True,
+        "update": True,
     }
 
 
-def test_update(client, db, document, make_user, superuser, admin, moderator,
-                submitter, user, subdivision, make_subdivision):
+def test_update(
+    client,
+    db,
+    document,
+    make_user,
+    superuser,
+    admin,
+    moderator,
+    submitter,
+    user,
+    subdivision,
+    make_subdivision,
+):
     """Test update documents permissions."""
 
-    headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    }
+    headers = {"Content-Type": "application/json", "Accept": "application/json"}
 
     # Not logged
-    res = client.put(url_for('invenio_records_rest.doc_item',
-                             pid_value=document['pid']),
-                     data=json.dumps(document.dumps()),
-                     headers=headers)
+    res = client.put(
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"]),
+        data=json.dumps(document.dumps()),
+        headers=headers,
+    )
     assert res.status_code == 401
 
     # Logged as user
-    login_user_via_session(client, email=user['email'])
-    res = client.put(url_for('invenio_records_rest.doc_item',
-                             pid_value=document['pid']),
-                     data=json.dumps(document.dumps()),
-                     headers=headers)
+    login_user_via_session(client, email=user["email"])
+    res = client.put(
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"]),
+        data=json.dumps(document.dumps()),
+        headers=headers,
+    )
     assert res.status_code == 403
 
     # Logged as submitter
-    login_user_via_session(client, email=submitter['email'])
-    res = client.put(url_for('invenio_records_rest.doc_item',
-                             pid_value=document['pid']),
-                     data=json.dumps(document.dumps()),
-                     headers=headers)
+    login_user_via_session(client, email=submitter["email"])
+    res = client.put(
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"]),
+        data=json.dumps(document.dumps()),
+        headers=headers,
+    )
     assert res.status_code == 403
 
     # Logged as moderator
-    login_user_via_session(client, email=moderator['email'])
-    res = client.put(url_for('invenio_records_rest.doc_item',
-                             pid_value=document['pid']),
-                     data=json.dumps(document.dumps()),
-                     headers=headers)
+    login_user_via_session(client, email=moderator["email"])
+    res = client.put(
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"]),
+        data=json.dumps(document.dumps()),
+        headers=headers,
+    )
     assert res.status_code == 200
 
     # Document has a subdivision, user have not.
-    document['subdivisions'] = [{
-        '$ref':
-        f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
-    }]
+    document["subdivisions"] = [
+        {"$ref": f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'}
+    ]
     document.commit()
     document.reindex()
     db.session.commit()
-    res = client.put(url_for('invenio_records_rest.doc_item',
-                             pid_value=document['pid']),
-                     data=json.dumps(document.dumps()),
-                     headers=headers)
+    res = client.put(
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"]),
+        data=json.dumps(document.dumps()),
+        headers=headers,
+    )
     assert res.status_code == 200
 
     # Document has a subdivision, and user have a different.
-    new_subdivision = make_subdivision('org')
-    moderator['subdivision'] = {
-        '$ref': f'https://sonar.ch/api/subdivisions/{new_subdivision["pid"]}'
+    new_subdivision = make_subdivision("org")
+    moderator["subdivision"] = {
+        "$ref": f'https://sonar.ch/api/subdivisions/{new_subdivision["pid"]}'
     }
     moderator.commit()
     moderator.reindex()
     db.session.commit()
-    res = client.put(url_for('invenio_records_rest.doc_item',
-                             pid_value=document['pid']),
-                     data=json.dumps(document.dumps()),
-                     headers=headers)
+    res = client.put(
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"]),
+        data=json.dumps(document.dumps()),
+        headers=headers,
+    )
     assert res.status_code == 403
 
     # Document has a subdivision, and user have the same.
-    moderator['subdivision'] = {
-        '$ref': f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
+    moderator["subdivision"] = {
+        "$ref": f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
     }
     moderator.commit()
     moderator.reindex()
     db.session.commit()
-    res = client.put(url_for('invenio_records_rest.doc_item',
-                             pid_value=document['pid']),
-                     data=json.dumps(document.dumps()),
-                     headers=headers)
+    res = client.put(
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"]),
+        data=json.dumps(document.dumps()),
+        headers=headers,
+    )
     assert res.status_code == 200
 
     # Document has no subdivision, and user has one.
-    document.pop('subdivisions', None)
+    document.pop("subdivisions", None)
     document.commit()
     document.reindex()
     db.session.commit()
-    res = client.put(url_for('invenio_records_rest.doc_item',
-                             pid_value=document['pid']),
-                     data=json.dumps(document.dumps()),
-                     headers=headers)
+    res = client.put(
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"]),
+        data=json.dumps(document.dumps()),
+        headers=headers,
+    )
     assert res.status_code == 403
 
     # Logged as admin
-    login_user_via_session(client, email=admin['email'])
-    res = client.put(url_for('invenio_records_rest.doc_item',
-                             pid_value=document['pid']),
-                     data=json.dumps(document.dumps()),
-                     headers=headers)
+    login_user_via_session(client, email=admin["email"])
+    res = client.put(
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"]),
+        data=json.dumps(document.dumps()),
+        headers=headers,
+    )
     assert res.status_code == 200
 
     # Logged as admin of other organisation
-    other_admin = make_user('admin', 'org2')
-    login_user_via_session(client, email=other_admin['email'])
-    res = client.put(url_for('invenio_records_rest.doc_item',
-                             pid_value=document['pid']),
-                     data=json.dumps(document.dumps()),
-                     headers=headers)
+    other_admin = make_user("admin", "org2")
+    login_user_via_session(client, email=other_admin["email"])
+    res = client.put(
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"]),
+        data=json.dumps(document.dumps()),
+        headers=headers,
+    )
     assert res.status_code == 403
 
     # Logged as superuser
-    login_user_via_session(client, email=superuser['email'])
-    res = client.put(url_for('invenio_records_rest.doc_item',
-                             pid_value=document['pid']),
-                     data=json.dumps(document.dumps()),
-                     headers=headers)
+    login_user_via_session(client, email=superuser["email"])
+    res = client.put(
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"]),
+        data=json.dumps(document.dumps()),
+        headers=headers,
+    )
     assert res.status_code == 200
 
 
-def test_delete(client, document, make_document, make_user, superuser, admin,
-                moderator, submitter, user):
+def test_delete(
+    client,
+    document,
+    make_document,
+    make_user,
+    superuser,
+    admin,
+    moderator,
+    submitter,
+    user,
+):
     """Test delete documents permissions."""
 
     # Not logged
     res = client.delete(
-        url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
+    )
     assert res.status_code == 401
 
     # Logged as user
-    login_user_via_session(client, email=user['email'])
+    login_user_via_session(client, email=user["email"])
     res = client.delete(
-        url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
+    )
     assert res.status_code == 403
 
     # Logged as submitter
-    login_user_via_session(client, email=submitter['email'])
+    login_user_via_session(client, email=submitter["email"])
     res = client.delete(
-        url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
+    )
     assert res.status_code == 403
 
     # Logged as moderator
-    login_user_via_session(client, email=moderator['email'])
+    login_user_via_session(client, email=moderator["email"])
     res = client.delete(
-        url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
+    )
     assert res.status_code == 403
 
     # Logged as admin
-    login_user_via_session(client, email=admin['email'])
+    login_user_via_session(client, email=admin["email"])
     res = client.delete(
-        url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
+    )
     assert res.status_code == 204
 
     # Create a new document
@@ -390,32 +448,32 @@ def test_delete(client, document, make_document, make_user, superuser, admin,
     ark_id = document.get_ark()
 
     # Logged as admin of other organisation
-    other_admin = make_user('admin', 'org2')
-    login_user_via_session(client, email=other_admin['email'])
+    other_admin = make_user("admin", "org2")
+    login_user_via_session(client, email=other_admin["email"])
     res = client.delete(
-        url_for('invenio_records_rest.doc_item', pid_value=document['pid']))
+        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
+    )
     assert res.status_code == 403
 
     # Logged as superuser
-    login_user_via_session(client, email=superuser['email'])
-    pid = document['pid']
-    res = client.delete(url_for('invenio_records_rest.doc_item',
-                                pid_value=pid))
+    login_user_via_session(client, email=superuser["email"])
+    pid = document["pid"]
+    res = client.delete(url_for("invenio_records_rest.doc_item", pid_value=pid))
     assert res.status_code == 204
-    assert PersistentIdentifier.get('ark', ark_id).status == \
-        PIDStatus.DELETED
+    assert PersistentIdentifier.get("ark", ark_id).status == PIDStatus.DELETED
 
 
-def test_document_with_urn_delete(client, superuser, admin, minimal_thesis_document_with_urn):
+def test_document_with_urn_delete(
+    client, superuser, admin, minimal_thesis_document_with_urn
+):
     """Test delete document with registered URN identifier."""
     # Add file to document
-    minimal_thesis_document_with_urn.files['test.pdf'] = BytesIO(b'File content')
-    minimal_thesis_document_with_urn.files['test.pdf']['type'] = 'file'
+    minimal_thesis_document_with_urn.files["test.pdf"] = BytesIO(b"File content")
+    minimal_thesis_document_with_urn.files["test.pdf"]["type"] = "file"
     minimal_thesis_document_with_urn.commit()
 
     # Logged as superuser
-    login_user_via_session(client, email=admin['email'])
-    pid = minimal_thesis_document_with_urn['pid']
-    res = client.delete(url_for('invenio_records_rest.doc_item',
-                                pid_value=pid))
+    login_user_via_session(client, email=admin["email"])
+    pid = minimal_thesis_document_with_urn["pid"]
+    res = client.delete(url_for("invenio_records_rest.doc_item", pid_value=pid))
     assert res.status_code == 403

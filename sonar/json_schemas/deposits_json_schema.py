@@ -34,33 +34,33 @@ class DepositsJSONSchema(JSONSchemaBase):
 
         organisation = {}
         if current_user_record:
-            organisation = current_user_record.replace_refs() \
-                .get('organisation')
+            organisation = current_user_record.replace_refs().get("organisation")
 
-        if not current_user_record or (current_user_record.is_moderator and \
-            organisation.get('isDedicated', False)):
+        if not current_user_record or (
+            current_user_record.is_moderator and organisation.get("isDedicated", False)
+        ):
             return schema
 
         # Remove some fields on json for the shared organisation
-        if not organisation.get('isDedicated', False):
+        if not organisation.get("isDedicated", False):
             # Remove fields for shared organisation
             for field in [
-                'collections', 'customField1', 'customField2', 'customField3'
+                "collections",
+                "customField1",
+                "customField2",
+                "customField3",
             ]:
-                schema['properties']['metadata']['properties']\
-                    .pop(field, None)
-                propertiesOrder = schema['properties']['metadata']\
-                    .get('propertiesOrder', [])
+                schema["properties"]["metadata"]["properties"].pop(field, None)
+                propertiesOrder = schema["properties"]["metadata"].get(
+                    "propertiesOrder", []
+                )
                 if field in propertiesOrder:
                     propertiesOrder.remove(field)
 
         # Remove subdivisions field
-        schema['properties']['diffusion']['properties'].pop(
-             'subdivisions', None)
-        propertiesOrder = schema['properties']['diffusion']\
-                .get('propertiesOrder', [])
-        if 'subdivisions' in propertiesOrder:
-            schema['properties']['diffusion']['propertiesOrder']\
-                .remove('subdivisions')
+        schema["properties"]["diffusion"]["properties"].pop("subdivisions", None)
+        propertiesOrder = schema["properties"]["diffusion"].get("propertiesOrder", [])
+        if "subdivisions" in propertiesOrder:
+            schema["properties"]["diffusion"]["propertiesOrder"].remove("subdivisions")
 
         return schema

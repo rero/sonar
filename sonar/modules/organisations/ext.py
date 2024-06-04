@@ -32,7 +32,7 @@ class Organisations(object):
     def init_app(self, app):
         """Flask application initialization."""
         self.init_config(app)
-        app.extensions['sonar_organisations'] = self
+        app.extensions["sonar_organisations"] = self
 
     def init_config(self, app):
         """Initialize configuration.

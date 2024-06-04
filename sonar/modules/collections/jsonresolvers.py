@@ -33,11 +33,11 @@ def json_resolver(pid):
     :return: Record instance.
     :rtype: Record
     """
-    resolver = Resolver(pid_type=Configuration.pid_type,
-                        object_type="rec",
-                        getter=Record.get_record)
+    resolver = Resolver(
+        pid_type=Configuration.pid_type, object_type="rec", getter=Record.get_record
+    )
     _, record = resolver.resolve(pid)
 
-    record.pop('$schema', None)
+    record.pop("$schema", None)
 
     return record

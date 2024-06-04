@@ -24,15 +24,15 @@ from mock import patch
 def test_get_translations(client):
     """Test get translations."""
     # Non existing language
-    res = client.get(url_for('translations.get_translations', lang='un'))
+    res = client.get(url_for("translations.get_translations", lang="un"))
     assert res.status_code == 404
 
     # Error during translation parsing
-    with patch('polib.pofile', side_effect=Exception('Mocked error')):
-        res = client.get(url_for('translations.get_translations', lang='fr'))
+    with patch("polib.pofile", side_effect=Exception("Mocked error")):
+        res = client.get(url_for("translations.get_translations", lang="fr"))
         assert res.status_code == 404
 
     # OK
-    res = client.get(url_for('translations.get_translations', lang='fr'))
+    res = client.get(url_for("translations.get_translations", lang="fr"))
     assert res.status_code == 200
-    assert res.json['About SONAR'] == 'À propos de SONAR'
+    assert res.json["About SONAR"] == "À propos de SONAR"

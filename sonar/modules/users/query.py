@@ -34,12 +34,12 @@ def search_factory(self, search, query_parser=None):
     """
     search, urlkwargs = default_search_factory(self, search)
 
-    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
+    if current_app.config.get("SONAR_APP_DISABLE_PERMISSION_CHECKS"):
         return (search, urlkwargs)
 
     # Searching for existing email, everybody can do that
-    if urlkwargs.get('q') and urlkwargs['q'].startswith('email:'):
-        search = search.source(includes=['pid'])
+    if urlkwargs.get("q") and urlkwargs["q"].startswith("email:"):
+        search = search.source(includes=["pid"])
         return (search, urlkwargs)
 
     # Super users can list all records
@@ -49,17 +49,14 @@ def search_factory(self, search, query_parser=None):
     # For admins, records are filtererd by user's organisation and they cannot
     # get superuser records.
     if current_user_record.is_admin:
-        first_filter = Q('term', organisation__pid=current_organisation['pid'])
-        second_filter = Q('bool',
-                          must_not={'exists': {
-                              'field': 'organisation'
-                          }})
-        search = search \
-            .filter('bool', filter=first_filter | second_filter) \
-            .filter('bool', must_not={'term': {'role': 'superuser'}})
+        first_filter = Q("term", organisation__pid=current_organisation["pid"])
+        second_filter = Q("bool", must_not={"exists": {"field": "organisation"}})
+        search = search.filter("bool", filter=first_filter | second_filter).filter(
+            "bool", must_not={"term": {"role": "superuser"}}
+        )
         return (search, urlkwargs)
 
     # For remaining roles, they can only list themselves
-    search = search.filter('term', pid=current_user_record['pid'])
+    search = search.filter("term", pid=current_user_record["pid"])
 
     return (search, urlkwargs)

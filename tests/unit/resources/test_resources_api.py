@@ -20,4 +20,4 @@
 
 def test_index_name_property(project):
     """Test getting index name"""
-    assert project._record.index_name == 'projects'
+    assert project._record.index_name == "projects"

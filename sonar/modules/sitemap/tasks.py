@@ -32,10 +32,10 @@ def sitemap_generate_task():
     get the status and/or the result of the task, execution is faster.
     """
     # Generate sitemap only on production state
-    if not current_app.config.get('SONAR_APP_PRODUCTION_STATE', False):
+    if not current_app.config.get("SONAR_APP_PRODUCTION_STATE", False):
         return
 
-    size = current_app.config.get('SONAR_APP_SITEMAP_ENTRY_SIZE', 10000)
+    size = current_app.config.get("SONAR_APP_SITEMAP_ENTRY_SIZE", 10000)
     # Generate dedicated organisations sitemaps
     orgs = OrganisationSearch().get_dedicated_list()
     for org in orgs:
@@ -43,5 +43,4 @@ def sitemap_generate_task():
             sitemap_generate(server_name, size)
 
     # Generate global sitemap
-    sitemap_generate(
-        current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'), size)
+    sitemap_generate(current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION"), size)

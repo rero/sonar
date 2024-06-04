@@ -19,44 +19,38 @@
 
 import re
 
-from flask import Blueprint, current_app, redirect, render_template, request, \
-    url_for
+from flask import Blueprint, current_app, redirect, render_template, request, url_for
 from flask_wiki.api import current_wiki
 
-blueprint = Blueprint('help',
-                      __name__,
-                      template_folder='templates',
-                      static_folder='static')
+blueprint = Blueprint(
+    "help", __name__, template_folder="templates", static_folder="static"
+)
 
 
-@blueprint.route('/<org_code:view>/help/', methods=['GET'])
+@blueprint.route("/<org_code:view>/help/", methods=["GET"])
 def index(view):
     """Help index redirect to home."""
-    return redirect(url_for(
-        'help.page', view=view, url=current_app.config.get('WIKI_HOME')))
+    return redirect(
+        url_for("help.page", view=view, url=current_app.config.get("WIKI_HOME"))
+    )
 
 
-@blueprint.route('/<org_code:view>/help/<path:url>/', methods=['GET'])
+@blueprint.route("/<org_code:view>/help/<path:url>/", methods=["GET"])
 def page(view, url):
     """Help page."""
-    page =current_wiki.get_or_404(url)
-    return render_template(
-        'help/page_wiki.html',
-        view=view,
-        page=page)
+    page = current_wiki.get_or_404(url)
+    return render_template("help/page_wiki.html", view=view, page=page)
 
 
-@blueprint.route('/<org_code:view>/help/search', methods=['GET'])
+@blueprint.route("/<org_code:view>/help/search", methods=["GET"])
 def search(view):
     """Help search."""
-    query = request.args.get('q', '')
+    query = request.args.get("q", "")
     results = current_wiki.search(query)
     return render_template(
-        'help/page_wiki_search.html',
-        results=results,
-        query=query,
-        view=view
+        "help/page_wiki_search.html", results=results, query=query, view=view
     )
+
 
 @blueprint.app_template_filter()
 def process_link(body, view):
@@ -68,7 +62,4 @@ def process_link(body, view):
     :param view: viewcode to actual view.
     :return: processed body.
     """
-    return re.sub(
-        r'\]\((\/help)(?!\/files\/)',
-        rf'](/{view}\1',
-        body)
+    return re.sub(r"\]\((\/help)(?!\/files\/)", rf"](/{view}\1", body)

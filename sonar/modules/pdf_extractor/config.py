@@ -17,7 +17,7 @@
 
 """SONAR documents configuration."""
 
-PDF_EXTRACTOR_GROBID_SERVER = 'localhost'
+PDF_EXTRACTOR_GROBID_SERVER = "localhost"
 """Grobid server."""
 
 PDF_EXTRACTOR_GROBID_PORT = 8070

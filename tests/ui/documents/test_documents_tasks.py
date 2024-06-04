@@ -23,23 +23,18 @@ from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.tasks import import_records
 
 
-@mock.patch(
-    'sonar.modules.documents.api.DocumentRecord.get_record_by_identifier')
-def test_import_records(mock_record_by_identifier, app, document_json,
-                        bucket_location):
+@mock.patch("sonar.modules.documents.api.DocumentRecord.get_record_by_identifier")
+def test_import_records(mock_record_by_identifier, app, document_json, bucket_location):
     """Test import records."""
-    files = [{
-        'key': 'test.pdf',
-        'url': 'http://some.url/file.pdf'
-    }]
+    files = [{"key": "test.pdf", "url": "http://some.url/file.pdf"}]
 
     # Successful importing record
     mock_record_by_identifier.return_value = None
-    document_json['files'] = files
+    document_json["files"] = files
     ids = import_records([document_json])
     record = DocumentRecord.get_record(ids[0])
     assert record
-    assert record['harvested']
+    assert record["harvested"]
 
     # Update
     mock_record_by_identifier.return_value = record

@@ -30,20 +30,25 @@ from sonar.resources.resources.responses import StreamResponseHandler
 class ProjectsRecordResourceConfig(RecordResourceConfig):
     """Projects resource configuration."""
 
-    blueprint_name = 'projects'
+    blueprint_name = "projects"
     url_prefix = "/projects/"
-    resource_name = 'projects'
+    resource_name = "projects"
 
     response_handlers = {
-        'application/json': ResponseHandler(
-            JSONSerializer(),
-            headers=etag_headers),
-        'text/csv': StreamResponseHandler(
-            CSVSerializer(csv_included_fields=[
-                'pid', 'name', 'description', 'startDate', 'endDate'
-            ]),
-            filename='projects.csv',
-            headers=etag_headers)
+        "application/json": ResponseHandler(JSONSerializer(), headers=etag_headers),
+        "text/csv": StreamResponseHandler(
+            CSVSerializer(
+                csv_included_fields=[
+                    "pid",
+                    "name",
+                    "description",
+                    "startDate",
+                    "endDate",
+                ]
+            ),
+            filename="projects.csv",
+            headers=etag_headers,
+        ),
     }
 
     # # Request parsing

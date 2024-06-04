@@ -35,7 +35,7 @@ from ..minters import id_minter
 from ..providers import Provider
 
 # provider
-DepositProvider = type('DepositProvider', (Provider, ), dict(pid_type='depo'))
+DepositProvider = type("DepositProvider", (Provider,), dict(pid_type="depo"))
 # minter
 deposit_pid_minter = partial(id_minter, provider=DepositProvider)
 # fetcher
@@ -48,68 +48,68 @@ class DepositSearch(SonarSearch):
     class Meta:
         """Search only on item index."""
 
-        index = 'deposits'
+        index = "deposits"
         doc_types = []
 
 
 class DepositRecord(SonarRecord):
     """Deposit record class."""
 
-    STEP_DIFFUSION = 'diffusion'
+    STEP_DIFFUSION = "diffusion"
 
-    STATUS_IN_PROGRESS = 'in_progress'
-    STATUS_VALIDATED = 'validated'
-    STATUS_TO_VALIDATE = 'to_validate'
-    STATUS_REJECTED = 'rejected'
-    STATUS_ASK_FOR_CHANGES = 'ask_for_changes'
+    STATUS_IN_PROGRESS = "in_progress"
+    STATUS_VALIDATED = "validated"
+    STATUS_TO_VALIDATE = "to_validate"
+    STATUS_REJECTED = "rejected"
+    STATUS_ASK_FOR_CHANGES = "ask_for_changes"
 
-    REVIEW_ACTION_APPROVE = 'approve'
-    REVIEW_ACTION_REJECT = 'reject'
-    REVIEW_ACTION_ASK_FOR_CHANGES = 'ask_for_changes'
+    REVIEW_ACTION_APPROVE = "approve"
+    REVIEW_ACTION_REJECT = "reject"
+    REVIEW_ACTION_ASK_FOR_CHANGES = "ask_for_changes"
 
     minter = deposit_pid_minter
     fetcher = deposit_pid_fetcher
     provider = DepositProvider
-    schema = 'deposits/deposit-v1.0.0.json'
+    schema = "deposits/deposit-v1.0.0.json"
 
     @property
     def subdivisions(self):
         """Getter for subdivisions."""
-        return self.get('diffusion', {}).get('subdivisions', [])
+        return self.get("diffusion", {}).get("subdivisions", [])
 
     @classmethod
-    def create(cls, data, id_=None, dbcommit=False, with_bucket=True,
-               **kwargs):
+    def create(cls, data, id_=None, dbcommit=False, with_bucket=True, **kwargs):
         """Create deposit record."""
-        if not data.get('diffusion', {}).get('subdivisions'):
+        if not data.get("diffusion", {}).get("subdivisions"):
             # Guess from submitter
             if (
-                current_user_record and current_user_record.is_submitter
-                and current_user_record.get('subdivision')
+                current_user_record
+                and current_user_record.is_submitter
+                and current_user_record.get("subdivision")
             ):
-                data.setdefault('diffusion', {})['subdivisions'] = [current_user_record['subdivision']]
-        record = super(DepositRecord, cls).create(data,
-                                                  id_=id_,
-                                                  dbcommit=dbcommit,
-                                                  with_bucket=with_bucket,
-                                                  **kwargs)
+                data.setdefault("diffusion", {})["subdivisions"] = [
+                    current_user_record["subdivision"]
+                ]
+        record = super(DepositRecord, cls).create(
+            data, id_=id_, dbcommit=dbcommit, with_bucket=with_bucket, **kwargs
+        )
         return record
 
     def log_action(self, user, action, comment=None):
         """Log intervention into deposit."""
-        if 'logs' not in self:
-            self['logs'] = []
+        if "logs" not in self:
+            self["logs"] = []
 
         log = {
-            'user': user,
-            'date': pytz.utc.localize(datetime.utcnow()).isoformat(),
-            'action': action
+            "user": user,
+            "date": pytz.utc.localize(datetime.utcnow()).isoformat(),
+            "action": action,
         }
 
         if comment:
-            log['comment'] = comment
+            log["comment"] = comment
 
-        self['logs'].append(log)
+        self["logs"].append(log)
 
         return log
 
@@ -119,372 +119,360 @@ class DepositRecord(SonarRecord):
         metadata = {}
 
         # Organisation
-        if current_user_record and current_user_record.get('organisation'):
-            metadata['organisation'] = [current_user_record['organisation']]
+        if current_user_record and current_user_record.get("organisation"):
+            metadata["organisation"] = [current_user_record["organisation"]]
 
         # Document type
-        metadata['documentType'] = self['metadata']['documentType']
+        metadata["documentType"] = self["metadata"]["documentType"]
 
         # Language
-        language = self['metadata'].get('language', 'eng')
+        language = self["metadata"].get("language", "eng")
 
         # Title
-        metadata['title'] = [{
-            'type':
-            'bf:Title',
-            'mainTitle': [{
-                'language': language,
-                'value': self['metadata']['title']
-            }]
-        }]
+        metadata["title"] = [
+            {
+                "type": "bf:Title",
+                "mainTitle": [
+                    {"language": language, "value": self["metadata"]["title"]}
+                ],
+            }
+        ]
 
         # Subtitle
-        if self['metadata'].get('subtitle'):
-            metadata['title'][0]['subtitle'] = [{
-                'language':
-                language,
-                'value':
-                self['metadata']['subtitle']
-            }]
+        if self["metadata"].get("subtitle"):
+            metadata["title"][0]["subtitle"] = [
+                {"language": language, "value": self["metadata"]["subtitle"]}
+            ]
 
         # Other title
-        if self['metadata'].get('otherLanguageTitle', {}).get('title'):
-            metadata['title'][0]['mainTitle'].append({
-                'language':
-                self['metadata']['otherLanguageTitle'].get(
-                    'language', language),
-                'value':
-                self['metadata']['otherLanguageTitle']['title']
-            })
+        if self["metadata"].get("otherLanguageTitle", {}).get("title"):
+            metadata["title"][0]["mainTitle"].append(
+                {
+                    "language": self["metadata"]["otherLanguageTitle"].get(
+                        "language", language
+                    ),
+                    "value": self["metadata"]["otherLanguageTitle"]["title"],
+                }
+            )
 
         # Languages
-        metadata['language'] = [{'value': language, 'type': 'bf:Language'}]
+        metadata["language"] = [{"value": language, "type": "bf:Language"}]
 
         # Document date
-        metadata['provisionActivity'] = [{
-            'type':
-            'bf:Publication',
-            'startDate':
-            self['metadata']['documentDate']
-        }]
-        metadata['provisionActivity'][0]['statement'] = []
+        metadata["provisionActivity"] = [
+            {"type": "bf:Publication", "startDate": self["metadata"]["documentDate"]}
+        ]
+        metadata["provisionActivity"][0]["statement"] = []
 
         # Publication place
-        if self['metadata'].get('publicationPlace'):
-            metadata['provisionActivity'][0]['statement'].append({
-                'label': [{
-                    'value': self['metadata']['publicationPlace']
-                }],
-                'type':
-                'bf:Place'
-            })
+        if self["metadata"].get("publicationPlace"):
+            metadata["provisionActivity"][0]["statement"].append(
+                {
+                    "label": [{"value": self["metadata"]["publicationPlace"]}],
+                    "type": "bf:Place",
+                }
+            )
 
         # Publisher
-        if self['metadata'].get('publisher'):
-            metadata['provisionActivity'][0]['statement'].append({
-                'label': [{
-                    'value': self['metadata']['publisher']
-                }],
-                'type':
-                'bf:Agent'
-            })
+        if self["metadata"].get("publisher"):
+            metadata["provisionActivity"][0]["statement"].append(
+                {
+                    "label": [{"value": self["metadata"]["publisher"]}],
+                    "type": "bf:Agent",
+                }
+            )
 
         # Add a statement for date
-        metadata['provisionActivity'][0]['statement'].append({
-            'label': [{
-                'value':
-                self['metadata']['statementDate']
-                if self['metadata'].get('statementDate') else
-                self['metadata']['documentDate']
-            }],
-            'type':
-            'Date'
-        })
+        metadata["provisionActivity"][0]["statement"].append(
+            {
+                "label": [
+                    {
+                        "value": (
+                            self["metadata"]["statementDate"]
+                            if self["metadata"].get("statementDate")
+                            else self["metadata"]["documentDate"]
+                        )
+                    }
+                ],
+                "type": "Date",
+            }
+        )
 
         # Published in
-        if self['metadata'].get('publication'):
-            year = self['metadata']['publication']['year'] if self['metadata'][
-                'publication'].get(
-                    'year') else self['metadata']['documentDate']
+        if self["metadata"].get("publication"):
+            year = (
+                self["metadata"]["publication"]["year"]
+                if self["metadata"]["publication"].get("year")
+                else self["metadata"]["documentDate"]
+            )
             part_of = {
-                'numberingYear': year,
-                'document': {
-                    'title': self['metadata']['publication']['publishedIn']
-                }
+                "numberingYear": year,
+                "document": {"title": self["metadata"]["publication"]["publishedIn"]},
             }
 
-            if self['metadata']['publication'].get('pages'):
-                part_of['numberingPages'] = self['metadata']['publication'][
-                    'pages']
+            if self["metadata"]["publication"].get("pages"):
+                part_of["numberingPages"] = self["metadata"]["publication"]["pages"]
 
-            if self['metadata']['publication'].get('volume'):
-                part_of['numberingVolume'] = self['metadata']['publication'][
-                    'volume']
+            if self["metadata"]["publication"].get("volume"):
+                part_of["numberingVolume"] = self["metadata"]["publication"]["volume"]
 
-            if self['metadata']['publication'].get('number'):
-                part_of['numberingIssue'] = self['metadata']['publication'][
-                    'number']
+            if self["metadata"]["publication"].get("number"):
+                part_of["numberingIssue"] = self["metadata"]["publication"]["number"]
 
-            if self['metadata']['publication'].get('editors'):
-                part_of['document']['contribution'] = self['metadata'][
-                    'publication']['editors']
+            if self["metadata"]["publication"].get("editors"):
+                part_of["document"]["contribution"] = self["metadata"]["publication"][
+                    "editors"
+                ]
 
-            if self['metadata']['publication'].get('publisher'):
-                part_of['document']['publication'] = {
-                    'statement': self['metadata']['publication']['publisher']
+            if self["metadata"]["publication"].get("publisher"):
+                part_of["document"]["publication"] = {
+                    "statement": self["metadata"]["publication"]["publisher"]
                 }
 
-            if self['metadata']['publication'].get('identifiedBy'):
-                part_of['document']['identifiedBy'] = self['metadata'][
-                    'publication']['identifiedBy']
+            if self["metadata"]["publication"].get("identifiedBy"):
+                part_of["document"]["identifiedBy"] = self["metadata"]["publication"][
+                    "identifiedBy"
+                ]
 
-            metadata['partOf'] = [part_of]
+            metadata["partOf"] = [part_of]
 
         # Other electronic versions
-        if self['metadata'].get('otherElectronicVersions'):
-            metadata['otherEdition'] = [{
-                'document': {
-                    'electronicLocator': link['url']
-                },
-                'publicNote': link['publicNote']
-            } for link in self['metadata']['otherElectronicVersions']]
+        if self["metadata"].get("otherElectronicVersions"):
+            metadata["otherEdition"] = [
+                {
+                    "document": {"electronicLocator": link["url"]},
+                    "publicNote": link["publicNote"],
+                }
+                for link in self["metadata"]["otherElectronicVersions"]
+            ]
 
         # related to
-        if self['metadata'].get('relatedTo'):
-            metadata['relatedTo'] = [{
-                'document': {
-                    'electronicLocator': link['url']
-                },
-                'publicNote': link['publicNote']
-            } for link in self['metadata']['relatedTo']]
+        if self["metadata"].get("relatedTo"):
+            metadata["relatedTo"] = [
+                {
+                    "document": {"electronicLocator": link["url"]},
+                    "publicNote": link["publicNote"],
+                }
+                for link in self["metadata"]["relatedTo"]
+            ]
 
         # Collections
-        if self['metadata'].get('collections'):
+        if self["metadata"].get("collections"):
             collections = []
-            for collection in self['metadata'].get('collections'):
+            for collection in self["metadata"].get("collections"):
                 # Create a new project
-                if not collection.get('$ref'):
+                if not collection.get("$ref"):
                     data = collection.copy()
                     # Store organisation
-                    data['organisation'] = current_user_record['organisation']
+                    data["organisation"] = current_user_record["organisation"]
                     collection_record = CollectionRecord.create(data)
                     collection_record.reindex()
                     collection = {
-                        '$ref':
-                        SonarRecord.get_ref_link('collections',
-                                                 collection_record['pid'])
+                        "$ref": SonarRecord.get_ref_link(
+                            "collections", collection_record["pid"]
+                        )
                     }
 
                 collections.append(collection)
 
             if collections:
-                metadata['collections'] = collections
+                metadata["collections"] = collections
 
         # Classification
-        if self['metadata'].get('classification'):
-            metadata['classification'] = [{
-                'type':
-                'bf:ClassificationUdc',
-                'classificationPortion':
-                self['metadata']['classification']
-            }]
+        if self["metadata"].get("classification"):
+            metadata["classification"] = [
+                {
+                    "type": "bf:ClassificationUdc",
+                    "classificationPortion": self["metadata"]["classification"],
+                }
+            ]
 
         # Abstracts
-        if self['metadata'].get('abstracts'):
-            metadata['abstracts'] = [{
-                'language':
-                abstract.get('language', language),
-                'value':
-                abstract['abstract']
-            } for abstract in self['metadata']['abstracts']]
+        if self["metadata"].get("abstracts"):
+            metadata["abstracts"] = [
+                {
+                    "language": abstract.get("language", language),
+                    "value": abstract["abstract"],
+                }
+                for abstract in self["metadata"]["abstracts"]
+            ]
 
         # Dissertation
-        if self['metadata'].get('dissertation'):
-            metadata['dissertation'] = self['metadata']['dissertation']
+        if self["metadata"].get("dissertation"):
+            metadata["dissertation"] = self["metadata"]["dissertation"]
 
         # Subjects
-        if self['metadata'].get('subjects'):
-            metadata['subjects'] = [{
-                'label': {
-                    'language': subject.get('language', language),
-                    'value': subject['subjects']
+        if self["metadata"].get("subjects"):
+            metadata["subjects"] = [
+                {
+                    "label": {
+                        "language": subject.get("language", language),
+                        "value": subject["subjects"],
+                    }
                 }
-            } for subject in self['metadata']['subjects']]
+                for subject in self["metadata"]["subjects"]
+            ]
 
         # Identifiers
         identifiers = []
-        if self['metadata'].get('identifiedBy'):
-            for identifier in self['metadata']['identifiedBy']:
+        if self["metadata"].get("identifiedBy"):
+            for identifier in self["metadata"]["identifiedBy"]:
                 data = {
-                    'type': identifier['type'],
-                    'value': identifier['value'],
+                    "type": identifier["type"],
+                    "value": identifier["value"],
                 }
 
-                if identifier.get('source'):
-                    data['source'] = identifier['source']
+                if identifier.get("source"):
+                    data["source"] = identifier["source"]
 
                 # Special for PMID
-                if identifier['type'] == 'pmid':
-                    data['source'] = 'PMID'
-                    data['type'] = 'bf:Local'
+                if identifier["type"] == "pmid":
+                    data["source"] = "PMID"
+                    data["type"] = "bf:Local"
 
                 identifiers.append(data)
 
         if identifiers:
-            metadata['identifiedBy'] = identifiers
+            metadata["identifiedBy"] = identifiers
 
         # Content note
-        if self['metadata'].get('contentNote'):
-            metadata['contentNote'] = self['metadata']['contentNote']
+        if self["metadata"].get("contentNote"):
+            metadata["contentNote"] = self["metadata"]["contentNote"]
 
         # Extent
-        if self['metadata'].get('extent'):
-            metadata['extent'] = self['metadata']['extent']
+        if self["metadata"].get("extent"):
+            metadata["extent"] = self["metadata"]["extent"]
 
         # Additional materials
-        if self['metadata'].get('additionalMaterials'):
-            metadata['additionalMaterials'] = self['metadata'][
-                'additionalMaterials']
+        if self["metadata"].get("additionalMaterials"):
+            metadata["additionalMaterials"] = self["metadata"]["additionalMaterials"]
 
         # Formats
-        if self['metadata'].get('formats'):
-            metadata['formats'] = self['metadata']['formats']
+        if self["metadata"].get("formats"):
+            metadata["formats"] = self["metadata"]["formats"]
 
         # Other material characteristics
-        if self['metadata'].get('otherMaterialCharacteristics'):
-            metadata['otherMaterialCharacteristics'] = self['metadata'][
-                'otherMaterialCharacteristics']
+        if self["metadata"].get("otherMaterialCharacteristics"):
+            metadata["otherMaterialCharacteristics"] = self["metadata"][
+                "otherMaterialCharacteristics"
+            ]
 
         # Edition statement
-        if self['metadata'].get('editionStatement'):
-            metadata['editionStatement'] = self['metadata']['editionStatement']
+        if self["metadata"].get("editionStatement"):
+            metadata["editionStatement"] = self["metadata"]["editionStatement"]
 
         # Notes
-        if self['metadata'].get('notes'):
-            metadata['notes'] = self['metadata']['notes']
+        if self["metadata"].get("notes"):
+            metadata["notes"] = self["metadata"]["notes"]
 
         # Series
-        if self['metadata'].get('series'):
-            metadata['series'] = self['metadata']['series']
+        if self["metadata"].get("series"):
+            metadata["series"] = self["metadata"]["series"]
 
         # Custom fields
         for field_number in range(1, 4):
-            field = f'customField{field_number}'
-            document_field = self['metadata'].get(field)
+            field = f"customField{field_number}"
+            document_field = self["metadata"].get(field)
             if document_field:
                 metadata[field] = document_field
 
         # Contributors
         contributors = []
-        for contributor in self.get('contributors', []):
+        for contributor in self.get("contributors", []):
             data = {
-                'agent': {
-                    'type': 'bf:Person',
-                    'preferred_name': contributor['name']
-                },
-                'role': [contributor['role']]
+                "agent": {"type": "bf:Person", "preferred_name": contributor["name"]},
+                "role": [contributor["role"]],
             }
 
-            if contributor.get('date_of_birth'):
-                 data['agent']['date_of_birth'] = contributor['date_of_birth']
+            if contributor.get("date_of_birth"):
+                data["agent"]["date_of_birth"] = contributor["date_of_birth"]
 
-            if contributor.get('date_of_death'):
-                 data['agent']['date_of_death'] = contributor['date_of_death']
+            if contributor.get("date_of_death"):
+                data["agent"]["date_of_death"] = contributor["date_of_death"]
 
-            if contributor.get('affiliation'):
-                data['affiliation'] = contributor['affiliation']
+            if contributor.get("affiliation"):
+                data["affiliation"] = contributor["affiliation"]
 
             # ORCID for contributor
-            if contributor.get('orcid'):
-                data['agent']['identifiedBy'] = {
-                    'type': 'bf:Local',
-                    'source': 'ORCID',
-                    'value': contributor['orcid']
+            if contributor.get("orcid"):
+                data["agent"]["identifiedBy"] = {
+                    "type": "bf:Local",
+                    "source": "ORCID",
+                    "value": contributor["orcid"],
                 }
 
             contributors.append(data)
 
         if contributors:
-            metadata['contribution'] = contributors
+            metadata["contribution"] = contributors
 
         # Projects
-        if self.get('projects'):
+        if self.get("projects"):
             projects = []
 
-            for project in self['projects']:
+            for project in self["projects"]:
                 # Create a new project
-                if not project.get('$ref'):
+                if not project.get("$ref"):
                     data = project.copy()
 
                     # Store user
-                    data['user'] = self['user']
+                    data["user"] = self["user"]
 
                     # Store organisation
-                    data['organisation'] = current_user_record['organisation']
+                    data["organisation"] = current_user_record["organisation"]
 
-                    project_record = sonar.service('projects').create(
-                        g.identity, {'metadata': data})
+                    project_record = sonar.service("projects").create(
+                        g.identity, {"metadata": data}
+                    )
                     project = {
-                        '$ref':
-                        SonarRecord.get_ref_link('projects',
-                                                 project_record['id'])
+                        "$ref": SonarRecord.get_ref_link(
+                            "projects", project_record["id"]
+                        )
                     }
 
                 projects.append(project)
 
             if projects:
-                metadata['projects'] = projects
+                metadata["projects"] = projects
 
         # License
-        metadata['usageAndAccessPolicy'] = {
-            'license': self['diffusion']['license']
-        }
+        metadata["usageAndAccessPolicy"] = {"license": self["diffusion"]["license"]}
 
         # Open access status
-        if self['diffusion'].get('oa_status'):
-            metadata['oa_status'] = self['diffusion']['oa_status']
+        if self["diffusion"].get("oa_status"):
+            metadata["oa_status"] = self["diffusion"]["oa_status"]
 
         # Subdivisions
-        if self['diffusion'].get('subdivisions'):
-            metadata['subdivisions'] = self['diffusion']['subdivisions']
-
+        if self["diffusion"].get("subdivisions"):
+            metadata["subdivisions"] = self["diffusion"]["subdivisions"]
 
         # Masked
-        if self['diffusion'].get('masked') is not None:
-            metadata['masked'] = self['diffusion']['masked']
-        document = DocumentRecord.create(metadata,
-                                         dbcommit=True,
-                                         with_bucket=True)
+        if self["diffusion"].get("masked") is not None:
+            metadata["masked"] = self["diffusion"]["masked"]
+        document = DocumentRecord.create(metadata, dbcommit=True, with_bucket=True)
 
-        current_order = 2
-        for file in self.files:
+        for idx, file in enumerate(self.files, start=1):
             with file.file.storage().open() as pdf_file:
                 content = pdf_file.read()
-
-                if file.get('category', 'main') == 'main':
-                    order = 1
-                else:
-                    order = current_order
-                    current_order += 1
-
                 kwargs = {
-                    'label': file.get('label', file['key']),
-                    'order': order
+                    "label": file.get("label", file["key"]),
+                    "order": file.get("order", idx),
                 }
 
-                if file.get('embargo', False) and file.get('embargoDate'):
-                    kwargs['access'] = 'coar:c_f1cf'  # Embargoed access
-                    kwargs['embargo_date'] = file['embargoDate']
-                    kwargs['restricted_outside_organisation'] = file.get(
-                        'exceptInOrganisation', False)
+                if file.get("embargoDate"):
+                    kwargs["access"] = "coar:c_f1cf"  # Embargoed access
+                    kwargs["embargo_date"] = file["embargoDate"]
+                    kwargs["restricted_outside_organisation"] = file.get(
+                        "exceptInOrganisation", False
+                    )
 
-                document.add_file(content, file['key'], **kwargs)
+                document.add_file(content, file["key"], **kwargs)
 
         document.commit()
         document.reindex()
 
-        self['document'] = {
-            '$ref': DocumentRecord.get_ref_link('documents', document['pid'])
+        self["document"] = {
+            "$ref": DocumentRecord.get_ref_link("documents", document["pid"])
         }
 
         return document

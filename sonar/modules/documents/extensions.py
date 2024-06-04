@@ -39,7 +39,7 @@ class ArkDocumentExtension(RecordExtension):
         """
         if ark_id := record.get_ark():
             with contextlib.suppress(PIDDoesNotExistError):
-                PersistentIdentifier.get('ark', ark_id).delete()
+                PersistentIdentifier.get("ark", ark_id).delete()
 
 
 class UrnDocumentExtension(RecordExtension):
@@ -66,8 +66,7 @@ class UrnDocumentExtension(RecordExtension):
         try:
             Urn.register_urn_code_from_document(record)
         except Exception as e:
-            current_app.logger.error(f'Error during URN registration{e}')
-
+            current_app.logger.error(f"Error during URN registration{e}")
 
     def post_delete(self, record, force=False):
         """Called after a record is deleted.
@@ -76,10 +75,12 @@ class UrnDocumentExtension(RecordExtension):
         :param force: unused.
         """
         from .api import DocumentRecord
+
         if urn_code := DocumentRecord.get_rero_urn_code(record):
             with contextlib.suppress(PIDDoesNotExistError):
-                urn_pid = PersistentIdentifier.get('urn', urn_code)
+                urn_pid = PersistentIdentifier.get("urn", urn_code)
                 urn_pid.delete()
                 current_app.logger.error(
                     f'Document (pid:{record["pid"]}) has been deleted and '
-                    f'contains an URN ({urn_code})')
+                    f"contains an URN ({urn_code})"
+                )

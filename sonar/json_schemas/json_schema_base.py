@@ -48,17 +48,16 @@ class JSONSchemaBase:
         :returns: The schema corresponding to the resource.
         """
         rec_type = self._resource_type
-        rec_type = re.sub('ies$', 'y', rec_type)
-        rec_type = re.sub('s$', '', rec_type)
+        rec_type = re.sub("ies$", "y", rec_type)
+        rec_type = re.sub("s$", "", rec_type)
 
         current_jsonschemas.get_schema.cache_clear()
-        schema_name = f'{self._resource_type}/{rec_type}-v1.0.0.json'
+        schema_name = f"{self._resource_type}/{rec_type}-v1.0.0.json"
 
         if has_custom_resource(self._resource_type):
             schema_name = f'{current_organisation["code"]}/{schema_name}'
 
-        self._schema = copy.deepcopy(
-            current_jsonschemas.get_schema(schema_name))
+        self._schema = copy.deepcopy(current_jsonschemas.get_schema(schema_name))
 
     def get_schema(self):
         """Return the schema loaded.
