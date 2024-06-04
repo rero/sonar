@@ -95,11 +95,17 @@
             "minLength": 1,
             "format": "uri",
             "pattern": "^https?://.*",
-            "form": {
-              "hideExpression": "true",
-              "validation": {
-                "messages": {
-                  "patternMessage": "Should be a valid URL format."
+            "widget": {
+              "formlyConfig": {
+                "expressions": {
+                  "hide": "true"
+                },
+                "props": {
+                  "validation": {
+                    "messages": {
+                      "patternMessage": "Should be a valid URL format."
+                    }
+                  }
                 }
               }
             }
@@ -109,8 +115,12 @@
             "description": "If the value is set to true, the file will point to the external link.",
             "type": "boolean",
             "default": false,
-            "form": {
-              "hideExpression": "true"
+            "widget": {
+              "formlyConfig": {
+                "expressions": {
+                  "hide": "true"
+                }
+              }
             }
           },
           "access": {
@@ -122,23 +132,27 @@
               "coar:c_16ec"
             ],
             "default": "coar:c_abf2",
-            "form": {
-              "options": [
-                {
-                  "label": "coar:c_abf2",
-                  "value": "coar:c_abf2"
+            "widget": {
+              "formlyConfig": {
+                "expressions": {
+                  "props.required": "true"
                 },
-                {
-                  "label": "coar:c_f1cf",
-                  "value": "coar:c_f1cf"
-                },
-                {
-                  "label": "coar:c_16ec",
-                  "value": "coar:c_16ec"
+                "props": {
+                  "options": [
+                    {
+                      "label": "coar:c_abf2",
+                      "value": "coar:c_abf2"
+                    },
+                    {
+                      "label": "coar:c_f1cf",
+                      "value": "coar:c_f1cf"
+                    },
+                    {
+                      "label": "coar:c_16ec",
+                      "value": "coar:c_16ec"
+                    }
+                  ]
                 }
-              ],
-              "expressionProperties": {
-                "templateOptions.required": "true"
               }
             }
           },
@@ -146,10 +160,12 @@
             "title": "Access allowed from the organisation's IP addresses",
             "type": "boolean",
             "default": true,
-            "form": {
-              "hideExpression": "!model || !model.access || model.access === 'coar:c_abf2'",
-              "expressionProperties": {
-                "templateOptions.required": "model && model.access && model.access !== 'coar:c_abf2'"
+            "widget": {
+              "formlyConfig": {
+                "expressions": {
+                  "props.required": "model && model.access && model.access !== 'coar:c_abf2'",
+                  "hide": "!model || !model.access || model.access === 'coar:c_abf2'"
+                }
               }
             }
           },
@@ -160,10 +176,12 @@
             "minLength": 1,
             "format": "date",
             "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
-            "form": {
-              "hideExpression": "!model || !model.access || model.access !== 'coar:c_f1cf'",
-              "expressionProperties": {
-                "templateOptions.required": "model && model.access && model.access === 'coar:c_f1cf'"
+            "widget": {
+              "formlyConfig": {
+                "expressions": {
+                  "props.required": "model && model.access && model.access === 'coar:c_f1cf'",
+                  "hide": "!model || !model.access || model.access !== 'coar:c_f1cf'"
+                }
               }
             }
           }
@@ -176,7 +194,6 @@
         ],
         "propertiesOrder": [
           "label",
-          "order",
           "access",
           "embargo_date",
           "restricted_outside_organisation",
@@ -233,9 +250,13 @@
             "type": "string",
             "pattern": "^https://sonar.ch/api/organisations/.*?$",
             "minLength": 1,
-            "form": {
-              "remoteOptions": {
-                "type": "organisations"
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "remoteOptions": {
+                    "type": "organisations"
+                  }
+                }
               }
             }
           }
@@ -244,9 +265,11 @@
           "$ref"
         ]
       },
-      "form": {
-        "expressionProperties": {
-          "templateOptions.required": "true"
+      "widget": {
+        "formlyConfig": {
+          "expressions": {
+            "props.required": "true"
+          }
         }
       }
     },
@@ -267,11 +290,12 @@
             "type": "string",
             "const": "bf:Title",
             "default": "bf:Title",
-            "form": {
-              "templateOptions": {
+            "widget": {
+              "formlyConfig": {
                 "wrappers": [
                   "hide"
-                ]
+                ],
+                "props": {}
               }
             }
           },
@@ -322,8 +346,12 @@
                 "language"
               ]
             },
-            "form": {
-              "hide": true
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "hide": true
+                }
+              }
             }
           }
         },
@@ -352,11 +380,12 @@
             "type": "string",
             "const": "bf:Language",
             "default": "bf:Language",
-            "form": {
-              "templateOptions": {
+            "widget": {
+              "formlyConfig": {
                 "wrappers": [
                   "hide"
-                ]
+                ],
+                "props": {}
               }
             }
           },
@@ -373,9 +402,11 @@
           "value"
         ]
       },
-      "form": {
-        "expressionProperties": {
-          "templateOptions.required": "true"
+      "widget": {
+        "formlyConfig": {
+          "expressions": {
+            "props.required": "true"
+          }
         }
       }
     },
@@ -416,10 +447,14 @@
       "required": [
         "editionDesignation"
       ],
-      "form": {
-        "hide": true,
-        "navigation": {
-          "essential": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true,
+            "navigation": {
+              "essential": true
+            }
+          }
         }
       }
     },
@@ -440,17 +475,21 @@
               "bf:Publication",
               "bf:Manufacture"
             ],
-            "form": {
-              "options": [
-                {
-                  "label": "bf:Publication",
-                  "value": "bf:Publication"
-                },
-                {
-                  "label": "bf:Manufacture",
-                  "value": "bf:Manufacture"
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "options": [
+                    {
+                      "label": "bf:Publication",
+                      "value": "bf:Publication"
+                    },
+                    {
+                      "label": "bf:Manufacture",
+                      "value": "bf:Manufacture"
+                    }
+                  ]
                 }
-              ]
+              }
             }
           },
           "statement": {
@@ -469,21 +508,25 @@
                     "bf:Agent",
                     "Date"
                   ],
-                  "form": {
-                    "options": [
-                      {
-                        "label": "bf:Place",
-                        "value": "bf:Place"
-                      },
-                      {
-                        "label": "bf:Agent",
-                        "value": "bf:Agent"
-                      },
-                      {
-                        "label": "Date",
-                        "value": "Date"
+                  "widget": {
+                    "formlyConfig": {
+                      "props": {
+                        "options": [
+                          {
+                            "label": "bf:Place",
+                            "value": "bf:Place"
+                          },
+                          {
+                            "label": "bf:Agent",
+                            "value": "bf:Agent"
+                          },
+                          {
+                            "label": "Date",
+                            "value": "Date"
+                          }
+                        ]
                       }
-                    ]
+                    }
                   }
                 },
                 "label": {
@@ -514,10 +557,14 @@
                 "label"
               ]
             },
-            "form": {
-              "hide": true,
-              "expressionProperties": {
-                "templateOptions.required": "field.parent.model.type && field.parent.model.type !== 'bf:Publication'"
+            "widget": {
+              "formlyConfig": {
+                "expressions": {
+                  "props.required": "field.parent.model.type && field.parent.model.type !== 'bf:Publication'"
+                },
+                "props": {
+                  "hide": true
+                }
               }
             }
           },
@@ -526,10 +573,14 @@
             "type": "string",
             "minLength": 1,
             "pattern": "^[0-9]{4}(-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]))?$",
-            "form": {
-              "placeholder": "Example: 2019 or 2019-01-01",
-              "expressionProperties": {
-                "templateOptions.required": "true"
+            "widget": {
+              "formlyConfig": {
+                "expressions": {
+                  "props.required": "true"
+                },
+                "props": {
+                  "placeholder": "Example: 2019 or 2019-01-01"
+                }
               }
             }
           },
@@ -538,9 +589,15 @@
             "type": "string",
             "minLength": 1,
             "pattern": "^[0-9]{4}(-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]))?$",
-            "form": {
-              "placeholder": "Example: 2019 or 2019-01-01",
-              "hideExpression": "!model ||  (model.type !== 'bf:Publication' || !model.startDate)"
+            "widget": {
+              "formlyConfig": {
+                "expressions": {
+                  "hide": "!model ||  (model.type !== 'bf:Publication' || !model.startDate)"
+                },
+                "props": {
+                  "placeholder": "Example: 2019 or 2019-01-01"
+                }
+              }
             }
           }
         },
@@ -554,9 +611,11 @@
           "type"
         ]
       },
-      "form": {
-        "expressionProperties": {
-          "templateOptions.required": "field.parent.model && !['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc', 'coar:c_3e5a', 'coar:c_ba08', coar:c_5794', 'coar:c_6670'].includes(field.parent.model.documentType)"
+      "widget": {
+        "formlyConfig": {
+          "expressions": {
+            "props.required": "field.parent.model && !['coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc', 'coar:c_3e5a', 'coar:c_ba08', 'coar:c_5794', 'coar:c_6670'].includes(field.parent.model.documentType)"
+          }
         }
       }
     },
@@ -565,8 +624,12 @@
       "description": "Extent of the resource, i.e. the number of pages or volumes.",
       "type": "string",
       "minLength": 1,
-      "form": {
-        "hide": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true
+          }
+        }
       }
     },
     "otherMaterialCharacteristics": {
@@ -574,8 +637,12 @@
       "description": "Other Material Characteristics, i.e. illustrations, black and white, or coloured.",
       "type": "string",
       "minLength": 1,
-      "form": {
-        "hide": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true
+          }
+        }
       }
     },
     "formats": {
@@ -588,8 +655,12 @@
         "type": "string",
         "minLength": 1
       },
-      "form": {
-        "hide": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true
+          }
+        }
       }
     },
     "additionalMaterials": {
@@ -597,8 +668,12 @@
       "description": "Accompanying material of the resource, i.e. maps.",
       "type": "string",
       "minLength": 1,
-      "form": {
-        "hide": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true
+          }
+        }
       }
     },
     "series": {
@@ -626,8 +701,12 @@
           "name"
         ]
       },
-      "form": {
-        "hide": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true
+          }
+        }
       }
     },
     "notes": {
@@ -639,8 +718,12 @@
         "type": "string",
         "minLength": 1
       },
-      "form": {
-        "hide": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true
+          }
+        }
       }
     },
     "abstracts": {
@@ -656,10 +739,12 @@
             "title": "Value",
             "type": "string",
             "minLength": 1,
-            "form": {
-              "type": "textarea",
-              "templateOptions": {
-                "rows": 3
+            "widget": {
+              "formlyConfig": {
+                "type": "textarea",
+                "props": {
+                  "rows": 3
+                }
               }
             }
           },
@@ -672,10 +757,14 @@
           "language"
         ]
       },
-      "form": {
-        "hide": true,
-        "navigation": {
-          "essential": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true,
+            "navigation": {
+              "essential": true
+            }
+          }
         }
       }
     },
@@ -717,101 +806,105 @@
               "bf:ReportNumber",
               "bf:Strn"
             ],
-            "form": {
-              "options": [
-                {
-                  "label": "bf:AudioIssueNumber",
-                  "value": "bf:AudioIssueNumber"
-                },
-                {
-                  "label": "bf:Doi",
-                  "value": "bf:Doi"
-                },
-                {
-                  "label": "bf:Ean",
-                  "value": "bf:Ean"
-                },
-                {
-                  "label": "bf:Gtin14Number",
-                  "value": "bf:Gtin14Number"
-                },
-                {
-                  "label": "bf:Identifier",
-                  "value": "bf:Identifier"
-                },
-                {
-                  "label": "bf:Isan",
-                  "value": "bf:Isan"
-                },
-                {
-                  "label": "bf:Isbn",
-                  "value": "bf:Isbn"
-                },
-                {
-                  "label": "bf:Ismn",
-                  "value": "bf:Ismn"
-                },
-                {
-                  "label": "bf:Isrc",
-                  "value": "bf:Isrc"
-                },
-                {
-                  "label": "bf:Issn",
-                  "value": "bf:Issn"
-                },
-                {
-                  "label": "bf:IssnL",
-                  "value": "bf:IssnL"
-                },
-                {
-                  "label": "bf:Local",
-                  "value": "bf:Local"
-                },
-                {
-                  "label": "bf:MatrixNumber",
-                  "value": "bf:MatrixNumber"
-                },
-                {
-                  "label": "bf:MusicDistributorNumber",
-                  "value": "bf:MusicDistributorNumber"
-                },
-                {
-                  "label": "bf:MusicPlate",
-                  "value": "bf:MusicPlate"
-                },
-                {
-                  "label": "bf:MusicPublisherNumber",
-                  "value": "bf:MusicPublisherNumber"
-                },
-                {
-                  "label": "bf:PublisherNumber",
-                  "value": "bf:PublisherNumber"
-                },
-                {
-                  "label": "bf:Upc",
-                  "value": "bf:Upc"
-                },
-                {
-                  "label": "bf:Urn",
-                  "value": "bf:Urn"
-                },
-                {
-                  "label": "bf:VideoRecordingNumber",
-                  "value": "bf:VideoRecordingNumber"
-                },
-                {
-                  "label": "uri",
-                  "value": "uri"
-                },
-                {
-                  "label": "bf:ReportNumber",
-                  "value": "bf:ReportNumber"
-                },
-                {
-                  "label": "bf:Strn",
-                  "value": "bf:Strn"
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "options": [
+                    {
+                      "label": "bf:AudioIssueNumber",
+                      "value": "bf:AudioIssueNumber"
+                    },
+                    {
+                      "label": "bf:Doi",
+                      "value": "bf:Doi"
+                    },
+                    {
+                      "label": "bf:Ean",
+                      "value": "bf:Ean"
+                    },
+                    {
+                      "label": "bf:Gtin14Number",
+                      "value": "bf:Gtin14Number"
+                    },
+                    {
+                      "label": "bf:Identifier",
+                      "value": "bf:Identifier"
+                    },
+                    {
+                      "label": "bf:Isan",
+                      "value": "bf:Isan"
+                    },
+                    {
+                      "label": "bf:Isbn",
+                      "value": "bf:Isbn"
+                    },
+                    {
+                      "label": "bf:Ismn",
+                      "value": "bf:Ismn"
+                    },
+                    {
+                      "label": "bf:Isrc",
+                      "value": "bf:Isrc"
+                    },
+                    {
+                      "label": "bf:Issn",
+                      "value": "bf:Issn"
+                    },
+                    {
+                      "label": "bf:IssnL",
+                      "value": "bf:IssnL"
+                    },
+                    {
+                      "label": "bf:Local",
+                      "value": "bf:Local"
+                    },
+                    {
+                      "label": "bf:MatrixNumber",
+                      "value": "bf:MatrixNumber"
+                    },
+                    {
+                      "label": "bf:MusicDistributorNumber",
+                      "value": "bf:MusicDistributorNumber"
+                    },
+                    {
+                      "label": "bf:MusicPlate",
+                      "value": "bf:MusicPlate"
+                    },
+                    {
+                      "label": "bf:MusicPublisherNumber",
+                      "value": "bf:MusicPublisherNumber"
+                    },
+                    {
+                      "label": "bf:PublisherNumber",
+                      "value": "bf:PublisherNumber"
+                    },
+                    {
+                      "label": "bf:Upc",
+                      "value": "bf:Upc"
+                    },
+                    {
+                      "label": "bf:Urn",
+                      "value": "bf:Urn"
+                    },
+                    {
+                      "label": "bf:VideoRecordingNumber",
+                      "value": "bf:VideoRecordingNumber"
+                    },
+                    {
+                      "label": "uri",
+                      "value": "uri"
+                    },
+                    {
+                      "label": "bf:ReportNumber",
+                      "value": "bf:ReportNumber"
+                    },
+                    {
+                      "label": "bf:Strn",
+                      "value": "bf:Strn"
+                    }
+                  ]
                 }
-              ]
+              }
             }
           },
           "value": {
@@ -823,16 +916,24 @@
             "title": "Note",
             "type": "string",
             "minLength": 1,
-            "form": {
-              "hide": true
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "hide": true
+                }
+              }
             }
           },
           "qualifier": {
             "title": "Qualifier",
             "type": "string",
             "minLength": 1,
-            "form": {
-              "hide": true
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "hide": true
+                }
+              }
             }
           },
           "acquisitionTerms": {
@@ -844,10 +945,12 @@
             "title": "Source",
             "type": "string",
             "minLength": 1,
-            "form": {
-              "hideExpression": "!model || model.type !== 'bf:Local'",
-              "expressionProperties": {
-                "templateOptions.required": "model && model.type === 'bf:Local'"
+            "widget": {
+              "formlyConfig": {
+                "expressions": {
+                  "props.required": "model && model.type === 'bf:Local'",
+                  "hide": "!model || model.type !== 'bf:Local'"
+                }
               }
             }
           },
@@ -860,8 +963,12 @@
               "invalid or cancelled"
             ],
             "validationMessage": "ISBN/ISSN status should be selected in the list below.",
-            "form": {
-              "hide": true
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "hide": true
+                }
+              }
             }
           }
         },
@@ -878,10 +985,14 @@
           "value"
         ]
       },
-      "form": {
-        "hide": true,
-        "navigation": {
-          "essential": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true,
+            "navigation": {
+              "essential": true
+            }
+          }
         }
       }
     },
@@ -927,10 +1038,14 @@
           "label"
         ]
       },
-      "form": {
-        "hide": true,
-        "navigation": {
-          "essential": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true,
+            "navigation": {
+              "essential": true
+            }
+          }
         }
       }
     },
@@ -959,11 +1074,15 @@
                 "type": "string",
                 "minLength": 1,
                 "pattern": "^https?://.+",
-                "form": {
-                  "placeholder": "Example: https://www.rero.ch",
-                  "validation": {
-                    "messages": {
-                      "patternMessage": "Should be a valid URL format."
+                "widget": {
+                  "formlyConfig": {
+                    "props": {
+                      "validation": {
+                        "messages": {
+                          "patternMessage": "Should be a valid URL format."
+                        }
+                      },
+                      "placeholder": "Example: https://www.rero.ch"
                     }
                   }
                 }
@@ -977,8 +1096,12 @@
             "title": "Public note",
             "type": "string",
             "minLength": 1,
-            "form": {
-              "placeholder": "Example: Published version"
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "placeholder": "Example: Published version"
+                }
+              }
             }
           }
         },
@@ -991,8 +1114,12 @@
           "publicNote"
         ]
       },
-      "form": {
-        "hide": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true
+          }
+        }
       }
     },
     "relatedTo": {
@@ -1015,11 +1142,15 @@
                 "type": "string",
                 "pattern": "^https?://.+",
                 "minLength": 1,
-                "form": {
-                  "placeholder": "Example: https://www.rero.ch",
-                  "validation": {
-                    "messages": {
-                      "patternMessage": "Should be a valid URL format."
+                "widget": {
+                  "formlyConfig": {
+                    "props": {
+                      "validation": {
+                        "messages": {
+                          "patternMessage": "Should be a valid URL format."
+                        }
+                      },
+                      "placeholder": "Example: https://www.rero.ch"
                     }
                   }
                 }
@@ -1033,8 +1164,12 @@
             "title": "Public note",
             "type": "string",
             "minLength": 1,
-            "form": {
-              "placeholder": "Example: Research dataset"
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "placeholder": "Example: Research dataset"
+                }
+              }
             }
           }
         },
@@ -1047,8 +1182,12 @@
           "publicNote"
         ]
       },
-      "form": {
-        "hide": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true
+          }
+        }
       }
     },
     "collections": {
@@ -1063,11 +1202,15 @@
           "$ref": {
             "type": "string",
             "pattern": "^https://sonar.ch/api/collections/.*?$",
-            "form": {
-              "remoteTypeahead": {
-                "type": "collections",
-                "field": "name.value.suggest",
-                "label": "label"
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "remoteTypeahead": {
+                    "type": "collections",
+                    "field": "name.value.suggest",
+                    "label": "label"
+                  }
+                }
               }
             }
           }
@@ -1076,10 +1219,14 @@
           "$ref"
         ]
       },
-      "form": {
-        "hide": true,
-        "navigation": {
-          "essential": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true,
+            "navigation": {
+              "essential": true
+            }
+          }
         }
       }
     },
@@ -1101,11 +1248,12 @@
                 "readOnly": true,
                 "const": "bf:ClassificationUdc",
                 "default": "bf:ClassificationUdc",
-                "form": {
-                  "templateOptions": {
+                "widget": {
+                  "formlyConfig": {
                     "wrappers": [
                       "hide"
-                    ]
+                    ],
+                    "props": {}
                   }
                 }
               },
@@ -1133,11 +1281,12 @@
                 "readOnly": true,
                 "const": "bf:ClassificationDdc",
                 "default": "bf:ClassificationDdc",
-                "form": {
-                  "templateOptions": {
+                "widget": {
+                  "formlyConfig": {
                     "wrappers": [
                       "hide"
-                    ]
+                    ],
+                    "props": {}
                   }
                 }
               },
@@ -1158,10 +1307,14 @@
           }
         ]
       },
-      "form": {
-        "hide": true,
-        "navigation": {
-          "essential": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true,
+            "navigation": {
+              "essential": true
+            }
+          }
         }
       }
     },
@@ -1174,8 +1327,12 @@
         "type": "string",
         "minLength": 1
       },
-      "form": {
-        "hide": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true
+          }
+        }
       }
     },
     "dissertation": {
@@ -1202,8 +1359,12 @@
           "title": "Date",
           "type": "string",
           "pattern": "^[0-9]{4}(-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]))?$",
-          "form": {
-            "placeholder": "Example: 2019 or 2019-05-05"
+          "widget": {
+            "formlyConfig": {
+              "props": {
+                "placeholder": "Example: 2019 or 2019-05-05"
+              }
+            }
           }
         }
       },
@@ -1216,10 +1377,14 @@
       "required": [
         "degree"
       ],
-      "form": {
-        "hide": true
-      },
-      "hideExpression": "field.parent.model && !['coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'habilitation_thesis', 'advanced_studies_thesis', 'other_thesis'].includes(field.parent.model.documentType)"
+      "hideExpression": "field.parent.model && !['coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'habilitation_thesis', 'advanced_studies_thesis', 'other_thesis'].includes(field.parent.model.documentType)",
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true
+          }
+        }
+      }
     },
     "usageAndAccessPolicy": {
       "title": "Usage and access policy",
@@ -1242,8 +1407,12 @@
       "required": [
         "license"
       ],
-      "form": {
-        "hide": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true
+          }
+        }
       }
     },
     "contribution": {
@@ -1259,7 +1428,7 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-               "agent": {
+              "agent": {
                 "title": "Agent",
                 "type": "object",
                 "additionalProperties": false,
@@ -1269,11 +1438,12 @@
                     "type": "string",
                     "const": "bf:Person",
                     "default": "bf:Person",
-                    "form": {
-                      "templateOptions": {
+                    "widget": {
+                      "formlyConfig": {
                         "wrappers": [
                           "hide"
-                        ]
+                        ],
+                        "props": {}
                       }
                     }
                   },
@@ -1281,12 +1451,16 @@
                     "title": "Preferred name",
                     "type": "string",
                     "minLength": 1,
-                    "form": {
-                      "remoteTypeahead": {
-                        "type": "documents",
-                        "field": "contribution.agent.preferred_name.suggest",
-                        "suggest": "/api/suggestions/completion",
-                        "allowAdd": true
+                    "widget": {
+                      "formlyConfig": {
+                        "props": {
+                          "remoteTypeahead": {
+                            "type": "documents",
+                            "field": "contribution.agent.preferred_name.suggest",
+                            "suggest": "/api/suggestions/completion",
+                            "allowAdd": true
+                          }
+                        }
                       }
                     }
                   },
@@ -1302,27 +1476,33 @@
                           "bf:Identifier",
                           "bf:Local"
                         ],
-                        "form": {
-                          "options": [
-                            {
-                              "label": "bf:Identifier",
-                              "value": "bf:Identifier"
-                            },
-                            {
-                              "label": "bf:Local",
-                              "value": "bf:Local"
+                        "widget": {
+                          "formlyConfig": {
+                            "props": {
+                              "options": [
+                                {
+                                  "label": "bf:Identifier",
+                                  "value": "bf:Identifier"
+                                },
+                                {
+                                  "label": "bf:Local",
+                                  "value": "bf:Local"
+                                }
+                              ]
                             }
-                          ]
+                          }
                         }
                       },
                       "source": {
                         "title": "Source",
                         "type": "string",
                         "minLength": 1,
-                        "form": {
-                          "hideExpression": "!model ||  model.type !== 'bf:Local'",
-                          "expressionProperties": {
-                            "templateOptions.required": "model && model.type === 'bf:Local'"
+                        "widget": {
+                          "formlyConfig": {
+                            "expressions": {
+                              "props.required": "model && model.type === 'bf:Local'",
+                              "hide": "!model ||  model.type !== 'bf:Local'"
+                            }
                           }
                         }
                       },
@@ -1341,24 +1521,36 @@
                       "type",
                       "value"
                     ],
-                    "form": {
-                      "hide": true
+                    "widget": {
+                      "formlyConfig": {
+                        "props": {
+                          "hide": true
+                        }
+                      }
                     }
                   },
                   "date_of_birth": {
                     "title": "Date of birth",
                     "type": "string",
                     "minLength": 4,
-                    "form": {
-                      "hide": true
+                    "widget": {
+                      "formlyConfig": {
+                        "props": {
+                          "hide": true
+                        }
+                      }
                     }
                   },
                   "date_of_death": {
                     "title": "Date of death",
                     "type": "string",
                     "minLength": 4,
-                    "form": {
-                      "hide": true
+                    "widget": {
+                      "formlyConfig": {
+                        "props": {
+                          "hide": true
+                        }
+                      }
                     }
                   }
                 },
@@ -1411,11 +1603,12 @@
                     "type": "string",
                     "const": "bf:Organization",
                     "default": "bf:Organization",
-                    "form": {
-                      "templateOptions": {
+                    "widget": {
+                      "formlyConfig": {
                         "wrappers": [
                           "hide"
-                        ]
+                        ],
+                        "props": {}
                       }
                     }
                   },
@@ -1423,15 +1616,18 @@
                     "title": "Preferred name",
                     "type": "string",
                     "minLength": 1,
-                    "form": {
-                      "remoteTypeahead": {
-                        "type": "documents",
-                        "field": "contribution.agent.preferred_name.suggest",
-                        "suggest": "/api/suggestions/completion",
-                        "allowAdd": true
+                    "widget": {
+                      "formlyConfig": {
+                        "props": {
+                          "remoteTypeahead": {
+                            "type": "documents",
+                            "field": "contribution.agent.preferred_name.suggest",
+                            "suggest": "/api/suggestions/completion",
+                            "allowAdd": true
+                          }
+                        }
                       }
                     }
-
                   }
                 },
                 "propertiesOrder": [
@@ -1474,11 +1670,12 @@
                     "type": "string",
                     "const": "bf:Meeting",
                     "default": "bf:Meeting",
-                    "form": {
-                      "templateOptions": {
+                    "widget": {
+                      "formlyConfig": {
                         "wrappers": [
                           "hide"
-                        ]
+                        ],
+                        "props": {}
                       }
                     }
                   },
@@ -1486,12 +1683,16 @@
                     "title": "Preferred name",
                     "type": "string",
                     "minLength": 1,
-                    "form": {
-                      "remoteTypeahead": {
-                        "type": "documents",
-                        "field": "contribution.agent.preferred_name.suggest",
-                        "suggest": "/api/suggestions/completion",
-                        "allowAdd": true
+                    "widget": {
+                      "formlyConfig": {
+                        "props": {
+                          "remoteTypeahead": {
+                            "type": "documents",
+                            "field": "contribution.agent.preferred_name.suggest",
+                            "suggest": "/api/suggestions/completion",
+                            "allowAdd": true
+                          }
+                        }
                       }
                     }
                   },
@@ -1499,24 +1700,36 @@
                     "title": "Place",
                     "type": "string",
                     "minLength": 1,
-                    "form": {
-                      "hide": true
+                    "widget": {
+                      "formlyConfig": {
+                        "props": {
+                          "hide": true
+                        }
+                      }
                     }
                   },
                   "date": {
                     "title": "Date",
                     "type": "string",
                     "minLength": 1,
-                    "form": {
-                      "hide": true
+                    "widget": {
+                      "formlyConfig": {
+                        "props": {
+                          "hide": true
+                        }
+                      }
                     }
                   },
                   "number": {
                     "title": "Number",
                     "type": "string",
                     "minLength": 1,
-                    "form": {
-                      "hide": true
+                    "widget": {
+                      "formlyConfig": {
+                        "props": {
+                          "hide": true
+                        }
+                      }
                     }
                   }
                 },
@@ -1550,10 +1763,14 @@
           }
         ]
       },
-      "form": {
-        "hide": true,
-        "navigation": {
-          "essential": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true,
+            "navigation": {
+              "essential": true
+            }
+          }
         }
       }
     },
@@ -1570,9 +1787,11 @@
             "title": "Year",
             "type": "string",
             "minLength": 1,
-            "form": {
-              "expressionProperties": {
-                "templateOptions.required": "!['coar:c_816b'].includes(field.parent.parent.parent.model.documentType)"
+            "widget": {
+              "formlyConfig": {
+                "expressions": {
+                  "props.required": "!['coar:c_816b'].includes(field.parent.parent.parent.model.documentType)"
+                }
               }
             }
           },
@@ -1580,24 +1799,36 @@
             "title": "Volume",
             "type": "string",
             "minLength": 1,
-            "form": {
-              "hideExpression": "!['coar:c_3248', 'coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc', 'coar:c_816b', 'coar:c_5794', 'coar:c_6670', 'coar:c_c94f'].includes(field.parent.parent.parent.model.documentType)"
+            "widget": {
+              "formlyConfig": {
+                "expressions": {
+                  "hide": "!['coar:c_3248', 'coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc', 'coar:c_816b', 'coar:c_5794', 'coar:c_6670', 'coar:c_c94f'].includes(field.parent.parent.parent.model.documentType)"
+                }
+              }
             }
           },
           "numberingIssue": {
             "title": "Issue",
             "type": "string",
             "minLength": 1,
-            "form": {
-              "hideExpression": "!['coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc', 'coar:c_816b', 'coar:c_5794', 'coar:c_6670', 'coar:c_c94f'].includes(field.parent.parent.parent.model.documentType)"
+            "widget": {
+              "formlyConfig": {
+                "expressions": {
+                  "hide": "!['coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc', 'coar:c_816b', 'coar:c_5794', 'coar:c_6670', 'coar:c_c94f'].includes(field.parent.parent.parent.model.documentType)"
+                }
+              }
             }
           },
           "numberingPages": {
             "title": "Pages",
             "type": "string",
             "minLength": 1,
-            "form": {
-              "placeholder": "Examples: 135, 5-27, …"
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "placeholder": "Examples: 135, 5-27, \u2026"
+                }
+              }
             }
           },
           "document": {
@@ -1632,8 +1863,12 @@
                   "statement",
                   "startDate"
                 ],
-                "form": {
-                  "hideExpression": "!['coar:c_3248', 'coar:c_5794', 'coar:c_6670'].includes(field.parent.parent.parent.parent.model.documentType)"
+                "widget": {
+                  "formlyConfig": {
+                    "expressions": {
+                      "hide": "!['coar:c_3248', 'coar:c_5794', 'coar:c_6670'].includes(field.parent.parent.parent.parent.model.documentType)"
+                    }
+                  }
                 }
               },
               "contribution": {
@@ -1644,12 +1879,20 @@
                   "title": "Author or editor",
                   "type": "string",
                   "minLength": 1,
-                  "form": {
-                    "placeholder": "Example: Muller, Hans"
+                  "widget": {
+                    "formlyConfig": {
+                      "props": {
+                        "placeholder": "Example: Muller, Hans"
+                      }
+                    }
                   }
                 },
-                "form": {
-                  "hideExpression": "!['coar:c_3248', 'coar:c_5794', 'coar:c_6670'].includes(field.parent.parent.parent.parent.model.documentType)"
+                "widget": {
+                  "formlyConfig": {
+                    "expressions": {
+                      "hide": "!['coar:c_3248', 'coar:c_5794', 'coar:c_6670'].includes(field.parent.parent.parent.parent.model.documentType)"
+                    }
+                  }
                 }
               },
               "identifiedBy": {
@@ -1689,101 +1932,105 @@
                         "bf:ReportNumber",
                         "bf:Strn"
                       ],
-                      "form": {
-                        "options": [
-                          {
-                            "label": "bf:AudioIssueNumber",
-                            "value": "bf:AudioIssueNumber"
-                          },
-                          {
-                            "label": "bf:Doi",
-                            "value": "bf:Doi"
-                          },
-                          {
-                            "label": "bf:Ean",
-                            "value": "bf:Ean"
-                          },
-                          {
-                            "label": "bf:Gtin14Number",
-                            "value": "bf:Gtin14Number"
-                          },
-                          {
-                            "label": "bf:Identifier",
-                            "value": "bf:Identifier"
-                          },
-                          {
-                            "label": "bf:Isan",
-                            "value": "bf:Isan"
-                          },
-                          {
-                            "label": "bf:Isbn",
-                            "value": "bf:Isbn"
-                          },
-                          {
-                            "label": "bf:Ismn",
-                            "value": "bf:Ismn"
-                          },
-                          {
-                            "label": "bf:Isrc",
-                            "value": "bf:Isrc"
-                          },
-                          {
-                            "label": "bf:Issn",
-                            "value": "bf:Issn"
-                          },
-                          {
-                            "label": "bf:IssnL",
-                            "value": "bf:IssnL"
-                          },
-                          {
-                            "label": "bf:Local",
-                            "value": "bf:Local"
-                          },
-                          {
-                            "label": "bf:MatrixNumber",
-                            "value": "bf:MatrixNumber"
-                          },
-                          {
-                            "label": "bf:MusicDistributorNumber",
-                            "value": "bf:MusicDistributorNumber"
-                          },
-                          {
-                            "label": "bf:MusicPlate",
-                            "value": "bf:MusicPlate"
-                          },
-                          {
-                            "label": "bf:MusicPublisherNumber",
-                            "value": "bf:MusicPublisherNumber"
-                          },
-                          {
-                            "label": "bf:PublisherNumber",
-                            "value": "bf:PublisherNumber"
-                          },
-                          {
-                            "label": "bf:Upc",
-                            "value": "bf:Upc"
-                          },
-                          {
-                            "label": "bf:Urn",
-                            "value": "bf:Urn"
-                          },
-                          {
-                            "label": "bf:VideoRecordingNumber",
-                            "value": "bf:VideoRecordingNumber"
-                          },
-                          {
-                            "label": "uri",
-                            "value": "uri"
-                          },
-                          {
-                            "label": "bf:ReportNumber",
-                            "value": "bf:ReportNumber"
-                          },
-                          {
-                            "label": "bf:Strn",
-                            "value": "bf:Strn"
+                      "widget": {
+                        "formlyConfig": {
+                          "props": {
+                            "options": [
+                              {
+                                "label": "bf:AudioIssueNumber",
+                                "value": "bf:AudioIssueNumber"
+                              },
+                              {
+                                "label": "bf:Doi",
+                                "value": "bf:Doi"
+                              },
+                              {
+                                "label": "bf:Ean",
+                                "value": "bf:Ean"
+                              },
+                              {
+                                "label": "bf:Gtin14Number",
+                                "value": "bf:Gtin14Number"
+                              },
+                              {
+                                "label": "bf:Identifier",
+                                "value": "bf:Identifier"
+                              },
+                              {
+                                "label": "bf:Isan",
+                                "value": "bf:Isan"
+                              },
+                              {
+                                "label": "bf:Isbn",
+                                "value": "bf:Isbn"
+                              },
+                              {
+                                "label": "bf:Ismn",
+                                "value": "bf:Ismn"
+                              },
+                              {
+                                "label": "bf:Isrc",
+                                "value": "bf:Isrc"
+                              },
+                              {
+                                "label": "bf:Issn",
+                                "value": "bf:Issn"
+                              },
+                              {
+                                "label": "bf:IssnL",
+                                "value": "bf:IssnL"
+                              },
+                              {
+                                "label": "bf:Local",
+                                "value": "bf:Local"
+                              },
+                              {
+                                "label": "bf:MatrixNumber",
+                                "value": "bf:MatrixNumber"
+                              },
+                              {
+                                "label": "bf:MusicDistributorNumber",
+                                "value": "bf:MusicDistributorNumber"
+                              },
+                              {
+                                "label": "bf:MusicPlate",
+                                "value": "bf:MusicPlate"
+                              },
+                              {
+                                "label": "bf:MusicPublisherNumber",
+                                "value": "bf:MusicPublisherNumber"
+                              },
+                              {
+                                "label": "bf:PublisherNumber",
+                                "value": "bf:PublisherNumber"
+                              },
+                              {
+                                "label": "bf:Upc",
+                                "value": "bf:Upc"
+                              },
+                              {
+                                "label": "bf:Urn",
+                                "value": "bf:Urn"
+                              },
+                              {
+                                "label": "bf:VideoRecordingNumber",
+                                "value": "bf:VideoRecordingNumber"
+                              },
+                              {
+                                "label": "uri",
+                                "value": "uri"
+                              },
+                              {
+                                "label": "bf:ReportNumber",
+                                "value": "bf:ReportNumber"
+                              },
+                              {
+                                "label": "bf:Strn",
+                                "value": "bf:Strn"
+                              }
+                            ]
                           }
-                        ]
+                        }
                       }
                     },
                     "value": {
@@ -1795,16 +2042,24 @@
                       "title": "Note",
                       "type": "string",
                       "minLength": 1,
-                      "form": {
-                        "hide": true
+                      "widget": {
+                        "formlyConfig": {
+                          "props": {
+                            "hide": true
+                          }
+                        }
                       }
                     },
                     "qualifier": {
                       "title": "Qualifier",
                       "type": "string",
                       "minLength": 1,
-                      "form": {
-                        "hide": true
+                      "widget": {
+                        "formlyConfig": {
+                          "props": {
+                            "hide": true
+                          }
+                        }
                       }
                     },
                     "acquisitionTerms": {
@@ -1816,10 +2071,12 @@
                       "title": "Source",
                       "type": "string",
                       "minLength": 1,
-                      "form": {
-                        "hideExpression": "!model ||  model.type !== 'bf:Local'",
-                        "expressionProperties": {
-                          "templateOptions.required": "model && model.type === 'bf:Local'"
+                      "widget": {
+                        "formlyConfig": {
+                          "expressions": {
+                            "props.required": "model && model.type === 'bf:Local'",
+                            "hide": "!model ||  model.type !== 'bf:Local'"
+                          }
                         }
                       }
                     },
@@ -1832,8 +2089,12 @@
                         "invalid or cancelled"
                       ],
                       "validationMessage": "ISBN/ISSN status should be selected in the list below.",
-                      "form": {
-                        "hide": true
+                      "widget": {
+                        "formlyConfig": {
+                          "props": {
+                            "hide": true
+                          }
+                        }
                       }
                     }
                   },
@@ -1850,8 +2111,12 @@
                     "value"
                   ]
                 },
-                "form": {
-                  "hide": true
+                "widget": {
+                  "formlyConfig": {
+                    "props": {
+                      "hide": true
+                    }
+                  }
                 }
               }
             },
@@ -1876,10 +2141,14 @@
           "document"
         ]
       },
-      "form": {
-        "hide": true,
-        "expressionProperties": {
-          "templateOptions.required": "field.parent.model && ['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)"
+      "widget": {
+        "formlyConfig": {
+          "expressions": {
+            "props.required": "field.parent.model && ['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)"
+          },
+          "props": {
+            "hide": true
+          }
         }
       }
     },
@@ -1895,11 +2164,15 @@
           "$ref": {
             "type": "string",
             "pattern": "^https://sonar.ch/api/projects/.*?$",
-            "form": {
-              "remoteTypeahead": {
-                "type": "projects",
-                "label": "name",
-                "field": "metadata.name.suggest"
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "remoteTypeahead": {
+                    "type": "projects",
+                    "label": "name",
+                    "field": "metadata.name.suggest"
+                  }
+                }
               }
             }
           }
@@ -1908,10 +2181,14 @@
           "$ref"
         ]
       },
-      "form": {
-        "hide": true,
-        "navigation": {
-          "essential": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true,
+            "navigation": {
+              "essential": true
+            }
+          }
         }
       }
     },
@@ -1925,17 +2202,25 @@
       "items": {
         "type": "string",
         "minLength": 1,
-        "form": {
-          "remoteTypeahead": {
-            "type": "documents",
-            "field": "customField1.suggest",
-            "suggest": "/api/suggestions/completion",
-            "allowAdd": true
+        "widget": {
+          "formlyConfig": {
+            "props": {
+              "remoteTypeahead": {
+                "type": "documents",
+                "field": "customField1.suggest",
+                "suggest": "/api/suggestions/completion",
+                "allowAdd": true
+              }
+            }
           }
         }
       },
-      "form": {
-        "hide": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true
+          }
+        }
       }
     },
     "customField2": {
@@ -1945,17 +2230,25 @@
       "items": {
         "type": "string",
         "minLength": 1,
-        "form": {
-          "remoteTypeahead": {
-            "type": "documents",
-            "field": "customField2.suggest",
-            "suggest": "/api/suggestions/completion",
-            "allowAdd": true
+        "widget": {
+          "formlyConfig": {
+            "props": {
+              "remoteTypeahead": {
+                "type": "documents",
+                "field": "customField2.suggest",
+                "suggest": "/api/suggestions/completion",
+                "allowAdd": true
+              }
+            }
           }
         }
       },
-      "form": {
-        "hide": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true
+          }
+        }
       }
     },
     "customField3": {
@@ -1965,21 +2258,29 @@
       "items": {
         "type": "string",
         "minLength": 1,
-        "form": {
-          "remoteTypeahead": {
-            "type": "documents",
-            "field": "customField3.suggest",
-            "suggest": "/api/suggestions/completion",
-            "allowAdd": true
+        "widget": {
+          "formlyConfig": {
+            "props": {
+              "remoteTypeahead": {
+                "type": "documents",
+                "field": "customField3.suggest",
+                "suggest": "/api/suggestions/completion",
+                "allowAdd": true
+              }
+            }
           }
         }
       },
-      "form": {
-        "hide": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true
+          }
+        }
       }
     },
     "masked": {
-      "$ref":"masked-v1.0.0.json"
+      "$ref": "masked-v1.0.0.json"
     },
     "subdivisions": {
       "title": "Subdivisions",
@@ -1993,11 +2294,15 @@
           "$ref": {
             "type": "string",
             "pattern": "^https://sonar.ch/api/subdivisions/.*?$",
-            "form": {
-              "remoteTypeahead": {
-                "type": "subdivisions",
-                "field": "name.value.suggest",
-                "label": "label"
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "remoteTypeahead": {
+                    "type": "subdivisions",
+                    "field": "name.value.suggest",
+                    "label": "label"
+                  }
+                }
               }
             }
           }
@@ -2006,10 +2311,14 @@
           "$ref"
         ]
       },
-      "form": {
-        "hide": true,
-        "navigation": {
-          "essential": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true,
+            "navigation": {
+              "essential": true
+            }
+          }
         }
       }
     }
@@ -2069,33 +2378,37 @@
           "prt"
         ],
         "default": "cre",
-        "form": {
-          "options": [
-            {
-              "label": "contribution_role_cre",
-              "value": "cre"
-            },
-            {
-              "label": "contribution_role_ctb",
-              "value": "ctb"
-            },
-            {
-              "label": "contribution_role_edt",
-              "value": "edt"
-            },
-            {
-              "label": "contribution_role_dgc",
-              "value": "dgc"
-            },
-            {
-              "label": "contribution_role_dgs",
-              "value": "dgs"
-            },
-            {
-              "label": "contribution_role_prt",
-              "value": "prt"
+        "widget": {
+          "formlyConfig": {
+            "props": {
+              "options": [
+                {
+                  "label": "contribution_role_cre",
+                  "value": "cre"
+                },
+                {
+                  "label": "contribution_role_ctb",
+                  "value": "ctb"
+                },
+                {
+                  "label": "contribution_role_edt",
+                  "value": "edt"
+                },
+                {
+                  "label": "contribution_role_dgc",
+                  "value": "dgc"
+                },
+                {
+                  "label": "contribution_role_dgs",
+                  "value": "dgs"
+                },
+                {
+                  "label": "contribution_role_prt",
+                  "value": "prt"
+                }
+              ]
             }
-          ]
+          }
         }
       }
     },
@@ -2107,8 +2420,12 @@
         "type": "string",
         "minLength": 1
       },
-      "form": {
-        "hide": true
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hide": true
+          }
+        }
       }
     }
   }

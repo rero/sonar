@@ -13,52 +13,54 @@
     "Rights reserved"
   ],
   "default": "License undefined",
-  "form": {
-    "templateOptions": {
+  "widget": {
+    "formlyConfig": {
+      "expressions": {
+        "props.required": "true"
+      },
       "wrappers": [
         "card"
-      ]
-    },
-    "expressionProperties": {
-      "templateOptions.required": "true"
-    },
-    "options": [
-      {
-        "label": "CC0",
-        "value": "CC0"
-      },
-      {
-        "label": "CC BY",
-        "value": "CC BY"
-      },
-      {
-        "label": "CC BY-NC",
-        "value": "CC BY-NC"
-      },
-      {
-        "label": "CC BY-NC-ND",
-        "value": "CC BY-NC-ND"
-      },
-      {
-        "label": "CC BY-NC-SA",
-        "value": "CC BY-NC-SA"
-      },
-      {
-        "label": "CC BY-ND",
-        "value": "CC BY-ND"
-      },
-      {
-        "label": "CC BY-SA",
-        "value": "CC BY-SA"
-      },
-      {
-        "label": "License undefined",
-        "value": "License undefined"
-      },
-      {
-        "label": "Rights reserved",
-        "value": "Rights reserved"
+      ],
+      "props": {
+        "options": [
+          {
+            "label": "CC0",
+            "value": "CC0"
+          },
+          {
+            "label": "CC BY",
+            "value": "CC BY"
+          },
+          {
+            "label": "CC BY-NC",
+            "value": "CC BY-NC"
+          },
+          {
+            "label": "CC BY-NC-ND",
+            "value": "CC BY-NC-ND"
+          },
+          {
+            "label": "CC BY-NC-SA",
+            "value": "CC BY-NC-SA"
+          },
+          {
+            "label": "CC BY-ND",
+            "value": "CC BY-ND"
+          },
+          {
+            "label": "CC BY-SA",
+            "value": "CC BY-SA"
+          },
+          {
+            "label": "License undefined",
+            "value": "License undefined"
+          },
+          {
+            "label": "Rights reserved",
+            "value": "Rights reserved"
+          }
+        ]
       }
-    ]
+    }
   }
 }

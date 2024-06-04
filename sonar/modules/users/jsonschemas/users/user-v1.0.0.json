@@ -18,16 +18,24 @@
       "title": "First name",
       "type": "string",
       "minLength": 1,
-      "form": {
-        "placeholder": "Example: John"
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "placeholder": "Example: John"
+          }
+        }
       }
     },
     "last_name": {
       "title": "Last name",
       "type": "string",
       "minLength": 1,
-      "form": {
-        "placeholder": "Example: Doe"
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "placeholder": "Example: Doe"
+          }
+        }
       }
     },
     "birth_date": {
@@ -42,15 +50,19 @@
       "type": "string",
       "format": "email",
       "pattern": "^.+@.+\\..+$",
-      "form": {
-        "validation": {
-          "validators": {
-            "valueAlreadyExists": {
-              "term": "email.analyzed"
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "validation": {
+              "validators": {
+                "valueAlreadyExists": {
+                  "term": "email.analyzed"
+                }
+              },
+              "messages": {
+                "pattern": "Email should have at least one `@` and  one `.`."
+              }
             }
-          },
-          "messages": {
-            "pattern": "Email should have at least one `@` and  one `.`."
           }
         }
       }
@@ -84,9 +96,13 @@
           "title": "Organisation",
           "type": "string",
           "pattern": "^https://sonar.ch/api/organisations/.*?$",
-          "form": {
-            "remoteOptions": {
-              "type": "organisations"
+          "widget": {
+            "formlyConfig": {
+              "props": {
+                "remoteOptions": {
+                  "type": "organisations"
+                }
+              }
             }
           }
         }
@@ -106,29 +122,33 @@
         "submitter",
         "user"
       ],
-      "form": {
-        "options": [
-          {
-            "label": "role_superuser",
-            "value": "superuser"
-          },
-          {
-            "label": "role_admin",
-            "value": "admin"
-          },
-          {
-            "label": "role_moderator",
-            "value": "moderator"
-          },
-          {
-            "label": "role_submitter",
-            "value": "submitter"
-          },
-          {
-            "label": "role_user",
-            "value": "user"
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "options": [
+              {
+                "label": "role_superuser",
+                "value": "superuser"
+              },
+              {
+                "label": "role_admin",
+                "value": "admin"
+              },
+              {
+                "label": "role_moderator",
+                "value": "moderator"
+              },
+              {
+                "label": "role_submitter",
+                "value": "submitter"
+              },
+              {
+                "label": "role_user",
+                "value": "user"
+              }
+            ]
           }
-        ]
+        }
       }
     },
     "subdivision": {
@@ -139,11 +159,15 @@
         "$ref": {
           "type": "string",
           "pattern": "^https://sonar.ch/api/subdivisions/.*?$",
-          "form": {
-            "remoteTypeahead": {
-              "type": "subdivisions",
-              "field": "name.value.suggest",
-              "label": "label"
+          "widget": {
+            "formlyConfig": {
+              "props": {
+                "remoteTypeahead": {
+                  "type": "subdivisions",
+                  "field": "name.value.suggest",
+                  "label": "label"
+                }
+              }
             }
           }
         }

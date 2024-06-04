@@ -20,11 +20,17 @@
       "type": "string",
       "pattern": "^[a-z0-9_-]{3,}$",
       "minLength": 3,
-      "form": {
-        "hideExpression": "field.model.pid",
-        "validation": {
-          "validators": {
-            "valueAlreadyExists": {}
+      "widget": {
+        "formlyConfig": {
+          "expressions": {
+            "hide": "field.model.pid"
+          },
+          "props": {
+            "validation": {
+              "validators": {
+                "valueAlreadyExists": {}
+              }
+            }
           }
         }
       }
@@ -47,10 +53,12 @@
             "title": "Value",
             "type": "string",
             "minLength": 1,
-            "form": {
-              "type": "markdown",
-              "templateOptions": {
-                "rows": 5
+            "widget": {
+              "formlyConfig": {
+                "type": "markdown",
+                "props": {
+                  "rows": 5
+                }
               }
             }
           },
@@ -58,18 +66,30 @@
             "$ref": "interface_language-v1.0.0.json"
           }
         },
-        "propertiesOrder": ["language", "value"],
-        "required": ["value", "language"]
+        "propertiesOrder": [
+          "language",
+          "value"
+        ],
+        "required": [
+          "value",
+          "language"
+        ]
       },
-      "form": {
-        "validation": {
-          "validators": {
-            "uniqueValueKeysInObject": {
-              "keys": ["language"]
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "validation": {
+              "validators": {
+                "uniqueValueKeysInObject": {
+                  "keys": [
+                    "language"
+                  ]
+                }
+              },
+              "messages": {
+                "uniqueValueKeysInObjectMessage": "Only one value per language is allowed"
+              }
             }
-          },
-          "messages": {
-            "uniqueValueKeysInObjectMessage": "Only one value per language is allowed"
           }
         }
       }
@@ -87,10 +107,12 @@
             "title": "Value",
             "type": "string",
             "minLength": 1,
-            "form": {
-              "type": "markdown",
-              "templateOptions": {
-                "rows": 5
+            "widget": {
+              "formlyConfig": {
+                "type": "markdown",
+                "props": {
+                  "rows": 5
+                }
               }
             }
           },
@@ -98,19 +120,33 @@
             "$ref": "interface_language-v1.0.0.json"
           }
         },
-        "propertiesOrder": ["language", "value"],
-        "required": ["value", "language"]
+        "propertiesOrder": [
+          "language",
+          "value"
+        ],
+        "required": [
+          "value",
+          "language"
+        ]
       },
-      "form": {
-        "hideExpression": "!field.parent.model.isDedicated",
-        "validation": {
-          "validators": {
-            "uniqueValueKeysInObject": {
-              "keys": ["language"]
-            }
+      "widget": {
+        "formlyConfig": {
+          "expressions": {
+            "hide": "!field.parent.model.isDedicated"
           },
-          "messages": {
-            "uniqueValueKeysInObjectMessage": "Only one value per language is allowed"
+          "props": {
+            "validation": {
+              "validators": {
+                "uniqueValueKeysInObject": {
+                  "keys": [
+                    "language"
+                  ]
+                }
+              },
+              "messages": {
+                "uniqueValueKeysInObjectMessage": "Only one value per language is allowed"
+              }
+            }
           }
         }
       }
@@ -126,27 +162,37 @@
       "description": "Organisation has a specific theme for his view.",
       "type": "boolean",
       "default": false,
-      "form": {
-        "hideExpression": "!field.model.isShared"
+      "widget": {
+        "formlyConfig": {
+          "expressions": {
+            "hide": "!field.model.isShared"
+          }
+        }
       }
     },
     "serverName": {
       "title": "Server name (without http)",
       "description": "Organisation server name for dedicated.",
       "type": "string",
-      "form": {
-        "hideExpression": "!field.model.isDedicated",
-        "expressionProperties": {
-          "templateOptions.required": "field.model.isDedicated"
-        },
-        "validation": {
-          "validators": {
-            "uniqueValueKeysInObject": {
-              "keys": ["serverName"]
-            }
+      "widget": {
+        "formlyConfig": {
+          "expressions": {
+            "props.required": "field.model.isDedicated",
+            "hide": "!field.model.isDedicated"
           },
-          "messages": {
-            "uniqueValueKeysInObjectMessage": "This domain name must be unique."
+          "props": {
+            "validation": {
+              "validators": {
+                "uniqueValueKeysInObject": {
+                  "keys": [
+                    "serverName"
+                  ]
+                }
+              },
+              "messages": {
+                "uniqueValueKeysInObjectMessage": "This domain name must be unique."
+              }
+            }
           }
         }
       }
@@ -156,12 +202,16 @@
       "description": "List of IP addresses or ranges that allow access to private files (access: embargoed or restricted), which are accessible only within the organisation. Note: the bibliographic record (metadata) is always public. Enter one rule per line.",
       "type": "string",
       "minLength": 1,
-      "form": {
-        "type": "textarea",
-        "templateOptions": {
-          "rows": 10
-        },
-        "hideExpression": "!field.model.isShared"
+      "widget": {
+        "formlyConfig": {
+          "type": "textarea",
+          "expressions": {
+            "hide": "!field.model.isShared"
+          },
+          "props": {
+            "rows": 10
+          }
+        }
       }
     },
     "arkNAAN": {
@@ -173,12 +223,16 @@
       "title": "Platform name",
       "type": "string",
       "minLength": 1,
-      "form": {
-        "type": "markdown",
-        "templateOptions": {
-          "rows": 5
-        },
-        "hideExpression": "!field.model.isDedicated"
+      "widget": {
+        "formlyConfig": {
+          "type": "markdown",
+          "expressions": {
+            "hide": "!field.model.isDedicated"
+          },
+          "props": {
+            "rows": 5
+          }
+        }
       }
     },
     "documentsCustomField1": {
@@ -204,8 +258,14 @@
                 "$ref": "language-v1.0.0.json"
               }
             },
-            "propertiesOrder": ["language", "value"],
-            "required": ["value", "language"]
+            "propertiesOrder": [
+              "language",
+              "value"
+            ],
+            "required": [
+              "value",
+              "language"
+            ]
           }
         },
         "includeInFacets": {
@@ -214,9 +274,16 @@
           "default": false
         }
       },
-      "propertiesOrder": ["label", "includeInFacets"],
-      "form": {
-        "hideExpression": "!field.parent.model.isDedicated"
+      "propertiesOrder": [
+        "label",
+        "includeInFacets"
+      ],
+      "widget": {
+        "formlyConfig": {
+          "expressions": {
+            "hide": "!field.parent.model.isDedicated"
+          }
+        }
       }
     },
     "documentsCustomField2": {
@@ -242,8 +309,14 @@
                 "$ref": "language-v1.0.0.json"
               }
             },
-            "propertiesOrder": ["language", "value"],
-            "required": ["value", "language"]
+            "propertiesOrder": [
+              "language",
+              "value"
+            ],
+            "required": [
+              "value",
+              "language"
+            ]
           }
         },
         "includeInFacets": {
@@ -252,9 +325,16 @@
           "default": false
         }
       },
-      "propertiesOrder": ["label", "includeInFacets"],
-      "form": {
-        "hideExpression": "!field.parent.model.isDedicated"
+      "propertiesOrder": [
+        "label",
+        "includeInFacets"
+      ],
+      "widget": {
+        "formlyConfig": {
+          "expressions": {
+            "hide": "!field.parent.model.isDedicated"
+          }
+        }
       }
     },
     "documentsCustomField3": {
@@ -280,8 +360,14 @@
                 "$ref": "language-v1.0.0.json"
               }
             },
-            "propertiesOrder": ["language", "value"],
-            "required": ["value", "language"]
+            "propertiesOrder": [
+              "language",
+              "value"
+            ],
+            "required": [
+              "value",
+              "language"
+            ]
           }
         },
         "includeInFacets": {
@@ -290,9 +376,16 @@
           "default": false
         }
       },
-      "propertiesOrder": ["label", "includeInFacets"],
-      "form": {
-        "hideExpression": "!field.parent.model.isDedicated"
+      "propertiesOrder": [
+        "label",
+        "includeInFacets"
+      ],
+      "widget": {
+        "formlyConfig": {
+          "expressions": {
+            "hide": "!field.parent.model.isDedicated"
+          }
+        }
       }
     },
     "publicDocumentFacets": {
@@ -313,47 +406,54 @@
           "subdivision"
         ]
       },
-      "form": {
-        "type": "multicheckbox",
-        "templateOptions": {
-          "type": "array",
-          "translate": true,
-          "options": [
-            {
-              "label": "document_type",
-              "value": "document_type"
-            },
-            {
-              "label": "controlled_affiliation",
-              "value": "controlled_affiliation"
-            },
-            {
-              "label": "year",
-              "value": "year"
-            },
-            {
-              "label": "collection",
-              "value": "collection"
-            },
-            {
-              "label": "language",
-              "value": "language"
-            },
-            {
-              "label": "author",
-              "value": "author"
-            },
-            {
-              "label": "subject",
-              "value": "subject"
-            },
-            {
-              "label": "subdivision",
-              "value": "subdivision"
-            }
-          ]
-        },
-        "hideExpression": "!field.parent.model.isDedicated"
+      "widget": {
+        "formlyConfig": {
+          "type": "multicheckbox",
+          "wrappers": [
+            "form-field"
+          ],
+          "expressions": {
+            "hide": "!field.parent.model.isDedicated"
+          },
+          "props": {
+            "type": "array",
+            "translate": true,
+            "options": [
+              {
+                "label": "document_type",
+                "value": "document_type"
+              },
+              {
+                "label": "controlled_affiliation",
+                "value": "controlled_affiliation"
+              },
+              {
+                "label": "year",
+                "value": "year"
+              },
+              {
+                "label": "collection",
+                "value": "collection"
+              },
+              {
+                "label": "language",
+                "value": "language"
+              },
+              {
+                "label": "author",
+                "value": "author"
+              },
+              {
+                "label": "subject",
+                "value": "subject"
+              },
+              {
+                "label": "subdivision",
+                "value": "subdivision"
+              }
+            ]
+          }
+        }
       }
     },
     "_bucket": {
@@ -408,7 +508,12 @@
             "type": "integer"
           }
         },
-        "required": ["bucket", "file_id", "version_id", "key"]
+        "required": [
+          "bucket",
+          "file_id",
+          "version_id",
+          "key"
+        ]
       }
     }
   },

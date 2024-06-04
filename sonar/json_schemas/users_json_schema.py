@@ -51,7 +51,7 @@ class UsersJSONSchema(JSONSchemaBase):
                 reachable_roles = current_user_record.\
                     get_all_reachable_roles()
 
-                schema['properties']['role']['form']['options'] = [{
+                schema['properties']['role']['widget']['formlyConfig']['props']['options'] = [{
                             'label': 'role_{role}'.format(role=role),
                             'value': role
                         } for role in reachable_roles]
