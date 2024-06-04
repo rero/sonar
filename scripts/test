@@ -89,7 +89,6 @@ add_exceptions "GHSA-f9vj-2wh5-fj8j"
 add_exceptions "GHSA-q34m-jh98-gwm2"
 PIPAPI_PYTHON_LOCATION=$(which python) pip-audit ${pip_audit_exceptions}
 
-
 info_msg "Test pydocstyle:"
 pydocstyle sonar tests docs
 info_msg "Test isort:"

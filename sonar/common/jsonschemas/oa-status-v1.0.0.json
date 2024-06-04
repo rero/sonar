@@ -9,36 +9,40 @@
     "diamond",
     "closed"
   ],
-  "form": {
-    "hide": true,
-    "navigation": {
-      "essential": true
-    },
-    "options": [
-      {
-        "label": "Green",
-        "value": "green"
-      },
-      {
-        "label": "Gold",
-        "value": "gold"
-      },
-      {
-        "label": "Hybrid",
-        "value": "hybrid"
-      },
-      {
-        "label": "Bronze",
-        "value": "bronze"
-      },
-      {
-        "label": "Diamond",
-        "value": "diamond"
-      },
-      {
-        "label": "Closed",
-        "value": "closed"
+  "widget": {
+    "formlyConfig": {
+      "props": {
+        "options": [
+          {
+            "label": "Green",
+            "value": "green"
+          },
+          {
+            "label": "Gold",
+            "value": "gold"
+          },
+          {
+            "label": "Hybrid",
+            "value": "hybrid"
+          },
+          {
+            "label": "Bronze",
+            "value": "bronze"
+          },
+          {
+            "label": "Diamond",
+            "value": "diamond"
+          },
+          {
+            "label": "Closed",
+            "value": "closed"
+          }
+        ],
+        "hide": true,
+        "navigation": {
+          "essential": true
+        }
       }
-    ]
+    }
   }
 }
