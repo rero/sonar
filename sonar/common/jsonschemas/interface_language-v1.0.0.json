@@ -7,27 +7,29 @@
     "fre",
     "ita"
   ],
-  "form": {
-    "templateOptions": {
-      "sort": true
-    },
-    "options": [
-      {
-        "label": "lang_ger",
-        "value": "ger"
-      },
-      {
-        "label": "lang_eng",
-        "value": "eng"
-      },
-      {
-        "label": "lang_fre",
-        "value": "fre"
-      },
-      {
-        "label": "lang_ita",
-        "value": "ita"
+  "widget": {
+    "formlyConfig": {
+      "props": {
+        "sort": true,
+        "options": [
+          {
+            "label": "lang_ger",
+            "value": "ger"
+          },
+          {
+            "label": "lang_eng",
+            "value": "eng"
+          },
+          {
+            "label": "lang_fre",
+            "value": "fre"
+          },
+          {
+            "label": "lang_ita",
+            "value": "ita"
+          }
+        ]
       }
-    ]
+    }
   }
 }
