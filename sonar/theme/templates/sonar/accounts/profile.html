@@ -20,14 +20,18 @@ along with this program. If not, see
 
 {%- block settings_body scoped %}
 <div class="standalone-editor">
-  <sonar-root></sonar-root>
+  <sonar-root class="sonar-ui"></sonar-root>
 </div>
 {%- endblock settings_body %}
 
+{%- block css %}
+  {{ super() }}
+  <link rel="stylesheet" href="/static/sonar-ui/styles.css?{{ ui_version }}">
+{%- endblock %}
+
 {%- block javascript %}
-  <script src="/static/sonar-ui/runtime.js?{{ ui_version }}" module></script>
-  <script src="/static/sonar-ui/polyfills.js?{{ ui_version }}" module></script>
-  <script src="/static/sonar-ui/main.js?{{ ui_version }}" module></script>
+  <script src="/static/sonar-ui/browser/polyfills.js?{{ ui_version }}" type="module"></script>
+  <script src="/static/sonar-ui/browser/main.js?{{ ui_version }}" type="module"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
   integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
