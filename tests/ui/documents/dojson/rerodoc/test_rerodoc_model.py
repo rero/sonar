@@ -25,8 +25,7 @@ from dojson.contrib.marc21.utils import create_record
 from sonar.modules.documents.dojson.rerodoc.model import overdo
 
 
-def test_marc21_to_type_and_organisation(app, bucket_location,
-                                         without_oaiset_signals):
+def test_marc21_to_type_and_organisation(app, bucket_location, without_oaiset_signals):
     """Test type and organisation."""
 
     # Type only
@@ -39,8 +38,8 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('documentType') == 'coar:c_2f33'
-    assert not data.get('organisation')
+    assert data.get("documentType") == "coar:c_2f33"
+    assert not data.get("organisation")
 
     # Type and organisation
     marc21xml = """
@@ -56,11 +55,10 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('documentType') == 'coar:c_2f33'
-    assert data.get('organisation') == [{
-        '$ref':
-        'https://sonar.ch/api/organisations/test'
-    }]
+    assert data.get("documentType") == "coar:c_2f33"
+    assert data.get("organisation") == [
+        {"$ref": "https://sonar.ch/api/organisations/test"}
+    ]
 
     # Type, subtype and organisation
     marc21xml = """
@@ -77,11 +75,10 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('documentType') == 'coar:c_6501'
-    assert data.get('organisation') == [{
-        '$ref':
-        'https://sonar.ch/api/organisations/test'
-    }]
+    assert data.get("documentType") == "coar:c_6501"
+    assert data.get("organisation") == [
+        {"$ref": "https://sonar.ch/api/organisations/test"}
+    ]
 
     # Organisation only
     marc21xml = """
@@ -96,11 +93,10 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('documentType')
-    assert data.get('organisation') == [{
-        '$ref':
-        'https://sonar.ch/api/organisations/test'
-    }]
+    assert not data.get("documentType")
+    assert data.get("organisation") == [
+        {"$ref": "https://sonar.ch/api/organisations/test"}
+    ]
 
     # Specific conversion for unisi
     marc21xml = """
@@ -112,11 +108,10 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('documentType')
-    assert data.get('organisation') == [{
-        '$ref':
-        'https://sonar.ch/api/organisations/usi'
-    }]
+    assert not data.get("documentType")
+    assert data.get("organisation") == [
+        {"$ref": "https://sonar.ch/api/organisations/usi"}
+    ]
 
     # Specific conversion for bpuge
     marc21xml = """
@@ -128,12 +123,11 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('documentType')
-    assert data.get('organisation') == [{
-        '$ref':
-        'https://sonar.ch/api/organisations/vge'
-    }]
-    assert len(data['subdivisions']) == 1
+    assert not data.get("documentType")
+    assert data.get("organisation") == [
+        {"$ref": "https://sonar.ch/api/organisations/vge"}
+    ]
+    assert len(data["subdivisions"]) == 1
 
     # Specific conversion for mhnge
     marc21xml = """
@@ -145,12 +139,11 @@ def test_marc21_to_type_and_organisation(app, bucket_location,
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('documentType')
-    assert data.get('organisation') == [{
-        '$ref':
-        'https://sonar.ch/api/organisations/vge'
-    }]
-    assert len(data['subdivisions']) == 1
+    assert not data.get("documentType")
+    assert data.get("organisation") == [
+        {"$ref": "https://sonar.ch/api/organisations/vge"}
+    ]
+    assert len(data["subdivisions"]) == 1
 
 
 def test_marc21_to_title_245(app):
@@ -168,18 +161,13 @@ def test_marc21_to_title_245(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('title') == [{
-        'type':
-        'bf:Title',
-        'mainTitle': [{
-            'value': 'Main title',
-            'language': 'eng'
-        }],
-        'subtitle': [{
-            'value': 'Subtitle',
-            'language': 'eng'
-        }]
-    }]
+    assert data.get("title") == [
+        {
+            "type": "bf:Title",
+            "mainTitle": [{"value": "Main title", "language": "eng"}],
+            "subtitle": [{"value": "Subtitle", "language": "eng"}],
+        }
+    ]
 
     # Multiple titles with subtitles
     marc21xml = """
@@ -198,29 +186,18 @@ def test_marc21_to_title_245(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('title') == [{
-        'type':
-        'bf:Title',
-        'mainTitle': [{
-            'value': 'Main title',
-            'language': 'eng'
-        }],
-        'subtitle': [{
-            'value': 'Subtitle',
-            'language': 'eng'
-        }]
-    }, {
-        'type':
-        'bf:Title',
-        'mainTitle': [{
-            'value': 'Titre principal',
-            'language': 'fre'
-        }],
-        'subtitle': [{
-            'value': 'Sous-titre',
-            'language': 'fre'
-        }]
-    }]
+    assert data.get("title") == [
+        {
+            "type": "bf:Title",
+            "mainTitle": [{"value": "Main title", "language": "eng"}],
+            "subtitle": [{"value": "Subtitle", "language": "eng"}],
+        },
+        {
+            "type": "bf:Title",
+            "mainTitle": [{"value": "Titre principal", "language": "fre"}],
+            "subtitle": [{"value": "Sous-titre", "language": "fre"}],
+        },
+    ]
 
     # One title without subtitle
     marc21xml = """
@@ -233,14 +210,9 @@ def test_marc21_to_title_245(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('title') == [{
-        'type':
-        'bf:Title',
-        'mainTitle': [{
-            'value': 'Main title',
-            'language': 'eng'
-        }]
-    }]
+    assert data.get("title") == [
+        {"type": "bf:Title", "mainTitle": [{"value": "Main title", "language": "eng"}]}
+    ]
 
     # No title
     marc21xml = """
@@ -253,7 +225,7 @@ def test_marc21_to_title_245(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('title')
+    assert not data.get("title")
 
     # No language
     marc21xml = """
@@ -265,14 +237,9 @@ def test_marc21_to_title_245(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('title') == [{
-        'type':
-        'bf:Title',
-        'mainTitle': [{
-            'value': 'Main title',
-            'language': 'eng'
-        }]
-    }]
+    assert data.get("title") == [
+        {"type": "bf:Title", "mainTitle": [{"value": "Main title", "language": "eng"}]}
+    ]
 
     # Multiple title with one without title
     marc21xml = """
@@ -290,18 +257,13 @@ def test_marc21_to_title_245(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('title') == [{
-        'type':
-        'bf:Title',
-        'mainTitle': [{
-            'value': 'Main title',
-            'language': 'eng'
-        }],
-        'subtitle': [{
-            'value': 'Subtitle',
-            'language': 'eng'
-        }]
-    }]
+    assert data.get("title") == [
+        {
+            "type": "bf:Title",
+            "mainTitle": [{"value": "Main title", "language": "eng"}],
+            "subtitle": [{"value": "Subtitle", "language": "eng"}],
+        }
+    ]
 
 
 def test_marc21_to_title_246(app):
@@ -318,14 +280,9 @@ def test_marc21_to_title_246(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('title') == [{
-        'type':
-        'bf:Title',
-        'mainTitle': [{
-            'value': 'Main title',
-            'language': 'eng'
-        }]
-    }]
+    assert data.get("title") == [
+        {"type": "bf:Title", "mainTitle": [{"value": "Main title", "language": "eng"}]}
+    ]
 
     # One title 246 without $a and without 245
     marc21xml = """
@@ -337,7 +294,7 @@ def test_marc21_to_title_246(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('title')
+    assert not data.get("title")
 
     # One title 246 without language and without 245
     marc21xml = """
@@ -349,14 +306,9 @@ def test_marc21_to_title_246(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('title') == [{
-        'type':
-        'bf:Title',
-        'mainTitle': [{
-            'value': 'Main title',
-            'language': 'eng'
-        }]
-    }]
+    assert data.get("title") == [
+        {"type": "bf:Title", "mainTitle": [{"value": "Main title", "language": "eng"}]}
+    ]
 
     # One title 246 with one 245 title
     marc21xml = """
@@ -373,17 +325,15 @@ def test_marc21_to_title_246(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('title') == [{
-        'type':
-        'bf:Title',
-        'mainTitle': [{
-            'value': 'Main title 245',
-            'language': 'eng'
-        }, {
-            'value': 'Main title 246',
-            'language': 'fre'
-        }]
-    }]
+    assert data.get("title") == [
+        {
+            "type": "bf:Title",
+            "mainTitle": [
+                {"value": "Main title 245", "language": "eng"},
+                {"value": "Main title 246", "language": "fre"},
+            ],
+        }
+    ]
 
     # One title 246 with multiple 245 title
     marc21xml = """
@@ -404,24 +354,19 @@ def test_marc21_to_title_246(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('title') == [{
-        'type':
-        'bf:Title',
-        'mainTitle': [{
-            'value': 'Main title 245 1',
-            'language': 'eng'
-        }]
-    }, {
-        'type':
-        'bf:Title',
-        'mainTitle': [{
-            'value': 'Main title 245 2',
-            'language': 'eng'
-        }, {
-            'value': 'Main title 246',
-            'language': 'fre'
-        }]
-    }]
+    assert data.get("title") == [
+        {
+            "type": "bf:Title",
+            "mainTitle": [{"value": "Main title 245 1", "language": "eng"}],
+        },
+        {
+            "type": "bf:Title",
+            "mainTitle": [
+                {"value": "Main title 245 2", "language": "eng"},
+                {"value": "Main title 246", "language": "fre"},
+            ],
+        },
+    ]
 
 
 def test_marc21_to_language(app):
@@ -436,7 +381,7 @@ def test_marc21_to_language(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('language') == [{'type': 'bf:Language', 'value': 'fre'}]
+    assert data.get("language") == [{"type": "bf:Language", "value": "fre"}]
 
     # Multiple $a
     marc21xml = """
@@ -449,13 +394,10 @@ def test_marc21_to_language(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('language') == [{
-        'type': 'bf:Language',
-        'value': 'eng'
-    }, {
-        'type': 'bf:Language',
-        'value': 'fre'
-    }]
+    assert data.get("language") == [
+        {"type": "bf:Language", "value": "eng"},
+        {"type": "bf:Language", "value": "fre"},
+    ]
 
     # Multiple 041
     marc21xml = """
@@ -470,13 +412,10 @@ def test_marc21_to_language(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('language') == [{
-        'type': 'bf:Language',
-        'value': 'eng'
-    }, {
-        'type': 'bf:Language',
-        'value': 'fre'
-    }]
+    assert data.get("language") == [
+        {"type": "bf:Language", "value": "eng"},
+        {"type": "bf:Language", "value": "fre"},
+    ]
 
     # Not $a
     marc21xml = """
@@ -487,7 +426,7 @@ def test_marc21_to_language(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('language')
+    assert not data.get("language")
 
 
 def test_marc21_to_provision_activity_field_260(app):
@@ -506,44 +445,28 @@ def test_marc21_to_provision_activity_field_260(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        "type":
-        "bf:Publication",
-        "startDate":
-        "1798",
-        "endDate":
-        "1799",
-        "statement": [{
-            "label": [{
-                "value": "Lausanne"
-            }],
-            "type": "bf:Place"
-        }, {
-            "label": [{
-                "value": "Bulletin officiel du Directoire"
-            }],
-            "type": "bf:Agent"
-        }, {
-            "label": [{
-                "value": "1798-1799"
-            }],
-            "type": "Date"
-        }]
-    }, {
-        "type":
-        "bf:Manufacture",
-        "statement": [{
-            "label": [{
-                "value": "Lausanne"
-            }],
-            "type": "bf:Place"
-        }, {
-            "label": [{
-                "value": "Henri Vincent"
-            }],
-            "type": "bf:Agent"
-        }]
-    }]
+    assert data.get("provisionActivity") == [
+        {
+            "type": "bf:Publication",
+            "startDate": "1798",
+            "endDate": "1799",
+            "statement": [
+                {"label": [{"value": "Lausanne"}], "type": "bf:Place"},
+                {
+                    "label": [{"value": "Bulletin officiel du Directoire"}],
+                    "type": "bf:Agent",
+                },
+                {"label": [{"value": "1798-1799"}], "type": "Date"},
+            ],
+        },
+        {
+            "type": "bf:Manufacture",
+            "statement": [
+                {"label": [{"value": "Lausanne"}], "type": "bf:Place"},
+                {"label": [{"value": "Henri Vincent"}], "type": "bf:Agent"},
+            ],
+        },
+    ]
 
     # No start date --> throw error
     marc21xml = """
@@ -556,7 +479,7 @@ def test_marc21_to_provision_activity_field_260(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('provisionActivity')
+    assert not data.get("provisionActivity")
 
     # No provision activity and wrong type --> throw error
     marc21xml = """
@@ -564,7 +487,7 @@ def test_marc21_to_provision_activity_field_260(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('provisionActivity')
+    assert not data.get("provisionActivity")
 
     # No provision activity and right types --> ok provision activity is not
     # mandatory
@@ -578,7 +501,7 @@ def test_marc21_to_provision_activity_field_260(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('provisionActivity')
+    assert not data.get("provisionActivity")
 
     # Without end date
     marc21xml = """
@@ -592,8 +515,8 @@ def test_marc21_to_provision_activity_field_260(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('provisionActivity')[0]['startDate'] == '1798'
-    assert 'endDate' not in data.get('provisionActivity')[0]
+    assert data.get("provisionActivity")[0]["startDate"] == "1798"
+    assert "endDate" not in data.get("provisionActivity")[0]
 
     # Wrong start date
     marc21xml = """
@@ -607,7 +530,7 @@ def test_marc21_to_provision_activity_field_260(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert 'startDate' not in data.get('provisionActivity')[0]
+    assert "startDate" not in data.get("provisionActivity")[0]
 
     # Wrong end date
     marc21xml = """
@@ -621,7 +544,7 @@ def test_marc21_to_provision_activity_field_260(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert 'endDate' not in data.get('provisionActivity')[0]
+    assert "endDate" not in data.get("provisionActivity")[0]
 
 
 def test_marc21_to_provision_activity_field_269(app):
@@ -636,10 +559,9 @@ def test_marc21_to_provision_activity_field_269(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        'startDate': '1966',
-        'type': 'bf:Publication'
-    }]
+    assert data.get("provisionActivity") == [
+        {"startDate": "1966", "type": "bf:Publication"}
+    ]
 
     # One field with full date
     marc21xml = """
@@ -651,10 +573,9 @@ def test_marc21_to_provision_activity_field_269(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        'startDate': '1966-01-01',
-        'type': 'bf:Publication'
-    }]
+    assert data.get("provisionActivity") == [
+        {"startDate": "1966-01-01", "type": "bf:Publication"}
+    ]
 
     # Date does not match "YYYY" OR "YYYY-MM-DD"
     marc21xml = """
@@ -666,7 +587,7 @@ def test_marc21_to_provision_activity_field_269(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('provisionActivity')
+    assert not data.get("provisionActivity")
 
     # Multiple fields
     marc21xml = """
@@ -681,10 +602,9 @@ def test_marc21_to_provision_activity_field_269(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        'startDate': '2005',
-        'type': 'bf:Publication'
-    }]
+    assert data.get("provisionActivity") == [
+        {"startDate": "2005", "type": "bf:Publication"}
+    ]
 
     # No field $c
     marc21xml = """
@@ -696,7 +616,7 @@ def test_marc21_to_provision_activity_field_269(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('provisionActivity')
+    assert not data.get("provisionActivity")
 
 
 def test_marc21_to_provision_activity_all(app):
@@ -721,44 +641,28 @@ def test_marc21_to_provision_activity_all(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        "type":
-        "bf:Publication",
-        "startDate":
-        "1798",
-        "endDate":
-        "1799",
-        "statement": [{
-            "label": [{
-                "value": "Lausanne"
-            }],
-            "type": "bf:Place"
-        }, {
-            "label": [{
-                "value": "Bulletin officiel du Directoire"
-            }],
-            "type": "bf:Agent"
-        }, {
-            "label": [{
-                "value": "1798-1799"
-            }],
-            "type": "Date"
-        }]
-    }, {
-        "type":
-        "bf:Manufacture",
-        "statement": [{
-            "label": [{
-                "value": "Lausanne"
-            }],
-            "type": "bf:Place"
-        }, {
-            "label": [{
-                "value": "Henri Vincent"
-            }],
-            "type": "bf:Agent"
-        }]
-    }]
+    assert data.get("provisionActivity") == [
+        {
+            "type": "bf:Publication",
+            "startDate": "1798",
+            "endDate": "1799",
+            "statement": [
+                {"label": [{"value": "Lausanne"}], "type": "bf:Place"},
+                {
+                    "label": [{"value": "Bulletin officiel du Directoire"}],
+                    "type": "bf:Agent",
+                },
+                {"label": [{"value": "1798-1799"}], "type": "Date"},
+            ],
+        },
+        {
+            "type": "bf:Manufacture",
+            "statement": [
+                {"label": [{"value": "Lausanne"}], "type": "bf:Place"},
+                {"label": [{"value": "Henri Vincent"}], "type": "bf:Agent"},
+            ],
+        },
+    ]
 
 
 def test_marc21_to_edition_statement(app):
@@ -774,13 +678,9 @@ def test_marc21_to_edition_statement(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('editionStatement') == {
-        'editionDesignation': {
-            'value': 'Reproduction numérique'
-        },
-        'responsibility': {
-            'value': 'René Wetzel'
-        }
+    assert data.get("editionStatement") == {
+        "editionDesignation": {"value": "Reproduction numérique"},
+        "responsibility": {"value": "René Wetzel"},
     }
 
     # Without field $a
@@ -793,7 +693,7 @@ def test_marc21_to_edition_statement(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('editionStatement')
+    assert not data.get("editionStatement")
 
     # Without field $b
     marc21xml = """
@@ -805,7 +705,7 @@ def test_marc21_to_edition_statement(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('editionStatement')
+    assert not data.get("editionStatement")
 
     # Multiple --> keep only one value
     marc21xml = """
@@ -822,13 +722,9 @@ def test_marc21_to_edition_statement(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('editionStatement') == {
-        'editionDesignation': {
-            'value': 'Reproduction numérique 2'
-        },
-        'responsibility': {
-            'value': 'René Wetzel'
-        }
+    assert data.get("editionStatement") == {
+        "editionDesignation": {"value": "Reproduction numérique 2"},
+        "responsibility": {"value": "René Wetzel"},
     }
 
 
@@ -849,9 +745,9 @@ def test_marc21_to_description(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('extent') == '116 p.'
-    assert data.get('otherMaterialCharacteristics') == 'ill.'
-    assert data.get('formats') == ['22 cm']
+    assert data.get("extent") == "116 p."
+    assert data.get("otherMaterialCharacteristics") == "ill."
+    assert data.get("formats") == ["22 cm"]
 
     marc21xml = """
     <record>
@@ -870,9 +766,9 @@ def test_marc21_to_description(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('extent') == '116 p.'
-    assert data.get('otherMaterialCharacteristics') == 'ill.'
-    assert data.get('formats') == ['22 cm', '12 x 15']
+    assert data.get("extent") == "116 p."
+    assert data.get("otherMaterialCharacteristics") == "ill."
+    assert data.get("formats") == ["22 cm", "12 x 15"]
 
     marc21xml = """
     <record>
@@ -885,8 +781,8 @@ def test_marc21_to_description(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('extent') == '116 p.'
-    assert data.get('otherMaterialCharacteristics') == 'ill.'
+    assert data.get("extent") == "116 p."
+    assert data.get("otherMaterialCharacteristics") == "ill."
 
 
 # series.name: [490$a repetitive]
@@ -907,13 +803,10 @@ def test_marc21_to_series(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('series') == [{
-        'name': 'Collection One',
-        'number': '5'
-    }, {
-        'name': 'Collection Two',
-        'number': '123'
-    }]
+    assert data.get("series") == [
+        {"name": "Collection One", "number": "5"},
+        {"name": "Collection Two", "number": "123"},
+    ]
 
 
 def test_marc21_to_abstract(app):
@@ -929,7 +822,7 @@ def test_marc21_to_abstract(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('abstracts') == [{'value': 'Abstract', 'language': 'eng'}]
+    assert data.get("abstracts") == [{"value": "Abstract", "language": "eng"}]
 
     # One abstract with language
     marc21xml = """
@@ -942,7 +835,7 @@ def test_marc21_to_abstract(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('abstracts') == [{'value': 'Résumé', 'language': 'fre'}]
+    assert data.get("abstracts") == [{"value": "Résumé", "language": "fre"}]
 
     # Multiple abstracts
     marc21xml = """
@@ -959,13 +852,10 @@ def test_marc21_to_abstract(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('abstracts') == [{
-        'value': 'Abstract',
-        'language': 'eng'
-    }, {
-        'value': 'Résumé',
-        'language': 'fre'
-    }]
+    assert data.get("abstracts") == [
+        {"value": "Abstract", "language": "eng"},
+        {"value": "Résumé", "language": "fre"},
+    ]
 
     # Without abstract
     marc21xml = """
@@ -977,7 +867,7 @@ def test_marc21_to_abstract(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('abstracts')
+    assert not data.get("abstracts")
 
     # Special case with lang --> fr
     marc21xml = """
@@ -990,7 +880,7 @@ def test_marc21_to_abstract(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('abstracts') == [{'value': 'Résumé', 'language': 'fre'}]
+    assert data.get("abstracts") == [{"value": "Résumé", "language": "fre"}]
 
 
 # notes: [500$a repetitive]
@@ -1009,7 +899,7 @@ def test_marc21_to_notes(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('notes') == ['note 1', 'note 2']
+    assert data.get("notes") == ["note 1", "note 2"]
 
 
 # subjects: 6xx [duplicates could exist between several vocabularies,
@@ -1035,22 +925,11 @@ def test_marc21_to_subjects(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('subjects') == [{
-        'label': {
-            'language': 'eng',
-            'value': ['subject 1', 'subject 2']
-        }
-    }, {
-        'label': {
-            'language': 'fre',
-            'value': ['sujet 1', 'sujet 2']
-        }
-    }, {
-        'label': {
-            'value': ['subject 600 1', 'subject 600 2']
-        },
-        'source': 'rero'
-    }]
+    assert data.get("subjects") == [
+        {"label": {"language": "eng", "value": ["subject 1", "subject 2"]}},
+        {"label": {"language": "fre", "value": ["sujet 1", "sujet 2"]}},
+        {"label": {"value": ["subject 600 1", "subject 600 2"]}, "source": "rero"},
+    ]
 
     # 600 without $a
     marc21xml = """
@@ -1061,7 +940,7 @@ def test_marc21_to_subjects(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('subjects')
+    assert not data.get("subjects")
 
     # 600 without source
     marc21xml = """
@@ -1073,7 +952,7 @@ def test_marc21_to_subjects(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('subjects')
+    assert not data.get("subjects")
 
     # 695 without language
     marc21xml = """
@@ -1085,7 +964,7 @@ def test_marc21_to_subjects(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('subjects')
+    assert not data.get("subjects")
 
 
 def test_marc21_to_identified_by_from_001(app):
@@ -1098,16 +977,14 @@ def test_marc21_to_identified_by_from_001(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('identifiedBy') == [{
-        'type': 'bf:Local',
-        'source': 'RERO DOC',
-        'value': '327171'
-    }]
+    assert data.get("identifiedBy") == [
+        {"type": "bf:Local", "source": "RERO DOC", "value": "327171"}
+    ]
 
     marc21xml = "<record></record>"
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('identifiedBy')
+    assert not data.get("identifiedBy")
 
 
 def test_marc21_to_identified_by_from_020(app):
@@ -1122,10 +999,7 @@ def test_marc21_to_identified_by_from_020(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('identifiedBy') == [{
-        'type': 'bf:Isbn',
-        'value': '9783796539138'
-    }]
+    assert data.get("identifiedBy") == [{"type": "bf:Isbn", "value": "9783796539138"}]
 
     # Without code $a
     marc21xml = """
@@ -1137,7 +1011,7 @@ def test_marc21_to_identified_by_from_020(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('identifiedBy')
+    assert not data.get("identifiedBy")
 
 
 def test_marc21_to_identified_by_from_024(app):
@@ -1153,10 +1027,9 @@ def test_marc21_to_identified_by_from_024(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('identifiedBy') == [{
-        'type': 'bf:Urn',
-        'value': 'urn:nbn:ch:rero-002-118667'
-    }]
+    assert data.get("identifiedBy") == [
+        {"type": "bf:Urn", "value": "urn:nbn:ch:rero-002-118667"}
+    ]
 
     # Without code $a
     marc21xml = """
@@ -1168,7 +1041,7 @@ def test_marc21_to_identified_by_from_024(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('identifiedBy')
+    assert not data.get("identifiedBy")
 
     # Without code $2
     marc21xml = """
@@ -1180,7 +1053,7 @@ def test_marc21_to_identified_by_from_024(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('identifiedBy')
+    assert not data.get("identifiedBy")
 
     # $2 is a falsy value
     marc21xml = """
@@ -1193,7 +1066,7 @@ def test_marc21_to_identified_by_from_024(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('identifiedBy')
+    assert not data.get("identifiedBy")
 
     # Without ind1 == 7
     marc21xml = """
@@ -1206,7 +1079,7 @@ def test_marc21_to_identified_by_from_024(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('identifiedBy')
+    assert not data.get("identifiedBy")
 
 
 def test_marc21_to_identified_by_from_027(app):
@@ -1221,10 +1094,7 @@ def test_marc21_to_identified_by_from_027(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('identifiedBy') == [{
-        'type': 'bf:Strn',
-        'value': '9789027223951'
-    }]
+    assert data.get("identifiedBy") == [{"type": "bf:Strn", "value": "9789027223951"}]
 
     # Without code $a
     marc21xml = """
@@ -1236,7 +1106,7 @@ def test_marc21_to_identified_by_from_027(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('identifiedBy')
+    assert not data.get("identifiedBy")
 
 
 def test_marc21_to_identified_by_from_035(app):
@@ -1251,11 +1121,9 @@ def test_marc21_to_identified_by_from_035(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('identifiedBy') == [{
-        'type': 'bf:Local',
-        'source': 'RERO',
-        'value': 'R008966083'
-    }]
+    assert data.get("identifiedBy") == [
+        {"type": "bf:Local", "source": "RERO", "value": "R008966083"}
+    ]
 
     # Without code $a
     marc21xml = """
@@ -1267,7 +1135,7 @@ def test_marc21_to_identified_by_from_035(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('identifiedBy')
+    assert not data.get("identifiedBy")
 
 
 def test_marc21_to_identified_by_from_037(app):
@@ -1284,14 +1152,13 @@ def test_marc21_to_identified_by_from_037(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('identifiedBy') == [{
-        'type':
-        'bf:Local',
-        'source':
-        'Swissbib',
-        'value':
-        '(NATIONALLICENCE)springer-10.1007/s00209-014-1344-0'
-    }]
+    assert data.get("identifiedBy") == [
+        {
+            "type": "bf:Local",
+            "source": "Swissbib",
+            "value": "(NATIONALLICENCE)springer-10.1007/s00209-014-1344-0",
+        }
+    ]
 
     # Without code $a
     marc21xml = """
@@ -1305,7 +1172,7 @@ def test_marc21_to_identified_by_from_037(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('identifiedBy')
+    assert not data.get("identifiedBy")
 
 
 def test_marc21_to_identified_by_from_088(app):
@@ -1320,10 +1187,7 @@ def test_marc21_to_identified_by_from_088(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('identifiedBy') == [{
-        'type': 'bf:ReportNumber',
-        'value': '25'
-    }]
+    assert data.get("identifiedBy") == [{"type": "bf:ReportNumber", "value": "25"}]
 
     # Without code $a
     marc21xml = """
@@ -1335,7 +1199,7 @@ def test_marc21_to_identified_by_from_088(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('identifiedBy')
+    assert not data.get("identifiedBy")
 
 
 def test_marc21_to_identified_by_from_091(app):
@@ -1351,11 +1215,9 @@ def test_marc21_to_identified_by_from_091(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('identifiedBy') == [{
-        'type': 'bf:Local',
-        'value': '24638240',
-        'source': 'PMID'
-    }]
+    assert data.get("identifiedBy") == [
+        {"type": "bf:Local", "value": "24638240", "source": "PMID"}
+    ]
 
     # Without code $a
     marc21xml = """
@@ -1367,7 +1229,7 @@ def test_marc21_to_identified_by_from_091(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('identifiedBy')
+    assert not data.get("identifiedBy")
 
     # Without code $b
     marc21xml = """
@@ -1379,7 +1241,7 @@ def test_marc21_to_identified_by_from_091(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('identifiedBy')
+    assert not data.get("identifiedBy")
 
     # Invalid code $b
     marc21xml = """
@@ -1392,7 +1254,7 @@ def test_marc21_to_identified_by_from_091(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('identifiedBy')
+    assert not data.get("identifiedBy")
 
 
 def test_marc21_to_identified_by_full(app):
@@ -1429,38 +1291,20 @@ def test_marc21_to_identified_by_full(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('identifiedBy') == [{
-        'type': 'bf:Local',
-        'source': 'RERO DOC',
-        'value': '327171'
-    }, {
-        'type': 'bf:Isbn',
-        'value': '9783796539138'
-    }, {
-        'type': 'bf:Urn',
-        'value': 'urn:nbn:ch:rero-002-118667'
-    }, {
-        'type': 'bf:Strn',
-        'value': '9789027223951'
-    }, {
-        'type': 'bf:Local',
-        'source': 'RERO',
-        'value': 'R008966083'
-    }, {
-        'type':
-        'bf:Local',
-        'source':
-        'Swissbib',
-        'value':
-        '(NATIONALLICENCE)springer-10.1007/s00209-014-1344-0'
-    }, {
-        'type': 'bf:ReportNumber',
-        'value': '25'
-    }, {
-        'type': 'bf:Local',
-        'value': '24638240',
-        'source': 'PMID'
-    }]
+    assert data.get("identifiedBy") == [
+        {"type": "bf:Local", "source": "RERO DOC", "value": "327171"},
+        {"type": "bf:Isbn", "value": "9783796539138"},
+        {"type": "bf:Urn", "value": "urn:nbn:ch:rero-002-118667"},
+        {"type": "bf:Strn", "value": "9789027223951"},
+        {"type": "bf:Local", "source": "RERO", "value": "R008966083"},
+        {
+            "type": "bf:Local",
+            "source": "Swissbib",
+            "value": "(NATIONALLICENCE)springer-10.1007/s00209-014-1344-0",
+        },
+        {"type": "bf:ReportNumber", "value": "25"},
+        {"type": "bf:Local", "value": "24638240", "source": "PMID"},
+    ]
 
 
 def test_marc21_to_files(app):
@@ -1482,11 +1326,11 @@ def test_marc21_to_files(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert len(data.get('files')) == 1
-    assert data.get('files')[0]['key'] == 'file.pdf'
-    assert data.get('files')[0]['url'] == 'http://some.url/file.pdf'
-    assert data.get('files')[0]['label'] == 'Dépliant de l\'exposition'
-    assert data.get('files')[0]['order'] == 1
+    assert len(data.get("files")) == 1
+    assert data.get("files")[0]["key"] == "file.pdf"
+    assert data.get("files")[0]["url"] == "http://some.url/file.pdf"
+    assert data.get("files")[0]["label"] == "Dépliant de l'exposition"
+    assert data.get("files")[0]["order"] == 1
 
     # Not key
     marc21xml = """
@@ -1504,7 +1348,7 @@ def test_marc21_to_files(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('files')
+    assert not data.get("files")
 
     # Not URL
     marc21xml = """
@@ -1520,7 +1364,7 @@ def test_marc21_to_files(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('files')
+    assert not data.get("files")
 
     # Wrong mime type
     marc21xml = """
@@ -1540,7 +1384,7 @@ def test_marc21_to_files(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('files')
+    assert not data.get("files")
 
 
 def test_marc21_to_other_edition(app):
@@ -1556,12 +1400,12 @@ def test_marc21_to_other_edition(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('otherEdition') == [{
-        'document': {
-            'electronicLocator': 'http://domain.com/url'
-        },
-        'publicNote': 'version publiée'
-    }]
+    assert data.get("otherEdition") == [
+        {
+            "document": {"electronicLocator": "http://domain.com/url"},
+            "publicNote": "version publiée",
+        }
+    ]
 
     # Multiple other editions
     marc21xml = """
@@ -1578,17 +1422,16 @@ def test_marc21_to_other_edition(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('otherEdition') == [{
-        'document': {
-            'electronicLocator': 'http://domain.com/url'
+    assert data.get("otherEdition") == [
+        {
+            "document": {"electronicLocator": "http://domain.com/url"},
+            "publicNote": "version publiée",
         },
-        'publicNote': 'version publiée'
-    }, {
-        'document': {
-            'electronicLocator': 'http://domain.com/url-2'
+        {
+            "document": {"electronicLocator": "http://domain.com/url-2"},
+            "publicNote": "version publiée",
         },
-        'publicNote': 'version publiée'
-    }]
+    ]
 
     # No electronic location
     marc21xml = """
@@ -1600,7 +1443,7 @@ def test_marc21_to_other_edition(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('otherEdition')
+    assert not data.get("otherEdition")
 
     # No public note
     marc21xml = """
@@ -1612,7 +1455,7 @@ def test_marc21_to_other_edition(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('otherEdition')
+    assert not data.get("otherEdition")
 
     # Incorrect DOIs - they do get collected in `otherEdition`
     # instead of `identifiedBy`
@@ -1646,38 +1489,41 @@ def test_marc21_to_other_edition(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('otherEdition') == [{
-        'document': {
-            'electronicLocator': 'http://dx.doi.org/10.1130%2F0091-7613(2002)030%3C0655:CWCIAP%3E2.0.CO%3B2'
+    assert data.get("otherEdition") == [
+        {
+            "document": {
+                "electronicLocator": "http://dx.doi.org/10.1130%2F0091-7613(2002)030%3C0655:CWCIAP%3E2.0.CO%3B2"
+            },
+            "publicNote": "version publiée",
         },
-        'publicNote': 'version publiée'
-    }, {
-        'document': {
-            'electronicLocator': 'http://dx.doi.org/0.1021/jp0558775'
+        {
+            "document": {"electronicLocator": "http://dx.doi.org/0.1021/jp0558775"},
+            "publicNote": "version publiée",
         },
-        'publicNote': 'version publiée'
-    }, {
-        'document': {
-            'electronicLocator': 'http://dx.doi.org/1017/S0031182010000296'
+        {
+            "document": {
+                "electronicLocator": "http://dx.doi.org/1017/S0031182010000296"
+            },
+            "publicNote": "version publiée",
         },
-        'publicNote': 'version publiée'
-    }, {
-        'document': {
-            'electronicLocator': 'http://dx.doi.org/1039/B926873A'
+        {
+            "document": {"electronicLocator": "http://dx.doi.org/1039/B926873A"},
+            "publicNote": "version publiée",
         },
-        'publicNote': 'version publiée'
-    }, {
-        'document': {
-            'electronicLocator': 'http://dx.doi.org/0.1016/j.str.2012.09.019'
+        {
+            "document": {
+                "electronicLocator": "http://dx.doi.org/0.1016/j.str.2012.09.019"
+            },
+            "publicNote": "version publiée",
         },
-        'publicNote': 'version publiée'
-    }, {
-        'document': {
-            'electronicLocator': 'https://doi.org/10.1111%2Fj.1467-9280.2009.02364.x'
+        {
+            "document": {
+                "electronicLocator": "https://doi.org/10.1111%2Fj.1467-9280.2009.02364.x"
+            },
+            "publicNote": "version publiée",
         },
-        'publicNote': 'version publiée'
-    }]
-    assert not data.get('identifiedBy')
+    ]
+    assert not data.get("identifiedBy")
 
     # Well-formed DOIs - they get collected in `identifiedBy`
     # instead of`otherEdition`
@@ -1707,31 +1553,17 @@ def test_marc21_to_other_edition(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('otherEdition')
-    assert data.get('identifiedBy') == [{
-        'type': 'bf:Doi',
-        'value': '10.1002/1521-3773(20020104)41:1'
-    },
-    {
-        'type': 'bf:Doi',
-        'value': '10.1016/j.apergo.2008.03.002'
-    },
-    {
-        'type': 'bf:Doi',
-        'value': '10.1594/PANGAEA.914883'
-    },
-    {
-        'type': 'bf:Doi',
-        'value': '10.1484/J.BPM.5.110808'
-    },
-    {
-        'type': 'bf:Doi',
-        'value': '10.35662/unine-thesis-2747'
-    }]
+    assert not data.get("otherEdition")
+    assert data.get("identifiedBy") == [
+        {"type": "bf:Doi", "value": "10.1002/1521-3773(20020104)41:1"},
+        {"type": "bf:Doi", "value": "10.1016/j.apergo.2008.03.002"},
+        {"type": "bf:Doi", "value": "10.1594/PANGAEA.914883"},
+        {"type": "bf:Doi", "value": "10.1484/J.BPM.5.110808"},
+        {"type": "bf:Doi", "value": "10.35662/unine-thesis-2747"},
+    ]
 
 
-def test_marc21_to_specific_collection(app, bucket_location,
-                                       without_oaiset_signals):
+def test_marc21_to_specific_collection(app, bucket_location, without_oaiset_signals):
     """Test extracting collection from file 982."""
     # No code a
     marc21xml = """
@@ -1743,7 +1575,7 @@ def test_marc21_to_specific_collection(app, bucket_location,
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('collections')
+    assert not data.get("collections")
 
     # Not field 982
     marc21xml = """
@@ -1752,7 +1584,7 @@ def test_marc21_to_specific_collection(app, bucket_location,
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('collections')
+    assert not data.get("collections")
 
     # No organisation
     marc21xml = """
@@ -1764,7 +1596,7 @@ def test_marc21_to_specific_collection(app, bucket_location,
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('collections')
+    assert not data.get("collections")
 
     # OK
     marc21xml = """
@@ -1779,7 +1611,7 @@ def test_marc21_to_specific_collection(app, bucket_location,
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data['collections']
+    assert data["collections"]
 
     # Multiple collections
     marc21xml = """
@@ -1797,7 +1629,7 @@ def test_marc21_to_specific_collection(app, bucket_location,
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert len(data['collections']) == 2
+    assert len(data["collections"]) == 2
 
 
 def test_marc21_to_classification_from_field_080(app):
@@ -1812,10 +1644,9 @@ def test_marc21_to_classification_from_field_080(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('classification') == [{
-        "type": "bf:ClassificationUdc",
-        "classificationPortion": "82"
-    }]
+    assert data.get("classification") == [
+        {"type": "bf:ClassificationUdc", "classificationPortion": "82"}
+    ]
 
     # Not $a record
     marc21xml = """
@@ -1826,7 +1657,7 @@ def test_marc21_to_classification_from_field_080(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('classification')
+    assert not data.get("classification")
 
 
 def test_marc21_to_classification_from_field_084(app):
@@ -1842,10 +1673,9 @@ def test_marc21_to_classification_from_field_084(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('classification') == [{
-        "type": "bf:ClassificationDdc",
-        "classificationPortion": "610"
-    }]
+    assert data.get("classification") == [
+        {"type": "bf:ClassificationDdc", "classificationPortion": "610"}
+    ]
 
     # Not $a record
     marc21xml = """
@@ -1857,7 +1687,7 @@ def test_marc21_to_classification_from_field_084(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('classification')
+    assert not data.get("classification")
 
     # Not $2 record
     marc21xml = """
@@ -1869,7 +1699,7 @@ def test_marc21_to_classification_from_field_084(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('classification')
+    assert not data.get("classification")
 
 
 def test_marc21_to_classification_from_all(app):
@@ -1887,13 +1717,10 @@ def test_marc21_to_classification_from_all(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('classification') == [{
-        "type": "bf:ClassificationUdc",
-        "classificationPortion": "82"
-    }, {
-        "type": "bf:ClassificationDdc",
-        "classificationPortion": "610"
-    }]
+    assert data.get("classification") == [
+        {"type": "bf:ClassificationUdc", "classificationPortion": "82"},
+        {"type": "bf:ClassificationDdc", "classificationPortion": "610"},
+    ]
 
 
 def test_marc21_to_content_note(app):
@@ -1911,9 +1738,7 @@ def test_marc21_to_content_note(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('contentNote') == [
-        'La comtesse de Mortane', 'Voyage de campagne'
-    ]
+    assert data.get("contentNote") == ["La comtesse de Mortane", "Voyage de campagne"]
 
     # No field $a
     marc21xml = """
@@ -1924,7 +1749,7 @@ def test_marc21_to_content_note(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('contentNote')
+    assert not data.get("contentNote")
 
 
 def test_marc21_to_dissertation_field_502(app):
@@ -1939,7 +1764,7 @@ def test_marc21_to_dissertation_field_502(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('dissertation') == {'degree': 'Thèse de doctorat'}
+    assert data.get("dissertation") == {"degree": "Thèse de doctorat"}
 
     # thesis note decomposition
     marc21xml = """
@@ -1949,12 +1774,12 @@ def test_marc21_to_dissertation_field_502(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('dissertation') == {
-        'degree': 'Thèse de doctorat',
-        'grantingInstitution': 'Université de Fribourg',
-        'date': '2010'
+    assert data.get("dissertation") == {
+        "degree": "Thèse de doctorat",
+        "grantingInstitution": "Université de Fribourg",
+        "date": "2010",
     }
-    
+
     # Multiple --> keep always last value
     marc21xml = """
     <record>
@@ -1968,7 +1793,7 @@ def test_marc21_to_dissertation_field_502(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('dissertation') == {'degree': 'Last degree'}
+    assert data.get("dissertation") == {"degree": "Last degree"}
 
     # Without $a
     marc21xml = """
@@ -1978,7 +1803,7 @@ def test_marc21_to_dissertation_field_502(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('dissertation')
+    assert not data.get("dissertation")
 
 
 def test_marc21_to_dissertation_field_508(app):
@@ -1993,7 +1818,7 @@ def test_marc21_to_dissertation_field_508(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('dissertation') == {'jury_note': 'Magna cum laude'}
+    assert data.get("dissertation") == {"jury_note": "Magna cum laude"}
 
     # Multiple
     marc21xml = """
@@ -2008,7 +1833,7 @@ def test_marc21_to_dissertation_field_508(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('dissertation') == {'jury_note': 'Note 2'}
+    assert data.get("dissertation") == {"jury_note": "Note 2"}
 
     # Without $a
     marc21xml = """
@@ -2018,7 +1843,7 @@ def test_marc21_to_dissertation_field_508(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('dissertation')
+    assert not data.get("dissertation")
 
 
 def test_marc21_to_dissertation_all(app):
@@ -2036,9 +1861,9 @@ def test_marc21_to_dissertation_all(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('dissertation') == {
-        'degree': 'Thèse de doctorat',
-        'jury_note': 'Magna cum laude'
+    assert data.get("dissertation") == {
+        "degree": "Thèse de doctorat",
+        "jury_note": "Magna cum laude",
     }
 
 
@@ -2054,9 +1879,9 @@ def test_marc21_to_usage_and_access_policy(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('usageAndAccessPolicy') == {
-        'label': 'Springer-Verlag Berlin',
-        'license': 'License undefined'
+    assert data.get("usageAndAccessPolicy") == {
+        "label": "Springer-Verlag Berlin",
+        "license": "License undefined",
     }
 
     # Multiple
@@ -2072,9 +1897,9 @@ def test_marc21_to_usage_and_access_policy(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('usageAndAccessPolicy') == {
-        'label': 'Usage 2',
-        'license': 'License undefined'
+    assert data.get("usageAndAccessPolicy") == {
+        "label": "Usage 2",
+        "license": "License undefined",
     }
 
     # Without $a
@@ -2085,9 +1910,7 @@ def test_marc21_to_usage_and_access_policy(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('usageAndAccessPolicy') == {
-        'license': 'License undefined'
-    }
+    assert data.get("usageAndAccessPolicy") == {"license": "License undefined"}
 
     # Without 540
     marc21xml = """
@@ -2095,9 +1918,7 @@ def test_marc21_to_usage_and_access_policy(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('usageAndAccessPolicy') == {
-        'license': 'License undefined'
-    }
+    assert data.get("usageAndAccessPolicy") == {"license": "License undefined"}
 
 
 def test_marc21_to_contribution_field_100(app):
@@ -2114,17 +1935,18 @@ def test_marc21_to_contribution_field_100(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('contribution') == [{
-        'agent': {
-            'type': 'bf:Person',
-            'preferred_name': 'Romagnani, Andrea',
-            'date_of_birth': '1980',
-            'date_of_death': '2010'
-        },
-        'role': ['cre'],
-        'affiliation':
-        'University of Bern, Switzerland'
-    }]
+    assert data.get("contribution") == [
+        {
+            "agent": {
+                "type": "bf:Person",
+                "preferred_name": "Romagnani, Andrea",
+                "date_of_birth": "1980",
+                "date_of_death": "2010",
+            },
+            "role": ["cre"],
+            "affiliation": "University of Bern, Switzerland",
+        }
+    ]
 
     # Not $a
     marc21xml = """
@@ -2137,7 +1959,7 @@ def test_marc21_to_contribution_field_100(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('contribution')
+    assert not data.get("contribution")
 
     # Date does not match
     marc21xml = """
@@ -2166,16 +1988,17 @@ def test_marc21_to_contribution_field_100(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('contribution') == [{
-        'agent': {
-            'type': 'bf:Person',
-            'preferred_name': 'Romagnani, Andrea',
-            'date_of_birth': '1980'
-        },
-        'role': ['cre'],
-        'affiliation':
-        'University of Bern, Switzerland'
-    }]
+    assert data.get("contribution") == [
+        {
+            "agent": {
+                "type": "bf:Person",
+                "preferred_name": "Romagnani, Andrea",
+                "date_of_birth": "1980",
+            },
+            "role": ["cre"],
+            "affiliation": "University of Bern, Switzerland",
+        }
+    ]
 
     # Only birth date, variant 2
     marc21xml = """
@@ -2189,16 +2012,17 @@ def test_marc21_to_contribution_field_100(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('contribution') == [{
-        'agent': {
-            'type': 'bf:Person',
-            'preferred_name': 'Romagnani, Andrea',
-            'date_of_birth': '1980'
-        },
-        'role': ['cre'],
-        'affiliation':
-        'University of Bern, Switzerland'
-    }]
+    assert data.get("contribution") == [
+        {
+            "agent": {
+                "type": "bf:Person",
+                "preferred_name": "Romagnani, Andrea",
+                "date_of_birth": "1980",
+            },
+            "role": ["cre"],
+            "affiliation": "University of Bern, Switzerland",
+        }
+    ]
 
     # Only birth date, variant 3
     marc21xml = """
@@ -2212,16 +2036,17 @@ def test_marc21_to_contribution_field_100(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('contribution') == [{
-        'agent': {
-            'type': 'bf:Person',
-            'preferred_name': 'Romagnani, Andrea',
-            'date_of_birth': '1980-04-04'
-        },
-        'role': ['cre'],
-        'affiliation':
-        'University of Bern, Switzerland'
-    }]
+    assert data.get("contribution") == [
+        {
+            "agent": {
+                "type": "bf:Person",
+                "preferred_name": "Romagnani, Andrea",
+                "date_of_birth": "1980-04-04",
+            },
+            "role": ["cre"],
+            "affiliation": "University of Bern, Switzerland",
+        }
+    ]
 
 
 def test_marc21_to_contribution_field_700(app):
@@ -2239,17 +2064,18 @@ def test_marc21_to_contribution_field_700(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('contribution') == [{
-        'agent': {
-            'type': 'bf:Person',
-            'preferred_name': 'Piguet, Etienne',
-            'date_of_birth': '1980',
-            'date_of_death': '2010'
-        },
-        'role': ['dgs'],
-        'affiliation':
-        'University of Bern, Switzerland'
-    }]
+    assert data.get("contribution") == [
+        {
+            "agent": {
+                "type": "bf:Person",
+                "preferred_name": "Piguet, Etienne",
+                "date_of_birth": "1980",
+                "date_of_death": "2010",
+            },
+            "role": ["dgs"],
+            "affiliation": "University of Bern, Switzerland",
+        }
+    ]
 
     # Not $a
     marc21xml = """
@@ -2263,7 +2089,7 @@ def test_marc21_to_contribution_field_700(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('contribution')
+    assert not data.get("contribution")
 
     # Only birth date
     marc21xml = """
@@ -2278,16 +2104,17 @@ def test_marc21_to_contribution_field_700(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('contribution') == [{
-        'agent': {
-            'type': 'bf:Person',
-            'preferred_name': 'Piguet, Etienne',
-            'date_of_birth': '1980'
-        },
-        'role': ['dgs'],
-        'affiliation':
-        'University of Bern, Switzerland'
-    }]
+    assert data.get("contribution") == [
+        {
+            "agent": {
+                "type": "bf:Person",
+                "preferred_name": "Piguet, Etienne",
+                "date_of_birth": "1980",
+            },
+            "role": ["dgs"],
+            "affiliation": "University of Bern, Switzerland",
+        }
+    ]
 
     # Role from field 980, but not existing
     marc21xml = """
@@ -2302,7 +2129,7 @@ def test_marc21_to_contribution_field_700(app):
     marc21json = create_record(marc21xml)
     with pytest.raises(Exception) as exception:
         data = overdo.do(marc21json)
-    assert str(exception.value).startswith('No role found for contributor')
+    assert str(exception.value).startswith("No role found for contributor")
 
     # Role from field 980, but 980 is not mapped
     marc21xml = """
@@ -2318,7 +2145,7 @@ def test_marc21_to_contribution_field_700(app):
     marc21json = create_record(marc21xml)
     with pytest.raises(Exception) as exception:
         data = overdo.do(marc21json)
-    assert str(exception.value).startswith('No role found for contributor')
+    assert str(exception.value).startswith("No role found for contributor")
 
     # Role from field 980, but $a is not existing
     marc21xml = """
@@ -2333,7 +2160,7 @@ def test_marc21_to_contribution_field_700(app):
     marc21json = create_record(marc21xml)
     with pytest.raises(Exception) as exception:
         data = overdo.do(marc21json)
-    assert str(exception.value).startswith('No role found for contributor')
+    assert str(exception.value).startswith("No role found for contributor")
 
     # Role from field 980, found 'cre'
     marc21xml = """
@@ -2348,7 +2175,7 @@ def test_marc21_to_contribution_field_700(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('contribution')[0]['role'] == ['cre']
+    assert data.get("contribution")[0]["role"] == ["cre"]
 
     # Role from field 980, found 'ctb'
     marc21xml = """
@@ -2363,7 +2190,7 @@ def test_marc21_to_contribution_field_700(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('contribution')[0]['role'] == ['ctb']
+    assert data.get("contribution")[0]["role"] == ["ctb"]
 
     # Role 'prt' found
     marc21xml = """
@@ -2376,7 +2203,7 @@ def test_marc21_to_contribution_field_700(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('contribution')[0]['role'] == ['prt']
+    assert data.get("contribution")[0]["role"] == ["prt"]
 
     # Role for joint author
     marc21xml = """
@@ -2389,7 +2216,7 @@ def test_marc21_to_contribution_field_700(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('contribution')[0]['role'] == ['cre']
+    assert data.get("contribution")[0]["role"] == ["cre"]
 
 
 def test_marc21_to_contribution_field_710(app):
@@ -2404,13 +2231,15 @@ def test_marc21_to_contribution_field_710(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('contribution') == [{
-        'agent': {
-            'type': 'bf:Organization',
-            'preferred_name': 'Musée d\'art et d\'histoire'
-        },
-        'role': ['ctb'],
-    }]
+    assert data.get("contribution") == [
+        {
+            "agent": {
+                "type": "bf:Organization",
+                "preferred_name": "Musée d'art et d'histoire",
+            },
+            "role": ["ctb"],
+        }
+    ]
 
     # No $a
     marc21xml = """
@@ -2421,7 +2250,7 @@ def test_marc21_to_contribution_field_710(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('contribution')
+    assert not data.get("contribution")
 
 
 def test_marc21_to_contribution_field_711(app):
@@ -2439,16 +2268,18 @@ def test_marc21_to_contribution_field_711(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('contribution') == [{
-        'agent': {
-            'type': 'bf:Meeting',
-            'preferred_name': 'Theologisches Forum Christentum',
-            'place': 'Stuttgart-Hohenheim',
-            'date': '2004',
-            'number': '2'
-        },
-        'role': ['cre'],
-    }]
+    assert data.get("contribution") == [
+        {
+            "agent": {
+                "type": "bf:Meeting",
+                "preferred_name": "Theologisches Forum Christentum",
+                "place": "Stuttgart-Hohenheim",
+                "date": "2004",
+                "number": "2",
+            },
+            "role": ["cre"],
+        }
+    ]
 
     # Not $a
     marc21xml = """
@@ -2462,7 +2293,7 @@ def test_marc21_to_contribution_field_711(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('contribution')
+    assert not data.get("contribution")
 
 
 def test_marc21_to_part_of(app):
@@ -2483,21 +2314,22 @@ def test_marc21_to_part_of(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('partOf') == [{
-        'numberingYear': '2015',
-        'document': {
-            'title': 'Mehr oder weniger Staat?',
-            'contribution': ['Belser, Eva Maria'],
-            'publication': {
-                'statement': 'Stämpfli Verlag, Bern',
-                'startDate': '2015'
-            }
+    assert data.get("partOf") == [
+        {
+            "numberingYear": "2015",
+            "document": {
+                "title": "Mehr oder weniger Staat?",
+                "contribution": ["Belser, Eva Maria"],
+                "publication": {
+                    "statement": "Stämpfli Verlag, Bern",
+                    "startDate": "2015",
+                },
+            },
         }
-    }]
-    assert data.get('provisionActivity') == [{
-        'startDate': '2015',
-        'type': 'bf:Publication'
-    }]
+    ]
+    assert data.get("provisionActivity") == [
+        {"startDate": "2015", "type": "bf:Publication"}
+    ]
 
     # With sub type is not ART INBOOK
     marc21xml = """
@@ -2514,22 +2346,21 @@ def test_marc21_to_part_of(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('partOf') == [{
-        'numberingYear': '2020',
-        'numberingVolume': '28',
-        'numberingIssue': '6',
-        'numberingPages': '8200-8210',
-        'document': {
-            'title': 'Optics Express',
-            'publication': {
-                'statement': 'Optical Society of America'
-            }
+    assert data.get("partOf") == [
+        {
+            "numberingYear": "2020",
+            "numberingVolume": "28",
+            "numberingIssue": "6",
+            "numberingPages": "8200-8210",
+            "document": {
+                "title": "Optics Express",
+                "publication": {"statement": "Optical Society of America"},
+            },
         }
-    }]
-    assert data.get('provisionActivity') == [{
-        'startDate': '2020',
-        'type': 'bf:Publication'
-    }]
+    ]
+    assert data.get("provisionActivity") == [
+        {"startDate": "2020", "type": "bf:Publication"}
+    ]
 
     # Without $g
     marc21xml = """
@@ -2546,8 +2377,8 @@ def test_marc21_to_part_of(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('partOf')
-    assert not data.get('provisionActivity')
+    assert not data.get("partOf")
+    assert not data.get("provisionActivity")
 
     # Without empty numbering year
     marc21xml = """
@@ -2565,8 +2396,8 @@ def test_marc21_to_part_of(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('partOf')
-    assert not data.get('provisionActivity')
+    assert not data.get("partOf")
+    assert not data.get("provisionActivity")
 
     # Without numbering year
     marc21xml = """
@@ -2584,8 +2415,8 @@ def test_marc21_to_part_of(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('partOf')
-    assert not data.get('provisionActivity')
+    assert not data.get("partOf")
+    assert not data.get("provisionActivity")
 
     # Without title
     marc21xml = """
@@ -2602,20 +2433,21 @@ def test_marc21_to_part_of(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('partOf') == [{
-        'numberingYear': '2015',
-        'document': {
-            'contribution': ['Belser, Eva Maria'],
-            'publication': {
-                'startDate': '2015',
-                'statement': 'Stämpfli Verlag, Bern'
-            }
+    assert data.get("partOf") == [
+        {
+            "numberingYear": "2015",
+            "document": {
+                "contribution": ["Belser, Eva Maria"],
+                "publication": {
+                    "startDate": "2015",
+                    "statement": "Stämpfli Verlag, Bern",
+                },
+            },
         }
-    }]
-    assert data.get('provisionActivity') == [{
-        'startDate': '2015',
-        'type': 'bf:Publication'
-    }]
+    ]
+    assert data.get("provisionActivity") == [
+        {"startDate": "2015", "type": "bf:Publication"}
+    ]
 
     # Without $c
     marc21xml = """
@@ -2632,20 +2464,21 @@ def test_marc21_to_part_of(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('partOf') == [{
-        'numberingYear': '2015',
-        'document': {
-            'title': 'Mehr oder weniger Staat?',
-            'publication': {
-                'statement': 'Stämpfli Verlag, Bern',
-                'startDate': '2015'
-            }
+    assert data.get("partOf") == [
+        {
+            "numberingYear": "2015",
+            "document": {
+                "title": "Mehr oder weniger Staat?",
+                "publication": {
+                    "statement": "Stämpfli Verlag, Bern",
+                    "startDate": "2015",
+                },
+            },
         }
-    }]
-    assert data.get('provisionActivity') == [{
-        'startDate': '2015',
-        'type': 'bf:Publication'
-    }]
+    ]
+    assert data.get("provisionActivity") == [
+        {"startDate": "2015", "type": "bf:Publication"}
+    ]
 
     # Without document
     marc21xml = """
@@ -2660,11 +2493,10 @@ def test_marc21_to_part_of(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('partOf') == [{'numberingYear': '2015'}]
-    assert data.get('provisionActivity') == [{
-        'startDate': '2015',
-        'type': 'bf:Publication'
-    }]
+    assert data.get("partOf") == [{"numberingYear": "2015"}]
+    assert data.get("provisionActivity") == [
+        {"startDate": "2015", "type": "bf:Publication"}
+    ]
 
 
 def test_start_date_priorities(app):
@@ -2691,7 +2523,7 @@ def test_start_date_priorities(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data['provisionActivity'][0]['startDate'] == '1798'
+    assert data["provisionActivity"][0]["startDate"] == "1798"
 
     # Start dates from 269$c must be taken.
     marc21xml = """
@@ -2710,7 +2542,7 @@ def test_start_date_priorities(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data['provisionActivity'][0]['startDate'] == '1966'
+    assert data["provisionActivity"][0]["startDate"] == "1966"
 
     # Start dates from 773$g must be taken.
     marc21xml = """
@@ -2726,7 +2558,7 @@ def test_start_date_priorities(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data['provisionActivity'][0]['startDate'] == '2015'
+    assert data["provisionActivity"][0]["startDate"] == "2015"
 
     # Only 502$9
     marc21xml = """
@@ -2739,7 +2571,7 @@ def test_start_date_priorities(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data['provisionActivity'][0]['startDate'] == '2020'
+    assert data["provisionActivity"][0]["startDate"] == "2020"
 
 
 def test_marc21_to_provision_activity_field_502(app):
@@ -2755,10 +2587,9 @@ def test_marc21_to_provision_activity_field_502(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        'startDate': '2020',
-        'type': 'bf:Publication'
-    }]
+    assert data.get("provisionActivity") == [
+        {"startDate": "2020", "type": "bf:Publication"}
+    ]
 
     # One field with full date
     marc21xml = """
@@ -2771,10 +2602,9 @@ def test_marc21_to_provision_activity_field_502(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        'startDate': '2020-09-09',
-        'type': 'bf:Publication'
-    }]
+    assert data.get("provisionActivity") == [
+        {"startDate": "2020-09-09", "type": "bf:Publication"}
+    ]
 
     # Date does not match "YYYY" OR "YYYY-MM-DD"
     marc21xml = """
@@ -2787,7 +2617,7 @@ def test_marc21_to_provision_activity_field_502(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('provisionActivity')
+    assert not data.get("provisionActivity")
 
     # Multiple fields
     marc21xml = """
@@ -2804,10 +2634,9 @@ def test_marc21_to_provision_activity_field_502(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert data.get('provisionActivity') == [{
-        'startDate': '2020',
-        'type': 'bf:Publication'
-    }]
+    assert data.get("provisionActivity") == [
+        {"startDate": "2020", "type": "bf:Publication"}
+    ]
 
     # No field $9
     marc21xml = """
@@ -2819,4 +2648,4 @@ def test_marc21_to_provision_activity_field_502(app):
     """
     marc21json = create_record(marc21xml)
     data = overdo.do(marc21json)
-    assert not data.get('provisionActivity')
+    assert not data.get("provisionActivity")

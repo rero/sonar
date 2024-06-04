@@ -19,4 +19,4 @@
 
 from flask import Blueprint
 
-blueprint = Blueprint('validation', __name__, template_folder='templates')
+blueprint = Blueprint("validation", __name__, template_folder="templates")

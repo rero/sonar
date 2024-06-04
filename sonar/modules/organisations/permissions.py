@@ -68,7 +68,7 @@ class OrganisationPermission(RecordPermission):
             return True
 
         # For admin users, they can read only their own organisation.
-        return current_organisation['pid'] == record['pid']
+        return current_organisation["pid"] == record["pid"]
 
     @classmethod
     def update(cls, user, record):
@@ -91,6 +91,7 @@ class OrganisationPermission(RecordPermission):
         """
         return bool(user and user.is_superuser)
 
+
 class OrganisationFilesPermission(FilesPermission):
     """Organisation files permissions.
 
@@ -101,7 +102,7 @@ class OrganisationFilesPermission(FilesPermission):
     @classmethod
     def get_organisation(cls, parent_record):
         """Get the organisation from the parent record."""
-        return OrganisationRecord.get_record_by_pid(parent_record['pid'])
+        return OrganisationRecord.get_record_by_pid(parent_record["pid"])
 
     @classmethod
     def read(cls, user, record, pid, parent_record):
@@ -134,8 +135,7 @@ class OrganisationFilesPermission(FilesPermission):
         if user and user.is_superuser:
             return True
         organisation = cls.get_organisation(parent_record)
-        return organisation and \
-            OrganisationPermission.update(user, organisation)
+        return organisation and OrganisationPermission.update(user, organisation)
 
     @classmethod
     def delete(cls, user, record, pid, parent_record):

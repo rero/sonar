@@ -29,7 +29,7 @@ class ExportSchemaV1(Schema):
     footer = fields.List(fields.Dict(dump_only=True))
     isShared = fields.Boolean(dump_only=True)
     isDedicated = fields.Boolean(dump_only=True)
-    files = fields.Method('get_files', dump_only=True)
+    files = fields.Method("get_files", dump_only=True)
     allowedIps = fields.String(dump_only=True)
     platformName = fields.String(dump_only=True)
     documentsCustomField1 = fields.Dict(dump_only=True)
@@ -42,7 +42,7 @@ class ExportSchemaV1(Schema):
         files = []
         for file in obj.files:
             json = file.dumps()
-            json['uri'] = file.file.uri
+            json["uri"] = file.file.uri
             files.append(json)
 
         return files

@@ -25,9 +25,9 @@ from sonar.heg.serializers.schemas.medline import MedlineSchema
 
 def test_loader_schema_factory():
     """Test loader schema factory."""
-    schema = SchemaFactory.create('Medline')
+    schema = SchemaFactory.create("Medline")
     assert isinstance(schema, MedlineSchema)
 
     with pytest.raises(Exception) as exception:
-        schema = SchemaFactory.create('not-existing')
+        schema = SchemaFactory.create("not-existing")
         assert str(exception) == 'No schema defined for key "not-existing"'

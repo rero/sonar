@@ -17,8 +17,7 @@
 
 """Permissions for users."""
 
-from sonar.modules.organisations.api import OrganisationRecord, \
-    current_organisation
+from sonar.modules.organisations.api import OrganisationRecord, current_organisation
 from sonar.modules.permissions import RecordPermission
 from sonar.modules.users.api import UserRecord
 
@@ -64,7 +63,7 @@ class UserPermission(RecordPermission):
             return False
 
         # Can read himself in all cases
-        if user['pid'] == record['pid']:
+        if user["pid"] == record["pid"]:
             return True
 
         # If not admin, no access
@@ -76,16 +75,16 @@ class UserPermission(RecordPermission):
             return True
 
         # Cannot read superusers records
-        if UserRecord.ROLE_SUPERUSER == record['role']:
+        if UserRecord.ROLE_SUPERUSER == record["role"]:
             return False
 
-        user = UserRecord.get_record_by_pid(record['pid'])
+        user = UserRecord.get_record_by_pid(record["pid"])
         user = user.replace_refs()
 
-        if not user.get('organisation'):
+        if not user.get("organisation"):
             return True
 
-        return current_organisation['pid'] == user['organisation']['pid']
+        return current_organisation["pid"] == user["organisation"]["pid"]
 
     @classmethod
     def update(cls, user, record):
@@ -115,16 +114,16 @@ class UserPermission(RecordPermission):
             return True
 
         # Cannot delete himself
-        if user['pid'] == record['pid']:
+        if user["pid"] == record["pid"]:
             return False
 
-        if not record.get('organisation'):
+        if not record.get("organisation"):
             return False
 
         # For admin read is only for logged user organisation
-        if record['organisation'].get('$ref'):
+        if record["organisation"].get("$ref"):
             return current_organisation[
-                'pid'] == OrganisationRecord.get_pid_by_ref_link(
-                    record['organisation']['$ref'])
+                "pid"
+            ] == OrganisationRecord.get_pid_by_ref_link(record["organisation"]["$ref"])
 
-        return current_organisation['pid'] == record['organisation']['pid']
+        return current_organisation["pid"] == record["organisation"]["pid"]

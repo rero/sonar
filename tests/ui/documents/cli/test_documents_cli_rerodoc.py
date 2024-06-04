@@ -29,27 +29,31 @@ def test_update_file_permissions(app, script_info, document_with_file):
     # Not existing input file
     result = runner.invoke(
         cli.update_file_permissions,
-        ['./tests/ui/documents/data/not_existing.csv', '-c', '1'],
-        obj=script_info)
-    assert 'Error: Invalid value for \'PERMISSIONS_FILE\'' in result.output
+        ["./tests/ui/documents/data/not_existing.csv", "-c", "1"],
+        obj=script_info,
+    )
+    assert "Error: Invalid value for 'PERMISSIONS_FILE'" in result.output
 
     # Invalid input file
     result = runner.invoke(
         cli.update_file_permissions,
-        ['./tests/ui/documents/data/invalid.csv', '-c', '1'],
-        obj=script_info)
-    assert 'CSV file seems to be not well formatted.' in result.output
+        ["./tests/ui/documents/data/invalid.csv", "-c", "1"],
+        obj=script_info,
+    )
+    assert "CSV file seems to be not well formatted." in result.output
 
     # File cannot be parsed
     result = runner.invoke(
         cli.update_file_permissions,
-        ['./tests/ui/documents/data/permissions_file.pdf', '-c', '1'],
-        obj=script_info)
-    assert 'An error occured during file process' in result.output
+        ["./tests/ui/documents/data/permissions_file.pdf", "-c", "1"],
+        obj=script_info,
+    )
+    assert "An error occured during file process" in result.output
 
     # OK
     result = runner.invoke(
         cli.update_file_permissions,
-        ['./tests/ui/documents/data/permissions_file.csv', '-c', '1'],
-        obj=script_info)
-    assert 'Process finished' in result.output
+        ["./tests/ui/documents/data/permissions_file.csv", "-c", "1"],
+        obj=script_info,
+    )
+    assert "Process finished" in result.output

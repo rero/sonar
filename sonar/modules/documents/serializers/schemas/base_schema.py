@@ -23,8 +23,10 @@ from flask import request
 from marshmallow import Schema, pre_dump
 
 from sonar.modules.documents.api import DocumentRecord
-from sonar.modules.documents.utils import has_external_urls_for_files, \
-    populate_files_properties
+from sonar.modules.documents.utils import (
+    has_external_urls_for_files,
+    populate_files_properties,
+)
 
 
 class BaseSchema(Schema):
@@ -41,20 +43,19 @@ class BaseSchema(Schema):
         :param item: Item object to process
         :returns: Modified item
         """
-        if not item['metadata'].get('_files'):
+        if not item["metadata"].get("_files"):
             return item
 
         # Store the main file
         main_file = self.get_main_file(item)
         if main_file:
-            item['metadata']['mainFile'] = main_file
+            item["metadata"]["mainFile"] = main_file
 
         # Check if organisation record forces to point file to an external url
-        item['metadata']['external_url'] = has_external_urls_for_files(
-            item['metadata'])
+        item["metadata"]["external_url"] = has_external_urls_for_files(item["metadata"])
 
         # Add restriction, link and thumbnail to files
-        populate_files_properties(item['metadata'])
+        populate_files_properties(item["metadata"])
 
         return item
 
@@ -65,31 +66,33 @@ class BaseSchema(Schema):
         :returns: Main file or None.
         """
         files = [
-            file for file in obj['metadata'].get('_files', [])
-            if file.get('type') == 'file'
+            file
+            for file in obj["metadata"].get("_files", [])
+            if file.get("type") == "file"
         ]
-        files = sorted(files, key=lambda file: file.get('order', 100))
+        files = sorted(files, key=lambda file: file.get("order", 100))
         return files[0] if files else None
 
     def get_id(self, obj):
         """Get id."""
-        return DocumentRecord.get_permanent_link(host=request.host_url,
-                                                 pid=obj['metadata']['pid'])
+        return DocumentRecord.get_permanent_link(
+            host=request.host_url, pid=obj["metadata"]["pid"]
+        )
 
     def get_title(self, obj):
         """Get title."""
-        for title in obj['metadata'].get('title', []):
-            return title['mainTitle'][0]['value']
+        for title in obj["metadata"].get("title", []):
+            return title["mainTitle"][0]["value"]
 
         return None
 
     def get_start_date(self, obj):
         """Get start date."""
-        for provision_activity in obj['metadata'].get('provisionActivity', []):
+        for provision_activity in obj["metadata"].get("provisionActivity", []):
             if provision_activity[
-                    'type'] == 'bf:Publication' and provision_activity.get(
-                        'startDate'):
-                return provision_activity['startDate']
+                "type"
+            ] == "bf:Publication" and provision_activity.get("startDate"):
+                return provision_activity["startDate"]
 
         return None
 
@@ -97,21 +100,22 @@ class BaseSchema(Schema):
         """Get keywords."""
         items = []
 
-        for subjects in obj['metadata'].get('subjects', []):
-            items = items + subjects['label']['value']
+        for subjects in obj["metadata"].get("subjects", []):
+            items = items + subjects["label"]["value"]
 
         return items
 
     def get_url(self, obj):
         """Get url."""
-        if obj['metadata'].get('mainFile', {}).get('links'):
-            if obj['metadata']['mainFile']['links'].get('download'):
-                return '{host}{image}'.format(
-                    host=request.host_url.rstrip('/'),
-                    image=obj['metadata']['mainFile']['links']['download'])
+        if obj["metadata"].get("mainFile", {}).get("links"):
+            if obj["metadata"]["mainFile"]["links"].get("download"):
+                return "{host}{image}".format(
+                    host=request.host_url.rstrip("/"),
+                    image=obj["metadata"]["mainFile"]["links"]["download"],
+                )
 
-            if obj['metadata']['mainFile']['links'].get('external'):
-                return obj['metadata']['mainFile']['links']['external']
+            if obj["metadata"]["mainFile"]["links"].get("external"):
+                return obj["metadata"]["mainFile"]["links"]["external"]
 
         return None
 
@@ -121,9 +125,9 @@ class BaseSchema(Schema):
         :param obj: Record dict.
         :returns: Pages stored in partOf
         """
-        for part_of in obj['metadata'].get('partOf', []):
-            if part_of.get('numberingPages'):
-                return part_of['numberingPages']
+        for part_of in obj["metadata"].get("partOf", []):
+            if part_of.get("numberingPages"):
+                return part_of["numberingPages"]
 
         return None
 
@@ -133,9 +137,9 @@ class BaseSchema(Schema):
         :param obj: Record dict.
         :returns: The first page.
         """
-        for part_of in obj['metadata'].get('partOf', []):
-            if part_of.get('numberingPages'):
-                matches = re.match(r'^([0-9]+)', part_of['numberingPages'])
+        for part_of in obj["metadata"].get("partOf", []):
+            if part_of.get("numberingPages"):
+                matches = re.match(r"^([0-9]+)", part_of["numberingPages"])
 
                 return matches.group(1) if matches else None
 
@@ -147,10 +151,9 @@ class BaseSchema(Schema):
         :param obj: Record dict.
         :returns: The last page.
         """
-        for part_of in obj['metadata'].get('partOf', []):
-            if part_of.get('numberingPages'):
-                matches = re.match(r'^[0-9]+\-([0-9]+)',
-                                   part_of['numberingPages'])
+        for part_of in obj["metadata"].get("partOf", []):
+            if part_of.get("numberingPages"):
+                matches = re.match(r"^[0-9]+\-([0-9]+)", part_of["numberingPages"])
 
                 return matches.group(1) if matches else None
 

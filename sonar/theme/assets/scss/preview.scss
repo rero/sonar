@@ -15,10 +15,12 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#sidebarContent {
-    background-color: rgba(0, 0, 0, 0.7);
+@layer bootstrap {
+  #sidebarContent {
+      background-color: rgba(0, 0, 0, 0.7);
 
-    .outlineItem > a {
-        color: white !important;
-    }
+      .outlineItem > a {
+          color: white !important;
+      }
+  }
 }

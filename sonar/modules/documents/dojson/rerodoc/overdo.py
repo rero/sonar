@@ -35,7 +35,7 @@ class Overdo(BaseOverdo):
         :param str organisation_key: Key (PID) of the organisation.
         """
         if not organisation_key:
-            raise Exception('No key provided')
+            raise Exception("No key provided")
 
         # Get organisation record from database
         organisation = OrganisationRecord.get_record_by_pid(organisation_key)
@@ -44,31 +44,35 @@ class Overdo(BaseOverdo):
             # Create organisation record
             organisation = OrganisationRecord.create(
                 {
-                    'code': organisation_key,
-                    'name': organisation_key,
-                    'isShared': False,
-                    'isDedicated': False
+                    "code": organisation_key,
+                    "name": organisation_key,
+                    "isShared": False,
+                    "isDedicated": False,
                 },
-                dbcommit=True)
+                dbcommit=True,
+            )
             organisation.reindex()
 
     def do(self, blob, ignore_missing=True, exception_handlers=None):
         """Do transformation."""
-        result = super(Overdo, self).do(blob,
-                                        ignore_missing=ignore_missing,
-                                        exception_handlers=exception_handlers)
+        result = super(Overdo, self).do(
+            blob, ignore_missing=ignore_missing, exception_handlers=exception_handlers
+        )
 
         # Verify data integrity
         self.verify(result)
 
         # Add default license if not set.
-        if not result.get('usageAndAccessPolicy'):
-            default_license = 'License undefined'
-            if result.get('organisation') and result['organisation'][0][
-                    '$ref'] == 'https://sonar.ch/api/organisations/hepbejune':
-                default_license = 'CC BY-NC-SA'
+        if not result.get("usageAndAccessPolicy"):
+            default_license = "License undefined"
+            if (
+                result.get("organisation")
+                and result["organisation"][0]["$ref"]
+                == "https://sonar.ch/api/organisations/hepbejune"
+            ):
+                default_license = "CC BY-NC-SA"
 
-            result['usageAndAccessPolicy'] = {'license': default_license}
+            result["usageAndAccessPolicy"] = {"license": default_license}
 
         return result
 
@@ -78,29 +82,34 @@ class Overdo(BaseOverdo):
         :param role_700: String, role found in field 700$e
         :returns: String containing the mapped role or None
         """
-        if role_700 in ['Dir.', 'Codir.']:
-            return 'dgs'
+        if role_700 in ["Dir.", "Codir."]:
+            return "dgs"
 
-        if role_700 == 'Libr./Impr.':
-            return 'prt'
+        if role_700 == "Libr./Impr.":
+            return "prt"
 
-        if role_700 == 'joint author':
-            return 'cre'
+        if role_700 == "joint author":
+            return "cre"
 
         if not role_700:
-            doc_type = self.blob_record.get('980__', {}).get('a')
+            doc_type = self.blob_record.get("980__", {}).get("a")
 
             if not doc_type:
                 return None
 
-            if doc_type in ['PREPRINT', 'POSTPRINT', 'DISSERTATION', 'REPORT']:
-                return 'cre'
+            if doc_type in ["PREPRINT", "POSTPRINT", "DISSERTATION", "REPORT"]:
+                return "cre"
 
             if doc_type in [
-                    'BOOK', 'THESIS', 'MAP', 'JOURNAL', 'PARTITION', 'AUDIO',
-                    'IMAGE'
+                "BOOK",
+                "THESIS",
+                "MAP",
+                "JOURNAL",
+                "PARTITION",
+                "AUDIO",
+                "IMAGE",
             ]:
-                return 'ctb'
+                return "ctb"
 
         return None
 
@@ -112,15 +121,19 @@ class Overdo(BaseOverdo):
 
         def is_pa_mandatory():
             """Check if record types make provision activity mandatory."""
-            document_type = result.get('documentType')
+            document_type = result.get("documentType")
 
             if not document_type:
                 return True
 
             if document_type not in [
-                    'coar:c_beb9', 'coar:c_6501', 'coar:c_998f',
-                    'coar:c_dcae04bc', 'coar:c_3e5a', 'coar:c_5794',
-                    'coar:c_6670'
+                "coar:c_beb9",
+                "coar:c_6501",
+                "coar:c_998f",
+                "coar:c_dcae04bc",
+                "coar:c_3e5a",
+                "coar:c_5794",
+                "coar:c_6670",
             ]:
                 return True
 
@@ -130,8 +143,8 @@ class Overdo(BaseOverdo):
 
         # Check if provision activity is set, but it's optional depending
         # on record types
-        if 'provisionActivity' not in result and is_pa_mandatory():
+        if "provisionActivity" not in result and is_pa_mandatory():
             self.result_ok = False
             current_app.logger.warning(
-                'No provision activity found in record {record}'.format(
-                    record=result))
+                "No provision activity found in record {record}".format(record=result)
+            )

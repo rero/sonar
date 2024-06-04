@@ -27,30 +27,32 @@ from sonar.theme.views import schemas
 
 def test_json_schema(client, make_user):
     """Test JSON schema."""
-    user = make_user('admin', 'hepvs')
+    user = make_user("admin", "hepvs")
 
-    login_user_via_view(client, email=user['email'], password='123456')
+    login_user_via_view(client, email=user["email"], password="123456")
 
-    result = schemas('projects')
-    assert result.json['schema']['properties']['metadata']['properties'][
-        'projectSponsor']
+    result = schemas("projects")
+    assert result.json["schema"]["properties"]["metadata"]["properties"][
+        "projectSponsor"
+    ]
 
 
 def test_service(client, make_user):
     """Test service."""
-    user = make_user('admin', 'hepvs')
+    user = make_user("admin", "hepvs")
 
-    login_user_via_view(client, email=user['email'], password='123456')
+    login_user_via_view(client, email=user["email"], password="123456")
 
-    assert isinstance(sonar.resources['projects'].service.schema.schema(),
-                      RecordSchema)
+    assert isinstance(sonar.resources["projects"].service.schema.schema(), RecordSchema)
 
 
 def test_api(client, make_user):
     """Test API."""
-    user = make_user('admin', 'hepvs')
+    user = make_user("admin", "hepvs")
 
-    login_user_via_view(client, email=user['email'], password='123456')
+    login_user_via_view(client, email=user["email"], password="123456")
 
-    assert Record({}).schema.value == 'https://sonar.ch/schemas/' \
-        'hepvs/projects/project-v1.0.0.json'
+    assert (
+        Record({}).schema.value == "https://sonar.ch/schemas/"
+        "hepvs/projects/project-v1.0.0.json"
+    )
