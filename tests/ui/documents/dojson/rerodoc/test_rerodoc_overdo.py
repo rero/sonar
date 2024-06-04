@@ -25,17 +25,17 @@ from sonar.modules.organisations.api import OrganisationRecord
 
 def test_create_organisation(app, bucket_location, without_oaiset_signals):
     """Test create organisation."""
-    Overdo.create_organisation('test')
+    Overdo.create_organisation("test")
 
     # Organisation creation OK
-    organisation = OrganisationRecord.get_record_by_pid('test')
+    organisation = OrganisationRecord.get_record_by_pid("test")
     assert organisation
-    assert organisation['pid'] == 'test'
+    assert organisation["pid"] == "test"
 
     # No organisation key provided
     with pytest.raises(Exception) as exception:
         Overdo.create_organisation(None)
-    assert str(exception.value) == 'No key provided'
+    assert str(exception.value) == "No key provided"
 
 
 def test_extract_date():
@@ -44,23 +44,23 @@ def test_extract_date():
     assert Overdo.extract_date(None) == (None, None)
 
     # Full first date
-    assert Overdo.extract_date('1980-01-01') == ('1980-01-01', None)
+    assert Overdo.extract_date("1980-01-01") == ("1980-01-01", None)
 
     # Full first date, variant
-    assert Overdo.extract_date('01-01-1980') == ('01-01-1980', None)
+    assert Overdo.extract_date("01-01-1980") == ("01-01-1980", None)
 
     # First year only
-    assert Overdo.extract_date('1980') == ('1980', None)
+    assert Overdo.extract_date("1980") == ("1980", None)
 
     # First year only, variant with dash
-    assert Overdo.extract_date('1980-') == ('1980', None)
+    assert Overdo.extract_date("1980-") == ("1980", None)
 
     # Start and end year
-    assert Overdo.extract_date('1980-2010') == ('1980', '2010')
+    assert Overdo.extract_date("1980-2010") == ("1980", "2010")
 
     # Error on date format
     with pytest.raises(Exception) as exception:
-        assert Overdo.extract_date('AAAA')
+        assert Overdo.extract_date("AAAA")
     assert str(exception.value) == 'Date "AAAA" is not recognized'
 
 
@@ -70,27 +70,27 @@ def test_get_contributor_role():
     overdo.blob_record = {}
 
     # dgs
-    assert overdo.get_contributor_role('Dir.') == 'dgs'
+    assert overdo.get_contributor_role("Dir.") == "dgs"
 
     # prt
-    assert overdo.get_contributor_role('Libr./Impr.') == 'prt'
+    assert overdo.get_contributor_role("Libr./Impr.") == "prt"
 
     # joint author
-    assert overdo.get_contributor_role('joint author') == 'cre'
+    assert overdo.get_contributor_role("joint author") == "cre"
 
     # with role but no mapping found
-    assert not overdo.get_contributor_role('not-mapped')
+    assert not overdo.get_contributor_role("not-mapped")
 
     # no role, no doc type
     assert not overdo.get_contributor_role(None)
 
     # no role, doc type mapped to 'cre'
-    overdo.blob_record = {'980__': {'a': 'PREPRINT'}}
-    assert overdo.get_contributor_role(None) == 'cre'
+    overdo.blob_record = {"980__": {"a": "PREPRINT"}}
+    assert overdo.get_contributor_role(None) == "cre"
 
     # no role, doc type mapped to 'ctb'
-    overdo.blob_record = {'980__': {'a': 'BOOK'}}
-    assert overdo.get_contributor_role(None) == 'ctb'
+    overdo.blob_record = {"980__": {"a": "BOOK"}}
+    assert overdo.get_contributor_role(None) == "ctb"
 
 
 def test_verify(app):
@@ -103,14 +103,14 @@ def test_verify(app):
     assert not overdo.result_ok
 
     # No provision activity and type make it mandatory
-    overdo.verify({'documentType': 'coar:c_816b'})
+    overdo.verify({"documentType": "coar:c_816b"})
     assert not overdo.result_ok
 
     # Provision activity is present in result
     overdo.blob_record = {}
-    overdo.verify({'provisionActivity': {}})
+    overdo.verify({"provisionActivity": {}})
     assert overdo.result_ok
 
     # No provision activity and provision activity is optional
-    overdo.verify({'documentType': 'coar:c_beb9'})
+    overdo.verify({"documentType": "coar:c_beb9"})
     assert overdo.result_ok

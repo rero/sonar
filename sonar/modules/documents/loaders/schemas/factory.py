@@ -22,13 +22,13 @@ from .boris import BorisSchema
 from .rerodoc import RerodocSchema
 
 
-class LoaderSchemaFactory():
+class LoaderSchemaFactory:
     """Factory for creating a loader schema."""
 
     schemas = {
-        'rerodoc': RerodocSchema,
-        'archive_ouverte_unige': ArchiveOuverteUnigeSchema,
-        'boris': BorisSchema
+        "rerodoc": RerodocSchema,
+        "archive_ouverte_unige": ArchiveOuverteUnigeSchema,
+        "boris": BorisSchema,
     }
 
     @staticmethod
@@ -41,5 +41,4 @@ class LoaderSchemaFactory():
         if LoaderSchemaFactory.schemas.get(schema_key):
             return LoaderSchemaFactory.schemas[schema_key]()
 
-        raise Exception(
-            'No schema defined for key "{key}"'.format(key=schema_key))
+        raise Exception('No schema defined for key "{key}"'.format(key=schema_key))

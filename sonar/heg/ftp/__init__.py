@@ -26,7 +26,7 @@ from zipfile import ZipFile
 from sonar.modules.utils import chunks
 
 
-class HEGRepository():
+class HEGRepository:
     """HEG FTP repository."""
 
     host = None
@@ -65,18 +65,18 @@ class HEGRepository():
 
         target_file = path.join(target, file)
         # Download file
-        with open(target_file, 'wb') as f:
-            self._ftp.retrbinary('RETR {file}'.format(file=file), f.write)
+        with open(target_file, "wb") as f:
+            self._ftp.retrbinary("RETR {file}".format(file=file), f.write)
 
         # Extract archive
-        with ZipFile(target_file, 'r') as zip_object:
+        with ZipFile(target_file, "r") as zip_object:
             zip_object.extractall(target)
 
         # Remove source file
         remove(target_file)
         # Remove useless file
         try:
-            remove(path.join(target, 'clusters.json'))
+            remove(path.join(target, "clusters.json"))
         except Exception:
             pass
 
@@ -87,15 +87,19 @@ class HEGRepository():
         for filename in listdir(target):
             file_path = path.join(target, filename)
 
-            matches = re.match(r'^(.*)\.json$', filename)
+            matches = re.match(r"^(.*)\.json$", filename)
             if matches:
                 with open(file_path) as json_file:
                     files = [
                         open(
                             path.join(
-                                target, '{prefix}_{index}.json'.format(
-                                    prefix=matches.group(1),
-                                    index=(i + 1))), 'w')
+                                target,
+                                "{prefix}_{index}.json".format(
+                                    prefix=matches.group(1), index=(i + 1)
+                                ),
+                            ),
+                            "w",
+                        )
                         for i in range(number_of_files)
                     ]
                     for i, line in enumerate(json_file):
@@ -111,5 +115,5 @@ class HEGRepository():
         :param target: Target directory.
         """
         for filename in listdir(target):
-            if filename.startswith('HEG'):
+            if filename.startswith("HEG"):
                 remove(path.join(target, filename))

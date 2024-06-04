@@ -8,23 +8,27 @@
   ],
   "description": "A masked document is visible in the professional interface, but not in the public interface.",
   "default": "not_masked",
-  "form": {
-    "options": [
-      {
-        "label": "Public",
-        "value": "not_masked"
+  "widget": {
+    "formlyConfig": {
+      "expressions": {
+        "props.required": "true"
       },
-      {
-        "label": "Private",
-        "value": "masked_for_all"
-      },
-      {
-        "label": "Restricted to the organisation",
-        "value": "masked_for_external_ips"
+      "props": {
+        "options": [
+          {
+            "label": "Public",
+            "value": "not_masked"
+          },
+          {
+            "label": "Private",
+            "value": "masked_for_all"
+          },
+          {
+            "label": "Restricted to the organisation",
+            "value": "masked_for_external_ips"
+          }
+        ]
       }
-    ],
-    "expressionProperties": {
-      "templateOptions.required": "true"
     }
   }
 }

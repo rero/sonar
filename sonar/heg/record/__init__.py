@@ -23,7 +23,7 @@ from sonar.heg.serializers.schemas.factory import SchemaFactory
 from sonar.modules.organisations.api import OrganisationRecord
 
 
-class HEGRecord():
+class HEGRecord:
     """HEG record."""
 
     SOURCES_PRIORITY = ["Medline", "CrossRef", "unpaywall"]
@@ -46,12 +46,14 @@ class HEGRecord():
 
             if self.data.get(record_source_key):
                 record = dict(
-                    SchemaFactory.create(source).dump(
-                        self.data[record_source_key]), **record)
+                    SchemaFactory.create(source).dump(self.data[record_source_key]),
+                    **record,
+                )
 
         # If `oa_status` is `closed`, the first file is flagged as restricted.
-        if record.get('files'):
-            record['files'][0]['access'] = 'coar:c_16ec' if record.get(
-                'oa_status') == 'closed' else 'coar:c_abf2'
+        if record.get("files"):
+            record["files"][0]["access"] = (
+                "coar:c_16ec" if record.get("oa_status") == "closed" else "coar:c_abf2"
+            )
 
         return record

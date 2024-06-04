@@ -42,6 +42,7 @@ class ReplaceRefsDumper(Dumper):
         data = deepcopy(DocumentRecord(_records_state.replace_refs(data)))
         return data
 
+
 class IndexerDumper(Dumper):
     """Document indexer dumper."""
 
@@ -64,18 +65,19 @@ class IndexerDumper(Dumper):
     def _process_open_access(record, data):
         """Adds isOpenAccess field."""
         # Check if record is open access.
-        data['isOpenAccess'] = record.is_open_access()
+        data["isOpenAccess"] = record.is_open_access()
 
     @staticmethod
     def _process_organisation_ips(record, data):
         """Adds isOpenAccess field."""
         # Compile allowed IPs in document
-        if data.get('organisation'):
-            if data['organisation'][0].get('allowedIps'):
-                data['organisation'][0]['ips'] = get_ips_list(
-                    data['organisation'][0]['allowedIps'].split('\n'))
+        if data.get("organisation"):
+            if data["organisation"][0].get("allowedIps"):
+                data["organisation"][0]["ips"] = get_ips_list(
+                    data["organisation"][0]["allowedIps"].split("\n")
+                )
             else:
-                data['organisation'][0]['ips'] = []
+                data["organisation"][0]["ips"] = []
 
     @staticmethod
     def _process_fulltext(record, data):
@@ -85,21 +87,20 @@ class IndexerDumper(Dumper):
             return
 
         # Store fulltext in array for indexing
-        data['fulltext'] = []
+        data["fulltext"] = []
         for file in record.files:
-            if file.get('type') == 'fulltext':
+            if file.get("type") == "fulltext":
                 with file.file.storage().open() as pdf_file:
-                    data['fulltext'].append(pdf_file.read().decode('utf-8'))
-
+                    data["fulltext"].append(pdf_file.read().decode("utf-8"))
 
     @staticmethod
     def _process_identifiers(record, data):
         """Adds isOpenAccess field."""
         # No files are present in record
-        for id in data.get('identifiedBy', []):
-            data.setdefault('identifiers', {})
-            key = id['type'].split(':')[-1].lower()
-            data['identifiers'].setdefault(key, []).append(id['value'])
+        for id in data.get("identifiedBy", []):
+            data.setdefault("identifiers", {})
+            key = id["type"].split(":")[-1].lower()
+            data["identifiers"].setdefault(key, []).append(id["value"])
 
     def dump(self, record, data):
         """Dump a document instance with basic document information's.
@@ -116,5 +117,6 @@ class IndexerDumper(Dumper):
         self._process_identifiers(record, data)
 
         return data
+
 
 document_indexer_dumper = IndexerDumper()

@@ -41,32 +41,28 @@ def snapshot():
 
 
 @click.command()
-@click.option('--repository', 'repository', default='backup')
+@click.option("--repository", "repository", default="backup")
 @with_appcontext
 def create_repository(repository):
     """Create repository for snapshot.
 
     :param repository: Repository name.
     """
-    click.secho('Create a repository for snapshots')
+    click.secho("Create a repository for snapshots")
 
     try:
         current_search_client.snapshot.create_repository(
-            repository, {
-                'type': 'fs',
-                'settings': {
-                    'location': repository
-                }
-            })
-        click.secho('Done', fg='green')
+            repository, {"type": "fs", "settings": {"location": repository}}
+        )
+        click.secho("Done", fg="green")
     except Exception as exception:
-        click.secho(str(exception), fg='red')
+        click.secho(str(exception), fg="red")
 
 
 @click.command()
-@click.option('--repository', 'repository', default='backup')
-@click.option('--name', 'name')
-@click.option('--wait/--no-wait', default=False)
+@click.option("--repository", "repository", default="backup")
+@click.option("--name", "name")
+@click.option("--wait/--no-wait", default=False)
 @with_appcontext
 def backup(repository, name, wait):
     """Backup elasticsearch data.
@@ -75,14 +71,13 @@ def backup(repository, name, wait):
     :param name: Name of the snapshot.
     :param wait: Wait for completion.
     """
-    click.secho('Backup elasticsearch data')
+    click.secho("Backup elasticsearch data")
 
     # If no name, create a snapshot with the current date
     if not name:
-        name = 'snapshot-{date}'.format(
-            date=datetime.date.today().strftime('%Y-%m-%d'))
+        name = "snapshot-{date}".format(date=datetime.date.today().strftime("%Y-%m-%d"))
 
-        click.secho('Create a snapshot with name {name}'.format(name=name))
+        click.secho("Create a snapshot with name {name}".format(name=name))
 
     try:
         # Remove old backup with the same name
@@ -92,24 +87,26 @@ def backup(repository, name, wait):
             pass
 
         # Backup data
-        current_search_client.snapshot.create(repository,
-                                              name,
-                                              wait_for_completion=wait)
+        current_search_client.snapshot.create(
+            repository, name, wait_for_completion=wait
+        )
 
-        click.secho('Done', fg='green')
+        click.secho("Done", fg="green")
     except Exception as exception:
-        click.secho(str(exception), fg='red')
+        click.secho(str(exception), fg="red")
 
 
 @click.command()
-@click.option('--repository', 'repository', default='backup')
-@click.option('--name', 'name', required=True)
-@click.option('--wait/--no-wait', default=False)
-@click.option('--yes-i-know',
-              is_flag=True,
-              callback=abort_if_false,
-              expose_value=False,
-              prompt='Do you really want to restore a snapshot?')
+@click.option("--repository", "repository", default="backup")
+@click.option("--name", "name", required=True)
+@click.option("--wait/--no-wait", default=False)
+@click.option(
+    "--yes-i-know",
+    is_flag=True,
+    callback=abort_if_false,
+    expose_value=False,
+    prompt="Do you really want to restore a snapshot?",
+)
 @with_appcontext
 def restore(repository, name, wait):
     """Restore elasticsearch data.
@@ -118,19 +115,19 @@ def restore(repository, name, wait):
     :param name: Name of the snapshot.
     :param wait: Wait for completion.
     """
-    click.secho('Restore elasticsearch data')
+    click.secho("Restore elasticsearch data")
     try:
         # Remove all indices
-        current_search_client.indices.delete('_all')
+        current_search_client.indices.delete("_all")
 
         # Restore the snapshot
-        current_search_client.snapshot.restore(repository,
-                                               name,
-                                               wait_for_completion=wait)
+        current_search_client.snapshot.restore(
+            repository, name, wait_for_completion=wait
+        )
 
-        click.secho('Done', fg='green')
+        click.secho("Done", fg="green")
     except Exception as exception:
-        click.secho(str(exception), fg='red')
+        click.secho(str(exception), fg="red")
 
 
 snapshot.add_command(create_repository)

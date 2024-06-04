@@ -34,23 +34,25 @@ from .minters import id_minter
 
 def get_current_organisation():
     """Return current organisation from context."""
-    if has_request_context() and not hasattr(_request_ctx_stack.top,
-                                             'organisation_record'):
+    if has_request_context() and not hasattr(
+        _request_ctx_stack.top, "organisation_record"
+    ):
         ctx = _request_ctx_stack.top
-        ctx.organisation_record = None if (
-            not current_user_record or
-            not current_user_record.get('organisation')
-        ) else OrganisationRecord.get_record_by_ref_link(
-            current_user_record['organisation']['$ref'])
+        ctx.organisation_record = (
+            None
+            if (not current_user_record or not current_user_record.get("organisation"))
+            else OrganisationRecord.get_record_by_ref_link(
+                current_user_record["organisation"]["$ref"]
+            )
+        )
 
-    return getattr(_request_ctx_stack.top, 'organisation_record', None)
+    return getattr(_request_ctx_stack.top, "organisation_record", None)
 
 
 current_organisation = LocalProxy(get_current_organisation)
 
 # provider
-OrganisationProvider = type('OrganisationProvider', (Provider, ),
-                            dict(pid_type='org'))
+OrganisationProvider = type("OrganisationProvider", (Provider,), dict(pid_type="org"))
 # minter
 organisation_pid_minter = partial(id_minter, provider=OrganisationProvider)
 # fetcher
@@ -63,7 +65,7 @@ class OrganisationSearch(SonarSearch):
     class Meta:
         """Search only on item index."""
 
-        index = 'organisations'
+        index = "organisations"
         doc_types = []
 
     def get_shared_or_dedicated_list(self):
@@ -71,18 +73,15 @@ class OrganisationSearch(SonarSearch):
 
         :returns: Iterator of dedicated or shared organisations.
         """
-        return self.filter('bool',
-                           should=[{
-                               'term': {
-                                   'isDedicated': True
-                               }
-                           }, {
-                               'term': {
-                                   'isShared': True
-                               }
-                           }]).source(
-                               ['pid', 'name', 'isShared',
-                                'isDedicated']).execute().hits
+        return (
+            self.filter(
+                "bool",
+                should=[{"term": {"isDedicated": True}}, {"term": {"isShared": True}}],
+            )
+            .source(["pid", "name", "isShared", "isDedicated"])
+            .execute()
+            .hits
+        )
 
     def get_organisation_pid_by_server_name(self, server_name):
         """Get organisation by server_name.
@@ -90,8 +89,12 @@ class OrganisationSearch(SonarSearch):
         :param server_name: server name for the dedicated organisation.
         :returns: pid of the dedicated organisation.
         """
-        if hits := self.filter('term', serverName=server_name) \
-            .source(['pid']).execute().hits:
+        if (
+            hits := self.filter("term", serverName=server_name)
+            .source(["pid"])
+            .execute()
+            .hits
+        ):
             return hits[0].pid
 
     def get_dedicated_list(self):
@@ -99,7 +102,7 @@ class OrganisationSearch(SonarSearch):
 
         :returns: Iterator of dedicated organisations.
         """
-        return self.filter('term', isDedicated=True).execute().hits
+        return self.filter("term", isDedicated=True).execute().hits
 
     def get_organisation_from_naan(self, naan):
         """Get organisation from a given naan.
@@ -109,9 +112,10 @@ class OrganisationSearch(SonarSearch):
         :returns: pid of the dedicated organisation.
         """
         try:
-            return next(self.filter('term', arkNAAN=naan).scan())
+            return next(self.filter("term", arkNAAN=naan).scan())
         except StopIteration:
             return None
+
 
 class OrganisationRecord(SonarRecord):
     """Organisation record class."""
@@ -119,25 +123,24 @@ class OrganisationRecord(SonarRecord):
     minter = organisation_pid_minter
     fetcher = organisation_pid_fetcher
     provider = OrganisationProvider
-    schema = 'organisations/organisation-v1.0.0.json'
+    schema = "organisations/organisation-v1.0.0.json"
 
     @classmethod
-    def create(cls, data, id_=None, dbcommit=False, with_bucket=True,
-               **kwargs):
+    def create(cls, data, id_=None, dbcommit=False, with_bucket=True, **kwargs):
         """Create organisation record."""
         # Create OAI set
-        code = data['code']
+        code = data["code"]
         oaiset = OAISet(
-            spec=code, name=data['name'],
+            spec=code,
+            name=data["name"],
             search_pattern=f'organisation.code:"{code}"',
-            system_created=True)
+            system_created=True,
+        )
         db.session.add(oaiset)
 
-        return super(OrganisationRecord, cls).create(data,
-                                                     id_=id_,
-                                                     dbcommit=dbcommit,
-                                                     with_bucket=with_bucket,
-                                                     **kwargs)
+        return super(OrganisationRecord, cls).create(
+            data, id_=id_, dbcommit=dbcommit, with_bucket=with_bucket, **kwargs
+        )
 
     @classmethod
     def get_or_create(cls, code, name=None):
@@ -153,20 +156,18 @@ class OrganisationRecord(SonarRecord):
             return organisation
 
         organisation = cls.create(
-            {
-                'code': code,
-                'name': name if name else code
-            }, dbcommit=True)
+            {"code": code, "name": name if name else code}, dbcommit=True
+        )
         organisation.reindex()
         return organisation
 
     def update(self, data):
         """Update data for record."""
         # Update OAI set name according to organisation's name
-        oaiset = OAISet.query.filter(OAISet.spec == data['code']).first()
+        oaiset = OAISet.query.filter(OAISet.spec == data["code"]).first()
 
         if oaiset:
-            oaiset.name = data['name']
+            oaiset.name = data["name"]
             db.session.commit()
 
         super(OrganisationRecord, self).update(data)

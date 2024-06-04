@@ -37,26 +37,27 @@ from ..providers import Provider
 
 def get_current_user():
     """Return current user record from context."""
-    if has_request_context() and not hasattr(_request_ctx_stack.top,
-                                             'user_record'):
+    if has_request_context() and not hasattr(_request_ctx_stack.top, "user_record"):
         ctx = _request_ctx_stack.top
-        ctx.user_record = None if (
-            current_user.is_anonymous) else UserRecord.get_user_by_email(
-                email=current_user.email)
+        ctx.user_record = (
+            None
+            if (current_user.is_anonymous)
+            else UserRecord.get_user_by_email(email=current_user.email)
+        )
 
-    return getattr(_request_ctx_stack.top, 'user_record', None)
+    return getattr(_request_ctx_stack.top, "user_record", None)
 
 
 current_user_record = LocalProxy(get_current_user)
 
 # provider
-UserProvider = type('UserProvider', (Provider, ), dict(pid_type='user'))
+UserProvider = type("UserProvider", (Provider,), dict(pid_type="user"))
 # minter
 user_pid_minter = partial(id_minter, provider=UserProvider)
 # fetcher
 user_pid_fetcher = partial(id_fetcher, provider=UserProvider)
 
-datastore = LocalProxy(lambda: current_app.extensions['security'].datastore)
+datastore = LocalProxy(lambda: current_app.extensions["security"].datastore)
 
 
 class UserSearch(SonarSearch):
@@ -65,7 +66,7 @@ class UserSearch(SonarSearch):
     class Meta:
         """Search only on item index."""
 
-        index = 'users'
+        index = "users"
         doc_types = []
 
     def get_moderators(self, organisation_pid=None, subdivision_pid=None):
@@ -81,67 +82,78 @@ class UserSearch(SonarSearch):
         must = []
 
         if organisation_pid:
-            must.append(Q('term', organisation__pid=organisation_pid))
+            must.append(Q("term", organisation__pid=organisation_pid))
 
         if not subdivision_pid:
             must.append(
-                Q('bool',
-                  should=[
-                      Q('term', role=UserRecord.ROLE_ADMIN),
-                      Q('bool',
-                        must=Q('term', role=UserRecord.ROLE_MODERATOR),
-                        must_not=Q('exists', field='subdivision'))
-                  ]))
+                Q(
+                    "bool",
+                    should=[
+                        Q("term", role=UserRecord.ROLE_ADMIN),
+                        Q(
+                            "bool",
+                            must=Q("term", role=UserRecord.ROLE_MODERATOR),
+                            must_not=Q("exists", field="subdivision"),
+                        ),
+                    ],
+                )
+            )
 
         else:
             must.append(
-                Q('bool',
-                  should=[
-                      Q('term', role=UserRecord.ROLE_ADMIN),
-                      Q('bool',
-                        must=[
-                            Q('term', role=UserRecord.ROLE_MODERATOR),
-                            Q('term', subdivision__pid=subdivision_pid)
-                        ])
-                  ]))
+                Q(
+                    "bool",
+                    should=[
+                        Q("term", role=UserRecord.ROLE_ADMIN),
+                        Q(
+                            "bool",
+                            must=[
+                                Q("term", role=UserRecord.ROLE_MODERATOR),
+                                Q("term", subdivision__pid=subdivision_pid),
+                            ],
+                        ),
+                    ],
+                )
+            )
 
-        return self.query('bool', filter=Q(
-            'bool', must=must)).source(includes=['pid', 'email']).scan()
+        return (
+            self.query("bool", filter=Q("bool", must=must))
+            .source(includes=["pid", "email"])
+            .scan()
+        )
 
 
 class UserRecord(SonarRecord):
     """User record class."""
 
-    ROLE_USER = 'user'
-    ROLE_MODERATOR = 'moderator'
-    ROLE_SUBMITTER = 'submitter'
-    ROLE_ADMIN = 'admin'
-    ROLE_SUPERUSER = 'superuser'
+    ROLE_USER = "user"
+    ROLE_MODERATOR = "moderator"
+    ROLE_SUBMITTER = "submitter"
+    ROLE_ADMIN = "admin"
+    ROLE_SUPERUSER = "superuser"
 
     ROLES_HIERARCHY = {
         ROLE_USER: [],
         ROLE_SUBMITTER: [ROLE_USER],
         ROLE_MODERATOR: [ROLE_SUBMITTER, ROLE_USER],
         ROLE_ADMIN: [ROLE_MODERATOR, ROLE_SUBMITTER, ROLE_USER],
-        ROLE_SUPERUSER:
-        [ROLE_ADMIN, ROLE_MODERATOR, ROLE_SUBMITTER, ROLE_USER],
+        ROLE_SUPERUSER: [ROLE_ADMIN, ROLE_MODERATOR, ROLE_SUBMITTER, ROLE_USER],
     }
 
     minter = user_pid_minter
     fetcher = user_pid_fetcher
     provider = UserProvider
-    schema = 'users/user-v1.0.0.json'
+    schema = "users/user-v1.0.0.json"
     available_roles = [
-        ROLE_SUPERUSER, ROLE_ADMIN, ROLE_MODERATOR, ROLE_SUBMITTER, ROLE_USER
+        ROLE_SUPERUSER,
+        ROLE_ADMIN,
+        ROLE_MODERATOR,
+        ROLE_SUBMITTER,
+        ROLE_USER,
     ]
 
     @classmethod
-    def create(cls,
-               data,
-               id_=None,
-               dbcommit=False,
-               with_bucket=False,
-               **kwargs):
+    def create(cls, data, id_=None, dbcommit=False, with_bucket=False, **kwargs):
         """Create a record and sync roles.
 
         :param data: Metadata for record.
@@ -150,8 +162,9 @@ class UserRecord(SonarRecord):
         :param with_bucket: True for associating a bucket to record.
         :returns: Created record instance.
         """
-        record = super(UserRecord, cls).create(data, id_, dbcommit,
-                                               with_bucket, **kwargs)
+        record = super(UserRecord, cls).create(
+            data, id_, dbcommit, with_bucket, **kwargs
+        )
 
         record.sync_roles()
         return record
@@ -176,9 +189,9 @@ class UserRecord(SonarRecord):
         # Remove roles from user account.
         self.remove_roles()
 
-        return super(UserRecord, self).delete(force=force,
-                                              dbcommit=dbcommit,
-                                              delindex=delindex)
+        return super(UserRecord, self).delete(
+            force=force, dbcommit=dbcommit, delindex=delindex
+        )
 
     @cached_property
     def user(self):
@@ -186,7 +199,7 @@ class UserRecord(SonarRecord):
 
         :returns: User account.
         """
-        email = self.get('email')
+        email = self.get("email")
         user = datastore.find_user(email=email)
 
         if not user:
@@ -215,7 +228,7 @@ class UserRecord(SonarRecord):
 
         for role in self.available_roles:
             in_db = role in db_roles
-            in_record = role == self.get('role', None)
+            in_record = role == self.get("role", None)
 
             if in_record and not in_db:
                 self.add_role_to_account(role)
@@ -223,9 +236,8 @@ class UserRecord(SonarRecord):
             if not in_record and in_db:
                 self.remove_role_from_account(role)
         # add user in any cases if does not exists
-        if 'user' not in [r.name for r in self.user.roles]:
-            self.add_role_to_account('user')
-
+        if "user" not in [r.name for r in self.user.roles]:
+            self.add_role_to_account("user")
 
     def remove_roles(self):
         """Remove roles from user account."""
@@ -247,8 +259,7 @@ class UserRecord(SonarRecord):
     @classmethod
     def get_pid_by_email(cls, email):
         """Get uuid pid by email."""
-        result = UserSearch().filter(
-            'term', email=email).source(includes='pid').scan()
+        result = UserSearch().filter("term", email=email).source(includes="pid").scan()
         try:
             return next(result).pid
         except StopIteration:
@@ -301,28 +312,28 @@ class UserRecord(SonarRecord):
         """
         organisation_pid = None
 
-        if 'organisation' in self:
+        if "organisation" in self:
             organisation_pid = UserRecord.get_pid_by_ref_link(
-                self['organisation']['$ref'])
+                self["organisation"]["$ref"]
+            )
 
-        moderators = UserSearch().get_moderators(organisation_pid,
-                                                 subdivision_pid)
+        moderators = UserSearch().get_moderators(organisation_pid, subdivision_pid)
 
-        return [result['email'] for result in moderators]
+        return [result["email"] for result in moderators]
 
     def is_granted(self, role_to_check):
         """Check if user has at least the role passed in argument."""
-        if not self.get('role'):
+        if not self.get("role"):
             return False
 
-        if role_to_check in self.get_reachable_roles(self.get('role')):
+        if role_to_check in self.get_reachable_roles(self.get("role")):
             return True
 
         return False
 
     def get_all_reachable_roles(self):
         """Get list of roles depending on role hierarchy."""
-        roles = self.get_reachable_roles(self.get('role'))
+        roles = self.get_reachable_roles(self.get("role"))
         return list(set(roles))
 
     @property

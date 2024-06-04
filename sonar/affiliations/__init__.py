@@ -21,4 +21,4 @@ from __future__ import absolute_import, print_function
 
 from .affiliation_resolver import AffiliationResolver
 
-__all__ = ('AffiliationResolver', )
+__all__ = ("AffiliationResolver",)

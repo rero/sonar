@@ -23,16 +23,16 @@ from flask import Blueprint, render_template
 from flask_login import login_required
 
 blueprint = Blueprint(
-    'pdf',
+    "pdf",
     __name__,
-    static_folder='../static',
-    template_folder='../templates',
-    url_prefix='/pdf-extractor'
+    static_folder="../static",
+    template_folder="../templates",
+    url_prefix="/pdf-extractor",
 )
 
 
-@blueprint.route('/test', methods=['GET'])
+@blueprint.route("/test", methods=["GET"])
 @login_required
 def test():
     """Test upload file and extracting metadata."""
-    return render_template('test.html')
+    return render_template("test.html")

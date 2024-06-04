@@ -46,17 +46,21 @@
           "language"
         ]
       },
-      "form": {
-        "validation": {
-          "validators": {
-            "uniqueValueKeysInObject": {
-              "keys": [
-                "language"
-              ]
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "validation": {
+              "validators": {
+                "uniqueValueKeysInObject": {
+                  "keys": [
+                    "language"
+                  ]
+                }
+              },
+              "messages": {
+                "uniqueValueKeysInObjectMessage": "Only one value per language is allowed"
+              }
             }
-          },
-          "messages": {
-            "uniqueValueKeysInObjectMessage": "Only one value per language is allowed"
           }
         }
       }
@@ -69,9 +73,13 @@
           "title": "Organisation",
           "type": "string",
           "pattern": "^https://sonar.ch/api/organisations/.*?$",
-          "form": {
-            "remoteOptions": {
-              "type": "organisations"
+          "widget": {
+            "formlyConfig": {
+              "props": {
+                "remoteOptions": {
+                  "type": "organisations"
+                }
+              }
             }
           }
         }
@@ -79,9 +87,11 @@
       "required": [
         "$ref"
       ],
-      "form": {
-        "expressionProperties": {
-          "templateOptions.required": "true"
+      "widget": {
+        "formlyConfig": {
+          "expressions": {
+            "props.required": "true"
+          }
         }
       }
     }

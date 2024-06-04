@@ -17,18 +17,15 @@
 
 """API for projects resources."""
 
-from invenio_pidstore.providers.recordid import \
-    RecordIdProvider as BaseRecordIdProvider
+from invenio_pidstore.providers.recordid import RecordIdProvider as BaseRecordIdProvider
 from invenio_records.dumpers import SearchDumper, SearchDumperExt
 from invenio_records.systemfields import ConstantField
 from invenio_records_resources.records.systemfields import IndexField, PIDField
-from invenio_records_resources.services.records.components import \
-    ServiceComponent
+from invenio_records_resources.services.records.components import ServiceComponent
 from werkzeug.utils import cached_property
 
 from sonar.affiliations import AffiliationResolver
-from sonar.modules.organisations.api import OrganisationRecord, \
-    current_organisation
+from sonar.modules.organisations.api import OrganisationRecord, current_organisation
 from sonar.modules.users.api import UserRecord
 from sonar.modules.utils import has_custom_resource
 from sonar.modules.validation.extensions.validation import ValidationExtension
@@ -37,8 +34,9 @@ from sonar.resources.api import Record as BaseRecord
 from . import models
 
 # Custom provider to set the PID type
-RecordIdProvider = type('RecordIdProvider', (BaseRecordIdProvider, ),
-                        dict(pid_type='proj'))
+RecordIdProvider = type(
+    "RecordIdProvider", (BaseRecordIdProvider,), dict(pid_type="proj")
+)
 
 
 class SearchDumperObjectsExt(SearchDumperExt):
@@ -46,19 +44,18 @@ class SearchDumperObjectsExt(SearchDumperExt):
 
     def dump(self, record, data):
         """Dump the data for indexing."""
-        if data['metadata'].get('user'):
-            data['metadata']['user'] = {
-                'pid':
-                UserRecord.get_pid_by_ref_link(
-                    data['metadata']['user']['$ref'])
+        if data["metadata"].get("user"):
+            data["metadata"]["user"] = {
+                "pid": UserRecord.get_pid_by_ref_link(data["metadata"]["user"]["$ref"])
             }
 
-        if data['metadata'].get('organisation'):
+        if data["metadata"].get("organisation"):
             organisation = OrganisationRecord.get_record_by_ref_link(
-                data['metadata']['organisation']['$ref'])
-            data['metadata']['organisation'] = {
-                'pid': organisation['pid'],
-                'name': organisation['name']
+                data["metadata"]["organisation"]["$ref"]
+            )
+            data["metadata"]["organisation"] = {
+                "pid": organisation["pid"],
+                "name": organisation["name"],
             }
 
 
@@ -69,11 +66,11 @@ class Record(BaseRecord):
     model_cls = models.RecordMetadata
 
     # System fields
-    index = IndexField('projects-project-v1.0.0', search_alias='projects')
+    index = IndexField("projects-project-v1.0.0", search_alias="projects")
 
     # The `pid_type` must not be filled as argument in this constructor.
     # Instead it is guessed from RecordIdProvider.
-    pid = PIDField('id', provider=RecordIdProvider)
+    pid = PIDField("id", provider=RecordIdProvider)
 
     # PID type retrieved from provider
     pid_type = RecordIdProvider.pid_type
@@ -85,19 +82,22 @@ class Record(BaseRecord):
     @cached_property
     def schema(self):
         """Return the schema."""
-        schema_key = 'projects' if not has_custom_resource(
-            'projects') else f'{current_organisation["code"]}/projects'
+        schema_key = (
+            "projects"
+            if not has_custom_resource("projects")
+            else f'{current_organisation["code"]}/projects'
+        )
 
-        schema = f'https://sonar.ch/schemas/{schema_key}/project-v1.0.0.json'
+        schema = f"https://sonar.ch/schemas/{schema_key}/project-v1.0.0.json"
 
-        return ConstantField('$schema', schema)
+        return ConstantField("$schema", schema)
 
     def __repr__(self):
         """String representation of object.
 
         :returns: A string representing the object.
         """
-        return self['metadata']['name']
+        return self["metadata"]["name"]
 
 
 class RecordComponent(ServiceComponent):
@@ -105,11 +105,11 @@ class RecordComponent(ServiceComponent):
 
     def create(self, identity, data=None, record=None, **kwargs):
         """Guess controlled affiliations."""
-        self._guess_controlled_affiliations(data['metadata'])
+        self._guess_controlled_affiliations(data["metadata"])
 
     def update(self, identity, data=None, record=None, **kwargs):
         """Guess controlled affiliations."""
-        self._guess_controlled_affiliations(data['metadata'])
+        self._guess_controlled_affiliations(data["metadata"])
 
     def _guess_controlled_affiliations(self, data):
         """Guess controlled affiliations.
@@ -117,10 +117,10 @@ class RecordComponent(ServiceComponent):
         :param data: Record data.
         """
         affiliation_resolver = AffiliationResolver()
-        for investigator in data.get('investigators', []):
-            if investigator.get('affiliation'):
+        for investigator in data.get("investigators", []):
+            if investigator.get("affiliation"):
                 controlled_affiliations = affiliation_resolver.resolve(
-                    investigator['affiliation'])
+                    investigator["affiliation"]
+                )
                 if controlled_affiliations:
-                    investigator[
-                        'controlledAffiliation'] = controlled_affiliations
+                    investigator["controlledAffiliation"] = controlled_affiliations

@@ -23,14 +23,14 @@ from flask import current_app
 from werkzeug.local import LocalProxy
 
 
-class SonarProxy():
+class SonarProxy:
     """SONAR proxy class."""
 
     extension = None
 
     def __init__(self):
         """Proxy initialization."""
-        self.extension = current_app.extensions['sonar']
+        self.extension = current_app.extensions["sonar"]
 
     @property
     def resources(self):
