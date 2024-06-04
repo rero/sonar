@@ -46,17 +46,13 @@ class ValidationSchemaMixin:
         :param item: Record item.
         :returns: The modified item.
         """
-        if not item.get('validation'):
-            item['validation'] = {
-                'status': Status.IN_PROGRESS,
-                'action': Action.SAVE
-            }
+        if not item.get("validation"):
+            item["validation"] = {"status": Status.IN_PROGRESS, "action": Action.SAVE}
 
         # Store user
-        if not item['validation'].get('user'):
-            item['validation']['user'] = {
-                '$ref':
-                SonarRecord.get_ref_link('users', current_user_record['pid'])
+        if not item["validation"].get("user"):
+            item["validation"]["user"] = {
+                "$ref": SonarRecord.get_ref_link("users", current_user_record["pid"])
             }
 
         return item

@@ -33,13 +33,11 @@ def rerodoc():
     """RERODOC specific commands."""
 
 
-@rerodoc.command('update-file-permissions')
-@click.argument('permissions_file', type=click.File('r'))
-@click.option('-c',
-              '--chunk-size',
-              type=int,
-              default=500,
-              help='Chunk size for bulk indexing.')
+@rerodoc.command("update-file-permissions")
+@click.argument("permissions_file", type=click.File("r"))
+@click.option(
+    "-c", "--chunk-size", type=int, default=500, help="Chunk size for bulk indexing."
+)
 @with_appcontext
 def update_file_permissions(permissions_file, chunk_size):
     """Update file permission with information given by input file.
@@ -58,15 +56,15 @@ def update_file_permissions(permissions_file, chunk_size):
         indexer.process_bulk_queue()
 
     try:
-        with open(permissions_file.name, 'r') as file:
-            reader = csv.reader(file, delimiter=',')
+        with open(permissions_file.name, "r") as file:
+            reader = csv.reader(file, delimiter=",")
 
             # header
             header = next(reader)
 
             # check number of columns
             if len(header) != 3:
-                raise Exception('CSV file seems to be not well formatted.')
+                raise Exception("CSV file seems to be not well formatted.")
 
             # To store ids for bulk indexing
             ids = []
@@ -74,69 +72,67 @@ def update_file_permissions(permissions_file, chunk_size):
             for row in reader:
                 try:
                     # try to load corresponding record
-                    record = DocumentRecord.get_record_by_identifier([{
-                        'type':
-                        'bf:Local',
-                        'value':
-                        row[0]
-                    }])
+                    record = DocumentRecord.get_record_by_identifier(
+                        [{"type": "bf:Local", "value": row[0]}]
+                    )
 
                     # No record found, skipping..
                     if not record:
                         raise Exception(
-                            'Record {record} not found'.format(record=row[0]))
+                            "Record {record} not found".format(record=row[0])
+                        )
 
-                    file_name = '{key}.pdf'.format(key=row[2])
+                    file_name = "{key}.pdf".format(key=row[2])
 
                     # File not found in record, skipping
                     if file_name not in record.files:
                         raise Exception(
-                            'File {file} not found in record {record}'.format(
-                                file=file_name, record=row[0]))
+                            "File {file} not found in record {record}".format(
+                                file=file_name, record=row[0]
+                            )
+                        )
 
                     record_file = record.files[file_name]
 
                     # permissions contains a status
-                    matches = re.search(r'status:(\w+)$', row[1])
+                    matches = re.search(r"status:(\w+)$", row[1])
                     if matches:
                         # If status if RERO or INTERNAL, file must not be
                         # displayed, otherwise file is not accessible outside
                         # organisation
-                        record_file[
-                            'access'] = 'coar:c_16ec'  # restricted access
-                        if matches.group(1) in ['RERO', 'INTERNAL']:
-                            record_file[
-                                'restricted_outside_organisation'] = False
+                        record_file["access"] = "coar:c_16ec"  # restricted access
+                        if matches.group(1) in ["RERO", "INTERNAL"]:
+                            record_file["restricted_outside_organisation"] = False
                         else:
-                            record_file[
-                                'restricted_outside_organisation'] = True
+                            record_file["restricted_outside_organisation"] = True
                     else:
                         # permissions contains a date
                         matches = re.search(
-                            r'allow roles \/\.\*,(\w+),\.\*\/\n\s+.+(\d{4}-'
-                            r'\d{2}-\d{2})', row[1])
+                            r"allow roles \/\.\*,(\w+),\.\*\/\n\s+.+(\d{4}-"
+                            r"\d{2}-\d{2})",
+                            row[1],
+                        )
 
                         if matches:
                             # file is accessible inside organisation
-                            if matches.group(1) != 'INTERNAL':
-                                record_file[
-                                    'restricted_outside_organisation'] = True
+                            if matches.group(1) != "INTERNAL":
+                                record_file["restricted_outside_organisation"] = True
                             # file is not accessible
                             else:
-                                record_file[
-                                    'restricted_outside_organisation'] = False
+                                record_file["restricted_outside_organisation"] = False
 
-                            record_file[
-                                'access'] = 'coar:c_f1cf'  # embargoed access
-                            record_file['embargo_date'] = matches.group(2)
+                            record_file["access"] = "coar:c_f1cf"  # embargoed access
+                            record_file["embargo_date"] = matches.group(2)
 
                     record.commit()
                     db.session.flush()
                     ids.append(str(record.id))
 
                     current_app.logger.warning(
-                        'Restriction added for file {file} in record {record}.'
-                        .format(file=file_name, record=record['pid']))
+                        "Restriction added for file {file} in record {record}.".format(
+                            file=file_name, record=record["pid"]
+                        )
+                    )
 
                     # Bulk save and index
                     if len(ids) % chunk_size == 0:
@@ -144,14 +140,17 @@ def update_file_permissions(permissions_file, chunk_size):
                         ids = []
 
                 except Exception as exception:
-                    click.secho(str(exception), fg='yellow')
+                    click.secho(str(exception), fg="yellow")
 
         # save remaining records
         save_records(ids)
 
-        click.secho('Process finished', fg='green')
+        click.secho("Process finished", fg="green")
 
     except Exception as exception:
-        click.secho('An error occured during file process: {error}'.format(
-            error=str(exception)),
-                    fg='red')
+        click.secho(
+            "An error occured during file process: {error}".format(
+                error=str(exception)
+            ),
+            fg="red",
+        )

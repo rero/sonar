@@ -27,18 +27,25 @@ from invenio_i18n.ext import current_i18n
 from invenio_records_ui.signals import record_viewed
 
 from sonar.modules.collections.api import Record as CollectionRecord
-from sonar.modules.documents.utils import has_external_urls_for_files, \
-    populate_files_properties
-from sonar.modules.utils import format_date, \
-    get_bibliographic_code_from_language, get_language_value
+from sonar.modules.documents.utils import (
+    has_external_urls_for_files,
+    populate_files_properties,
+)
+from sonar.modules.utils import (
+    format_date,
+    get_bibliographic_code_from_language,
+    get_language_value,
+)
 
 from .utils import publication_statement_text
 
-blueprint = Blueprint('documents',
-                      __name__,
-                      template_folder='templates',
-                      static_folder='static',
-                      url_prefix='/')
+blueprint = Blueprint(
+    "documents",
+    __name__,
+    template_folder="templates",
+    static_folder="static",
+    url_prefix="/",
+)
 """Blueprint used for loading templates and static assets
 
 The sole purpose of this blueprint is to ensure that Invenio can find the
@@ -47,17 +54,15 @@ this file.
 """
 
 
-@blueprint.route('/<org_code:view>/search/documents')
+@blueprint.route("/<org_code:view>/search/documents")
 def search(view):
     """Search results page."""
     # Load collection if arg is in URL.
     collection = None
-    if request.args.get('collection_view'):
-        collection = CollectionRecord.get_record_by_pid(
-            request.args['collection_view'])
+    if request.args.get("collection_view"):
+        collection = CollectionRecord.get_record_by_pid(request.args["collection_view"])
 
-    return render_template('sonar/search.html',
-                           collection=collection, view=view)
+    return render_template("sonar/search.html", collection=collection, view=view)
 
 
 def detail(pid, record, template=None, **kwargs):
@@ -72,24 +77,21 @@ def detail(pid, record, template=None, **kwargs):
     :returns: The rendered template.
     """
     # Add restriction, link and thumbnail to files
-    if record.get('_files'):
+    if record.get("_files"):
         # Check if organisation's record forces to point file to an external
         # url
-        record['external_url'] = has_external_urls_for_files(record)
+        record["external_url"] = has_external_urls_for_files(record)
 
         populate_files_properties(record)
 
     # Import is here to avoid a circular reference error.
-    from sonar.modules.documents.serializers import google_scholar_v1, \
-        schemaorg_v1
+    from sonar.modules.documents.serializers import google_scholar_v1, schemaorg_v1
 
     # Get schema org data
-    schema_org_data = json.dumps(
-        schemaorg_v1.transform_record(record['pid'], record))
+    schema_org_data = json.dumps(schemaorg_v1.transform_record(record["pid"], record))
 
     # Get scholar data
-    google_scholar_data = google_scholar_v1.transform_record(
-        record['pid'], record)
+    google_scholar_data = google_scholar_v1.transform_record(record["pid"], record)
 
     # Resolve $ref properties
     record = record.resolve()
@@ -105,12 +107,14 @@ def detail(pid, record, template=None, **kwargs):
         record=record,
     )
 
-    return render_template(template,
-                           pid=pid,
-                           record=record,
-                           view=kwargs.get('view'),
-                           schema_org_data=schema_org_data,
-                           google_scholar_data=google_scholar_data)
+    return render_template(
+        template,
+        pid=pid,
+        record=record,
+        view=kwargs.get("view"),
+        schema_org_data=schema_org_data,
+        google_scholar_data=google_scholar_data,
+    )
 
 
 @blueprint.app_template_filter()
@@ -131,17 +135,17 @@ def title_format(title, language):
 
         for preferred_language in preferred_languages:
             for item in items:
-                if item['language'] == preferred_language:
-                    return item['value']
+                if item["language"] == preferred_language:
+                    return item["value"]
 
-        return items[0]['value']
+        return items[0]["value"]
 
     output = []
-    main_title = get_value(title.get('mainTitle', []))
+    main_title = get_value(title.get("mainTitle", []))
     if main_title:
         output.append(main_title)
 
-    subtitle = get_value(title.get('subtitle', []))
+    subtitle = get_value(title.get("subtitle", []))
     if subtitle:
         output.append(subtitle)
 
@@ -160,7 +164,7 @@ def file_size(size):
 
     :param size: integer representing the size of the file.
     """
-    return str(round(size / (1024 * 1024), 2)) + 'Mb'
+    return str(round(size / (1024 * 1024), 2)) + "Mb"
 
 
 @blueprint.app_template_filter()
@@ -170,131 +174,135 @@ def part_of_format(part_of):
     :param part_of: Object representing partOf property
     """
     items = []
-    document = part_of.get('document', {})
-    if document.get('title'):
-        items.append(document['title'])
+    document = part_of.get("document", {})
+    if document.get("title"):
+        items.append(document["title"])
 
-    if 'contribution' in document:
+    if "contribution" in document:
         formated_contribs = []
-        first_contrib = document['contribution'][0]
-        other_contribs = document['contribution'][1:]
+        first_contrib = document["contribution"][0]
+        other_contribs = document["contribution"][1:]
         if other_contribs:
-            formated_contribs.append(f' / {first_contrib} ; ')
-            formated_contribs.append(
-                ' ; '.join(other_contribs)
-            )
+            formated_contribs.append(f" / {first_contrib} ; ")
+            formated_contribs.append(" ; ".join(other_contribs))
         else:
-            formated_contribs.append(f' / {first_contrib}')
-        items.append(''.join(formated_contribs))
+            formated_contribs.append(f" / {first_contrib}")
+        items.append("".join(formated_contribs))
     if items:
-        items.append('. ')
+        items.append(". ")
 
-    if 'publication' in document and 'statement' in document['publication']:
-        items.append('- {value}.'.format(
-            value=document['publication']['statement']))
+    if "publication" in document and "statement" in document["publication"]:
+        items.append("- {value}.".format(value=document["publication"]["statement"]))
 
-    item = ''.join(items).strip() if items else ''
+    item = "".join(items).strip() if items else ""
 
     numbers = []
-    if 'numberingYear' in part_of:
-        numbers.append(part_of['numberingYear'])
+    if "numberingYear" in part_of:
+        numbers.append(part_of["numberingYear"])
 
-    if 'numberingVolume' in part_of:
-        numbers.append('{label} {value}'.format(
-            label=_('vol.'), value=part_of['numberingVolume']))
+    if "numberingVolume" in part_of:
+        numbers.append(
+            "{label} {value}".format(label=_("vol."), value=part_of["numberingVolume"])
+        )
 
-    if 'numberingIssue' in part_of:
-        numbers.append('{label} {value}'.format(label=_('no.'),
-                                              value=part_of['numberingIssue']))
+    if "numberingIssue" in part_of:
+        numbers.append(
+            "{label} {value}".format(label=_("no."), value=part_of["numberingIssue"])
+        )
 
-    if 'numberingPages' in part_of:
-        numbers.append('{label} {value}'.format(label=_('p.'),
-                                              value=part_of['numberingPages']))
+    if "numberingPages" in part_of:
+        numbers.append(
+            "{label} {value}".format(label=_("p."), value=part_of["numberingPages"])
+        )
     if item and numbers:
-        item += ' - '
+        item += " - "
     if numbers:
-        item += ', '.join(numbers)
+        item += ", ".join(numbers)
     return item
 
 
 @blueprint.app_template_filter()
 def contributors(record, meeting=False):
     """Get ordered list of contributors."""
-    if not record.get('contribution'):
+    if not record.get("contribution"):
         return []
 
-    if list(filter(lambda d: 'agent' in d, record.get('contribution'))):
-        contributors = list(filter(lambda d:
-            d['agent']['type'] == 'bf:Meeting'
-            if meeting else d['agent']['type'] != 'bf:Meeting',
-            record.get('contribution')))
+    if list(filter(lambda d: "agent" in d, record.get("contribution"))):
+        contributors = list(
+            filter(
+                lambda d: (
+                    d["agent"]["type"] == "bf:Meeting"
+                    if meeting
+                    else d["agent"]["type"] != "bf:Meeting"
+                ),
+                record.get("contribution"),
+            )
+        )
     else:
-        contributors = record.get('contribution');
+        contributors = record.get("contribution")
 
-    priorities = ['cre', 'ctb', 'dgs', 'dgc', 'edt', 'prt']
+    priorities = ["cre", "ctb", "dgs", "dgc", "edt", "prt"]
 
-    return sorted(contributors,
-                  key=lambda i: priorities.index(i['role'][0]))
+    return sorted(contributors, key=lambda i: priorities.index(i["role"][0]))
 
 
 @blueprint.app_template_filter()
 def abstracts(record):
     """Get ordered list of abstracts."""
-    if not record.get('abstracts'):
+    if not record.get("abstracts"):
         return []
 
-    language = get_bibliographic_code_from_language(
-        current_i18n.locale.language)
+    language = get_bibliographic_code_from_language(current_i18n.locale.language)
     preferred_languages = get_preferred_languages(language)
 
     abstractLanguage = []
     abstractCode = []
-    for abstract in record['abstracts']:
-        if abstract['language'] in preferred_languages:
+    for abstract in record["abstracts"]:
+        if abstract["language"] in preferred_languages:
             abstractLanguage.append(abstract)
         else:
             abstractCode.append(abstract)
     abstractSortedLanguage = sorted(
         abstractLanguage,
-        key=lambda abstract: preferred_languages.index(abstract['language'])
+        key=lambda abstract: preferred_languages.index(abstract["language"]),
     )
-    abstractSortedCode = sorted(
-        abstractCode,
-        key=lambda abstract: abstract['language']
-    )
+    abstractSortedCode = sorted(abstractCode, key=lambda abstract: abstract["language"])
     return abstractSortedLanguage + abstractSortedCode
 
 
 @blueprint.app_template_filter()
 def dissertation(record):
     """Get dissertation text."""
-    if not record.get('dissertation'):
+    if not record.get("dissertation"):
         return None
 
-    dissertation_text = [record['dissertation']['degree']]
+    dissertation_text = [record["dissertation"]["degree"]]
 
     # Dissertation has grantingInstitution or date
-    if record['dissertation'].get(
-            'grantingInstitution') or record['dissertation'].get('date'):
-        dissertation_text.append(': ')
+    if record["dissertation"].get("grantingInstitution") or record["dissertation"].get(
+        "date"
+    ):
+        dissertation_text.append(": ")
 
         # Add grantingInstitution
-        if record['dissertation'].get('grantingInstitution'):
-            dissertation_text.append(
-                record['dissertation']['grantingInstitution'])
+        if record["dissertation"].get("grantingInstitution"):
+            dissertation_text.append(record["dissertation"]["grantingInstitution"])
 
         # Add date
-        if record['dissertation'].get('date'):
-            dissertation_text.append(', {date}'.format(
-                date=format_date(record['dissertation']['date'])))
+        if record["dissertation"].get("date"):
+            dissertation_text.append(
+                ", {date}".format(date=format_date(record["dissertation"]["date"]))
+            )
 
     # Add jury note
-    if record['dissertation'].get('jury_note'):
-        dissertation_text.append(' ({label}: {note})'.format(
-            label=_('Jury note').lower(),
-            note=record['dissertation']['jury_note']))
+    if record["dissertation"].get("jury_note"):
+        dissertation_text.append(
+            " ({label}: {note})".format(
+                label=_("Jury note").lower(), note=record["dissertation"]["jury_note"]
+            )
+        )
 
-    return ''.join(dissertation_text)
+    return "".join(dissertation_text)
 
 
 @blueprint.app_template_filter()
@@ -304,20 +312,27 @@ def contribution_text(contribution):
     :param contribution: Dict representing the contribution.
     :returns: Formatted text.
     """
-    data = [contribution['agent']['preferred_name']]
+    data = [contribution["agent"]["preferred_name"]]
 
     # Meeting
-    if contribution['agent']['type'] == 'bf:Meeting':
+    if contribution["agent"]["type"] == "bf:Meeting":
         if meeting := meeting_text(contribution):
-            data.append(f'({meeting})')
+            data.append(f"({meeting})")
 
     # Person
-    if contribution['agent'][
-            'type'] == 'bf:Person' and contribution['role'][0] != 'cre':
-        data.append('({role})'.format(role=_('contribution_role_{role}'.format(
-            role=contribution['role'][0])).lower()))
+    if (
+        contribution["agent"]["type"] == "bf:Person"
+        and contribution["role"][0] != "cre"
+    ):
+        data.append(
+            "({role})".format(
+                role=_(
+                    "contribution_role_{role}".format(role=contribution["role"][0])
+                ).lower()
+            )
+        )
 
-    return ' '.join(data)
+    return " ".join(data)
 
 
 @blueprint.app_template_filter()
@@ -327,10 +342,10 @@ def meeting_text(contribution):
     :param contribution: Dict representing the contribution.
     :returns: Formatted text.
     """
-    contrib = contribution['agent']
-    return ' : '.join([
-        contrib[key] for key in ['number', 'date', 'place']
-        if key in contrib.keys()])
+    contrib = contribution["agent"]
+    return " : ".join(
+        [contrib[key] for key in ["number", "date", "place"] if key in contrib.keys()]
+    )
 
 
 @blueprint.app_template_filter()
@@ -341,11 +356,14 @@ def get_custom_field_label(record, custom_field_index):
     :param custom_field_index: Index position of the custom field.
     :returns: The label found or None.
     """
-    if record.get('organisation') and record['organisation'][0].get(
-            'documentsCustomField' + str(custom_field_index), {}).get('label'):
+    if record.get("organisation") and record["organisation"][0].get(
+        "documentsCustomField" + str(custom_field_index), {}
+    ).get("label"):
         return get_language_value(
-            record['organisation'][0]['documentsCustomField' +
-                                      str(custom_field_index)]['label'])
+            record["organisation"][0]["documentsCustomField" + str(custom_field_index)][
+                "label"
+            ]
+        )
 
     return None
 
@@ -359,12 +377,12 @@ def get_language_from_bibliographic_code(language_code):
     :param language_code: Bibliographic language
     :return str
     """
-    languages_map = current_app.config.get('SONAR_APP_LANGUAGES_MAP')
+    languages_map = current_app.config.get("SONAR_APP_LANGUAGES_MAP")
 
     if language_code not in languages_map:
         raise Exception(f'Language code not found for "{language_code}"')
     code = languages_map.get(language_code)
-    return code or '';
+    return code or ""
 
     return code
 
@@ -375,7 +393,8 @@ def get_preferred_languages(force_language=None):
     :param forceLanguage: String, force a language to be the first.
     """
     preferred_languages = current_app.config.get(
-        'SONAR_APP_PREFERRED_LANGUAGES', []).copy()
+        "SONAR_APP_PREFERRED_LANGUAGES", []
+    ).copy()
 
     if force_language:
         preferred_languages.insert(0, force_language)

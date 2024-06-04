@@ -48,7 +48,7 @@ class FileObject(InvenioFileObjet):
     def dumps(self):
         """Create a dump of the metadata associated to the record."""
         super(FileObject, self).dumps()
-        self.data.update({'mimetype': self.obj.mimetype})
+        self.data.update({"mimetype": self.obj.mimetype})
         return self.data
 
 
@@ -64,16 +64,11 @@ class SonarRecord(Record, FilesMixin):
     minter = None
     fetcher = None
     provider = None
-    object_type = 'rec'
+    object_type = "rec"
     schema = None
 
     @classmethod
-    def create(cls,
-               data,
-               id_=None,
-               dbcommit=False,
-               with_bucket=False,
-               **kwargs):
+    def create(cls, data, id_=None, dbcommit=False, with_bucket=False, **kwargs):
         """Create a new record."""
         assert cls.minter
         assert cls.schema
@@ -81,15 +76,14 @@ class SonarRecord(Record, FilesMixin):
         if not id_:
             id_ = uuid4()
 
-        if '$schema' not in data:
+        if "$schema" not in data:
             data["$schema"] = current_jsonschemas.path_to_url(cls.schema)
 
         cls.minter(id_, data)
 
-        record = super(SonarRecord, cls).create(data=data,
-                                                with_bucket=with_bucket,
-                                                id_=id_,
-                                                **kwargs)
+        record = super(SonarRecord, cls).create(
+            data=data, with_bucket=with_bucket, id_=id_, **kwargs
+        )
 
         if dbcommit:
             record.dbcommit()
@@ -100,8 +94,10 @@ class SonarRecord(Record, FilesMixin):
     def get_indexer_class(cls):
         """Get the indexer from config."""
         return obj_or_import_string(
-            current_app.config['RECORDS_REST_ENDPOINTS'][
-                cls.provider.pid_type]['indexer_class'])
+            current_app.config["RECORDS_REST_ENDPOINTS"][cls.provider.pid_type][
+                "indexer_class"
+            ]
+        )
 
     @classmethod
     def get_record_class_by_pid_type(cls, pid_type):
@@ -110,8 +106,11 @@ class SonarRecord(Record, FilesMixin):
         :param pid_type: PID type.
         :returns: Record class.
         """
-        return current_app.config.get('RECORDS_REST_ENDPOINTS',
-                                      {}).get(pid_type, {}).get('record_class')
+        return (
+            current_app.config.get("RECORDS_REST_ENDPOINTS", {})
+            .get(pid_type, {})
+            .get("record_class")
+        )
 
     @classmethod
     def get_all_pids(cls, with_deleted=False):
@@ -120,8 +119,7 @@ class SonarRecord(Record, FilesMixin):
         :param with_deleted: Include deleted records.
         :returns: A generator iterator.
         """
-        query = PersistentIdentifier.query.filter_by(
-            pid_type=cls.provider.pid_type)
+        query = PersistentIdentifier.query.filter_by(pid_type=cls.provider.pid_type)
         if not with_deleted:
             query = query.filter_by(status=PIDStatus.REGISTERED)
 
@@ -133,11 +131,10 @@ class SonarRecord(Record, FilesMixin):
         """Get ils record by pid value."""
         assert cls.provider
         try:
-            persistent_identifier = PersistentIdentifier.get(
-                cls.provider.pid_type, pid)
-            return super(SonarRecord,
-                         cls).get_record(persistent_identifier.object_uuid,
-                                         with_deleted=with_deleted)
+            persistent_identifier = PersistentIdentifier.get(cls.provider.pid_type, pid)
+            return super(SonarRecord, cls).get_record(
+                persistent_identifier.object_uuid, with_deleted=with_deleted
+            )
         except NoResultFound:
             return None
         except PIDDoesNotExistError:
@@ -146,18 +143,19 @@ class SonarRecord(Record, FilesMixin):
     @classmethod
     def get_ref_link(cls, record_type, record_id):
         """Get $ref link for the given type of record."""
-        return 'https://{host}/api/{type}/{id}'.format(
-            host=current_app.config.get('JSONSCHEMAS_HOST'),
+        return "https://{host}/api/{type}/{id}".format(
+            host=current_app.config.get("JSONSCHEMAS_HOST"),
             type=record_type,
-            id=record_id)
+            id=record_id,
+        )
 
     @classmethod
     def get_pid_by_ref_link(cls, link):
         """Return the PID corresponding to the ref link given."""
-        result = re.match(r'.*\/(.*)$', link)
+        result = re.match(r".*\/(.*)$", link)
 
         if result is None:
-            raise Exception('{link} is not a valid ref link'.format(link=link))
+            raise Exception("{link} is not a valid ref link".format(link=link))
 
         return result.group(1)
 
@@ -173,8 +171,9 @@ class SonarRecord(Record, FilesMixin):
         :param identifier: Record UUID.
         :returns: PID instance of record.
         """
-        return PersistentIdentifier.get_by_object(cls.provider.pid_type,
-                                                  cls.object_type, identifier)
+        return PersistentIdentifier.get_by_object(
+            cls.provider.pid_type, cls.object_type, identifier
+        )
 
     @staticmethod
     def dbcommit():
@@ -192,33 +191,39 @@ class SonarRecord(Record, FilesMixin):
             # Find the record bucket object.
             try:
                 records_buckets = RecordsBuckets.query.filter_by(
-                    bucket_id=bucket).first()
+                    bucket_id=bucket
+                ).first()
             except Exception:
-                raise Exception('`records_buckets` object not found.')
+                raise Exception("`records_buckets` object not found.")
 
             # Find the record PID.
 
             # Filter by the declared REST endpoints to avoid identifiers as
             # oai, urn, etc.
             pid_types = [
-                v['pid_type'] for v in
-                    current_app.config.get('RECORDS_REST_ENDPOINTS',{}).values()
+                v["pid_type"]
+                for v in current_app.config.get("RECORDS_REST_ENDPOINTS", {}).values()
             ]
-            pid = PersistentIdentifier.query.filter_by(
-                object_uuid=records_buckets.record_id).filter(
-                    PersistentIdentifier.pid_type.in_(pid_types)
-                ).first()
+            pid = (
+                PersistentIdentifier.query.filter_by(
+                    object_uuid=records_buckets.record_id
+                )
+                .filter(PersistentIdentifier.pid_type.in_(pid_types))
+                .first()
+            )
 
             if not pid:
-                raise Exception('Persistent identifier not found.')
+                raise Exception("Persistent identifier not found.")
 
             # Retrieve real record class
-            record_class = current_app.config.get(
-                'RECORDS_REST_ENDPOINTS',
-                {}).get(pid.pid_type).get('record_class')
+            record_class = (
+                current_app.config.get("RECORDS_REST_ENDPOINTS", {})
+                .get(pid.pid_type)
+                .get("record_class")
+            )
 
             if not record_class:
-                raise Exception('Class for record not found.')
+                raise Exception("Class for record not found.")
 
             record_class = obj_or_import_string(record_class)
 
@@ -249,15 +254,15 @@ class SonarRecord(Record, FilesMixin):
 
         for kwargs, see add_file method below.
         """
-        kwargs['external_url'] = url
+        kwargs["external_url"] = url
         result = requests.get(url)
         if result.status_code == 200:
             self.add_file(result.content, key, **kwargs)
         else:
             # File cannot be downloaded, keep the link to the external source.
             # And create an empty file.
-            kwargs['force_external_url'] = True
-            self.add_file(b'', key, **kwargs)
+            kwargs["force_external_url"] = True
+            self.add_file(b"", key, **kwargs)
 
     def replace_refs(self):
         """Replace the ``$ref`` keys within the JSON.
@@ -276,15 +281,17 @@ class SonarRecord(Record, FilesMixin):
         :param str key: File key
         :returns: File object created.
         """
-        if not current_app.config.get('SONAR_DOCUMENTS_IMPORT_FILES'):
+        if not current_app.config.get("SONAR_DOCUMENTS_IMPORT_FILES"):
             return
 
         # If file with the same key exists and file exists and checksum is
         # the same as the registered file, we don't do anything
         checksum = compute_md5_checksum(BytesIO(data))
-        if key in self.files and os.path.isfile(
-                self.files[key].file.uri
-        ) and checksum == self.files[key].file.checksum:
+        if (
+            key in self.files
+            and os.path.isfile(self.files[key].file.uri)
+            and checksum == self.files[key].file.checksum
+        ):
             return None
 
         # Create the file
@@ -342,8 +349,8 @@ class SonarRecord(Record, FilesMixin):
         :returns: True if record has organisation
         :rtype: Bool
         """
-        for org in self.get('organisation', []):
-            if organisation_pid == org['pid']:
+        for org in self.get("organisation", []):
+            if organisation_pid == org["pid"]:
                 return True
 
         return False
@@ -351,7 +358,7 @@ class SonarRecord(Record, FilesMixin):
     @property
     def subdivisions(self):
         """Getter for subdivisions."""
-        return self.get('subdivisions', [])
+        return self.get("subdivisions", [])
 
     def has_subdivision(self, subdivision_pid):
         """Check if record belongs to the subdivision.
@@ -369,7 +376,7 @@ class SonarRecord(Record, FilesMixin):
             return False
 
         for subdivision in self.subdivisions:
-            if subdivision_pid == subdivision['pid']:
+            if subdivision_pid == subdivision["pid"]:
                 return True
 
         # Subdivision not found, record is inaccessible
@@ -382,7 +389,7 @@ class SonarSearch(RecordsSearch):
     class Meta:
         """Search only on item index."""
 
-        index = 'records'
+        index = "records"
 
 
 class SonarIndexer(RecordIndexer):

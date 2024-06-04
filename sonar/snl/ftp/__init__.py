@@ -20,7 +20,7 @@
 from pysftp import Connection
 
 
-class SNLRepository():
+class SNLRepository:
     """SNL FTP repository."""
 
     def __init__(self, host, user, password, directory):
@@ -39,8 +39,11 @@ class SNLRepository():
     def connect(self):
         """Connect to FTP server and change directory."""
         self.client = Connection(
-            self.host, username=self.user,
-            password=self.password, default_path=self.directory)
+            self.host,
+            username=self.user,
+            password=self.password,
+            default_path=self.directory,
+        )
 
     def make_dir(self, pathname):
         """Make new directory via FTP connection."""
@@ -52,7 +55,9 @@ class SNLRepository():
 
     def list(self):
         """List directory via FTP connection."""
-        self.client.walktree('.', lambda x: print(x), lambda x: print(x), lambda x: print(x))
+        self.client.walktree(
+            ".", lambda x: print(x), lambda x: print(x), lambda x: print(x)
+        )
 
     def upload_file(self, file_path, file_name):
         """Upload file to SNL server via FTP connection.

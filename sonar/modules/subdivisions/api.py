@@ -26,8 +26,9 @@ from .config import Configuration
 from .minters import id_minter
 
 # provider
-RecordProvider = type('RecordProvider', (Provider, ),
-                      dict(pid_type=Configuration.pid_type))
+RecordProvider = type(
+    "RecordProvider", (Provider,), dict(pid_type=Configuration.pid_type)
+)
 # minter
 pid_minter = partial(id_minter, provider=RecordProvider)
 # fetcher
@@ -50,8 +51,12 @@ class Record(SonarRecord):
         :returns: The record found.
         :rtype: SonarRecord.
         """
-        result = RecordSearch().filter(
-            'term', hashKey=hash_key).source(includes='pid').scan()
+        result = (
+            RecordSearch()
+            .filter("term", hashKey=hash_key)
+            .source(includes="pid")
+            .scan()
+        )
         try:
             return next(result).pid
         except StopIteration:

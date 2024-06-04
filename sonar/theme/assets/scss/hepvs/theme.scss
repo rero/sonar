@@ -15,27 +15,29 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-@import "variables";
-@import "../common/theme";
+@layer bootstrap {
+  @import "variables";
+  @import "../common/theme";
 
-.bg-header {
-  background-color: $color-white;
+  .bg-header {
+    background-color: $color-white;
 
-  .nav-link {
-    color: $color-gray !important;
+    .nav-link {
+      color: $color-gray !important;
+    }
+
+    .btn-outline-light,
+    .form-control {
+      color: $color-gray;
+      border-color: $color-gray;
+    }
   }
 
-  .btn-outline-light,
-  .form-control {
-    color: $color-gray;
-    border-color: $color-gray;
-  }
-}
-
-.bg-organisation {
-  color: $color-white !important;
-
-  .nav-link {
+  .bg-organisation {
     color: $color-white !important;
+
+    .nav-link {
+      color: $color-white !important;
+    }
   }
 }

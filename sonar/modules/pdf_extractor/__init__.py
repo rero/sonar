@@ -22,4 +22,4 @@ from __future__ import absolute_import, print_function
 
 from .ext import PDFExtractor
 
-__all__ = ('PDFExtractor', )
+__all__ = ("PDFExtractor",)

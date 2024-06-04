@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-version: '2.3'
 services:
   app:
     build:
@@ -109,7 +108,7 @@ services:
     ports:
       - "5555:5555"
   grobid:
-    image: lfoppiano/grobid:0.8.0
+    image: lfoppiano/grobid:latest-crf
     ports:
       - "8070:8070"
       - "8071:8071"

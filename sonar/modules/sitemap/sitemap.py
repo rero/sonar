@@ -36,41 +36,48 @@ def sitemap_generate(server_name, size=10000):
     """
     # Find Organisation by server name and set view and server name
     search = DocumentSearch()
-    if org_pid := OrganisationSearch() \
-        .get_organisation_pid_by_server_name(server_name):
-        search = search.filter('term', organisation__pid=org_pid)
+    if org_pid := OrganisationSearch().get_organisation_pid_by_server_name(server_name):
+        search = search.filter("term", organisation__pid=org_pid)
     else:
-        server_name = current_app.config.get('SONAR_APP_SERVER_NAME')
-        org_pid = current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION')
+        server_name = current_app.config.get("SONAR_APP_SERVER_NAME")
+        org_pid = current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION")
 
-    with current_app.test_request_context(f'https://{server_name}'):
+    with current_app.test_request_context(f"https://{server_name}"):
         files_splitted = 0
-        file_name = 'sitemap.xml'
+        file_name = "sitemap.xml"
         folder = []
-        if org_pid != current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'):
+        if org_pid != current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION"):
             folder.append(org_pid)
         sitemap_folder = os.path.join(
-            current_app.config.get('SONAR_APP_SITEMAP_FOLDER_PATH'), *folder)
+            current_app.config.get("SONAR_APP_SITEMAP_FOLDER_PATH"), *folder
+        )
         sitemap_file = os.path.join(sitemap_folder, file_name)
         # Create a destination directory
         _create_folder_or_remove_files(sitemap_folder)
 
         if count := search.count():
             # Elasticsearch query for current organisation
-            hits = search \
-                .sort({'_updated': 'asc'}) \
-                .params(preserve_order=True) \
-                .source(['pid', '_updated']) \
+            hits = (
+                search.sort({"_updated": "asc"})
+                .params(preserve_order=True)
+                .source(["pid", "_updated"])
                 .scan()
+            )
 
             if count > size:
                 # In multiple files mode, generate the index
-                files_splitted = math.ceil(count / size);
+                files_splitted = math.ceil(count / size)
                 _generate_index_sitemap(sitemap_file, org_pid, files_splitted)
 
             _generate_sitemap(
-                sitemap_folder, sitemap_file, file_name, org_pid,
-                files_splitted, hits, size)
+                sitemap_folder,
+                sitemap_file,
+                file_name,
+                org_pid,
+                files_splitted,
+                hits,
+                size,
+            )
 
 
 def _create_folder_or_remove_files(sitemap_folder):
@@ -84,7 +91,7 @@ def _create_folder_or_remove_files(sitemap_folder):
         os.makedirs(sitemap_folder)
 
     # remove all files into the current folder
-    for file in glob.glob(f'{sitemap_folder}/*.xml'):
+    for file in glob.glob(f"{sitemap_folder}/*.xml"):
         os.remove(file)
 
 
@@ -93,13 +100,13 @@ def _get_url_sets(hits, max, org_pid, last=True):
     n = 0
     for hit in hits:
         yield {
-            'loc': url_for(
-                'invenio_records_ui.doc',
+            "loc": url_for(
+                "invenio_records_ui.doc",
                 view=org_pid,
                 pid_value=hit.pid,
-                _external=True),
-            'lastmod': datetime.fromisoformat(hit._updated) \
-                .strftime('%Y-%m-%d')
+                _external=True,
+            ),
+            "lastmod": datetime.fromisoformat(hit._updated).strftime("%Y-%m-%d"),
         }
         n += 1
         if not last and n == max:
@@ -113,24 +120,23 @@ def _generate_index_sitemap(sitemap_file, org_pid, files_splitted):
     :param: org_pid: organisation pid.
     :param: files_splitted: Number of indexes to generate.
     """
+
     def get_splitted_files():
-        for i in range(1, files_splitted+1):
+        for i in range(1, files_splitted + 1):
             yield {
                 "loc": url_for(
-                    'sitemap.sitemap_index',
-                    view=org_pid,
-                    index=i,
-                    _external=True)
+                    "sitemap.sitemap_index", view=org_pid, index=i, _external=True
+                )
             }
-    template = current_app.jinja_env.get_template(
-        'sonar/sitemap_index.xml')
+
+    template = current_app.jinja_env.get_template("sonar/sitemap_index.xml")
     rv = template.stream(sitemaps=get_splitted_files())
     rv.dump(sitemap_file)
 
 
 def _generate_sitemap(
-    sitemap_folder, sitemap_file, file_name, org_pid, files_splitted, hits,
-    size):
+    sitemap_folder, sitemap_file, file_name, org_pid, files_splitted, hits, size
+):
     """Generate the sitemap file(s).
 
     :param: sitemap_folder: destination folder.
@@ -142,15 +148,16 @@ def _generate_sitemap(
     :param: size: Size of the set.
     """
     # Get the template
-    template = current_app.jinja_env.get_template('sonar/sitemap.xml')
+    template = current_app.jinja_env.get_template("sonar/sitemap.xml")
 
     if files_splitted > 1:
         # Multiple files
-        file = file_name.split('.')
-        for i in range(1, files_splitted+1):
-            file_path = os.path.join(sitemap_folder, f'{file[0]}_{i}.xml')
+        file = file_name.split(".")
+        for i in range(1, files_splitted + 1):
+            file_path = os.path.join(sitemap_folder, f"{file[0]}_{i}.xml")
             rv = template.stream(
-                urlsets=_get_url_sets(hits, size, org_pid, files_splitted == i))
+                urlsets=_get_url_sets(hits, size, org_pid, files_splitted == i)
+            )
             rv.enable_buffering(100)
             rv.dump(file_path)
     else:
