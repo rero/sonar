@@ -127,136 +127,105 @@ def test_rerodoc_loader(app, organisation):
     </record>
     """  # nopep8
     assert RerodocSchema().dump(xml) == {
-        'identifiedBy': [{
-            'type': 'bf:Local',
-            'source': 'RERO DOC',
-            'value': '289209'
-        }, {
-            'type':
-            'bf:Local',
-            'source':
-            'Swissbib',
-            'value':
-            '(NATIONALLICENCE)oxford-10.1093/mnras/stu2500'
-        }, {
-            'type':
-            'bf:Doi',
-            'value':
-            '10.1093/mnras/stu2500'
-        }],
-        'collections': [{
-            '$ref': 'https://sonar.ch/api/collections/1'
-        }],
-        'usageAndAccessPolicy': {
-            'label':
-            '© 2015 The Authors Published by Oxford University Press on '
-            'behalf of the Royal Astronomical Society',
-            'license': 'License undefined'
+        "identifiedBy": [
+            {"type": "bf:Local", "source": "RERO DOC", "value": "289209"},
+            {
+                "type": "bf:Local",
+                "source": "Swissbib",
+                "value": "(NATIONALLICENCE)oxford-10.1093/mnras/stu2500",
+            },
+            {"type": "bf:Doi", "value": "10.1093/mnras/stu2500"},
+        ],
+        "collections": [{"$ref": "https://sonar.ch/api/collections/1"}],
+        "usageAndAccessPolicy": {
+            "label": "© 2015 The Authors Published by Oxford University Press on "
+            "behalf of the Royal Astronomical Society",
+            "license": "License undefined",
         },
-        'abstracts': [{
-            'value':
-            'We study supermassive black holes (BHs) in merging galaxies',
-            'language': 'eng'
-        }],
-        'partOf': [{
-            'numberingYear': '2015',
-            'numberingVolume': '447',
-            'numberingIssue': '3',
-            'numberingPages': '2123-2143',
-            'document': {
-                'title': 'Monthly Notices of the Royal Astronomical Society',
-                'publication': {
-                    'statement': 'Oxford University Press'
-                }
+        "abstracts": [
+            {
+                "value": "We study supermassive black holes (BHs) in merging galaxies",
+                "language": "eng",
             }
-        }],
-        'provisionActivity': [{
-            'type': 'bf:Publication',
-            'startDate': '2015'
-        }],
-        'otherEdition': [{
-            'document': {
-                'electronicLocator': 'http://www-geol.unine.ch/GEOMAGNETISME/tract.html'
+        ],
+        "partOf": [
+            {
+                "numberingYear": "2015",
+                "numberingVolume": "447",
+                "numberingIssue": "3",
+                "numberingPages": "2123-2143",
+                "document": {
+                    "title": "Monthly Notices of the Royal Astronomical Society",
+                    "publication": {"statement": "Oxford University Press"},
+                },
+            }
+        ],
+        "provisionActivity": [{"type": "bf:Publication", "startDate": "2015"}],
+        "otherEdition": [
+            {
+                "document": {
+                    "electronicLocator": "http://www-geol.unine.ch/GEOMAGNETISME/tract.html"
+                },
+                "publicNote": "Alternative version",
+            }
+        ],
+        "language": [{"type": "bf:Language", "value": "eng"}],
+        "documentType": "coar:c_6501",
+        "organisation": [{"$ref": "https://sonar.ch/api/organisations/org"}],
+        "classification": [
+            {"type": "bf:ClassificationUdc", "classificationPortion": "52"}
+        ],
+        "contribution": [
+            {
+                "agent": {"type": "bf:Person", "preferred_name": "Capelo, Pedro R."},
+                "role": ["cre"],
+                "affiliation": "Department of Astronomy, University of Michigan, Ann Arbor, MI "
+                "48109, USA",
             },
-            'publicNote': "Alternative version"
-        }],
-        'language': [{
-            'type': 'bf:Language',
-            'value': 'eng'
-        }],
-        'documentType':
-        'coar:c_6501',
-        'organisation': [{
-            '$ref': 'https://sonar.ch/api/organisations/org'
-        }],
-        'classification': [{
-            'type': 'bf:ClassificationUdc',
-            'classificationPortion': '52'
-        }],
-        'contribution': [{
-            'agent': {
-                'type': 'bf:Person',
-                'preferred_name': 'Capelo, Pedro R.'
+            {
+                "agent": {"type": "bf:Person", "preferred_name": "Volonteri, Marta"},
+                "role": ["cre"],
+                "affiliation": "Department of Astronomy, University of Michigan, Ann Arbor, MI "
+                "48109, USA",
             },
-            'role': ['cre'],
-            'affiliation':
-            'Department of Astronomy, University of Michigan, Ann Arbor, MI '
-            '48109, USA'
-        }, {
-            'agent': {
-                'type': 'bf:Person',
-                'preferred_name': 'Volonteri, Marta'
+            {
+                "agent": {"type": "bf:Person", "preferred_name": "Dotti, Massimo"},
+                "role": ["cre"],
+                "affiliation": "Dipartimento di Fisica G. Occhialini, Università degli Studi di "
+                "Milano Bicocca, Piazza della Scienza 3, I-20126 Milano, Italy",
             },
-            'role': ['cre'],
-            'affiliation':
-            'Department of Astronomy, University of Michigan, Ann Arbor, MI '
-            '48109, USA'
-        }, {
-            'agent': {
-                'type': 'bf:Person',
-                'preferred_name': 'Dotti, Massimo'
+            {
+                "agent": {
+                    "type": "bf:Person",
+                    "preferred_name": "Bellovary, Jillian M.",
+                },
+                "role": ["cre"],
+                "affiliation": "Department of Physics and Astronomy, Vanderbilt University, "
+                "Nashville, TN 37235, USA",
             },
-            'role': ['cre'],
-            'affiliation':
-            'Dipartimento di Fisica G. Occhialini, Università degli Studi di '
-            'Milano Bicocca, Piazza della Scienza 3, I-20126 Milano, Italy'
-        }, {
-            'agent': {
-                'type': 'bf:Person',
-                'preferred_name': 'Bellovary, Jillian M.'
+            {
+                "agent": {"type": "bf:Person", "preferred_name": "Mayer, Lucio"},
+                "role": ["cre"],
+                "affiliation": "Institute for Computational Science, University of Zürich, "
+                "Winterthurerstrasse 190, CH-8057 Zürich, Switzerland",
             },
-            'role': ['cre'],
-            'affiliation':
-            'Department of Physics and Astronomy, Vanderbilt University, '
-            'Nashville, TN 37235, USA'
-        }, {
-            'agent': {
-                'type': 'bf:Person',
-                'preferred_name': 'Mayer, Lucio'
+            {
+                "agent": {"type": "bf:Person", "preferred_name": "Governato, Fabio"},
+                "role": ["cre"],
+                "affiliation": "Department of Astronomy, University of Washington, Box 351580, "
+                "Seattle, WA 98195, USA",
             },
-            'role': ['cre'],
-            'affiliation':
-            'Institute for Computational Science, University of Zürich, '
-            'Winterthurerstrasse 190, CH-8057 Zürich, Switzerland'
-        }, {
-            'agent': {
-                'type': 'bf:Person',
-                'preferred_name': 'Governato, Fabio'
-            },
-            'role': ['cre'],
-            'affiliation':
-            'Department of Astronomy, University of Washington, Box 351580, '
-            'Seattle, WA 98195, USA'
-        }],
-        'title': [{
-            'type':
-            'bf:Title',
-            'mainTitle': [{
-                'value':
-                'Growth and activity of black holes in galaxy mergers with '
-                'varying mass ratios',
-                'language':
-                'eng'
-            }]
-        }]
+        ],
+        "title": [
+            {
+                "type": "bf:Title",
+                "mainTitle": [
+                    {
+                        "value": "Growth and activity of black holes in galaxy mergers with "
+                        "varying mass ratios",
+                        "language": "eng",
+                    }
+                ],
+            }
+        ],
     }

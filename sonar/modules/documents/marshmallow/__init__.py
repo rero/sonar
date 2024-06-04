@@ -19,7 +19,6 @@
 
 from __future__ import absolute_import, print_function
 
-from .json import DocumentListSchemaV1, DocumentMetadataSchemaV1, \
-    DocumentSchemaV1
+from .json import DocumentListSchemaV1, DocumentMetadataSchemaV1, DocumentSchemaV1
 
-__all__ = ('DocumentMetadataSchemaV1', 'DocumentSchemaV1', 'DocumentListSchemaV1')
+__all__ = ("DocumentMetadataSchemaV1", "DocumentSchemaV1", "DocumentListSchemaV1")

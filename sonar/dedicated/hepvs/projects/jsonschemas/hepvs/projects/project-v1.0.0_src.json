@@ -55,11 +55,13 @@
           "title": "Project summary",
           "type": "string",
           "minLength": 1,
-          "form": {
-            "type": "textarea",
-            "templateOptions": {
-              "rows": 5,
-              "limitWords": 250
+          "widget": {
+            "formlyConfig": {
+              "type": "textarea",
+              "props": {
+                "rows": 5,
+                "limitWords": 250
+              }
             }
           }
         },
@@ -69,10 +71,12 @@
           "type": "string",
           "format": "date",
           "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
-          "form": {
-            "type": "datepicker",
-            "templateOptions": {
-              "placeholder": "Example: 2020-12-01"
+          "widget": {
+            "formlyConfig": {
+              "type": "datePicker",
+              "props": {
+                "placeholder": "Example: 2020-12-01"
+              }
             }
           }
         },
@@ -82,10 +86,12 @@
           "type": "string",
           "format": "date",
           "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
-          "form": {
-            "type": "datepicker",
-            "templateOptions": {
-              "placeholder": "Example: 2020-12-01"
+          "widget": {
+            "formlyConfig": {
+              "type": "datePicker",
+              "props": {
+                "placeholder": "Example: 2020-12-01"
+              }
             }
           }
         },
@@ -96,9 +102,13 @@
             "$ref": {
               "type": "string",
               "pattern": "^https://sonar.ch/api/organisations/.*?$",
-              "form": {
-                "remoteOptions": {
-                  "type": "organisations"
+              "widget": {
+                "formlyConfig": {
+                  "props": {
+                    "remoteOptions": {
+                      "type": "organisations"
+                    }
+                  }
                 }
               }
             }
@@ -106,9 +116,11 @@
           "required": [
             "$ref"
           ],
-          "form": {
-            "expressionProperties": {
-              "templateOptions.required": "true"
+          "widget": {
+            "formlyConfig": {
+              "expressions": {
+                "props.required": "true"
+              }
             }
           }
         },
@@ -121,9 +133,13 @@
               "title": "User",
               "type": "string",
               "pattern": "^https://sonar.ch/api/users/.*?$",
-              "form": {
-                "remoteOptions": {
-                  "type": "users"
+              "widget": {
+                "formlyConfig": {
+                  "props": {
+                    "remoteOptions": {
+                      "type": "users"
+                    }
+                  }
                 }
               }
             }
@@ -131,29 +147,37 @@
           "required": [
             "$ref"
           ],
-          "form": {
-            "expressionProperties": {
-              "templateOptions.required": "true"
+          "widget": {
+            "formlyConfig": {
+              "expressions": {
+                "props.required": "true"
+              }
             }
           }
         },
         "approvalDate": {
           "title": "Date of approval by the Team Leader",
           "type": "string",
-          "form": {
-            "type": "datepicker"
+          "widget": {
+            "formlyConfig": {
+              "type": "datePicker"
+            }
           }
         },
         "projectSponsor": {
           "title": "Project sponsor",
           "type": "string",
           "minLength": 1,
-          "form": {
-            "remoteTypeahead": {
-              "type": "projects",
-              "field": "metadata.projectSponsor.suggest,metadata.innerSearcher.suggest",
-              "suggest": "/api/suggestions/completion",
-              "allowAdd": true
+          "widget": {
+            "formlyConfig": {
+              "props": {
+                "remoteTypeahead": {
+                  "type": "projects",
+                  "field": "metadata.projectSponsor.suggest,metadata.innerSearcher.suggest",
+                  "suggest": "/api/suggestions/completion",
+                  "allowAdd": true
+                }
+              }
             }
           }
         },
@@ -167,28 +191,29 @@
             "Scientific collaborator"
           ],
           "default": "Lecturer/professor",
-          "form": {
-            "type": "select",
-            "options": [
-              {
-                "label": "Lecturer/professor",
-                "value": "Lecturer/professor"
-              },
-              {
-                "label": "Doctoral student",
-                "value": "Doctoral student"
-              },
-              {
-                "label": "Animators",
-                "value": "Animators"
-              },
-              {
-                "label": "Scientific collaborator",
-                "value": "Scientific collaborator"
+          "widget": {
+            "formlyConfig": {
+              "type": "select",
+              "props": {
+                "options": [
+                  {
+                    "label": "Lecturer/professor",
+                    "value": "Lecturer/professor"
+                  },
+                  {
+                    "label": "Doctoral student",
+                    "value": "Doctoral student"
+                  },
+                  {
+                    "label": "Animators",
+                    "value": "Animators"
+                  },
+                  {
+                    "label": "Scientific collaborator",
+                    "value": "Scientific collaborator"
+                  }
+                ]
               }
-            ],
-            "templateOptions": {
-              "wrappers": []
             }
           }
         },
@@ -204,36 +229,37 @@
             "Training and professionalization"
           ],
           "default": "Education, childhood and the learning Society 21",
-          "form": {
-            "type": "select",
-            "options": [
-              {
-                "label": "Education, childhood and the learning Society 21",
-                "value": "Education, childhood and the learning Society 21"
-              },
-              {
-                "label": "Emotions, learning, and well-being at school",
-                "value": "Emotions, learning, and well-being at school"
-              },
-              {
-                "label": "Fundamental learning",
-                "value": "Fundamental learning"
-              },
-              {
-                "label": "Creativity, transformations and innovations in education",
-                "value": "Creativity, transformations and innovations in education"
-              },
-              {
-                "label": "Languages, arts, cultures: mediation and teaching",
-                "value": "Languages, arts, cultures: mediation and teaching"
-              },
-              {
-                "label": "Training and professionalization",
-                "value": "Training and professionalization"
+          "widget": {
+            "formlyConfig": {
+              "type": "select",
+              "props": {
+                "options": [
+                  {
+                    "label": "Education, childhood and the learning Society 21",
+                    "value": "Education, childhood and the learning Society 21"
+                  },
+                  {
+                    "label": "Emotions, learning, and well-being at school",
+                    "value": "Emotions, learning, and well-being at school"
+                  },
+                  {
+                    "label": "Fundamental learning",
+                    "value": "Fundamental learning"
+                  },
+                  {
+                    "label": "Creativity, transformations and innovations in education",
+                    "value": "Creativity, transformations and innovations in education"
+                  },
+                  {
+                    "label": "Languages, arts, cultures: mediation and teaching",
+                    "value": "Languages, arts, cultures: mediation and teaching"
+                  },
+                  {
+                    "label": "Training and professionalization",
+                    "value": "Training and professionalization"
+                  }
+                ]
               }
-            ],
-            "templateOptions": {
-              "wrappers": []
             }
           }
         },
@@ -245,12 +271,16 @@
             "title": "First and last name",
             "type": "string",
             "minLength": 1,
-            "form": {
-              "remoteTypeahead": {
-                "type": "projects",
-                "field": "metadata.projectSponsor.suggest,metadata.innerSearcher.suggest",
-                "suggest": "/api/suggestions/completion",
-                "allowAdd": true
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "remoteTypeahead": {
+                    "type": "projects",
+                    "field": "metadata.projectSponsor.suggest,metadata.innerSearcher.suggest",
+                    "suggest": "/api/suggestions/completion",
+                    "allowAdd": true
+                  }
+                }
               }
             }
           }
@@ -266,36 +296,37 @@
             "Languages, arts, cultures: mediation and teaching",
             "Training and professionalization"
           ],
-          "form": {
-            "type": "select",
-            "options": [
-              {
-                "label": "Education, childhood and the learning Society 21",
-                "value": "Education, childhood and the learning Society 21"
-              },
-              {
-                "label": "Emotions, learning, and well-being at school",
-                "value": "Emotions, learning, and well-being at school"
-              },
-              {
-                "label": "Fundamental learning",
-                "value": "Fundamental learning"
-              },
-              {
-                "label": "Creativity, transformations and innovations in education",
-                "value": "Creativity, transformations and innovations in education"
-              },
-              {
-                "label": "Languages, arts, cultures: mediation and teaching",
-                "value": "Languages, arts, cultures: mediation and teaching"
-              },
-              {
-                "label": "Training and professionalization",
-                "value": "Training and professionalization"
+          "widget": {
+            "formlyConfig": {
+              "type": "select",
+              "props": {
+                "options": [
+                  {
+                    "label": "Education, childhood and the learning Society 21",
+                    "value": "Education, childhood and the learning Society 21"
+                  },
+                  {
+                    "label": "Emotions, learning, and well-being at school",
+                    "value": "Emotions, learning, and well-being at school"
+                  },
+                  {
+                    "label": "Fundamental learning",
+                    "value": "Fundamental learning"
+                  },
+                  {
+                    "label": "Creativity, transformations and innovations in education",
+                    "value": "Creativity, transformations and innovations in education"
+                  },
+                  {
+                    "label": "Languages, arts, cultures: mediation and teaching",
+                    "value": "Languages, arts, cultures: mediation and teaching"
+                  },
+                  {
+                    "label": "Training and professionalization",
+                    "value": "Training and professionalization"
+                  }
+                ]
               }
-            ],
-            "templateOptions": {
-              "wrappers": []
             }
           }
         },
@@ -309,28 +340,29 @@
             "Suspended"
           ],
           "default": "In progress",
-          "form": {
-            "type": "select",
-            "options": [
-              {
-                "label": "In progress",
-                "value": "In progress"
-              },
-              {
-                "label": "Completed",
-                "value": "Completed"
-              },
-              {
-                "label": "Abandoned",
-                "value": "Abandoned"
-              },
-              {
-                "label": "Suspended",
-                "value": "Suspended"
+          "widget": {
+            "formlyConfig": {
+              "type": "select",
+              "props": {
+                "options": [
+                  {
+                    "label": "In progress",
+                    "value": "In progress"
+                  },
+                  {
+                    "label": "Completed",
+                    "value": "Completed"
+                  },
+                  {
+                    "label": "Abandoned",
+                    "value": "Abandoned"
+                  },
+                  {
+                    "label": "Suspended",
+                    "value": "Suspended"
+                  }
+                ]
               }
-            ],
-            "templateOptions": {
-              "wrappers": []
             }
           }
         },
@@ -345,6 +377,7 @@
               "default": false
             },
             "list": {
+              "title": "External partners",
               "type": "array",
               "minItems": 1,
               "items": {
@@ -361,8 +394,12 @@
                     "title": "Institution",
                     "type": "string",
                     "minLength": 1,
-                    "form": {
-                      "hide": true
+                    "widget": {
+                      "formlyConfig": {
+                        "props": {
+                          "hide": true
+                        }
+                      }
                     }
                   }
                 },
@@ -374,8 +411,12 @@
                   "searcherName"
                 ]
               },
-              "form": {
-                "hideExpression": "!field.parent.model || !field.parent.model.choice"
+              "widget": {
+                "formlyConfig": {
+                  "expressions": {
+                    "hide": "!field.parent.model || !field.parent.model.choice"
+                  }
+                }
               }
             }
           },
@@ -395,12 +436,16 @@
           "items": {
             "type": "string",
             "minLength": 1,
-            "form": {
-              "remoteTypeahead": {
-                "type": "projects",
-                "field": "metadata.keywords.suggest",
-                "suggest": "/api/suggestions/completion",
-                "allowAdd": true
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "remoteTypeahead": {
+                    "type": "projects",
+                    "field": "metadata.keywords.suggest",
+                    "suggest": "/api/suggestions/completion",
+                    "allowAdd": true
+                  }
+                }
               }
             }
           }
@@ -409,49 +454,62 @@
           "title": "Realization framework",
           "type": "array",
           "minItems": 1,
+          "uniqueItems": true,
+          "default": [],
           "items": {
+            "title": "Realization framework",
             "type": "string",
-            "minLength": 1
+            "enum": [
+              "Master",
+              "Master of Advanced Studies",
+              "Doctorate supported by the HEP-VS",
+              "Doctorate not supported by the HEP-VS",
+              "Internal research",
+              "Funded research",
+              "Post-doctorate supported by the HEP-VS",
+              "CAS or DAS"
+            ]
           },
-          "form": {
-            "type": "multicheckbox",
-            "templateOptions": {
-              "wrappers": [],
-              "type": "array",
-              "options": [
-                {
-                  "label": "Master",
-                  "value": "Master"
-                },
-                {
-                  "label": "Master of Advanced Studies",
-                  "value": "Master of Advanced Studies"
-                },
-                {
-                  "label": "Doctorate supported by the HEP-VS",
-                  "value": "Doctorate supported by the HEP-VS"
-                },
-                {
-                  "label": "Doctorate not supported by the HEP-VS",
-                  "value": "Doctorate not supported by the HEP-VS"
-                },
-                {
-                  "label": "Internal research",
-                  "value": "Internal research"
-                },
-                {
-                  "label": "Funded research",
-                  "value": "Funded research"
-                },
-                {
-                  "label": "Post-doctorate supported by the HEP-VS",
-                  "value": "Post-doctorate supported by the HEP-VS"
-                },
-                {
-                  "label": "CAS or DAS",
-                  "value": "CAS or DAS"
-                }
-              ]
+          "widget": {
+            "formlyConfig": {
+              "type": "multi-select",
+              "props": {
+                "sort": true,
+                "options": [
+                  {
+                    "label": "Master",
+                    "value": "Master"
+                  },
+                  {
+                    "label": "Master of Advanced Studies",
+                    "value": "Master of Advanced Studies"
+                  },
+                  {
+                    "label": "Doctorate supported by the HEP-VS",
+                    "value": "Doctorate supported by the HEP-VS"
+                  },
+                  {
+                    "label": "Doctorate not supported by the HEP-VS",
+                    "value": "Doctorate not supported by the HEP-VS"
+                  },
+                  {
+                    "label": "Internal research",
+                    "value": "Internal research"
+                  },
+                  {
+                    "label": "Funded research",
+                    "value": "Funded research"
+                  },
+                  {
+                    "label": "Post-doctorate supported by the HEP-VS",
+                    "value": "Post-doctorate supported by the HEP-VS"
+                  },
+                  {
+                    "label": "CAS or DAS",
+                    "value": "CAS or DAS"
+                  }
+                ]
+              }
             }
           }
         },
@@ -473,7 +531,7 @@
                 "type": {
                   "type": "string",
                   "enum": [
-                    "​Swiss National Science Foundation",
+                    "\u200bSwiss National Science Foundation",
                     "Swissuniversities",
                     "HES-SO Valais-Wallis",
                     "HES-SO",
@@ -482,52 +540,57 @@
                     "Company",
                     "Other (free field)"
                   ],
-                  "form": {
-                    "type": "select",
-                    "options": [
-                      {
-                        "label": "​Swiss National Science Foundation",
-                        "value": "​Swiss National Science Foundation"
-                      },
-                      {
-                        "label": "Swissuniversities",
-                        "value": "Swissuniversities"
-                      },
-                      {
-                        "label": "HES-SO Valais-Wallis",
-                        "value": "HES-SO Valais-Wallis"
-                      },
-                      {
-                        "label": "HES-SO",
-                        "value": "HES-SO"
-                      },
-                      {
-                        "label": "Private foundation",
-                        "value": "Private foundation"
-                      },
-                      {
-                        "label": "Public foundation",
-                        "value": "Public foundation"
-                      },
-                      {
-                        "label": "Company",
-                        "value": "Company"
-                      },
-                      {
-                        "label": "Other (free field)",
-                        "value": "Other (free field)"
+                  "widget": {
+                    "formlyConfig": {
+                      "props": {
+                        "options": [
+                          {
+                            "label": "\u200bSwiss National Science Foundation",
+                            "value": "\u200bSwiss National Science Foundation"
+                          },
+                          {
+                            "label": "Swissuniversities",
+                            "value": "Swissuniversities"
+                          },
+                          {
+                            "label": "HES-SO Valais-Wallis",
+                            "value": "HES-SO Valais-Wallis"
+                          },
+                          {
+                            "label": "HES-SO",
+                            "value": "HES-SO"
+                          },
+                          {
+                            "label": "Private foundation",
+                            "value": "Private foundation"
+                          },
+                          {
+                            "label": "Public foundation",
+                            "value": "Public foundation"
+                          },
+                          {
+                            "label": "Company",
+                            "value": "Company"
+                          },
+                          {
+                            "label": "Other (free field)",
+                            "value": "Other (free field)"
+                          }
+                        ]
                       }
-                    ]
+                    }
                   }
                 },
                 "number": {
                   "title": "Funding number",
                   "type": "string",
                   "minLength": 1,
-                  "form": {
-                    "hideExpression": "!model || !model.type || (model.type !== '​Swiss National Science Foundation' && model.type !== 'Swissuniversities')",
-                    "expressionProperties": {
-                      "templateOptions.required": "model && (model.type === '​Swiss National Science Foundation' || model.type === 'Swissuniversities')"
+                  "widget": {
+                    "formlyConfig": {
+                      "expressions": {
+                        "props.required": "model && (model.type === '\u200bSwiss National Science Foundation' || model.type === 'Swissuniversities')",
+                        "hide": "!model || !model.type || (model.type !== '\u200bSwiss National Science Foundation' && model.type !== 'Swissuniversities')"
+                      }
                     }
                   }
                 },
@@ -535,10 +598,12 @@
                   "title": "Name",
                   "type": "string",
                   "minLength": 1,
-                  "form": {
-                    "hideExpression": "!model || !model.type || model.type === '​Swiss National Science Foundation' || model.type === 'Swissuniversities'",
-                    "expressionProperties": {
-                      "templateOptions.required": "model && model.type !== '​Swiss National Science Foundation' && model.type !== 'Swissuniversities'"
+                  "widget": {
+                    "formlyConfig": {
+                      "expressions": {
+                        "props.required": "model && model.type !== '\u200bSwiss National Science Foundation' && model.type !== 'Swissuniversities'",
+                        "hide": "!model || !model.type || model.type === '\u200bSwiss National Science Foundation' || model.type === 'Swissuniversities'"
+                      }
                     }
                   }
                 }
@@ -551,16 +616,24 @@
               "required": [
                 "type"
               ],
-              "form": {
-                "hideExpression": "field.parent.model.choice === false"
+              "widget": {
+                "formlyConfig": {
+                  "expressions": {
+                    "hide": "field.parent.model.choice === false"
+                  }
+                }
               }
             },
             "fundingReceived": {
               "title": "Funding was granted for the project",
               "type": "boolean",
               "default": true,
-              "form": {
-                "hideExpression": "field.parent.model.choice === false"
+              "widget": {
+                "formlyConfig": {
+                  "expressions": {
+                    "hide": "field.parent.model.choice === false"
+                  }
+                }
               }
             }
           },
@@ -613,116 +686,116 @@
                   "Animator",
                   "Other"
                 ],
-                "form": {
-                  "type": "select",
-                  "options": [
-                    {
-                      "label": "Apprentice",
-                      "value": "Apprentice"
-                    },
-                    {
-                      "label": "Social Assistant",
-                      "value": "Social Assistant"
-                    },
-                    {
-                      "label": "Guidance counsellor",
-                      "value": "Guidance counsellor"
-                    },
-                    {
-                      "label": "Director, head of establishment",
-                      "value": "Director, head of establishment"
-                    },
-                    {
-                      "label": "Director, head of HE training",
-                      "value": "Director, head of HE training"
-                    },
-                    {
-                      "label": "Dean of a school",
-                      "value": "Dean of a school"
-                    },
-                    {
-                      "label": "Vice-rector HE",
-                      "value": "Vice-rector HE"
-                    },
-                    {
-                      "label": "Student",
-                      "value": "Student"
-                    },
-                    {
-                      "label": "Allophone student",
-                      "value": "Allophone student"
-                    },
-                    {
-                      "label": "Student in special education",
-                      "value": "Student in special education"
-                    },
-                    {
-                      "label": "Primary teacher",
-                      "value": "Primary teacher"
-                    },
-                    {
-                      "label": "Secondary teacher",
-                      "value": "Secondary teacher"
-                    },
-                    {
-                      "label": "Tertiary teacher",
-                      "value": "Tertiary teacher"
-                    },
-                    {
-                      "label": "Special education teacher",
-                      "value": "Special education teacher"
-                    },
-                    {
-                      "label": "Student in training",
-                      "value": "Student in training"
-                    },
-                    {
-                      "label": "Trainer",
-                      "value": "Trainer"
-                    },
-                    {
-                      "label": "Inspector",
-                      "value": "Inspector"
-                    },
-                    {
-                      "label": "Logopedist",
-                      "value": "Logopedist"
-                    },
-                    {
-                      "label": "Classroom teacher",
-                      "value": "Classroom teacher"
-                    },
-                    {
-                      "label": "Mediator",
-                      "value": "Mediator"
-                    },
-                    {
-                      "label": "Parents",
-                      "value": "Parents"
-                    },
-                    {
-                      "label": "Practitioner-trainer",
-                      "value": "Practitioner-trainer"
-                    },
-                    {
-                      "label": "Psychologist",
-                      "value": "Psychologist"
-                    },
-                    {
-                      "label": "Psychomotrician",
-                      "value": "Psychomotrician"
-                    },
-                    {
-                      "label": "Animator",
-                      "value": "Animator"
-                    },
-                    {
-                      "label": "Other",
-                      "value": "Other"
+                "widget": {
+                  "formlyConfig": {
+                    "props": {
+                      "options": [
+                        {
+                          "label": "Apprentice",
+                          "value": "Apprentice"
+                        },
+                        {
+                          "label": "Social Assistant",
+                          "value": "Social Assistant"
+                        },
+                        {
+                          "label": "Guidance counsellor",
+                          "value": "Guidance counsellor"
+                        },
+                        {
+                          "label": "Director, head of establishment",
+                          "value": "Director, head of establishment"
+                        },
+                        {
+                          "label": "Director, head of HE training",
+                          "value": "Director, head of HE training"
+                        },
+                        {
+                          "label": "Dean of a school",
+                          "value": "Dean of a school"
+                        },
+                        {
+                          "label": "Vice-rector HE",
+                          "value": "Vice-rector HE"
+                        },
+                        {
+                          "label": "Student",
+                          "value": "Student"
+                        },
+                        {
+                          "label": "Allophone student",
+                          "value": "Allophone student"
+                        },
+                        {
+                          "label": "Student in special education",
+                          "value": "Student in special education"
+                        },
+                        {
+                          "label": "Primary teacher",
+                          "value": "Primary teacher"
+                        },
+                        {
+                          "label": "Secondary teacher",
+                          "value": "Secondary teacher"
+                        },
+                        {
+                          "label": "Tertiary teacher",
+                          "value": "Tertiary teacher"
+                        },
+                        {
+                          "label": "Special education teacher",
+                          "value": "Special education teacher"
+                        },
+                        {
+                          "label": "Student in training",
+                          "value": "Student in training"
+                        },
+                        {
+                          "label": "Trainer",
+                          "value": "Trainer"
+                        },
+                        {
+                          "label": "Inspector",
+                          "value": "Inspector"
+                        },
+                        {
+                          "label": "Logopedist",
+                          "value": "Logopedist"
+                        },
+                        {
+                          "label": "Classroom teacher",
+                          "value": "Classroom teacher"
+                        },
+                        {
+                          "label": "Mediator",
+                          "value": "Mediator"
+                        },
+                        {
+                          "label": "Parents",
+                          "value": "Parents"
+                        },
+                        {
+                          "label": "Practitioner-trainer",
+                          "value": "Practitioner-trainer"
+                        },
+                        {
+                          "label": "Psychologist",
+                          "value": "Psychologist"
+                        },
+                        {
+                          "label": "Psychomotrician",
+                          "value": "Psychomotrician"
+                        },
+                        {
+                          "label": "Animator",
+                          "value": "Animator"
+                        },
+                        {
+                          "label": "Other",
+                          "value": "Other"
+                        }
+                      ]
                     }
-                  ],
-                  "templateOptions": {
-                    "wrappers": []
                   }
                 }
               },
@@ -730,10 +803,12 @@
                 "title": "Type of actor",
                 "type": "string",
                 "minLength": 1,
-                "form": {
-                  "hideExpression": "!model || !model.choice || model.choice !== 'Other'",
-                  "expressionProperties": {
-                    "templateOptions.required": "model && model.choice === 'Other'"
+                "widget": {
+                  "formlyConfig": {
+                    "expressions": {
+                      "props.required": "model && model.choice === 'Other'",
+                      "hide": "!model || !model.choice || model.choice !== 'Other'"
+                    }
                   }
                 }
               },
@@ -758,11 +833,13 @@
           "title": "What are the benefits and quality improvements in the research in this project?",
           "type": "string",
           "minLength": 1,
-          "form": {
-            "type": "textarea",
-            "templateOptions": {
-              "rows": 5,
-              "limitWords": 250
+          "widget": {
+            "formlyConfig": {
+              "type": "textarea",
+              "props": {
+                "rows": 5,
+                "limitWords": 250
+              }
             }
           }
         },
@@ -770,11 +847,13 @@
           "title": "What are the benefits of research in training?",
           "type": "string",
           "minLength": 1,
-          "form": {
-            "type": "textarea",
-            "templateOptions": {
-              "rows": 5,
-              "limitWords": 250
+          "widget": {
+            "formlyConfig": {
+              "type": "textarea",
+              "props": {
+                "rows": 5,
+                "limitWords": 250
+              }
             }
           }
         },
@@ -782,11 +861,13 @@
           "title": "What is the impact of the research on the professional environment?",
           "type": "string",
           "minLength": 1,
-          "form": {
-            "type": "textarea",
-            "templateOptions": {
-              "rows": 5,
-              "limitWords": 250
+          "widget": {
+            "formlyConfig": {
+              "type": "textarea",
+              "props": {
+                "rows": 5,
+                "limitWords": 250
+              }
             }
           }
         },
@@ -794,11 +875,13 @@
           "title": "What is the impact of research on public action or on internal or external governance?",
           "type": "string",
           "minLength": 1,
-          "form": {
-            "type": "textarea",
-            "templateOptions": {
-              "rows": 5,
-              "limitWords": 250
+          "widget": {
+            "formlyConfig": {
+              "type": "textarea",
+              "props": {
+                "rows": 5,
+                "limitWords": 250
+              }
             }
           }
         },
@@ -816,10 +899,12 @@
               "title": "Why?",
               "type": "string",
               "minLength": 1,
-              "form": {
-                "hideExpression": "!model || !model.choice",
-                "expressionProperties": {
-                  "templateOptions.required": "model && model.choice"
+              "widget": {
+                "formlyConfig": {
+                  "expressions": {
+                    "props.required": "model && model.choice",
+                    "hide": "!model || !model.choice"
+                  }
                 }
               }
             }
@@ -843,6 +928,7 @@
               "default": false
             },
             "mandate": {
+              "title": "Mandate",
               "type": "string",
               "default": "State of Valais, Education service",
               "enum": [
@@ -855,53 +941,60 @@
                 "Other locality (Switzerland)",
                 "Other"
               ],
-              "form": {
-                "type": "select",
-                "options": [
-                  {
-                    "label": "State of Valais, Education service",
-                    "value": "State of Valais, Education service"
+              "widget": {
+                "formlyConfig": {
+                  "expressions": {
+                    "hide": "!model || !model.choice"
                   },
-                  {
-                    "label": "State of Valais, Higher education service",
-                    "value": "State of Valais, Higher education service"
-                  },
-                  {
-                    "label": "State of Valais, other services",
-                    "value": "State of Valais, other services"
-                  },
-                  {
-                    "label": "State of Valais, parastatal institution",
-                    "value": "State of Valais, parastatal institution"
-                  },
-                  {
-                    "label": "Locality (Valais)",
-                    "value": "Locality (Valais)"
-                  },
-                  {
-                    "label": "Other canton (Switzerland)",
-                    "value": "Other canton (Switzerland)"
-                  },
-                  {
-                    "label": "Other locality (Switzerland)",
-                    "value": "Other locality (Switzerland)"
-                  },
-                  {
-                    "label": "Other",
-                    "value": "Other"
+                  "props": {
+                    "options": [
+                      {
+                        "label": "State of Valais, Education service",
+                        "value": "State of Valais, Education service"
+                      },
+                      {
+                        "label": "State of Valais, Higher education service",
+                        "value": "State of Valais, Higher education service"
+                      },
+                      {
+                        "label": "State of Valais, other services",
+                        "value": "State of Valais, other services"
+                      },
+                      {
+                        "label": "State of Valais, parastatal institution",
+                        "value": "State of Valais, parastatal institution"
+                      },
+                      {
+                        "label": "Locality (Valais)",
+                        "value": "Locality (Valais)"
+                      },
+                      {
+                        "label": "Other canton (Switzerland)",
+                        "value": "Other canton (Switzerland)"
+                      },
+                      {
+                        "label": "Other locality (Switzerland)",
+                        "value": "Other locality (Switzerland)"
+                      },
+                      {
+                        "label": "Other",
+                        "value": "Other"
+                      }
+                    ]
                   }
-                ],
-                "hideExpression": "!model || !model.choice"
+                }
               }
             },
             "name": {
               "title": "Name",
               "type": "string",
               "minLength": 1,
-              "form": {
-                "hideExpression": "!model || !model.mandate || ['State of Valais, Education service', 'State of Valais, Higher education service'].includes(model.mandate)",
-                "expressionProperties": {
-                  "templateOptions.required": "model && model.mandate && !['State of Valais, Education service', 'State of Valais, Higher education service'].includes(model.mandate)"
+              "widget": {
+                "formlyConfig": {
+                  "expressions": {
+                    "props.required": "model && model.mandate && !['State of Valais, Education service', 'State of Valais, Higher education service'].includes(model.mandate)",
+                    "hide": "!model || !model.mandate || ['State of Valais, Education service', 'State of Valais, Higher education service'].includes(model.mandate)"
+                  }
                 }
               }
             },
@@ -909,14 +1002,16 @@
               "title": "Brief description of the mandate",
               "type": "string",
               "minLength": 1,
-              "form": {
-                "type": "textarea",
-                "templateOptions": {
-                  "rows": 5
-                },
-                "hideExpression": "!model || !model.choice",
-                "expressionProperties": {
-                  "templateOptions.required": "model && model.choice"
+              "widget": {
+                "formlyConfig": {
+                  "type": "textarea",
+                  "expressions": {
+                    "props.required": "model && model.choice",
+                    "hide": "!model || !model.choice"
+                  },
+                  "props": {
+                    "rows": 5
+                  }
                 }
               }
             }
@@ -945,14 +1040,16 @@
               "title": "Brief description of the report",
               "type": "string",
               "minLength": 1,
-              "form": {
-                "type": "textarea",
-                "templateOptions": {
-                  "rows": 5
-                },
-                "hideExpression": "!model || !model.choice",
-                "expressionProperties": {
-                  "templateOptions.required": "model && model.choice"
+              "widget": {
+                "formlyConfig": {
+                  "type": "textarea",
+                  "expressions": {
+                    "props.required": "model && model.choice",
+                    "hide": "!model || !model.choice"
+                  },
+                  "props": {
+                    "rows": 5
+                  }
                 }
               }
             }
@@ -969,10 +1066,12 @@
           "title": "How are research results used in training?",
           "type": "string",
           "minLength": 1,
-          "form": {
-            "type": "textarea",
-            "templateOptions": {
-              "rows": 5
+          "widget": {
+            "formlyConfig": {
+              "type": "textarea",
+              "props": {
+                "rows": 5
+              }
             }
           }
         },

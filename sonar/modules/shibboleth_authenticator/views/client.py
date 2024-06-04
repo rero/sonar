@@ -31,17 +31,17 @@ from ..auth import init_saml_auth
 from ..handlers import authorized_signup_handler
 from ..utils import get_safe_redirect_target, prepare_flask_request
 
-blueprint = Blueprint('shibboleth_authenticator',
-                      __name__,
-                      url_prefix='/shibboleth')
+blueprint = Blueprint("shibboleth_authenticator", __name__, url_prefix="/shibboleth")
 
-serializer = LocalProxy(lambda: TimedJSONWebSignatureSerializer(
-    current_app.config['SECRET_KEY'],
-    expires_in=current_app.config['SHIBBOLETH_STATE_EXPIRES'],
-))
+serializer = LocalProxy(
+    lambda: TimedJSONWebSignatureSerializer(
+        current_app.config["SECRET_KEY"],
+        expires_in=current_app.config["SHIBBOLETH_STATE_EXPIRES"],
+    )
+)
 
 
-@blueprint.route('/login/<remote_app>', methods=['GET', 'POST'])
+@blueprint.route("/login/<remote_app>", methods=["GET", "POST"])
 def login(remote_app):
     """
     Redirect user to remote application for authentication.
@@ -54,18 +54,16 @@ def login(remote_app):
     :returns: (flask.Response) Return redirect response to IdP or abort in case
                         of failure.
     """
-    if remote_app not in current_app.config['SHIBBOLETH_IDENTITY_PROVIDERS']:
+    if remote_app not in current_app.config["SHIBBOLETH_IDENTITY_PROVIDERS"]:
         return abort(404)
 
     # Store next parameter in state token
-    next_param = get_safe_redirect_target(arg='next')
+    next_param = get_safe_redirect_target(arg="next")
     if not next_param:
-        next_param = '/'
-    state_token = serializer.dumps({
-        'app': remote_app,
-        'next': next_param,
-        'sid': _create_identifier()
-    })
+        next_param = "/"
+    state_token = serializer.dumps(
+        {"app": remote_app, "next": next_param, "sid": _create_identifier()}
+    )
 
     # req = prepare_flask_request(request)
     try:
@@ -76,7 +74,7 @@ def login(remote_app):
     return redirect(auth.login(state_token))
 
 
-@blueprint.route('/authorized/<remote_app>', methods=['GET', 'POST'])
+@blueprint.route("/authorized/<remote_app>", methods=["GET", "POST"])
 def authorized(remote_app=None):
     """
     Authorize handler callback.
@@ -93,7 +91,7 @@ def authorized(remote_app=None):
         logout_user()
 
     # Configuration not found for given identity provider
-    if remote_app not in current_app.config['SHIBBOLETH_IDENTITY_PROVIDERS']:
+    if remote_app not in current_app.config["SHIBBOLETH_IDENTITY_PROVIDERS"]:
         return abort(404)
 
     # Init SAML auth
@@ -113,9 +111,9 @@ def authorized(remote_app=None):
     errors = auth.get_errors()
 
     if not errors and auth.is_authenticated():
-        if 'RelayState' in request.form:
+        if "RelayState" in request.form:
             # Get state token stored in RelayState
-            state_token = request.form['RelayState']
+            state_token = request.form["RelayState"]
             try:
                 if not state_token:
                     raise ValueError
@@ -124,15 +122,14 @@ def authorized(remote_app=None):
                 state = serializer.loads(state_token)
                 # Verify that state is for this session, app and that next
                 # parameter have not been modified.
-                if (state['sid'] != _create_identifier() or
-                        state['app'] != remote_app):
+                if state["sid"] != _create_identifier() or state["app"] != remote_app:
                     raise ValueError
                 # Store next url
-                set_session_next_url(remote_app, state['next'])
+                set_session_next_url(remote_app, state["next"])
             except (ValueError, BadData):
-                if current_app.config.get('OAUTHCLIENT_STATE_ENABLED',
-                                          True) or (not (current_app.debug or
-                                                         current_app.testing)):
+                if current_app.config.get("OAUTHCLIENT_STATE_ENABLED", True) or (
+                    not (current_app.debug or current_app.testing)
+                ):
                     return abort(400)
         return authorized_signup_handler(auth, remote_app)
     return abort(403)

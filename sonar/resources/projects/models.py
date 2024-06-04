@@ -24,4 +24,4 @@ from invenio_records.models import RecordMetadataBase
 class RecordMetadata(db.Model, RecordMetadataBase):
     """Projects metadata model."""
 
-    __tablename__ = 'projects_metadata'
+    __tablename__ = "projects_metadata"

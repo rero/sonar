@@ -25,19 +25,15 @@ from sonar.modules.documents.marshmallow.json import ThumbnailSchemaV1
 def test_partOf(document):
     """Test partOf serialization."""
     document = {
-        'pid': '1',
-        'organisation': [{
-            '$ref': 'https://sonar.rero.ch/api/organisations/org'
-        }],
-        'partOf': [{
-            'document': {
-                'title': 'Host document',
-                'contribution': ['Muller']
-            }
-        }]
+        "pid": "1",
+        "organisation": [{"$ref": "https://sonar.rero.ch/api/organisations/org"}],
+        "partOf": [
+            {"document": {"title": "Host document", "contribution": ["Muller"]}}
+        ],
     }
-    assert DocumentMetadataSchemaV1().dump(
-        document)['partOf'][0]['document']['contribution'] == ['Muller']
+    assert DocumentMetadataSchemaV1().dump(document)["partOf"][0]["document"][
+        "contribution"
+    ] == ["Muller"]
 
 
 def test_file_key():

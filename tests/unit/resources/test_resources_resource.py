@@ -20,35 +20,45 @@
 from flask_security import url_for_security
 from invenio_accounts.testutils import login_user_via_view
 
-from sonar.dedicated.hepvs.projects.resource import \
-    RecordResourceConfig as HEPVSRecordResourceConfig
+from sonar.dedicated.hepvs.projects.resource import (
+    RecordResourceConfig as HEPVSRecordResourceConfig,
+)
 from sonar.resources.projects.resource import ProjectsRecordResourceConfig
 
 
 def test_config(app, client, make_user, admin):
     """Test resources configuration."""
-    user = make_user('admin', 'hepvs')
+    user = make_user("admin", "hepvs")
 
     # Not logged
-    assert isinstance(app.extensions['sonar'].resources['projects'].config(),
-                      ProjectsRecordResourceConfig)
+    assert isinstance(
+        app.extensions["sonar"].resources["projects"].config(),
+        ProjectsRecordResourceConfig,
+    )
 
     # Logged as user not belonging to HEPVS.
-    login_user_via_view(client, email=admin['email'], password='123456')
-    assert isinstance(app.extensions['sonar'].resources['projects'].config(),
-                      ProjectsRecordResourceConfig)
+    login_user_via_view(client, email=admin["email"], password="123456")
+    assert isinstance(
+        app.extensions["sonar"].resources["projects"].config(),
+        ProjectsRecordResourceConfig,
+    )
 
-    client.get(url_for_security('logout'))
+    client.get(url_for_security("logout"))
 
     # Logged as user from HEPVS.
-    login_user_via_view(client, email=user['email'], password='123456')
+    login_user_via_view(client, email=user["email"], password="123456")
 
     # OK, custom config
-    assert isinstance(app.extensions['sonar'].resources['projects'].config(),
-                      HEPVSRecordResourceConfig)
+    assert isinstance(
+        app.extensions["sonar"].resources["projects"].config(),
+        HEPVSRecordResourceConfig,
+    )
 
     # No `resource_name` attribute
-    delattr(app.extensions['sonar'].resources['projects'].default_config,
-            'resource_name')
-    assert isinstance(app.extensions['sonar'].resources['projects'].config(),
-                      ProjectsRecordResourceConfig)
+    delattr(
+        app.extensions["sonar"].resources["projects"].default_config, "resource_name"
+    )
+    assert isinstance(
+        app.extensions["sonar"].resources["projects"].config(),
+        ProjectsRecordResourceConfig,
+    )

@@ -17,18 +17,19 @@
 
 """Collections views."""
 
-from flask import Blueprint, abort, current_app, redirect, render_template, \
-    url_for
+from flask import Blueprint, abort, current_app, redirect, render_template, url_for
 
 from sonar.modules.collections.api import RecordSearch
 
-blueprint = Blueprint('collections',
-                      __name__,
-                      template_folder='templates',
-                      url_prefix='/<org_code:view>/collections')
+blueprint = Blueprint(
+    "collections",
+    __name__,
+    template_folder="templates",
+    url_prefix="/<org_code:view>/collections",
+)
 
 
-@blueprint.route('')
+@blueprint.route("")
 def index(**kwargs):
     r"""Collection index view.
 
@@ -36,15 +37,14 @@ def index(**kwargs):
     :returns: The rendered template.
     """
     # No collection for global view.
-    if kwargs.get('view') == current_app.config.get(
-            'SONAR_APP_DEFAULT_ORGANISATION'):
+    if kwargs.get("view") == current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION"):
         abort(404)
 
-    records = RecordSearch().filter('term',
-                                    organisation__pid=kwargs['view']).scan()
+    records = RecordSearch().filter("term", organisation__pid=kwargs["view"]).scan()
 
     return render_template(
-        'collections/index.html', records=list(records), view=kwargs['view'])
+        "collections/index.html", records=list(records), view=kwargs["view"]
+    )
 
 
 def detail(pid, record, **kwargs):
@@ -59,10 +59,11 @@ def detail(pid, record, **kwargs):
     record = record.replace_refs()
 
     # Only accessible in organisation's view.
-    if record['organisation']['pid'] != kwargs.get('view'):
+    if record["organisation"]["pid"] != kwargs.get("view"):
         abort(404)
 
     return redirect(
-        url_for('documents.search',
-                view=kwargs.get('view'),
-                collection_view=record['pid']))
+        url_for(
+            "documents.search", view=kwargs.get("view"), collection_view=record["pid"]
+        )
+    )

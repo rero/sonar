@@ -29,7 +29,7 @@ def extract_text_from_content(content):
 
     content is the binary representation of text.
     """
-    temp = tempfile.NamedTemporaryFile(mode='w+b', suffix=".pdf")
+    temp = tempfile.NamedTemporaryFile(mode="w+b", suffix=".pdf")
     temp.write(content)
 
     return extract_text_from_file(temp.name)
@@ -39,12 +39,12 @@ def extract_text_from_file(file):
     """Extract full-text from file."""
     # Process pdf text extraction
     text = subprocess.check_output(
-        'pdftotext -enc UTF-8 {file} - 2> /dev/null'.format(file=file),
-        shell=True)
+        "pdftotext -enc UTF-8 {file} - 2> /dev/null".format(file=file), shell=True
+    )
     text = text.decode()
 
     # Remove carriage returns
-    text = re.sub('[\r\n\f]+', ' ', text)
+    text = re.sub("[\r\n\f]+", " ", text)
 
     return text
 
@@ -54,120 +54,119 @@ def format_extracted_data(data):
     formatted_data = {}
 
     # Get title
-    title = data['teiHeader']['fileDesc']['titleStmt']['title'].get('#text')
+    title = data["teiHeader"]["fileDesc"]["titleStmt"]["title"].get("#text")
     if title:
-        formatted_data['title'] = title
+        formatted_data["title"] = title
 
-    if data.get('text') and data.get('text', {}).get('@xml:lang'):
-        language = pycountry.languages.get(alpha_2=data['text']['@xml:lang'])
+    if data.get("text") and data.get("text", {}).get("@xml:lang"):
+        language = pycountry.languages.get(alpha_2=data["text"]["@xml:lang"])
         if language:
-            if hasattr(language, 'bibliographic'):
-                formatted_data['languages'] = [language.bibliographic]
+            if hasattr(language, "bibliographic"):
+                formatted_data["languages"] = [language.bibliographic]
             else:
-                formatted_data['languages'] = [language.alpha_3]
+                formatted_data["languages"] = [language.alpha_3]
 
-    analytic = data['teiHeader']['fileDesc']['sourceDesc']['biblStruct'].get(
-        'analytic', {})
+    analytic = data["teiHeader"]["fileDesc"]["sourceDesc"]["biblStruct"].get(
+        "analytic", {}
+    )
 
-    if analytic and analytic.get('author'):
-        authors = force_list(analytic.get('author'))
+    if analytic and analytic.get("author"):
+        authors = force_list(analytic.get("author"))
 
         for author in authors:
             author_data = {}
 
-            if author.get('persName'):
+            if author.get("persName"):
                 name = []
-                surname = author['persName'].get('surname')
+                surname = author["persName"].get("surname")
 
                 if surname:
                     name.append(surname)
 
-                forenames = author['persName'].get('forename', [])
+                forenames = author["persName"].get("forename", [])
                 forenames = force_list(forenames)
 
                 if forenames:
-                    name.append(' '.join(
-                        [forename['#text'] for forename in forenames]))
+                    name.append(" ".join([forename["#text"] for forename in forenames]))
 
                 if len(name) > 1:
-                    author_data['name'] = ', '.join(name)
-                    author_data['role'] = 'cre'
+                    author_data["name"] = ", ".join(name)
+                    author_data["role"] = "cre"
 
-            if author_data.get('name'):
-                author_data['affiliation'] = None
+            if author_data.get("name"):
+                author_data["affiliation"] = None
 
-                affiliations = force_list(author.get('affiliation', []))
+                affiliations = force_list(author.get("affiliation", []))
 
                 if affiliations:
                     author_affiliation = []
 
                     # Append organisation data
-                    organisations = force_list(affiliations[0].get(
-                        'orgName', []))
+                    organisations = force_list(affiliations[0].get("orgName", []))
                     for organisation in organisations:
-                        author_affiliation.append(organisation['#text'])
+                        author_affiliation.append(organisation["#text"])
 
                     # Append settlement
-                    if affiliations[0].get('address', {}).get('settlement'):
+                    if affiliations[0].get("address", {}).get("settlement"):
                         author_affiliation.append(
-                            affiliations[0]['address']['settlement'])
+                            affiliations[0]["address"]["settlement"]
+                        )
 
                     # Append region
-                    if affiliations[0].get('address', {}).get('region'):
-                        author_affiliation.append(
-                            affiliations[0]['address']['region'])
+                    if affiliations[0].get("address", {}).get("region"):
+                        author_affiliation.append(affiliations[0]["address"]["region"])
 
                     # Append country
-                    if affiliations[0].get('address', {}).get('country'):
+                    if affiliations[0].get("address", {}).get("country"):
                         author_affiliation.append(
-                            affiliations[0]['address']['country']['#text'])
+                            affiliations[0]["address"]["country"]["#text"]
+                        )
 
                     # Store affiliation in author data
                     if author_affiliation:
-                        author_data['affiliation'] = ', '.join(
-                            author_affiliation)
+                        author_data["affiliation"] = ", ".join(author_affiliation)
 
             if author_data:
-                formatted_data.setdefault('authors', []).append(author_data)
+                formatted_data.setdefault("authors", []).append(author_data)
 
     # Publication
-    monogr = data['teiHeader']['fileDesc']['sourceDesc']['biblStruct'][
-        'monogr']
+    monogr = data["teiHeader"]["fileDesc"]["sourceDesc"]["biblStruct"]["monogr"]
 
     publication = {}
 
-    if monogr.get('title'):
-        monogr['title'] = force_list(monogr['title'])
-        publication['publishedIn'] = monogr['title'][0]['#text']
+    if monogr.get("title"):
+        monogr["title"] = force_list(monogr["title"])
+        publication["publishedIn"] = monogr["title"][0]["#text"]
 
-    if monogr.get('imprint', {}).get('biblScope'):
-        if monogr['imprint'].get('publisher'):
-            publication['publisher'] = monogr['imprint']['publisher']
+    if monogr.get("imprint", {}).get("biblScope"):
+        if monogr["imprint"].get("publisher"):
+            publication["publisher"] = monogr["imprint"]["publisher"]
 
-        monogr['imprint']['biblScope'] = force_list(
-            monogr['imprint']['biblScope'])
+        monogr["imprint"]["biblScope"] = force_list(monogr["imprint"]["biblScope"])
 
-        for item in monogr['imprint']['biblScope']:
-            if item['@unit'] in ['page', 'volume', 'number']:
-                key = item['@unit']
-                if key == 'page':
-                    key = 'pages'
+        for item in monogr["imprint"]["biblScope"]:
+            if item["@unit"] in ["page", "volume", "number"]:
+                key = item["@unit"]
+                if key == "page":
+                    key = "pages"
 
-                publication[key] = item['#text'] if '#text' in item else item[
-                    '@from'] + '-' + item['@to']
+                publication[key] = (
+                    item["#text"]
+                    if "#text" in item
+                    else item["@from"] + "-" + item["@to"]
+                )
 
-        if monogr['imprint'].get('date').get('@when'):
-            match = re.search(r'^([0-9]{4}).*$',
-                              monogr['imprint']['date']['@when'])
+        if monogr["imprint"].get("date").get("@when"):
+            match = re.search(r"^([0-9]{4}).*$", monogr["imprint"]["date"]["@when"])
             if match:
-                formatted_data['documentDate'] = match.group(1)
+                formatted_data["documentDate"] = match.group(1)
 
     if publication:
-        formatted_data['publication'] = publication
+        formatted_data["publication"] = publication
 
-    abstract = data['teiHeader']['profileDesc'].get('abstract')
+    abstract = data["teiHeader"]["profileDesc"].get("abstract")
     if abstract:
-        formatted_data['abstract'] = abstract['p']
+        formatted_data["abstract"] = abstract["p"]
 
     return formatted_data
 

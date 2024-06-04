@@ -52,233 +52,225 @@
     "coar:c_8042",
     "coar:c_1843"
   ],
-  "form": {
-    "templateOptions": {
-      "sort": false,
-      "wrappers": [
-        "card"
-      ]
-    },
-    "options": [
-      {
-        "label": "document_type_coar:c_2f33",
-        "value": "coar:c_2f33",
-        "preferred": true
+  "widget": {
+    "formlyConfig": {
+      "type": "tree-select",
+      "expressions": {
+        "props.required": "true"
       },
-      {
-        "label": "document_type_coar:c_3248",
-        "value": "coar:c_3248",
-        "preferred": true
-      },
-      {
-        "label": "document_type_coar:c_c94f",
-        "value": "coar:c_c94f",
-        "children": [
+      "props": {
+        "filter": true,
+        "options": [
           {
-            "label": "document_type_coar:c_5794",
-            "value": "coar:c_5794",
-            "preferred": true
+            "label": "document_type_coar:c_2f33",
+            "data": "coar:c_2f33"
           },
           {
-            "label": "document_type_coar:c_18cp",
-            "value": "coar:c_18cp"
+            "label": "document_type_coar:c_3248",
+            "data": "coar:c_3248"
           },
           {
-            "label": "document_type_coar:c_6670",
-            "value": "coar:c_6670"
+            "label": "document_type_coar:c_c94f",
+            "data": "coar:c_c94f",
+            "children": [
+              {
+                "label": "document_type_coar:c_5794",
+                "data": "coar:c_5794"
+              },
+              {
+                "label": "document_type_coar:c_18cp",
+                "data": "coar:c_18cp"
+              },
+              {
+                "label": "document_type_coar:c_6670",
+                "data": "coar:c_6670"
+              },
+              {
+                "label": "document_type_coar:c_18co",
+                "data": "coar:c_18co"
+              },
+              {
+                "label": "document_type_coar:c_f744",
+                "data": "coar:c_f744"
+              },
+              {
+                "label": "document_type_coar:R60J-J5BD",
+                "data": "coar:R60J-J5BD"
+              }
+            ]
           },
           {
-            "label": "document_type_coar:c_18co",
-            "value": "coar:c_18co"
+            "label": "document_type_coar:c_ddb1",
+            "data": "coar:c_ddb1"
           },
           {
-            "label": "document_type_coar:c_f744",
-            "value": "coar:c_f744"
+            "label": "document_type_coar:c_3e5a",
+            "data": "coar:c_3e5a",
+            "children": [
+              {
+                "label": "document_type_coar:c_beb9",
+                "data": "coar:c_beb9"
+              },
+              {
+                "label": "document_type_coar:c_6501",
+                "data": "coar:c_6501"
+              },
+              {
+                "label": "document_type_coar:c_998f",
+                "data": "coar:c_998f"
+              },
+              {
+                "label": "document_type_coar:c_dcae04bc",
+                "data": "coar:c_dcae04bc"
+              }
+            ]
           },
           {
-            "label": "document_type_coar:R60J-J5BD",
-            "value": "coar:R60J-J5BD"
+            "label": "document_type_coar:c_ba08",
+            "data": "coar:c_ba08"
+          },
+          {
+            "label": "document_type_coar:c_8544",
+            "data": "coar:c_8544"
+          },
+          {
+            "label": "document_type_non_textual_object",
+            "data": "non_textual_object",
+            "children": [
+              {
+                "label": "document_type_coar:c_8a7e",
+                "data": "coar:c_8a7e"
+              },
+              {
+                "label": "document_type_coar:c_ecc8",
+                "data": "coar:c_ecc8"
+              },
+              {
+                "label": "document_type_coar:c_12cc",
+                "data": "coar:c_12cc"
+              },
+              {
+                "label": "document_type_coar:c_18cc",
+                "data": "coar:c_18cc"
+              },
+              {
+                "label": "document_type_coar:c_18cw",
+                "data": "coar:c_18cw"
+              },
+              {
+                "label": "document_type_coar:c_5ce6",
+                "data": "coar:c_5ce6"
+              }
+            ]
+          },
+          {
+            "label": "document_type_coar:c_15cd",
+            "data": "coar:c_15cd"
+          },
+          {
+            "label": "document_type_coar:c_2659",
+            "data": "coar:c_2659",
+            "children": [
+              {
+                "label": "document_type_coar:c_0640",
+                "data": "coar:c_0640"
+              },
+              {
+                "label": "document_type_coar:c_2cd9",
+                "data": "coar:c_2cd9"
+              },
+              {
+                "label": "document_type_coar:c_2fe3",
+                "data": "coar:c_2fe3"
+              }
+            ]
+          },
+          {
+            "label": "document_type_coar:c_816b",
+            "data": "coar:c_816b"
+          },
+          {
+            "label": "document_type_coar:c_93fc",
+            "data": "coar:c_93fc",
+            "children": [
+              {
+                "label": "document_type_coar:c_18ww",
+                "data": "coar:c_18ww"
+              },
+              {
+                "label": "document_type_coar:c_18wz",
+                "data": "coar:c_18wz"
+              },
+              {
+                "label": "document_type_coar:c_18wq",
+                "data": "coar:c_18wq"
+              },
+              {
+                "label": "document_type_coar:c_186u",
+                "data": "coar:c_186u"
+              },
+              {
+                "label": "document_type_coar:c_18op",
+                "data": "coar:c_18op"
+              },
+              {
+                "label": "document_type_coar:c_ba1f",
+                "data": "coar:c_ba1f"
+              },
+              {
+                "label": "document_type_coar:c_18hj",
+                "data": "coar:c_18hj"
+              },
+              {
+                "label": "document_type_coar:c_18ws",
+                "data": "coar:c_18ws"
+              },
+              {
+                "label": "document_type_coar:c_18gh",
+                "data": "coar:c_18gh"
+              }
+            ]
+          },
+          {
+            "label": "document_type_coar:c_46ec",
+            "data": "coar:c_46ec",
+            "children": [
+              {
+                "label": "document_type_coar:c_7a1f",
+                "data": "coar:c_7a1f"
+              },
+              {
+                "label": "document_type_coar:c_db06",
+                "data": "coar:c_db06"
+              },
+              {
+                "label": "document_type_coar:c_bdcc",
+                "data": "coar:c_bdcc"
+              },
+              {
+                "label": "document_type_habilitation_thesis",
+                "data": "habilitation_thesis"
+              },
+              {
+                "label": "document_type_advanced_studies_thesis",
+                "data": "advanced_studies_thesis"
+              },
+              {
+                "label": "document_type_other_thesis",
+                "data": "other_thesis"
+              }
+            ]
+          },
+          {
+            "label": "document_type_coar:c_8042",
+            "data": "coar:c_8042"
+          },
+          {
+            "label": "document_type_coar:c_1843",
+            "data": "coar:c_1843"
           }
         ]
-      },
-      {
-        "label": "document_type_coar:c_ddb1",
-        "value": "coar:c_ddb1"
-      },
-      {
-        "label": "document_type_coar:c_3e5a",
-        "value": "coar:c_3e5a",
-        "children": [
-          {
-            "label": "document_type_coar:c_beb9",
-            "value": "coar:c_beb9"
-          },
-          {
-            "label": "document_type_coar:c_6501",
-            "value": "coar:c_6501",
-            "preferred": true
-          },
-          {
-            "label": "document_type_coar:c_998f",
-            "value": "coar:c_998f"
-          },
-          {
-            "label": "document_type_coar:c_dcae04bc",
-            "value": "coar:c_dcae04bc"
-          }
-        ]
-      },
-      {
-        "label": "document_type_coar:c_ba08",
-        "value": "coar:c_ba08"
-      },
-      {
-        "label": "document_type_coar:c_8544",
-        "value": "coar:c_8544"
-      },
-      {
-        "label": "document_type_non_textual_object",
-        "value": "non_textual_object",
-        "children": [
-          {
-            "label": "document_type_coar:c_8a7e",
-            "value": "coar:c_8a7e"
-          },
-          {
-            "label": "document_type_coar:c_ecc8",
-            "value": "coar:c_ecc8"
-          },
-          {
-            "label": "document_type_coar:c_12cc",
-            "value": "coar:c_12cc"
-          },
-          {
-            "label": "document_type_coar:c_18cc",
-            "value": "coar:c_18cc"
-          },
-          {
-            "label": "document_type_coar:c_18cw",
-            "value": "coar:c_18cw"
-          },
-          {
-            "label": "document_type_coar:c_5ce6",
-            "value": "coar:c_5ce6"
-          }
-        ]
-      },
-      {
-        "label": "document_type_coar:c_15cd",
-        "value": "coar:c_15cd"
-      },
-      {
-        "label": "document_type_coar:c_2659",
-        "value": "coar:c_2659",
-        "children": [
-          {
-            "label": "document_type_coar:c_0640",
-            "value": "coar:c_0640"
-          },
-          {
-            "label": "document_type_coar:c_2cd9",
-            "value": "coar:c_2cd9"
-          },
-          {
-            "label": "document_type_coar:c_2fe3",
-            "value": "coar:c_2fe3"
-          }
-        ]
-      },
-      {
-        "label": "document_type_coar:c_816b",
-        "value": "coar:c_816b",
-        "preferred": true
-      },
-      {
-        "label": "document_type_coar:c_93fc",
-        "value": "coar:c_93fc",
-        "children": [
-          {
-            "label": "document_type_coar:c_18ww",
-            "value": "coar:c_18ww"
-          },
-          {
-            "label": "document_type_coar:c_18wz",
-            "value": "coar:c_18wz"
-          },
-          {
-            "label": "document_type_coar:c_18wq",
-            "value": "coar:c_18wq"
-          },
-          {
-            "label": "document_type_coar:c_186u",
-            "value": "coar:c_186u"
-          },
-          {
-            "label": "document_type_coar:c_18op",
-            "value": "coar:c_18op"
-          },
-          {
-            "label": "document_type_coar:c_ba1f",
-            "value": "coar:c_ba1f"
-          },
-          {
-            "label": "document_type_coar:c_18hj",
-            "value": "coar:c_18hj"
-          },
-          {
-            "label": "document_type_coar:c_18ws",
-            "value": "coar:c_18ws"
-          },
-          {
-            "label": "document_type_coar:c_18gh",
-            "value": "coar:c_18gh"
-          }
-        ]
-      },
-      {
-        "label": "document_type_coar:c_46ec",
-        "value": "coar:c_46ec",
-        "children": [
-          {
-            "label": "document_type_coar:c_7a1f",
-            "value": "coar:c_7a1f",
-            "preferred": true
-          },
-          {
-            "label": "document_type_coar:c_db06",
-            "value": "coar:c_db06",
-            "preferred": true
-          },
-          {
-            "label": "document_type_coar:c_bdcc",
-            "value": "coar:c_bdcc",
-            "preferred": true
-          },
-          {
-            "label": "document_type_habilitation_thesis",
-            "value": "habilitation_thesis"
-          },
-          {
-            "label": "document_type_advanced_studies_thesis",
-            "value": "advanced_studies_thesis"
-          },
-          {
-            "label": "document_type_other_thesis",
-            "value": "other_thesis"
-          }
-        ]
-      },
-      {
-        "label": "document_type_coar:c_8042",
-        "value": "coar:c_8042"
-      },
-      {
-        "label": "document_type_coar:c_1843",
-        "value": "coar:c_1843"
       }
-    ],
-    "expressionProperties": {
-      "templateOptions.required": "true"
     }
   }
 }

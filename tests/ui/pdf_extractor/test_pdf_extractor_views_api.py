@@ -27,38 +27,38 @@ create_app = create_api
 
 def test_metadata(client, pdf_file, mock_grobid_response):
     """Test metadata extraction."""
-    response = client.post('/pdf-extractor/metadata')
+    response = client.post("/pdf-extractor/metadata")
     assert response.status_code == 400
 
-    with open(pdf_file, 'rb') as file:
+    with open(pdf_file, "rb") as file:
         content = file.read()
 
-    data = dict(file=(BytesIO(content), 'test.pdf'))
+    data = dict(file=(BytesIO(content), "test.pdf"))
 
-    response = client.post('/pdf-extractor/metadata',
-                           data=data,
-                           content_type='multipart/form-data')
+    response = client.post(
+        "/pdf-extractor/metadata", data=data, content_type="multipart/form-data"
+    )
     assert response.status_code == 200
     result = json.loads(response.data)
-    assert 'teiHeader' in result
+    assert "teiHeader" in result
 
-    title = result['teiHeader']['fileDesc']['titleStmt']['title']['#text']
-    assert title[:10] == 'High-harmo'
+    title = result["teiHeader"]["fileDesc"]["titleStmt"]["title"]["#text"]
+    assert title[:10] == "High-harmo"
 
 
 def test_full_text(client, pdf_file):
     """Test full text extraction."""
-    response = client.post('/pdf-extractor/full-text')
+    response = client.post("/pdf-extractor/full-text")
     assert response.status_code == 400
 
-    with open(pdf_file, 'rb') as file:
+    with open(pdf_file, "rb") as file:
         content = file.read()
 
-    data = dict(file=(BytesIO(content), 'test.pdf'))
+    data = dict(file=(BytesIO(content), "test.pdf"))
 
-    response = client.post('/pdf-extractor/full-text',
-                           data=data,
-                           content_type='multipart/form-data')
+    response = client.post(
+        "/pdf-extractor/full-text", data=data, content_type="multipart/form-data"
+    )
     assert response.status_code == 200
     result = json.loads(response.data)
-    assert 'text' in result
+    assert "text" in result

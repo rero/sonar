@@ -24,21 +24,25 @@ from flask_security import url_for_security
 from invenio_accounts.testutils import login_user_via_session
 
 
-def test_update_delete(client, superuser, admin, moderator,
-              submitter, user, document, pdf_file):
+def test_update_delete(
+    client, superuser, admin, moderator, submitter, user, document, pdf_file
+):
     """Test permissions for uploading and deleting files."""
-    file_name = 'test.pdf'
+    file_name = "test.pdf"
     users = [superuser, admin, moderator, submitter, user, None]
 
     # upload the file
     url_file_content = url_for(
-        'invenio_records_files.doc_object_api', pid_value=document.get('pid'), key=file_name)
+        "invenio_records_files.doc_object_api",
+        pid_value=document.get("pid"),
+        key=file_name,
+    )
     for u, status in zip(users, [200, 200, 200, 404, 404, 404]):
         if u:
-            login_user_via_session(client, email=u['email'])
+            login_user_via_session(client, email=u["email"])
         else:
-            client.get(url_for_security('logout'))
-        res = client.put(url_file_content, input_stream=open(pdf_file, 'rb'))
+            client.get(url_for_security("logout"))
+        res = client.put(url_file_content, input_stream=open(pdf_file, "rb"))
         assert res.status_code == status
         if status == 200:
             # the delete return status is no content
@@ -47,132 +51,150 @@ def test_update_delete(client, superuser, admin, moderator,
             assert res.status_code == status
 
 
-def test_read_metadata(client, superuser, admin, moderator,
-              submitter, user, document_with_file):
+def test_read_metadata(
+    client, superuser, admin, moderator, submitter, user, document_with_file
+):
     """Test read files permissions."""
 
     users = [superuser, admin, moderator, submitter, user, None]
     url_files = url_for(
-        'invenio_records_files.doc_bucket_api',
-        pid_value=document_with_file.get('pid'))
+        "invenio_records_files.doc_bucket_api", pid_value=document_with_file.get("pid")
+    )
     for u, status in zip(users, [200, 200, 200, 200, 200, 200]):
         if u:
-            login_user_via_session(client, email=u['email'])
+            login_user_via_session(client, email=u["email"])
         else:
-            client.get(url_for_security('logout'))
+            client.get(url_for_security("logout"))
         res = client.get(url_files)
         assert res.status_code == status
 
     # Masked document
-    document_with_file['masked'] = 'masked_for_all'
+    document_with_file["masked"] = "masked_for_all"
     document_with_file.commit()
     for u, status in zip(users, [200, 200, 200, 404, 404, 404]):
         if u:
-            login_user_via_session(client, email=u['email'])
+            login_user_via_session(client, email=u["email"])
         else:
-            client.get(url_for_security('logout'))
+            client.get(url_for_security("logout"))
         res = client.get(url_files)
         assert res.status_code == status
 
 
-def test_read_content(client, superuser, admin, moderator,
-              submitter, user, user_without_org, document_with_file):
+def test_read_content(
+    client,
+    superuser,
+    admin,
+    moderator,
+    submitter,
+    user,
+    user_without_org,
+    document_with_file,
+):
     """Test read documents permissions."""
 
-    file_name = 'test1.pdf'
-    users = [
-        superuser, admin, moderator, submitter, user, user_without_org, None]
+    file_name = "test1.pdf"
+    users = [superuser, admin, moderator, submitter, user, user_without_org, None]
     url_file_content = url_for(
-        'invenio_records_files.doc_object_api',
-        pid_value=document_with_file.get('pid'),
-    key=file_name)
+        "invenio_records_files.doc_object_api",
+        pid_value=document_with_file.get("pid"),
+        key=file_name,
+    )
     open_access_code = "coar:c_abf2"
-    document_with_file.files[file_name]['access'] = open_access_code
+    document_with_file.files[file_name]["access"] = open_access_code
     document_with_file.commit()
     for u, status in zip(users, [200, 200, 200, 200, 200, 200, 200]):
         if u:
-            login_user_via_session(client, email=u['email'])
+            login_user_via_session(client, email=u["email"])
         else:
-            client.get(url_for_security('logout'))
+            client.get(url_for_security("logout"))
         res = client.get(url_file_content)
         assert res.status_code == status
     # Masked document
-    document_with_file['masked'] = 'masked_for_all'
+    document_with_file["masked"] = "masked_for_all"
     document_with_file.commit()
     for u, status in zip(users, [200, 200, 200, 404, 404, 404, 404]):
         if u:
-            login_user_via_session(client, email=u['email'])
+            login_user_via_session(client, email=u["email"])
         else:
-            client.get(url_for_security('logout'))
+            client.get(url_for_security("logout"))
         res = client.get(url_file_content)
         assert res.status_code == status
 
-    del document_with_file['masked']
+    del document_with_file["masked"]
 
     # restricted files
     restricted_code = "coar:c_16ec"
-    document_with_file.files[file_name]['access'] = restricted_code
-    document_with_file.files[file_name]['restricted_outside_organisation'] = True
+    document_with_file.files[file_name]["access"] = restricted_code
+    document_with_file.files[file_name]["restricted_outside_organisation"] = True
     document_with_file.commit()
     for u, status in zip(users, [200, 200, 200, 200, 200, 404, 404]):
         if u:
-            login_user_via_session(client, email=u['email'])
+            login_user_via_session(client, email=u["email"])
         else:
-            client.get(url_for_security('logout'))
+            client.get(url_for_security("logout"))
         res = client.get(url_file_content)
         assert res.status_code == status
 
 
-def test_file_of_document_with_urn_delete(client, superuser, admin,
-                                          minimal_thesis_document_with_urn):
+def test_file_of_document_with_urn_delete(
+    client, superuser, admin, minimal_thesis_document_with_urn
+):
     """Test delete file of document with registered URN identifier."""
     # Logged as admin
-    login_user_via_session(client, email=admin['email'])
+    login_user_via_session(client, email=admin["email"])
 
     minimal_thesis_document = minimal_thesis_document_with_urn
     # Add pdf file to document
-    minimal_thesis_document.files['test.pdf'] = BytesIO(b'File content')
-    minimal_thesis_document.files['test.pdf']['type'] = 'file'
+    minimal_thesis_document.files["test.pdf"] = BytesIO(b"File content")
+    minimal_thesis_document.files["test.pdf"]["type"] = "file"
     minimal_thesis_document.commit()
 
     url_file_content = url_for(
-        'invenio_records_files.doc_object_api',
-        pid_value=minimal_thesis_document['pid'], key='test.pdf')
+        "invenio_records_files.doc_object_api",
+        pid_value=minimal_thesis_document["pid"],
+        key="test.pdf",
+    )
     res = client.delete(url_file_content)
     assert res.status_code == 403
 
     # Add png file to document
-    minimal_thesis_document.files['test.png'] = BytesIO(b'File content')
-    minimal_thesis_document.files['test.png']['type'] = 'file'
+    minimal_thesis_document.files["test.png"] = BytesIO(b"File content")
+    minimal_thesis_document.files["test.png"]["type"] = "file"
     minimal_thesis_document.commit()
 
     url_file_content = url_for(
-        'invenio_records_files.doc_object_api',
-        pid_value=minimal_thesis_document['pid'], key='test.png')
+        "invenio_records_files.doc_object_api",
+        pid_value=minimal_thesis_document["pid"],
+        key="test.png",
+    )
     res = client.delete(url_file_content)
     assert res.status_code == 204
 
     # Logged as superuser
-    login_user_via_session(client, email=superuser['email'])
+    login_user_via_session(client, email=superuser["email"])
 
     # Add pdf file to document
-    minimal_thesis_document.files['test.pdf'] = BytesIO(b'File content')
-    minimal_thesis_document.files['test.pdf']['type'] = 'file'
+    minimal_thesis_document.files["test.pdf"] = BytesIO(b"File content")
+    minimal_thesis_document.files["test.pdf"]["type"] = "file"
     minimal_thesis_document.commit()
 
     url_file_content = url_for(
-        'invenio_records_files.doc_object_api',
-        pid_value=minimal_thesis_document['pid'], key='test.pdf')
+        "invenio_records_files.doc_object_api",
+        pid_value=minimal_thesis_document["pid"],
+        key="test.pdf",
+    )
     res = client.delete(url_file_content)
     assert res.status_code == 204
 
     # Add png file to document
-    minimal_thesis_document.files['test.png'] = BytesIO(b'File content')
-    minimal_thesis_document.files['test.png']['type'] = 'file'
+    minimal_thesis_document.files["test.png"] = BytesIO(b"File content")
+    minimal_thesis_document.files["test.png"]["type"] = "file"
     minimal_thesis_document.commit()
 
     url_file_content = url_for(
-        'invenio_records_files.doc_object_api',
-        pid_value=minimal_thesis_document['pid'], key='test.png')
+        "invenio_records_files.doc_object_api",
+        pid_value=minimal_thesis_document["pid"],
+        key="test.png",
+    )
     res = client.delete(url_file_content)
     assert res.status_code == 204

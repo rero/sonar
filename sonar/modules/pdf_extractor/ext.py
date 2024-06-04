@@ -23,7 +23,7 @@ from __future__ import absolute_import, print_function
 from . import config
 
 
-class PDFExtractor():
+class PDFExtractor:
     """PDF Extractor extension."""
 
     def __init__(self, app=None):
@@ -34,7 +34,7 @@ class PDFExtractor():
     def init_app(self, app):
         """Flask application initialization."""
         self.init_config(app)
-        app.extensions['pdf_extractor'] = self
+        app.extensions["pdf_extractor"] = self
 
     @staticmethod
     def init_config(app):
@@ -43,5 +43,5 @@ class PDFExtractor():
         Override configuration variables with the values in this package.
         """
         for k in dir(config):
-            if k.startswith('PDF_EXTRACTOR'):
+            if k.startswith("PDF_EXTRACTOR"):
                 app.config.setdefault(k, getattr(config, k))

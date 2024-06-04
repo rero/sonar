@@ -30,7 +30,7 @@ from flask import current_app
 class PDFExtractor:
     """PDF extractor class."""
 
-    api_url = ''
+    api_url = ""
 
     def __init__(self):
         """Init PDF extractor."""
@@ -39,8 +39,9 @@ class PDFExtractor:
     def _load_config(self):
         """Load configuration from extension."""
         self.api_url = "http://{server}:{port}/api".format(
-            server=current_app.config.get('PDF_EXTRACTOR_GROBID_SERVER'),
-            port=current_app.config.get('PDF_EXTRACTOR_GROBID_PORT'))
+            server=current_app.config.get("PDF_EXTRACTOR_GROBID_SERVER"),
+            port=current_app.config.get("PDF_EXTRACTOR_GROBID_PORT"),
+        )
         if not self.api_is_alive():
             raise ConnectionRefusedError
 
@@ -50,7 +51,7 @@ class PDFExtractor:
         :returns: (bool) Return wether grobid service is up or not
         """
         try:
-            response, status = self.do_request('isalive', 'get')
+            response, status = self.do_request("isalive", "get")
         except Exception as err:
             return False
 
@@ -59,7 +60,7 @@ class PDFExtractor:
 
         return bool(response)
 
-    def do_request(self, endpoint, request_type='get', files=None):
+    def do_request(self, endpoint, request_type="get", files=None):
         """Do request on Grobid api.
 
         :param endpoint: (str) Endpoint of API to query
@@ -67,19 +68,18 @@ class PDFExtractor:
         :param files: (dict) files to post (Multipart-encoded files)
         :returns: (tuple) Tuple containing response text and status
         """
-        url = f'{self.api_url}/{endpoint}'
+        url = f"{self.api_url}/{endpoint}"
 
-        if request_type.lower() not in ['get', 'post']:
+        if request_type.lower() not in ["get", "post"]:
             raise ValueError
 
-        if request_type.lower() == 'get':
+        if request_type.lower() == "get":
             response = requests.get(url)
             return response.content, response.status_code
 
-        if request_type.lower() == 'post':
-            headers = {'Accept': 'application/xml'}
-            response = requests.post(
-                url, headers=headers, files=files)
+        if request_type.lower() == "post":
+            headers = {"Accept": "application/xml"}
+            response = requests.post(url, headers=headers, files=files)
             return response.text, response.status_code
 
     def process(self, input_file, output_file=None, dict_output=True):
@@ -95,7 +95,7 @@ class PDFExtractor:
 
         # Dump xml output into given file
         if output_file:
-            with open(output_file, 'w') as file:
+            with open(output_file, "w") as file:
                 file.write(output)
             return None
 
@@ -114,12 +114,10 @@ class PDFExtractor:
         :param dict_output: (bool) Extraction will be formatted in JSON.
         :returns: (str|json) Metadata extraction
         """
-        temp = tempfile.NamedTemporaryFile(mode='w+b', suffix=".pdf")
+        temp = tempfile.NamedTemporaryFile(mode="w+b", suffix=".pdf")
         temp.write(pdf_content)
 
-        return self.process(temp.name,
-                            output_file=output_file,
-                            dict_output=dict_output)
+        return self.process(temp.name, output_file=output_file, dict_output=dict_output)
 
     def extract_metadata(self, file):
         """Process metadata extraction.
@@ -128,22 +126,22 @@ class PDFExtractor:
         :returns: (str) Extraction metadata as TEI XML
         """
         if not os.path.isfile(file):
-            raise ValueError('Input file does not exist')
+            raise ValueError("Input file does not exist")
 
-        if not file.lower().endswith('.pdf'):
-            raise ValueError('Input file is not a valid PDF file')
+        if not file.lower().endswith(".pdf"):
+            raise ValueError("Input file is not a valid PDF file")
 
-        response, status = self.do_request('processHeaderDocument',
-                                           'post',
-                                           files={
-                                               'input':
-                                               (file, open(file, 'rb'),
-                                                'application/pdf'),
-                                                'consolidateHeader':1
-                                           })
+        response, status = self.do_request(
+            "processHeaderDocument",
+            "post",
+            files={
+                "input": (file, open(file, "rb"), "application/pdf"),
+                "consolidateHeader": 1,
+            },
+        )
 
         if status != 200:
-            raise Exception('Metadata extraction failed')
+            raise Exception("Metadata extraction failed")
 
         return response
 
@@ -152,12 +150,12 @@ class PDFExtractor:
         """Parse xml content."""
         iterator = ET.iterparse(StringIO(xml))
         for _, element in iterator:
-            if '}' in element.tag:
-                element.tag = element.tag.split('}', 1)[1]
+            if "}" in element.tag:
+                element.tag = element.tag.split("}", 1)[1]
         root = iterator.root
 
         # parse xml
-        result = xmltodict.parse(ET.tostring(root, encoding='unicode'))
-        result = result['TEI']
+        result = xmltodict.parse(ET.tostring(root, encoding="unicode"))
+        result = result["TEI"]
 
         return result

@@ -49,21 +49,21 @@ class Overdo(BaseOverdo):
             return (None, None)
 
         # Match a full date
-        match = re.search(r'^([0-9]{4}-[0-9]{2}-[0-9]{2})$', date)
+        match = re.search(r"^([0-9]{4}-[0-9]{2}-[0-9]{2})$", date)
         if match:
             return (match.group(1), None)
 
-        match = re.search(r'^([0-9]{2}-[0-9]{2}-[0-9]{4})$', date)
+        match = re.search(r"^([0-9]{2}-[0-9]{2}-[0-9]{4})$", date)
         if match:
             return (match.group(1), None)
 
         # Match these value: "1980-2010"
-        match = re.search(r'^([0-9]{4})-([0-9]{4})$', date)
+        match = re.search(r"^([0-9]{4})-([0-9]{4})$", date)
         if match:
             return (match.group(1), match.group(2))
 
         # Match these value: "1980-" or "1980"
-        match = re.search(r'^([0-9]{4})-?', date)
+        match = re.search(r"^([0-9]{4})-?", date)
         if match:
             return (match.group(1), None)
 
@@ -73,6 +73,6 @@ class Overdo(BaseOverdo):
         """Store blob values and do transformation."""
         self.blob_record = blob
 
-        return super(Overdo, self).do(blob,
-                                      ignore_missing=ignore_missing,
-                                      exception_handlers=exception_handlers)
+        return super(Overdo, self).do(
+            blob, ignore_missing=ignore_missing, exception_handlers=exception_handlers
+        )

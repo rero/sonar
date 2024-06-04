@@ -34,9 +34,8 @@ def detail(pid, record, template=None, **kwargs):
     :param \*\*kwargs: Additional view arguments based on URL rule.
     :returns: The rendered template.
     """
-    service = sonar.service('projects')
-    item = service.result_item(service, g.identity,
-                record)
+    service = sonar.service("projects")
+    item = service.result_item(service, g.identity, record)
 
     # Send signal when record is viewed
     record_viewed.send(
@@ -45,6 +44,4 @@ def detail(pid, record, template=None, **kwargs):
         record=record,
     )
 
-    return render_template(template,
-                           pid=pid,
-                           record=item.data['metadata'])
+    return render_template(template, pid=pid, record=item.data["metadata"])

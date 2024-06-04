@@ -26,7 +26,7 @@ from invenio_app.factory import create_api
 from sonar.modules.documents.api import DocumentRecord
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope="module")
 def create_app():
     """Create test app."""
     return create_api
@@ -38,24 +38,20 @@ def minimal_thesis_document(db, bucket_location, organisation):
     with requests_mock.mock() as response:
         response.head(requests_mock.ANY, status_code=404)
         response.post(
-            requests_mock.ANY, status_code=201,
-            json={'urn': 'urn:nbn:ch:rero-006-17'})
+            requests_mock.ANY, status_code=201, json={"urn": "urn:nbn:ch:rero-006-17"}
+        )
         record = DocumentRecord.create(
             {
                 "title": [
                     {
                         "type": "bf:Title",
                         "mainTitle": [
-                            {
-                                "language": "eng",
-                                "value": "Title of the document"
-                            }
+                            {"language": "eng", "value": "Title of the document"}
                         ],
                     }
                 ],
                 "documentType": "coar:c_db06",
-                "organisation": [
-                    {"$ref": "https://sonar.ch/api/organisations/org"}],
+                "organisation": [{"$ref": "https://sonar.ch/api/organisations/org"}],
                 "identifiedBy": [
                     {"type": "bf:Local", "value": "10.1186"},
                 ],

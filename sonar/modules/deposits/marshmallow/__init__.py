@@ -21,4 +21,7 @@ from __future__ import absolute_import, print_function
 
 from .json import DepositMetadataSchemaV1, DepositSchemaV1
 
-__all__ = ('DepositMetadataSchemaV1', 'DepositSchemaV1',)
+__all__ = (
+    "DepositMetadataSchemaV1",
+    "DepositSchemaV1",
+)

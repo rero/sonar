@@ -31,5 +31,4 @@ class Record(BaseRecord):
         :returns: The alias of the current index.
         :rtype: str
         """
-        return next(
-            iter(next(iter(self.index.get_alias().values()))['aliases']))
+        return next(iter(next(iter(self.index.get_alias().values()))["aliases"]))

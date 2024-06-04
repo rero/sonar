@@ -20,14 +20,13 @@
 import mock
 
 
-class VerifyRecordPermissionPatch():
+class VerifyRecordPermissionPatch:
     """Verify record permissions."""
 
     status_code = 200
 
 
-def mock_response(status=200, content="CONTENT", json_data=None,
-                  raise_for_status=None):
+def mock_response(status=200, content="CONTENT", json_data=None, raise_for_status=None):
     """Mock a request response."""
     mock_resp = mock.Mock()
     # mock raise_for_status call w/optional error

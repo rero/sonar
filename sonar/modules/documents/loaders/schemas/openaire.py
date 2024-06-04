@@ -26,8 +26,8 @@ from sonar.modules.pdf_extractor.utils import force_list
 class OpenaireSchema(Schema):
     """Openaire marshmallow schema."""
 
-    identifiedBy = fields.Method('get_identifiers')
-    title = fields.Method('get_title')
+    identifiedBy = fields.Method("get_identifiers")
+    title = fields.Method("get_title")
 
     @pre_dump
     def parse_xml(self, data, **kwargs):
@@ -38,44 +38,49 @@ class OpenaireSchema(Schema):
         """
         result = xmltodict.parse(data)
 
-        if not result.get('record', {}).get('metadata', {}).get('resource'):
+        if not result.get("record", {}).get("metadata", {}).get("resource"):
             return {}
 
-        return result['record']['metadata']['resource']
+        return result["record"]["metadata"]["resource"]
 
     def get_identifiers(self, obj):
         """Create identifiers."""
         identifiers = []
 
         # Main identifier
-        if obj.get('datacite:identifier'):
-            identifiers.append({
-                'type': 'bf:Local',
-                'source': 'BORIS',
-                'value': obj['datacite:identifier']['#text']
-            })
+        if obj.get("datacite:identifier"):
+            identifiers.append(
+                {
+                    "type": "bf:Local",
+                    "source": "BORIS",
+                    "value": obj["datacite:identifier"]["#text"],
+                }
+            )
 
         # DOI
-        if obj.get('datacite:alternateIdentifiers'):
-            for identifier in force_list(obj['datacite:alternateIdentifiers']
-                                         ['datacite:alternateIdentifier']):
-                if identifier['@identifierType'] == 'DOI':
-                    identifiers.append({
-                        'type': 'bf:Doi',
-                        'value': identifier['#text']
-                    })
+        if obj.get("datacite:alternateIdentifiers"):
+            for identifier in force_list(
+                obj["datacite:alternateIdentifiers"]["datacite:alternateIdentifier"]
+            ):
+                if identifier["@identifierType"] == "DOI":
+                    identifiers.append({"type": "bf:Doi", "value": identifier["#text"]})
 
         # PMID
-        if obj.get('datacite:relatedIdentifiers'):
-            for identifier in force_list(obj['datacite:relatedIdentifiers']
-                                         ['datacite:relatedIdentifier']):
-                if identifier['@relationType'] == 'IsVersionOf' and identifier[
-                        '@relatedIdentifierType'] == 'PMID':
-                    identifiers.append({
-                        'type': 'bf:Local',
-                        'source': 'PMID',
-                        'value': identifier['#text']
-                    })
+        if obj.get("datacite:relatedIdentifiers"):
+            for identifier in force_list(
+                obj["datacite:relatedIdentifiers"]["datacite:relatedIdentifier"]
+            ):
+                if (
+                    identifier["@relationType"] == "IsVersionOf"
+                    and identifier["@relatedIdentifierType"] == "PMID"
+                ):
+                    identifiers.append(
+                        {
+                            "type": "bf:Local",
+                            "source": "PMID",
+                            "value": identifier["#text"],
+                        }
+                    )
 
         return identifiers
 
@@ -84,14 +89,18 @@ class OpenaireSchema(Schema):
         titles = []
 
         for title in force_list(
-                obj.get('datacite:titles', {}).get('datacite:title', [])):
-            titles.append({
-                'type':
-                'bf:Title',
-                'mainTitle': [{
-                    'value': title['#text'],
-                    'language': title.get('@xml:lang', 'eng')
-                }]
-            })
+            obj.get("datacite:titles", {}).get("datacite:title", [])
+        ):
+            titles.append(
+                {
+                    "type": "bf:Title",
+                    "mainTitle": [
+                        {
+                            "value": title["#text"],
+                            "language": title.get("@xml:lang", "eng"),
+                        }
+                    ],
+                }
+            )
 
         return titles

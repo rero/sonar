@@ -31,7 +31,6 @@ class SonarDublinCoreXMLSerializer(BaseSerializer):
         """Constructor."""
         self.schema_class = DublinCoreSchema
 
-
     def serialize_object(self, obj):
         """Serialize a single object according to the response ctx."""
 
@@ -56,34 +55,33 @@ class SonarDublinCoreXMLSerializer(BaseSerializer):
         :returns: an etree element.
         """
         ns = {
-            'dc': 'http://purl.org/dc/elements/1.1/',
-            'oai_dc': 'http://www.openarchives.org/OAI/2.0/oai_dc/',
-            'xml': 'xml',
-            'xsi': 'http://www.w3.org/2001/XMLSchema-instance',
+            "dc": "http://purl.org/dc/elements/1.1/",
+            "oai_dc": "http://www.openarchives.org/OAI/2.0/oai_dc/",
+            "xml": "xml",
+            "xsi": "http://www.w3.org/2001/XMLSchema-instance",
         }
-        container = '{http://www.openarchives.org/OAI/2.0/oai_dc/}dc'
+        container = "{http://www.openarchives.org/OAI/2.0/oai_dc/}dc"
         """Default container element."""
         attrib = {
-            '{http://www.w3.org/2001/XMLSchema-instance}schemaLocation':
-            'http://www.openarchives.org/OAI/2.0/oai_dc/ '
-            'http://www.openarchives.org/OAI/2.0/oai_dc.xsd'
+            "{http://www.w3.org/2001/XMLSchema-instance}schemaLocation": "http://www.openarchives.org/OAI/2.0/oai_dc/ "
+            "http://www.openarchives.org/OAI/2.0/oai_dc.xsd"
         }
         """Default container element attributes."""
         elements = {
-            'contributors': 'contributor',
-            'creators': 'creator',
-            'dates': 'date',
-            'descriptions': 'description',
-            'formats': 'format',
-            'identifiers': 'identifier',
-            'languages': 'language',
-            'publishers': 'publisher',
-            'relations': 'relation',
-            'rights': 'rights',
-            'sources': 'source',
-            'subjects': 'subject',
-            'titles': 'title',
-            'types': 'type'
+            "contributors": "contributor",
+            "creators": "creator",
+            "dates": "date",
+            "descriptions": "description",
+            "formats": "format",
+            "identifiers": "identifier",
+            "languages": "language",
+            "publishers": "publisher",
+            "relations": "relation",
+            "rights": "rights",
+            "sources": "source",
+            "subjects": "subject",
+            "titles": "title",
+            "types": "type",
         }
 
         root = etree.Element(container, nsmap=ns, attrib=attrib)
@@ -93,25 +91,22 @@ class SonarDublinCoreXMLSerializer(BaseSerializer):
                 for value in values:
                     attrs = {}
                     if isinstance(value, dict):
-                        val = value['value']
-                        if '@attrs' in value:
-                            for attr in value['@attrs']:
-                                prefix = attr['prefix'] \
-                                    if 'prefix' in attr else 'xml'
-                                attrs[f'{{{prefix}}}{attr["name"]}'] = \
-                                    attr['value']
+                        val = value["value"]
+                        if "@attrs" in value:
+                            for attr in value["@attrs"]:
+                                prefix = attr["prefix"] if "prefix" in attr else "xml"
+                                attrs[f'{{{prefix}}}{attr["name"]}'] = attr["value"]
                     else:
                         val = value
                     field = etree.SubElement(
                         root,
-                        f'{{http://purl.org/dc/elements/1.1/}}{elements[key]}',
-                        attrs
-                        )
+                        f"{{http://purl.org/dc/elements/1.1/}}{elements[key]}",
+                        attrs,
+                    )
                     field.text = sanitize_unicode(val)
         return root
 
 
 def sonar_dublin_core(pid, record):
     """Get DublinCore XML for OAI-PMH."""
-    return SonarDublinCoreXMLSerializer()\
-        .serialize_object_xml(record)
+    return SonarDublinCoreXMLSerializer().serialize_object_xml(record)

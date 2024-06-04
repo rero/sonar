@@ -31,11 +31,10 @@ class URNAlreadyRegisterd(Exception):
     """The URN identifier is already registered."""
 
 
-
 class Urn:
     """Urn class."""
 
-    urn_pid_type = 'urn'
+    urn_pid_type = "urn"
 
     @classmethod
     def _calculateCheckDigit(cls, urn):
@@ -47,27 +46,62 @@ class Urn:
         # https://d-nb.info/1045320641/34
         # set up conversion table
         conversion_table = {
-            '0':'1', '1':'2', '2':'3', '3':'4', '4':'5', '5':'6', '6':'7',
-            '7':'8', '8':'9', '9':'41', 'A':'18', 'B':'14', 'C':'19', 'D':'15',
-            'E':'16', 'F':'21', 'G':'22', 'H':'23', 'I':'24', 'J':'25',
-            'K':'42', 'L':'26', 'M':'27', 'N':'13', 'O':'28', 'P':'29',
-            'Q':'31', 'R':'12', 'S':'32', 'T':'33', 'U':'11', 'V':'34',
-            'W':'35', 'X':'36', 'Y':'37', 'Z':'38', '-':'39', ':':'17',
-            '_':'43', '.':'47', '/':'45','+':'49'
-            }
+            "0": "1",
+            "1": "2",
+            "2": "3",
+            "3": "4",
+            "4": "5",
+            "5": "6",
+            "6": "7",
+            "7": "8",
+            "8": "9",
+            "9": "41",
+            "A": "18",
+            "B": "14",
+            "C": "19",
+            "D": "15",
+            "E": "16",
+            "F": "21",
+            "G": "22",
+            "H": "23",
+            "I": "24",
+            "J": "25",
+            "K": "42",
+            "L": "26",
+            "M": "27",
+            "N": "13",
+            "O": "28",
+            "P": "29",
+            "Q": "31",
+            "R": "12",
+            "S": "32",
+            "T": "33",
+            "U": "11",
+            "V": "34",
+            "W": "35",
+            "X": "36",
+            "Y": "37",
+            "Z": "38",
+            "-": "39",
+            ":": "17",
+            "_": "43",
+            ".": "47",
+            "/": "45",
+            "+": "49",
+        }
         # obtain digit sequence using the conversion table by concatenating
         # chars
-        digit_sequence = ''
+        digit_sequence = ""
         for idx, element in enumerate(urn, 0):
             digits = conversion_table[urn[idx].upper()]
             digit_sequence = digit_sequence + digits
         # calculate product sum
         product_sum = 0
         for idx, element in enumerate(digit_sequence, 0):
-            product_sum = product_sum + ((idx+1) * int(digit_sequence[idx]))
+            product_sum = product_sum + ((idx + 1) * int(digit_sequence[idx]))
         # read the last number of the digit sequence and calculate the quotient
         last_number = int(digit_sequence[-1])
-        quotient = int(product_sum/last_number)
+        quotient = int(product_sum / last_number)
         quotient_string = str(quotient)
         # read the check-digit from the quotient value string
         return quotient_string[-1]
@@ -81,7 +115,7 @@ class Urn:
         """
         base_urn = current_app.config.get("SONAR_APP_URN_DNB_BASE_URN")
         new_urn = f'{base_urn}{config.get("code"):03}-{pid}'
-        return f'{new_urn}{cls._calculateCheckDigit(new_urn)}'
+        return f"{new_urn}{cls._calculateCheckDigit(new_urn)}"
 
     @classmethod
     def create_urn(cls, record):
@@ -90,11 +124,13 @@ class Urn:
         :param record: the invenio record instance to be processed.
         """
         from sonar.modules.documents.api import DocumentRecord
+
         urn_config = current_app.config.get("SONAR_APP_DOCUMENT_URN")
         org_pid = record.resolve().get("organisation", [{}])[0].get("pid")
         if DocumentRecord.get_rero_urn_code(record):
             current_app.logger.warning(
-                    f'generated urn already exist for document: {record["pid"]}')
+                f'generated urn already exist for document: {record["pid"]}'
+            )
             return
         if config := urn_config.get("organisations", {}).get(org_pid):
             if record.get("documentType") in config.get("types"):
@@ -113,12 +149,12 @@ class Urn:
                             {"type": "bf:Urn", "value": urn_code}
                         )
                     else:
-                        record["identifiedBy"] = \
-                            [{"type": "bf:Urn", "value": urn_code}]
+                        record["identifiedBy"] = [{"type": "bf:Urn", "value": urn_code}]
                     return pid
                 except PIDAlreadyExists:
                     current_app.logger.error(
-                        f'generated urn already exist for document: {record["pid"]}')
+                        f'generated urn already exist for document: {record["pid"]}'
+                    )
 
     @classmethod
     def _urn_query(cls, status=None):
@@ -127,10 +163,9 @@ class Urn:
         :param status: PID status by default N.
         :returns: Base query.
         """
-        return PersistentIdentifier.query\
-                .filter_by(pid_type=cls.urn_pid_type)\
-                .filter_by(status=status)
-
+        return PersistentIdentifier.query.filter_by(
+            pid_type=cls.urn_pid_type
+        ).filter_by(status=status)
 
     @classmethod
     def get_urn_pids(cls, status=PIDStatus.RESERVED, days=None):
@@ -143,17 +178,18 @@ class Urn:
         query = cls._urn_query(status=status)
         if uuuids := [str(uuid.object_uuid) for uuid in query.all()]:
             from sonar.modules.documents.api import DocumentSearch
-            query = DocumentSearch()\
-                .filter('terms', _id=uuuids)
+
+            query = DocumentSearch().filter("terms", _id=uuuids)
             if days:
                 date = datetime.now(timezone.utc) - timedelta(days=days)
-                query = query.filter('range', _created={'gte': date})
+                query = query.filter("range", _created={"gte": date})
+
             def get_pids(query):
-                for hit in query.source('pid').scan():
+                for hit in query.source("pid").scan():
                     yield hit.pid
+
             return query.count(), get_pids(query)
         return 0, []
-
 
     @classmethod
     def get_unregistered_urns(cls):
@@ -179,7 +215,7 @@ class Urn:
         pid = PersistentIdentifier.get(cls.urn_pid_type, urn_code)
         if pid.is_registered():
             current_app.logger.warning(
-                f'URU {urn_code} is already registered for the document: '
+                f"URU {urn_code} is already registered for the document: "
                 f'{record["pid"]}'
             )
             return False
@@ -198,18 +234,29 @@ class Urn:
         from elasticsearch_dsl import Q
 
         from sonar.modules.documents.api import DocumentRecord, DocumentSearch
+
         urn_config = current_app.config.get("SONAR_APP_DOCUMENT_URN")
-        configs = urn_config.get('organisations', {})
+        configs = urn_config.get("organisations", {})
         pids = []
         for org_pid in configs.keys():
             config = configs.get(org_pid)
-            doc_types = config.get('types')
-            query = DocumentSearch()\
-                .filter('terms', documentType=doc_types)\
-                .filter('term', organisation__pid=org_pid)\
-                .filter('bool', must_not=[
-                    Q('nested', path='identifiedBy', query=Q('term', identifiedBy__type='bf:Urn'))])\
-                .source(['pid'])
+            doc_types = config.get("types")
+            query = (
+                DocumentSearch()
+                .filter("terms", documentType=doc_types)
+                .filter("term", organisation__pid=org_pid)
+                .filter(
+                    "bool",
+                    must_not=[
+                        Q(
+                            "nested",
+                            path="identifiedBy",
+                            query=Q("term", identifiedBy__type="bf:Urn"),
+                        )
+                    ],
+                )
+                .source(["pid"])
+            )
             pids.extend(hit.pid for hit in query.scan())
 
         for pid in set(pids):

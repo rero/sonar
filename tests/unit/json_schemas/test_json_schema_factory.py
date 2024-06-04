@@ -25,9 +25,9 @@ from sonar.json_schemas.json_schema_base import JSONSchemaBase
 def test_create(app):
     """Test schema object creation."""
     # No custom schema
-    schema = JSONSchemaFactory.create('organisations')
+    schema = JSONSchemaFactory.create("organisations")
     assert isinstance(schema, JSONSchemaBase)
 
     # Specific schema
-    schema = JSONSchemaFactory.create('deposits')
+    schema = JSONSchemaFactory.create("deposits")
     assert isinstance(schema, DepositsJSONSchema)

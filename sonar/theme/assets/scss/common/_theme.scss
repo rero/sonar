@@ -26,11 +26,6 @@
     background-color: $bg-organisation;
 }
 
-.standalone-editor {
-  legend, button.btn-outline-danger {
-    display: none;
-  }
-}
 
 // Avoid dropdown menu to appear under the wiki TOC.
 div.wiki-page div.sticky-top {

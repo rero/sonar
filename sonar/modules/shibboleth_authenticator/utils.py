@@ -27,7 +27,7 @@ from flask import current_app, request
 from slugify import slugify
 from werkzeug.local import LocalProxy
 
-_security = LocalProxy(lambda: current_app.extensions['security'])
+_security = LocalProxy(lambda: current_app.extensions["security"])
 
 _datastore = LocalProxy(lambda: _security.datastore)
 
@@ -39,28 +39,31 @@ def get_account_info(attributes, remote_app):
     :param remote_app: (str) Identity provider key.
     :returns: (dict) A dictionary representing user to create or update.
     """
-    mappings = current_app.config['SHIBBOLETH_IDENTITY_PROVIDERS'][remote_app][
-        'mappings']
+    mappings = current_app.config["SHIBBOLETH_IDENTITY_PROVIDERS"][remote_app][
+        "mappings"
+    ]
 
     # Map data according to configuration
-    email = attributes[mappings['email']][0]
-    external_id = attributes[mappings['user_unique_id']][0]
-    full_name = attributes[mappings['full_name']][0]
+    email = attributes[mappings["email"]][0]
+    external_id = attributes[mappings["user_unique_id"]][0]
+    full_name = attributes[mappings["full_name"]][0]
 
     return dict(
         user=dict(
             email=email,
-            profile=dict(full_name=full_name,
-                         username="{slug}-{random}".format(
-                             slug=slugify(full_name),
-                             random=str(randrange(1000)))),
+            profile=dict(
+                full_name=full_name,
+                username="{slug}-{random}".format(
+                    slug=slugify(full_name), random=str(randrange(1000))
+                ),
+            ),
         ),
         external_id=external_id,
         external_method=remote_app,
     )
 
 
-def get_safe_redirect_target(arg='next'):
+def get_safe_redirect_target(arg="next"):
     """Get URL to redirect to and ensure that it is local.
 
     :param arg: (str) URL argument.
@@ -69,14 +72,15 @@ def get_safe_redirect_target(arg='next'):
     for target in request.args.get(arg), request.referrer:
         if target:
             redirect_uri = uritools.urisplit(target)
-            allowed_hosts = current_app.config.get('APP_ALLOWED_HOSTS', [])
+            allowed_hosts = current_app.config.get("APP_ALLOWED_HOSTS", [])
 
             if redirect_uri.host in allowed_hosts:
                 return target
 
             if redirect_uri.path:
-                return uritools.uricompose(path=redirect_uri.path,
-                                           query=redirect_uri.query)
+                return uritools.uricompose(
+                    path=redirect_uri.path, query=redirect_uri.query
+                )
 
     return None
 
@@ -92,11 +96,11 @@ def prepare_flask_request(flask_request):
 
     # If server is behind proxys or balancers use the HTTP_X_FORWARDED fields.
     return {
-        'https': 'on' if flask_request.scheme == 'https' else 'off',
-        'http_host': flask_request.host,
-        'server_port': url_data.port,
-        'script_name': flask_request.path,
-        'get_data': flask_request.args.copy(),
-        'X-Forwarded-for': '',
-        'post_data': flask_request.form.copy(),
+        "https": "on" if flask_request.scheme == "https" else "off",
+        "http_host": flask_request.host,
+        "server_port": url_data.port,
+        "script_name": flask_request.path,
+        "get_data": flask_request.args.copy(),
+        "X-Forwarded-for": "",
+        "post_data": flask_request.form.copy(),
     }

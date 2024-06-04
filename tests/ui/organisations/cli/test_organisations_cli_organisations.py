@@ -23,26 +23,32 @@ import sonar.modules.organisations.cli.organisations as Cli
 from sonar.modules.organisations.api import OrganisationRecord
 
 
-def test_import_organisations(app, script_info, bucket_location,
-                              without_oaiset_signals):
+def test_import_organisations(
+    app, script_info, bucket_location, without_oaiset_signals
+):
     """Test import organisations."""
     runner = CliRunner()
 
-    datastore = app.extensions['security'].datastore
-    datastore.create_role(name='admin')
+    datastore = app.extensions["security"].datastore
+    datastore.create_role(name="admin")
 
     # Import ok
-    result = runner.invoke(Cli.import_organisations,
-                           ['./tests/ui/organisations/data/valid.json'],
-                           obj=script_info)
-    organisation = OrganisationRecord.get_record_by_pid('test')
+    result = runner.invoke(
+        Cli.import_organisations,
+        ["./tests/ui/organisations/data/valid.json"],
+        obj=script_info,
+    )
+    organisation = OrganisationRecord.get_record_by_pid("test")
     assert organisation
-    assert organisation['pid'] == 'test'
+    assert organisation["pid"] == "test"
 
     # Already existing
-    result = runner.invoke(Cli.import_organisations,
-                           ['./tests/ui/organisations/data/valid.json'],
-                           obj=script_info)
+    result = runner.invoke(
+        Cli.import_organisations,
+        ["./tests/ui/organisations/data/valid.json"],
+        obj=script_info,
+    )
     assert result.output.find(
-        'Organisation {\'code\': \'test\', \'name\': \'Test\'} could not be '
-        'imported: Record already exists in DB')
+        "Organisation {'code': 'test', 'name': 'Test'} could not be "
+        "imported: Record already exists in DB"
+    )

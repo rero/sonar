@@ -26,32 +26,29 @@ from sonar.modules.stats.api import Record, RecordSearch
 class DocumentsStats(BaseView):
     """Documents stats admin views."""
 
-    @expose('/')
+    @expose("/")
     def index(self):
         """Stats index view.
 
         :returns: Rendered template
         """
-        hits = RecordSearch().sort('-_created')[0:100].execute().to_dict()
-        return self.render('sonar/stats/index.html',
-                           records=hits['hits']['hits'])
+        hits = RecordSearch().sort("-_created")[0:100].execute().to_dict()
+        return self.render("sonar/stats/index.html", records=hits["hits"]["hits"])
 
-    @expose('/collect')
+    @expose("/collect")
     def collect(self):
         """Collect statistics.
 
         :returns: Rendered template or redirection to detail view.
         """
-        save = bool(request.args.get('save'))
+        save = bool(request.args.get("save"))
         record = Record.collect(save)
         if not save:
-            return self.render('sonar/stats/detail.html',
-                               record=record,
-                               live=True)
+            return self.render("sonar/stats/detail.html", record=record, live=True)
 
-        return redirect(url_for('documentsstats.detail', pid=record['pid']))
+        return redirect(url_for("documentsstats.detail", pid=record["pid"]))
 
-    @expose('/<pid>')
+    @expose("/<pid>")
     def detail(self, pid):
         """Stats detail view.
 
@@ -63,14 +60,12 @@ class DocumentsStats(BaseView):
         if not record:
             abort(404)
 
-        return self.render('sonar/stats/detail.html', record=record)
+        return self.render("sonar/stats/detail.html", record=record)
 
 
 stats_adminview = {
-    'view_class': DocumentsStats,
-    'kwargs': {
-        'name': 'Stats'
-    },
+    "view_class": DocumentsStats,
+    "kwargs": {"name": "Stats"},
 }
 
-__all__ = ('stats_adminview', )
+__all__ = ("stats_adminview",)

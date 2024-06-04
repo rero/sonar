@@ -22,8 +22,11 @@ from __future__ import absolute_import, print_function
 from functools import partial
 
 from invenio_records_rest.schemas import StrictKeysMixin
-from invenio_records_rest.schemas.fields import GenFunction, \
-    PersistentIdentifier, SanitizedUnicode
+from invenio_records_rest.schemas.fields import (
+    GenFunction,
+    PersistentIdentifier,
+    SanitizedUnicode,
+)
 from marshmallow import fields, pre_dump, pre_load
 
 from sonar.modules.deposits.api import DepositRecord
@@ -51,10 +54,12 @@ class DepositMetadataSchemaV1(StrictKeysMixin):
     _bucket = SanitizedUnicode()
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
-    schema = GenFunction(load_only=True,
-                         attribute="$schema",
-                         data_key="$schema",
-                         deserialize=schema_from_deposit)
+    schema = GenFunction(
+        load_only=True,
+        attribute="$schema",
+        data_key="$schema",
+        deserialize=schema_from_deposit,
+    )
     permissions = fields.Dict(dump_only=True)
 
     @pre_dump
@@ -64,10 +69,10 @@ class DepositMetadataSchemaV1(StrictKeysMixin):
         :param item: Dict representing the record
         :returns: Dict of modified record.
         """
-        item['permissions'] = {
-            'read': DepositPermission.read(current_user_record, item),
-            'update': DepositPermission.update(current_user_record, item),
-            'delete': DepositPermission.delete(current_user_record, item)
+        item["permissions"] = {
+            "read": DepositPermission.read(current_user_record, item),
+            "update": DepositPermission.update(current_user_record, item),
+            "delete": DepositPermission.delete(current_user_record, item),
         }
 
         return item
@@ -79,7 +84,7 @@ class DepositMetadataSchemaV1(StrictKeysMixin):
         :param data: Dict of record data.
         :returns: Modified data.
         """
-        data.pop('permissions', None)
+        data.pop("permissions", None)
 
         return data
 

@@ -41,7 +41,7 @@ def add_full_name(sender=None, record=None, json=None, index=None, **kwargs):
     :param index: Index where data is sent.
     """
     # Takes care only about users indexing
-    if not index.startswith('users'):
+    if not index.startswith("users"):
         return
 
-    json['full_name'] = f'{json["first_name"]} {json["last_name"]}'
+    json["full_name"] = f'{json["first_name"]} {json["last_name"]}'

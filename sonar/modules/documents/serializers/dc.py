@@ -17,8 +17,9 @@
 
 """Dublin Core REST serializer."""
 
-from invenio_records_rest.serializers.dc import \
-    DublinCoreSerializer as BaseDublinCoreSerializer
+from invenio_records_rest.serializers.dc import (
+    DublinCoreSerializer as BaseDublinCoreSerializer,
+)
 from lxml import etree
 
 from .oai_dc import SonarDublinCoreXMLSerializer
@@ -37,8 +38,10 @@ class DublinCoreSerializer(BaseDublinCoreSerializer, SonarDublinCoreXMLSerialize
         :param record: Record instance.
         :param links_factory: Factory function for record links.
         """
-        root = self.serialize_dict_to_etree(self.transform_record(pid, record, links_factory))
-        return etree.tostring(root, pretty_print=True, encoding='UTF-8')
+        root = self.serialize_dict_to_etree(
+            self.transform_record(pid, record, links_factory)
+        )
+        return etree.tostring(root, pretty_print=True, encoding="UTF-8")
 
     def serialize_search(
         self, pid_fetcher, search_result, links=None, item_links_factory=None
@@ -50,18 +53,18 @@ class DublinCoreSerializer(BaseDublinCoreSerializer, SonarDublinCoreXMLSerialize
         :param links: Dictionary of links to add to response.
         """
         root = etree.Element(
-            'collection',
-            total=str(search_result['hits']['total']['value'])
+            "collection", total=str(search_result["hits"]["total"]["value"])
         )
         for hit in search_result["hits"]["hits"]:
-            child = self.serialize_dict_to_etree(self.transform_search_hit(
-                        pid_fetcher(hit["_id"], hit["_source"]),
-                        hit,
-                        links_factory=item_links_factory,
-                    )
+            child = self.serialize_dict_to_etree(
+                self.transform_search_hit(
+                    pid_fetcher(hit["_id"], hit["_source"]),
+                    hit,
+                    links_factory=item_links_factory,
+                )
             )
             root.append(child)
-        return etree.tostring(root, pretty_print=True, encoding='UTF-8')
+        return etree.tostring(root, pretty_print=True, encoding="UTF-8")
 
     def dump(self, obj, context=None):
         """Serialize object with schema.

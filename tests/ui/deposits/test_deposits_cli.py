@@ -27,9 +27,9 @@ def test_create(app, script_info):
     """Test create location."""
     runner = CliRunner()
 
-    directory = os.path.join(app.instance_path, 'files')
+    directory = os.path.join(app.instance_path, "files")
 
     os.makedirs(directory, 0o755, exist_ok=True)
 
     result = runner.invoke(cli.create, obj=script_info)
-    assert 'Location #1 created successfully' in result.output
+    assert "Location #1 created successfully" in result.output

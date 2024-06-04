@@ -35,12 +35,12 @@ class OrganisationCodeConverter(BaseConverter):
         :param value: the URL param value.
         :returns: the URL param value.
         """
-        if g.get('organisation'):
-            g.pop('organisation')
-        if value == current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION'):
+        if g.get("organisation"):
+            g.pop("organisation")
+        if value == current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION"):
             return value
         organisation = OrganisationRecord.get_record_by_pid(value)
-        if not organisation or not organisation.get('isShared'):
+        if not organisation or not organisation.get("isShared"):
             raise ValidationError
         g.organisation = organisation.dumps()
         return value

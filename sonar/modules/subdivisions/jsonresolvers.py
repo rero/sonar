@@ -33,12 +33,12 @@ def json_resolver(pid):
     :return: Record instance.
     :rtype: Record
     """
-    resolver = Resolver(pid_type=Configuration.pid_type,
-                        object_type='rec',
-                        getter=Record.get_record)
+    resolver = Resolver(
+        pid_type=Configuration.pid_type, object_type="rec", getter=Record.get_record
+    )
     _, record = resolver.resolve(pid)
 
-    if record.get('$schema'):
-        del record['$schema']
+    if record.get("$schema"):
+        del record["$schema"]
 
     return record

@@ -31,8 +31,12 @@ from invenio_stats import current_stats
 from sonar.affiliations import AffiliationResolver
 from sonar.modules.documents.minters import id_minter
 from sonar.modules.pdf_extractor.utils import extract_text_from_content
-from sonar.modules.utils import change_filename_extension, \
-    create_thumbnail_from_file, get_current_ip, is_ip_in_list
+from sonar.modules.utils import (
+    change_filename_extension,
+    create_thumbnail_from_file,
+    get_current_ip,
+    is_ip_in_list,
+)
 
 from ..api import SonarIndexer, SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
@@ -41,7 +45,7 @@ from .dumpers import ReplaceRefsDumper, document_indexer_dumper
 from .extensions import ArkDocumentExtension, UrnDocumentExtension
 
 # provider
-DocumentProvider = type('DocumentProvider', (Provider, ), dict(pid_type='doc'))
+DocumentProvider = type("DocumentProvider", (Provider,), dict(pid_type="doc"))
 # minter
 document_pid_minter = partial(id_minter, provider=DocumentProvider)
 # fetcher
@@ -54,8 +58,9 @@ class DocumentSearch(SonarSearch):
     class Meta:
         """Search only on item index."""
 
-        index = 'documents'
+        index = "documents"
         doc_types = []
+
 
 class DocumentRecord(SonarRecord):
     """Document record class."""
@@ -63,7 +68,7 @@ class DocumentRecord(SonarRecord):
     minter = document_pid_minter
     fetcher = document_pid_fetcher
     provider = DocumentProvider
-    schema = 'documents/document-v1.0.0.json'
+    schema = "documents/document-v1.0.0.json"
     enable_jsonref = False
     _extensions = [ArkDocumentExtension(), UrnDocumentExtension()]
 
@@ -80,10 +85,11 @@ class DocumentRecord(SonarRecord):
         if (ark_url := doc.get_ark_resolver_url()) and not ignore_ark:
             return ark_url
         if not org:
-            org = current_app.config.get('SONAR_APP_DEFAULT_ORGANISATION')
+            org = current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION")
 
-        return current_app.config.get('SONAR_DOCUMENTS_PERMALINK').format(
-            host=host, org=org, pid=pid)
+        return current_app.config.get("SONAR_DOCUMENTS_PERMALINK").format(
+            host=host, org=org, pid=pid
+        )
 
     @staticmethod
     def get_documents_by_project(project_pid):
@@ -96,25 +102,25 @@ class DocumentRecord(SonarRecord):
         def format_hit(hit):
             """Format hit item."""
             hit = hit.to_dict()
-            hit['permalink'] = DocumentRecord.get_permanent_link(
-                request.host_url, hit['pid'])
+            hit["permalink"] = DocumentRecord.get_permanent_link(
+                request.host_url, hit["pid"]
+            )
             return hit
 
-        results = DocumentSearch().filter(
-            'term',
-            projects__pid=project_pid).source(includes=['pid', 'title'])
+        results = (
+            DocumentSearch()
+            .filter("term", projects__pid=project_pid)
+            .source(includes=["pid", "title"])
+        )
         return list(map(format_hit, results))
 
     @classmethod
-    def create(cls, data, id_=None, dbcommit=False, with_bucket=True,
-               **kwargs):
+    def create(cls, data, id_=None, dbcommit=False, with_bucket=True, **kwargs):
         """Create document record."""
         cls.guess_controlled_affiliations(data)
-        return super(DocumentRecord, cls).create(data,
-                                                 id_=id_,
-                                                 dbcommit=dbcommit,
-                                                 with_bucket=with_bucket,
-                                                 **kwargs)
+        return super(DocumentRecord, cls).create(
+            data, id_=id_, dbcommit=dbcommit, with_bucket=with_bucket, **kwargs
+        )
 
     @classmethod
     def guess_controlled_affiliations(cls, data):
@@ -123,14 +129,14 @@ class DocumentRecord(SonarRecord):
         :param data: Record data.
         """
         affiliation_resolver = AffiliationResolver()
-        for contributor in data.get('contribution', []):
+        for contributor in data.get("contribution", []):
             # remove existing controlled affiliation
-            contributor.pop('controlledAffiliation', None)
-            if contributor.get('affiliation'):
+            contributor.pop("controlledAffiliation", None)
+            if contributor.get("affiliation"):
                 if controlled_affiliations := affiliation_resolver.resolve(
-                        contributor['affiliation']):
-                    contributor[
-                        'controlledAffiliation'] = controlled_affiliations
+                    contributor["affiliation"]
+                ):
+                    contributor["controlledAffiliation"] = controlled_affiliations
 
     @classmethod
     def get_record_by_identifier(cls, identifiers):
@@ -142,8 +148,9 @@ class DocumentRecord(SonarRecord):
 
         # Search only for DOI or local indentifiers.
         search_identifiers = [
-            identifier for identifier in identifiers
-            if identifier['type'] in ['bf:Local', 'bf:Doi']
+            identifier
+            for identifier in identifiers
+            if identifier["type"] in ["bf:Local", "bf:Doi"]
         ]
 
         # No identifiers to analyze
@@ -155,21 +162,25 @@ class DocumentRecord(SonarRecord):
         filters = []
         for identifier in search_identifiers:
             identifier_filters = [
-                Q('term', identifiedBy__value=identifier['value']),
-                Q('term', identifiedBy__type=identifier['type'])
+                Q("term", identifiedBy__value=identifier["value"]),
+                Q("term", identifiedBy__type=identifier["type"]),
             ]
-            if identifier.get('source'):
+            if identifier.get("source"):
                 identifier_filters.append(
-                    Q('term', identifiedBy__source=identifier['source']))
+                    Q("term", identifiedBy__source=identifier["source"])
+                )
 
             filters.append(
-                Q('nested',
-                  path='identifiedBy',
-                  query=Q('bool', filter=identifier_filters)))
+                Q(
+                    "nested",
+                    path="identifiedBy",
+                    query=Q("bool", filter=identifier_filters),
+                )
+            )
 
-        search = search.query('bool', filter=filters).source(includes=['pid'])
+        search = search.query("bool", filter=filters).source(includes=["pid"])
         if results := list(search):
-            return cls.get_record_by_pid(results[0]['pid'])
+            return cls.get_record_by_pid(results[0]["pid"])
 
         return None
 
@@ -183,14 +194,14 @@ class DocumentRecord(SonarRecord):
         :param str key: File key
         :returns: File object created.
         """
-        if not kwargs.get('type'):
-            kwargs['type'] = 'file'
+        if not kwargs.get("type"):
+            kwargs["type"] = "file"
 
-        if not kwargs.get('order'):
-            kwargs['order'] = self.get_next_file_order()
+        if not kwargs.get("order"):
+            kwargs["order"] = self.get_next_file_order()
 
-        if not kwargs.get('label'):
-            kwargs['label'] = key
+        if not kwargs.get("label"):
+            kwargs["label"] = key
 
         added_file = super(DocumentRecord, self).add_file(data, key, **kwargs)
 
@@ -220,16 +231,16 @@ class DocumentRecord(SonarRecord):
             self.create_thumbnail(self.files[file.key])
 
             # Default type is `file`
-            if not self.files[file.key].get('type'):
-                self.files[file.key]['type'] = 'file'
+            if not self.files[file.key].get("type"):
+                self.files[file.key]["type"] = "file"
 
             # Default label is `file.key`
-            if not self.files[file.key].get('label'):
-                self.files[file.key]['label'] = file.key
+            if not self.files[file.key].get("label"):
+                self.files[file.key]["label"] = file.key
 
             # Order is calculated with other files
-            if not self.files[file.key].get('order'):
-                self.files[file.key]['order'] = self.get_next_file_order()
+            if not self.files[file.key].get("order"):
+                self.files[file.key]["order"] = self.get_next_file_order()
 
         super(DocumentRecord, self).sync_files(file, deleted)
 
@@ -239,9 +250,10 @@ class DocumentRecord(SonarRecord):
         :param file: File object.
         """
         # If extract fulltext is disabled or file is not a PDF
-        if not current_app.config.get(
-                'SONAR_DOCUMENTS_EXTRACT_FULLTEXT_ON_IMPORT'
-        ) or file.mimetype != 'application/pdf':
+        if (
+            not current_app.config.get("SONAR_DOCUMENTS_EXTRACT_FULLTEXT_ON_IMPORT")
+            or file.mimetype != "application/pdf"
+        ):
             return
 
         # Try to extract full text from file data, and generate a warning if
@@ -251,15 +263,16 @@ class DocumentRecord(SonarRecord):
             with file.file.storage().open() as pdf_file:
                 fulltext = extract_text_from_content(pdf_file.read())
 
-            key = change_filename_extension(file.key, 'txt')
+            key = change_filename_extension(file.key, "txt")
             self.files[key] = BytesIO(fulltext.encode())
-            self.files[key]['type'] = 'fulltext'
+            self.files[key]["type"] = "fulltext"
         except Exception as exception:
             current_app.logger.warning(
-                'Error during fulltext extraction of {file} of record '
-                '{record}: {error}'.format(file=file.key,
-                                           error=exception,
-                                           record=self['identifiedBy']))
+                "Error during fulltext extraction of {file} of record "
+                "{record}: {error}".format(
+                    file=file.key, error=exception, record=self["identifiedBy"]
+                )
+            )
 
     def create_thumbnail(self, file):
         """Create a thumbnail for record.
@@ -271,31 +284,32 @@ class DocumentRecord(SonarRecord):
         """
         try:
             # Create thumbnail
-            image_blob = create_thumbnail_from_file(file.file.uri,
-                                                    file.mimetype)
+            image_blob = create_thumbnail_from_file(file.file.uri, file.mimetype)
 
-            thumbnail_key = change_filename_extension(file['key'], 'jpg')
+            thumbnail_key = change_filename_extension(file["key"], "jpg")
 
             # Store thumbnail in record's files
             self.files[thumbnail_key] = BytesIO(image_blob)
-            self.files[thumbnail_key]['type'] = 'thumbnail'
+            self.files[thumbnail_key]["type"] = "thumbnail"
         except Exception as exception:
             current_app.logger.warning(
-                'Error during thumbnail generation of {file} of record '
-                '{record}: {error}'.format(file=file['key'],
-                                           error=exception,
-                                           record=self.get(
-                                               'identifiedBy', self['pid'])))
+                "Error during thumbnail generation of {file} of record "
+                "{record}: {error}".format(
+                    file=file["key"],
+                    error=exception,
+                    record=self.get("identifiedBy", self["pid"]),
+                )
+            )
 
     def get_main_file(self):
         """Get the main file of record."""
-        files = [file for file in self.files if file.get('type') == 'file']
+        files = [file for file in self.files if file.get("type") == "file"]
 
         if not files:
             return None
 
         for file in files:
-            if file.get('order') == 1:
+            if file.get("order") == 1:
                 return file
 
         return files[0]
@@ -305,12 +319,12 @@ class DocumentRecord(SonarRecord):
 
         :returns: Integer representing the new position.
         """
-        files = [file for file in self.files if file.get('type') == 'file']
+        files = [file for file in self.files if file.get("type") == "file"]
 
         if not files:
             return 1
 
-        positions = [file.get('order', 1) for file in files]
+        positions = [file.get("order", 1) for file in files]
 
         return max(positions) + 1
 
@@ -322,11 +336,8 @@ class DocumentRecord(SonarRecord):
 
         :returns: Formatted list of files.
         """
-        files = [
-            file for file in self.get('_files', [])
-            if file.get('type') == 'file'
-        ]
-        return sorted(files, key=lambda file: file.get('order', 100))
+        files = [file for file in self.get("_files", []) if file.get("type") == "file"]
+        return sorted(files, key=lambda file: file.get("order", 100))
 
     def update(self, data):
         """Update record.
@@ -348,24 +359,22 @@ class DocumentRecord(SonarRecord):
 
         for file in self.files:
             # Restricted access.
-            if file.get('access') == 'coar:c_16ec':
+            if file.get("access") == "coar:c_16ec":
                 return False
 
             # Embargoed access
-            if file.get('access') == 'coar:c_f1cf':
-                if not file.get('embargo_date'):
+            if file.get("access") == "coar:c_f1cf":
+                if not file.get("embargo_date"):
                     return False
 
                 try:
-                    embargo_date = datetime.strptime(file['embargo_date'],
-                                                     '%Y-%m-%d')
+                    embargo_date = datetime.strptime(file["embargo_date"], "%Y-%m-%d")
                 except Exception:
                     return False
 
                 return embargo_date <= datetime.now()
 
         return True
-
 
     @property
     def is_masked(self):
@@ -374,16 +383,20 @@ class DocumentRecord(SonarRecord):
         :returns: True if record is masked
         :rtype: boolean
         """
-        if not self.get('masked'):
+        if not self.get("masked"):
             return False
 
-        if self['masked'] == 'masked_for_all':
+        if self["masked"] == "masked_for_all":
             return True
 
-        if self['masked'] == 'masked_for_external_ips' and self.get(
-                'organisation') and not is_ip_in_list(
-                    get_current_ip(), self['organisation'][0].get(
-                        'allowedIps', '').split('\n')):
+        if (
+            self["masked"] == "masked_for_external_ips"
+            and self.get("organisation")
+            and not is_ip_in_list(
+                get_current_ip(),
+                self["organisation"][0].get("allowedIps", "").split("\n"),
+            )
+        ):
             return True
 
         return False
@@ -399,28 +412,30 @@ class DocumentRecord(SonarRecord):
         :rtype: dict
         """
         res = {}
-        query_cfg = current_stats.queries['record-view']
-        query  = query_cfg.cls(name='record-view', **query_cfg.params)
+        query_cfg = current_stats.queries["record-view"]
+        query = query_cfg.cls(name="record-view", **query_cfg.params)
         try:
-            res['record-view'] = int(query.run(pid_type='doc', pid_value=self['pid'])['unique_count'])
+            res["record-view"] = int(
+                query.run(pid_type="doc", pid_value=self["pid"])["unique_count"]
+            )
         except NotFoundError:
-            res['record-view'] = 0
-        query_cfg = current_stats.queries['file-download']
-        query  = query_cfg.cls(name='file-download', **query_cfg.params)
-        res['file-download'] = {f['key']: 0 for f in self.get_files_list()}
+            res["record-view"] = 0
+        query_cfg = current_stats.queries["file-download"]
+        query = query_cfg.cls(name="file-download", **query_cfg.params)
+        res["file-download"] = {f["key"]: 0 for f in self.get_files_list()}
         with contextlib.suppress(NotFoundError):
             res_query = query.run(bucket_id=self.bucket_id)
-            file_keys = res['file-download'].keys()
-            for b in res_query['buckets']:
-                if b.get('key') in file_keys:
-                    res['file-download'][b['key']] = int(b['unique_count'])
+            file_keys = res["file-download"].keys()
+            for b in res_query["buckets"]:
+                if b.get("key") in file_keys:
+                    res["file-download"][b["key"]] = int(b["unique_count"])
         return res
 
     def get_ark(self):
         """Get the ARK identifier."""
-        for identifier in self.get('identifiedBy', []):
-            if identifier.get('type') == 'ark':
-                return identifier.get('value')
+        for identifier in self.get("identifiedBy", []):
+            if identifier.get("type") == "ark":
+                return identifier.get("value")
 
     def get_ark_resolver_url(self):
         """Get the ark resolver url.
@@ -428,8 +443,8 @@ class DocumentRecord(SonarRecord):
         :returns: the URL to resolve the current identifier.
         """
         if ark := self.get_ark():
-            resolver_url = current_app.config.get('SONAR_APP_ARK_RESOLVER')
-            return f'{resolver_url}/{ark}'
+            resolver_url = current_app.config.get("SONAR_APP_ARK_RESOLVER")
+            return f"{resolver_url}/{ark}"
 
     def resolve(self):
         """Resolve references data.
@@ -448,11 +463,10 @@ class DocumentRecord(SonarRecord):
         :param record: dictionary of document.
         :returns: urn code.
         """
-        base_urn = current_app.config.get('SONAR_APP_URN_DNB_BASE_URN')
-        for identifier in record.get('identifiedBy', []):
-            if identifier['type'] == 'bf:Urn' and \
-                    base_urn in identifier['value']:
-                return identifier['value']
+        base_urn = current_app.config.get("SONAR_APP_URN_DNB_BASE_URN")
+        for identifier in record.get("identifiedBy", []):
+            if identifier["type"] == "bf:Urn" and base_urn in identifier["value"]:
+                return identifier["value"]
 
 
 class DocumentIndexer(SonarIndexer):

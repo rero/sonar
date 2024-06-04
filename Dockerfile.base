@@ -26,7 +26,7 @@ FROM python:3.9-slim-bookworm
 
 # require debian packages
 RUN apt-get upgrade -y && apt-get update -y
-RUN apt-get install --no-install-recommends -y git vim-tiny curl gcc g++ pkg-config gnupg libc6-dev libxml2-dev libxmlsec1-dev libxmlsec1-openssl xpdf xpdf-utils ghostscript imagemagick && rm -rf /var/lib/apt/lists/*
+RUN apt-get install --no-install-recommends -y git vim-tiny curl gcc g++ pkg-config gnupg libc6-dev libxmlsec1-openssl xpdf xpdf-utils ghostscript imagemagick && rm -rf /var/lib/apt/lists/*
 RUN sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
 RUN pip install --upgrade wheel pip uv
 

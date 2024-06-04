@@ -33,7 +33,7 @@ def search_factory(self, search, query_parser=None):
     """
     search, urlkwargs = default_search_factory(self, search)
 
-    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
+    if current_app.config.get("SONAR_APP_DISABLE_PERMISSION_CHECKS"):
         return (search, urlkwargs)
 
     # Records are not filtered for superusers.
@@ -41,7 +41,6 @@ def search_factory(self, search, query_parser=None):
         return (search, urlkwargs)
 
     # For admins, records are filtered by organisation of the current user.
-    search = search.filter('term',
-                           organisation__pid=current_organisation['pid'])
+    search = search.filter("term", organisation__pid=current_organisation["pid"])
 
     return (search, urlkwargs)

@@ -24,4 +24,4 @@ from ..schemas import RecordMetadataSchema
 #: JSON loader using Marshmallow for data validation.
 json_v1 = marshmallow_loader(RecordMetadataSchema)
 
-__all__ = ('json_v1', )
+__all__ = ("json_v1",)

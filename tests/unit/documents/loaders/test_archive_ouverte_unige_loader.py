@@ -17,8 +17,9 @@
 
 """Test Archive ouverte UNIGE record loader."""
 
-from sonar.modules.documents.loaders.schemas.archive_ouverte_unige import \
-    ArchiveOuverteUnigeSchema
+from sonar.modules.documents.loaders.schemas.archive_ouverte_unige import (
+    ArchiveOuverteUnigeSchema,
+)
 
 
 def test_archive_ouverte_unige_loader():
@@ -166,24 +167,15 @@ def test_archive_ouverte_unige_loader():
 </record>
     """
     assert ArchiveOuverteUnigeSchema().dump(xml) == {
-        'identifiedBy': [{
-            'source': 'Archive ouverte UNIGE',
-            'type': 'bf:Local',
-            'value': 'unige:1'
-        }, {
-            'type': 'bf:Doi',
-            'value': '10.1016/j.ijpharm'
-        }, {
-            'source': 'PMID',
-            'type': 'bf:Local',
-            'value': '17997238'
-        }],
-        'title': [{
-            'mainTitle': [{
-                'language': 'eng',
-                'value': 'High throughput'
-            }],
-            'type':
-            'bf:Title'
-        }]
+        "identifiedBy": [
+            {"source": "Archive ouverte UNIGE", "type": "bf:Local", "value": "unige:1"},
+            {"type": "bf:Doi", "value": "10.1016/j.ijpharm"},
+            {"source": "PMID", "type": "bf:Local", "value": "17997238"},
+        ],
+        "title": [
+            {
+                "mainTitle": [{"language": "eng", "value": "High throughput"}],
+                "type": "bf:Title",
+            }
+        ],
     }

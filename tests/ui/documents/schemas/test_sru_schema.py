@@ -49,13 +49,9 @@ def test_title():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'title': [{
-            'mainTitle': [{
-                'language': 'eng',
-                'value': 'Title'
-            }],
-            'type': 'bf:Title'
-        }]
+        "title": [
+            {"mainTitle": [{"language": "eng", "value": "Title"}], "type": "bf:Title"}
+        ]
     }
 
     # With language
@@ -68,21 +64,11 @@ def test_title():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'language': [{
-            'type': 'bf:Language',
-            'value': 'ger'
-        }],
-        'provisionActivity': [{
-            'startDate': '1980',
-            'type': 'bf:Publication'
-        }],
-        'title': [{
-            'mainTitle': [{
-                'language': 'ger',
-                'value': 'Title'
-            }],
-            'type': 'bf:Title'
-        }]
+        "language": [{"type": "bf:Language", "value": "ger"}],
+        "provisionActivity": [{"startDate": "1980", "type": "bf:Publication"}],
+        "title": [
+            {"mainTitle": [{"language": "ger", "value": "Title"}], "type": "bf:Title"}
+        ],
     }
 
     # With subtitle
@@ -95,17 +81,13 @@ def test_title():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'title': [{
-            'mainTitle': [{
-                'language': 'eng',
-                'value': 'Title'
-            }],
-            'subtitle': [{
-                'language': 'eng',
-                'value': 'Subtitle'
-            }],
-            'type': 'bf:Title'
-        }]
+        "title": [
+            {
+                "mainTitle": [{"language": "eng", "value": "Title"}],
+                "subtitle": [{"language": "eng", "value": "Subtitle"}],
+                "type": "bf:Title",
+            }
+        ]
     }
 
 
@@ -125,14 +107,8 @@ def test_language():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'language': [{
-            'type': 'bf:Language',
-            'value': 'ger'
-        }],
-        'provisionActivity': [{
-            'startDate': '1980',
-            'type': 'bf:Publication'
-        }]
+        "language": [{"type": "bf:Language", "value": "ger"}],
+        "provisionActivity": [{"startDate": "1980", "type": "bf:Publication"}],
     }
 
 
@@ -151,11 +127,7 @@ def test_identified_by():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'identifiedBy': [{
-            'type': 'bf:Local',
-            'value': '1111',
-            'source': 'swisscovery'
-        }]
+        "identifiedBy": [{"type": "bf:Local", "value": "1111", "source": "swisscovery"}]
     }
 
     # ISBN, but no $a
@@ -176,10 +148,7 @@ def test_identified_by():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'identifiedBy': [{
-            'type': 'bf:Isbn',
-            'value': 'ISBN NUMBER'
-        }]
+        "identifiedBy": [{"type": "bf:Isbn", "value": "ISBN NUMBER"}]
     }
 
     # ISSN, but no $a and no $l
@@ -201,13 +170,10 @@ def test_identified_by():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'identifiedBy': [{
-            'type': 'bf:Issn',
-            'value': 'ISSN NUMBER'
-        }, {
-            'type': 'bf:IssnL',
-            'value': 'ISSNL NUMBER'
-        }]
+        "identifiedBy": [
+            {"type": "bf:Issn", "value": "ISSN NUMBER"},
+            {"type": "bf:IssnL", "value": "ISSNL NUMBER"},
+        ]
     }
 
     # 024, but no $a
@@ -241,20 +207,12 @@ def test_identified_by():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'identifiedBy': [{
-            'type': 'bf:Doi',
-            'value': 'DOI'
-        }, {
-            'type': 'bf:Urn',
-            'value': 'URN'
-        }, {
-            'type': 'uri',
-            'value': 'URI'
-        }, {
-            'type': 'bf:Local',
-            'value': 'OTHER',
-            'source': 'other'
-        }]
+        "identifiedBy": [
+            {"type": "bf:Doi", "value": "DOI"},
+            {"type": "bf:Urn", "value": "URN"},
+            {"type": "uri", "value": "URI"},
+            {"type": "bf:Local", "value": "OTHER", "source": "other"},
+        ]
     }
 
     # 027, but no $a
@@ -275,10 +233,7 @@ def test_identified_by():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'identifiedBy': [{
-            'type': 'bf:Strn',
-            'value': 'Identifier'
-        }]
+        "identifiedBy": [{"type": "bf:Strn", "value": "Identifier"}]
     }
 
     # 088, but no $a
@@ -299,10 +254,7 @@ def test_identified_by():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'identifiedBy': [{
-            'type': 'bf:ReportNumber',
-            'value': 'Identifier'
-        }]
+        "identifiedBy": [{"type": "bf:ReportNumber", "value": "Identifier"}]
     }
 
 
@@ -332,10 +284,7 @@ def test_abstracts():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'abstracts': [{
-            'value': 'Record summary',
-            'language': 'eng'
-        }]
+        "abstracts": [{"value": "Record summary", "language": "eng"}]
     }
 
 
@@ -367,7 +316,7 @@ def test_content_notes():
         </datafield>
     </record>
     """
-    assert SRUSchema().dump(xml) == {'contentNote': ['Note 1', 'Note 2']}
+    assert SRUSchema().dump(xml) == {"contentNote": ["Note 1", "Note 2"]}
 
 
 def test_contribution():
@@ -394,15 +343,17 @@ def test_contribution():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'contribution': [{
-            'agent': {
-                'type': 'bf:Person',
-                'preferred_name': 'Thilmany, Christian. Herrmann',
-                'date_of_birth': '1710',
-                'date_of_death': '1767'
-            },
-            'role': ['cre']
-        }]
+        "contribution": [
+            {
+                "agent": {
+                    "type": "bf:Person",
+                    "preferred_name": "Thilmany, Christian. Herrmann",
+                    "date_of_birth": "1710",
+                    "date_of_death": "1767",
+                },
+                "role": ["cre"],
+            }
+        ]
     }
 
     # OK, field 700
@@ -416,15 +367,17 @@ def test_contribution():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'contribution': [{
-            'agent': {
-                'type': 'bf:Person',
-                'preferred_name': 'Thilmany, Christian. Herrmann',
-                'date_of_birth': '1710',
-                'date_of_death': '1767'
-            },
-            'role': ['cre']
-        }]
+        "contribution": [
+            {
+                "agent": {
+                    "type": "bf:Person",
+                    "preferred_name": "Thilmany, Christian. Herrmann",
+                    "date_of_birth": "1710",
+                    "date_of_death": "1767",
+                },
+                "role": ["cre"],
+            }
+        ]
     }
 
     # Field 710
@@ -438,15 +391,15 @@ def test_contribution():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'contribution': [{
-            'agent': {
-                'type':
-                'bf:Organization',
-                'preferred_name':
-                'Commission européenne. Direction générale Emploi. Another b'
-            },
-            'role': ['ctb']
-        }]
+        "contribution": [
+            {
+                "agent": {
+                    "type": "bf:Organization",
+                    "preferred_name": "Commission européenne. Direction générale Emploi. Another b",
+                },
+                "role": ["ctb"],
+            }
+        ]
     }
 
     # Field 711
@@ -462,16 +415,18 @@ def test_contribution():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'contribution': [{
-            'agent': {
-                'type': 'bf:Meeting',
-                'preferred_name': 'Forage and Grassland Conference. Sub',
-                'place': 'Hamburg',
-                'date': '2011-02-02',
-                'number': '1'
-            },
-            'role': ['ctb']
-        }]
+        "contribution": [
+            {
+                "agent": {
+                    "type": "bf:Meeting",
+                    "preferred_name": "Forage and Grassland Conference. Sub",
+                    "place": "Hamburg",
+                    "date": "2011-02-02",
+                    "number": "1",
+                },
+                "role": ["ctb"],
+            }
+        ]
     }
 
 
@@ -494,7 +449,7 @@ def test_extent():
         </datafield>
     </record>
     """
-    assert SRUSchema().dump(xml) == {'extent': '1 Bd.'}
+    assert SRUSchema().dump(xml) == {"extent": "1 Bd."}
 
 
 def test_dissertation():
@@ -520,10 +475,10 @@ def test_dissertation():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'dissertation': {
-            'degree': 'Diss. Claremont. Complément',
-            'grantingInstitution': 'Granting',
-            'date': '2019'
+        "dissertation": {
+            "degree": "Diss. Claremont. Complément",
+            "grantingInstitution": "Granting",
+            "date": "2019",
         }
     }
 
@@ -539,9 +494,9 @@ def test_dissertation():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'dissertation': {
-            'degree': 'Diss. Claremont. Complément',
-            'grantingInstitution': 'Granting'
+        "dissertation": {
+            "degree": "Diss. Claremont. Complément",
+            "grantingInstitution": "Granting",
         }
     }
 
@@ -566,10 +521,7 @@ def test_additional_materials():
         </datafield>
     </record>
     """
-    assert SRUSchema().dump(xml) == {
-        'extent': '1 Bd.',
-        'additionalMaterials': '30 pl.'
-    }
+    assert SRUSchema().dump(xml) == {"extent": "1 Bd.", "additionalMaterials": "30 pl."}
 
 
 def test_formats():
@@ -592,7 +544,7 @@ def test_formats():
         </datafield>
     </record>
     """
-    assert SRUSchema().dump(xml) == {'extent': '1 Bd.', 'formats': ['24 cm']}
+    assert SRUSchema().dump(xml) == {"extent": "1 Bd.", "formats": ["24 cm"]}
 
 
 def test_other_material_characteristics():
@@ -616,8 +568,8 @@ def test_other_material_characteristics():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'extent': '1 Bd.',
-        'otherMaterialCharacteristics': 'Other material characteristics'
+        "extent": "1 Bd.",
+        "otherMaterialCharacteristics": "Other material characteristics",
     }
 
 
@@ -642,13 +594,9 @@ def test_edition_statement():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'editionStatement': {
-            'editionDesignation': {
-                'value': '1st edition'
-            },
-            'responsibility': {
-                'value': 'Resp.'
-            }
+        "editionStatement": {
+            "editionDesignation": {"value": "1st edition"},
+            "responsibility": {"value": "Resp."},
         }
     }
 
@@ -661,7 +609,7 @@ def test_document_type():
         <leader>02935nkm a2200253 c 4500</leader>
     </record>
     """
-    assert SRUSchema().dump(xml) == {'documentType': 'coar:c_ecc8'}
+    assert SRUSchema().dump(xml) == {"documentType": "coar:c_ecc8"}
 
     # Musical notation
     xml = """
@@ -669,7 +617,7 @@ def test_document_type():
         <leader>02935ncm a2200253 c 4500</leader>
     </record>
     """
-    assert SRUSchema().dump(xml) == {'documentType': 'coar:c_18cw'}
+    assert SRUSchema().dump(xml) == {"documentType": "coar:c_18cw"}
 
     # Cartographic material
     xml = """
@@ -677,7 +625,7 @@ def test_document_type():
         <leader>02935nfm a2200253 c 4500</leader>
     </record>
     """
-    assert SRUSchema().dump(xml) == {'documentType': 'coar:c_12cc'}
+    assert SRUSchema().dump(xml) == {"documentType": "coar:c_12cc"}
 
     # Moving image
     xml = """
@@ -685,7 +633,7 @@ def test_document_type():
         <leader>02935ngm a2200253 c 4500</leader>
     </record>
     """
-    assert SRUSchema().dump(xml) == {'documentType': 'coar:c_8a7e'}
+    assert SRUSchema().dump(xml) == {"documentType": "coar:c_8a7e"}
 
     # Sound
     xml = """
@@ -693,7 +641,7 @@ def test_document_type():
         <leader>02935njm a2200253 c 4500</leader>
     </record>
     """
-    assert SRUSchema().dump(xml) == {'documentType': 'coar:c_18cc'}
+    assert SRUSchema().dump(xml) == {"documentType": "coar:c_18cc"}
 
     # Dataset
     xml = """
@@ -701,7 +649,7 @@ def test_document_type():
         <leader>02935nmm a2200253 c 4500</leader>
     </record>
     """
-    assert SRUSchema().dump(xml) == {'documentType': 'coar:c_ddb1'}
+    assert SRUSchema().dump(xml) == {"documentType": "coar:c_ddb1"}
 
     # Contribution to journal
     xml = """
@@ -709,7 +657,7 @@ def test_document_type():
         <leader>02935nab a2200253 c 4500</leader>
     </record>
     """
-    assert SRUSchema().dump(xml) == {'documentType': 'coar:c_3e5a'}
+    assert SRUSchema().dump(xml) == {"documentType": "coar:c_3e5a"}
 
     # Book part
     xml = """
@@ -717,7 +665,7 @@ def test_document_type():
         <leader>02935naa a2200253 c 4500</leader>
     </record>
     """
-    assert SRUSchema().dump(xml) == {'documentType': 'coar:c_3248'}
+    assert SRUSchema().dump(xml) == {"documentType": "coar:c_3248"}
 
     # Periodical
     xml = """
@@ -725,7 +673,7 @@ def test_document_type():
         <leader>02935nas a2200253 c 4500</leader>
     </record>
     """
-    assert SRUSchema().dump(xml) == {'documentType': 'coar:c_2659'}
+    assert SRUSchema().dump(xml) == {"documentType": "coar:c_2659"}
 
     # Bachelor thesis
     xml = """
@@ -737,10 +685,8 @@ def test_document_type():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'documentType': 'coar:c_7a1f',
-        'dissertation': {
-            'degree': 'bachelor thesis'
-        }
+        "documentType": "coar:c_7a1f",
+        "dissertation": {"degree": "bachelor thesis"},
     }
 
     # Master thesis
@@ -753,10 +699,8 @@ def test_document_type():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'documentType': 'coar:c_bdcc',
-        'dissertation': {
-            'degree': 'master thesis'
-        }
+        "documentType": "coar:c_bdcc",
+        "dissertation": {"degree": "master thesis"},
     }
 
     # Doctoral thesis
@@ -769,10 +713,8 @@ def test_document_type():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'documentType': 'coar:c_db06',
-        'dissertation': {
-            'degree': 'thèse'
-        }
+        "documentType": "coar:c_db06",
+        "dissertation": {"degree": "thèse"},
     }
 
     # Thesis
@@ -783,7 +725,7 @@ def test_document_type():
         </datafield>
     </record>
     """
-    assert SRUSchema().dump(xml) == {'documentType': 'coar:c_46ec'}
+    assert SRUSchema().dump(xml) == {"documentType": "coar:c_46ec"}
 
     # Book
     xml = """
@@ -791,7 +733,7 @@ def test_document_type():
         <leader>02935nam a2200253 c 4500</leader>
     </record>
     """
-    assert SRUSchema().dump(xml) == {'documentType': 'coar:c_2f33'}
+    assert SRUSchema().dump(xml) == {"documentType": "coar:c_2f33"}
 
     # Other
     xml = """
@@ -799,7 +741,7 @@ def test_document_type():
         <leader>02935nzz a2200253 c 4500</leader>
     </record>
     """
-    assert SRUSchema().dump(xml) == {'documentType': 'coar:c_1843'}
+    assert SRUSchema().dump(xml) == {"documentType": "coar:c_1843"}
 
 
 def test_provision_activity():
@@ -810,15 +752,10 @@ def test_provision_activity():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'language': [{
-            'type': 'bf:Language',
-            'value': 'ger'
-        }],
-        'provisionActivity': [{
-            'type': 'bf:Publication',
-            'startDate': '1980',
-            'endDate': '1990'
-        }]
+        "language": [{"type": "bf:Language", "value": "ger"}],
+        "provisionActivity": [
+            {"type": "bf:Publication", "startDate": "1980", "endDate": "1990"}
+        ],
     }
 
     # 264
@@ -841,65 +778,28 @@ def test_provision_activity():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'provisionActivity': [{
-            'type':
-            'bf:Publication',
-            'statement': [{
-                'type': 'bf:Place',
-                'label': {
-                    'value': 'Place 1'
-                }
-            }, {
-                'type': 'bf:Place',
-                'label': {
-                    'value': 'Place 2'
-                }
-            }, {
-                'type': 'bf:Agent',
-                'label': {
-                    'value': 'Agent 1'
-                }
-            }, {
-                'type': 'bf:Agent',
-                'label': {
-                    'value': 'Agent 2'
-                }
-            }, {
-                'type': 'Date',
-                'label': {
-                    'value': '2019'
-                }
-            }],
-        }, {
-            'type':
-            'bf:Manufacture',
-            'statement': [{
-                'type': 'bf:Place',
-                'label': {
-                    'value': 'Place 3'
-                }
-            }, {
-                'type': 'bf:Place',
-                'label': {
-                    'value': 'Place 4'
-                }
-            }, {
-                'type': 'bf:Agent',
-                'label': {
-                    'value': 'Agent 3'
-                }
-            }, {
-                'type': 'bf:Agent',
-                'label': {
-                    'value': 'Agent 4'
-                }
-            }, {
-                'type': 'Date',
-                'label': {
-                    'value': '2020'
-                }
-            }],
-        }]
+        "provisionActivity": [
+            {
+                "type": "bf:Publication",
+                "statement": [
+                    {"type": "bf:Place", "label": {"value": "Place 1"}},
+                    {"type": "bf:Place", "label": {"value": "Place 2"}},
+                    {"type": "bf:Agent", "label": {"value": "Agent 1"}},
+                    {"type": "bf:Agent", "label": {"value": "Agent 2"}},
+                    {"type": "Date", "label": {"value": "2019"}},
+                ],
+            },
+            {
+                "type": "bf:Manufacture",
+                "statement": [
+                    {"type": "bf:Place", "label": {"value": "Place 3"}},
+                    {"type": "bf:Place", "label": {"value": "Place 4"}},
+                    {"type": "bf:Agent", "label": {"value": "Agent 3"}},
+                    {"type": "bf:Agent", "label": {"value": "Agent 4"}},
+                    {"type": "Date", "label": {"value": "2020"}},
+                ],
+            },
+        ]
     }
 
 
@@ -944,9 +844,15 @@ def test_notes():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'notes': [
-            'Note 1', 'Note 2', 'Note 3', 'Note 4', 'Note 5', 'Note 6',
-            'Note 7', 'Note 8'
+        "notes": [
+            "Note 1",
+            "Note 2",
+            "Note 3",
+            "Note 4",
+            "Note 5",
+            "Note 6",
+            "Note 7",
+            "Note 8",
         ]
     }
 
@@ -975,12 +881,7 @@ def test_series():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'series': [{
-            'name': 'Serie 1',
-            'number': '12'
-        }, {
-            'name': 'Serie 2'
-        }]
+        "series": [{"name": "Serie 1", "number": "12"}, {"name": "Serie 2"}]
     }
 
 
@@ -1022,42 +923,41 @@ def test_part_of():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'partOf': [{
-            'document': {
-                'title': 'Document title 1',
-                'contribution': ['Contributor 1', 'Contributor 2']
+        "partOf": [
+            {
+                "document": {
+                    "title": "Document title 1",
+                    "contribution": ["Contributor 1", "Contributor 2"],
+                },
+                "numberingVolume": "22",
+                "numberingIssue": "4",
+                "numberingPages": "485-512",
+                "numberingYear": "2004",
             },
-            'numberingVolume': '22',
-            'numberingIssue': '4',
-            'numberingPages': '485-512',
-            'numberingYear': '2004'
-        }, {
-            'document': {
-                'title':
-                'Document title 2',
-                'identifiedBy': [{
-                    'type': 'bf:Issn',
-                    'value': 'ISSN'
-                }, {
-                    'type': 'bf:Isbn',
-                    'value': 'ISBN'
-                }]
+            {
+                "document": {
+                    "title": "Document title 2",
+                    "identifiedBy": [
+                        {"type": "bf:Issn", "value": "ISSN"},
+                        {"type": "bf:Isbn", "value": "ISBN"},
+                    ],
+                },
+                "numberingVolume": "22",
+                "numberingIssue": "4",
+                "numberingYear": "2004",
             },
-            'numberingVolume': '22',
-            'numberingIssue': '4',
-            'numberingYear': '2004'
-        }, {
-            'document': {
-                'title': 'Document title 3',
+            {
+                "document": {
+                    "title": "Document title 3",
+                },
+                "numberingPages": "243-263",
             },
-            'numberingPages': '243-263'
-        }, {
-            'document': {
-                'title': 'Document title 4'
+            {
+                "document": {"title": "Document title 4"},
+                "numberingIssue": "16",
+                "numberingYear": "2011",
             },
-            'numberingIssue': '16',
-            'numberingYear': '2011'
-        }]
+        ]
     }
 
 
@@ -1089,25 +989,20 @@ def test_part_of_800():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'partOf': [{
-            'document': {
-                'title':
-                'Document title 1',
-                'contribution': ['Contributor 1', 'Contributor 2'],
-                'identifiedBy': [{
-                    'type': 'bf:Issn',
-                    'value': 'ISSN'
-                }, {
-                    'type': 'bf:Isbn',
-                    'value': 'ISBN'
-                }]
+        "partOf": [
+            {
+                "document": {
+                    "title": "Document title 1",
+                    "contribution": ["Contributor 1", "Contributor 2"],
+                    "identifiedBy": [
+                        {"type": "bf:Issn", "value": "ISSN"},
+                        {"type": "bf:Isbn", "value": "ISBN"},
+                    ],
+                },
+                "numberingVolume": "1234",
             },
-            'numberingVolume': '1234'
-        }, {
-            'document': {
-                'title': 'Document title 2'
-            }
-        }]
+            {"document": {"title": "Document title 2"}},
+        ]
     }
 
 
@@ -1138,24 +1033,19 @@ def test_part_of_830():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'partOf': [{
-            'document': {
-                'title':
-                'Document title 1. Some subtitle',
-                'identifiedBy': [{
-                    'type': 'bf:Issn',
-                    'value': 'ISSN'
-                }, {
-                    'type': 'bf:Isbn',
-                    'value': 'ISBN'
-                }]
+        "partOf": [
+            {
+                "document": {
+                    "title": "Document title 1. Some subtitle",
+                    "identifiedBy": [
+                        {"type": "bf:Issn", "value": "ISSN"},
+                        {"type": "bf:Isbn", "value": "ISBN"},
+                    ],
+                },
+                "numberingVolume": "1234",
             },
-            'numberingVolume': '1234'
-        }, {
-            'document': {
-                'title': 'Document title 2'
-            }
-        }]
+            {"document": {"title": "Document title 2"}},
+        ]
     }
 
 
@@ -1184,33 +1074,28 @@ def test_part_of_all():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        'partOf': [{
-            'document': {
-                'title': 'Document title 1',
-                'contribution': ['Contributor 1', 'Contributor 2']
+        "partOf": [
+            {
+                "document": {
+                    "title": "Document title 1",
+                    "contribution": ["Contributor 1", "Contributor 2"],
+                },
+                "numberingVolume": "22",
+                "numberingIssue": "4",
+                "numberingPages": "485-512",
+                "numberingYear": "2004",
             },
-            'numberingVolume': '22',
-            'numberingIssue': '4',
-            'numberingPages': '485-512',
-            'numberingYear': '2004'
-        }, {
-            'document': {
-                'title':
-                'Document title 2',
-                'contribution': ['Contributor 1', 'Contributor 2'],
-                'identifiedBy': [{
-                    'type': 'bf:Issn',
-                    'value': 'ISSN'
-                }, {
-                    'type': 'bf:Isbn',
-                    'value': 'ISBN'
-                }]
+            {
+                "document": {
+                    "title": "Document title 2",
+                    "contribution": ["Contributor 1", "Contributor 2"],
+                    "identifiedBy": [
+                        {"type": "bf:Issn", "value": "ISSN"},
+                        {"type": "bf:Isbn", "value": "ISBN"},
+                    ],
+                },
+                "numberingVolume": "1234",
             },
-            'numberingVolume': '1234'
-        }, {
-            'document': {
-                'title': 'Document title 3'
-            },
-            'numberingVolume': '1234'
-        }]
+            {"document": {"title": "Document title 3"}, "numberingVolume": "1234"},
+        ]
     }

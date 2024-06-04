@@ -17,15 +17,18 @@
 
 """Projects service."""
 
-from invenio_records_resources.services import \
-    SearchOptions as BaseSearchOptions
+from invenio_records_resources.services import SearchOptions as BaseSearchOptions
 from invenio_records_resources.services.records.facets import TermsFacet
-from invenio_records_resources.services.records.params import FacetsParam, \
-    PaginationParam, QueryStrParam, SortParam
-from invenio_records_resources.services.records.params.querystr import \
-    SuggestQueryParser
-from invenio_records_resources.services.records.schema import \
-    ServiceSchemaWrapper
+from invenio_records_resources.services.records.params import (
+    FacetsParam,
+    PaginationParam,
+    QueryStrParam,
+    SortParam,
+)
+from invenio_records_resources.services.records.params.querystr import (
+    SuggestQueryParser,
+)
+from invenio_records_resources.services.records.schema import ServiceSchemaWrapper
 from invenio_records_rest.utils import obj_or_import_string
 
 from sonar.modules.organisations.api import current_organisation
@@ -57,46 +60,40 @@ class PreFacetsParam(FacetsParam):
 class SearchOptions(BaseSearchOptions):
     """Search options."""
 
-    sort_default = 'relevance'
-    sort_default_no_query = 'newest'
+    sort_default = "relevance"
+    sort_default_no_query = "newest"
     sort_options = {
-        'relevance': {
-            'fields': ['_score'],
+        "relevance": {
+            "fields": ["_score"],
         },
-        'name': {
-            'fields': ['metadata.name.raw']
-        },
-        'newest': {
-            'fields': ['-metadata.startDate']
-        },
-        'oldest': {
-            'fields': ['metadata.startDate']
-        }
+        "name": {"fields": ["metadata.name.raw"]},
+        "newest": {"fields": ["-metadata.startDate"]},
+        "oldest": {"fields": ["metadata.startDate"]},
     }
 
-    pagination_options = {
-        "default_results_per_page": 10,
-        "default_max_results": 10000
-    }
+    pagination_options = {"default_results_per_page": 10, "default_max_results": 10000}
 
     params_interpreters_cls = [
         QueryStrParam,
         PaginationParam,
         SortParam,
-        PreFacetsParam
+        PreFacetsParam,
     ]
 
     facets = {
-        'user': TermsFacet(field='metadata.user.pid'),
-        'organisation': TermsFacet(field='metadata.organisation.pid'),
-        'status': TermsFacet(field='metadata.validation.status')
+        "user": TermsFacet(field="metadata.user.pid"),
+        "organisation": TermsFacet(field="metadata.organisation.pid"),
+        "status": TermsFacet(field="metadata.validation.status"),
     }
 
-    suggest_parser_cls = SuggestQueryParser.factory(fields=[
-        "metadata.name.suggest", "metadata.projectSponsor.suggest",
-        "metadata.innerSearcher.suggest", "metadata.keywords.suggest"
-    ])
-
+    suggest_parser_cls = SuggestQueryParser.factory(
+        fields=[
+            "metadata.name.suggest",
+            "metadata.projectSponsor.suggest",
+            "metadata.innerSearcher.suggest",
+            "metadata.keywords.suggest",
+        ]
+    )
 
 
 class ProjectsRecordServiceConfig(RecordServiceConfig):
@@ -121,11 +118,13 @@ class ProjectsRecordService(RecordService):
     @property
     def schema(self):
         """Returns the data schema instance."""
-        schema_path = 'sonar.resources.projects.schema:RecordSchema'
+        schema_path = "sonar.resources.projects.schema:RecordSchema"
 
-        if has_custom_resource('projects'):
-            schema_path = f'sonar.dedicated.{current_organisation["code"]}.' \
-                'projects.schema:RecordSchema'
+        if has_custom_resource("projects"):
+            schema_path = (
+                f'sonar.dedicated.{current_organisation["code"]}.'
+                "projects.schema:RecordSchema"
+            )
 
         schema = obj_or_import_string(schema_path)
 

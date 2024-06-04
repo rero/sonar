@@ -26,20 +26,20 @@ def test_load(app, monkeypatch):
     """Test load."""
     # Non existing schema
     with pytest.raises(Exception) as exception:
-        schema = JSONSchemaBase('fakes')
-        assert str(
-            exception.value) == 'Schema "fakes/fake-v1.0.0.json" not found'
+        schema = JSONSchemaBase("fakes")
+        assert str(exception.value) == 'Schema "fakes/fake-v1.0.0.json" not found'
 
     # Standard schema
-    schema = JSONSchemaBase('documents')
-    assert schema.get_schema()['title'] == 'Document'
+    schema = JSONSchemaBase("documents")
+    assert schema.get_schema()["title"] == "Document"
 
     # Schema for custom resource
     monkeypatch.setattr(
-        'sonar.json_schemas.json_schema_base.current_organisation',
-        {'code': 'hepvs'})
+        "sonar.json_schemas.json_schema_base.current_organisation", {"code": "hepvs"}
+    )
     monkeypatch.setattr(
-        'sonar.json_schemas.json_schema_base.has_custom_resource', lambda *
-        args, **kwargs: True)
-    schema = JSONSchemaBase('projects')
-    assert schema.get_schema()['title'] == 'Research project'
+        "sonar.json_schemas.json_schema_base.has_custom_resource",
+        lambda *args, **kwargs: True,
+    )
+    schema = JSONSchemaBase("projects")
+    assert schema.get_schema()["title"] == "Research project"

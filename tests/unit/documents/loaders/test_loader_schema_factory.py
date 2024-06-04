@@ -25,9 +25,9 @@ from sonar.modules.documents.loaders.schemas.rerodoc import RerodocSchema
 
 def test_loader_schema_factory():
     """Test loader schema factory."""
-    schema = LoaderSchemaFactory.create('rerodoc')
+    schema = LoaderSchemaFactory.create("rerodoc")
     assert isinstance(schema, RerodocSchema)
 
     with pytest.raises(Exception) as exception:
-        schema = LoaderSchemaFactory.create('not-existing')
+        schema = LoaderSchemaFactory.create("not-existing")
         assert str(exception) == 'No schema defined for key "not-existing"'

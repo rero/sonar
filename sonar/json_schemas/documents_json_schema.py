@@ -36,21 +36,23 @@ class DocumentsJSONSchema(JSONSchemaBase):
             return schema
 
         # Get Organisation for the current logged user
-        organisation = current_user_record.replace_refs()\
-            .get('organisation', {})
+        organisation = current_user_record.replace_refs().get("organisation", {})
         # Remove some fields on json for the shared organisation
-        if not organisation.get('isDedicated', False):
+        if not organisation.get("isDedicated", False):
             for field in [
-                'collections', 'subdivisions', 'customField1',
-                'customField2', 'customField3'
+                "collections",
+                "subdivisions",
+                "customField1",
+                "customField2",
+                "customField3",
             ]:
-                schema['properties'].pop(field, None)
-                if field in schema.get('propertiesOrder', []):
-                    schema['propertiesOrder'].remove(field)
+                schema["properties"].pop(field, None)
+                if field in schema.get("propertiesOrder", []):
+                    schema["propertiesOrder"].remove(field)
 
         if not current_user_record.is_superuser:
-            schema['properties'].pop('organisation', None)
-            if 'organisation' in schema.get('propertiesOrder', []):
-                schema['propertiesOrder'].remove('organisation')
+            schema["properties"].pop("organisation", None)
+            if "organisation" in schema.get("propertiesOrder", []):
+                schema["propertiesOrder"].remove("organisation")
 
         return schema

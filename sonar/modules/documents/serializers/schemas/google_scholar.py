@@ -31,70 +31,70 @@ from .base_schema import BaseSchema
 class GoogleScholarV1(BaseSchema):
     """Marshmallow schema for Google scholar."""
 
-    title = fields.Method('get_title')
-    language = fields.Method('get_language')
-    publication_date = fields.Method('get_start_date')
-    keywords = fields.Method('get_keywords')
-    pdf_url = fields.Method('get_url')
-    online_date = fields.Method('get_start_date')
-    author = fields.Method('get_author')
-    doi = fields.Method('get_doi')
-    abstract_html_url = fields.Method('get_abstract_url')
-    pages = fields.Method('get_pages')
-    firstpage = fields.Method('get_first_page')
-    lastpage = fields.Method('get_last_page')
-    volume = fields.Method('get_volume')
-    journal_title = fields.Method('get_host_document_title')
-
+    title = fields.Method("get_title")
+    language = fields.Method("get_language")
+    publication_date = fields.Method("get_start_date")
+    keywords = fields.Method("get_keywords")
+    pdf_url = fields.Method("get_url")
+    online_date = fields.Method("get_start_date")
+    author = fields.Method("get_author")
+    doi = fields.Method("get_doi")
+    abstract_html_url = fields.Method("get_abstract_url")
+    pages = fields.Method("get_pages")
+    firstpage = fields.Method("get_first_page")
+    lastpage = fields.Method("get_last_page")
+    volume = fields.Method("get_volume")
+    journal_title = fields.Method("get_host_document_title")
 
     def get_abstract_url(self, obj):
         """Get id."""
-        return DocumentRecord.get_permanent_link(request.host_url,
-                                                 obj['metadata']['pid'],
-                                                 ignore_ark=True)
+        return DocumentRecord.get_permanent_link(
+            request.host_url, obj["metadata"]["pid"], ignore_ark=True
+        )
 
     def get_language(self, obj):
         """Get language."""
-        for language in obj['metadata'].get('language', []):
-            return get_language_from_bibliographic_code(language['value'])
+        for language in obj["metadata"].get("language", []):
+            return get_language_from_bibliographic_code(language["value"])
 
         return None
 
     def get_keywords(self, obj):
         """Get keywords."""
-        return ' ; '.join(super(GoogleScholarV1, self).get_keywords(obj))
+        return " ; ".join(super(GoogleScholarV1, self).get_keywords(obj))
 
     def get_author(self, obj):
         """Get authors."""
         items = []
-        for contributor in obj['metadata'].get('contribution', []):
-            if contributor['role'][0] == 'cre' and contributor['agent'].get(
-                    'preferred_name'):
-                items.append(contributor['agent']['preferred_name'])
+        for contributor in obj["metadata"].get("contribution", []):
+            if contributor["role"][0] == "cre" and contributor["agent"].get(
+                "preferred_name"
+            ):
+                items.append(contributor["agent"]["preferred_name"])
 
         return items
 
     def get_doi(self, obj):
         """Get DOI."""
-        for identifier in obj['metadata'].get('identifiedBy', []):
-            if identifier['type'] == 'bf:Doi':
-                return identifier['value']
+        for identifier in obj["metadata"].get("identifiedBy", []):
+            if identifier["type"] == "bf:Doi":
+                return identifier["value"]
 
         return None
 
     def get_volume(self, obj):
         """Get volume."""
-        for part_of in obj['metadata'].get('partOf', []):
-            if part_of.get('numberingVolume'):
-                return part_of['numberingVolume']
+        for part_of in obj["metadata"].get("partOf", []):
+            if part_of.get("numberingVolume"):
+                return part_of["numberingVolume"]
 
         return None
 
     def get_host_document_title(self, obj):
         """Get volume."""
-        for part_of in obj['metadata'].get('partOf', []):
-            if part_of.get('document', {}).get('title'):
-                return part_of['document']['title']
+        for part_of in obj["metadata"].get("partOf", []):
+            if part_of.get("document", {}).get("title"):
+                return part_of["document"]["title"]
 
         return None
 

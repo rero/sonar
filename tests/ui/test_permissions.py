@@ -20,9 +20,15 @@
 from flask_security import url_for_security
 from invenio_accounts.testutils import login_user_via_view
 
-from sonar.modules.permissions import admin_permission_factory, \
-    files_permission_factory, has_admin_access, has_submitter_access, \
-    has_superuser_access, record_permission_factory, wiki_edit_permission
+from sonar.modules.permissions import (
+    admin_permission_factory,
+    files_permission_factory,
+    has_admin_access,
+    has_submitter_access,
+    has_superuser_access,
+    record_permission_factory,
+    wiki_edit_permission,
+)
 
 
 def test_has_submitter_access(app, client, user_without_role, submitter):
@@ -32,15 +38,13 @@ def test_has_submitter_access(app, client, user_without_role, submitter):
     assert has_submitter_access()
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
-    login_user_via_view(client,
-                        email=user_without_role.email,
-                        password='123456')
+    login_user_via_view(client, email=user_without_role.email, password="123456")
 
     assert not has_submitter_access()
 
-    client.get(url_for_security('logout'))
+    client.get(url_for_security("logout"))
 
-    login_user_via_view(client, email=submitter['email'], password='123456')
+    login_user_via_view(client, email=submitter["email"], password="123456")
 
     assert has_submitter_access()
 
@@ -52,15 +56,13 @@ def test_has_admin_access(app, client, user_without_role, admin):
     assert has_admin_access()
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
-    login_user_via_view(client,
-                        email=user_without_role.email,
-                        password='123456')
+    login_user_via_view(client, email=user_without_role.email, password="123456")
 
     assert not has_admin_access()
 
-    client.get(url_for_security('logout'))
+    client.get(url_for_security("logout"))
 
-    login_user_via_view(client, email=admin['email'], password='123456')
+    login_user_via_view(client, email=admin["email"], password="123456")
 
     assert has_admin_access()
 
@@ -71,15 +73,13 @@ def test_has_superuser_access(app, client, user_without_role, superuser):
     assert has_superuser_access()
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
-    login_user_via_view(client,
-                        email=user_without_role.email,
-                        password='123456')
+    login_user_via_view(client, email=user_without_role.email, password="123456")
 
     assert not has_superuser_access()
 
-    client.get(url_for_security('logout'))
+    client.get(url_for_security("logout"))
 
-    login_user_via_view(client, email=superuser['email'], password='123456')
+    login_user_via_view(client, email=superuser["email"], password="123456")
 
     assert has_superuser_access()
 
@@ -87,86 +87,83 @@ def test_has_superuser_access(app, client, user_without_role, superuser):
 def test_list_permission_factory(app, client, superuser):
     """Test list permission factory."""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
-    assert record_permission_factory(action='list').can()
+    assert record_permission_factory(action="list").can()
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
-    assert not record_permission_factory(action='list').can()
+    assert not record_permission_factory(action="list").can()
 
-    login_user_via_view(client, email=superuser['email'], password='123456')
-    assert record_permission_factory(action='list').can()
+    login_user_via_view(client, email=superuser["email"], password="123456")
+    assert record_permission_factory(action="list").can()
 
 
 def test_create_permission_factory(app, client, superuser, document):
     """Test create permission factory"""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
-    assert record_permission_factory(action='create', record=document).can()
+    assert record_permission_factory(action="create", record=document).can()
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
-    assert not record_permission_factory(action='create',
-                                         record=document).can()
+    assert not record_permission_factory(action="create", record=document).can()
 
-    login_user_via_view(client, email=superuser['email'], password='123456')
-    assert record_permission_factory(action='create', record=document).can()
+    login_user_via_view(client, email=superuser["email"], password="123456")
+    assert record_permission_factory(action="create", record=document).can()
 
 
 def test_read_permission_factory(app, client, superuser, document):
     """Test read permission factory"""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
-    assert record_permission_factory(action='read', record=document).can()
+    assert record_permission_factory(action="read", record=document).can()
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
-    assert not record_permission_factory(action='read', record=document).can()
+    assert not record_permission_factory(action="read", record=document).can()
 
-    login_user_via_view(client, email=superuser['email'], password='123456')
-    assert record_permission_factory(action='read', record=document).can()
+    login_user_via_view(client, email=superuser["email"], password="123456")
+    assert record_permission_factory(action="read", record=document).can()
 
 
 def test_update_permission_factory(app, client, superuser, document):
     """Test update permission factory"""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
-    assert record_permission_factory(action='update', record=document).can()
+    assert record_permission_factory(action="update", record=document).can()
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
-    assert not record_permission_factory(action='update',
-                                         record=document).can()
+    assert not record_permission_factory(action="update", record=document).can()
 
-    login_user_via_view(client, email=superuser['email'], password='123456')
-    assert record_permission_factory(action='update', record=document).can()
+    login_user_via_view(client, email=superuser["email"], password="123456")
+    assert record_permission_factory(action="update", record=document).can()
 
 
 def test_delete_permission_factory(app, client, superuser, document):
     """Test delete permission factory"""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
-    assert record_permission_factory(action='delete', record=document).can()
+    assert record_permission_factory(action="delete", record=document).can()
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
-    assert not record_permission_factory(action='delete',
-                                         record=document).can()
+    assert not record_permission_factory(action="delete", record=document).can()
 
-    login_user_via_view(client, email=superuser['email'], password='123456')
-    assert record_permission_factory(action='delete', record=document).can()
+    login_user_via_view(client, email=superuser["email"], password="123456")
+    assert record_permission_factory(action="delete", record=document).can()
 
 
 def test_unknown_permission_factory(app, client, superuser, document):
     """Test unknown permission factory"""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
-    assert record_permission_factory(document, 'unknown').can()
+    assert record_permission_factory(document, "unknown").can()
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
-    assert not record_permission_factory(document, 'unknown').can()
+    assert not record_permission_factory(document, "unknown").can()
 
-    login_user_via_view(client, email=superuser['email'], password='123456')
-    assert not record_permission_factory(document, 'unknown').can()
+    login_user_via_view(client, email=superuser["email"], password="123456")
+    assert not record_permission_factory(document, "unknown").can()
 
 
 def test_files_permission_factory(app, client, superuser):
     """Test files permission factory."""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
-    assert files_permission_factory(None, 'object-read').can()
+    assert files_permission_factory(None, "object-read").can()
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
-    login_user_via_view(client, email=superuser['email'], password='123456')
-    assert files_permission_factory(None, 'object-read').can()
+    login_user_via_view(client, email=superuser["email"], password="123456")
+    assert files_permission_factory(None, "object-read").can()
 
 
 def test_admin_permission_factory(app, client, superuser):
@@ -175,19 +172,19 @@ def test_admin_permission_factory(app, client, superuser):
     assert admin_permission_factory(None).can()
 
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
-    login_user_via_view(client, email=superuser['email'], password='123456')
+    login_user_via_view(client, email=superuser["email"], password="123456")
     assert admin_permission_factory(None).can()
 
 
 def test_wiki_edit_ui_permission(client, user, superuser):
     """Test wiki edit ui permission."""
     # No access
-    login_user_via_view(client, email=user['email'], password='123456')
+    login_user_via_view(client, email=user["email"], password="123456")
     assert not wiki_edit_permission()
 
     # Logout user
-    client.get(url_for_security('logout'))
+    client.get(url_for_security("logout"))
 
     # OK user has access
-    login_user_via_view(client, email=superuser['email'], password='123456')
+    login_user_via_view(client, email=superuser["email"], password="123456")
     assert wiki_edit_permission()

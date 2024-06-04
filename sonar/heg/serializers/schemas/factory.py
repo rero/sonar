@@ -22,13 +22,13 @@ from .medline import MedlineSchema
 from .unpaywall import UnpaywallSchema
 
 
-class SchemaFactory():
+class SchemaFactory:
     """Factory for creating a loader schema."""
 
     SCHEMAS = {
-        'Medline': MedlineSchema,
-        'CrossRef': CrossrefSchema,
-        'unpaywall': UnpaywallSchema
+        "Medline": MedlineSchema,
+        "CrossRef": CrossrefSchema,
+        "unpaywall": UnpaywallSchema,
     }
 
     @staticmethod
@@ -41,5 +41,4 @@ class SchemaFactory():
         if SchemaFactory.SCHEMAS.get(schema_key):
             return SchemaFactory.SCHEMAS[schema_key]()
 
-        raise Exception(
-            'No schema defined for key "{key}"'.format(key=schema_key))
+        raise Exception('No schema defined for key "{key}"'.format(key=schema_key))

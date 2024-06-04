@@ -20,8 +20,7 @@
 from functools import partial
 
 from invenio_records_rest.schemas import StrictKeysMixin
-from invenio_records_rest.schemas.fields import GenFunction, \
-    PersistentIdentifier
+from invenio_records_rest.schemas.fields import GenFunction, PersistentIdentifier
 from marshmallow import fields, pre_dump, pre_load
 
 from sonar.modules.serializers import schema_from_context
@@ -41,17 +40,19 @@ class RecordMetadataSchema(StrictKeysMixin):
     name = fields.List(fields.Dict(), required=True)
     organisation = fields.Dict()
     permissions = fields.Dict(dump_only=True)
-    label = fields.Method('get_label')
+    label = fields.Method("get_label")
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
-    schema = GenFunction(load_only=True,
-                         attribute="$schema",
-                         data_key="$schema",
-                         deserialize=schema_from_record)
+    schema = GenFunction(
+        load_only=True,
+        attribute="$schema",
+        data_key="$schema",
+        deserialize=schema_from_record,
+    )
 
     def get_label(self, obj):
         """Get label."""
-        return get_language_value(obj['name'])
+        return get_language_value(obj["name"])
 
     @pre_load
     def remove_fields(self, data, **kwargs):
@@ -61,8 +62,8 @@ class RecordMetadataSchema(StrictKeysMixin):
         :return: Modified data
         :rtype: dict
         """
-        data.pop('permissions', None)
-        data.pop('label', None)
+        data.pop("permissions", None)
+        data.pop("label", None)
 
         return data
 
@@ -75,12 +76,12 @@ class RecordMetadataSchema(StrictKeysMixin):
         :rtype: dict
         """
         # Organisation already attached to project, we do nothing.
-        if data.get('organisation'):
+        if data.get("organisation"):
             return data
 
         # Store current user organisation in new project.
-        if current_user_record.get('organisation'):
-            data['organisation'] = current_user_record['organisation']
+        if current_user_record.get("organisation"):
+            data["organisation"] = current_user_record["organisation"]
 
         return data
 
@@ -92,10 +93,10 @@ class RecordMetadataSchema(StrictKeysMixin):
         :return: Modified item
         :rtype: dict
         """
-        item['permissions'] = {
-            'read': RecordPermission.read(current_user_record, item),
-            'update': RecordPermission.update(current_user_record, item),
-            'delete': RecordPermission.delete(current_user_record, item)
+        item["permissions"] = {
+            "read": RecordPermission.read(current_user_record, item),
+            "update": RecordPermission.update(current_user_record, item),
+            "delete": RecordPermission.delete(current_user_record, item),
         }
 
         return item

@@ -34,18 +34,17 @@ def get_operator_and_query_type(qstr=None):
 
     # If qstr contains `:` keyword, operator is forced to `AND` and query type
     # `query_string`.
-    if ':' in qstr:
-        return ('AND', 'query_string')
+    if ":" in qstr:
+        return ("AND", "query_string")
 
     # Default to `AND`
-    operator = request.args.get('operator', 'AND')
+    operator = request.args.get("operator", "AND")
 
-    if operator.upper() not in ['AND', 'OR']:
+    if operator.upper() not in ["AND", "OR"]:
         raise Exception('Only "AND" or "OR" operators allowed')
 
     # With operator AND, with always use simple query string.
-    query_type = 'simple_query_string' \
-        if operator.upper() == 'AND' else 'query_string'
+    query_type = "simple_query_string" if operator.upper() == "AND" else "query_string"
 
     return (operator, query_type)
 
@@ -74,7 +73,7 @@ def default_search_factory(self, search, query_parser=None):
     from invenio_records_rest.facets import default_facets_factory
     from invenio_records_rest.sorter import default_sorter_factory
 
-    query_string = request.values.get('q')
+    query_string = request.values.get("q")
 
     # Use query parser given to function or the default one.
     query_parser = query_parser or _default_parser
@@ -83,7 +82,7 @@ def default_search_factory(self, search, query_parser=None):
     search = search.query(query_parser(query_string))
 
     # Get index corresponding to record type.
-    search_index = getattr(search, '_original_index', search._index)[0]
+    search_index = getattr(search, "_original_index", search._index)[0]
 
     # Build facets
     search, urlkwargs = default_facets_factory(search, search_index)
@@ -93,10 +92,10 @@ def default_search_factory(self, search, query_parser=None):
     for key, value in sortkwargs.items():
         urlkwargs.add(key, value)
 
-    urlkwargs.add('q', query_string)
+    urlkwargs.add("q", query_string)
 
     # Add explanation to hits
-    if request.args.get('debug'):
+    if request.args.get("debug"):
         search = search.extra(explain=True)
 
     return search, urlkwargs
@@ -108,11 +107,13 @@ def and_term_filter(field):
     :param field: Field name.
     :return: Function that returns a boolean AND query between term values.
     """
+
     def inner(values):
         must = []
         for value in values:
-            must.append(Q('term', **{field: value}))
-        return Q('bool', must=must)
+            must.append(Q("term", **{field: value}))
+        return Q("bool", must=must)
+
     return inner
 
 
@@ -122,6 +123,8 @@ def missing_field_filter(field):
     :param field: Property that must not exist.
     :returns: elasticsearch DSL query.
     """
+
     def inner(values):
-        return Q('bool', must_not=[Q('exists', field=field)])
+        return Q("bool", must_not=[Q("exists", field=field)])
+
     return inner
