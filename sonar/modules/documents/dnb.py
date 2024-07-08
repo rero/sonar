@@ -149,6 +149,27 @@ class DnbUrnService:
                 f'urn: {urn_code}')
 
     @classmethod
+    def set_successor(cls, urn_code, successor_urn):
+        """Set the successor of a given urn.
+
+        :param urn_code: str - the urn code.
+        :param successor_urn: str - the urn code of the successor.
+        """
+        response = requests.request(
+            'PATCH',
+            f"{cls.base_url()}/urn/{urn_code}",
+            headers=cls.headers(),
+            data=json.dumps(dict(successor=f'{cls.base_url()}/urn/{successor_urn}'))
+        )
+        if response.status_code != 204:
+            msg = response.json().get('developerMessage', '')
+            raise DnbServerError(
+                f'Bad DNB server response status {response.status_code}, '
+                f'when we update the information of the following '
+                f'urn: {urn_code}',
+                f'{msg}')
+
+    @classmethod
     def create(cls, data):
         """Register a new URN to the DBN service with a list of urls.
 
