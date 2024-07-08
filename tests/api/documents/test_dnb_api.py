@@ -33,7 +33,6 @@ def test_dnb_rest_api_verify_exist(app):
         urn_code = 'urn:nbn:ch:rero-006-119656'
         assert DnbUrnService.exists(urn_code)
 
-
 def test_dnb_rest_api_verify_not_exist(app):
     """Test dnb rest api verify code does not exist."""
     with requests_mock.mock() as response:

@@ -27,7 +27,7 @@ from invenio_pidstore.errors import PIDDoesNotExistError
 from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 
 from sonar.modules.documents.api import DocumentRecord
-from sonar.modules.documents.dnb import DnbUrnService
+from sonar.modules.documents.dnb import DnbServerError, DnbUrnService
 from sonar.modules.documents.urn import Urn
 from sonar.snl.ftp import SNLRepository
 
@@ -103,6 +103,7 @@ def register():
         click.secho(f'Registering document (pid: {doc["pid"]})', fg='yellow')
         Urn.register_urn_code_from_document(doc)
     click.secho(f'{idx} URN registered.', fg='green')
+
 
 
 @urn.command('snl-upload-file')
@@ -184,3 +185,23 @@ def snl_list_files():
     )
     snl_repository.connect()
     snl_repository.list()
+
+@urn.command()
+@click.argument('urn')
+@click.argument('successor_urn')
+@with_appcontext
+def successor(urn, successor_urn):
+    """Set a successor for a given run.
+
+    :param urn: str - URN identifier
+    :param successor_urn: str - Sucessor URN identifier
+    """
+    try:
+        DnbUrnService().set_successor(urn, successor_urn)
+        click.secho(
+            f'Added successfully a successor.',
+            fg='green')
+    except DnbServerError as err:
+        click.secho(
+            str(err),
+            fg='red')
