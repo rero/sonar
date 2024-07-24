@@ -247,12 +247,14 @@
         "type": "object",
         "properties": {
           "$ref": {
+            "title": "Organisation",
             "type": "string",
             "pattern": "^https://sonar.ch/api/organisations/.*?$",
             "minLength": 1,
             "widget": {
               "formlyConfig": {
                 "props": {
+                  "hideLabel": true,
                   "remoteOptions": {
                     "type": "organisations"
                   }
@@ -2324,10 +2326,10 @@
     }
   },
   "propertiesOrder": [
+    "organisation",
     "documentType",
     "title",
     "language",
-    "organisation",
     "projects",
     "classification",
     "abstracts",
