@@ -43,7 +43,12 @@
       "description": "Date in yyyy-mm-dd format, ex: 1970-01-01",
       "type": "string",
       "format": "date",
-      "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$"
+      "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
+      "widget": {
+        "formlyConfig": {
+          "type": "datepicker"
+        }
+      }
     },
     "email": {
       "title": "Email",
@@ -91,6 +96,7 @@
     },
     "organisation": {
       "type": "object",
+      "title": "Organisation",
       "properties": {
         "$ref": {
           "title": "Organisation",
@@ -107,21 +113,20 @@
           }
         }
       },
-      "required": [
-        "$ref"
-      ]
+      "required": ["$ref"],
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "hideLabel": true
+          }
+        }
+      }
     },
     "role": {
       "title": "Role",
       "type": "string",
       "minLength": 1,
-      "enum": [
-        "superuser",
-        "admin",
-        "moderator",
-        "submitter",
-        "user"
-      ],
+      "enum": ["superuser", "admin", "moderator", "submitter", "user"],
       "widget": {
         "formlyConfig": {
           "props": {
@@ -172,9 +177,7 @@
           }
         }
       },
-      "required": [
-        "$ref"
-      ]
+      "required": ["$ref"]
     }
   },
   "propertiesOrder": [
@@ -190,11 +193,5 @@
     "postal_code",
     "city"
   ],
-  "required": [
-    "first_name",
-    "last_name",
-    "email",
-    "role",
-    "$schema"
-  ]
+  "required": ["first_name", "last_name", "email", "role", "$schema"]
 }

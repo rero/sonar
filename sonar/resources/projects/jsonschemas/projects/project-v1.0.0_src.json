@@ -264,7 +264,7 @@
         "funding_organisations": {
           "title": "Funding organisations",
           "type": "array",
-          "minItems": 0,
+          "minItems": 1,
           "items": {
             "title": "Funding organisation",
             "type": "object",
@@ -316,6 +316,7 @@
           "type": "object",
           "properties": {
             "$ref": {
+              "title": "Organisation",
               "type": "string",
               "pattern": "^https://sonar.ch/api/organisations/.*?$",
               "widget": {
@@ -334,6 +335,9 @@
           ],
           "widget": {
             "formlyConfig": {
+              "props": {
+                "hideLabel": true
+              },
               "expressions": {
                 "props.required": "true"
               }
@@ -373,11 +377,11 @@
         }
       },
       "propertiesOrder": [
+        "organisation",
         "name",
         "description",
         "startDate",
         "endDate",
-        "organisation",
         "identifiedBy",
         "investigators",
         "funding_organisations"
