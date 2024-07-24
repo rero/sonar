@@ -193,16 +193,5 @@
     "postal_code",
     "city"
   ],
-<<<<<<< HEAD
   "required": ["first_name", "last_name", "email", "role", "$schema"]
 }
-=======
-  "required": [
-    "first_name",
-    "last_name",
-    "email",
-    "role",
-    "$schema"
-  ]
-}
->>>>>>> 11a6c67 (data model: adapt JONSchemas to angular 17)

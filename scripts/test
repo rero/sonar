@@ -67,7 +67,6 @@ if [[ -z "${VIRTUAL_ENV}" ]]; then
   exit 1
 fi
 
-<<<<<<< HEAD
 pip_audit_exceptions=""
 section "Check vulnerabilities:"
 # cryptography 43.0.3  GHSA-79v4-65xg-pq4g 44.0.1
@@ -89,37 +88,6 @@ add_exceptions "GHSA-f9vj-2wh5-fj8j"
 # werkzeug     2.2.3   GHSA-q34m-jh98-gwm2 3.0.6
 add_exceptions "GHSA-q34m-jh98-gwm2"
 PIPAPI_PYTHON_LOCATION=$(which python) pip-audit ${pip_audit_exceptions}
-
-=======
-# -> Vulnerability found in flask-caching version 2.0.1
-#    Vulnerability ID: 40459
-# -> Vulnerability found in sqlalchemy version 1.4.50
-#    Vulnerability ID: 51668
-# -> Vulnerability found in sqlalchemy-utils version 0.38.3
-#    Vulnerability ID: 42194
-# -> Vulnerability found in wtforms version 2.3.3
-#    Vulnerability ID: 42852
-# -> Vulnerability found in werkzeug version 2.2.3
-#    Vulnerability ID: 62019
-# -> Vulnerability found in py version 1.11.0
-#    Vulnerability ID: 51457
-# -> Vulnerability found in jinja2 version 3.1.4
-#    Vulnerability ID: 70612
-# -> Vulnerability found in flask-cors version 4.0.1
-#    Vulnerability ID: 70624
-# -> Vulnerability found in werkzeug version 2.2.3
-#    Vulnerability ID: 71595
-# -> Vulnerability found in werkzeug version 2.2.3
-#    Vulnerability ID: 71594
-
-echo "Check vulnerabilities:"
-safety_exceptions="-i 40459 -i 51668 -i 42194 -i 42852 -i 62019 -i 67599 -i 51457 -i 70624 -i 70612 -i 71595 -i 71594"
-msg=$(safety check -o text ${safety_exceptions}) || {
-  echo "Safety vulnerabilites found for packages:" $(safety check -o bare ${safety_exceptions})
-  echo "Run:" "safety check -o screen ${safety_exceptions} | grep -i vulnerability" "for more details"
-  exit 1
-}
->>>>>>> 36f3133 (data model: adapt JONSchemas to angular 17)
 
 info_msg "Test pydocstyle:"
 pydocstyle sonar tests docs
