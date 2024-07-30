@@ -145,29 +145,33 @@
         "rejected",
         "ask_for_changes"
       ],
-      "form": {
-        "options": [
-          {
-            "label": "deposit_status_in_progress",
-            "value": "in_progress"
-          },
-          {
-            "label": "deposit_status_to_validate",
-            "value": "to_validate"
-          },
-          {
-            "label": "deposit_status_validated",
-            "value": "validated"
-          },
-          {
-            "label": "deposit_status_rejected",
-            "value": "rejected"
-          },
-          {
-            "label": "deposit_status_ask_for_changes",
-            "value": "ask_for_changes"
+      "widget": {
+        "formlyConfig": {
+          "props": {
+            "options": [
+              {
+                "label": "deposit_status_in_progress",
+                "value": "in_progress"
+              },
+              {
+                "label": "deposit_status_to_validate",
+                "value": "to_validate"
+              },
+              {
+                "label": "deposit_status_validated",
+                "value": "validated"
+              },
+              {
+                "label": "deposit_status_rejected",
+                "value": "rejected"
+              },
+              {
+                "label": "deposit_status_ask_for_changes",
+                "value": "ask_for_changes"
+              }
+            ]
           }
-        ]
+        }
       }
     },
     "step": {
@@ -217,25 +221,29 @@
               "reject",
               "ask_for_changes"
             ],
-            "form": {
-              "options": [
-                {
-                  "label": "deposit_log_action_submit",
-                  "value": "submit"
-                },
-                {
-                  "label": "deposit_log_action_approve",
-                  "value": "approve"
-                },
-                {
-                  "label": "deposit_log_action_reject",
-                  "value": "reject"
-                },
-                {
-                  "label": "deposit_log_action_ask_for_changes",
-                  "value": "ask_for_changes"
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "options": [
+                    {
+                      "label": "deposit_log_action_submit",
+                      "value": "submit"
+                    },
+                    {
+                      "label": "deposit_log_action_approve",
+                      "value": "approve"
+                    },
+                    {
+                      "label": "deposit_log_action_reject",
+                      "value": "reject"
+                    },
+                    {
+                      "label": "deposit_log_action_ask_for_changes",
+                      "value": "ask_for_changes"
+                    }
+                  ]
                 }
-              ]
+              }
             }
           },
           "date": {
@@ -289,10 +297,12 @@
           "title": "Title",
           "type": "string",
           "minLength": 1,
-          "form": {
-            "type": "textarea",
-            "templateOptions": {
-              "rows": 3
+          "widget": {
+            "formlyConfig": {
+              "type": "textarea",
+              "props": {
+                "rows": 3
+              }
             }
           }
         },
@@ -315,11 +325,12 @@
               "$ref": "language-v1.0.0.json"
             }
           },
-          "form": {
-            "templateOptions": {
+          "widget": {
+            "formlyConfig": {
               "wrappers": [
                 "card"
-              ]
+              ],
+              "props": {}
             }
           }
         },
@@ -330,16 +341,24 @@
           "title": "Publication place",
           "type": "string",
           "minLength": 1,
-          "form": {
-            "hideExpression": "!model.documentType || !['coar:c_2f33', 'coar:c_f744', 'coar:c_8a7e', 'coar:c_ecc8', 'coar:c_12cc', 'coar:c_18cc', 'coar:c_18cw', 'coar:c_5ce6', 'coar:c_15cd', 'coar:c_2659', 'coar:c_0640', 'coar:c_2cd9', 'coar:c_2fe3', 'coar:c_93fc', 'coar:c_18ww', 'coar:c_18wz', 'coar:c_18wq', 'coar:c_186u', 'coar:c_18op', 'coar:c_ba1f', 'coar:c_18hj', 'coar:c_18ws', 'coar:c_18gh', 'coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'coar:c_8042', 'coar:c_1843'].includes(model.documentType)"
+          "widget": {
+            "formlyConfig": {
+              "expressions": {
+                "hide": "!model?.documentType || !['coar:c_2f33', 'coar:c_f744', 'coar:c_8a7e', 'coar:c_ecc8', 'coar:c_12cc', 'coar:c_18cc', 'coar:c_18cw', 'coar:c_5ce6', 'coar:c_15cd', 'coar:c_2659', 'coar:c_0640', 'coar:c_2cd9', 'coar:c_2fe3', 'coar:c_93fc', 'coar:c_18ww', 'coar:c_18wz', 'coar:c_18wq', 'coar:c_186u', 'coar:c_18op', 'coar:c_ba1f', 'coar:c_18hj', 'coar:c_18ws', 'coar:c_18gh', 'coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'coar:c_8042', 'coar:c_1843'].includes(model.documentType)"
+              }
+            }
           }
         },
         "publisher": {
           "title": "Publisher",
           "type": "string",
           "minLength": 1,
-          "form": {
-            "hideExpression": "!model.documentType || !['coar:c_2f33', 'coar:c_f744', 'coar:c_8a7e', 'coar:c_ecc8', 'coar:c_12cc', 'coar:c_18cc', 'coar:c_18cw', 'coar:c_5ce6', 'coar:c_15cd', 'coar:c_2659', 'coar:c_0640', 'coar:c_2cd9', 'coar:c_2fe3', 'coar:c_93fc', 'coar:c_18ww', 'coar:c_18wz', 'coar:c_18wq', 'coar:c_186u', 'coar:c_18op', 'coar:c_ba1f', 'coar:c_18hj', 'coar:c_18ws', 'coar:c_18gh', 'coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'coar:c_8042', 'coar:c_1843'].includes(model.documentType)"
+          "widget": {
+            "formlyConfig": {
+              "expressions": {
+                "hide": "!model?.documentType || !['coar:c_2f33', 'coar:c_f744', 'coar:c_8a7e', 'coar:c_ecc8', 'coar:c_12cc', 'coar:c_18cc', 'coar:c_18cw', 'coar:c_5ce6', 'coar:c_15cd', 'coar:c_2659', 'coar:c_0640', 'coar:c_2cd9', 'coar:c_2fe3', 'coar:c_93fc', 'coar:c_18ww', 'coar:c_18wz', 'coar:c_18wq', 'coar:c_186u', 'coar:c_18op', 'coar:c_ba1f', 'coar:c_18hj', 'coar:c_18ws', 'coar:c_18gh', 'coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'coar:c_8042', 'coar:c_1843'].includes(model.documentType)"
+              }
+            }
           }
         },
         "documentDate": {
@@ -348,13 +367,15 @@
           "type": "string",
           "minLength": 1,
           "pattern": "^[0-9]{4}$",
-          "form": {
-            "templateOptions": {
-              "placeholder": "Example: 2020"
-            },
-            "validation": {
-              "messages": {
-                "patternMessage": "Format is not valid: YYYY."
+          "widget": {
+            "formlyConfig": {
+              "props": {
+                "placeholder": "Example: 2020",
+                "validation": {
+                  "messages": {
+                    "patternMessage": "Format is not valid: YYYY."
+                  }
+                }
               }
             }
           }
@@ -402,135 +423,141 @@
                   "bf:Strn",
                   "pmid"
                 ],
-                "form": {
-                  "templateOptions": {
+                "widget": {
+                  "formlyConfig": {
                     "wrappers": [
                       "card"
-                    ]
-                  },
-                  "options": [
-                    {
-                      "label": "bf:Doi",
-                      "value": "bf:Doi",
-                      "preferred": true
-                    },
-                    {
-                      "label": "pmid",
-                      "value": "pmid",
-                      "preferred": true
-                    },
-                    {
-                      "label": "bf:Isbn",
-                      "value": "bf:Isbn",
-                      "preferred": true
-                    },
-                    {
-                      "label": "bf:AudioIssueNumber",
-                      "value": "bf:AudioIssueNumber"
-                    },
-                    {
-                      "label": "bf:Ean",
-                      "value": "bf:Ean"
-                    },
-                    {
-                      "label": "bf:Gtin14Number",
-                      "value": "bf:Gtin14Number"
-                    },
-                    {
-                      "label": "bf:Identifier",
-                      "value": "bf:Identifier"
-                    },
-                    {
-                      "label": "bf:Isan",
-                      "value": "bf:Isan"
-                    },
-                    {
-                      "label": "bf:Ismn",
-                      "value": "bf:Ismn"
-                    },
-                    {
-                      "label": "bf:Isrc",
-                      "value": "bf:Isrc"
-                    },
-                    {
-                      "label": "bf:Issn",
-                      "value": "bf:Issn"
-                    },
-                    {
-                      "label": "bf:IssnL",
-                      "value": "bf:IssnL"
-                    },
-                    {
-                      "label": "bf:Local",
-                      "value": "bf:Local"
-                    },
-                    {
-                      "label": "bf:MatrixNumber",
-                      "value": "bf:MatrixNumber"
-                    },
-                    {
-                      "label": "bf:MusicDistributorNumber",
-                      "value": "bf:MusicDistributorNumber"
-                    },
-                    {
-                      "label": "bf:MusicPlate",
-                      "value": "bf:MusicPlate"
-                    },
-                    {
-                      "label": "bf:MusicPublisherNumber",
-                      "value": "bf:MusicPublisherNumber"
-                    },
-                    {
-                      "label": "bf:PublisherNumber",
-                      "value": "bf:PublisherNumber"
-                    },
-                    {
-                      "label": "bf:Upc",
-                      "value": "bf:Upc"
-                    },
-                    {
-                      "label": "bf:Urn",
-                      "value": "bf:Urn"
-                    },
-                    {
-                      "label": "bf:VideoRecordingNumber",
-                      "value": "bf:VideoRecordingNumber"
-                    },
-                    {
-                      "label": "uri",
-                      "value": "uri"
-                    },
-                    {
-                      "label": "bf:ReportNumber",
-                      "value": "bf:ReportNumber"
-                    },
-                    {
-                      "label": "bf:Strn",
-                      "value": "bf:Strn"
+                    ],
+                    "props": {
+                      "options": [
+                        {
+                          "label": "bf:Doi",
+                          "value": "bf:Doi",
+                          "preferred": true
+                        },
+                        {
+                          "label": "pmid",
+                          "value": "pmid",
+                          "preferred": true
+                        },
+                        {
+                          "label": "bf:Isbn",
+                          "value": "bf:Isbn",
+                          "preferred": true
+                        },
+                        {
+                          "label": "bf:AudioIssueNumber",
+                          "value": "bf:AudioIssueNumber"
+                        },
+                        {
+                          "label": "bf:Ean",
+                          "value": "bf:Ean"
+                        },
+                        {
+                          "label": "bf:Gtin14Number",
+                          "value": "bf:Gtin14Number"
+                        },
+                        {
+                          "label": "bf:Identifier",
+                          "value": "bf:Identifier"
+                        },
+                        {
+                          "label": "bf:Isan",
+                          "value": "bf:Isan"
+                        },
+                        {
+                          "label": "bf:Ismn",
+                          "value": "bf:Ismn"
+                        },
+                        {
+                          "label": "bf:Isrc",
+                          "value": "bf:Isrc"
+                        },
+                        {
+                          "label": "bf:Issn",
+                          "value": "bf:Issn"
+                        },
+                        {
+                          "label": "bf:IssnL",
+                          "value": "bf:IssnL"
+                        },
+                        {
+                          "label": "bf:Local",
+                          "value": "bf:Local"
+                        },
+                        {
+                          "label": "bf:MatrixNumber",
+                          "value": "bf:MatrixNumber"
+                        },
+                        {
+                          "label": "bf:MusicDistributorNumber",
+                          "value": "bf:MusicDistributorNumber"
+                        },
+                        {
+                          "label": "bf:MusicPlate",
+                          "value": "bf:MusicPlate"
+                        },
+                        {
+                          "label": "bf:MusicPublisherNumber",
+                          "value": "bf:MusicPublisherNumber"
+                        },
+                        {
+                          "label": "bf:PublisherNumber",
+                          "value": "bf:PublisherNumber"
+                        },
+                        {
+                          "label": "bf:Upc",
+                          "value": "bf:Upc"
+                        },
+                        {
+                          "label": "bf:Urn",
+                          "value": "bf:Urn"
+                        },
+                        {
+                          "label": "bf:VideoRecordingNumber",
+                          "value": "bf:VideoRecordingNumber"
+                        },
+                        {
+                          "label": "uri",
+                          "value": "uri"
+                        },
+                        {
+                          "label": "bf:ReportNumber",
+                          "value": "bf:ReportNumber"
+                        },
+                        {
+                          "label": "bf:Strn",
+                          "value": "bf:Strn"
+                        }
+                      ]
                     }
-                  ]
+                  }
                 }
               },
               "value": {
                 "key": "identified_by_value",
                 "title": "Value",
-                "form" : {
-                  "templateOptions" : {
-                    "placeholder" : "Example (DOI): 10.3406/spira.2016.1748"
-                  }
-                },
                 "type": "string",
-                "minLength": 1
+                "minLength": 1,
+                "widget": {
+                  "formlyConfig": {
+                    "props": {
+                      "placeholder": "Example (DOI): 10.3406/spira.2016.1748"
+                    }
+                  }
+                }
               },
               "source": {
                 "title": "Source",
                 "type": "string",
                 "minLength": 1,
-                "form": {
-                  "expressionProperties": {
-                    "templateOptions.required": "model && model.type === 'bf:Local'"
-                  },
-                  "hideExpression": "!model ||  (model.type !== 'bf:Local')"
+                "widget": {
+                  "formlyConfig": {
+                    "expressions": {
+                      "props.required": "model && model.type === 'bf:Local'",
+                      "hide": "!model ||  (model.type !== 'bf:Local')"
+                    }
+                  }
                 }
               }
             },
@@ -544,11 +571,12 @@
               "value"
             ]
           },
-          "form": {
-            "templateOptions": {
+          "widget": {
+            "formlyConfig": {
               "wrappers": [
                 "card"
-              ]
+              ],
+              "props": {}
             }
           }
         },
@@ -578,10 +606,14 @@
               "title": "Volume",
               "type": "string",
               "minLength": 1,
-              "form": {
-                "hideExpression": "field.parent.parent.model && !['coar:c_3248', 'coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc', 'coar:c_816b', 'coar:c_5794', 'coar:c_6670', 'coar:c_c94f'].includes(field.parent.parent.model.documentType)",
-                "templateOptions": {
-                  "placeholder": "Example: 1, 4-5, …"
+              "widget": {
+                "formlyConfig": {
+                  "expressions": {
+                    "hide": "field.parent.parent.model && !['coar:c_3248', 'coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc', 'coar:c_816b', 'coar:c_5794', 'coar:c_6670', 'coar:c_c94f'].includes(field.parent.parent.model.documentType)"
+                  },
+                  "props": {
+                    "placeholder": "Example: 1, 4-5, \u2026"
+                  }
                 }
               }
             },
@@ -589,10 +621,14 @@
               "title": "Number",
               "type": "string",
               "minLength": 1,
-              "form": {
-                "hideExpression": "field.parent.parent.model && !['coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc', 'coar:c_816b', 'coar:c_5794', 'coar:c_6670', 'coar:c_c94f'].includes(field.parent.parent.model.documentType)",
-                "templateOptions": {
-                  "placeholder": "Example: 10, 22-24, …"
+              "widget": {
+                "formlyConfig": {
+                  "expressions": {
+                    "hide": "field.parent.parent.model && !['coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_998f', 'coar:c_dcae04bc', 'coar:c_816b', 'coar:c_5794', 'coar:c_6670', 'coar:c_c94f'].includes(field.parent.parent.model.documentType)"
+                  },
+                  "props": {
+                    "placeholder": "Example: 10, 22-24, \u2026"
+                  }
                 }
               }
             },
@@ -600,9 +636,11 @@
               "title": "Pages",
               "type": "string",
               "minLength": 1,
-              "form": {
-                "templateOptions": {
-                  "placeholder": "Examples: 135, 5-27, …"
+              "widget": {
+                "formlyConfig": {
+                  "props": {
+                    "placeholder": "Examples: 135, 5-27, \u2026"
+                  }
                 }
               }
             },
@@ -610,8 +648,12 @@
               "title": "Year",
               "type": "string",
               "minLength": 1,
-              "form": {
-                "hide": true
+              "widget": {
+                "formlyConfig": {
+                  "props": {
+                    "hide": true
+                  }
+                }
               }
             },
             "editors": {
@@ -621,8 +663,12 @@
                 "type": "string",
                 "minLength": 1
               },
-              "form": {
-                "hideExpression": "field.parent.parent.model && ['coar:c_6501'].includes(field.parent.parent.model.documentType)"
+              "widget": {
+                "formlyConfig": {
+                  "expressions": {
+                    "hide": "field.parent.parent.model && ['coar:c_6501'].includes(field.parent.parent.model.documentType)"
+                  }
+                }
               }
             },
             "publisher": {
@@ -680,17 +726,24 @@
                   "value"
                 ]
               },
-              "form": {
-                "hide": true
+              "widget": {
+                "formlyConfig": {
+                  "props": {
+                    "hide": true
+                  }
+                }
               }
             }
           },
-          "form": {
-            "hideExpression": "field.parent.model && !['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_816b', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)",
-            "templateOptions": {
+          "widget": {
+            "formlyConfig": {
+              "expressions": {
+                "hide": "field.parent.model && !['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_816b', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)"
+              },
               "wrappers": [
                 "card"
-              ]
+              ],
+              "props": {}
             }
           }
         },
@@ -710,9 +763,11 @@
                 "title": "Public note",
                 "type": "string",
                 "minLength": 1,
-                "form": {
-                  "templateOptions": {
-                    "placeholder": "Example: Published version"
+                "widget": {
+                  "formlyConfig": {
+                    "props": {
+                      "placeholder": "Example: Published version"
+                    }
                   }
                 }
               },
@@ -721,24 +776,27 @@
                 "type": "string",
                 "minLength": 1,
                 "pattern": "^https?://.+",
-                "form": {
-                  "templateOptions": {
-                    "placeholder": "Example: https://www.rero.ch"
-                  },
-                  "validation": {
-                    "messages": {
-                      "patternMessage": "Should be a valid URL format."
+                "widget": {
+                  "formlyConfig": {
+                    "props": {
+                      "placeholder": "Example: https://www.rero.ch",
+                      "validation": {
+                        "messages": {
+                          "patternMessage": "Should be a valid URL format."
+                        }
+                      }
                     }
                   }
                 }
               }
             }
           },
-          "form": {
-            "templateOptions": {
+          "widget": {
+            "formlyConfig": {
               "wrappers": [
                 "card"
-              ]
+              ],
+              "props": {}
             }
           }
         },
@@ -754,11 +812,15 @@
               "$ref": {
                 "type": "string",
                 "pattern": "^https://sonar.ch/api/collections/.*?$",
-                "form": {
-                  "remoteTypeahead": {
-                    "type": "collections",
-                    "field": "name.value.suggest",
-                    "label": "label"
+                "widget": {
+                  "formlyConfig": {
+                    "props": {
+                      "remoteTypeahead": {
+                        "type": "collections",
+                        "field": "name.value.suggest",
+                        "label": "label"
+                      }
+                    }
                   }
                 }
               }
@@ -767,11 +829,12 @@
               "$ref"
             ]
           },
-          "form": {
-            "templateOptions": {
+          "widget": {
+            "formlyConfig": {
               "wrappers": [
                 "card"
-              ]
+              ],
+              "props": {}
             }
           }
         },
@@ -801,20 +864,23 @@
                 "title": "Abstract",
                 "type": "string",
                 "minLength": 1,
-                "form": {
-                  "type": "textarea",
-                  "templateOptions": {
-                    "rows": 3
+                "widget": {
+                  "formlyConfig": {
+                    "type": "textarea",
+                    "props": {
+                      "rows": 3
+                    }
                   }
                 }
               }
             }
           },
-          "form": {
-            "templateOptions": {
+          "widget": {
+            "formlyConfig": {
               "wrappers": [
                 "card"
-              ]
+              ],
+              "props": {}
             }
           }
         },
@@ -841,7 +907,9 @@
                 "title": "Values",
                 "type": "array",
                 "minItems": 1,
-                "default": [null],
+                "default": [
+                  null
+                ],
                 "items": {
                   "type": "string",
                   "minLength": 1
@@ -849,11 +917,12 @@
               }
             }
           },
-          "form": {
-            "templateOptions": {
+          "widget": {
+            "formlyConfig": {
               "wrappers": [
                 "card"
-              ]
+              ],
+              "props": {}
             }
           }
         },
@@ -881,9 +950,11 @@
               "title": "Date",
               "type": "string",
               "pattern": "^[0-9]{4}(-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]))?$",
-              "form": {
-                "templateOptions": {
-                  "placeholder": "Example: 2019 or 2019-05-05"
+              "widget": {
+                "formlyConfig": {
+                  "props": {
+                    "placeholder": "Example: 2019 or 2019-05-05"
+                  }
                 }
               }
             }
@@ -897,12 +968,15 @@
           "required": [
             "degree"
           ],
-          "form": {
-            "hideExpression": "field.parent.model && !['coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'habilitation_thesis', 'advanced_studies_thesis', 'other_thesis'].includes(field.parent.model.documentType)",
-            "templateOptions": {
+          "widget": {
+            "formlyConfig": {
+              "expressions": {
+                "hide": "field.parent.model && !['coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'habilitation_thesis', 'advanced_studies_thesis', 'other_thesis'].includes(field.parent.model.documentType)"
+              },
               "wrappers": [
                 "card"
-              ]
+              ],
+              "props": {}
             }
           }
         },
@@ -1024,12 +1098,16 @@
           "items": {
             "type": "string",
             "minLength": 1,
-            "form": {
-              "remoteTypeahead": {
-                "type": "documents",
-                "field": "customField1.suggest",
-                "suggest": "/api/suggestions/completion",
-                "allowAdd": true
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "remoteTypeahead": {
+                    "type": "documents",
+                    "field": "customField1.suggest",
+                    "suggest": "/api/suggestions/completion",
+                    "allowAdd": true
+                  }
+                }
               }
             }
           }
@@ -1040,12 +1118,16 @@
           "items": {
             "type": "string",
             "minLength": 1,
-            "form": {
-              "remoteTypeahead": {
-                "type": "documents",
-                "field": "customField2.suggest",
-                "suggest": "/api/suggestions/completion",
-                "allowAdd": true
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "remoteTypeahead": {
+                    "type": "documents",
+                    "field": "customField2.suggest",
+                    "suggest": "/api/suggestions/completion",
+                    "allowAdd": true
+                  }
+                }
               }
             }
           }
@@ -1056,12 +1138,16 @@
           "items": {
             "type": "string",
             "minLength": 1,
-            "form": {
-              "remoteTypeahead": {
-                "type": "documents",
-                "field": "customField3.suggest",
-                "suggest": "/api/suggestions/completion",
-                "allowAdd": true
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "remoteTypeahead": {
+                    "type": "documents",
+                    "field": "customField3.suggest",
+                    "suggest": "/api/suggestions/completion",
+                    "allowAdd": true
+                  }
+                }
               }
             }
           }
@@ -1087,9 +1173,11 @@
                 "title": "Public note",
                 "type": "string",
                 "minLength": 1,
-                "form": {
-                  "templateOptions": {
-                    "placeholder": "Example: Research dataset"
+                "widget": {
+                  "formlyConfig": {
+                    "props": {
+                      "placeholder": "Example: Research dataset"
+                    }
                   }
                 }
               },
@@ -1098,24 +1186,27 @@
                 "type": "string",
                 "minLength": 1,
                 "pattern": "^https?://.+",
-                "form": {
-                  "templateOptions": {
-                    "placeholder": "Example: https://www.rero.ch"
-                  },
-                  "validation": {
-                    "messages": {
-                      "patternMessage": "Should be a valid URL format."
+                "widget": {
+                  "formlyConfig": {
+                    "props": {
+                      "placeholder": "Example: https://www.rero.ch",
+                      "validation": {
+                        "messages": {
+                          "patternMessage": "Should be a valid URL format."
+                        }
+                      }
                     }
                   }
                 }
               }
             }
           },
-          "form": {
-            "templateOptions": {
+          "widget": {
+            "formlyConfig": {
               "wrappers": [
                 "card"
-              ]
+              ],
+              "props": {}
             }
           }
         }
@@ -1148,12 +1239,16 @@
             "description": "Last name, first name, ex: Doe, John",
             "type": "string",
             "minLength": 1,
-            "form": {
-              "remoteTypeahead": {
-                "type": "documents",
-                "field": "contribution.agent.preferred_name.suggest",
-                "suggest": "/api/suggestions/completion",
-                "allowAdd": true
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "remoteTypeahead": {
+                    "type": "documents",
+                    "field": "contribution.agent.preferred_name.suggest",
+                    "suggest": "/api/suggestions/completion",
+                    "allowAdd": true
+                  }
+                }
               }
             }
           },
@@ -1174,38 +1269,40 @@
               "dgs",
               "prt"
             ],
-            "form": {
-              "templateOptions": {
+            "widget": {
+              "formlyConfig": {
                 "wrappers": [
                   "card"
-                ]
-              },
-              "options": [
-                {
-                  "label": "contribution_role_cre",
-                  "value": "cre"
-                },
-                {
-                  "label": "contribution_role_ctb",
-                  "value": "ctb"
-                },
-                {
-                  "label": "contribution_role_edt",
-                  "value": "edt"
-                },
-                {
-                  "label": "contribution_role_dgc",
-                  "value": "dgc"
-                },
-                {
-                  "label": "contribution_role_dgs",
-                  "value": "dgs"
-                },
-                {
-                  "label": "contribution_role_prt",
-                  "value": "prt"
+                ],
+                "props": {
+                  "options": [
+                    {
+                      "label": "contribution_role_cre",
+                      "value": "cre"
+                    },
+                    {
+                      "label": "contribution_role_ctb",
+                      "value": "ctb"
+                    },
+                    {
+                      "label": "contribution_role_edt",
+                      "value": "edt"
+                    },
+                    {
+                      "label": "contribution_role_dgc",
+                      "value": "dgc"
+                    },
+                    {
+                      "label": "contribution_role_dgs",
+                      "value": "dgs"
+                    },
+                    {
+                      "label": "contribution_role_prt",
+                      "value": "prt"
+                    }
+                  ]
                 }
-              ]
+              }
             }
           },
           "orcid": {
@@ -1213,9 +1310,11 @@
             "type": "string",
             "minLength": 1,
             "pattern": "^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[0-9X]$",
-            "form": {
-              "templateOptions": {
-                "placeholder": "Example: 1111-2222-3333-4444"
+            "widget": {
+              "formlyConfig": {
+                "props": {
+                  "placeholder": "Example: 1111-2222-3333-4444"
+                }
               }
             }
           },
@@ -1231,11 +1330,12 @@
           }
         }
       },
-      "form": {
-        "templateOptions": {
+      "widget": {
+        "formlyConfig": {
           "wrappers": [
             "card"
-          ]
+          ],
+          "props": {}
         }
       }
     },
@@ -1250,16 +1350,22 @@
         "oneOf": [
           {
             "title": "Existing project",
+            "type": "object",
+            "additionnalProperties": false,
             "properties": {
               "$ref": {
                 "title": "Project",
                 "type": "string",
                 "pattern": "^https://sonar.ch/api/projects/.*?$",
-                "form": {
-                  "remoteTypeahead": {
-                    "type": "projects",
-                    "field": "metadata.name.suggest",
-                    "label": "name"
+                "widget": {
+                  "formlyConfig": {
+                    "props": {
+                      "remoteTypeahead": {
+                        "type": "projects",
+                        "field": "metadata.name.suggest",
+                        "label": "name"
+                      }
+                    }
                   }
                 }
               }
@@ -1270,6 +1376,8 @@
           },
           {
             "title": "Add a new project",
+            "additionnalProperties": false,
+            "type": "object",
             "properties": {
               "name": {
                 "title": "Name",
@@ -1280,10 +1388,12 @@
                 "title": "Description",
                 "type": "string",
                 "minLength": 1,
-                "form": {
-                  "type": "textarea",
-                  "templateOptions": {
-                    "rows": 5
+                "widget": {
+                  "formlyConfig": {
+                    "type": "textarea",
+                    "props": {
+                      "rows": 5
+                    }
                   }
                 }
               },
@@ -1292,10 +1402,12 @@
                 "type": "string",
                 "format": "date",
                 "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
-                "form": {
-                  "type": "datepicker",
-                  "templateOptions": {
-                    "placeholder": "Example: 2020-12-01"
+                "widget": {
+                  "formlyConfig": {
+                    "type": "datepicker",
+                    "props": {
+                      "placeholder": "Example: 2020-12-01"
+                    }
                   }
                 }
               },
@@ -1304,10 +1416,12 @@
                 "type": "string",
                 "format": "date",
                 "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
-                "form": {
-                  "type": "datepicker",
-                  "templateOptions": {
-                    "placeholder": "Example: 2020-12-01"
+                "widget": {
+                  "formlyConfig": {
+                    "type": "datepicker",
+                    "props": {
+                      "placeholder": "Example: 2020-12-01"
+                    }
                   }
                 }
               }
@@ -1325,11 +1439,12 @@
           }
         ]
       },
-      "form": {
-        "templateOptions": {
+      "widget": {
+        "formlyConfig": {
           "wrappers": [
             "card"
-          ]
+          ],
+          "props": {}
         }
       }
     },
@@ -1362,11 +1477,15 @@
               "$ref": {
                 "type": "string",
                 "pattern": "^https://sonar.ch/api/subdivisions/.*?$",
-                "form": {
-                  "remoteTypeahead": {
-                    "type": "subdivisions",
-                    "field": "name.value.suggest",
-                    "label": "label"
+                "widget": {
+                  "formlyConfig": {
+                    "props": {
+                      "remoteTypeahead": {
+                        "type": "subdivisions",
+                        "field": "name.value.suggest",
+                        "label": "label"
+                      }
+                    }
                   }
                 }
               }
@@ -1375,16 +1494,17 @@
               "$ref"
             ]
           },
-          "form": {
-            "templateOptions": {
+          "widget": {
+            "formlyConfig": {
               "wrappers": [
                 "card"
-              ]
+              ],
+              "props": {}
             }
           }
         },
         "masked": {
-          "$ref":"masked-v1.0.0.json"
+          "$ref": "masked-v1.0.0.json"
         }
       }
     },

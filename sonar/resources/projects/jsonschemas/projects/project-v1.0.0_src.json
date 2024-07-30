@@ -55,10 +55,12 @@
           "title": "Description",
           "type": "string",
           "minLength": 1,
-          "form": {
-            "type": "textarea",
-            "templateOptions": {
-              "rows": 5
+          "widget": {
+            "formlyConfig": {
+              "type": "textarea",
+              "props": {
+                "rows": 5
+              }
             }
           }
         },
@@ -68,10 +70,12 @@
           "type": "string",
           "format": "date",
           "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
-          "form": {
-            "type": "datepicker",
-            "templateOptions": {
-              "placeholder": "Example: 2020-12-01"
+          "widget": {
+            "formlyConfig": {
+              "type": "datepicker",
+              "props": {
+                "placeholder": "Example: 2020-12-01"
+              }
             }
           }
         },
@@ -81,10 +85,12 @@
           "type": "string",
           "format": "date",
           "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
-          "form": {
-            "type": "datepicker",
-            "templateOptions": {
-              "placeholder": "Example: 2020-12-01"
+          "widget": {
+            "formlyConfig": {
+              "type": "datepicker",
+              "props": {
+                "placeholder": "Example: 2020-12-01"
+              }
             }
           }
         },
@@ -100,27 +106,33 @@
                 "bf:Identifier",
                 "bf:Local"
               ],
-              "form": {
-                "options": [
-                  {
-                    "label": "bf:Identifier",
-                    "value": "bf:Identifier"
-                  },
-                  {
-                    "label": "bf:Local",
-                    "value": "bf:Local"
+              "widget": {
+                "formlyConfig": {
+                  "props": {
+                    "options": [
+                      {
+                        "label": "bf:Identifier",
+                        "value": "bf:Identifier"
+                      },
+                      {
+                        "label": "bf:Local",
+                        "value": "bf:Local"
+                      }
+                    ]
                   }
-                ]
+                }
               }
             },
             "source": {
               "title": "Source",
               "type": "string",
               "minLength": 1,
-              "form": {
-                "hideExpression": "!model || model.type !== 'bf:Local'",
-                "expressionProperties": {
-                  "templateOptions.required": "model && model.type === 'bf:Local'"
+              "widget": {
+                "formlyConfig": {
+                  "expressions": {
+                    "props.required": "model && model.type === 'bf:Local'",
+                    "hide": "!model || model.type !== 'bf:Local'"
+                  }
                 }
               }
             },
@@ -139,10 +151,14 @@
             "type",
             "value"
           ],
-          "form": {
-            "hide": true,
-            "navigation": {
-              "essential": true
+          "widget": {
+            "formlyConfig": {
+              "props": {
+                "hide": true,
+                "navigation": {
+                  "essential": true
+                }
+              }
             }
           }
         },
@@ -185,17 +201,21 @@
                     "coinvestigator"
                   ],
                   "default": "investigator",
-                  "form": {
-                    "options": [
-                      {
-                        "label": "investigator",
-                        "value": "investigator"
-                      },
-                      {
-                        "label": "coinvestigator",
-                        "value": "coinvestigator"
+                  "widget": {
+                    "formlyConfig": {
+                      "props": {
+                        "options": [
+                          {
+                            "label": "investigator",
+                            "value": "investigator"
+                          },
+                          {
+                            "label": "coinvestigator",
+                            "value": "coinvestigator"
+                          }
+                        ]
                       }
-                    ]
+                    }
                   }
                 }
               },
@@ -230,17 +250,21 @@
               "role"
             ]
           },
-          "form": {
-            "hide": true,
-            "navigation": {
-              "essential": true
+          "widget": {
+            "formlyConfig": {
+              "props": {
+                "hide": true,
+                "navigation": {
+                  "essential": true
+                }
+              }
             }
           }
         },
         "funding_organisations": {
           "title": "Funding organisations",
           "type": "array",
-          "minItems": 0,
+          "minItems": 1,
           "items": {
             "title": "Funding organisation",
             "type": "object",
@@ -276,10 +300,14 @@
               "agent"
             ]
           },
-          "form": {
-            "hide": true,
-            "navigation": {
-              "essential": true
+          "widget": {
+            "formlyConfig": {
+              "props": {
+                "hide": true,
+                "navigation": {
+                  "essential": true
+                }
+              }
             }
           }
         },
@@ -288,11 +316,16 @@
           "type": "object",
           "properties": {
             "$ref": {
+              "title": "Organisation",
               "type": "string",
               "pattern": "^https://sonar.ch/api/organisations/.*?$",
-              "form": {
-                "remoteOptions": {
-                  "type": "organisations"
+              "widget": {
+                "formlyConfig": {
+                  "props": {
+                    "remoteOptions": {
+                      "type": "organisations"
+                    }
+                  }
                 }
               }
             }
@@ -300,9 +333,14 @@
           "required": [
             "$ref"
           ],
-          "form": {
-            "expressionProperties": {
-              "templateOptions.required": "true"
+          "widget": {
+            "formlyConfig": {
+              "props": {
+                "hideLabel": true
+              },
+              "expressions": {
+                "props.required": "true"
+              }
             }
           }
         },
@@ -315,9 +353,13 @@
               "title": "User",
               "type": "string",
               "pattern": "^https://sonar.ch/api/users/.*?$",
-              "form": {
-                "remoteOptions": {
-                  "type": "users"
+              "widget": {
+                "formlyConfig": {
+                  "props": {
+                    "remoteOptions": {
+                      "type": "users"
+                    }
+                  }
                 }
               }
             }
@@ -325,19 +367,21 @@
           "required": [
             "$ref"
           ],
-          "form": {
-            "expressionProperties": {
-              "templateOptions.required": "true"
+          "widget": {
+            "formlyConfig": {
+              "expressions": {
+                "props.required": "true"
+              }
             }
           }
         }
       },
       "propertiesOrder": [
+        "organisation",
         "name",
         "description",
         "startDate",
         "endDate",
-        "organisation",
         "identifiedBy",
         "investigators",
         "funding_organisations"

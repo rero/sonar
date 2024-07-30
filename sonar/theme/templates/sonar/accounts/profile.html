@@ -24,6 +24,11 @@ along with this program. If not, see
 </div>
 {%- endblock settings_body %}
 
+{%- block css %}
+  {{ super() }}
+  <link rel="stylesheet" href="/static/sonar-ui/styles.css?{{ ui_version }}">
+{%- endblock %}
+
 {%- block javascript %}
   <script src="/static/sonar-ui/runtime.js?{{ ui_version }}" module></script>
   <script src="/static/sonar-ui/polyfills.js?{{ ui_version }}" module></script>
