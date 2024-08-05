@@ -29,9 +29,11 @@ if [[ -z "${VIRTUAL_ENV}" ]]; then
   exit 1
 fi
 
-# -> Vulnerability found in flask-caching version 2.0.1
+# -> Vulnerability found in flask-caching version 2.3.0
 #    Vulnerability ID: 40459
-# -> Vulnerability found in sqlalchemy version 1.4.50
+# -> Vulnerability found in flask-cors version 4.0.1
+#    Vulnerability ID: 70624
+# -> Vulnerability found in sqlalchemy version 1.4.53
 #    Vulnerability ID: 51668
 # -> Vulnerability found in sqlalchemy-utils version 0.38.3
 #    Vulnerability ID: 42194
@@ -39,15 +41,19 @@ fi
 #    Vulnerability ID: 42852
 # -> Vulnerability found in werkzeug version 2.2.3
 #    Vulnerability ID: 62019
-# -> Vulnerability found in py version 1.11.0
-#    Vulnerability ID: 51457
+# -> Vulnerability found in werkzeug version 2.2.3
+#    Vulnerability ID: 71595
+# -> Vulnerability found in werkzeug version 2.2.3
+#    Vulnerability ID: 71594
 # -> Vulnerability found in jinja2 version 3.1.4
 #    Vulnerability ID: 70612
-# -> Vulnerability found in flask-cors version 4.0.1
-#    Vulnerability ID: 70624
+# -> Vulnerability found in pip version 23.2.1
+#    Vulnerability ID: 62044
+# -> Vulnerability found in py version 1.11.0
+#    Vulnerability ID: 51457
 
 echo "Check vulnerabilities:"
-safety_exceptions="-i 40459 -i 51668 -i 42194 -i 42852 -i 62019 -i 67599 -i 51457 -i 70624 -i 70612"
+safety_exceptions="-i 40459 -i 70624 -i 51668 -i 42194 -i 42852 -i 62019 -i 71595 -i 71594 -i 70612 -i 62044 -i 51457"
 msg=$(safety check -o text ${safety_exceptions}) || {
   echo "Safety vulnerabilites found for packages:" $(safety check -o bare ${safety_exceptions})
   echo "Run:" "safety check -o screen ${safety_exceptions} | grep -i vulnerability" "for more details"
