@@ -31,16 +31,16 @@ check_ready() {
         fi
     done
 }
-_db_check(){ docker-compose exec --user postgres db bash -c "pg_isready" &>/dev/null; }
+_db_check(){ docker compose exec --user postgres db bash -c "pg_isready" &>/dev/null; }
 check_ready "Postgres" _db_check
 
 _es_check(){ curl --output /dev/null --silent --head --fail http://localhost:9200 &>/dev/null; }
 check_ready "Elasticsearch" _es_check
 
-_redis_check(){ docker-compose exec cache bash -c 'redis-cli ping' | grep 'PONG' &> /dev/null; }
+_redis_check(){ docker compose exec cache bash -c 'redis-cli ping' | grep 'PONG' &> /dev/null; }
 check_ready "Redis" _redis_check
 
-_rabbit_check(){ docker-compose exec mq bash -c "rabbitmqctl status" &>/dev/null; }
+_rabbit_check(){ docker compose exec mq bash -c "rabbitmqctl status" &>/dev/null; }
 check_ready "RabbitMQ" _rabbit_check
 
 _web_server_check_css(){
