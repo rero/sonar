@@ -72,7 +72,7 @@
           "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
           "widget": {
             "formlyConfig": {
-              "type": "datepicker",
+              "type": "datePicker",
               "props": {
                 "placeholder": "Example: 2020-12-01"
               }
@@ -87,7 +87,7 @@
           "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
           "widget": {
             "formlyConfig": {
-              "type": "datepicker",
+              "type": "datePicker",
               "props": {
                 "placeholder": "Example: 2020-12-01"
               }
