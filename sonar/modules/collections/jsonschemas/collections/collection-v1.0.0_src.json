@@ -166,6 +166,11 @@
             "type": "string",
             "minLength": 1
           },
+          "label": {
+            "title": "Label",
+            "type": "string",
+            "minLength": 1
+          },
           "mimetype": {
             "title": "Mimetype",
             "type": "string",
@@ -183,6 +188,9 @@
             "type": "integer"
           }
         },
+        "propertiesOrder": [
+          "label"
+        ],
         "required": [
           "bucket",
           "file_id",

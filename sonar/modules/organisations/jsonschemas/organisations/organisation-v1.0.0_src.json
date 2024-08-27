@@ -501,12 +501,20 @@
             "type": "string",
             "minLength": 1
           },
+          "label": {
+            "title": "Label",
+            "type": "string",
+            "minLength": 1
+          },
           "size": {
             "title": "Size",
             "description": "Size of the file in bytes.",
             "type": "integer"
           }
         },
+        "propertiesOrder": [
+          "label"
+        ],
         "required": [
           "bucket",
           "file_id",

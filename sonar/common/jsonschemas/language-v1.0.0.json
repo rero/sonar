@@ -492,7 +492,30 @@
     "formlyConfig": {
       "props": {
         "sort": true,
+        "filter": true,
+        "filterBy": "label",
+        "group": true,
         "options": [
+          {
+            "label": "lang_eng",
+            "value": "eng",
+            "preferred": true
+          },
+          {
+            "label": "lang_fre",
+            "value": "fre",
+            "preferred": true
+          },
+          {
+            "label": "lang_ger",
+            "value": "ger",
+            "preferred": true
+          },
+          {
+            "label": "lang_ita",
+            "value": "ita",
+            "preferred": true
+          },
           {
             "label": "lang_aar",
             "value": "aar"
@@ -986,11 +1009,6 @@
             "value": "elx"
           },
           {
-            "label": "lang_eng",
-            "value": "eng",
-            "preferred": true
-          },
-          {
             "label": "lang_enm",
             "value": "enm"
           },
@@ -1043,11 +1061,6 @@
             "value": "fon"
           },
           {
-            "label": "lang_fre",
-            "value": "fre",
-            "preferred": true
-          },
-          {
             "label": "lang_frm",
             "value": "frm"
           },
@@ -1094,11 +1107,6 @@
           {
             "label": "lang_geo",
             "value": "geo"
-          },
-          {
-            "label": "lang_ger",
-            "value": "ger",
-            "preferred": true
           },
           {
             "label": "lang_gez",
@@ -1303,11 +1311,6 @@
           {
             "label": "lang_iro",
             "value": "iro"
-          },
-          {
-            "label": "lang_ita",
-            "value": "ita",
-            "preferred": true
           },
           {
             "label": "lang_jav",
