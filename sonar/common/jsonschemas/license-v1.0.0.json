@@ -18,9 +18,6 @@
       "expressions": {
         "props.required": "true"
       },
-      "wrappers": [
-        "card"
-      ],
       "props": {
         "options": [
           {

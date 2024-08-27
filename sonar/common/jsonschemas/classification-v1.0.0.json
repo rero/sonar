@@ -92,9 +92,7 @@
   ],
   "widget": {
     "formlyConfig": {
-      "wrappers": [
-        "card"
-      ],
+      "type": "tree-select",
       "props": {
         "sort": false,
         "options": [

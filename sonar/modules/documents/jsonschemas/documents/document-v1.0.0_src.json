@@ -296,8 +296,7 @@
               "formlyConfig": {
                 "wrappers": [
                   "hide"
-                ],
-                "props": {}
+                ]
               }
             }
           },
@@ -386,8 +385,7 @@
               "formlyConfig": {
                 "wrappers": [
                   "hide"
-                ],
-                "props": {}
+                ]
               }
             }
           },
@@ -1254,8 +1252,7 @@
                   "formlyConfig": {
                     "wrappers": [
                       "hide"
-                    ],
-                    "props": {}
+                    ]
                   }
                 }
               },
@@ -1287,8 +1284,7 @@
                   "formlyConfig": {
                     "wrappers": [
                       "hide"
-                    ],
-                    "props": {}
+                    ]
                   }
                 }
               },
@@ -1444,8 +1440,7 @@
                       "formlyConfig": {
                         "wrappers": [
                           "hide"
-                        ],
-                        "props": {}
+                        ]
                       }
                     }
                   },
@@ -1609,8 +1604,7 @@
                       "formlyConfig": {
                         "wrappers": [
                           "hide"
-                        ],
-                        "props": {}
+                        ]
                       }
                     }
                   },
@@ -1676,8 +1670,7 @@
                       "formlyConfig": {
                         "wrappers": [
                           "hide"
-                        ],
-                        "props": {}
+                        ]
                       }
                     }
                   },
@@ -2168,6 +2161,7 @@
             "pattern": "^https://sonar.ch/api/projects/.*?$",
             "widget": {
               "formlyConfig": {
+                "type": "remoteTypeahead",
                 "props": {
                   "remoteTypeahead": {
                     "type": "projects",

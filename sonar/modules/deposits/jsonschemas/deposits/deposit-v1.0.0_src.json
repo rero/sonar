@@ -73,14 +73,12 @@
             "type": "string",
             "minLength": 1
           },
-          "category": {
-            "title": "Type",
-            "type": "string",
-            "enum": [
-              "main",
-              "additional"
-            ],
-            "default": "main"
+          "order": {
+            "title": "Position",
+            "description": "Position of the file, the first file in the list is the main file.",
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
           },
           "type": {
             "title": "Type",
@@ -324,14 +322,6 @@
             "language": {
               "$ref": "language-v1.0.0.json"
             }
-          },
-          "widget": {
-            "formlyConfig": {
-              "wrappers": [
-                "card"
-              ],
-              "props": {}
-            }
           }
         },
         "language": {
@@ -425,9 +415,7 @@
                 ],
                 "widget": {
                   "formlyConfig": {
-                    "wrappers": [
-                      "card"
-                    ],
+                    "type": "tree-select",
                     "props": {
                       "options": [
                         {
@@ -570,14 +558,6 @@
               "type",
               "value"
             ]
-          },
-          "widget": {
-            "formlyConfig": {
-              "wrappers": [
-                "card"
-              ],
-              "props": {}
-            }
           }
         },
         "publication": {
@@ -739,11 +719,7 @@
             "formlyConfig": {
               "expressions": {
                 "hide": "field.parent.model && !['coar:c_3248', 'coar:c_5794', 'coar:c_6670', 'coar:c_3e5a', 'coar:c_ba08', 'coar:c_beb9', 'coar:c_6501', 'coar:c_816b', 'coar:c_998f', 'coar:c_dcae04bc'].includes(field.parent.model.documentType)"
-              },
-              "wrappers": [
-                "card"
-              ],
-              "props": {}
+              }
             }
           }
         },
@@ -790,14 +766,6 @@
                 }
               }
             }
-          },
-          "widget": {
-            "formlyConfig": {
-              "wrappers": [
-                "card"
-              ],
-              "props": {}
-            }
           }
         },
         "collections": {
@@ -828,14 +796,6 @@
             "required": [
               "$ref"
             ]
-          },
-          "widget": {
-            "formlyConfig": {
-              "wrappers": [
-                "card"
-              ],
-              "props": {}
-            }
           }
         },
         "classification": {
@@ -874,14 +834,6 @@
                 }
               }
             }
-          },
-          "widget": {
-            "formlyConfig": {
-              "wrappers": [
-                "card"
-              ],
-              "props": {}
-            }
           }
         },
         "subjects": {
@@ -915,14 +867,6 @@
                   "minLength": 1
                 }
               }
-            }
-          },
-          "widget": {
-            "formlyConfig": {
-              "wrappers": [
-                "card"
-              ],
-              "props": {}
             }
           }
         },
@@ -972,11 +916,7 @@
             "formlyConfig": {
               "expressions": {
                 "hide": "field.parent.model && !['coar:c_46ec', 'coar:c_7a1f', 'coar:c_db06', 'coar:c_bdcc', 'habilitation_thesis', 'advanced_studies_thesis', 'other_thesis'].includes(field.parent.model.documentType)"
-              },
-              "wrappers": [
-                "card"
-              ],
-              "props": {}
+              }
             }
           }
         },
@@ -1200,14 +1140,6 @@
                 }
               }
             }
-          },
-          "widget": {
-            "formlyConfig": {
-              "wrappers": [
-                "card"
-              ],
-              "props": {}
-            }
           }
         }
       }
@@ -1271,9 +1203,6 @@
             ],
             "widget": {
               "formlyConfig": {
-                "wrappers": [
-                  "card"
-                ],
                 "props": {
                   "options": [
                     {
@@ -1328,14 +1257,6 @@
             "type": "string",
             "minLength": 4
           }
-        }
-      },
-      "widget": {
-        "formlyConfig": {
-          "wrappers": [
-            "card"
-          ],
-          "props": {}
         }
       }
     },
@@ -1404,7 +1325,7 @@
                 "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
                 "widget": {
                   "formlyConfig": {
-                    "type": "datepicker",
+                    "type": "datePicker",
                     "props": {
                       "placeholder": "Example: 2020-12-01"
                     }
@@ -1418,7 +1339,7 @@
                 "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
                 "widget": {
                   "formlyConfig": {
-                    "type": "datepicker",
+                    "type": "datePicker",
                     "props": {
                       "placeholder": "Example: 2020-12-01"
                     }
@@ -1438,14 +1359,6 @@
             ]
           }
         ]
-      },
-      "widget": {
-        "formlyConfig": {
-          "wrappers": [
-            "card"
-          ],
-          "props": {}
-        }
       }
     },
     "diffusion": {
@@ -1493,14 +1406,6 @@
             "required": [
               "$ref"
             ]
-          },
-          "widget": {
-            "formlyConfig": {
-              "wrappers": [
-                "card"
-              ],
-              "props": {}
-            }
           }
         },
         "masked": {

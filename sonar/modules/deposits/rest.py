@@ -66,7 +66,6 @@ class FilesResource(ContentNegotiatedMethodView):
         # Store document
         deposit.files[key] = BytesIO(request.get_data())
         deposit.files[key]['label'] = re.search(r'(.*)\..*$', key).group(1)
-        deposit.files[key]['category'] = request.args['type']
         deposit.files[key]['type'] = 'file'
 
         deposit.commit()
@@ -247,7 +246,7 @@ def extract_metadata(pid=None):
 
     main_file = [
         file for file in deposit.files
-        if file['category'] == 'main' and file.mimetype == 'application/pdf'
+        if file['order'] == 1 and file.mimetype == 'application/pdf'
     ]
 
     if not main_file:

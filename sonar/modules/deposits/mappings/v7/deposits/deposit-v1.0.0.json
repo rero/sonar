@@ -41,11 +41,11 @@
           "size": {
             "type": "integer"
           },
+          "order": {
+            "type": "integer"
+          },
           "label": {
             "type": "text"
-          },
-          "category": {
-            "type": "keyword"
           },
           "type": {
             "type": "keyword"
