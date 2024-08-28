@@ -54,12 +54,10 @@
   ],
   "widget": {
     "formlyConfig": {
+      "type": "tree-select",
       "expressions": {
         "props.required": "true"
       },
-      "wrappers": [
-        "card"
-      ],
       "props": {
         "sort": false,
         "options": [
