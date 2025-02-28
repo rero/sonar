@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: sonar 1.8.2\n"
 "Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2023-12-20 09:34+0100\n"
-"PO-Revision-Date: 2023-12-04 15:05+0000\n"
+"PO-Revision-Date: 2024-04-19 17:07+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"es/>\n"
 "Language: es\n"
-"Language-Team: Spanish "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/es/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.5-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: sonar/theme/views.py:102
@@ -1841,39 +1842,39 @@ msgstr "Registrarse"
 #: sonar/theme/templates/sonar/accounts/signup.html:27
 #, python-format
 msgid "Sign up for a %(sitename)s account"
-msgstr ""
+msgstr "Regístrese para obtener una cuenta %(sitename)s"
 
 #: sonar/theme/templates/sonar/accounts/signup.html:50
 #: sonar/theme/templates/sonar/oauth/signup.html:33
 #, python-format
 msgid "Sign-up with %(type)s"
-msgstr ""
+msgstr "Regístrate con %(type)s"
 
 #: sonar/theme/templates/sonar/partial/switch_aai_dropdown.html:21
 msgid "Sign-up with SWITCHaai"
-msgstr ""
+msgstr "Regístrate en SWITCHaai"
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:169
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:67
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:64
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:406
 msgid "Size"
-msgstr ""
+msgstr "Tamaño"
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:170
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:68
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:65
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:407
 msgid "Size of the file in bytes."
-msgstr ""
+msgstr "Tamaño del archivo en bytes."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:624
 msgid "Social Assistant"
-msgstr ""
+msgstr "Asistente social"
 
 #: sonar/templates/security/email/reset_instructions.html:24
 msgid "Someone requested that the password for your SONAR account be reset."
-msgstr ""
+msgstr "Alguien solicitó que se restableciera la contraseña de su cuenta SONAR."
 
 #: sonar/common/jsonschemas/identifiedby-v1.0.0.json:28
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:526
@@ -1883,30 +1884,30 @@ msgstr ""
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1813
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:117
 msgid "Source"
-msgstr ""
+msgstr "Fuente"
 
 #: sonar/theme/templates/sonar/frontpage.html:110
 msgid "Source code on"
-msgstr ""
+msgstr "Código fuente en"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:672
 msgid "Special education teacher"
-msgstr ""
+msgstr "Profesor de educación especial"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:67
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:1291
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1617
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:66
 msgid "Start date"
-msgstr ""
+msgstr "Fecha de inicio"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:525
 msgid "Start date of publication"
-msgstr ""
+msgstr "Fecha de inicio de la publicación"
 
 #: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:16
 msgid "Stat ID."
-msgstr ""
+msgstr "Identificación del estado."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:862
 msgid "State of Valais, Education service"
@@ -5334,4 +5335,3 @@ msgstr "Año"
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:489
 msgid "​Swiss National Science Foundation"
 msgstr ""
-
