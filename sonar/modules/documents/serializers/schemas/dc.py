@@ -123,14 +123,13 @@ class DublinCoreSchema(BaseSchema):
 
     def get_identifiers(self, obj):
         """Get identifiers."""
+        pid = obj["metadata"]["pid"]
         items = list(
             {
                 DocumentRecord.get_permanent_link(
-                    request.host_url, obj['metadata']['pid'], ignore_ark=True
+                    request.host_url, pid, ignore_ark=True
                 ),
-                DocumentRecord.get_permanent_link(
-                    request.host_url, obj['metadata']['pid']
-                ),
+                DocumentRecord.get_permanent_link(request.host_url, pid),
             }
         )
         # If files on the document
@@ -147,8 +146,10 @@ class DublinCoreSchema(BaseSchema):
             for file in files:
                 links = file.get('links', {})
                 if 'download' in links and links.get('download'):
-                    items.append(host + links.get('download'))
-
+                    items.append(f'{host}{links["download"]}')
+                # if the file is restricted it does not appears on the download link
+                elif file["restriction"]["restricted"]:
+                    items.append(f'{host}/documents/{pid}/files/{file["key"]}')
         return items
 
     def get_languages(self, obj):
