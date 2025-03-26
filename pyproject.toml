@@ -1,126 +1,145 @@
-[tool.poetry]
+[project]
 name = "SONAR"
 version = "1.10.1"
 description = "SONAR is an archive of scholarly publications. It intends to collect, promote and preserve the publications of authors affiliated with Swiss public research institutions."
-authors = ["RERO <software@rero.ch>"]
+authors = [{name = "RERO",email = "<software@rero.ch>"}]
 license = "GNU Affero General Public License v3.0"
+requires-python = ">= 3.9,<3.10"
 
-[tool.poetry.dependencies]
-python = ">= 3.9, <3.10"
+dependencies = [
+    "lxml (>=4.9.1)",
+    "xmlsec (<1.3.15)",
+    "marshmallow (>=3.0.0,<4.0.0)",
+    "uwsgi (>=2.0)",
+    "uwsgi-tools (>=1.1.1)",
+    "uwsgitop (>=0.11)",
 
-invenio-oaiharvester = {git = "https://github.com/inveniosoftware/invenio-oaiharvester.git", tag = "v1.0.0a4"}
+    "invenio-oaiharvester @ git+https://github.com/inveniosoftware/invenio-oaiharvester.git@v1.0.0a4",
 
-# Invenio core modules
-invenio-app = ">=1.3.4,<1.4.0"
-invenio-base = ">=1.2.16,<1.3.0"
-invenio-cache = ">=1.1.1,<1.2.0"
-invenio-celery = ">=1.2.5,<1.3.0"
-invenio-config = ">=1.0.3,<1.1.0"
-invenio-i18n = ">=2.0.0,<3.0.0"
-invenio-db = {version = ">=1.1.0,<1.2.0", extras = ["postgresql"]}
+    "invenio-search [elasticsearch7] (>=2.1.0,<3.0.0)",
 
-# Invenio base bundle
-invenio-admin = ">=1.4.0,<1.5.0"
-invenio-assets = ">=2.0.0,<3.0.0"
-invenio-formatter = ">=2.0.0,<3.0.0"
-invenio-logging = {version = ">=2.0.0,<3.0.0"}
-Flask-Mail = "0.9.1" # pinned due to breaking changes in v0.10.0
-sentry-sdk = "<2.0.0" # pinned due to https://github.com/inveniosoftware/invenio-rest/issues/135
-invenio-mail = ">=2.0.0,<3.0.0"
-invenio-rest = ">=1.3.0,<1.4.0"
-invenio-theme = ">=2.5.7,<3.0.0"
+    # Invenio core modules
+    "invenio-app (>=1.4.0,<3.0.0)",
+    "invenio-base (>=1.3.0,<3.0.0)",
+    "invenio-cache (>=1.1.1,<2.0.0)",
+    "invenio-celery (>=1.2.5,<2.0.0)",
+    "invenio-config (>=1.0.3,<2.0.0)",
+    "invenio-i18n (>=2.0.0,<3.0.0)",
+    "invenio-db [postgresql] (>=1.1.0,<2.0.0)",
 
-# Invenio auth bundle
-invenio-access = ">=2.0.0,<3.0.0"
-invenio-accounts = ">=3.5.2,<4.0.0"
-invenio-oauth2server = ">=2.0.0,<3.0.0"
-invenio-oauthclient = ">=3.0.0,<4.0.0"
-invenio-userprofiles = "^2.3.1"
+    # Invenio base bundle
+    "invenio-admin (>=1.4.0,<1.5.0)",
+    "invenio-assets (>=3.0.0,<4.0.0)",
+    "invenio-formatter (>=2.0.0,<3.0.0)",
+    "invenio-logging (>=2.0.0,<3.0.0)",
+    "invenio-mail (>=2.0.0,<3.0.0)",
+    "invenio-rest (>=1.3.0,<2.0.0)",
+    "invenio-theme (>3.0.0,<4.0.0)",
 
-# Invenio metadata bundle
-invenio-indexer = ">=2.2.0,<3.0.0"
-invenio-jsonschemas = ">=1.1.4,<1.2.0"
-invenio-oaiserver = ">=2.2.0,<2.3.0"
-invenio-pidstore = ">=1.3.0,<1.4.0"
-invenio-records-rest = ">=2.2.0,<2.3.0"
-invenio-records-ui = ">=1.2.0,<1.3.0"
-invenio-records = ">=2.1.0,<2.3.0"
-invenio-search-ui = ">=2.4.0,<3.0.0"
-invenio-records-resources = "^4.18.3"
+    # Invenio auth bundle
+    "invenio-access (>=2.0.0,<3.0.0)",
+    "invenio-accounts (>=5.0.0,!=5.1.0,<7.0.0)",
+    "invenio-oauth2server (>=2.3.0,<3.0.0)",
+    "invenio-oauthclient (>=4.0.0,<5.0.0)",
+    "invenio-userprofiles (>=3.0.0,<4.0.0)",
 
-# Files
-invenio-files-rest = '>=2.0.0,<3.0.0'
-invenio-previewer = '>=2.0.0,<3.0.0'
-invenio-records-files = '>=1.2.1,<1.3.0'
+    "invenio-indexer (>=2.2.0,<3.0.0)",
+    "invenio-jsonschemas (>=1.1.4,<2.0.0)",
+    "invenio-oaiserver (>=2.2.0,<3.0.0)",
+    "invenio-pidstore (>=1.3.0,<2.0.0)",
+    "invenio-records-rest (>=2.2.0,<3.0.0)",
+    "invenio-records-ui (>=1.2.0,<2.0.0)",
+    "invenio-records (>=2.1.0,<3.0.0)",
+    "invenio-search-ui (>=2.4.0,<3.0.0)",
+    "invenio-stats (==4.0.1)",
+    "invenio-records-resources",
 
-## RERO ILS specific python modules
-PyYAML = ">=5.3.1"
-dateparser = ">=1.1.1"
-isbnlib = ">=3.9.1"
-requests = ">=2.20.0"
-polib = "*"
-xmltodict = "*"
-redisbeat = ">1.2.5, <1.3.0"
-jsonpickle = ">=1.4.1"
-ciso8601 = "*"
+    # Files
+    "invenio-files-rest (>=2.0.0,<3.0.0)",
+    "invenio-previewer (>=2.0.0,<3.0.0)",
+    "invenio-records-files (>=1.2.1,<1.3.0)",
 
-## Additionnal constraints on python modules
-markdown-captions = "*"
-zipp = "*"
+    # Pinned due to before_first_request deprecation https://flask.palletsprojects.com/en/2.2.x/api/#flask.Flask.before_first_request
+    "Flask (>=2.2.0,<2.3.0)",
+    "sentry-sdk (<2.0.0)",
 
-## Deployment
-python-dotenv = ">=0.13.0"
-pydocstyle = ">=6.1.1"
+    ## RERO ILS specific python modules
+    "PyYAML (>=5.3.1)",
+    "dateparser (>=1.1.1)",
+    "isbnlib (>=3.9.1)",
+    "requests (>=2.23.0)",
+    "polib",
+    "xmltodict",
+    "redisbeat  (>1.2.5,<1.3.0)",
+    "jsonpickle (>=1.4.1)",
+    "ciso8601",
 
-## Third party optional modules used by RERO ILS
-freezegun = "^1.1.0"
-lazyreader = ">1.0.0"
-jinja2 = ">2.11.2"
-jsonmerge = "^1.8.0"
-num2words = "^0.5.10"
-iso639 = "^0.1.4"
-dcxml = "^0.1.2"
-DeepDiff = "^5.5.0"
-docutils = "<0.18.0"
-wtforms = "<3.0.0"
-poethepoet = "^0.12.3"
-Mako = ">=1.2.2"
-rero-invenio-base = "^0.3.0"
-jsonresolver = "*"
-pyparsing = "^3.1.1"
-flask-wiki = "^0.3.1"
-invenio-stats = "^4.0.1"
-fuzzywuzzy = "^0.18.0"
-pycountry = "^23.12.11"
-netaddr = "^0.9.0"
-wand = "^0.6.13"
-webdavclient3 = "^3.14.6"
-pysftp = "^0.2.9"
-python-slugify = "*"
-orcid = "^1.0.3"
-python3-saml = "^1.16.0"
-python-levenshtein = "^0.23.0"
-jsonschema = "<=4.20.0"
+    ## Additionnal constraints on python modules
+    "markdown-captions",
+    "zipp",
 
-# Production
-uwsgitop = "^0.11"
-uwsgi = "^2.0.23"
-uwsgi-tools = "^1.1.1"
+    ## Deployment
+    "python-dotenv (>=0.13.0)",
 
-[tool.poetry.dev-dependencies]
+    ## Third party optional modules used by RERO ILS
+    "freezegun (>=1.1.0)",
+    "lazyreader (>1.0.0)",
+    "jinja2 (>2.11.2)",
+    "jsonmerge (>=1.8.0)",
+    "num2words (>=0.5.10)",
+    "iso639 (>=0.1.4)",
+    "dcxml (>=0.1.2)",
+    "DeepDiff (>=5.5.0)",
+    "docutils (<0.18.0)",
+    "wtforms (<3.0.0)",
+    # to avoid conflict for urllib3
+    "dparse (>=0.5.2)",
+    "Mako (>=1.2.2)",
+    # "rero-invenio-base (>=0.3.0)",
+    "jsonresolver",
+    # needed for elasticsearch 7.13.4
+    "urllib3 (<2.0.0)",
+    "pyparsing (>=3.1.1)",
+    "flask-wiki (>=0.3.1)",
+     "poethepoet",
+     "flask-menu (<2.0.0)",
+    "isort (>=6.0.0)",
+    "black (>=25.1.0,<26.0.0)",
+
+    ## SONAR Specific
+    "fuzzywuzzy (==0.18.0)",
+    "pycountry (==23.12.11)",
+    "netaddr (==0.9.0)",
+    "wand (==0.6.13)",
+    "webdavclient3 (==3.14.6)",
+    "pysftp (==0.2.9)",
+    "python-slugify",
+    "orcid (==1.0.3)",
+    "python3-saml (==1.16.0)",
+    "python-levenshtein (==0.23.0)",
+    # "jsonschema (<=4.20.0)",
+    "flask-breadcrumbs (>=0.5.1,<0.6.0)"
+]
+
+[tool.poetry.group.dev.dependencies]
 pytest-invenio = ">=2.1.6,<3.0.0"
+pydocstyle = ">=6.1.1"
+pytest-black = ">=0.3.2"
+pytest-black-ng = ">=0.4.0"
 Sphinx = ">=4.5.0"
 Flask-Debugtoolbar = ">=0.10.1"
 ## RERO ILS specific python packages
-safety = ">=1.8,<3.0.0"
+pip-audit = ">=2.8.0,<3.0.0"
 mock = ">=2.0.0"
 autoflake = ">=1.3.1"
-appnope = { version = "*", optional = true }
+appnope = { version = "*",optional = true }
+beautifulsoup4 = "^4.11.1"
+requests-mock = "^1.11.0"
 
-[tool.poetry.plugins."console_scripts"]
+[project.entry-points."app.console_scripts"]
 sonar = "invenio_app.cli:cli"
 
-[tool.poetry.plugins."flask.commands"]
+[project.entry-points."flask.commands"]
 documents = "sonar.modules.documents.cli.documents:documents"
 ark = "sonar.modules.ark.cli:ark"
 oaiharvester = "sonar.modules.documents.cli.oaiharvester:oaiharvester"
@@ -132,18 +151,18 @@ fixtures = "sonar.modules.cli.fixtures:fixtures"
 utils = "sonar.modules.cli.utils:utils"
 sitemap = "sonar.modules.sitemap.cli.sitemap:sitemap"
 
-[tool.poetry.plugins."invenio_base.apps"]
+[project.entry-points."invenio_base.apps"]
 sonar = "sonar.ext:Sonar"
 documents = "sonar.modules.documents:Documents"
 shibboleth_authenticator = "sonar.modules.shibboleth_authenticator:ShibbolethAuthenticator"
 
-[tool.poetry.plugins."invenio_base.api_apps"]
+[project.entry-points."invenio_base.api_apps"]
 sonar = "sonar.ext:SonarAPI"
 documents = "sonar.modules.documents:Documents"
 organisations = "sonar.modules.organisations:Organisations"
 invenio_i18n = "invenio_i18n:InvenioI18N"
 
-[tool.poetry.plugins."invenio_base.blueprints"]
+[project.entry-points."invenio_base.blueprints"]
 dedicated = "sonar.dedicated.views:blueprint"
 help = "sonar.help.views:blueprint"
 collections = "sonar.modules.collections.views:blueprint"
@@ -156,7 +175,7 @@ users = "sonar.modules.users.views:blueprint"
 sitemap = "sonar.modules.sitemap.views:blueprint"
 ark = "sonar.modules.ark.views:blueprint"
 
-[tool.poetry.plugins."invenio_base.api_blueprints"]
+[project.entry-points."invenio_base.api_blueprints"]
 deposits = "sonar.modules.deposits.rest:api_blueprint"
 documents = "sonar.modules.documents.rest:api_blueprint"
 pdf_extractor = "sonar.modules.pdf_extractor.views.api:api_blueprint"
@@ -166,23 +185,23 @@ suggestions = "sonar.suggestions.rest:api_blueprint"
 translations = "sonar.translations.rest:api_blueprint"
 users = "sonar.modules.users.views:blueprint"
 
-[tool.poetry.plugins."invenio_assets.webpack"]
+[project.entry-points."invenio_assets.webpack"]
 sonar_theme = "sonar.theme.webpack:theme"
 
-[tool.poetry.plugins."invenio_config.module"]
+[project.entry-points."invenio_config.module"]
 sonar = "sonar.config"
 sonar_documents = "sonar.modules.documents.config"
 shibboleth_authenticator = "sonar.modules.shibboleth_authenticator.config"
 pdf_extractor = "sonar.modules.pdf_extractor.config"
 
-[tool.poetry.plugins."invenio_db.alembic"]
+[project.entry-points."invenio_db.alembic"]
 sonar = "sonar:alembic"
 
-[tool.poetry.plugins."invenio_i18n.translations"]
+[project.entry-points."invenio_i18n.translations"]
 messages = "sonar"
 messages_wiki = "flask_wiki"
 
-[tool.poetry.plugins."invenio_jsonschemas.schemas"]
+[project.entry-points."invenio_jsonschemas.schemas"]
 documents = "sonar.modules.documents.jsonschemas"
 organisations = "sonar.modules.organisations.jsonschemas"
 users = "sonar.modules.users.jsonschemas"
@@ -194,7 +213,7 @@ subdivisions = "sonar.modules.subdivisions.jsonschemas"
 stats = "sonar.modules.stats.jsonschemas"
 common = "sonar.common.jsonschemas"
 
-[tool.poetry.plugins."invenio_search.mappings"]
+[project.entry-points."invenio_search.mappings"]
 documents = "sonar.modules.documents.mappings"
 organisations = "sonar.modules.organisations.mappings"
 users = "sonar.modules.users.mappings"
@@ -204,10 +223,10 @@ collections = "sonar.modules.collections.mappings"
 subdivisions = "sonar.modules.subdivisions.mappings"
 stats = "sonar.modules.stats.mappings"
 
-[tool.poetry.plugins."invenio_search.templates"]
+[project.entry-points."invenio_search.templates"]
 base-record = "sonar.es_templates:list_es_templates"
 
-[tool.poetry.plugins."invenio_pidstore.minters"]
+[project.entry-points."invenio_pidstore.minters"]
 document_id = "sonar.modules.documents.api:document_pid_minter"
 organisation_id = "sonar.modules.organisations.api:organisation_pid_minter"
 user_id = "sonar.modules.users.api:user_pid_minter"
@@ -216,7 +235,7 @@ collections_id = "sonar.modules.collections.api:pid_minter"
 subdivisions_id = "sonar.modules.subdivisions.api:pid_minter"
 stats_id = "sonar.modules.stats.api:pid_minter"
 
-[tool.poetry.plugins."invenio_pidstore.fetchers"]
+[project.entry-points."invenio_pidstore.fetchers"]
 document_id = "sonar.modules.documents.api:document_pid_fetcher"
 organisation_id = "sonar.modules.organisations.api:organisation_pid_fetcher"
 user_id = "sonar.modules.users.api:user_pid_fetcher"
@@ -225,7 +244,7 @@ collections_id = "sonar.modules.collections.api:pid_fetcher"
 subdivisions_id = "sonar.modules.subdivisions.api:pid_fetcher"
 stats_id = "sonar.modules.stats.api:pid_fetcher"
 
-[tool.poetry.plugins."invenio_records.jsonresolver"]
+[project.entry-points."invenio_records.jsonresolver"]
 organisation = "sonar.modules.organisations.jsonresolvers"
 user = "sonar.modules.users.jsonresolvers"
 document = "sonar.modules.documents.jsonresolvers"
@@ -233,19 +252,16 @@ project = "sonar.resources.projects.jsonresolvers"
 collections = "sonar.modules.collections.jsonresolvers"
 subdivisions = "sonar.modules.subdivisions.jsonresolvers"
 
-[tool.poetry.plugins."invenio_celery.tasks"]
+[project.entry-points."invenio_celery.tasks"]
 documents = "sonar.modules.documents.tasks"
 stats = "sonar.modules.stats.tasks"
 sitemap = "sonar.modules.sitemap.tasks"
 
-[tool.poetry.plugins."invenio_admin.views"]
+[project.entry-points."invenio_admin.views"]
 stats = "sonar.modules.stats.admin:stats_adminview"
 
-[tool.poetry.plugins."babel.extractors"]
+[project.entry-points."babel.extractors"]
 json = "sonar.modules.babel_extractors:extract_json"
-
-[tool.poetry.group.dev.dependencies]
-requests-mock = "^1.11.0"
 
 [tool.poe.tasks]
 bootstrap = {cmd = "./scripts/bootstrap", help = "Runs bootstrap"}

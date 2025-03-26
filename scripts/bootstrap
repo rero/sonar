@@ -53,6 +53,9 @@ done
 
 title "Bootstrap script"
 
+section "Upgrade pip"
+poetry run pip install --upgrade pip
+
 section "Install poethepoet"
 poetry run pip install poethepoet
 
@@ -111,6 +114,6 @@ invenio utils compile-json ./sonar/dedicated/hepvs/projects/jsonschemas/hepvs/pr
 
 # Compile translations catalogs
 section "Compile translations catalogs" "info"
-python ./setup.py compile_catalog
+poetry run pybabel compile -d sonar/translations
 
 message "\nBootstrap finished successfully" "success"

@@ -70,3 +70,7 @@ token_create() {
       invenio utils token-create -n ${1} -u ${2} -t ${3}
   fi
 }
+
+add_exceptions() {
+  pip_audit_exceptions="$pip_audit_exceptions --ignore-vuln $1"""
+}

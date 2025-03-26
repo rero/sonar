@@ -24,7 +24,7 @@ from sonar.modules.query import default_search_factory
 from sonar.modules.users.api import current_user_record
 
 
-def search_factory(self, search):
+def search_factory(self, search, query_parser=None):
     """Search factory.
 
     :param Search search: Search instance
