@@ -235,6 +235,16 @@ def test_identifiers(minimal_document):
     }
 
 
+def test_identifiers_with_files(document_with_file):
+    """Test identifiers serialization with files."""
+    result = SonarDublinCoreXMLSerializer().transform_record(document_with_file)
+    assert set(result["identifiers"]) == {
+        "https://n2t.net/ark:/99999/ffk31",
+        "http://localhost/global/documents/1",
+        "http://localhost/documents/1/files/test1.pdf",
+    }
+
+
 def test_languages(minimal_document):
     """Test languages serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
