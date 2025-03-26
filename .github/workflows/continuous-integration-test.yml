@@ -17,11 +17,7 @@ jobs:
       run: |
         sudo apt-get update -y
         sudo apt-get install -y pkg-config libxml2-dev libxmlsec1-dev libxmlsec1-openssl
-        sudo apt-get install -y libxml2 ghostscript imagemagick
-        wget http://security.ubuntu.com/ubuntu/pool/main/p/poppler/libpoppler73_0.62.0-2ubuntu2.14_amd64.deb
-        sudo apt-get install ./libpoppler73_0.62.0-2ubuntu2.14_amd64.deb
-        wget http://archive.ubuntu.com/ubuntu/pool/universe/x/xpdf/xpdf_3.04-7_amd64.deb
-        sudo apt-get install ./xpdf_3.04-7_amd64.deb
+        sudo apt-get install -y libxml2 ghostscript imagemagick xpdf
         sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
 
     - name: Setup node
@@ -33,7 +29,7 @@ jobs:
       run: docker compose up -d
 
     - name: Setup Python 3.9
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v5
       with:
         python-version: 3.9
 
