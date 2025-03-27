@@ -51,7 +51,7 @@ class FileSchemaV1(StrictKeysMixin):
     bucket = SanitizedUnicode()
     file_id = SanitizedUnicode()
     version_id = SanitizedUnicode()
-    key = SanitizedUnicode()
+    key = fields.Str()
     mimetype = SanitizedUnicode()
     checksum = SanitizedUnicode()
     size = fields.Integer()

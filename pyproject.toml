@@ -51,7 +51,7 @@ dependencies = [
     "invenio-records-ui (>=1.2.0,<2.0.0)",
     "invenio-records (>=2.1.0,<3.0.0)",
     "invenio-search-ui (>=2.4.0,<3.0.0)",
-    "invenio-stats (==4.0.1)",
+    "invenio-stats",
     "invenio-records-resources",
 
     # Files
