@@ -50,14 +50,13 @@ class ThumbnailSchemaV1(StrictKeysMixin):
 
         unknown = EXCLUDE
 
-    key = SanitizedUnicode()
+    key = fields.Str()
     label = SanitizedUnicode()
     type = SanitizedUnicode()
     order = fields.Integer()
     restriction = fields.Dict(dump_only=True)
     links = fields.Dict(dump_only=True)
     thumbnail = SanitizedUnicode(dump_only=True)
-
 
 
 class FileSchemaV1(ThumbnailSchemaV1):
