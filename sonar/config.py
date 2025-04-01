@@ -875,7 +875,7 @@ PREVIEWER_MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024
 # OAI-PMH
 # =======
 #: Index to use for the OAI-PMH server.
-OAISERVER_RECORD_INDEX = 'documents'
+OAISERVER_RECORD_INDEX = "documents-document-v1.0.0"
 #: OAI identifier prefix
 OAISERVER_ID_PREFIX = 'oai:sonar.ch:'
 #: The e-mail addresses of administrators of the repository.
