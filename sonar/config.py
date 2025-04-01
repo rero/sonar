@@ -35,21 +35,17 @@ from invenio_stats.aggregations import StatAggregator
 from invenio_stats.processors import EventsIndexer
 from invenio_stats.queries import ESTermsQuery
 
-from sonar.modules.collections.config import \
-    Configuration as CollectionConfiguration
+from sonar.modules.collections.config import Configuration as CollectionConfiguration
 from sonar.modules.deposits.api import DepositRecord, DepositSearch
 from sonar.modules.deposits.permissions import DepositPermission
 from sonar.modules.documents.api import DocumentRecord, DocumentSearch
 from sonar.modules.documents.permissions import DocumentPermission
-from sonar.modules.organisations.api import OrganisationRecord, \
-    OrganisationSearch
+from sonar.modules.organisations.api import OrganisationRecord, OrganisationSearch
 from sonar.modules.organisations.permissions import OrganisationPermission
-from sonar.modules.permissions import record_permission_factory, \
-    wiki_edit_permission
+from sonar.modules.permissions import record_permission_factory, wiki_edit_permission
 from sonar.modules.query import and_term_filter, missing_field_filter
 from sonar.modules.stats.config import Configuration as StatConfiguration
-from sonar.modules.subdivisions.config import \
-    Configuration as SubdivisionConfiguration
+from sonar.modules.subdivisions.config import Configuration as SubdivisionConfiguration
 from sonar.modules.users.api import UserRecord, UserSearch
 from sonar.modules.users.permissions import UserPermission
 from sonar.modules.utils import get_current_language
@@ -875,7 +871,7 @@ PREVIEWER_MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024
 # OAI-PMH
 # =======
 #: Index to use for the OAI-PMH server.
-OAISERVER_RECORD_INDEX = 'documents'
+OAISERVER_RECORD_INDEX = "documents-document-v1.0.0"
 #: OAI identifier prefix
 OAISERVER_ID_PREFIX = 'oai:sonar.ch:'
 #: The e-mail addresses of administrators of the repository.

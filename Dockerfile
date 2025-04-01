@@ -41,6 +41,8 @@ USER 1000
 
 # Run bootstrap
 ENV TERM=xterm-256color
+# to avoid lxml conflict
+ENV UWSGI_PROFILE_OVERRIDE="xml=no"
 ARG UI_TGZ=""
 ENV INVENIO_COLLECT_STORAGE='flask_collect.storage.file'
 RUN poetry run ./scripts/bootstrap --deploy --ui ${UI_TGZ}
