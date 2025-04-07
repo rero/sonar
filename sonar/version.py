@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # Swiss Open Access Repository
-# Copyright (C) 2021 RERO
+# Copyright (C) 2025 RERO+
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -17,10 +17,9 @@
 
 """Version information for Swiss Open Access Repository.
 
-This file is imported by ``sonar.__init__``,
-and parsed by ``setup.py``.
+This file is imported by ``sonar.__init__``.
 """
 
 from __future__ import absolute_import, print_function
 
-__version__ = '1.10.1'
+__version__ = "1.10.1"
