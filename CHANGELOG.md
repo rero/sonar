@@ -1,5 +1,26 @@
 # Changelog
 
+## [v1.11.0](https://github.com/rero/sonar/tree/v1.11.0) (2025-04-08)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.10.1...v1.11.0)
+
+**New features:**
+* urn: add new successor command [\#989](https://github.com/rero/sonar/pull/989) (by @jma)
+
+**Fixes:**
+* Restricted files are not mentioned in the Dublin Core record [\#1000](https://github.com/rero/sonar/issues/1000)
+* fix(deployment): fix lxml conflict packages [\#1004](https://github.com/rero/sonar/pull/1004) (by @jma)
+* Link to file is broken when the file name contains special characters [\#861](https://github.com/rero/sonar/issues/861)
+* fix(translations): use poetry commands [\#1005](https://github.com/rero/sonar/pull/1005) (by @PascalRepond)
+* data model: fix server error during the provisionActivity formatting. [\#982](https://github.com/rero/sonar/pull/982) (by @jma)
+* documents: fix boosting [\#977](https://github.com/rero/sonar/pull/977) (by @jma)
+
+**Other changes:**
+* dependencies: fix security issues [\#1001](https://github.com/rero/sonar/pull/1001) (by @jma)
+* chore(deprecation): update compose commands to v2 [\#994](https://github.com/rero/sonar/pull/994) (by @PascalRepond)
+* dependencies: fix security issues for uwsgi [\#990](https://github.com/rero/sonar/pull/990) (by @jma)
+* dependencies: fix security issues [\#983](https://github.com/rero/sonar/pull/983) (by @jma)
+
 ## [v1.10.1](https://github.com/rero/sonar/tree/v1.10.1) (2024-01-30)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.10.0...v1.10.1)
