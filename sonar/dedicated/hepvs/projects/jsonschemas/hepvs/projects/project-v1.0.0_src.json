@@ -455,6 +455,7 @@
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
+          "default": [],
           "items": {
             "title": "Realization framework",
             "type": "string",
@@ -471,8 +472,9 @@
           },
           "widget": {
             "formlyConfig": {
-              "type": "multicheckbox",
+              "type": "multi-select",
               "props": {
+                "sort": true,
                 "options": [
                   {
                     "label": "Master",

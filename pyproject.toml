@@ -122,7 +122,8 @@ dependencies = [
     "python3-saml (==1.16.0)",
     "python-levenshtein (==0.23.0)",
     # "jsonschema (<=4.20.0)",
-    "flask-breadcrumbs (>=0.5.1,<0.6.0)"
+    "flask-breadcrumbs (>=0.5.1,<0.6.0)",
+    "uritemplate (<4.2.0)"
 ]
 
 [project.entry-points."app.console_scripts"]

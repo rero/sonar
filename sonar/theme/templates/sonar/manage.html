@@ -10,7 +10,14 @@
   <meta name="msapplication-TileImage" content="/static/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
   <style>
-    @layer bootstrap, theme, sonar-ui, primeng, utilities;
+    @layer theme, sonar-ui, primeng, utilities;
+    :root {
+      font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 1rem
+    }
   </style>
   <link rel="apple-touch-icon" sizes="57x57" href="/static/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/static/apple-icon-60x60.png">
@@ -30,10 +37,9 @@
 </head>
 
 <body>
-  <sonar-root></sonar-root>
-  <script src="/static/sonar-ui/runtime.js?{{ ui_version }}" type="module"></script>
-  <script src="/static/sonar-ui/polyfills.js?{{ ui_version }}" type="module"></script>
-  <script src="/static/sonar-ui/main.js?{{ ui_version }}" type="module"></script>
+  <sonar-root class="sonar-ui"></sonar-root>
+  <script src="/static/sonar-ui/browser/polyfills.js?{{ ui_version }}" type="module"></script>
+  <script src="/static/sonar-ui/browser/main.js?{{ ui_version }}" type="module"></script>
 </body>
 
 </html>

@@ -22,6 +22,7 @@
       "description": "List of files attached to the record.",
       "type": "array",
       "items": {
+        "title": "File",
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -138,6 +139,7 @@
                   "props.required": "true"
                 },
                 "props": {
+                  "appendTo": "body",
                   "options": [
                     {
                       "label": "coar:c_abf2",
@@ -178,9 +180,17 @@
             "pattern": "^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
             "widget": {
               "formlyConfig": {
+                "type": "datePicker",
                 "expressions": {
                   "props.required": "model && model.access && model.access === 'coar:c_f1cf'",
                   "hide": "!model || !model.access || model.access !== 'coar:c_f1cf'"
+                },
+                "props": {
+                  "validation": {
+                    "messages": {
+                      "patternMessage": "Should be in the following format: 2022-12-31 (YYYY-MM-DD)."
+                    }
+                  }
                 }
               }
             }
@@ -1193,7 +1203,7 @@
     "collections": {
       "title": "Collections",
       "type": "array",
-      "minItems": 0,
+      "minItems": 1,
       "items": {
         "title": "Collections",
         "type": "object",
@@ -1204,8 +1214,9 @@
             "pattern": "^https://sonar.ch/api/collections/.*?$",
             "widget": {
               "formlyConfig": {
+                "type": "remoteAutoComplete",
                 "props": {
-                  "remoteTypeahead": {
+                  "queryOptions": {
                     "type": "collections",
                     "field": "name.value.suggest",
                     "label": "label"
@@ -1615,10 +1626,10 @@
                     "widget": {
                       "formlyConfig": {
                         "props": {
-                          "remoteTypeahead": {
+                          "type": "remoteAutoComplete",
+                          "formlyConfig": {
                             "type": "documents",
                             "field": "contribution.agent.preferred_name.suggest",
-                            "suggest": "/api/suggestions/completion",
                             "allowAdd": true
                           }
                         }
@@ -1680,11 +1691,11 @@
                     "minLength": 1,
                     "widget": {
                       "formlyConfig": {
+                        "type": "remoteAutoComplete",
                         "props": {
-                          "remoteTypeahead": {
+                          "formlyConfig": {
                             "type": "documents",
                             "field": "contribution.agent.preferred_name.suggest",
-                            "suggest": "/api/suggestions/completion",
                             "allowAdd": true
                           }
                         }
@@ -2150,7 +2161,7 @@
     "projects": {
       "title": "Research projects",
       "type": "array",
-      "minItems": 0,
+      "minItems": 1,
       "items": {
         "title": "Research project",
         "type": "object",
@@ -2161,9 +2172,9 @@
             "pattern": "^https://sonar.ch/api/projects/.*?$",
             "widget": {
               "formlyConfig": {
-                "type": "remoteTypeahead",
+                "type": "remoteAutoComplete",
                 "props": {
-                  "remoteTypeahead": {
+                  "queryOptions": {
                     "type": "projects",
                     "label": "name",
                     "field": "metadata.name.suggest"
@@ -2201,10 +2212,10 @@
         "widget": {
           "formlyConfig": {
             "props": {
-              "remoteTypeahead": {
+              "type": "remoteAutoComplete",
+              "formlyConfig": {
                 "type": "documents",
                 "field": "customField1.suggest",
-                "suggest": "/api/suggestions/completion",
                 "allowAdd": true
               }
             }
@@ -2229,10 +2240,10 @@
         "widget": {
           "formlyConfig": {
             "props": {
-              "remoteTypeahead": {
+              "type": "remoteAutoComplete",
+              "formlyConfig": {
                 "type": "documents",
                 "field": "customField2.suggest",
-                "suggest": "/api/suggestions/completion",
                 "allowAdd": true
               }
             }
@@ -2257,10 +2268,10 @@
         "widget": {
           "formlyConfig": {
             "props": {
-              "remoteTypeahead": {
+              "type": "remoteAutoComplete",
+              "formlyConfig": {
                 "type": "documents",
                 "field": "customField3.suggest",
-                "suggest": "/api/suggestions/completion",
                 "allowAdd": true
               }
             }
@@ -2293,7 +2304,8 @@
             "widget": {
               "formlyConfig": {
                 "props": {
-                  "remoteTypeahead": {
+                  "type": "remoteAutoComplete",
+                  "formlyConfig": {
                     "type": "subdivisions",
                     "field": "name.value.suggest",
                     "label": "label"
@@ -2362,6 +2374,8 @@
       "title": "Roles",
       "type": "array",
       "minItems": 1,
+      "uniqueItems": true,
+      "default": ["cre"],
       "items": {
         "title": "Role",
         "type": "string",
@@ -2372,38 +2386,38 @@
           "dgc",
           "dgs",
           "prt"
-        ],
-        "default": "cre",
-        "widget": {
-          "formlyConfig": {
-            "props": {
-              "options": [
-                {
-                  "label": "contribution_role_cre",
-                  "value": "cre"
-                },
-                {
-                  "label": "contribution_role_ctb",
-                  "value": "ctb"
-                },
-                {
-                  "label": "contribution_role_edt",
-                  "value": "edt"
-                },
-                {
-                  "label": "contribution_role_dgc",
-                  "value": "dgc"
-                },
-                {
-                  "label": "contribution_role_dgs",
-                  "value": "dgs"
-                },
-                {
-                  "label": "contribution_role_prt",
-                  "value": "prt"
-                }
-              ]
-            }
+        ]
+      },
+      "widget": {
+        "formlyConfig": {
+          "type": "multi-select",
+          "props": {
+            "options": [
+              {
+                "label": "contribution_role_cre",
+                "value": "cre"
+              },
+              {
+                "label": "contribution_role_ctb",
+                "value": "ctb"
+              },
+              {
+                "label": "contribution_role_edt",
+                "value": "edt"
+              },
+              {
+                "label": "contribution_role_dgc",
+                "value": "dgc"
+              },
+              {
+                "label": "contribution_role_dgs",
+                "value": "dgs"
+              },
+              {
+                "label": "contribution_role_prt",
+                "value": "prt"
+              }
+            ]
           }
         }
       }
