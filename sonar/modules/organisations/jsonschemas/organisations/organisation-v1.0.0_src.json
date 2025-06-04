@@ -407,10 +407,7 @@
       },
       "widget": {
         "formlyConfig": {
-          "type": "multicheckbox",
-          "wrappers": [
-            "form-field"
-          ],
+          "type": "multi-select",
           "expressions": {
             "hide": "!field.parent.model.isDedicated"
           },
