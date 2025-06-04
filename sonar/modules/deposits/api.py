@@ -456,20 +456,12 @@ class DepositRecord(SonarRecord):
                                          dbcommit=True,
                                          with_bucket=True)
 
-        current_order = 2
-        for file in self.files:
+        for idx, file in enumerate(self.files, start=1):
             with file.file.storage().open() as pdf_file:
                 content = pdf_file.read()
-
-                if file.get('category', 'main') == 'main':
-                    order = 1
-                else:
-                    order = current_order
-                    current_order += 1
-
                 kwargs = {
                     'label': file.get('label', file['key']),
-                    'order': order
+                    'order': file.get('order', idx)
                 }
 
                 if file.get('embargo', False) and file.get('embargoDate'):
