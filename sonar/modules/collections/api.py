@@ -26,8 +26,9 @@ from .config import Configuration
 from .minters import id_minter
 
 # provider
-RecordProvider = type('RecordProvider', (Provider, ),
-                      dict(pid_type=Configuration.pid_type))
+RecordProvider = type(
+    "RecordProvider", (Provider,), dict(pid_type=Configuration.pid_type)
+)
 # minter
 pid_minter = partial(id_minter, provider=RecordProvider)
 # fetcher
@@ -43,8 +44,7 @@ class Record(SonarRecord):
     schema = Configuration.schema
 
     @classmethod
-    def create(cls, data, id_=None, dbcommit=False, with_bucket=True,
-               **kwargs):
+    def create(cls, data, id_=None, dbcommit=False, with_bucket=True, **kwargs):
         """Create record.
 
         :param dict data: Metadata of the new record
@@ -54,11 +54,9 @@ class Record(SonarRecord):
         :return: New record instance
         :rtype: Record
         """
-        return super().create(data,
-                                         id_=id_,
-                                         dbcommit=dbcommit,
-                                         with_bucket=with_bucket,
-                                         **kwargs)
+        return super().create(
+            data, id_=id_, dbcommit=dbcommit, with_bucket=with_bucket, **kwargs
+        )
 
     @classmethod
     def get_pid_by_hash_key(cls, hash_key):
@@ -68,8 +66,12 @@ class Record(SonarRecord):
         :return: The record found.
         :rtype: SonarRecord.
         """
-        result = RecordSearch().filter(
-            'term', hashKey=hash_key).source(includes='pid').scan()
+        result = (
+            RecordSearch()
+            .filter("term", hashKey=hash_key)
+            .source(includes="pid")
+            .scan()
+        )
         try:
             return next(result).pid
         except StopIteration:

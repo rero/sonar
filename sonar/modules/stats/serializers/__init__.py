@@ -20,11 +20,12 @@
 import csv
 
 from flask import current_app
-from invenio_records_rest.serializers.csv import \
-    CSVSerializer as BaseCSVSerializer
+from invenio_records_rest.serializers.csv import CSVSerializer as BaseCSVSerializer
 from invenio_records_rest.serializers.csv import Line
-from invenio_records_rest.serializers.response import record_responsify, \
-    search_responsify
+from invenio_records_rest.serializers.response import (
+    record_responsify,
+    search_responsify,
+)
 
 from sonar.modules.serializers import JSONSerializer
 from sonar.theme.views import format_date
@@ -42,9 +43,7 @@ class CSVSerializer(BaseCSVSerializer):
         """
         assert len(records) == 1
         record = records[0]
-        headers = [
-            'organisation', 'type', 'documents', 'full_text', 'no_full_text'
-        ]
+        headers = ["organisation", "type", "documents", "full_text", "no_full_text"]
 
         # Write header
         line = Line()
@@ -53,10 +52,10 @@ class CSVSerializer(BaseCSVSerializer):
         yield line.read()
 
         # Dump values
-        for value in record['metadata']['values']:
-            value['documents'] = len(value['pids'])
-            value['no_full_text'] = value['documents'] - value['full_text']
-            value.pop('pids', None)
+        for value in record["metadata"]["values"]:
+            value["documents"] = len(value["pids"])
+            value["no_full_text"] = value["documents"] - value["full_text"]
+            value.pop("pids", None)
             writer.writerow(value)
             yield line.read()
 
@@ -81,9 +80,9 @@ csv_v1 = CSVSerializer()
 # Records-REST serializers
 # ========================
 #: JSON record serializer for individual records.
-json_v1_response = record_responsify(json_v1, 'application/json')
+json_v1_response = record_responsify(json_v1, "application/json")
 #: JSON record serializer for search results.
-json_v1_search = search_responsify(json_v1, 'application/json')
+json_v1_search = search_responsify(json_v1, "application/json")
 
 
 def csv_record_responsify(serializer, mimetype):
@@ -98,9 +97,10 @@ def csv_record_responsify(serializer, mimetype):
     """
 
     def view(pid, record, code=200, headers=None, links_factory=None):
-        response = current_app.response_class(serializer.serialize(
-            pid, record, links_factory=links_factory),
-                                              mimetype=mimetype)
+        response = current_app.response_class(
+            serializer.serialize(pid, record, links_factory=links_factory),
+            mimetype=mimetype,
+        )
         response.status_code = code
         response.cache_control.no_cache = True
         response.set_etag(str(record.revision_id))
@@ -109,11 +109,12 @@ def csv_record_responsify(serializer, mimetype):
             response.headers.extend(headers)
 
         # set the output filename
-        date = format_date(record.created, '%Y%m%d%H%M')
-        filename = f'stats-{date}.csv'
-        if not response.headers.get('Content-Disposition'):
-            response.headers['Content-Disposition'] = \
+        date = format_date(record.created, "%Y%m%d%H%M")
+        filename = f"stats-{date}.csv"
+        if not response.headers.get("Content-Disposition"):
+            response.headers["Content-Disposition"] = (
                 f'attachment; filename="{filename}"'
+            )
 
         return response
 
@@ -121,10 +122,10 @@ def csv_record_responsify(serializer, mimetype):
 
 
 #: CSV record serializer for individual records.
-csv_v1_response = csv_record_responsify(csv_v1, 'text/csv')
+csv_v1_response = csv_record_responsify(csv_v1, "text/csv")
 
 __all__ = (
-    'json_v1',
-    'json_v1_response',
-    'json_v1_search',
+    "json_v1",
+    "json_v1_response",
+    "json_v1_search",
 )

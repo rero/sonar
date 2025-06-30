@@ -28,4 +28,5 @@ def test_dnb_sucessor(app):
     with requests_mock.mock() as response:
         response.patch(requests_mock.ANY, status_code=204)
         DnbUrnService().set_successor(
-            'urn:nbn:ch:rero-002-old', 'urn:nbn:ch:rero-002-new')
+            "urn:nbn:ch:rero-002-old", "urn:nbn:ch:rero-002-new"
+        )

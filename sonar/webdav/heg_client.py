@@ -27,12 +27,9 @@ class HegClient(Client):
     def __init__(self):
         """Constructor of WebDAV client for HEG."""
         options = {
-            'webdav_hostname':
-            current_app.config.get('SONAR_APP_WEBDAV_HEG_HOST'),
-            'webdav_login':
-            current_app.config.get('SONAR_APP_WEBDAV_HEG_USER'),
-            'webdav_password':
-            current_app.config.get('SONAR_APP_WEBDAV_HEG_PASSWORD')
+            "webdav_hostname": current_app.config.get("SONAR_APP_WEBDAV_HEG_HOST"),
+            "webdav_login": current_app.config.get("SONAR_APP_WEBDAV_HEG_USER"),
+            "webdav_password": current_app.config.get("SONAR_APP_WEBDAV_HEG_PASSWORD"),
         }
 
         super(HegClient, self).__init__(options)

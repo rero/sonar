@@ -18,7 +18,7 @@
 """Minters."""
 
 
-def id_minter(record_uuid, data, provider, pid_key='pid', object_type='rec'):
+def id_minter(record_uuid, data, provider, pid_key="pid", object_type="rec"):
     """PID minter.
 
     :param str record_uuid: UUID of the record
@@ -30,9 +30,9 @@ def id_minter(record_uuid, data, provider, pid_key='pid', object_type='rec'):
     :rtype: str
     """
     # Create persistent identifier
-    provider = provider.create(object_type=object_type,
-                               object_uuid=record_uuid,
-                               pid_value=data.get(pid_key))
+    provider = provider.create(
+        object_type=object_type, object_uuid=record_uuid, pid_value=data.get(pid_key)
+    )
     pid = provider.pid
     data[pid_key] = pid.pid_value
     return pid

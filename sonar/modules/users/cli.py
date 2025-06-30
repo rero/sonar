@@ -30,7 +30,7 @@ from werkzeug.local import LocalProxy
 
 from ..users.api import UserRecord
 
-datastore = LocalProxy(lambda: current_app.extensions['security'].datastore)
+datastore = LocalProxy(lambda: current_app.extensions["security"].datastore)
 
 
 @click.group()
@@ -38,66 +38,71 @@ def users():
     """Users CLI commands."""
 
 
-@users.command('import')
-@click.argument('infile', type=click.File('r'))
+@users.command("import")
+@click.argument("infile", type=click.File("r"))
 @with_appcontext
 def import_users(infile):
     """Import users."""
-    click.secho('Importing users from {file}'.format(file=infile.name))
+    click.secho("Importing users from {file}".format(file=infile.name))
 
     data = json.load(infile)
     for user_data in data:
         try:
-            email = user_data.get('email')
+            email = user_data.get("email")
 
             # No email found in user's data, account cannot be created
             if not email:
-                raise ClickException('Email not defined')
+                raise ClickException("Email not defined")
 
             user = datastore.find_user(email=email)
 
             # User already exists, skip account creation
             if user:
                 raise ClickException(
-                    'User with email {email} already exists'.format(
-                        email=email))
+                    "User with email {email} already exists".format(email=email)
+                )
 
             password = user_data.get(
-                'password',
-                '$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw'
-                '/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvf'
-                'R3m1mNVfsHgfgA'
+                "password",
+                "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw"
+                "/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvf"
+                "R3m1mNVfsHgfgA",
             )
-            del user_data['password']
+            del user_data["password"]
 
-            if not user_data.get('role'):
-                user_data['role'] = UserRecord.ROLE_USER
+            if not user_data.get("role"):
+                user_data["role"] = UserRecord.ROLE_USER
 
-            if not datastore.find_role(user_data['role']):
-                datastore.create_role(name=user_data['role'])
+            if not datastore.find_role(user_data["role"]):
+                datastore.create_role(name=user_data["role"])
                 datastore.commit()
 
             # Create account and activate it
-            datastore.create_user(email=email,
-                                  password=password,
-                                  roles=[user_data['role']])
+            datastore.create_user(
+                email=email, password=password, roles=[user_data["role"]]
+            )
             datastore.commit()
             user = datastore.find_user(email=email)
             confirm_user(user)
             datastore.commit()
 
             click.secho(
-                'User {email} with ID #{id} created successfully'.format(
-                    email=email, id=user.id),
-                fg='green')
+                "User {email} with ID #{id} created successfully".format(
+                    email=email, id=user.id
+                ),
+                fg="green",
+            )
 
             # Create user resource
             user = UserRecord.create(user_data, dbcommit=True)
             user.reindex()
 
         except Exception as error:
-            click.secho('User {user} could not be imported: {error}'.format(
-                user=user_data, error=str(error)),
-                        fg='red')
+            click.secho(
+                "User {user} could not be imported: {error}".format(
+                    user=user_data, error=str(error)
+                ),
+                fg="red",
+            )
 
-    click.secho('Finished', fg='green')
+    click.secho("Finished", fg="green")
