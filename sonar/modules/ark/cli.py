@@ -33,58 +33,69 @@ from .api import Ark
 def ark():
     """ARK utils commands."""
     if not Ark():
-        click.secho('ARK is not enabled.', fg='red')
+        click.secho("ARK is not enabled.", fg="red")
         raise click.Abort()
+
 
 @ark.command()
 @with_appcontext
 def config():
     """Dump the ARK client configurations."""
-    click.secho(f'{Ark().config()}')
+    click.secho(f"{Ark().config()}")
+
 
 @ark.command()
-@click.argument('organisation_pid')
+@click.argument("organisation_pid")
 @with_appcontext
 def create_missing(organisation_pid):
     """Create an ark identifier in the document of the given organisation."""
     organisation = OrganisationRecord.get_record_by_pid(organisation_pid)
     if not organisation:
-        click.secho('Organisation does not exist.', fg='red')
+        click.secho("Organisation does not exist.", fg="red")
         raise click.Abort()
-    if not organisation.get('arkNAAN'):
+    if not organisation.get("arkNAAN"):
         click.secho(
-            'NAAN configuration does not exist for the given organisation.',
-            fg='red')
+            "NAAN configuration does not exist for the given organisation.", fg="red"
+        )
         raise click.Abort()
-    search = DocumentSearch()\
-        .source('pid')\
-        .filter('bool', must_not=[
-            Q('nested', path='identifiedBy', query=Q('term', identifiedBy__type='ark')),
-            Q('term', harvested=True)
-        ])\
-        .filter('term', organisation__pid=organisation_pid)
+    search = (
+        DocumentSearch()
+        .source("pid")
+        .filter(
+            "bool",
+            must_not=[
+                Q(
+                    "nested",
+                    path="identifiedBy",
+                    query=Q("term", identifiedBy__type="ark"),
+                ),
+                Q("term", harvested=True),
+            ],
+        )
+        .filter("term", organisation__pid=organisation_pid)
+    )
 
     if not search.count():
-        click.secho('No document found.', fg='yellow')
+        click.secho("No document found.", fg="yellow")
         raise click.Abort()
 
-    ark = Ark(naan=organisation.get('arkNAAN'))
+    ark = Ark(naan=organisation.get("arkNAAN"))
     if not ark:
-        click.secho('Ark is not enabled.', fg='red')
+        click.secho("Ark is not enabled.", fg="red")
         raise click.Abort()
 
-    click.secho(f'Detected {search.count()}', fg='green')
+    click.secho(f"Detected {search.count()}", fg="green")
     n = 0
     with click.progressbar(search.scan()) as bar:
         for res in bar:
             doc = DocumentRecord.get_record_by_pid(res.pid)
-            pid = ark.create(doc['pid'], record_uuid=doc.id)
+            pid = ark.create(doc["pid"], record_uuid=doc.id)
             assert not doc.get_ark()
-            doc.setdefault('identifiedBy', []).append(
-                dict(type='ark', value=pid.pid_value))
+            doc.setdefault("identifiedBy", []).append(
+                dict(type="ark", value=pid.pid_value)
+            )
             doc.commit()
             db.session.commit()
             doc.reindex()
             n += 1
-    click.secho(f'{n} document has been updated.', fg='green')
-
+    click.secho(f"{n} document has been updated.", fg="green")

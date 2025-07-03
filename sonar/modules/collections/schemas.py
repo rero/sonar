@@ -20,8 +20,11 @@
 from functools import partial
 
 from invenio_records_rest.schemas import Nested, StrictKeysMixin
-from invenio_records_rest.schemas.fields import GenFunction, \
-    PersistentIdentifier, SanitizedUnicode
+from invenio_records_rest.schemas.fields import (
+    GenFunction,
+    PersistentIdentifier,
+    SanitizedUnicode,
+)
 from marshmallow import EXCLUDE, fields, pre_dump, pre_load
 
 from sonar.modules.serializers import schema_from_context
@@ -32,6 +35,7 @@ from .api import Record
 from .permissions import FilesPermission, RecordPermission
 
 schema_from_record = partial(schema_from_context, schema=Record.schema)
+
 
 class FileSchemaV1(StrictKeysMixin):
     """File schema."""
@@ -70,13 +74,17 @@ class FileSchemaV1(StrictKeysMixin):
         :param item: Dict representing the record.
         :returns: Modified dict.
         """
-        if not item.get('bucket'):
+        if not item.get("bucket"):
             return item
-        doc = Record.get_record_by_bucket(item.get('bucket'))
-        item['permissions'] = {
-            'read': FilesPermission.read(current_user_record, item, doc['pid'], doc),
-            'update': FilesPermission.update(current_user_record, item, doc['pid'], doc),
-            'delete': FilesPermission.delete(current_user_record, item, doc['pid'], doc)
+        doc = Record.get_record_by_bucket(item.get("bucket"))
+        item["permissions"] = {
+            "read": FilesPermission.read(current_user_record, item, doc["pid"], doc),
+            "update": FilesPermission.update(
+                current_user_record, item, doc["pid"], doc
+            ),
+            "delete": FilesPermission.delete(
+                current_user_record, item, doc["pid"], doc
+            ),
         }
 
         return item
@@ -88,8 +96,9 @@ class FileSchemaV1(StrictKeysMixin):
         :param data: Dict of record data.
         :returns: Modified data.
         """
-        data.pop('permissions', None)
+        data.pop("permissions", None)
         return data
+
 
 class RecordMetadataSchema(StrictKeysMixin):
     """Schema for record metadata."""
@@ -99,19 +108,21 @@ class RecordMetadataSchema(StrictKeysMixin):
     description = fields.List(fields.Dict())
     organisation = fields.Dict()
     permissions = fields.Dict(dump_only=True)
-    label = fields.Method('get_label')
+    label = fields.Method("get_label")
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
-    schema = GenFunction(load_only=True,
-                         attribute="$schema",
-                         data_key="$schema",
-                         deserialize=schema_from_record)
+    schema = GenFunction(
+        load_only=True,
+        attribute="$schema",
+        data_key="$schema",
+        deserialize=schema_from_record,
+    )
     _files = Nested(FileSchemaV1, many=True)
     _bucket = SanitizedUnicode()
 
     def get_label(self, obj):
         """Get label."""
-        return get_language_value(obj['name'])
+        return get_language_value(obj["name"])
 
     @pre_load
     def remove_fields(self, data, **kwargs):
@@ -121,8 +132,8 @@ class RecordMetadataSchema(StrictKeysMixin):
         :return: Modified data
         :rtype: dict
         """
-        data.pop('permissions', None)
-        data.pop('label', None)
+        data.pop("permissions", None)
+        data.pop("label", None)
 
         return data
 
@@ -135,12 +146,12 @@ class RecordMetadataSchema(StrictKeysMixin):
         :rtype: dict
         """
         # Organisation already attached to project, we do nothing.
-        if data.get('organisation'):
+        if data.get("organisation"):
             return data
 
         # Store current user organisation in new project.
-        if current_user_record.get('organisation'):
-            data['organisation'] = current_user_record['organisation']
+        if current_user_record.get("organisation"):
+            data["organisation"] = current_user_record["organisation"]
 
         return data
 
@@ -152,10 +163,10 @@ class RecordMetadataSchema(StrictKeysMixin):
         :return: Modified item
         :rtype: dict
         """
-        item['permissions'] = {
-            'read': RecordPermission.read(current_user_record, item),
-            'update': RecordPermission.update(current_user_record, item),
-            'delete': RecordPermission.delete(current_user_record, item)
+        item["permissions"] = {
+            "read": RecordPermission.read(current_user_record, item),
+            "update": RecordPermission.update(current_user_record, item),
+            "delete": RecordPermission.delete(current_user_record, item),
         }
 
         return item

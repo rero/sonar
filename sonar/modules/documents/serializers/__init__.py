@@ -17,8 +17,10 @@
 
 """Document serializers."""
 
-from invenio_records_rest.serializers.response import record_responsify, \
-    search_responsify
+from invenio_records_rest.serializers.response import (
+    record_responsify,
+    search_responsify,
+)
 
 from ..marshmallow import DocumentListSchemaV1, DocumentSchemaV1
 from .dc import DublinCoreSerializer
@@ -36,8 +38,7 @@ json_list_v1 = JSONSerializer(DocumentListSchemaV1)
 #: schema.org serializer
 schemaorg_v1 = SonarSchemaOrgSerializer(SchemaOrgV1, replace_refs=True)
 #: google scholar serializer
-google_scholar_v1 = SonarGoogleScholarSerializer(GoogleScholarV1,
-                                                 replace_refs=True)
+google_scholar_v1 = SonarGoogleScholarSerializer(GoogleScholarV1, replace_refs=True)
 from sonar.modules.documents.serializers.schemas.dc import DublinCoreSchema
 
 dc_v1 = DublinCoreSerializer(DublinCoreSchema)
@@ -45,19 +46,19 @@ dc_v1 = DublinCoreSerializer(DublinCoreSchema)
 # Records-REST serializers
 # ========================
 #: JSON record serializer for individual records.
-json_v1_response = record_responsify(json_v1, 'application/json')
+json_v1_response = record_responsify(json_v1, "application/json")
 #: JSON record serializer for search results.
-json_v1_search = search_responsify(json_list_v1, 'application/json')
+json_v1_search = search_responsify(json_list_v1, "application/json")
 
 #: JSON record serializer for individual records.
-dc_v1_response = record_responsify(dc_v1, 'text/xml')
+dc_v1_response = record_responsify(dc_v1, "text/xml")
 #: JSON record serializer for search results.
-dc_v1_search = search_responsify(dc_v1, 'text/xml')
+dc_v1_search = search_responsify(dc_v1, "text/xml")
 
 __all__ = (
-    'json_v1',
-    'json_v1_response',
-    'json_v1_search',
-    'dc_v1_response',
-    'dc_v1_search',
+    "json_v1",
+    "json_v1_response",
+    "json_v1_search",
+    "dc_v1_response",
+    "dc_v1_search",
 )

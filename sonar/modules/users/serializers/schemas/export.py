@@ -33,7 +33,7 @@ class ExportSchemaV1(Schema):
     phone = fields.String(dump_only=True)
     organisation = fields.Dict(dump_only=True)
     role = fields.String(dump_only=True)
-    password = fields.Method('get_password', dump_only=True)
+    password = fields.Method("get_password", dump_only=True)
 
     def get_password(self, obj):
         """Get hashed password."""

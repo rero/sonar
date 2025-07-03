@@ -41,7 +41,7 @@ from werkzeug.security import gen_salt
 
 from sonar.modules.api import SonarRecord
 
-_datastore = LocalProxy(lambda: current_app.extensions['security'].datastore)
+_datastore = LocalProxy(lambda: current_app.extensions["security"].datastore)
 
 
 @click.group()
@@ -50,22 +50,24 @@ def utils():
 
 
 @utils.command()
-@click.option('--force', is_flag=True, default=False)
+@click.option("--force", is_flag=True, default=False)
 @with_appcontext
 @search_version_check
 def es_init(force):
     """Initialize registered templates, aliases and mappings."""
     # TODO: to remove once it is fixed in invenio-search module
-    click.secho('Putting templates...', fg='green', bold=True, file=sys.stderr)
+    click.secho("Putting templates...", fg="green", bold=True, file=sys.stderr)
     with click.progressbar(
-            current_search.put_templates(ignore=[400] if force else None),
-            length=len(current_search.templates)) as item:
+        current_search.put_templates(ignore=[400] if force else None),
+        length=len(current_search.templates),
+    ) as item:
         for response in item:
             item.label = response
-    click.secho('Creating indexes...', fg='green', bold=True, file=sys.stderr)
+    click.secho("Creating indexes...", fg="green", bold=True, file=sys.stderr)
     with click.progressbar(
-            current_search.create(ignore=[400] if force else None),
-            length=len(current_search.mappings)) as item:
+        current_search.create(ignore=[400] if force else None),
+        length=len(current_search.mappings),
+    ) as item:
         for name, response in item:
             item.label = name
 
@@ -78,21 +80,18 @@ def clear_files():
         try:
             shutil.rmtree(location.uri)
         except Exception:
-            click.secho(
-                f'Directory {location.uri} cannot be cleaned',
-                fg='yellow'
-            )
+            click.secho(f"Directory {location.uri} cannot be cleaned", fg="yellow")
 
-    click.secho('Finished', fg='green')
+    click.secho("Finished", fg="green")
 
 
 @utils.command()
-@click.argument('src_json_file', type=click.File('r'))
-@click.option('-o', '--output', 'output', type=click.File('w'), default=None)
+@click.argument("src_json_file", type=click.File("r"))
+@click.option("-o", "--output", "output", type=click.File("w"), default=None)
 @with_appcontext
 def compile_json(src_json_file, output):
     """Compile source json file (resolve $ref)."""
-    click.secho('Compile json file (resolve $ref): ', fg='green', nl=False)
+    click.secho("Compile json file (resolve $ref): ", fg="green", nl=False)
     click.secho(src_json_file.name)
 
     data = jsonref.load(src_json_file, loader=custom_json_loader)
@@ -112,14 +111,10 @@ def custom_json_loader(uri, **kwargs):
     return jsonloader(uri, *kwargs)
 
 
-@utils.command('export')
-@click.option('-p', '--pid-type', 'pid_type', default='doc')
-@click.option('-s', '--serializer', 'serializer_key', default='export')
-@click.option('-o',
-              '--output-dir',
-              'output_dir',
-              required=True,
-              type=click.File('w'))
+@utils.command("export")
+@click.option("-p", "--pid-type", "pid_type", default="doc")
+@click.option("-s", "--serializer", "serializer_key", default="export")
+@click.option("-o", "--output-dir", "output_dir", required=True, type=click.File("w"))
 @with_appcontext
 def export(pid_type, serializer_key, output_dir):
     """Export records for the given record type.
@@ -138,7 +133,8 @@ def export(pid_type, serializer_key, output_dir):
 
         # Load the serializer
         serializer_class = current_app.config.get(
-            'SONAR_APP_EXPORT_SERIALIZERS', {}).get(pid_type)
+            "SONAR_APP_EXPORT_SERIALIZERS", {}
+        ).get(pid_type)
 
         if serializer_class:
             serializer = obj_or_import_string(serializer_class)()
@@ -150,9 +146,7 @@ def export(pid_type, serializer_key, output_dir):
 
         # Create ouptut directory if not exists
         if pids:
-            pathlib.Path(output_dir.name).mkdir(mode=0o755,
-                                                parents=True,
-                                                exist_ok=True)
+            pathlib.Path(output_dir.name).mkdir(mode=0o755, parents=True, exist_ok=True)
 
         for pid in pids:
             record = record_class.get_record_by_pid(pid)
@@ -162,33 +156,32 @@ def export(pid_type, serializer_key, output_dir):
             else:
                 record = record.dumps()
 
-            for file in record.get('files', []):
-                if file.get('uri'):
-                    target_path = join(output_dir.name, pid, file['key'])
-                    pathlib.Path(dirname(target_path)).mkdir(mode=0o755,
-                                                             parents=True,
-                                                             exist_ok=True)
-                    shutil.copyfile(file['uri'], target_path)
-                    file.pop('uri')
-                    file['path'] = f'./{pid}/{file["key"]}'
+            for file in record.get("files", []):
+                if file.get("uri"):
+                    target_path = join(output_dir.name, pid, file["key"])
+                    pathlib.Path(dirname(target_path)).mkdir(
+                        mode=0o755, parents=True, exist_ok=True
+                    )
+                    shutil.copyfile(file["uri"], target_path)
+                    file.pop("uri")
+                    file["path"] = f'./{pid}/{file["key"]}'
 
             records.append(record)
 
         if records:
             # Write data
-            output_file = join(output_dir.name, 'data.json')
-            f = open(output_file, 'w')
+            output_file = join(output_dir.name, "data.json")
+            f = open(output_file, "w")
             f.write(json.dumps(records))
             f.close()
 
-        click.secho('Finished', fg='green')
+        click.secho("Finished", fg="green")
 
     except Exception as err:
-        click.secho(f'An error occured during export: {err}', fg='red')
+        click.secho(f"An error occured during export: {err}", fg="red")
 
 
-def create_personal(
-        name, user_id, scopes=None, is_internal=False, access_token=None):
+def create_personal(name, user_id, scopes=None, is_internal=False, access_token=None):
     """Create a personal access token.
 
     A token that is bound to a specific user and which doesn't expire, i.e.
@@ -210,14 +203,13 @@ def create_personal(
             user_id=user_id,
             is_internal=True,
             is_confidential=False,
-            _default_scopes=scopes
+            _default_scopes=scopes,
         )
         client.gen_salt()
 
         if not access_token:
             access_token = gen_salt(
-                current_app.config.get(
-                    'OAUTH2SERVER_TOKEN_PERSONAL_SALT_LEN')
+                current_app.config.get("OAUTH2SERVER_TOKEN_PERSONAL_SALT_LEN")
             )
         token = Token(
             client_id=client.client_id,
@@ -235,25 +227,31 @@ def create_personal(
 
 
 @utils.command()
-@click.option('-n', '--name', required=True)
+@click.option("-n", "--name", required=True)
 @click.option(
-    '-u', '--user', required=True, callback=process_user,
-    help='User ID or email.')
+    "-u", "--user", required=True, callback=process_user, help="User ID or email."
+)
+@click.option("-s", "--scope", "scopes", multiple=True, callback=process_scopes)
+@click.option("-i", "--internal", is_flag=True)
 @click.option(
-    '-s', '--scope', 'scopes', multiple=True, callback=process_scopes)
-@click.option('-i', '--internal', is_flag=True)
-@click.option(
-    '-t', '--access_token', 'access_token', required=False,
-    help='personalized access_token.')
+    "-t",
+    "--access_token",
+    "access_token",
+    required=False,
+    help="personalized access_token.",
+)
 @with_appcontext
 def token_create(name, user, scopes, internal, access_token):
     """Create a personal OAuth token."""
     if user:
         token = create_personal(
-            name, user.id, scopes=scopes, is_internal=internal,
-            access_token=access_token
+            name,
+            user.id,
+            scopes=scopes,
+            is_internal=internal,
+            access_token=access_token,
         )
         db.session.commit()
-        click.secho(token.access_token, fg='blue')
+        click.secho(token.access_token, fg="blue")
     else:
-        click.secho('No user found', fg='red')
+        click.secho("No user found", fg="red")

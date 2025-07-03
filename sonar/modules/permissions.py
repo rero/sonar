@@ -27,24 +27,25 @@ from invenio_base.utils import obj_or_import_string
 
 from sonar.modules.users.api import current_user_record
 
-superuser_access_permission = Permission(ActionNeed('superuser-access'))
-admin_access_permission = Permission(ActionNeed('admin-access'))
-submitter_access_permission = Permission(RoleNeed('submitter'),
-                                         RoleNeed('moderator'),
-                                         RoleNeed('admin'),
-                                         RoleNeed('superuser'))
+superuser_access_permission = Permission(ActionNeed("superuser-access"))
+admin_access_permission = Permission(ActionNeed("admin-access"))
+submitter_access_permission = Permission(
+    RoleNeed("submitter"),
+    RoleNeed("moderator"),
+    RoleNeed("admin"),
+    RoleNeed("superuser"),
+)
 
-moderator_access_permission = Permission(RoleNeed('moderator'),
-                                         RoleNeed('admin'),
-                                         RoleNeed('superuser'))
-monitoring_access_permission = Permission(RoleNeed('superuser'),
-                                          RoleNeed('monitoring'))
+moderator_access_permission = Permission(
+    RoleNeed("moderator"), RoleNeed("admin"), RoleNeed("superuser")
+)
+monitoring_access_permission = Permission(RoleNeed("superuser"), RoleNeed("monitoring"))
 
 # Allow access without permission check
-allow_access = type('Allow', (), {'can': lambda self: True})()
+allow_access = type("Allow", (), {"can": lambda self: True})()
 
 # Deny access without permission check
-deny_access = type('Allow', (), {'can': lambda self: False})()
+deny_access = type("Allow", (), {"can": lambda self: False})()
 
 
 def has_submitter_access():
@@ -52,7 +53,7 @@ def has_submitter_access():
 
     This function is used in app context and can be called in all templates.
     """
-    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
+    if current_app.config.get("SONAR_APP_DISABLE_PERMISSION_CHECKS"):
         return True
 
     return submitter_access_permission.can()
@@ -63,7 +64,7 @@ def has_admin_access():
 
     This function is used in app context and can be called in all templates.
     """
-    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
+    if current_app.config.get("SONAR_APP_DISABLE_PERMISSION_CHECKS"):
         return True
 
     return admin_access_permission.can()
@@ -74,7 +75,7 @@ def has_superuser_access():
 
     This function is used in app context and can be called in all templates.
     """
-    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
+    if current_app.config.get("SONAR_APP_DISABLE_PERMISSION_CHECKS"):
         return True
 
     return superuser_access_permission.can()
@@ -89,7 +90,7 @@ def record_permission_factory(record=None, action=None, cls=None):
     :returns: Permission object.
     """
     # Permission is allowed for all actions.
-    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
+    if current_app.config.get("SONAR_APP_DISABLE_PERMISSION_CHECKS"):
         return allow_access
 
     # No specific class, the base record permission class is taken.
@@ -135,7 +136,7 @@ def is_user_logged_and_submitter(func):
 
 def admin_permission_factory(admin_view):
     """Admin permission factory."""
-    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
+    if current_app.config.get("SONAR_APP_DISABLE_PERMISSION_CHECKS"):
         return allow_access
 
     return superuser_access_permission
@@ -151,21 +152,24 @@ def files_permission_factory(obj, action, pid=None, record=None):
                read(record masked, restricted: embargo etc, text never)
     """
     # Permission is allowed for all actions.
-    if current_app.config.get('SONAR_APP_DISABLE_PERMISSION_CHECKS'):
+    if current_app.config.get("SONAR_APP_DISABLE_PERMISSION_CHECKS"):
         return allow_access
 
     pid_type = None
     if pid:
         pid_type = pid.pid_type
-    elif request.view_args.get('pid_value'):
-        (pid, record) = request.view_args.get('pid_value').data
+    elif request.view_args.get("pid_value"):
+        (pid, record) = request.view_args.get("pid_value").data
         pid_type = pid.pid_type
 
     files_permission_cls = obj_or_import_string(
-        current_app.config.get(
-            'SONAR_APP_FILES_REST_PERMISSION', {}).get(pid_type, FilesPermission))
+        current_app.config.get("SONAR_APP_FILES_REST_PERMISSION", {}).get(
+            pid_type, FilesPermission
+        )
+    )
     return files_permission_cls.create_permission(
-        obj, action, user=None, pid=pid, parent_record=record)
+        obj, action, user=None, pid=pid, parent_record=record
+    )
 
 
 def wiki_edit_permission():
@@ -179,11 +183,11 @@ def wiki_edit_permission():
 class RecordPermission:
     """Record permissions for CRUD operations."""
 
-    list_actions = ['list']
-    create_actions = ['create']
-    read_actions = ['read']
-    update_actions = ['update']
-    delete_actions = ['delete']
+    list_actions = ["list"]
+    create_actions = ["create"]
+    read_actions = ["read"]
+    update_actions = ["update"]
+    delete_actions = ["delete"]
 
     def __init__(self, record, func, user=None, **kwargs):
         """Initialize a file permission object.
@@ -301,20 +305,18 @@ class FilesPermission(RecordPermission):
     list_actions = []
     create_actions = []
     read_actions = [
-        'bucket-read', 'bucket-read-versions',
-        'bucket-listmultiparts',
-        'object-read', 'multipart-read',
-        'object-read-version'
+        "bucket-read",
+        "bucket-read-versions",
+        "bucket-listmultiparts",
+        "object-read",
+        "multipart-read",
+        "object-read-version",
     ]
     update_actions = [
-        'location-update',
-        'bucket-update',
+        "location-update",
+        "bucket-update",
     ]
-    delete_actions = [
-        'object-delete',
-        'object-delete-version',
-        'multipart-delete'
-    ]
+    delete_actions = ["object-delete", "object-delete-version", "multipart-delete"]
 
     def __init__(self, record, func, user=None, pid=None, parent_record={}):
         """Initialize a file permission object.
@@ -335,5 +337,9 @@ class FilesPermission(RecordPermission):
 
         :returns: Permission object.
         """
-        return self.func(user=self.user, record=self.record, pid=self.pid,
-                         parent_record=self.parent_record)
+        return self.func(
+            user=self.user,
+            record=self.record,
+            pid=self.pid,
+            parent_record=self.parent_record,
+        )

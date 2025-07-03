@@ -25,23 +25,22 @@ from invenio_oaiserver.models import OAISet
 def test_oai_set(organisation, document):
     """Test OAI set synchronisation with organisation."""
     # Document has a `_oai` property
-    assert document['_oai']['id'] == 'oai:sonar.ch:{pid}'.format(
-        pid=document['pid'])
-    assert document['_oai']['sets'] == ['org']
+    assert document["_oai"]["id"] == "oai:sonar.ch:{pid}".format(pid=document["pid"])
+    assert document["_oai"]["sets"] == ["org"]
     assert re.match(
-        r'^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:'
-        r'[0-9]{2}:[0-9]{2}\.[0-9]{6}\+00:00$',
-        document['_oai']['updated'])
+        r"^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:" r"[0-9]{2}:[0-9]{2}\.[0-9]{6}\+00:00$",
+        document["_oai"]["updated"],
+    )
 
     # Set for organisation exists
     sets = OAISet.query.all()
     assert len(sets) == 1
-    assert sets[0].spec == 'org'
-    assert sets[0].name == 'org'
+    assert sets[0].spec == "org"
+    assert sets[0].name == "org"
 
     # New name is updated
-    organisation.update({'code': 'org', 'name': 'New name'})
+    organisation.update({"code": "org", "name": "New name"})
     sets = OAISet.query.all()
     assert len(sets) == 1
-    assert sets[0].spec == 'org'
-    assert sets[0].name == 'New name'
+    assert sets[0].spec == "org"
+    assert sets[0].name == "New name"

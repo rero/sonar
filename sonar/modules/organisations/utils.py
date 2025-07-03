@@ -23,8 +23,7 @@ from bs4 import BeautifulSoup
 
 def platform_name(organisation):
     """Get platform name."""
-    platform_name = organisation.get('platformName')
+    platform_name = organisation.get("platformName")
     if platform_name:
         html = markdown.markdown(platform_name)
-        return ''.join(
-            BeautifulSoup(html).findAll(text=True)).replace('\n', ' - ')
+        return "".join(BeautifulSoup(html).findAll(text=True)).replace("\n", " - ")

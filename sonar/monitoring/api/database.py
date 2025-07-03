@@ -20,7 +20,7 @@
 from invenio_db import db
 
 
-class DatabaseMonitoring():
+class DatabaseMonitoring:
     """DB monitoring."""
 
     def count_connections(self):
@@ -51,10 +51,10 @@ class DatabaseMonitoring():
         result = db.session.execute(query).first()
 
         return {
-            'max': result['max_conn'],
-            'used': result['used'],
-            'reserved_for_super': result['res_for_super'],
-            'free': result['free']
+            "max": result["max_conn"],
+            "used": result["used"],
+            "reserved_for_super": result["res_for_super"],
+            "free": result["free"],
         }
 
     def activity(self):
@@ -74,15 +74,15 @@ class DatabaseMonitoring():
         def format_row(row):
             """Format returned row from DB."""
             return {
-                'application_name': row['application_name'],
-                'client_addr': row['client_addr'],
-                'client_port': row['client_port'],
-                'backend_start': row['backend_start'],
-                'xact_start': row['xact_start'],
-                'query_start': row['query_start'],
-                'wait_event': row['wait_event'],
-                'state': row['state'],
-                'left': row['left'],
+                "application_name": row["application_name"],
+                "client_addr": row["client_addr"],
+                "client_port": row["client_port"],
+                "backend_start": row["backend_start"],
+                "xact_start": row["xact_start"],
+                "query_start": row["query_start"],
+                "wait_event": row["wait_event"],
+                "state": row["state"],
+                "left": row["left"],
             }
 
         return list(map(format_row, db.session.execute(query).fetchall()))
