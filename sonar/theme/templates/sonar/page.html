@@ -107,6 +107,9 @@ along with this program. If not, see
   {%- endblock head_links %}
 
   {%- block css %}
+  <style>
+    @layer bootstrap, theme, sonar-ui, primeng, utilities;
+  </style>
   {{ webpack[get_specific_theme()] }}
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link

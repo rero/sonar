@@ -19,8 +19,7 @@
 
 from marshmallow import fields
 
-from sonar.resources.projects.schema import \
-    MetadataSchema as BaseMetadataSchema
+from sonar.resources.projects.schema import MetadataSchema as BaseMetadataSchema
 from sonar.resources.projects.schema import RecordSchema as BaseRecordSchema
 
 

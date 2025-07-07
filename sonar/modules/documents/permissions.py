@@ -40,7 +40,7 @@ class DocumentPermission(RecordPermission):
         :param record: Record to check.
         :returns: True is action can be done.
         """
-        view = request.args.get('view')
+        view = request.args.get("view")
 
         # Documents are accessible in public view, but eventually filtered
         # later by organisation
@@ -48,7 +48,7 @@ class DocumentPermission(RecordPermission):
             return True
 
         # Only for moderators users.
-        if (not user or not user.is_moderator or not current_organisation):
+        if not user or not user.is_moderator or not current_organisation:
             return False
 
         return True
@@ -76,11 +76,11 @@ class DocumentPermission(RecordPermission):
         if user and user.is_superuser:
             return True
 
-        document = DocumentRecord.get_record_by_pid(record['pid'])
+        document = DocumentRecord.get_record_by_pid(record["pid"])
         document = document.resolve()
         # Moderator can read their own documents.
         if user and user.is_moderator:
-            if document.has_organisation(current_organisation['pid']):
+            if document.has_organisation(current_organisation["pid"]):
                 return True
         return not document.is_masked
 
@@ -98,15 +98,15 @@ class DocumentPermission(RecordPermission):
         if user.is_superuser:
             return True
 
-        document = DocumentRecord.get_record_by_pid(record['pid'])
+        document = DocumentRecord.get_record_by_pid(record["pid"])
         document = document.resolve()
 
         # Moderator can update their own documents.
-        if not document.has_organisation(current_organisation['pid']):
+        if not document.has_organisation(current_organisation["pid"]):
             return False
 
         user = user.replace_refs()
-        return document.has_subdivision(user.get('subdivision', {}).get('pid'))
+        return document.has_subdivision(user.get("subdivision", {}).get("pid"))
 
     @classmethod
     def delete(cls, user, record):
@@ -134,12 +134,13 @@ class DocumentPermission(RecordPermission):
         :returns: True if action can be done.
         """
         # Delete only documents with no URN or no registred URN
-        document = DocumentRecord.get_record_by_pid(record['pid'])
+        document = DocumentRecord.get_record_by_pid(record["pid"])
         if document:
             # check if document has urn
             try:
-                urn_identifier = PersistentIdentifier\
-                    .get_by_object('urn', 'rec', document.id)
+                urn_identifier = PersistentIdentifier.get_by_object(
+                    "urn", "rec", document.id
+                )
             except PIDDoesNotExistError:
                 return False
 
@@ -157,7 +158,7 @@ class DocumentFilesPermission(FilesPermission):
     @classmethod
     def get_document(cls, parent_record):
         """Get the parent document."""
-        return DocumentRecord.get_record_by_pid(parent_record.get('pid'))
+        return DocumentRecord.get_record_by_pid(parent_record.get("pid"))
 
     @classmethod
     def read(cls, user, record, pid, parent_record):
@@ -181,19 +182,15 @@ class DocumentFilesPermission(FilesPermission):
         # TODO: filter the list of files based on embargo
         if isinstance(record, Bucket):
             return True
-        if hasattr(record, 'key'):
+        if hasattr(record, "key"):
             file = document.files[record.key]
         else:
-            file = document.files[record['key']]
-        file_type = file['type']
-        if file_type == 'fulltext' and (not user or not user.is_admin):
+            file = document.files[record["key"]]
+        file_type = file["type"]
+        if file_type == "fulltext" and (not user or not user.is_admin):
             return False
-        file_restriction = get_file_restriction(
-            file,
-            get_organisations(document),
-            True
-        )
-        return not file_restriction.get('restricted', True)
+        file_restriction = get_file_restriction(file, get_organisations(document), True)
+        return not file_restriction.get("restricted", True)
 
     @classmethod
     def update(cls, user, record, pid, parent_record):
@@ -210,15 +207,17 @@ class DocumentFilesPermission(FilesPermission):
             return True
         document = cls.get_document(parent_record)
         if isinstance(record, ObjectVersion):
-            file_type = document.files[record.key]['type']
-            if file_type == 'file' and record.mimetype == 'application/pdf':
-                return not DocumentPermission.has_urn(parent_record)\
-                    and DocumentPermission.update(user, parent_record)
+            file_type = document.files[record.key]["type"]
+            if file_type == "file" and record.mimetype == "application/pdf":
+                return not DocumentPermission.has_urn(
+                    parent_record
+                ) and DocumentPermission.update(user, parent_record)
         if isinstance(record, dict):
-            file_type = record['type']
-            if file_type == 'file' and record['mimetype'] == 'application/pdf':
-                return not DocumentPermission.has_urn(parent_record)\
-                    and DocumentPermission.update(user, parent_record)
+            file_type = record["type"]
+            if file_type == "file" and record["mimetype"] == "application/pdf":
+                return not DocumentPermission.has_urn(
+                    parent_record
+                ) and DocumentPermission.update(user, parent_record)
         if document := cls.get_document(parent_record):
             return DocumentPermission.update(user, document)
         return False

@@ -17,8 +17,9 @@
 
 """Test deposits documents schema serializer."""
 
-from sonar.modules.deposits.serializers.schemas.document import \
-    DocumentSchema as DepositDocumentSchema
+from sonar.modules.deposits.serializers.schemas.document import (
+    DocumentSchema as DepositDocumentSchema,
+)
 
 
 def test_title():
@@ -28,29 +29,28 @@ def test_title():
     assert DepositDocumentSchema().dump(document) == {}
 
     document = {
-        'title': [{
-            'mainTitle': [{
-                'language':
-                'ger',
-                'value':
-                '¿Política exterior o política de cooperación?'
-            }],
-            'subtitle': [{
-                'language':
-                'ger',
-                'value':
-                'una aproximación constructivista al estudio de la política exterior colombiana'
-            }],
-            'type':
-            'bf:Title'
-        }]
+        "title": [
+            {
+                "mainTitle": [
+                    {
+                        "language": "ger",
+                        "value": "¿Política exterior o política de cooperación?",
+                    }
+                ],
+                "subtitle": [
+                    {
+                        "language": "ger",
+                        "value": "una aproximación constructivista al estudio de la política exterior colombiana",
+                    }
+                ],
+                "type": "bf:Title",
+            }
+        ]
     }
     assert DepositDocumentSchema().dump(document) == {
-        'metadata': {
-            'title':
-            '¿Política exterior o política de cooperación?',
-            'subtitle':
-            'una aproximación constructivista al estudio de la política exterior colombiana'
+        "metadata": {
+            "title": "¿Política exterior o política de cooperación?",
+            "subtitle": "una aproximación constructivista al estudio de la política exterior colombiana",
         }
     }
 
@@ -58,47 +58,25 @@ def test_title():
 def test_identified_by():
     """Test identified by."""
     document = {
-        'identifiedBy': [{
-            'type': 'bf:Doi',
-            'value': '10/12345'
-        }, {
-            'type': 'bf:Isbn',
-            'value': '987654'
-        }, {
-            'type': 'bf:Issn',
-            'value': '123456'
-        }, {
-            'type': 'bf:IssnL',
-            'value': '567890'
-        }, {
-            'type': 'bf:Urn',
-            'value': 'urn-value'
-        }, {
-            'type': 'uri',
-            'value': 'https://uri.com'
-        }]
+        "identifiedBy": [
+            {"type": "bf:Doi", "value": "10/12345"},
+            {"type": "bf:Isbn", "value": "987654"},
+            {"type": "bf:Issn", "value": "123456"},
+            {"type": "bf:IssnL", "value": "567890"},
+            {"type": "bf:Urn", "value": "urn-value"},
+            {"type": "uri", "value": "https://uri.com"},
+        ]
     }
     assert DepositDocumentSchema().dump(document) == {
-        'metadata': {
-            'identifiedBy': [{
-                'type': 'bf:Doi',
-                'value': '10/12345'
-            }, {
-                'type': 'bf:Isbn',
-                'value': '987654'
-            }, {
-                'type': 'bf:Issn',
-                'value': '123456'
-            }, {
-                'type': 'bf:IssnL',
-                'value': '567890'
-            }, {
-                'type': 'bf:Urn',
-                'value': 'urn-value'
-            }, {
-                'type': 'uri',
-                'value': 'https://uri.com'
-            }]
+        "metadata": {
+            "identifiedBy": [
+                {"type": "bf:Doi", "value": "10/12345"},
+                {"type": "bf:Isbn", "value": "987654"},
+                {"type": "bf:Issn", "value": "123456"},
+                {"type": "bf:IssnL", "value": "567890"},
+                {"type": "bf:Urn", "value": "urn-value"},
+                {"type": "uri", "value": "https://uri.com"},
+            ]
         }
     }
 
@@ -110,19 +88,12 @@ def test_language():
     assert DepositDocumentSchema().dump(document) == {}
 
     document = {
-        'language': [{
-            'type': 'bf:Language',
-            'value': 'fre'
-        }, {
-            'type': 'bf:Language',
-            'value': 'ger'
-        }]
+        "language": [
+            {"type": "bf:Language", "value": "fre"},
+            {"type": "bf:Language", "value": "ger"},
+        ]
     }
-    assert DepositDocumentSchema().dump(document) == {
-        'metadata': {
-            'language': 'fre'
-        }
-    }
+    assert DepositDocumentSchema().dump(document) == {"metadata": {"language": "fre"}}
 
 
 def test_abstracts():
@@ -131,23 +102,17 @@ def test_abstracts():
     assert DepositDocumentSchema().dump({}) == {}
 
     document = {
-        'abstracts': [{
-            'language': 'fre',
-            'value': 'Abstract FRE'
-        }, {
-            'language': 'eng',
-            'value': 'Abstract ENG'
-        }]
+        "abstracts": [
+            {"language": "fre", "value": "Abstract FRE"},
+            {"language": "eng", "value": "Abstract ENG"},
+        ]
     }
     assert DepositDocumentSchema().dump(document) == {
-        'metadata': {
-            'abstracts': [{
-                'language': 'fre',
-                'abstract': 'Abstract FRE'
-            }, {
-                'language': 'eng',
-                'abstract': 'Abstract ENG'
-            }]
+        "metadata": {
+            "abstracts": [
+                {"language": "fre", "abstract": "Abstract FRE"},
+                {"language": "eng", "abstract": "Abstract ENG"},
+            ]
         }
     }
 
@@ -158,23 +123,27 @@ def test_contribution():
     assert DepositDocumentSchema().dump({}) == {}
 
     document = {
-        'contribution': [{
-            'agent': {
-                'type': 'bf:Person',
-                'preferred_name': 'Thilmany, Christian. Herrmann',
-                'date_of_birth': '1710',
-                'date_of_death': '1767'
-            },
-            'role': ['cre']
-        }]
+        "contribution": [
+            {
+                "agent": {
+                    "type": "bf:Person",
+                    "preferred_name": "Thilmany, Christian. Herrmann",
+                    "date_of_birth": "1710",
+                    "date_of_death": "1767",
+                },
+                "role": ["cre"],
+            }
+        ]
     }
     assert DepositDocumentSchema().dump(document) == {
-        'contributors': [{
-            'name': 'Thilmany, Christian. Herrmann',
-            'role': 'cre',
-            'date_of_birth': '1710',
-            'date_of_death': '1767'
-        }]
+        "contributors": [
+            {
+                "name": "Thilmany, Christian. Herrmann",
+                "role": "cre",
+                "date_of_birth": "1710",
+                "date_of_death": "1767",
+            }
+        ]
     }
 
 
@@ -184,11 +153,9 @@ def test_document_type():
     document = {}
     assert DepositDocumentSchema().dump(document) == {}
 
-    document = {'documentType': 'coar:c_2f33'}
+    document = {"documentType": "coar:c_2f33"}
     assert DepositDocumentSchema().dump(document) == {
-        'metadata': {
-            'documentType': 'coar:c_2f33'
-        }
+        "metadata": {"documentType": "coar:c_2f33"}
     }
 
 
@@ -199,57 +166,44 @@ def test_date():
     assert DepositDocumentSchema().dump(document) == {}
 
     # No start date
-    document = {'provisionActivity': [{}]}
+    document = {"provisionActivity": [{}]}
     assert DepositDocumentSchema().dump(document) == {}
 
-    document = {
-        'provisionActivity': [{
-            'type': 'bf:Publication',
-            'startDate': '2012'
-        }]
-    }
+    document = {"provisionActivity": [{"type": "bf:Publication", "startDate": "2012"}]}
     assert DepositDocumentSchema().dump(document) == {
-        'metadata': {
-            'documentDate': '2012'
-        }
+        "metadata": {"documentDate": "2012"}
     }
 
 
 def test_content_note():
     """Test content note."""
-    document = {'contentNote': ['Note 1', 'Note 2']}
+    document = {"contentNote": ["Note 1", "Note 2"]}
     assert DepositDocumentSchema().dump(document) == {
-        'metadata': {
-            'contentNote': ['Note 1', 'Note 2']
-        }
+        "metadata": {"contentNote": ["Note 1", "Note 2"]}
     }
 
 
 def test_extent():
     """Test extent."""
-    document = {'extent': '1 Bd.'}
-    assert DepositDocumentSchema().dump(document) == {
-        'metadata': {
-            'extent': '1 Bd.'
-        }
-    }
+    document = {"extent": "1 Bd."}
+    assert DepositDocumentSchema().dump(document) == {"metadata": {"extent": "1 Bd."}}
 
 
 def test_dissertation():
     """Test dissertation."""
     document = {
-        'dissertation': {
-            'degree': 'Diss. Claremont. Complément',
-            'grantingInstitution': 'Granting',
-            'date': '2019'
+        "dissertation": {
+            "degree": "Diss. Claremont. Complément",
+            "grantingInstitution": "Granting",
+            "date": "2019",
         }
     }
     assert DepositDocumentSchema().dump(document) == {
-        'metadata': {
-            'dissertation': {
-                'degree': 'Diss. Claremont. Complément',
-                'grantingInstitution': 'Granting',
-                'date': '2019'
+        "metadata": {
+            "dissertation": {
+                "degree": "Diss. Claremont. Complément",
+                "grantingInstitution": "Granting",
+                "date": "2019",
             }
         }
     }
@@ -257,57 +211,41 @@ def test_dissertation():
 
 def test_additional_materials():
     """Test additional materials."""
-    document = {'additionalMaterials': '30 pl.'}
+    document = {"additionalMaterials": "30 pl."}
     assert DepositDocumentSchema().dump(document) == {
-        'metadata': {
-            'additionalMaterials': '30 pl.'
-        }
+        "metadata": {"additionalMaterials": "30 pl."}
     }
 
 
 def test_formats():
     """Test formats."""
-    document = {
-        'otherMaterialCharacteristics': 'Other material characteristics'
-    }
+    document = {"otherMaterialCharacteristics": "Other material characteristics"}
     assert DepositDocumentSchema().dump(document) == {
-        'metadata': {
-            'otherMaterialCharacteristics': 'Other material characteristics'
-        }
+        "metadata": {"otherMaterialCharacteristics": "Other material characteristics"}
     }
 
 
 def test_other_material_characteristics():
     """Test other material characteristics."""
-    document = {'formats': ['24 cm']}
+    document = {"formats": ["24 cm"]}
     assert DepositDocumentSchema().dump(document) == {
-        'metadata': {
-            'formats': ['24 cm']
-        }
+        "metadata": {"formats": ["24 cm"]}
     }
 
 
 def test_edition_statement():
     """Test edition statement."""
     document = {
-        'editionStatement': {
-            'editionDesignation': {
-                'value': '1st edition'
-            },
-            'responsibility': {
-                'value': 'Resp.'
-            }
+        "editionStatement": {
+            "editionDesignation": {"value": "1st edition"},
+            "responsibility": {"value": "Resp."},
         }
     }
     assert DepositDocumentSchema().dump(document) == {
-        'metadata': {
-            'editionStatement': {
-                'editionDesignation': {
-                    'value': '1st edition'
-                },
-                'responsibility': {
-                    'value': 'Resp.'
-                }
+        "metadata": {
+            "editionStatement": {
+                "editionDesignation": {"value": "1st edition"},
+                "responsibility": {"value": "Resp."},
             }
         }
     }
@@ -320,28 +258,21 @@ def test_publication_place():
     assert DepositDocumentSchema().dump(document) == {}
 
     # No statement
-    document = {'provisionActivity': [{}]}
+    document = {"provisionActivity": [{}]}
     assert DepositDocumentSchema().dump(document) == {}
 
     document = {
-        'provisionActivity': [{
-            'statement': [{
-                'type': 'bf:Place',
-                'label': {
-                    'value': 'Place 1'
-                }
-            }, {
-                'type': 'bf:Place',
-                'label': {
-                    'value': 'Place 2'
-                }
-            }]
-        }]
+        "provisionActivity": [
+            {
+                "statement": [
+                    {"type": "bf:Place", "label": {"value": "Place 1"}},
+                    {"type": "bf:Place", "label": {"value": "Place 2"}},
+                ]
+            }
+        ]
     }
     assert DepositDocumentSchema().dump(document) == {
-        'metadata': {
-            'publicationPlace': 'Place 1'
-        }
+        "metadata": {"publicationPlace": "Place 1"}
     }
 
 
@@ -352,28 +283,21 @@ def test_publisher():
     assert DepositDocumentSchema().dump(document) == {}
 
     # No statement
-    document = {'provisionActivity': [{}]}
+    document = {"provisionActivity": [{}]}
     assert DepositDocumentSchema().dump(document) == {}
 
     document = {
-        'provisionActivity': [{
-            'statement': [{
-                'type': 'bf:Agent',
-                'label': {
-                    'value': 'Agent 1'
-                }
-            }, {
-                'type': 'bf:Agent',
-                'label': {
-                    'value': 'Agent 2'
-                }
-            }]
-        }]
+        "provisionActivity": [
+            {
+                "statement": [
+                    {"type": "bf:Agent", "label": {"value": "Agent 1"}},
+                    {"type": "bf:Agent", "label": {"value": "Agent 2"}},
+                ]
+            }
+        ]
     }
     assert DepositDocumentSchema().dump(document) == {
-        'metadata': {
-            'publisher': 'Agent 1'
-        }
+        "metadata": {"publisher": "Agent 1"}
     }
 
 
@@ -383,11 +307,9 @@ def test_notes():
     document = {}
     assert DepositDocumentSchema().dump(document) == {}
 
-    document = {'notes': ['Note 1', 'Note 2']}
+    document = {"notes": ["Note 1", "Note 2"]}
     assert DepositDocumentSchema().dump(document) == {
-        'metadata': {
-            'notes': ['Note 1', 'Note 2']
-        }
+        "metadata": {"notes": ["Note 1", "Note 2"]}
     }
 
 
@@ -397,22 +319,10 @@ def test_series():
     document = {}
     assert DepositDocumentSchema().dump(document) == {}
 
-    document = {
-        'series': [{
-            'name': 'Serie 1',
-            'number': '12'
-        }, {
-            'name': 'Serie 2'
-        }]
-    }
+    document = {"series": [{"name": "Serie 1", "number": "12"}, {"name": "Serie 2"}]}
     assert DepositDocumentSchema().dump(document) == {
-        'metadata': {
-            'series': [{
-                'name': 'Serie 1',
-                'number': '12'
-            }, {
-                'name': 'Serie 2'
-            }]
+        "metadata": {
+            "series": [{"name": "Serie 1", "number": "12"}, {"name": "Serie 2"}]
         }
     }
 
@@ -424,64 +334,53 @@ def test_part_of():
     assert DepositDocumentSchema().dump(document) == {}
 
     document = {
-        'partOf': [{
-            'document': {
-                'title':
-                'Document title 1',
-                'contribution': ['Contributor 1', 'Contributor 2'],
-                'identifiedBy': [{
-                    'type': 'bf:Issn',
-                    'value': 'ISSN'
-                }, {
-                    'type': 'bf:Isbn',
-                    'value': 'ISBN'
-                }]
+        "partOf": [
+            {
+                "document": {
+                    "title": "Document title 1",
+                    "contribution": ["Contributor 1", "Contributor 2"],
+                    "identifiedBy": [
+                        {"type": "bf:Issn", "value": "ISSN"},
+                        {"type": "bf:Isbn", "value": "ISBN"},
+                    ],
+                },
+                "numberingVolume": "22",
+                "numberingIssue": "4",
+                "numberingPages": "485-512",
+                "numberingYear": "2004",
             },
-            'numberingVolume': '22',
-            'numberingIssue': '4',
-            'numberingPages': '485-512',
-            'numberingYear': '2004'
-        }, {
-            'document': {
-                'title': 'Document title 2'
+            {
+                "document": {"title": "Document title 2"},
+                "numberingVolume": "22",
+                "numberingIssue": "4",
+                "numberingYear": "2004",
             },
-            'numberingVolume': '22',
-            'numberingIssue': '4',
-            'numberingYear': '2004'
-        }, {
-            'document': {
-                'title': 'Document title 3',
+            {
+                "document": {
+                    "title": "Document title 3",
+                },
+                "numberingPages": "243-263",
             },
-            'numberingPages': '243-263'
-        }, {
-            'document': {
-                'title': 'Document title 4'
+            {
+                "document": {"title": "Document title 4"},
+                "numberingIssue": "16",
+                "numberingYear": "2011",
             },
-            'numberingIssue': '16',
-            'numberingYear': '2011'
-        }]
+        ]
     }
     assert DepositDocumentSchema().dump(document) == {
-        'metadata': {
-            'publication': {
-                'publishedIn':
-                'Document title 1',
-                'volume':
-                '22',
-                'number':
-                '4',
-                'pages':
-                '485-512',
-                'year':
-                '2004',
-                'editors': ['Contributor 1', 'Contributor 2'],
-                'identifiedBy': [{
-                    'type': 'bf:Issn',
-                    'value': 'ISSN'
-                }, {
-                    'type': 'bf:Isbn',
-                    'value': 'ISBN'
-                }]
+        "metadata": {
+            "publication": {
+                "publishedIn": "Document title 1",
+                "volume": "22",
+                "number": "4",
+                "pages": "485-512",
+                "year": "2004",
+                "editors": ["Contributor 1", "Contributor 2"],
+                "identifiedBy": [
+                    {"type": "bf:Issn", "value": "ISSN"},
+                    {"type": "bf:Isbn", "value": "ISBN"},
+                ],
             }
         }
     }

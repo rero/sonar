@@ -24,57 +24,50 @@ from sonar.modules.documents.dojson.overdo import Overdo
 overdo = Overdo()
 
 
-@overdo.over('identifiedBy', '001')
+@overdo.over("identifiedBy", "001")
 @utils.ignore_value
 def marc21_to_identified_by_from_001(self, key, value):
     """Get identifier from field 001."""
-    identified_by = self.get('identifiedBy', [])
+    identified_by = self.get("identifiedBy", [])
 
-    identified_by.append({
-        'type': 'bf:Local',
-        'source': 'Archive ouverte UNIGE',
-        'value': value
-    })
+    identified_by.append(
+        {"type": "bf:Local", "source": "Archive ouverte UNIGE", "value": value}
+    )
 
     return identified_by
 
 
-@overdo.over('title', '^245..')
+@overdo.over("title", "^245..")
 @utils.for_each_value
 @utils.ignore_value
 def marc21_to_title_245(self, key, value):
     """Get title."""
-    main_title = value.get('a', 'No title found')
-    language = value.get('9', 'eng')
+    main_title = value.get("a", "No title found")
+    language = value.get("9", "eng")
 
     title = {
-        'type': 'bf:Title',
-        'mainTitle': [{
-            'value': main_title,
-            'language': language
-        }]
+        "type": "bf:Title",
+        "mainTitle": [{"value": main_title, "language": language}],
     }
 
     return title
 
 
-@overdo.over('identifiedBy', '^0247.')
+@overdo.over("identifiedBy", "^0247.")
 @utils.ignore_value
 def marc21_to_identified_by_from_024(self, key, value):
     """Get identifier from field 024."""
-    identified_by = self.get('identifiedBy', [])
+    identified_by = self.get("identifiedBy", [])
 
-    if not value.get('a') or not value.get('2') in ['DOI', 'PMID']:
+    if not value.get("a") or not value.get("2") in ["DOI", "PMID"]:
         return None
 
-    if value.get('2') == 'DOI':
-        identified_by.append({'type': 'bf:Doi', 'value': value.get('a')})
+    if value.get("2") == "DOI":
+        identified_by.append({"type": "bf:Doi", "value": value.get("a")})
 
-    if value.get('2') == 'PMID':
-        identified_by.append({
-            'type': 'bf:Local',
-            'source': 'PMID',
-            'value': value.get('a')
-        })
+    if value.get("2") == "PMID":
+        identified_by.append(
+            {"type": "bf:Local", "source": "PMID", "value": value.get("a")}
+        )
 
     return identified_by

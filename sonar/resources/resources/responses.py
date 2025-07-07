@@ -27,7 +27,7 @@ class StreamResponseHandler(ResponseHandler):
 
     filename = None
 
-    def __init__(self, serializer, filename='records', headers=None):
+    def __init__(self, serializer, filename="records", headers=None):
         """Stream response initialization.
 
         :param filename: File name.
@@ -35,7 +35,6 @@ class StreamResponseHandler(ResponseHandler):
         """
         self.filename = filename
         super().__init__(serializer=serializer, headers=headers)
-
 
     def make_response(self, obj_or_list, code, many=False):
         """Builds a response for one object."""
@@ -51,11 +50,15 @@ class StreamResponseHandler(ResponseHandler):
             serialize = self.serializer.serialize_object
 
         response = flask_make_response(
-            "" if obj_or_list is None else Response(
-                self.serializer.serialize_object_list(obj_or_list)),
-            code
+            (
+                ""
+                if obj_or_list is None
+                else Response(self.serializer.serialize_object_list(obj_or_list))
+            ),
+            code,
         )
 
-        response.headers[
-            'Content-Disposition'] = f'attachment; filename={self.filename}'
+        response.headers["Content-Disposition"] = (
+            f"attachment; filename={self.filename}"
+        )
         return response

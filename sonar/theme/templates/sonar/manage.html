@@ -9,6 +9,16 @@
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="/static/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
+  <style>
+    @layer theme, sonar-ui, primeng, utilities;
+    :root {
+      font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 1rem
+    }
+  </style>
   <link rel="apple-touch-icon" sizes="57x57" href="/static/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/static/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="/static/apple-icon-72x72.png">
@@ -23,14 +33,13 @@
   <link rel="icon" type="image/png" sizes="96x96" href="/static/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
   <link rel="manifest" href="/static/manifest.json">
-  <link rel="stylesheet" href="/static/sonar-ui/styles.css?{{ ui_version }}">
+  <link rel="stylesheet" href="/static/sonar-ui/browser/styles.css?{{ ui_version }}">
 </head>
 
 <body>
-  <sonar-root></sonar-root>
-  <script src="/static/sonar-ui/runtime.js?{{ ui_version }}" module></script>
-  <script src="/static/sonar-ui/polyfills.js?{{ ui_version }}" module></script>
-  <script src="/static/sonar-ui/main.js?{{ ui_version }}" module></script>
+  <sonar-root class="sonar-ui"></sonar-root>
+  <script src="/static/sonar-ui/browser/polyfills.js?{{ ui_version }}" type="module"></script>
+  <script src="/static/sonar-ui/browser/main.js?{{ ui_version }}" type="module"></script>
 </body>
 
 </html>
