@@ -17,8 +17,7 @@
 
 """Base Record resource."""
 
-from invenio_records_resources.resources import \
-    RecordResource as BaseRecordResource
+from invenio_records_resources.resources import RecordResource as BaseRecordResource
 from invenio_records_rest.utils import obj_or_import_string
 
 from sonar.modules.organisations.api import current_organisation
@@ -34,15 +33,17 @@ class RecordResource(BaseRecordResource):
 
         :returns: Default configuration or the dedicated configuration.
         """
-        if not hasattr(self.default_config, 'resource_name'):
+        if not hasattr(self.default_config, "resource_name"):
             return self.default_config
 
         if not has_custom_resource(self.default_config.resource_name):
             return self.default_config
 
         resource_name = self.default_config.resource_name
-        resource_config = (f'sonar.dedicated.{current_organisation["code"]}.'
-                           f'{resource_name}.resource:RecordResourceConfig')
+        resource_config = (
+            f'sonar.dedicated.{current_organisation["code"]}.'
+            f"{resource_name}.resource:RecordResourceConfig"
+        )
 
         return obj_or_import_string(resource_config)
 

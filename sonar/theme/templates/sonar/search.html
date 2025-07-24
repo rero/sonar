@@ -6,12 +6,12 @@
 {% include 'collections/item.html' %}
 <hr class="my-4">
 {% endif %}
-<sonar-root></sonar-root>
+<sonar-root class="sonar-ui"></sonar-root>
 {% endblock %}
 
 {%- block javascript %}
 {{ super() }}
-  <script src="/static/sonar-ui/runtime.js?{{ ui_version }}" module></script>
-  <script src="/static/sonar-ui/polyfills.js?{{ ui_version }}" module></script>
-  <script src="/static/sonar-ui/main.js?{{ ui_version }}" module></script>
+  <link rel="stylesheet" href="/static/sonar-ui/browser/styles.css?{{ ui_version }}">
+  <script src="/static/sonar-ui/browser/polyfills.js?{{ ui_version }}" type="module"></script>
+  <script src="/static/sonar-ui/browser/main.js?{{ ui_version }}" type="module"></script>
 {%- endblock javascript %}

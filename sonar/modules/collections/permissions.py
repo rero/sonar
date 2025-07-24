@@ -66,10 +66,10 @@ class RecordPermission(BaseRecordPermission):
         if not (user and user.is_submitter):
             return False
 
-        record = Record.get_record_by_pid(record['pid'])
+        record = Record.get_record_by_pid(record["pid"])
         record = record.replace_refs()
 
-        return current_organisation['pid'] == record['organisation']['pid']
+        return current_organisation["pid"] == record["organisation"]["pid"]
 
     @classmethod
     def update(cls, user, record):
@@ -98,14 +98,18 @@ class RecordPermission(BaseRecordPermission):
         if not (user and user.is_admin):
             return False
 
-        results = DocumentSearch().filter(
-            'term', collections__pid=record['pid']).source(includes=['pid'])
+        results = (
+            DocumentSearch()
+            .filter("term", collections__pid=record["pid"])
+            .source(includes=["pid"])
+        )
 
         # Cannot remove collection associated to a record
         if results.count():
             return False
 
         return cls.read(user, record)
+
 
 class FilesPermission(BaseFilesPermission):
     """Collection files permissions.
@@ -117,7 +121,7 @@ class FilesPermission(BaseFilesPermission):
     @classmethod
     def get_collection(cls, parent_record):
         """Get the collection record from the parent record."""
-        return Record.get_record_by_pid(parent_record['pid'])
+        return Record.get_record_by_pid(parent_record["pid"])
 
     @classmethod
     def read(cls, user, record, pid, parent_record):

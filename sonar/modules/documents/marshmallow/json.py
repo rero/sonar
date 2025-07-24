@@ -23,22 +23,32 @@ from functools import partial
 
 from flask import request
 from invenio_records_rest.schemas import Nested, StrictKeysMixin
-from invenio_records_rest.schemas.fields import GenFunction, \
-    PersistentIdentifier, SanitizedUnicode
+from invenio_records_rest.schemas.fields import (
+    GenFunction,
+    PersistentIdentifier,
+    SanitizedUnicode,
+)
 from marshmallow import EXCLUDE, fields, pre_dump, pre_load, validate
 
 from sonar.modules.documents.api import DocumentRecord
-from sonar.modules.documents.permissions import DocumentFilesPermission, \
-    DocumentPermission
-from sonar.modules.documents.utils import has_external_urls_for_files, \
-    populate_files_properties
-from sonar.modules.documents.views import contribution_text, \
-    create_publication_statement, dissertation, part_of_format
+from sonar.modules.documents.permissions import (
+    DocumentFilesPermission,
+    DocumentPermission,
+)
+from sonar.modules.documents.utils import (
+    has_external_urls_for_files,
+    populate_files_properties,
+)
+from sonar.modules.documents.views import (
+    contribution_text,
+    create_publication_statement,
+    dissertation,
+    part_of_format,
+)
 from sonar.modules.serializers import schema_from_context
 from sonar.modules.users.api import current_user_record
 
-schema_from_document = partial(schema_from_context,
-                               schema=DocumentRecord.schema)
+schema_from_document = partial(schema_from_context, schema=DocumentRecord.schema)
 from flask import current_app
 
 
@@ -89,13 +99,19 @@ class FileSchemaV1(ThumbnailSchemaV1):
         :param item: Dict representing the record.
         :returns: Modified dict.
         """
-        if not item.get('bucket'):
+        if not item.get("bucket"):
             return item
-        doc = DocumentRecord.get_record_by_bucket(item.get('bucket'))
-        item['permissions'] = {
-            'read': DocumentFilesPermission.read(current_user_record, item, doc['pid'], doc),
-            'update': DocumentFilesPermission.update(current_user_record, item, doc['pid'], doc),
-            'delete': DocumentFilesPermission.delete(current_user_record, item, doc['pid'], doc)
+        doc = DocumentRecord.get_record_by_bucket(item.get("bucket"))
+        item["permissions"] = {
+            "read": DocumentFilesPermission.read(
+                current_user_record, item, doc["pid"], doc
+            ),
+            "update": DocumentFilesPermission.update(
+                current_user_record, item, doc["pid"], doc
+            ),
+            "delete": DocumentFilesPermission.delete(
+                current_user_record, item, doc["pid"], doc
+            ),
         }
 
         return item
@@ -107,7 +123,7 @@ class FileSchemaV1(ThumbnailSchemaV1):
         :param data: Dict of record data.
         :returns: Modified data.
         """
-        data.pop('permissions', None)
+        data.pop("permissions", None)
         return data
 
 
@@ -155,10 +171,12 @@ class DocumentListMetadataSchemaV1(StrictKeysMixin):
     _oai = fields.Dict()
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
-    schema = GenFunction(load_only=True,
-                         attribute="$schema",
-                         data_key="$schema",
-                         deserialize=schema_from_document)
+    schema = GenFunction(
+        load_only=True,
+        attribute="$schema",
+        data_key="$schema",
+        deserialize=schema_from_document,
+    )
     permissions = fields.Dict(dump_only=True)
     permalink = SanitizedUnicode(dump_only=True)
 
@@ -169,18 +187,17 @@ class DocumentListMetadataSchemaV1(StrictKeysMixin):
         :param item: Item object to process
         :returns: Modified item
         """
-        if not item.get('_files'):
+        if not item.get("_files"):
             return item
 
         # Check if organisation record forces to point file to an external url
-        item['external_url'] = has_external_urls_for_files(item)
+        item["external_url"] = has_external_urls_for_files(item)
 
         # Add restriction, link and thumbnail to files
         populate_files_properties(item)
 
         # Sort files to have the main file in first position
-        item['_files'] = sorted(item['_files'],
-                                key=lambda file: file.get('order', 100))
+        item["_files"] = sorted(item["_files"], key=lambda file: file.get("order", 100))
 
         return item
 
@@ -192,13 +209,13 @@ class DocumentListMetadataSchemaV1(StrictKeysMixin):
         :returns: Modified dict.
         """
         # For public views, no check for permissions
-        if request.args.get('view'):
+        if request.args.get("view"):
             return item
 
-        item['permissions'] = {
-            'read': DocumentPermission.read(current_user_record, item),
-            'update': DocumentPermission.update(current_user_record, item),
-            'delete': DocumentPermission.delete(current_user_record, item)
+        item["permissions"] = {
+            "read": DocumentPermission.read(current_user_record, item),
+            "update": DocumentPermission.update(current_user_record, item),
+            "delete": DocumentPermission.delete(current_user_record, item),
         }
 
         return item
@@ -206,17 +223,18 @@ class DocumentListMetadataSchemaV1(StrictKeysMixin):
     @pre_dump
     def add_permalink(self, item, **kwargs):
         """Add permanent link to document."""
-        item['permalink'] = DocumentRecord.get_permanent_link(
-            host=request.host_url, pid=item['pid'])
+        item["permalink"] = DocumentRecord.get_permanent_link(
+            host=request.host_url, pid=item["pid"]
+        )
         return item
 
     @pre_dump
     def add_ark_uri(self, item, **kwargs):
         """Add permanent link to document."""
-        resolver_url = current_app.config.get('SONAR_APP_ARK_RESOLVER')
-        for itm in item.get('identifiedBy', []):
-            if itm.get('type') == 'ark':
-                itm['uri'] = f'{resolver_url}/{itm["value"]}'
+        resolver_url = current_app.config.get("SONAR_APP_ARK_RESOLVER")
+        for itm in item.get("identifiedBy", []):
+            if itm.get("type") == "ark":
+                itm["uri"] = f'{resolver_url}/{itm["value"]}'
                 break
         return item
 
@@ -228,22 +246,21 @@ class DocumentListMetadataSchemaV1(StrictKeysMixin):
         :returns: Modified data.
         """
         # Provision activity processing
-        for index, provision_activity in enumerate(
-                item.get('provisionActivity', [])):
-            item['provisionActivity'][index][
-                'text'] = create_publication_statement(provision_activity)
+        for index, provision_activity in enumerate(item.get("provisionActivity", [])):
+            item["provisionActivity"][index]["text"] = create_publication_statement(
+                provision_activity
+            )
 
         # Part of proccessing
-        for index, part_of in enumerate(item.get('partOf', [])):
-            item['partOf'][index]['text'] = part_of_format(part_of)
+        for index, part_of in enumerate(item.get("partOf", [])):
+            item["partOf"][index]["text"] = part_of_format(part_of)
 
         # Contribution
-        for index, contribution in enumerate(item.get('contribution', [])):
-            item['contribution'][index]['text'] = contribution_text(
-                contribution)
+        for index, contribution in enumerate(item.get("contribution", [])):
+            item["contribution"][index]["text"] = contribution_text(contribution)
 
-        if item.get('dissertation'):
-            item['dissertation']['text'] = dissertation(item)
+        if item.get("dissertation"):
+            item["dissertation"]["text"] = dissertation(item)
 
         return item
 
@@ -255,12 +272,12 @@ class DocumentListMetadataSchemaV1(StrictKeysMixin):
         :returns: Modified dict of record data.
         """
         # Organisation already attached to document, we do nothing.
-        if data.get('organisation'):
+        if data.get("organisation"):
             return data
 
         # Store current user organisation in new document.
-        if current_user_record.get('organisation'):
-            data['organisation'] = [current_user_record['organisation']]
+        if current_user_record.get("organisation"):
+            data["organisation"] = [current_user_record["organisation"]]
 
         return data
 
@@ -271,23 +288,23 @@ class DocumentListMetadataSchemaV1(StrictKeysMixin):
         :param data: Dict of record data.
         :returns: Modified data.
         """
-        for provision_activity in data.get('provisionActivity', []):
-            provision_activity.pop('text', None)
+        for provision_activity in data.get("provisionActivity", []):
+            provision_activity.pop("text", None)
 
-        for part_of in data.get('partOf', []):
-            part_of.pop('text', None)
+        for part_of in data.get("partOf", []):
+            part_of.pop("text", None)
 
-        for contribution in data.get('contribution', []):
-            contribution.pop('text', None)
+        for contribution in data.get("contribution", []):
+            contribution.pop("text", None)
 
-        data.get('dissertation', {}).pop('text', None)
+        data.get("dissertation", {}).pop("text", None)
 
-        data.pop('permalink', None)
-        data.pop('permissions', None)
-        data.pop('external_url', None)
-        for itm in data.get('identifiedBy', []):
-            if itm.get('type') == 'ark':
-                itm.pop('uri', None)
+        data.pop("permalink", None)
+        data.pop("permissions", None)
+        data.pop("external_url", None)
+        for itm in data.get("identifiedBy", []):
+            if itm.get("type") == "ark":
+                itm.pop("uri", None)
                 break
 
         return data

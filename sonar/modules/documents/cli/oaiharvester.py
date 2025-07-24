@@ -32,8 +32,8 @@ def config():
     """Configs commands for OAI harvesting."""
 
 
-@config.command('create')
-@click.argument('config_file', type=click.File('r'))
+@config.command("create")
+@click.argument("config_file", type=click.File("r"))
 @with_appcontext
 def oai_config_create(config_file):
     """Creates configurations for OAI harvesting.
@@ -41,52 +41,55 @@ def oai_config_create(config_file):
     :param config_file: File containing a list of sources to harvest.
     """
     click.secho(
-        '\nCreating configurations for OAI harvesting from file "{file}"...'.
-        format(file=config_file.name))
+        '\nCreating configurations for OAI harvesting from file "{file}"...'.format(
+            file=config_file.name
+        )
+    )
 
     sources = json.load(config_file)
 
     if not sources or not isinstance(sources, list):
-        raise ClickException('Configurations file cannot be parsed')
+        raise ClickException("Configurations file cannot be parsed")
 
     for source in sources:
         try:
-            configuration = OAIHarvestConfig.query.filter_by(
-                name=source['key']).first()
+            configuration = OAIHarvestConfig.query.filter_by(name=source["key"]).first()
 
             if configuration:
                 raise Exception(
-                    'Config already registered for "{name}"'.format(
-                        name=source['key']))
+                    'Config already registered for "{name}"'.format(name=source["key"])
+                )
 
             configuration = OAIHarvestConfig(
-                name=source['key'],
-                baseurl=source['url'],
-                metadataprefix=source['metadataprefix'],
-                setspecs=source['setspecs'],
-                comment=source['comment'])
+                name=source["key"],
+                baseurl=source["url"],
+                metadataprefix=source["metadataprefix"],
+                setspecs=source["setspecs"],
+                comment=source["comment"],
+            )
             configuration.save()
             db.session.commit()
 
-            click.secho('Created configuration for "{name}"'.format(
-                name=source['key']),
-                        fg='green')
+            click.secho(
+                'Created configuration for "{name}"'.format(name=source["key"]),
+                fg="green",
+            )
         except Exception as exception:
-            click.secho(str(exception), fg='yellow')
+            click.secho(str(exception), fg="yellow")
 
-    click.secho('Done', fg='green')
+    click.secho("Done", fg="green")
 
 
-@config.command('list')
+@config.command("list")
 @with_appcontext
 def oai_config_info():
     """List infos for tasks."""
     oais = OAIHarvestConfig.query.all()
     for oai in oais:
-        click.secho('\n' + oai.name, underline=True)
-        click.echo('\tlastrun       : ', nl=False)
+        click.secho("\n" + oai.name, underline=True)
+        click.echo("\tlastrun       : ", nl=False)
         click.echo(oai.lastrun)
-        click.echo('\tbaseurl       : ' + oai.baseurl)
-        click.echo('\tmetadataprefix: ' + oai.metadataprefix)
-        click.echo('\tcomment       : ' + oai.comment)
-        click.echo('\tsetspecs      : ' + oai.setspecs)
+        click.echo("\tbaseurl       : " + oai.baseurl)
+        click.echo("\tmetadataprefix: " + oai.metadataprefix)
+        click.echo("\tcomment       : " + oai.comment)
+        click.echo("\tsetspecs      : " + oai.setspecs)

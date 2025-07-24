@@ -22,20 +22,26 @@ from __future__ import absolute_import, print_function
 from functools import partial
 
 from invenio_records_rest.schemas import Nested, StrictKeysMixin
-from invenio_records_rest.schemas.fields import GenFunction, \
-    PersistentIdentifier, SanitizedUnicode
+from invenio_records_rest.schemas.fields import (
+    GenFunction,
+    PersistentIdentifier,
+    SanitizedUnicode,
+)
 from marshmallow import EXCLUDE, fields, pre_dump, pre_load
 
-from sonar.modules.organisations.api import OrganisationRecord, \
-    current_organisation
-from sonar.modules.organisations.permissions import \
-    OrganisationFilesPermission, OrganisationPermission
+from sonar.modules.organisations.api import OrganisationRecord, current_organisation
+from sonar.modules.organisations.permissions import (
+    OrganisationFilesPermission,
+    OrganisationPermission,
+)
 from sonar.modules.permissions import has_superuser_access
 from sonar.modules.serializers import schema_from_context
 from sonar.modules.users.api import current_user_record
 
-schema_from_organisation = partial(schema_from_context,
-                                   schema=OrganisationRecord.schema)
+schema_from_organisation = partial(
+    schema_from_context, schema=OrganisationRecord.schema
+)
+
 
 class FileSchemaV1(StrictKeysMixin):
     """File schema."""
@@ -74,13 +80,19 @@ class FileSchemaV1(StrictKeysMixin):
         :param item: Dict representing the record.
         :returns: Modified dict.
         """
-        if not item.get('bucket'):
+        if not item.get("bucket"):
             return item
-        doc = OrganisationRecord.get_record_by_bucket(item.get('bucket'))
-        item['permissions'] = {
-            'read': OrganisationFilesPermission.read(current_user_record, item, doc['pid'], doc),
-            'update': OrganisationFilesPermission.update(current_user_record, item, doc['pid'], doc),
-            'delete': OrganisationFilesPermission.delete(current_user_record, item, doc['pid'], doc)
+        doc = OrganisationRecord.get_record_by_bucket(item.get("bucket"))
+        item["permissions"] = {
+            "read": OrganisationFilesPermission.read(
+                current_user_record, item, doc["pid"], doc
+            ),
+            "update": OrganisationFilesPermission.update(
+                current_user_record, item, doc["pid"], doc
+            ),
+            "delete": OrganisationFilesPermission.delete(
+                current_user_record, item, doc["pid"], doc
+            ),
         }
 
         return item
@@ -92,8 +104,9 @@ class FileSchemaV1(StrictKeysMixin):
         :param data: Dict of record data.
         :returns: Modified data.
         """
-        data.pop('permissions', None)
+        data.pop("permissions", None)
         return data
+
 
 class OrganisationMetadataSchemaV1(StrictKeysMixin):
     """Schema for the organisation metadata."""
@@ -115,10 +128,12 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
     publicDocumentFacets = fields.List(fields.String())
     # When loading, if $schema is not provided, it's retrieved by
     # Record.schema property.
-    schema = GenFunction(load_only=True,
-                         attribute="$schema",
-                         data_key="$schema",
-                         deserialize=schema_from_organisation)
+    schema = GenFunction(
+        load_only=True,
+        attribute="$schema",
+        data_key="$schema",
+        deserialize=schema_from_organisation,
+    )
     permissions = fields.Dict(dump_only=True)
     _files = Nested(FileSchemaV1, many=True)
     _bucket = SanitizedUnicode()
@@ -130,10 +145,10 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
         :param item: Dict representing the record.
         :returns: Modified dict.
         """
-        item['permissions'] = {
-            'read': OrganisationPermission.read(current_user_record, item),
-            'update': OrganisationPermission.update(current_user_record, item),
-            'delete': OrganisationPermission.delete(current_user_record, item)
+        item["permissions"] = {
+            "read": OrganisationPermission.read(current_user_record, item),
+            "update": OrganisationPermission.update(current_user_record, item),
+            "delete": OrganisationPermission.delete(current_user_record, item),
         }
 
         return item
@@ -145,7 +160,7 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
         :param data: Dict of record data.
         :returns: Modified data.
         """
-        data.pop('permissions', None)
+        data.pop("permissions", None)
 
         return data
 
@@ -157,9 +172,8 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
         by posting the data, but guessed from user's organisation.
         """
         if not has_superuser_access():
-            data['isShared'] = current_organisation.get('isShared', False)
-            data['isDedicated'] = current_organisation.get(
-                'isDedicated', False)
+            data["isShared"] = current_organisation.get("isShared", False)
+            data["isDedicated"] = current_organisation.get("isDedicated", False)
         return data
 
     @pre_load
@@ -170,10 +184,10 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
         by posting the data, but guessed from user's organisation.
         """
         if not has_superuser_access():
-            if arkNAAN := current_organisation.get('arkNAAN'):
-                data['arkNAAN'] = arkNAAN
+            if arkNAAN := current_organisation.get("arkNAAN"):
+                data["arkNAAN"] = arkNAAN
             else:
-                data.pop('arkNAAN', None)
+                data.pop("arkNAAN", None)
         return data
 
 

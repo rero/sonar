@@ -32,26 +32,24 @@ def send_welcome_email(user_record, user):
     :param user: User account.
     """
     user_record = user_record.replace_refs()
-    code = user_record['organisation'].get('code', '')
-    plain_platform_name = 'SONAR'
-    pname = platform_name(user_record['organisation'])
+    code = user_record["organisation"].get("code", "")
+    plain_platform_name = "SONAR"
+    pname = platform_name(user_record["organisation"])
     if pname:
         plain_platform_name = pname
 
     token = generate_reset_password_token(user)
     reset_link = url_for_security(
-        'reset_password',
-        token=token,
-        next=f'/{code}',
-        _external=True
+        "reset_password", token=token, next=f"/{code}", _external=True
     )
 
     send_email(
-        [user_record['email']],
+        [user_record["email"]],
         f'{_("Welcome to")} {plain_platform_name}',
-        'users/email/welcome', {
-            'user': user_record,
-            'reset_link': reset_link,
-            'platform_name': plain_platform_name
-        }
+        "users/email/welcome",
+        {
+            "user": user_record,
+            "reset_link": reset_link,
+            "platform_name": plain_platform_name,
+        },
     )

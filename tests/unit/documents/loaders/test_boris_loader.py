@@ -68,30 +68,27 @@ def test_boris_loader():
     </record>
     """  # nopep8
     assert BorisSchema().dump(xml) == {
-        'title': [{
-            'type':
-            'bf:Title',
-            'mainTitle': [{
-                'value': 'Good Religion or Bad Religion',
-                'language': 'eng'
-            }]
-        }],
-        'identifiedBy': [{
-            'type': 'bf:Local',
-            'source': 'BORIS',
-            'value': 'https://boris.unibe.ch/10713/'
-        }, {
-            'type': 'bf:Doi',
-            'value': '10.7892/boris.10713'
-        }, {
-            'type': 'bf:Local',
-            'source': 'PMID',
-            'value': '123456'
-        }]
+        "title": [
+            {
+                "type": "bf:Title",
+                "mainTitle": [
+                    {"value": "Good Religion or Bad Religion", "language": "eng"}
+                ],
+            }
+        ],
+        "identifiedBy": [
+            {
+                "type": "bf:Local",
+                "source": "BORIS",
+                "value": "https://boris.unibe.ch/10713/",
+            },
+            {"type": "bf:Doi", "value": "10.7892/boris.10713"},
+            {"type": "bf:Local", "source": "PMID", "value": "123456"},
+        ],
     }
 
     # Not well structured
     xml = """
     <resource></resource>
     """
-    assert BorisSchema().dump(xml) == {'identifiedBy': [], 'title': []}
+    assert BorisSchema().dump(xml) == {"identifiedBy": [], "title": []}

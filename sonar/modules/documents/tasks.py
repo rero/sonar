@@ -33,50 +33,51 @@ def import_records(records_to_import):
     :returns: List of IDs.
     """
     from sonar.modules.documents.api import DocumentIndexer, DocumentRecord
+
     indexer = DocumentIndexer(record_cls=DocumentRecord)
 
     ids = []
 
     for data in records_to_import:
         try:
-            files_data = data.pop('files', [])
+            files_data = data.pop("files", [])
 
             record = DocumentRecord.get_record_by_identifier(
-                data.get('identifiedBy', []))
+                data.get("identifiedBy", [])
+            )
 
             # Set record as harvested
-            data['harvested'] = True
+            data["harvested"] = True
 
             if not record:
-                record = DocumentRecord.create(data,
-                                               dbcommit=False,
-                                               with_bucket=True)
+                record = DocumentRecord.create(data, dbcommit=False, with_bucket=True)
             else:
                 current_app.logger.warning(
-                    'Record already imported with PID {pid}: {record}'.format(
-                        pid=record['pid'], record=data))
+                    "Record already imported with PID {pid}: {record}".format(
+                        pid=record["pid"], record=data
+                    )
+                )
                 record.update(data)
 
             for file_data in files_data:
                 # Store url and key and remove it from dict to pass dict to
                 # kwargs in add_file_from_url method
-                url = file_data.pop('url')
-                key = file_data.pop('key')
+                url = file_data.pop("url")
+                key = file_data.pop("key")
 
                 try:
-                    if url.startswith('http'):
+                    if url.startswith("http"):
                         record.add_file_from_url(url, key, **file_data)
                     else:
-                        with open(url, 'rb') as pdf_file:
-                            record.add_file(pdf_file.read(), key,
-                                            **file_data)
+                        with open(url, "rb") as pdf_file:
+                            record.add_file(pdf_file.read(), key, **file_data)
                 except Exception as exception:
                     current_app.logger.warning(
-                        'Error during import of file {file} of record '
-                        '{record}: {error}'.format(
-                            file=key,
-                            error=exception,
-                            record=record['identifiedBy']))
+                        "Error during import of file {file} of record "
+                        "{record}: {error}".format(
+                            file=key, error=exception, record=record["identifiedBy"]
+                        )
+                    )
 
             # Merge record in database, at this time it's not saved into DB.
             record.commit()
@@ -88,13 +89,17 @@ def import_records(records_to_import):
             ids.append(str(record.id))
 
             current_app.logger.info(
-                'Record with reference "{reference}" imported successfully'.
-                format(reference=record['identifiedBy']))
+                'Record with reference "{reference}" imported successfully'.format(
+                    reference=record["identifiedBy"]
+                )
+            )
 
         except Exception as exception:
             current_app.logger.error(
-                'Error during importation of record {record}: {exception}'.
-                format(record=data, exception=exception))
+                "Error during importation of record {record}: {exception}".format(
+                    record=data, exception=exception
+                )
+            )
 
     # Commit and index records
     db.session.commit()

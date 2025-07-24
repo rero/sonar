@@ -21,4 +21,4 @@ from __future__ import absolute_import, print_function
 
 from .heg_client import HegClient
 
-__all__ = ('HegClient',)
+__all__ = ("HegClient",)

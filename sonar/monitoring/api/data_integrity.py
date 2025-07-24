@@ -24,7 +24,7 @@ from invenio_search import RecordsSearch
 from sonar.proxies import sonar
 
 
-class DataIntegrityMonitoring():
+class DataIntegrityMonitoring:
     """Data integrity monitoring."""
 
     def get_db_count(self, rec_type, with_deleted=False):
@@ -67,20 +67,21 @@ class DataIntegrityMonitoring():
         index = sonar.endpoints.get(rec_type, None)
 
         if not index:
-            raise Exception('No index configured for resource "{type}"'.format(
-                type=rec_type))
+            raise Exception(
+                'No index configured for resource "{type}"'.format(type=rec_type)
+            )
 
-        result = {'es': [], 'es_double': [], 'db': []}
+        result = {"es": [], "es_double": [], "db": []}
 
         # Elastic search PIDs
         es_pids = {}
-        for hit in RecordsSearch(index=index).source(['pid', 'id']).scan():
+        for hit in RecordsSearch(index=index).source(["pid", "id"]).scan():
             pid_value = hit.pid
             # for resources pid is a dict
             if not isinstance(pid_value, str):
                 pid_value = hit.id
             if es_pids.get(pid_value):
-                result['es_double'].append(hit.pid)
+                result["es_double"].append(hit.pid)
             es_pids[pid_value] = 1
 
         # Database PIDs
@@ -94,10 +95,10 @@ class DataIntegrityMonitoring():
             if es_pids.get(identifier.pid_value):
                 es_pids.pop(identifier.pid_value)
             else:
-                result['db'].append(identifier.pid_value)
+                result["db"].append(identifier.pid_value)
 
         # Transform dictionary to list
-        result['es'] = [v for v in es_pids]
+        result["es"] = [v for v in es_pids]
 
         return result
 
@@ -115,15 +116,14 @@ class DataIntegrityMonitoring():
             db_count = self.get_db_count(rec_type)
 
             info[rec_type] = {
-                'db': db_count,
-                'es': es_count,
-                'db-es': db_count - es_count,
-                'index': index
+                "db": db_count,
+                "es": es_count,
+                "db-es": db_count - es_count,
+                "index": index,
             }
 
             if with_detail:
-                info[rec_type]['detail'] = self.missing_pids(
-                    rec_type, with_deleted)
+                info[rec_type]["detail"] = self.missing_pids(rec_type, with_deleted)
 
         return info
 
@@ -134,7 +134,7 @@ class DataIntegrityMonitoring():
         :returns: True if an error is found
         """
         for rec_type, item in self.info(with_deleted).items():
-            if item['db-es'] != 0:
+            if item["db-es"] != 0:
                 return True
 
         return False
