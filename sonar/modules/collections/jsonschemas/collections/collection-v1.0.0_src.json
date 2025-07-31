@@ -182,6 +182,12 @@
             "type": "string",
             "minLength": 1
           },
+          "order": {
+            "title": "Position",
+            "description": "Position of the file, the first file in the list is the main file.",
+            "type": "integer",
+            "minimum": 1
+          },
           "size": {
             "title": "Size",
             "description": "Size of the file in bytes.",

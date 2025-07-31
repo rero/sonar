@@ -170,8 +170,9 @@
           "minLength": 1,
           "widget": {
             "formlyConfig": {
+              "type": "remoteAutoComplete",
               "props": {
-                "remoteTypeahead": {
+                "queryOptions": {
                   "type": "projects",
                   "field": "metadata.projectSponsor.suggest,metadata.innerSearcher.suggest",
                   "suggest": "/api/suggestions/completion",
@@ -273,8 +274,9 @@
             "minLength": 1,
             "widget": {
               "formlyConfig": {
+                "type": "remoteAutoComplete",
                 "props": {
-                  "remoteTypeahead": {
+                  "queryOptions": {
                     "type": "projects",
                     "field": "metadata.projectSponsor.suggest,metadata.innerSearcher.suggest",
                     "suggest": "/api/suggestions/completion",
@@ -438,8 +440,9 @@
             "minLength": 1,
             "widget": {
               "formlyConfig": {
+                "type": "remoteAutoComplete",
                 "props": {
-                  "remoteTypeahead": {
+                  "queryOptions": {
                     "type": "projects",
                     "field": "metadata.keywords.suggest",
                     "suggest": "/api/suggestions/completion",
