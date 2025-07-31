@@ -131,6 +131,9 @@ prod = [
     "uwsgitop (>=0.11)",
 ]
 
+[tool.isort]
+profile = "black"
+
 [project.entry-points."app.console_scripts"]
 sonar = "invenio_app.cli:cli"
 
