@@ -23,5 +23,5 @@ from sonar.modules.users.serializers.schemas.export import ExportSchemaV1
 def test_export_schema(user):
     """Test export schema."""
     result = ExportSchemaV1().dump(user)
-    assert result['email'] == 'orguser@rero.ch'
-    assert result.get('password')
+    assert result["email"] == "orguser@rero.ch"
+    assert result.get("password")

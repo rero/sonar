@@ -27,6 +27,5 @@ def test_reindex(app, script_info, project):
     runner = CliRunner()
 
     # Not existing input file
-    result = runner.invoke(reindex, ['projects', '--yes-i-know'],
-                           obj=script_info)
-    assert 'Record indexed successfully!' in result.output
+    result = runner.invoke(reindex, ["projects", "--yes-i-know"], obj=script_info)
+    assert "Record indexed successfully!" in result.output

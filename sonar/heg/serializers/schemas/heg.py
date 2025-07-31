@@ -25,26 +25,26 @@ from sonar.modules.utils import get_bibliographic_code_from_language
 class HEGSchema(Schema):
     """HEG common marshmallow schema."""
 
-    title = fields.Method('get_title')
-    abstracts = fields.Method('get_abstracts')
-    language = fields.Method('get_language')
-    identifiedBy = fields.Method('get_identifiers')
-    documentType = fields.Method('get_document_type')
-    subjects = fields.Method('get_subjects')
-    contribution = fields.Method('get_contribution')
-    provisionActivity = fields.Method('get_provision_activity')
-    partOf = fields.Method('get_part_of')
+    title = fields.Method("get_title")
+    abstracts = fields.Method("get_abstracts")
+    language = fields.Method("get_language")
+    identifiedBy = fields.Method("get_identifiers")
+    documentType = fields.Method("get_document_type")
+    subjects = fields.Method("get_subjects")
+    contribution = fields.Method("get_contribution")
+    provisionActivity = fields.Method("get_provision_activity")
+    partOf = fields.Method("get_part_of")
 
     @pre_dump
     def pre_process_record(self, item, **kwargs):
         """Pre-process record, before dumping."""
         # Store language
-        if item.get('language'):
-            language = item['language']
+        if item.get("language"):
+            language = item["language"]
 
-            item['language'] = get_bibliographic_code_from_language(language)
+            item["language"] = get_bibliographic_code_from_language(language)
         else:
-            item['language'] = 'eng'
+            item["language"] = "eng"
 
         return item
 
@@ -63,15 +63,15 @@ class HEGSchema(Schema):
 
     def get_language(self, obj):
         """Get language."""
-        return [{'type': 'bf:Language', 'value': obj['language']}]
+        return [{"type": "bf:Language", "value": obj["language"]}]
 
     def get_identifiers(self, obj):
         """Get identifiers."""
-        return [{"type": "bf:Doi", "value": obj['_id']}]
+        return [{"type": "bf:Doi", "value": obj["_id"]}]
 
     def get_document_type(self, obj):
         """Get document type."""
-        return 'coar:c_6501'
+        return "coar:c_6501"
 
     def get_subjects(self, obj):
         """Get subjects."""

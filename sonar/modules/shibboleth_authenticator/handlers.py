@@ -24,18 +24,24 @@ from flask_login import current_user, logout_user
 from invenio_accounts.models import User
 from invenio_db import db
 from invenio_oauthclient.errors import AlreadyLinkedError
-from invenio_oauthclient.handlers import get_session_next_url, \
-    oauth_error_handler, token_session_key
-from invenio_oauthclient.oauth import oauth_authenticate, oauth_get_user, \
-    oauth_link_external_id, oauth_register
-from invenio_oauthclient.utils import create_csrf_disabled_registrationform, \
-    fill_form
+from invenio_oauthclient.handlers import (
+    get_session_next_url,
+    oauth_error_handler,
+    token_session_key,
+)
+from invenio_oauthclient.oauth import (
+    oauth_authenticate,
+    oauth_get_user,
+    oauth_link_external_id,
+    oauth_register,
+)
+from invenio_oauthclient.utils import create_csrf_disabled_registrationform, fill_form
 from sqlalchemy import func
 from werkzeug.local import LocalProxy
 
 from .utils import get_account_info
 
-_security = LocalProxy(lambda: current_app.extensions['security'])
+_security = LocalProxy(lambda: current_app.extensions["security"])
 
 _datastore = LocalProxy(lambda: _security.datastore)
 
@@ -55,7 +61,7 @@ def authorized_signup_handler(auth, remote=None, *args, **kwargs):
     :returns: Redirect response.
     """
     # Remove any previously stored auto register session key
-    session.pop(token_session_key(remote) + '_autoregister', None)
+    session.pop(token_session_key(remote) + "_autoregister", None)
 
     # Sign-in/up user
     # ---------------
@@ -67,10 +73,10 @@ def authorized_signup_handler(auth, remote=None, *args, **kwargs):
     user = None
     # Pre-check done to use a case insensitive comparison because this is not
     # done in invenio --> https://github.com/inveniosoftware/invenio-oauthclient/blob/master/invenio_oauthclient/utils.py#L82  # nopep8
-    if account_info.get('user', {}).get('email'):
+    if account_info.get("user", {}).get("email"):
         user = User.query.filter(
-            func.lower(User.email) == func.lower(account_info['user']
-                                                 ['email'])).one_or_none()
+            func.lower(User.email) == func.lower(account_info["user"]["email"])
+        ).one_or_none()
 
     if user is None:
         user = oauth_get_user(remote, account_info=account_info)
@@ -80,7 +86,7 @@ def authorized_signup_handler(auth, remote=None, *args, **kwargs):
         form = create_csrf_disabled_registrationform(remote)
 
         # Fill form with user data
-        form = fill_form(form, account_info['user'])
+        form = fill_form(form, account_info["user"])
 
         # Try to register user
         user = oauth_register(form)
@@ -96,7 +102,8 @@ def authorized_signup_handler(auth, remote=None, *args, **kwargs):
     # create external id link
     try:
         oauth_link_external_id(
-            user, dict(id=account_info['external_id'], method=remote))
+            user, dict(id=account_info["external_id"], method=remote)
+        )
         db.session.commit()
     except AlreadyLinkedError:
         pass
@@ -106,4 +113,4 @@ def authorized_signup_handler(auth, remote=None, *args, **kwargs):
     if next_url:
         return redirect(next_url)
 
-    return redirect(current_app.config['SECURITY_POST_LOGIN_VIEW'])
+    return redirect(current_app.config["SECURITY_POST_LOGIN_VIEW"])

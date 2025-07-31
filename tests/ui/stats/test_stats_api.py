@@ -23,22 +23,21 @@ from sonar.modules.stats.tasks import collect_stats
 
 def test_collect_task(document, document_with_file, es_clear):
     """Test collect stats."""
-    assert collect_stats().startswith(
-        'New stat has been created with a pid of: ')
+    assert collect_stats().startswith("New stat has been created with a pid of: ")
 
 
 def test_collect(document, document_with_file, es_clear):
     """Test collect stats."""
     record = Record.collect()
-    assert len(record['values']) == 1
-    assert record['values'][0]['full_text'] == 1
-    assert record['values'][0]['organisation'] == 'org'
-    assert record['values'][0]['type'] == 'shared'
-    assert len(record['values'][0]['pids']) == 2
+    assert len(record["values"]) == 1
+    assert record["values"][0]["full_text"] == 1
+    assert record["values"][0]["organisation"] == "org"
+    assert record["values"][0]["type"] == "shared"
+    assert len(record["values"][0]["pids"]) == 2
 
 
 def test_get_documents_pids(organisation, document):
     """Test get documents pids for organisation."""
-    documents = list(Record.get_documents(organisation['pid']))
+    documents = list(Record.get_documents(organisation["pid"]))
     assert len(documents) == 1
-    assert documents[0]['pid'] == '1'
+    assert documents[0]["pid"] == "1"

@@ -17,13 +17,16 @@
 
 """schema.org serializer."""
 
-from invenio_records_rest.serializers.base import PreprocessorMixin, \
-    SerializerMixinInterface
+from invenio_records_rest.serializers.base import (
+    PreprocessorMixin,
+    SerializerMixinInterface,
+)
 from invenio_records_rest.serializers.marshmallow import MarshmallowMixin
 
 
-class SonarSchemaOrgSerializer(SerializerMixinInterface, MarshmallowMixin,
-                               PreprocessorMixin):
+class SonarSchemaOrgSerializer(
+    SerializerMixinInterface, MarshmallowMixin, PreprocessorMixin
+):
     """Marshmallow based schema.org serializer for records."""
 
     def dump(self, obj, context=None):

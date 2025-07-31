@@ -27,134 +27,145 @@ from sonar.modules.documents.receivers import process_boosting
 def test_boosting_fields(app):
     """Test the boosting configuration."""
     # the configuration should exists
-    assert app.config.get('SONAR_DOCUMENT_QUERY_BOOSTING')
+    assert app.config.get("SONAR_DOCUMENT_QUERY_BOOSTING")
     # it should be expanded
-    assert "'*'" not in app.config.get('SONAR_DOCUMENT_QUERY_BOOSTING')
+    assert "'*'" not in app.config.get("SONAR_DOCUMENT_QUERY_BOOSTING")
 
     # several cases of configurations
-    assert process_boosting(['title.*']) == ['title.*']
-    assert 'title.*' in process_boosting(['*'])
-    assert 'title.*^2' in process_boosting(['title.*^2', '*'])
-    assert 'customField1' in process_boosting(['*'])
-    assert 'customField1.*' in process_boosting(['*'])
+    assert process_boosting(["title.*"]) == ["title.*"]
+    assert "title.*" in process_boosting(["*"])
+    assert "title.*^2" in process_boosting(["title.*^2", "*"])
+    assert "customField1" in process_boosting(["*"])
+    assert "customField1.*" in process_boosting(["*"])
 
-def test_api_query(client, document_with_file, document_json, make_document,
-                   superuser):
+
+def test_api_query(client, document_with_file, document_json, make_document, superuser):
     """Test simple flow using REST API."""
-    headers = [('Content-Type', 'application/json')]
-    login_user_via_session(client, email=superuser['email'])
+    headers = [("Content-Type", "application/json")]
+    login_user_via_session(client, email=superuser["email"])
 
     # get records without query string
-    response = client.get(url_for('invenio_records_rest.doc_list'),
-                          headers=headers)
+    response = client.get(url_for("invenio_records_rest.doc_list"), headers=headers)
     assert response.status_code == 200
-    assert response.json['hits']['total']['value'] == 1
+    assert response.json["hits"]["total"]["value"] == 1
 
     # with explanation
-    response = client.get(url_for('invenio_records_rest.doc_list', debug=1),
-                          headers=headers)
+    response = client.get(
+        url_for("invenio_records_rest.doc_list", debug=1), headers=headers
+    )
     assert response.status_code == 200
-    assert response.json['hits']['total']['value'] == 1
-    assert 'explanation' in response.json['hits']['hits'][0]
+    assert response.json["hits"]["total"]["value"] == 1
+    assert "explanation" in response.json["hits"]["hits"][0]
 
     # query string = 'title'
-    response = client.get(url_for('invenio_records_rest.doc_list', q='title'),
-                          headers=headers)
+    response = client.get(
+        url_for("invenio_records_rest.doc_list", q="title"), headers=headers
+    )
     assert response.status_code == 200
-    assert response.json['hits']['total']['value'] == 1
+    assert response.json["hits"]["total"]["value"] == 1
 
     # query string = 'titlé', record found with word "Title"
-    response = client.get(url_for('invenio_records_rest.doc_list', q='titlé'),
-                          headers=headers)
+    response = client.get(
+        url_for("invenio_records_rest.doc_list", q="titlé"), headers=headers
+    )
     assert response.status_code == 200
-    assert response.json['hits']['total']['value'] == 1
+    assert response.json["hits"]["total"]["value"] == 1
 
     # query string = 'resume', record found with word "Résumé"
-    response = client.get(url_for('invenio_records_rest.doc_list', q='resume'),
-                          headers=headers)
+    response = client.get(
+        url_for("invenio_records_rest.doc_list", q="resume"), headers=headers
+    )
     assert response.status_code == 200
-    assert response.json['hits']['total']['value'] == 1
+    assert response.json["hits"]["total"]["value"] == 1
 
     # Multiple words in query string = 'resume title' and operator AND
-    response = client.get(url_for('invenio_records_rest.doc_list',
-                                  q='resume title',
-                                  operator='AND'),
-                          headers=headers)
+    response = client.get(
+        url_for("invenio_records_rest.doc_list", q="resume title", operator="AND"),
+        headers=headers,
+    )
     assert response.status_code == 200
-    assert response.json['hits']['total']['value'] == 1
+    assert response.json["hits"]["total"]["value"] == 1
 
     # Multiple words in query string = 'resume title' and operator AND, but
     # one word not found
-    response = client.get(url_for('invenio_records_rest.doc_list',
-                                  q='resume fake',
-                                  operator='AND'),
-                          headers=headers)
+    response = client.get(
+        url_for("invenio_records_rest.doc_list", q="resume fake", operator="AND"),
+        headers=headers,
+    )
     assert response.status_code == 200
-    assert response.json['hits']['total']['value'] == 0
+    assert response.json["hits"]["total"]["value"] == 0
 
     # Multiple words in query string = 'resume title' and operator OR
-    response = client.get(url_for('invenio_records_rest.doc_list',
-                                  q='resume title',
-                                  operator='OR'),
-                          headers=headers)
+    response = client.get(
+        url_for("invenio_records_rest.doc_list", q="resume title", operator="OR"),
+        headers=headers,
+    )
     assert response.status_code == 200
-    assert response.json['hits']['total']['value'] == 1
+    assert response.json["hits"]["total"]["value"] == 1
 
     # Multiple words in query string = 'resume title' and operator OR and one
     # word not found
-    response = client.get(url_for('invenio_records_rest.doc_list',
-                                  q='resume fake',
-                                  operator='OR'),
-                          headers=headers)
+    response = client.get(
+        url_for("invenio_records_rest.doc_list", q="resume fake", operator="OR"),
+        headers=headers,
+    )
     assert response.status_code == 200
-    assert response.json['hits']['total']['value'] == 1
+    assert response.json["hits"]["total"]["value"] == 1
 
     # Test search in fulltext
-    response = client.get(url_for('invenio_records_rest.doc_list',
-                                  q='fulltext:(theoretically study the high-harmonic)',
-                                  debug=1),
-                          headers=headers)
+    response = client.get(
+        url_for(
+            "invenio_records_rest.doc_list",
+            q="fulltext:(theoretically study the high-harmonic)",
+            debug=1,
+        ),
+        headers=headers,
+    )
     assert response.status_code == 200
-    assert response.json['hits']['total']['value'] == 1
-    assert response.json['hits']['hits'][0]['explanation']['details']
+    assert response.json["hits"]["total"]["value"] == 1
+    assert response.json["hits"]["hits"][0]["explanation"]["details"]
 
-    response = client.get(url_for('invenio_records_rest.doc_list',
-                                  q='(theoretically study the high-harmonic)',
-                                  debug=1),
-                          headers=headers)
+    response = client.get(
+        url_for(
+            "invenio_records_rest.doc_list",
+            q="(theoretically study the high-harmonic)",
+            debug=1,
+        ),
+        headers=headers,
+    )
     assert response.status_code == 200
-    assert response.json['hits']['total']['value'] == 0
+    assert response.json["hits"]["total"]["value"] == 0
 
     # Not allowed operator
     with pytest.raises(Exception) as exception:
-        response = client.get(url_for('invenio_records_rest.doc_list',
-                                      q='title',
-                                      operator='not-allowed'),
-                              headers=headers)
+        response = client.get(
+            url_for("invenio_records_rest.doc_list", q="title", operator="not-allowed"),
+            headers=headers,
+        )
     assert str(exception.value) == 'Only "AND" or "OR" operators allowed'
 
     # Error during parsing of query string
-    response = client.get(url_for('invenio_records_rest.doc_list',
-                                  q='i/o',
-                                  operator='OR'),
-                          headers=headers)
+    response = client.get(
+        url_for("invenio_records_rest.doc_list", q="i/o", operator="OR"),
+        headers=headers,
+    )
     assert response.status_code == 400
-    assert ('The syntax of the search query is invalid.' in response.get_data(
-        as_text=True))
+    assert "The syntax of the search query is invalid." in response.get_data(
+        as_text=True
+    )
 
     # Test facets with AND operator.
     # Create a new document with only one subject
-    document_json['subjects'] = [{
-        'label': {
-            'language': 'eng',
-            'value': ['GARCH models']
-        },
-        'source': 'RERO'
-    }]
-    make_document(organisation='org')
-    response = client.get(url_for(
-        'invenio_records_rest.doc_list',
-        subject=['Time series models', 'GARCH models']),
-                          headers=headers)
+    document_json["subjects"] = [
+        {"label": {"language": "eng", "value": ["GARCH models"]}, "source": "RERO"}
+    ]
+    make_document(organisation="org")
+    response = client.get(
+        url_for(
+            "invenio_records_rest.doc_list",
+            subject=["Time series models", "GARCH models"],
+        ),
+        headers=headers,
+    )
     assert response.status_code == 200
-    assert response.json['hits']['total']['value'] == 1
+    assert response.json["hits"]["total"]["value"] == 1

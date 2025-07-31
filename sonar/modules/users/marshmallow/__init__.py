@@ -21,4 +21,7 @@ from __future__ import absolute_import, print_function
 
 from .json import UserMetadataSchemaV1, UserSchemaV1
 
-__all__ = ('UserMetadataSchemaV1', 'UserSchemaV1',)
+__all__ = (
+    "UserMetadataSchemaV1",
+    "UserSchemaV1",
+)

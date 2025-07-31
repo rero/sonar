@@ -23,9 +23,12 @@ from invenio_base.signals import app_loaded
 from invenio_oaiharvester.signals import oaiharvest_finished
 from invenio_records.signals import before_record_insert, before_record_update
 
-from sonar.modules.documents.receivers import export_json, \
-    set_boosting_query_fields, transform_harvested_records, \
-    update_oai_property
+from sonar.modules.documents.receivers import (
+    export_json,
+    set_boosting_query_fields,
+    transform_harvested_records,
+    update_oai_property,
+)
 
 from . import config
 
@@ -41,7 +44,7 @@ class Documents(object):
     def init_app(self, app):
         """Flask application initialization."""
         self.init_config(app)
-        app.extensions['sonar_documents'] = self
+        app.extensions["sonar_documents"] = self
 
         # Connect to oaiharvester signal
         oaiharvest_finished.connect(transform_harvested_records, weak=False)
@@ -53,9 +56,8 @@ class Documents(object):
         # Expand configuration.
         app_loaded.connect(set_boosting_query_fields)
 
-
     def init_config(self, app):
         """Initialize configuration."""
         for k in dir(app.config):
-            if k.startswith('SONAR_DOCUMENTS_'):
+            if k.startswith("SONAR_DOCUMENTS_"):
                 app.config.setdefault(k, getattr(config, k))

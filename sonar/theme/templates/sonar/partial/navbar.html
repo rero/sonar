@@ -74,7 +74,7 @@ along with this program. If not, see
         {% else %}
         {% if current_user.roles and current_user.roles[0].name == 'submitter' %}
         <li class="nav-item">
-          <a class="btn btn-outline-light" href="{{ url_for('sonar.manage', path='deposit/0/create')}}">
+          <a class="btn btn-outline-light" href="{{ url_for('sonar.manage', path='deposit/create')}}">
             {{ _('Deposit a publication') }}
           </a>
         </li>

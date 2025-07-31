@@ -24,22 +24,23 @@ from sonar.modules.documents.dumpers import IndexerDumper
 
 def test_document_indexer_dumper(document, pdf_file):
     """Test add full text to document."""
-    with open(pdf_file, 'rb') as file:
+    with open(pdf_file, "rb") as file:
         content = file.read()
 
     # Successful file add
-    document.add_file(content, 'test1.pdf', type='file')
-    assert document.files['test1.pdf']
-    assert document.files['test1-pdf.txt']
+    document.add_file(content, "test1.pdf", type="file")
+    assert document.files["test1.pdf"]
+    assert document.files["test1-pdf.txt"]
 
     data = document.dumps(IndexerDumper())
 
-    assert len(data['fulltext']) == 1
-    assert 'PHYSICAL REVIEW B 99' in data['fulltext'][0]
-    assert data['_updated']
-    assert 'ips' in data['organisation'][0]
-    assert 'isOpenAccess' in data
-    assert 'identifiers' in data
+    assert len(data["fulltext"]) == 1
+    assert "PHYSICAL REVIEW B 99" in data["fulltext"][0]
+    assert data["_updated"]
+    assert "ips" in data["organisation"][0]
+    assert "isOpenAccess" in data
+    assert "identifiers" in data
+
 
 def test_document_indexer_dumper_identifiers(document):
     """Test the additional identifiers produced by the dumper."""
@@ -68,18 +69,18 @@ def test_document_indexer_dumper_identifiers(document):
         "bf:VideoRecordingNumber",
         "uri",
         "bf:ReportNumber",
-        "bf:Strn"
+        "bf:Strn",
     ]
     n = 0
-    document['identifiedBy'] = []
+    document["identifiedBy"] = []
     res = {}
     for t in types:
-        key = t.split(':')[-1].lower()
-        for _ in range(random.randint(1,5)):
-            value = f'value{n}'
-            document['identifiedBy'].append(dict(type=t, value=value))
+        key = t.split(":")[-1].lower()
+        for _ in range(random.randint(1, 5)):
+            value = f"value{n}"
+            document["identifiedBy"].append(dict(type=t, value=value))
             res.setdefault(key, []).append(value)
             n += 1
 
     data = document.dumps(IndexerDumper())
-    assert data['identifiers'] == res
+    assert data["identifiers"] == res

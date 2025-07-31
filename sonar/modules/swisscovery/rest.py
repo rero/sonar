@@ -23,61 +23,63 @@ import requests
 import xmltodict
 from flask import Blueprint, current_app, jsonify, request
 
-from sonar.modules.deposits.serializers.schemas.document import \
-    DocumentSchema as DepositDocumentSchema
+from sonar.modules.deposits.serializers.schemas.document import (
+    DocumentSchema as DepositDocumentSchema,
+)
 from sonar.modules.documents.loaders.schemas.sru import SRUSchema
 from sonar.modules.permissions import is_user_logged_and_submitter
 
-api_blueprint = Blueprint('swisscovery', __name__, url_prefix='/swisscovery')
+api_blueprint = Blueprint("swisscovery", __name__, url_prefix="/swisscovery")
 
 
-@api_blueprint.route('/', methods=['GET'])
+@api_blueprint.route("/", methods=["GET"])
 @is_user_logged_and_submitter
 def get_record():
     """Get record."""
-    search_type = request.args.get('type', 'all_for_ui')
-    query = request.args.get('query')
-    format = request.args.get('format', 'document')
+    search_type = request.args.get("type", "all_for_ui")
+    query = request.args.get("query")
+    format = request.args.get("format", "document")
 
     if not search_type or not query:
         return jsonify({}), 400
 
     params = {
-        'operation': 'searchRetrieve',
-        'version':
-        current_app.config.get('SONAR_APP_SWISSCOVERY_SEARCH_VERSION'),
-        'recordSchema': 'marcxml',
-        'maximumRecords': '1',
-        'startRecord': '1',
-        'query': f'({search_type}="{query}")'
+        "operation": "searchRetrieve",
+        "version": current_app.config.get("SONAR_APP_SWISSCOVERY_SEARCH_VERSION"),
+        "recordSchema": "marcxml",
+        "maximumRecords": "1",
+        "startRecord": "1",
+        "query": f'({search_type}="{query}")',
     }
     response = requests.get(
-        current_app.config.get('SONAR_APP_SWISSCOVERY_SEARCH_URL'),
-        params=params)
+        current_app.config.get("SONAR_APP_SWISSCOVERY_SEARCH_URL"), params=params
+    )
     result = xmltodict.parse(response.text)
 
-    if not result['sru:searchRetrieveResponse'].get(
-            'sru:records') or not result['sru:searchRetrieveResponse'][
-                'sru:records'].get('sru:record'):
+    if not result["sru:searchRetrieveResponse"].get("sru:records") or not result[
+        "sru:searchRetrieveResponse"
+    ]["sru:records"].get("sru:record"):
         return jsonify({}), 200
 
     # Get only relevant XML part.
-    record = xmltodict.unparse(result['sru:searchRetrieveResponse']
-                               ['sru:records']['sru:record']['sru:recordData'],
-                               full_document=False)
+    record = xmltodict.unparse(
+        result["sru:searchRetrieveResponse"]["sru:records"]["sru:record"][
+            "sru:recordData"
+        ],
+        full_document=False,
+    )
 
     record = SRUSchema().dump(record)
 
     # Regular expression to remove the << and >> around a value in the title
     # Ex: <<La>> vie est belle => La vie est belle
-    pattern = re.compile('<<(.+)>>', re.S)
-    for title in record.get('title',[]):
-        for mainTitle in title.get('mainTitle', []):
-            mainTitle['value'] = re.sub(pattern, r'\1', mainTitle['value'])
+    pattern = re.compile("<<(.+)>>", re.S)
+    for title in record.get("title", []):
+        for mainTitle in title.get("mainTitle", []):
+            mainTitle["value"] = re.sub(pattern, r"\1", mainTitle["value"])
 
     # Serialize for deposit.
-    if format == 'deposit':
+    if format == "deposit":
         record = DepositDocumentSchema().dump(record)
-
 
     return jsonify(record)

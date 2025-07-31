@@ -15,30 +15,32 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-@import "../common/variables";
-@import "../common/theme";
+@layer bootstrap {
+  @import "../common/variables";
+  @import "../common/theme";
 
-/* Bandeau supérieur */
-.bg-header {
-  background-color: #cb4b40;
-  @extend .navbar-dark;
-}
-
-/* Bandeau principal */
-.bg-organisation {
-  background-color: #eeeeee;
-  @extend .navbar-light;
-
-  .btn-outline-light, .form-control {
-    color: #8F8F8F;
-    border-color: #8F8F8F;
+  /* Bandeau supérieur */
+  .bg-header {
+    background-color: #cb4b40;
+    @extend .navbar-dark;
   }
-}
 
-/* Bandeau intermédiaire */
-.text-light {
-  color: #000000 !important;
-}
-.bg-secondary {
-  background-color: #f7de89 !important
+  /* Bandeau principal */
+  .bg-organisation {
+    background-color: #eeeeee;
+    @extend .navbar-light;
+
+    .btn-outline-light, .form-control {
+      color: #8F8F8F;
+      border-color: #8F8F8F;
+    }
+  }
+
+  /* Bandeau intermédiaire */
+  .text-light {
+    color: #000000 !important;
+  }
+  .bg-secondary {
+    background-color: #f7de89 !important
+  }
 }
