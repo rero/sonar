@@ -166,8 +166,9 @@
           "pattern": "^https://sonar.ch/api/subdivisions/.*?$",
           "widget": {
             "formlyConfig": {
+              "type": "remoteAutoComplete",
               "props": {
-                "remoteTypeahead": {
+                "queryOptions": {
                   "type": "subdivisions",
                   "field": "name.value.suggest",
                   "label": "label"

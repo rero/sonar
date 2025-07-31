@@ -2303,9 +2303,9 @@
             "pattern": "^https://sonar.ch/api/subdivisions/.*?$",
             "widget": {
               "formlyConfig": {
+                "type": "remoteAutoComplete",
                 "props": {
-                  "type": "remoteAutoComplete",
-                  "formlyConfig": {
+                  "queryOptions": {
                     "type": "subdivisions",
                     "field": "name.value.suggest",
                     "label": "label"

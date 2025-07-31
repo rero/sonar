@@ -73,7 +73,6 @@ services:
       - "5672:5672"
   es:
     build: ./docker/elasticsearch/
-    image: elasticsearch-icu-7.10.2
     restart: "unless-stopped"
     environment:
       - bootstrap.memory_lock=true
