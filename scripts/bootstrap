@@ -138,16 +138,6 @@ cp -R ${assets_folder}/node_modules/@rero/sonar-ui/dist/sonar/* ${static_folder}
 # Copy worker from pdfjs to avoid a 404 error when previewing PDF files.
 cp ${assets_folder}/node_modules/pdfjs-dist/build/pdf.worker.min.js ${static_folder}/js/pdfjs/
 
-# Compile JSON schemas
-info_msg "Compile JSON schemas"
-invenio utils compile-json ./sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json -o ./sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json
-invenio utils compile-json ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json -o ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
-invenio utils compile-json ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json -o ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json
-invenio utils compile-json ./sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json -o ./sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json
-invenio utils compile-json ./sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0_src.json -o ./sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0.json
-invenio utils compile-json ./sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json -o ./sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json
-invenio utils compile-json ./sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json -o ./sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json
-
 # Compile translations catalogs
 info_msg "Compile translations catalogs"
 uv run pybabel compile -d sonar/translations

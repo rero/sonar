@@ -303,7 +303,7 @@
       ],
       "properties": {
         "documentType": {
-          "$ref": "type-v1.0.0.json"
+          "$ref": "https://sonar.ch/schemas/common/type-v1.0.0.json"
         },
         "title": {
           "title": "Title",
@@ -334,12 +334,12 @@
               "minLength": 1
             },
             "language": {
-              "$ref": "language-v1.0.0.json"
+              "$ref": "https://sonar.ch/schemas/common/language-v1.0.0.json"
             }
           }
         },
         "language": {
-          "$ref": "language-v1.0.0.json"
+          "$ref": "https://sonar.ch/schemas/common/language-v1.0.0.json"
         },
         "publicationPlace": {
           "title": "Publication place",
@@ -814,7 +814,7 @@
           }
         },
         "classification": {
-          "$ref": "classification-v1.0.0.json"
+          "$ref": "https://sonar.ch/schemas/common/classification-v1.0.0.json"
         },
         "abstracts": {
           "title": "Abstracts",
@@ -833,7 +833,7 @@
             ],
             "properties": {
               "language": {
-                "$ref": "language-v1.0.0.json"
+                "$ref": "https://sonar.ch/schemas/common/language-v1.0.0.json"
               },
               "abstract": {
                 "title": "Abstract",
@@ -868,7 +868,7 @@
             ],
             "properties": {
               "language": {
-                "$ref": "language-v1.0.0.json"
+                "$ref": "https://sonar.ch/schemas/common/language-v1.0.0.json"
               },
               "subjects": {
                 "title": "Values",
@@ -1393,10 +1393,10 @@
       ],
       "properties": {
         "license": {
-          "$ref": "license-v1.0.0.json"
+          "$ref": "https://sonar.ch/schemas/common/license-v1.0.0.json"
         },
         "oa_status": {
-          "$ref": "oa-status-v1.0.0.json"
+          "$ref": "https://sonar.ch/schemas/common/oa-status-v1.0.0.json"
         },
         "subdivisions": {
           "title": "Subdivisions",
@@ -1431,7 +1431,7 @@
           }
         },
         "masked": {
-          "$ref": "masked-v1.0.0.json"
+          "$ref": "https://sonar.ch/schemas/common/masked-v1.0.0.json"
         }
       }
     },

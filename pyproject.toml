@@ -209,7 +209,7 @@ projects_hepvs = "sonar.dedicated.hepvs.projects.jsonschemas"
 collections = "sonar.modules.collections.jsonschemas"
 subdivisions = "sonar.modules.subdivisions.jsonschemas"
 stats = "sonar.modules.stats.jsonschemas"
-common = "sonar.common.jsonschemas"
+common = "sonar.jsonschemas"
 
 [project.entry-points."invenio_search.mappings"]
 documents = "sonar.modules.documents.mappings"

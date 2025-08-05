@@ -286,7 +286,7 @@
       }
     },
     "documentType": {
-      "$ref": "type-v1.0.0.json"
+      "$ref": "https://sonar.ch/schemas/common/type-v1.0.0.json"
     },
     "title": {
       "title": "Titles",
@@ -325,7 +325,7 @@
                   "minLength": 1
                 },
                 "language": {
-                  "$ref": "language-v1.0.0.json"
+                  "$ref": "https://sonar.ch/schemas/common/language-v1.0.0.json"
                 }
               },
               "required": [
@@ -349,7 +349,7 @@
                   "minLength": 1
                 },
                 "language": {
-                  "$ref": "language-v1.0.0.json"
+                  "$ref": "https://sonar.ch/schemas/common/language-v1.0.0.json"
                 }
               },
               "required": [
@@ -400,7 +400,7 @@
             }
           },
           "value": {
-            "$ref": "language-v1.0.0.json"
+            "$ref": "https://sonar.ch/schemas/common/language-v1.0.0.json"
           }
         },
         "propertiesOrder": [
@@ -759,7 +759,7 @@
             }
           },
           "language": {
-            "$ref": "language-v1.0.0.json"
+            "$ref": "https://sonar.ch/schemas/common/language-v1.0.0.json"
           }
         },
         "required": [
@@ -1021,7 +1021,7 @@
             "additionalProperties": false,
             "properties": {
               "language": {
-                "$ref": "language-v1.0.0.json"
+                "$ref": "https://sonar.ch/schemas/common/language-v1.0.0.json"
               },
               "value": {
                 "title": "Value",
@@ -1268,7 +1268,7 @@
                 }
               },
               "classificationPortion": {
-                "$ref": "classification-v1.0.0.json"
+                "$ref": "https://sonar.ch/schemas/common/classification-v1.0.0.json"
               }
             },
             "propertiesOrder": [
@@ -1401,7 +1401,7 @@
       "additionalProperties": false,
       "properties": {
         "license": {
-          "$ref": "license-v1.0.0.json"
+          "$ref": "https://sonar.ch/schemas/common/license-v1.0.0.json"
         },
         "label": {
           "title": "Label",
@@ -2200,7 +2200,7 @@
       }
     },
     "oa_status": {
-      "$ref": "oa-status-v1.0.0.json"
+      "$ref": "https://sonar.ch/schemas/common/oa-status-v1.0.0.json"
     },
     "customField1": {
       "title": "Custom field 1",
@@ -2287,7 +2287,7 @@
       }
     },
     "masked": {
-      "$ref": "masked-v1.0.0.json"
+      "$ref": "https://sonar.ch/schemas/common/masked-v1.0.0.json"
     },
     "subdivisions": {
       "title": "Subdivisions",
