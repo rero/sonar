@@ -1,6 +1,6 @@
 {# -*- coding: utf-8 -*-
 Swiss Open Access Repository
-Copyright (C) 2021-2022 RERO
+Copyright (C) 2021-2025 RERO
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
@@ -435,11 +435,16 @@ along with this program. If not, see
   <hr class="mb-4 mt-0">
   <div class="row">
     {% for file in files %}
-    {% if loop.index > 1 %}
-    <div class="col-lg-2 mb-5">
-      {{ thumbnail(record, file, stats['file-download'][file['key']] or 0) }}
-    </div>
-    {% endif %}
+      {% if loop.index > 1 %}
+        <div class="col-lg-2">
+          {{ thumbnail(record, file, stats['file-download'][file['key']] or 0) }}
+          {% if file.label %}
+            <div class="text-center">
+              {{ file.label }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
     {% endfor %}
   </div>
   {% endif %}
