@@ -4,9 +4,9 @@ version = "1.11.0"
 description = "SONAR is an archive of scholarly publications. It intends to collect, promote and preserve the publications of authors affiliated with Swiss public research institutions."
 authors = [{name = "RERO", email = "software@rero.ch"}]
 keywords = ["sonar", "invenio", "document repository"]
-license = "GNU Affero General Public License v3.0 only"
+license = "AGPL-3.0"
+license-files = ["LICENSE"]
 urls = {homepage = "https://www.rero.ch/en/products/sonar", repository="https://github.com/rero/sonar"}
-dynamic = ["classifiers"]
 requires-python = ">= 3.9,<3.10"
 
 dependencies = [
@@ -14,14 +14,8 @@ dependencies = [
     # to avoid lxml conflict
     "xmlsec (<1.3.15)",
     "marshmallow (>=3.0.0,<4.0.0)",
-    "uwsgi (>=2.0)",
-    "uwsgi-tools (>=1.1.1)",
-    "uwsgitop (>=0.11)",
-
     "invenio-oaiharvester @ git+https://github.com/inveniosoftware/invenio-oaiharvester.git@v1.0.0a4",
-
     "invenio-search [elasticsearch7] (>=2.1.0,<3.0.0)",
-
     # Invenio core modules
     "invenio-app (>=1.4.0,<3.0.0)",
     "invenio-base (>=1.3.0,<3.0.0)",
@@ -30,7 +24,6 @@ dependencies = [
     "invenio-config (>=1.0.3,<2.0.0)",
     "invenio-i18n (>=2.0.0,<3.0.0)",
     "invenio-db [postgresql] (>=1.1.0,<2.0.0)",
-
     # Invenio base bundle
     "invenio-admin (>=1.4.0,<1.5.0)",
     "invenio-assets (>=3.0.0,<4.0.0)",
@@ -39,14 +32,12 @@ dependencies = [
     "invenio-mail (>=2.0.0,<3.0.0)",
     "invenio-rest (>=1.3.0,<2.0.0)",
     "invenio-theme (>3.0.0,<4.0.0)",
-
     # Invenio auth bundle
     "invenio-access (>=2.0.0,<3.0.0)",
     "invenio-accounts (>=5.0.0,!=5.1.0,<7.0.0)",
     "invenio-oauth2server (>=2.3.0,<3.0.0)",
     "invenio-oauthclient (>=4.0.0,<5.0.0)",
     "invenio-userprofiles (>=3.0.0,<4.0.0)",
-
     "invenio-indexer (>=2.2.0,<3.0.0)",
     "invenio-jsonschemas (>=1.1.4,<2.0.0)",
     "invenio-oaiserver (>=2.2.0,<3.0.0)",
@@ -57,16 +48,13 @@ dependencies = [
     "invenio-search-ui (>=2.4.0,<3.0.0)",
     "invenio-stats",
     "invenio-records-resources",
-
     # Files
     "invenio-files-rest (>=2.0.0,<3.0.0)",
     "invenio-previewer (>=2.0.0,<3.0.0)",
     "invenio-records-files (>=1.2.1,<1.3.0)",
-
     # Pinned due to before_first_request deprecation https://flask.palletsprojects.com/en/2.2.x/api/#flask.Flask.before_first_request
     "Flask (>=2.2.0,<2.3.0)",
     "sentry-sdk (<2.0.0)",
-
     ## RERO ILS specific python modules
     "PyYAML (>=5.3.1)",
     "dateparser (>=1.1.1)",
@@ -77,14 +65,11 @@ dependencies = [
     "redisbeat  (>1.2.5,<1.3.0)",
     "jsonpickle (>=1.4.1)",
     "ciso8601",
-
     ## Additionnal constraints on python modules
     "markdown-captions",
     "zipp",
-
     ## Deployment
     "python-dotenv (>=0.13.0)",
-
     ## Third party optional modules used by RERO ILS
     "freezegun (>=1.1.0)",
     "lazyreader (>1.0.0)",
@@ -107,9 +92,6 @@ dependencies = [
     "flask-wiki (>=0.3.1)",
     "poethepoet",
     "flask-menu (<2.0.0)",
-    "isort (>=6.0.0)",
-    "black (>=25.1.0,<26.0.0)",
-
     ## SONAR Specific
     "fuzzywuzzy (==0.18.0)",
     "pycountry (==23.12.11)",
@@ -122,7 +104,31 @@ dependencies = [
     "python3-saml (==1.16.0)",
     "python-levenshtein (==0.23.0)",
     # "jsonschema (<=4.20.0)",
-    "flask-breadcrumbs (>=0.5.1,<0.6.0)"
+    "flask-breadcrumbs (>=0.5.1,<0.6.0)",
+    "uritemplate (<4.2.0)",
+    # Paramiko >=4.0.0 incompatible with pysftp
+    "paramiko<4.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "Sphinx (>=4.5.0)",
+    "Flask-Debugtoolbar (>=0.10.1)",
+    "pip-audit (>=2.8.0,<3.0.0)",
+    "mock (>=2.0.0)",
+    "appnope",
+    "beautifulsoup4 (>=4.11.1)",
+    "requests-mock (>=1.11.0)",
+    "pytest-invenio (>=2.1.6,<3.0.0)",
+    "pydocstyle (>=6.1.1)",
+    "pytest-black (>=0.3.2)",
+    "pytest-black-ng (>=0.4.0)",
+    "autoflake (>=1.3.1)",
+]
+prod = [
+    "uwsgi (>=2.0)",
+    "uwsgi-tools (>=1.1.1)",
+    "uwsgitop (>=0.11)",
 ]
 
 [project.entry-points."app.console_scripts"]
@@ -252,21 +258,6 @@ stats = "sonar.modules.stats.admin:stats_adminview"
 [project.entry-points."babel.extractors"]
 json = "sonar.modules.babel_extractors:extract_json"
 
-[tool.poetry.group.dev.dependencies]
-pytest-invenio = ">=2.1.6,<3.0.0"
-pydocstyle = ">=6.1.1"
-pytest-black = ">=0.3.2"
-pytest-black-ng = ">=0.4.0"
-Sphinx = ">=4.5.0"
-Flask-Debugtoolbar = ">=0.10.1"
-## RERO ILS specific python packages
-pip-audit = ">=2.8.0,<3.0.0"
-mock = ">=2.0.0"
-autoflake = ">=1.3.1"
-appnope = { version = "*",optional = true }
-beautifulsoup4 = "^4.11.1"
-requests-mock = "^1.11.0"
-
 [tool.pytest.ini_options]
 addopts = "--color=yes --isort --pydocstyle --exclude-warning-annotations --doctest-glob='*.rst' --doctest-modules --cov=sonar --cov-report=term-missing --ignore=setup.py --ignore=docs/conf.py -p celery.contrib.pytest"
 testpaths = ["docs", "tests", "sonar"]
@@ -292,4 +283,11 @@ init_catalog = {cmd = "pybabel init -i sonar/translations/messages.pot -d sonar/
 update_catalog = {cmd = "pybabel update -i sonar/translations/messages.pot -d sonar/translations", help = "update existing message catalogs from a POT file"}
 
 [build-system]
-requires = ["poetry>=2.0.0"]
+requires = ["uv_build"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-root = "."
+
+[tool.uv]
+package = true

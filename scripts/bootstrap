@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # Swiss Open Access Repository
-# Copyright (C) 2021 RERO
+# Copyright (C) 2021-2025 RERO
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -16,17 +16,58 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+NC='\033[0m'                    # Default color
+INFO_COLOR='\033[1;97;44m'      # Bold + white + blue background
+SUCCESS_COLOR='\033[1;97;42m'   # Bold + white + green background
+ERROR_COLOR='\033[1;97;41m'     # Bold + white + red background
+
+PROGRAM=`basename $0`
+
 source $(dirname "$0")/functions
 
 set -e
 
+# MESSAGES
+msg() {
+  echo -e "${1}" 1>&2
+}
+# Display a colored message
+# More info: https://misc.flogisoft.com/bash/tip_colors_and_formatting
+# $1: choosen color
+# $2: title
+# $3: the message
+colored_msg() {
+  msg "${1}[${2}]: ${3}${NC}"
+}
+
+info_msg() {
+  colored_msg "${INFO_COLOR}" "INFO" "${1}"
+}
+
+error_msg() {
+  colored_msg "${ERROR_COLOR}" "ERROR" "${1}"
+}
+
+error_msg+exit() {
+    error_msg "${1}" && exit 1
+}
+
+success_msg() {
+  colored_msg "${SUCCESS_COLOR}" "SUCCESS" "${1}"
+}
+
+# Displays program name
+msg "PROGRAM: ${PROGRAM}"
+
+flags=()
 deploy=false
+cmd="uv sync --frozen"
 ci=false
 ui_tgz=""
 
-# Poetry is a mandatory condition to launch this program!
+# uv is a mandatory condition to launch this program!
 if [[ -z "${VIRTUAL_ENV}" ]]; then
-  message "Launch this script via poetry command: poetry run ${PROGRAM}" "error"
+  error_msg "Launch this script via uv command: uv run ${PROGRAM}"
   exit 1
 fi
 
@@ -45,7 +86,7 @@ while test $# -gt 0; do
         --deploy)
             deploy=true
             ;;
-        *) message "Option $1 not recognized" "error" ;;
+        *) error_msg "Option $1 not recognized" ;;
     esac
     shift
 done
@@ -53,36 +94,31 @@ done
 
 title "Bootstrap script"
 
-section "Upgrade pip"
-poetry run pip install --upgrade pip
-
-section "Install poethepoet"
-poetry run pip install poethepoet
-
-if ! $deploy ; then
+if $deploy ; then
+  if ! $ci ; then
+    flags=("--no-group dev --group prod")
+  fi
+else
   if $ci ; then
-    section "Updating dependencies" "info"
-    poetry update
+    cmd="uv sync --upgrade"
   fi
 fi
 
-if ! $deploy ; then
-  section "Install the application" "info"
-  poetry install
-else
-  section "Install the application for production" "info"
-  poetry install --only main
-fi
+# BOOTSTRAP START
+# install the application and all the dependencies
+flag="${flags[@]}"
+info_msg "Install with command: ${cmd} ${flag}"
+${cmd} ${flags[@]}
 
 # Collect static files
-section "Collect static files" "info"
+info_msg "Collect static files"
 invenio collect -v
 
 # Store folder path
 assets_folder=$(invenio shell --no-term-title -c "print(app.config.get('WEBPACKEXT_PROJECT_BUILDDIR'))")
 static_folder=$(invenio shell --no-term-title -c "print('static_folder:%s' % app.static_folder)"|grep static_folder| cut -d: -f2-)
 
-section "Install assets" "info"
+info_msg "Install assets"
 
 # Remove installed RERO packages (in case they was installed with pack)
 rm -rf ${assets_folder}/node_modules/@rero
@@ -91,7 +127,7 @@ rm -rf ${assets_folder}/node_modules/@rero
 invenio webpack buildall
 
 if [ ! -z "$ui_tgz" ]; then
-  message "Install UI from $ui_tgz" "info"
+  info_msg "Install UI from $ui_tgz"
   npm i $ui_tgz --prefix $assets_folder
 fi
 
@@ -103,7 +139,7 @@ cp -R ${assets_folder}/node_modules/@rero/sonar-ui/dist/sonar/* ${static_folder}
 cp ${assets_folder}/node_modules/pdfjs-dist/build/pdf.worker.min.js ${static_folder}/js/pdfjs/
 
 # Compile JSON schemas
-section "Compile JSON schemas" "info"
+info_msg "Compile JSON schemas"
 invenio utils compile-json ./sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json -o ./sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json
 invenio utils compile-json ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json -o ./sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json
 invenio utils compile-json ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json -o ./sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json
@@ -113,7 +149,7 @@ invenio utils compile-json ./sonar/resources/projects/jsonschemas/projects/proje
 invenio utils compile-json ./sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json -o ./sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json
 
 # Compile translations catalogs
-section "Compile translations catalogs" "info"
-poetry run pybabel compile -d sonar/translations
+info_msg "Compile translations catalogs"
+uv run pybabel compile -d sonar/translations
 
-message "\nBootstrap finished successfully" "success"
+success_msg "\nBootstrap finished successfully"
