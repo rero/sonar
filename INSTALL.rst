@@ -24,16 +24,7 @@ First, create your working directory and ``cd`` into it. Clone the project into 
 
     $ git clone https://github.com/rero/sonar.git
 
-You need to install `poetry`, it will handle the virtual environment creation for the project
-in order to sandbox our Python environment, as well as manage the dependency installation,
-among other things.
-
-.. code-block:: console
-
-    $ pyenv install 3.9.9
-    $ cd sonar
-    $ pyenv local 3.9.9
-    $ pip install poetry
+You need to `install uv <https://docs.astral.sh/uv/getting-started/installation/>`, it will handle the versions of Python and the virtual environment creation for the project in order to sandbox our Python environment, as well as manage the dependency installation, among other things.
 
 Next, ``cd`` into the project directory and bootstrap the instance (this will install
 all Python dependencies and build all static assets):
@@ -41,7 +32,7 @@ all Python dependencies and build all static assets):
 .. code-block:: console
 
     $ cd sonar
-    $ poetry run ./scripts/bootstrap
+    $ uv run ./scripts/bootstrap
 
 Start all dependent services using docker-compose (this will start PostgreSQL,
 Elasticsearch 6, RabbitMQ and Redis):
@@ -70,7 +61,7 @@ Next, create database tables, search indexes and message queues:
 
 .. code-block:: console
 
-    $ poetry run ./scripts/setup
+    $ uv run poe setup
 
 Running
 -------
@@ -78,13 +69,13 @@ Start the webserver and the celery worker:
 
 .. code-block:: console
 
-    $ poetry run ./scripts/server
+    $ uv run poe server
 
 Start a Python shell:
 
 .. code-block:: console
 
-    $ poetry run ./scripts/console
+    $ uv run poe console
 
 Testing
 -------
@@ -92,14 +83,14 @@ Run the test suite via the provided script:
 
 .. code-block:: console
 
-    $ poetry run ./scripts/test
+    $ uv run poe run_tests
 
 By default, end-to-end tests are skipped. You can include the E2E tests like
 this:
 
 .. code-block:: console
 
-    $ env E2E=yes poetry run ./scripts/test
+    $ env E2E=yes uv run poe run_tests
 
 For more information about end-to-end testing see `pytest-invenio
 <https://pytest-invenio.readthedocs.io/en/latest/usage.html#running-e2e-tests>`_.
@@ -121,7 +112,7 @@ already done:
 
 .. code-block:: console
 
-    $ docker compose -f docker-compose.full.yml run --rm web-ui "poetry run ./scripts/setup"
+    $ docker compose -f docker-compose.full.yml run --rm web-ui "uv run ./scripts/setup"
 
 In addition to the normal ``docker-compose.yml``, this one will start:
 

@@ -1,4 +1,4 @@
-name: build
+name: CI
 on: [push, pull_request, workflow_dispatch]
 
 env:
@@ -28,34 +28,30 @@ jobs:
     - name: Docker compose up
       run: docker compose up -d
 
-    - name: Setup Python 3.9
-      uses: actions/setup-python@v5
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
       with:
-        python-version: 3.9
+        enable-cache: true
+        cache-dependency-glob: uv.lock
 
-    - name: Install Poetry
-      uses: snok/install-poetry@v1
-
-    - name: Run Bootstrap
-      run: |
-        poetry run ./scripts/bootstrap
-        pip install --upgrade coveralls
+    - name: Set up Python
+      run: uv python install 3.9
 
     - name: Bootstrap
       if: ${{ matrix.dependencies == 'dev' }}
       run: |
-        poetry run ./scripts/bootstrap --ci
-        pip install --upgrade coveralls
+        uv run ./scripts/bootstrap --ci
 
     - name: Bootstrap deploy
       if: ${{ matrix.dependencies == 'deploy' }}
       run: |
-        poetry run ./scripts/bootstrap --ci --deploy E2E=yes
+        uv run ./scripts/bootstrap --ci --deploy
 
     - name: Run Test
-      run: poetry run ./scripts/test
+      run: uv run poe run_tests
 
     - name: Code Coverage
+      if: ${{ matrix.dependencies == 'development' }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COVERALLS_SERVICE_NAME: github

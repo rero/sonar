@@ -15,3 +15,5 @@ docker-compose-dev.yml
 Procfile*
 
 celerybeat-schedule
+
+.venv/

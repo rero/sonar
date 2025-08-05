@@ -45,6 +45,6 @@ ENV TERM=xterm-256color
 ENV UWSGI_PROFILE_OVERRIDE="xml=no"
 ARG UI_TGZ=""
 ENV INVENIO_COLLECT_STORAGE='flask_collect.storage.file'
-RUN poetry run ./scripts/bootstrap --deploy --ui ${UI_TGZ}
+RUN uv run --no-sync ./scripts/bootstrap --deploy --ui ${UI_TGZ}
 
 ENTRYPOINT [ "bash", "-c"]
