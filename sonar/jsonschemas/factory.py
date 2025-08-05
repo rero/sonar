@@ -37,13 +37,13 @@ class JSONSchemaFactory:
     }
 
     @staticmethod
-    def create(resource_type):
+    def create(resource_type, with_refs=False):
         """Create instance of schema based on the given resource.
 
         :param resource_type: String representing the type of resource.
         :returns: The schema instance.
         """
-        if JSONSchemaFactory.SCHEMAS.get(resource_type):
-            return JSONSchemaFactory.SCHEMAS[resource_type](resource_type)
+        if json_schema_cls := JSONSchemaFactory.SCHEMAS.get(resource_type):
+            return json_schema_cls(resource_type, with_refs)
 
-        return JSONSchemaBase(resource_type)
+        return JSONSchemaBase(resource_type, with_refs)

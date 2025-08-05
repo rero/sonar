@@ -1010,3 +1010,20 @@ STATS_QUERIES = {
         ),
     ),
 }
+
+# JSONSchemas
+# ===========
+"""Default json schema host."""
+JSONSCHEMAS_HOST = "sonar.ch"
+"""Default schema endpoint."""
+JSONSCHEMAS_ENDPOINT = "/schemas"
+"""Whether to resolve $ref before serving a schema."""
+JSONSCHEMAS_REPLACE_REFS = False
+"""Whether to resolve schema using the Resolver Class."""
+JSONSCHEMAS_RESOLVE_SCHEMA = True
+"""Loader class used in ``JSONRef`` when replacing ``$ref``."""
+JSONSCHEMAS_LOADER_CLS = "sonar.jsonschemas.utils.JsonLoader"
+"""Register the endpoints on the API app."""
+JSONSCHEMAS_REGISTER_ENDPOINTS_API = False
+"""Register the endpoints on the UI app."""
+JSONSCHEMAS_REGISTER_ENDPOINTS_UI = False

@@ -24,7 +24,9 @@ this file.
 
 from __future__ import absolute_import, print_function
 
+import contextlib
 import re
+from copy import deepcopy
 from datetime import datetime
 from urllib.parse import urlparse
 
@@ -44,10 +46,11 @@ from flask_babel import lazy_gettext as _
 from flask_breadcrumbs import register_breadcrumb
 from flask_login import current_user, login_required
 from flask_menu import current_menu, register_menu
+from invenio_jsonschemas import current_jsonschemas
 from invenio_jsonschemas.errors import JSONSchemaNotFound
 from invenio_pidstore.models import PersistentIdentifier
 
-from sonar.json_schemas.factory import JSONSchemaFactory
+from sonar.jsonschemas.factory import JSONSchemaFactory
 from sonar.modules.collections.permissions import (
     RecordPermission as CollectionPermission,
 )
@@ -252,18 +255,57 @@ def logged_user():
     return jsonify(data)
 
 
+def replace_ref_url(schema, new_host):
+    """Replace all $refs with local $refs.
+
+    :param: schema: Schema to replace the $refs
+    :param: new_host: The host to replace the $ref with.
+    :returns: modified schema.
+    """
+    jsonschema_host = current_app.config.get("JSONSCHEMAS_HOST")
+    if default := schema.get("properties", {}).get("$schema", {}).get("default"):
+        schema["properties"]["$schema"]["default"] = default.replace(
+            jsonschema_host, new_host
+        )
+    for k, v in schema.items():
+        if isinstance(v, dict):
+            schema[k] = replace_ref_url(schema=schema[k], new_host=new_host)
+    if "$ref" in schema and isinstance(schema["$ref"], str):
+        schema["$ref"] = schema["$ref"].replace(jsonschema_host, new_host)
+    # Todo: local://
+    return schema
+
+
 @blueprint.route("/schemas/<record_type>")
-def schemas(record_type):
+@blueprint.route("/schemas/<record_type>/<path:schema>")
+def schemas(record_type, schema=None):
     """Return schema for the editor.
 
     :param record_type: Type of resource.
     :returns: JSONified schema or a 404 if not found.
     """
+    resolved = request.args.get(
+        "resolved", current_app.config.get("JSONSCHEMAS_RESOLVE_SCHEMA"), type=int
+    )
+    new_host = urlparse(request.base_url).netloc
     try:
-        json_schema = JSONSchemaFactory.create(record_type)
-        return jsonify({"schema": json_schema.process()})
+        schema = JSONSchemaFactory.create(record_type, with_refs=bool(resolved))
+        schema = schema.process()
+        if not resolved:
+            schema = replace_ref_url(schema, new_host)
+        return jsonify({"schema": schema})
     except JSONSchemaNotFound:
-        abort(404)
+        schema_path = f"{record_type}/{schema}"
+        with contextlib.suppress(JSONSchemaNotFound):
+            if current_app.debug:
+                current_jsonschemas.get_schema.cache_clear()
+            schema = deepcopy(
+                current_jsonschemas.get_schema(schema_path, with_refs=bool(resolved))
+            )
+        if not resolved:
+            schema = replace_ref_url(schema, new_host)
+            return jsonify({"schema": schema})
+    abort(404)
 
 
 @blueprint.app_template_filter()

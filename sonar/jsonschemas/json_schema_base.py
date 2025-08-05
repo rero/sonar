@@ -31,8 +31,9 @@ class JSONSchemaBase:
 
     _resource_type = None
     _schema = None
+    _with_refs = False
 
-    def __init__(self, resource_type):
+    def __init__(self, resource_type, with_refs=False):
         """Class initialization.
 
         Stores the resource type and load the corresponding schema.
@@ -40,6 +41,7 @@ class JSONSchemaBase:
         :param resource_type: Type of resource
         """
         self._resource_type = resource_type
+        self._with_refs = with_refs
         self._load_schema()
 
     def _load_schema(self):
@@ -52,12 +54,14 @@ class JSONSchemaBase:
         rec_type = re.sub("s$", "", rec_type)
 
         current_jsonschemas.get_schema.cache_clear()
-        schema_name = f"{self._resource_type}/{rec_type}-v1.0.0.json"
+        schema_path = f"{self._resource_type}/{rec_type}-v1.0.0.json"
 
         if has_custom_resource(self._resource_type):
-            schema_name = f'{current_organisation["code"]}/{schema_name}'
+            schema_path = f'{current_organisation["code"]}/{schema_path}'
 
-        self._schema = copy.deepcopy(current_jsonschemas.get_schema(schema_name))
+        self._schema = copy.deepcopy(
+            current_jsonschemas.get_schema(schema_path, with_refs=self._with_refs)
+        )
 
     def get_schema(self):
         """Return the schema loaded.
