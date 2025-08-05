@@ -27,18 +27,6 @@ from invenio_search.cli import destroy
 import sonar.modules.cli.utils as Cli
 
 
-def test_compile_json(app, script_info):
-    """Test JSON compilation."""
-    runner = CliRunner()
-
-    result = runner.invoke(
-        Cli.compile_json, ["./tests/ui/data/json_to_compile.json"], obj=script_info
-    )
-
-    assert result.output.find("language-v1.0.0.json") == -1
-    assert result.output.find("#/definitions/someDefinition") == -1
-
-
 def test_es_init(app, script_info, es_clear):
     """Test ES init command."""
     runner = CliRunner()

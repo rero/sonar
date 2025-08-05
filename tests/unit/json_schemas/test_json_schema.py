@@ -19,7 +19,7 @@
 
 import pytest
 
-from sonar.json_schemas.json_schema_base import JSONSchemaBase
+from sonar.jsonschemas.json_schema_base import JSONSchemaBase
 
 
 def test_load(app, monkeypatch):
@@ -35,10 +35,10 @@ def test_load(app, monkeypatch):
 
     # Schema for custom resource
     monkeypatch.setattr(
-        "sonar.json_schemas.json_schema_base.current_organisation", {"code": "hepvs"}
+        "sonar.jsonschemas.json_schema_base.current_organisation", {"code": "hepvs"}
     )
     monkeypatch.setattr(
-        "sonar.json_schemas.json_schema_base.has_custom_resource",
+        "sonar.jsonschemas.json_schema_base.has_custom_resource",
         lambda *args, **kwargs: True,
     )
     schema = JSONSchemaBase("projects")

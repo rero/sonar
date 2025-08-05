@@ -24,18 +24,15 @@ import sys
 from os.path import dirname, join
 
 import click
-import jsonref
 from flask import current_app
 from flask.cli import with_appcontext
 from invenio_db import db
 from invenio_files_rest.models import Location
-from invenio_jsonschemas import current_jsonschemas
 from invenio_oauth2server.cli import process_scopes, process_user
 from invenio_oauth2server.models import Client, Token
 from invenio_records_rest.utils import obj_or_import_string
 from invenio_search.cli import search_version_check
 from invenio_search.proxies import current_search
-from jsonref import jsonloader
 from werkzeug.local import LocalProxy
 from werkzeug.security import gen_salt
 
@@ -83,32 +80,6 @@ def clear_files():
             click.secho(f"Directory {location.uri} cannot be cleaned", fg="yellow")
 
     click.secho("Finished", fg="green")
-
-
-@utils.command()
-@click.argument("src_json_file", type=click.File("r"))
-@click.option("-o", "--output", "output", type=click.File("w"), default=None)
-@with_appcontext
-def compile_json(src_json_file, output):
-    """Compile source json file (resolve $ref)."""
-    click.secho("Compile json file (resolve $ref): ", fg="green", nl=False)
-    click.secho(src_json_file.name)
-
-    data = jsonref.load(src_json_file, loader=custom_json_loader)
-    if not output:
-        output = sys.stdout
-    json.dump(data, fp=output, indent=2)
-
-
-def custom_json_loader(uri, **kwargs):
-    """Method invoked when an uri has to be resolved.
-
-    If URI is present in registered JSON schemas list, it resolves in the
-    common schemas, else lets the loader from jsonref do the job.
-    """
-    if uri in current_jsonschemas.list_schemas():
-        return current_jsonschemas.get_schema(uri)
-    return jsonloader(uri, *kwargs)
 
 
 @utils.command("export")

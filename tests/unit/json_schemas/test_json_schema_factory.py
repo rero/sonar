@@ -17,9 +17,9 @@
 
 """Test JSON schema factory."""
 
-from sonar.json_schemas.deposits_json_schema import DepositsJSONSchema
-from sonar.json_schemas.factory import JSONSchemaFactory
-from sonar.json_schemas.json_schema_base import JSONSchemaBase
+from sonar.jsonschemas.deposits_json_schema import DepositsJSONSchema
+from sonar.jsonschemas.factory import JSONSchemaFactory
+from sonar.jsonschemas.json_schema_base import JSONSchemaBase
 
 
 def test_create(app):

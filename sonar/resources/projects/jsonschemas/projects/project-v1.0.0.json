@@ -235,7 +235,57 @@
                 }
               },
               "identifiedBy": {
-                "$ref": "identifiedby-v1.0.0.json"
+                "title": "Identifier",
+                "description": "Identifier",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "type": {
+                    "title": "Type",
+                    "type": "string",
+                    "enum": [
+                      "bf:Identifier",
+                      "bf:Local"
+                    ],
+                    "form": {
+                      "options": [
+                        {
+                          "label": "bf:Identifier",
+                          "value": "bf:Identifier"
+                        },
+                        {
+                          "label": "bf:Local",
+                          "value": "bf:Local"
+                        }
+                      ]
+                    }
+                  },
+                  "source": {
+                    "title": "Source",
+                    "type": "string",
+                    "minLength": 1,
+                    "form": {
+                      "hideExpression": "!model || model.type !== 'bf:Local'",
+                      "expressionProperties": {
+                        "templateOptions.required": "model && model.type === 'bf:Local'"
+                      }
+                    }
+                  },
+                  "value": {
+                    "title": "Value",
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "propertiesOrder": [
+                  "type",
+                  "source",
+                  "value"
+                ],
+                "required": [
+                  "type",
+                  "value"
+                ]
               }
             },
             "propertiesOrder": [
@@ -289,7 +339,57 @@
                 ]
               },
               "identifiedBy": {
-                "$ref": "identifiedby-v1.0.0.json"
+                "title": "Identifier",
+                "description": "Identifier",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "type": {
+                    "title": "Type",
+                    "type": "string",
+                    "enum": [
+                      "bf:Identifier",
+                      "bf:Local"
+                    ],
+                    "form": {
+                      "options": [
+                        {
+                          "label": "bf:Identifier",
+                          "value": "bf:Identifier"
+                        },
+                        {
+                          "label": "bf:Local",
+                          "value": "bf:Local"
+                        }
+                      ]
+                    }
+                  },
+                  "source": {
+                    "title": "Source",
+                    "type": "string",
+                    "minLength": 1,
+                    "form": {
+                      "hideExpression": "!model || model.type !== 'bf:Local'",
+                      "expressionProperties": {
+                        "templateOptions.required": "model && model.type === 'bf:Local'"
+                      }
+                    }
+                  },
+                  "value": {
+                    "title": "Value",
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "propertiesOrder": [
+                  "type",
+                  "source",
+                  "value"
+                ],
+                "required": [
+                  "type",
+                  "value"
+                ]
               }
             },
             "propertiesOrder": [
