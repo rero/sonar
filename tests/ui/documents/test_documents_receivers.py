@@ -27,7 +27,7 @@ from sonar.modules.documents.receivers import (
 )
 
 
-def test_transform_harvested_records(app, bucket_location, without_oaiset_signals, capsys):
+def test_transform_harvested_records(app, bucket_location, capsys):
     """Test harvested record transformation."""
     request, records = get_records(
         ["oai:doc.rero.ch:20120503160026-MV"],
