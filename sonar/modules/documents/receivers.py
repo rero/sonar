@@ -18,7 +18,7 @@
 import json
 import re
 import time
-from datetime import datetime, timezone
+from datetime import datetime
 from os import makedirs
 from os.path import exists, join
 
@@ -26,12 +26,11 @@ import click
 from flask import current_app
 from invenio_search import current_search
 
-from sonar.modules.api import SonarRecord
 from sonar.modules.documents.loaders.schemas.factory import LoaderSchemaFactory
 from sonar.modules.utils import chunks
 from sonar.webdav import HegClient
 
-from .api import DocumentRecord, DocumentSearch
+from .api import DocumentSearch
 from .tasks import import_records
 
 CHUNK_SIZE = 20
@@ -80,28 +79,6 @@ def transform_harvested_records(sender=None, records=None, **kwargs):
         import_records.delay(chunk)
 
     click.echo(f"{len(records)} records harvested in {time.time() - start_time} seconds")
-
-
-def update_oai_property(sender, record):
-    """Called when a document is created or updated.
-
-    Update `_oai` property of the record.
-
-    :param sender: Sender
-    :param record: Document record
-    """
-    if not isinstance(record, DocumentRecord):
-        return
-
-    sets = [SonarRecord.get_pid_by_ref_link(organisation["$ref"]) for organisation in record.get("organisation", [])]
-
-    oai = record.get("_oai", {"id": f"oai:sonar.ch:{record['pid']}"})
-    oai.update({"updated": datetime.now(timezone.utc).isoformat(), "sets": sets})
-    record["_oai"] = oai
-
-    # Store the value in `json` property, as it's not more called during object
-    # creation. https://github.com/inveniosoftware/invenio-records/commit/ab7fdc10ddf54249dde8bc968f98b1fdd633610f#diff-51263e1ef21bcc060a5163632df055ef67ac3e3b2e222930649c13865cffa5aeR171
-    record.model.json = record.model_cls.encode(dict(record))
 
 
 def export_json(sender=None, records=None, **kwargs):

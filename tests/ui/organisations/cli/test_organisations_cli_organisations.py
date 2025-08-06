@@ -21,7 +21,7 @@ import sonar.modules.organisations.cli.organisations as cli
 from sonar.modules.organisations.api import OrganisationRecord
 
 
-def test_import_organisations(app, script_info, bucket_location, without_oaiset_signals):
+def test_import_organisations(app, script_info, bucket_location):
     """Test import organisations."""
     runner = CliRunner()
 

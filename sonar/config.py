@@ -277,16 +277,6 @@ APP_DEFAULT_SECURE_HEADERS = {
 }
 """Talisman default Secure Headers configuration."""
 
-# OAI-PMH
-# =======
-OAISERVER_ID_PREFIX = "oai:sonar.ch:"
-
-# Debug
-# =====
-# Flask-DebugToolbar is by default enabled when the application is running in
-# debug mode. More configuration options are available at
-# https://flask-debugtoolbar.readthedocs.io/en/latest/#configuration
-
 #: Switches off incept of redirects by Flask-DebugToolbar.
 DEBUG_TB_INTERCEPT_REDIRECTS = False
 
@@ -863,6 +853,7 @@ PREVIEWER_MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024
 
 # OAI-PMH
 # =======
+OAISERVER_ID_PREFIX = "oai:sonar.ch:"
 #: Index to use for the OAI-PMH server.
 OAISERVER_RECORD_INDEX = "documents-document-v1.0.0"
 #: OAI identifier prefix
@@ -883,6 +874,10 @@ OAISERVER_METADATA_FORMATS = {
 }
 #: Number of records to return per page in OAI-PMH results.
 OAISERVER_PAGE_SIZE = 100
+#: OAI ID fetcher function.
+OAISERVER_GETRECORD_FETCHER = "sonar.modules.documents.oaipmh_utils:getrecord_fetcher"
+#: Record retrieval class.
+OAISERVER_RECORD_CLS = "sonar.modules.documents.api:DocumentRecord"
 
 # Stats
 # =====
