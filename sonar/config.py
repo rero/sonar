@@ -1010,3 +1010,9 @@ STATS_QUERIES = {
         ),
     ),
 }
+
+OAISERVER_GETRECORD_FETCHER = "sonar.modules.documents.oaipmh_utils:getrecord_fetcher"
+"""OAI ID fetcher function."""
+
+OAISERVER_RECORD_CLS = "sonar.modules.documents.api:DocumentRecord"
+"""Record retrieval class."""
