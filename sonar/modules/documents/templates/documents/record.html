@@ -384,10 +384,24 @@ along with this program. If not, see
           {{ _('License') }}
         </dt>
         <dd class="col-lg-9">
-          {{ _(record.usageAndAccessPolicy.license) }}
-          {% if record.usageAndAccessPolicy.label %}
-          <br>{{ record.usageAndAccessPolicy.label }}
-          {% endif %}
+          <div class="d-flex flex-column">
+            <div class="d-flex">
+              {{ _(record.usageAndAccessPolicy.license) }}
+              {% if record.usageAndAccessPolicy.license in config.SONAR_APP_DOCUMENT_LICENSES %}
+                {% set licenseLogo = config.SONAR_APP_DOCUMENT_LICENSES[record.usageAndAccessPolicy.license] %}
+                <div class="ml-2">
+                  <a href="{{ licenseLogo.link }}" target="_blank">
+                    <img src="{{ licenseLogo.icon }}" title="{{ record.usageAndAccessPolicy.license }}" width="73px" />
+                  </a>
+                </div>
+              {% endif %}
+            </div>
+            {% if record.usageAndAccessPolicy.label %}
+              <div>
+                {{ record.usageAndAccessPolicy.label }}
+              </div>
+            {% endif %}
+          </div>
         </dd>
         {% endif %}
 
