@@ -34,6 +34,7 @@ from flask_security.utils import hash_password
 from invenio_access.models import ActionUsers, Role
 from invenio_files_rest.models import Location
 from invenio_queues.proxies import current_queues
+from invenio_search import current_search
 
 from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.deposits.api import DepositRecord
@@ -198,7 +199,7 @@ def app_config(app_config):
 
 
 @pytest.fixture
-def make_organisation(app, db, bucket_location, without_oaiset_signals):
+def make_organisation(app, db, bucket_location):
     """Factory for creating organisation."""
 
     def _make_organisation(code, is_shared=True):
@@ -220,6 +221,7 @@ def make_organisation(app, db, bucket_location, without_oaiset_signals):
             record = OrganisationRecord.create(data, dbcommit=True)
             record.reindex()
             db.session.commit()
+            current_search.flush_and_refresh(index='documents-document-v1.0.0-percolators')
 
         return record
 
@@ -941,16 +943,6 @@ def mock_thumbnail_creation(monkeypatch):
         "sonar.modules.utils.Image.make_blob",
         lambda *args: b"Fake thumbnail image content",
     )
-
-
-@pytest.fixture
-def without_oaiset_signals(app):
-    """Temporary disable oaiset signals."""
-    from invenio_oaiserver import current_oaiserver
-
-    current_oaiserver.unregister_signals_oaiset()
-    yield
-    current_oaiserver.register_signals_oaiset()
 
 
 @pytest.fixture()
