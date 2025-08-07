@@ -109,10 +109,7 @@ class BaseSchema(Schema):
         """Get url."""
         if obj["metadata"].get("mainFile", {}).get("links"):
             if obj["metadata"]["mainFile"]["links"].get("download"):
-                return "{host}{image}".format(
-                    host=request.host_url.rstrip("/"),
-                    image=obj["metadata"]["mainFile"]["links"]["download"],
-                )
+                return f"{request.host_url.rstrip('/')}{obj['metadata']['mainFile']['links']['download']}"
 
             if obj["metadata"]["mainFile"]["links"].get("external"):
                 return obj["metadata"]["mainFile"]["links"]["external"]

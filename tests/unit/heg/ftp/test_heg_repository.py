@@ -83,11 +83,11 @@ def test_close(mock_ftp_constructor):
 
 def test_queue_files(monkeypatch):
     """Test queue files."""
-    data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)))
+    file_name = os.path.join(os.path.dirname(__file__), "..", "data", "heg_data.zip")
 
     class MockFTP:
         def retrbinary(self, path, callback):
-            with open(os.path.join(data_path, "../data/heg_data.zip"), "rb") as file:
+            with open(file_name, "rb") as file:
                 callback(file.read())
 
     monkeypatch.setattr("sonar.heg.ftp.HEGRepository._ftp", MockFTP())

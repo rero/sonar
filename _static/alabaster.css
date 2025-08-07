@@ -689,10 +689,6 @@ nav#rellinks li+li:before {
     content: "|";
 }
 
-nav#breadcrumbs li+li:before {
-    content: "\00BB";
-}
-
 /* Hide certain items when printing */
 @media print {
     div.related {

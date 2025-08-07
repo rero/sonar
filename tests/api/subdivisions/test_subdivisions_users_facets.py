@@ -24,7 +24,7 @@ from invenio_accounts.testutils import login_user_via_session
 def test_list(app, db, client, deposit, superuser, subdivision):
     """Test subdivision facet."""
     superuser["subdivision"] = {
-        "$ref": "https://sonar.ch/api/subdivisions/{pid}".format(pid=subdivision["pid"])
+        "$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"
     }
     superuser.commit()
     db.session.commit()

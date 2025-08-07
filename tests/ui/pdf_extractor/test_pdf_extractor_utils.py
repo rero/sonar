@@ -26,7 +26,7 @@ from sonar.modules.pdf_extractor.utils import format_extracted_data
 def test_format_extracted_data(app):
     """Test format extracted data."""
     # format_extracted_data({})
-    json_file = os.path.dirname(os.path.abspath(__file__)) + "/data/extracted_data.json"
+    json_file = os.path.join(os.path.dirname(__file__), "data", "extracted_data.json")
 
     with open(json_file, "rb") as file:
         # Test standard extraction

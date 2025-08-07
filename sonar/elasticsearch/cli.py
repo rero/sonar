@@ -75,9 +75,9 @@ def backup(repository, name, wait):
 
     # If no name, create a snapshot with the current date
     if not name:
-        name = "snapshot-{date}".format(date=datetime.date.today().strftime("%Y-%m-%d"))
+        name = f"snapshot-{datetime.date.today().strftime('%Y-%m-%d')}"
 
-        click.secho("Create a snapshot with name {name}".format(name=name))
+        click.secho(f"Create a snapshot with name {name}")
 
     try:
         # Remove old backup with the same name

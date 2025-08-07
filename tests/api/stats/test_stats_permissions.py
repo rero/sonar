@@ -26,7 +26,7 @@ from sonar.modules.stats.api import Record
 
 
 def test_list(
-    app, client, document, superuser, admin, moderator, submitter, user, es_clear
+    app, client, document, superuser, admin, moderator, submitter, user, search_clear
 ):
     """Test list stats permissions."""
     # Not logged
@@ -39,7 +39,7 @@ def test_list(
         assert res.status_code == 403
 
 
-def test_create(client, superuser, admin, moderator, submitter, user, es_clear):
+def test_create(client, superuser, admin, moderator, submitter, user, search_clear):
     """Test create stats permissions."""
     headers = {"Content-Type": "application/json", "Accept": "application/json"}
 
@@ -59,7 +59,9 @@ def test_create(client, superuser, admin, moderator, submitter, user, es_clear):
         assert res.status_code == 403
 
 
-def test_read(client, document, superuser, admin, moderator, submitter, user, es_clear):
+def test_read(
+    client, document, superuser, admin, moderator, submitter, user, search_clear
+):
     """Test read stats permissions."""
     record = Record.collect()
 
@@ -91,7 +93,7 @@ def test_read(client, document, superuser, admin, moderator, submitter, user, es
     )
 
 
-def test_update(client, superuser, admin, moderator, submitter, user, es_clear):
+def test_update(client, superuser, admin, moderator, submitter, user, search_clear):
     """Test update stats permissions."""
     headers = {"Content-Type": "application/json", "Accept": "application/json"}
 
@@ -115,7 +117,7 @@ def test_update(client, superuser, admin, moderator, submitter, user, es_clear):
         assert res.status_code == 403
 
 
-def test_delete(client, superuser, admin, moderator, submitter, user, es_clear):
+def test_delete(client, superuser, admin, moderator, submitter, user, search_clear):
     """Test delete stats permissions."""
     record = Record.collect()
 

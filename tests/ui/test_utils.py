@@ -54,13 +54,13 @@ def test_create_thumbnail_from_file():
     assert str(exception.value).startswith("unable to open image")
 
     # Thumbnail creation for PDF is OK
-    file = os.path.dirname(__file__) + "/data/sample.pdf"
+    file = os.path.join(os.path.dirname(__file__), "data", "sample.pdf")
     assert create_thumbnail_from_file(file, "application/pdf").startswith(
         b"Fake thumbnail image content"
     )
 
     # Thumbnail creation for image is OK
-    file = os.path.dirname(__file__) + "/data/sample.jpg"
+    file = os.path.join(os.path.dirname(__file__), "data", "sample.jpg")
     assert create_thumbnail_from_file(file, "image/jpeg").startswith(
         b"Fake thumbnail image content"
     )

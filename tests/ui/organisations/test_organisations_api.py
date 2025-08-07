@@ -20,7 +20,7 @@
 from sonar.modules.organisations.api import OrganisationRecord, OrganisationSearch
 
 
-def test_get_or_create(organisation, es_clear):
+def test_get_or_create(organisation, search_clear):
     """Test get or create an organisation."""
     # Existing organisation
     organisation = OrganisationRecord.get_or_create("org", "Organisation")

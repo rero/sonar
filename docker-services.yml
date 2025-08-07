@@ -33,7 +33,7 @@ services:
       - "INVENIO_SECRET_KEY=CHANGE_ME"
       - "INVENIO_SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://sonar:sonar@db/sonar"
       - "INVENIO_WSGI_PROXIES=2"
-      - "INVENIO_RATELIMIT_STORAGE_URL=redis://cache:6379/3"
+      - "INVENIO_RATELIMIT_STORAGE_URI=redis://cache:6379/3"
       - "INVENIO_SENTRY_DSN=https://92869499699a4389bf0ffce8039a248d@sentrydev.test.rero.ch:8443/5"
   lb:
     build: ./docker/haproxy/

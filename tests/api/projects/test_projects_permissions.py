@@ -359,9 +359,7 @@ def test_delete(
     project1 = make_project("submitter", "org")
 
     # Cannot remove project as it is linked to document.
-    document["projects"] = [
-        {"$ref": "https://sonar.ch/api/projects/{pid}".format(pid=project1["id"])}
-    ]
+    document["projects"] = [{"$ref": f"https://sonar.ch/api/projects/{project1['id']}"}]
     document.commit()
     db.session.commit()
     document.reindex()

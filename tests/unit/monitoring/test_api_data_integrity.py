@@ -24,7 +24,7 @@ from sonar.modules.documents.api import DocumentRecord
 from sonar.monitoring.api.data_integrity import DataIntegrityMonitoring
 
 
-def test_db_count(app, es_clear, document):
+def test_db_count(app, search_clear, document):
     """Test DB count."""
     monitoring = DataIntegrityMonitoring()
 
@@ -40,7 +40,7 @@ def test_db_count(app, es_clear, document):
     assert monitoring.get_db_count("doc", True) == 1
 
 
-def test_es_count(app, es_clear, document):
+def test_es_count(app, search_clear, document):
     """Test ES count."""
     monitoring = DataIntegrityMonitoring()
 
@@ -53,7 +53,7 @@ def test_es_count(app, es_clear, document):
     assert monitoring.get_es_count("documents") == 1
 
 
-def test_missing_pids(app, es_clear, document_json):
+def test_missing_pids(app, search_clear, document_json):
     """Test missing PIDs."""
     document_json["pid"] = "1000"
 
@@ -92,7 +92,7 @@ def test_missing_pids(app, es_clear, document_json):
     app.config.get("RECORDS_REST_ENDPOINTS")["doc"]["search_index"] = "documents"
 
 
-def test_info(app, es_clear, document, project, deposit):
+def test_info(app, search_clear, document, project, deposit):
     """Test info."""
     monitoring = DataIntegrityMonitoring()
     info = monitoring.info()
@@ -115,7 +115,7 @@ def test_info(app, es_clear, document, project, deposit):
     assert info["projects"]["es"] == 1
 
 
-def test_has_error(app, es_clear, document):
+def test_has_error(app, search_clear, document):
     """Test if data has error."""
     # No error
     monitoring = DataIntegrityMonitoring()

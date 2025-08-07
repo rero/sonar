@@ -56,7 +56,7 @@ class DataIntegrityMonitoring:
         try:
             return RecordsSearch(index=index).query().count()
         except NotFoundError:
-            raise Exception('No index found for "{type}"'.format(type=index))
+            raise Exception(f'No index found for "{index}"')
 
     def missing_pids(self, rec_type, with_deleted=False):
         """Get ES and DB counts.
@@ -67,9 +67,7 @@ class DataIntegrityMonitoring:
         index = sonar.endpoints.get(rec_type, None)
 
         if not index:
-            raise Exception(
-                'No index configured for resource "{type}"'.format(type=rec_type)
-            )
+            raise Exception(f'No index configured for resource "{rec_type}"')
 
         result = {"es": [], "es_double": [], "db": []}
 

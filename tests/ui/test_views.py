@@ -315,7 +315,7 @@ def test_profile(client, user):
     login_user_via_view(client, email=user["email"], password="123456")
     res = client.get(url_for("sonar.profile"))
     assert res.status_code == 302
-    assert res.location.find("/users/profile/{pid}".format(pid=user["pid"])) != -1
+    assert res.location.find(f"/users/profile/{user['pid']}") != -1
 
     # Logged
     res = client.get(url_for("sonar.profile", pid=user["pid"]))

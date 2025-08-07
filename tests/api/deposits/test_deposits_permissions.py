@@ -97,9 +97,7 @@ def test_create(
 
     # User
     login_user_via_session(client, email=user["email"])
-    deposit_json["user"] = {
-        "$ref": "https://sonar.ch/api/users/{pid}".format(pid=user["pid"])
-    }
+    deposit_json["user"] = {"$ref": f"https://sonar.ch/api/users/{user['pid']}"}
     res = client.post(
         url_for("invenio_records_rest.depo_list"),
         data=json.dumps(deposit_json),
@@ -110,16 +108,12 @@ def test_create(
     # submitter
     login_user_via_session(client, email=submitter["email"])
     submitter["subdivision"] = {
-        "$ref": "https://sonar.ch/api/subdivisions/{subdivision}".format(
-            subdivision=subdivision["pid"]
-        )
+        "$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"
     }
     submitter.commit()
     submitter.reindex()
     db.session.commit()
-    deposit_json["user"] = {
-        "$ref": "https://sonar.ch/api/users/{pid}".format(pid=submitter["pid"])
-    }
+    deposit_json["user"] = {"$ref": f"https://sonar.ch/api/users/{submitter['pid']}"}
     del deposit_json["diffusion"]["subdivisions"]
     res = client.post(
         url_for("invenio_records_rest.depo_list"),
@@ -131,9 +125,7 @@ def test_create(
 
     # Moderator
     login_user_via_session(client, email=moderator["email"])
-    deposit_json["user"] = {
-        "$ref": "https://sonar.ch/api/users/{pid}".format(pid=moderator["pid"])
-    }
+    deposit_json["user"] = {"$ref": f"https://sonar.ch/api/users/{moderator['pid']}"}
     res = client.post(
         url_for("invenio_records_rest.depo_list"),
         data=json.dumps(deposit_json),
@@ -143,9 +135,7 @@ def test_create(
 
     # Admin
     login_user_via_session(client, email=admin["email"])
-    deposit_json["user"] = {
-        "$ref": "https://sonar.ch/api/users/{pid}".format(pid=admin["pid"])
-    }
+    deposit_json["user"] = {"$ref": f"https://sonar.ch/api/users/{admin['pid']}"}
     res = client.post(
         url_for("invenio_records_rest.depo_list"),
         data=json.dumps(deposit_json),
@@ -155,9 +145,7 @@ def test_create(
 
     # Super user
     login_user_via_session(client, email=superuser["email"])
-    deposit_json["user"] = {
-        "$ref": "https://sonar.ch/api/users/{pid}".format(pid=superuser["pid"])
-    }
+    deposit_json["user"] = {"$ref": f"https://sonar.ch/api/users/{superuser['pid']}"}
     res = client.post(
         url_for("invenio_records_rest.depo_list"),
         data=json.dumps(deposit_json),

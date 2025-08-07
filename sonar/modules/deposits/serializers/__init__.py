@@ -42,10 +42,7 @@ class JSONSerializer(_JSONSerializer):
         ):
             user = UserRecord.get_record_by_pid(org_term["key"])
             if user:
-                org_term["name"] = "{last_name}, {first_name}".format(
-                    last_name=user["last_name"], first_name=user["first_name"]
-                )
-
+                org_term["name"] = f"{user['last_name']}, {user['first_name']}"
         # Add subdivision name
         for org_term in (
             results.get("aggregations", {}).get("subdivision", {}).get("buckets", [])

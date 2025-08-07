@@ -77,7 +77,7 @@ def test_extract_metadata(app, mock_grobid_response, pdf_file):
     assert str(exception.value) == "Input file does not exist"
 
     # Test non valid pdf
-    input_file = os.path.dirname(os.path.abspath(__file__)) + "/data/test.doc"
+    input_file = os.path.join(os.path.dirname(__file__), "data", "test.doc")
     with pytest.raises(ValueError) as exception:
         pdf_extractor.extract_metadata(input_file)
     assert str(exception.value) == "Input file is not a valid PDF file"
