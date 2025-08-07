@@ -72,7 +72,7 @@ def get_safe_redirect_target(arg="next"):
     for target in request.args.get(arg), request.referrer:
         if target:
             redirect_uri = uritools.urisplit(target)
-            allowed_hosts = current_app.config.get("APP_ALLOWED_HOSTS", [])
+            allowed_hosts = current_app.config.get("TRUSTED_HOSTS", [])
 
             if redirect_uri.host in allowed_hosts:
                 return target

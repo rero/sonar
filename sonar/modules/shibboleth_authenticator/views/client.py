@@ -23,7 +23,7 @@ from flask import Blueprint, abort, current_app, redirect, request
 from flask_login import current_user, logout_user
 from flask_login.utils import _create_identifier
 from invenio_oauthclient.handlers import set_session_next_url
-from itsdangerous import BadData, TimedJSONWebSignatureSerializer
+from itsdangerous.url_safe import URLSafeTimedSerializer as Serializer
 from onelogin.saml2.auth import OneLogin_Saml2_Error
 from werkzeug.local import LocalProxy
 
@@ -34,7 +34,7 @@ from ..utils import get_safe_redirect_target, prepare_flask_request
 blueprint = Blueprint("shibboleth_authenticator", __name__, url_prefix="/shibboleth")
 
 serializer = LocalProxy(
-    lambda: TimedJSONWebSignatureSerializer(
+    lambda: Serializer(
         current_app.config["SECRET_KEY"],
         expires_in=current_app.config["SHIBBOLETH_STATE_EXPIRES"],
     )
@@ -58,9 +58,7 @@ def login(remote_app):
         return abort(404)
 
     # Store next parameter in state token
-    next_param = get_safe_redirect_target(arg="next")
-    if not next_param:
-        next_param = "/"
+    next_param = get_safe_redirect_target(arg="next") or "/"
     state_token = serializer.dumps(
         {"app": remote_app, "next": next_param, "sid": _create_identifier()}
     )

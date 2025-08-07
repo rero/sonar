@@ -35,7 +35,7 @@ jobs:
         cache-dependency-glob: uv.lock
 
     - name: Set up Python
-      run: uv python install 3.9
+      run: uv python install 3.12
 
     - name: Bootstrap
       if: ${{ matrix.dependencies == 'dev' }}

@@ -181,7 +181,7 @@ def app_config(app_config):
     app_config["CELERY_REDIS_SCHEDULER_URL"] = "redis://localhost:6379/4"
     app_config["CELERY_RESULT_BACKEND"] = "redis://localhost:6379/2"
     app_config["PDF_EXTRACTOR_GROBID_PORT"] = "8070"
-    app_config["RATELIMIT_STORAGE_URL"] = "redis://localhost:6379/3"
+    app_config["RATELIMIT_STORAGE_URI"] = "redis://localhost:6379/3"
     app_config["SEARCH_ELASTIC_HOSTS"] = ["localhost:9200"]
     app_config["SONAR_APP_DEFAULT_ORGANISATION"] = "global"
     app_config["SONAR_APP_SERVER_NAME"] = "sonar.rero.ch"

@@ -40,7 +40,7 @@ def test_accountinfo(app, valid_attributes):
 
 def test_get_safe_redirect_target(app, monkeypatch):
     """Test safe redirect target."""
-    app.config.update(APP_ALLOWED_HOSTS=["sonar.ch"])
+    app.config.update(TRUSTED_HOSTS=["sonar.ch"])
     url1 = "/test/page"
     url2 = "https://sonar.ch/path/subpath?parameter=test"
     url3 = "http://test.ch/path/subpath?parameter=test"
