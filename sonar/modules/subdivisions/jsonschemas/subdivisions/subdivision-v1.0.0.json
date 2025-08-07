@@ -34,7 +34,7 @@
             "minLength": 1
           },
           "language": {
-            "$ref": "language-v1.0.0.json"
+            "$ref": "https://sonar.ch/schemas/common/language-v1.0.0.json"
           }
         },
         "propertiesOrder": [

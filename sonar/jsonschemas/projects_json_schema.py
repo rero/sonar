@@ -31,7 +31,6 @@ class ProjectsJSONSchema(JSONSchemaBase):
         :returns: The processed schema.
         """
         schema = super().process()
-
         # Remove modes fields if user does not have superuser role.
         if current_user_record and not current_user_record.is_superuser:
             schema["properties"]["metadata"]["properties"].pop("organisation", None)

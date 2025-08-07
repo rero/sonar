@@ -1079,7 +1079,7 @@
           }
         },
         "validation": {
-          "$ref": "validation-v1.0.0.json"
+          "$ref": "https://sonar.ch/schemas/common/validation-v1.0.0.json"
         }
       },
       "propertiesOrder": [

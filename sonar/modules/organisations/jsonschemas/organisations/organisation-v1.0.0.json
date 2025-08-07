@@ -62,7 +62,7 @@
             }
           },
           "language": {
-            "$ref": "interface_language-v1.0.0.json"
+            "$ref": "https://sonar.ch/schemas/common/interface_language-v1.0.0.json"
           }
         },
         "propertiesOrder": [
@@ -115,7 +115,7 @@
             }
           },
           "language": {
-            "$ref": "interface_language-v1.0.0.json"
+            "$ref": "https://sonar.ch/schemas/common/interface_language-v1.0.0.json"
           }
         },
         "propertiesOrder": [
@@ -254,7 +254,7 @@
                 "minLength": 1
               },
               "language": {
-                "$ref": "language-v1.0.0.json"
+                "$ref": "https://sonar.ch/schemas/common/language-v1.0.0.json"
               }
             },
             "propertiesOrder": [
@@ -305,7 +305,7 @@
                 "minLength": 1
               },
               "language": {
-                "$ref": "language-v1.0.0.json"
+                "$ref": "https://sonar.ch/schemas/common/language-v1.0.0.json"
               }
             },
             "propertiesOrder": [
@@ -356,7 +356,7 @@
                 "minLength": 1
               },
               "language": {
-                "$ref": "language-v1.0.0.json"
+                "$ref": "https://sonar.ch/schemas/common/language-v1.0.0.json"
               }
             },
             "propertiesOrder": [
