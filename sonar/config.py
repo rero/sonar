@@ -63,7 +63,7 @@ WEBPACKEXT_PROJECT = "sonar.theme.webpack:project"
 # Rate limiting
 # =============
 #: Storage for ratelimiter.
-RATELIMIT_STORAGE_URL = "redis://localhost:6379/3"
+RATELIMIT_STORAGE_URI = "redis://localhost:6379/3"
 #: Disable rate limit to avoid 429 http error
 RATELIMIT_ENABLED = False
 
@@ -220,7 +220,7 @@ SESSION_COOKIE_SECURE = True
 #: provided, the allowed hosts variable is set to localhost. In production it
 #: should be set to the correct host and it is strongly recommended to only
 #: route correct hosts to the application.
-APP_ALLOWED_HOSTS = ["sonar.ch", "localhost", "127.0.0.1"]
+TRUSTED_HOSTS = ["sonar.ch", "localhost", "127.0.0.1"]
 
 APP_DEFAULT_SECURE_HEADERS = {
     "force_https": True,

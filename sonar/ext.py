@@ -59,7 +59,6 @@ from sonar.resources.projects.service import (
 from sonar.signals import file_download_proxy
 
 from . import config_sonar
-from .route_converters import OrganisationCodeConverter
 from .version import __version__
 
 
@@ -150,7 +149,6 @@ class Sonar:
 
     def init_views(self, app):
         """Initialize the main flask views."""
-        app.url_map.converters["org_code"] = OrganisationCodeConverter
 
         @app.route(
             "/", defaults={"view": app.config.get("SONAR_APP_DEFAULT_ORGANISATION")}
@@ -299,3 +297,24 @@ class SonarAPI(Sonar):
             """
             if request.args.get("format"):
                 request.accept_mimetypes = MIMEAccept([(request.args["format"], 1)])
+
+
+# def init_menu_profile(app):
+#     """Create the profile header menu."""
+#     # @register_menu(
+#     #     blueprint,
+#     #     "settings.record_profile",
+#     #     _("%(icon)s Profile", icon='<i class="fa fa-user fa-fw"></i>'),
+#     # )
+#     # @register_breadcrumb(blueprint, "breadcrumbs.record_profile", _("Profile"))
+#     pass
+
+
+# def finalize_app(app):
+#     """Finalize app."""
+#     init_menu_profile(app)
+
+
+# def api_finalize_app(app):
+#     """Finalize app for api."""
+#     pass
