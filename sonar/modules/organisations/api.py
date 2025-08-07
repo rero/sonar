@@ -19,7 +19,8 @@
 
 from functools import partial
 
-from flask import _request_ctx_stack, has_request_context
+from flask import has_request_context
+from flask.globals import request_ctx
 from invenio_db import db
 from invenio_oaiserver.models import OAISet
 from werkzeug.local import LocalProxy
@@ -34,11 +35,8 @@ from .minters import id_minter
 
 def get_current_organisation():
     """Return current organisation from context."""
-    if has_request_context() and not hasattr(
-        _request_ctx_stack.top, "organisation_record"
-    ):
-        ctx = _request_ctx_stack.top
-        ctx.organisation_record = (
+    if has_request_context() and not hasattr(request_ctx, "organisation_record"):
+        request_ctx.organisation_record = (
             None
             if (not current_user_record or not current_user_record.get("organisation"))
             else OrganisationRecord.get_record_by_ref_link(
@@ -46,7 +44,7 @@ def get_current_organisation():
             )
         )
 
-    return getattr(_request_ctx_stack.top, "organisation_record", None)
+    return getattr(request_ctx, "organisation_record", None)
 
 
 current_organisation = LocalProxy(get_current_organisation)

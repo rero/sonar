@@ -74,9 +74,7 @@ class CrossrefSchema(HEGSchema):
             contributor = {
                 "agent": {
                     "type": "bf:Person",
-                    "preferred_name": "{family}, {given}".format(
-                        given=item["given"], family=item["family"]
-                    ),
+                    "preferred_name": f"{item['family']}, {item['given']}",
                 },
                 "role": ["cre"],
             }

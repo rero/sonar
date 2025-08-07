@@ -150,10 +150,7 @@ class SchemaOrgV1(BaseSchema):
     def get_image(self, obj):
         """Get image."""
         if obj["metadata"].get("mainFile", {}).get("thumbnail"):
-            return "{host}{image}".format(
-                host=request.host_url.rstrip("/"),
-                image=obj["metadata"]["mainFile"]["thumbnail"],
-            )
+            return f"{request.host_url.rstrip('/')}{obj['metadata']['mainFile']['thumbnail']}"
 
         return None
 
@@ -165,10 +162,7 @@ class SchemaOrgV1(BaseSchema):
             if file.get("type") == "file" and file.get("links"):
                 if file["links"].get("download"):
                     files.append(
-                        "{host}{image}".format(
-                            host=request.host_url.rstrip("/"),
-                            image=file["links"]["download"],
-                        )
+                        f"{request.host_url.rstrip('/')}{file['links']['download']}"
                     )
 
                 if file["links"].get("external"):

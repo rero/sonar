@@ -38,10 +38,9 @@ class PDFExtractor:
 
     def _load_config(self):
         """Load configuration from extension."""
-        self.api_url = "http://{server}:{port}/api".format(
-            server=current_app.config.get("PDF_EXTRACTOR_GROBID_SERVER"),
-            port=current_app.config.get("PDF_EXTRACTOR_GROBID_PORT"),
-        )
+        server = current_app.config.get("PDF_EXTRACTOR_GROBID_SERVER", "localhost")
+        port = current_app.config.get("PDF_EXTRACTOR_GROBID_PORT", "8070")
+        self.api_url = f"http://{server}:{port}/api"
         if not self.api_is_alive():
             raise ConnectionRefusedError
 
@@ -52,7 +51,7 @@ class PDFExtractor:
         """
         try:
             response, status = self.do_request("isalive", "get")
-        except Exception as err:
+        except Exception:
             return False
 
         if status != 200:

@@ -146,5 +146,5 @@ class Overdo(BaseOverdo):
         if "provisionActivity" not in result and is_pa_mandatory():
             self.result_ok = False
             current_app.logger.warning(
-                "No provision activity found in record {record}".format(record=result)
+                f"No provision activity found in record {result}"
             )

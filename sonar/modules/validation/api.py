@@ -17,9 +17,8 @@
 
 """Validation API."""
 
-from datetime import datetime
+from datetime import datetime, timezone
 
-import pytz
 from flask import current_app
 from flask_babel import _
 from invenio_i18n.ext import current_i18n
@@ -207,7 +206,7 @@ class Validation:
                     "pid": user["pid"],
                     "name": f'{user["first_name"]} {user["last_name"]}',
                 },
-                "date": pytz.utc.localize(datetime.utcnow()).isoformat(),
+                "date": datetime.now(timezone.utc).isoformat(),
                 "comment": validation.get("comment"),
             }
         )

@@ -36,31 +36,27 @@ def test_get(app, deposit):
 def test_post(client, deposit):
     """Test post file in deposit."""
     # Test non existing deposit
-    url = "/deposits/10000/custom-files?key=1.pdf&type=additional".format(
-        pid=deposit["pid"]
-    )
+    url = "/deposits/10000/custom-files?key=1.pdf&type=additional"
     response = client.post(url)
     assert response.status_code == 400
 
     # Test non existing "key" paremeter
-    url = "/deposits/{pid}/custom-files?type=additional".format(pid=deposit["pid"])
+    url = f"/deposits/{deposit['pid']}/custom-files?type=additional"
     response = client.post(url)
     assert response.status_code == 400
 
     # Test non existing "type" paremeter
-    url = "/deposits/{pid}/custom-files?key=1.pdf".format(pid=deposit["pid"])
+    url = f"/deposits/{deposit['pid']}/custom-files?key=1.pdf"
     response = client.post(url)
     assert response.status_code == 400
 
     # Test type not in "main" or "additional"
-    url = "/deposits/{pid}/custom-files?key=1.pdf&type=fake".format(pid=deposit["pid"])
+    url = f"/deposits/{deposit['pid']}/custom-files?key=1.pdf&type=fake"
     response = client.post(url)
     assert response.status_code == 400
 
     # OK
-    url = "/deposits/{pid}/custom-files?key=1.pdf&type=additional".format(
-        pid=deposit["pid"]
-    )
+    url = f"/deposits/{deposit['pid']}/custom-files?key=1.pdf&type=additional"
     response = client.post(url)
     assert response.status_code == 200
     assert response.content_type == "application/json"
@@ -77,7 +73,7 @@ def test_file_put(client, deposit):
 
     # Non existing file
     response = client.put(url.format(pid=deposit["pid"], key="fake.pdf"))
-    assert response.status_code == 400
+    assert response.status_code == 415
 
     # OK
     response = client.put(
@@ -173,7 +169,7 @@ def test_review(client, db, user, moderator, deposit):
     db.session.commit()
 
     response = client.post(url)
-    assert response.status_code == 400
+    assert response.status_code == 415
 
     # Invalid action
     response = client.post(

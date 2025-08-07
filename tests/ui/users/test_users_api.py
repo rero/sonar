@@ -20,7 +20,7 @@
 from sonar.modules.users.api import UserRecord, UserSearch
 
 
-def test_get_moderators(app, db, organisation, subdivision, roles, es_clear):
+def test_get_moderators(app, db, organisation, subdivision, roles, search_clear):
     """Test search for moderators."""
     for item in [
         {

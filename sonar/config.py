@@ -63,7 +63,7 @@ WEBPACKEXT_PROJECT = "sonar.theme.webpack:project"
 # Rate limiting
 # =============
 #: Storage for ratelimiter.
-RATELIMIT_STORAGE_URL = "redis://localhost:6379/3"
+RATELIMIT_STORAGE_URI = "redis://localhost:6379/3"
 #: Disable rate limit to avoid 429 http error
 RATELIMIT_ENABLED = False
 
@@ -220,7 +220,7 @@ SESSION_COOKIE_SECURE = True
 #: provided, the allowed hosts variable is set to localhost. In production it
 #: should be set to the correct host and it is strongly recommended to only
 #: route correct hosts to the application.
-APP_ALLOWED_HOSTS = ["sonar.ch", "localhost", "127.0.0.1"]
+TRUSTED_HOSTS = ["sonar.ch", "localhost", "127.0.0.1"]
 
 APP_DEFAULT_SECURE_HEADERS = {
     "force_https": True,
@@ -770,11 +770,9 @@ OAUTHCLIENT_REMOTE_APPS["orcid"]["signup_handler"][
 ] = "sonar.modules.oauth.orcid:account_setup"
 OAUTHCLIENT_REMOTE_APPS["orcid"]["params"].update(
     dict(
-        base_url="https://{domain}/".format(domain=ORCID_DOMAIN),
-        access_token_url="https://{domain}/oauth/token".format(domain=ORCID_DOMAIN),
-        authorize_url="https://{domain}/oauth/authorize#show_login".format(
-            domain=ORCID_DOMAIN
-        ),
+        base_url=f"https://{ORCID_DOMAIN}/",
+        access_token_url=f"https://{ORCID_DOMAIN}/oauth/token",
+        authorize_url=f"https://{ORCID_DOMAIN}/oauth/authorize#show_login",
     )
 )
 

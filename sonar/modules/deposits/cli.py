@@ -62,4 +62,4 @@ def create():
     db.session.add(loc)
     db.session.commit()
 
-    click.secho("Location #{id} created successfully".format(id=loc.id), fg="green")
+    click.secho(f"Location #{loc.id} created successfully", fg="green")

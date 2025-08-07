@@ -376,7 +376,7 @@ def test_delete(
 
     # Cannot remove collection as it is linked to document.
     document["collections"] = [
-        {"$ref": "https://sonar.ch/api/collections/{pid}".format(pid=collection["pid"])}
+        {"$ref": f"https://sonar.ch/api/collections/{collection['pid']}"}
     ]
     document.commit()
     db.session.commit()

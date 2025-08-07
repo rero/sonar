@@ -268,10 +268,7 @@ class DocumentRecord(SonarRecord):
             self.files[key]["type"] = "fulltext"
         except Exception as exception:
             current_app.logger.warning(
-                "Error during fulltext extraction of {file} of record "
-                "{record}: {error}".format(
-                    file=file.key, error=exception, record=self["identifiedBy"]
-                )
+                f"Error during fulltext extraction of {file.key} of record {self['identifiedBy']}: {exception}"
             )
 
     def create_thumbnail(self, file):
@@ -293,12 +290,8 @@ class DocumentRecord(SonarRecord):
             self.files[thumbnail_key]["type"] = "thumbnail"
         except Exception as exception:
             current_app.logger.warning(
-                "Error during thumbnail generation of {file} of record "
-                "{record}: {error}".format(
-                    file=file["key"],
-                    error=exception,
-                    record=self.get("identifiedBy", self["pid"]),
-                )
+                f"Error during thumbnail generation of {file['key']} of record "
+                f"{self.get('identifiedBy', self['pid'])}: {exception}"
             )
 
     def get_main_file(self):

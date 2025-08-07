@@ -146,10 +146,6 @@ along with this program. If not, see
   </header>
   {%- block page_body %}
   <div class="container my-5">
-    {%- block breadcrumbs %}
-    {%- include "sonar/breadcrumbs.html" %}
-    {%- endblock breadcrumbs %}
-
     {%- block flashmessages %}
     {%- from "sonar/macros/messages.html" import flashed_messages with context -%}
     <div class="my-5">{{ flashed_messages() }}</div>

@@ -25,12 +25,22 @@ import pytest
 import requests
 
 
+@pytest.fixture(scope="module")
+def pdf_file():
+    """Return test PDF file path."""
+    return os.path.join(os.path.dirname(__file__), "data", "postprint.pdf")
+
+
+@pytest.fixture(scope="module")
+def xml_file():
+    """Return test XML output file path."""
+    return os.path.join(os.path.dirname(__file__), "data", "postprint.xml")
+
+
 @pytest.fixture(scope="function")
-def mock_grobid_response(monkeypatch):
+def mock_grobid_response(monkeypatch, xml_file):
     """Mock a grobid response for full text extraction."""
-    with open(
-        os.path.dirname(os.path.abspath(__file__)) + "/data/postprint.xml", "r"
-    ) as file:
+    with open(xml_file, "r") as file:
         output = file.read()
 
     class MockResponse:
@@ -53,15 +63,3 @@ def mock_grobid_error_response(monkeypatch):
         text = ""
 
     monkeypatch.setattr(requests, "post", lambda *args, **kwargs: MockResponse)
-
-
-@pytest.fixture(scope="module")
-def pdf_file():
-    """Return test PDF file path."""
-    return os.path.dirname(os.path.abspath(__file__)) + "/data/postprint.pdf"
-
-
-@pytest.fixture(scope="module")
-def xml_file():
-    """Return test XML output file path."""
-    return os.path.dirname(os.path.abspath(__file__)) + "/data/postprint.xml"

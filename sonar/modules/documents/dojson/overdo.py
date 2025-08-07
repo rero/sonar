@@ -67,7 +67,7 @@ class Overdo(BaseOverdo):
         if match:
             return (match.group(1), None)
 
-        raise Exception('Date "{date}" is not recognized'.format(date=date))
+        raise Exception(f'Date "{date}" is not recognized')
 
     def do(self, blob, ignore_missing=True, exception_handlers=None):
         """Store blob values and do transformation."""

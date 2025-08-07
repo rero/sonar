@@ -20,7 +20,7 @@
 from flask import url_for
 
 
-def test_ark_query(db, client, organisation, document, es_clear):
+def test_ark_query(db, client, organisation, document, search_clear):
     """Test ark search query."""
 
     # an empty query: the document should be in the results

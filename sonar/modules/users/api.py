@@ -20,7 +20,8 @@
 from functools import partial
 
 from elasticsearch_dsl.query import Q
-from flask import _request_ctx_stack, current_app, has_request_context
+from flask import current_app, has_request_context
+from flask.globals import request_ctx
 from flask_security import current_user
 from flask_security.confirmable import confirm_user
 from flask_security.utils import hash_password
@@ -37,15 +38,14 @@ from ..providers import Provider
 
 def get_current_user():
     """Return current user record from context."""
-    if has_request_context() and not hasattr(_request_ctx_stack.top, "user_record"):
-        ctx = _request_ctx_stack.top
-        ctx.user_record = (
+    if has_request_context() and not hasattr(request_ctx, "user_record"):
+        request_ctx.user_record = (
             None
             if (current_user.is_anonymous)
             else UserRecord.get_user_by_email(email=current_user.email)
         )
 
-    return getattr(_request_ctx_stack.top, "user_record", None)
+    return getattr(request_ctx, "user_record", None)
 
 
 current_user_record = LocalProxy(get_current_user)

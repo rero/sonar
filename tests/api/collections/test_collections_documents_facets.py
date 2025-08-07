@@ -23,7 +23,7 @@ from invenio_accounts.testutils import login_user_via_session
 
 def test_list(app, db, client, document, collection, superuser):
     document["collections"] = [
-        {"$ref": "https://sonar.ch/api/collections/{pid}".format(pid=collection["pid"])}
+        {"$ref": f"https://sonar.ch/api/collections/{collection['pid']}"}
     ]
     document.commit()
     db.session.commit()

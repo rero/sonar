@@ -43,10 +43,8 @@ def create_thumbnail_from_file(file_path, mimetype):
     # Thumbnail can only be done from images or PDFs.
     if not mimetype.startswith("image/") and mimetype != "application/pdf":
         raise Exception(
-            "Cannot create thumbnail from file {file} with mimetype"
-            ' "{mimetype}", only images and PDFs are allowed'.format(
-                file=file_path, mimetype=mimetype
-            )
+            f'Cannot create thumbnail from file {file_path} with mimetype "{mimetype}",'
+            " only images and PDFs are allowed"
         )
 
     # For PDF, we take only the first page
@@ -87,9 +85,7 @@ def send_email(recipients, subject, template, ctx=None, html=True, lang="en"):
     """Send email."""
     email_type = "html" if html else "txt"
 
-    template = "{template}/{lang}.{type}".format(
-        template=template, lang=lang, type=email_type
-    )
+    template = f"{template}/{lang}.{email_type}"
     msg = TemplatedMessage(
         template_body=template if not html else None,
         template_html=template if html else None,
@@ -170,10 +166,10 @@ def get_specific_theme():
     :returns: String representing the webpack entry. Default to `global`.
     """
     if g.get("organisation", {}).get("isDedicated"):
-        theme_name = "{organisation}-theme".format(organisation=g.organisation["pid"])
+        theme_name = f"{g.organisation['pid']}-theme"
 
         if theme.entry.get(theme_name):
-            return "{theme}.css".format(theme=theme_name)
+            return f"{theme_name}.css"
 
     return "global-theme.css"
 

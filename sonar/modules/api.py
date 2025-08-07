@@ -143,11 +143,8 @@ class SonarRecord(Record, FilesMixin):
     @classmethod
     def get_ref_link(cls, record_type, record_id):
         """Get $ref link for the given type of record."""
-        return "https://{host}/api/{type}/{id}".format(
-            host=current_app.config.get("JSONSCHEMAS_HOST"),
-            type=record_type,
-            id=record_id,
-        )
+        host = current_app.config.get("JSONSCHEMAS_HOST")
+        return f"https://{host}/api/{record_type}/{record_id}"
 
     @classmethod
     def get_pid_by_ref_link(cls, link):
@@ -155,7 +152,7 @@ class SonarRecord(Record, FilesMixin):
         result = re.match(r".*\/(.*)$", link)
 
         if result is None:
-            raise Exception("{link} is not a valid ref link".format(link=link))
+            raise Exception(f"{link} is not a valid ref link")
 
         return result.group(1)
 

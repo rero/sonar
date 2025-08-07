@@ -383,11 +383,7 @@ def test_delete(
 
     # Cannot remove subdivision as it is linked to document.
     document["subdivisions"] = [
-        {
-            "$ref": "https://sonar.ch/api/subdivisions/{pid}".format(
-                pid=subdivision["pid"]
-            )
-        }
+        {"$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"}
     ]
     document.commit()
     db.session.commit()
