@@ -23,7 +23,46 @@ from invenio_db import db
 from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 
 
-def test_db_connection_count(client, es_clear, monkeypatch, admin, superuser):
+def test_data_info(client, search_clear, superuser, document, monkeypatch):
+    """Test integrity info."""
+    login_user_via_session(client, email=superuser["email"])
+
+    response = client.get(url_for("monitoring_api.data_info"))
+    assert response.status_code == 200
+    assert response.json == {
+        "data": {
+            "depo": {"db": 0, "es": 0, "db-es": 0, "index": "deposits"},
+            "doc": {"db": 1, "es": 1, "db-es": 0, "index": "documents"},
+            "org": {"db": 1, "es": 1, "db-es": 0, "index": "organisations"},
+            "projects": {"db": 0, "es": 0, "db-es": 0, "index": "projects"},
+            "user": {"db": 1, "es": 1, "db-es": 0, "index": "users"},
+            "coll": {"db": 0, "es": 0, "db-es": 0, "index": "collections"},
+            "subd": {"db": 0, "es": 0, "db-es": 0, "index": "subdivisions"},
+            "stat": {"db": 0, "es": 0, "db-es": 0, "index": "stats"},
+        }
+    }
+
+    # With detail
+    response = client.get(url_for("monitoring_api.data_info", detail=True))
+    assert response.status_code == 200
+    assert response.json["data"]["doc"]["detail"] == {
+        "db": [],
+        "es": [],
+        "es_double": [],
+    }
+
+    # Throw error
+    def mock_info(*args, **kwargs):
+        raise Exception("Unknown exception")
+
+    monkeypatch.setattr(
+        "sonar.monitoring.api.data_integrity.DataIntegrityMonitoring.info", mock_info
+    )
+    response = client.get(url_for("monitoring_api.data_info", detail=True))
+    assert response.status_code == 500
+
+
+def test_db_connection_count(client, search_clear, monkeypatch, admin, superuser):
     """Test DB connections count."""
     # Not logged
     response = client.get(url_for("monitoring_api.db_connection_count"))
@@ -55,7 +94,7 @@ def test_db_connection_count(client, es_clear, monkeypatch, admin, superuser):
     }
 
 
-def test_db_activity(client, es_clear, monkeypatch, admin, superuser):
+def test_db_activity(client, search_clear, monkeypatch, admin, superuser):
     """Test DB activity."""
     login_user_via_session(client, email=superuser["email"])
 
@@ -101,7 +140,9 @@ def test_db_activity(client, es_clear, monkeypatch, admin, superuser):
     }
 
 
-def test_data_status(client, es_clear, organisation, superuser, document, monkeypatch):
+def test_data_status(
+    client, search_clear, organisation, superuser, document, monkeypatch
+):
     """Test integrity status."""
     login_user_via_session(client, email=superuser["email"])
 
@@ -127,45 +168,6 @@ def test_data_status(client, es_clear, organisation, superuser, document, monkey
     assert response.status_code == 500
 
 
-def test_data_info(client, es_clear, superuser, document, monkeypatch):
-    """Test integrity info."""
-    login_user_via_session(client, email=superuser["email"])
-
-    response = client.get(url_for("monitoring_api.data_info"))
-    assert response.status_code == 200
-    assert response.json == {
-        "data": {
-            "depo": {"db": 0, "es": 0, "db-es": 0, "index": "deposits"},
-            "doc": {"db": 1, "es": 1, "db-es": 0, "index": "documents"},
-            "org": {"db": 1, "es": 1, "db-es": 0, "index": "organisations"},
-            "projects": {"db": 0, "es": 0, "db-es": 0, "index": "projects"},
-            "user": {"db": 1, "es": 1, "db-es": 0, "index": "users"},
-            "coll": {"db": 0, "es": 0, "db-es": 0, "index": "collections"},
-            "subd": {"db": 0, "es": 0, "db-es": 0, "index": "subdivisions"},
-            "stat": {"db": 0, "es": 0, "db-es": 0, "index": "stats"},
-        }
-    }
-
-    # With detail
-    response = client.get(url_for("monitoring_api.data_info", detail=True))
-    assert response.status_code == 200
-    assert response.json["data"]["doc"]["detail"] == {
-        "db": [],
-        "es": [],
-        "es_double": [],
-    }
-
-    # Throw error
-    def mock_info(*args, **kwargs):
-        raise Exception("Unknown exception")
-
-    monkeypatch.setattr(
-        "sonar.monitoring.api.data_integrity.DataIntegrityMonitoring.info", mock_info
-    )
-    response = client.get(url_for("monitoring_api.data_info", detail=True))
-    assert response.status_code == 500
-
-
 def test_elastic_search(client, superuser, monkeypatch):
     """Test elastic search health."""
     login_user_via_session(client, email=superuser["email"])
@@ -188,7 +190,7 @@ def test_elastic_search(client, superuser, monkeypatch):
 
 
 def test_urn(
-    client, es_clear, superuser, monkeypatch, minimal_thesis_document_with_urn
+    client, search_clear, superuser, monkeypatch, minimal_thesis_document_with_urn
 ):
     """Test unregistered urn counts."""
     login_user_via_session(client, email=superuser["email"])

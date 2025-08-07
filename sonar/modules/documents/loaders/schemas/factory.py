@@ -41,4 +41,4 @@ class LoaderSchemaFactory:
         if LoaderSchemaFactory.schemas.get(schema_key):
             return LoaderSchemaFactory.schemas[schema_key]()
 
-        raise Exception('No schema defined for key "{key}"'.format(key=schema_key))
+        raise Exception(f'No schema defined for key "{schema_key}"')

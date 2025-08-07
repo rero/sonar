@@ -35,7 +35,7 @@ jobs:
         cache-dependency-glob: uv.lock
 
     - name: Set up Python
-      run: uv python install 3.9
+      run: uv python install 3.12
 
     - name: Bootstrap
       if: ${{ matrix.dependencies == 'dev' }}
@@ -50,9 +50,12 @@ jobs:
     - name: Run Test
       run: uv run poe run_tests
 
-    - name: Code Coverage
-      if: ${{ matrix.dependencies == 'development' }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        COVERALLS_SERVICE_NAME: github
-      run: coveralls
+    - name: Coverage XML
+      if: ${{ matrix.dependencies == 'dev' }}
+      run: uv run coverage xml
+
+    - name: Coveralls
+      if: ${{ matrix.dependencies == 'dev' }}
+      uses: coverallsapp/github-action@v2
+      with:
+        format: cobertura

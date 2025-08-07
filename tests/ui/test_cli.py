@@ -27,7 +27,7 @@ from invenio_search.cli import destroy
 import sonar.modules.cli.utils as Cli
 
 
-def test_es_init(app, script_info, es_clear):
+def test_es_init(app, script_info, search_clear):
     """Test ES init command."""
     runner = CliRunner()
 
@@ -48,12 +48,7 @@ def test_clear_files(app, script_info, bucket_location):
     # Directory not exists
     result = runner.invoke(Cli.clear_files, obj=script_info)
     assert (
-        result.output.find(
-            "Directory {directory} cannot be cleaned".format(
-                directory=bucket_location.uri
-            )
-        )
-        != -1
+        result.output.find(f"Directory {bucket_location.uri} cannot be cleaned") != -1
     )
 
 
@@ -87,13 +82,13 @@ def test_export(app, script_info, document, organisation):
     assert result.output.find('Export "org" records') != -1
 
 
-def test_cli_access_token(app, script_info):
+def test_cli_access_token(app, db, script_info):
     """Test access token cli."""
     runner = CliRunner()
     email = "test@test.com"
     res = runner.invoke(
-        CliUsers.users_create,
-        ["--active", "--confirm", "--password", "PWD_TEST", email],
+        CliUsers.users,
+        ["create", "--active", "--confirm", "--password", "PWD_TEST", email],
         obj=script_info,
     )
     res = runner.invoke(

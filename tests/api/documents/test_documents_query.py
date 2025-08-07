@@ -20,9 +20,9 @@
 from flask import url_for
 
 
-def test_collection_query(db, client, document, collection, es_clear):
+def test_collection_query(db, client, document, collection, search_clear):
     document["collections"] = [
-        {"$ref": "https://sonar.ch/api/collections/{pid}".format(pid=collection["pid"])}
+        {"$ref": f"https://sonar.ch/api/collections/{collection['pid']}"}
     ]
     document.commit()
     db.session.commit()
@@ -39,7 +39,7 @@ def test_collection_query(db, client, document, collection, es_clear):
     assert res.json["hits"]["total"]["value"] == 1
 
 
-def test_identifiers_query(client, document, es_clear):
+def test_identifiers_query(client, document, search_clear):
     """Test identifiers search query."""
 
     res = client.get(
@@ -53,7 +53,7 @@ def test_identifiers_query(client, document, es_clear):
     assert res.json["hits"]["total"]["value"] == 1
 
 
-def test_masked_document(db, client, organisation, document, es_clear):
+def test_masked_document(db, client, organisation, document, search_clear):
     """Test masked document."""
     # Not masked (property not exists)
     res = client.get(url_for("invenio_records_rest.doc_list", view="global"))

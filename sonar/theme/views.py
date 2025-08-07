@@ -42,10 +42,8 @@ from flask import (
     request,
     url_for,
 )
-from flask_babel import lazy_gettext as _
-from flask_breadcrumbs import register_breadcrumb
 from flask_login import current_user, login_required
-from flask_menu import current_menu, register_menu
+from flask_menu import current_menu
 from invenio_jsonschemas import current_jsonschemas
 from invenio_jsonschemas.errors import JSONSchemaNotFound
 from invenio_pidstore.models import PersistentIdentifier
@@ -112,12 +110,6 @@ def robots_txt():
 @blueprint.route("/users/profile")
 @blueprint.route("/users/profile/<pid>")
 @login_required
-@register_menu(
-    blueprint,
-    "settings.record_profile",
-    _("%(icon)s Profile", icon='<i class="fa fa-user fa-fw"></i>'),
-)
-@register_breadcrumb(blueprint, "breadcrumbs.record_profile", _("Profile"))
 def profile(pid=None):
     """Logged user profile edition page.
 

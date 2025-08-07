@@ -20,12 +20,11 @@
 import json
 import re
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from os import makedirs
 from os.path import exists, join
 
 import click
-import pytz
 from flask import current_app
 from invenio_search import current_search
 
@@ -60,7 +59,7 @@ def transform_harvested_records(sender=None, records=None, **kwargs):
         max_records = None
 
     if kwargs.get("name"):
-        click.echo('Harvesting records from "{set}"'.format(set=kwargs.get("name")))
+        click.echo(f"Harvesting records from \"{kwargs.get('name')}\"")
 
     harvested_records = list(records)
 
@@ -84,9 +83,7 @@ def transform_harvested_records(sender=None, records=None, **kwargs):
         import_records.delay(chunk)
 
     click.echo(
-        "{count} records harvested in {time} seconds".format(
-            count=len(records), time=time.time() - start_time
-        )
+        f"{len(records)} records harvested in {time.time() - start_time} seconds"
     )
 
 
@@ -105,9 +102,9 @@ def update_oai_property(sender, record):
     for organisation in record.get("organisation", []):
         sets.append(SonarRecord.get_pid_by_ref_link(organisation["$ref"]))
 
-    record["_oai"].update(
-        {"updated": pytz.utc.localize(datetime.utcnow()).isoformat(), "sets": sets}
-    )
+    oai = record.get("_oai", {"id": f"oai:sonar.ch:{record['pid']}"})
+    oai.update({"updated": datetime.now(timezone.utc).isoformat(), "sets": sets})
+    record["_oai"] = oai
 
     # Store the value in `json` property, as it's not more called during object
     # creation. https://github.com/inveniosoftware/invenio-records/commit/ab7fdc10ddf54249dde8bc968f98b1fdd633610f#diff-51263e1ef21bcc060a5163632df055ef67ac3e3b2e222930649c13865cffa5aeR171
@@ -133,15 +130,13 @@ def export_json(sender=None, records=None, **kwargs):
 
     records_to_export = []
 
-    click.echo("{count} records harvested".format(count=len(records)))
+    click.echo(f"{len(records)} records harvested")
 
     for record in records:
         loader_schema = LoaderSchemaFactory.create(kwargs["name"])
         records_to_export.append(loader_schema.dump(str(record)))
 
-    file_name = "{source}-{date}.json".format(
-        source=kwargs["name"], date=datetime.now().strftime("%Y%m%d%H%M%S")
-    )
+    file_name = f"{kwargs['name']}-{datetime.now().strftime('%Y%m%d%H%M%S')}.json"
     file_path = join(data_directory, file_name)
 
     json_file = open(file_path, "w")
@@ -151,7 +146,7 @@ def export_json(sender=None, records=None, **kwargs):
     client = HegClient()
     client.upload_file(file_name, file_path)
 
-    click.echo("{count} records exported".format(count=len(records_to_export)))
+    click.echo(f"{len(records_to_export)} records exported")
 
 
 def process_boosting(config):

@@ -98,9 +98,7 @@ def get_file_links(file, record):
     if not file.get("mimetype"):
         return links
 
-    links["download"] = "/documents/{pid}/files/{key}".format(
-        pid=record["pid"], key=file["key"]
-    )
+    links["download"] = f"/documents/{record['pid']}/files/{file['key']}"
 
     if file["mimetype"] not in current_app.config.get(
         "SONAR_APP_FILE_PREVIEW_MIMETYPES", []
@@ -110,9 +108,7 @@ def get_file_links(file, record):
     if file["mimetype"] == "application/octet-stream":
         if os.path.splitext(file["key"])[-1] != ".md":
             return links
-    links["preview"] = "/documents/{pid}/preview/{key}".format(
-        pid=record["pid"], key=file["key"]
-    )
+    links["preview"] = f"/documents/{record['pid']}/preview/{file['key']}"
     return links
 
 
@@ -237,7 +233,7 @@ def get_thumbnail(file, record):
     if not matches:
         return "static/images/no-image.png"
 
-    return "/documents/{pid}/files/{key}".format(pid=record["pid"], key=key)
+    return f"/documents/{record['pid']}/files/{key}"
 
 
 def populate_files_properties(record):

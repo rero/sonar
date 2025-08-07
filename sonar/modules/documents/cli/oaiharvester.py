@@ -41,9 +41,7 @@ def oai_config_create(config_file):
     :param config_file: File containing a list of sources to harvest.
     """
     click.secho(
-        '\nCreating configurations for OAI harvesting from file "{file}"...'.format(
-            file=config_file.name
-        )
+        f'\nCreating configurations for OAI harvesting from file "{config_file.name}"...'
     )
 
     sources = json.load(config_file)
@@ -56,9 +54,7 @@ def oai_config_create(config_file):
             configuration = OAIHarvestConfig.query.filter_by(name=source["key"]).first()
 
             if configuration:
-                raise Exception(
-                    'Config already registered for "{name}"'.format(name=source["key"])
-                )
+                raise Exception(f"Config already registered for \"{source['key']}\"")
 
             configuration = OAIHarvestConfig(
                 name=source["key"],
@@ -71,7 +67,7 @@ def oai_config_create(config_file):
             db.session.commit()
 
             click.secho(
-                'Created configuration for "{name}"'.format(name=source["key"]),
+                f"Created configuration for \"{source['key']}\"",
                 fg="green",
             )
         except Exception as exception:

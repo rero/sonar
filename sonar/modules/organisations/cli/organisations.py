@@ -39,7 +39,7 @@ def organisations():
 @with_appcontext
 def import_organisations(file):
     """Import organisations from JSON file."""
-    click.secho("Importing organisations from {file}".format(file=file.name))
+    click.secho(f"Importing organisations from {file.name}")
 
     directory = os.path.dirname(file.name)
 
@@ -71,9 +71,7 @@ def import_organisations(file):
             indexer.index(db_record)
         except Exception as error:
             click.secho(
-                "Organisation {org} could not be imported: {error}".format(
-                    org=record, error=str(error)
-                ),
+                f"Organisation {record} could not be imported: {error}",
                 fg="red",
             )
 

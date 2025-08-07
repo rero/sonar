@@ -136,7 +136,7 @@ mkdir -p ${static_folder}/sonar-ui
 cp -R ${assets_folder}/node_modules/@rero/sonar-ui/dist/sonar/* ${static_folder}/sonar-ui
 
 # Copy worker from pdfjs to avoid a 404 error when previewing PDF files.
-cp ${assets_folder}/node_modules/pdfjs-dist/build/pdf.worker.min.js ${static_folder}/js/pdfjs/
+cp ${assets_folder}/node_modules/pdfjs-dist/build/pdf.worker.min.mjs ${static_folder}/js/pdfjs/
 
 # Compile translations catalogs
 info_msg "Compile translations catalogs"

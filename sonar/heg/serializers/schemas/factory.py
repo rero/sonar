@@ -41,4 +41,4 @@ class SchemaFactory:
         if SchemaFactory.SCHEMAS.get(schema_key):
             return SchemaFactory.SCHEMAS[schema_key]()
 
-        raise Exception('No schema defined for key "{key}"'.format(key=schema_key))
+        raise Exception(f'No schema defined for key "{schema_key}"')

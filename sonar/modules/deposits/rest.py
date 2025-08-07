@@ -232,7 +232,7 @@ def review(pid=None):
     send_email(
         [deposit_user["email"]],
         subject,
-        "deposits/email/{action}".format(action=payload["action"]),
+        f"deposits/email/{payload['action']}",
         {
             "deposit": deposit,
             "deposit_user": deposit_user,

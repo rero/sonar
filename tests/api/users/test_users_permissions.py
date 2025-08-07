@@ -149,9 +149,7 @@ def test_create(client, organisation, superuser, admin, moderator, submitter, us
 
     # Super user
     user_json["organisation"] = {
-        "$ref": "https://sonar.ch/api/organisations/{organisation}".format(
-            organisation=organisation["pid"]
-        )
+        "$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"
     }
 
     login_user_via_session(client, email=superuser["email"])

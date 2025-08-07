@@ -21,31 +21,7 @@ from io import BytesIO
 
 import pytest
 
-from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.serializers import google_scholar_v1
-
-
-@pytest.fixture()
-def minimal_document(db, bucket_location, organisation):
-    record = DocumentRecord.create(
-        {
-            "pid": "1000",
-            "title": [
-                {
-                    "type": "bf:Title",
-                    "mainTitle": [
-                        {"language": "eng", "value": "Title of the document"}
-                    ],
-                }
-            ],
-            "organisation": [{"$ref": "https://sonar.ch/api/organisations/org"}],
-        },
-        dbcommit=True,
-        with_bucket=True,
-    )
-    record.commit()
-    db.session.commit()
-    return record
 
 
 @pytest.fixture()
@@ -203,11 +179,8 @@ def test_authors(minimal_document, contributors):
         minimal_document["pid"], minimal_document
     )
 
-    for author in ["Creator 1", "Creator 2"]:
-        assert (
-            '<meta name="citation_author" content="{author}">'.format(author=author)
-            in result
-        )
+    assert '<meta name="citation_author" content="Creator 1">' in result
+    assert '<meta name="citation_author" content="Creator 2">' in result
 
 
 def test_doi(minimal_document):

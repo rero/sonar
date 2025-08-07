@@ -67,8 +67,8 @@ def test_get_metadata(app, client, organisation_with_file):
 def test_put_delete(app, client, organisation, pdf_file):
     """Test create and delete a file."""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
-    file_name = "test.pdf"
 
+    file_name = "test1.pdf"
     # upload the file
     url_file_content = url_for(
         "invenio_records_files.org_object_api",

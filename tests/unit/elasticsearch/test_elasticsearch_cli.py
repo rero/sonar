@@ -56,10 +56,7 @@ def test_backup(app, script_info):
 
     # Snapshot with no name
     result = runner.invoke(backup, obj=script_info)
-    assert (
-        "snapshot-{date}".format(date=datetime.date.today().strftime("%Y-%m-%d"))
-        in result.output
-    )
+    assert f"snapshot-{datetime.date.today().strftime('%Y-%m-%d')}" in result.output
 
     # Not existing repository
     current_search_client.snapshot.delete("backup", "test")

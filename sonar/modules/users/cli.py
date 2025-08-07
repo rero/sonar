@@ -43,7 +43,7 @@ def users():
 @with_appcontext
 def import_users(infile):
     """Import users."""
-    click.secho("Importing users from {file}".format(file=infile.name))
+    click.secho(f"Importing users from {infile.name}")
 
     data = json.load(infile)
     for user_data in data:
@@ -58,9 +58,7 @@ def import_users(infile):
 
             # User already exists, skip account creation
             if user:
-                raise ClickException(
-                    "User with email {email} already exists".format(email=email)
-                )
+                raise ClickException(f"User with email {email} already exists")
 
             password = user_data.get(
                 "password",
@@ -87,9 +85,7 @@ def import_users(infile):
             datastore.commit()
 
             click.secho(
-                "User {email} with ID #{id} created successfully".format(
-                    email=email, id=user.id
-                ),
+                f"User {email} with ID #{user.id} created successfully",
                 fg="green",
             )
 
@@ -99,9 +95,7 @@ def import_users(infile):
 
         except Exception as error:
             click.secho(
-                "User {user} could not be imported: {error}".format(
-                    user=user_data, error=str(error)
-                ),
+                f"User {user_data} could not be imported: {error}",
                 fg="red",
             )
 

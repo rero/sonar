@@ -24,7 +24,7 @@ import os
 import jinja2
 import markdown
 from flask import current_app, render_template, request, url_for
-from flask_bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap4
 from flask_security import user_registered
 from flask_wiki import Wiki
 from flask_wiki.markdown_ext import BootstrapExtension
@@ -59,7 +59,6 @@ from sonar.resources.projects.service import (
 from sonar.signals import file_download_proxy
 
 from . import config_sonar
-from .route_converters import OrganisationCodeConverter
 from .version import __version__
 
 
@@ -110,7 +109,7 @@ class Sonar:
 
             CORS(app)
 
-        Bootstrap(app)
+        Bootstrap4(app)
         Wiki(app)
 
         app.context_processor(utility_processor)
@@ -150,7 +149,6 @@ class Sonar:
 
     def init_views(self, app):
         """Initialize the main flask views."""
-        app.url_map.converters["org_code"] = OrganisationCodeConverter
 
         @app.route(
             "/", defaults={"view": app.config.get("SONAR_APP_DEFAULT_ORGANISATION")}

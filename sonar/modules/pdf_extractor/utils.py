@@ -39,7 +39,7 @@ def extract_text_from_file(file):
     """Extract full-text from file."""
     # Process pdf text extraction
     text = subprocess.check_output(
-        "pdftotext -enc UTF-8 {file} - 2> /dev/null".format(file=file), shell=True
+        f"pdftotext -enc UTF-8 {file} - 2> /dev/null", shell=True
     )
     text = text.decode()
 

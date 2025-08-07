@@ -53,9 +53,7 @@ def import_records(records_to_import):
                 record = DocumentRecord.create(data, dbcommit=False, with_bucket=True)
             else:
                 current_app.logger.warning(
-                    "Record already imported with PID {pid}: {record}".format(
-                        pid=record["pid"], record=data
-                    )
+                    f"Record already imported with PID {record['pid']}: {data}"
                 )
                 record.update(data)
 
@@ -73,10 +71,7 @@ def import_records(records_to_import):
                             record.add_file(pdf_file.read(), key, **file_data)
                 except Exception as exception:
                     current_app.logger.warning(
-                        "Error during import of file {file} of record "
-                        "{record}: {error}".format(
-                            file=key, error=exception, record=record["identifiedBy"]
-                        )
+                        f"Error during import of file {key} of record {record['identifiedBy']}: {exception}"
                     )
 
             # Merge record in database, at this time it's not saved into DB.
@@ -89,16 +84,12 @@ def import_records(records_to_import):
             ids.append(str(record.id))
 
             current_app.logger.info(
-                'Record with reference "{reference}" imported successfully'.format(
-                    reference=record["identifiedBy"]
-                )
+                f'Record with reference "{record["identifiedBy"]}" imported successfully'
             )
 
         except Exception as exception:
             current_app.logger.error(
-                "Error during importation of record {record}: {exception}".format(
-                    record=data, exception=exception
-                )
+                f"Error during importation of record {data}: {exception}"
             )
 
     # Commit and index records
