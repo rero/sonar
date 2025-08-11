@@ -987,6 +987,7 @@
           "value",
           "status",
           "qualifier",
+          "acquisitionTerms",
           "note",
           "source"
         ],
@@ -2069,7 +2070,8 @@
                       }
                     },
                     "acquisitionTerms": {
-                      "title": "Acquisition terms",
+                      "title": "Terms of acquisition",
+                      "description": "Conditions under which the publisher, distributor, etc., will normally supply a resource, e.g., price of a resource.",
                       "type": "string",
                       "minLength": 1
                     },
@@ -2129,7 +2131,8 @@
             "propertiesOrder": [
               "title",
               "publication",
-              "contribution"
+              "contribution",
+              "identifiedBy"
             ],
             "required": [
               "title"
