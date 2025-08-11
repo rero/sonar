@@ -62,210 +62,259 @@
         "filter": true,
         "options": [
           {
+            "key": "coar:c_2f33",
             "label": "document_type_coar:c_2f33",
             "data": "coar:c_2f33"
           },
           {
+            "key": "coar:c_3248",
             "label": "document_type_coar:c_3248",
             "data": "coar:c_3248"
           },
           {
+            "key": "coar:c_c94f",
             "label": "document_type_coar:c_c94f",
             "data": "coar:c_c94f",
             "children": [
               {
+                "key": "coar:c_5794",
                 "label": "document_type_coar:c_5794",
                 "data": "coar:c_5794"
               },
               {
+                "key": "coar:c_18cp",
                 "label": "document_type_coar:c_18cp",
                 "data": "coar:c_18cp"
               },
               {
+                "key": "coar:c_6670",
                 "label": "document_type_coar:c_6670",
                 "data": "coar:c_6670"
               },
               {
+                "key": "coar:c_18co",
                 "label": "document_type_coar:c_18co",
                 "data": "coar:c_18co"
               },
               {
+                "key": "coar:c_f744",
                 "label": "document_type_coar:c_f744",
                 "data": "coar:c_f744"
               },
               {
+                "key": "coar:R60J-J5BD",
                 "label": "document_type_coar:R60J-J5BD",
                 "data": "coar:R60J-J5BD"
               }
             ]
           },
           {
+            "key": "coar:c_ddb1",
             "label": "document_type_coar:c_ddb1",
             "data": "coar:c_ddb1"
           },
           {
+            "key": "coar:c_3e5a",
             "label": "document_type_coar:c_3e5a",
             "data": "coar:c_3e5a",
             "children": [
               {
+                "key": "coar:c_beb9",
                 "label": "document_type_coar:c_beb9",
                 "data": "coar:c_beb9"
               },
               {
+                "key": "coar:c_6501",
                 "label": "document_type_coar:c_6501",
                 "data": "coar:c_6501"
               },
               {
+                "key": "coar:c_998f",
                 "label": "document_type_coar:c_998f",
                 "data": "coar:c_998f"
               },
               {
+                "key": "coar:c_dcae04bc",
                 "label": "document_type_coar:c_dcae04bc",
                 "data": "coar:c_dcae04bc"
               }
             ]
           },
           {
+            "key": "coar:c_ba08",
             "label": "document_type_coar:c_ba08",
             "data": "coar:c_ba08"
           },
           {
+            "key": "coar:c_8544",
             "label": "document_type_coar:c_8544",
             "data": "coar:c_8544"
           },
           {
+            "key": "non_textual_object",
             "label": "document_type_non_textual_object",
             "data": "non_textual_object",
             "children": [
               {
+                "key": "coar:c_8a7e",
                 "label": "document_type_coar:c_8a7e",
                 "data": "coar:c_8a7e"
               },
               {
+                "key": "coar:c_ecc8",
                 "label": "document_type_coar:c_ecc8",
                 "data": "coar:c_ecc8"
               },
               {
+                "key": "coar:c_12cc",
                 "label": "document_type_coar:c_12cc",
                 "data": "coar:c_12cc"
               },
               {
+                "key": "coar:c_18cc",
                 "label": "document_type_coar:c_18cc",
                 "data": "coar:c_18cc"
               },
               {
+                "key": "coar:c_18cw",
                 "label": "document_type_coar:c_18cw",
                 "data": "coar:c_18cw"
               },
               {
+                "key": "coar:c_5ce6",
                 "label": "document_type_coar:c_5ce6",
                 "data": "coar:c_5ce6"
               }
             ]
           },
           {
+            "key": "coar:c_15cd",
             "label": "document_type_coar:c_15cd",
             "data": "coar:c_15cd"
           },
           {
+            "key": "coar:c_2659",
             "label": "document_type_coar:c_2659",
             "data": "coar:c_2659",
             "children": [
               {
+                "key": "coar:c_0640",
                 "label": "document_type_coar:c_0640",
                 "data": "coar:c_0640"
               },
               {
+                "key": "coar:c_2cd9",
                 "label": "document_type_coar:c_2cd9",
                 "data": "coar:c_2cd9"
               },
               {
+                "key": "coar:c_2fe3",
                 "label": "document_type_coar:c_2fe3",
                 "data": "coar:c_2fe3"
               }
             ]
           },
           {
+            "key": "coar:c_816b",
             "label": "document_type_coar:c_816b",
             "data": "coar:c_816b"
           },
           {
+            "key": "coar:c_93fc",
             "label": "document_type_coar:c_93fc",
             "data": "coar:c_93fc",
             "children": [
               {
+                "key": "coar:c_18ww",
                 "label": "document_type_coar:c_18ww",
                 "data": "coar:c_18ww"
               },
               {
+                "key": "coar:c_18wz",
                 "label": "document_type_coar:c_18wz",
                 "data": "coar:c_18wz"
               },
               {
+                "key": "coar:c_18wq",
                 "label": "document_type_coar:c_18wq",
                 "data": "coar:c_18wq"
               },
               {
+                "key": "coar:c_186u",
                 "label": "document_type_coar:c_186u",
                 "data": "coar:c_186u"
               },
               {
+                "key": "coar:c_18op",
                 "label": "document_type_coar:c_18op",
                 "data": "coar:c_18op"
               },
               {
+                "key": "coar:c_ba1f",
                 "label": "document_type_coar:c_ba1f",
                 "data": "coar:c_ba1f"
               },
               {
+                "key": "coar:c_18hj",
                 "label": "document_type_coar:c_18hj",
                 "data": "coar:c_18hj"
               },
               {
+                "key": "coar:c_18ws",
                 "label": "document_type_coar:c_18ws",
                 "data": "coar:c_18ws"
               },
               {
+                "key": "coar:c_18gh",
                 "label": "document_type_coar:c_18gh",
                 "data": "coar:c_18gh"
               }
             ]
           },
           {
+            "key": "coar:c_46ec",
             "label": "document_type_coar:c_46ec",
             "data": "coar:c_46ec",
             "children": [
               {
+                "key": "coar:c_7a1f",
                 "label": "document_type_coar:c_7a1f",
                 "data": "coar:c_7a1f"
               },
               {
+                "key": "coar:c_db06",
                 "label": "document_type_coar:c_db06",
                 "data": "coar:c_db06"
               },
               {
+                "key": "coar:c_bdcc",
                 "label": "document_type_coar:c_bdcc",
                 "data": "coar:c_bdcc"
               },
               {
+                "key": "habilitation_thesis",
                 "label": "document_type_habilitation_thesis",
                 "data": "habilitation_thesis"
               },
               {
+                "key": "advanced_studies_thesis",
                 "label": "document_type_advanced_studies_thesis",
                 "data": "advanced_studies_thesis"
               },
               {
+                "key": "other_thesis",
                 "label": "document_type_other_thesis",
                 "data": "other_thesis"
               }
             ]
           },
           {
+            "key": "coar:c_8042",
             "label": "document_type_coar:c_8042",
             "data": "coar:c_8042"
           },
           {
+            "key": "coar:c_1843",
             "label": "document_type_coar:c_1843",
             "data": "coar:c_1843"
           }
