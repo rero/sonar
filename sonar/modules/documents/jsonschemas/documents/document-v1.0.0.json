@@ -1625,9 +1625,9 @@
                     "minLength": 1,
                     "widget": {
                       "formlyConfig": {
+                        "type": "remoteAutoComplete",
                         "props": {
-                          "type": "remoteAutoComplete",
-                          "formlyConfig": {
+                          "queryOptions": {
                             "type": "documents",
                             "field": "contribution.agent.preferred_name.suggest",
                             "allowAdd": true
@@ -1693,7 +1693,7 @@
                       "formlyConfig": {
                         "type": "remoteAutoComplete",
                         "props": {
-                          "formlyConfig": {
+                          "queryOptions": {
                             "type": "documents",
                             "field": "contribution.agent.preferred_name.suggest",
                             "allowAdd": true
