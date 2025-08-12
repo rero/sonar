@@ -18,7 +18,7 @@ along with this program. If not, see
 
 {%- extends config.RECORDS_UI_BASE_TEMPLATE %}
 
-{% from 'sonar/macros/macro.html' import thumbnail, identifier_link, contributors_format %}
+{% from 'sonar/macros/macro.html' import thumbnail, identifier_link, contributors_format, contributor_icon %}
 
 {% set title = record.title[0] | title_format(current_i18n.language) %}
 {% set description = record.abstracts[0].value if record.abstracts else None %}
@@ -100,12 +100,12 @@ along with this program. If not, see
       <div class="my-2">
         <ul class="list-unstyled m-0">
           {% for contribution in contributors %}
-          <li class="creator {{ 'd-none' if loop.index > 3 }}">
+          <li class="creator {{ 'd-none' if loop.index > 5 }}">
             {{ contributors_format(contribution, view_code) }}
           </li>
           {% endfor %}
         </ul>
-        {% if contributors | length > 3 %}
+        {% if contributors | length > 5 %}
         <a href="#" id="show-more-contributors">{{ _('Show more') }}&hellip;</a>
         {% endif %}
       </div>
@@ -274,14 +274,14 @@ along with this program. If not, see
         {% endif %}
 
         <!-- CONTRIBUTIONS -> TYPE: bf:Meeting -->
-        {% set meettings = record | contributors(true) %}
-        {% if meettings %}
+        {% set meetings = record | contributors(true) %}
+        {% if meetings %}
         <dt class="col-lg-3">
           {{ _('Conference') }}
         </dt>
         <dd class="col-lg-9">
           <ul class="list-unstyled mb-0">
-            {% for contribution in meettings %}
+            {% for contribution in meetings %}
             <li>
               {{ contributors_format(contribution, view_code) }}
             </li>
