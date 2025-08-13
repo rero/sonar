@@ -22,6 +22,7 @@ along with this program. If not, see
 
 {% set title = record.title[0] | title_format(current_i18n.language) %}
 {% set description = record.abstracts[0].value if record.abstracts else None %}
+{% set quote = '"' %}
 
 {% block head %}
 {{ super() }}
@@ -171,7 +172,7 @@ along with this program. If not, see
         {% for subject in record.subjects %}
         {% for value in subject.label.value %}
         <h5 class="d-inline">
-          <a href="{{ url_for('documents.search', view=view_code, q='subjects.label.value:' + value) }}">
+          <a href="{{ url_for('documents.search', view=view_code, q='subjects.label.value:' + quote + value + quote) }}">
             <span class="badge badge-secondary text-light font-weight-light">
               <i class="fa fa-tag mx-1"></i> {{ value }}
             </span></a>
@@ -310,12 +311,16 @@ along with this program. If not, see
           {{ _('Classification') }}
         </dt>
         <dd class="col-lg-9">
-          {% for classification in record.classification if classification.type == 'bf:ClassificationUdc' -%}
-          <a
-            href="{{ url_for('documents.search', view=view_code, q='classification.classificationPortion:' + classification.classificationPortion) }}">{{
-            _('classification_' + classification.classificationPortion) }}</a>{% if not loop.last %}&nbsp;;&nbsp;{%
-          endif %}
-          {%- endfor %}
+          {% for classification in record.classification %}
+              <a href="{{ url_for('documents.search', view=view_code, q='classification.classificationPortion:' + quote + classification.classificationPortion + quote) }}">
+                {% if classification.type == 'bf:ClassificationUdc' %}
+                  {{ _("classification_" + classification.classificationPortion) }}
+                {% else %}
+                  {{ classification.classificationPortion }}
+                {% endif %}
+              </a>
+            {% if not loop.last %}&nbsp;;&nbsp;{% endif %}
+          {% endfor %}
         </dd>
         {% endif %}
 
