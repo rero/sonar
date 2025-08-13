@@ -17,7 +17,6 @@
 
 """Document Api."""
 
-
 import contextlib
 from datetime import datetime
 from functools import partial
@@ -422,13 +421,16 @@ class DocumentRecord(SonarRecord):
             res["record-view"] = 0
         query_cfg = current_stats.queries["file-download"]
         query = query_cfg.cls(name="file-download", **query_cfg.params)
-        res["file-download"] = {f["key"]: 0 for f in self.get_files_list()}
+        files = self.get_files_list()
+        res["file-download"] = {
+            f["key"]: {"count": 0, "label": f["label"]} for f in files
+        }
         with contextlib.suppress(NotFoundError):
             res_query = query.run(bucket_id=self.bucket_id)
             file_keys = res["file-download"].keys()
             for b in res_query["buckets"]:
                 if b.get("key") in file_keys:
-                    res["file-download"][b["key"]] = int(b["unique_count"])
+                    res["file-download"][b["key"]]["count"] = int(b["unique_count"])
         return res
 
     def get_ark(self):

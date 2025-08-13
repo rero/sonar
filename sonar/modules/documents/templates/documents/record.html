@@ -53,7 +53,7 @@ along with this program. If not, see
       {% if files and files | length > 0 %}
       <div class="mb-4">
         {{ thumbnail(record, first_file,
-        stats['file-download'][first_file['key']] or 0) }}
+        stats['file-download'][first_file['key']]['count'] or 0) }}
       </div>
       {% else %}
       <img src="{{ url_for('static', filename='images/no-image.png') }}" alt="{{ title }}" class="img-fluid">
@@ -445,13 +445,13 @@ along with this program. If not, see
   </div>
 
   {% if files and files | length > 1 %}
-  <h5 id="other_files" class="mt-5">{{ _('Other files') }}</h5>
+  <h5 id="other_files" class="mt-2">{{ _('Other files') }}</h5>
   <hr class="mb-4 mt-0">
   <div class="row">
     {% for file in files %}
       {% if loop.index > 1 %}
         <div class="col-lg-2">
-          {{ thumbnail(record, file, stats['file-download'][file['key']] or 0) }}
+          {{ thumbnail(record, file, stats['file-download'][file['key']]['count'] or 0) }}
           {% if file.label %}
             <div class="text-center">
               {{ file.label }}
@@ -472,7 +472,13 @@ along with this program. If not, see
       <strong class="mt-2 d-block">{{ _('File downloads') }}:</strong>
       <ul>
         {% for key, value in stats['file-download'].items() %}
-        <li>{{ key }}: {{ value }}</li>
+        <li>
+          {% if  value["label"] != key %}
+            <span class="sonar-tooltip" title="{{ key }}">{{ value["label"] }}:</span> {{ value["count"] }}
+          {% else %}
+            <span>{{ value["label"] }}: {{ value["count"] }}</span>
+          {% endif %}
+        </li>
         {% endfor %}
       </ul>
     </div>
