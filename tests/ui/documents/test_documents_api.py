@@ -183,8 +183,15 @@ def test_stats(app, client, document_with_file, es, db, event_queues):
     aggregate_events(["file-download-agg", "record-view-agg"])
     es.indices.refresh(index="stats-file-download")
     es.indices.refresh(index="stats-record-view")
+
+    document_with_file.files["test1.pdf"]["label"] = "test1"
+    document_with_file.commit()
+
     assert document_with_file.statistics["record-view"] == 1
-    assert document_with_file.statistics["file-download"]["test1.pdf"] == 1
+    assert document_with_file.statistics["file-download"]["test1.pdf"]["count"] == 1
+    assert (
+        document_with_file.statistics["file-download"]["test1.pdf"]["label"] == "test1"
+    )
     # the thumbnail should not be in the statistics
     assert not "test1-pdf.jpg" in document_with_file.statistics["file-download"]
 
@@ -196,9 +203,9 @@ def test_affiliations(document):
     document.update(data)
     assert "controlledAffiliation" not in document["contribution"][0]
 
-    data["contribution"][0][
-        "affiliation"
-    ] = "Uni of Geneva and HUG, Uni of Lausanne and CHUV"
+    data["contribution"][0]["affiliation"] = (
+        "Uni of Geneva and HUG, Uni of Lausanne and CHUV"
+    )
     document.update(data)
     assert len(document["contribution"][0]["controlledAffiliation"]) == 2
 
