@@ -72,10 +72,10 @@ def test_get_record_class_by_pid_type(app):
     assert record.__name__ == "DocumentRecord"
 
 
-def test_get_all_pids(document):
+def test_get_all_pids(db, document):
     """Test get all identifiers for a record type."""
     result = list(DocumentRecord.get_all_pids())
-    assert result == ["1"]
+    assert result == [document["pid"]]
 
     # with delete --> false
     document.delete()

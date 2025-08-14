@@ -21,12 +21,12 @@ from sonar.modules.stats.api import Record
 from sonar.modules.stats.tasks import collect_stats
 
 
-def test_collect_task(document, document_with_file, es_clear):
+def test_collect_task(db, document, document_with_file, search_clear):
     """Test collect stats."""
     assert collect_stats().startswith("New stat has been created with a pid of: ")
 
 
-def test_collect(document, document_with_file, es_clear):
+def test_collect(db, document, document_with_file, search_clear):
     """Test collect stats."""
     record = Record.collect()
     assert len(record["values"]) == 1
@@ -36,7 +36,7 @@ def test_collect(document, document_with_file, es_clear):
     assert len(record["values"][0]["pids"]) == 2
 
 
-def test_get_documents_pids(organisation, document):
+def test_get_documents_pids(db, organisation, document):
     """Test get documents pids for organisation."""
     documents = list(Record.get_documents(organisation["pid"]))
     assert len(documents) == 1

@@ -66,7 +66,7 @@ class HEGRepository:
         target_file = path.join(target, file)
         # Download file
         with open(target_file, "wb") as f:
-            self._ftp.retrbinary("RETR {file}".format(file=file), f.write)
+            self._ftp.retrbinary(f"RETR {file}", f.write)
 
         # Extract archive
         with ZipFile(target_file, "r") as zip_object:
@@ -91,15 +91,7 @@ class HEGRepository:
             if matches:
                 with open(file_path) as json_file:
                     files = [
-                        open(
-                            path.join(
-                                target,
-                                "{prefix}_{index}.json".format(
-                                    prefix=matches.group(1), index=(i + 1)
-                                ),
-                            ),
-                            "w",
-                        )
+                        open(path.join(target, f"{matches.group(1)}_{i + 1}.json"), "w")
                         for i in range(number_of_files)
                     ]
                     for i, line in enumerate(json_file):

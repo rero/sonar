@@ -53,9 +53,7 @@ def get_account_info(attributes, remote_app):
             email=email,
             profile=dict(
                 full_name=full_name,
-                username="{slug}-{random}".format(
-                    slug=slugify(full_name), random=str(randrange(1000))
-                ),
+                username=f"{slugify(full_name)}-{randrange(1000)}",
             ),
         ),
         external_id=external_id,
@@ -72,7 +70,7 @@ def get_safe_redirect_target(arg="next"):
     for target in request.args.get(arg), request.referrer:
         if target:
             redirect_uri = uritools.urisplit(target)
-            allowed_hosts = current_app.config.get("APP_ALLOWED_HOSTS", [])
+            allowed_hosts = current_app.config.get("TRUSTED_HOSTS", [])
 
             if redirect_uri.host in allowed_hosts:
                 return target

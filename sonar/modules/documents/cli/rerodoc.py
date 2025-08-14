@@ -78,18 +78,14 @@ def update_file_permissions(permissions_file, chunk_size):
 
                     # No record found, skipping..
                     if not record:
-                        raise Exception(
-                            "Record {record} not found".format(record=row[0])
-                        )
+                        raise Exception(f"Record {row[0]} not found")
 
-                    file_name = "{key}.pdf".format(key=row[2])
+                    file_name = f"{row[2]}.pdf"
 
                     # File not found in record, skipping
                     if file_name not in record.files:
                         raise Exception(
-                            "File {file} not found in record {record}".format(
-                                file=file_name, record=row[0]
-                            )
+                            f"File {file_name} not found in record {row[0]}"
                         )
 
                     record_file = record.files[file_name]
@@ -129,9 +125,7 @@ def update_file_permissions(permissions_file, chunk_size):
                     ids.append(str(record.id))
 
                     current_app.logger.warning(
-                        "Restriction added for file {file} in record {record}.".format(
-                            file=file_name, record=record["pid"]
-                        )
+                        f"Restriction added for file {file_name} in record {record['pid']}."
                     )
 
                     # Bulk save and index
@@ -149,8 +143,6 @@ def update_file_permissions(permissions_file, chunk_size):
 
     except Exception as exception:
         click.secho(
-            "An error occured during file process: {error}".format(
-                error=str(exception)
-            ),
+            f"An error occured during file process: {exception}",
             fg="red",
         )

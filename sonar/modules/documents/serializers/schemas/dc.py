@@ -94,9 +94,7 @@ class DublinCoreSchema(BaseSchema):
             and obj["metadata"]["mainFile"]["restriction"]["date"]
         ):
             items.append(
-                "info:eu-repo/date/embargoEnd/{date}".format(
-                    date=obj["metadata"]["mainFile"]["embargo_date"]
-                )
+                f'info:eu-repo/date/embargoEnd/{obj["metadata"]["mainFile"]["embargo_date"]}'
             )
 
         return items
@@ -309,10 +307,7 @@ class DublinCoreSchema(BaseSchema):
                 classification_type = "ddc"
 
             items.append(
-                "info:eu-repo/classification/{type}/{classification}".format(
-                    type=classification_type,
-                    classification=classification["classificationPortion"],
-                )
+                f"info:eu-repo/classification/{classification_type}/{classification['classificationPortion']}"
             )
 
         return items
@@ -367,6 +362,6 @@ class DublinCoreSchema(BaseSchema):
             info.append(contributor["agent"]["place"])
 
         if info:
-            data += " ({info})".format(info=" : ".join(info))
+            data += f" ({' : '.join(info)})"
 
         return data

@@ -48,9 +48,9 @@ def queue_files(file):
     """
     # If file is not set, the file is guessed from current date
     if not file:
-        file = "data_{date}.zip".format(date=datetime.date.today().strftime("%d%m%y"))
+        file = f"data_{datetime.date.today().strftime('%d%m%y')}.zip"
 
-    click.secho('Queue files from file "{file}"'.format(file=file))
+    click.secho(f'Queue files from file "{file}"')
 
     try:
         heg_repository = HEGRepository("candy.hesge.ch", "SONAR/production")
@@ -94,8 +94,7 @@ def import_records(file, remove_file):
                         records.append(heg_record.serialize())
                     except Exception as exception:
                         click.secho(
-                            "Error during processing record {record}: "
-                            "{exception}".format(record=data, exception=exception),
+                            f"Error during processing record {data}: {exception}",
                             fg="red",
                         )
 
@@ -107,8 +106,7 @@ def import_records(file, remove_file):
                 remove(file_path)
 
             click.secho(
-                'Process finished for file "{file}", the data will be '
-                "imported in background".format(file=file_path),
+                f'Process finished for file "{file_path}", the data will be imported in background',
                 fg="green",
             )
         except Exception as exception:

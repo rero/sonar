@@ -140,7 +140,7 @@ def test_urn_create(app, db, bucket_location, organisation_with_urn):
             record.delete(dbcommit=True, delindex=True)
             urn_pid = PersistentIdentifier.get("urn", urn_code)
             assert urn_pid.status == PIDStatus.DELETED
-            db.session.rollback()
+            # db.session.rollback() ????
 
     with mock.patch.object(UrnIdentifier, "next") as mock_method:
         urn = "urn:nbn:ch:rero-006-37"

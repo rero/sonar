@@ -25,7 +25,7 @@ from invenio_stats.tasks import aggregate_events, process_events
 from sonar.modules.documents.api import DocumentRecord
 
 
-def test_get_record_by_identifier(app, document):
+def test_get_record_by_identifier(app, db, document):
     """Test getting record by its identifier."""
     # Record found
     record = DocumentRecord.get_record_by_identifier(
@@ -58,7 +58,7 @@ def test_get_record_by_identifier(app, document):
     assert not record
 
 
-def test_get_next_file_order(document_with_file, document):
+def test_get_next_file_order(db, document_with_file, document):
     """Test getting next file position."""
     # One file with order 1
     assert document_with_file.get_next_file_order() == 2
@@ -76,7 +76,7 @@ def test_get_next_file_order(document_with_file, document):
     assert document.get_next_file_order() == 1
 
 
-def test_get_files_list(document, pdf_file):
+def test_get_files_list(db, document, pdf_file):
     """Test getting the list of files, filtered and orderd."""
     document.add_file(b"file 1", "test1.pdf", order=2)
     document.add_file(b"file 2", "test2.pdf", order=1)
@@ -96,10 +96,10 @@ def test_get_documents_by_project(db, project, document):
 
     documents = DocumentRecord.get_documents_by_project(project.id)
     assert documents[0]["pid"] == document["pid"]
-    assert documents[0]["permalink"] == f"https://n2t.net/ark:/99999/ffk32"
+    assert documents[0]["permalink"] == "https://n2t.net/ark:/99999/ffk32"
 
 
-def test_is_open_access(document, embargo_date):
+def test_is_open_access(db, document, embargo_date):
     """Test if document is open access."""
     assert not document.is_open_access()
 
@@ -135,7 +135,7 @@ def test_is_open_access(document, embargo_date):
     assert not document.is_open_access()
 
 
-def test_stats(app, client, document_with_file, es, db, event_queues):
+def test_stats(app, db, client, document_with_file, es, event_queues):
     """Test get existing stats for file downloads."""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
 
@@ -186,10 +186,10 @@ def test_stats(app, client, document_with_file, es, db, event_queues):
     assert document_with_file.statistics["record-view"] == 1
     assert document_with_file.statistics["file-download"]["test1.pdf"] == 1
     # the thumbnail should not be in the statistics
-    assert not "test1-pdf.jpg" in document_with_file.statistics["file-download"]
+    assert "test1-pdf.jpg" not in document_with_file.statistics["file-download"]
 
 
-def test_affiliations(document):
+def test_affiliations(db, document):
     """Test controlled affiliation."""
     data = deepcopy(dict(document))
     data["contribution"][0]["affiliation"] = "foo"

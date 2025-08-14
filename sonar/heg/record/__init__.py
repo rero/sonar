@@ -42,7 +42,7 @@ class HEGRecord:
         record = {}
 
         for source in self.SOURCES_PRIORITY:
-            record_source_key = "{source}_record".format(source=source)
+            record_source_key = f"{source}_record"
 
             if self.data.get(record_source_key):
                 record = dict(

@@ -51,8 +51,7 @@ class UsersJSONSchema(JSONSchemaBase):
                 schema["properties"]["role"]["widget"]["formlyConfig"]["props"][
                     "options"
                 ] = [
-                    {"label": "role_{role}".format(role=role), "value": role}
-                    for role in reachable_roles
+                    {"label": f"role_{role}", "value": role} for role in reachable_roles
                 ]
                 schema["properties"]["role"][
                     "enum"

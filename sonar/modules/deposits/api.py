@@ -17,10 +17,9 @@
 
 """Deposit API."""
 
-from datetime import datetime
+from datetime import datetime, timezone
 from functools import partial
 
-import pytz
 from flask import g
 
 from sonar.modules.api import SonarRecord
@@ -102,7 +101,7 @@ class DepositRecord(SonarRecord):
 
         log = {
             "user": user,
-            "date": pytz.utc.localize(datetime.utcnow()).isoformat(),
+            "date": datetime.now(timezone.utc).isoformat(),
             "action": action,
         }
 

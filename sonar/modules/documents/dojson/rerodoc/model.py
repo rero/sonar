@@ -175,7 +175,7 @@ def marc21_to_type_and_organisation(self, key, value):
     key = value.get("a", "") + "|" + value.get("f", "")
     if key not in TYPE_MAPPINGS:
         current_app.logger.warning(
-            'Document type not found in mapping for type "{type}"'.format(type=key)
+            f'Document type not found in mapping for type "{key}"'
         )
         return None
 
@@ -607,10 +607,8 @@ def marc21_to_files(self, key, value):
     # 29085
     if mime_type == "pdt/download":
         current_app.logger.warning(
-            "File {file} for record {record} has a strange pdt/download mime "
-            "type, skipping import of file...".format(
-                file=key, record=self["identifiedBy"]
-            )
+            f"File {key} for record {self['identifiedBy']} has a strange pdt/download mime "
+            "type, skipping import of file..."
         )
         return None
 
@@ -876,9 +874,7 @@ def marc21_to_contribution_field_700(self, key, value):
     role = overdo.get_contributor_role(value.get("e"))
 
     if not role:
-        raise Exception(
-            "No role found for contributor {contribution}".format(contribution=value)
-        )
+        raise Exception(f"No role found for contributor {value}")
 
     data = {
         "agent": {"type": "bf:Person", "preferred_name": value.get("a")},

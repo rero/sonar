@@ -90,15 +90,14 @@ def _create_folder_or_remove_files(sitemap_folder):
         # Recursive
         os.makedirs(sitemap_folder)
 
-    # remove all files into the current folder
+    # remove all xml files from the sitemap folder
     for file in glob.glob(f"{sitemap_folder}/*.xml"):
         os.remove(file)
 
 
 def _get_url_sets(hits, max, org_pid, last=True):
     """Get url sets."""
-    n = 0
-    for hit in hits:
+    for n, hit in enumerate(hits):
         yield {
             "loc": url_for(
                 "invenio_records_ui.doc",
@@ -121,16 +120,17 @@ def _generate_index_sitemap(sitemap_file, org_pid, files_splitted):
     :param: files_splitted: Number of indexes to generate.
     """
 
-    def get_splitted_files():
+    def get_splitted_files(org_pid, files_splitted):
         for i in range(1, files_splitted + 1):
-            yield {
-                "loc": url_for(
-                    "sitemap.sitemap_index", view=org_pid, index=i, _external=True
-                )
-            }
+            url = url_for(
+                "sitemap.sitemap_index", view=org_pid, index=i, _external=True
+            )
+            yield {"loc": url}
 
     template = current_app.jinja_env.get_template("sonar/sitemap_index.xml")
-    rv = template.stream(sitemaps=get_splitted_files())
+    rv = template.stream(
+        sitemaps=get_splitted_files(org_pid=org_pid, files_splitted=files_splitted)
+    )
     rv.dump(sitemap_file)
 
 

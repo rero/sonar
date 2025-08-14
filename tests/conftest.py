@@ -17,6 +17,7 @@
 
 """Common pytest fixtures and plugins."""
 
+
 import copy
 import os
 import shutil
@@ -26,14 +27,17 @@ from datetime import date
 from io import BytesIO
 from os.path import dirname, join
 
+import mock
 import pytest
 import requests_mock
 from dotenv import load_dotenv
 from flask_principal import ActionNeed
 from flask_security.utils import hash_password
 from invenio_access.models import ActionUsers, Role
+from invenio_db import db as db_
 from invenio_files_rest.models import Location
 from invenio_queues.proxies import current_queues
+from sqlalchemy_utils import create_database, database_exists
 
 from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.deposits.api import DepositRecord
@@ -42,6 +46,19 @@ from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.subdivisions.api import Record as SubdivisionRecord
 from sonar.modules.users.api import UserRecord
 from sonar.proxies import sonar
+
+
+# # Needed if tests working with SQLite
+@pytest.fixture()
+def db(app):
+    """Get setup database."""
+    if not database_exists(str(db_.engine.url.render_as_string(hide_password=False))):
+        create_database(str(db_.engine.url.render_as_string(hide_password=False)))
+    db_.create_all()
+    yield db_
+    db_.session.remove()
+    db_.drop_all()
+    # drop_alembic_version_table()
 
 
 @pytest.fixture()
@@ -69,7 +86,7 @@ def search(appctx):
     Scope: module
     This fixture will create all registered indexes in Elasticsearch and remove
     once done. Fixtures that perform changes (e.g. index or remove documents),
-    should used the function-scoped :py:data:`es_clear` fixture to leave the
+    should used the function-scoped :py:data:`search_clear` fixture to leave the
     indexes clean for the following tests.
     """
     from invenio_search import current_search, current_search_client
@@ -181,7 +198,7 @@ def app_config(app_config):
     app_config["CELERY_REDIS_SCHEDULER_URL"] = "redis://localhost:6379/4"
     app_config["CELERY_RESULT_BACKEND"] = "redis://localhost:6379/2"
     app_config["PDF_EXTRACTOR_GROBID_PORT"] = "8070"
-    app_config["RATELIMIT_STORAGE_URL"] = "redis://localhost:6379/3"
+    app_config["RATELIMIT_STORAGE_URI"] = "redis://localhost:6379/3"
     app_config["SEARCH_ELASTIC_HOSTS"] = ["localhost:9200"]
     app_config["SONAR_APP_DEFAULT_ORGANISATION"] = "global"
     app_config["SONAR_APP_SERVER_NAME"] = "sonar.rero.ch"
@@ -194,6 +211,18 @@ def app_config(app_config):
     app_config["WIKI_CONTENT_DIR"] = help_test_dir
     app_config["WIKI_UPLOAD_FOLDER"] = join(help_test_dir, "files")
     app_config["WTF_CSRF_ENABLED"] = False
+    app_config["SQLALCHEMY_DATABASE_URI"] = (
+        "postgresql+psycopg2://sonar:sonar@localhost/sonar"
+    )
+    # org.domain.com needed for sitemap tests
+    app_config["TRUSTED_HOSTS"] = [
+        "sonar.ch",
+        "sonar.rero.ch",
+        "localhost",
+        "127.0.0.1",
+        "org.domain.com",
+    ]
+    app_config
     return app_config
 
 
@@ -218,8 +247,8 @@ def make_organisation(app, db, bucket_location, without_oaiset_signals):
 
         if not record:
             record = OrganisationRecord.create(data, dbcommit=True)
-            record.reindex()
             db.session.commit()
+        record.reindex()
 
         return record
 
@@ -279,14 +308,11 @@ def make_user(app, db, make_organisation, roles):
             make_organisation(organisation, is_shared=organisation_is_shared)
             name = organisation + name
 
-        email = "{name}@rero.ch".format(name=name)
+        email = f"{name}@rero.ch"
 
         datastore = app.extensions["security"].datastore
 
-        user = datastore.find_user(email=email)
-
-        if user:
-            record = UserRecord.get_user_by_email(email)
+        if record := UserRecord.get_user_by_email(email):
             return record
 
         user = datastore.create_user(
@@ -317,9 +343,7 @@ def make_user(app, db, make_organisation, roles):
 
         if organisation:
             data["organisation"] = {
-                "$ref": "https://sonar.ch/api/organisations/{organisation}".format(
-                    organisation=organisation
-                )
+                "$ref": f"https://sonar.ch/api/organisations/{organisation}"
             }
 
         record = UserRecord.create(data, dbcommit=True)
@@ -657,9 +681,7 @@ def make_deposit(db, deposit_json, bucket_location, pdf_file, make_user, embargo
     def _make_deposit(role="submitter", organisation=None):
         user = make_user(role, organisation)
 
-        deposit_json["user"] = {
-            "$ref": "https://sonar.ch/api/users/{pid}".format(pid=user["pid"])
-        }
+        deposit_json["user"] = {"$ref": f"https://sonar.ch/api/users/{user['pid']}"}
 
         deposit_json.pop("pid", None)
 
@@ -692,7 +714,7 @@ def make_deposit(db, deposit_json, bucket_location, pdf_file, make_user, embargo
 def deposit(app, db, user, pdf_file, bucket_location, deposit_json, embargo_date):
     """Deposit fixture."""
     json = copy.deepcopy(deposit_json)
-    json["user"] = {"$ref": "https://sonar.ch/api/users/{pid}".format(pid=user["pid"])}
+    json["user"] = {"$ref": f"https://sonar.ch/api/users/{user['pid']}"}
 
     deposit = DepositRecord.create(json, dbcommit=True, with_bucket=True)
 
@@ -767,16 +789,19 @@ def make_project(app, db, project_json, make_user):
         user = make_user(role, organisation)
 
         project_json["metadata"]["user"] = {
-            "$ref": "https://sonar.ch/api/users/{pid}".format(pid=user["pid"])
+            "$ref": f"https://sonar.ch/api/users/{user['pid']}"
         }
 
         project_json["metadata"]["organisation"] = {
-            "$ref": "https://sonar.ch/api/organisations/{pid}".format(pid=organisation)
+            "$ref": f"https://sonar.ch/api/organisations/{organisation}"
         }
 
         project_json.pop("id", None)
 
-        project = sonar.service("projects").create(None, project_json)
+        with mock.patch(
+            "invenio_records_resources.services.base.service.Service.require_permission"
+        ):
+            project = sonar.service("projects").create(None, project_json)
         app.extensions["invenio-search"].flush_and_refresh(index="projects")
         return project
 
@@ -787,16 +812,15 @@ def make_project(app, db, project_json, make_user):
 def project(app, db, es, admin, organisation, project_json):
     """Deposit fixture."""
     json = copy.deepcopy(project_json)
-    json["metadata"]["user"] = {
-        "$ref": "https://sonar.ch/api/users/{pid}".format(pid=admin["pid"])
-    }
+    json["metadata"]["user"] = {"$ref": f"https://sonar.ch/api/users/{admin['pid']}"}
     json["metadata"]["organisation"] = {
-        "$ref": "https://sonar.ch/api/organisations/{pid}".format(
-            pid=organisation["pid"]
-        )
+        "$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"
     }
 
-    project = sonar.service("projects").create(None, json)
+    with mock.patch(
+        "invenio_records_resources.services.base.service.Service.require_permission"
+    ):
+        project = sonar.service("projects").create(None, json)
     app.extensions["invenio-search"].flush_and_refresh(index="projects")
     return project
 
@@ -816,7 +840,7 @@ def make_collection(app, db, collection_json):
 
     def _make_collection(organisation=None):
         collection_json["organisation"] = {
-            "$ref": "https://sonar.ch/api/organisations/{pid}".format(pid=organisation)
+            "$ref": f"https://sonar.ch/api/organisations/{organisation}"
         }
 
         collection_json.pop("pid", None)
@@ -837,9 +861,7 @@ def collection(app, db, es, admin, organisation, collection_json):
     """Collection fixture."""
     json = copy.deepcopy(collection_json)
     json["organisation"] = {
-        "$ref": "https://sonar.ch/api/organisations/{pid}".format(
-            pid=organisation["pid"]
-        )
+        "$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"
     }
 
     collection = CollectionRecord.create(json, dbcommit=True, with_bucket=True)
@@ -870,7 +892,7 @@ def make_subdivision(app, db, subdivision_json):
 
     def _make_subdivision(organisation=None):
         subdivision_json["organisation"] = {
-            "$ref": "https://sonar.ch/api/organisations/{pid}".format(pid=organisation)
+            "$ref": f"https://sonar.ch/api/organisations/{organisation}"
         }
 
         subdivision_json.pop("pid", None)
@@ -889,9 +911,7 @@ def subdivision(app, db, es, admin, organisation, subdivision_json):
     """Subdivision fixture."""
     json = copy.deepcopy(subdivision_json)
     json["organisation"] = {
-        "$ref": "https://sonar.ch/api/organisations/{pid}".format(
-            pid=organisation["pid"]
-        )
+        "$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"
     }
 
     subdivision = SubdivisionRecord.create(json, dbcommit=True)
@@ -906,9 +926,7 @@ def subdivision2(app, db, es, admin, organisation, subdivision_json):
     """Second subdivision fixture."""
     json = copy.deepcopy(subdivision_json)
     json["organisation"] = {
-        "$ref": "https://sonar.ch/api/organisations/{pid}".format(
-            pid=organisation["pid"]
-        )
+        "$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"
     }
 
     subdivision = SubdivisionRecord.create(json, dbcommit=True)
@@ -921,17 +939,22 @@ def subdivision2(app, db, es, admin, organisation, subdivision_json):
 @pytest.fixture()
 def bucket_location(app, db):
     """Create a default location for managing files."""
-    tmppath = tempfile.mkdtemp()
-    location = Location(name="default", uri=tmppath, default=True)
-    db.session.add(location)
+    # Create unique name to prefent: `UNIQUE constraint failed: files_location.name`
+    # name = uri.split("/")[-1].replace("_", "-").lower()
+    uri = tempfile.mkdtemp()
+    location_obj = Location(name="default", uri=uri, default=True)
+    db.session.add(location_obj)
     db.session.commit()
-    return location
+    yield location_obj
+    # Remove folder after test
+    if os.path.isdir(uri):
+        shutil.rmtree(uri, ignore_errors=True)
 
 
 @pytest.fixture()
 def pdf_file():
     """Return test PDF file path."""
-    return os.path.dirname(os.path.abspath(__file__)) + "/data/test.pdf"
+    return os.path.join(os.path.dirname(__file__), "data", "test.pdf")
 
 
 @pytest.fixture(autouse=True)
@@ -984,3 +1007,29 @@ def minimal_thesis_document_with_urn(db, bucket_location, organisation_with_urn)
         db.session.commit()
         record.reindex()
         return record
+
+
+@pytest.fixture()
+def minimal_document(db, bucket_location, organisation):
+    """Minimal document."""
+    record = DocumentRecord.create(
+        {
+            "pid": "1000",
+            "title": [
+                {
+                    "type": "bf:Title",
+                    "mainTitle": [
+                        {"language": "eng", "value": "Title of the document"}
+                    ],
+                }
+            ],
+            "organisation": [
+                {"$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"}
+            ],
+        },
+        dbcommit=True,
+        with_bucket=True,
+    )
+    record.commit()
+    db.session.commit()
+    return record

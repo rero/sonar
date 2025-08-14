@@ -56,9 +56,7 @@ def init_saml_auth(req, remote_app):
     with open(sp_config["private_key"], "r") as content_file:
         private_key = content_file.read()
 
-    with open(
-        "./data/idp_certificates/{remote_app}.crt".format(remote_app=remote_app), "r"
-    ) as content_file:
+    with open(f"./data/idp_certificates/{remote_app}.crt", "r") as content_file:
         idp_cert = content_file.read()
 
     # Create auth object with settings below
@@ -98,10 +96,6 @@ def get_identity_provider_configuration(remote_app):
     :returns: (dict) A dictionary with the identity provider configuration.
     """
     if remote_app not in current_app.config.get("SHIBBOLETH_IDENTITY_PROVIDERS"):
-        raise Exception(
-            'Identity provider not found for "{remote_app}"'.format(
-                remote_app=remote_app
-            )
-        )
+        raise Exception(f'Identity provider not found for "{remote_app}"')
 
     return current_app.config.get("SHIBBOLETH_IDENTITY_PROVIDERS")[remote_app]

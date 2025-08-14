@@ -40,6 +40,7 @@ class RecordService(BaseRecordService):
         :param identity: Identity of user creating the record.
         :param data: Input data according to the data schema.
         """
+        # TODO: Why Identity(1) and UserNeed(1) ???
         if not identity:
             identity = Identity(1)
             identity.provides.add(UserNeed(1))
