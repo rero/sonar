@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -52,11 +50,7 @@ def aggregations():
 
     if view and view != current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION"):
         organisation = OrganisationRecord.get_record_by_pid(view)
-        if (
-            organisation
-            and organisation.get("isDedicated")
-            and organisation.get("publicDocumentFacets")
-        ):
+        if organisation and organisation.get("isDedicated") and organisation.get("publicDocumentFacets"):
             aggregations_list = organisation.get("publicDocumentFacets") + customFields
     else:
         organisation = current_organisation
@@ -79,25 +73,17 @@ def aggregations():
         if (
             view == current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION")
             or not organisation
-            or not organisation.get(f"documentsCustomField{i}", {}).get(
-                "includeInFacets"
-            )
+            or not organisation.get(f"documentsCustomField{i}", {}).get("includeInFacets")
         ):
             aggregations_list.remove(f"customField{i}")
         elif organisation[f"documentsCustomField{i}"].get("label"):
             aggregations_list[aggregations_list.index(f"customField{i}")] = {
                 "key": f"customField{i}",
-                "name": get_language_value(
-                    organisation[f"documentsCustomField{i}"]["label"]
-                ),
+                "name": get_language_value(organisation[f"documentsCustomField{i}"]["label"]),
             }
 
     # Don't display subdivision in global context
-    if (
-        view
-        and "subdivision" in aggregations_list
-        and view == current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION")
-    ):
+    if view and "subdivision" in aggregations_list and view == current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION"):
         aggregations_list.remove("subdivision")
 
     return jsonify(aggregations_list)

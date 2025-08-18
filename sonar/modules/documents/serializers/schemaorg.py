@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -24,9 +22,7 @@ from invenio_records_rest.serializers.base import (
 from invenio_records_rest.serializers.marshmallow import MarshmallowMixin
 
 
-class SonarSchemaOrgSerializer(
-    SerializerMixinInterface, MarshmallowMixin, PreprocessorMixin
-):
+class SonarSchemaOrgSerializer(SerializerMixinInterface, MarshmallowMixin, PreprocessorMixin):
     """Marshmallow based schema.org serializer for records."""
 
     def dump(self, obj, context=None):

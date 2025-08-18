@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021-2022 RERO
 #
@@ -201,19 +199,13 @@ def part_of_format(part_of):
         numbers.append(part_of["numberingYear"])
 
     if "numberingVolume" in part_of:
-        numbers.append(
-            "{label} {value}".format(label=_("vol."), value=part_of["numberingVolume"])
-        )
+        numbers.append("{label} {value}".format(label=_("vol."), value=part_of["numberingVolume"]))
 
     if "numberingIssue" in part_of:
-        numbers.append(
-            "{label} {value}".format(label=_("no."), value=part_of["numberingIssue"])
-        )
+        numbers.append("{label} {value}".format(label=_("no."), value=part_of["numberingIssue"]))
 
     if "numberingPages" in part_of:
-        numbers.append(
-            "{label} {value}".format(label=_("p."), value=part_of["numberingPages"])
-        )
+        numbers.append("{label} {value}".format(label=_("p."), value=part_of["numberingPages"]))
     if item and numbers:
         item += " - "
     if numbers:
@@ -230,11 +222,7 @@ def contributors(record, meeting=False):
     if list(filter(lambda d: "agent" in d, record.get("contribution"))):
         contributors = list(
             filter(
-                lambda d: (
-                    d["agent"]["type"] == "bf:Meeting"
-                    if meeting
-                    else d["agent"]["type"] != "bf:Meeting"
-                ),
+                lambda d: (d["agent"]["type"] == "bf:Meeting" if meeting else d["agent"]["type"] != "bf:Meeting"),
                 record.get("contribution"),
             )
         )
@@ -279,9 +267,7 @@ def dissertation(record):
     dissertation_text = [record["dissertation"]["degree"]]
 
     # Dissertation has grantingInstitution or date
-    if record["dissertation"].get("grantingInstitution") or record["dissertation"].get(
-        "date"
-    ):
+    if record["dissertation"].get("grantingInstitution") or record["dissertation"].get("date"):
         dissertation_text.append(": ")
 
         # Add grantingInstitution
@@ -290,16 +276,12 @@ def dissertation(record):
 
         # Add date
         if record["dissertation"].get("date"):
-            dissertation_text.append(
-                ", {date}".format(date=format_date(record["dissertation"]["date"]))
-            )
+            dissertation_text.append(", {date}".format(date=format_date(record["dissertation"]["date"])))
 
     # Add jury note
     if record["dissertation"].get("jury_note"):
         dissertation_text.append(
-            " ({label}: {note})".format(
-                label=_("Jury note").lower(), note=record["dissertation"]["jury_note"]
-            )
+            " ({label}: {note})".format(label=_("Jury note").lower(), note=record["dissertation"]["jury_note"])
         )
 
     return "".join(dissertation_text)
@@ -320,17 +302,8 @@ def contribution_text(contribution):
             data.append(f"({meeting})")
 
     # Person
-    if (
-        contribution["agent"]["type"] == "bf:Person"
-        and contribution["role"][0] != "cre"
-    ):
-        data.append(
-            "({role})".format(
-                role=_(
-                    "contribution_role_{role}".format(role=contribution["role"][0])
-                ).lower()
-            )
-        )
+    if contribution["agent"]["type"] == "bf:Person" and contribution["role"][0] != "cre":
+        data.append("({role})".format(role=_("contribution_role_{role}".format(role=contribution["role"][0])).lower()))
 
     return " ".join(data)
 
@@ -343,9 +316,7 @@ def meeting_text(contribution):
     :returns: Formatted text.
     """
     contrib = contribution["agent"]
-    return " : ".join(
-        [contrib[key] for key in ["number", "date", "place"] if key in contrib.keys()]
-    )
+    return " : ".join([contrib[key] for key in ["number", "date", "place"] if key in contrib.keys()])
 
 
 @blueprint.app_template_filter()
@@ -359,11 +330,7 @@ def get_custom_field_label(record, custom_field_index):
     if record.get("organisation") and record["organisation"][0].get(
         "documentsCustomField" + str(custom_field_index), {}
     ).get("label"):
-        return get_language_value(
-            record["organisation"][0]["documentsCustomField" + str(custom_field_index)][
-                "label"
-            ]
-        )
+        return get_language_value(record["organisation"][0]["documentsCustomField" + str(custom_field_index)]["label"])
 
     return None
 
@@ -392,9 +359,7 @@ def get_preferred_languages(force_language=None):
 
     :param forceLanguage: String, force a language to be the first.
     """
-    preferred_languages = current_app.config.get(
-        "SONAR_APP_PREFERRED_LANGUAGES", []
-    ).copy()
+    preferred_languages = current_app.config.get("SONAR_APP_PREFERRED_LANGUAGES", []).copy()
 
     if force_language:
         preferred_languages.insert(0, force_language)

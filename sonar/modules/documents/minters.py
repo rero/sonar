@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -31,9 +29,7 @@ from sonar.modules.ark.api import Ark
 def id_minter(record_uuid, data, provider, pid_key="pid", object_type="rec"):
     """Document PID minter."""
     # Create persistent identifier
-    provider = provider.create(
-        object_type=object_type, object_uuid=record_uuid, pid_value=data.get(pid_key)
-    )
+    provider = provider.create(object_type=object_type, object_uuid=record_uuid, pid_value=data.get(pid_key))
 
     pid = provider.pid
     data[pid_key] = pid.pid_value
@@ -41,9 +37,7 @@ def id_minter(record_uuid, data, provider, pid_key="pid", object_type="rec"):
     # Mandatory to check if PID for OAI exists, as the minter is called twice
     # during API calls..
     try:
-        oai_pid_value = current_app.config.get("OAISERVER_ID_PREFIX", "") + str(
-            pid.pid_value
-        )
+        oai_pid_value = current_app.config.get("OAISERVER_ID_PREFIX", "") + str(pid.pid_value)
         OAIIDProvider.get(oai_pid_value, "oai")
     except PIDDoesNotExistError:
         oaiid_minter(record_uuid, data)
@@ -76,16 +70,12 @@ def external_minters(record_uuid, data, pid_key="pid"):
                 pid.redirect(PersistentIdentifier.get("doc", data[pid_key]))
             except PIDAlreadyExists:
                 pass
-    new_data = current_app.extensions.get("invenio-records").replace_refs(
-        data.get("organisation", [{}])[0]
-    )
+    new_data = current_app.extensions.get("invenio-records").replace_refs(data.get("organisation", [{}])[0])
     naan = new_data.get("arkNAAN")
 
     if not data.get("harvested") and (ark := Ark(naan=naan)):
         try:
             pid = ark.create(data[pid_key], record_uuid=record_uuid)
-            data.setdefault("identifiedBy", []).append(
-                dict(type="ark", value=pid.pid_value)
-            )
+            data.setdefault("identifiedBy", []).append(dict(type="ark", value=pid.pid_value))
         except PIDAlreadyExists:
             pass

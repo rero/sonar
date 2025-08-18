@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -42,9 +40,7 @@ def test_get(client, document_with_file):
     assert not fdata.get("permissions")
 
     # the item result should contains permissions
-    res = client.get(
-        url_for("invenio_records_rest.doc_item", pid_value=document_with_file["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.doc_item", pid_value=document_with_file["pid"]))
     assert res.status_code == 200
     assert res.json["metadata"]["_files"][0]["permissions"] == {
         "delete": False,

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2023 RERO
 #
@@ -16,6 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """Blueprint used for ark resolution."""
+
 from flask import Blueprint, abort, redirect
 
 from sonar.modules.ark.api import Ark

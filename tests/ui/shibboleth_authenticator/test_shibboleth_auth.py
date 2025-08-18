@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -31,10 +29,7 @@ def test_get_identity_provider_configuration(app):
     assert str(e.value) == 'Identity provider not found for "not_exists"'
 
     # Valid identity provider
-    assert (
-        auth.get_identity_provider_configuration("idp").get("entity_id")
-        == "https://idp.com/shibboleth"
-    )
+    assert auth.get_identity_provider_configuration("idp").get("entity_id") == "https://idp.com/shibboleth"
 
 
 def test_init_saml_auth(app, request):

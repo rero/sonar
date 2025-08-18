@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -112,9 +110,7 @@ def csv_record_responsify(serializer, mimetype):
         date = format_date(record.created, "%Y%m%d%H%M")
         filename = f"stats-{date}.csv"
         if not response.headers.get("Content-Disposition"):
-            response.headers["Content-Disposition"] = (
-                f'attachment; filename="{filename}"'
-            )
+            response.headers["Content-Disposition"] = f'attachment; filename="{filename}"'
 
         return response
 

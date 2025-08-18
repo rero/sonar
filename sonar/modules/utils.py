@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -100,9 +98,7 @@ def send_email(recipients, subject, template, ctx=None, html=True, lang="en"):
 def get_switch_aai_providers():
     """Return the list of available SWITCHaai providers."""
     providers = []
-    for provider, data in current_app.config.get(
-        "SHIBBOLETH_IDENTITY_PROVIDERS"
-    ).items():
+    for provider, data in current_app.config.get("SHIBBOLETH_IDENTITY_PROVIDERS").items():
         # Don't take providers flagged as dev in production mode
         if current_app.config.get("ENV") != "development" and data.get("dev", False):
             continue
@@ -125,9 +121,7 @@ def remove_trailing_punctuation(data, punctuation=",", spaced_punctuation=":;/-"
     """
     punctuation = punctuation.replace(".", r"\.").replace("-", r"\-")
     spaced_punctuation = spaced_punctuation.replace(".", r"\.").replace("-", r"\-")
-    return re.sub(
-        r"([{0}]|\s+[{1}])$".format(punctuation, spaced_punctuation), "", data.rstrip()
-    ).rstrip()
+    return re.sub(r"([{0}]|\s+[{1}])$".format(punctuation, spaced_punctuation), "", data.rstrip()).rstrip()
 
 
 def get_current_language():
@@ -235,15 +229,11 @@ def has_custom_resource(resource_type):
         return False
 
     return (
-        current_app.config.get("SONAR_APP_ORGANISATION_CONFIG")
-        .get(current_organisation["code"], {})
-        .get(resource_type)
+        current_app.config.get("SONAR_APP_ORGANISATION_CONFIG").get(current_organisation["code"], {}).get(resource_type)
     )
 
 
-def get_language_value(
-    values, locale=None, value_field="value", language_field="language"
-):
+def get_language_value(values, locale=None, value_field="value", language_field="language"):
     """Return the value corresponding to the locale.
 
     :params values: List of values with the language.
@@ -382,9 +372,7 @@ def file_download_ui(pid, record, _record_file_factory=None, **kwargs):
     )
 
 
-def requests_retry_session(
-    retries=5, backoff_factor=0.5, status_forcelist=(500, 502, 504), session=None
-):
+def requests_retry_session(retries=5, backoff_factor=0.5, status_forcelist=(500, 502, 504), session=None):
     """Request retry session.
 
     :params retries: The total number of retry attempts to make.

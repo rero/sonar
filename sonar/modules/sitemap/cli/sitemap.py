@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2022 RERO
 #
@@ -16,7 +14,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """Sitemap cli."""
-
 
 import click
 from flask import current_app
@@ -38,7 +35,5 @@ def generate(server_name):
 
     :param: server_name: organisation server name.
     """
-    sitemap_generate(
-        server_name, current_app.config.get("SONAR_APP_SITEMAP_ENTRY_SIZE", 10000)
-    )
+    sitemap_generate(server_name, current_app.config.get("SONAR_APP_SITEMAP_ENTRY_SIZE", 10000))
     click.secho(f"Generate sitemap for {server_name}", fg="green")

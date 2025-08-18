@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -45,9 +43,7 @@ def search_factory(self, search, query_parser=None):
 
     # For admin and moderator, only records that belongs to his organisation.
     if user.is_admin or user.is_moderator:
-        search = search.filter(
-            "term", user__organisation__pid=current_organisation["pid"]
-        )
+        search = search.filter("term", user__organisation__pid=current_organisation["pid"])
 
         # For moderators having a subdivision, records are filtered by
         # subdivision or by owned deposits

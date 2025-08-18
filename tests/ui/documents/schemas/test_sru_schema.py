@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -49,9 +47,7 @@ def test_title():
     </record>
     """
     assert SRUSchema().dump(xml) == {
-        "title": [
-            {"mainTitle": [{"language": "eng", "value": "Title"}], "type": "bf:Title"}
-        ]
+        "title": [{"mainTitle": [{"language": "eng", "value": "Title"}], "type": "bf:Title"}]
     }
 
     # With language
@@ -66,9 +62,7 @@ def test_title():
     assert SRUSchema().dump(xml) == {
         "language": [{"type": "bf:Language", "value": "ger"}],
         "provisionActivity": [{"startDate": "1980", "type": "bf:Publication"}],
-        "title": [
-            {"mainTitle": [{"language": "ger", "value": "Title"}], "type": "bf:Title"}
-        ],
+        "title": [{"mainTitle": [{"language": "ger", "value": "Title"}], "type": "bf:Title"}],
     }
 
     # With subtitle
@@ -126,9 +120,7 @@ def test_identified_by():
         <controlfield tag="001">1111</controlfield>
     </record>
     """
-    assert SRUSchema().dump(xml) == {
-        "identifiedBy": [{"type": "bf:Local", "value": "1111", "source": "swisscovery"}]
-    }
+    assert SRUSchema().dump(xml) == {"identifiedBy": [{"type": "bf:Local", "value": "1111", "source": "swisscovery"}]}
 
     # ISBN, but no $a
     xml = """
@@ -147,9 +139,7 @@ def test_identified_by():
         </datafield>
     </record>
     """
-    assert SRUSchema().dump(xml) == {
-        "identifiedBy": [{"type": "bf:Isbn", "value": "ISBN NUMBER"}]
-    }
+    assert SRUSchema().dump(xml) == {"identifiedBy": [{"type": "bf:Isbn", "value": "ISBN NUMBER"}]}
 
     # ISSN, but no $a and no $l
     xml = """
@@ -232,9 +222,7 @@ def test_identified_by():
         </datafield>
     </record>
     """
-    assert SRUSchema().dump(xml) == {
-        "identifiedBy": [{"type": "bf:Strn", "value": "Identifier"}]
-    }
+    assert SRUSchema().dump(xml) == {"identifiedBy": [{"type": "bf:Strn", "value": "Identifier"}]}
 
     # 088, but no $a
     xml = """
@@ -253,9 +241,7 @@ def test_identified_by():
         </datafield>
     </record>
     """
-    assert SRUSchema().dump(xml) == {
-        "identifiedBy": [{"type": "bf:ReportNumber", "value": "Identifier"}]
-    }
+    assert SRUSchema().dump(xml) == {"identifiedBy": [{"type": "bf:ReportNumber", "value": "Identifier"}]}
 
 
 def test_abstracts():
@@ -283,9 +269,7 @@ def test_abstracts():
         </datafield>
     </record>
     """
-    assert SRUSchema().dump(xml) == {
-        "abstracts": [{"value": "Record summary", "language": "eng"}]
-    }
+    assert SRUSchema().dump(xml) == {"abstracts": [{"value": "Record summary", "language": "eng"}]}
 
 
 def test_content_notes():
@@ -753,9 +737,7 @@ def test_provision_activity():
     """
     assert SRUSchema().dump(xml) == {
         "language": [{"type": "bf:Language", "value": "ger"}],
-        "provisionActivity": [
-            {"type": "bf:Publication", "startDate": "1980", "endDate": "1990"}
-        ],
+        "provisionActivity": [{"type": "bf:Publication", "startDate": "1980", "endDate": "1990"}],
     }
 
     # 264
@@ -880,9 +862,7 @@ def test_series():
         </datafield>
     </record>
     """
-    assert SRUSchema().dump(xml) == {
-        "series": [{"name": "Serie 1", "number": "12"}, {"name": "Serie 2"}]
-    }
+    assert SRUSchema().dump(xml) == {"series": [{"name": "Serie 1", "number": "12"}, {"name": "Serie 2"}]}
 
 
 def test_part_of():

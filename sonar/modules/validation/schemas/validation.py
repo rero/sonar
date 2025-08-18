@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -51,8 +49,6 @@ class ValidationSchemaMixin:
 
         # Store user
         if not item["validation"].get("user"):
-            item["validation"]["user"] = {
-                "$ref": SonarRecord.get_ref_link("users", current_user_record["pid"])
-            }
+            item["validation"]["user"] = {"$ref": SonarRecord.get_ref_link("users", current_user_record["pid"])}
 
         return item

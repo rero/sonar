@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -21,8 +19,6 @@
 def test_organisation_resolver(document):
     """Test organisation resolver."""
     assert document["organisation"][0].get("$ref")
-    assert (
-        document["organisation"][0]["$ref"] == "https://sonar.ch/api/organisations/org"
-    )
+    assert document["organisation"][0]["$ref"] == "https://sonar.ch/api/organisations/org"
 
     assert document.resolve().get("organisation")[0]["name"] == "org"

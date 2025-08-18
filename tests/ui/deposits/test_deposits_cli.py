@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -16,6 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """Test CLI for deposits."""
+
 import os
 
 from click.testing import CliRunner

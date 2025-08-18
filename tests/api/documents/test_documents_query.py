@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -21,9 +19,7 @@ from flask import url_for
 
 
 def test_collection_query(db, client, document, collection, search_clear):
-    document["collections"] = [
-        {"$ref": f"https://sonar.ch/api/collections/{collection['pid']}"}
-    ]
+    document["collections"] = [{"$ref": f"https://sonar.ch/api/collections/{collection['pid']}"}]
     document.commit()
     db.session.commit()
     document.reindex()

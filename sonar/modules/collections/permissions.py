@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -16,7 +14,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """Record permissions."""
-
 
 from sonar.modules.documents.api import DocumentSearch
 from sonar.modules.organisations.api import current_organisation
@@ -98,11 +95,7 @@ class RecordPermission(BaseRecordPermission):
         if not (user and user.is_admin):
             return False
 
-        results = (
-            DocumentSearch()
-            .filter("term", collections__pid=record["pid"])
-            .source(includes=["pid"])
-        )
+        results = DocumentSearch().filter("term", collections__pid=record["pid"]).source(includes=["pid"])
 
         # Cannot remove collection associated to a record
         if results.count():

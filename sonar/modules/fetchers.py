@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -17,7 +15,6 @@
 
 """Persistent identifier fetchers."""
 
-
 from __future__ import absolute_import, print_function
 
 from collections import namedtuple
@@ -33,6 +30,4 @@ def id_fetcher(record_uuid, data, provider, pid_key="pid"):
     :param data: The record metadata.
     :returns: A :data:`sonar.modules.fetchers.FetchedPID` instance.
     """
-    return FetchedPID(
-        provider=provider, pid_type=provider.pid_type, pid_value=data[pid_key]
-    )
+    return FetchedPID(provider=provider, pid_type=provider.pid_type, pid_value=data[pid_key])

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -24,9 +22,7 @@ def test_serializer(app):
     """Test serializer."""
     csv = CSVSerializer(csv_included_fields=["pid"])
 
-    records = {
-        "hits": {"hits": [{"id": "1", "metadata": {}}, {"id": "2", "metadata": {}}]}
-    }
+    records = {"hits": {"hits": [{"id": "1", "metadata": {}}, {"id": "2", "metadata": {}}]}}
 
     result = "".join(csv.serialize_object_list(records))
     assert result == '"pid"\r\n"1"\r\n"2"\r\n'

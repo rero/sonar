@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -46,10 +44,7 @@ def test_robots_txt(app):
         app.config.update(SONAR_APP_PRODUCTION_STATE=True)
         res = client.get(url)
         assert res.status_code == 200
-        assert (
-            b"User-agent: *\nAllow: /\n\n"
-            b"Sitemap: http://localhost/global/sitemap.xml" in res.data
-        )
+        assert b"User-agent: *\nAllow: /\n\nSitemap: http://localhost/global/sitemap.xml" in res.data
 
 
 def test_admin_record_page(app, admin, user_without_role):
@@ -238,14 +233,9 @@ def test_schema_projects(client, user):
     login_user_via_session(client, email=user["email"])
     res = client.get(url_for("sonar.schemas", record_type="projects"))
     assert res.status_code == 200
-    assert not res.json["schema"]["properties"]["metadata"]["properties"].get(
-        "organisation"
-    )
+    assert not res.json["schema"]["properties"]["metadata"]["properties"].get("organisation")
     assert not res.json["schema"]["properties"].get("role")
-    assert (
-        "organisation"
-        not in res.json["schema"]["properties"]["metadata"]["propertiesOrder"]
-    )
+    assert "organisation" not in res.json["schema"]["properties"]["metadata"]["propertiesOrder"]
 
 
 def test_schema_deposits(client, moderator, submitter, moderator_dedicated):
@@ -254,54 +244,27 @@ def test_schema_deposits(client, moderator, submitter, moderator_dedicated):
     res = client.get(url_for("sonar.schemas", record_type="deposits"))
     assert res.status_code == 200
     # Moderator with shared organisation
-    assert not res.json["schema"]["properties"]["diffusion"]["properties"].get(
-        "subdivisions"
-    )
-    assert (
-        "subdivisions"
-        not in res.json["schema"]["properties"]["diffusion"]["propertiesOrder"]
-    )
-    assert not res.json["schema"]["properties"]["metadata"]["properties"].get(
-        "collections"
-    )
-    assert (
-        "collections"
-        not in res.json["schema"]["properties"]["metadata"]["propertiesOrder"]
-    )
+    assert not res.json["schema"]["properties"]["diffusion"]["properties"].get("subdivisions")
+    assert "subdivisions" not in res.json["schema"]["properties"]["diffusion"]["propertiesOrder"]
+    assert not res.json["schema"]["properties"]["metadata"]["properties"].get("collections")
+    assert "collections" not in res.json["schema"]["properties"]["metadata"]["propertiesOrder"]
 
     login_user_via_session(client, email=submitter["email"])
     res = client.get(url_for("sonar.schemas", record_type="deposits"))
     assert res.status_code == 200
-    assert not res.json["schema"]["properties"]["diffusion"]["properties"].get(
-        "subdivisions"
-    )
-    assert (
-        "subdivisions"
-        not in res.json["schema"]["properties"]["diffusion"]["propertiesOrder"]
-    )
-    assert not res.json["schema"]["properties"]["metadata"]["properties"].get(
-        "collections"
-    )
-    assert (
-        "collections"
-        not in res.json["schema"]["properties"]["metadata"]["propertiesOrder"]
-    )
+    assert not res.json["schema"]["properties"]["diffusion"]["properties"].get("subdivisions")
+    assert "subdivisions" not in res.json["schema"]["properties"]["diffusion"]["propertiesOrder"]
+    assert not res.json["schema"]["properties"]["metadata"]["properties"].get("collections")
+    assert "collections" not in res.json["schema"]["properties"]["metadata"]["propertiesOrder"]
 
     # Moderator with dedicated organisation
     login_user_via_session(client, email=moderator_dedicated["email"])
     res = client.get(url_for("sonar.schemas", record_type="deposits"))
     assert res.status_code == 200
     assert res.json["schema"]["properties"]["metadata"]["properties"].get("collections")
-    assert (
-        "collections" in res.json["schema"]["properties"]["metadata"]["propertiesOrder"]
-    )
-    assert res.json["schema"]["properties"]["diffusion"]["properties"].get(
-        "subdivisions"
-    )
-    assert (
-        "subdivisions"
-        in res.json["schema"]["properties"]["diffusion"]["propertiesOrder"]
-    )
+    assert "collections" in res.json["schema"]["properties"]["metadata"]["propertiesOrder"]
+    assert res.json["schema"]["properties"]["diffusion"]["properties"].get("subdivisions")
+    assert "subdivisions" in res.json["schema"]["properties"]["diffusion"]["propertiesOrder"]
 
 
 def test_profile(client, user):
@@ -335,14 +298,10 @@ def test_record_image_url(client):
     assert not record_image_url({"_files": []}, "org")
 
     # No images
-    assert not record_image_url(
-        {"_files": [{"bucket": "1234", "key": "test.pdf"}]}, "org"
-    )
+    assert not record_image_url({"_files": [{"bucket": "1234", "key": "test.pdf"}]}, "org")
 
     # No pid
-    assert not record_image_url(
-        {"_files": [{"bucket": "1234", "key": "test.pdf"}]}, "org"
-    )
+    assert not record_image_url({"_files": [{"bucket": "1234", "key": "test.pdf"}]}, "org")
 
     record = {
         "pid": "1",
@@ -356,10 +315,7 @@ def test_record_image_url(client):
     assert record_image_url(record, "org") == "/organisations/1/files/test.jpg"
 
     # Take files corresponding to key
-    assert (
-        record_image_url(record, "org", "test2.jpg")
-        == "/organisations/1/files/test2.jpg"
-    )
+    assert record_image_url(record, "org", "test2.jpg") == "/organisations/1/files/test2.jpg"
 
 
 def test_rerodoc_redirection(client, app, document, organisation):
@@ -370,11 +326,9 @@ def test_rerodoc_redirection(client, app, document, organisation):
     assert res.status_code == 404
 
     # Files
-    res = client.get(
-        url_for("sonar.rerodoc_redirection", pid="111111", filename="test.pdf")
-    )
+    res = client.get(url_for("sonar.rerodoc_redirection", pid="111111", filename="test.pdf"))
     assert res.status_code == 302
-    assert res.location.find(f'/documents/{document["pid"]}/files/test.pdf') != -1
+    assert res.location.find(f"/documents/{document['pid']}/files/test.pdf") != -1
 
     def changeOrg(key, value):
         organisation[key] = value
@@ -387,24 +341,20 @@ def test_rerodoc_redirection(client, app, document, organisation):
     changeOrg("isShared", False)
     res = client.get(url_for("sonar.rerodoc_redirection", pid="111111"))
     assert res.status_code == 302
-    assert res.location.find(f'/{global_view}/documents/{document["pid"]}') != -1
+    assert res.location.find(f"/{global_view}/documents/{document['pid']}") != -1
 
     # Dedicated
     changeOrg("isDedicated", True)
     res = client.get(url_for("sonar.rerodoc_redirection", pid="111111"))
     assert res.status_code == 302
-    assert (
-        res.location.find(f'/{organisation["code"]}/documents/{document["pid"]}') != -1
-    )
+    assert res.location.find(f"/{organisation['code']}/documents/{document['pid']}") != -1
 
     # Shared
     changeOrg("isDedicated", False)
     changeOrg("isShared", True)
     res = client.get(url_for("sonar.rerodoc_redirection", pid="111111"))
     assert res.status_code == 302
-    assert (
-        res.location.find(f'/{organisation["code"]}/documents/{document["pid"]}') != -1
-    )
+    assert res.location.find(f"/{organisation['code']}/documents/{document['pid']}") != -1
 
 
 def test_format_date(app):
@@ -421,16 +371,9 @@ def test_format_date(app):
 
 def test_process_link():
     """Test process_link filter."""
-    assert "[search tips](/view/help/search_tips/)" == process_link(
-        "[search tips](/help/search_tips/)", "view"
-    )
+    assert "[search tips](/view/help/search_tips/)" == process_link("[search tips](/help/search_tips/)", "view")
 
-    assert (
-        "![SONAR_collection.JPG](/help/files/SONAR_collection.JPG"
-        ' "SONAR_collection.JPG")'
-        == process_link(
-            "![SONAR_collection.JPG](/help/files/"
-            'SONAR_collection.JPG "SONAR_collection.JPG")',
-            "view",
-        )
+    assert '![SONAR_collection.JPG](/help/files/SONAR_collection.JPG "SONAR_collection.JPG")' == process_link(
+        '![SONAR_collection.JPG](/help/files/SONAR_collection.JPG "SONAR_collection.JPG")',
+        "view",
     )

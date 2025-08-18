@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -95,7 +93,7 @@ class SonarDublinCoreXMLSerializer(BaseSerializer):
                         if "@attrs" in value:
                             for attr in value["@attrs"]:
                                 prefix = attr["prefix"] if "prefix" in attr else "xml"
-                                attrs[f'{{{prefix}}}{attr["name"]}'] = attr["value"]
+                                attrs[f"{{{prefix}}}{attr['name']}"] = attr["value"]
                     else:
                         val = value
                     field = etree.SubElement(

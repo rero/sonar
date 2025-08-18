@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -61,9 +59,7 @@ class DublinCoreSchema(BaseSchema):
         """Get contributors."""
         items = []
         for contributor in obj["metadata"].get("contribution", []):
-            if contributor["role"][0] != "cre" and contributor["agent"].get(
-                "preferred_name"
-            ):
+            if contributor["role"][0] != "cre" and contributor["agent"].get("preferred_name"):
                 items.append(self.format_contributor(contributor))
 
         return items
@@ -72,9 +68,7 @@ class DublinCoreSchema(BaseSchema):
         """Get creators."""
         items = []
         for contributor in obj["metadata"].get("contribution", []):
-            if contributor["role"][0] == "cre" and contributor["agent"].get(
-                "preferred_name"
-            ):
+            if contributor["role"][0] == "cre" and contributor["agent"].get("preferred_name"):
                 items.append(self.format_contributor(contributor))
 
         return items
@@ -84,18 +78,11 @@ class DublinCoreSchema(BaseSchema):
         items = []
 
         for provision_activity in obj["metadata"].get("provisionActivity", []):
-            if provision_activity[
-                "type"
-            ] == "bf:Publication" and provision_activity.get("startDate"):
+            if provision_activity["type"] == "bf:Publication" and provision_activity.get("startDate"):
                 items.append(provision_activity["startDate"])
 
-        if (
-            obj["metadata"].get("mainFile")
-            and obj["metadata"]["mainFile"]["restriction"]["date"]
-        ):
-            items.append(
-                f'info:eu-repo/date/embargoEnd/{obj["metadata"]["mainFile"]["embargo_date"]}'
-            )
+        if obj["metadata"].get("mainFile") and obj["metadata"]["mainFile"]["restriction"]["date"]:
+            items.append(f"info:eu-repo/date/embargoEnd/{obj['metadata']['mainFile']['embargo_date']}")
 
         return items
 
@@ -135,9 +122,7 @@ class DublinCoreSchema(BaseSchema):
         pid = obj["metadata"]["pid"]
         items = list(
             {
-                DocumentRecord.get_permanent_link(
-                    request.host_url, pid, ignore_ark=True
-                ),
+                DocumentRecord.get_permanent_link(request.host_url, pid, ignore_ark=True),
                 DocumentRecord.get_permanent_link(request.host_url, pid),
             }
         )
@@ -156,10 +141,10 @@ class DublinCoreSchema(BaseSchema):
             for file in files:
                 links = file.get("links", {})
                 if "download" in links and links.get("download"):
-                    items.append(f'{host}{links["download"]}')
+                    items.append(f"{host}{links['download']}")
                 # if the file is restricted it does not appears on the download link
                 elif file["restriction"]["restricted"]:
-                    items.append(f'{host}/documents/{pid}/files/{file["key"]}')
+                    items.append(f"{host}/documents/{pid}/files/{file['key']}")
         return items
 
     def get_languages(self, obj):
@@ -174,9 +159,7 @@ class DublinCoreSchema(BaseSchema):
         items = []
 
         for provision_activity in obj["metadata"]["provisionActivity"]:
-            if provision_activity[
-                "type"
-            ] == "bf:Publication" and provision_activity.get("statement"):
+            if provision_activity["type"] == "bf:Publication" and provision_activity.get("statement"):
                 for statement in provision_activity["statement"]:
                     if statement["type"] == "bf:Agent":
                         items.append(statement["label"][0]["value"])
@@ -186,12 +169,8 @@ class DublinCoreSchema(BaseSchema):
     def get_relations(self, obj):
         """Get relations."""
         items = [
-            other_edition["document"]["electronicLocator"]
-            for other_edition in obj["metadata"].get("otherEdition", [])
-        ] + [
-            other_edition["document"]["electronicLocator"]
-            for other_edition in obj["metadata"].get("relatedTo", [])
-        ]
+            other_edition["document"]["electronicLocator"] for other_edition in obj["metadata"].get("otherEdition", [])
+        ] + [other_edition["document"]["electronicLocator"] for other_edition in obj["metadata"].get("relatedTo", [])]
 
         result = "info:eu-repo/semantics/altIdentifier/{schema}/{identifier}"
 
@@ -209,15 +188,11 @@ class DublinCoreSchema(BaseSchema):
 
             # ISBN
             if identifier["type"] == "bf:Isbn":
-                items.append(
-                    result.format(schema="isbn", identifier=identifier["value"])
-                )
+                items.append(result.format(schema="isbn", identifier=identifier["value"]))
 
             # ISSN
             if identifier["type"] == "bf:Issn":
-                items.append(
-                    result.format(schema="issn", identifier=identifier["value"])
-                )
+                items.append(result.format(schema="issn", identifier=identifier["value"]))
 
             # PMID
             if (
@@ -225,15 +200,11 @@ class DublinCoreSchema(BaseSchema):
                 and identifier.get("source")
                 and identifier["source"].lower().find("pmid") != -1
             ):
-                items.append(
-                    result.format(schema="pmid", identifier=identifier["value"])
-                )
+                items.append(result.format(schema="pmid", identifier=identifier["value"]))
 
             # URN
             if identifier["type"] == "bf:Urn":
-                items.append(
-                    result.format(schema="urn", identifier=identifier["value"])
-                )
+                items.append(result.format(schema="urn", identifier=identifier["value"]))
 
         return items
 
@@ -270,9 +241,7 @@ class DublinCoreSchema(BaseSchema):
 
     def get_sources(self, obj):
         """Get sources."""
-        return [
-            part_of_format(part_of) for part_of in obj["metadata"].get("partOf", [])
-        ]
+        return [part_of_format(part_of) for part_of in obj["metadata"].get("partOf", [])]
 
     def get_subjects(self, obj):
         """Get subjects."""
@@ -288,9 +257,7 @@ class DublinCoreSchema(BaseSchema):
                                 {
                                     "prefix": "xml",
                                     "name": "lang",
-                                    "value": self.translate_language(
-                                        subjects["label"]["language"]
-                                    ),
+                                    "value": self.translate_language(subjects["label"]["language"]),
                                 }
                             ],
                             "value": value,
@@ -306,9 +273,7 @@ class DublinCoreSchema(BaseSchema):
             if classification["type"] == "bf:ClassificationDdc":
                 classification_type = "ddc"
 
-            items.append(
-                f"info:eu-repo/classification/{classification_type}/{classification['classificationPortion']}"
-            )
+            items.append(f"info:eu-repo/classification/{classification_type}/{classification['classificationPortion']}")
 
         return items
 
@@ -319,9 +284,7 @@ class DublinCoreSchema(BaseSchema):
                 {
                     "prefix": "xml",
                     "name": "lang",
-                    "value": self.translate_language(
-                        obj["metadata"]["title"][0]["mainTitle"][0]["language"]
-                    ),
+                    "value": self.translate_language(obj["metadata"]["title"][0]["mainTitle"][0]["language"]),
                 }
             ],
             "value": obj["metadata"]["title"][0]["mainTitle"][0]["value"].strip(),

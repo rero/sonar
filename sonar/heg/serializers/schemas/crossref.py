@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -58,10 +56,7 @@ class CrossrefSchema(HEGSchema):
 
     def get_subjects(self, obj):
         """Get subjects."""
-        return [
-            {"label": {"language": obj["language"], "value": [item]}}
-            for item in obj.get("subject", [])
-        ]
+        return [{"label": {"language": obj["language"], "value": [item]}} for item in obj.get("subject", [])]
 
     def get_contribution(self, obj):
         """Get contribution."""
@@ -144,8 +139,6 @@ class CrossrefSchema(HEGSchema):
         # Add ISSN of the journal
         for issn_type in obj.get("issn-type", []):
             if issn_type["type"] == "electronic":
-                part_of["document"]["identifiedBy"] = [
-                    {"type": "bf:Issn", "value": issn_type["value"]}
-                ]
+                part_of["document"]["identifiedBy"] = [{"type": "bf:Issn", "value": issn_type["value"]}]
 
         return [part_of]

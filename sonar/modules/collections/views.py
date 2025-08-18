@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -42,9 +40,7 @@ def index(**kwargs):
 
     records = RecordSearch().filter("term", organisation__pid=kwargs["view"]).scan()
 
-    return render_template(
-        "collections/index.html", records=list(records), view=kwargs["view"]
-    )
+    return render_template("collections/index.html", records=list(records), view=kwargs["view"])
 
 
 def detail(pid, record, **kwargs):
@@ -62,8 +58,4 @@ def detail(pid, record, **kwargs):
     if record["organisation"]["pid"] != kwargs.get("view"):
         abort(404)
 
-    return redirect(
-        url_for(
-            "documents.search", view=kwargs.get("view"), collection_view=record["pid"]
-        )
-    )
+    return redirect(url_for("documents.search", view=kwargs.get("view"), collection_view=record["pid"]))

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2022 RERO
 #
@@ -16,7 +14,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """Test REST endpoint for documents."""
-
 
 from elasticsearch_dsl import Search
 from flask import url_for
@@ -67,9 +64,7 @@ def test_get_metadata(app, client, document_with_file):
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
 
     # get all files metadata of a given document
-    url_files = url_for(
-        "invenio_records_files.doc_bucket_api", pid_value=document_with_file.get("pid")
-    )
+    url_files = url_for("invenio_records_files.doc_bucket_api", pid_value=document_with_file.get("pid"))
     res = client.get(url_files)
     assert res.status_code == 200
     file_keys = ["test1.pdf", "test1-pdf.txt", "test1-pdf.jpg"]

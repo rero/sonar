@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -81,9 +79,7 @@ class SonarRecord(Record, FilesMixin):
 
         cls.minter(id_, data)
 
-        record = super(SonarRecord, cls).create(
-            data=data, with_bucket=with_bucket, id_=id_, **kwargs
-        )
+        record = super(SonarRecord, cls).create(data=data, with_bucket=with_bucket, id_=id_, **kwargs)
 
         if dbcommit:
             record.dbcommit()
@@ -94,9 +90,7 @@ class SonarRecord(Record, FilesMixin):
     def get_indexer_class(cls):
         """Get the indexer from config."""
         return obj_or_import_string(
-            current_app.config["RECORDS_REST_ENDPOINTS"][cls.provider.pid_type][
-                "indexer_class"
-            ]
+            current_app.config["RECORDS_REST_ENDPOINTS"][cls.provider.pid_type]["indexer_class"]
         )
 
     @classmethod
@@ -106,11 +100,7 @@ class SonarRecord(Record, FilesMixin):
         :param pid_type: PID type.
         :returns: Record class.
         """
-        return (
-            current_app.config.get("RECORDS_REST_ENDPOINTS", {})
-            .get(pid_type, {})
-            .get("record_class")
-        )
+        return current_app.config.get("RECORDS_REST_ENDPOINTS", {}).get(pid_type, {}).get("record_class")
 
     @classmethod
     def get_all_pids(cls, with_deleted=False):
@@ -132,9 +122,7 @@ class SonarRecord(Record, FilesMixin):
         assert cls.provider
         try:
             persistent_identifier = PersistentIdentifier.get(cls.provider.pid_type, pid)
-            return super(SonarRecord, cls).get_record(
-                persistent_identifier.object_uuid, with_deleted=with_deleted
-            )
+            return super(SonarRecord, cls).get_record(persistent_identifier.object_uuid, with_deleted=with_deleted)
         except NoResultFound:
             return None
         except PIDDoesNotExistError:
@@ -168,9 +156,7 @@ class SonarRecord(Record, FilesMixin):
         :param identifier: Record UUID.
         :returns: PID instance of record.
         """
-        return PersistentIdentifier.get_by_object(
-            cls.provider.pid_type, cls.object_type, identifier
-        )
+        return PersistentIdentifier.get_by_object(cls.provider.pid_type, cls.object_type, identifier)
 
     @staticmethod
     def dbcommit():
@@ -187,9 +173,7 @@ class SonarRecord(Record, FilesMixin):
         try:
             # Find the record bucket object.
             try:
-                records_buckets = RecordsBuckets.query.filter_by(
-                    bucket_id=bucket
-                ).first()
+                records_buckets = RecordsBuckets.query.filter_by(bucket_id=bucket).first()
             except Exception:
                 raise Exception("`records_buckets` object not found.")
 
@@ -197,14 +181,9 @@ class SonarRecord(Record, FilesMixin):
 
             # Filter by the declared REST endpoints to avoid identifiers as
             # oai, urn, etc.
-            pid_types = [
-                v["pid_type"]
-                for v in current_app.config.get("RECORDS_REST_ENDPOINTS", {}).values()
-            ]
+            pid_types = [v["pid_type"] for v in current_app.config.get("RECORDS_REST_ENDPOINTS", {}).values()]
             pid = (
-                PersistentIdentifier.query.filter_by(
-                    object_uuid=records_buckets.record_id
-                )
+                PersistentIdentifier.query.filter_by(object_uuid=records_buckets.record_id)
                 .filter(PersistentIdentifier.pid_type.in_(pid_types))
                 .first()
             )
@@ -213,11 +192,7 @@ class SonarRecord(Record, FilesMixin):
                 raise Exception("Persistent identifier not found.")
 
             # Retrieve real record class
-            record_class = (
-                current_app.config.get("RECORDS_REST_ENDPOINTS", {})
-                .get(pid.pid_type)
-                .get("record_class")
-            )
+            record_class = current_app.config.get("RECORDS_REST_ENDPOINTS", {}).get(pid.pid_type).get("record_class")
 
             if not record_class:
                 raise Exception("Class for record not found.")
@@ -284,11 +259,7 @@ class SonarRecord(Record, FilesMixin):
         # If file with the same key exists and file exists and checksum is
         # the same as the registered file, we don't do anything
         checksum = compute_md5_checksum(BytesIO(data))
-        if (
-            key in self.files
-            and os.path.isfile(self.files[key].file.uri)
-            and checksum == self.files[key].file.checksum
-        ):
+        if key in self.files and os.path.isfile(self.files[key].file.uri) and checksum == self.files[key].file.checksum:
             return None
 
         # Create the file

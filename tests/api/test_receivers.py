@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -54,9 +52,7 @@ def test_sync_record_files(db, document_with_file, bucket_location):
 
     # File is not associated to document's bucket, nothing change
     new_bucket = Bucket.create(bucket_location)
-    new_file = ObjectVersion.create(
-        new_bucket, "new_file.pdf", stream=BytesIO(b"new file content")
-    )
+    new_file = ObjectVersion.create(new_bucket, "new_file.pdf", stream=BytesIO(b"new file content"))
     db.session.commit()
     sync_record_files(new_file)
     assert len(document_with_file.files) == 3

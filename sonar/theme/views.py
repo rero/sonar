@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -65,9 +63,7 @@ from sonar.modules.users.api import current_user_record
 from sonar.modules.users.permissions import UserPermission
 from sonar.resources.projects.permissions import RecordPermissionPolicy
 
-blueprint = Blueprint(
-    "sonar", __name__, template_folder="templates", static_folder="static"
-)
+blueprint = Blueprint("sonar", __name__, template_folder="templates", static_folder="static")
 
 
 @blueprint.before_app_request
@@ -190,13 +186,7 @@ def manage(path=None):
 @blueprint.route("/logged-user/", methods=["GET"])
 def logged_user():
     """Current logged user informations in JSON."""
-    data = {
-        "settings": {
-            "document_identifier_link": current_app.config.get(
-                "SONAR_APP_DOCUMENT_IDENTIFIER_LINK"
-            )
-        }
-    }
+    data = {"settings": {"document_identifier_link": current_app.config.get("SONAR_APP_DOCUMENT_IDENTIFIER_LINK")}}
 
     if not current_user.is_anonymous:
         user = current_user_record
@@ -256,9 +246,7 @@ def replace_ref_url(schema, new_host):
     """
     jsonschema_host = current_app.config.get("JSONSCHEMAS_HOST")
     if default := schema.get("properties", {}).get("$schema", {}).get("default"):
-        schema["properties"]["$schema"]["default"] = default.replace(
-            jsonschema_host, new_host
-        )
+        schema["properties"]["$schema"]["default"] = default.replace(jsonschema_host, new_host)
     for k, v in schema.items():
         if isinstance(v, dict):
             schema[k] = replace_ref_url(schema=schema[k], new_host=new_host)
@@ -276,9 +264,7 @@ def schemas(record_type, schema=None):
     :param record_type: Type of resource.
     :returns: JSONified schema or a 404 if not found.
     """
-    resolved = request.args.get(
-        "resolved", current_app.config.get("JSONSCHEMAS_RESOLVE_SCHEMA"), type=int
-    )
+    resolved = request.args.get("resolved", current_app.config.get("JSONSCHEMAS_RESOLVE_SCHEMA"), type=int)
     new_host = urlparse(request.base_url).netloc
     try:
         schema = JSONSchemaFactory.create(record_type, with_refs=bool(resolved))
@@ -291,9 +277,7 @@ def schemas(record_type, schema=None):
         with contextlib.suppress(JSONSchemaNotFound):
             if current_app.debug:
                 current_jsonschemas.get_schema.cache_clear()
-            schema = deepcopy(
-                current_jsonschemas.get_schema(schema_path, with_refs=bool(resolved))
-            )
+            schema = deepcopy(current_jsonschemas.get_schema(schema_path, with_refs=bool(resolved)))
         if not resolved:
             schema = replace_ref_url(schema, new_host)
             return jsonify({"schema": schema})

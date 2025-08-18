@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -101,9 +99,7 @@ class SchemaOrgV1(BaseSchema):
 
     def get_type(self, obj):
         """Get type."""
-        if obj["metadata"].get("documentType") and TYPE_MAPPING.get(
-            obj["metadata"]["documentType"]
-        ):
+        if obj["metadata"].get("documentType") and TYPE_MAPPING.get(obj["metadata"]["documentType"]):
             return TYPE_MAPPING[obj["metadata"]["documentType"]]
 
         return "CreativeWork"
@@ -126,12 +122,8 @@ class SchemaOrgV1(BaseSchema):
         """Get authors."""
         items = []
         for contributor in obj["metadata"].get("contribution", []):
-            if contributor["role"][0] == "cre" and contributor["agent"].get(
-                "preferred_name"
-            ):
-                items.append(
-                    {"@type": "Person", "name": contributor["agent"]["preferred_name"]}
-                )
+            if contributor["role"][0] == "cre" and contributor["agent"].get("preferred_name"):
+                items.append({"@type": "Person", "name": contributor["agent"]["preferred_name"]})
 
         return items
 
@@ -161,9 +153,7 @@ class SchemaOrgV1(BaseSchema):
         for file in obj["metadata"].get("_files", []):
             if file.get("type") == "file" and file.get("links"):
                 if file["links"].get("download"):
-                    files.append(
-                        f"{request.host_url.rstrip('/')}{file['links']['download']}"
-                    )
+                    files.append(f"{request.host_url.rstrip('/')}{file['links']['download']}")
 
                 if file["links"].get("external"):
                     files.append(file["links"]["external"])

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # SONAR
 # Copyright (C) 2022 RERO+
 #
@@ -16,6 +14,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 """Replace document type field in documents."""
+
 from logging import getLogger
 
 from invenio_db import db

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -62,9 +60,7 @@ def completion():
         search = search.source(excludes="*")
 
         for field in fields:
-            search = search.suggest(
-                field, query, completion={"field": field, "skip_duplicates": True}
-            )
+            search = search.suggest(field, query, completion={"field": field, "skip_duplicates": True})
         for _, suggestion in search.execute().suggest.to_dict().items():
             results = results + [option["text"] for option in suggestion[0]["options"]]
     except Exception:

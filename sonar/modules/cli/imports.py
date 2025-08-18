@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -76,9 +74,7 @@ def hepbejune(data_file, pdf_directory):
                         "mainTitle": [{"value": row[3], "language": "fre"}],
                     }
                 ],
-                "identifiedBy": [
-                    {"type": "bf:Local", "source": "hepbejune", "value": row[0]}
-                ],
+                "identifiedBy": [{"type": "bf:Local", "source": "hepbejune", "value": row[0]}],
                 "language": [{"type": "bf:Language", "value": "fre"}],
                 "contribution": [
                     {
@@ -91,16 +87,12 @@ def hepbejune(data_file, pdf_directory):
                     "grantingInstitution": "Haute école pédagogique BEJUNE",
                     "date": date.strftime("%Y-%m-%d"),
                 },
-                "provisionActivity": [
-                    {"type": "bf:Publication", "startDate": date.strftime("%Y")}
-                ],
+                "provisionActivity": [{"type": "bf:Publication", "startDate": date.strftime("%Y")}],
                 "customField1": [row[12]],
                 "customField2": [row[13]],
                 "documentType": DOCUMENT_TYPE_MAPPING.get(row[14], "coar:c_1843"),
                 "usageAndAccessPolicy": {"license": "CC BY-NC-ND"},
-                "organisation": [
-                    {"$ref": "https://sonar.ch/api/organisations/hepbejune"}
-                ],
+                "organisation": [{"$ref": "https://sonar.ch/api/organisations/hepbejune"}],
                 "harvested": True,
                 "masked": "masked_for_external_ips",
             }

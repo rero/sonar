@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -87,9 +85,7 @@ def backup(repository, name, wait):
             pass
 
         # Backup data
-        current_search_client.snapshot.create(
-            repository, name, wait_for_completion=wait
-        )
+        current_search_client.snapshot.create(repository, name, wait_for_completion=wait)
 
         click.secho("Done", fg="green")
     except Exception as exception:
@@ -121,9 +117,7 @@ def restore(repository, name, wait):
         current_search_client.indices.delete("_all")
 
         # Restore the snapshot
-        current_search_client.snapshot.restore(
-            repository, name, wait_for_completion=wait
-        )
+        current_search_client.snapshot.restore(repository, name, wait_for_completion=wait)
 
         click.secho("Done", fg="green")
     except Exception as exception:

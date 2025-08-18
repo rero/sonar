@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -163,30 +161,24 @@ def test_rerodoc_loader(app, organisation):
         "provisionActivity": [{"type": "bf:Publication", "startDate": "2015"}],
         "otherEdition": [
             {
-                "document": {
-                    "electronicLocator": "http://www-geol.unine.ch/GEOMAGNETISME/tract.html"
-                },
+                "document": {"electronicLocator": "http://www-geol.unine.ch/GEOMAGNETISME/tract.html"},
                 "publicNote": "Alternative version",
             }
         ],
         "language": [{"type": "bf:Language", "value": "eng"}],
         "documentType": "coar:c_6501",
         "organisation": [{"$ref": "https://sonar.ch/api/organisations/org"}],
-        "classification": [
-            {"type": "bf:ClassificationUdc", "classificationPortion": "52"}
-        ],
+        "classification": [{"type": "bf:ClassificationUdc", "classificationPortion": "52"}],
         "contribution": [
             {
                 "agent": {"type": "bf:Person", "preferred_name": "Capelo, Pedro R."},
                 "role": ["cre"],
-                "affiliation": "Department of Astronomy, University of Michigan, Ann Arbor, MI "
-                "48109, USA",
+                "affiliation": "Department of Astronomy, University of Michigan, Ann Arbor, MI 48109, USA",
             },
             {
                 "agent": {"type": "bf:Person", "preferred_name": "Volonteri, Marta"},
                 "role": ["cre"],
-                "affiliation": "Department of Astronomy, University of Michigan, Ann Arbor, MI "
-                "48109, USA",
+                "affiliation": "Department of Astronomy, University of Michigan, Ann Arbor, MI 48109, USA",
             },
             {
                 "agent": {"type": "bf:Person", "preferred_name": "Dotti, Massimo"},
@@ -200,8 +192,7 @@ def test_rerodoc_loader(app, organisation):
                     "preferred_name": "Bellovary, Jillian M.",
                 },
                 "role": ["cre"],
-                "affiliation": "Department of Physics and Astronomy, Vanderbilt University, "
-                "Nashville, TN 37235, USA",
+                "affiliation": "Department of Physics and Astronomy, Vanderbilt University, Nashville, TN 37235, USA",
             },
             {
                 "agent": {"type": "bf:Person", "preferred_name": "Mayer, Lucio"},
@@ -212,8 +203,7 @@ def test_rerodoc_loader(app, organisation):
             {
                 "agent": {"type": "bf:Person", "preferred_name": "Governato, Fabio"},
                 "role": ["cre"],
-                "affiliation": "Department of Astronomy, University of Washington, Box 351580, "
-                "Seattle, WA 98195, USA",
+                "affiliation": "Department of Astronomy, University of Washington, Box 351580, Seattle, WA 98195, USA",
             },
         ],
         "title": [
@@ -221,8 +211,7 @@ def test_rerodoc_loader(app, organisation):
                 "type": "bf:Title",
                 "mainTitle": [
                     {
-                        "value": "Growth and activity of black holes in galaxy mergers with "
-                        "varying mass ratios",
+                        "value": "Growth and activity of black holes in galaxy mergers with varying mass ratios",
                         "language": "eng",
                     }
                 ],

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -39,9 +37,7 @@ def get_current_organisation():
         request_ctx.organisation_record = (
             None
             if (not current_user_record or not current_user_record.get("organisation"))
-            else OrganisationRecord.get_record_by_ref_link(
-                current_user_record["organisation"]["$ref"]
-            )
+            else OrganisationRecord.get_record_by_ref_link(current_user_record["organisation"]["$ref"])
         )
 
     return getattr(request_ctx, "organisation_record", None)
@@ -87,12 +83,7 @@ class OrganisationSearch(SonarSearch):
         :param server_name: server name for the dedicated organisation.
         :returns: pid of the dedicated organisation.
         """
-        if (
-            hits := self.filter("term", serverName=server_name)
-            .source(["pid"])
-            .execute()
-            .hits
-        ):
+        if hits := self.filter("term", serverName=server_name).source(["pid"]).execute().hits:
             return hits[0].pid
 
     def get_dedicated_list(self):
@@ -153,9 +144,7 @@ class OrganisationRecord(SonarRecord):
         if organisation:
             return organisation
 
-        organisation = cls.create(
-            {"code": code, "name": name if name else code}, dbcommit=True
-        )
+        organisation = cls.create({"code": code, "name": name if name else code}, dbcommit=True)
         organisation.reindex()
         return organisation
 

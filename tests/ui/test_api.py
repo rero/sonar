@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -97,10 +95,7 @@ def test_create(document_json):
 
 def test_get_ref_link():
     """Test ref link."""
-    assert (
-        DocumentRecord.get_ref_link("document", "1") == "https://sonar.ch"
-        "/api/document/1"
-    )
+    assert DocumentRecord.get_ref_link("document", "1") == "https://sonar.ch/api/document/1"
 
 
 def test_get_record_by_pid(app, document_json):
@@ -160,9 +155,7 @@ def test_get_pid_by_ref_link(document):
 
 def test_get_record_by_ref_link(document):
     """Test getting a record by a reference link."""
-    link = url_for(
-        "invenio_records_rest.doc_item", _external=True, pid_value=document["pid"]
-    )
+    link = url_for("invenio_records_rest.doc_item", _external=True, pid_value=document["pid"])
 
     record = DocumentRecord.get_record_by_ref_link(link)
     assert record["pid"] == document["pid"]
@@ -171,9 +164,7 @@ def test_get_record_by_ref_link(document):
 def test_add_file_from_url(document):
     """Test add file to document by giving its URL."""
     # OK
-    document.add_file_from_url(
-        "https://doc.rero.ch/record/328028/files/nor_irc.pdf", "test.pdf"
-    )
+    document.add_file_from_url("https://doc.rero.ch/record/328028/files/nor_irc.pdf", "test.pdf")
     assert len(document.files) == 3
     assert document.files["test.pdf"]["label"] == "test.pdf"
 
@@ -275,9 +266,7 @@ def test_get_record_by_bucket(app, db, document_with_file):
     assert not SonarRecord.get_record_by_bucket("9bca9173-2c7b-4e22-bd6d-46e4f972dbf89")
 
     # Not record class found
-    app.config.get("RECORDS_REST_ENDPOINTS", {}).get("doc", {}).pop(
-        "record_class", None
-    )
+    app.config.get("RECORDS_REST_ENDPOINTS", {}).get("doc", {}).pop("record_class", None)
     assert not SonarRecord.get_record_by_bucket(document_with_file["_bucket"])
     app.config["RECORDS_REST_ENDPOINTS"]["doc"]["record_class"] = DocumentRecord
 

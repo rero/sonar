@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2022 RERO
 #
@@ -66,9 +64,7 @@ class DnbUrnService:
         # Documentation: https://wiki.dnb.de/display/URNSERVDOK/URN-Service+API
         # https://wiki.dnb.de/display/URNSERVDOK/Beispiele%3A+URN-Verwaltung
         try:
-            response = requests.request(
-                "HEAD", f"{cls.base_url()}/urn/{urn_code}", headers=cls.headers()
-            )
+            response = requests.request("HEAD", f"{cls.base_url()}/urn/{urn_code}", headers=cls.headers())
             if not response.status_code in [200, 404]:
                 raise DnbServerError(
                     f"Bad DNB server response status {response.status_code}, "
@@ -89,9 +85,7 @@ class DnbUrnService:
         # Documentation: https://wiki.dnb.de/display/URNSERVDOK/URN-Service+API
         # https://wiki.dnb.de/display/URNSERVDOK/Beispiele%3A+URN-Verwaltung
         try:
-            response = requests.get(
-                f"{cls.base_url()}/urn/{urn_code}/urls", headers=cls.headers()
-            )
+            response = requests.get(f"{cls.base_url()}/urn/{urn_code}/urls", headers=cls.headers())
             if not response.status_code == 200:
                 raise DnbServerError(
                     f"Bad DNB server response status {response.status_code}, "
@@ -114,9 +108,7 @@ class DnbUrnService:
         # https://wiki.dnb.de/display/URNSERVDOK/Beispiele%3A+URN-Verwaltung
         answer = False
         try:
-            response = requests.get(
-                f"{cls.base_url()}/urn/{urn_code}", headers=cls.headers()
-            )
+            response = requests.get(f"{cls.base_url()}/urn/{urn_code}", headers=cls.headers())
             if response.status_code != 200:
                 raise DnbServerError(
                     f"Bad DNB server response status {response.status_code}, "
@@ -177,14 +169,12 @@ class DnbUrnService:
         :param data: dict - the request body see https://tinyurl.com/mtpfaz5z
                      for more details.
         """
-        response = requests.request(
-            "POST", cls.base_url(), headers=cls.headers(), data=json.dumps(data)
-        )
+        response = requests.request("POST", cls.base_url(), headers=cls.headers(), data=json.dumps(data))
         if response.status_code != 201:
             raise DnbServerError(
                 f"Bad DNB server response status {response.status_code}, "
                 f"when we update the information of the following "
-                f'urn: {data.get("urn")}'
+                f"urn: {data.get('urn')}"
             )
 
     @classmethod
@@ -216,7 +206,7 @@ class DnbUrnService:
         :rtype: str.
         :returns: the target URL.
         """
-        base_url = f'https://{current_app.config.get("SONAR_APP_SERVER_NAME")}'
+        base_url = f"https://{current_app.config.get('SONAR_APP_SERVER_NAME')}"
         if orgs := document.resolve().get("organisation", []):
             org_code = current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION")
             if org := orgs[0]:

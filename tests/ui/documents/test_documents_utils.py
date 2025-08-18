@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -40,20 +38,10 @@ def test_publication_statement_text():
     ) == {"default": "Lausanne : Bulletin officiel du Directoire, 1798-1799, 1900-1999"}
 
     # Without statement
-    assert (
-        utils.publication_statement_text(
-            {"type": "bf:Publication", "startDate": "1990"}
-        )
-        == "1990"
-    )
+    assert utils.publication_statement_text({"type": "bf:Publication", "startDate": "1990"}) == "1990"
 
     # Without statement, complete date
-    assert (
-        utils.publication_statement_text(
-            {"type": "bf:Publication", "startDate": "1990-12-31"}
-        )
-        == "31.12.1990"
-    )
+    assert utils.publication_statement_text({"type": "bf:Publication", "startDate": "1990-12-31"}) == "31.12.1990"
 
 
 def test_get_file_restriction(app, organisation, admin, monkeypatch, embargo_date):
@@ -80,24 +68,28 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch, embargo_dat
         }
 
         # Access property is open access, file is allowed
-        assert utils.get_file_restriction(
-            {"access": "coar:c_abf2"}, [organisation]
-        ) == {"date": None, "restricted": False}
+        assert utils.get_file_restriction({"access": "coar:c_abf2"}, [organisation]) == {
+            "date": None,
+            "restricted": False,
+        }
 
         # Embargo access, but no date specified, file is allowed
-        assert utils.get_file_restriction(
-            {"access": "coar:c_f1cf"}, [organisation]
-        ) == {"date": None, "restricted": False}
+        assert utils.get_file_restriction({"access": "coar:c_f1cf"}, [organisation]) == {
+            "date": None,
+            "restricted": False,
+        }
 
         # Embargo access, but date is invalid, file is allowed
-        assert utils.get_file_restriction(
-            {"access": "coar:c_f1cf", "embargo_date": "wrong"}, [organisation]
-        ) == {"date": None, "restricted": False}
+        assert utils.get_file_restriction({"access": "coar:c_f1cf", "embargo_date": "wrong"}, [organisation]) == {
+            "date": None,
+            "restricted": False,
+        }
 
         # Embargo access, but date is in the past, file is allowed
-        assert utils.get_file_restriction(
-            {"access": "coar:c_f1cf", "embargo_date": "2010-01-01"}, [organisation]
-        ) == {"date": None, "restricted": False}
+        assert utils.get_file_restriction({"access": "coar:c_f1cf", "embargo_date": "2010-01-01"}, [organisation]) == {
+            "date": None,
+            "restricted": False,
+        }
 
         # Embargo access, restriction is not defined, no access
         assert utils.get_file_restriction(
@@ -139,9 +131,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch, embargo_dat
 
         # Embargo access, restriction is outside organisation, user logged but
         # organisations are not corresponding --> file is locked
-        monkeypatch.setattr(
-            "sonar.modules.documents.utils.current_organisation", {"pid": "another-org"}
-        )
+        monkeypatch.setattr("sonar.modules.documents.utils.current_organisation", {"pid": "another-org"})
         assert utils.get_file_restriction(
             {
                 "access": "coar:c_f1cf",
@@ -153,9 +143,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch, embargo_dat
 
         # Embargo access, restriction is outside organisation, user logged and
         # organisations are matching --> file is accessible
-        monkeypatch.setattr(
-            "sonar.modules.documents.utils.current_organisation", {"pid": "org"}
-        )
+        monkeypatch.setattr("sonar.modules.documents.utils.current_organisation", {"pid": "org"})
         assert utils.get_file_restriction(
             {
                 "access": "coar:c_f1cf",
@@ -167,9 +155,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch, embargo_dat
 
         # Embargo access, restriction is outside organisation, user logged and
         # IP is not white listed --> file is locked
-        monkeypatch.setattr(
-            "sonar.modules.documents.utils.current_organisation", {"pid": "another-org"}
-        )
+        monkeypatch.setattr("sonar.modules.documents.utils.current_organisation", {"pid": "another-org"})
         organisation["allowedIps"] = ""
         assert utils.get_file_restriction(
             {
@@ -234,9 +220,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch, embargo_dat
 
         # Restricted access, restriction is outside organisation, user logged
         # but organisations are not corresponding --> file is locked
-        monkeypatch.setattr(
-            "sonar.modules.documents.utils.current_organisation", {"pid": "another-org"}
-        )
+        monkeypatch.setattr("sonar.modules.documents.utils.current_organisation", {"pid": "another-org"})
         assert utils.get_file_restriction(
             {
                 "access": "coar:c_16ec",
@@ -247,9 +231,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch, embargo_dat
 
         # Restricted access, restriction is outside organisation, user logged
         # and organisations are matching --> file is accessible
-        monkeypatch.setattr(
-            "sonar.modules.documents.utils.current_organisation", {"pid": "org"}
-        )
+        monkeypatch.setattr("sonar.modules.documents.utils.current_organisation", {"pid": "org"})
         assert utils.get_file_restriction(
             {
                 "access": "coar:c_16ec",
@@ -260,9 +242,7 @@ def test_get_file_restriction(app, organisation, admin, monkeypatch, embargo_dat
 
         # Restricted access, restriction is outside organisation, user logged
         # and IP is not white listed --> file is locked
-        monkeypatch.setattr(
-            "sonar.modules.documents.utils.current_organisation", {"pid": "another-org"}
-        )
+        monkeypatch.setattr("sonar.modules.documents.utils.current_organisation", {"pid": "another-org"})
         organisation["allowedIps"] = ""
         assert utils.get_file_restriction(
             {

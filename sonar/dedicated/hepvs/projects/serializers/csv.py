@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -40,7 +38,7 @@ class CSVSerializer(BaseCSVSerializer):
             """
             text = external_partner["searcherName"]
             if external_partner.get("institution"):
-                text = f'{text} ({external_partner["institution"]})'
+                text = f"{text} ({external_partner['institution']})"
             return text
 
         def transform_actors_involved(actor):
@@ -51,7 +49,7 @@ class CSVSerializer(BaseCSVSerializer):
             """
             text = actor["choice"] if actor["choice"] != "Other" else actor["other"]
             if actor.get("count"):
-                text = f'{text} ({actor["count"]})'
+                text = f"{text} ({actor['count']})"
             return text
 
         for key in ["innerSearcher", "keywords", "realizationFramework"]:
@@ -83,9 +81,7 @@ class CSVSerializer(BaseCSVSerializer):
             if not data["educationalDocument"]["choice"]:
                 data.pop("educationalDocument")
             else:
-                data["educationalDocument"] = data["educationalDocument"][
-                    "briefDescription"
-                ]
+                data["educationalDocument"] = data["educationalDocument"]["briefDescription"]
 
         # Funder
         if not data.get("funding", {}).get("choice"):

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -93,9 +91,7 @@ def marc21_to_type_and_organisation(self, key, value):
         # a faculty AND a subdivision of FOLIA/unifr
         if organisation == "hepfr":
             organisation = "unifr"
-            self["organisation"] = [
-                {"$ref": OrganisationRecord.get_ref_link("organisations", organisation)}
-            ]
+            self["organisation"] = [{"$ref": OrganisationRecord.get_ref_link("organisations", organisation)}]
             # `hepfr` is a faculty of FOLIA/unifr
             self["customField1"] = ["HEP|PH FR"]
             # `hepfr` is a subdivision of FOLIA/unifr
@@ -113,13 +109,7 @@ def marc21_to_type_and_organisation(self, key, value):
             subdivision_pid = next(result).pid
             # If the subdivision exists, assign it to the record
             if subdivision_pid:
-                self["subdivisions"] = [
-                    {
-                        "$ref": SubdivisionRecord.get_ref_link(
-                            "subdivisions", subdivision_pid
-                        )
-                    }
-                ]
+                self["subdivisions"] = [{"$ref": SubdivisionRecord.get_ref_link("subdivisions", subdivision_pid)}]
 
         # Specific transformation for `bpuge` and `mhnge`, because the real
         # acronym is `vge`.
@@ -133,15 +123,11 @@ def marc21_to_type_and_organisation(self, key, value):
             overdo.create_organisation(organisation)
             overdo.registererd_organisations.append(organisation)
 
-        self["organisation"] = [
-            {"$ref": OrganisationRecord.get_ref_link("organisations", organisation)}
-        ]
+        self["organisation"] = [{"$ref": OrganisationRecord.get_ref_link("organisations", organisation)}]
 
         if subdivision_name:
             # Store subdivision
-            hash_key = hashlib.md5(
-                (subdivision_name + organisation).encode()
-            ).hexdigest()
+            hash_key = hashlib.md5((subdivision_name + organisation).encode()).hexdigest()
 
             subdivision_pid = SubdivisionRecord.get_pid_by_hash_key(hash_key)
 
@@ -150,11 +136,7 @@ def marc21_to_type_and_organisation(self, key, value):
                 subdivision = SubdivisionRecord.create(
                     {
                         "name": [{"language": "eng", "value": subdivision_name}],
-                        "organisation": {
-                            "$ref": OrganisationRecord.get_ref_link(
-                                "organisations", organisation
-                            )
-                        },
+                        "organisation": {"$ref": OrganisationRecord.get_ref_link("organisations", organisation)},
                         "hashKey": hash_key,
                     }
                 )
@@ -163,20 +145,12 @@ def marc21_to_type_and_organisation(self, key, value):
                 db.session.commit()
                 subdivision_pid = subdivision["pid"]
 
-            self["subdivisions"] = [
-                {
-                    "$ref": SubdivisionRecord.get_ref_link(
-                        "subdivisions", subdivision_pid
-                    )
-                }
-            ]
+            self["subdivisions"] = [{"$ref": SubdivisionRecord.get_ref_link("subdivisions", subdivision_pid)}]
 
     # get doc type by mapping
     key = value.get("a", "") + "|" + value.get("f", "")
     if key not in TYPE_MAPPINGS:
-        current_app.logger.warning(
-            f'Document type not found in mapping for type "{key}"'
-        )
+        current_app.logger.warning(f'Document type not found in mapping for type "{key}"')
         return None
 
     # Store types to records
@@ -275,9 +249,7 @@ def marc21_to_provision_activity_field_260(self, key, value):
 
         # Place
         if value.get("a"):
-            publication["statement"].append(
-                {"type": "bf:Place", "label": [{"value": value.get("a")}]}
-            )
+            publication["statement"].append({"type": "bf:Place", "label": [{"value": value.get("a")}]})
 
         # Agent
         if value.get("b"):
@@ -294,9 +266,7 @@ def marc21_to_provision_activity_field_260(self, key, value):
         if years and re.match(r"^\d{4}$", years[0]):
             publication["startDate"] = years[0]
 
-            publication["statement"].append(
-                {"type": "Date", "label": [{"value": value.get("c")}]}
-            )
+            publication["statement"].append({"type": "Date", "label": [{"value": value.get("c")}]})
 
         # End date
         if len(years) > 1 and re.match(r"^\d{4}$", years[1]):
@@ -317,9 +287,7 @@ def marc21_to_provision_activity_field_260(self, key, value):
             )
 
         if value.get("f"):
-            manufacture["statement"].append(
-                {"type": "bf:Agent", "label": [{"value": value.get("f")}]}
-            )
+            manufacture["statement"].append({"type": "bf:Agent", "label": [{"value": value.get("f")}]})
 
         provision_activity.append(manufacture)
 
@@ -365,15 +333,11 @@ def marc21_to_description(self, key, value):
     """
     if value.get("a"):
         if not self.get("extent"):
-            self["extent"] = remove_trailing_punctuation(
-                overdo.not_repetitive(value, "a")
-            )
+            self["extent"] = remove_trailing_punctuation(overdo.not_repetitive(value, "a"))
 
     if value.get("b"):
         if self.get("otherMaterialCharacteristics", []) == []:
-            self["otherMaterialCharacteristics"] = remove_trailing_punctuation(
-                overdo.not_repetitive(value, "b")
-            )
+            self["otherMaterialCharacteristics"] = remove_trailing_punctuation(overdo.not_repetitive(value, "b"))
 
     if value.get("c"):
         formats = self.get("formats")
@@ -493,9 +457,7 @@ def marc21_to_identified_by_from_035(self, key, value):
     if not value.get("a"):
         return None
 
-    identified_by.append(
-        {"type": "bf:Local", "source": "RERO", "value": value.get("a")}
-    )
+    identified_by.append({"type": "bf:Local", "source": "RERO", "value": value.get("a")})
 
     return identified_by
 
@@ -543,9 +505,7 @@ def marc21_to_identified_by_from_091(self, key, value):
     if not value.get("a") or value.get("b") != "pmid":
         return None
 
-    identified_by.append(
-        {"type": "bf:Local", "value": value.get("a"), "source": "PMID"}
-    )
+    identified_by.append({"type": "bf:Local", "value": value.get("a"), "source": "PMID"})
 
     return identified_by
 
@@ -670,9 +630,7 @@ def marc21_to_specific_collection(self, key, value):
     if not self.get("organisation"):
         return None
 
-    organisation_pid = OrganisationRecord.get_pid_by_ref_link(
-        self["organisation"][0]["$ref"]
-    )
+    organisation_pid = OrganisationRecord.get_pid_by_ref_link(self["organisation"][0]["$ref"])
 
     hash_key = hashlib.md5((value.get("a") + organisation_pid).encode()).hexdigest()
 
@@ -744,9 +702,7 @@ def marc21_to_dissertation_field_502(self, key, value):
             if matches.group("degree"):
                 dissertation["degree"] = matches.group("degree")
             if matches.group("grantingInstitution"):
-                dissertation["grantingInstitution"] = matches.group(
-                    "grantingInstitution"
-                )
+                dissertation["grantingInstitution"] = matches.group("grantingInstitution")
             if matches.group("date"):
                 dissertation["date"] = matches.group("date")
 
@@ -760,20 +716,13 @@ def marc21_to_dissertation_field_502(self, key, value):
                 customField2 = None
                 if "mémoire de master spécialisé" in degree:
                     customField1 = "Enseignement spécialisé"
-                    customField2 = (
-                        "Master of Arts in special needs "
-                        "education, orientation enseignement spécialisé"
-                    )
+                    customField2 = "Master of Arts in special needs education, orientation enseignement spécialisé"
                 elif "mémoire de master" in degree:
                     customField1 = "Enseignement secondaire"
-                    customField2 = (
-                        "Master of Arts or of Science " "in Secondary Education"
-                    )
+                    customField2 = "Master of Arts or of Science in Secondary Education"
                 elif "mémoire de bachelor" in degree:
                     customField1 = "Enseignement primaire"
-                    customField2 = (
-                        "Bachelor of Arts in Pre-Primary and " "Primary Education"
-                    )
+                    customField2 = "Bachelor of Arts in Pre-Primary and Primary Education"
                 if customField1:
                     self["customField1"] = [customField1]
                 if customField2:
@@ -781,11 +730,7 @@ def marc21_to_dissertation_field_502(self, key, value):
 
     # Try to get start date and store in provision activity
     # 260$c and 269$c have priority to this date
-    if (
-        record.get("260__", {}).get("c")
-        or record.get("269__", {}).get("c")
-        or record.get("773__", {}).get("g")
-    ):
+    if record.get("260__", {}).get("c") or record.get("269__", {}).get("c") or record.get("773__", {}).get("g"):
         return None
 
     # No date, skipping

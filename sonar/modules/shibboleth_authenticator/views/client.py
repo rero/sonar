@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -34,9 +32,7 @@ from ..utils import get_safe_redirect_target, prepare_flask_request
 
 blueprint = Blueprint("shibboleth_authenticator", __name__, url_prefix="/shibboleth")
 
-serializer = LocalProxy(
-    lambda: URLSafeTimedSerializer(current_app.config["SECRET_KEY"])
-)
+serializer = LocalProxy(lambda: URLSafeTimedSerializer(current_app.config["SECRET_KEY"]))
 
 
 @blueprint.route("/login/<remote_app>", methods=["GET", "POST"])
@@ -57,9 +53,7 @@ def login(remote_app):
 
     # Store next parameter in state token
     next_param = get_safe_redirect_target(arg="next") or "/"
-    state_token = serializer.dumps(
-        {"app": remote_app, "next": next_param, "sid": _create_identifier()}
-    )
+    state_token = serializer.dumps({"app": remote_app, "next": next_param, "sid": _create_identifier()})
 
     # req = prepare_flask_request(request)
     try:
@@ -115,9 +109,7 @@ def authorized(remote_app=None):
                     raise ValueError
                 # Check authenticity and integrity of state and decode the
                 # values.
-                state = serializer.loads(
-                    state_token, max_age=current_app.config["SHIBBOLETH_STATE_EXPIRES"]
-                )
+                state = serializer.loads(state_token, max_age=current_app.config["SHIBBOLETH_STATE_EXPIRES"])
                 # Verify that state is for this session, app and that next
                 # parameter have not been modified.
                 if state["sid"] != _create_identifier() or state["app"] != remote_app:

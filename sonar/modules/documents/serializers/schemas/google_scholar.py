@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -48,9 +46,7 @@ class GoogleScholarV1(BaseSchema):
 
     def get_abstract_url(self, obj):
         """Get id."""
-        return DocumentRecord.get_permanent_link(
-            request.host_url, obj["metadata"]["pid"], ignore_ark=True
-        )
+        return DocumentRecord.get_permanent_link(request.host_url, obj["metadata"]["pid"], ignore_ark=True)
 
     def get_language(self, obj):
         """Get language."""
@@ -67,9 +63,7 @@ class GoogleScholarV1(BaseSchema):
         """Get authors."""
         items = []
         for contributor in obj["metadata"].get("contribution", []):
-            if contributor["role"][0] == "cre" and contributor["agent"].get(
-                "preferred_name"
-            ):
+            if contributor["role"][0] == "cre" and contributor["agent"].get("preferred_name"):
                 items.append(contributor["agent"]["preferred_name"])
 
         return items

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -30,9 +28,7 @@ def marc21_to_identified_by_from_001(self, key, value):
     """Get identifier from field 001."""
     identified_by = self.get("identifiedBy", [])
 
-    identified_by.append(
-        {"type": "bf:Local", "source": "Archive ouverte UNIGE", "value": value}
-    )
+    identified_by.append({"type": "bf:Local", "source": "Archive ouverte UNIGE", "value": value})
 
     return identified_by
 
@@ -66,8 +62,6 @@ def marc21_to_identified_by_from_024(self, key, value):
         identified_by.append({"type": "bf:Doi", "value": value.get("a")})
 
     if value.get("2") == "PMID":
-        identified_by.append(
-            {"type": "bf:Local", "source": "PMID", "value": value.get("a")}
-        )
+        identified_by.append({"type": "bf:Local", "source": "PMID", "value": value.get("a")})
 
     return identified_by

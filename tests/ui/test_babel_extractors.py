@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # RERO ILS
 # Copyright (C) 2021 RERO
 #

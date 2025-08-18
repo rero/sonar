@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2022 RERO
 #
@@ -16,7 +14,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """Test DnbUrnService rest API."""
-
 
 import mock
 import requests_mock
@@ -45,7 +42,6 @@ def test_dnb_rest_api_verify_not_exist(app):
 def test_dnb_rest_api_register(organisation_with_urn):
     """Test dnb rest api register new code."""
     with requests_mock.mock() as response:
-
         from sonar.modules.documents.urn import Urn
 
         # mock the next URN id
@@ -59,15 +55,11 @@ def test_dnb_rest_api_register(organisation_with_urn):
                     "title": [
                         {
                             "type": "bf:Title",
-                            "mainTitle": [
-                                {"language": "eng", "value": "Title of the document"}
-                            ],
+                            "mainTitle": [{"language": "eng", "value": "Title of the document"}],
                         }
                     ],
                     "documentType": "coar:c_db06",
-                    "organisation": [
-                        {"$ref": "https://sonar.ch/api/organisations/org"}
-                    ],
+                    "organisation": [{"$ref": "https://sonar.ch/api/organisations/org"}],
                     "identifiedBy": [
                         {"type": "bf:Local", "value": "10.1186"},
                     ],

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -38,9 +36,7 @@ from sonar.modules.permissions import has_superuser_access
 from sonar.modules.serializers import schema_from_context
 from sonar.modules.users.api import current_user_record
 
-schema_from_organisation = partial(
-    schema_from_context, schema=OrganisationRecord.schema
-)
+schema_from_organisation = partial(schema_from_context, schema=OrganisationRecord.schema)
 
 
 class FileSchemaV1(StrictKeysMixin):
@@ -84,15 +80,9 @@ class FileSchemaV1(StrictKeysMixin):
             return item
         doc = OrganisationRecord.get_record_by_bucket(item.get("bucket"))
         item["permissions"] = {
-            "read": OrganisationFilesPermission.read(
-                current_user_record, item, doc["pid"], doc
-            ),
-            "update": OrganisationFilesPermission.update(
-                current_user_record, item, doc["pid"], doc
-            ),
-            "delete": OrganisationFilesPermission.delete(
-                current_user_record, item, doc["pid"], doc
-            ),
+            "read": OrganisationFilesPermission.read(current_user_record, item, doc["pid"], doc),
+            "update": OrganisationFilesPermission.update(current_user_record, item, doc["pid"], doc),
+            "delete": OrganisationFilesPermission.delete(current_user_record, item, doc["pid"], doc),
         }
 
         return item

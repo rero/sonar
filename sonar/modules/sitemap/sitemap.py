@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2022 RERO
 #
@@ -48,21 +46,14 @@ def sitemap_generate(server_name, size=10000):
         folder = []
         if org_pid != current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION"):
             folder.append(org_pid)
-        sitemap_folder = os.path.join(
-            current_app.config.get("SONAR_APP_SITEMAP_FOLDER_PATH"), *folder
-        )
+        sitemap_folder = os.path.join(current_app.config.get("SONAR_APP_SITEMAP_FOLDER_PATH"), *folder)
         sitemap_file = os.path.join(sitemap_folder, file_name)
         # Create a destination directory
         _create_folder_or_remove_files(sitemap_folder)
 
         if count := search.count():
             # Elasticsearch query for current organisation
-            hits = (
-                search.sort({"_updated": "asc"})
-                .params(preserve_order=True)
-                .source(["pid", "_updated"])
-                .scan()
-            )
+            hits = search.sort({"_updated": "asc"}).params(preserve_order=True).source(["pid", "_updated"]).scan()
 
             if count > size:
                 # In multiple files mode, generate the index
@@ -122,21 +113,15 @@ def _generate_index_sitemap(sitemap_file, org_pid, files_splitted):
 
     def get_splitted_files(org_pid, files_splitted):
         for i in range(1, files_splitted + 1):
-            url = url_for(
-                "sitemap.sitemap_index", view=org_pid, index=i, _external=True
-            )
+            url = url_for("sitemap.sitemap_index", view=org_pid, index=i, _external=True)
             yield {"loc": url}
 
     template = current_app.jinja_env.get_template("sonar/sitemap_index.xml")
-    rv = template.stream(
-        sitemaps=get_splitted_files(org_pid=org_pid, files_splitted=files_splitted)
-    )
+    rv = template.stream(sitemaps=get_splitted_files(org_pid=org_pid, files_splitted=files_splitted))
     rv.dump(sitemap_file)
 
 
-def _generate_sitemap(
-    sitemap_folder, sitemap_file, file_name, org_pid, files_splitted, hits, size
-):
+def _generate_sitemap(sitemap_folder, sitemap_file, file_name, org_pid, files_splitted, hits, size):
     """Generate the sitemap file(s).
 
     :param: sitemap_folder: destination folder.
@@ -155,9 +140,7 @@ def _generate_sitemap(
         file = file_name.split(".")
         for i in range(1, files_splitted + 1):
             file_path = os.path.join(sitemap_folder, f"{file[0]}_{i}.xml")
-            rv = template.stream(
-                urlsets=_get_url_sets(hits, size, org_pid, files_splitted == i)
-            )
+            rv = template.stream(urlsets=_get_url_sets(hits, size, org_pid, files_splitted == i))
             rv.enable_buffering(100)
             rv.dump(file_path)
     else:

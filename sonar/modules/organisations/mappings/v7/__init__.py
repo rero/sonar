@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Copyright (C) 2019 CERN.
 #
 # My site is free software; you can redistribute it and/or modify it under

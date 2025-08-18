@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -55,9 +53,7 @@ def queue_files(file):
     try:
         heg_repository = HEGRepository("candy.hesge.ch", "SONAR/production")
         heg_repository.connect()
-        heg_repository.queue_files(
-            file, current_app.config.get("SONAR_APP_HEG_DATA_DIRECTORY")
-        )
+        heg_repository.queue_files(file, current_app.config.get("SONAR_APP_HEG_DATA_DIRECTORY"))
 
         click.secho("Files queued successfully", fg="green")
     except Exception as exception:

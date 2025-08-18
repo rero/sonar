@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -47,9 +45,7 @@ def test_clear_files(app, script_info, bucket_location):
 
     # Directory not exists
     result = runner.invoke(Cli.clear_files, obj=script_info)
-    assert (
-        result.output.find(f"Directory {bucket_location.uri} cannot be cleaned") != -1
-    )
+    assert result.output.find(f"Directory {bucket_location.uri} cannot be cleaned") != -1
 
 
 def test_export(app, script_info, document, organisation):
@@ -64,21 +60,15 @@ def test_export(app, script_info, document, organisation):
     assert result.exit_code == 2
 
     # No record class found
-    result = runner.invoke(
-        Cli.export, ["--pid-type", "fake", "--output-dir", "/tmp/fake"], obj=script_info
-    )
+    result = runner.invoke(Cli.export, ["--pid-type", "fake", "--output-dir", "/tmp/fake"], obj=script_info)
     assert result.output.find('No record class found for type "fake"') != -1
 
     # Without export serializer
-    result = runner.invoke(
-        Cli.export, ["--pid-type", "doc", "--output-dir", "/tmp/doc"], obj=script_info
-    )
+    result = runner.invoke(Cli.export, ["--pid-type", "doc", "--output-dir", "/tmp/doc"], obj=script_info)
     assert result.output.find('Export "doc" records') != -1
 
     # With serializer
-    result = runner.invoke(
-        Cli.export, ["--pid-type", "org", "--output-dir", "/tmp/org"], obj=script_info
-    )
+    result = runner.invoke(Cli.export, ["--pid-type", "org", "--output-dir", "/tmp/org"], obj=script_info)
     assert result.output.find('Export "org" records') != -1
 
 

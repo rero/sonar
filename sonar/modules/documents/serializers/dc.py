@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2022 RERO
 #
@@ -38,23 +36,17 @@ class DublinCoreSerializer(BaseDublinCoreSerializer, SonarDublinCoreXMLSerialize
         :param record: Record instance.
         :param links_factory: Factory function for record links.
         """
-        root = self.serialize_dict_to_etree(
-            self.transform_record(pid, record, links_factory)
-        )
+        root = self.serialize_dict_to_etree(self.transform_record(pid, record, links_factory))
         return etree.tostring(root, pretty_print=True, encoding="UTF-8")
 
-    def serialize_search(
-        self, pid_fetcher, search_result, links=None, item_links_factory=None
-    ):
+    def serialize_search(self, pid_fetcher, search_result, links=None, item_links_factory=None):
         """Serialize a search result.
 
         :param pid_fetcher: Persistent identifier fetcher.
         :param search_result: The search engine result.
         :param links: Dictionary of links to add to response.
         """
-        root = etree.Element(
-            "collection", total=str(search_result["hits"]["total"]["value"])
-        )
+        root = etree.Element("collection", total=str(search_result["hits"]["total"]["value"]))
         for hit in search_result["hits"]["hits"]:
             child = self.serialize_dict_to_etree(
                 self.transform_search_hit(

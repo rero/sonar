@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -98,11 +96,7 @@ class RecordPermission(BaseRecordPermission):
         :return: True if action can be done
         :rtype: bool
         """
-        results = (
-            DocumentSearch()
-            .filter("term", subdivisions__pid=record["pid"])
-            .source(includes=["pid"])
-        )
+        results = DocumentSearch().filter("term", subdivisions__pid=record["pid"]).source(includes=["pid"])
 
         # Cannot remove subdivision associated to a record
         if results.count():

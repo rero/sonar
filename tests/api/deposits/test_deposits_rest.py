@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -114,15 +112,11 @@ def test_file_put(client, deposit):
 def test_publish(client, db, user, moderator, subdivision, deposit):
     """Test publishing a deposit."""
     # Add a subdivision to moderator and user
-    user["subdivision"] = {
-        "$ref": f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
-    }
+    user["subdivision"] = {"$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"}
     user.commit()
     user.reindex()
 
-    moderator["subdivision"] = {
-        "$ref": f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
-    }
+    moderator["subdivision"] = {"$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"}
     moderator.commit()
     moderator.reindex()
     db.session.commit()
@@ -172,9 +166,7 @@ def test_review(client, db, user, moderator, deposit):
     assert response.status_code == 415
 
     # Invalid action
-    response = client.post(
-        url, data=json.dumps({"action": "unknown", "comment": None}), headers=headers
-    )
+    response = client.post(url, data=json.dumps({"action": "unknown", "comment": None}), headers=headers)
     assert response.status_code == 400
 
     # User is not a moderator
@@ -256,7 +248,5 @@ def test_extract_metadata(client, deposit):
     response = client.get(url, headers=headers)
     assert response.status_code == 500
 
-    response = client.get(
-        url_for("deposits.extract_metadata", pid="not-existing"), headers=headers
-    )
+    response = client.get(url_for("deposits.extract_metadata", pid="not-existing"), headers=headers)
     assert response.status_code == 400

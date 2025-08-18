@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -103,15 +101,9 @@ class FileSchemaV1(ThumbnailSchemaV1):
             return item
         doc = DocumentRecord.get_record_by_bucket(item.get("bucket"))
         item["permissions"] = {
-            "read": DocumentFilesPermission.read(
-                current_user_record, item, doc["pid"], doc
-            ),
-            "update": DocumentFilesPermission.update(
-                current_user_record, item, doc["pid"], doc
-            ),
-            "delete": DocumentFilesPermission.delete(
-                current_user_record, item, doc["pid"], doc
-            ),
+            "read": DocumentFilesPermission.read(current_user_record, item, doc["pid"], doc),
+            "update": DocumentFilesPermission.update(current_user_record, item, doc["pid"], doc),
+            "delete": DocumentFilesPermission.delete(current_user_record, item, doc["pid"], doc),
         }
 
         return item
@@ -223,9 +215,7 @@ class DocumentListMetadataSchemaV1(StrictKeysMixin):
     @pre_dump
     def add_permalink(self, item, **kwargs):
         """Add permanent link to document."""
-        item["permalink"] = DocumentRecord.get_permanent_link(
-            host=request.host_url, pid=item["pid"]
-        )
+        item["permalink"] = DocumentRecord.get_permanent_link(host=request.host_url, pid=item["pid"])
         return item
 
     @pre_dump
@@ -234,7 +224,7 @@ class DocumentListMetadataSchemaV1(StrictKeysMixin):
         resolver_url = current_app.config.get("SONAR_APP_ARK_RESOLVER")
         for itm in item.get("identifiedBy", []):
             if itm.get("type") == "ark":
-                itm["uri"] = f'{resolver_url}/{itm["value"]}'
+                itm["uri"] = f"{resolver_url}/{itm['value']}"
                 break
         return item
 
@@ -247,9 +237,7 @@ class DocumentListMetadataSchemaV1(StrictKeysMixin):
         """
         # Provision activity processing
         for index, provision_activity in enumerate(item.get("provisionActivity", [])):
-            item["provisionActivity"][index]["text"] = create_publication_statement(
-                provision_activity
-            )
+            item["provisionActivity"][index]["text"] = create_publication_statement(provision_activity)
 
         # Part of proccessing
         for index, part_of in enumerate(item.get("partOf", [])):

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -65,19 +63,13 @@ class BaseSchema(Schema):
         :param obj: Record dict.
         :returns: Main file or None.
         """
-        files = [
-            file
-            for file in obj["metadata"].get("_files", [])
-            if file.get("type") == "file"
-        ]
+        files = [file for file in obj["metadata"].get("_files", []) if file.get("type") == "file"]
         files = sorted(files, key=lambda file: file.get("order", 100))
         return files[0] if files else None
 
     def get_id(self, obj):
         """Get id."""
-        return DocumentRecord.get_permanent_link(
-            host=request.host_url, pid=obj["metadata"]["pid"]
-        )
+        return DocumentRecord.get_permanent_link(host=request.host_url, pid=obj["metadata"]["pid"])
 
     def get_title(self, obj):
         """Get title."""
@@ -89,9 +81,7 @@ class BaseSchema(Schema):
     def get_start_date(self, obj):
         """Get start date."""
         for provision_activity in obj["metadata"].get("provisionActivity", []):
-            if provision_activity[
-                "type"
-            ] == "bf:Publication" and provision_activity.get("startDate"):
+            if provision_activity["type"] == "bf:Publication" and provision_activity.get("startDate"):
                 return provision_activity["startDate"]
 
         return None

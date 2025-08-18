@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -23,9 +21,7 @@ from invenio_accounts.testutils import login_user_via_session
 
 def test_list(app, db, client, deposit, superuser, subdivision):
     """Test subdivision facet."""
-    superuser["subdivision"] = {
-        "$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"
-    }
+    superuser["subdivision"] = {"$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"}
     superuser.commit()
     db.session.commit()
     superuser.reindex()

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -138,9 +136,7 @@ class DocumentPermission(RecordPermission):
         if document:
             # check if document has urn
             try:
-                urn_identifier = PersistentIdentifier.get_by_object(
-                    "urn", "rec", document.id
-                )
+                urn_identifier = PersistentIdentifier.get_by_object("urn", "rec", document.id)
             except PIDDoesNotExistError:
                 return False
 
@@ -209,15 +205,11 @@ class DocumentFilesPermission(FilesPermission):
         if isinstance(record, ObjectVersion):
             file_type = document.files[record.key]["type"]
             if file_type == "file" and record.mimetype == "application/pdf":
-                return not DocumentPermission.has_urn(
-                    parent_record
-                ) and DocumentPermission.update(user, parent_record)
+                return not DocumentPermission.has_urn(parent_record) and DocumentPermission.update(user, parent_record)
         if isinstance(record, dict):
             file_type = record["type"]
             if file_type == "file" and record["mimetype"] == "application/pdf":
-                return not DocumentPermission.has_urn(
-                    parent_record
-                ) and DocumentPermission.update(user, parent_record)
+                return not DocumentPermission.has_urn(parent_record) and DocumentPermission.update(user, parent_record)
         if document := cls.get_document(parent_record):
             return DocumentPermission.update(user, document)
         return False

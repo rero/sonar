@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -57,11 +55,9 @@ class JSONSchemaBase:
         schema_path = f"{self._resource_type}/{rec_type}-v1.0.0.json"
 
         if has_custom_resource(self._resource_type):
-            schema_path = f'{current_organisation["code"]}/{schema_path}'
+            schema_path = f"{current_organisation['code']}/{schema_path}"
 
-        self._schema = copy.deepcopy(
-            current_jsonschemas.get_schema(schema_path, with_refs=self._with_refs)
-        )
+        self._schema = copy.deepcopy(current_jsonschemas.get_schema(schema_path, with_refs=self._with_refs))
 
     def get_schema(self):
         """Return the schema loaded.

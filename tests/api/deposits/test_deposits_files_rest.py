@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2022 RERO
 #
@@ -16,7 +14,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """Test REST endpoint for deposits."""
-
 
 from flask import url_for
 
@@ -44,9 +41,7 @@ def test_get_metadata(app, client, deposit):
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
 
     # get all files metadata of a given deposit
-    url_files = url_for(
-        "invenio_records_files.depo_bucket_api", pid_value=deposit.get("pid")
-    )
+    url_files = url_for("invenio_records_files.depo_bucket_api", pid_value=deposit.get("pid"))
     res = client.get(url_files)
     assert res.status_code == 200
     file_keys = ["main.pdf", "additional.pdf"]

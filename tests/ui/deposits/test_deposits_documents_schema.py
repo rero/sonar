@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -154,9 +152,7 @@ def test_document_type():
     assert DepositDocumentSchema().dump(document) == {}
 
     document = {"documentType": "coar:c_2f33"}
-    assert DepositDocumentSchema().dump(document) == {
-        "metadata": {"documentType": "coar:c_2f33"}
-    }
+    assert DepositDocumentSchema().dump(document) == {"metadata": {"documentType": "coar:c_2f33"}}
 
 
 def test_date():
@@ -170,17 +166,13 @@ def test_date():
     assert DepositDocumentSchema().dump(document) == {}
 
     document = {"provisionActivity": [{"type": "bf:Publication", "startDate": "2012"}]}
-    assert DepositDocumentSchema().dump(document) == {
-        "metadata": {"documentDate": "2012"}
-    }
+    assert DepositDocumentSchema().dump(document) == {"metadata": {"documentDate": "2012"}}
 
 
 def test_content_note():
     """Test content note."""
     document = {"contentNote": ["Note 1", "Note 2"]}
-    assert DepositDocumentSchema().dump(document) == {
-        "metadata": {"contentNote": ["Note 1", "Note 2"]}
-    }
+    assert DepositDocumentSchema().dump(document) == {"metadata": {"contentNote": ["Note 1", "Note 2"]}}
 
 
 def test_extent():
@@ -212,9 +204,7 @@ def test_dissertation():
 def test_additional_materials():
     """Test additional materials."""
     document = {"additionalMaterials": "30 pl."}
-    assert DepositDocumentSchema().dump(document) == {
-        "metadata": {"additionalMaterials": "30 pl."}
-    }
+    assert DepositDocumentSchema().dump(document) == {"metadata": {"additionalMaterials": "30 pl."}}
 
 
 def test_formats():
@@ -228,9 +218,7 @@ def test_formats():
 def test_other_material_characteristics():
     """Test other material characteristics."""
     document = {"formats": ["24 cm"]}
-    assert DepositDocumentSchema().dump(document) == {
-        "metadata": {"formats": ["24 cm"]}
-    }
+    assert DepositDocumentSchema().dump(document) == {"metadata": {"formats": ["24 cm"]}}
 
 
 def test_edition_statement():
@@ -271,9 +259,7 @@ def test_publication_place():
             }
         ]
     }
-    assert DepositDocumentSchema().dump(document) == {
-        "metadata": {"publicationPlace": "Place 1"}
-    }
+    assert DepositDocumentSchema().dump(document) == {"metadata": {"publicationPlace": "Place 1"}}
 
 
 def test_publisher():
@@ -296,9 +282,7 @@ def test_publisher():
             }
         ]
     }
-    assert DepositDocumentSchema().dump(document) == {
-        "metadata": {"publisher": "Agent 1"}
-    }
+    assert DepositDocumentSchema().dump(document) == {"metadata": {"publisher": "Agent 1"}}
 
 
 def test_notes():
@@ -308,9 +292,7 @@ def test_notes():
     assert DepositDocumentSchema().dump(document) == {}
 
     document = {"notes": ["Note 1", "Note 2"]}
-    assert DepositDocumentSchema().dump(document) == {
-        "metadata": {"notes": ["Note 1", "Note 2"]}
-    }
+    assert DepositDocumentSchema().dump(document) == {"metadata": {"notes": ["Note 1", "Note 2"]}}
 
 
 def test_series():
@@ -321,9 +303,7 @@ def test_series():
 
     document = {"series": [{"name": "Serie 1", "number": "12"}, {"name": "Serie 2"}]}
     assert DepositDocumentSchema().dump(document) == {
-        "metadata": {
-            "series": [{"name": "Serie 1", "number": "12"}, {"name": "Serie 2"}]
-        }
+        "metadata": {"series": [{"name": "Serie 1", "number": "12"}, {"name": "Serie 2"}]}
     }
 
 

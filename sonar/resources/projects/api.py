@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -34,9 +32,7 @@ from sonar.resources.api import Record as BaseRecord
 from . import models
 
 # Custom provider to set the PID type
-RecordIdProvider = type(
-    "RecordIdProvider", (BaseRecordIdProvider,), dict(pid_type="proj")
-)
+RecordIdProvider = type("RecordIdProvider", (BaseRecordIdProvider,), dict(pid_type="proj"))
 
 
 class SearchDumperObjectsExt(SearchDumperExt):
@@ -45,14 +41,10 @@ class SearchDumperObjectsExt(SearchDumperExt):
     def dump(self, record, data):
         """Dump the data for indexing."""
         if data["metadata"].get("user"):
-            data["metadata"]["user"] = {
-                "pid": UserRecord.get_pid_by_ref_link(data["metadata"]["user"]["$ref"])
-            }
+            data["metadata"]["user"] = {"pid": UserRecord.get_pid_by_ref_link(data["metadata"]["user"]["$ref"])}
 
         if data["metadata"].get("organisation"):
-            organisation = OrganisationRecord.get_record_by_ref_link(
-                data["metadata"]["organisation"]["$ref"]
-            )
+            organisation = OrganisationRecord.get_record_by_ref_link(data["metadata"]["organisation"]["$ref"])
             data["metadata"]["organisation"] = {
                 "pid": organisation["pid"],
                 "name": organisation["name"],
@@ -82,11 +74,7 @@ class Record(BaseRecord):
     @cached_property
     def schema(self):
         """Return the schema."""
-        schema_key = (
-            "projects"
-            if not has_custom_resource("projects")
-            else f'{current_organisation["code"]}/projects'
-        )
+        schema_key = "projects" if not has_custom_resource("projects") else f"{current_organisation['code']}/projects"
 
         schema = f"https://sonar.ch/schemas/{schema_key}/project-v1.0.0.json"
 
@@ -119,8 +107,6 @@ class RecordComponent(ServiceComponent):
         affiliation_resolver = AffiliationResolver()
         for investigator in data.get("investigators", []):
             if investigator.get("affiliation"):
-                controlled_affiliations = affiliation_resolver.resolve(
-                    investigator["affiliation"]
-                )
+                controlled_affiliations = affiliation_resolver.resolve(investigator["affiliation"])
                 if controlled_affiliations:
                     investigator["controlledAffiliation"] = controlled_affiliations

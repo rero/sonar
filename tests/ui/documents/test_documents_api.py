@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -52,9 +50,7 @@ def test_get_record_by_identifier(app, db, document):
     assert not record
 
     # Record not found, cause juste `bf:Doi` and `bf:Local` are analyzed.
-    record = DocumentRecord.get_record_by_identifier(
-        [{"value": "oai:unknown", "type": "bf:Identifier"}]
-    )
+    record = DocumentRecord.get_record_by_identifier([{"value": "oai:unknown", "type": "bf:Identifier"}])
     assert not record
 
 
@@ -189,9 +185,7 @@ def test_stats(app, db, client, document_with_file, es, event_queues):
 
     assert document_with_file.statistics["record-view"] == 1
     assert document_with_file.statistics["file-download"]["test1.pdf"]["count"] == 1
-    assert (
-        document_with_file.statistics["file-download"]["test1.pdf"]["label"] == "test1"
-    )
+    assert document_with_file.statistics["file-download"]["test1.pdf"]["label"] == "test1"
     # the thumbnail should not be in the statistics
     assert "test1-pdf.jpg" not in document_with_file.statistics["file-download"]
 
@@ -203,9 +197,7 @@ def test_affiliations(db, document):
     document.update(data)
     assert "controlledAffiliation" not in document["contribution"][0]
 
-    data["contribution"][0]["affiliation"] = (
-        "Uni of Geneva and HUG, Uni of Lausanne and CHUV"
-    )
+    data["contribution"][0]["affiliation"] = "Uni of Geneva and HUG, Uni of Lausanne and CHUV"
     document.update(data)
     assert len(document["contribution"][0]["controlledAffiliation"]) == 2
 

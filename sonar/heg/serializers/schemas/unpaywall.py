@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -33,9 +31,7 @@ class UnpaywallSchema(Schema):
 
     def get_files(self, obj):
         """Get files."""
-        if not obj.get("best_oa_location") or not obj["best_oa_location"].get(
-            "url_for_pdf"
-        ):
+        if not obj.get("best_oa_location") or not obj["best_oa_location"].get("url_for_pdf"):
             return []
 
         return [

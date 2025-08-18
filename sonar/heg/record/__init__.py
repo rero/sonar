@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -52,8 +50,6 @@ class HEGRecord:
 
         # If `oa_status` is `closed`, the first file is flagged as restricted.
         if record.get("files"):
-            record["files"][0]["access"] = (
-                "coar:c_16ec" if record.get("oa_status") == "closed" else "coar:c_abf2"
-            )
+            record["files"][0]["access"] = "coar:c_16ec" if record.get("oa_status") == "closed" else "coar:c_abf2"
 
         return record

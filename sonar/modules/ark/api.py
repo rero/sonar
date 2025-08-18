@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -41,9 +39,7 @@ class Ark:
         if naan and cls._scheme and cls._shoulder and cls._resolver:
             cls._naan = naan
             cls._url_resolve = cls._resolver
-            cls._regex = re.compile(
-                rf"{cls._scheme}/{cls._naan}/{cls._shoulder}(?P<pid>\w+)"
-            )
+            cls._regex = re.compile(rf"{cls._scheme}/{cls._naan}/{cls._shoulder}(?P<pid>\w+)")
             return super(Ark, cls).__new__(cls)
 
     def config(self):

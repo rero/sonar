@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -155,37 +153,27 @@ def test_read(
     collection2 = make_collection("org2")
 
     # Not logged
-    res = client.get(
-        url_for("invenio_records_rest.coll_item", pid_value=collection1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.coll_item", pid_value=collection1["pid"]))
     assert res.status_code == 401
 
     # Logged as user
     login_user_via_session(client, email=user["email"])
-    res = client.get(
-        url_for("invenio_records_rest.coll_item", pid_value=collection1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.coll_item", pid_value=collection1["pid"]))
     assert res.status_code == 403
 
     # Logged as submitter
     login_user_via_session(client, email=submitter["email"])
-    res = client.get(
-        url_for("invenio_records_rest.coll_item", pid_value=collection1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.coll_item", pid_value=collection1["pid"]))
     assert res.status_code == 200
 
     # Logged as moderator
     login_user_via_session(client, email=moderator["email"])
-    res = client.get(
-        url_for("invenio_records_rest.coll_item", pid_value=collection1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.coll_item", pid_value=collection1["pid"]))
     assert res.status_code == 200
 
     # Logged as admin
     login_user_via_session(client, email=admin["email"])
-    res = client.get(
-        url_for("invenio_records_rest.coll_item", pid_value=collection1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.coll_item", pid_value=collection1["pid"]))
     assert res.status_code == 200
     assert res.json["metadata"]["permissions"] == {
         "delete": True,
@@ -194,22 +182,16 @@ def test_read(
     }
 
     # Logged as admin of other organisation
-    res = client.get(
-        url_for("invenio_records_rest.coll_item", pid_value=collection2["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.coll_item", pid_value=collection2["pid"]))
     assert res.status_code == 403
 
     # Logged as superuser
     login_user_via_session(client, email=superuser["email"])
-    res = client.get(
-        url_for("invenio_records_rest.coll_item", pid_value=collection1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.coll_item", pid_value=collection1["pid"]))
     assert res.status_code == 200
 
     login_user_via_session(client, email=superuser["email"])
-    res = client.get(
-        url_for("invenio_records_rest.coll_item", pid_value=collection2["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.coll_item", pid_value=collection2["pid"]))
     assert res.status_code == 200
     assert res.json["metadata"]["permissions"] == {
         "delete": True,
@@ -312,77 +294,57 @@ def test_delete(
 ):
     """Test delete collections permissions."""
     # Not logged
-    res = client.delete(
-        url_for("invenio_records_rest.coll_item", pid_value=collection["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.coll_item", pid_value=collection["pid"]))
     assert res.status_code == 401
 
     # Logged as user
     login_user_via_session(client, email=user["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.coll_item", pid_value=collection["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.coll_item", pid_value=collection["pid"]))
     assert res.status_code == 403
 
     # Logged as submitter
     login_user_via_session(client, email=submitter["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.coll_item", pid_value=collection["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.coll_item", pid_value=collection["pid"]))
     assert res.status_code == 403
 
     # Logged as moderator
     login_user_via_session(client, email=moderator["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.coll_item", pid_value=collection["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.coll_item", pid_value=collection["pid"]))
     assert res.status_code == 403
 
     make_organisation("org2")
     collection2 = make_collection("org2")
 
     # Cannot remove collection from other organisation
-    res = client.delete(
-        url_for("invenio_records_rest.coll_item", pid_value=collection2["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.coll_item", pid_value=collection2["pid"]))
     assert res.status_code == 403
 
     collection = make_collection("org")
 
     # Logged as admin
     login_user_via_session(client, email=admin["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.coll_item", pid_value=collection["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.coll_item", pid_value=collection["pid"]))
     assert res.status_code == 204
 
     collection = make_collection("org")
 
     # Logged as superuser
     login_user_via_session(client, email=superuser["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.coll_item", pid_value=collection["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.coll_item", pid_value=collection["pid"]))
     assert res.status_code == 204
 
     # Can remove any collection
     login_user_via_session(client, email=superuser["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.coll_item", pid_value=collection2["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.coll_item", pid_value=collection2["pid"]))
     assert res.status_code == 204
 
     collection = make_collection("org")
 
     # Cannot remove collection as it is linked to document.
-    document["collections"] = [
-        {"$ref": f"https://sonar.ch/api/collections/{collection['pid']}"}
-    ]
+    document["collections"] = [{"$ref": f"https://sonar.ch/api/collections/{collection['pid']}"}]
     document.commit()
     db.session.commit()
     document.reindex()
 
-    res = client.delete(
-        url_for("invenio_records_rest.coll_item", pid_value=collection["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.coll_item", pid_value=collection["pid"]))
     assert res.status_code == 403

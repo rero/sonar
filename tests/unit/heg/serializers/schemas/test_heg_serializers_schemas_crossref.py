@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -53,9 +51,7 @@ def test_crossref_schema(app):
     }
 
     # Subjects
-    assert CrossrefSchema().dump({"_id": "111", "subject": ["Subject 1", "Subject 2"]})[
-        "subjects"
-    ] == [
+    assert CrossrefSchema().dump({"_id": "111", "subject": ["Subject 1", "Subject 2"]})["subjects"] == [
         {"label": {"language": "eng", "value": ["Subject 1"]}},
         {"label": {"language": "eng", "value": ["Subject 2"]}},
     ]
@@ -91,9 +87,9 @@ def test_crossref_schema(app):
     ]
 
     # Provision activity
-    assert CrossrefSchema().dump(
-        {"_id": "111", "published-online": {"date-parts": [[2020, 4, 12]]}}
-    )["provisionActivity"] == [
+    assert CrossrefSchema().dump({"_id": "111", "published-online": {"date-parts": [[2020, 4, 12]]}})[
+        "provisionActivity"
+    ] == [
         {
             "startDate": "2020",
             "statement": [{"label": [{"value": "2020-4-12"}], "type": "Date"}],

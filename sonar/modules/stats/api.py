@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -31,9 +29,7 @@ from .config import Configuration
 from .minters import id_minter
 
 # provider
-RecordProvider = type(
-    "RecordProvider", (Provider,), dict(pid_type=Configuration.pid_type)
-)
+RecordProvider = type("RecordProvider", (Provider,), dict(pid_type=Configuration.pid_type))
 # minter
 pid_minter = partial(id_minter, provider=RecordProvider)
 # fetcher
@@ -65,10 +61,7 @@ class Record(SonarRecord):
             :rtype: bool
             """
             for file in document.get("_files", []):
-                if (
-                    file.get("mimetype") == "application/pdf"
-                    and file.get("type") == "file"
-                ):
+                if file.get("mimetype") == "application/pdf" and file.get("type") == "file":
                     return True
 
             return False
@@ -92,11 +85,7 @@ class Record(SonarRecord):
             stats.append(
                 {
                     "organisation": organisation["name"],
-                    "type": (
-                        "dedicated"
-                        if organisation.to_dict().get("isDedicated")
-                        else "shared"
-                    ),
+                    "type": ("dedicated" if organisation.to_dict().get("isDedicated") else "shared"),
                     "full_text": fulltext,
                     "pids": pids,
                 }
@@ -119,11 +108,7 @@ class Record(SonarRecord):
         :returns: A generator for getting documents PID and files.
         :rtype: generator
         """
-        query = (
-            DocumentSearch()
-            .filter("term", organisation__pid=organisation_pid)
-            .source(["pid", "_files"])
-        )
+        query = DocumentSearch().filter("term", organisation__pid=organisation_pid).source(["pid", "_files"])
 
         return query.scan()
 

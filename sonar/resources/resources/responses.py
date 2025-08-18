@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -50,15 +48,9 @@ class StreamResponseHandler(ResponseHandler):
             serialize = self.serializer.serialize_object
 
         response = flask_make_response(
-            (
-                ""
-                if obj_or_list is None
-                else Response(self.serializer.serialize_object_list(obj_or_list))
-            ),
+            ("" if obj_or_list is None else Response(self.serializer.serialize_object_list(obj_or_list))),
             code,
         )
 
-        response.headers["Content-Disposition"] = (
-            f"attachment; filename={self.filename}"
-        )
+        response.headers["Content-Disposition"] = f"attachment; filename={self.filename}"
         return response

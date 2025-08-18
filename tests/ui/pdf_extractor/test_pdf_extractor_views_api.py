@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -35,9 +33,7 @@ def test_metadata(client, pdf_file, mock_grobid_response):
 
     data = dict(file=(BytesIO(content), "test.pdf"))
 
-    response = client.post(
-        "/pdf-extractor/metadata", data=data, content_type="multipart/form-data"
-    )
+    response = client.post("/pdf-extractor/metadata", data=data, content_type="multipart/form-data")
     assert response.status_code == 200
     result = json.loads(response.data)
     assert "teiHeader" in result
@@ -56,9 +52,7 @@ def test_full_text(client, pdf_file):
 
     data = dict(file=(BytesIO(content), "test.pdf"))
 
-    response = client.post(
-        "/pdf-extractor/full-text", data=data, content_type="multipart/form-data"
-    )
+    response = client.post("/pdf-extractor/full-text", data=data, content_type="multipart/form-data")
     assert response.status_code == 200
     result = json.loads(response.data)
     assert "text" in result

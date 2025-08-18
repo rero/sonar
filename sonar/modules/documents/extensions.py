@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -81,6 +79,5 @@ class UrnDocumentExtension(RecordExtension):
                 urn_pid = PersistentIdentifier.get("urn", urn_code)
                 urn_pid.delete()
                 current_app.logger.error(
-                    f'Document (pid:{record["pid"]}) has been deleted and '
-                    f"contains an URN ({urn_code})"
+                    f"Document (pid:{record['pid']}) has been deleted and contains an URN ({urn_code})"
                 )

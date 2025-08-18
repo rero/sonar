@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -167,9 +165,7 @@ def test_descriptions_attributes(minimal_document):
 
 def test_descriptions_xml_control_char(minimal_document):
     minimal_document["abstracts"] = [{"language": "fre", "value": "sous\x02évalués"}]
-    assert SonarDublinCoreXMLSerializer().serialize_object_xml(
-        dict(_source=minimal_document)
-    )
+    assert SonarDublinCoreXMLSerializer().serialize_object_xml(dict(_source=minimal_document))
 
 
 def test_formats(minimal_document):
@@ -242,9 +238,7 @@ def test_publishers(minimal_document):
 def test_relations(minimal_document):
     """Test relations serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
-    assert result["relations"] == [
-        "info:eu-repo/semantics/altIdentifier/ark/99999/ffk31000"
-    ]
+    assert result["relations"] == ["info:eu-repo/semantics/altIdentifier/ark/99999/ffk31000"]
 
     minimal_document["otherEdition"] = [
         {"document": {"electronicLocator": "https://some.url.1"}},

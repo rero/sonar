@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -42,9 +40,7 @@ def import_records(records_to_import):
         try:
             files_data = data.pop("files", [])
 
-            record = DocumentRecord.get_record_by_identifier(
-                data.get("identifiedBy", [])
-            )
+            record = DocumentRecord.get_record_by_identifier(data.get("identifiedBy", []))
 
             # Set record as harvested
             data["harvested"] = True
@@ -52,9 +48,7 @@ def import_records(records_to_import):
             if not record:
                 record = DocumentRecord.create(data, dbcommit=False, with_bucket=True)
             else:
-                current_app.logger.warning(
-                    f"Record already imported with PID {record['pid']}: {data}"
-                )
+                current_app.logger.warning(f"Record already imported with PID {record['pid']}: {data}")
                 record.update(data)
 
             for file_data in files_data:
@@ -83,14 +77,10 @@ def import_records(records_to_import):
             # Add ID for bulk index in elasticsearch
             ids.append(str(record.id))
 
-            current_app.logger.info(
-                f'Record with reference "{record["identifiedBy"]}" imported successfully'
-            )
+            current_app.logger.info(f'Record with reference "{record["identifiedBy"]}" imported successfully')
 
         except Exception as exception:
-            current_app.logger.error(
-                f"Error during importation of record {data}: {exception}"
-            )
+            current_app.logger.error(f"Error during importation of record {data}: {exception}")
 
     # Commit and index records
     db.session.commit()

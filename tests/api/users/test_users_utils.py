@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -35,16 +33,8 @@ def test_send_welcome_email(app, user, submitter, moderator, admin):
         assert len(outbox) == 1
         assert outbox[0].html.find("Dear Orguser") != -1
         assert outbox[0].html.find("<li>Upload publications.</li>") == -1
-        assert (
-            outbox[0].html.find(
-                "<li>Moderate submissions and edit document metadata.</li>"
-            )
-            == -1
-        )
-        assert (
-            outbox[0].html.find("<li>Manage the repository as an administrator.</li>")
-            == -1
-        )
+        assert outbox[0].html.find("<li>Moderate submissions and edit document metadata.</li>") == -1
+        assert outbox[0].html.find("<li>Manage the repository as an administrator.</li>") == -1
 
     # For submitter
     account = datastore.find_user(email=submitter["email"])
@@ -55,16 +45,8 @@ def test_send_welcome_email(app, user, submitter, moderator, admin):
         assert len(outbox) == 1
         assert outbox[0].html.find("Dear Orgsubmitter") != -1
         assert outbox[0].html.find("<li>Upload publications.</li>") != -1
-        assert (
-            outbox[0].html.find(
-                "<li>Moderate submissions and edit document metadata.</li>"
-            )
-            == -1
-        )
-        assert (
-            outbox[0].html.find("<li>Manage the repository as an administrator.</li>")
-            == -1
-        )
+        assert outbox[0].html.find("<li>Moderate submissions and edit document metadata.</li>") == -1
+        assert outbox[0].html.find("<li>Manage the repository as an administrator.</li>") == -1
 
     # For moderator
     account = datastore.find_user(email=moderator["email"])
@@ -75,16 +57,8 @@ def test_send_welcome_email(app, user, submitter, moderator, admin):
         assert len(outbox) == 1
         assert outbox[0].html.find("Dear Orgmoderator") != -1
         assert outbox[0].html.find("<li>Upload publications.</li>") != -1
-        assert (
-            outbox[0].html.find(
-                "<li>Moderate submissions and edit document metadata.</li>"
-            )
-            != -1
-        )
-        assert (
-            outbox[0].html.find("<li>Manage the repository as an administrator.</li>")
-            == -1
-        )
+        assert outbox[0].html.find("<li>Moderate submissions and edit document metadata.</li>") != -1
+        assert outbox[0].html.find("<li>Manage the repository as an administrator.</li>") == -1
 
     # For admin
     account = datastore.find_user(email=admin["email"])
@@ -95,13 +69,5 @@ def test_send_welcome_email(app, user, submitter, moderator, admin):
         assert len(outbox) == 1
         assert outbox[0].html.find("Dear Orgadmin") != -1
         assert outbox[0].html.find("<li>Upload publications.</li>") != -1
-        assert (
-            outbox[0].html.find(
-                "<li>Moderate submissions and edit document metadata.</li>"
-            )
-            != -1
-        )
-        assert (
-            outbox[0].html.find("<li>Manage the repository as an administrator.</li>")
-            != -1
-        )
+        assert outbox[0].html.find("<li>Moderate submissions and edit document metadata.</li>") != -1
+        assert outbox[0].html.find("<li>Manage the repository as an administrator.</li>") != -1

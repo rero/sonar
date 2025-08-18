@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -58,25 +56,21 @@ def test_create_doc_with_ark(document, client, organisation):
     assert res.status_code == 404
 
     # naan does not exist in organisations
-    res = client.get(
-        url_for("ark.resolve", naan="FOO999", path=f'ffk3{document.get("pid")}')
-    )
+    res = client.get(url_for("ark.resolve", naan="FOO999", path=f"ffk3{document.get('pid')}"))
     assert res.status_code == 404
 
     # a valid ark
-    ark_id = f'ark:/99999/ffk3{document.get("pid")}'
+    ark_id = f"ark:/99999/ffk3{document.get('pid')}"
     assert document.get_ark() == ark_id
-    res = client.get(
-        url_for("ark.resolve", naan="99999", path=f'ffk3{document.get("pid")}')
-    )
+    res = client.get(url_for("ark.resolve", naan="99999", path=f"ffk3{document.get('pid')}"))
     assert res.status_code == 302
 
     # the redirect to the right location
-    assert res.location == f'/{organisation.get("code")}/documents/1'
+    assert res.location == f"/{organisation.get('code')}/documents/1"
 
     # the redirected URL give a valid response
     res = client.get(
-        url_for("ark.resolve", naan="99999", path=f'ffk3{document.get("pid")}'),
+        url_for("ark.resolve", naan="99999", path=f"ffk3{document.get('pid')}"),
         follow_redirects=True,
     )
     assert res.status_code == 200
@@ -84,16 +78,14 @@ def test_create_doc_with_ark(document, client, organisation):
     document.delete()
     pid = PersistentIdentifier.get("ark", ark_id)
     assert pid.status == PIDStatus.DELETED
-    res = client.get(
-        url_for("ark.resolve", naan="99999", path=f'ffk3{document.get("pid")}')
-    )
+    res = client.get(url_for("ark.resolve", naan="99999", path=f"ffk3{document.get('pid')}"))
     # redirect to the existing document and thumbstone
     assert res.status_code == 302
-    assert res.location == f'/{organisation.get("code")}/documents/1'
+    assert res.location == f"/{organisation.get('code')}/documents/1"
 
     # the redirected URL is deleted
     res = client.get(
-        url_for("ark.resolve", naan="99999", path=f'ffk3{document.get("pid")}'),
+        url_for("ark.resolve", naan="99999", path=f"ffk3{document.get('pid')}"),
         follow_redirects=True,
     )
     # Gone

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -25,9 +23,7 @@ from invenio_accounts.testutils import login_user_via_session
 from sonar.modules.stats.api import Record
 
 
-def test_list(
-    app, client, document, superuser, admin, moderator, submitter, user, search_clear
-):
+def test_list(app, client, document, superuser, admin, moderator, submitter, user, search_clear):
     """Test list stats permissions."""
     # Not logged
     res = client.get(url_for("invenio_records_rest.stat_list"))
@@ -44,9 +40,7 @@ def test_create(client, superuser, admin, moderator, submitter, user, search_cle
     headers = {"Content-Type": "application/json", "Accept": "application/json"}
 
     # Not logged
-    res = client.post(
-        url_for("invenio_records_rest.stat_list"), data=json.dumps({}), headers=headers
-    )
+    res = client.post(url_for("invenio_records_rest.stat_list"), data=json.dumps({}), headers=headers)
     assert res.status_code == 401
 
     for user in [superuser, admin, moderator, submitter, user]:
@@ -59,9 +53,7 @@ def test_create(client, superuser, admin, moderator, submitter, user, search_cle
         assert res.status_code == 403
 
 
-def test_read(
-    client, document, superuser, admin, moderator, submitter, user, search_clear
-):
+def test_read(client, document, superuser, admin, moderator, submitter, user, search_clear):
     """Test read stats permissions."""
     record = Record.collect()
 
@@ -71,9 +63,7 @@ def test_read(
 
     for user in [admin, moderator, submitter, user]:
         login_user_via_session(client, email=user["email"])
-        res = client.get(
-            url_for("invenio_records_rest.stat_item", pid_value=record["pid"])
-        )
+        res = client.get(url_for("invenio_records_rest.stat_item", pid_value=record["pid"]))
         assert res.status_code == 403
 
     login_user_via_session(client, email=superuser["email"])
@@ -81,16 +71,9 @@ def test_read(
     assert res.status_code == 200
 
     # CSV
-    res = client.get(
-        url_for(
-            "invenio_records_rest.stat_item", format="text/csv", pid_value=record["pid"]
-        )
-    )
+    res = client.get(url_for("invenio_records_rest.stat_item", format="text/csv", pid_value=record["pid"]))
     assert res.status_code == 200
-    assert (
-        res.data
-        == b"organisation,type,documents,full_text,no_full_text\r\norg,shared,1,0,1\r\n"
-    )
+    assert res.data == b"organisation,type,documents,full_text,no_full_text\r\norg,shared,1,0,1\r\n"
 
 
 def test_update(client, superuser, admin, moderator, submitter, user, search_clear):
@@ -121,14 +104,10 @@ def test_delete(client, superuser, admin, moderator, submitter, user, search_cle
     """Test delete stats permissions."""
     record = Record.collect()
 
-    res = client.delete(
-        url_for("invenio_records_rest.stat_item", pid_value=record["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.stat_item", pid_value=record["pid"]))
     assert res.status_code == 401
 
     for user in [superuser, admin, moderator, submitter, user]:
         login_user_via_session(client, email=user["email"])
-        res = client.delete(
-            url_for("invenio_records_rest.stat_item", pid_value=record["pid"])
-        )
+        res = client.delete(url_for("invenio_records_rest.stat_item", pid_value=record["pid"]))
         assert res.status_code == 403

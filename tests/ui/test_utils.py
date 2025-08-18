@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -43,8 +41,7 @@ def test_create_thumbnail_from_file():
     with pytest.raises(Exception) as exception:
         create_thumbnail_from_file("file/path/test.pdf", "text/plain")
     assert (
-        str(exception.value)
-        == "Cannot create thumbnail from file file/path/test.pdf with mimetype"
+        str(exception.value) == "Cannot create thumbnail from file file/path/test.pdf with mimetype"
         ' "text/plain", only images and PDFs are allowed'
     )
 
@@ -55,15 +52,11 @@ def test_create_thumbnail_from_file():
 
     # Thumbnail creation for PDF is OK
     file = os.path.join(os.path.dirname(__file__), "data", "sample.pdf")
-    assert create_thumbnail_from_file(file, "application/pdf").startswith(
-        b"Fake thumbnail image content"
-    )
+    assert create_thumbnail_from_file(file, "application/pdf").startswith(b"Fake thumbnail image content")
 
     # Thumbnail creation for image is OK
     file = os.path.join(os.path.dirname(__file__), "data", "sample.jpg")
-    assert create_thumbnail_from_file(file, "image/jpeg").startswith(
-        b"Fake thumbnail image content"
-    )
+    assert create_thumbnail_from_file(file, "image/jpeg").startswith(b"Fake thumbnail image content")
 
 
 def test_get_switch_aai_providers(app):
@@ -227,6 +220,4 @@ def test_get_current_ip(app):
 def test_get_ips_list():
     """Test get IP list."""
     ranges = ["127.0.0.1", "192.168.1.3-5", "12.13.14.15/32"]
-    assert set(get_ips_list(ranges)) == set(
-        ["12.13.14.15/32", "127.0.0.1/32", "192.168.1.3/32", "192.168.1.4/31"]
-    )
+    assert set(get_ips_list(ranges)) == set(["12.13.14.15/32", "127.0.0.1/32", "192.168.1.3/32", "192.168.1.4/31"])

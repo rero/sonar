@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -52,9 +50,7 @@ class RecordService(BaseRecordService):
         """Send all records to the index queue and process indexing."""
         ids = (
             x[0]
-            for x in PersistentIdentifier.query.filter_by(
-                object_type="rec", status=PIDStatus.REGISTERED
-            )
+            for x in PersistentIdentifier.query.filter_by(object_type="rec", status=PIDStatus.REGISTERED)
             .filter(PersistentIdentifier.pid_type.in_([self.record_cls.pid_type]))
             .values(PersistentIdentifier.object_uuid)
         )

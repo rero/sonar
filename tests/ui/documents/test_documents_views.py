@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -124,12 +122,7 @@ def test_index(client):
 
 def test_search(app, client, organisation, collection):
     """Test search."""
-    assert (
-        client.get(
-            url_for("documents.search", view="global", resource_type="documents")
-        ).status_code
-        == 200
-    )
+    assert client.get(url_for("documents.search", view="global", resource_type="documents")).status_code == 200
 
     # Test search with collection
     result = client.get(
@@ -143,21 +136,12 @@ def test_search(app, client, organisation, collection):
     assert result.status_code == 200
     assert result.data.find(b"<h3>Collection name</h3>") != -1
 
-    assert (
-        client.get(
-            url_for("documents.search", view="not-existing", resource_type="documents")
-        ).status_code
-        == 404
-    )
+    assert client.get(url_for("documents.search", view="not-existing", resource_type="documents")).status_code == 404
 
 
 def test_detail(app, client, organisation, document_with_file):
     """Test document detail page."""
-    res = client.get(
-        url_for(
-            "invenio_records_ui.doc", view="global", pid_value=document_with_file["pid"]
-        )
-    )
+    res = client.get(url_for("invenio_records_ui.doc", view="global", pid_value=document_with_file["pid"]))
     from bs4 import BeautifulSoup
 
     soup = BeautifulSoup(res.data, "html.parser")
@@ -165,12 +149,7 @@ def test_detail(app, client, organisation, document_with_file):
 
     assert res.status_code == 200
 
-    assert (
-        client.get(
-            url_for("invenio_records_ui.doc", view="global", pid_value="not-existing")
-        ).status_code
-        == 404
-    )
+    assert client.get(url_for("invenio_records_ui.doc", view="global", pid_value="not-existing")).status_code == 404
 
 
 def test_title_format(document):
@@ -179,12 +158,7 @@ def test_title_format(document):
     assert views.title_format({"mainTitle": [], "subtitle": []}, "en") == ""
 
     # Take the first one as fallback
-    assert (
-        views.title_format(
-            {"mainTitle": [{"language": "spa", "value": "Title ES"}]}, "fr"
-        )
-        == "Title ES"
-    )
+    assert views.title_format({"mainTitle": [{"language": "spa", "value": "Title ES"}]}, "fr") == "Title ES"
 
     title = {
         "mainTitle": [
@@ -207,15 +181,9 @@ def test_title_format(document):
 
 def test_create_publication_statement(document):
     """Test create publication statement."""
-    publication_statement = views.create_publication_statement(
-        document["provisionActivity"][0]
-    )
+    publication_statement = views.create_publication_statement(document["provisionActivity"][0])
     assert publication_statement
-    assert (
-        publication_statement["default"]
-        == "Bienne : Impr. Weber, [2006] ; Lausanne ; Rippone : "
-        "Impr. Coustaud"
-    )
+    assert publication_statement["default"] == "Bienne : Impr. Weber, [2006] ; Lausanne ; Rippone : Impr. Coustaud"
 
 
 def test_nl2br(app):
@@ -250,13 +218,9 @@ def test_file_size(app):
 
 def test_has_external_urls_for_files(app):
     """Test if record has to point files to external URL or not."""
-    assert views.has_external_urls_for_files(
-        {"pid": 1, "organisation": [{"pid": "csal"}]}
-    )
+    assert views.has_external_urls_for_files({"pid": 1, "organisation": [{"pid": "csal"}]})
 
-    assert not views.has_external_urls_for_files(
-        {"pid": 1, "organisation": [{"pid": "usi"}]}
-    )
+    assert not views.has_external_urls_for_files({"pid": 1, "organisation": [{"pid": "usi"}]})
 
     assert not views.has_external_urls_for_files({"pid": 1, "organisation": []})
 
@@ -354,10 +318,7 @@ def test_part_of_format():
         == "2015, vol. 28, no. 2, p. 469-480"
     )
 
-    assert (
-        views.part_of_format({"numberingVolume": "28", "numberingIssue": "2"})
-        == "vol. 28, no. 2"
-    )
+    assert views.part_of_format({"numberingVolume": "28", "numberingIssue": "2"}) == "vol. 28, no. 2"
 
     assert views.part_of_format({"numberingYear": "2015"}) == "2015"
 
@@ -406,9 +367,7 @@ def test_contributors():
 
     priorities = ["cre", "ctb", "dgs", "dgc", "edt", "prt"]
 
-    for index, contributor in enumerate(
-        views.contributors({"contribution": contributors})
-    ):
+    for index, contributor in enumerate(views.contributors({"contribution": contributors})):
         assert contributor["role"][0] == priorities[index]
 
     # No contributors
@@ -437,16 +396,11 @@ def test_dissertation():
     assert not views.dissertation({})
 
     # Only degree property
-    assert (
-        views.dissertation({"dissertation": {"degree": "Thèse de doctorat"}})
-        == "Thèse de doctorat"
-    )
+    assert views.dissertation({"dissertation": {"degree": "Thèse de doctorat"}}) == "Thèse de doctorat"
 
     #  With jury notes
     assert (
-        views.dissertation(
-            {"dissertation": {"degree": "Thèse de doctorat", "jury_note": "Jury note"}}
-        )
+        views.dissertation({"dissertation": {"degree": "Thèse de doctorat", "jury_note": "Jury note"}})
         == "Thèse de doctorat (jury note: Jury note)"
     )
 
@@ -484,26 +438,9 @@ def test_dissertation():
 
 def test_project_detail(app, client, project):
     """Test project detail page."""
-    assert (
-        client.get(
-            url_for("invenio_records_ui.proj", view="global", pid_value=project.id)
-        ).status_code
-        == 200
-    )
-    assert (
-        client.get(
-            url_for("invenio_records_ui.proj", view="global", pid_value="not-existing")
-        ).status_code
-        == 404
-    )
-    assert (
-        client.get(
-            url_for(
-                "invenio_records_ui.proj", view="not-existing", pid_value=project.id
-            )
-        ).status_code
-        == 404
-    )
+    assert client.get(url_for("invenio_records_ui.proj", view="global", pid_value=project.id)).status_code == 200
+    assert client.get(url_for("invenio_records_ui.proj", view="global", pid_value="not-existing")).status_code == 404
+    assert client.get(url_for("invenio_records_ui.proj", view="not-existing", pid_value=project.id)).status_code == 404
 
 
 def test_language_value(app):
@@ -512,10 +449,7 @@ def test_language_value(app):
         {"language": "eng", "value": "Value ENG"},
         {"language": "fre", "value": "Value FRE"},
     ]
-    assert (
-        render_template_string("{{ values | language_value }}", values=values)
-        == "Value ENG"
-    )
+    assert render_template_string("{{ values | language_value }}", values=values) == "Value ENG"
 
 
 def test_get_custom_field_label(app):
@@ -532,21 +466,11 @@ def test_get_custom_field_label(app):
             }
         ]
     }
-    assert (
-        render_template_string(
-            "{{ record | get_custom_field_label(1) }}", record=record
-        )
-        == "Test ENG"
-    )
+    assert render_template_string("{{ record | get_custom_field_label(1) }}", record=record) == "Test ENG"
 
     # No organisation
     record = {}
-    assert (
-        render_template_string(
-            "{{ record | get_custom_field_label(1) }}", record=record
-        )
-        == "None"
-    )
+    assert render_template_string("{{ record | get_custom_field_label(1) }}", record=record) == "None"
 
     # No index for custom field
     record = {
@@ -561,30 +485,17 @@ def test_get_custom_field_label(app):
             }
         ]
     }
-    assert (
-        render_template_string(
-            "{{ record | get_custom_field_label(2) }}", record=record
-        )
-        == "None"
-    )
+    assert render_template_string("{{ record | get_custom_field_label(2) }}", record=record) == "None"
 
     # No label
     record = {"organisation": [{"documentsCustomField1": {}}]}
-    assert (
-        render_template_string(
-            "{{ record | get_custom_field_label(1) }}", record=record
-        )
-        == "None"
-    )
+    assert render_template_string("{{ record | get_custom_field_label(1) }}", record=record) == "None"
 
 
 def test_markdown_filter(app):
     """Test markdown to HTML conversion."""
     assert (
-        render_template_string(
-            "{{ 'Markdown text\nwith **strong** and *italic*' | markdown_filter"
-            " | safe}}"
-        )
+        render_template_string("{{ 'Markdown text\nwith **strong** and *italic*' | markdown_filter | safe}}")
         == "<p>Markdown text\nwith <strong>strong</strong> and <em>italic</em>"
         "</p>"
     )

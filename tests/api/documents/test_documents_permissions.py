@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -136,10 +134,7 @@ def test_create(client, document_json, superuser, admin, moderator, submitter, u
         headers=headers,
     )
     assert res.status_code == 201
-    assert (
-        res.json["metadata"]["organisation"][0]["$ref"]
-        == "https://sonar.ch/api/organisations/org"
-    )
+    assert res.json["metadata"]["organisation"][0]["$ref"] == "https://sonar.ch/api/organisations/org"
 
     # Admin
     login_user_via_session(client, email=admin["email"])
@@ -149,10 +144,7 @@ def test_create(client, document_json, superuser, admin, moderator, submitter, u
         headers=headers,
     )
     assert res.status_code == 201
-    assert (
-        res.json["metadata"]["organisation"][0]["$ref"]
-        == "https://sonar.ch/api/organisations/org"
-    )
+    assert res.json["metadata"]["organisation"][0]["$ref"] == "https://sonar.ch/api/organisations/org"
 
     # Super user
     login_user_via_session(client, email=superuser["email"])
@@ -162,56 +154,39 @@ def test_create(client, document_json, superuser, admin, moderator, submitter, u
         headers=headers,
     )
     assert res.status_code == 201
-    assert (
-        res.json["metadata"]["organisation"][0]["$ref"]
-        == "https://sonar.ch/api/organisations/org"
-    )
+    assert res.json["metadata"]["organisation"][0]["$ref"] == "https://sonar.ch/api/organisations/org"
     ark = [r for r in res.json["metadata"]["identifiedBy"] if r.get("type") == "ark"][0]
     assert ark.get("value").startswith("ark:/")
 
-    assert (
-        PersistentIdentifier.get("ark", ark.get("value")).status == PIDStatus.REGISTERED
-    )
+    assert PersistentIdentifier.get("ark", ark.get("value")).status == PIDStatus.REGISTERED
 
 
-def test_read(
-    client, document, make_user, superuser, admin, moderator, submitter, user
-):
+def test_read(client, document, make_user, superuser, admin, moderator, submitter, user):
     """Test read documents permissions."""
 
     # Not logged
-    res = client.get(
-        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.doc_item", pid_value=document["pid"]))
     assert res.status_code == 200
 
     # masked document
     magic_mock = mock.MagicMock(return_value=True)
     with mock.patch("sonar.modules.documents.api.DocumentRecord.is_masked", magic_mock):
-        res = client.get(
-            url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
-        )
+        res = client.get(url_for("invenio_records_rest.doc_item", pid_value=document["pid"]))
         assert res.status_code == 401
 
     # Logged as user
     login_user_via_session(client, email=user["email"])
-    res = client.get(
-        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.doc_item", pid_value=document["pid"]))
     assert res.status_code == 200
 
     # Logged as submitter
     login_user_via_session(client, email=submitter["email"])
-    res = client.get(
-        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.doc_item", pid_value=document["pid"]))
     assert res.status_code == 200
 
     # Logged as moderator
     login_user_via_session(client, email=moderator["email"])
-    res = client.get(
-        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.doc_item", pid_value=document["pid"]))
     assert res.status_code == 200
     assert res.json["metadata"]["permissions"] == {
         "delete": False,
@@ -219,8 +194,7 @@ def test_read(
         "update": True,
     }
     assert (
-        res.json["metadata"]["partOf"][0]["text"]
-        == "Journal du dimanche / Renato, Ferrari ; Albano, Mesta. "
+        res.json["metadata"]["partOf"][0]["text"] == "Journal du dimanche / Renato, Ferrari ; Albano, Mesta. "
         "- John Doe Publications inc.. - 2020, vol. 6, no. 12, p. 135-139"
     )
     assert res.json["metadata"]["provisionActivity"][0]["text"] == {
@@ -229,9 +203,7 @@ def test_read(
 
     # Logged as admin
     login_user_via_session(client, email=admin["email"])
-    res = client.get(
-        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.doc_item", pid_value=document["pid"]))
     assert res.status_code == 200
     assert res.json["metadata"]["permissions"] == {
         "delete": True,
@@ -242,16 +214,12 @@ def test_read(
     # Logged as admin of other organisation
     other_admin = make_user("admin", "org2")
     login_user_via_session(client, email=other_admin["email"])
-    res = client.get(
-        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.doc_item", pid_value=document["pid"]))
     assert res.status_code == 200
 
     # Logged as superuser
     login_user_via_session(client, email=superuser["email"])
-    res = client.get(
-        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.doc_item", pid_value=document["pid"]))
     assert res.status_code == 200
     assert res.json["metadata"]["permissions"] == {
         "delete": True,
@@ -313,9 +281,7 @@ def test_update(
     assert res.status_code == 200
 
     # Document has a subdivision, user have not.
-    document["subdivisions"] = [
-        {"$ref": f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'}
-    ]
+    document["subdivisions"] = [{"$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"}]
     document.commit()
     document.reindex()
     db.session.commit()
@@ -328,9 +294,7 @@ def test_update(
 
     # Document has a subdivision, and user have a different.
     new_subdivision = make_subdivision("org")
-    moderator["subdivision"] = {
-        "$ref": f'https://sonar.ch/api/subdivisions/{new_subdivision["pid"]}'
-    }
+    moderator["subdivision"] = {"$ref": f"https://sonar.ch/api/subdivisions/{new_subdivision['pid']}"}
     moderator.commit()
     moderator.reindex()
     db.session.commit()
@@ -342,9 +306,7 @@ def test_update(
     assert res.status_code == 403
 
     # Document has a subdivision, and user have the same.
-    moderator["subdivision"] = {
-        "$ref": f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
-    }
+    moderator["subdivision"] = {"$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"}
     moderator.commit()
     moderator.reindex()
     db.session.commit()
@@ -410,37 +372,27 @@ def test_delete(
     """Test delete documents permissions."""
 
     # Not logged
-    res = client.delete(
-        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.doc_item", pid_value=document["pid"]))
     assert res.status_code == 401
 
     # Logged as user
     login_user_via_session(client, email=user["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.doc_item", pid_value=document["pid"]))
     assert res.status_code == 403
 
     # Logged as submitter
     login_user_via_session(client, email=submitter["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.doc_item", pid_value=document["pid"]))
     assert res.status_code == 403
 
     # Logged as moderator
     login_user_via_session(client, email=moderator["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.doc_item", pid_value=document["pid"]))
     assert res.status_code == 403
 
     # Logged as admin
     login_user_via_session(client, email=admin["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.doc_item", pid_value=document["pid"]))
     assert res.status_code == 204
 
     # Create a new document
@@ -450,9 +402,7 @@ def test_delete(
     # Logged as admin of other organisation
     other_admin = make_user("admin", "org2")
     login_user_via_session(client, email=other_admin["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.doc_item", pid_value=document["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.doc_item", pid_value=document["pid"]))
     assert res.status_code == 403
 
     # Logged as superuser
@@ -463,9 +413,7 @@ def test_delete(
     assert PersistentIdentifier.get("ark", ark_id).status == PIDStatus.DELETED
 
 
-def test_document_with_urn_delete(
-    client, superuser, admin, minimal_thesis_document_with_urn
-):
+def test_document_with_urn_delete(client, superuser, admin, minimal_thesis_document_with_urn):
     """Test delete document with registered URN identifier."""
     # Add file to document
     minimal_thesis_document_with_urn.files["test.pdf"] = BytesIO(b"File content")

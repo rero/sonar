@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -122,8 +120,6 @@ class UserPermission(RecordPermission):
 
         # For admin read is only for logged user organisation
         if record["organisation"].get("$ref"):
-            return current_organisation[
-                "pid"
-            ] == OrganisationRecord.get_pid_by_ref_link(record["organisation"]["$ref"])
+            return current_organisation["pid"] == OrganisationRecord.get_pid_by_ref_link(record["organisation"]["$ref"])
 
         return current_organisation["pid"] == record["organisation"]["pid"]

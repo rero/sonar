@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -103,9 +101,7 @@ def export(pid_type, serializer_key, output_dir):
             raise Exception(f'No record class found for type "{pid_type}"')
 
         # Load the serializer
-        serializer_class = current_app.config.get(
-            "SONAR_APP_EXPORT_SERIALIZERS", {}
-        ).get(pid_type)
+        serializer_class = current_app.config.get("SONAR_APP_EXPORT_SERIALIZERS", {}).get(pid_type)
 
         if serializer_class:
             serializer = obj_or_import_string(serializer_class)()
@@ -130,12 +126,10 @@ def export(pid_type, serializer_key, output_dir):
             for file in record.get("files", []):
                 if file.get("uri"):
                     target_path = join(output_dir.name, pid, file["key"])
-                    pathlib.Path(dirname(target_path)).mkdir(
-                        mode=0o755, parents=True, exist_ok=True
-                    )
+                    pathlib.Path(dirname(target_path)).mkdir(mode=0o755, parents=True, exist_ok=True)
                     shutil.copyfile(file["uri"], target_path)
                     file.pop("uri")
-                    file["path"] = f'./{pid}/{file["key"]}'
+                    file["path"] = f"./{pid}/{file['key']}"
 
             records.append(record)
 
@@ -179,9 +173,7 @@ def create_personal(name, user_id, scopes=None, is_internal=False, access_token=
         client.gen_salt()
 
         if not access_token:
-            access_token = gen_salt(
-                current_app.config.get("OAUTH2SERVER_TOKEN_PERSONAL_SALT_LEN")
-            )
+            access_token = gen_salt(current_app.config.get("OAUTH2SERVER_TOKEN_PERSONAL_SALT_LEN"))
         token = Token(
             client_id=client.client_id,
             user_id=user_id,
@@ -199,9 +191,7 @@ def create_personal(name, user_id, scopes=None, is_internal=False, access_token=
 
 @utils.command()
 @click.option("-n", "--name", required=True)
-@click.option(
-    "-u", "--user", required=True, callback=process_user, help="User ID or email."
-)
+@click.option("-u", "--user", required=True, callback=process_user, help="User ID or email.")
 @click.option("-s", "--scope", "scopes", multiple=True, callback=process_scopes)
 @click.option("-i", "--internal", is_flag=True)
 @click.option(

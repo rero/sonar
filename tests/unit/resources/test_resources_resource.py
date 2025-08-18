@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -55,9 +53,7 @@ def test_config(app, client, make_user, admin):
     )
 
     # No `resource_name` attribute
-    delattr(
-        app.extensions["sonar"].resources["projects"].default_config, "resource_name"
-    )
+    delattr(app.extensions["sonar"].resources["projects"].default_config, "resource_name")
     assert isinstance(
         app.extensions["sonar"].resources["projects"].config(),
         ProjectsRecordResourceConfig,

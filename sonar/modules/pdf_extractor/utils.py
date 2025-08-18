@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -38,9 +36,7 @@ def extract_text_from_content(content):
 def extract_text_from_file(file):
     """Extract full-text from file."""
     # Process pdf text extraction
-    text = subprocess.check_output(
-        f"pdftotext -enc UTF-8 {file} - 2> /dev/null", shell=True
-    )
+    text = subprocess.check_output(f"pdftotext -enc UTF-8 {file} - 2> /dev/null", shell=True)
     text = text.decode()
 
     # Remove carriage returns
@@ -66,9 +62,7 @@ def format_extracted_data(data):
             else:
                 formatted_data["languages"] = [language.alpha_3]
 
-    analytic = data["teiHeader"]["fileDesc"]["sourceDesc"]["biblStruct"].get(
-        "analytic", {}
-    )
+    analytic = data["teiHeader"]["fileDesc"]["sourceDesc"]["biblStruct"].get("analytic", {})
 
     if analytic and analytic.get("author"):
         authors = force_list(analytic.get("author"))
@@ -108,9 +102,7 @@ def format_extracted_data(data):
 
                     # Append settlement
                     if affiliations[0].get("address", {}).get("settlement"):
-                        author_affiliation.append(
-                            affiliations[0]["address"]["settlement"]
-                        )
+                        author_affiliation.append(affiliations[0]["address"]["settlement"])
 
                     # Append region
                     if affiliations[0].get("address", {}).get("region"):
@@ -118,9 +110,7 @@ def format_extracted_data(data):
 
                     # Append country
                     if affiliations[0].get("address", {}).get("country"):
-                        author_affiliation.append(
-                            affiliations[0]["address"]["country"]["#text"]
-                        )
+                        author_affiliation.append(affiliations[0]["address"]["country"]["#text"])
 
                     # Store affiliation in author data
                     if author_affiliation:
@@ -150,11 +140,7 @@ def format_extracted_data(data):
                 if key == "page":
                     key = "pages"
 
-                publication[key] = (
-                    item["#text"]
-                    if "#text" in item
-                    else item["@from"] + "-" + item["@to"]
-                )
+                publication[key] = item["#text"] if "#text" in item else item["@from"] + "-" + item["@to"]
 
         if monogr["imprint"].get("date").get("@when"):
             match = re.search(r"^([0-9]{4}).*$", monogr["imprint"]["date"]["@when"])

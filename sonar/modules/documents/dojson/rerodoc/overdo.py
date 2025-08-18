@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -55,9 +53,7 @@ class Overdo(BaseOverdo):
 
     def do(self, blob, ignore_missing=True, exception_handlers=None):
         """Do transformation."""
-        result = super(Overdo, self).do(
-            blob, ignore_missing=ignore_missing, exception_handlers=exception_handlers
-        )
+        result = super(Overdo, self).do(blob, ignore_missing=ignore_missing, exception_handlers=exception_handlers)
 
         # Verify data integrity
         self.verify(result)
@@ -67,8 +63,7 @@ class Overdo(BaseOverdo):
             default_license = "License undefined"
             if (
                 result.get("organisation")
-                and result["organisation"][0]["$ref"]
-                == "https://sonar.ch/api/organisations/hepbejune"
+                and result["organisation"][0]["$ref"] == "https://sonar.ch/api/organisations/hepbejune"
             ):
                 default_license = "CC BY-NC-SA"
 
@@ -145,6 +140,4 @@ class Overdo(BaseOverdo):
         # on record types
         if "provisionActivity" not in result and is_pa_mandatory():
             self.result_ok = False
-            current_app.logger.warning(
-                f"No provision activity found in record {result}"
-            )
+            current_app.logger.warning(f"No provision activity found in record {result}")

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -54,9 +52,7 @@ def create_missing(organisation_pid):
         click.secho("Organisation does not exist.", fg="red")
         raise click.Abort()
     if not organisation.get("arkNAAN"):
-        click.secho(
-            "NAAN configuration does not exist for the given organisation.", fg="red"
-        )
+        click.secho("NAAN configuration does not exist for the given organisation.", fg="red")
         raise click.Abort()
     search = (
         DocumentSearch()
@@ -91,9 +87,7 @@ def create_missing(organisation_pid):
             doc = DocumentRecord.get_record_by_pid(res.pid)
             pid = ark.create(doc["pid"], record_uuid=doc.id)
             assert not doc.get_ark()
-            doc.setdefault("identifiedBy", []).append(
-                dict(type="ark", value=pid.pid_value)
-            )
+            doc.setdefault("identifiedBy", []).append(dict(type="ark", value=pid.pid_value))
             doc.commit()
             db.session.commit()
             doc.reindex()

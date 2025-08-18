@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -74,9 +72,7 @@ def authorized_signup_handler(auth, remote=None, *args, **kwargs):
     # Pre-check done to use a case insensitive comparison because this is not
     # done in invenio --> https://github.com/inveniosoftware/invenio-oauthclient/blob/master/invenio_oauthclient/utils.py#L82  # nopep8
     if account_info.get("user", {}).get("email"):
-        user = User.query.filter(
-            func.lower(User.email) == func.lower(account_info["user"]["email"])
-        ).one_or_none()
+        user = User.query.filter(func.lower(User.email) == func.lower(account_info["user"]["email"])).one_or_none()
 
     if user is None:
         user = oauth_get_user(remote, account_info=account_info)
@@ -101,9 +97,7 @@ def authorized_signup_handler(auth, remote=None, *args, **kwargs):
 
     # create external id link
     try:
-        oauth_link_external_id(
-            user, dict(id=account_info["external_id"], method=remote)
-        )
+        oauth_link_external_id(user, dict(id=account_info["external_id"], method=remote))
         db.session.commit()
     except AlreadyLinkedError:
         pass

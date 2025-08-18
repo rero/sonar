@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -84,11 +82,7 @@ class MetadataSchema(Schema, ValidationSchemaMixin):
             return data
 
         # Store current user in project.
-        data["user"] = {
-            "$ref": current_user_record.get_ref_link(
-                "users", current_user_record["pid"]
-            )
-        }
+        data["user"] = {"$ref": current_user_record.get_ref_link("users", current_user_record["pid"])}
 
         return data
 
@@ -106,9 +100,7 @@ class RecordSchema(BaseRecordSchema):
         `add_permission` need this property and we cannot be sure that this
         hook will be executed first.
         """
-        obj["metadata"]["documents"] = DocumentRecord.get_documents_by_project(
-            obj["id"]
-        )
+        obj["metadata"]["documents"] = DocumentRecord.get_documents_by_project(obj["id"])
         return super().dump(obj, *args, **kwargs)
 
     @pre_dump
@@ -122,15 +114,9 @@ class RecordSchema(BaseRecordSchema):
         identity = g.get("identity", AnonymousIdentity())
 
         item["metadata"]["permissions"] = {
-            "read": service.permission_policy("read", **{"record": item}).allows(
-                identity
-            ),
-            "update": service.permission_policy("update", **{"record": item}).allows(
-                identity
-            ),
-            "delete": service.permission_policy("delete", **{"record": item}).allows(
-                identity
-            ),
+            "read": service.permission_policy("read", **{"record": item}).allows(identity),
+            "update": service.permission_policy("update", **{"record": item}).allows(identity),
+            "delete": service.permission_policy("delete", **{"record": item}).allows(identity),
         }
 
         return item
