@@ -15,7 +15,6 @@
 
 """Pytest fixtures and plugins for the UI application."""
 
-
 import pytest
 
 
@@ -32,10 +31,10 @@ def valid_attributes():
 @pytest.fixture(scope="module")
 def valid_sp_configuration():
     """Fixture for valid service provider configuration."""
-    return dict(
-        strict=True,
-        debug=True,
-        entity_id="entity_id",
-        x509cert="./docker/nginx/sp.pem",
-        private_key="./docker/nginx/sp.key",
-    )
+    return {
+        "strict": True,
+        "debug": True,
+        "entity_id": "entity_id",
+        "x509cert": "./docker/nginx/sp.pem",
+        "private_key": "./docker/nginx/sp.key",
+    }

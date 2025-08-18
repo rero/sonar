@@ -20,6 +20,8 @@ from invenio_records_rest.serializers.response import (
     search_responsify,
 )
 
+from sonar.modules.documents.serializers.schemas.dc import DublinCoreSchema
+
 from ..marshmallow import DocumentListSchemaV1, DocumentSchemaV1
 from .dc import DublinCoreSerializer
 from .google_scholar import SonarGoogleScholarSerializer
@@ -37,7 +39,6 @@ json_list_v1 = JSONSerializer(DocumentListSchemaV1)
 schemaorg_v1 = SonarSchemaOrgSerializer(SchemaOrgV1, replace_refs=True)
 #: google scholar serializer
 google_scholar_v1 = SonarGoogleScholarSerializer(GoogleScholarV1, replace_refs=True)
-from sonar.modules.documents.serializers.schemas.dc import DublinCoreSchema
 
 dc_v1 = DublinCoreSerializer(DublinCoreSchema)
 

@@ -74,18 +74,18 @@ def marc21_to_type_and_organisation(self, key, value):
         # (`customField2`)
         if organisation == "hepbejune" and value.get("f"):
             document_subtype = value.get("f").lower()
-            customField1 = ""
-            customField2 = ""
+            custom_field1 = ""
+            custom_field2 = ""
             if document_subtype == "diss_bachelor":
-                customField1 = "Enseignement primaire"
-                customField2 = "Bachelor of Arts in Pre-Primary and Primary Education"
+                custom_field1 = "Enseignement primaire"
+                custom_field2 = "Bachelor of Arts in Pre-Primary and Primary Education"
             elif document_subtype == "diss_master":
-                customField1 = "Enseignement secondaire"
-                customField2 = "Master of Arts or of Science in Secondary Education"
-            if customField1:
-                self["customField1"] = [customField1]
-            if customField2:
-                self["customField2"] = [customField2]
+                custom_field1 = "Enseignement secondaire"
+                custom_field2 = "Master of Arts or of Science in Secondary Education"
+            if custom_field1:
+                self["customField1"] = [custom_field1]
+            if custom_field2:
+                self["customField2"] = [custom_field2]
 
         # Specific transformation for `hepfr`, which should be imported as
         # a faculty AND a subdivision of FOLIA/unifr
@@ -169,9 +169,7 @@ def marc21_to_language(self, key, value):
 
     language = self.get("language", [])
 
-    codes = utils.force_list(value.get("a"))
-
-    for code in codes:
+    for code in utils.force_list(value.get("a")):
         language.append({"type": "bf:Language", "value": code})
 
     self["language"] = language
@@ -331,13 +329,11 @@ def marc21_to_description(self, key, value):
     otherMaterialCharacteristics: 300$b (the first one if many)
     formats: 300 [$c repetitive]
     """
-    if value.get("a"):
-        if not self.get("extent"):
-            self["extent"] = remove_trailing_punctuation(overdo.not_repetitive(value, "a"))
+    if value.get("a") and not self.get("extent"):
+        self["extent"] = remove_trailing_punctuation(overdo.not_repetitive(value, "a"))
 
-    if value.get("b"):
-        if self.get("otherMaterialCharacteristics", []) == []:
-            self["otherMaterialCharacteristics"] = remove_trailing_punctuation(overdo.not_repetitive(value, "b"))
+    if value.get("b") and self.get("otherMaterialCharacteristics", []) == []:
+        self["otherMaterialCharacteristics"] = remove_trailing_punctuation(overdo.not_repetitive(value, "b"))
 
     if value.get("c"):
         formats = self.get("formats")
@@ -526,13 +522,7 @@ def marc21_to_subjects(self, key, value):
     if not value.get("a"):
         return None
 
-    subject_values = []
-
-    for item in value.get("a").split(" ; "):
-        if item:
-            subject_values.append(item)
-
-    subjects = {"label": {"value": subject_values}}
+    subjects = {"label": {"value": [item for item in value.get("a").split(" ; ") if item]}}
 
     # If field is 695 and no language is available
     if key == "695__":
@@ -582,15 +572,13 @@ def marc21_to_files(self, key, value):
         if match:
             order = int(match.group(1))
 
-    data = {
+    return {
         "key": key,
         "url": url,
         "label": value.get("z", key),
         "type": "file",
         "order": order,
     }
-
-    return data
 
 
 @overdo.over("otherEdition", "^775..")
@@ -711,21 +699,21 @@ def marc21_to_dissertation_field_502(self, key, value):
             organisation = record.get("980__", {}).get("b")
             if organisation and organisation.lower() == "hepbejune":
                 degree = matches.group("degree").lower()
-                customField1 = None
-                customField2 = None
+                custom_field1 = None
+                custom_field2 = None
                 if "mémoire de master spécialisé" in degree:
-                    customField1 = "Enseignement spécialisé"
-                    customField2 = "Master of Arts in special needs education, orientation enseignement spécialisé"
+                    custom_field1 = "Enseignement spécialisé"
+                    custom_field2 = "Master of Arts in special needs education, orientation enseignement spécialisé"
                 elif "mémoire de master" in degree:
-                    customField1 = "Enseignement secondaire"
-                    customField2 = "Master of Arts or of Science in Secondary Education"
+                    custom_field1 = "Enseignement secondaire"
+                    custom_field2 = "Master of Arts or of Science in Secondary Education"
                 elif "mémoire de bachelor" in degree:
-                    customField1 = "Enseignement primaire"
-                    customField2 = "Bachelor of Arts in Pre-Primary and Primary Education"
-                if customField1:
-                    self["customField1"] = [customField1]
-                if customField2:
-                    self["customField2"] = [customField2]
+                    custom_field1 = "Enseignement primaire"
+                    custom_field2 = "Bachelor of Arts in Pre-Primary and Primary Education"
+                if custom_field1:
+                    self["customField1"] = [custom_field1]
+                if custom_field2:
+                    self["customField2"] = [custom_field2]
 
     # Try to get start date and store in provision activity
     # 260$c and 269$c have priority to this date
@@ -950,13 +938,7 @@ def marc21_to_part_of(self, key, value):
 
     # Contribution
     if value.get("c"):
-        contributors = []
-        for contributor in value.get("c").split(";"):
-            if contributor:
-                contributors.append(contributor)
-
-        if contributors:
-            document["contribution"] = contributors
+        document["contribution"] = list(value.get("c").split(";"))
 
     record = overdo.blob_record
 

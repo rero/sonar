@@ -30,4 +30,4 @@ class HegClient(Client):
             "webdav_password": current_app.config.get("SONAR_APP_WEBDAV_HEG_PASSWORD"),
         }
 
-        super(HegClient, self).__init__(options)
+        super().__init__(options)

@@ -194,8 +194,8 @@ def test_get_bibliographic_code_from_language(app):
 def test_get_language_value(app):
     """Test language value."""
     # No value passed
-    assert get_language_value(None) == None
-    assert get_language_value([]) == None
+    assert get_language_value(None) is None
+    assert get_language_value([]) is None
 
     # No locale
     values = [
@@ -220,4 +220,4 @@ def test_get_current_ip(app):
 def test_get_ips_list():
     """Test get IP list."""
     ranges = ["127.0.0.1", "192.168.1.3-5", "12.13.14.15/32"]
-    assert set(get_ips_list(ranges)) == set(["12.13.14.15/32", "127.0.0.1/32", "192.168.1.3/32", "192.168.1.4/31"])
+    assert set(get_ips_list(ranges)) == {"12.13.14.15/32", "127.0.0.1/32", "192.168.1.3/32", "192.168.1.4/31"}

@@ -15,7 +15,6 @@
 
 """Document extension."""
 
-
 from invenio_base.signals import app_loaded
 from invenio_oaiharvester.signals import oaiharvest_finished
 from invenio_records.signals import before_record_insert, before_record_update

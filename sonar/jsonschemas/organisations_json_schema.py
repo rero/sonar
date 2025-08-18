@@ -32,9 +32,9 @@ class OrganisationsJSONSchema(JSONSchemaBase):
 
         # Remove modes fields if user does not have superuser role.
         if not current_user_record.is_superuser:
-            propertiesOrder = schema.get("propertiesOrder", [])
+            properties_order = schema.get("propertiesOrder", [])
             for field in ["isDedicated", "isShared", "arkNAAN"]:
-                if field in propertiesOrder:
+                if field in properties_order:
                     schema["propertiesOrder"].remove(field)
 
         return schema

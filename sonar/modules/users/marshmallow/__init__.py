@@ -15,7 +15,6 @@
 
 """Marshmallow for deposits."""
 
-
 from .json import UserMetadataSchemaV1, UserSchemaV1
 
 __all__ = (

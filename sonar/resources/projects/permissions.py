@@ -108,7 +108,7 @@ class Delete(Update):
         if documents:
             return [any_user]
 
-        return super(Delete, self).excludes(record)
+        return super().excludes(record)
 
 
 class RecordPermissionPolicy(BaseRecordPermissionPolicy):

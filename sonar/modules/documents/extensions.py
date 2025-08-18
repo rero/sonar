@@ -20,7 +20,7 @@ import contextlib
 from flask import current_app
 from invenio_db import db
 from invenio_pidstore.errors import PIDDoesNotExistError
-from invenio_pidstore.models import PersistentIdentifier, PIDDoesNotExistError
+from invenio_pidstore.models import PersistentIdentifier
 from invenio_records.extensions import RecordExtension
 
 from sonar.modules.documents.urn import Urn

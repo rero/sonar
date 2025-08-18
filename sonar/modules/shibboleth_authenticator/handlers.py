@@ -15,7 +15,6 @@
 
 """Handlers for shibboleth endpoints."""
 
-
 from flask import current_app, redirect, session
 from flask_login import current_user, logout_user
 from invenio_accounts.models import User
@@ -96,7 +95,7 @@ def authorized_signup_handler(auth, remote=None, *args, **kwargs):
 
     # create external id link
     try:
-        oauth_link_external_id(user, dict(id=account_info["external_id"], method=remote))
+        oauth_link_external_id(user, {"id": account_info["external_id"], "method": remote})
         db.session.commit()
     except AlreadyLinkedError:
         pass

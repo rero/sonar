@@ -15,7 +15,6 @@
 
 """User serializers."""
 
-
 from invenio_records_rest.serializers.response import (
     record_responsify,
     search_responsify,
@@ -38,7 +37,7 @@ class JSONSerializer(_JSONSerializer):
             if subdivision:
                 org_term["name"] = subdivision["name"][0]["value"]
 
-        return super(JSONSerializer, self).post_process_serialize_search(results, pid_fetcher)
+        return super().post_process_serialize_search(results, pid_fetcher)
 
 
 # Serializers

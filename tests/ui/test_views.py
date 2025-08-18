@@ -330,7 +330,7 @@ def test_rerodoc_redirection(client, app, document, organisation):
     assert res.status_code == 302
     assert res.location.find(f"/documents/{document['pid']}/files/test.pdf") != -1
 
-    def changeOrg(key, value):
+    def changeorg(key, value):
         organisation[key] = value
         organisation.commit()
         organisation.dbcommit()
@@ -338,20 +338,20 @@ def test_rerodoc_redirection(client, app, document, organisation):
         # organisation.reindex()
 
     # No dedicated
-    changeOrg("isShared", False)
+    changeorg("isShared", False)
     res = client.get(url_for("sonar.rerodoc_redirection", pid="111111"))
     assert res.status_code == 302
     assert res.location.find(f"/{global_view}/documents/{document['pid']}") != -1
 
     # Dedicated
-    changeOrg("isDedicated", True)
+    changeorg("isDedicated", True)
     res = client.get(url_for("sonar.rerodoc_redirection", pid="111111"))
     assert res.status_code == 302
     assert res.location.find(f"/{organisation['code']}/documents/{document['pid']}") != -1
 
     # Shared
-    changeOrg("isDedicated", False)
-    changeOrg("isShared", True)
+    changeorg("isDedicated", False)
+    changeorg("isShared", True)
     res = client.get(url_for("sonar.rerodoc_redirection", pid="111111"))
     assert res.status_code == 302
     assert res.location.find(f"/{organisation['code']}/documents/{document['pid']}") != -1
@@ -373,7 +373,10 @@ def test_process_link():
     """Test process_link filter."""
     assert process_link("[search tips](/help/search_tips/)", "view") == "[search tips](/view/help/search_tips/)"
 
-    assert process_link(
-        '![SONAR_collection.JPG](/help/files/SONAR_collection.JPG "SONAR_collection.JPG")',
-        "view",
-    ) == '![SONAR_collection.JPG](/help/files/SONAR_collection.JPG "SONAR_collection.JPG")'
+    assert (
+        process_link(
+            '![SONAR_collection.JPG](/help/files/SONAR_collection.JPG "SONAR_collection.JPG")',
+            "view",
+        )
+        == '![SONAR_collection.JPG](/help/files/SONAR_collection.JPG "SONAR_collection.JPG")'
+    )

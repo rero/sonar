@@ -67,6 +67,8 @@ fi
 
 pip_audit_exceptions=""
 section "Check vulnerabilities:"
+# future  1.0.0   GHSA-xqrq-4mgf-ff32
+add_exceptions "GHSA-xqrq-4mgf-ff32"
 # py      1.11.0  PYSEC-2022-42969
 add_exceptions "PYSEC-2022-42969"
 # urllib3 1.26.20 GHSA-pq67-6m6q-mj2v 2.5.0

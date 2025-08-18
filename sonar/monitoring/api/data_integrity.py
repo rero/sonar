@@ -94,7 +94,7 @@ class DataIntegrityMonitoring:
                 result["db"].append(identifier.pid_value)
 
         # Transform dictionary to list
-        result["es"] = [v for v in es_pids]
+        result["es"] = list(es_pids)
 
         return result
 
@@ -129,8 +129,4 @@ class DataIntegrityMonitoring:
         :param with_deleted: Count also deleted items in database.
         :returns: True if an error is found
         """
-        for rec_type, item in self.info(with_deleted).items():
-            if item["db-es"] != 0:
-                return True
-
-        return False
+        return any(item["db-es"] != 0 for rec_type, item in self.info(with_deleted).items())

@@ -45,7 +45,7 @@ class FileObject(InvenioFileObjet):
 
     def dumps(self):
         """Create a dump of the metadata associated to the record."""
-        super(FileObject, self).dumps()
+        super().dumps()
         self.data.update({"mimetype": self.obj.mimetype})
         return self.data
 
@@ -79,7 +79,7 @@ class SonarRecord(Record, FilesMixin):
 
         cls.minter(id_, data)
 
-        record = super(SonarRecord, cls).create(data=data, with_bucket=with_bucket, id_=id_, **kwargs)
+        record = super().create(data=data, with_bucket=with_bucket, id_=id_, **kwargs)
 
         if dbcommit:
             record.dbcommit()
@@ -122,7 +122,7 @@ class SonarRecord(Record, FilesMixin):
         assert cls.provider
         try:
             persistent_identifier = PersistentIdentifier.get(cls.provider.pid_type, pid)
-            return super(SonarRecord, cls).get_record(persistent_identifier.object_uuid, with_deleted=with_deleted)
+            return super().get_record(persistent_identifier.object_uuid, with_deleted=with_deleted)
         except NoResultFound:
             return None
         except PIDDoesNotExistError:
@@ -299,7 +299,7 @@ class SonarRecord(Record, FilesMixin):
         persistent_identifier = self.get_persistent_identifier(self.id)
         persistent_identifier.delete()
 
-        super(SonarRecord, self).delete(force=force)
+        super().delete(force=force)
 
         if dbcommit:
             self.dbcommit()
@@ -317,11 +317,7 @@ class SonarRecord(Record, FilesMixin):
         :returns: True if record has organisation
         :rtype: Bool
         """
-        for org in self.get("organisation", []):
-            if organisation_pid == org["pid"]:
-                return True
-
-        return False
+        return any(organisation_pid == org["pid"] for org in self.get("organisation", []))
 
     @property
     def subdivisions(self):
@@ -343,12 +339,7 @@ class SonarRecord(Record, FilesMixin):
         if not self.subdivisions:
             return False
 
-        for subdivision in self.subdivisions:
-            if subdivision_pid == subdivision["pid"]:
-                return True
-
-        # Subdivision not found, record is inaccessible
-        return False
+        return any(subdivision_pid == subdivision["pid"] for subdivision in self.subdivisions)
 
 
 class SonarSearch(RecordsSearch):
@@ -371,7 +362,7 @@ class SonarIndexer(RecordIndexer):
         :param record: Record to index.
         :returns: Indexation result
         """
-        return_value = super(SonarIndexer, self).index(record)
+        return_value = super().index(record)
 
         index_name = current_record_to_index(record)
         current_search.flush_and_refresh(index_name)
@@ -383,7 +374,7 @@ class SonarIndexer(RecordIndexer):
         :param record: Record to remove from index.
         :returns: Indexation result
         """
-        return_value = super(SonarIndexer, self).delete(record)
+        return_value = super().delete(record)
         index_name = current_record_to_index(record)
         current_search.flush_and_refresh(index_name)
         return return_value

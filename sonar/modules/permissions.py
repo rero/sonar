@@ -110,6 +110,7 @@ def can_access_manage_view(func):
                 return func(*args, **kwargs)
 
             abort(403)
+        return None
 
     return decorated_view
 
@@ -126,6 +127,7 @@ def is_user_logged_and_submitter(func):
                 return func(*args, **kwargs)
 
             abort(403)
+        return None
 
     return decorated_view
 

@@ -15,4 +15,3 @@
 
 
 """Invenio digital library framework."""
-

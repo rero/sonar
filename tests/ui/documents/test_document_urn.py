@@ -31,7 +31,7 @@ def test_urn_get_generate_urns(organisation_with_urn, document):
     document.pop("identifiedBy")
     document["documentType"] = "coar:c_db06"
     document.reindex()
-    assert list(Urn.get_documents_to_generate_urns())[0]["pid"] == document["pid"]
+    assert next(iter(Urn.get_documents_to_generate_urns()))["pid"] == document["pid"]
     # restore original data
     indexer = DocumentIndexer()
     doc = DocumentRecord.get_record_by_pid(document["pid"])

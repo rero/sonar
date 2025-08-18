@@ -16,7 +16,6 @@
 
 """PDF extractor extension."""
 
-
 from .ext import PDFExtractor
 
 __all__ = ("PDFExtractor",)

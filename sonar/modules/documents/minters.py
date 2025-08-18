@@ -15,7 +15,6 @@
 
 """Persistent identifier minters for documents."""
 
-
 from flask import current_app
 from invenio_oaiserver.minters import oaiid_minter
 from invenio_oaiserver.provider import OAIIDProvider
@@ -75,6 +74,6 @@ def external_minters(record_uuid, data, pid_key="pid"):
     if not data.get("harvested") and (ark := Ark(naan=naan)):
         try:
             pid = ark.create(data[pid_key], record_uuid=record_uuid)
-            data.setdefault("identifiedBy", []).append(dict(type="ark", value=pid.pid_value))
+            data.setdefault("identifiedBy", []).append({"type": "ark", "value": pid.pid_value})
         except PIDAlreadyExists:
             pass

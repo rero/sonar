@@ -46,7 +46,7 @@ def get_current_organisation():
 current_organisation = LocalProxy(get_current_organisation)
 
 # provider
-OrganisationProvider = type("OrganisationProvider", (Provider,), dict(pid_type="org"))
+OrganisationProvider = type("OrganisationProvider", (Provider,), {"pid_type": "org"})
 # minter
 organisation_pid_minter = partial(id_minter, provider=OrganisationProvider)
 # fetcher
@@ -85,6 +85,7 @@ class OrganisationSearch(SonarSearch):
         """
         if hits := self.filter("term", serverName=server_name).source(["pid"]).execute().hits:
             return hits[0].pid
+        return None
 
     def get_dedicated_list(self):
         """Get the list of dedicated organisations.
@@ -127,9 +128,7 @@ class OrganisationRecord(SonarRecord):
         )
         db.session.add(oaiset)
 
-        return super(OrganisationRecord, cls).create(
-            data, id_=id_, dbcommit=dbcommit, with_bucket=with_bucket, **kwargs
-        )
+        return super().create(data, id_=id_, dbcommit=dbcommit, with_bucket=with_bucket, **kwargs)
 
     @classmethod
     def get_or_create(cls, code, name=None):
@@ -157,7 +156,7 @@ class OrganisationRecord(SonarRecord):
             oaiset.name = data["name"]
             db.session.commit()
 
-        super(OrganisationRecord, self).update(data)
+        super().update(data)
         return self
 
 

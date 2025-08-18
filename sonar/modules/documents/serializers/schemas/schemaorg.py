@@ -15,7 +15,6 @@
 
 """schema.org marshmallow schema."""
 
-
 from flask import request
 from marshmallow import fields, post_dump
 
@@ -119,12 +118,11 @@ class SchemaOrgV1(BaseSchema):
 
     def get_creator(self, obj):
         """Get authors."""
-        items = []
-        for contributor in obj["metadata"].get("contribution", []):
-            if contributor["role"][0] == "cre" and contributor["agent"].get("preferred_name"):
-                items.append({"@type": "Person", "name": contributor["agent"]["preferred_name"]})
-
-        return items
+        return [
+            {"@type": "Person", "name": contributor["agent"]["preferred_name"]}
+            for contributor in obj["metadata"].get("contribution", [])
+            if contributor["role"][0] == "cre" and contributor["agent"].get("preferred_name")
+        ]
 
     def get_license(self, obj):
         """Get license."""

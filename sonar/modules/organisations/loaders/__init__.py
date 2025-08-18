@@ -22,11 +22,7 @@ json_v1 instance, it uses the OrganisationMetadataSchemaV1, defining the
 PersistentIdentifier field.
 """
 
-
-from invenio_records_rest.loaders.marshmallow import (
-    json_patch_loader,
-    marshmallow_loader,
-)
+from invenio_records_rest.loaders.marshmallow import marshmallow_loader
 
 from ..marshmallow import OrganisationMetadataSchemaV1
 

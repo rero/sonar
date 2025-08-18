@@ -15,7 +15,6 @@
 
 """Test SRU dojson transformation."""
 
-
 from sonar.modules.documents.loaders.schemas.sru import SRUSchema
 
 

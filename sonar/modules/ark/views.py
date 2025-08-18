@@ -23,7 +23,7 @@ from sonar.modules.organisations.api import OrganisationSearch
 blueprint = Blueprint("ark", __name__)
 
 
-@blueprint.route("/ark:/<naan>/<path>")
+@blueprint.route("/ark:/<naan>/<path>")  # noqa: RET503
 def resolve(naan, path):
     """Resolve a naan and redirect to the right view.
 
@@ -38,9 +38,8 @@ def resolve(naan, path):
         abort(404)
     ark = Ark(naan)
     # The instance has an ark configuration and this ark pid exists.
-    if ark and (pid := ark.get(f"ark:/{naan}/{path}")):
-        if pid.is_registered() or pid.is_deleted():
-            doc_pid = path.replace(ark._shoulder, "")
-            # redirecto to the right view
-            return redirect(f"/{code}/documents/{doc_pid}", code=302)
+    if ark and (pid := ark.get(f"ark:/{naan}/{path}")) and (pid.is_registered() or pid.is_deleted()):
+        doc_pid = path.replace(ark._shoulder, "")
+        # redirecto to the right view
+        return redirect(f"/{code}/documents/{doc_pid}", code=302)
     abort(404)

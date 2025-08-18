@@ -29,8 +29,6 @@ from sonar.modules.documents.dnb import DnbServerError, DnbUrnService
 from sonar.modules.documents.urn import Urn
 from sonar.snl.ftp import SNLRepository
 
-from ..api import DocumentRecord
-
 
 @click.group()
 def urn():
@@ -149,10 +147,10 @@ def snl_upload_file(urn_code):
             click.secho(str(exception), fg="red")
 
     # print email template
-    template_email_SNL = current_app.config.get("SONAR_APP_SNL_EMAIL_TEMPLATE")
+    template_email_snl = current_app.config.get("SONAR_APP_SNL_EMAIL_TEMPLATE")
 
     click.secho("Template of email to send to SNL:", fg="green")
-    with open(template_email_SNL) as file:
+    with open(template_email_snl) as file:
         email_txt = file.read()
         email_txt = email_txt.replace("<URN>", urn_code)
         email_txt = email_txt.replace("<URL>", f"https://sonar.ch/global/documents/{doc.get('pid')}")
@@ -170,7 +168,7 @@ def snl_list_files():
         directory=current_app.config.get("SONAR_APP_FTP_SNL_PATH"),
     )
     snl_repository.connect()
-    snl_repository.list()
+    snl_repository.client.walktree(".", lambda x: click.secho(x), lambda x: click.secho(x), lambda x: click.secho(x))
 
 
 @urn.command()

@@ -15,7 +15,6 @@
 
 """Google scholar marshmallow schema."""
 
-
 from flask import request
 from marshmallow import fields, post_dump
 
@@ -56,16 +55,15 @@ class GoogleScholarV1(BaseSchema):
 
     def get_keywords(self, obj):
         """Get keywords."""
-        return " ; ".join(super(GoogleScholarV1, self).get_keywords(obj))
+        return " ; ".join(super().get_keywords(obj))
 
     def get_author(self, obj):
         """Get authors."""
-        items = []
-        for contributor in obj["metadata"].get("contribution", []):
-            if contributor["role"][0] == "cre" and contributor["agent"].get("preferred_name"):
-                items.append(contributor["agent"]["preferred_name"])
-
-        return items
+        return [
+            contributor["agent"]["preferred_name"]
+            for contributor in obj["metadata"].get("contribution", [])
+            if contributor["role"][0] == "cre" and contributor["agent"].get("preferred_name")
+        ]
 
     def get_doi(self, obj):
         """Get DOI."""

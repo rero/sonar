@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -47,14 +49,14 @@ class DepositsJSONSchema(JSONSchemaBase):
                 "customField3",
             ]:
                 schema["properties"]["metadata"]["properties"].pop(field, None)
-                propertiesOrder = schema["properties"]["metadata"].get("propertiesOrder", [])
-                if field in propertiesOrder:
-                    propertiesOrder.remove(field)
+                properties_order = schema["properties"]["metadata"].get("propertiesOrder", [])
+                if field in properties_order:
+                    properties_order.remove(field)
 
         # Remove subdivisions field
         schema["properties"]["diffusion"]["properties"].pop("subdivisions", None)
-        propertiesOrder = schema["properties"]["diffusion"].get("propertiesOrder", [])
-        if "subdivisions" in propertiesOrder:
+        properties_order = schema["properties"]["diffusion"].get("propertiesOrder", [])
+        if "subdivisions" in properties_order:
             schema["properties"]["diffusion"]["propertiesOrder"].remove("subdivisions")
 
         return schema

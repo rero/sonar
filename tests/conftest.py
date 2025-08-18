@@ -149,25 +149,25 @@ def app_config(app_config):
     """Define configuration for module."""
     help_test_dir = join(dirname(__file__), "data", "help")
 
-    app_config["SHIBBOLETH_SERVICE_PROVIDER"] = dict(
-        strict=True,
-        debug=True,
-        entity_id="entity_id",
-        x509cert="./docker/nginx/sp.pem",
-        private_key="./docker/nginx/sp.key",
-    )
+    app_config["SHIBBOLETH_SERVICE_PROVIDER"] = {
+        "strict": True,
+        "debug": True,
+        "entity_id": "entity_id",
+        "x509cert": "./docker/nginx/sp.pem",
+        "private_key": "./docker/nginx/sp.key",
+    }
 
-    app_config["SHIBBOLETH_IDENTITY_PROVIDERS"] = dict(
-        idp=dict(
-            entity_id="https://idp.com/shibboleth",
-            sso_url="https://idp.com/Redirect/SSO",
-            mappings=dict(
-                email="email",
-                full_name="name",
-                user_unique_id="id",
-            ),
-        )
-    )
+    app_config["SHIBBOLETH_IDENTITY_PROVIDERS"] = {
+        "idp": {
+            "entity_id": "https://idp.com/shibboleth",
+            "sso_url": "https://idp.com/Redirect/SSO",
+            "mappings": {
+                "email": "email",
+                "full_name": "name",
+                "user_unique_id": "id",
+            },
+        }
+    }
 
     # ARK
     app_config["SONAR_APP_ARK_RESOLVER"] = "https://n2t.net"

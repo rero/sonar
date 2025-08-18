@@ -33,12 +33,12 @@ def test_login(app, client, valid_sp_configuration):
 
     # Test misconfigured identity provider
     app.config.update(
-        SHIBBOLETH_SERVICE_PROVIDER=dict(
-            debug=True,
-            strict=True,
-            x509cert="./data/shibboleth/sp.pem",
-            private_key="./data/shibboleth/sp.key",
-        )
+        SHIBBOLETH_SERVICE_PROVIDER={
+            "debug": True,
+            "strict": True,
+            "x509cert": "./data/shibboleth/sp.pem",
+            "private_key": "./data/shibboleth/sp.key",
+        }
     )
 
     assert client.get("/shibboleth/login/idp").status_code == 500
@@ -48,12 +48,12 @@ def test_authorized(monkeypatch, app, client, roles, user_without_role, valid_at
     """Test authorized view."""
     # Test unexisting identity provider
     app.config.update(
-        SHIBBOLETH_SERVICE_PROVIDER=dict(
-            debug=True,
-            strict=True,
-            x509cert="./data/shibboleth/sp.pem",
-            private_key="./data/shibboleth/sp.key",
-        )
+        SHIBBOLETH_SERVICE_PROVIDER={
+            "debug": True,
+            "strict": True,
+            "x509cert": "./data/shibboleth/sp.pem",
+            "private_key": "./data/shibboleth/sp.key",
+        }
     )
 
     assert client.post("/shibboleth/authorized/not_exists").status_code == 404
@@ -113,7 +113,7 @@ def test_authorized(monkeypatch, app, client, roles, user_without_role, valid_at
     assert (
         client.post(
             "/shibboleth/authorized/idp",
-            data=dict(SAMLResponse=_load_file("valid_saml_response")),
+            data={"SAMLResponse": _load_file("valid_saml_response")},
         ).status_code
         == 403
     )
@@ -135,7 +135,7 @@ def test_authorized(monkeypatch, app, client, roles, user_without_role, valid_at
     assert (
         client.post(
             "/shibboleth/authorized/idp",
-            data=dict(SAMLResponse=_load_file("valid_saml_response"), RelayState=state),
+            data={"SAMLResponse": _load_file("valid_saml_response"), "RelayState": state},
         ).status_code
         == 302
     )
@@ -148,7 +148,7 @@ def test_authorized(monkeypatch, app, client, roles, user_without_role, valid_at
     assert (
         client.post(
             "/shibboleth/authorized/idp",
-            data=dict(SAMLResponse=_load_file("valid_saml_response"), RelayState=state),
+            data={"SAMLResponse": _load_file("valid_saml_response"), "RelayState": state},
         ).status_code
         == 400
     )
@@ -160,8 +160,8 @@ def test_authorized(monkeypatch, app, client, roles, user_without_role, valid_at
         host = "sonar.ch"
         scheme = "https"
         path = "/test/page"
-        args = dict(parameter="test")
-        form = dict(RelayState=None)
+        args = {"parameter": "test"}
+        form = {"RelayState": None}
 
     mock_request = MockRequest()
 
@@ -171,7 +171,7 @@ def test_authorized(monkeypatch, app, client, roles, user_without_role, valid_at
     assert (
         client.post(
             "/shibboleth/authorized/idp",
-            data=dict(SAMLResponse=_load_file("valid_saml_response")),
+            data={"SAMLResponse": _load_file("valid_saml_response")},
         ).status_code
         == 400
     )
@@ -182,9 +182,7 @@ def _load_file(filename):
     filename = os.path.join(os.path.dirname(__file__), "data", filename)
 
     if os.path.exists(filename):
-        f = open(filename)
-        content = f.read()
-        f.close()
-        return content
+        with open(filename) as f:
+            return f.read()
 
     return None

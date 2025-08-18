@@ -15,13 +15,11 @@
 
 """HEG FTP repository."""
 
-import json
+import contextlib
 import re
 from ftplib import FTP
 from os import listdir, path, remove
 from zipfile import ZipFile
-
-from sonar.modules.utils import chunks
 
 
 class HEGRepository:
@@ -73,10 +71,8 @@ class HEGRepository:
         # Remove source file
         remove(target_file)
         # Remove useless file
-        try:
+        with contextlib.suppress(Exception):
             remove(path.join(target, "clusters.json"))
-        except Exception:
-            pass
 
         # Number of splitted files for each file
         number_of_files = int(10000 / records_size)
@@ -89,7 +85,8 @@ class HEGRepository:
             if matches:
                 with open(file_path) as json_file:
                     files = [
-                        open(path.join(target, f"{matches.group(1)}_{i + 1}.json"), "w") for i in range(number_of_files)
+                        open(path.join(target, f"{matches.group(1)}_{i + 1}.json"), "w")  # noqa: SIM115
+                        for i in range(number_of_files)
                     ]
                     for i, line in enumerate(json_file):
                         files[i % number_of_files].write(line)

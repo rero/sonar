@@ -15,7 +15,6 @@
 
 """Schemas for marshmallow."""
 
-
 from .json import OrganisationMetadataSchemaV1, OrganisationSchemaV1
 
 __all__ = (

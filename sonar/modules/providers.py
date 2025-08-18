@@ -15,7 +15,6 @@
 
 """Record providers."""
 
-
 from invenio_pidstore.errors import PIDDoesNotExistError
 from invenio_pidstore.models import PIDStatus, RecordIdentifier
 from invenio_pidstore.providers.base import BaseProvider
@@ -70,4 +69,4 @@ class Provider(BaseProvider):
                 kwargs["status"] = PIDStatus.REGISTERED
 
             # Call base provider
-            return super(Provider, cls).create(object_type=object_type, object_uuid=object_uuid, **kwargs)
+            return super().create(object_type=object_type, object_uuid=object_uuid, **kwargs)

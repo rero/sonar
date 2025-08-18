@@ -89,7 +89,7 @@ def test_list(
     data = res.json["hits"]["hits"][0]["metadata"]
     assert res.json["hits"]["total"]["value"] == 1
     assert data["identifiers"]
-    ark_identifier = [r for r in data["identifiedBy"] if r.get("type") == "ark"][0]
+    ark_identifier = next(r for r in data["identifiedBy"] if r.get("type") == "ark")
     from sonar.modules.ark.api import Ark
 
     ark = Ark(naan=organisation.get("arkNAAN"))
@@ -155,7 +155,7 @@ def test_create(client, document_json, superuser, admin, moderator, submitter, u
     )
     assert res.status_code == 201
     assert res.json["metadata"]["organisation"][0]["$ref"] == "https://sonar.ch/api/organisations/org"
-    ark = [r for r in res.json["metadata"]["identifiedBy"] if r.get("type") == "ark"][0]
+    ark = next(r for r in res.json["metadata"]["identifiedBy"] if r.get("type") == "ark")
     assert ark.get("value").startswith("ark:/")
 
     assert PersistentIdentifier.get("ark", ark.get("value")).status == PIDStatus.REGISTERED

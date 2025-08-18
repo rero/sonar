@@ -15,7 +15,6 @@
 
 """Celery application for Invenio flavours."""
 
-
 from dotenv import load_dotenv
 from flask_celeryext import create_celery_app
 from invenio_app.factory import create_ui

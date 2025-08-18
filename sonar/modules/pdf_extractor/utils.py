@@ -20,6 +20,7 @@ import subprocess
 import tempfile
 
 import pycountry
+from dojson.utils import force_list
 
 
 def extract_text_from_content(content):
@@ -27,10 +28,9 @@ def extract_text_from_content(content):
 
     content is the binary representation of text.
     """
-    temp = tempfile.NamedTemporaryFile(mode="w+b", suffix=".pdf")
-    temp.write(content)
-
-    return extract_text_from_file(temp.name)
+    with tempfile.NamedTemporaryFile(mode="w+b", suffix=".pdf") as temp:
+        temp.write(content)
+        return extract_text_from_file(temp.name)
 
 
 def extract_text_from_file(file):
@@ -40,9 +40,7 @@ def extract_text_from_file(file):
     text = text.decode()
 
     # Remove carriage returns
-    text = re.sub("[\r\n\f]+", " ", text)
-
-    return text
+    return re.sub(r"[\r\n\f]+", " ", text)
 
 
 def format_extracted_data(data):
@@ -93,12 +91,9 @@ def format_extracted_data(data):
                 affiliations = force_list(author.get("affiliation", []))
 
                 if affiliations:
-                    author_affiliation = []
-
                     # Append organisation data
                     organisations = force_list(affiliations[0].get("orgName", []))
-                    for organisation in organisations:
-                        author_affiliation.append(organisation["#text"])
+                    author_affiliation = [organisation["#text"] for organisation in organisations]
 
                     # Append settlement
                     if affiliations[0].get("address", {}).get("settlement"):
@@ -155,11 +150,3 @@ def format_extracted_data(data):
         formatted_data["abstract"] = abstract["p"]
 
     return formatted_data
-
-
-def force_list(data):
-    """Force input data to be a list."""
-    if not isinstance(data, list):
-        return [data]
-
-    return data

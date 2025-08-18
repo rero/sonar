@@ -57,29 +57,27 @@ class DublinCoreSchema(BaseSchema):
 
     def get_contributors(self, obj):
         """Get contributors."""
-        items = []
-        for contributor in obj["metadata"].get("contribution", []):
-            if contributor["role"][0] != "cre" and contributor["agent"].get("preferred_name"):
-                items.append(self.format_contributor(contributor))
-
-        return items
+        return [
+            self.format_contributor(contributor)
+            for contributor in obj["metadata"].get("contribution", [])
+            if contributor["role"][0] != "cre" and contributor["agent"].get("preferred_name")
+        ]
 
     def get_creators(self, obj):
         """Get creators."""
-        items = []
-        for contributor in obj["metadata"].get("contribution", []):
-            if contributor["role"][0] == "cre" and contributor["agent"].get("preferred_name"):
-                items.append(self.format_contributor(contributor))
-
-        return items
+        return [
+            self.format_contributor(contributor)
+            for contributor in obj["metadata"].get("contribution", [])
+            if contributor["role"][0] == "cre" and contributor["agent"].get("preferred_name")
+        ]
 
     def get_dates(self, obj):
         """Get dates."""
-        items = []
-
-        for provision_activity in obj["metadata"].get("provisionActivity", []):
-            if provision_activity["type"] == "bf:Publication" and provision_activity.get("startDate"):
-                items.append(provision_activity["startDate"])
+        items = [
+            provision_activity["startDate"]
+            for provision_activity in obj["metadata"].get("provisionActivity", [])
+            if provision_activity["type"] == "bf:Publication" and provision_activity.get("startDate")
+        ]
 
         if obj["metadata"].get("mainFile") and obj["metadata"]["mainFile"]["restriction"]["date"]:
             items.append(f"info:eu-repo/date/embargoEnd/{obj['metadata']['mainFile']['embargo_date']}")
@@ -162,7 +160,7 @@ class DublinCoreSchema(BaseSchema):
             if provision_activity["type"] == "bf:Publication" and provision_activity.get("statement"):
                 for statement in provision_activity["statement"]:
                     if statement["type"] == "bf:Agent":
-                        items.append(statement["label"][0]["value"])
+                        items.append(statement["label"][0]["value"])  # noqa: PERF401
 
         return items
 
@@ -251,7 +249,7 @@ class DublinCoreSchema(BaseSchema):
         for subjects in obj["metadata"].get("subjects", []):
             if "language" in subjects["label"]:
                 for value in subjects["label"]["value"]:
-                    items.append(
+                    items.append(  # noqa: PERF401
                         {
                             "@attrs": [
                                 {

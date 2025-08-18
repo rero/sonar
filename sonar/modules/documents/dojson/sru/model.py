@@ -15,6 +15,7 @@
 
 """DOJSON transformation for SRU."""
 
+import contextlib
 import re
 
 from dojson import utils
@@ -229,20 +230,20 @@ def marc21_to_identified_by_from_024(self, key, value):
     if not value.get("a") or not value.get("2"):
         return
 
-    type = "bf:Local"
+    identifier_type = "bf:Local"
 
     if value.get("2") == "doi":
-        type = "bf:Doi"
+        identifier_type = "bf:Doi"
 
     if value.get("2") == "urn":
-        type = "bf:Urn"
+        identifier_type = "bf:Urn"
 
     if value.get("2") == "uri":
-        type = "uri"
+        identifier_type = "uri"
 
-    document_type = {"type": type, "value": value.get("a")}
+    document_type = {"type": identifier_type, "value": value.get("a")}
 
-    if type == "bf:Local":
+    if identifier_type == "bf:Local":
         document_type["source"] = value.get("2")
 
     identified_by = self.get("identifiedBy", [])
@@ -367,7 +368,7 @@ def marc21_to_contribution_from_100_700(self, key, value):
     if not value.get("a"):
         return
 
-    is_100_or_700 = key.startswith("100") or key.startswith("700")
+    is_100_or_700 = key.startswith(("100", "700"))
 
     separator = " " if is_100_or_700 else ". "
 
@@ -377,13 +378,13 @@ def marc21_to_contribution_from_100_700(self, key, value):
 
     contribution = self.get("contribution", [])
 
-    type = "bf:Person"
+    contrib_type = "bf:Person"
 
     if key == "710__":
-        type = "bf:Organization"
+        contrib_type = "bf:Organization"
 
     if key == "711__":
-        type = "bf:Meeting"
+        contrib_type = "bf:Meeting"
 
     role = "cre" if is_100_or_700 else "ctb"
     if value.get("4"):
@@ -391,14 +392,12 @@ def marc21_to_contribution_from_100_700(self, key, value):
             if item in CONTRIBUTOR_ROLES_MAPPING:
                 role = CONTRIBUTOR_ROLES_MAPPING[item]
 
-    data = {"agent": {"type": type, "preferred_name": name}, "role": [role]}
+    data = {"agent": {"type": contrib_type, "preferred_name": name}, "role": [role]}
 
     if is_100_or_700 and value.get("d"):
         date_of_birth = date_of_death = None
-        try:
+        with contextlib.suppress(Exception):
             date_of_birth, date_of_death = overdo.extract_date(value["d"][:9])
-        except Exception:
-            pass
 
         if date_of_birth:
             data["agent"]["date_of_birth"] = date_of_birth
@@ -465,10 +464,8 @@ def marc21_to_dissertation_from_502(self, key, value):
         data["grantingInstitution"] = value["c"]
 
     if value.get("d"):
-        try:
+        with contextlib.suppress(Exception):
             data["date"] = overdo.extract_date(value["d"])[0]
-        except Exception:
-            pass
 
     return data
 
@@ -511,6 +508,7 @@ def marc21_to_document_type_from_leader(self, key, value):
             or "thèse" in field.get("b", "").lower()
         ):
             return "coar:c_db06"
+        return None
 
     leader_06 = value[6]
 
@@ -555,7 +553,7 @@ def marc21_to_document_type_from_leader(self, key, value):
 
         field_502 = overdo.blob_record.get("502__")
         if field_502:
-            if type(field_502) == tuple:
+            if isinstance(field_502, tuple):
                 for fld502 in field_502:
                     doctype = determine_type(fld502)
                     if doctype:
@@ -662,11 +660,8 @@ def marc21_to_partof_from_773(self, key, value):
     data = {"document": {"title": value["t"]}}
 
     # Contribution
-    contributions = []
-    for contribution in utils.force_list(value.get("a", [])):
-        contributions.append(contribution)
-    if contributions:
-        data["document"]["contribution"] = contributions
+    if contributions := utils.force_list(value.get("a", [])):
+        data["document"]["contribution"] = list(contributions)
 
     # Identifiers
     identifiers = []
@@ -742,12 +737,8 @@ def marc21_to_partof_from_800(self, key, value):
     data = {"document": {"title": title}}
 
     # Contribution
-    if key.startswith("800"):
-        contributions = []
-        for contribution in utils.force_list(value.get("a", [])):
-            contributions.append(contribution)
-        if contributions:
-            data["document"]["contribution"] = contributions
+    if key.startswith("800") and (contributions := utils.force_list(value.get("a", []))):
+        data["document"]["contribution"] = list(contributions)
 
     # Identifiers
     identifiers = []

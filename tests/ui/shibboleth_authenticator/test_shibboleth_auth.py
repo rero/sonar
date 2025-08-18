@@ -36,34 +36,34 @@ def test_init_saml_auth(app, request):
     """Test SAML auth initialization."""
     # Valid init without strict mode
     app.config.update(
-        SHIBBOLETH_SERVICE_PROVIDER=dict(
-            debug=True,
-            entity_id="entity_id",
-            x509cert="./docker/nginx/sp.pem",
-            private_key="./docker/nginx/sp.key",
-        )
+        SHIBBOLETH_SERVICE_PROVIDER={
+            "debug": True,
+            "entity_id": "entity_id",
+            "x509cert": "./docker/nginx/sp.pem",
+            "private_key": "./docker/nginx/sp.key",
+        }
     )
     assert isinstance(auth.init_saml_auth(request, "idp"), OneLogin_Saml2_Auth)
 
     # Valid init without debug
     app.config.update(
-        SHIBBOLETH_SERVICE_PROVIDER=dict(
-            strict=True,
-            entity_id="entity_id",
-            x509cert="./docker/nginx/sp.pem",
-            private_key="./docker/nginx/sp.key",
-        )
+        SHIBBOLETH_SERVICE_PROVIDER={
+            "strict": True,
+            "entity_id": "entity_id",
+            "x509cert": "./docker/nginx/sp.pem",
+            "private_key": "./docker/nginx/sp.key",
+        }
     )
     assert isinstance(auth.init_saml_auth(request, "idp"), OneLogin_Saml2_Auth)
 
     # Init failed caused by certificate lack
     app.config.update(
-        SHIBBOLETH_SERVICE_PROVIDER=dict(
-            debug=True,
-            strict=True,
-            entity_id="entity_id",
-            private_key="./docker/nginx/sp.key",
-        )
+        SHIBBOLETH_SERVICE_PROVIDER={
+            "debug": True,
+            "strict": True,
+            "entity_id": "entity_id",
+            "private_key": "./docker/nginx/sp.key",
+        }
     )
     with pytest.raises(Exception) as e:
         auth.init_saml_auth(request, "idp")
@@ -71,12 +71,12 @@ def test_init_saml_auth(app, request):
 
     # Init failed caused by private key lack
     app.config.update(
-        SHIBBOLETH_SERVICE_PROVIDER=dict(
-            debug=True,
-            strict=True,
-            entity_id="entity_id",
-            x509cert="./docker/nginx/sp.pem",
-        )
+        SHIBBOLETH_SERVICE_PROVIDER={
+            "debug": True,
+            "strict": True,
+            "entity_id": "entity_id",
+            "x509cert": "./docker/nginx/sp.pem",
+        }
     )
     with pytest.raises(Exception) as e:
         auth.init_saml_auth(request, "idp")
@@ -84,12 +84,12 @@ def test_init_saml_auth(app, request):
 
     # Init failed caused by entity ID lack
     app.config.update(
-        SHIBBOLETH_SERVICE_PROVIDER=dict(
-            debug=True,
-            strict=True,
-            x509cert="./docker/nginx/sp.pem",
-            private_key="./docker/nginx/sp.key",
-        )
+        SHIBBOLETH_SERVICE_PROVIDER={
+            "debug": True,
+            "strict": True,
+            "x509cert": "./docker/nginx/sp.pem",
+            "private_key": "./docker/nginx/sp.key",
+        }
     )
     with pytest.raises(Exception) as e:
         auth.init_saml_auth(request, "idp")

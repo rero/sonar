@@ -15,7 +15,6 @@
 
 """JS/CSS Webpack bundles for theme."""
 
-
 from flask_webpackext import WebpackBundle, WebpackBundleProject
 from pywebpack import bundles_from_entry_point
 

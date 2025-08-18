@@ -20,19 +20,17 @@ from functools import partial
 
 from flask import g
 
-from sonar.modules.api import SonarRecord
+from sonar.modules.api import SonarIndexer, SonarRecord, SonarSearch
 from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.documents.api import DocumentRecord
+from sonar.modules.fetchers import id_fetcher
+from sonar.modules.minters import id_minter
+from sonar.modules.providers import Provider
 from sonar.modules.users.api import current_user_record
 from sonar.proxies import sonar
 
-from ..api import SonarIndexer, SonarRecord, SonarSearch
-from ..fetchers import id_fetcher
-from ..minters import id_minter
-from ..providers import Provider
-
 # provider
-DepositProvider = type("DepositProvider", (Provider,), dict(pid_type="depo"))
+DepositProvider = type("DepositProvider", (Provider,), {"pid_type": "depo"})
 # minter
 deposit_pid_minter = partial(id_minter, provider=DepositProvider)
 # fetcher
@@ -77,12 +75,12 @@ class DepositRecord(SonarRecord):
     @classmethod
     def create(cls, data, id_=None, dbcommit=False, with_bucket=True, **kwargs):
         """Create deposit record."""
-        if not data.get("diffusion", {}).get("subdivisions"):
-            # Guess from submitter
-            if current_user_record and current_user_record.is_submitter and current_user_record.get("subdivision"):
-                data.setdefault("diffusion", {})["subdivisions"] = [current_user_record["subdivision"]]
-        record = super(DepositRecord, cls).create(data, id_=id_, dbcommit=dbcommit, with_bucket=with_bucket, **kwargs)
-        return record
+        # Guess from submitter if no data
+        if not data.get("diffusion", {}).get("subdivisions") and (
+            current_user_record and current_user_record.is_submitter and current_user_record.get("subdivision")
+        ):
+            data.setdefault("diffusion", {})["subdivisions"] = [current_user_record["subdivision"]]
+        return super().create(data, id_=id_, dbcommit=dbcommit, with_bucket=with_bucket, **kwargs)
 
     def log_action(self, user, action, comment=None):
         """Log intervention into deposit."""

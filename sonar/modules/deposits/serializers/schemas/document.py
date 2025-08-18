@@ -152,8 +152,7 @@ class DocumentSchema(Schema, RemoveEmptyValuesMixin):
     def init_data(self, item, **kwargs):
         """Initialize data before processing."""
         contribution = item.pop("contribution", None)
-        item = {"metadata": item, "contribution": contribution}
-        return item
+        return {"metadata": item, "contribution": contribution}
 
     def get_contributors(self, obj):
         """Get contributors."""

@@ -51,10 +51,6 @@ class SNLRepository:
         """Move to directory via FTP connection."""
         self.client.cd(pathname)
 
-    def list(self):
-        """List directory via FTP connection."""
-        self.client.walktree(".", lambda x: print(x), lambda x: print(x), lambda x: print(x))
-
     def upload_file(self, file_path, file_name):
         """Upload file to SNL server via FTP connection.
 

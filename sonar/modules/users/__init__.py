@@ -15,4 +15,3 @@
 
 
 """User init script."""
-

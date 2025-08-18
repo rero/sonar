@@ -15,10 +15,9 @@
 
 """JSON Schemas."""
 
-
 from functools import partial
 
-from flask import request
+from flask import current_app, request
 from invenio_records_rest.schemas import Nested, StrictKeysMixin
 from invenio_records_rest.schemas.fields import (
     GenFunction,
@@ -46,7 +45,6 @@ from sonar.modules.serializers import schema_from_context
 from sonar.modules.users.api import current_user_record
 
 schema_from_document = partial(schema_from_context, schema=DocumentRecord.schema)
-from flask import current_app
 
 
 class ThumbnailSchemaV1(StrictKeysMixin):

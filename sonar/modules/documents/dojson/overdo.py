@@ -71,4 +71,4 @@ class Overdo(BaseOverdo):
         """Store blob values and do transformation."""
         self.blob_record = blob
 
-        return super(Overdo, self).do(blob, ignore_missing=ignore_missing, exception_handlers=exception_handlers)
+        return super().do(blob, ignore_missing=ignore_missing, exception_handlers=exception_handlers)

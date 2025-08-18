@@ -31,10 +31,7 @@ class UserPermission(RecordPermission):
         :param record: Record to check.
         :returns: True is action can be done.
         """
-        if not user:
-            return False
-
-        return True
+        return bool(user)
 
     @classmethod
     def create(cls, user, record=None):

@@ -49,4 +49,4 @@ class JSONSerializer(BasedJSONSerializer):
         for org_term in results.get("aggregations", {}).get("collection", {}).get("buckets", []):
             if collection := CollectionRecord.get_record_by_pid(org_term["key"]):
                 org_term["name"] = get_language_value(collection["name"])
-        return super(JSONSerializer, self).post_process_serialize_search(results, pid_fetcher)
+        return super().post_process_serialize_search(results, pid_fetcher)

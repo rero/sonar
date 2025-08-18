@@ -38,18 +38,14 @@ class DocumentPermission(RecordPermission):
         :param record: Record to check.
         :returns: True is action can be done.
         """
-        view = request.args.get("view")
 
         # Documents are accessible in public view, but eventually filtered
         # later by organisation
-        if view:
+        if request.args.get("view"):
             return True
 
         # Only for moderators users.
-        if not user or not user.is_moderator or not current_organisation:
-            return False
-
-        return True
+        return bool(user and user.is_moderator and current_organisation)
 
     @classmethod
     def create(cls, user, record=None):
@@ -77,9 +73,8 @@ class DocumentPermission(RecordPermission):
         document = DocumentRecord.get_record_by_pid(record["pid"])
         document = document.resolve()
         # Moderator can read their own documents.
-        if user and user.is_moderator:
-            if document.has_organisation(current_organisation["pid"]):
-                return True
+        if user and user.is_moderator and document.has_organisation(current_organisation["pid"]):
+            return True
         return not document.is_masked
 
     @classmethod
@@ -178,10 +173,7 @@ class DocumentFilesPermission(FilesPermission):
         # TODO: filter the list of files based on embargo
         if isinstance(record, Bucket):
             return True
-        if hasattr(record, "key"):
-            file = document.files[record.key]
-        else:
-            file = document.files[record["key"]]
+        file = document.files[record.key] if hasattr(record, "key") else document.files[record["key"]]
         file_type = file["type"]
         if file_type == "fulltext" and (not user or not user.is_admin):
             return False

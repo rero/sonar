@@ -15,7 +15,6 @@
 
 """JSON Schemas."""
 
-
 from functools import partial
 
 from invenio_records_rest.schemas import StrictKeysMixin

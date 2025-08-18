@@ -15,7 +15,6 @@
 
 """Manage Webdav access."""
 
-
 from .heg_client import HegClient
 
 __all__ = ("HegClient",)

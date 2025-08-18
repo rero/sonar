@@ -15,7 +15,6 @@
 
 """Pytest fixtures and plugins for the UI application."""
 
-
 import pytest
 from invenio_app.factory import create_ui
 

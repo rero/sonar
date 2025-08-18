@@ -25,7 +25,7 @@ from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 from sonar.modules.documents.models import UrnIdentifier
 
 
-class URNAlreadyRegisterd(Exception):
+class URNAlreadyRegisteredError(Exception):
     """The URN identifier is already registered."""
 
 
@@ -35,7 +35,7 @@ class Urn:
     urn_pid_type = "urn"
 
     @classmethod
-    def _calculateCheckDigit(cls, urn):
+    def _calculate_check_digit(cls, urn):
         """Return the check-digit calculated on a URN.
 
         :param urn: the urn identifier.
@@ -113,7 +113,7 @@ class Urn:
         """
         base_urn = current_app.config.get("SONAR_APP_URN_DNB_BASE_URN")
         new_urn = f"{base_urn}{config.get('code'):03}-{pid}"
-        return f"{new_urn}{cls._calculateCheckDigit(new_urn)}"
+        return f"{new_urn}{cls._calculate_check_digit(new_urn)}"
 
     @classmethod
     def create_urn(cls, record):
@@ -128,25 +128,27 @@ class Urn:
         if DocumentRecord.get_rero_urn_code(record):
             current_app.logger.warning(f"generated urn already exist for document: {record['pid']}")
             return None
-        if config := urn_config.get("organisations", {}).get(org_pid):
-            if record.get("documentType") in config.get("types"):
-                urn_next_pid = str(UrnIdentifier.next())
-                try:
-                    urn_code = cls._generate_urn(int(urn_next_pid), config)
-                    pid = PersistentIdentifier.create(
-                        cls.urn_pid_type,
-                        urn_code,
-                        object_type="rec",
-                        object_uuid=record.id,
-                        status=PIDStatus.RESERVED,
-                    )
-                    if "identifiedBy" in record:
-                        record["identifiedBy"].append({"type": "bf:Urn", "value": urn_code})
-                    else:
-                        record["identifiedBy"] = [{"type": "bf:Urn", "value": urn_code}]
-                    return pid
-                except PIDAlreadyExists:
-                    current_app.logger.error(f"generated urn already exist for document: {record['pid']}")
+        if (config := urn_config.get("organisations", {}).get(org_pid)) and record.get("documentType") in config.get(
+            "types"
+        ):
+            urn_next_pid = str(UrnIdentifier.next())
+            try:
+                urn_code = cls._generate_urn(int(urn_next_pid), config)
+                pid = PersistentIdentifier.create(
+                    cls.urn_pid_type,
+                    urn_code,
+                    object_type="rec",
+                    object_uuid=record.id,
+                    status=PIDStatus.RESERVED,
+                )
+                if "identifiedBy" in record:
+                    record["identifiedBy"].append({"type": "bf:Urn", "value": urn_code})
+                else:
+                    record["identifiedBy"] = [{"type": "bf:Urn", "value": urn_code}]
+                return pid
+            except PIDAlreadyExists:
+                current_app.logger.error(f"generated urn already exist for document: {record['pid']}")
+        return None
 
     @classmethod
     def _urn_query(cls, status=None):
@@ -225,7 +227,7 @@ class Urn:
         urn_config = current_app.config.get("SONAR_APP_DOCUMENT_URN")
         configs = urn_config.get("organisations", {})
         pids = []
-        for org_pid in configs.keys():
+        for org_pid in configs:
             config = configs.get(org_pid)
             doc_types = config.get("types")
             query = (

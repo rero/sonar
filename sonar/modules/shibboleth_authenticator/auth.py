@@ -83,8 +83,7 @@ def init_saml_auth(req, remote_app):
             "x509cert": idp_cert,
         },
     }
-    auth = OneLogin_Saml2_Auth(req, settings)
-    return auth
+    return OneLogin_Saml2_Auth(req, settings)
 
 
 def get_identity_provider_configuration(remote_app):

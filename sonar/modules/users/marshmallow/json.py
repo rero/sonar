@@ -15,7 +15,6 @@
 
 """Marshmallow for deposits."""
 
-
 from functools import partial
 
 from invenio_records_rest.schemas import StrictKeysMixin

@@ -16,7 +16,6 @@
 """Persistent identifier minters."""
 
 
-
 def id_minter(record_uuid, data, provider, pid_key="pid", object_type="rec"):
     """SONAR minter."""
     # Create persistent identifier

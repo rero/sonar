@@ -103,10 +103,7 @@ def export(pid_type, serializer_key, output_dir):
         # Load the serializer
         serializer_class = current_app.config.get("SONAR_APP_EXPORT_SERIALIZERS", {}).get(pid_type)
 
-        if serializer_class:
-            serializer = obj_or_import_string(serializer_class)()
-        else:
-            serializer = None
+        serializer = obj_or_import_string(serializer_class)() if serializer_class else None
 
         pids = record_class.get_all_pids()
         records = []
@@ -118,10 +115,7 @@ def export(pid_type, serializer_key, output_dir):
         for pid in pids:
             record = record_class.get_record_by_pid(pid)
 
-            if serializer:
-                record = serializer.dump(record)
-            else:
-                record = record.dumps()
+            record = serializer.dump(record) if serializer else record.dumps()
 
             for file in record.get("files", []):
                 if file.get("uri"):
@@ -136,9 +130,8 @@ def export(pid_type, serializer_key, output_dir):
         if records:
             # Write data
             output_file = join(output_dir.name, "data.json")
-            f = open(output_file, "w")
-            f.write(json.dumps(records))
-            f.close()
+            with open(output_file, "w") as f:
+                f.write(json.dumps(records))
 
         click.secho("Finished", fg="green")
 

@@ -35,7 +35,7 @@ class SonarDublinCoreXMLSerializer(BaseSerializer):
     def transform_record(self, obj):
         """Tranform record."""
         # TODO: Remove this hack after migrate to invenio ressources
-        return self.schema_class().dump(dict(metadata=obj))
+        return self.schema_class().dump({"metadata": obj})
 
     def serialize_object_xml(self, obj):
         """Serialize a single record and persistent identifier to etree.
@@ -92,7 +92,7 @@ class SonarDublinCoreXMLSerializer(BaseSerializer):
                         val = value["value"]
                         if "@attrs" in value:
                             for attr in value["@attrs"]:
-                                prefix = attr["prefix"] if "prefix" in attr else "xml"
+                                prefix = attr.get("prefix", "xml")
                                 attrs[f"{{{prefix}}}{attr['name']}"] = attr["value"]
                     else:
                         val = value

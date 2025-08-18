@@ -32,10 +32,7 @@ class DepositPermission(RecordPermission):
         :returns: True is action can be done.
         """
         # At least for submitters logged users.
-        if not user or not user.is_submitter:
-            return False
-
-        return True
+        return bool(user and user.is_submitter)
 
     @classmethod
     def create(cls, user, record=None):

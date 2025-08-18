@@ -45,7 +45,7 @@ def test_get_metadata(app, client, deposit):
     res = client.get(url_files)
     assert res.status_code == 200
     file_keys = ["main.pdf", "additional.pdf"]
-    assert set(file_keys) == set([f.get("key") for f in res.json.get("contents")])
+    assert set(file_keys) == {f.get("key") for f in res.json.get("contents")}
 
     # get a specific file metadata of a given deposit
     for f_key in file_keys:
@@ -69,8 +69,9 @@ def test_put_delete(app, client, deposit, pdf_file):
         pid_value=deposit.get("pid"),
         key=file_name,
     )
-    res = client.put(url_file_content, input_stream=open(pdf_file, "rb"))
-    assert res.status_code == 200
+    with open(pdf_file, "rb") as f:
+        res = client.put(url_file_content, input_stream=f)
+        assert res.status_code == 200
 
     # get the version id
     url_file = url_for(
@@ -91,8 +92,9 @@ def test_put_delete(app, client, deposit, pdf_file):
         pid_value=deposit.get("pid"),
         key=file_name,
     )
-    res = client.put(url_file_content, input_stream=open(pdf_file, "rb"))
-    assert res.status_code == 200
+    with open(pdf_file, "rb") as f:
+        res = client.put(url_file_content, input_stream=f)
+        assert res.status_code == 200
 
     # get the new version id
     url_file = url_for(

@@ -35,14 +35,13 @@ class SonarGoogleScholarSerializer(SerializerMixinInterface, MarshmallowMixin, P
 
     def transform_record(self, pid, record, links_factory=None, **kwargs):
         """Transform record in metas for Google scholar."""
-        data = super(SonarGoogleScholarSerializer, self).transform_record(pid, record, links_factory, **kwargs)
+        data = super().transform_record(pid, record, links_factory, **kwargs)
 
         metas = []
         meta_template = '<meta name="citation_{key}" content="{value}">'
         for key, value in data.items():
             if isinstance(value, list):
-                for listValue in value:
-                    metas.append(meta_template.format(key=key, value=listValue))
+                metas.extend(meta_template.format(key=key, value=list_value) for list_value in value)
             else:
                 metas.append(meta_template.format(key=key, value=value))
 

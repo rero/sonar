@@ -42,10 +42,7 @@ class StreamResponseHandler(ResponseHandler):
 
         # https://flask.palletsprojects.com/en/1.1.x/api/#flask.Flask.make_response
         # (body, status, header)
-        if many:
-            serialize = self.serializer.serialize_object_list
-        else:
-            serialize = self.serializer.serialize_object
+        serialize = self.serializer.serialize_object_list if many else self.serializer.serialize_object
 
         response = flask_make_response(
             ("" if obj_or_list is None else Response(self.serializer.serialize_object_list(obj_or_list))),

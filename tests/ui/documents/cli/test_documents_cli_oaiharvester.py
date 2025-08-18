@@ -17,7 +17,7 @@
 
 from click.testing import CliRunner
 
-import sonar.modules.documents.cli.oaiharvester as Cli
+import sonar.modules.documents.cli.oaiharvester as cli
 
 
 def test_oai_config_create(app, script_info):
@@ -26,7 +26,7 @@ def test_oai_config_create(app, script_info):
 
     # Test create configuration
     result = runner.invoke(
-        Cli.oai_config_create,
+        cli.oai_config_create,
         ["./tests/ui/documents/data/oai_sources.json"],
         obj=script_info,
     )
@@ -34,7 +34,7 @@ def test_oai_config_create(app, script_info):
 
     # Test already created configurations
     result = runner.invoke(
-        Cli.oai_config_create,
+        cli.oai_config_create,
         ["./tests/ui/documents/data/oai_sources.json"],
         obj=script_info,
     )
@@ -42,7 +42,7 @@ def test_oai_config_create(app, script_info):
 
     # Test error on configuration JSON file
     result = runner.invoke(
-        Cli.oai_config_create,
+        cli.oai_config_create,
         ["./tests/ui/documents/data/oai_sources_error.json"],
         obj=script_info,
     )
@@ -55,11 +55,11 @@ def test_oai_config_info(app, script_info):
 
     # Create configurations
     runner.invoke(
-        Cli.oai_config_create,
+        cli.oai_config_create,
         ["./tests/ui/documents/data/oai_sources.json"],
         obj=script_info,
     )
 
     # List configurations
-    result = runner.invoke(Cli.oai_config_info, obj=script_info)
+    result = runner.invoke(cli.oai_config_info, obj=script_info)
     assert result.output.startswith("\nfake")

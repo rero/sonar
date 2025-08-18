@@ -17,9 +17,6 @@
 
 from flask_resources import ResponseHandler
 from flask_resources.serializers import JSONSerializer
-from invenio_records_resources.resources import (
-    RecordResourceConfig as BaseRecordResourceConfig,
-)
 from invenio_records_resources.resources.records.headers import etag_headers
 
 from sonar.dedicated.hepvs.projects.serializers.csv import CSVSerializer

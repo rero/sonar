@@ -37,8 +37,7 @@ class ReplaceRefsDumper(Dumper):
 
         # do a fresh copy
         data = deepcopy(record)
-        data = deepcopy(DocumentRecord(_records_state.replace_refs(data)))
-        return data
+        return deepcopy(DocumentRecord(_records_state.replace_refs(data)))
 
 
 class IndexerDumper(Dumper):
@@ -89,10 +88,10 @@ class IndexerDumper(Dumper):
     def _process_identifiers(record, data):
         """Adds isOpenAccess field."""
         # No files are present in record
-        for id in data.get("identifiedBy", []):
+        for identifier in data.get("identifiedBy", []):
             data.setdefault("identifiers", {})
-            key = id["type"].split(":")[-1].lower()
-            data["identifiers"].setdefault(key, []).append(id["value"])
+            key = identifier["type"].split(":")[-1].lower()
+            data["identifiers"].setdefault(key, []).append(identifier["value"])
 
     def dump(self, record, data):
         """Dump a document instance with basic document information's.

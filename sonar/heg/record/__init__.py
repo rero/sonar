@@ -15,10 +15,7 @@
 
 """Record from HEG."""
 
-from slugify import slugify
-
 from sonar.heg.serializers.schemas.factory import SchemaFactory
-from sonar.modules.organisations.api import OrganisationRecord
 
 
 class HEGRecord:

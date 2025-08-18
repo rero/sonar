@@ -41,12 +41,10 @@ def marc21_to_title_245(self, key, value):
     main_title = value.get("a", "No title found")
     language = value.get("9", "eng")
 
-    title = {
+    return {
         "type": "bf:Title",
         "mainTitle": [{"value": main_title, "language": language}],
     }
-
-    return title
 
 
 @overdo.over("identifiedBy", "^0247.")

@@ -16,7 +16,6 @@
 
 """Invenio digital library framework."""
 
-
 from .ext import ShibbolethAuthenticator
 
 __all__ = ("ShibbolethAuthenticator",)

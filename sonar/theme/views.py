@@ -20,7 +20,6 @@ templates and static files located in the folders of the same names next to
 this file.
 """
 
-
 import contextlib
 import re
 from copy import deepcopy
@@ -281,6 +280,7 @@ def schemas(record_type, schema=None):
             schema = replace_ref_url(schema, new_host)
             return jsonify({"schema": schema})
     abort(404)
+    return None
 
 
 @blueprint.app_template_filter()
@@ -294,22 +294,21 @@ def record_image_url(record, code, key=None):
     if not (record.get("_files") and record.get("pid")):
         return None
     for file in record["_files"]:
-        if re.match(r"^.*\.(jpe?g|png|gif|svg)$", file["key"], flags=re.IGNORECASE):
-            if not key or file["key"] == key:
-                return url_for(
-                    f"invenio_records_ui.{code}_files",
-                    pid_value=record.get("pid"),
-                    filename=file["key"],
-                )
+        if re.match(r"^.*\.(jpe?g|png|gif|svg)$", file["key"], flags=re.IGNORECASE) and (not key or file["key"] == key):
+            return url_for(
+                f"invenio_records_ui.{code}_files",
+                pid_value=record.get("pid"),
+                filename=file["key"],
+            )
     return None
 
 
 @blueprint.app_template_filter()
-def format_date(date, format="%d/%m/%Y"):
+def format_date(date, format="%d/%m/%Y"):  # noqa: A002
     """Format the given ISO format date string.
 
     :param date: Date string in ISO format.
-    :param format: Output format.
+    :param fmt: Output format.
     :returns: Formatted date string.
     """
     # Parse date

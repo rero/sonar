@@ -15,7 +15,6 @@
 
 """Pytest fixtures and plugins for PDF extractor tests."""
 
-
 import os
 
 import pytest
