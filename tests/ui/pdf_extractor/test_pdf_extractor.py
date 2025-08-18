@@ -46,7 +46,7 @@ def test_process(app, mock_grobid_response, pdf_file):
     with tempfile.NamedTemporaryFile(mode="w+b", suffix=".pdf") as temp_file:
         pdf_extractor.process(pdf_file, output_file=temp_file.name)
 
-        with open(temp_file.name, "r") as output_file:
+        with open(temp_file.name) as output_file:
             output = output_file.read()
             assert output.startswith('<?xml version="1.0" encoding="UTF-8"?>')
 

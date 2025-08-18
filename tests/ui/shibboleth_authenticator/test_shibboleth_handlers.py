@@ -24,7 +24,7 @@ def test_authorized_signup_handler(app, roles, valid_sp_configuration, valid_att
     """Test signup handler."""
     app.config.update(SHIBBOLETH_SERVICE_PROVIDER=valid_sp_configuration)
 
-    class MockResponse(object):
+    class MockResponse:
         """Mock SAML auth object."""
 
         def get_attributes(self):
@@ -49,7 +49,7 @@ def test_authorized_signup_handler(app, roles, valid_sp_configuration, valid_att
     assert response.status_code == 302
     assert "/test/" in response.location
 
-    class MockUser(object):
+    class MockUser:
         """Mock user."""
 
         def is_authenticated(self):

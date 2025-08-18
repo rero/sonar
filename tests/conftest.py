@@ -23,8 +23,8 @@ import tempfile
 from datetime import date
 from io import BytesIO
 from os.path import dirname, join
+from unittest import mock
 
-import mock
 import pytest
 import requests_mock
 from dotenv import load_dotenv

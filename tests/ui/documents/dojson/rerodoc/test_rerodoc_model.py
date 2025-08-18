@@ -15,7 +15,6 @@
 
 """DOJSON module tests."""
 
-from __future__ import absolute_import, print_function
 
 import pytest
 from dojson.contrib.marc21.utils import create_record

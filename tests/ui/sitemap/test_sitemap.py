@@ -40,7 +40,7 @@ def test_sitemap(app, db, organisation, document):
     # Control data into the xml file
     tree = ET.parse(sitemap_file)
     url = tree.findall(f"{namespace}url")[0]
-    assert "https://sonar.rero.ch/global/documents/1" == url.find(f"{namespace}loc").text
+    assert url.find(f"{namespace}loc").text == "https://sonar.rero.ch/global/documents/1"
     assert date.today().strftime("%Y-%m-%d") == url.find(f"{namespace}lastmod").text
 
     # ------- test for a dedicated organisation
@@ -58,7 +58,7 @@ def test_sitemap(app, db, organisation, document):
     # Control data into the xml file
     tree = ET.parse(sitemap_file)
     url = tree.findall(f"{namespace}url")[0]
-    assert "https://org.domain.com/org/documents/1" == url.find(f"{namespace}loc").text
+    assert url.find(f"{namespace}loc").text == "https://org.domain.com/org/documents/1"
     assert date.today().strftime("%Y-%m-%d") == url.find(f"{namespace}lastmod").text
 
     # ------- Generate multiple files with index sitemap

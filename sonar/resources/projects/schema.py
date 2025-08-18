@@ -114,9 +114,9 @@ class RecordSchema(BaseRecordSchema):
         identity = g.get("identity", AnonymousIdentity())
 
         item["metadata"]["permissions"] = {
-            "read": service.permission_policy("read", **{"record": item}).allows(identity),
-            "update": service.permission_policy("update", **{"record": item}).allows(identity),
-            "delete": service.permission_policy("delete", **{"record": item}).allows(identity),
+            "read": service.permission_policy("read", record=item).allows(identity),
+            "update": service.permission_policy("update", record=item).allows(identity),
+            "delete": service.permission_policy("delete", record=item).allows(identity),
         }
 
         return item

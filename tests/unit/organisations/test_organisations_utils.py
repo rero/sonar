@@ -21,4 +21,4 @@ from sonar.modules.organisations.utils import platform_name
 def test_platform_name():
     """Test transformation of platform name."""
     organisation = {"platformName": "#SiteName\n##Platform"}
-    assert "SiteName - Platform" == platform_name(organisation)
+    assert platform_name(organisation) == "SiteName - Platform"

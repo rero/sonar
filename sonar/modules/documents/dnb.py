@@ -65,7 +65,7 @@ class DnbUrnService:
         # https://wiki.dnb.de/display/URNSERVDOK/Beispiele%3A+URN-Verwaltung
         try:
             response = requests.request("HEAD", f"{cls.base_url()}/urn/{urn_code}", headers=cls.headers())
-            if not response.status_code in [200, 404]:
+            if response.status_code not in [200, 404]:
                 raise DnbServerError(
                     f"Bad DNB server response status {response.status_code}, "
                     f"when we check the existence of the following "

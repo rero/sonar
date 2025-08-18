@@ -15,7 +15,6 @@
 
 """Record serializers."""
 
-from __future__ import absolute_import, print_function
 
 from invenio_records_rest.serializers.response import (
     record_responsify,

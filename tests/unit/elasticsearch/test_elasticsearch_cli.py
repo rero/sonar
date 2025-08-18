@@ -16,10 +16,10 @@
 """Test Elasticsearch cli commands."""
 
 import datetime
+from unittest.mock import patch
 
 from click.testing import CliRunner
 from invenio_search import current_search_client
-from mock import patch
 
 from sonar.elasticsearch.cli import backup, create_repository, restore
 

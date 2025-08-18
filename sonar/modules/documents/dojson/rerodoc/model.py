@@ -151,12 +151,12 @@ def marc21_to_type_and_organisation(self, key, value):
     key = value.get("a", "") + "|" + value.get("f", "")
     if key not in TYPE_MAPPINGS:
         current_app.logger.warning(f'Document type not found in mapping for type "{key}"')
-        return None
+        return
 
     # Store types to records
     self["documentType"] = TYPE_MAPPINGS[key]
 
-    return None
+    return
 
 
 @overdo.over("language", "^041")
@@ -165,7 +165,7 @@ def marc21_to_type_and_organisation(self, key, value):
 def marc21_to_language(self, key, value):
     """Get languages."""
     if not value.get("a"):
-        return None
+        return
 
     language = self.get("language", [])
 
@@ -176,7 +176,7 @@ def marc21_to_language(self, key, value):
 
     self["language"] = language
 
-    return None
+    return
 
 
 @overdo.over("title", "^245..")
@@ -211,7 +211,7 @@ def marc21_to_title_246(self, key, value):
     language = value.get("9", "eng")
 
     if not main_title:
-        return None
+        return
 
     title = self.get("title", [{"type": "bf:Title", "mainTitle": []}])
 
@@ -220,7 +220,7 @@ def marc21_to_title_246(self, key, value):
 
     self["title"] = title
 
-    return None
+    return
 
 
 @overdo.over("editionStatement", "^250..")
@@ -295,7 +295,7 @@ def marc21_to_provision_activity_field_260(self, key, value):
     if provision_activity:
         self["provisionActivity"] = provision_activity
 
-    return None
+    return
 
 
 @overdo.over("provisionActivity", "^269..")
@@ -304,22 +304,22 @@ def marc21_to_provision_activity_field_269(self, key, value):
     """Get provision activity data from field 269."""
     # 260$c has priority to this date
     if overdo.blob_record.get("260__", {}).get("c"):
-        return None
+        return
 
     # No date, skipping
     if not value.get("c"):
-        return None
+        return
 
     # Assign start date
     match = re.search(r"^[0-9]{4}(-[0-9]{2}-[0-9]{2})?$", value.get("c"))
 
     # Date does not match "YYYY" or "YYYY-MM-DD"
     if not match:
-        return None
+        return
 
     add_provision_activity_start_date(self, value.get("c"))
 
-    return None
+    return
 
 
 @overdo.over("formats", "^300..")
@@ -382,7 +382,7 @@ def marc21_to_abstract(self, key, value):
     language = value.get("9", "eng")
 
     if not abstract:
-        return None
+        return
 
     if language == "fr":
         language = "fre"
@@ -392,7 +392,7 @@ def marc21_to_abstract(self, key, value):
 
     self["abstracts"] = abstracts_data
 
-    return None
+    return
 
 
 @overdo.over("identifiedBy", "001")
@@ -611,11 +611,10 @@ def marc21_to_other_edition(self, key, value):
         identified_by.append({"type": "bf:Doi", "value": matches.group("doi")})
         self["identifiedBy"] = identified_by
         return None
-    else:
-        return {
-            "document": {"electronicLocator": electronic_locator},
-            "publicNote": public_note,
-        }
+    return {
+        "document": {"electronicLocator": electronic_locator},
+        "publicNote": public_note,
+    }
 
 
 @overdo.over("collections", "^982..")
@@ -731,21 +730,21 @@ def marc21_to_dissertation_field_502(self, key, value):
     # Try to get start date and store in provision activity
     # 260$c and 269$c have priority to this date
     if record.get("260__", {}).get("c") or record.get("269__", {}).get("c") or record.get("773__", {}).get("g"):
-        return None
+        return
 
     # No date, skipping
     if not value.get("9"):
-        return None
+        return
 
     # Match either 2019 or 2019-01-01
     match = re.search(r"^[0-9]{4}(-[0-9]{2}-[0-9]{2})?$", value.get("9"))
 
     if not match:
-        return None
+        return
 
     add_provision_activity_start_date(self, value.get("9"))
 
-    return None
+    return
 
 
 @overdo.over("dissertation", "^508..")
@@ -753,14 +752,14 @@ def marc21_to_dissertation_field_502(self, key, value):
 def marc21_to_dissertation_field_508(self, key, value):
     """Extract dissertation note."""
     if not value.get("a"):
-        return None
+        return
 
     dissertation = self.get("dissertation", {})
     dissertation["jury_note"] = value.get("a")
 
     self["dissertation"] = dissertation
 
-    return None
+    return
 
 
 @overdo.over("usageAndAccessPolicy", "^540..")
@@ -778,7 +777,7 @@ def marc21_to_usage_and_access_policy(self, key, value):
 def marc21_to_contribution_field_100(self, key, value):
     """Extract contribution from field 100."""
     if not value.get("a"):
-        return None
+        return
 
     contribution = self.get("contribution", [])
 
@@ -803,7 +802,7 @@ def marc21_to_contribution_field_100(self, key, value):
     contribution.append(data)
     self["contribution"] = contribution
 
-    return None
+    return
 
 
 @overdo.over("contribution", "^700..")
@@ -812,7 +811,7 @@ def marc21_to_contribution_field_100(self, key, value):
 def marc21_to_contribution_field_700(self, key, value):
     """Extract contribution from field 100."""
     if not value.get("a"):
-        return None
+        return
 
     contribution = self.get("contribution", [])
 
@@ -842,7 +841,7 @@ def marc21_to_contribution_field_700(self, key, value):
     contribution.append(data)
     self["contribution"] = contribution
 
-    return None
+    return
 
 
 @overdo.over("contribution", "^710..")
@@ -851,7 +850,7 @@ def marc21_to_contribution_field_700(self, key, value):
 def marc21_to_contribution_field_710(self, key, value):
     """Extract contribution from field 710."""
     if not value.get("a"):
-        return None
+        return
 
     contribution = self.get("contribution", [])
     contribution.append(
@@ -862,7 +861,7 @@ def marc21_to_contribution_field_710(self, key, value):
     )
     self["contribution"] = contribution
 
-    return None
+    return
 
 
 @overdo.over("contribution", "^711..")
@@ -871,7 +870,7 @@ def marc21_to_contribution_field_710(self, key, value):
 def marc21_to_contribution_field_711(self, key, value):
     """Extract contribution from field 711."""
     if not value.get("a"):
-        return None
+        return
 
     contribution = self.get("contribution", [])
 
@@ -895,7 +894,7 @@ def marc21_to_contribution_field_711(self, key, value):
     contribution.append(data)
     self["contribution"] = contribution
 
-    return None
+    return
 
 
 @overdo.over("customField1", "^918..")
@@ -911,7 +910,7 @@ def marc21_to_faculty_and_department(self, key, value):
         dep = value.get("c")
         if dep:
             self["customField2"] = [dep]
-    return None
+    return
 
 
 @overdo.over("partOf", "^773..")

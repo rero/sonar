@@ -34,7 +34,7 @@ class AffiliationResolver:
         """
         affiliations = []
 
-        with open(CSV_FILE, "r") as file:
+        with open(CSV_FILE) as file:
             reader = csv.reader(file, delimiter="\t")
             for row in reader:
                 affiliation = []

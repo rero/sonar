@@ -55,7 +55,7 @@ def marc21_to_identified_by_from_024(self, key, value):
     """Get identifier from field 024."""
     identified_by = self.get("identifiedBy", [])
 
-    if not value.get("a") or not value.get("2") in ["DOI", "PMID"]:
+    if not value.get("a") or value.get("2") not in ["DOI", "PMID"]:
         return None
 
     if value.get("2") == "DOI":

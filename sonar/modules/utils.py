@@ -121,7 +121,7 @@ def remove_trailing_punctuation(data, punctuation=",", spaced_punctuation=":;/-"
     """
     punctuation = punctuation.replace(".", r"\.").replace("-", r"\-")
     spaced_punctuation = spaced_punctuation.replace(".", r"\.").replace("-", r"\-")
-    return re.sub(r"([{0}]|\s+[{1}])$".format(punctuation, spaced_punctuation), "", data.rstrip()).rstrip()
+    return re.sub(rf"([{punctuation}]|\s+[{spaced_punctuation}])$", "", data.rstrip()).rstrip()
 
 
 def get_current_language():

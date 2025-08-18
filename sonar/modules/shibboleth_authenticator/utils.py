@@ -15,7 +15,6 @@
 
 """Utility methods to help find, authenticate or register a remote user."""
 
-from __future__ import absolute_import, print_function
 
 from random import randrange
 from urllib.parse import urlparse

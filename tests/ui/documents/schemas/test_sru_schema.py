@@ -15,7 +15,6 @@
 
 """Test SRU dojson transformation."""
 
-from __future__ import absolute_import, print_function
 
 from sonar.modules.documents.loaders.schemas.sru import SRUSchema
 

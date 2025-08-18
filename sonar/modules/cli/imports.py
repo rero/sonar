@@ -51,7 +51,7 @@ def hepbejune(data_file, pdf_directory):
 
     records = []
 
-    with open(data_file.name, "r") as file:
+    with open(data_file.name) as file:
         reader = csv.reader(file, delimiter=",")
 
         for row in reader:

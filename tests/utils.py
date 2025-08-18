@@ -15,7 +15,7 @@
 
 """Utils function for testing."""
 
-import mock
+from unittest import mock
 
 
 class VerifyRecordPermissionPatch:

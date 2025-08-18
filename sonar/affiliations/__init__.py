@@ -15,7 +15,6 @@
 
 """Affiliations."""
 
-from __future__ import absolute_import, print_function
 
 from .affiliation_resolver import AffiliationResolver
 

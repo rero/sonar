@@ -18,6 +18,5 @@
 This file is imported by ``sonar.__init__``.
 """
 
-from __future__ import absolute_import, print_function
 
 __version__ = "1.11.0"

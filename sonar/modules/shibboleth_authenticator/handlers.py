@@ -15,7 +15,6 @@
 
 """Handlers for shibboleth endpoints."""
 
-from __future__ import absolute_import, print_function
 
 from flask import current_app, redirect, session
 from flask_login import current_user, logout_user

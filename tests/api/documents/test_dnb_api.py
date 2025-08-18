@@ -15,7 +15,8 @@
 
 """Test DnbUrnService rest API."""
 
-import mock
+from unittest import mock
+
 import requests_mock
 from invenio_pidstore.models import PersistentIdentifier
 

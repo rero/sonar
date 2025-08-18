@@ -26,7 +26,7 @@ def test_oai_set(organisation, document):
     assert document["_oai"]["id"] == f"oai:sonar.ch:{document['pid']}"
     assert document["_oai"]["sets"] == ["org"]
     assert re.match(
-        r"^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:" r"[0-9]{2}:[0-9]{2}\.[0-9]{6}\+00:00$",
+        r"^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}\+00:00$",
         document["_oai"]["updated"],
     )
 

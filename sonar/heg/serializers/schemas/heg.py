@@ -53,11 +53,11 @@ class HEGSchema(Schema):
 
     def get_title(self, obj):
         """Get title."""
-        return None
+        return
 
     def get_abstracts(self, obj):
         """Get abstracts."""
-        return None
+        return
 
     def get_language(self, obj):
         """Get language."""
@@ -73,16 +73,16 @@ class HEGSchema(Schema):
 
     def get_subjects(self, obj):
         """Get subjects."""
-        return None
+        return
 
     def get_contribution(self, obj):
         """Get contribution."""
-        return None
+        return
 
     def get_provision_activity(self, obj):
         """Get provision activity."""
-        return None
+        return
 
     def get_part_of(self, obj):
         """Get part of."""
-        return None
+        return

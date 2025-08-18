@@ -15,7 +15,6 @@
 
 """Pytest fixtures and plugins for PDF extractor tests."""
 
-from __future__ import absolute_import, print_function
 
 import os
 
@@ -38,7 +37,7 @@ def xml_file():
 @pytest.fixture(scope="function")
 def mock_grobid_response(monkeypatch, xml_file):
     """Mock a grobid response for full text extraction."""
-    with open(xml_file, "r") as file:
+    with open(xml_file) as file:
         output = file.read()
 
     class MockResponse:

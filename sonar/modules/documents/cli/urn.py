@@ -152,7 +152,7 @@ def snl_upload_file(urn_code):
     template_email_SNL = current_app.config.get("SONAR_APP_SNL_EMAIL_TEMPLATE")
 
     click.secho("Template of email to send to SNL:", fg="green")
-    with open(template_email_SNL, "r") as file:
+    with open(template_email_SNL) as file:
         email_txt = file.read()
         email_txt = email_txt.replace("<URN>", urn_code)
         email_txt = email_txt.replace("<URL>", f"https://sonar.ch/global/documents/{doc.get('pid')}")
@@ -185,6 +185,6 @@ def successor(urn, successor_urn):
     """
     try:
         DnbUrnService().set_successor(urn, successor_urn)
-        click.secho(f"Added successfully a successor.", fg="green")
+        click.secho("Added successfully a successor.", fg="green")
     except DnbServerError as err:
         click.secho(str(err), fg="red")

@@ -35,17 +35,17 @@ def test_transform_harvested_records(app, bucket_location, without_oaiset_signal
         url="http://doc.rero.ch/oai2d",
     )
 
-    transform_harvested_records(None, records, **{"name": "rerodoc", "max": "1"})
+    transform_harvested_records(None, records, name="rerodoc", max="1")
     captured = capsys.readouterr()
     assert captured.out.find("1 records harvested") != -1
 
     # Max set to 0 --> import all
-    transform_harvested_records(None, records, **{"name": "rerodoc", "max": "0"})
+    transform_harvested_records(None, records, name="rerodoc", max="0")
     captured = capsys.readouterr()
     assert captured.out.find("1 records harvested") != -1
 
     # Not an import
-    transform_harvested_records(None, records, **{"name": "rerodoc", "max": "1", "action": "not-existing"})
+    transform_harvested_records(None, records, name="rerodoc", max="1", action="not-existing")
     captured = capsys.readouterr()
     assert captured.out == ""
 
@@ -75,8 +75,8 @@ def test_export_json(app, bucket_location, monkeypatch):
 
     data_directory = join(app.config["SONAR_APP_STORAGE_PATH"], "data")
 
-    export_json(None, records, **{"name": "rerodoc", "action": "not-existing"})
+    export_json(None, records, name="rerodoc", action="not-existing")
     assert not exists(data_directory)
 
-    export_json(None, records, **{"name": "rerodoc", "action": "export"})
+    export_json(None, records, name="rerodoc", action="export")
     assert len(listdir(data_directory)) == 1

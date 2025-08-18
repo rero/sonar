@@ -15,8 +15,9 @@
 
 """Test translations REST endpoints."""
 
+from unittest.mock import patch
+
 from flask import url_for
-from mock import patch
 
 
 def test_get_translations(client):

@@ -17,8 +17,8 @@
 
 import os
 import tempfile
+from unittest import mock
 
-import mock
 import pytest
 
 from sonar.heg.ftp import HEGRepository
