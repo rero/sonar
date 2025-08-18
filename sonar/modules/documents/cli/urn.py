@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2022 RERO
 #
@@ -56,18 +54,18 @@ def get(urn):
     url = DnbUrnService.get_url(document)
     if dnb_urls["items"][0]["url"] != url:
         click.secho(
-            f'error: DNB has the wrong url ({dnb_urls["items"][0]["url"]} != {url})',
+            f"error: DNB has the wrong url ({dnb_urls['items'][0]['url']} != {url})",
             fg="red",
         )
     if len(dnb_urls["items"]) > 1:
         urls = [item["url"] for item in dnb_urls["items"]]
-        click.secho(f'error: DNB has more than one urls ({", ".join(urls)})', fg="red")
+        click.secho(f"error: DNB has more than one urls ({', '.join(urls)})", fg="red")
 
-    click.echo(f'urn created: {dnb_urn["created"]}')
-    click.echo(f'urn modified: {dnb_urn["lastModified"]}')
+    click.echo(f"urn created: {dnb_urn['created']}")
+    click.echo(f"urn modified: {dnb_urn['lastModified']}")
     dnb_url = dnb_urls["items"][0]
-    click.echo(f'url created: {dnb_url["created"]}')
-    click.echo(f'url modified: {dnb_url["lastModified"]}')
+    click.echo(f"url created: {dnb_url['created']}")
+    click.echo(f"url modified: {dnb_url['lastModified']}")
     click.echo(f"url: {url}")
 
 
@@ -77,9 +75,7 @@ def create():
     """Create and register urns for loaded records."""
     idx = 0
     for idx, document in enumerate(Urn.get_documents_to_generate_urns(), 1):
-        click.secho(
-            f'\t{idx}: generate urn code for pid: {document["pid"]}', fg="green"
-        )
+        click.secho(f"\t{idx}: generate urn code for pid: {document['pid']}", fg="green")
         Urn.create_urn(document)
         document.commit()
         db.session.commit()
@@ -92,12 +88,10 @@ def create():
 @with_appcontext
 def register():
     """Register urns for reserved URN pids."""
-    query = PersistentIdentifier.query.filter_by(pid_type="urn").filter_by(
-        status=PIDStatus.RESERVED
-    )
+    query = PersistentIdentifier.query.filter_by(pid_type="urn").filter_by(status=PIDStatus.RESERVED)
     for idx, pid in enumerate(query.all()):
         doc = DocumentRecord.get_record(pid.object_uuid)
-        click.secho(f'Registering document (pid: {doc["pid"]})', fg="yellow")
+        click.secho(f"Registering document (pid: {doc['pid']})", fg="yellow")
         Urn.register_urn_code_from_document(doc)
     click.secho(f"{idx} URN registered.", fg="green")
 
@@ -150,9 +144,7 @@ def snl_upload_file(urn_code):
     for _file in files:
         try:
             snl_repository.upload_file(_file.file.uri, os.path.join(urn_dir, _file.key))
-            click.secho(
-                f"Successfully uploaded file {os.path.basename(_file.key)}.", fg="green"
-            )
+            click.secho(f"Successfully uploaded file {os.path.basename(_file.key)}.", fg="green")
         except Exception as exception:
             click.secho(str(exception), fg="red")
 
@@ -163,9 +155,7 @@ def snl_upload_file(urn_code):
     with open(template_email_SNL, "r") as file:
         email_txt = file.read()
         email_txt = email_txt.replace("<URN>", urn_code)
-        email_txt = email_txt.replace(
-            "<URL>", f'https://sonar.ch/global/documents/{doc.get("pid")}'
-        )
+        email_txt = email_txt.replace("<URL>", f"https://sonar.ch/global/documents/{doc.get('pid')}")
         click.secho(email_txt)
 
 

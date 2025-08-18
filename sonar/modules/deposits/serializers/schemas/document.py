@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -79,10 +77,7 @@ class DocumentMetadataSchema(Schema, RemoveEmptyValuesMixin):
         if not obj.get("abstracts"):
             return None
 
-        return [
-            {"language": item["language"], "abstract": item["value"]}
-            for item in obj["abstracts"]
-        ]
+        return [{"language": item["language"], "abstract": item["value"]} for item in obj["abstracts"]]
 
     def get_date(self, obj):
         """Get date."""

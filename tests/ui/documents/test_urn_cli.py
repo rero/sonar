@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2023 RERO
 #
@@ -17,7 +15,6 @@
 
 """Test URN cli."""
 
-
 from io import BytesIO
 
 import mock
@@ -29,9 +26,7 @@ from sonar.snl.ftp import SNLRepository
 
 
 @mock.patch("sonar.snl.ftp.Connection", autospec=True)
-def test_snl_upload_file(
-    mock_ftp_constructor, app, script_info, minimal_thesis_document_with_urn
-):
+def test_snl_upload_file(mock_ftp_constructor, app, script_info, minimal_thesis_document_with_urn):
     """Test upload file."""
     app.config["SONAR_APP_FTP_SNL_PATH"] = "/rero"
 
@@ -47,9 +42,7 @@ def test_snl_upload_file(
 
     with app.app_context():
         # create pid identifier
-        provider = BaseProvider.create(
-            pid_type="urn", pid_value="urn:nbn:ch:rero-006-72"
-        )
+        provider = BaseProvider.create(pid_type="urn", pid_value="urn:nbn:ch:rero-006-72")
         assert provider.pid
         assert provider.pid.pid_type == "urn"
         assert provider.pid.pid_value == "urn:nbn:ch:rero-006-72"
@@ -68,11 +61,7 @@ def test_snl_upload_file(
         # upload file
         result = runner.invoke(
             snl_upload_file,
-            [
-                minimal_thesis_document_with_urn.get_rero_urn_code(
-                    minimal_thesis_document_with_urn
-                )
-            ],
+            [minimal_thesis_document_with_urn.get_rero_urn_code(minimal_thesis_document_with_urn)],
             obj=script_info,
         )
         assert "Template of email to send to SNL:" in result.output

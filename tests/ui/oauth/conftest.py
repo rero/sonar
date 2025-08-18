@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -91,11 +89,7 @@ def mock_api_read_record(monkeypatch):
             },
         }
 
-        if (
-            request_type == "FAKE"
-            or record_id == "NOT_EXISTING"
-            or token == "NOT_EXISTING"
-        ):
+        if request_type == "FAKE" or record_id == "NOT_EXISTING" or token == "NOT_EXISTING":
             return None
 
         if request_type == "person":

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -262,9 +260,7 @@ def test_pagination(app, minimal_document):
     assert "pagination" not in result
 
     # OK
-    minimal_document["partOf"] = [
-        {"document": {"title": "Host document"}, "numberingPages": "123-125"}
-    ]
+    minimal_document["partOf"] = [{"document": {"title": "Host document"}, "numberingPages": "123-125"}]
     result = schemaorg_v1.transform_record(minimal_document["pid"], minimal_document)
     assert result["pagination"] == "123-125"
 
@@ -281,30 +277,22 @@ def test_page_start(app, minimal_document):
     assert "pageStart" not in result
 
     # Only one page
-    minimal_document["partOf"] = [
-        {"document": {"title": "Host document"}, "numberingPages": "123"}
-    ]
+    minimal_document["partOf"] = [{"document": {"title": "Host document"}, "numberingPages": "123"}]
     result = schemaorg_v1.transform_record(minimal_document["pid"], minimal_document)
     assert result["pageStart"] == "123"
 
     # Set of pages
-    minimal_document["partOf"] = [
-        {"document": {"title": "Host document"}, "numberingPages": "123-130"}
-    ]
+    minimal_document["partOf"] = [{"document": {"title": "Host document"}, "numberingPages": "123-130"}]
     result = schemaorg_v1.transform_record(minimal_document["pid"], minimal_document)
     assert result["pageStart"] == "123"
 
     # Exotic formatting
-    minimal_document["partOf"] = [
-        {"document": {"title": "Host document"}, "numberingPages": "123, 134-135"}
-    ]
+    minimal_document["partOf"] = [{"document": {"title": "Host document"}, "numberingPages": "123, 134-135"}]
     result = schemaorg_v1.transform_record(minimal_document["pid"], minimal_document)
     assert result["pageStart"] == "123"
 
     # Page start not found
-    minimal_document["partOf"] = [
-        {"document": {"title": "Host document"}, "numberingPages": "pages"}
-    ]
+    minimal_document["partOf"] = [{"document": {"title": "Host document"}, "numberingPages": "pages"}]
     result = schemaorg_v1.transform_record(minimal_document["pid"], minimal_document)
     assert "pageStart" not in result
 
@@ -321,29 +309,21 @@ def test_page_end(app, minimal_document):
     assert "pageEnd" not in result
 
     # Only one page
-    minimal_document["partOf"] = [
-        {"document": {"title": "Host document"}, "numberingPages": "123"}
-    ]
+    minimal_document["partOf"] = [{"document": {"title": "Host document"}, "numberingPages": "123"}]
     result = schemaorg_v1.transform_record(minimal_document["pid"], minimal_document)
     assert "pageEnd" not in result
 
     # Set of pages
-    minimal_document["partOf"] = [
-        {"document": {"title": "Host document"}, "numberingPages": "123-130"}
-    ]
+    minimal_document["partOf"] = [{"document": {"title": "Host document"}, "numberingPages": "123-130"}]
     result = schemaorg_v1.transform_record(minimal_document["pid"], minimal_document)
     assert result["pageEnd"] == "130"
 
     # Exotic formatting
-    minimal_document["partOf"] = [
-        {"document": {"title": "Host document"}, "numberingPages": "123, 134-135"}
-    ]
+    minimal_document["partOf"] = [{"document": {"title": "Host document"}, "numberingPages": "123, 134-135"}]
     result = schemaorg_v1.transform_record(minimal_document["pid"], minimal_document)
     assert "pageEnd" not in result
 
     # Page end not found
-    minimal_document["partOf"] = [
-        {"document": {"title": "Host document"}, "numberingPages": "pages"}
-    ]
+    minimal_document["partOf"] = [{"document": {"title": "Host document"}, "numberingPages": "pages"}]
     result = schemaorg_v1.transform_record(minimal_document["pid"], minimal_document)
     assert "pageEnd" not in result

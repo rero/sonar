@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -154,37 +152,27 @@ def test_read(
     subdivision2 = make_subdivision("org2")
 
     # Not logged
-    res = client.get(
-        url_for("invenio_records_rest.subd_item", pid_value=subdivision1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.subd_item", pid_value=subdivision1["pid"]))
     assert res.status_code == 401
 
     # Logged as user
     login_user_via_session(client, email=user["email"])
-    res = client.get(
-        url_for("invenio_records_rest.subd_item", pid_value=subdivision1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.subd_item", pid_value=subdivision1["pid"]))
     assert res.status_code == 403
 
     # Logged as submitter
     login_user_via_session(client, email=submitter["email"])
-    res = client.get(
-        url_for("invenio_records_rest.subd_item", pid_value=subdivision1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.subd_item", pid_value=subdivision1["pid"]))
     assert res.status_code == 200
 
     # Logged as moderator
     login_user_via_session(client, email=moderator["email"])
-    res = client.get(
-        url_for("invenio_records_rest.subd_item", pid_value=subdivision1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.subd_item", pid_value=subdivision1["pid"]))
     assert res.status_code == 200
 
     # Logged as admin
     login_user_via_session(client, email=admin["email"])
-    res = client.get(
-        url_for("invenio_records_rest.subd_item", pid_value=subdivision1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.subd_item", pid_value=subdivision1["pid"]))
     assert res.status_code == 200
     assert res.json["metadata"]["permissions"] == {
         "delete": True,
@@ -193,22 +181,16 @@ def test_read(
     }
 
     # Logged as admin of other organisation
-    res = client.get(
-        url_for("invenio_records_rest.subd_item", pid_value=subdivision2["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.subd_item", pid_value=subdivision2["pid"]))
     assert res.status_code == 403
 
     # Logged as superuser
     login_user_via_session(client, email=superuser["email"])
-    res = client.get(
-        url_for("invenio_records_rest.subd_item", pid_value=subdivision1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.subd_item", pid_value=subdivision1["pid"]))
     assert res.status_code == 200
 
     login_user_via_session(client, email=superuser["email"])
-    res = client.get(
-        url_for("invenio_records_rest.subd_item", pid_value=subdivision2["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.subd_item", pid_value=subdivision2["pid"]))
     assert res.status_code == 200
     assert res.json["metadata"]["permissions"] == {
         "delete": True,
@@ -319,77 +301,57 @@ def test_delete(
 ):
     """Test delete subdivisions permissions."""
     # Not logged
-    res = client.delete(
-        url_for("invenio_records_rest.subd_item", pid_value=subdivision["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.subd_item", pid_value=subdivision["pid"]))
     assert res.status_code == 401
 
     # Logged as user
     login_user_via_session(client, email=user["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.subd_item", pid_value=subdivision["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.subd_item", pid_value=subdivision["pid"]))
     assert res.status_code == 403
 
     # Logged as submitter
     login_user_via_session(client, email=submitter["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.subd_item", pid_value=subdivision["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.subd_item", pid_value=subdivision["pid"]))
     assert res.status_code == 403
 
     # Logged as moderator
     login_user_via_session(client, email=moderator["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.subd_item", pid_value=subdivision["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.subd_item", pid_value=subdivision["pid"]))
     assert res.status_code == 403
 
     make_organisation("org2")
     subdivision2 = make_subdivision("org2")
 
     # Cannot remove subdivision from other organisation
-    res = client.delete(
-        url_for("invenio_records_rest.subd_item", pid_value=subdivision2["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.subd_item", pid_value=subdivision2["pid"]))
     assert res.status_code == 403
 
     subdivision = make_subdivision("org")
 
     # Logged as admin
     login_user_via_session(client, email=admin["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.subd_item", pid_value=subdivision["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.subd_item", pid_value=subdivision["pid"]))
     assert res.status_code == 204
 
     subdivision = make_subdivision("org")
 
     # Logged as superuser
     login_user_via_session(client, email=superuser["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.subd_item", pid_value=subdivision["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.subd_item", pid_value=subdivision["pid"]))
     assert res.status_code == 204
 
     # Can remove any subdivision
     login_user_via_session(client, email=superuser["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.subd_item", pid_value=subdivision2["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.subd_item", pid_value=subdivision2["pid"]))
     assert res.status_code == 204
 
     subdivision = make_subdivision("org")
 
     # Cannot remove subdivision as it is linked to document.
-    document["subdivisions"] = [
-        {"$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"}
-    ]
+    document["subdivisions"] = [{"$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"}]
     document.commit()
     db.session.commit()
     document.reindex()
 
-    res = client.delete(
-        url_for("invenio_records_rest.subd_item", pid_value=subdivision["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.subd_item", pid_value=subdivision["pid"]))
     assert res.status_code == 403

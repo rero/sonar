@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -23,9 +21,7 @@ import sonar.modules.organisations.cli.organisations as Cli
 from sonar.modules.organisations.api import OrganisationRecord
 
 
-def test_import_organisations(
-    app, script_info, bucket_location, without_oaiset_signals
-):
+def test_import_organisations(app, script_info, bucket_location, without_oaiset_signals):
     """Test import organisations."""
     runner = CliRunner()
 
@@ -49,6 +45,5 @@ def test_import_organisations(
         obj=script_info,
     )
     assert result.output.find(
-        "Organisation {'code': 'test', 'name': 'Test'} could not be "
-        "imported: Record already exists in DB"
+        "Organisation {'code': 'test', 'name': 'Test'} could not be imported: Record already exists in DB"
     )

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -50,31 +48,23 @@ def test_api_query(client, document_with_file, document_json, make_document, sup
     assert response.json["hits"]["total"]["value"] == 1
 
     # with explanation
-    response = client.get(
-        url_for("invenio_records_rest.doc_list", debug=1), headers=headers
-    )
+    response = client.get(url_for("invenio_records_rest.doc_list", debug=1), headers=headers)
     assert response.status_code == 200
     assert response.json["hits"]["total"]["value"] == 1
     assert "explanation" in response.json["hits"]["hits"][0]
 
     # query string = 'title'
-    response = client.get(
-        url_for("invenio_records_rest.doc_list", q="title"), headers=headers
-    )
+    response = client.get(url_for("invenio_records_rest.doc_list", q="title"), headers=headers)
     assert response.status_code == 200
     assert response.json["hits"]["total"]["value"] == 1
 
     # query string = 'titlé', record found with word "Title"
-    response = client.get(
-        url_for("invenio_records_rest.doc_list", q="titlé"), headers=headers
-    )
+    response = client.get(url_for("invenio_records_rest.doc_list", q="titlé"), headers=headers)
     assert response.status_code == 200
     assert response.json["hits"]["total"]["value"] == 1
 
     # query string = 'resume', record found with word "Résumé"
-    response = client.get(
-        url_for("invenio_records_rest.doc_list", q="resume"), headers=headers
-    )
+    response = client.get(url_for("invenio_records_rest.doc_list", q="resume"), headers=headers)
     assert response.status_code == 200
     assert response.json["hits"]["total"]["value"] == 1
 
@@ -150,15 +140,11 @@ def test_api_query(client, document_with_file, document_json, make_document, sup
         headers=headers,
     )
     assert response.status_code == 400
-    assert "The syntax of the search query is invalid." in response.get_data(
-        as_text=True
-    )
+    assert "The syntax of the search query is invalid." in response.get_data(as_text=True)
 
     # Test facets with AND operator.
     # Create a new document with only one subject
-    document_json["subjects"] = [
-        {"label": {"language": "eng", "value": ["GARCH models"]}, "source": "RERO"}
-    ]
+    document_json["subjects"] = [{"label": {"language": "eng", "value": ["GARCH models"]}, "source": "RERO"}]
     make_document(organisation="org")
     response = client.get(
         url_for(

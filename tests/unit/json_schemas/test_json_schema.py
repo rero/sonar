@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -34,9 +32,7 @@ def test_load(app, monkeypatch):
     assert schema.get_schema()["title"] == "Document"
 
     # Schema for custom resource
-    monkeypatch.setattr(
-        "sonar.jsonschemas.json_schema_base.current_organisation", {"code": "hepvs"}
-    )
+    monkeypatch.setattr("sonar.jsonschemas.json_schema_base.current_organisation", {"code": "hepvs"})
     monkeypatch.setattr(
         "sonar.jsonschemas.json_schema_base.has_custom_resource",
         lambda *args, **kwargs: True,

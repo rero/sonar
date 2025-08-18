@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -32,22 +30,16 @@ def test_resolve():
 
     assert not affiliation_resolver.resolve(None)
 
-    test_string = (
-        "Institute for Computer Music and Sound Technology, Zurich"
-        " University of the Arts, Switzerland"
-    )
+    test_string = "Institute for Computer Music and Sound Technology, Zurich University of the Arts, Switzerland"
     assert affiliation_resolver.resolve(test_string) == ["ZHdK (Zurich)"]
 
     test_string = "IST"
     assert affiliation_resolver.resolve(test_string) == ["IST"]
 
     test_string = (
-        "Clinic for Cardiovascular Surgery, University Hospital"
-        "Zurich, Raemistrasse 100, 8091 Zurich, Switzerland"
+        "Clinic for Cardiovascular Surgery, University HospitalZurich, Raemistrasse 100, 8091 Zurich, Switzerland"
     )
-    assert affiliation_resolver.resolve(test_string) == [
-        "University of Zurich and Hospital"
-    ]
+    assert affiliation_resolver.resolve(test_string) == ["University of Zurich and Hospital"]
 
     test_string = (
         "Institute for Research in Biomedicine (IRB), "

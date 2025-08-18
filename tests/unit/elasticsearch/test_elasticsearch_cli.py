@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -40,7 +38,7 @@ def test_create_repository(app, script_info):
         side_effect=Exception("Mocked error"),
     ):
         result = runner.invoke(create_repository, obj=script_info)
-        assert result.output == "Create a repository for snapshots\nMocked " "error\n"
+        assert result.output == "Create a repository for snapshots\nMocked error\n"
 
 
 def test_backup(app, script_info):
@@ -48,9 +46,7 @@ def test_backup(app, script_info):
     runner = CliRunner()
 
     # OK
-    current_search_client.snapshot.create_repository(
-        "backup", {"type": "fs", "settings": {"location": "backup"}}
-    )
+    current_search_client.snapshot.create_repository("backup", {"type": "fs", "settings": {"location": "backup"}})
     result = runner.invoke(backup, ["--name", "test"], obj=script_info)
     assert result.output == "Backup elasticsearch data\nDone\n"
 
@@ -69,9 +65,7 @@ def test_restore(app, script_info):
     """Test restore."""
     runner = CliRunner()
 
-    current_search_client.snapshot.create_repository(
-        "backup", {"type": "fs", "settings": {"location": "backup"}}
-    )
+    current_search_client.snapshot.create_repository("backup", {"type": "fs", "settings": {"location": "backup"}})
     result = runner.invoke(backup, ["--name", "test", "--wait"], obj=script_info)
 
     # OK
@@ -79,9 +73,7 @@ def test_restore(app, script_info):
     assert result.output == "Restore elasticsearch data\nDone\n"
 
     # Unexisting snapshot
-    result = runner.invoke(
-        restore, ["--name", "unexisting", "--yes-i-know"], obj=script_info
-    )
+    result = runner.invoke(restore, ["--name", "unexisting", "--yes-i-know"], obj=script_info)
     assert "snapshot does not exist" in result.output
 
     # Aborting

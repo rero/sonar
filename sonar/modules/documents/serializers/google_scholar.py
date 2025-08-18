@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -24,9 +22,7 @@ from invenio_records_rest.serializers.base import (
 from invenio_records_rest.serializers.marshmallow import MarshmallowMixin
 
 
-class SonarGoogleScholarSerializer(
-    SerializerMixinInterface, MarshmallowMixin, PreprocessorMixin
-):
+class SonarGoogleScholarSerializer(SerializerMixinInterface, MarshmallowMixin, PreprocessorMixin):
     """Google scholar serializer."""
 
     def dump(self, obj, context=None):
@@ -39,9 +35,7 @@ class SonarGoogleScholarSerializer(
 
     def transform_record(self, pid, record, links_factory=None, **kwargs):
         """Transform record in metas for Google scholar."""
-        data = super(SonarGoogleScholarSerializer, self).transform_record(
-            pid, record, links_factory, **kwargs
-        )
+        data = super(SonarGoogleScholarSerializer, self).transform_record(pid, record, links_factory, **kwargs)
 
         metas = []
         meta_template = '<meta name="citation_{key}" content="{value}">'

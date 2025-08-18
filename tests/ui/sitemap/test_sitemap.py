@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2022 RERO
 #
@@ -42,9 +40,7 @@ def test_sitemap(app, db, organisation, document):
     # Control data into the xml file
     tree = ET.parse(sitemap_file)
     url = tree.findall(f"{namespace}url")[0]
-    assert (
-        "https://sonar.rero.ch/global/documents/1" == url.find(f"{namespace}loc").text
-    )
+    assert "https://sonar.rero.ch/global/documents/1" == url.find(f"{namespace}loc").text
     assert date.today().strftime("%Y-%m-%d") == url.find(f"{namespace}lastmod").text
 
     # ------- test for a dedicated organisation
@@ -68,9 +64,7 @@ def test_sitemap(app, db, organisation, document):
     # ------- Generate multiple files with index sitemap
     document.pop("pid", None)
     document.pop("_oai", None)
-    document["identifiedBy"] = [
-        {"value": "R003415714", "type": "bf:Local", "source": "RERO"}
-    ]
+    document["identifiedBy"] = [{"value": "R003415714", "type": "bf:Local", "source": "RERO"}]
     doc = DocumentRecord.create(document)
     doc.reindex()
     db.session.commit()
@@ -83,20 +77,14 @@ def test_sitemap(app, db, organisation, document):
     tree = ET.parse(sitemap_index)
     sitemaps = tree.findall(f"{namespace}sitemap")
     for n, sitemap in enumerate(sitemaps, start=1):
-        assert (
-            f"https://org.domain.com/org/sitemap_{n}.xml"
-            == sitemap.find(f"{namespace}loc").text
-        )
+        assert f"https://org.domain.com/org/sitemap_{n}.xml" == sitemap.find(f"{namespace}loc").text
 
     for i in range(1, 3):
         sitemap_file = os.path.join(path, organisation["pid"], f"sitemap_{i}.xml")
         assert os.path.isfile(sitemap_file)
         tree = ET.parse(sitemap_file)
         url = tree.findall(f"{namespace}url")[0]
-        assert (
-            f"https://org.domain.com/org/documents/{i}"
-            == url.find(f"{namespace}loc").text
-        )
+        assert f"https://org.domain.com/org/documents/{i}" == url.find(f"{namespace}loc").text
         assert date.today().strftime("%Y-%m-%d") == url.find(f"{namespace}lastmod").text
 
     # Remove folder after test

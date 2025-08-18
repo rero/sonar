@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -55,9 +53,7 @@ def test_data_info(client, search_clear, superuser, document, monkeypatch):
     def mock_info(*args, **kwargs):
         raise Exception("Unknown exception")
 
-    monkeypatch.setattr(
-        "sonar.monitoring.api.data_integrity.DataIntegrityMonitoring.info", mock_info
-    )
+    monkeypatch.setattr("sonar.monitoring.api.data_integrity.DataIntegrityMonitoring.info", mock_info)
     response = client.get(url_for("monitoring_api.data_info", detail=True))
     assert response.status_code == 500
 
@@ -89,9 +85,7 @@ def test_db_connection_count(client, search_clear, monkeypatch, admin, superuser
     # OK
     response = client.get(url_for("monitoring_api.db_connection_count"))
     assert response.status_code == 200
-    assert response.json == {
-        "data": {"max": 100, "used": 10, "reserved_for_super": 2, "free": 88}
-    }
+    assert response.json == {"data": {"max": 100, "used": 10, "reserved_for_super": 2, "free": 88}}
 
 
 def test_db_activity(client, search_clear, monkeypatch, admin, superuser):
@@ -140,9 +134,7 @@ def test_db_activity(client, search_clear, monkeypatch, admin, superuser):
     }
 
 
-def test_data_status(
-    client, search_clear, organisation, superuser, document, monkeypatch
-):
+def test_data_status(client, search_clear, organisation, superuser, document, monkeypatch):
     """Test integrity status."""
     login_user_via_session(client, email=superuser["email"])
 
@@ -161,9 +153,7 @@ def test_data_status(
     def mock_info(*args):
         raise Exception("Unknown exception")
 
-    monkeypatch.setattr(
-        "sonar.monitoring.api.data_integrity.DataIntegrityMonitoring.info", mock_info
-    )
+    monkeypatch.setattr("sonar.monitoring.api.data_integrity.DataIntegrityMonitoring.info", mock_info)
     response = client.get(url_for("monitoring_api.data_status"))
     assert response.status_code == 500
 
@@ -181,17 +171,13 @@ def test_elastic_search(client, superuser, monkeypatch):
     def mock_info(*args):
         raise Exception("Unknown exception")
 
-    monkeypatch.setattr(
-        "invenio_search.current_search_client.cluster.health", mock_info
-    )
+    monkeypatch.setattr("invenio_search.current_search_client.cluster.health", mock_info)
     response = client.get(url_for("monitoring_api.elastic_search"))
     assert response.status_code == 500
     assert response.json == {"error": "Unknown exception"}
 
 
-def test_urn(
-    client, search_clear, superuser, monkeypatch, minimal_thesis_document_with_urn
-):
+def test_urn(client, search_clear, superuser, monkeypatch, minimal_thesis_document_with_urn):
     """Test unregistered urn counts."""
     login_user_via_session(client, email=superuser["email"])
     response = client.get(url_for("monitoring_api.urn"))
@@ -202,9 +188,7 @@ def test_urn(
     assert response.status_code == 200
     assert response.json["data"]["reserved"]["count"] == 0
 
-    query = PersistentIdentifier.query.filter_by(pid_type="urn").filter_by(
-        status=PIDStatus.REGISTERED
-    )
+    query = PersistentIdentifier.query.filter_by(pid_type="urn").filter_by(status=PIDStatus.REGISTERED)
     pid = query.first()
     pid.status = PIDStatus.RESERVED
     db.session.commit()

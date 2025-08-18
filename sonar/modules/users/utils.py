@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -39,13 +37,11 @@ def send_welcome_email(user_record, user):
         plain_platform_name = pname
 
     token = generate_reset_password_token(user)
-    reset_link = url_for_security(
-        "reset_password", token=token, next=f"/{code}", _external=True
-    )
+    reset_link = url_for_security("reset_password", token=token, next=f"/{code}", _external=True)
 
     send_email(
         [user_record["email"]],
-        f'{_("Welcome to")} {plain_platform_name}',
+        f"{_('Welcome to')} {plain_platform_name}",
         "users/email/welcome",
         {
             "user": user_record,

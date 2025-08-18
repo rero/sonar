@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -36,9 +34,7 @@ class DepositsJSONSchema(JSONSchemaBase):
         if current_user_record:
             organisation = current_user_record.replace_refs().get("organisation")
 
-        if not current_user_record or (
-            current_user_record.is_moderator and organisation.get("isDedicated", False)
-        ):
+        if not current_user_record or (current_user_record.is_moderator and organisation.get("isDedicated", False)):
             return schema
 
         # Remove some fields on json for the shared organisation
@@ -51,9 +47,7 @@ class DepositsJSONSchema(JSONSchemaBase):
                 "customField3",
             ]:
                 schema["properties"]["metadata"]["properties"].pop(field, None)
-                propertiesOrder = schema["properties"]["metadata"].get(
-                    "propertiesOrder", []
-                )
+                propertiesOrder = schema["properties"]["metadata"].get("propertiesOrder", [])
                 if field in propertiesOrder:
                     propertiesOrder.remove(field)
 

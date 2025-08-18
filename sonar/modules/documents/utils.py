@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -89,9 +87,7 @@ def get_file_links(file, record):
         return links
 
     # File has an external url
-    if (record["external_url"] or file.get("force_external_url", False)) and file.get(
-        "external_url"
-    ):
+    if (record["external_url"] or file.get("force_external_url", False)) and file.get("external_url"):
         links["external"] = file["external_url"]
         return links
 
@@ -100,9 +96,7 @@ def get_file_links(file, record):
 
     links["download"] = f"/documents/{record['pid']}/files/{file['key']}"
 
-    if file["mimetype"] not in current_app.config.get(
-        "SONAR_APP_FILE_PREVIEW_MIMETYPES", []
-    ):
+    if file["mimetype"] not in current_app.config.get("SONAR_APP_FILE_PREVIEW_MIMETYPES", []):
         return links
     # only markdown is supported
     if file["mimetype"] == "application/octet-stream":
@@ -134,10 +128,7 @@ def get_file_restriction(file, organisations, for_permission=True):
 
         # Logged user belongs to same organisation as record's organisation.
         for organisation in organisations:
-            if (
-                current_organisation
-                and current_organisation["pid"] == organisation["pid"]
-            ):
+            if current_organisation and current_organisation["pid"] == organisation["pid"]:
                 return True
 
         # Check IP is allowed.
@@ -146,9 +137,7 @@ def get_file_restriction(file, organisations, for_permission=True):
         # proxy IP.
         ip_address = ip_address.split(", ")[0]
         for organisation in organisations:
-            if is_ip_in_list(
-                ip_address, organisation.get("allowedIps", "").split("\n")
-            ):
+            if is_ip_in_list(ip_address, organisation.get("allowedIps", "").split("\n")):
                 return True
 
         return False
@@ -201,14 +190,10 @@ def has_external_urls_for_files(record):
     """
     for organisation in record.get("organisation", []):
         organisation_pid = (
-            SonarRecord.get_pid_by_ref_link(organisation["$ref"])
-            if organisation.get("$ref")
-            else organisation["pid"]
+            SonarRecord.get_pid_by_ref_link(organisation["$ref"]) if organisation.get("$ref") else organisation["pid"]
         )
 
-        return organisation_pid in current_app.config.get(
-            "SONAR_DOCUMENTS_ORGANISATIONS_EXTERNAL_FILES"
-        )
+        return organisation_pid in current_app.config.get("SONAR_DOCUMENTS_ORGANISATIONS_EXTERNAL_FILES")
 
     return False
 

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2022 RERO
 #
@@ -17,15 +15,12 @@
 
 """Test organisations files permissions."""
 
-
 from flask import url_for
 from flask_security import url_for_security
 from invenio_accounts.testutils import login_user_via_session
 
 
-def test_update_delete(
-    client, superuser, admin, moderator, submitter, user, organisation, pdf_file
-):
+def test_update_delete(client, superuser, admin, moderator, submitter, user, organisation, pdf_file):
     """Test permissions for uploading and deleting files."""
     file_name = "test.pdf"
     users = [superuser, admin, moderator, submitter, user, None]
@@ -50,9 +45,7 @@ def test_update_delete(
             assert res.status_code == status
 
 
-def test_read_metadata(
-    client, superuser, admin, moderator, submitter, user, organisation_with_file
-):
+def test_read_metadata(client, superuser, admin, moderator, submitter, user, organisation_with_file):
     """Test read files permissions."""
 
     users = [superuser, admin, moderator, submitter, user, None]
@@ -69,9 +62,7 @@ def test_read_metadata(
         assert res.status_code == status
 
 
-def test_read_content(
-    client, superuser, admin, moderator, submitter, user, organisation_with_file
-):
+def test_read_content(client, superuser, admin, moderator, submitter, user, organisation_with_file):
     """Test read organisations permissions."""
 
     file_name = "test1.pdf"

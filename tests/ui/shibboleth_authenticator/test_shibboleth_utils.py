@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -54,9 +52,7 @@ def test_get_safe_redirect_target(app, monkeypatch):
 
     mock_request = MockRequest()
 
-    monkeypatch.setattr(
-        "sonar.modules.shibboleth_authenticator.utils.request", mock_request
-    )
+    monkeypatch.setattr("sonar.modules.shibboleth_authenticator.utils.request", mock_request)
 
     mock_request.args["next"] = url1
     assert get_safe_redirect_target() == url1

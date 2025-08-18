@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -26,4 +24,4 @@ from .api import Record
 def collect_stats():
     """Collect and store the current statistics."""
     record = Record.collect()
-    return f'New stat has been created with a pid of: {record["pid"]}'
+    return f"New stat has been created with a pid of: {record['pid']}"

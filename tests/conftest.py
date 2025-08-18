@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -16,7 +14,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """Common pytest fixtures and plugins."""
-
 
 import copy
 import os
@@ -130,13 +127,9 @@ def instance_path():
     # static folder
     if not invenio_static_folder:
         if invenio_instance_path:
-            os.environ["INVENIO_STATIC_FOLDER"] = os.path.join(
-                invenio_instance_path, "static"
-            )
+            os.environ["INVENIO_STATIC_FOLDER"] = os.path.join(invenio_instance_path, "static")
         else:
-            os.environ["INVENIO_STATIC_FOLDER"] = os.path.join(
-                sys.prefix, "var/instance/static"
-            )
+            os.environ["INVENIO_STATIC_FOLDER"] = os.path.join(sys.prefix, "var/instance/static")
     # instance path
     if not path:
         path = tempfile.mkdtemp()
@@ -202,18 +195,14 @@ def app_config(app_config):
     app_config["SEARCH_ELASTIC_HOSTS"] = ["localhost:9200"]
     app_config["SONAR_APP_DEFAULT_ORGANISATION"] = "global"
     app_config["SONAR_APP_SERVER_NAME"] = "sonar.rero.ch"
-    app_config["SONAR_APP_URN_DNB_BASE_URL"] = (
-        "https://api.nbn-resolving.org/sandbox/v2"
-    )
+    app_config["SONAR_APP_URN_DNB_BASE_URL"] = "https://api.nbn-resolving.org/sandbox/v2"
     app_config["SONAR_APP_URN_DNB_BASE_URN"] = "urn:nbn:ch:rero-"
     app_config["SONAR_APP_URN_DNB_PASSWORD"] = ""
     app_config["SONAR_APP_URN_DNB_USERNAME"] = ""
     app_config["WIKI_CONTENT_DIR"] = help_test_dir
     app_config["WIKI_UPLOAD_FOLDER"] = join(help_test_dir, "files")
     app_config["WTF_CSRF_ENABLED"] = False
-    app_config["SQLALCHEMY_DATABASE_URI"] = (
-        "postgresql+psycopg2://sonar:sonar@localhost/sonar"
-    )
+    app_config["SQLALCHEMY_DATABASE_URI"] = "postgresql+psycopg2://sonar:sonar@localhost/sonar"
     # org.domain.com needed for sitemap tests
     app_config["TRUSTED_HOSTS"] = [
         "sonar.ch",
@@ -264,9 +253,7 @@ def organisation(make_organisation):
 @pytest.fixture()
 def organisation_with_urn(app, make_organisation):
     """Create an organisation."""
-    app.config["SONAR_APP_DOCUMENT_URN"] = {
-        "organisations": {"org": {"types": ["coar:c_db06"], "code": 6}}
-    }
+    app.config["SONAR_APP_DOCUMENT_URN"] = {"organisations": {"org": {"types": ["coar:c_db06"], "code": 6}}}
     return make_organisation("org")
 
 
@@ -299,9 +286,7 @@ def roles(base_app, db):
 def make_user(app, db, make_organisation, roles):
     """Factory for creating user."""
 
-    def _make_user(
-        role_name, organisation="org", organisation_is_shared=True, access=None
-    ):
+    def _make_user(role_name, organisation="org", organisation_is_shared=True, access=None):
         name = role_name
 
         if organisation:
@@ -315,9 +300,7 @@ def make_user(app, db, make_organisation, roles):
         if record := UserRecord.get_user_by_email(email):
             return record
 
-        user = datastore.create_user(
-            email=email, password=hash_password("123456"), active=True
-        )
+        user = datastore.create_user(email=email, password=hash_password("123456"), active=True)
         datastore.commit()
 
         role = datastore.find_role(role_name)
@@ -342,9 +325,7 @@ def make_user(app, db, make_organisation, roles):
         }
 
         if organisation:
-            data["organisation"] = {
-                "$ref": f"https://sonar.ch/api/organisations/{organisation}"
-            }
+            data["organisation"] = {"$ref": f"https://sonar.ch/api/organisations/{organisation}"}
 
         record = UserRecord.create(data, dbcommit=True)
         record.reindex()
@@ -359,9 +340,7 @@ def make_user(app, db, make_organisation, roles):
 def user_without_role(app, db):
     """Create user in database without role."""
     datastore = app.extensions["security"].datastore
-    user = datastore.create_user(
-        email="user-without-role@rero.ch", password=hash_password("123456"), active=True
-    )
+    user = datastore.create_user(email="user-without-role@rero.ch", password=hash_password("123456"), active=True)
     db.session.commit()
 
     return user
@@ -514,9 +493,7 @@ def document_json(app, db, bucket_location, organisation):
 def make_document(db, document_json, make_organisation, pdf_file, embargo_date):
     """Factory for creating document."""
 
-    def _make_document(
-        data=document_json, organisation="org", with_file=False, pid=None
-    ):
+    def _make_document(data=document_json, organisation="org", with_file=False, pid=None):
         if organisation:
             make_organisation(organisation)
             data["organisation"] = [{"$ref": "https://sonar.ch/api/organisations/org"}]
@@ -610,9 +587,7 @@ def deposit_json(collection, subdivision):
                     "url": "https://some.url/related.pdf",
                 }
             ],
-            "collections": [
-                {"$ref": f'https://sonar.ch/api/collections/{collection["pid"]}'}
-            ],
+            "collections": [{"$ref": f"https://sonar.ch/api/collections/{collection['pid']}"}],
             "classification": "543",
             "abstracts": [
                 {"language": "eng", "abstract": "Abstract of the document"},
@@ -664,9 +639,7 @@ def deposit_json(collection, subdivision):
         "diffusion": {
             "license": "CC0",
             "oa_status": "green",
-            "subdivisions": [
-                {"$ref": f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'}
-            ],
+            "subdivisions": [{"$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"}],
             "masked": "not_masked",
         },
         "status": "in_progress",
@@ -788,19 +761,13 @@ def make_project(app, db, project_json, make_user):
     def _make_project(role="submitter", organisation=None):
         user = make_user(role, organisation)
 
-        project_json["metadata"]["user"] = {
-            "$ref": f"https://sonar.ch/api/users/{user['pid']}"
-        }
+        project_json["metadata"]["user"] = {"$ref": f"https://sonar.ch/api/users/{user['pid']}"}
 
-        project_json["metadata"]["organisation"] = {
-            "$ref": f"https://sonar.ch/api/organisations/{organisation}"
-        }
+        project_json["metadata"]["organisation"] = {"$ref": f"https://sonar.ch/api/organisations/{organisation}"}
 
         project_json.pop("id", None)
 
-        with mock.patch(
-            "invenio_records_resources.services.base.service.Service.require_permission"
-        ):
+        with mock.patch("invenio_records_resources.services.base.service.Service.require_permission"):
             project = sonar.service("projects").create(None, project_json)
         app.extensions["invenio-search"].flush_and_refresh(index="projects")
         return project
@@ -813,13 +780,9 @@ def project(app, db, es, admin, organisation, project_json):
     """Deposit fixture."""
     json = copy.deepcopy(project_json)
     json["metadata"]["user"] = {"$ref": f"https://sonar.ch/api/users/{admin['pid']}"}
-    json["metadata"]["organisation"] = {
-        "$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"
-    }
+    json["metadata"]["organisation"] = {"$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"}
 
-    with mock.patch(
-        "invenio_records_resources.services.base.service.Service.require_permission"
-    ):
+    with mock.patch("invenio_records_resources.services.base.service.Service.require_permission"):
         project = sonar.service("projects").create(None, json)
     app.extensions["invenio-search"].flush_and_refresh(index="projects")
     return project
@@ -839,15 +802,11 @@ def make_collection(app, db, collection_json):
     """Factory for creating collection."""
 
     def _make_collection(organisation=None):
-        collection_json["organisation"] = {
-            "$ref": f"https://sonar.ch/api/organisations/{organisation}"
-        }
+        collection_json["organisation"] = {"$ref": f"https://sonar.ch/api/organisations/{organisation}"}
 
         collection_json.pop("pid", None)
 
-        collection = CollectionRecord.create(
-            collection_json, dbcommit=True, with_bucket=True
-        )
+        collection = CollectionRecord.create(collection_json, dbcommit=True, with_bucket=True)
         collection.commit()
         collection.reindex()
         db.session.commit()
@@ -860,9 +819,7 @@ def make_collection(app, db, collection_json):
 def collection(app, db, es, admin, organisation, collection_json):
     """Collection fixture."""
     json = copy.deepcopy(collection_json)
-    json["organisation"] = {
-        "$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"
-    }
+    json["organisation"] = {"$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"}
 
     collection = CollectionRecord.create(json, dbcommit=True, with_bucket=True)
     collection.commit()
@@ -891,9 +848,7 @@ def make_subdivision(app, db, subdivision_json):
     """Factory for creating subdivision."""
 
     def _make_subdivision(organisation=None):
-        subdivision_json["organisation"] = {
-            "$ref": f"https://sonar.ch/api/organisations/{organisation}"
-        }
+        subdivision_json["organisation"] = {"$ref": f"https://sonar.ch/api/organisations/{organisation}"}
 
         subdivision_json.pop("pid", None)
 
@@ -910,9 +865,7 @@ def make_subdivision(app, db, subdivision_json):
 def subdivision(app, db, es, admin, organisation, subdivision_json):
     """Subdivision fixture."""
     json = copy.deepcopy(subdivision_json)
-    json["organisation"] = {
-        "$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"
-    }
+    json["organisation"] = {"$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"}
 
     subdivision = SubdivisionRecord.create(json, dbcommit=True)
     subdivision.commit()
@@ -925,9 +878,7 @@ def subdivision(app, db, es, admin, organisation, subdivision_json):
 def subdivision2(app, db, es, admin, organisation, subdivision_json):
     """Second subdivision fixture."""
     json = copy.deepcopy(subdivision_json)
-    json["organisation"] = {
-        "$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"
-    }
+    json["organisation"] = {"$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"}
 
     subdivision = SubdivisionRecord.create(json, dbcommit=True)
     subdivision.commit()
@@ -981,17 +932,13 @@ def minimal_thesis_document_with_urn(db, bucket_location, organisation_with_urn)
     """Return a minimal thesis document."""
     with requests_mock.mock() as response:
         response.head(requests_mock.ANY, status_code=404)
-        response.post(
-            requests_mock.ANY, status_code=201, json={"urn": "urn:nbn:ch:rero-006-17"}
-        )
+        response.post(requests_mock.ANY, status_code=201, json={"urn": "urn:nbn:ch:rero-006-17"})
         record = DocumentRecord.create(
             {
                 "title": [
                     {
                         "type": "bf:Title",
-                        "mainTitle": [
-                            {"language": "eng", "value": "Title of the document"}
-                        ],
+                        "mainTitle": [{"language": "eng", "value": "Title of the document"}],
                     }
                 ],
                 "documentType": "coar:c_db06",
@@ -1018,14 +965,10 @@ def minimal_document(db, bucket_location, organisation):
             "title": [
                 {
                     "type": "bf:Title",
-                    "mainTitle": [
-                        {"language": "eng", "value": "Title of the document"}
-                    ],
+                    "mainTitle": [{"language": "eng", "value": "Title of the document"}],
                 }
             ],
-            "organisation": [
-                {"$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"}
-            ],
+            "organisation": [{"$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"}],
         },
         dbcommit=True,
         with_bucket=True,

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2022 RERO
 #
@@ -16,7 +14,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """Dublin Core REST serializer."""
-
 
 from datetime import datetime
 
@@ -44,18 +41,12 @@ class JSONSerializer(BasedJSONSerializer):
             }
 
         # Add organisation name
-        for org_term in (
-            results.get("aggregations", {}).get("organisation", {}).get("buckets", [])
-        ):
+        for org_term in results.get("aggregations", {}).get("organisation", {}).get("buckets", []):
             if organisation := OrganisationRecord.get_record_by_pid(org_term["key"]):
                 org_term["name"] = organisation["name"]
 
         # Add collection name
-        for org_term in (
-            results.get("aggregations", {}).get("collection", {}).get("buckets", [])
-        ):
+        for org_term in results.get("aggregations", {}).get("collection", {}).get("buckets", []):
             if collection := CollectionRecord.get_record_by_pid(org_term["key"]):
                 org_term["name"] = get_language_value(collection["name"])
-        return super(JSONSerializer, self).post_process_serialize_search(
-            results, pid_fetcher
-        )
+        return super(JSONSerializer, self).post_process_serialize_search(results, pid_fetcher)

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -22,9 +20,7 @@ import pytest
 from sonar.modules.shibboleth_authenticator.handlers import authorized_signup_handler
 
 
-def test_authorized_signup_handler(
-    app, roles, valid_sp_configuration, valid_attributes, monkeypatch
-):
+def test_authorized_signup_handler(app, roles, valid_sp_configuration, valid_attributes, monkeypatch):
     """Test signup handler."""
     app.config.update(SHIBBOLETH_SERVICE_PROVIDER=valid_sp_configuration)
 
@@ -70,9 +66,7 @@ def test_authorized_signup_handler(
     assert "/login/" in response.location
 
     # Test oauth register failure
-    monkeypatch.setattr(
-        "sonar.modules.shibboleth_authenticator.handlers.current_user", MockUser()
-    )
+    monkeypatch.setattr("sonar.modules.shibboleth_authenticator.handlers.current_user", MockUser())
     monkeypatch.setattr(
         "sonar.modules.shibboleth_authenticator.handlers.oauth_get_user",
         lambda remote, account_info: None,

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2023 RERO
 #
@@ -55,9 +53,7 @@ class SNLRepository:
 
     def list(self):
         """List directory via FTP connection."""
-        self.client.walktree(
-            ".", lambda x: print(x), lambda x: print(x), lambda x: print(x)
-        )
+        self.client.walktree(".", lambda x: print(x), lambda x: print(x), lambda x: print(x))
 
     def upload_file(self, file_path, file_name):
         """Upload file to SNL server via FTP connection.

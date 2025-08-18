@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -32,9 +30,7 @@ def test_json_schema(client, make_user):
     login_user_via_view(client, email=user["email"], password="123456")
 
     result = schemas("projects")
-    assert result.json["schema"]["properties"]["metadata"]["properties"][
-        "projectSponsor"
-    ]
+    assert result.json["schema"]["properties"]["metadata"]["properties"]["projectSponsor"]
 
 
 def test_service(client, make_user):
@@ -52,7 +48,4 @@ def test_api(client, make_user):
 
     login_user_via_view(client, email=user["email"], password="123456")
 
-    assert (
-        Record({}).schema.value == "https://sonar.ch/schemas/"
-        "hepvs/projects/project-v1.0.0.json"
-    )
+    assert Record({}).schema.value == "https://sonar.ch/schemas/hepvs/projects/project-v1.0.0.json"

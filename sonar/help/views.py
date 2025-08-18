@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2022 RERO
 #
@@ -23,17 +21,13 @@ from flask import Blueprint, current_app, redirect, render_template, request, ur
 from flask_wiki.api import current_wiki
 from whoosh import index as whoosh_index
 
-blueprint = Blueprint(
-    "help", __name__, template_folder="templates", static_folder="static"
-)
+blueprint = Blueprint("help", __name__, template_folder="templates", static_folder="static")
 
 
 @blueprint.route("/<org_code:view>/help/", methods=["GET"])
 def index(view):
     """Help index redirect to home."""
-    return redirect(
-        url_for("help.page", view=view, url=current_app.config.get("WIKI_HOME"))
-    )
+    return redirect(url_for("help.page", view=view, url=current_app.config.get("WIKI_HOME")))
 
 
 @blueprint.route("/<org_code:view>/help/<path:url>/", methods=["GET"])
@@ -48,13 +42,9 @@ def search(view):
     """Help search."""
     query = request.args.get("q", "")
     results = []
-    index_dir = whoosh_index.open_dir(
-        current_app.config.get('WIKI_INDEX_DIR')
-    )
+    index_dir = whoosh_index.open_dir(current_app.config.get("WIKI_INDEX_DIR"))
     results = current_wiki.search(query, index_dir, index_dir.searcher())
-    return render_template(
-        "help/page_wiki_search.html", results=results, query=query, view=view
-    )
+    return render_template("help/page_wiki_search.html", results=results, query=query, view=view)
 
 
 @blueprint.app_template_filter()

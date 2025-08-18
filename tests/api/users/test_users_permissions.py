@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -45,20 +43,12 @@ def test_list(app, client, make_user, superuser, admin, moderator, submitter, us
     assert res.json["hits"]["total"]["value"] == 1
 
     # Test search email, no result
-    res = client.get(
-        url_for(
-            "invenio_records_rest.user_list", q="email:test@gmail.com NOT pid:orguser"
-        )
-    )
+    res = client.get(url_for("invenio_records_rest.user_list", q="email:test@gmail.com NOT pid:orguser"))
     assert res.status_code == 200
     assert res.json["hits"]["total"]["value"] == 0
 
     # Test search email, existing email
-    res = client.get(
-        url_for(
-            "invenio_records_rest.user_list", q="email:orgadmin@rero.ch NOT pid:orguser"
-        )
-    )
+    res = client.get(url_for("invenio_records_rest.user_list", q="email:orgadmin@rero.ch NOT pid:orguser"))
     assert res.status_code == 200
     assert res.json["hits"]["total"]["value"] == 1
     assert not res.json["hits"]["hits"][0]["metadata"].get("email")
@@ -142,15 +132,10 @@ def test_create(client, organisation, superuser, admin, moderator, submitter, us
         headers=headers,
     )
     assert res.status_code == 201
-    assert (
-        res.json["metadata"]["organisation"]["$ref"]
-        == "https://sonar.ch/api/organisations/org"
-    )
+    assert res.json["metadata"]["organisation"]["$ref"] == "https://sonar.ch/api/organisations/org"
 
     # Super user
-    user_json["organisation"] = {
-        "$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"
-    }
+    user_json["organisation"] = {"$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"}
 
     login_user_via_session(client, email=superuser["email"])
     res = client.post(
@@ -159,10 +144,7 @@ def test_create(client, organisation, superuser, admin, moderator, submitter, us
         headers=headers,
     )
     assert res.status_code == 201
-    assert (
-        res.json["metadata"]["organisation"]["$ref"]
-        == "https://sonar.ch/api/organisations/org"
-    )
+    assert res.json["metadata"]["organisation"]["$ref"] == "https://sonar.ch/api/organisations/org"
 
 
 def test_read(client, make_user, superuser, admin, moderator, submitter, user):
@@ -183,16 +165,12 @@ def test_read(client, make_user, superuser, admin, moderator, submitter, user):
 
     # Logged as user and read other
     login_user_via_session(client, email=user["email"])
-    res = client.get(
-        url_for("invenio_records_rest.user_item", pid_value=moderator["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.user_item", pid_value=moderator["pid"]))
     assert res.status_code == 403
 
     # Logged as submitter
     login_user_via_session(client, email=submitter["email"])
-    res = client.get(
-        url_for("invenio_records_rest.user_item", pid_value=submitter["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.user_item", pid_value=submitter["pid"]))
     assert res.status_code == 200
     assert res.json["metadata"]["permissions"] == {
         "delete": False,
@@ -206,9 +184,7 @@ def test_read(client, make_user, superuser, admin, moderator, submitter, user):
 
     # Logged as moderator
     login_user_via_session(client, email=moderator["email"])
-    res = client.get(
-        url_for("invenio_records_rest.user_item", pid_value=moderator["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.user_item", pid_value=moderator["pid"]))
     assert res.status_code == 200
     assert res.json["metadata"]["permissions"] == {
         "delete": False,
@@ -232,9 +208,7 @@ def test_read(client, make_user, superuser, admin, moderator, submitter, user):
 
     # Logged as admin, try to read superuser
     login_user_via_session(client, email=admin["email"])
-    res = client.get(
-        url_for("invenio_records_rest.user_item", pid_value=superuser["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.user_item", pid_value=superuser["pid"]))
     assert res.status_code == 403
 
     # Logged as admin of other organisation
@@ -256,9 +230,7 @@ def test_read(client, make_user, superuser, admin, moderator, submitter, user):
     # Test user without associated organisation
     new_user = make_user("user", None)
     login_user_via_session(client, email=admin["email"])
-    res = client.get(
-        url_for("invenio_records_rest.user_item", pid_value=new_user["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.user_item", pid_value=new_user["pid"]))
     assert res.status_code == 200
     assert res.json["metadata"]["permissions"] == {
         "delete": False,
@@ -372,37 +344,27 @@ def test_update(client, make_user, superuser, admin, moderator, submitter, user)
 def test_delete(client, make_user, superuser, admin, moderator, submitter, user):
     """Test delete users permissions."""
     # Not logged
-    res = client.delete(
-        url_for("invenio_records_rest.user_item", pid_value=user["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.user_item", pid_value=user["pid"]))
     assert res.status_code == 401
 
     # Logged as user
     login_user_via_session(client, email=user["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.user_item", pid_value=user["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.user_item", pid_value=user["pid"]))
     assert res.status_code == 403
 
     # Logged as submitter
     login_user_via_session(client, email=submitter["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.user_item", pid_value=user["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.user_item", pid_value=user["pid"]))
     assert res.status_code == 403
 
     # Logged as moderator
     login_user_via_session(client, email=moderator["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.user_item", pid_value=user["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.user_item", pid_value=user["pid"]))
     assert res.status_code == 403
 
     # Logged as admin
     login_user_via_session(client, email=admin["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.user_item", pid_value=user["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.user_item", pid_value=user["pid"]))
     assert res.status_code == 204
 
     # Create a new user
@@ -411,14 +373,10 @@ def test_delete(client, make_user, superuser, admin, moderator, submitter, user)
     # Logged as admin of other organisation
     other_admin = make_user("admin", "org2")
     login_user_via_session(client, email=other_admin["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.user_item", pid_value=user["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.user_item", pid_value=user["pid"]))
     assert res.status_code == 403
 
     # Logged as superuser
     login_user_via_session(client, email=superuser["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.user_item", pid_value=user["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.user_item", pid_value=user["pid"]))
     assert res.status_code == 204

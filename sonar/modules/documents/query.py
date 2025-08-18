@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -45,9 +43,7 @@ def documents_query_parser(qstr=None):
 
     operator, query_type = get_operator_and_query_type(qstr)
 
-    return Q(
-        query_type, query=qstr, default_operator=operator, fields=fields, lenient=True
-    )
+    return Q(query_type, query=qstr, default_operator=operator, fields=fields, lenient=True)
     # lenient property is necessary to make it wildcards working, see
     # https://github.com/elastic/elasticsearch/issues/39577#issuecomment-468751713
     # for more details.
@@ -92,15 +88,11 @@ def search_factory(self, search, query_parser=None):
 
         # Filter collection
         if request.args.get("collection_view"):
-            search = search.filter(
-                "term", collections__pid=request.args["collection_view"]
-            )
+            search = search.filter("term", collections__pid=request.args["collection_view"])
     # Admin
     else:
         # Filters records by user's organisation
         if not current_user_record.is_superuser:
-            search = search.filter(
-                "term", organisation__pid=current_organisation["pid"]
-            )
+            search = search.filter("term", organisation__pid=current_organisation["pid"])
 
     return (search, urlkwargs)

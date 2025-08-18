@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -90,9 +88,7 @@ class Sonar:
             # Force to load SONAR templates before others
             # it is require for Flask-Security see:
             # https://pythonhosted.org/Flask-Security/customizing.html#emails
-            sonar_loader = jinja2.ChoiceLoader(
-                [jinja2.PackageLoader("sonar", "templates"), app.jinja_loader]
-            )
+            sonar_loader = jinja2.ChoiceLoader([jinja2.PackageLoader("sonar", "templates"), app.jinja_loader])
             app.jinja_loader = sonar_loader
             app.jinja_env.globals["version"] = __version__
 
@@ -150,9 +146,7 @@ class Sonar:
     def init_views(self, app):
         """Initialize the main flask views."""
 
-        @app.route(
-            "/", defaults={"view": app.config.get("SONAR_APP_DEFAULT_ORGANISATION")}
-        )
+        @app.route("/", defaults={"view": app.config.get("SONAR_APP_DEFAULT_ORGANISATION")})
         @app.route("/<org_code:view>")
         def index(view):
             """Homepage."""
@@ -164,9 +158,7 @@ class Sonar:
             return string.replace("\n", "<br>")
 
         @app.template_filter()
-        def language_value(
-            values, locale=None, value_field="value", language_field="language"
-        ):
+        def language_value(values, locale=None, value_field="value", language_field="language"):
             """Get the value of a field corresponding to the current language.
 
             :params values: List of values with the language.
@@ -228,8 +220,7 @@ class Sonar:
             if org and "_files" in org:
                 favicon = list(
                     filter(
-                        lambda d: d["mimetype"]
-                        in ["image/x-icon", "image/vnd.microsoft.icon"],
+                        lambda d: d["mimetype"] in ["image/x-icon", "image/vnd.microsoft.icon"],
                         org["_files"],
                     )
                 )
@@ -247,9 +238,7 @@ class Sonar:
         """Create resources."""
         # Initialize the project resource with the corresponding service.
         project_service = ProjectsRecordService(ProjectsRecordServiceConfig())
-        projects_resource = ProjectsRecordResource(
-            service=project_service, config=ProjectsRecordResourceConfig
-        )
+        projects_resource = ProjectsRecordResource(service=project_service, config=ProjectsRecordResourceConfig)
         self.resources["projects"] = projects_resource
 
     def get_endpoints(self):
@@ -263,9 +252,7 @@ class Sonar:
             aliases = resource.service.default_config.record_cls.index.get_alias()
             endpoints[doc_type] = list(aliases[list(aliases.keys())[0]]["aliases"])[0]
 
-        for doc_type, resource in current_app.config.get(
-            "RECORDS_REST_ENDPOINTS"
-        ).items():
+        for doc_type, resource in current_app.config.get("RECORDS_REST_ENDPOINTS").items():
             if resource.get("search_index"):
                 endpoints[doc_type] = resource["search_index"]
 

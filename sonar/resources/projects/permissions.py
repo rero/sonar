@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -45,9 +43,7 @@ class Read(AdminAction):
         # organisation. The same rule is applied when searching project in
         # typeahead input.
         # TODO: Find a better way for handling typeahead calls..
-        if current_user_record.is_moderator or (
-            request.args.get("q") and ".suggest" in request.args["q"]
-        ):
+        if current_user_record.is_moderator or (request.args.get("q") and ".suggest" in request.args["q"]):
             must = [Q("term", metadata__organisation__pid=current_organisation["pid"])]
 
             # In suggestions only records published can be queried.
@@ -84,9 +80,7 @@ class Update(AdminAction):
         # organisation's projects.
         if current_user_record.is_moderator:
             organisation_pid = (
-                SonarRecord.get_pid_by_ref_link(
-                    record["metadata"]["organisation"]["$ref"]
-                )
+                SonarRecord.get_pid_by_ref_link(record["metadata"]["organisation"]["$ref"])
                 if record["metadata"]["organisation"].get("$ref")
                 else record["metadata"]["organisation"]["pid"]
             )

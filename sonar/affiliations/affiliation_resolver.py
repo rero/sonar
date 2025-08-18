@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -70,15 +68,11 @@ class AffiliationResolver:
                     # using rejected forms https://github.com/rero/sonar/issues/824
                     if (
                         affiliation.lower() == "zurich university"
-                        and "zurich university of the arts"
-                        in searched_affiliation.lower()
+                        and "zurich university of the arts" in searched_affiliation.lower()
                     ):
                         continue
                     # handle special case CERN/Lucerne
-                    if (
-                        affiliation.lower() == "cern"
-                        and "lucerne" in searched_affiliation.lower()
-                    ):
+                    if affiliation.lower() == "cern" and "lucerne" in searched_affiliation.lower():
                         continue
                     # handle special case Freiburg im Breisgau
                     if "university of freiburg" in searched_affiliation.lower():

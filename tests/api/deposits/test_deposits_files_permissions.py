@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2022 RERO
 #
@@ -17,15 +15,12 @@
 
 """Test deposits files permissions."""
 
-
 from flask import url_for
 from flask_security import url_for_security
 from invenio_accounts.testutils import login_user_via_session
 
 
-def test_update_delete(
-    client, superuser, admin, moderator, submitter, user, deposit, pdf_file
-):
+def test_update_delete(client, superuser, admin, moderator, submitter, user, deposit, pdf_file):
     """Test permissions for uploading and deleting files."""
     file_name = "test.pdf"
     users = [superuser, admin, moderator, submitter, user, None]
@@ -54,9 +49,7 @@ def test_read_metadata(client, superuser, admin, moderator, submitter, user, dep
     """Test read files permissions."""
 
     users = [superuser, admin, moderator, submitter, user, None]
-    url_files = url_for(
-        "invenio_records_files.depo_bucket_api", pid_value=deposit.get("pid")
-    )
+    url_files = url_for("invenio_records_files.depo_bucket_api", pid_value=deposit.get("pid"))
     for u, status in zip(users, [200, 200, 200, 404, 404, 404]):
         if u:
             login_user_via_session(client, email=u["email"])

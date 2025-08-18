@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -73,6 +71,4 @@ class Provider(BaseProvider):
                 kwargs["status"] = PIDStatus.REGISTERED
 
             # Call base provider
-            return super(Provider, cls).create(
-                object_type=object_type, object_uuid=object_uuid, **kwargs
-            )
+            return super(Provider, cls).create(object_type=object_type, object_uuid=object_uuid, **kwargs)

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -55,18 +53,14 @@ class JSONSerializer(_JSONSerializer):
     def post_process_serialize_search(self, results, pid_fetcher):
         """Post process the search results."""
         # Add subdivision name
-        for org_term in (
-            results.get("aggregations", {}).get("subdivision", {}).get("buckets", [])
-        ):
+        for org_term in results.get("aggregations", {}).get("subdivision", {}).get("buckets", []):
             subdivision = SubdivisionRecord.get_record_by_pid(org_term["key"])
             if subdivision:
                 org_term["name"] = get_language_value(subdivision["name"])
 
         return results
 
-    def serialize_search(
-        self, pid_fetcher, search_result, links=None, item_links_factory=None, **kwargs
-    ):
+    def serialize_search(self, pid_fetcher, search_result, links=None, item_links_factory=None, **kwargs):
         """Serialize a search result.
 
         :param pid_fetcher: Persistent identifier fetcher.

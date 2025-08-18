@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -20,18 +18,14 @@
 from invenio_accounts.testutils import login_user_via_view
 
 
-def test_create_document(
-    app, db, project, client, deposit, submitter, subdivision, embargo_date
-):
+def test_create_document(app, db, project, client, deposit, submitter, subdivision, embargo_date):
     """Test create document based on it."""
-    submitter["subdivision"] = {
-        "$ref": f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
-    }
+    submitter["subdivision"] = {"$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"}
     submitter.commit()
     submitter.reindex()
     db.session.commit()
 
-    deposit["user"] = {"$ref": f'https://sonar.ch/api/users/{submitter["pid"]}'}
+    deposit["user"] = {"$ref": f"https://sonar.ch/api/users/{submitter['pid']}"}
     deposit["projects"] = [
         {"$ref": f"https://sonar.ch/api/projects/{project.id}"},
         {
@@ -49,9 +43,7 @@ def test_create_document(
 
     document = deposit.create_document()
 
-    assert document["organisation"] == [
-        {"$ref": "https://sonar.ch/api/organisations/org"}
-    ]
+    assert document["organisation"] == [{"$ref": "https://sonar.ch/api/organisations/org"}]
 
     assert document["documentType"] == "coar:c_816b"
     assert document["title"] == [
@@ -106,9 +98,7 @@ def test_create_document(
         }
     ]
     assert len(document["collections"]) == 1
-    assert document["classification"] == [
-        {"type": "bf:ClassificationUdc", "classificationPortion": "543"}
-    ]
+    assert document["classification"] == [{"type": "bf:ClassificationUdc", "classificationPortion": "543"}]
     assert document["abstracts"] == [
         {"language": "eng", "value": "Abstract of the document"},
         {"language": "fre", "value": "Résumé du document"},

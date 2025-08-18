@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -60,9 +58,7 @@ def test_medline_schema(app):
     }
 
     # Contribution
-    assert MedlineSchema().dump(
-        {"_id": "111", "authors": ["John Doe"], "affiliations": ["RERO"]}
-    )["contribution"] == [
+    assert MedlineSchema().dump({"_id": "111", "authors": ["John Doe"], "affiliations": ["RERO"]})["contribution"] == [
         {
             "affiliation": "RERO",
             "agent": {"preferred_name": "John Doe", "type": "bf:Person"},
@@ -71,9 +67,9 @@ def test_medline_schema(app):
     ]
 
     # Provision activity
-    assert MedlineSchema().dump(
-        {"_id": "111", "pubyear": "2019", "entrez_date": "2019-03-03"}
-    )["provisionActivity"] == [
+    assert MedlineSchema().dump({"_id": "111", "pubyear": "2019", "entrez_date": "2019-03-03"})[
+        "provisionActivity"
+    ] == [
         {
             "startDate": "2019",
             "statement": [{"label": [{"value": "2019-03-03"}], "type": "Date"}],
@@ -82,9 +78,9 @@ def test_medline_schema(app):
     ]
 
     # Part of
-    assert MedlineSchema().dump(
-        {"_id": "111", "pubyear": "2019", "journal": "Journal"}
-    )["partOf"] == [{"document": {"title": "Journal"}, "numberingYear": "2019"}]
+    assert MedlineSchema().dump({"_id": "111", "pubyear": "2019", "journal": "Journal"})["partOf"] == [
+        {"document": {"title": "Journal"}, "numberingYear": "2019"}
+    ]
 
     # Subjects
     assert MedlineSchema().dump(

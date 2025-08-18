@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -46,9 +44,7 @@ class CSVSerializer(BaseCSVSerializer, BaseSerializer):
 
             # Write the CSV output in memory
             line = Line()
-            writer = csv.DictWriter(
-                line, delimiter=";", quoting=csv.QUOTE_ALL, fieldnames=headers
-            )
+            writer = csv.DictWriter(line, delimiter=";", quoting=csv.QUOTE_ALL, fieldnames=headers)
             writer.writerow(headers)
             yield line.read()
 

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -498,17 +496,11 @@ def marc21_to_document_type_from_leader(self, key, value):
     def determine_type(field):
         """Determine type of document."""
         # Bachelor thesis
-        if (
-            "bachelor" in field.get("a", "").lower()
-            or "bachelor" in field.get("b", "").lower()
-        ):
+        if "bachelor" in field.get("a", "").lower() or "bachelor" in field.get("b", "").lower():
             return "coar:c_7a1f"
 
         # Master thesis
-        if (
-            "master" in field.get("a", "").lower()
-            or "master" in field.get("b", "").lower()
-        ):
+        if "master" in field.get("a", "").lower() or "master" in field.get("b", "").lower():
             return "coar:c_bdcc"
 
         # Doctoral thesis
@@ -594,19 +586,13 @@ def marc21_to_provision_activity_from_264_1(self, key, value):
         provision_activity[0]["statement"] = []
 
     for place in utils.force_list(value.get("a", [])):
-        provision_activity[0]["statement"].append(
-            {"type": "bf:Place", "label": {"value": place}}
-        )
+        provision_activity[0]["statement"].append({"type": "bf:Place", "label": {"value": place}})
 
     for agent in utils.force_list(value.get("b", [])):
-        provision_activity[0]["statement"].append(
-            {"type": "bf:Agent", "label": {"value": agent}}
-        )
+        provision_activity[0]["statement"].append({"type": "bf:Agent", "label": {"value": agent}})
 
     if value.get("c"):
-        provision_activity[0]["statement"].append(
-            {"type": "Date", "label": {"value": value["c"]}}
-        )
+        provision_activity[0]["statement"].append({"type": "Date", "label": {"value": value["c"]}})
 
     self["provisionActivity"] = provision_activity
 
@@ -628,9 +614,7 @@ def marc21_to_provision_activity_from_264_3(self, key, value):
         manufacture["statement"].append({"type": "bf:Agent", "label": {"value": agent}})
 
     if value.get("c"):
-        manufacture["statement"].append(
-            {"type": "Date", "label": {"value": value["c"]}}
-        )
+        manufacture["statement"].append({"type": "Date", "label": {"value": value["c"]}})
 
     provision_activity.append(manufacture)
     self["provisionActivity"] = provision_activity

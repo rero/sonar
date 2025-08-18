@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2022 RERO
 #
@@ -35,8 +33,6 @@ class ProjectsJSONSchema(JSONSchemaBase):
         if current_user_record and not current_user_record.is_superuser:
             schema["properties"]["metadata"]["properties"].pop("organisation", None)
             if "organisation" in schema["properties"]["metadata"]["propertiesOrder"]:
-                schema["properties"]["metadata"]["propertiesOrder"].remove(
-                    "organisation"
-                )
+                schema["properties"]["metadata"]["propertiesOrder"].remove("organisation")
 
         return schema

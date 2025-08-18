@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -37,17 +35,13 @@ def minimal_thesis_document(db, bucket_location, organisation):
     """Return a minimal thesis document."""
     with requests_mock.mock() as response:
         response.head(requests_mock.ANY, status_code=404)
-        response.post(
-            requests_mock.ANY, status_code=201, json={"urn": "urn:nbn:ch:rero-006-17"}
-        )
+        response.post(requests_mock.ANY, status_code=201, json={"urn": "urn:nbn:ch:rero-006-17"})
         record = DocumentRecord.create(
             {
                 "title": [
                     {
                         "type": "bf:Title",
-                        "mainTitle": [
-                            {"language": "eng", "value": "Title of the document"}
-                        ],
+                        "mainTitle": [{"language": "eng", "value": "Title of the document"}],
                     }
                 ],
                 "documentType": "coar:c_db06",

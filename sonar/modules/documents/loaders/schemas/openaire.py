@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -59,21 +57,14 @@ class OpenaireSchema(Schema):
 
         # DOI
         if obj.get("datacite:alternateIdentifiers"):
-            for identifier in force_list(
-                obj["datacite:alternateIdentifiers"]["datacite:alternateIdentifier"]
-            ):
+            for identifier in force_list(obj["datacite:alternateIdentifiers"]["datacite:alternateIdentifier"]):
                 if identifier["@identifierType"] == "DOI":
                     identifiers.append({"type": "bf:Doi", "value": identifier["#text"]})
 
         # PMID
         if obj.get("datacite:relatedIdentifiers"):
-            for identifier in force_list(
-                obj["datacite:relatedIdentifiers"]["datacite:relatedIdentifier"]
-            ):
-                if (
-                    identifier["@relationType"] == "IsVersionOf"
-                    and identifier["@relatedIdentifierType"] == "PMID"
-                ):
+            for identifier in force_list(obj["datacite:relatedIdentifiers"]["datacite:relatedIdentifier"]):
+                if identifier["@relationType"] == "IsVersionOf" and identifier["@relatedIdentifierType"] == "PMID":
                     identifiers.append(
                         {
                             "type": "bf:Local",
@@ -88,9 +79,7 @@ class OpenaireSchema(Schema):
         """Get title."""
         titles = []
 
-        for title in force_list(
-            obj.get("datacite:titles", {}).get("datacite:title", [])
-        ):
+        for title in force_list(obj.get("datacite:titles", {}).get("datacite:title", [])):
             titles.append(
                 {
                     "type": "bf:Title",

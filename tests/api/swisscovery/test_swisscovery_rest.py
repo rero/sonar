@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -41,17 +39,13 @@ def test_get_record(client, user, submitter):
 
     # No record found
     login_user_via_session(client, email=submitter["email"])
-    res = client.get(
-        url_for("swisscovery.get_record", query="NON-EXISTING", type="mms_id")
-    )
+    res = client.get(url_for("swisscovery.get_record", query="NON-EXISTING", type="mms_id"))
     assert res.status_code == 200
     assert res.json == {}
 
     # Document serialized
     login_user_via_session(client, email=submitter["email"])
-    res = client.get(
-        url_for("swisscovery.get_record", query="991087591959705501", type="mms_id")
-    )
+    res = client.get(url_for("swisscovery.get_record", query="991087591959705501", type="mms_id"))
     assert res.status_code == 200
     assert res.json == {
         "contribution": [

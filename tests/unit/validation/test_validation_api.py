@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -48,28 +46,14 @@ def test_load_user(client, submitter, moderator):
     # No user in record
     with pytest.raises(Exception) as exception:
         validation._load_user(
-            {
-                "metadata": {
-                    "validation": {
-                        "user": {"$ref": "https://sonar.ch/api/users/not-existing"}
-                    }
-                }
-            }
+            {"metadata": {"validation": {"user": {"$ref": "https://sonar.ch/api/users/not-existing"}}}}
         )
         assert isinstance(exception.value, UserRecordNotFoundError)
 
     # Logged user is not owner of the record
     with pytest.raises(Exception) as exception:
         validation._load_user(
-            {
-                "metadata": {
-                    "validation": {
-                        "user": {
-                            "$ref": f'https://sonar.ch/api/users/{moderator["pid"]}'
-                        }
-                    }
-                }
-            }
+            {"metadata": {"validation": {"user": {"$ref": f"https://sonar.ch/api/users/{moderator['pid']}"}}}}
         )
         assert isinstance(exception.value, UserIsNotOwnerOfRecordError)
 
@@ -112,9 +96,7 @@ def test_moderator_process(client, moderator, project):
     validation = Validation()
 
     # Save a record and the moderator is the owner
-    project._record["metadata"]["validation"]["user"][
-        "$ref"
-    ] = f'https://sonar.ch/api/users/{moderator["pid"]}'
+    project._record["metadata"]["validation"]["user"]["$ref"] = f"https://sonar.ch/api/users/{moderator['pid']}"
     for status in ["in_progress", "to_validate", "ask_for_changes", "rejected"]:
         project._record["metadata"]["validation"]["status"] = status
         validation.process(project._record)

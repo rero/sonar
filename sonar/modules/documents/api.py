@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -86,9 +84,7 @@ class DocumentRecord(SonarRecord):
         if not org:
             org = current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION")
 
-        return current_app.config.get("SONAR_DOCUMENTS_PERMALINK").format(
-            host=host, org=org, pid=pid
-        )
+        return current_app.config.get("SONAR_DOCUMENTS_PERMALINK").format(host=host, org=org, pid=pid)
 
     @staticmethod
     def get_documents_by_project(project_pid):
@@ -101,25 +97,17 @@ class DocumentRecord(SonarRecord):
         def format_hit(hit):
             """Format hit item."""
             hit = hit.to_dict()
-            hit["permalink"] = DocumentRecord.get_permanent_link(
-                request.host_url, hit["pid"]
-            )
+            hit["permalink"] = DocumentRecord.get_permanent_link(request.host_url, hit["pid"])
             return hit
 
-        results = (
-            DocumentSearch()
-            .filter("term", projects__pid=project_pid)
-            .source(includes=["pid", "title"])
-        )
+        results = DocumentSearch().filter("term", projects__pid=project_pid).source(includes=["pid", "title"])
         return list(map(format_hit, results))
 
     @classmethod
     def create(cls, data, id_=None, dbcommit=False, with_bucket=True, **kwargs):
         """Create document record."""
         cls.guess_controlled_affiliations(data)
-        return super(DocumentRecord, cls).create(
-            data, id_=id_, dbcommit=dbcommit, with_bucket=with_bucket, **kwargs
-        )
+        return super(DocumentRecord, cls).create(data, id_=id_, dbcommit=dbcommit, with_bucket=with_bucket, **kwargs)
 
     @classmethod
     def guess_controlled_affiliations(cls, data):
@@ -132,9 +120,7 @@ class DocumentRecord(SonarRecord):
             # remove existing controlled affiliation
             contributor.pop("controlledAffiliation", None)
             if contributor.get("affiliation"):
-                if controlled_affiliations := affiliation_resolver.resolve(
-                    contributor["affiliation"]
-                ):
+                if controlled_affiliations := affiliation_resolver.resolve(contributor["affiliation"]):
                     contributor["controlledAffiliation"] = controlled_affiliations
 
     @classmethod
@@ -146,11 +132,7 @@ class DocumentRecord(SonarRecord):
         search = DocumentSearch()
 
         # Search only for DOI or local indentifiers.
-        search_identifiers = [
-            identifier
-            for identifier in identifiers
-            if identifier["type"] in ["bf:Local", "bf:Doi"]
-        ]
+        search_identifiers = [identifier for identifier in identifiers if identifier["type"] in ["bf:Local", "bf:Doi"]]
 
         # No identifiers to analyze
         if not search_identifiers:
@@ -165,9 +147,7 @@ class DocumentRecord(SonarRecord):
                 Q("term", identifiedBy__type=identifier["type"]),
             ]
             if identifier.get("source"):
-                identifier_filters.append(
-                    Q("term", identifiedBy__source=identifier["source"])
-                )
+                identifier_filters.append(Q("term", identifiedBy__source=identifier["source"]))
 
             filters.append(
                 Q(
@@ -407,9 +387,7 @@ class DocumentRecord(SonarRecord):
         query_cfg = current_stats.queries["record-view"]
         query = query_cfg.cls(name="record-view", **query_cfg.params)
         try:
-            res["record-view"] = int(
-                query.run(pid_type="doc", pid_value=self["pid"])["unique_count"]
-            )
+            res["record-view"] = int(query.run(pid_type="doc", pid_value=self["pid"])["unique_count"])
         except NotFoundError:
             res["record-view"] = 0
         query_cfg = current_stats.queries["file-download"]

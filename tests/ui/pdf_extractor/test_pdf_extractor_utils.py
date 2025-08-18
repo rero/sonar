@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -33,10 +31,7 @@ def test_format_extracted_data(app):
         extracted_data = json.load(file)
         formatted_data = format_extracted_data(extracted_data)
         assert "title" in formatted_data
-        assert (
-            formatted_data["title"] == "Calibrated Ice Thickness Estimate"
-            " for All Glaciers in Austria"
-        )
+        assert formatted_data["title"] == "Calibrated Ice Thickness Estimate for All Glaciers in Austria"
         assert len(formatted_data["authors"]) == 2
         assert formatted_data["authors"] == [
             {
@@ -54,15 +49,9 @@ def test_format_extracted_data(app):
         ]
 
         # Test authors
-        extracted_data["teiHeader"]["fileDesc"]["sourceDesc"]["biblStruct"]["analytic"][
-            "author"
-        ] = extracted_data["teiHeader"]["fileDesc"]["sourceDesc"]["biblStruct"][
-            "analytic"
-        ][
-            "author"
-        ][
-            0
-        ]
+        extracted_data["teiHeader"]["fileDesc"]["sourceDesc"]["biblStruct"]["analytic"]["author"] = extracted_data[
+            "teiHeader"
+        ]["fileDesc"]["sourceDesc"]["biblStruct"]["analytic"]["author"][0]
 
         formatted_data = format_extracted_data(extracted_data)
         assert len(formatted_data["authors"]) == 1
@@ -73,22 +62,10 @@ def test_format_extracted_data(app):
         assert formatted_data["languages"][0] == "ger"
 
         # Test imprint
-        extracted_data["teiHeader"]["fileDesc"]["sourceDesc"]["biblStruct"]["monogr"][
-            "imprint"
-        ]["biblScope"] = extracted_data["teiHeader"]["fileDesc"]["sourceDesc"][
-            "biblStruct"
-        ][
-            "monogr"
-        ][
-            "imprint"
-        ][
-            "biblScope"
-        ][
-            0
-        ]
-        formatted_data = format_extracted_data(extracted_data)
-        assert (
-            formatted_data["publication"]["publishedIn"] == "Frontiers in Earth Science"
+        extracted_data["teiHeader"]["fileDesc"]["sourceDesc"]["biblStruct"]["monogr"]["imprint"]["biblScope"] = (
+            extracted_data["teiHeader"]["fileDesc"]["sourceDesc"]["biblStruct"]["monogr"]["imprint"]["biblScope"][0]
         )
+        formatted_data = format_extracted_data(extracted_data)
+        assert formatted_data["publication"]["publishedIn"] == "Frontiers in Earth Science"
         assert formatted_data["publication"]["volume"] == "7"
         assert formatted_data["documentDate"] == "2019"

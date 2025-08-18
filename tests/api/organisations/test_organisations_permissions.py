@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -23,9 +21,7 @@ from flask import url_for
 from invenio_accounts.testutils import login_user_via_session
 
 
-def test_list(
-    app, client, make_organisation, superuser, admin, moderator, submitter, user
-):
+def test_list(app, client, make_organisation, superuser, admin, moderator, submitter, user):
     """Test list organisations permissions."""
     make_organisation("org2")
 
@@ -75,44 +71,32 @@ def test_create(client, superuser, admin, moderator, submitter, user):
     headers = {"Content-Type": "application/json", "Accept": "application/json"}
 
     # Not logged
-    res = client.post(
-        url_for("invenio_records_rest.org_list"), data=json.dumps(data), headers=headers
-    )
+    res = client.post(url_for("invenio_records_rest.org_list"), data=json.dumps(data), headers=headers)
     assert res.status_code == 401
 
     # User
     login_user_via_session(client, email=user["email"])
-    res = client.post(
-        url_for("invenio_records_rest.org_list"), data=json.dumps(data), headers=headers
-    )
+    res = client.post(url_for("invenio_records_rest.org_list"), data=json.dumps(data), headers=headers)
     assert res.status_code == 403
 
     # submitter
     login_user_via_session(client, email=submitter["email"])
-    res = client.post(
-        url_for("invenio_records_rest.org_list"), data=json.dumps(data), headers=headers
-    )
+    res = client.post(url_for("invenio_records_rest.org_list"), data=json.dumps(data), headers=headers)
     assert res.status_code == 403
 
     # Moderator
     login_user_via_session(client, email=moderator["email"])
-    res = client.post(
-        url_for("invenio_records_rest.org_list"), data=json.dumps(data), headers=headers
-    )
+    res = client.post(url_for("invenio_records_rest.org_list"), data=json.dumps(data), headers=headers)
     assert res.status_code == 403
 
     # Admin
     login_user_via_session(client, email=admin["email"])
-    res = client.post(
-        url_for("invenio_records_rest.org_list"), data=json.dumps(data), headers=headers
-    )
+    res = client.post(url_for("invenio_records_rest.org_list"), data=json.dumps(data), headers=headers)
     assert res.status_code == 403
 
     # Super user
     login_user_via_session(client, email=superuser["email"])
-    res = client.post(
-        url_for("invenio_records_rest.org_list"), data=json.dumps(data), headers=headers
-    )
+    res = client.post(url_for("invenio_records_rest.org_list"), data=json.dumps(data), headers=headers)
     assert res.status_code == 201
     assert res.json["metadata"]["pid"] == "org2"
 
@@ -169,9 +153,7 @@ def test_read(client, make_organisation, superuser, admin, moderator, submitter,
     }
 
 
-def test_update(
-    client, make_organisation, superuser, admin, moderator, submitter, user
-):
+def test_update(client, make_organisation, superuser, admin, moderator, submitter, user):
     """Test update organisations permissions."""
     headers = {"Content-Type": "application/json", "Accept": "application/json"}
 

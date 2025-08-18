@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -107,9 +105,7 @@ class FileResource(ContentNegotiatedMethodView):
 files_view = FilesResource.as_view("files")
 file_view = FileResource.as_view("file")
 
-api_blueprint = Blueprint(
-    "deposits", __name__, url_prefix="/deposits/<pid>/", template_folder="templates"
-)
+api_blueprint = Blueprint("deposits", __name__, url_prefix="/deposits/<pid>/", template_folder="templates")
 api_blueprint.add_url_rule("/custom-files/<key>", view_func=file_view)
 api_blueprint.add_url_rule("/custom-files", view_func=files_view)
 
@@ -122,8 +118,7 @@ def publish(pid=None):
     if (
         not deposit
         or deposit["step"] != DepositRecord.STEP_DIFFUSION
-        or deposit["status"]
-        not in [DepositRecord.STATUS_IN_PROGRESS, DepositRecord.STATUS_ASK_FOR_CHANGES]
+        or deposit["status"] not in [DepositRecord.STATUS_IN_PROGRESS, DepositRecord.STATUS_ASK_FOR_CHANGES]
     ):
         abort(400)
 
@@ -139,18 +134,14 @@ def publish(pid=None):
         deposit["status"] = DepositRecord.STATUS_TO_VALIDATE
 
         subdivision = (
-            SubdivisionRecord.get_record_by_ref_link(user["subdivision"]["$ref"])
-            if user.get("subdivision")
-            else None
+            SubdivisionRecord.get_record_by_ref_link(user["subdivision"]["$ref"]) if user.get("subdivision") else None
         )
 
-        moderators_emails = user.get_moderators_emails(
-            subdivision["pid"] if subdivision else None
-        )
+        moderators_emails = user.get_moderators_emails(subdivision["pid"] if subdivision else None)
 
         email_subject = _("Deposit to validate")
         if subdivision:
-            email_subject += f' ({get_language_value(subdivision["name"])})'
+            email_subject += f" ({get_language_value(subdivision['name'])})"
 
         if moderators_emails:
             # Send an email to validators
@@ -259,11 +250,7 @@ def extract_metadata(pid=None):
     if not deposit:
         abort(400)
     # TODO: check if order should be required
-    main_file = [
-        file
-        for file in deposit.files
-        if file.get("order") == 1 and file.mimetype == "application/pdf"
-    ]
+    main_file = [file for file in deposit.files if file.get("order") == 1 and file.mimetype == "application/pdf"]
 
     if not main_file:
         abort(500)

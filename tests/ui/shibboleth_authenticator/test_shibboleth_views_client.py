@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -46,9 +44,7 @@ def test_login(app, client, valid_sp_configuration):
     assert client.get("/shibboleth/login/idp").status_code == 500
 
 
-def test_authorized(
-    monkeypatch, app, client, roles, user_without_role, valid_attributes
-):
+def test_authorized(monkeypatch, app, client, roles, user_without_role, valid_attributes):
     """Test authorized view."""
     # Test unexisting identity provider
     app.config.update(
@@ -109,9 +105,7 @@ def test_authorized(
             return True
 
     mock_user = MockUser()
-    monkeypatch.setattr(
-        "sonar.modules.shibboleth_authenticator.views.client.current_user", mock_user
-    )
+    monkeypatch.setattr("sonar.modules.shibboleth_authenticator.views.client.current_user", mock_user)
     assert client.post("/shibboleth/authorized/idp").status_code == 400
 
     # Test errors in authentication (but no exception)
@@ -148,7 +142,7 @@ def test_authorized(
 
     # Test error in relay state token
     monkeypatch.setattr(
-        "sonar.modules.shibboleth_authenticator.views.client" "._create_identifier",
+        "sonar.modules.shibboleth_authenticator.views.client._create_identifier",
         lambda: "test",
     )
     assert (
@@ -172,9 +166,7 @@ def test_authorized(
     mock_request = MockRequest()
 
     # Test error when no relay state token found
-    monkeypatch.setattr(
-        "sonar.modules.shibboleth_authenticator.views.client.request", mock_request
-    )
+    monkeypatch.setattr("sonar.modules.shibboleth_authenticator.views.client.request", mock_request)
 
     assert (
         client.post(

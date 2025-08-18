@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -36,16 +34,12 @@ class JSONSerializer(_JSONSerializer):
     def post_process_serialize_search(self, results, pid_fetcher):
         """Post process the search results."""
         # Add subdivision name
-        for org_term in (
-            results.get("aggregations", {}).get("subdivision", {}).get("buckets", [])
-        ):
+        for org_term in results.get("aggregations", {}).get("subdivision", {}).get("buckets", []):
             subdivision = SubdivisionRecord.get_record_by_pid(org_term["key"])
             if subdivision:
                 org_term["name"] = subdivision["name"][0]["value"]
 
-        return super(JSONSerializer, self).post_process_serialize_search(
-            results, pid_fetcher
-        )
+        return super(JSONSerializer, self).post_process_serialize_search(results, pid_fetcher)
 
 
 # Serializers

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -40,9 +38,7 @@ def oai_config_create(config_file):
 
     :param config_file: File containing a list of sources to harvest.
     """
-    click.secho(
-        f'\nCreating configurations for OAI harvesting from file "{config_file.name}"...'
-    )
+    click.secho(f'\nCreating configurations for OAI harvesting from file "{config_file.name}"...')
 
     sources = json.load(config_file)
 
@@ -54,7 +50,7 @@ def oai_config_create(config_file):
             configuration = OAIHarvestConfig.query.filter_by(name=source["key"]).first()
 
             if configuration:
-                raise Exception(f"Config already registered for \"{source['key']}\"")
+                raise Exception(f'Config already registered for "{source["key"]}"')
 
             configuration = OAIHarvestConfig(
                 name=source["key"],
@@ -67,7 +63,7 @@ def oai_config_create(config_file):
             db.session.commit()
 
             click.secho(
-                f"Created configuration for \"{source['key']}\"",
+                f'Created configuration for "{source["key"]}"',
                 fg="green",
             )
         except Exception as exception:

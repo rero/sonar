@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -91,8 +89,7 @@ class HEGRepository:
             if matches:
                 with open(file_path) as json_file:
                     files = [
-                        open(path.join(target, f"{matches.group(1)}_{i + 1}.json"), "w")
-                        for i in range(number_of_files)
+                        open(path.join(target, f"{matches.group(1)}_{i + 1}.json"), "w") for i in range(number_of_files)
                     ]
                     for i, line in enumerate(json_file):
                         files[i % number_of_files].write(line)

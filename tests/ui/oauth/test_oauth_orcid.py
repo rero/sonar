@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -39,15 +37,11 @@ def test_account_setup(app, orcid_record, remote_account):
 def test_get_orcid_record(mock_api_read_record, app, orcid_record):
     """Test to get an orcid detail."""
     # Test valid returned record
-    record = sonar_orcid.get_orcid_record(
-        orcid_record["orcid"], orcid_record["access_token"]
-    )
+    record = sonar_orcid.get_orcid_record(orcid_record["orcid"], orcid_record["access_token"])
     assert record["orcid-identifier"]["path"] == orcid_record["orcid"]
 
     # Test error when request_type is invalid
-    record = sonar_orcid.get_orcid_record(
-        orcid_record["orcid"], orcid_record["access_token"], "FAKE"
-    )
+    record = sonar_orcid.get_orcid_record(orcid_record["orcid"], orcid_record["access_token"], "FAKE")
     assert not record
 
     # Test error when access token is invalid
@@ -62,15 +56,11 @@ def test_get_orcid_record(mock_api_read_record, app, orcid_record):
 def test_get_orcid_record_email(mock_api_read_record, app, orcid_record):
     """Test getting ORCID record email."""
     # Test existing email
-    email = sonar_orcid.get_orcid_record_email(
-        orcid_record["orcid"], orcid_record["access_token"]
-    )
+    email = sonar_orcid.get_orcid_record_email(orcid_record["orcid"], orcid_record["access_token"])
     assert email == "john.doe@test.com"
 
     # Test when record id does not exist
-    email = sonar_orcid.get_orcid_record_email(
-        "NOT_EXISTING", orcid_record["access_token"]
-    )
+    email = sonar_orcid.get_orcid_record_email("NOT_EXISTING", orcid_record["access_token"])
     assert email == ""
 
     # Test when access token does not exist

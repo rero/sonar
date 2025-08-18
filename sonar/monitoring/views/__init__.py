@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -78,9 +76,7 @@ def data_status():
     """Status of data integrity."""
     try:
         data_monitoring = DataIntegrityMonitoring()
-        return jsonify(
-            {"data": {"status": "red" if data_monitoring.has_error() else "green"}}
-        )
+        return jsonify({"data": {"status": "red" if data_monitoring.has_error() else "green"}})
     except Exception as exception:
         return jsonify({"error": str(exception)}), 500
 
@@ -90,9 +86,7 @@ def data_info():
     """Info of data integrity."""
     try:
         data_monitoring = DataIntegrityMonitoring()
-        return jsonify(
-            {"data": data_monitoring.info(with_detail=("detail" in request.args))}
-        )
+        return jsonify({"data": data_monitoring.info(with_detail=("detail" in request.args))})
     except Exception as exception:
         return jsonify({"error": str(exception)}), 500
 

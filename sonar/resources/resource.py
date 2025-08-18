@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -41,8 +39,7 @@ class RecordResource(BaseRecordResource):
 
         resource_name = self.default_config.resource_name
         resource_config = (
-            f'sonar.dedicated.{current_organisation["code"]}.'
-            f"{resource_name}.resource:RecordResourceConfig"
+            f"sonar.dedicated.{current_organisation['code']}.{resource_name}.resource:RecordResourceConfig"
         )
 
         return obj_or_import_string(resource_config)

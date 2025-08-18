@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -36,9 +34,7 @@ submitter_access_permission = Permission(
     RoleNeed("superuser"),
 )
 
-moderator_access_permission = Permission(
-    RoleNeed("moderator"), RoleNeed("admin"), RoleNeed("superuser")
-)
+moderator_access_permission = Permission(RoleNeed("moderator"), RoleNeed("admin"), RoleNeed("superuser"))
 monitoring_access_permission = Permission(RoleNeed("superuser"), RoleNeed("monitoring"))
 
 # Allow access without permission check
@@ -163,13 +159,9 @@ def files_permission_factory(obj, action, pid=None, record=None):
         pid_type = pid.pid_type
 
     files_permission_cls = obj_or_import_string(
-        current_app.config.get("SONAR_APP_FILES_REST_PERMISSION", {}).get(
-            pid_type, FilesPermission
-        )
+        current_app.config.get("SONAR_APP_FILES_REST_PERMISSION", {}).get(pid_type, FilesPermission)
     )
-    return files_permission_cls.create_permission(
-        obj, action, user=None, pid=pid, parent_record=record
-    )
+    return files_permission_cls.create_permission(obj, action, user=None, pid=pid, parent_record=record)
 
 
 def wiki_edit_permission():

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -40,9 +38,7 @@ def get_current_user():
     """Return current user record from context."""
     if has_request_context() and not hasattr(request_ctx, "user_record"):
         request_ctx.user_record = (
-            None
-            if (current_user.is_anonymous)
-            else UserRecord.get_user_by_email(email=current_user.email)
+            None if (current_user.is_anonymous) else UserRecord.get_user_by_email(email=current_user.email)
         )
 
     return getattr(request_ctx, "user_record", None)
@@ -116,11 +112,7 @@ class UserSearch(SonarSearch):
                 )
             )
 
-        return (
-            self.query("bool", filter=Q("bool", must=must))
-            .source(includes=["pid", "email"])
-            .scan()
-        )
+        return self.query("bool", filter=Q("bool", must=must)).source(includes=["pid", "email"]).scan()
 
 
 class UserRecord(SonarRecord):
@@ -162,9 +154,7 @@ class UserRecord(SonarRecord):
         :param with_bucket: True for associating a bucket to record.
         :returns: Created record instance.
         """
-        record = super(UserRecord, cls).create(
-            data, id_, dbcommit, with_bucket, **kwargs
-        )
+        record = super(UserRecord, cls).create(data, id_, dbcommit, with_bucket, **kwargs)
 
         record.sync_roles()
         return record
@@ -189,9 +179,7 @@ class UserRecord(SonarRecord):
         # Remove roles from user account.
         self.remove_roles()
 
-        return super(UserRecord, self).delete(
-            force=force, dbcommit=dbcommit, delindex=delindex
-        )
+        return super(UserRecord, self).delete(force=force, dbcommit=dbcommit, delindex=delindex)
 
     @cached_property
     def user(self):
@@ -313,9 +301,7 @@ class UserRecord(SonarRecord):
         organisation_pid = None
 
         if "organisation" in self:
-            organisation_pid = UserRecord.get_pid_by_ref_link(
-                self["organisation"]["$ref"]
-            )
+            organisation_pid = UserRecord.get_pid_by_ref_link(self["organisation"]["$ref"])
 
         moderators = UserSearch().get_moderators(organisation_pid, subdivision_pid)
 

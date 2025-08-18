@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -51,21 +49,17 @@ def get_record():
         "startRecord": "1",
         "query": f'({search_type}="{query}")',
     }
-    response = requests.get(
-        current_app.config.get("SONAR_APP_SWISSCOVERY_SEARCH_URL"), params=params
-    )
+    response = requests.get(current_app.config.get("SONAR_APP_SWISSCOVERY_SEARCH_URL"), params=params)
     result = xmltodict.parse(response.text)
 
-    if not result["sru:searchRetrieveResponse"].get("sru:records") or not result[
-        "sru:searchRetrieveResponse"
-    ]["sru:records"].get("sru:record"):
+    if not result["sru:searchRetrieveResponse"].get("sru:records") or not result["sru:searchRetrieveResponse"][
+        "sru:records"
+    ].get("sru:record"):
         return jsonify({}), 200
 
     # Get only relevant XML part.
     record = xmltodict.unparse(
-        result["sru:searchRetrieveResponse"]["sru:records"]["sru:record"][
-            "sru:recordData"
-        ],
+        result["sru:searchRetrieveResponse"]["sru:records"]["sru:record"]["sru:recordData"],
         full_document=False,
     )
 

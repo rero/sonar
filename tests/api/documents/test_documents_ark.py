@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -35,23 +33,13 @@ def test_ark_query(db, client, organisation, document, search_clear):
 
     # the ark identifier field should exists
     ark = document.get_ark()
-    res = client.get(
-        url_for(
-            "invenio_records_rest.doc_list", view="global", q="_exists_:identifiers.ark"
-        )
-    )
+    res = client.get(url_for("invenio_records_rest.doc_list", view="global", q="_exists_:identifiers.ark"))
     assert res.json["hits"]["total"]["value"] == 1
 
     # search with the field name
-    res = client.get(
-        url_for(
-            "invenio_records_rest.doc_list", view="global", q=f'identifiers.ark:"{ark}"'
-        )
-    )
+    res = client.get(url_for("invenio_records_rest.doc_list", view="global", q=f'identifiers.ark:"{ark}"'))
     assert res.json["hits"]["total"]["value"] == 1
 
     # search everywhere
-    res = client.get(
-        url_for("invenio_records_rest.doc_list", view="global", q=f'"{ark}"')
-    )
+    res = client.get(url_for("invenio_records_rest.doc_list", view="global", q=f'"{ark}"'))
     assert res.json["hits"]["total"]["value"] == 1

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # SONAR
 # Copyright (C) 2022 RERO+
 #
@@ -16,7 +14,6 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 """Initialize alembic."""
-
 
 # revision identifiers, used by Alembic.
 revision = "3d3309f660e4"

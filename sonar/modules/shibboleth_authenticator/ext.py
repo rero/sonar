@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -40,12 +38,8 @@ class ShibbolethAuthenticator(object):
         # Update service provider configuration with certificate path found
         # in environment variables
         service_provider = app.config.get("SHIBBOLETH_SERVICE_PROVIDER")
-        service_provider["x509cert"] = app.config.get(
-            "SHIBBOLETH_SERVICE_PROVIDER_CERTIFICATE"
-        )
-        service_provider["private_key"] = app.config.get(
-            "SHIBBOLETH_SERVICE_PROVIDER_PRIVATE_KEY"
-        )
+        service_provider["x509cert"] = app.config.get("SHIBBOLETH_SERVICE_PROVIDER_CERTIFICATE")
+        service_provider["private_key"] = app.config.get("SHIBBOLETH_SERVICE_PROVIDER_PRIVATE_KEY")
 
         app.config.setdefault("SHIBBOLETH_SERVICE_PROVIDER", service_provider)
 

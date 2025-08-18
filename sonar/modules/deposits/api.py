@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -81,17 +79,9 @@ class DepositRecord(SonarRecord):
         """Create deposit record."""
         if not data.get("diffusion", {}).get("subdivisions"):
             # Guess from submitter
-            if (
-                current_user_record
-                and current_user_record.is_submitter
-                and current_user_record.get("subdivision")
-            ):
-                data.setdefault("diffusion", {})["subdivisions"] = [
-                    current_user_record["subdivision"]
-                ]
-        record = super(DepositRecord, cls).create(
-            data, id_=id_, dbcommit=dbcommit, with_bucket=with_bucket, **kwargs
-        )
+            if current_user_record and current_user_record.is_submitter and current_user_record.get("subdivision"):
+                data.setdefault("diffusion", {})["subdivisions"] = [current_user_record["subdivision"]]
+        record = super(DepositRecord, cls).create(data, id_=id_, dbcommit=dbcommit, with_bucket=with_bucket, **kwargs)
         return record
 
     def log_action(self, user, action, comment=None):
@@ -131,25 +121,19 @@ class DepositRecord(SonarRecord):
         metadata["title"] = [
             {
                 "type": "bf:Title",
-                "mainTitle": [
-                    {"language": language, "value": self["metadata"]["title"]}
-                ],
+                "mainTitle": [{"language": language, "value": self["metadata"]["title"]}],
             }
         ]
 
         # Subtitle
         if self["metadata"].get("subtitle"):
-            metadata["title"][0]["subtitle"] = [
-                {"language": language, "value": self["metadata"]["subtitle"]}
-            ]
+            metadata["title"][0]["subtitle"] = [{"language": language, "value": self["metadata"]["subtitle"]}]
 
         # Other title
         if self["metadata"].get("otherLanguageTitle", {}).get("title"):
             metadata["title"][0]["mainTitle"].append(
                 {
-                    "language": self["metadata"]["otherLanguageTitle"].get(
-                        "language", language
-                    ),
+                    "language": self["metadata"]["otherLanguageTitle"].get("language", language),
                     "value": self["metadata"]["otherLanguageTitle"]["title"],
                 }
             )
@@ -158,9 +142,7 @@ class DepositRecord(SonarRecord):
         metadata["language"] = [{"value": language, "type": "bf:Language"}]
 
         # Document date
-        metadata["provisionActivity"] = [
-            {"type": "bf:Publication", "startDate": self["metadata"]["documentDate"]}
-        ]
+        metadata["provisionActivity"] = [{"type": "bf:Publication", "startDate": self["metadata"]["documentDate"]}]
         metadata["provisionActivity"][0]["statement"] = []
 
         # Publication place
@@ -219,19 +201,13 @@ class DepositRecord(SonarRecord):
                 part_of["numberingIssue"] = self["metadata"]["publication"]["number"]
 
             if self["metadata"]["publication"].get("editors"):
-                part_of["document"]["contribution"] = self["metadata"]["publication"][
-                    "editors"
-                ]
+                part_of["document"]["contribution"] = self["metadata"]["publication"]["editors"]
 
             if self["metadata"]["publication"].get("publisher"):
-                part_of["document"]["publication"] = {
-                    "statement": self["metadata"]["publication"]["publisher"]
-                }
+                part_of["document"]["publication"] = {"statement": self["metadata"]["publication"]["publisher"]}
 
             if self["metadata"]["publication"].get("identifiedBy"):
-                part_of["document"]["identifiedBy"] = self["metadata"]["publication"][
-                    "identifiedBy"
-                ]
+                part_of["document"]["identifiedBy"] = self["metadata"]["publication"]["identifiedBy"]
 
             metadata["partOf"] = [part_of]
 
@@ -266,11 +242,7 @@ class DepositRecord(SonarRecord):
                     data["organisation"] = current_user_record["organisation"]
                     collection_record = CollectionRecord.create(data)
                     collection_record.reindex()
-                    collection = {
-                        "$ref": SonarRecord.get_ref_link(
-                            "collections", collection_record["pid"]
-                        )
-                    }
+                    collection = {"$ref": SonarRecord.get_ref_link("collections", collection_record["pid"])}
 
                 collections.append(collection)
 
@@ -352,9 +324,7 @@ class DepositRecord(SonarRecord):
 
         # Other material characteristics
         if self["metadata"].get("otherMaterialCharacteristics"):
-            metadata["otherMaterialCharacteristics"] = self["metadata"][
-                "otherMaterialCharacteristics"
-            ]
+            metadata["otherMaterialCharacteristics"] = self["metadata"]["otherMaterialCharacteristics"]
 
         # Edition statement
         if self["metadata"].get("editionStatement"):
@@ -420,14 +390,8 @@ class DepositRecord(SonarRecord):
                     # Store organisation
                     data["organisation"] = current_user_record["organisation"]
 
-                    project_record = sonar.service("projects").create(
-                        g.identity, {"metadata": data}
-                    )
-                    project = {
-                        "$ref": SonarRecord.get_ref_link(
-                            "projects", project_record["id"]
-                        )
-                    }
+                    project_record = sonar.service("projects").create(g.identity, {"metadata": data})
+                    project = {"$ref": SonarRecord.get_ref_link("projects", project_record["id"])}
 
                 projects.append(project)
 
@@ -461,18 +425,14 @@ class DepositRecord(SonarRecord):
                 if file.get("embargoDate"):
                     kwargs["access"] = "coar:c_f1cf"  # Embargoed access
                     kwargs["embargo_date"] = file["embargoDate"]
-                    kwargs["restricted_outside_organisation"] = file.get(
-                        "exceptInOrganisation", False
-                    )
+                    kwargs["restricted_outside_organisation"] = file.get("exceptInOrganisation", False)
 
                 document.add_file(content, file["key"], **kwargs)
 
         document.commit()
         document.reindex()
 
-        self["document"] = {
-            "$ref": DocumentRecord.get_ref_link("documents", document["pid"])
-        }
+        self["document"] = {"$ref": DocumentRecord.get_ref_link("documents", document["pid"])}
 
         return document
 

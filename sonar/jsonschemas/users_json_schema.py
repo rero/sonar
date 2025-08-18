@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2022 RERO
 #
@@ -48,14 +46,10 @@ class UsersJSONSchema(JSONSchemaBase):
             if current_user_record.is_admin:
                 reachable_roles = current_user_record.get_all_reachable_roles()
 
-                schema["properties"]["role"]["widget"]["formlyConfig"]["props"][
-                    "options"
-                ] = [
+                schema["properties"]["role"]["widget"]["formlyConfig"]["props"]["options"] = [
                     {"label": f"role_{role}", "value": role} for role in reachable_roles
                 ]
-                schema["properties"]["role"][
-                    "enum"
-                ] = current_user_record.get_all_reachable_roles()
+                schema["properties"]["role"]["enum"] = current_user_record.get_all_reachable_roles()
             else:
                 schema["properties"].pop("role")
                 if "role" in schema.get("propertiesOrder", []):

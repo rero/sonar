@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -129,10 +127,7 @@ class Validation:
             Action.APPROVE: Status.VALIDATED,
         }
         for action, status in actions_map.items():
-            if (
-                validation["action"] == action
-                and validation["status"] == Status.TO_VALIDATE
-            ):
+            if validation["action"] == action and validation["status"] == Status.TO_VALIDATE:
                 comment = validation.get("comment")
                 self._update_status(validation, status)
                 # Send mail to user
@@ -158,16 +153,12 @@ class Validation:
         if not record["metadata"].get("validation", {}).get("user"):
             raise Exception("No user stored in record")
 
-        record_user = UserRecord.get_record_by_ref_link(
-            record["metadata"]["validation"]["user"]["$ref"]
-        )
+        record_user = UserRecord.get_record_by_ref_link(record["metadata"]["validation"]["user"]["$ref"])
 
         if not record_user:
             raise UserRecordNotFoundError
 
-        if not self._user_can_moderate() and not self._user_is_owner_of_record(
-            record_user
-        ):
+        if not self._user_can_moderate() and not self._user_is_owner_of_record(record_user):
             raise UserIsNotOwnerOfRecordError
 
         return record_user
@@ -204,7 +195,7 @@ class Validation:
                 "action": validation["action"],
                 "user": {
                     "pid": user["pid"],
-                    "name": f'{user["first_name"]} {user["last_name"]}',
+                    "name": f"{user['first_name']} {user['last_name']}",
                 },
                 "date": datetime.now(timezone.utc).isoformat(),
                 "comment": validation.get("comment"),

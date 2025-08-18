@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -121,10 +119,7 @@ class ProjectsRecordService(RecordService):
         schema_path = "sonar.resources.projects.schema:RecordSchema"
 
         if has_custom_resource("projects"):
-            schema_path = (
-                f'sonar.dedicated.{current_organisation["code"]}.'
-                "projects.schema:RecordSchema"
-            )
+            schema_path = f"sonar.dedicated.{current_organisation['code']}.projects.schema:RecordSchema"
 
         schema = obj_or_import_string(schema_path)
 

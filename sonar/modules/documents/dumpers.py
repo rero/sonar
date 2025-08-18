@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2023 RERO
 #
@@ -49,12 +47,8 @@ class IndexerDumper(Dumper):
     @staticmethod
     def _add_dates(record, data):
         """Adds isOpenAccess field."""
-        data["_created"] = (
-            pytz.utc.localize(record.created).isoformat() if record.created else None
-        )
-        data["_updated"] = (
-            pytz.utc.localize(record.updated).isoformat() if record.updated else None
-        )
+        data["_created"] = pytz.utc.localize(record.created).isoformat() if record.created else None
+        data["_updated"] = pytz.utc.localize(record.updated).isoformat() if record.updated else None
 
     @staticmethod
     def _replace_refs(data):
@@ -73,9 +67,7 @@ class IndexerDumper(Dumper):
         # Compile allowed IPs in document
         if data.get("organisation"):
             if data["organisation"][0].get("allowedIps"):
-                data["organisation"][0]["ips"] = get_ips_list(
-                    data["organisation"][0]["allowedIps"].split("\n")
-                )
+                data["organisation"][0]["ips"] = get_ips_list(data["organisation"][0]["allowedIps"].split("\n"))
             else:
                 data["organisation"][0]["ips"] = []
 

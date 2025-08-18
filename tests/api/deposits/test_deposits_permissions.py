@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -107,9 +105,7 @@ def test_create(
 
     # submitter
     login_user_via_session(client, email=submitter["email"])
-    submitter["subdivision"] = {
-        "$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"
-    }
+    submitter["subdivision"] = {"$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"}
     submitter.commit()
     submitter.reindex()
     db.session.commit()
@@ -172,35 +168,25 @@ def test_read(
     deposit2 = make_deposit("submitter", "org2")
 
     # Not logged
-    res = client.get(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"]))
     assert res.status_code == 401
 
     # Logged as user
     login_user_via_session(client, email=user["email"])
-    res = client.get(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"]))
     assert res.status_code == 403
 
     # Logged as submitter
     login_user_via_session(client, email=submitter["email"])
-    res = client.get(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"]))
     assert res.status_code == 200
 
-    res = client.get(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit2["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.depo_item", pid_value=deposit2["pid"]))
     assert res.status_code == 403
 
     # Logged as moderator
     login_user_via_session(client, email=moderator["email"])
-    res = client.get(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"]))
     assert res.status_code == 200
 
     # Moderator has subdivision, I can read a deposit of my subdivision
@@ -209,56 +195,40 @@ def test_read(
     moderator.commit()
     moderator.reindex()
     db.session.commit()
-    res = client.get(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"]))
     assert res.status_code == 200
 
     # Moderator has subdivision, I cannot read deposit outside of his
     # subdivision
-    moderator["subdivision"] = {
-        "$ref": f'https://sonar.ch/api/subdivisions/{subdivision2["pid"]}'
-    }
+    moderator["subdivision"] = {"$ref": f"https://sonar.ch/api/subdivisions/{subdivision2['pid']}"}
     moderator.commit()
     moderator.reindex()
     db.session.commit()
-    res = client.get(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"]))
     assert res.status_code == 403
 
     # Cannot read deposit of other organisations
-    res = client.get(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit2["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.depo_item", pid_value=deposit2["pid"]))
     assert res.status_code == 403
 
     # Logged as admin
     login_user_via_session(client, email=admin["email"])
-    res = client.get(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"]))
     assert res.status_code == 200
 
     # Cannot read deposit of other organisations
-    res = client.get(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit2["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.depo_item", pid_value=deposit2["pid"]))
     assert res.status_code == 403
 
     # Logged as admin of other organisation
     other_admin = make_user("admin", "org2")
     login_user_via_session(client, email=other_admin["email"])
-    res = client.get(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"]))
     assert res.status_code == 403
 
     # Logged as superuser
     login_user_via_session(client, email=superuser["email"])
-    res = client.get(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"])
-    )
+    res = client.get(url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"]))
     assert res.status_code == 200
 
 
@@ -358,76 +328,56 @@ def test_delete(client, db, make_deposit, superuser, admin, moderator, submitter
     deposit2 = make_deposit("submitter", "org2")
 
     # Not logged
-    res = client.delete(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"]))
     assert res.status_code == 401
 
     # Logged as user
     login_user_via_session(client, email=user["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"]))
     assert res.status_code == 403
 
     # Logged as submitter
     login_user_via_session(client, email=submitter["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit2["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.depo_item", pid_value=deposit2["pid"]))
     assert res.status_code == 403
 
     deposit1["status"] = DepositRecord.STATUS_VALIDATED
     deposit1.commit()
     db.session.commit()
 
-    res = client.delete(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"]))
     assert res.status_code == 403
 
     deposit1["status"] = DepositRecord.STATUS_IN_PROGRESS
     deposit1.commit()
     db.session.commit()
 
-    res = client.delete(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"]))
     assert res.status_code == 204
 
     deposit1 = make_deposit("submitter", "org")
 
     # Logged as moderator
     login_user_via_session(client, email=moderator["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit2["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.depo_item", pid_value=deposit2["pid"]))
     assert res.status_code == 403
 
-    res = client.delete(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"]))
     assert res.status_code == 204
 
     deposit1 = make_deposit("submitter", "org")
 
     # Logged as admin
     login_user_via_session(client, email=admin["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit2["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.depo_item", pid_value=deposit2["pid"]))
     assert res.status_code == 403
 
-    res = client.delete(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"]))
     assert res.status_code == 204
 
     deposit1 = make_deposit("submitter", "org")
 
     # Logged as superuser
     login_user_via_session(client, email=superuser["email"])
-    res = client.delete(
-        url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"])
-    )
+    res = client.delete(url_for("invenio_records_rest.depo_item", pid_value=deposit1["pid"]))
     assert res.status_code == 204

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -45,11 +43,7 @@ def test_completion(client, project_json, make_user):
     assert res.json == {"error": "No field parameter given"}
 
     # No resource parameter
-    res = client.get(
-        url_for(
-            "suggestions.completion", q="Sp", field="metadata.projectSponsor.suggest"
-        )
-    )
+    res = client.get(url_for("suggestions.completion", q="Sp", field="metadata.projectSponsor.suggest"))
     assert res.status_code == 400
     assert res.json == {"error": "No resource parameter given"}
 
@@ -66,9 +60,7 @@ def test_completion(client, project_json, make_user):
     assert res.json == {"error": "Search class not found"}
 
     # Unknown field
-    res = client.get(
-        url_for("suggestions.completion", q="Sp", field="unknown", resource="projects")
-    )
+    res = client.get(url_for("suggestions.completion", q="Sp", field="unknown", resource="projects"))
     assert res.status_code == 400
     assert res.json == {"error": "Bad request"}
 

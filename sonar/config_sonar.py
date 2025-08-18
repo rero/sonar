@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -534,8 +532,8 @@ SONAR_APP_STORAGE_PATH = None
 """File storage location."""
 
 SONAR_APP_EXPORT_SERIALIZERS = {
-    "org": ("sonar.modules.organisations.serializers.schemas.export:" "ExportSchemaV1"),
-    "user": ("sonar.modules.users.serializers.schemas.export:" "ExportSchemaV1"),
+    "org": ("sonar.modules.organisations.serializers.schemas.export:ExportSchemaV1"),
+    "user": ("sonar.modules.users.serializers.schemas.export:ExportSchemaV1"),
 }
 
 SONAR_APP_FILE_PREVIEW_MIMETYPES = [
@@ -557,9 +555,7 @@ SONAR_APP_WEBDAV_HEG_PASSWORD = None
 
 SONAR_APP_HEG_DATA_DIRECTORY = "./data/heg"
 
-SONAR_APP_ORGANISATION_CONFIG = {
-    "hepvs": {"home_template": "dedicated/hepvs/home.html", "projects": True}
-}
+SONAR_APP_ORGANISATION_CONFIG = {"hepvs": {"home_template": "dedicated/hepvs/home.html", "projects": True}}
 
 # FTP
 # ===
@@ -567,9 +563,7 @@ SONAR_APP_FTP_SNL_HOST = "https://change.me"
 SONAR_APP_FTP_SNL_USER = "changeMe"
 SONAR_APP_FTP_SNL_PASSWORD = "changeMe"
 SONAR_APP_FTP_SNL_PATH = "changeMe"
-SONAR_APP_SNL_EMAIL_TEMPLATE = (
-    "sonar/modules/documents/templates/documents/emailSNL.txt"
-)
+SONAR_APP_SNL_EMAIL_TEMPLATE = "sonar/modules/documents/templates/documents/emailSNL.txt"
 
 """FTP connection to SNL server."""
 

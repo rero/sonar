@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2022 RERO
 #
@@ -17,15 +15,12 @@
 
 """Test collections files permissions."""
 
-
 from flask import url_for
 from flask_security import url_for_security
 from invenio_accounts.testutils import login_user_via_session
 
 
-def test_read(
-    client, superuser, admin, moderator, submitter, user, collection_with_file
-):
+def test_read(client, superuser, admin, moderator, submitter, user, collection_with_file):
     """Test read collections permissions."""
 
     file_name = "test1.pdf"

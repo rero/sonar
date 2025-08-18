@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -53,9 +51,7 @@ def test_get_moderators(app, db, organisation, subdivision, roles, search_clear)
         }
 
         if item["subdivision"]:
-            data["subdivision"] = {
-                "$ref": f'https://sonar.ch/api/subdivisions/{subdivision["pid"]}'
-            }
+            data["subdivision"] = {"$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"}
         user = UserRecord.create(data, dbcommit=True)
         user.reindex()
 
@@ -64,10 +60,7 @@ def test_get_moderators(app, db, organisation, subdivision, roles, search_clear)
     assert "admin@gmail.com" in moderators
     assert "admin+subdivision@gmail.com" in moderators
 
-    moderators = [
-        result["email"]
-        for result in UserSearch().get_moderators("not_existing_organisation")
-    ]
+    moderators = [result["email"] for result in UserSearch().get_moderators("not_existing_organisation")]
     assert not moderators
 
     moderators = [result["email"] for result in UserSearch().get_moderators("org")]
@@ -76,10 +69,7 @@ def test_get_moderators(app, db, organisation, subdivision, roles, search_clear)
     assert "admin+subdivision@gmail.com" in moderators
 
     # Get moderators from the same subdivision
-    moderators = [
-        result["email"]
-        for result in UserSearch().get_moderators("org", subdivision["pid"])
-    ]
+    moderators = [result["email"] for result in UserSearch().get_moderators("org", subdivision["pid"])]
     assert "moderator+subdivision@gmail.com" in moderators
     assert "admin@gmail.com" in moderators
     assert "admin+subdivision@gmail.com" in moderators

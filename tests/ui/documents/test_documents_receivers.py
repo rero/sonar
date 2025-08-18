@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -29,9 +27,7 @@ from sonar.modules.documents.receivers import (
 )
 
 
-def test_transform_harvested_records(
-    app, bucket_location, without_oaiset_signals, capsys
-):
+def test_transform_harvested_records(app, bucket_location, without_oaiset_signals, capsys):
     """Test harvested record transformation."""
     request, records = get_records(
         ["oai:doc.rero.ch:20120503160026-MV"],
@@ -49,9 +45,7 @@ def test_transform_harvested_records(
     assert captured.out.find("1 records harvested") != -1
 
     # Not an import
-    transform_harvested_records(
-        None, records, **{"name": "rerodoc", "max": "1", "action": "not-existing"}
-    )
+    transform_harvested_records(None, records, **{"name": "rerodoc", "max": "1", "action": "not-existing"})
     captured = capsys.readouterr()
     assert captured.out == ""
 

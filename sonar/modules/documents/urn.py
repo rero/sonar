@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2022 RERO
 #
@@ -114,7 +112,7 @@ class Urn:
         :param config: organisation related configuration.
         """
         base_urn = current_app.config.get("SONAR_APP_URN_DNB_BASE_URN")
-        new_urn = f'{base_urn}{config.get("code"):03}-{pid}'
+        new_urn = f"{base_urn}{config.get('code'):03}-{pid}"
         return f"{new_urn}{cls._calculateCheckDigit(new_urn)}"
 
     @classmethod
@@ -128,9 +126,7 @@ class Urn:
         urn_config = current_app.config.get("SONAR_APP_DOCUMENT_URN")
         org_pid = record.resolve().get("organisation", [{}])[0].get("pid")
         if DocumentRecord.get_rero_urn_code(record):
-            current_app.logger.warning(
-                f'generated urn already exist for document: {record["pid"]}'
-            )
+            current_app.logger.warning(f"generated urn already exist for document: {record['pid']}")
             return
         if config := urn_config.get("organisations", {}).get(org_pid):
             if record.get("documentType") in config.get("types"):
@@ -145,16 +141,12 @@ class Urn:
                         status=PIDStatus.RESERVED,
                     )
                     if "identifiedBy" in record:
-                        record["identifiedBy"].append(
-                            {"type": "bf:Urn", "value": urn_code}
-                        )
+                        record["identifiedBy"].append({"type": "bf:Urn", "value": urn_code})
                     else:
                         record["identifiedBy"] = [{"type": "bf:Urn", "value": urn_code}]
                     return pid
                 except PIDAlreadyExists:
-                    current_app.logger.error(
-                        f'generated urn already exist for document: {record["pid"]}'
-                    )
+                    current_app.logger.error(f"generated urn already exist for document: {record['pid']}")
 
     @classmethod
     def _urn_query(cls, status=None):
@@ -163,9 +155,7 @@ class Urn:
         :param status: PID status by default N.
         :returns: Base query.
         """
-        return PersistentIdentifier.query.filter_by(
-            pid_type=cls.urn_pid_type
-        ).filter_by(status=status)
+        return PersistentIdentifier.query.filter_by(pid_type=cls.urn_pid_type).filter_by(status=status)
 
     @classmethod
     def get_urn_pids(cls, status=PIDStatus.RESERVED, days=None):
@@ -214,10 +204,7 @@ class Urn:
             return False
         pid = PersistentIdentifier.get(cls.urn_pid_type, urn_code)
         if pid.is_registered():
-            current_app.logger.warning(
-                f"URU {urn_code} is already registered for the document: "
-                f'{record["pid"]}'
-            )
+            current_app.logger.warning(f"URU {urn_code} is already registered for the document: {record['pid']}")
             return False
         if DnbUrnService.register_document(record):
             pid.register()

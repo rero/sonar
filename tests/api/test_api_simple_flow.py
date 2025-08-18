@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -47,10 +45,7 @@ def test_simple_flow(client, document_json, admin, embargo_date):
     # retrieve record
     res = client.get(url_for("invenio_records_rest.doc_item", pid_value=1))
     assert res.status_code == 200
-    assert (
-        response.json["metadata"]["title"][0]["mainTitle"][0]["value"]
-        == "Title of the document"
-    )
+    assert response.json["metadata"]["title"][0]["mainTitle"][0]["value"] == "Title of the document"
 
 
 def test_add_files_restrictions(client, document_with_file, superuser, embargo_date):

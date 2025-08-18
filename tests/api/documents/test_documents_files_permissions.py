@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2022 RERO
 #
@@ -24,9 +22,7 @@ from flask_security import url_for_security
 from invenio_accounts.testutils import login_user_via_session
 
 
-def test_update_delete(
-    client, superuser, admin, moderator, submitter, user, document, pdf_file
-):
+def test_update_delete(client, superuser, admin, moderator, submitter, user, document, pdf_file):
     """Test permissions for uploading and deleting files."""
     file_name = "test.pdf"
     users = [superuser, admin, moderator, submitter, user, None]
@@ -51,15 +47,11 @@ def test_update_delete(
             assert res.status_code == status
 
 
-def test_read_metadata(
-    client, superuser, admin, moderator, submitter, user, document_with_file
-):
+def test_read_metadata(client, superuser, admin, moderator, submitter, user, document_with_file):
     """Test read files permissions."""
 
     users = [superuser, admin, moderator, submitter, user, None]
-    url_files = url_for(
-        "invenio_records_files.doc_bucket_api", pid_value=document_with_file.get("pid")
-    )
+    url_files = url_for("invenio_records_files.doc_bucket_api", pid_value=document_with_file.get("pid"))
     for u, status in zip(users, [200, 200, 200, 200, 200, 200]):
         if u:
             login_user_via_session(client, email=u["email"])
@@ -136,9 +128,7 @@ def test_read_content(
         assert res.status_code == status
 
 
-def test_file_of_document_with_urn_delete(
-    client, superuser, admin, minimal_thesis_document_with_urn
-):
+def test_file_of_document_with_urn_delete(client, superuser, admin, minimal_thesis_document_with_urn):
     """Test delete file of document with registered URN identifier."""
     # Logged as admin
     login_user_via_session(client, email=admin["email"])

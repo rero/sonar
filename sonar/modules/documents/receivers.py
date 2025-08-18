@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -59,7 +57,7 @@ def transform_harvested_records(sender=None, records=None, **kwargs):
         max_records = None
 
     if kwargs.get("name"):
-        click.echo(f"Harvesting records from \"{kwargs.get('name')}\"")
+        click.echo(f'Harvesting records from "{kwargs.get("name")}"')
 
     harvested_records = list(records)
 
@@ -82,9 +80,7 @@ def transform_harvested_records(sender=None, records=None, **kwargs):
     for chunk in list(chunks(records, CHUNK_SIZE)):
         import_records.delay(chunk)
 
-    click.echo(
-        f"{len(records)} records harvested in {time.time() - start_time} seconds"
-    )
+    click.echo(f"{len(records)} records harvested in {time.time() - start_time} seconds")
 
 
 def update_oai_property(sender, record):

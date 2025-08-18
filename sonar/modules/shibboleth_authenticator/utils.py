@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -39,9 +37,7 @@ def get_account_info(attributes, remote_app):
     :param remote_app: (str) Identity provider key.
     :returns: (dict) A dictionary representing user to create or update.
     """
-    mappings = current_app.config["SHIBBOLETH_IDENTITY_PROVIDERS"][remote_app][
-        "mappings"
-    ]
+    mappings = current_app.config["SHIBBOLETH_IDENTITY_PROVIDERS"][remote_app]["mappings"]
 
     # Map data according to configuration
     email = attributes[mappings["email"]][0]
@@ -76,9 +72,7 @@ def get_safe_redirect_target(arg="next"):
                 return target
 
             if redirect_uri.path:
-                return uritools.uricompose(
-                    path=redirect_uri.path, query=redirect_uri.query
-                )
+                return uritools.uricompose(path=redirect_uri.path, query=redirect_uri.query)
 
     return None
 

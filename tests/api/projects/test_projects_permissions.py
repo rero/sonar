@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -108,50 +106,36 @@ def test_create(client, project_json, superuser, admin, moderator, submitter, us
     headers = {"Content-Type": "application/json", "Accept": "application/json"}
 
     # Not logged
-    res = client.post(
-        url_for("projects.search"), data=json.dumps(project_json), headers=headers
-    )
+    res = client.post(url_for("projects.search"), data=json.dumps(project_json), headers=headers)
     assert res.status_code == 403
 
     # User
     login_user_via_session(client, email=user["email"])
-    res = client.post(
-        url_for("projects.search"), data=json.dumps(project_json), headers=headers
-    )
+    res = client.post(url_for("projects.search"), data=json.dumps(project_json), headers=headers)
     assert res.status_code == 403
 
     # submitter
     login_user_via_session(client, email=submitter["email"])
-    res = client.post(
-        url_for("projects.search"), data=json.dumps(project_json), headers=headers
-    )
+    res = client.post(url_for("projects.search"), data=json.dumps(project_json), headers=headers)
     assert res.status_code == 201
 
     # Moderator
     login_user_via_session(client, email=moderator["email"])
-    res = client.post(
-        url_for("projects.search"), data=json.dumps(project_json), headers=headers
-    )
+    res = client.post(url_for("projects.search"), data=json.dumps(project_json), headers=headers)
     assert res.status_code == 201
 
     # Admin
     login_user_via_session(client, email=admin["email"])
-    res = client.post(
-        url_for("projects.search"), data=json.dumps(project_json), headers=headers
-    )
+    res = client.post(url_for("projects.search"), data=json.dumps(project_json), headers=headers)
     assert res.status_code == 201
 
     # Super user
     login_user_via_session(client, email=superuser["email"])
-    res = client.post(
-        url_for("projects.search"), data=json.dumps(project_json), headers=headers
-    )
+    res = client.post(url_for("projects.search"), data=json.dumps(project_json), headers=headers)
     assert res.status_code == 201
 
 
-def test_read(
-    client, make_project, make_user, superuser, admin, moderator, submitter, user
-):
+def test_read(client, make_project, make_user, superuser, admin, moderator, submitter, user):
     """Test read project permissions."""
     project1 = make_project("submitter", "org")
     project2 = make_project("submitter", "org2")
@@ -308,9 +292,7 @@ def test_update(client, make_project, superuser, admin, moderator, submitter, us
     assert res.status_code == 403
 
 
-def test_delete(
-    client, db, document, make_project, superuser, admin, moderator, submitter, user
-):
+def test_delete(client, db, document, make_project, superuser, admin, moderator, submitter, user):
     """Test delete deposits permissions."""
     project1 = make_project("submitter", "org")
     project2 = make_project("submitter", "org2")

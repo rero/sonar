@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -76,9 +74,7 @@ def import_users(infile):
                 datastore.commit()
 
             # Create account and activate it
-            datastore.create_user(
-                email=email, password=password, roles=[user_data["role"]]
-            )
+            datastore.create_user(email=email, password=password, roles=[user_data["role"]])
             datastore.commit()
             user = datastore.find_user(email=email)
             confirm_user(user)

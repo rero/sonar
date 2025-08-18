@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -79,12 +77,8 @@ class FileSchemaV1(StrictKeysMixin):
         doc = Record.get_record_by_bucket(item.get("bucket"))
         item["permissions"] = {
             "read": FilesPermission.read(current_user_record, item, doc["pid"], doc),
-            "update": FilesPermission.update(
-                current_user_record, item, doc["pid"], doc
-            ),
-            "delete": FilesPermission.delete(
-                current_user_record, item, doc["pid"], doc
-            ),
+            "update": FilesPermission.update(current_user_record, item, doc["pid"], doc),
+            "delete": FilesPermission.delete(current_user_record, item, doc["pid"], doc),
         }
 
         return item

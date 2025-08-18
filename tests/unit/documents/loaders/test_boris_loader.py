@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -71,9 +69,7 @@ def test_boris_loader():
         "title": [
             {
                 "type": "bf:Title",
-                "mainTitle": [
-                    {"value": "Good Religion or Bad Religion", "language": "eng"}
-                ],
+                "mainTitle": [{"value": "Good Religion or Bad Religion", "language": "eng"}],
             }
         ],
         "identifiedBy": [

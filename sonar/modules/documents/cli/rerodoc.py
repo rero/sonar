@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -35,9 +33,7 @@ def rerodoc():
 
 @rerodoc.command("update-file-permissions")
 @click.argument("permissions_file", type=click.File("r"))
-@click.option(
-    "-c", "--chunk-size", type=int, default=500, help="Chunk size for bulk indexing."
-)
+@click.option("-c", "--chunk-size", type=int, default=500, help="Chunk size for bulk indexing.")
 @with_appcontext
 def update_file_permissions(permissions_file, chunk_size):
     """Update file permission with information given by input file.
@@ -72,9 +68,7 @@ def update_file_permissions(permissions_file, chunk_size):
             for row in reader:
                 try:
                     # try to load corresponding record
-                    record = DocumentRecord.get_record_by_identifier(
-                        [{"type": "bf:Local", "value": row[0]}]
-                    )
+                    record = DocumentRecord.get_record_by_identifier([{"type": "bf:Local", "value": row[0]}])
 
                     # No record found, skipping..
                     if not record:
@@ -84,9 +78,7 @@ def update_file_permissions(permissions_file, chunk_size):
 
                     # File not found in record, skipping
                     if file_name not in record.files:
-                        raise Exception(
-                            f"File {file_name} not found in record {row[0]}"
-                        )
+                        raise Exception(f"File {file_name} not found in record {row[0]}")
 
                     record_file = record.files[file_name]
 
@@ -124,9 +116,7 @@ def update_file_permissions(permissions_file, chunk_size):
                     db.session.flush()
                     ids.append(str(record.id))
 
-                    current_app.logger.warning(
-                        f"Restriction added for file {file_name} in record {record['pid']}."
-                    )
+                    current_app.logger.warning(f"Restriction added for file {file_name} in record {record['pid']}.")
 
                     # Bulk save and index
                     if len(ids) % chunk_size == 0:

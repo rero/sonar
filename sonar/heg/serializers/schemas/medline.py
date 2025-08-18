@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -43,9 +41,7 @@ class MedlineSchema(HEGSchema):
         identifiers = super(MedlineSchema, self).get_identifiers(obj)
 
         if obj.get("pmid"):
-            identifiers.append(
-                {"type": "bf:Local", "source": "PMID", "value": obj["pmid"]}
-            )
+            identifiers.append({"type": "bf:Local", "source": "PMID", "value": obj["pmid"]})
 
         return identifiers
 
@@ -103,9 +99,7 @@ class MedlineSchema(HEGSchema):
             provision_activity["startDate"] = obj["pubyear"]
 
         if obj.get("entrez_date"):
-            provision_activity["statement"] = [
-                {"type": "Date", "label": [{"value": obj.get("entrez_date")}]}
-            ]
+            provision_activity["statement"] = [{"type": "Date", "label": [{"value": obj.get("entrez_date")}]}]
 
         return [provision_activity]
 
@@ -114,6 +108,4 @@ class MedlineSchema(HEGSchema):
         if not obj.get("journal"):
             return None
 
-        return [
-            {"numberingYear": obj["pubyear"], "document": {"title": obj["journal"]}}
-        ]
+        return [{"numberingYear": obj["pubyear"], "document": {"title": obj["journal"]}}]

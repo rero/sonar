@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Swiss Open Access Repository
 # Copyright (C) 2021 RERO
 #
@@ -44,4 +42,4 @@ def add_full_name(sender=None, record=None, json=None, index=None, **kwargs):
     if not index.startswith("users"):
         return
 
-    json["full_name"] = f'{json["first_name"]} {json["last_name"]}'
+    json["full_name"] = f"{json['first_name']} {json['last_name']}"
