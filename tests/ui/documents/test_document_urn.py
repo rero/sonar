@@ -17,8 +17,8 @@
 
 import re
 from copy import deepcopy
+from unittest import mock
 
-import mock
 import requests_mock
 from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 

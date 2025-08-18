@@ -15,7 +15,6 @@
 
 """User resolver."""
 
-from __future__ import absolute_import, print_function
 
 import jsonresolver
 from invenio_pidstore.resolver import Resolver

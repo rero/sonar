@@ -15,7 +15,6 @@
 
 """Persistent identifier minters for documents."""
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 from flask import current_app
 from invenio_oaiserver.minters import oaiid_minter

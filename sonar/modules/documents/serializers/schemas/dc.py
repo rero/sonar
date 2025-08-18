@@ -51,7 +51,7 @@ class DublinCoreSchema(BaseSchema):
         :returns: language code ISO-639-2 if possible or ISO-639-3.
         """
         langs = current_app.config["SONAR_APP_LANGUAGES_MAP"]
-        if language in langs and langs[language]:
+        if langs.get(language):
             return langs[language]
         return language
 

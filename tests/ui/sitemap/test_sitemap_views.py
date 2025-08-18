@@ -15,7 +15,8 @@
 
 """Test sitemap views."""
 
-import mock
+from unittest import mock
+
 from flask import Response, url_for
 
 

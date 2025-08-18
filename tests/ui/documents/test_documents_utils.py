@@ -314,7 +314,7 @@ def test_get_file_links(app):
     file["external_url"] = None
     file["mimetype"] = "application/octet-stream"
     assert utils.get_file_links(file, document) == {
-        "download": f"/documents/1/files/test.foo",
+        "download": "/documents/1/files/test.foo",
         "external": None,
         "preview": None,
     }

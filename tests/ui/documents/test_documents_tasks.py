@@ -15,7 +15,7 @@
 
 """Test documents tasks."""
 
-import mock
+from unittest import mock
 
 from sonar.modules.documents.api import DocumentRecord
 from sonar.modules.documents.tasks import import_records

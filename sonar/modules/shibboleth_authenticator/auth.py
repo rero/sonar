@@ -48,13 +48,13 @@ def init_saml_auth(req, remote_app):
         raise Exception('"private_key" path for service provider not configured')
 
     # Read certificates
-    with open(sp_config["x509cert"], "r") as content_file:
+    with open(sp_config["x509cert"]) as content_file:
         x509cert = content_file.read()
 
-    with open(sp_config["private_key"], "r") as content_file:
+    with open(sp_config["private_key"]) as content_file:
         private_key = content_file.read()
 
-    with open(f"./data/idp_certificates/{remote_app}.crt", "r") as content_file:
+    with open(f"./data/idp_certificates/{remote_app}.crt") as content_file:
         idp_cert = content_file.read()
 
     # Create auth object with settings below

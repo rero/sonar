@@ -54,9 +54,9 @@ dc_v1_response = record_responsify(dc_v1, "text/xml")
 dc_v1_search = search_responsify(dc_v1, "text/xml")
 
 __all__ = (
+    "dc_v1_response",
+    "dc_v1_search",
     "json_v1",
     "json_v1_response",
     "json_v1_search",
-    "dc_v1_response",
-    "dc_v1_search",
 )

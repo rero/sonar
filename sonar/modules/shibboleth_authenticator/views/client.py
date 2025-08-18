@@ -15,7 +15,6 @@
 
 """Blueprint for handling Shibboleth callbacks."""
 
-from __future__ import absolute_import, print_function
 
 from flask import Blueprint, abort, current_app, redirect, request
 from flask_login import current_user, logout_user

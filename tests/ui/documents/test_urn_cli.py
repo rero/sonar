@@ -16,8 +16,8 @@
 """Test URN cli."""
 
 from io import BytesIO
+from unittest import mock
 
-import mock
 from click.testing import CliRunner
 from invenio_pidstore.providers.base import BaseProvider
 

@@ -52,7 +52,7 @@ config:
 def test_create_doc_with_ark(document, client, organisation):
     """Create a document and mint a ARK id."""
     # pid does not exist
-    res = client.get(url_for("ark.resolve", naan="99999", path=f"ffk3foo"))
+    res = client.get(url_for("ark.resolve", naan="99999", path="ffk3foo"))
     assert res.status_code == 404
 
     # naan does not exist in organisations

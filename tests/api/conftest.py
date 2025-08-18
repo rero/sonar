@@ -15,7 +15,6 @@
 
 """Pytest fixtures and plugins for the API application."""
 
-from __future__ import absolute_import, print_function
 
 import pytest
 import requests_mock

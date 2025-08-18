@@ -51,7 +51,7 @@ def transform_harvested_records(sender=None, records=None, **kwargs):
 
     start_time = time.time()
 
-    max_records = kwargs.get("max", None)
+    max_records = kwargs.get("max")
     # Cancel parameter if max is set to 0
     if max_records == "0":
         max_records = None
@@ -163,7 +163,7 @@ def process_boosting(config):
     doc_mappings = list(current_search.aliases[index_name].values())
     assert len(doc_mappings) == 1
     mapping_path = doc_mappings.pop()
-    with open(mapping_path, "r") as body:
+    with open(mapping_path) as body:
         mapping = json.load(body)
     fields = []
     for prop, conf in mapping["mappings"]["properties"].items():

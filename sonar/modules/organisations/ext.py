@@ -16,10 +16,9 @@
 
 """Organisation extension."""
 
-from __future__ import absolute_import, print_function
 
 
-class Organisations(object):
+class Organisations:
     """Organisation extension."""
 
     def __init__(self, app=None):

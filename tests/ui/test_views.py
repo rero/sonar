@@ -371,9 +371,9 @@ def test_format_date(app):
 
 def test_process_link():
     """Test process_link filter."""
-    assert "[search tips](/view/help/search_tips/)" == process_link("[search tips](/help/search_tips/)", "view")
+    assert process_link("[search tips](/help/search_tips/)", "view") == "[search tips](/view/help/search_tips/)"
 
-    assert '![SONAR_collection.JPG](/help/files/SONAR_collection.JPG "SONAR_collection.JPG")' == process_link(
+    assert process_link(
         '![SONAR_collection.JPG](/help/files/SONAR_collection.JPG "SONAR_collection.JPG")',
         "view",
-    )
+    ) == '![SONAR_collection.JPG](/help/files/SONAR_collection.JPG "SONAR_collection.JPG")'

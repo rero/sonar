@@ -15,7 +15,6 @@
 
 """Click command-line interface for user management."""
 
-from __future__ import absolute_import, print_function
 
 import json
 

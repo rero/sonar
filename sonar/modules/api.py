@@ -254,7 +254,7 @@ class SonarRecord(Record, FilesMixin):
         :returns: File object created.
         """
         if not current_app.config.get("SONAR_DOCUMENTS_IMPORT_FILES"):
-            return
+            return None
 
         # If file with the same key exists and file exists and checksum is
         # the same as the registered file, we don't do anything

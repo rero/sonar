@@ -65,7 +65,7 @@ def test_authorized(monkeypatch, app, client, roles, user_without_role, valid_at
     )
     assert client.post("/shibboleth/authorized/idp").status_code == 500
 
-    class MockAuth(object):
+    class MockAuth:
         """Mock auth."""
 
         @staticmethod
@@ -97,7 +97,7 @@ def test_authorized(monkeypatch, app, client, roles, user_without_role, valid_at
     assert client.post("/shibboleth/authorized/idp").status_code == 400
 
     # Test when user is authenticated
-    class MockUser(object):
+    class MockUser:
         """Mock user."""
 
         def is_authenticated(self):
@@ -119,7 +119,7 @@ def test_authorized(monkeypatch, app, client, roles, user_without_role, valid_at
     )
 
     # Test valid authentication
-    mock_auth.get_errors = lambda: []
+    mock_auth.get_errors = list
 
     from sonar.modules.shibboleth_authenticator.views.client import serializer
 
@@ -153,7 +153,7 @@ def test_authorized(monkeypatch, app, client, roles, user_without_role, valid_at
         == 400
     )
 
-    class MockRequest(object):
+    class MockRequest:
         """Mock request."""
 
         url = "https://sonar.ch/test/page?parameter=test"
@@ -182,7 +182,7 @@ def _load_file(filename):
     filename = os.path.join(os.path.dirname(__file__), "data", filename)
 
     if os.path.exists(filename):
-        f = open(filename, "r")
+        f = open(filename)
         content = f.read()
         f.close()
         return content

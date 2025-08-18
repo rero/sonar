@@ -127,7 +127,7 @@ class Urn:
         org_pid = record.resolve().get("organisation", [{}])[0].get("pid")
         if DocumentRecord.get_rero_urn_code(record):
             current_app.logger.warning(f"generated urn already exist for document: {record['pid']}")
-            return
+            return None
         if config := urn_config.get("organisations", {}).get(org_pid):
             if record.get("documentType") in config.get("types"):
                 urn_next_pid = str(UrnIdentifier.next())

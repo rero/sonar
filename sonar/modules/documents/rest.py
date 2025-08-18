@@ -57,9 +57,7 @@ def aggregations():
 
     # Remove organisation in dedicated view
     if "organisation" in aggregations_list:
-        if view and view != current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION"):
-            aggregations_list.remove("organisation")
-        elif current_user_record and not current_user_record.is_superuser:
+        if (view and view != current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION")) or (current_user_record and not current_user_record.is_superuser):
             aggregations_list.remove("organisation")
 
     # Remove collection in collection context

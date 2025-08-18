@@ -45,7 +45,7 @@ def response_file(file_path):
 
     def stream_file(sitemap_file):
         """Stream file."""
-        with open(sitemap_file, "r", encoding="utf-8", buffering=100000) as f:
+        with open(sitemap_file, encoding="utf-8", buffering=100000) as f:
             yield from f
 
     sitemap_folder = current_app.config.get("SONAR_APP_SITEMAP_FOLDER_PATH")

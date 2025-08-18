@@ -25,7 +25,7 @@ from .modules.documents.api import DocumentRecord
 def record_view_event_builder(event, sender_app, pid=None, record=None, **kwargs):
     """Build a record-view event."""
     if not isinstance(record, DocumentRecord):
-        return
+        return None
     event.update(
         {
             # When:

@@ -15,12 +15,11 @@
 
 """Shibboleth authenticator extension."""
 
-from __future__ import absolute_import, print_function
 
 from . import config
 
 
-class ShibbolethAuthenticator(object):
+class ShibbolethAuthenticator:
     """Shibboleth authenticator extension."""
 
     def __init__(self, app=None):

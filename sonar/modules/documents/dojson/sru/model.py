@@ -191,14 +191,14 @@ def marc21_to_identified_by_from_001(self, key, value):
 def marc21_to_identified_by_from_020(self, key, value):
     """Get identifier from field 020."""
     if not value.get("a"):
-        return None
+        return
 
     identified_by = self.get("identifiedBy", [])
     identified_by.append({"type": "bf:Isbn", "value": value.get("a")})
 
     self["identifiedBy"] = identified_by
 
-    return None
+    return
 
 
 @overdo.over("identifiedBy", "^022..")
@@ -206,7 +206,7 @@ def marc21_to_identified_by_from_020(self, key, value):
 def marc21_to_identified_by_from_022(self, key, value):
     """Get identifier from field 022."""
     if not value.get("a") and not value.get("l"):
-        return None
+        return
 
     identified_by = self.get("identifiedBy", [])
 
@@ -218,7 +218,7 @@ def marc21_to_identified_by_from_022(self, key, value):
 
     self["identifiedBy"] = identified_by
 
-    return None
+    return
 
 
 @overdo.over("identifiedBy", "^024..")
@@ -227,7 +227,7 @@ def marc21_to_identified_by_from_022(self, key, value):
 def marc21_to_identified_by_from_024(self, key, value):
     """Get identifier from field 024."""
     if not value.get("a") or not value.get("2"):
-        return None
+        return
 
     type = "bf:Local"
 
@@ -250,7 +250,7 @@ def marc21_to_identified_by_from_024(self, key, value):
 
     self["identifiedBy"] = identified_by
 
-    return None
+    return
 
 
 @overdo.over("identifiedBy", "^027..")
@@ -259,14 +259,14 @@ def marc21_to_identified_by_from_024(self, key, value):
 def marc21_to_identified_by_from_027(self, key, value):
     """Get identifier from field 027."""
     if not value.get("a"):
-        return None
+        return
 
     identified_by = self.get("identifiedBy", [])
     identified_by.append({"type": "bf:Strn", "value": value.get("a")})
 
     self["identifiedBy"] = identified_by
 
-    return None
+    return
 
 
 @overdo.over("identifiedBy", "^088..")
@@ -275,14 +275,14 @@ def marc21_to_identified_by_from_027(self, key, value):
 def marc21_to_identified_by_from_088(self, key, value):
     """Get identifier from field 088."""
     if not value.get("a"):
-        return None
+        return
 
     identified_by = self.get("identifiedBy", [])
     identified_by.append({"type": "bf:ReportNumber", "value": value.get("a")})
 
     self["identifiedBy"] = identified_by
 
-    return None
+    return
 
 
 @overdo.over("language", "^008")
@@ -308,7 +308,7 @@ def marc21_to_language_and_provision_activity_from_008(self, key, value):
 
     self["provisionActivity"] = provision_activity
 
-    return None
+    return
 
 
 @overdo.over("title", "^245..")
@@ -365,7 +365,7 @@ def marc21_to_content_note_from_505(self, key, value):
 def marc21_to_contribution_from_100_700(self, key, value):
     """Get contribution from field 100."""
     if not value.get("a"):
-        return None
+        return
 
     is_100_or_700 = key.startswith("100") or key.startswith("700")
 
@@ -420,7 +420,7 @@ def marc21_to_contribution_from_100_700(self, key, value):
 
     self["contribution"] = contribution
 
-    return None
+    return
 
 
 @overdo.over("extent", "^300..")
@@ -443,7 +443,7 @@ def marc21_to_extent_from_300(self, key, value):
     if value.get("e"):
         self["additionalMaterials"] = value["e"]
 
-    return None
+    return
 
 
 @overdo.over("dissertation", "^502..")
@@ -596,7 +596,7 @@ def marc21_to_provision_activity_from_264_1(self, key, value):
 
     self["provisionActivity"] = provision_activity
 
-    return None
+    return
 
 
 @overdo.over("provisionActivity", "^264.(1|3)")
@@ -619,7 +619,7 @@ def marc21_to_provision_activity_from_264_3(self, key, value):
     provision_activity.append(manufacture)
     self["provisionActivity"] = provision_activity
 
-    return None
+    return
 
 
 @overdo.over("notes", "^(500|504|508|510|511|530|545|555)..")
@@ -655,7 +655,7 @@ def marc21_to_series_from_490(self, key, value):
 def marc21_to_partof_from_773(self, key, value):
     """Get partOf from field 773."""
     if not value.get("t"):
-        return None
+        return
 
     part_of = self.get("partOf", [])
 
@@ -711,7 +711,7 @@ def marc21_to_partof_from_773(self, key, value):
     part_of.append(data)
     self["partOf"] = part_of
 
-    return None
+    return
 
 
 @overdo.over("partOf800830", "^800|830..")
@@ -735,7 +735,7 @@ def marc21_to_partof_from_800(self, key, value):
             title = ". ".join(title)
 
     if not title:
-        return None
+        return
 
     part_of = self.get("partOf", [])
 
@@ -765,4 +765,4 @@ def marc21_to_partof_from_800(self, key, value):
     part_of.append(data)
     self["partOf"] = part_of
 
-    return None
+    return

@@ -15,7 +15,6 @@
 
 """Document extension."""
 
-from __future__ import absolute_import, print_function
 
 from invenio_base.signals import app_loaded
 from invenio_oaiharvester.signals import oaiharvest_finished
@@ -31,7 +30,7 @@ from sonar.modules.documents.receivers import (
 from . import config
 
 
-class Documents(object):
+class Documents:
     """SONAR documents extension."""
 
     def __init__(self, app=None):

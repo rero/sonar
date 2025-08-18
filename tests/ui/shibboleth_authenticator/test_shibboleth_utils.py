@@ -43,7 +43,7 @@ def test_get_safe_redirect_target(app, monkeypatch):
     url2 = "https://sonar.ch/path/subpath?parameter=test"
     url3 = "http://test.ch/path/subpath?parameter=test"
 
-    class MockRequest(object):
+    class MockRequest:
         """Mock request."""
 
         def __init__(self):
@@ -70,7 +70,7 @@ def test_get_safe_redirect_target(app, monkeypatch):
 def test_prepare_flask_request(app):
     """Test flask request preparation."""
 
-    class MockRequest(object):
+    class MockRequest:
         """Mock request."""
 
         url = "https://sonar.ch/test/page?parameter=test"
