@@ -15,7 +15,6 @@
 
 """Record serializers."""
 
-
 from invenio_records_rest.serializers.response import (
     record_responsify,
     search_responsify,

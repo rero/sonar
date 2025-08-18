@@ -17,7 +17,7 @@
 
 from click.testing import CliRunner
 
-import sonar.modules.organisations.cli.organisations as Cli
+import sonar.modules.organisations.cli.organisations as cli
 from sonar.modules.organisations.api import OrganisationRecord
 
 
@@ -30,7 +30,7 @@ def test_import_organisations(app, script_info, bucket_location, without_oaiset_
 
     # Import ok
     result = runner.invoke(
-        Cli.import_organisations,
+        cli.import_organisations,
         ["./tests/ui/organisations/data/valid.json"],
         obj=script_info,
     )
@@ -40,7 +40,7 @@ def test_import_organisations(app, script_info, bucket_location, without_oaiset_
 
     # Already existing
     result = runner.invoke(
-        Cli.import_organisations,
+        cli.import_organisations,
         ["./tests/ui/organisations/data/valid.json"],
         obj=script_info,
     )

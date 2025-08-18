@@ -25,3 +25,4 @@ def platform_name(organisation):
     if platform_name:
         html = markdown.markdown(platform_name)
         return "".join(BeautifulSoup(html).findAll(text=True)).replace("\n", " - ")
+    return None

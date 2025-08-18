@@ -86,7 +86,7 @@ def _create_folder_or_remove_files(sitemap_folder):
         os.remove(file)
 
 
-def _get_url_sets(hits, max, org_pid, last=True):
+def _get_url_sets(hits, maximum, org_pid, last=True):
     """Get url sets."""
     for n, hit in enumerate(hits):
         yield {
@@ -99,7 +99,7 @@ def _get_url_sets(hits, max, org_pid, last=True):
             "lastmod": datetime.fromisoformat(hit._updated).strftime("%Y-%m-%d"),
         }
         n += 1
-        if not last and n == max:
+        if not last and n == maximum:
             break
 
 

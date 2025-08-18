@@ -15,7 +15,6 @@
 
 """API Views."""
 
-
 from flask import Blueprint, jsonify, request
 
 from sonar.modules.pdf_extractor.pdf_extractor import PDFExtractor
@@ -45,7 +44,7 @@ def metadata():
         # Extract metadata from PDF
         return jsonify(pdf_extractor.process_raw(pdf_file.read()))
     except Exception as exception:
-        return jsonify(dict(error=str(exception))), 400
+        return jsonify({"error": str(exception)}), 400
 
 
 @api_blueprint.route("/full-text", methods=["POST"])
@@ -63,4 +62,4 @@ def full_text():
 
         return jsonify(text=text)
     except Exception as exception:
-        return jsonify(dict(error=str(exception))), 400
+        return jsonify({"error": str(exception)}), 400

@@ -39,7 +39,7 @@ class CSVSerializer(BaseCSVSerializer, BaseSerializer):
         def generate_csv():
             headers = dict.fromkeys(self.csv_included_fields)
             # Translate header values.
-            for key, value in headers.items():
+            for key in headers:
                 headers[key] = key
 
             # Write the CSV output in memory

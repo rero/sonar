@@ -15,7 +15,6 @@
 
 """Organisation resolver."""
 
-
 import jsonresolver
 from invenio_pidstore.resolver import Resolver
 from invenio_records.api import Record

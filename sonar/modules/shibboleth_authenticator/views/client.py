@@ -15,7 +15,6 @@
 
 """Blueprint for handling Shibboleth callbacks."""
 
-
 from flask import Blueprint, abort, current_app, redirect, request
 from flask_login import current_user, logout_user
 from flask_login.utils import _create_identifier

@@ -36,7 +36,7 @@ def get_record():
     """Get record."""
     search_type = request.args.get("type", "all_for_ui")
     query = request.args.get("query")
-    format = request.args.get("format", "document")
+    fmt = request.args.get("format", "document")
 
     if not search_type or not query:
         return jsonify({}), 400
@@ -69,11 +69,11 @@ def get_record():
     # Ex: <<La>> vie est belle => La vie est belle
     pattern = re.compile("<<(.+)>>", re.S)
     for title in record.get("title", []):
-        for mainTitle in title.get("mainTitle", []):
-            mainTitle["value"] = re.sub(pattern, r"\1", mainTitle["value"])
+        for main_title in title.get("mainTitle", []):
+            main_title["value"] = re.sub(pattern, r"\1", main_title["value"])
 
     # Serialize for deposit.
-    if format == "deposit":
+    if fmt == "deposit":
         record = DepositDocumentSchema().dump(record)
 
     return jsonify(record)

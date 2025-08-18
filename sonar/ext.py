@@ -15,7 +15,6 @@
 
 """Document extension."""
 
-
 import os
 
 import jinja2
@@ -44,7 +43,7 @@ from sonar.modules.utils import (
     get_switch_aai_providers,
     get_view_code,
 )
-from sonar.modules.validation.views import blueprint as validationBlueprint
+from sonar.modules.validation.views import blueprint as validation_blueprint
 from sonar.resources.projects.resource import (
     ProjectsRecordResource,
     ProjectsRecordResourceConfig,
@@ -61,16 +60,16 @@ from .version import __version__
 
 def utility_processor():
     """Dictionary for passing data to templates."""
-    return dict(
-        has_submitter_access=has_submitter_access,
-        has_admin_access=has_admin_access,
-        has_superuser_access=has_superuser_access,
-        ui_version=config_sonar.SONAR_APP_UI_VERSION,
-        aai_providers=get_switch_aai_providers,
-        view_code=get_view_code(),
-        current_user_record=current_user_record,
-        get_specific_theme=get_specific_theme,
-    )
+    return {
+        "has_submitter_access": has_submitter_access,
+        "has_admin_access": has_admin_access,
+        "has_superuser_access": has_superuser_access,
+        "ui_version": config_sonar.SONAR_APP_UI_VERSION,
+        "aai_providers": get_switch_aai_providers,
+        "view_code": get_view_code(),
+        "current_user_record": current_user_record,
+        "get_specific_theme": get_specific_theme,
+    }
 
 
 class Sonar:
@@ -232,6 +231,7 @@ class Sonar:
                             filename=favicon[0]["key"],
                         ),
                     }
+            return None
 
     def create_resources(self):
         """Create resources."""
@@ -249,7 +249,7 @@ class Sonar:
 
         for doc_type, resource in self.resources.items():
             aliases = resource.service.default_config.record_cls.index.get_alias()
-            endpoints[doc_type] = list(aliases[list(aliases.keys())[0]]["aliases"])[0]
+            endpoints[doc_type] = next(iter(aliases[next(iter(aliases.keys()))]["aliases"]))
 
         for doc_type, resource in current_app.config.get("RECORDS_REST_ENDPOINTS").items():
             if resource.get("search_index"):
@@ -272,7 +272,7 @@ class SonarAPI(Sonar):
         app.register_blueprint(self.resources["projects"].as_blueprint())
 
         # Register REST endpoint for validation module.
-        app.register_blueprint(validationBlueprint)
+        app.register_blueprint(validation_blueprint)
 
         @app.before_request
         def set_accept_mimetype():

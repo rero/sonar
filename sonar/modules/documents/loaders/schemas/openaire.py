@@ -16,9 +16,8 @@
 """Openaire schema."""
 
 import xmltodict
+from dojson.utils import force_list
 from marshmallow import Schema, fields, pre_dump
-
-from sonar.modules.pdf_extractor.utils import force_list
 
 
 class OpenaireSchema(Schema):
@@ -57,39 +56,37 @@ class OpenaireSchema(Schema):
 
         # DOI
         if obj.get("datacite:alternateIdentifiers"):
-            for identifier in force_list(obj["datacite:alternateIdentifiers"]["datacite:alternateIdentifier"]):
-                if identifier["@identifierType"] == "DOI":
-                    identifiers.append({"type": "bf:Doi", "value": identifier["#text"]})
+            identifiers.extend(
+                {"type": "bf:Doi", "value": identifier["#text"]}
+                for identifier in force_list(obj["datacite:alternateIdentifiers"]["datacite:alternateIdentifier"])
+                if identifier["@identifierType"] == "DOI"
+            )
 
         # PMID
         if obj.get("datacite:relatedIdentifiers"):
-            for identifier in force_list(obj["datacite:relatedIdentifiers"]["datacite:relatedIdentifier"]):
-                if identifier["@relationType"] == "IsVersionOf" and identifier["@relatedIdentifierType"] == "PMID":
-                    identifiers.append(
-                        {
-                            "type": "bf:Local",
-                            "source": "PMID",
-                            "value": identifier["#text"],
-                        }
-                    )
+            identifiers.extend(
+                {
+                    "type": "bf:Local",
+                    "source": "PMID",
+                    "value": identifier["#text"],
+                }
+                for identifier in force_list(obj["datacite:relatedIdentifiers"]["datacite:relatedIdentifier"])
+                if identifier["@relationType"] == "IsVersionOf" and identifier["@relatedIdentifierType"] == "PMID"
+            )
 
         return identifiers
 
     def get_title(self, obj):
         """Get title."""
-        titles = []
-
-        for title in force_list(obj.get("datacite:titles", {}).get("datacite:title", [])):
-            titles.append(
-                {
-                    "type": "bf:Title",
-                    "mainTitle": [
-                        {
-                            "value": title["#text"],
-                            "language": title.get("@xml:lang", "eng"),
-                        }
-                    ],
-                }
-            )
-
-        return titles
+        return [
+            {
+                "type": "bf:Title",
+                "mainTitle": [
+                    {
+                        "value": title["#text"],
+                        "language": title.get("@xml:lang", "eng"),
+                    }
+                ],
+            }
+            for title in force_list(obj.get("datacite:titles", {}).get("datacite:title", []))
+        ]

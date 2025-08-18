@@ -30,7 +30,7 @@ def aggregations():
     view = request.args.get("view")
     collection = request.args.get("collection")
 
-    customFields = [
+    custom_fields = [
         "customField1",
         "customField2",
         "customField3",
@@ -46,19 +46,22 @@ def aggregations():
         "subject",
         "organisation",
         "subdivision",
-    ] + customFields
+        *custom_fields,
+    ]
 
     if view and view != current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION"):
         organisation = OrganisationRecord.get_record_by_pid(view)
         if organisation and organisation.get("isDedicated") and organisation.get("publicDocumentFacets"):
-            aggregations_list = organisation.get("publicDocumentFacets") + customFields
+            aggregations_list = organisation.get("publicDocumentFacets") + custom_fields
     else:
         organisation = current_organisation
 
     # Remove organisation in dedicated view
-    if "organisation" in aggregations_list:
-        if (view and view != current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION")) or (current_user_record and not current_user_record.is_superuser):
-            aggregations_list.remove("organisation")
+    if "organisation" in aggregations_list and (
+        (view and view != current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION"))
+        or (current_user_record and not current_user_record.is_superuser)
+    ):
+        aggregations_list.remove("organisation")
 
     # Remove collection in collection context
     if collection and "collection" in aggregations_list:

@@ -15,7 +15,6 @@
 
 """Pytest fixtures and plugins for the UI application."""
 
-
 import pytest
 from invenio_app.factory import create_ui
 from invenio_oauthclient.models import RemoteAccount, RemoteToken
@@ -45,20 +44,20 @@ def orcid_record():
 @pytest.fixture(scope="module")
 def user_record():
     """User record."""
-    return dict(
-        external_id="0000-0000-0000-0000",
-        external_method="orcid",
-        user=dict(
-            email="john.doe@test.com",
-            profile=dict(full_name="John Doe", username="john-doe"),
-        ),
-    )
+    return {
+        "external_id": "0000-0000-0000-0000",
+        "external_method": "orcid",
+        "user": {
+            "email": "john.doe@test.com",
+            "profile": {"full_name": "John Doe", "username": "john-doe"},
+        },
+    }
 
 
 @pytest.fixture()
 def remote_account(app, user_without_role):
     """Create a remote token from user data."""
-    remote_account = RemoteAccount.create(1, "dev", dict())
+    remote_account = RemoteAccount.create(1, "dev", {})
     remote_token = RemoteToken.create(user_without_role.id, "dev", "token", "secret")
 
     return remote_account, remote_token

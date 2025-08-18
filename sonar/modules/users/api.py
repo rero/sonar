@@ -47,7 +47,7 @@ def get_current_user():
 current_user_record = LocalProxy(get_current_user)
 
 # provider
-UserProvider = type("UserProvider", (Provider,), dict(pid_type="user"))
+UserProvider = type("UserProvider", (Provider,), {"pid_type": "user"})
 # minter
 user_pid_minter = partial(id_minter, provider=UserProvider)
 # fetcher
@@ -154,7 +154,7 @@ class UserRecord(SonarRecord):
         :param with_bucket: True for associating a bucket to record.
         :returns: Created record instance.
         """
-        record = super(UserRecord, cls).create(data, id_, dbcommit, with_bucket, **kwargs)
+        record = super().create(data, id_, dbcommit, with_bucket, **kwargs)
 
         record.sync_roles()
         return record
@@ -165,7 +165,7 @@ class UserRecord(SonarRecord):
         :param data: New metadata of the record.
         :returns: Record instance.
         """
-        super(UserRecord, self).update(data)
+        super().update(data)
         self.sync_roles()
         return self
 
@@ -179,7 +179,7 @@ class UserRecord(SonarRecord):
         # Remove roles from user account.
         self.remove_roles()
 
-        return super(UserRecord, self).delete(force=force, dbcommit=dbcommit, delindex=delindex)
+        return super().delete(force=force, dbcommit=dbcommit, delindex=delindex)
 
     @cached_property
     def user(self):
@@ -312,10 +312,7 @@ class UserRecord(SonarRecord):
         if not self.get("role"):
             return False
 
-        if role_to_check in self.get_reachable_roles(self.get("role")):
-            return True
-
-        return False
+        return role_to_check in self.get_reachable_roles(self.get("role"))
 
     def get_all_reachable_roles(self):
         """Get list of roles depending on role hierarchy."""

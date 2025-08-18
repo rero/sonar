@@ -15,7 +15,6 @@
 
 """JSON Schemas."""
 
-
 from functools import partial
 
 from invenio_records_rest.schemas import Nested, StrictKeysMixin
@@ -173,8 +172,8 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
         by posting the data, but guessed from user's organisation.
         """
         if not has_superuser_access():
-            if arkNAAN := current_organisation.get("arkNAAN"):
-                data["arkNAAN"] = arkNAAN
+            if ark_naan := current_organisation.get("arkNAAN"):
+                data["arkNAAN"] = ark_naan
             else:
                 data.pop("arkNAAN", None)
         return data

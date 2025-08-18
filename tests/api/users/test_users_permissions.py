@@ -36,7 +36,7 @@ def test_list(app, client, make_user, superuser, admin, moderator, submitter, us
     assert res.json["hits"]["total"]["value"] == 6
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
 
-    # # Logged as user
+    # Logged as user
     login_user_via_session(client, email=user["email"])
     res = client.get(url_for("invenio_records_rest.user_list"))
     assert res.status_code == 200

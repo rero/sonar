@@ -15,7 +15,6 @@
 
 """Schemas for marshmallow."""
 
-
 from .json import DepositMetadataSchemaV1, DepositSchemaV1
 
 __all__ = (

@@ -46,9 +46,7 @@ class JSONSerializer(_JSONSerializer):
         if request and request.args.get("resolve") == "1":
             record = record.resolve()
 
-        return super(JSONSerializer, self).preprocess_record(
-            pid=pid, record=record, links_factory=links_factory, kwargs=kwargs
-        )
+        return super().preprocess_record(pid=pid, record=record, links_factory=links_factory, kwargs=kwargs)
 
     def post_process_serialize_search(self, results, pid_fetcher):
         """Post process the search results."""
@@ -67,9 +65,9 @@ class JSONSerializer(_JSONSerializer):
         :param search_result: Elasticsearch search result.
         :param links: Dictionary of links to add to response.
         """
-        results = dict(
-            hits=dict(
-                hits=[
+        results = {
+            "hits": {
+                "hits": [
                     self.transform_search_hit(
                         pid_fetcher(hit["_id"], hit["_source"]),
                         hit,
@@ -78,11 +76,11 @@ class JSONSerializer(_JSONSerializer):
                     )
                     for hit in search_result["hits"]["hits"]
                 ],
-                total=search_result["hits"]["total"],
-            ),
-            links=links or {},
-            aggregations=search_result.get("aggregations", dict()),
-        )
+                "total": search_result["hits"]["total"],
+            },
+            "links": links or {},
+            "aggregations": search_result.get("aggregations", {}),
+        }
         return json.dumps(
             self.post_process_serialize_search(results, pid_fetcher),
             **self._format_args(),

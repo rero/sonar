@@ -15,7 +15,6 @@
 
 """Affiliations."""
 
-
 from .affiliation_resolver import AffiliationResolver
 
 __all__ = ("AffiliationResolver",)

@@ -114,11 +114,10 @@ class Validation:
         validation = record["metadata"]["validation"]
 
         # Save the record
-        if validation["action"] == Action.SAVE:
-            # Moderator is owner of the record. Record is published
-            # directly.
-            if self._user_is_owner_of_record(user):
-                validation["status"] = Status.VALIDATED
+        # If, the moderator is owner of the record. Record is published
+        # directly.
+        if validation["action"] == Action.SAVE and self._user_is_owner_of_record(user):
+            validation["status"] = Status.VALIDATED
 
         # Check all actions
         actions_map = {

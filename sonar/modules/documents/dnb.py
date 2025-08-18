@@ -151,7 +151,7 @@ class DnbUrnService:
             "PATCH",
             f"{cls.base_url()}/urn/{urn_code}",
             headers=cls.headers(),
-            data=json.dumps(dict(successor=f"{cls.base_url()}/urn/{successor_urn}")),
+            data=json.dumps({"successor": f"{cls.base_url()}/urn/{successor_urn}"}),
         )
         if response.status_code != 204:
             msg = response.json().get("developerMessage", "")
@@ -215,3 +215,4 @@ class DnbUrnService:
                 if org.get("isDedicated") and (server_name := org.get("serverName")):
                     base_url = f"https://{server_name}"
             return f"{base_url}/{org_code}/documents/{document.get('pid')}"
+        return None

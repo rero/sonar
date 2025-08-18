@@ -15,7 +15,6 @@
 
 """Shibboleth authenticator extension."""
 
-
 from . import config
 
 

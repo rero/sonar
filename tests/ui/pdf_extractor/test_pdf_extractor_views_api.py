@@ -31,7 +31,7 @@ def test_metadata(client, pdf_file, mock_grobid_response):
     with open(pdf_file, "rb") as file:
         content = file.read()
 
-    data = dict(file=(BytesIO(content), "test.pdf"))
+    data = {"file": (BytesIO(content), "test.pdf")}
 
     response = client.post("/pdf-extractor/metadata", data=data, content_type="multipart/form-data")
     assert response.status_code == 200
@@ -50,7 +50,7 @@ def test_full_text(client, pdf_file):
     with open(pdf_file, "rb") as file:
         content = file.read()
 
-    data = dict(file=(BytesIO(content), "test.pdf"))
+    data = {"file": (BytesIO(content), "test.pdf")}
 
     response = client.post("/pdf-extractor/full-text", data=data, content_type="multipart/form-data")
     assert response.status_code == 200

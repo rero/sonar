@@ -38,7 +38,7 @@ class MedlineSchema(HEGSchema):
 
     def get_identifiers(self, obj):
         """Get identifiers."""
-        identifiers = super(MedlineSchema, self).get_identifiers(obj)
+        identifiers = super().get_identifiers(obj)
 
         if obj.get("pmid"):
             identifiers.append({"type": "bf:Local", "source": "PMID", "value": obj["pmid"]})
@@ -54,10 +54,8 @@ class MedlineSchema(HEGSchema):
 
     def get_subjects(self, obj):
         """Get subjects."""
-        subjects = []
 
-        for item in obj.get("keywords", []):
-            subjects.append({"label": {"language": obj["language"], "value": [item]}})
+        subjects = [{"label": {"language": obj["language"], "value": [item]}} for item in obj.get("keywords", [])]
 
         for item in obj.get("mesh_terms", []):
             matches = re.match(r"^.*:(.*)$", item)

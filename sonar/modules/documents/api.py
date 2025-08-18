@@ -42,7 +42,7 @@ from .dumpers import ReplaceRefsDumper, document_indexer_dumper
 from .extensions import ArkDocumentExtension, UrnDocumentExtension
 
 # provider
-DocumentProvider = type("DocumentProvider", (Provider,), dict(pid_type="doc"))
+DocumentProvider = type("DocumentProvider", (Provider,), {"pid_type": "doc"})
 # minter
 document_pid_minter = partial(id_minter, provider=DocumentProvider)
 # fetcher
@@ -107,7 +107,7 @@ class DocumentRecord(SonarRecord):
     def create(cls, data, id_=None, dbcommit=False, with_bucket=True, **kwargs):
         """Create document record."""
         cls.guess_controlled_affiliations(data)
-        return super(DocumentRecord, cls).create(data, id_=id_, dbcommit=dbcommit, with_bucket=with_bucket, **kwargs)
+        return super().create(data, id_=id_, dbcommit=dbcommit, with_bucket=with_bucket, **kwargs)
 
     @classmethod
     def guess_controlled_affiliations(cls, data):
@@ -119,9 +119,10 @@ class DocumentRecord(SonarRecord):
         for contributor in data.get("contribution", []):
             # remove existing controlled affiliation
             contributor.pop("controlledAffiliation", None)
-            if contributor.get("affiliation"):
-                if controlled_affiliations := affiliation_resolver.resolve(contributor["affiliation"]):
-                    contributor["controlledAffiliation"] = controlled_affiliations
+            if contributor.get("affiliation") and (
+                controlled_affiliations := affiliation_resolver.resolve(contributor["affiliation"])
+            ):
+                contributor["controlledAffiliation"] = controlled_affiliations
 
     @classmethod
     def get_record_by_identifier(cls, identifiers):
@@ -182,7 +183,7 @@ class DocumentRecord(SonarRecord):
         if not kwargs.get("label"):
             kwargs["label"] = key
 
-        added_file = super(DocumentRecord, self).add_file(data, key, **kwargs)
+        added_file = super().add_file(data, key, **kwargs)
 
         if not added_file:
             return None
@@ -221,7 +222,7 @@ class DocumentRecord(SonarRecord):
             if not self.files[file.key].get("order"):
                 self.files[file.key]["order"] = self.get_next_file_order()
 
-        super(DocumentRecord, self).sync_files(file, deleted)
+        super().sync_files(file, deleted)
 
     def create_fulltext_file(self, file):
         """Create fulltext file corresponding to give file object.
@@ -318,7 +319,7 @@ class DocumentRecord(SonarRecord):
         :returns: Record instance
         """
         self.guess_controlled_affiliations(data)
-        return super(DocumentRecord, self).update(data)
+        return super().update(data)
 
     def is_open_access(self):
         """Check if current document is open access.
@@ -361,17 +362,11 @@ class DocumentRecord(SonarRecord):
         if self["masked"] == "masked_for_all":
             return True
 
-        if (
+        return bool(
             self["masked"] == "masked_for_external_ips"
             and self.get("organisation")
-            and not is_ip_in_list(
-                get_current_ip(),
-                self["organisation"][0].get("allowedIps", "").split("\n"),
-            )
-        ):
-            return True
-
-        return False
+            and not is_ip_in_list(get_current_ip(), self["organisation"][0].get("allowedIps", "").split("\n"))
+        )
 
     @property
     def statistics(self):
@@ -393,9 +388,7 @@ class DocumentRecord(SonarRecord):
         query_cfg = current_stats.queries["file-download"]
         query = query_cfg.cls(name="file-download", **query_cfg.params)
         files = self.get_files_list()
-        res["file-download"] = {
-            f["key"]: {"count": 0, "label": f["label"]} for f in files
-        }
+        res["file-download"] = {f["key"]: {"count": 0, "label": f["label"]} for f in files}
         with contextlib.suppress(NotFoundError):
             res_query = query.run(bucket_id=self.bucket_id)
             file_keys = res["file-download"].keys()
@@ -409,6 +402,7 @@ class DocumentRecord(SonarRecord):
         for identifier in self.get("identifiedBy", []):
             if identifier.get("type") == "ark":
                 return identifier.get("value")
+        return None
 
     def get_ark_resolver_url(self):
         """Get the ark resolver url.
@@ -418,6 +412,7 @@ class DocumentRecord(SonarRecord):
         if ark := self.get_ark():
             resolver_url = current_app.config.get("SONAR_APP_ARK_RESOLVER")
             return f"{resolver_url}/{ark}"
+        return None
 
     def resolve(self):
         """Resolve references data.
@@ -440,6 +435,7 @@ class DocumentRecord(SonarRecord):
         for identifier in record.get("identifiedBy", []):
             if identifier["type"] == "bf:Urn" and base_urn in identifier["value"]:
                 return identifier["value"]
+        return None
 
 
 class DocumentIndexer(SonarIndexer):

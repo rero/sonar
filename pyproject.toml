@@ -101,6 +101,13 @@ dependencies = [
 [dependency-groups]
 dev = [
     ## Python packages development dependencies
+    ## Default from Invenio
+    "pytest-invenio>=3.0.0,<4.0.0",
+    "pydocstyle>=6.1.1",
+    "pytest-black>=0.4.0",
+    "pytest-black-ng>=0.4.0",
+    "Sphinx>=4.5.0",
+    "Flask-Debugtoolbar>=0.10.1",
     "pip-audit>=2.8.0,<3.0.0",
     "mock>=2.0.0",
     "beautifulsoup4>=4.11.1",
@@ -261,8 +268,8 @@ extend-exclude = ["config.py", "conf.py"]
 line-length = 120
 
 [tool.ruff.lint]
-extend-select = ["A", "C4", "DTZ", "INT", "ISC", "T20", "PIE", "Q", "RET", "SIM", "I", "N", "PERF", "W", "D", "F", "UP", "RUF"]
-ignore = ["D100", "D101", "D103", "D200", "D202", "D205", "D400", "D401", "F403", "F405", "F841", "UP009"]
+extend-select = ["A", "C4", "INT", "ISC", "T20", "PIE", "Q", "RET", "SIM", "I", "N", "PERF", "W", "D", "F", "UP", "RUF"]
+ignore = ["D100", "D101", "D103", "D200", "D202", "D205", "D400", "D401", "F403", "F405", "F841", "N815", "PERF203", "RUF012", "UP009"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"

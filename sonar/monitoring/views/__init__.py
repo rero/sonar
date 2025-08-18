@@ -122,14 +122,14 @@ def urn():
 
     :return: jsonified count information.
     """
-    data = dict()
+    data = {}
     try:
         days = int(args.get("days", 0)) if (args := request.args) else 0
         count, pids = Urn.get_urn_pids(days=days)
-        data["reserved"] = dict(count=count, pids=list(pids))
+        data["reserved"] = {"count": count, "pids": list(pids)}
         count, pids = Urn.get_urn_pids(days=days, status=PIDStatus.REGISTERED)
-        data["registered"] = dict(count=count)
-        return jsonify(dict(data=data))
+        data["registered"] = {"count": count}
+        return jsonify({"data": data})
     except Exception as exception:
         return jsonify({"error": str(exception)}), 500
 

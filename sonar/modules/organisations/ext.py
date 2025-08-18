@@ -17,7 +17,6 @@
 """Organisation extension."""
 
 
-
 class Organisations:
     """Organisation extension."""
 

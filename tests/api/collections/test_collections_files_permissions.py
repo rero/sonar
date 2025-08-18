@@ -36,13 +36,14 @@ def test_update_delete(client, superuser, admin, moderator, submitter, user, col
             login_user_via_session(client, email=u["email"])
         else:
             client.get(url_for_security("logout"))
-        res = client.put(url_file_content, input_stream=open(pdf_file, "rb"))
-        assert res.status_code == status
-        if status == 200:
-            # the delete return status is no content
-            status = 204
-            res = client.delete(url_file_content)
+        with open(pdf_file, "rb") as f:
+            res = client.put(url_file_content, input_stream=f)
             assert res.status_code == status
+            if status == 200:
+                # the delete return status is no content
+                status = 204
+                res = client.delete(url_file_content)
+                assert res.status_code == status
 
 
 def test_read_metadata(client, superuser, admin, moderator, submitter, user, collection_with_file):

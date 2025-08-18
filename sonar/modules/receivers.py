@@ -15,6 +15,8 @@
 
 """Listeners for application."""
 
+import contextlib
+
 from sonar.modules.api import SonarRecord
 
 
@@ -23,10 +25,8 @@ def file_uploaded_listener(sender, obj):
 
     :param obj: Object version.
     """
-    try:
+    with contextlib.suppress(Exception):
         sync_record_files(obj, False)
-    except Exception:
-        pass
 
 
 def file_deleted_listener(sender, obj):
@@ -34,10 +34,8 @@ def file_deleted_listener(sender, obj):
 
     :param obj: Object version.
     """
-    try:
+    with contextlib.suppress(Exception):
         sync_record_files(obj, True)
-    except Exception:
-        pass
 
 
 def sync_record_files(file, deleted=False):

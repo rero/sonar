@@ -16,7 +16,6 @@
 
 """Define relation between records and buckets."""
 
-
 from invenio_db import db
 from invenio_pidstore.models import RecordIdentifier
 

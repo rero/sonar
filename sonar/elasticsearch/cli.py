@@ -15,6 +15,7 @@
 
 """CLI for Elasticsearch."""
 
+import contextlib
 import datetime
 
 import click
@@ -79,10 +80,8 @@ def backup(repository, name, wait):
 
     try:
         # Remove old backup with the same name
-        try:
+        with contextlib.suppress(Exception):
             current_search_client.snapshot.delete(repository, name)
-        except Exception:
-            pass
 
         # Backup data
         current_search_client.snapshot.create(repository, name, wait_for_completion=wait)

@@ -47,7 +47,7 @@ def test_get_safe_redirect_target(app, monkeypatch):
         """Mock request."""
 
         def __init__(self):
-            self.args = dict(next=None)
+            self.args = {"next": None}
             self.referrer = None
 
     mock_request = MockRequest()
@@ -77,8 +77,8 @@ def test_prepare_flask_request(app):
         host = "sonar.ch"
         scheme = "https"
         path = "/test/page"
-        args = dict(parameter="test")
-        form = dict()
+        args = {"parameter": "test"}
+        form = {}
 
     mock_request = MockRequest()
 

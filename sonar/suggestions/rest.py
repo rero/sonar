@@ -47,7 +47,7 @@ def completion():
         search = service.config.search.search_cls(index=resource)
     except Exception as err:
         endpoints = current_app.config.get("RECORDS_REST_ENDPOINTS")
-        for doc_type, config in endpoints.items():
+        for config in endpoints.values():
             if config.get("search_index") == resource:
                 search = config["search_class"]()
 
@@ -61,7 +61,7 @@ def completion():
 
         for field in fields:
             search = search.suggest(field, query, completion={"field": field, "skip_duplicates": True})
-        for _, suggestion in search.execute().suggest.to_dict().items():
+        for suggestion in search.execute().suggest.to_dict().values():
             results = results + [option["text"] for option in suggestion[0]["options"]]
     except Exception:
         return jsonify({"error": "Bad request"}), 400

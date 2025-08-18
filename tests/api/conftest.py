@@ -15,7 +15,6 @@
 
 """Pytest fixtures and plugins for the API application."""
 
-
 import pytest
 import requests_mock
 from invenio_app.factory import create_api

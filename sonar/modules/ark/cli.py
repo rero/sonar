@@ -87,7 +87,7 @@ def create_missing(organisation_pid):
             doc = DocumentRecord.get_record_by_pid(res.pid)
             pid = ark.create(doc["pid"], record_uuid=doc.id)
             assert not doc.get_ark()
-            doc.setdefault("identifiedBy", []).append(dict(type="ark", value=pid.pid_value))
+            doc.setdefault("identifiedBy", []).append({"type": "ark", "value": pid.pid_value})
             doc.commit()
             db.session.commit()
             doc.reindex()

@@ -15,7 +15,6 @@
 
 """Schemas for marshmallow."""
 
-
 from .json import DocumentListSchemaV1, DocumentMetadataSchemaV1, DocumentSchemaV1
 
 __all__ = ("DocumentListSchemaV1", "DocumentMetadataSchemaV1", "DocumentSchemaV1")

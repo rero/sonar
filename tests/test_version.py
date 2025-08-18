@@ -16,7 +16,6 @@
 """Simple test of version import."""
 
 
-
 def test_version():
     """Test version import."""
     from sonar import __version__

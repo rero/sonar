@@ -15,7 +15,6 @@
 
 """Blueprint used for loading templates."""
 
-
 import os
 from datetime import datetime
 
@@ -98,9 +97,8 @@ def get_file_links(file, record):
     if file["mimetype"] not in current_app.config.get("SONAR_APP_FILE_PREVIEW_MIMETYPES", []):
         return links
     # only markdown is supported
-    if file["mimetype"] == "application/octet-stream":
-        if os.path.splitext(file["key"])[-1] != ".md":
-            return links
+    if file["mimetype"] == "application/octet-stream" and os.path.splitext(file["key"])[-1] != ".md":
+        return links
     links["preview"] = f"/documents/{record['pid']}/preview/{file['key']}"
     return links
 

@@ -15,7 +15,6 @@
 
 """Blueprint definitions."""
 
-
 import json
 
 from flask import Blueprint, abort, current_app, render_template, request
@@ -242,19 +241,19 @@ def abstracts(record):
     language = get_bibliographic_code_from_language(current_i18n.locale.language)
     preferred_languages = get_preferred_languages(language)
 
-    abstractLanguage = []
-    abstractCode = []
+    abstract_language = []
+    abstract_code = []
     for abstract in record["abstracts"]:
         if abstract["language"] in preferred_languages:
-            abstractLanguage.append(abstract)
+            abstract_language.append(abstract)
         else:
-            abstractCode.append(abstract)
-    abstractSortedLanguage = sorted(
-        abstractLanguage,
+            abstract_code.append(abstract)
+    abstract_sorted_language = sorted(
+        abstract_language,
         key=lambda abstract: preferred_languages.index(abstract["language"]),
     )
-    abstractSortedCode = sorted(abstractCode, key=lambda abstract: abstract["language"])
-    return abstractSortedLanguage + abstractSortedCode
+    abstract_sorted_code = sorted(abstract_code, key=lambda abstract: abstract["language"])
+    return abstract_sorted_language + abstract_sorted_code
 
 
 @blueprint.app_template_filter()
@@ -296,13 +295,12 @@ def contribution_text(contribution):
     data = [contribution["agent"]["preferred_name"]]
 
     # Meeting
-    if contribution["agent"]["type"] == "bf:Meeting":
-        if meeting := meeting_text(contribution):
-            data.append(f"({meeting})")
+    if contribution["agent"]["type"] == "bf:Meeting" and (meeting := meeting_text(contribution)):
+        data.append(f"({meeting})")
 
     # Person
     if contribution["agent"]["type"] == "bf:Person" and contribution["role"][0] != "cre":
-        data.append("({role})".format(role=_("contribution_role_{role}".format(role=contribution["role"][0])).lower()))
+        data.append("({role})".format(role=_("contribution_role_{role}".format(role=contribution["role"][0])).lower()))  # noqa: INT002
 
     return " ".join(data)
 
@@ -315,7 +313,7 @@ def meeting_text(contribution):
     :returns: Formatted text.
     """
     contrib = contribution["agent"]
-    return " : ".join([contrib[key] for key in ["number", "date", "place"] if key in contrib.keys()])
+    return " : ".join([contrib[key] for key in ["number", "date", "place"] if key in contrib])
 
 
 @blueprint.app_template_filter()

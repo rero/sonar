@@ -27,20 +27,19 @@ class CrossrefSchema(HEGSchema):
     def get_title(self, obj):
         """Get title."""
         titles = []
-
-        for title in obj.get("title", []):
-            titles.append(
-                {
-                    "type": "bf:Title",
-                    "mainTitle": [{"value": title, "language": obj["language"]}],
-                }
-            )
+        titles.extend(
+            {
+                "type": "bf:Title",
+                "mainTitle": [{"value": title, "language": obj["language"]}],
+            }
+            for title in obj.get("title", [])
+        )
 
         return titles
 
     def get_identifiers(self, obj):
         """Get identifiers."""
-        identifiers = super(CrossrefSchema, self).get_identifiers(obj)
+        identifiers = super().get_identifiers(obj)
 
         if obj.get("ISSN"):
             identifiers.append({"type": "bf:Issn", "value": obj["ISSN"][0]})

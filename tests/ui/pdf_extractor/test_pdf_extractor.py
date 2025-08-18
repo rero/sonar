@@ -121,11 +121,12 @@ def test_do_request(app, mock_grobid_response, pdf_file):
         pdf_extractor.do_request("isalive", "invalid")
 
     # Test post request
-    assert (
-        pdf_extractor.do_request(
-            "processFulltextDocument",
-            "post",
-            files={"input": (pdf_file, open(pdf_file, "rb"), "application/pdf")},
-        )[1]
-        == 200
-    )
+    with open(pdf_file, "rb") as f:
+        assert (
+            pdf_extractor.do_request(
+                "processFulltextDocument",
+                "post",
+                files={"input": (pdf_file, f, "application/pdf")},
+            )[1]
+            == 200
+        )

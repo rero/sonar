@@ -84,7 +84,7 @@ def test_get_files_list(db, document, pdf_file):
 
 
 def test_get_documents_by_project(db, project, document):
-    """ "Test getting documents by a project."""
+    """Test getting documents by a project."""
     document["projects"] = [{"$ref": f"https://sonar.ch/api/projects/{project.id}"}]
     document.commit()
     document.reindex()

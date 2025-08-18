@@ -32,7 +32,7 @@ from sonar.resources.api import Record as BaseRecord
 from . import models
 
 # Custom provider to set the PID type
-RecordIdProvider = type("RecordIdProvider", (BaseRecordIdProvider,), dict(pid_type="proj"))
+RecordIdProvider = type("RecordIdProvider", (BaseRecordIdProvider,), {"pid_type": "proj"})
 
 
 class SearchDumperObjectsExt(SearchDumperExt):

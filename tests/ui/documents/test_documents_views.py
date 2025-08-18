@@ -342,7 +342,7 @@ def test_abstracts(app):
         {"language": "roh", "value": "Romancio"},
     ]
     abstracts_sort = views.abstracts({"abstracts": abstracts})
-    assert [abs["language"] for abs in abstracts_sort] == ["eng", "fre", "roh"]
+    assert [abstr["language"] for abstr in abstracts_sort] == ["eng", "fre", "roh"]
 
     abstracts = [
         {"language": "fre", "value": "Résumé"},
@@ -351,7 +351,7 @@ def test_abstracts(app):
         {"language": "kin", "value": "kin Summary"},
     ]
     abstracts_sort = views.abstracts({"abstracts": abstracts})
-    assert [abs["language"] for abs in abstracts_sort] == ["eng", "fre", "kin", "roh"]
+    assert [abstr["language"] for abstr in abstracts_sort] == ["eng", "fre", "kin", "roh"]
 
 
 def test_contributors():

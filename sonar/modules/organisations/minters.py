@@ -16,7 +16,6 @@
 """Persistent identifier minters for organisation."""
 
 
-
 def id_minter(record_uuid, data, provider, pid_key="pid", object_type="rec"):
     """Organisation minter which takes the code value as PID."""
     # Create persistent identifier

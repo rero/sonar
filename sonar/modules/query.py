@@ -15,7 +15,6 @@
 
 """Query factories for REST API."""
 
-
 from elasticsearch_dsl.query import Q
 from flask import request
 
@@ -107,8 +106,7 @@ def and_term_filter(field):
 
     def inner(values):
         must = []
-        for value in values:
-            must.append(Q("term", **{field: value}))
+        must.extend(Q("term", **{field: value}) for value in values)
         return Q("bool", must=must)
 
     return inner

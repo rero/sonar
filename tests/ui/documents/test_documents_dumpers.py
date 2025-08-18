@@ -76,7 +76,7 @@ def test_document_indexer_dumper_identifiers(document):
         key = t.split(":")[-1].lower()
         for _ in range(random.randint(1, 5)):
             value = f"value{n}"
-            document["identifiedBy"].append(dict(type=t, value=value))
+            document["identifiedBy"].append({"type": t, "value": value})
             res.setdefault(key, []).append(value)
             n += 1
 

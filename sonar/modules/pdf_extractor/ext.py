@@ -16,7 +16,6 @@
 
 """PDF Extractor extension."""
 
-
 from . import config
 
 

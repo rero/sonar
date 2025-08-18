@@ -53,7 +53,7 @@ class Overdo(BaseOverdo):
 
     def do(self, blob, ignore_missing=True, exception_handlers=None):
         """Do transformation."""
-        result = super(Overdo, self).do(blob, ignore_missing=ignore_missing, exception_handlers=exception_handlers)
+        result = super().do(blob, ignore_missing=ignore_missing, exception_handlers=exception_handlers)
 
         # Verify data integrity
         self.verify(result)
@@ -121,7 +121,7 @@ class Overdo(BaseOverdo):
             if not document_type:
                 return True
 
-            if document_type not in [
+            return document_type not in [
                 "coar:c_beb9",
                 "coar:c_6501",
                 "coar:c_998f",
@@ -129,10 +129,7 @@ class Overdo(BaseOverdo):
                 "coar:c_3e5a",
                 "coar:c_5794",
                 "coar:c_6670",
-            ]:
-                return True
-
-            return False
+            ]
 
         self.result_ok = True
 

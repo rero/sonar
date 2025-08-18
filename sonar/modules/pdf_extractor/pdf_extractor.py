@@ -78,6 +78,7 @@ class PDFExtractor:
             headers = {"Accept": "application/xml"}
             response = requests.post(url, headers=headers, files=files)
             return response.text, response.status_code
+        return None
 
     def process(self, input_file, output_file=None, dict_output=True):
         """Process metadata extraction from file.
@@ -111,10 +112,10 @@ class PDFExtractor:
         :param dict_output: (bool) Extraction will be formatted in JSON.
         :returns: (str|json) Metadata extraction
         """
-        temp = tempfile.NamedTemporaryFile(mode="w+b", suffix=".pdf")
-        temp.write(pdf_content)
+        with tempfile.NamedTemporaryFile(mode="w+b", suffix=".pdf") as temp:
+            temp.write(pdf_content)
 
-        return self.process(temp.name, output_file=output_file, dict_output=dict_output)
+            return self.process(temp.name, output_file=output_file, dict_output=dict_output)
 
     def extract_metadata(self, file):
         """Process metadata extraction.
@@ -128,19 +129,20 @@ class PDFExtractor:
         if not file.lower().endswith(".pdf"):
             raise ValueError("Input file is not a valid PDF file")
 
-        response, status = self.do_request(
-            "processHeaderDocument",
-            "post",
-            files={
-                "input": (file, open(file, "rb"), "application/pdf"),
-                "consolidateHeader": 1,
-            },
-        )
+        with open(file, "rb") as f:
+            response, status = self.do_request(
+                "processHeaderDocument",
+                "post",
+                files={
+                    "input": (file, f, "application/pdf"),
+                    "consolidateHeader": 1,
+                },
+            )
 
-        if status != 200:
-            raise Exception("Metadata extraction failed")
+            if status != 200:
+                raise Exception("Metadata extraction failed")
 
-        return response
+            return response
 
     @staticmethod
     def parse_tei_xml(xml):
@@ -153,6 +155,4 @@ class PDFExtractor:
 
         # parse xml
         result = xmltodict.parse(ET.tostring(root, encoding="unicode"))
-        result = result["TEI"]
-
-        return result
+        return result["TEI"]

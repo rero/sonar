@@ -105,7 +105,7 @@ class ProjectsRecordServiceConfig(RecordServiceConfig):
 
     search = SearchOptions
 
-    components = RecordServiceConfig.components + [RecordComponent]
+    components = [*RecordServiceConfig.components, RecordComponent]
 
 
 class ProjectsRecordService(RecordService):

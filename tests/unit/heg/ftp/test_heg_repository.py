@@ -102,13 +102,11 @@ def test_remove_files_from_target():
 
     path = tempfile.mkdtemp()
 
-    f = open(os.path.join(path, "test.txt"), "w")
-    f.write("Temp")
-    f.close()
+    with open(os.path.join(path, "test.txt"), "w") as f:
+        f.write("Temp")
 
-    f = open(os.path.join(path, "HEG_test.txt"), "w")
-    f.write("Temp")
-    f.close()
+    with open(os.path.join(path, "HEG_test.txt"), "w") as f:
+        f.write("Temp")
 
     assert len(os.listdir(path)) == 2
     repository.remove_files_from_target(path)

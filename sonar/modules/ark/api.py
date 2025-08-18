@@ -40,7 +40,8 @@ class Ark:
             cls._naan = naan
             cls._url_resolve = cls._resolver
             cls._regex = re.compile(rf"{cls._scheme}/{cls._naan}/{cls._shoulder}(?P<pid>\w+)")
-            return super(Ark, cls).__new__(cls)
+            return super().__new__(cls)
+        return None
 
     def config(self):
         """String representation with config and urls."""
@@ -56,7 +57,7 @@ config:
     def init_config(cls):
         """Read the configuation from the current app."""
         config = current_app.config
-        for conf_key in config.keys():
+        for conf_key in config:
             if conf_key.startswith("SONAR_APP_ARK_"):
                 setattr(
                     cls,
@@ -88,6 +89,7 @@ config:
         """
         if match := self._regex.match(ark_id):
             return match.groupdict().get("pid")
+        return None
 
     def get(self, _id):
         """Get the persistent identifier.
@@ -112,11 +114,10 @@ config:
         :returns: A tuple of the HTTP status code and the text response.
         """
         ark_id = self.ark_from_id(pid)
-        pid = PersistentIdentifier.create(
+        return PersistentIdentifier.create(
             "ark",
             ark_id,
             object_type="rec",
             object_uuid=record_uuid,
             status=PIDStatus.REGISTERED,
         )
-        return pid

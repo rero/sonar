@@ -27,12 +27,11 @@ from flask import current_app
 from invenio_search import current_search
 
 from sonar.modules.api import SonarRecord
-from sonar.modules.documents.api import DocumentRecord, DocumentSearch
 from sonar.modules.documents.loaders.schemas.factory import LoaderSchemaFactory
 from sonar.modules.utils import chunks
 from sonar.webdav import HegClient
 
-from .api import DocumentRecord
+from .api import DocumentRecord, DocumentSearch
 from .tasks import import_records
 
 CHUNK_SIZE = 20
@@ -94,9 +93,7 @@ def update_oai_property(sender, record):
     if not isinstance(record, DocumentRecord):
         return
 
-    sets = []
-    for organisation in record.get("organisation", []):
-        sets.append(SonarRecord.get_pid_by_ref_link(organisation["$ref"]))
+    sets = [SonarRecord.get_pid_by_ref_link(organisation["$ref"]) for organisation in record.get("organisation", [])]
 
     oai = record.get("_oai", {"id": f"oai:sonar.ch:{record['pid']}"})
     oai.update({"updated": datetime.now(timezone.utc).isoformat(), "sets": sets})
@@ -135,8 +132,8 @@ def export_json(sender=None, records=None, **kwargs):
     file_name = f"{kwargs['name']}-{datetime.now().strftime('%Y%m%d%H%M%S')}.json"
     file_path = join(data_directory, file_name)
 
-    json_file = open(file_path, "w")
-    json_file.write(json.dumps(records_to_export))
+    with open(file_path, "w") as json_file:
+        json_file.write(json.dumps(records_to_export))
 
     # Export to webdav for HEG
     client = HegClient()
@@ -171,9 +168,7 @@ def process_boosting(config):
         # fields for multiple mapping configurations
         if conf.get("fields"):
             tmp_fields = [field, f"{field}.*"]
-            for tmp_f in tmp_fields:
-                if tmp_f not in existing_fields:
-                    fields.append(tmp_f)
+            fields.extend(tmp_f for tmp_f in tmp_fields if tmp_f not in existing_fields)
             continue
         # add .* for field with children
         if conf.get("properties"):

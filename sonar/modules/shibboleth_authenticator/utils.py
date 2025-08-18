@@ -15,7 +15,6 @@
 
 """Utility methods to help find, authenticate or register a remote user."""
 
-
 from random import randrange
 from urllib.parse import urlparse
 
@@ -43,17 +42,17 @@ def get_account_info(attributes, remote_app):
     external_id = attributes[mappings["user_unique_id"]][0]
     full_name = attributes[mappings["full_name"]][0]
 
-    return dict(
-        user=dict(
-            email=email,
-            profile=dict(
-                full_name=full_name,
-                username=f"{slugify(full_name)}-{randrange(1000)}",
-            ),
-        ),
-        external_id=external_id,
-        external_method=remote_app,
-    )
+    return {
+        "user": {
+            "email": email,
+            "profile": {
+                "full_name": full_name,
+                "username": f"{slugify(full_name)}-{randrange(1000)}",
+            },
+        },
+        "external_id": external_id,
+        "external_method": remote_app,
+    }
 
 
 def get_safe_redirect_target(arg="next"):

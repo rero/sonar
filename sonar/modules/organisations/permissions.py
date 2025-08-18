@@ -33,10 +33,7 @@ class OrganisationPermission(RecordPermission):
         :returns: True is action can be done.
         """
         # Only for admin users at least.
-        if not user or not user.is_admin:
-            return False
-
-        return True
+        return bool(user and user.is_admin)
 
     @classmethod
     def create(cls, user, record=None):
@@ -47,7 +44,7 @@ class OrganisationPermission(RecordPermission):
         :returns: True is action can be done.
         """
         # Only superuser can create an organisation.
-        return user and user.is_superuser
+        return bool(user and user.is_superuser)
 
     @classmethod
     def read(cls, user, record):

@@ -15,7 +15,6 @@
 
 """Click command-line interface for user management."""
 
-
 import json
 
 import click
