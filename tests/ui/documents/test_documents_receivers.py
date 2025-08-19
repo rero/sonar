@@ -18,8 +18,6 @@
 from os import listdir
 from os.path import exists, join
 
-from invenio_oaiharvester.tasks import get_records
-
 from sonar.modules.documents.receivers import (
     chunks,
     export_json,
@@ -27,25 +25,20 @@ from sonar.modules.documents.receivers import (
 )
 
 
-def test_transform_harvested_records(app, bucket_location, capsys):
+def test_transform_harvested_records(app, bucket_location, capsys, harvested_record):
     """Test harvested record transformation."""
-    request, records = get_records(
-        ["oai:doc.rero.ch:20120503160026-MV"],
-        metadata_prefix="marcxml",
-        url="http://doc.rero.ch/oai2d",
-    )
 
-    transform_harvested_records(None, records, name="rerodoc", max="1")
+    transform_harvested_records(None, [harvested_record], name="rerodoc", max="1")
     captured = capsys.readouterr()
     assert captured.out.find("1 records harvested") != -1
 
     # Max set to 0 --> import all
-    transform_harvested_records(None, records, name="rerodoc", max="0")
+    transform_harvested_records(None, [harvested_record], name="rerodoc", max="0")
     captured = capsys.readouterr()
     assert captured.out.find("1 records harvested") != -1
 
     # Not an import
-    transform_harvested_records(None, records, name="rerodoc", max="1", action="not-existing")
+    transform_harvested_records(None, [harvested_record], name="rerodoc", max="1", action="not-existing")
     captured = capsys.readouterr()
     assert captured.out == ""
 
@@ -59,7 +52,7 @@ def test_chunks():
     assert records[-1] == [10]
 
 
-def test_export_json(app, bucket_location, monkeypatch):
+def test_export_json(app, bucket_location, monkeypatch, harvested_record):
     """Test export records to file."""
     # Patch the file upload to webdav.
     import tempfile
@@ -67,16 +60,10 @@ def test_export_json(app, bucket_location, monkeypatch):
     app.config["SONAR_APP_STORAGE_PATH"] = tempfile.mkdtemp()
     monkeypatch.setattr("webdav3.client.Client.upload_file", lambda *args: True)
 
-    request, records = get_records(
-        ["oai:doc.rero.ch:20120503160026-MV"],
-        metadata_prefix="marcxml",
-        url="http://doc.rero.ch/oai2d",
-    )
-
     data_directory = join(app.config["SONAR_APP_STORAGE_PATH"], "data")
 
-    export_json(None, records, name="rerodoc", action="not-existing")
+    export_json(None, [harvested_record], name="rerodoc", action="not-existing")
     assert not exists(data_directory)
 
-    export_json(None, records, name="rerodoc", action="export")
+    export_json(None, [harvested_record], name="rerodoc", action="export")
     assert len(listdir(data_directory)) == 1

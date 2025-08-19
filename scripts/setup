@@ -26,39 +26,10 @@ fi
 
 title "Application setup"
 
-# Size of data to create
-size="0"
-import=false
 fixtures_folder='./data'
 
-# If set to true, data for organisations and users will be erased and base
-# fixtures are created.
-clear_data=false
 
-while test $# -gt 0; do
-    case "$1" in
-        --import)
-            import=true
-            ;;
-        --size)
-            size="$2"
-            shift
-            ;;
-        --clear-data)
-            clear_data=true
-            ;;
-        *) message "Option $1 not recognized" "error" ;;
-    esac
-    shift
-done
-
-if $clear_data; then
-    message "All data will be cleared!" "warning"
-fi
-
-if $import; then
-    message "Size of import sets is set to \"$size\"" "info"
-fi
+message "All data will be cleared!" "warning"
 
 # Try to create database and tables if does not exist
 invenio db init create || true
@@ -71,12 +42,8 @@ celery --app sonar.celery purge -f
 section "Clear redis cache" "info"
 invenio shell --no-term-title -c "import redis; redis.StrictRedis.from_url(app.config['CACHE_REDIS_URL']).flushall(); print('Cache cleared')"
 
-if [ $clear_data = false ]; then
-    fixtures_folder='./data/backups'
-    section "Backup of existing data" "info"
-    invenio utils export --pid-type org --output-dir "${fixtures_folder}/organisations"
-    invenio utils export --pid-type user --output-dir "${fixtures_folder}/users"
-fi
+fixtures_folder='./data'
+
 section "Clear files" "info"
 invenio utils clear-files
 
@@ -120,9 +87,10 @@ token_create monitoring monitoring@rero.ch ${INVENIO_RERO_ACCESS_TOKEN_MONITORIN
 section "Create location for storing files" "info"
 invenio fixtures deposits create
 
-# Create configurations for OAI harvesting
-section "Create configurations for OAI harvesting" "info"
-invenio oaiharvester config create data/oai_sources.json
+# Initialize flask wiki
+section "Initialize wiki search"
+invenio flask_wiki init-index
+invenio flask_wiki index
 
 # Create users and organisations
 section "Create organisations" "info"
@@ -131,14 +99,7 @@ invenio fixtures organisations import "${fixtures_folder}/organisations/data.jso
 section "Create users" "info"
 invenio fixtures users import "${fixtures_folder}/users/data.json"
 
-# Import rerodoc data
-if $import; then
-    section "Import sets of data" "info"
-    invenio oaiharvester harvest -n rerodoc -q -a max=${size}
-fi
-
-section "Initialize wiki search"
-invenio flask_wiki init-index
-invenio flask_wiki index
+section "Create documents" "info"
+invenio fixtures documents import "${fixtures_folder}/documents/data.json"
 
 message "\nInstallation finished successfully" "success"

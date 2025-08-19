@@ -15,8 +15,17 @@
 
 """Pytest fixtures and plugins for the UI application."""
 
+import os
+
 import pytest
 from invenio_app.factory import create_ui
+
+
+@pytest.fixture(scope="module")
+def harvested_record():
+    """Return test XML output file path."""
+    with open(os.path.join(os.path.dirname(__file__), "data", "harvested_record.xml")) as file:
+        yield file.read()
 
 
 @pytest.fixture(scope="module")

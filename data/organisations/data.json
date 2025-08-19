@@ -1,133 +1,80 @@
 [
   {
-      "code": "rero",
-      "name": "RERO",
-      "isShared": true,
-      "arkNAAN": "99999",
-      "files": [
+    "code": "rero",
+    "name": "RERO+",
+    "isShared": true,
+    "isDedicated": false,
+    "arkNAAN": "99999",
+    "files": [
+      {
+        "key": "rero.jpg",
+        "path": "./files/rero.jpg"
+      }
+    ]
+  },
+  {
+    "code": "fictivededicated",
+    "name": "Université des sciences fictives",
+    "description": [
+      {
+        "language": "fre",
+        "value": "Fondée pour explorer l’imaginaire scientifique, l’Université des sciences fictives forme les esprits curieux aux savoirs possibles, improbables ou encore à inventer. Entre rigueur et spéculation, elle ouvre des voies inédites vers les mondes de demain."
+      },
+      {
+        "language": "eng",
+        "value": "Founded to explore scientific imagination, the University of Fictive Sciences trains curious minds in knowledge that is possible, improbable, or yet to be invented. Blending rigor and speculation, it opens new paths toward the worlds of tomorrow."
+      }
+    ],
+    "isShared": true,
+    "isDedicated": true,
+    "serverName": "fictivededicated.test.com",
+    "platformName": "#Université des sciences fictives\n#University of Fictive Sciences",
+    "documentsCustomField1": {
+      "includeInFacets": true,
+      "label": [
         {
-          "key": "rero.jpg",
-          "path": "./rero/rero.jpg"
+          "language": "fre",
+          "value": "Vraisemblance"
+        },
+        {
+          "language": "eng",
+          "value": "Plausibility"
         }
       ]
-  },
-  {
-    "code": "hepvs",
-    "name": "HEP Valais",
-    "description": [
-      {
-        "language": "ger",
-        "value": "Description in German in **markdown** format"
-      },
-      {
-        "language": "eng",
-        "value": "Description in English in **markdown** format"
-      },
-      {
-        "language": "fre",
-        "value": "Description in French in **markdown** format"
-      },
-      {
-        "language": "ita",
-        "value": "Description in Italian in **markdown** format"
-      }
-    ],
-    "footer": [
-      {
-        "language": "ger",
-        "value": "Footer GER **markdown** format"
-      },
-      {
-        "language": "eng",
-        "value": "Footer ENG **markdown** format"
-      },
-      {
-        "language": "fre",
-        "value": "Footer FRE **markdown** format"
-      },
-      {
-        "language": "ita",
-        "value": "Footer ITA **markdown** format"
-      }
-    ],
-    "isShared": true,
-    "isDedicated": true,
-    "serverName": "fredi.hepvs.ch",
-    "platformName": "FREDI",
+    },
+    "documentsCustomField2": {
+      "includeInFacets": true,
+      "label": [
+        {
+          "language": "fre",
+          "value": "Étendue"
+        },
+        {
+          "language": "eng",
+          "value": "Scope"
+        }
+      ]
+    },
+    "documentsCustomField3": {
+      "includeInFacets": false
+    },
     "files": [
       {
-        "key": "hepvs.png",
-        "path": "./hepvs/hepvs.png"
+        "key": "fictivededicated.png",
+        "path": "./files/fictivededicated.png"
       }
     ]
   },
   {
-    "code": "hepbejune",
-    "name": "Haute École Pédagogique BEJUNE",
+    "code": "fictiveshared",
+    "name": "École des hautes études partagées",
     "isShared": true,
-    "isDedicated": true,
-    "serverName": "roar.hep-bejune.ch",
-    "platformName": "# ROAR\n#### Répertoire ouvert et archives BEJUNE",
+    "isDedicated": false,
     "files": [
       {
-        "key": "logo.png",
-        "path": "./hepbejune/logo.png"
+        "key": "fictiveshared.jpg",
+        "path": "./files/fictiveshared.jpg"
       }
     ]
-  },
-  {
-    "code": "unifr",
-    "name": "Université de Fribourg",
-    "description": [
-      {
-        "language": "ger",
-        "value": "FOLIA ist das institutionelle Repositorium der Universität Freiburg (Schweiz). Es bietet freien Zugang zu den Publikationen der Forschenden der Universität. FOLIA wird von der Kantons- und Universitätsbibliothek Freiburg betreut."
-      },
-      {
-        "language": "eng",
-        "value": "FOLIA is the institutional repository of the University of Fribourg (Switzerland). It provides free access to the publications of the researchers of the University. FOLIA is managed by the Bibliothèque cantonale et universitaire de Fribourg."
-      },
-      {
-        "language": "fre",
-        "value": "FOLIA est le serveur de dépôt institutionnel de l'Université de Fribourg (Suisse). Il fournit un accès libre aux publications des chercheurs et chercheuses de l'Université. FOLIA est géré par la Bibliothèque cantonale et universitaire de Fribourg."
-      },
-      {
-        "language": "ita",
-        "value": "FOLIA è l'archivio istituzionale dell'Università di Friburgo (Svizzera). Fornisce un accesso gratuito alle pubblicazioni dei ricercatrici e ricercatori dell'Università. FOLIA è gestito dalla Bibliothèque cantonale et universitaire de Fribourg."
-      }
-    ],
-    "footer": [
-      {
-        "language": "ger",
-        "value": "Footer GER **markdown** format"
-      },
-      {
-        "language": "eng",
-        "value": "Footer ENG **markdown** format"
-      },
-      {
-        "language": "fre",
-        "value": "Footer FRE **markdown** format"
-      },
-      {
-        "language": "ita",
-        "value": "Footer ITA **markdown** format"
-      }
-    ],
-    "isShared": true,
-    "isDedicated": true,
-    "serverName": "folia.unifr.ch",
-    "platformName": "# FOLIA\n#### Fribourg Open Library and Archive",
-    "files": [
-      {
-        "key": "logo.png",
-        "path": "./unifr/logo.png"
-      }
-    ]
-  },
-  {
-    "code": "shared",
-    "name": "Organisation shared",
-    "isShared": true
   }
 ]

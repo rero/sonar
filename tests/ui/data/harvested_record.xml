@@ -1,0 +1,128 @@
+<record xmlns="http://www.openarchives.org/OAI/2.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <header>
+        <identifier>oai:doc.rero.ch:20120503160026-MV</identifier>
+        <datestamp>2013-06-17T11:29:40Z</datestamp>
+        <setSpec>postprint</setSpec>
+        <setSpec>cdu1</setSpec>
+        <setSpec>rero_explore</setSpec>
+        <setSpec>article</setSpec>
+        <setSpec>unifr</setSpec>
+    </header>
+    <metadata>
+        <marc:record xmlns:marc="http://www.loc.gov/MARC21/slim"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd"
+            type="Bibliographic">
+            <marc:leader>00000coc 2200000uu 4500</marc:leader>
+            <marc:controlfield tag="001">29085</marc:controlfield>
+            <marc:controlfield tag="005">20150420164351.0</marc:controlfield>
+            <marc:datafield tag="024" ind1="8" ind2=" ">
+                <marc:subfield code="a">oai:doc.rero.ch:20120503160026-MV</marc:subfield>
+                <marc:subfield code="p">article</marc:subfield>
+                <marc:subfield code="p">rero_explore</marc:subfield>
+                <marc:subfield code="p">cdu1</marc:subfield>
+                <marc:subfield code="p">postprint</marc:subfield>
+                <marc:subfield code="p">unifr</marc:subfield>
+            </marc:datafield>
+            <marc:datafield tag="041" ind1=" " ind2=" ">
+                <marc:subfield code="a">eng</marc:subfield>
+            </marc:datafield>
+            <marc:datafield tag="080" ind1=" " ind2=" ">
+                <marc:subfield code="a">1</marc:subfield>
+            </marc:datafield>
+            <marc:datafield tag="100" ind1=" " ind2=" ">
+                <marc:subfield code="a">Betschart, Christof</marc:subfield>
+            </marc:datafield>
+            <marc:datafield tag="245" ind1=" " ind2=" ">
+                <marc:subfield code="a">Was ist Lebenskraft?</marc:subfield>
+                <marc:subfield code="9">eng</marc:subfield>
+                <marc:subfield code="b">Edith Steins anthropologischer Beitrag in 'Psychische
+                    Kausalität' (Teil 2)</marc:subfield>
+            </marc:datafield>
+            <marc:datafield tag="246" ind1=" " ind2=" ">
+                <marc:subfield code="a">What is Lifeforce? Edith Stein's Anthropological
+                    Contribution in 'Psychic Causality' (Part 2)</marc:subfield>
+                <marc:subfield code="9">eng</marc:subfield>
+            </marc:datafield>
+            <marc:datafield tag="520" ind1=" " ind2=" ">
+                <marc:subfield code="a">Dieser Folge-Artikel im Edith Stein Jahrbuch 2010 fragt nach
+                    der Lebenskraft in Edith Steins Abhandlung „Psychische Kausalität“ (1918
+                    geschrieben, 1922 publiziert). Es geht besonders um den Wandel der Lebenskraft
+                    im Hinblick auf ihre Umsetzung im sinnlichen und geistigen Bereich, sowie ihre
+                    Erneuerung durch die Welt der Werte, durch die intersubjektiven Beziehungen und
+                    durch Gott. Ein eigener Abschnitt ist der Frage nach ganz aufgebrauchter
+                    Lebenskraft gewidmet. Im Ausblick wird die Lebenskraft im Sinne eines Potenzials
+                    zu sinnlicher und geistiger Betätigung interpretiert und eine Auseinandersetzung
+                    mit der Tiefenpsychologie Sigmund Freuds angestrebt.</marc:subfield>
+                <marc:subfield code="9">ger</marc:subfield>
+            </marc:datafield>
+            <marc:datafield tag="695" ind1=" " ind2=" ">
+                <marc:subfield code="a">force vitale ; phénoménologie ; conscience phénoménologique
+                    ; réalité psychique ; idéalisme-réalisme ; dépression ; neurologie ; psychologie
+                    des profondeurs ; vécu religieux ; monde des valeurs ; Edith Stein ; Edmund
+                    Husserl</marc:subfield>
+                <marc:subfield code="9">fre</marc:subfield>
+            </marc:datafield>
+            <marc:datafield tag="695" ind1=" " ind2=" ">
+                <marc:subfield code="a">Lebenskraft ; Betätigungspotenzial ; Phänomenologie ;
+                    Bewusstsein ; Psyche ; Idealismus-Realismus ; Depression ; Neurologie ;
+                    Tiefenpsychologie ; religiöses Erlebnis ; Wertewelt ; Burnout ; Edith Stein ;
+                    Edmund Husserl</marc:subfield>
+                <marc:subfield code="9">ger</marc:subfield>
+            </marc:datafield>
+            <marc:datafield tag="695" ind1=" " ind2=" ">
+                <marc:subfield code="a">vital force ; life force ; phenomenology ; phenomenological
+                    conscience ; psyche ; idealism-realism ; depression ; neurology ; psychology of
+                    Sigmund Freud ; world of values ; burnout ; Edith Stein ; Edmund Husserl</marc:subfield>
+                <marc:subfield code="9">eng</marc:subfield>
+            </marc:datafield>
+            <marc:datafield tag="695" ind1=" " ind2=" ">
+                <marc:subfield code="a">forza vitale ; fenomenologia ; coscienza fenomenologica ;
+                    psiche ; idealismo-realismo ; depressione ; neurologia ; psicologia freudiana ;
+                    vissuto religioso ; mondo dei valori ; burnout ; Edith Stein ; Edmund Husserl</marc:subfield>
+                <marc:subfield code="9">ita</marc:subfield>
+            </marc:datafield>
+            <marc:datafield tag="773" ind1=" " ind2=" ">
+                <marc:subfield code="t">Edith Stein Jahrbuch</marc:subfield>
+                <marc:subfield code="g">2010/16//33-64</marc:subfield>
+                <marc:subfield code="d">Echter</marc:subfield>
+            </marc:datafield>
+            <marc:datafield tag="856" ind1="4" ind2=" ">
+                <marc:subfield code="f">Betschart_Jahrbuch_2010.pdf</marc:subfield>
+                <marc:subfield code="q">pdt/download</marc:subfield>
+                <marc:subfield code="s">126302</marc:subfield>
+                <marc:subfield code="u">
+                    http://doc.rero.ch/lm.php?url=1000,43,2,20120503160026-MV/Betschart_Jahrbuch_2010.pdf</marc:subfield>
+                <marc:subfield code="y">2012-05-03 16:03:50</marc:subfield>
+                <marc:subfield code="z">Texte intégral</marc:subfield>
+            </marc:datafield>
+            <marc:datafield tag="856" ind1="4" ind2=" ">
+                <marc:subfield code="f">Betschart_Jahrbuch_2010.pdf</marc:subfield>
+                <marc:subfield code="q">application/pdf</marc:subfield>
+                <marc:subfield code="s">126302</marc:subfield>
+                <marc:subfield code="u">
+                    http://doc.rero.ch/record/29085/files/Betschart_Jahrbuch_2010.pdf</marc:subfield>
+                <marc:subfield code="y">order:1</marc:subfield>
+                <marc:subfield code="z">Texte intégral</marc:subfield>
+            </marc:datafield>
+            <marc:datafield tag="918" ind1=" " ind2=" ">
+                <marc:subfield code="a">Faculté de théologie</marc:subfield>
+                <marc:subfield code="b">Décanat, Av. de l'Europe 20, 1700 Fribourg</marc:subfield>
+            </marc:datafield>
+            <marc:datafield tag="919" ind1=" " ind2=" ">
+                <marc:subfield code="a">Université de Fribourg</marc:subfield>
+                <marc:subfield code="b">Fribourg</marc:subfield>
+                <marc:subfield code="d">doc.support@rero.ch</marc:subfield>
+            </marc:datafield>
+            <marc:datafield tag="980" ind1=" " ind2=" ">
+                <marc:subfield code="a">POSTPRINT</marc:subfield>
+                <marc:subfield code="b">UNIFR</marc:subfield>
+                <marc:subfield code="f">ART_JOURNAL</marc:subfield>
+            </marc:datafield>
+            <marc:datafield tag="990" ind1=" " ind2=" ">
+                <marc:subfield code="a">20120503160026-MV</marc:subfield>
+            </marc:datafield>
+        </marc:record>
+    </metadata>
+</record>

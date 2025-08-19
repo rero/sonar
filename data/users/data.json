@@ -75,24 +75,69 @@
     }
   },
   {
-    "first_name": "Michèle",
-    "last_name": "Guernon",
-    "email": "rero.sonar+hepvssubmitter@gmail.com",
+    "first_name": "Aya",
+    "last_name": "Cochran",
+    "email": "rero.sonar+admin-dedicated@gmail.com",
+    "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
+    "role": "admin",
+    "birth_date": "1984-04-20",
+    "street": "Rasenstrasse 2",
+    "postal_code": "4577",
+    "city": "Hessigkofen",
+    "phone": "+41323666556",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/fictivededicated"
+    }
+  },
+  {
+    "first_name": "Tammy",
+    "last_name": "Davey",
+    "email": "rero.sonar+user-dedicated@gmail.com",
+    "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
+    "role": "user",
+    "birth_date": "1971-12-01",
+    "street": "Brunnacherstrasse 112",
+    "postal_code": "5330",
+    "city": "Zurzach",
+    "phone": "+41625037543",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/fictivededicated"
+    }
+  },
+  {
+    "first_name": "Nick",
+    "last_name": "Whiteley",
+    "email": "rero.sonar+moderator-dedicated-sub1@gmail.com",
+    "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
+    "role": "moderator",
+    "birth_date": "1964-10-10",
+    "street": "Lichtmattstrasse 123",
+    "postal_code": "5736",
+    "city": "Burg",
+    "phone": "+41627676171",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/fictivededicated"
+    }
+  },
+  {
+    "first_name": "James",
+    "last_name": "Keller",
+    "email": "rero.sonar+submitter-dedicated-sub1@gmail.com",
     "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
     "role": "submitter",
-    "birth_date": "1968-04-06",
-    "street": "Glennerstrasse 96",
-    "postal_code": "1202",
-    "city": "Genève",
-    "phone": "+41225022590",
+    "birth_date": "1983-09-14",
+    "street": "Kirchstrasse 57",
+    "postal_code": "1660",
+    "city": "La Lécherette",
+    "phone": "+41269639084",
     "organisation": {
-      "$ref": "https://sonar.ch/api/organisations/hepvs"
+      "$ref": "https://sonar.ch/api/organisations/fictivededicated"
     }
   },
   {
     "first_name": "Gabriel",
     "last_name": "Fortin",
-    "email": "rero.sonar+hepvsmoderator@gmail.com",
+    "email": "rero.sonar+moderator-dedicated-sub2@gmail.com",
     "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
     "role": "moderator",
     "birth_date": "1972-10-28",
@@ -101,7 +146,22 @@
     "city": "Bern",
     "phone": "+41914105597",
     "organisation": {
-      "$ref": "https://sonar.ch/api/organisations/hepvs"
+      "$ref": "https://sonar.ch/api/organisations/fictivededicated"
+    }
+  },
+  {
+    "first_name": "Michèle",
+    "last_name": "Guernon",
+    "email": "rero.sonar+submitter-dedicated-sub2@gmail.com",
+    "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
+    "role": "submitter",
+    "birth_date": "1968-04-06",
+    "street": "Glennerstrasse 96",
+    "postal_code": "1202",
+    "city": "Genève",
+    "phone": "+41225022590",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/fictivededicated"
     }
   },
   {
@@ -116,7 +176,7 @@
     "city": "Zurzach",
     "phone": "+41625037543",
     "organisation": {
-      "$ref": "https://sonar.ch/api/organisations/shared"
+      "$ref": "https://sonar.ch/api/organisations/fictiveshared"
     }
   },
   {
@@ -131,7 +191,7 @@
     "city": "Burg",
     "phone": "+41627676171",
     "organisation": {
-      "$ref": "https://sonar.ch/api/organisations/shared"
+      "$ref": "https://sonar.ch/api/organisations/fictiveshared"
     }
   },
   {
@@ -146,7 +206,7 @@
     "city": "La Lécherette",
     "phone": "+41269639084",
     "organisation": {
-      "$ref": "https://sonar.ch/api/organisations/shared"
+      "$ref": "https://sonar.ch/api/organisations/fictiveshared"
     }
   },
   {
@@ -161,67 +221,7 @@
     "city": "Hessigkofen",
     "phone": "+41323666556",
     "organisation": {
-      "$ref": "https://sonar.ch/api/organisations/shared"
-    }
-  },
-  {
-    "first_name": "Tammy",
-    "last_name": "Davey",
-    "email": "rero.sonar+admin-unifr@gmail.com",
-    "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
-    "role": "admin",
-    "birth_date": "1971-12-01",
-    "street": "Brunnacherstrasse 112",
-    "postal_code": "5330",
-    "city": "Zurzach",
-    "phone": "+41625037543",
-    "organisation": {
-      "$ref": "https://sonar.ch/api/organisations/unifr"
-    }
-  },
-  {
-    "first_name": "Nick",
-    "last_name": "Whiteley",
-    "email": "rero.sonar+moderator-unifr@gmail.com",
-    "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
-    "role": "moderator",
-    "birth_date": "1964-10-10",
-    "street": "Lichtmattstrasse 123",
-    "postal_code": "5736",
-    "city": "Burg",
-    "phone": "+41627676171",
-    "organisation": {
-      "$ref": "https://sonar.ch/api/organisations/unifr"
-    }
-  },
-  {
-    "first_name": "James",
-    "last_name": "Keller",
-    "email": "rero.sonar+submitter-unifr@gmail.com",
-    "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
-    "role": "submitter",
-    "birth_date": "1983-09-14",
-    "street": "Kirchstrasse 57",
-    "postal_code": "1660",
-    "city": "La Lécherette",
-    "phone": "+41269639084",
-    "organisation": {
-      "$ref": "https://sonar.ch/api/organisations/unifr"
-    }
-  },
-  {
-    "first_name": "Aya",
-    "last_name": "Cochran",
-    "email": "rero.sonar+user-unifr@gmail.com",
-    "password": "$pbkdf2-sha512$25000$29ubk1KqFUJorTXmHAPAmA$ooj0RJyHyinmZw/.pNMXne8p70X/BDoX5Ypww24OIguSWEo3y.KT6hiwxwHS5OynZNkgnLvfR3m1mNVfsHgfgA",
-    "role": "user",
-    "birth_date": "1984-04-20",
-    "street": "Rasenstrasse 2",
-    "postal_code": "4577",
-    "city": "Hessigkofen",
-    "phone": "+41323666556",
-    "organisation": {
-      "$ref": "https://sonar.ch/api/organisations/unifr"
+      "$ref": "https://sonar.ch/api/organisations/fictiveshared"
     }
   }
 ]
