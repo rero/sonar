@@ -152,9 +152,6 @@ invenio_i18n = "invenio_i18n:InvenioI18N"
 [project.entry-points."invenio_base.converters"]
 org_code = "sonar.route_converters:OrganisationCodeConverter"
 
-[project.entry-points."invenio_base.api_converters"]
-org_code = "sonar.route_converters:OrganisationCodeConverter"
-
 [project.entry-points."invenio_base.blueprints"]
 dedicated = "sonar.dedicated.views:blueprint"
 help = "sonar.help.views:blueprint"

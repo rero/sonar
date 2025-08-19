@@ -18,16 +18,22 @@
 import os
 
 import jinja2
-import markdown
-from flask import current_app, render_template, request, url_for
+from flask import current_app, render_template, request
 from flask_bootstrap import Bootstrap4
 from flask_security import user_registered
 from flask_wiki import Wiki
-from flask_wiki.markdown_ext import BootstrapExtension
 from invenio_files_rest.signals import file_deleted, file_downloaded, file_uploaded
 from invenio_indexer.signals import before_record_index
 from werkzeug.datastructures import MIMEAccept
 
+from sonar.filters import (
+    favicon,
+    get_admin_record_detail_url,
+    language_value,
+    markdown_filter,
+    nl2br,
+    organisation_platform_name,
+)
 from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.organisations.utils import platform_name
 from sonar.modules.permissions import (
@@ -39,7 +45,6 @@ from sonar.modules.receivers import file_deleted_listener, file_uploaded_listene
 from sonar.modules.users.api import current_user_record
 from sonar.modules.users.signals import add_full_name, user_registered_handler
 from sonar.modules.utils import (
-    get_language_value,
     get_specific_theme,
     get_switch_aai_providers,
     get_view_code,
@@ -73,8 +78,8 @@ def utility_processor():
     }
 
 
-class Sonar:
-    """SONAR extension."""
+class SonarBase:
+    """SONAR BASE extension."""
 
     # Dictionary used to store resources managed by invenio-records-resources
     resources = {}
@@ -95,19 +100,8 @@ class Sonar:
         """Flask application initialization."""
         self.init_config(app)
         self.create_resources()
-        self.init_views(app)
 
         app.extensions["sonar"] = self
-
-        if app.config["SONAR_APP_ENABLE_CORS"]:
-            from flask_cors import CORS
-
-            CORS(app)
-
-        Bootstrap4(app)
-        Wiki(app)
-
-        app.context_processor(utility_processor)
 
         # Connect to signal sent when a user is created in Flask-Security.
         user_registered.connect(user_registered_handler, weak=False)
@@ -237,9 +231,8 @@ class Sonar:
         @app.template_filter()
         def get_organisation_by_ref(ref):
             """Get Organisation by $ref."""
-            pid = ref.split('/')[-1]
+            pid = ref.split("/")[-1]
             return OrganisationRecord.get_record_by_pid(pid)
-
 
     def create_resources(self):
         """Create resources."""
@@ -266,7 +259,68 @@ class Sonar:
         return endpoints
 
 
-class SonarAPI(Sonar):
+class Sonar(SonarBase):
+    """SONAR extension."""
+
+    # Dictionary used to store resources managed by invenio-records-resources
+    resources = {}
+
+    def init_app(self, app):
+        """Flask application initialization."""
+        super().init_app(app)
+        self.init_views(app)
+
+        if app.config["SONAR_APP_ENABLE_CORS"]:
+            from flask_cors import CORS
+
+            CORS(app)
+
+        Bootstrap4(app)
+        Wiki(app)
+
+        app.context_processor(utility_processor)
+
+        # add template filters
+        app.add_template_filter(nl2br)
+        app.add_template_filter(language_value)
+        app.add_template_filter(get_admin_record_detail_url)
+        app.add_template_filter(favicon)
+        app.add_template_filter(organisation_platform_name)
+        app.add_template_filter(markdown_filter)
+
+    def init_config(self, app):
+        """Initialize configuration."""
+        for k in dir(config_sonar):
+            if k.startswith("SONAR_APP_"):
+                app.config.setdefault(k, getattr(config_sonar, k))
+
+        # Set default if not exists.
+        if not app.config.get("SONAR_APP_SITEMAP_FOLDER_PATH"):
+            app.config.setdefault(
+                "SONAR_APP_SITEMAP_FOLDER_PATH",
+                os.path.join(app.instance_path, "sitemap"),
+            )
+
+        # add keep alive support for angular application
+        # NOTE: this will not work for werkzeug> 2.1.2
+        # https://werkzeug.palletsprojects.com/en/2.2.x/changes/#version-2-1-2
+        if app.config.get("DEBUG"):  # pragma: no cover
+            # debug code do not need to be cover by the tests
+            from werkzeug.serving import WSGIRequestHandler
+
+            WSGIRequestHandler.protocol_version = "HTTP/1.1"
+
+    def init_views(self, app):
+        """Initialize the main flask views."""
+
+        @app.route("/", defaults={"view": app.config.get("SONAR_APP_DEFAULT_ORGANISATION")})
+        @app.route("/<org_code:view>")
+        def index(view):
+            """Homepage."""
+            return render_template("sonar/frontpage.html", view=view)
+
+
+class SonarAPI(SonarBase):
     """SONAR API extension."""
 
     def __init__(self, app=None):
