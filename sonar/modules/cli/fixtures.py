@@ -18,6 +18,7 @@
 import click
 
 from ..deposits.cli import deposits
+from ..documents.cli.documents import documents_fixtures
 from ..organisations.cli.organisations import organisations
 from ..users.cli import users
 
@@ -30,3 +31,4 @@ def fixtures():
 fixtures.add_command(users)
 fixtures.add_command(organisations)
 fixtures.add_command(deposits)
+fixtures.add_command(documents_fixtures)
