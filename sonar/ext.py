@@ -1,5 +1,5 @@
 # Swiss Open Access Repository
-# Copyright (C) 2021 RERO
+# Copyright (C) 2025 RERO
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -18,17 +18,22 @@
 import os
 
 import jinja2
-import markdown
-from flask import current_app, render_template, request, url_for
+from flask import current_app, render_template, request
 from flask_bootstrap import Bootstrap4
 from flask_security import user_registered
 from flask_wiki import Wiki
-from flask_wiki.markdown_ext import BootstrapExtension
 from invenio_files_rest.signals import file_deleted, file_downloaded, file_uploaded
 from invenio_indexer.signals import before_record_index
 from werkzeug.datastructures import MIMEAccept
 
-from sonar.modules.organisations.utils import platform_name
+from sonar.filters import (
+    favicon,
+    get_admin_record_detail_url,
+    language_value,
+    markdown_filter,
+    nl2br,
+    organisation_platform_name,
+)
 from sonar.modules.permissions import (
     has_admin_access,
     has_submitter_access,
@@ -38,7 +43,6 @@ from sonar.modules.receivers import file_deleted_listener, file_uploaded_listene
 from sonar.modules.users.api import current_user_record
 from sonar.modules.users.signals import add_full_name, user_registered_handler
 from sonar.modules.utils import (
-    get_language_value,
     get_specific_theme,
     get_switch_aai_providers,
     get_view_code,
@@ -72,8 +76,8 @@ def utility_processor():
     }
 
 
-class Sonar:
-    """SONAR extension."""
+class SonarBase:
+    """SONAR BASE extension."""
 
     # Dictionary used to store resources managed by invenio-records-resources
     resources = {}
@@ -94,19 +98,8 @@ class Sonar:
         """Flask application initialization."""
         self.init_config(app)
         self.create_resources()
-        self.init_views(app)
 
         app.extensions["sonar"] = self
-
-        if app.config["SONAR_APP_ENABLE_CORS"]:
-            from flask_cors import CORS
-
-            CORS(app)
-
-        Bootstrap4(app)
-        Wiki(app)
-
-        app.context_processor(utility_processor)
 
         # Connect to signal sent when a user is created in Flask-Security.
         user_registered.connect(user_registered_handler, weak=False)
@@ -141,98 +134,6 @@ class Sonar:
 
             WSGIRequestHandler.protocol_version = "HTTP/1.1"
 
-    def init_views(self, app):
-        """Initialize the main flask views."""
-
-        @app.route("/", defaults={"view": app.config.get("SONAR_APP_DEFAULT_ORGANISATION")})
-        @app.route("/<org_code:view>")
-        def index(view):
-            """Homepage."""
-            return render_template("sonar/frontpage.html", view=view)
-
-        @app.template_filter()
-        def nl2br(string):
-            r"""Replace \n to <br>."""
-            return string.replace("\n", "<br>")
-
-        @app.template_filter()
-        def language_value(values, locale=None, value_field="value", language_field="language"):
-            """Get the value of a field corresponding to the current language.
-
-            :params values: List of values with the language.
-            :params locale: Two digit locale to find.
-            :params value_field: Name of the property containing the value.
-            :params language_field: Name of the property containing the language.
-            :returns: The value corresponding to the current language.
-            """
-            return get_language_value(values, locale, value_field, language_field)
-
-        @app.template_filter()
-        def get_admin_record_detail_url(record):
-            r"""Return the frontend application URL for a record detail.
-
-            :param record: Record object.
-            :returns: Absolute URL to recrod detail.
-            :rtype: str
-            """
-            url = [
-                app.config.get("SONAR_APP_ANGULAR_URL")[:-1],
-                "records",
-                record.index_name,
-                "detail",
-                record.pid.pid_value,
-            ]
-            return "/".join(url)
-
-        @app.template_filter()
-        def markdown_filter(content):
-            """Markdown filter.
-
-            :param str content: Content to convert
-            :returns: HTML corresponding to markdown
-            :rtype: str
-            """
-            return markdown.markdown(
-                content,
-                extensions=[
-                    BootstrapExtension(),
-                    "codehilite",
-                    "fenced_code",
-                    "toc",
-                    "meta",
-                    "tables",
-                ],
-            )
-
-        @app.template_filter()
-        def organisation_platform_name(org):
-            """Get organisation platform name."""
-            name = platform_name(org)
-            if not name:
-                return app.config.get("THEME_SITENAME")
-            return name
-
-        @app.template_filter()
-        def favicon(org):
-            """Fav icon for current organisation."""
-            if org and "_files" in org:
-                favicon = list(
-                    filter(
-                        lambda d: d["mimetype"] in ["image/x-icon", "image/vnd.microsoft.icon"],
-                        org["_files"],
-                    )
-                )
-                if favicon:
-                    return {
-                        "mimetype": favicon[0]["mimetype"],
-                        "url": url_for(
-                            "invenio_records_ui.org_files",
-                            pid_value=org.get("pid"),
-                            filename=favicon[0]["key"],
-                        ),
-                    }
-            return None
-
     def create_resources(self):
         """Create resources."""
         # Initialize the project resource with the corresponding service.
@@ -258,7 +159,68 @@ class Sonar:
         return endpoints
 
 
-class SonarAPI(Sonar):
+class Sonar(SonarBase):
+    """SONAR extension."""
+
+    # Dictionary used to store resources managed by invenio-records-resources
+    resources = {}
+
+    def init_app(self, app):
+        """Flask application initialization."""
+        super().init_app(app)
+        self.init_views(app)
+
+        if app.config["SONAR_APP_ENABLE_CORS"]:
+            from flask_cors import CORS
+
+            CORS(app)
+
+        Bootstrap4(app)
+        Wiki(app)
+
+        app.context_processor(utility_processor)
+
+        # add template filters
+        app.add_template_filter(nl2br)
+        app.add_template_filter(language_value)
+        app.add_template_filter(get_admin_record_detail_url)
+        app.add_template_filter(favicon)
+        app.add_template_filter(organisation_platform_name)
+        app.add_template_filter(markdown_filter)
+
+    def init_config(self, app):
+        """Initialize configuration."""
+        for k in dir(config_sonar):
+            if k.startswith("SONAR_APP_"):
+                app.config.setdefault(k, getattr(config_sonar, k))
+
+        # Set default if not exists.
+        if not app.config.get("SONAR_APP_SITEMAP_FOLDER_PATH"):
+            app.config.setdefault(
+                "SONAR_APP_SITEMAP_FOLDER_PATH",
+                os.path.join(app.instance_path, "sitemap"),
+            )
+
+        # add keep alive support for angular application
+        # NOTE: this will not work for werkzeug> 2.1.2
+        # https://werkzeug.palletsprojects.com/en/2.2.x/changes/#version-2-1-2
+        if app.config.get("DEBUG"):  # pragma: no cover
+            # debug code do not need to be cover by the tests
+            from werkzeug.serving import WSGIRequestHandler
+
+            WSGIRequestHandler.protocol_version = "HTTP/1.1"
+
+    def init_views(self, app):
+        """Initialize the main flask views."""
+
+        @app.route("/", defaults={"view": app.config.get("SONAR_APP_DEFAULT_ORGANISATION")})
+        @app.route("/<org_code:view>")
+        def index(view):
+            """Homepage."""
+            return render_template("sonar/frontpage.html", view=view)
+
+
+class SonarAPI(SonarBase):
     """SONAR API extension."""
 
     def __init__(self, app=None):
