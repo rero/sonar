@@ -15,9 +15,11 @@
 
 """Record permissions."""
 
+from sonar.modules.deposits.api import DepositSearch
 from sonar.modules.documents.api import DocumentSearch
 from sonar.modules.organisations.api import current_organisation
 from sonar.modules.permissions import RecordPermission as BaseRecordPermission
+from sonar.modules.users.api import UserSearch
 
 from .api import Record
 
@@ -102,7 +104,14 @@ class RecordPermission(BaseRecordPermission):
         if results.count():
             return False
 
-        if not cls.read(user, record):
+        # Cannot remove subdivision associated to a user
+        results = UserSearch().filter("term", subdivision__pid=record["pid"]).source(includes=["pid"])
+        if results.count():
             return False
 
-        return cls.create(user, record)
+        # Cannot remove subdivision associated to a deposit
+        results = DepositSearch().filter("term", diffusion__subdivisions__pid=record["pid"]).source(includes=["pid"])
+        if results.count():
+            return False
+
+        return cls.create(user, record) if cls.read(user, record) else False
