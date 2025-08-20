@@ -15,6 +15,9 @@
 
 """Test API for user records."""
 
+from invenio_search import current_search
+
+from sonar.modules.deposits.api import DepositSearch
 from sonar.modules.users.api import UserRecord, UserSearch
 
 
@@ -208,3 +211,20 @@ def test_get_all_reachable_roles(app, db, user):
     assert "moderator" in roles
     assert "submitter" in roles
     assert "admin" in roles
+
+
+def test_delete_user_deposit(app, db, deposit, user):
+    """Test deposit deletion by user deletion."""
+    deposit.update(deposit)
+    deposit.dbcommit()
+    deposit.reindex()
+    db.session.commit()
+    current_search.flush_and_refresh("deposits")
+
+    query = DepositSearch().filter("term", user__pid=user["pid"])
+    assert query.count() == 1
+    user.delete(dbcommit=True, delindex=False)
+    indexer = user.get_indexer_class()
+    indexer().delete(user)
+    current_search.flush_and_refresh("deposits")
+    assert query.count() == 0
