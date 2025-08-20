@@ -247,6 +247,7 @@ subdivisions = "sonar.modules.subdivisions.jsonresolvers"
 documents = "sonar.modules.documents.tasks"
 stats = "sonar.modules.stats.tasks"
 sitemap = "sonar.modules.sitemap.tasks"
+users = "sonar.modules.users.tasks"
 
 [project.entry-points."invenio_admin.views"]
 stats = "sonar.modules.stats.admin:stats_adminview"
