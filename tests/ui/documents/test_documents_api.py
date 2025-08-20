@@ -18,8 +18,10 @@
 from copy import deepcopy
 
 from flask import url_for
+from invenio_search import current_search
 from invenio_stats.tasks import aggregate_events, process_events
 
+from sonar.modules.deposits.api import DepositSearch
 from sonar.modules.documents.api import DocumentRecord
 
 
@@ -204,3 +206,20 @@ def test_affiliations(db, document):
     data["contribution"][0].pop("affiliation", None)
     document.update(data)
     assert "controlledAffiliation" not in document["contribution"][0]
+
+
+def test_delete_document_deposit(app, db, deposit, submitter):
+    """Test deposit deletion by document deletion."""
+    document = deposit.create_document()
+    deposit.update(deposit)
+    deposit.dbcommit()
+    deposit.reindex()
+    db.session.commit()
+    current_search.flush_and_refresh("deposits")
+
+    doc_pid = document["pid"]
+    query = DepositSearch().filter("term", document__pid=doc_pid)
+    assert query.count() == 1
+    document.delete(dbcommit=True, delindex=True)
+    current_search.flush_and_refresh("deposits")
+    assert query.count() == 0
