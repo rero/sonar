@@ -1,5 +1,5 @@
 # Swiss Open Access Repository
-# Copyright (C) 2021 RERO
+# Copyright (C) 2025 RERO
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -169,7 +169,7 @@ class UserRecord(SonarRecord):
         self.sync_roles()
         return self
 
-    def delete(self, force=False, dbcommit=True, delindex=False):
+    def delete(self, force=False, dbcommit=False, delindex=False):
         """Delete record and persistent identifier.
 
         :param force: True to hard delete record.
@@ -178,6 +178,11 @@ class UserRecord(SonarRecord):
         """
         # Remove roles from user account.
         self.remove_roles()
+
+        # Remove deposits.
+        from .tasks import delete_deposits
+
+        delete_deposits.delay(user_pid=self["pid"], force=force, dbcommit=dbcommit, delindex=delindex)
 
         return super().delete(force=force, dbcommit=dbcommit, delindex=delindex)
 
@@ -349,3 +354,14 @@ class UserIndexer(SonarIndexer):
     """Indexing documents in Elasticsearch."""
 
     record_cls = UserRecord
+
+    def delete(self, record):
+        """Delete a record.
+
+        :param record: Record instance.
+        """
+        from ..deposits.api import DepositSearch
+
+        DepositSearch().filter("term", user__pid=record["pid"]).delete()
+
+        return super().delete(record)
