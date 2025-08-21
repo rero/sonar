@@ -1,5 +1,5 @@
 # Swiss Open Access Repository
-# Copyright (C) 2021 RERO
+# Copyright (C) 2021-2025 RERO
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -28,6 +28,7 @@ from invenio_files_rest.signals import file_deleted, file_downloaded, file_uploa
 from invenio_indexer.signals import before_record_index
 from werkzeug.datastructures import MIMEAccept
 
+from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.organisations.utils import platform_name
 from sonar.modules.permissions import (
     has_admin_access,
@@ -232,6 +233,13 @@ class Sonar:
                         ),
                     }
             return None
+
+        @app.template_filter()
+        def get_organisation_by_ref(ref):
+            """Get Organisation by $ref."""
+            pid = ref.split('/')[-1]
+            return OrganisationRecord.get_record_by_pid(pid)
+
 
     def create_resources(self):
         """Create resources."""
