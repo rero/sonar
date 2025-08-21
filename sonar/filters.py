@@ -21,6 +21,7 @@ import markdown
 from flask import current_app, url_for
 from flask_wiki.markdown_ext import BootstrapExtension
 
+from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.organisations.utils import platform_name
 from sonar.modules.utils import get_language_value
 
@@ -108,3 +109,14 @@ def favicon(org):
             ),
         }
     return None
+
+
+def get_organisation_by_pid(pid):
+    """Get Organisation by PID."""
+    return OrganisationRecord.get_record_by_pid(pid)
+
+
+def get_organisation_by_ref(ref):
+    """Get Organisation by $ref."""
+    pid = ref.split("/")[-1]
+    return OrganisationRecord.get_record_by_pid(pid)
