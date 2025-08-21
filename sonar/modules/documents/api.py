@@ -321,6 +321,23 @@ class DocumentRecord(SonarRecord):
         self.guess_controlled_affiliations(data)
         return super().update(data)
 
+    def delete(self, force=False, dbcommit=True, delindex=False):
+        """Delete record and persistent identifier.
+
+        :param force: True to hard delete record.
+        :param dbcommit: True for validating database transaction.
+        :param delindex: True to remove record from index.
+        """
+        # Remove deposits.
+        from ..deposits.api import DepositRecord, DepositSearch
+
+        query = DepositSearch().filter("term", document__pid=self["pid"])
+        for hit in query.source("pid").scan():
+            deposit = DepositRecord.get_record_by_pid(hit.pid)
+            deposit.delete(force=force, dbcommit=dbcommit, delindex=delindex)
+
+        return super().delete(force=force, dbcommit=dbcommit, delindex=delindex)
+
     def is_open_access(self):
         """Check if current document is open access.
 

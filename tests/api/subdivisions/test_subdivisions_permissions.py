@@ -298,6 +298,7 @@ def test_delete(
     moderator,
     submitter,
     user,
+    deposit,
 ):
     """Test delete subdivisions permissions."""
     # Not logged
@@ -348,6 +349,7 @@ def test_delete(
     subdivision = make_subdivision("org")
 
     # Cannot remove subdivision as it is linked to document.
+    document_subdivisions = document.get("subdivisions")
     document["subdivisions"] = [{"$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"}]
     document.commit()
     db.session.commit()
@@ -355,3 +357,41 @@ def test_delete(
 
     res = client.delete(url_for("invenio_records_rest.subd_item", pid_value=subdivision["pid"]))
     assert res.status_code == 403
+    if document_subdivisions:
+        document["subdivisions"] = document_subdivisions
+    else:
+        document.pop("subdivisions")
+    document.commit()
+    db.session.commit()
+    document.reindex()
+
+    # Cannot remove subdivision as it is linked to user.
+    user_subdivision = document.get("subdivision")
+    user["subdivision"] = {"$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"}
+    user.commit()
+    db.session.commit()
+    user.reindex()
+
+    res = client.delete(url_for("invenio_records_rest.subd_item", pid_value=subdivision["pid"]))
+    assert res.status_code == 403
+    if user_subdivision:
+        user["subdivision"] = user_subdivision
+    else:
+        user.pop("subdivision")
+    user.commit()
+    db.session.commit()
+    user.reindex()
+
+    # Cannot remove subdivision as it is linked to deposit.
+    deposit_diffusion_subdivisions = deposit["diffusion"].get("subdivisions")
+    deposit["diffusion"]["subdivisions"] = [{"$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"}]
+    deposit.commit()
+    db.session.commit()
+    deposit.reindex()
+
+    res = client.delete(url_for("invenio_records_rest.subd_item", pid_value=subdivision["pid"]))
+    assert res.status_code == 403
+    if deposit_diffusion_subdivisions:
+        deposit["diffusion"]["subdivisions"] = deposit_diffusion_subdivisions
+    else:
+        deposit["diffusion"].pop("subdivisions")
