@@ -29,6 +29,8 @@ from werkzeug.datastructures import MIMEAccept
 from sonar.filters import (
     favicon,
     get_admin_record_detail_url,
+    get_organisation_by_pid,
+    get_organisation_by_ref,
     language_value,
     markdown_filter,
     nl2br,
@@ -187,6 +189,8 @@ class Sonar(SonarBase):
         app.add_template_filter(favicon)
         app.add_template_filter(organisation_platform_name)
         app.add_template_filter(markdown_filter)
+        app.add_template_filter(get_organisation_by_pid)
+        app.add_template_filter(get_organisation_by_ref)
 
     def init_config(self, app):
         """Initialize configuration."""

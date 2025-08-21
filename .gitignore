@@ -74,7 +74,7 @@ target/
 data/backups/
 
 # Celery
-celerybeat-schedule
+celerybeat-schedule.*
 
 # Wiki files
 wiki/

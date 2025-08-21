@@ -1,6 +1,6 @@
 {# -*- coding: utf-8 -*-
 Swiss Open Access Repository
-Copyright (C) 2021 RERO
+Copyright (C) 2021-2025 RERO
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
@@ -16,6 +16,8 @@ along with this program. If not, see
 <http: //www.gnu.org/licenses />.
 #}
 {% set name = collection.name | language_value %}
+{% set organisation = collection.organisation['$ref'] | get_organisation_by_ref %}
+{% set coll_view_code = organisation.code if organisation.isDedicated else view_code %}
 <div class="row">
   {% set thumbnail = collection | record_image_url('coll') %}
   {% if thumbnail %}
@@ -35,13 +37,13 @@ along with this program. If not, see
     </p>
     <div class="row">
       <div class="col-sm-6 pt-2">
-        <a href="{{ url_for('invenio_records_ui.coll', pid_value=collection.pid, view=view_code) }}">
+        <a href="{{ url_for('invenio_records_ui.coll', pid_value=collection.pid, view=coll_view_code) }}">
           <i class="fa fa-chevron-right mr-1"></i>
-          {{ url_for('invenio_records_ui.coll', pid_value=collection.pid, view=view_code, _external=True) }}
+          {{ url_for('invenio_records_ui.coll', pid_value=collection.pid, view=coll_view_code, _external=True) }}
         </a>
       </div>
       <div class="col">
-        <form action="{{ url_for('documents.search', view=view_code) }}" role="search">
+        <form action="{{ url_for('documents.search', view=coll_view_code) }}" role="search">
           <input type="hidden" name="collection_view" value="{{ collection.pid }}">
           <div class="input-group">
             <input type="text" name="q" value="{{ request.args.get('q', '') }}" class="form-control"

@@ -241,8 +241,10 @@ along with this program. If not, see
         <dd class="col-lg-9">
           <ul class="list-unstyled mb-0">
             {% for collection in record.collections %}
+            {% set organisation = collection.organisation.pid | get_organisation_by_pid %}
+            {% set coll_view_code = organisation.code if organisation.isDedicated else view_code %}
             <li class="p-0">
-              <a href="{{ url_for('documents.search', view=view_code, collection_view=collection.pid) }}">
+              <a href="{{ url_for('documents.search', view=coll_view_code, collection_view=collection.pid) }}">
                 {{ collection.name | language_value }}
               </a>
             </li>
