@@ -21,7 +21,7 @@ from dojson.contrib.marc21.utils import create_record
 from sonar.modules.documents.dojson.rerodoc.model import overdo
 
 
-def test_marc21_to_type_and_organisation(app, bucket_location, without_oaiset_signals):
+def test_marc21_to_type_and_organisation(app, bucket_location):
     """Test type and organisation."""
 
     # Type only
@@ -1519,7 +1519,7 @@ def test_marc21_to_other_edition(app):
     ]
 
 
-def test_marc21_to_specific_collection(app, bucket_location, without_oaiset_signals):
+def test_marc21_to_specific_collection(app, bucket_location):
     """Test extracting collection from file 982."""
     # No code a
     marc21xml = """

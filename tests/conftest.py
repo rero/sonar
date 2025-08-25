@@ -34,6 +34,7 @@ from invenio_access.models import ActionUsers, Role
 from invenio_db import db as db_
 from invenio_files_rest.models import Location
 from invenio_queues.proxies import current_queues
+from invenio_search import current_search
 from sqlalchemy_utils import create_database, database_exists
 
 from sonar.modules.collections.api import Record as CollectionRecord
@@ -216,7 +217,7 @@ def app_config(app_config):
 
 
 @pytest.fixture
-def make_organisation(app, db, bucket_location, without_oaiset_signals):
+def make_organisation(app, db, bucket_location):
     """Factory for creating organisation."""
 
     def _make_organisation(code, is_shared=True):
@@ -237,7 +238,8 @@ def make_organisation(app, db, bucket_location, without_oaiset_signals):
         if not record:
             record = OrganisationRecord.create(data, dbcommit=True)
             db.session.commit()
-        record.reindex()
+            record.reindex()
+            current_search.flush_and_refresh(index="documents-document-v1.0.0-percolators")
 
         return record
 
@@ -915,16 +917,6 @@ def mock_thumbnail_creation(monkeypatch):
         "sonar.modules.utils.Image.make_blob",
         lambda *args: b"Fake thumbnail image content",
     )
-
-
-@pytest.fixture
-def without_oaiset_signals(app):
-    """Temporary disable oaiset signals."""
-    from invenio_oaiserver import current_oaiserver
-
-    current_oaiserver.unregister_signals_oaiset()
-    yield
-    current_oaiserver.register_signals_oaiset()
 
 
 @pytest.fixture()
