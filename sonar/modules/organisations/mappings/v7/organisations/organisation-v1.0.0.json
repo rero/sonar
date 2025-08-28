@@ -127,6 +127,51 @@
         "type": "keyword",
         "index": false
       },
+            "_files": {
+        "type": "object",
+        "properties": {
+          "bucket": {
+            "type": "keyword"
+          },
+          "file_id": {
+            "type": "keyword"
+          },
+          "version_id": {
+            "type": "keyword"
+          },
+          "key": {
+            "type": "keyword"
+          },
+          "mimetype": {
+            "type": "keyword"
+          },
+          "checksum": {
+            "type": "keyword"
+          },
+          "size": {
+            "type": "integer"
+          },
+          "order": {
+            "type": "integer"
+          },
+          "label": {
+            "type": "text"
+          },
+          "type": {
+            "type": "keyword"
+          },
+          "embargo": {
+            "type": "boolean"
+          },
+          "embargoDate": {
+            "type": "date",
+            "format": "yyyy-MM-dd"
+          },
+          "exceptInOrganisation": {
+            "type": "boolean"
+          }
+        }
+      },
       "_created": {
         "type": "date"
       },
