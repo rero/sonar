@@ -507,6 +507,13 @@
             "title": "Size",
             "description": "Size of the file in bytes.",
             "type": "integer"
+          },
+          "order": {
+            "title": "Position",
+            "description": "Position of the file, the first file in the list is the main file.",
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
           }
         },
         "propertiesOrder": [
