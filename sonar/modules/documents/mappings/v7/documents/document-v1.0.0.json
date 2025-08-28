@@ -51,7 +51,7 @@
             "type": "keyword"
           },
           "order": {
-            "type": "short"
+            "type": "integer"
           },
           "external_url": {
             "type": "keyword"
