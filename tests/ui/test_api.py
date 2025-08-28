@@ -19,6 +19,7 @@ from copy import deepcopy
 from unittest import mock
 
 import pytest
+import requests_mock
 from flask import url_for
 from invenio_accounts.testutils import login_user_via_session
 from invenio_app.factory import create_api
@@ -161,17 +162,26 @@ def test_get_record_by_ref_link(document):
     assert record["pid"] == document["pid"]
 
 
-def test_add_file_from_url(document):
+def test_add_file_from_url(document, pdf_file):
     """Test add file to document by giving its URL."""
-    # OK
-    document.add_file_from_url("https://doc.rero.ch/record/328028/files/nor_irc.pdf", "test.pdf")
-    assert len(document.files) == 3
-    assert document.files["test.pdf"]["label"] == "test.pdf"
+    pdf_content = None
+    with open(pdf_file, "rb") as file:
+        pdf_content = file.read()
 
-    # Non existing file URL
-    document.add_file_from_url("https://doc.rero.ch/pdf-url", "test2.pdf")
-    assert len(document.files) == 4
-    assert document.files["test2.pdf"]["label"] == "test2.pdf"
+    # Successful file add
+    with requests_mock.mock() as response:
+        response.get("https://foo.foo/test.pdf", content=pdf_content, status_code=200)
+        document.add_file_from_url("https://foo.foo/test.pdf", "test.pdf")
+        assert len(document.files) == 3
+        assert document.files["test.pdf"]["label"] == "test.pdf"
+
+    # Test for unreachable URL
+    with requests_mock.mock() as response:
+        response.get("https://foo.foo/test.pdf", status_code=403)
+        # Non existing file URL
+        document.add_file_from_url("https://foo.foo/test.pdf", "test2.pdf")
+        assert len(document.files) == 4
+        assert document.files["test2.pdf"]["label"] == "test2.pdf"
 
 
 @mock.patch("sonar.modules.documents.api.extract_text_from_content")
