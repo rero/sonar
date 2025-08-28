@@ -579,7 +579,7 @@ SONAR_APP_ARK_SCHEME = "ark:"
 SONAR_APP_ARK_SHOULDER = "ffk3"
 """ARK Shoulder, can be multiple for a given organisation."""
 
-SONAR_APP_SWISSCOVERY_SEARCH_URL = "https://swisscovery.slsp.ch/view/sru/41SLSP_NETWORK"
+SONAR_APP_SWISSCOVERY_SEARCH_URL = "https://swisscovery.ch/view/sru/41SLSP_NETWORK"
 SONAR_APP_SWISSCOVERY_SEARCH_VERSION = "1.1"
 
 # Link on document identifier
@@ -588,7 +588,7 @@ SONAR_APP_DOCUMENT_IDENTIFIER_LINK = {
     "bf:Doi": {"default": "https://doi.org/_identifier_"},
     "bf:Local": {
         "orcid": "https://orcid.org/_identifier_",
-        "swisscovery": "https://swisscovery.slsp.ch/permalink/41SLSP_NETWORK/1ufb5t2/alma_identifier_",
+        "swisscovery": "https://swisscovery.ch/permalink/41SLSP_NETWORK/1ufb5t2/alma_identifier_",
     },
     "bf:Urn": {"default": "https://nbn-resolving.org/_identifier_"},
 }
