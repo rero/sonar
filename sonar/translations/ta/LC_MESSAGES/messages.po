@@ -6,17 +6,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: SONAR 1.11.0\n"
-"Report-Msgid-Bugs-To: software@rero.ch\n"
+"Report-Msgid-Bugs-To: nicolas.prongue@rero.ch\n"
 "POT-Creation-Date: 2025-04-08 16:35+0200\n"
-"PO-Revision-Date: 2025-02-28 14:02+0000\n"
+"PO-Revision-Date: 2025-07-19 03:02+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/rero_plus/sonar/ta/"
+">\n"
 "Language: ta\n"
-"Language-Team: Tamil "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/ta/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.13-dev\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: sonar/theme/views.py:102
@@ -160,7 +161,7 @@ msgstr "ஆசிரியர் அல்லது ஆசிரியர்"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:618
 msgid "Authors / Editors"
-msgstr "ஆசிரியர்கள் / ஆசிரியர்கள்"
+msgstr "ஆசிரியர்/திருத்துபவர்"
 
 #: sonar/modules/documents/templates/documents/record.html:48
 #: sonar/theme/templates/sonar/projects/detail.html:15
@@ -214,23 +215,23 @@ msgstr "சி.சி மூலம்"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:35
 msgid "CC BY-NC"
-msgstr "சிசி பை-என்.சி."
+msgstr "சிசி பை-என்சி"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:39
 msgid "CC BY-NC-ND"
-msgstr "சிசி பை-என்.சி-என்.டி."
+msgstr "சிசி பை-என்.சி-என்.டி"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:43
 msgid "CC BY-NC-SA"
-msgstr "சிசி பை-என்.சி-எச்.ஏ."
+msgstr "சிசி பை-என்.சி-எச்.ஏ"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:47
 msgid "CC BY-ND"
-msgstr "சிசி பை-என்.டி."
+msgstr "சிசி பை-என்.டி"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:51
 msgid "CC BY-SA"
-msgstr "சி.சி பை-எச்.ஏ."
+msgstr "சி.சி பை-எச்.ஏ"
 
 #: sonar/common/jsonschemas/license-v1.0.0.json:27
 msgid "CC0"
@@ -443,9 +444,9 @@ msgid "Dear"
 msgstr "அன்பே"
 
 #: sonar/templates/security/email/welcome.html:1
-#, fuzzy, python-format
+#, python-format
 msgid "Dear %(email)s"
-msgstr "அன்புள்ள %(மின்னஞ்சல்கள்"
+msgstr "அன்புள்ள %(email)s"
 
 #: sonar/templates/security/email/reset_instructions.html:22
 #: sonar/templates/security/email/reset_notice.html:22
@@ -484,7 +485,7 @@ msgstr "பதிவில் ஒரு கோப்பின் தகவலை
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:42
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:55
 msgid "Description"
-msgstr "விவரம்"
+msgstr "விளக்கம்"
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0_src.json:65
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:38
@@ -1041,7 +1042,7 @@ msgstr "கண்டுபிடி"
 
 #: sonar/theme/webpack_assets/package.json:4
 msgid "Invenio assets"
-msgstr ""
+msgstr "சொத்துக்களைக் கண்டறியவும்"
 
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0_src.json:154
 msgid "Investigator"
@@ -2428,7 +2429,7 @@ msgstr "பி.எஃப்: ஐ.எச்.எம்.என்"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:755
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:1727
 msgid "bf:Isrc"
-msgstr "பி.எஃப்: ஐ.எச்.ஆர்.சி."
+msgstr "பி.எஃப்: ஐ.எச்.ஆர்.சி"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0_src.json:456
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0_src.json:759
@@ -2972,7 +2973,7 @@ msgstr "டெபாசிட்_ச்டேட்டச்_ வால்டே
 
 #: sonar/translations/manual_translations.txt:30
 msgid "description"
-msgstr "விவரம்"
+msgstr "விளக்கம்"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0_src.json:323
 msgid "document_type"
@@ -5363,4 +5364,3 @@ msgstr "ஆண்டு"
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0_src.json:489
 msgid "​Swiss National Science Foundation"
 msgstr "சுவிச் தேசிய அறிவியல் அறக்கட்டளை"
-
