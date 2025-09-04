@@ -379,10 +379,14 @@ RECORDS_REST_ENDPOINTS = {
             "application/json": (
                 "sonar.modules.documents.serializers" ":json_v1_response"
             ),
+            "application/rero+json": (
+                "sonar.modules.documents.serializers" ":json_doc_response"
+            ),
             "text/xml": ("sonar.modules.documents.serializers" ":dc_v1_response"),
         },
         record_serializers_aliases={
             "json": "application/json",
+            "rero": "application/rero+json",
             "dc": "text/xml",
         },
         search_serializers={
