@@ -300,6 +300,22 @@ class DocumentMetadataSchemaV1(DocumentListMetadataSchemaV1):
 
     _files = Nested(FileSchemaV1, many=True)
 
+    @pre_load
+    def restore_ark_identifier(self, data, **kwargs):
+        """Remove ark identifier if any.
+
+        :param item: Dict representing the record.
+        :returns: Modified dict.
+        """
+        item = data.get("identifiedBy", [])
+        data["identifiedBy"] = [identifier for identifier in item if identifier.get("type") != "ark"]
+        from sonar.modules.documents.api import DocumentRecord
+
+        if doc := DocumentRecord.get_record_by_pid(data.get("pid")):
+            item = doc.get("identifiedBy", [])
+            data["identifiedBy"].extend([identifier for identifier in item if identifier.get("type") == "ark"])
+        return data
+
 
 class DocumentSchemaV1(StrictKeysMixin):
     """Document schema."""
@@ -308,6 +324,21 @@ class DocumentSchemaV1(StrictKeysMixin):
     metadata = fields.Nested(DocumentMetadataSchemaV1)
     links = fields.Dict(dump_only=True)
     explanation = fields.Raw(dump_only=True)
+
+
+class DocumentReroSchemaV1(DocumentSchemaV1):
+    """Document schema."""
+
+    @pre_dump
+    def remove_ark_identifier(self, data, **kwargs):
+        """Remove ark identifier if any.
+
+        :param item: Dict representing the record.
+        :returns: Modified dict.
+        """
+        item = data["metadata"].get("identifiedBy", [])
+        data["metadata"]["identifiedBy"] = [identifier for identifier in item if identifier.get("type") != "ark"]
+        return data
 
 
 class DocumentListSchemaV1(StrictKeysMixin):

@@ -16,9 +16,12 @@
 """Test REST endpoint for documents."""
 
 import json
+from copy import deepcopy
 
 from flask import url_for
 from invenio_accounts.testutils import login_user_via_session
+
+from sonar.modules.documents.api import DocumentRecord
 
 
 def test_get(client, document_with_file):
@@ -26,6 +29,7 @@ def test_get(client, document_with_file):
     res = client.get(url_for("invenio_records_rest.doc_list", view="global"))
     assert res.status_code == 200
     assert res.json["hits"]["total"]["value"] == 1
+
     # the search results does not contains permissions
     fdata = res.json["hits"]["hits"][0]["metadata"]["_files"][0]
     assert list(fdata.keys()) == [
@@ -47,27 +51,71 @@ def test_get(client, document_with_file):
         "read": False,
         "update": False,
     }
+    assert "ark" in [r["type"] for r in res.json["metadata"]["identifiedBy"]]
+
+    # ark identifier is removed
+    res = client.get(url_for("invenio_records_rest.doc_item", pid_value=document_with_file["pid"], format="rero"))
+    assert res.status_code == 200
+    assert "ark" not in [r["type"] for r in res.json["metadata"]["identifiedBy"]]
 
 
-def test_put(app, client, document_with_file):
+def test_post_put_delete(app, client, document_json, organisation):
     """Test putting metadata on existing file."""
     # Disable configuration
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
     headers = [("Content-Type", "application/json")]
+    data = deepcopy(document_json)
+    data["organisation"] = [{"$ref": f"https://sonar.ch/api/organisations/{organisation['code']}"}]
 
-    # Retrieve document by doing a get request.
-    response = client.get(
-        url_for("invenio_records_rest.doc_item", pid_value=document_with_file["pid"]),
-        headers=headers,
-    )
+    data["identifiedBy"].append({"type": "ark", "value": "ark:/99999/foo"})
+    response = client.post(url_for("invenio_records_rest.doc_list"), headers=headers, data=json.dumps(data))
+    assert response.status_code == 201
+    data = response.json["metadata"]
+    assert [r for r in data["identifiedBy"] if r["type"] == "ark"]
+    doc = DocumentRecord.get_record_by_pid(data["pid"])
+    assert doc.get_ark() != "ark:/99999/foo"
 
-    # Put data to document
     response = client.put(
-        url_for("invenio_records_rest.doc_item", pid_value=document_with_file["pid"]),
+        url_for("invenio_records_rest.doc_item", pid_value=data["pid"]),
         headers=headers,
-        data=json.dumps(response.json["metadata"]),
+        data=json.dumps(data),
     )
     assert response.status_code == 200
+
+    response = client.delete(url_for("invenio_records_rest.doc_item", pid_value=data["pid"]))
+    assert response.status_code == 204
+    response = client.get(url_for("invenio_records_rest.doc_item", pid_value=data["pid"]))
+
+    assert response.status_code == 410
+
+    # assert document_with_file.get_ark()
+
+    # # Retrieve document by doing a get request.
+    # response = client.get(
+    #     url_for("invenio_records_rest.doc_item", pid_value=document_with_file["pid"]),
+    #     headers=headers,
+    # )
+    # data = response.json["metadata"]
+    # # Put data to document
+    # response = client.put(
+    #     url_for("invenio_records_rest.doc_item", pid_value=document_with_file["pid"]),
+    #     headers=headers,
+    #     data=json.dumps(data),
+    # )
+    # assert response.status_code == 200
+
+    # data["identifiedBy"].append({"type": "ark", "value": "ark:/99999/foo"})
+
+    # # Put data to document
+    # response = client.put(
+    #     url_for("invenio_records_rest.doc_item", pid_value=document_with_file["pid"]),
+    #     headers=headers,
+    #     data=json.dumps(data),
+    # )
+    # from sonar.modules.documents.api import DocumentRecord
+    # doc = DocumentRecord.get_record_by_pid(document_with_file["pid"])
+    # assert doc.get_ark() == document_with_file.get_ark()
+    # assert response.status_code == 200
 
 
 def test_aggregations(app, client, document, superuser, admin):

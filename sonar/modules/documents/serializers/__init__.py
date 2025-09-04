@@ -22,7 +22,7 @@ from invenio_records_rest.serializers.response import (
 
 from sonar.modules.documents.serializers.schemas.dc import DublinCoreSchema
 
-from ..marshmallow import DocumentListSchemaV1, DocumentSchemaV1
+from ..marshmallow import DocumentListSchemaV1, DocumentReroSchemaV1, DocumentSchemaV1
 from .dc import DublinCoreSerializer
 from .google_scholar import SonarGoogleScholarSerializer
 from .json import JSONSerializer
@@ -34,6 +34,7 @@ from .schemas.schemaorg import SchemaOrgV1
 # ===========
 #: JSON serializer definition.
 json_v1 = JSONSerializer(DocumentSchemaV1)
+json_doc = JSONSerializer(DocumentReroSchemaV1)
 json_list_v1 = JSONSerializer(DocumentListSchemaV1)
 #: schema.org serializer
 schemaorg_v1 = SonarSchemaOrgSerializer(SchemaOrgV1, replace_refs=True)
@@ -46,6 +47,7 @@ dc_v1 = DublinCoreSerializer(DublinCoreSchema)
 # ========================
 #: JSON record serializer for individual records.
 json_v1_response = record_responsify(json_v1, "application/json")
+json_doc_response = record_responsify(json_doc, "application/rero+json")
 #: JSON record serializer for search results.
 json_v1_search = search_responsify(json_list_v1, "application/json")
 
