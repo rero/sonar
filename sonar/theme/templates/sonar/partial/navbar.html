@@ -72,7 +72,7 @@ along with this program. If not, see
         </li>
         {% endif %}
         {% else %}
-        {% if current_user_record.is_submitter %}
+        {% if current_user_record.role == 'submitter'  %}
         <li class="nav-item">
           <a class="btn btn-outline-light" href="{{ url_for('sonar.manage', path='deposit/create')}}">
             {{ _('Deposit a publication') }}
