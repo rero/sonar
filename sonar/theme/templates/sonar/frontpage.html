@@ -1,6 +1,6 @@
 {# -*- coding: utf-8 -*-
 Swiss Open Access Repository
-Copyright (C) 2021 RERO
+Copyright (C) 2021-2025 RERO
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
@@ -93,6 +93,9 @@ along with this program. If not, see
     {% if g.organisation.get('description') %}
     {{ g.organisation.description | language_value | markdown_filter | safe }}
     {% endif %}
+    {% if  config.ENV != 'production' %}
+      {% include "sonar/partial/test_info.html" %}
+    {% endif %}
     {% endif %}
   </div>
   {% else %}
@@ -101,21 +104,10 @@ along with this program. If not, see
       {{ _('The Swiss Open Access Repository is an archive of scholarly publications. It collects and promotes open access publications by authors affiliated with Swiss public research institutions.') }}
     </h5>
   </div>
-  <div class="col-lg-4 mt-3 mt-lg-0">
-    <h3 class="mb-4">{{ _('Follow us') }}</h3>
-    <div class="row align-items-center mt-3">
-      <div class="col-2">
-        <i class="fa fa-github fa-2x"></i>
-      </div>
-      <div class="col-10">{{ _('Source code on') }} <a href="https://github.com/rero/sonar" target="_blank"
-          rel="noopener">Github</a>
-      </div>
-    </div>
-    <div class="row align-items-center mt-3">
-      <div class="col-2">
-        <i class="fa fa-twitter fa-2x"></i>
-      </div>
-      <div class="col-10"> <a href="https://twitter.com/sonardotch" target="_blank" rel="noopener">Twitter</a></div>
+  <div class="col-lg-5 mt-3 mt-lg-0">
+    {% if  config.ENV != 'production' %}
+      {% include "sonar/partial/test_info.html" %}
+    {% endif %}
     </div>
   </div>
   {% endif %}

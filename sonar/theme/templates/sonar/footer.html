@@ -1,6 +1,6 @@
 {# -*- coding: utf-8 -*-
   Swiss Open Access Repository
-  Copyright (C) 2021 RERO
+  Copyright (C) 2021-2025 RERO
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU Affero General Public License as published by
@@ -32,16 +32,14 @@
         <div class="d-lg-flex flex-row">
           <div>
             {% set helplink = url_for('help.index', view=organisation.get('pid')) if organisation.get('isDedicated') else url_for('wiki.index') %}
-            <a href="{{ helplink }}">{{ _('Help & Documentation') }}</a>
-          </div>
-          <div class="d-none d-lg-block mx-3">|</div>
-          <div>
-            <a href="https://www.rero.ch/produits/sonar" target="_blank" rel="noopener">{{ _('About SONAR') }}</a>
+            <a href="{{ helplink }}">{{ _('Help') }}</a>
           </div>
           <div class="d-none d-lg-block mx-3">|</div>
           <div>
             <a href="https://www.rero.ch/contact" target="_blank" rel="noopener">{{ _('Contact') }}</a>
           </div>
+          <div class="d-none d-lg-block mx-3">|</div>
+          <div><a href="https://github.com/rero/sonar" target="_blank" rel="noopener"><i class="fa fa-github" aria-hidden="true"></i> {{ _('Source code') }} </a></div>
         </div>
       </div>
     </div>
