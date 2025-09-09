@@ -1,0 +1,29 @@
+{# -*- coding: utf-8 -*-
+  Swiss Open Access Repository
+  Copyright (C) 2025 RERO
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published by
+  the Free Software Foundation, version 3 of the License.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#}
+
+<div class="p-4 bg-primary text-light rounded" >
+  <h3>{{ _('Test logins') }}</h3>
+  <p>{{ _('Choose your role:') }}</p>
+  <ul>
+    <li>rero.sonar+<strong>admin</strong>-dedicated@gmail.com</li>
+    <li>rero.sonar+<strong>moderator</strong>-dedicated-sub1@gmail.com</li>
+    <li>rero.sonar+<strong>submitter</strong>-dedicated-sub1@gmail.com</li>
+  </ul>
+  <p>{{ _('Password:') }} <em>Pw123456</em></p>
+  {{ _('More test logins and documentation are available on the') }}
+  <a href="{{ url_for('wiki.page', url='demo') }}" class="text-secondary">{{ _('help page') }}</a>
+</div>
