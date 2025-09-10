@@ -1,6 +1,6 @@
 [project]
 name = "SONAR"
-version = "1.11.0"
+version = "1.12.0"
 description = "SONAR is an archive of scholarly publications. It intends to collect, promote and preserve the publications of authors affiliated with Swiss public research institutions."
 authors = [{name = "RERO", email = "software@rero.ch"}]
 keywords = ["sonar", "invenio", "document repository"]
@@ -45,6 +45,7 @@ dependencies = [
     "invenio-search-ui>=4.0.0,<5.0.0",
     "invenio-stats",
     "invenio-records-resources",
+    "rero-invenio-base>=0.3.1",
     # Files
     "invenio-files-rest>=3.0.0,<4.0.0",
     "invenio-previewer>=3.0.0,<4.0.0",

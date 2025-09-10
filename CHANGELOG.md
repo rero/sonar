@@ -1,83 +1,152 @@
 # Changelog
 
+## [v1.12.0](https://github.com/rero/sonar/tree/v1.12.0) (2025-10-08)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.11.0...v1.12.0)
+
+**New features:**
+
+- Add logos and links for CC licenses [#414](https://github.com/rero/sonar/issues/414) (by @Garfield-fr)
+- Latex math formulas should be displayed correctly [#875](https://github.com/rero/sonar/issues/875) (by @Garfield-fr)
+- Add a button "Validate and see other deposits" on the deposit [#826](https://github.com/rero/sonar/issues/826) (by @Garfield-fr)
+
+**Enhancements:**
+
+- Cancel a deposit: the button should be hidden from the validation process [#840](https://github.com/rero/sonar/issues/840) (by @jma)
+- Improve files UI components [#986](https://github.com/rero/sonar/issues/986)
+- Delete or archive a deposit when the corresponding document is deleted [#664](https://github.com/rero/sonar/issues/664)
+- Data coherence should be improved after the deletion of some resources [#948](https://github.com/rero/sonar/issues/948) (by @rerowep)
+- fix(stats): display the label instead of the file name [#1029](https://github.com/rero/sonar/pull/1029) (by @PascalRepond)
+- style(document): add contribution type icon [#1025](https://github.com/rero/sonar/pull/1025) (by @Garfield-fr)
+
+**Fixes:**
+
+- fix(public): fix collection detailed view not resolving [#1055](https://github.com/rero/sonar/pull/1055) (by @PascalRepond)
+- fix: set correct sonar URL in welcome email [#1056](https://github.com/rero/sonar/pull/1056) (by @PascalRepond)
+- fix: remove the oai set during the organisation creation [#1051](https://github.com/rero/sonar/pull/1051) (by @jma)
+- fix: disallows ark identifier modifications [#1044](https://github.com/rero/sonar/pull/1044) (by @jma)
+- fix: hide "deposit a publication" button for admins [#1045](https://github.com/rero/sonar/pull/1045) (by @PascalRepond)
+- Collection permalink does not work in global view for dedicated organisation [#713](https://github.com/rero/sonar/issues/713) (by @Garfield-fr)
+- Accessing `/api` returns an error 500 [#987](https://github.com/rero/sonar/issues/987) (by @rerowep)
+- OAI server: missing setSpec headers [#1007](https://github.com/rero/sonar/issues/1007) (by @jma, @NathanPython2002)
+- Help in dedicated views is not based on flask-wiki package [#984](https://github.com/rero/sonar/issues/984) (by @rerowep)
+- The user account menu should not contain a link to the admin and public interface in the same time [#679](https://github.com/rero/sonar/issues/679) (by @PascalRepond)
+- Document view: language not translated dynamically [#960](https://github.com/rero/sonar/issues/960) (by @Garfield-fr)
+- Classification link in the detailed view can causes an internal server error [#859](https://github.com/rero/sonar/issues/859) (by @PascalRepond)
+- Link "Deposit another publication" after a submission does not work as expected [#1027](https://github.com/rero/sonar/issues/1027) (by @PascalRepond)
+- Missing subfields in document editor [#988](https://github.com/rero/sonar/issues/988) (by @PascalRepond)
+- Wrong error message when the contribution role is missing [#814](https://github.com/rero/sonar/issues/814)
+- Editor validation: Required field ´local_identifier.source´ can be saved as empty [#797](https://github.com/rero/sonar/issues/797)
+- The file label should be displayed for additional files [#882](https://github.com/rero/sonar/issues/882)
+- fix: button "deposit a publication" on homepage [#1041](https://github.com/rero/sonar/pull/1041) (by @PascalRepond)
+- fix: fix organisation file uploads [#1040](https://github.com/rero/sonar/pull/1040) (by @jma)
+- fix(deposit): fix jsonchema for type [#1021](https://github.com/rero/sonar/pull/1021) (by @Garfield-fr)
+- fix: fix typo for UNIL controlled affiliation [#1026](https://github.com/rero/sonar/pull/1026) (by @PascalRepond)
+- fix(document): incorrect autocomplete config [#1024](https://github.com/rero/sonar/pull/1024) (by @Garfield-fr)
+
+**Other changes:**
+
+- feat(fixtures): enrich fixtures [#1054](https://github.com/rero/sonar/pull/1054) (by @jma)
+- fix: remove webpack project [#1053](https://github.com/rero/sonar/pull/1053) (by @jma)
+- chore: display test logins on frontpage [#1046](https://github.com/rero/sonar/pull/1046) (by @PascalRepond)
+- chore: remove unused dependencies [#1047](https://github.com/rero/sonar/pull/1047) (by @PascalRepond)
+- feat: use local fixtures [#1037](https://github.com/rero/sonar/pull/1037) (by @jma)
+- core(python): version 3.12 [#1020](https://github.com/rero/sonar/pull/1020) (by @rerowep)
+- jsonschema: use jsonschemas without compiling [#1017](https://github.com/rero/sonar/pull/1017) (by @rerowep)
+- chore(dev): add ruff linter and formatter [#1030](https://github.com/rero/sonar/pull/1030) (by @PascalRepond)
+- chore: update nginx config on docker [#1031](https://github.com/rero/sonar/pull/1031) (by @Garfield-fr)
+- chore: replace poetry by uv [#1016](https://github.com/rero/sonar/pull/1016) (by @PascalRepond)
+
 ## [v1.11.0](https://github.com/rero/sonar/tree/v1.11.0) (2025-04-08)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.10.1...v1.11.0)
 
 **New features:**
-* urn: add new successor command [\#989](https://github.com/rero/sonar/pull/989) (by @jma)
+
+- urn: add new successor command [\#989](https://github.com/rero/sonar/pull/989) (by @jma)
 
 **Fixes:**
-* Restricted files are not mentioned in the Dublin Core record [\#1000](https://github.com/rero/sonar/issues/1000)
-* fix(deployment): fix lxml conflict packages [\#1004](https://github.com/rero/sonar/pull/1004) (by @jma)
-* Link to file is broken when the file name contains special characters [\#861](https://github.com/rero/sonar/issues/861)
-* fix(translations): use poetry commands [\#1005](https://github.com/rero/sonar/pull/1005) (by @PascalRepond)
-* data model: fix server error during the provisionActivity formatting. [\#982](https://github.com/rero/sonar/pull/982) (by @jma)
-* documents: fix boosting [\#977](https://github.com/rero/sonar/pull/977) (by @jma)
+
+- Restricted files are not mentioned in the Dublin Core record [\#1000](https://github.com/rero/sonar/issues/1000)
+- fix(deployment): fix lxml conflict packages [\#1004](https://github.com/rero/sonar/pull/1004) (by @jma)
+- Link to file is broken when the file name contains special characters [\#861](https://github.com/rero/sonar/issues/861)
+- fix(translations): use poetry commands [\#1005](https://github.com/rero/sonar/pull/1005) (by @PascalRepond)
+- data model: fix server error during the provisionActivity formatting. [\#982](https://github.com/rero/sonar/pull/982) (by @jma)
+- documents: fix boosting [\#977](https://github.com/rero/sonar/pull/977) (by @jma)
 
 **Other changes:**
-* dependencies: fix security issues [\#1001](https://github.com/rero/sonar/pull/1001) (by @jma)
-* chore(deprecation): update compose commands to v2 [\#994](https://github.com/rero/sonar/pull/994) (by @PascalRepond)
-* dependencies: fix security issues for uwsgi [\#990](https://github.com/rero/sonar/pull/990) (by @jma)
-* dependencies: fix security issues [\#983](https://github.com/rero/sonar/pull/983) (by @jma)
+
+- dependencies: fix security issues [\#1001](https://github.com/rero/sonar/pull/1001) (by @jma)
+- chore(deprecation): update compose commands to v2 [\#994](https://github.com/rero/sonar/pull/994) (by @PascalRepond)
+- dependencies: fix security issues for uwsgi [\#990](https://github.com/rero/sonar/pull/990) (by @jma)
+- dependencies: fix security issues [\#983](https://github.com/rero/sonar/pull/983) (by @jma)
 
 ## [v1.10.1](https://github.com/rero/sonar/tree/v1.10.1) (2024-01-30)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.10.0...v1.10.1)
 
 **Fixes:**
-* documents: removes permssions from the search list [\#972](https://github.com/rero/sonar/issues/972) (by @jma)
+
+- documents: removes permssions from the search list [\#972](https://github.com/rero/sonar/issues/972) (by @jma)
 
 ## [v1.10.0](https://github.com/rero/sonar/tree/v1.10.0) (2024-01-23)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.9.1...v1.10.0)
 
 **Enhancements:**
-* documents: add wildcard query to document identifiers [\#963](https://github.com/rero/sonar/pull/963) (by @jma)
-* monitoring: REDIS, ES indicies [\#932](https://github.com/rero/sonar/pull/932) (by @rerowep)
-* dependencies: upgrade invenio packages [\#966](https://github.com/rero/sonar/pull/966) (by @jma)
+
+- documents: add wildcard query to document identifiers [\#963](https://github.com/rero/sonar/pull/963) (by @jma)
+- monitoring: REDIS, ES indicies [\#932](https://github.com/rero/sonar/pull/932) (by @rerowep)
+- dependencies: upgrade invenio packages [\#966](https://github.com/rero/sonar/pull/966) (by @jma)
 
 **Fixes:**
-* The button "search in full-text" doesn't work [\#965](https://github.com/rero/sonar/issues/965) (by @jma)
-* translations: translate "full-text" field name in UI [\#957](https://github.com/rero/sonar/issues/957) (by @PascalRepond)
-* Thumbnails not displayed in brief view [\#959](https://github.com/rero/sonar/issues/959) (by @jma)
-* Link to file is broken when the file name contains special characters [\#861](https://github.com/rero/sonar/issues/861) (by @jma)
-* monitoring: fix projects database count [\#971](https://github.com/rero/sonar/issues/971) (by @jma)
-* monitoring: access token [\#968](https://github.com/rero/sonar/issues/968) (by @rerowep)
+
+- The button "search in full-text" doesn't work [\#965](https://github.com/rero/sonar/issues/965) (by @jma)
+- translations: translate "full-text" field name in UI [\#957](https://github.com/rero/sonar/issues/957) (by @PascalRepond)
+- Thumbnails not displayed in brief view [\#959](https://github.com/rero/sonar/issues/959) (by @jma)
+- Link to file is broken when the file name contains special characters [\#861](https://github.com/rero/sonar/issues/861) (by @jma)
+- monitoring: fix projects database count [\#971](https://github.com/rero/sonar/issues/971) (by @jma)
+- monitoring: access token [\#968](https://github.com/rero/sonar/issues/968) (by @rerowep)
 
 **Other changes:**
-* chore: update github templates and workflows [\#958](https://github.com/rero/sonar/pull/958) (by @PascalRepond)
+
+- chore: update github templates and workflows [\#958](https://github.com/rero/sonar/pull/958) (by @PascalRepond)
 
 ## [v1.9.1](https://github.com/rero/sonar/tree/v1.9.1) (2023-10-11)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.9.0...v1.9.1)
 
 **Fixes:**
-* deployement: fix nginx configuration [\#953](https://github.com/rero/sonar/pull/953) (by @jma)
-* documents: fix poor performance on serializer [\#955](https://github.com/rero/sonar/pull/955) (by @jma)
+
+- deployement: fix nginx configuration [\#953](https://github.com/rero/sonar/pull/953) (by @jma)
+- documents: fix poor performance on serializer [\#955](https://github.com/rero/sonar/pull/955) (by @jma)
 
 ## [v1.9.0](https://github.com/rero/sonar/tree/v1.9.0) (2023-08-22)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.8.2...v1.9.0)
 
 **New features:**
-* Activate URN assignment and registration [\#811](https://github.com/rero/sonar/issues/811) (by @jma)
-* ARK persistent identifiers: activate storage, display and redirection [\#652](https://github.com/rero/sonar/issues/652) (by @jma)
+
+- Activate URN assignment and registration [\#811](https://github.com/rero/sonar/issues/811) (by @jma)
+- ARK persistent identifiers: activate storage, display and redirection [\#652](https://github.com/rero/sonar/issues/652) (by @jma)
 
 **Enhancements:**
-* documents and deposits: add diamond OA status [\#940](https://github.com/rero/sonar/pull/940) (by @PascalRepond)
-* controlled affiliations: add terms for HEP BEJUNE [\#939](https://github.com/rero/sonar/pull/939) (by @PascalRepond)
+
+- documents and deposits: add diamond OA status [\#940](https://github.com/rero/sonar/pull/940) (by @PascalRepond)
+- controlled affiliations: add terms for HEP BEJUNE [\#939](https://github.com/rero/sonar/pull/939) (by @PascalRepond)
 
 **Fixes:**
-* documents: fix lowercase contributor role [\#937](https://github.com/rero/sonar/pull/937) (by @PascalRepond)
-* controlledAffiliation: fix resolver [\#918](https://github.com/rero/sonar/pull/918) (by @PascalRepond)
-* files: fix record retrieval from the file bucket [\#950](https://github.com/rero/sonar/pull/950) (by @jma)
-* orcid: change legacy URL [\#947](https://github.com/rero/sonar/pull/947) (by @jma)
+
+- documents: fix lowercase contributor role [\#937](https://github.com/rero/sonar/pull/937) (by @PascalRepond)
+- controlledAffiliation: fix resolver [\#918](https://github.com/rero/sonar/pull/918) (by @PascalRepond)
+- files: fix record retrieval from the file bucket [\#950](https://github.com/rero/sonar/pull/950) (by @jma)
+- orcid: change legacy URL [\#947](https://github.com/rero/sonar/pull/947) (by @jma)
 
 **Other changes:**
-* dependencies: fix vulnerabilities [\#935](https://github.com/rero/sonar/pull/935) (by @jma)
-* dependencies: update [\#927](https://github.com/rero/sonar/pull/927) (by @PascalRepond)
-* dependencies: fix vulnerabilities [\#924](https://github.com/rero/sonar/pull/924) (by @jma)
+
+- dependencies: fix vulnerabilities [\#935](https://github.com/rero/sonar/pull/935) (by @jma)
+- dependencies: update [\#927](https://github.com/rero/sonar/pull/927) (by @PascalRepond)
+- dependencies: fix vulnerabilities [\#924](https://github.com/rero/sonar/pull/924) (by @jma)
 
 ## [v1.8.2](https://github.com/rero/sonar/tree/v1.8.2) (2022-11-24)
 
@@ -85,9 +154,9 @@
 
 **Bug fixes:**
 
-* Controlled affiliation should be cleared when affiliation is modified to empty or unrecognized value [\#807](https://github.com/rero/sonar/issues/807) (by @jma & @PascalRepond)
-* The editor or API should prevent bad character encodings [\#867](https://github.com/rero/sonar/issues/867) (by @jma)
-* dependencies: fix vulnerabilities [\#916](https://github.com/rero/sonar/pull/916) (by @jma)
+- Controlled affiliation should be cleared when affiliation is modified to empty or unrecognized value [\#807](https://github.com/rero/sonar/issues/807) (by @jma & @PascalRepond)
+- The editor or API should prevent bad character encodings [\#867](https://github.com/rero/sonar/issues/867) (by @jma)
+- dependencies: fix vulnerabilities [\#916](https://github.com/rero/sonar/pull/916) (by @jma)
 
 ## [v1.8.1](https://github.com/rero/sonar/tree/v1.8.1) (2022-10-20)
 
@@ -95,7 +164,7 @@
 
 **Bug fixes:**
 
-* logged user: fix settings [\#905](https://github.com/rero/sonar/pull/905) (by @Garfield-fr)
+- logged user: fix settings [\#905](https://github.com/rero/sonar/pull/905) (by @Garfield-fr)
 
 ## [v1.8.0](https://github.com/rero/sonar/tree/v1.8.0) (2022-08-30)
 
@@ -103,43 +172,43 @@
 
 **New features:**
 
-* Display in pro and public detailed view the number of views and downloads per file (stats) [\#400](https://github.com/rero/sonar/issues/400) (by @jma)
-* Add a field `relatedTo` to the document, allowing to refer to related material, such as a dataset. [\#544](https://github.com/rero/sonar/issues/544) (by @Garfield-fr)
+- Display in pro and public detailed view the number of views and downloads per file (stats) [\#400](https://github.com/rero/sonar/issues/400) (by @jma)
+- Add a field `relatedTo` to the document, allowing to refer to related material, such as a dataset. [\#544](https://github.com/rero/sonar/issues/544) (by @Garfield-fr)
 
 **Enhancements:**
 
-* Small improvement in the deposit editor [\#715](https://github.com/rero/sonar/issues/715) (by @PascalRepond)
-* Add the software version in the first page footer [\#806](https://github.com/rero/sonar/issues/806) (by @PascalRepond)
-* Add 2 document types: conference object, book review [\#881](https://github.com/rero/sonar/issues/881) (by @PascalRepond)
-* Remove the preview area in the "diffusion" step of the deposit process [1] [\#263](https://github.com/rero/sonar/issues/263) (by @PascalRepond)
-* Editor: adapt to new ng-core version [\#860](https://github.com/rero/sonar/issues/860) (by @PascalRepond)
-* Optimise Google Scholar indexation [\#798](https://github.com/rero/sonar/issues/798) (by @Garfield-fr)
-* document: update of the abstract display [\#845](https://github.com/rero/sonar/pull/845) (by @Garfield-fr)
-* Allow to relaunch a search by clicking on the author's name [\#744](https://github.com/rero/sonar/issues/744) (by @Garfield-fr)
-* Add direct link to main file in `oai_dc` export (OAI-PMH) [\#800](https://github.com/rero/sonar/issues/800) (by @Garfield-fr)
+- Small improvement in the deposit editor [\#715](https://github.com/rero/sonar/issues/715) (by @PascalRepond)
+- Add the software version in the first page footer [\#806](https://github.com/rero/sonar/issues/806) (by @PascalRepond)
+- Add 2 document types: conference object, book review [\#881](https://github.com/rero/sonar/issues/881) (by @PascalRepond)
+- Remove the preview area in the "diffusion" step of the deposit process [1] [\#263](https://github.com/rero/sonar/issues/263) (by @PascalRepond)
+- Editor: adapt to new ng-core version [\#860](https://github.com/rero/sonar/issues/860) (by @PascalRepond)
+- Optimise Google Scholar indexation [\#798](https://github.com/rero/sonar/issues/798) (by @Garfield-fr)
+- document: update of the abstract display [\#845](https://github.com/rero/sonar/pull/845) (by @Garfield-fr)
+- Allow to relaunch a search by clicking on the author's name [\#744](https://github.com/rero/sonar/issues/744) (by @Garfield-fr)
+- Add direct link to main file in `oai_dc` export (OAI-PMH) [\#800](https://github.com/rero/sonar/issues/800) (by @Garfield-fr)
 
 **Fixes:**
 
-* templates: fix display problems [\#895](https://github.com/rero/sonar/pull/895) (by @PascalRepond)
-* dependencies: fix vulnerabilities [\#897](https://github.com/rero/sonar/pull/897) (by @jma)
-* controlled affiliations: fix USI affiliation name [\#880](https://github.com/rero/sonar/pull/880) (by @PascalRepond)
-* Problems in the document editor within field `partOf` [\#626](https://github.com/rero/sonar/issues/626) (by @PascalRepond, @jma)
-* Impossible to submit a research project (hepvs): it spins forever [\#858](https://github.com/rero/sonar/issues/858) (by @vgranata)
-* Field `volume` in the deposit should not be stricter than its equivalent in the document [\#878](https://github.com/rero/sonar/issues/878) (by @PascalRepond)
-* Truncated values in autocomplete lists [\#853](https://github.com/rero/sonar/issues/853) (by @Garfield-fr)
-* Activate the recording of file access statistics [\#829](https://github.com/rero/sonar/issues/829) (by @jma)
-* tests: fix csv serializer test [\#892](https://github.com/rero/sonar/pull/892) (by @PascalRepond)
-* documents api: fix missing contribution [\#889](https://github.com/rero/sonar/pull/889) (by @jma)
-* Problem with login via SWITCH edu-ID [\#844](https://github.com/rero/sonar/issues/844) (by @jma)
+- templates: fix display problems [\#895](https://github.com/rero/sonar/pull/895) (by @PascalRepond)
+- dependencies: fix vulnerabilities [\#897](https://github.com/rero/sonar/pull/897) (by @jma)
+- controlled affiliations: fix USI affiliation name [\#880](https://github.com/rero/sonar/pull/880) (by @PascalRepond)
+- Problems in the document editor within field `partOf` [\#626](https://github.com/rero/sonar/issues/626) (by @PascalRepond, @jma)
+- Impossible to submit a research project (hepvs): it spins forever [\#858](https://github.com/rero/sonar/issues/858) (by @vgranata)
+- Field `volume` in the deposit should not be stricter than its equivalent in the document [\#878](https://github.com/rero/sonar/issues/878) (by @PascalRepond)
+- Truncated values in autocomplete lists [\#853](https://github.com/rero/sonar/issues/853) (by @Garfield-fr)
+- Activate the recording of file access statistics [\#829](https://github.com/rero/sonar/issues/829) (by @jma)
+- tests: fix csv serializer test [\#892](https://github.com/rero/sonar/pull/892) (by @PascalRepond)
+- documents api: fix missing contribution [\#889](https://github.com/rero/sonar/pull/889) (by @jma)
+- Problem with login via SWITCH edu-ID [\#844](https://github.com/rero/sonar/issues/844) (by @jma)
 
 **Other changes:**
 
-* organisations: fix editor ValidationError [\#888](https://github.com/rero/sonar/pull/888) (by @PascalRepond)
-* update flask-wiki to 0.2.1 [\#869](https://github.com/rero/sonar/pull/869) (by @PascalRepond)
-* module: invenio-record-resources [\#786](https://github.com/rero/sonar/pull/786) (by @rerowep)
-* templates: update footer info [\#872](https://github.com/rero/sonar/pull/872) (by @PascalRepond)
-* uwsgi: suppress unimportant errors [\#865](https://github.com/rero/sonar/pull/865) (by @rerowep)
-* footer: update links [\#868](https://github.com/rero/sonar/pull/868) (by @PascalRepond)
+- organisations: fix editor ValidationError [\#888](https://github.com/rero/sonar/pull/888) (by @PascalRepond)
+- update flask-wiki to 0.2.1 [\#869](https://github.com/rero/sonar/pull/869) (by @PascalRepond)
+- module: invenio-record-resources [\#786](https://github.com/rero/sonar/pull/786) (by @rerowep)
+- templates: update footer info [\#872](https://github.com/rero/sonar/pull/872) (by @PascalRepond)
+- uwsgi: suppress unimportant errors [\#865](https://github.com/rero/sonar/pull/865) (by @rerowep)
+- footer: update links [\#868](https://github.com/rero/sonar/pull/868) (by @PascalRepond)
 
 ## [v1.7.0](https://github.com/rero/sonar/tree/v1.7.0) (2022-05-05)
 
@@ -1039,7 +1108,7 @@
 - translations: Italian translations [\#55](https://github.com/rero/sonar/pull/55) ([sebastiendeleze](https://github.com/sebastiendeleze))
 - authentication: Switch edu-id authentication [\#54](https://github.com/rero/sonar/pull/54) ([sebastiendeleze](https://github.com/sebastiendeleze))
 - authentication: ORCID OAuth [\#39](https://github.com/rero/sonar/pull/39) ([sebastiendeleze](https://github.com/sebastiendeleze))
--  templating: Document detail [\#37](https://github.com/rero/sonar/pull/37) ([sebastiendeleze](https://github.com/sebastiendeleze))
+- templating: Document detail [\#37](https://github.com/rero/sonar/pull/37) ([sebastiendeleze](https://github.com/sebastiendeleze))
 - translations: Translations in french and german [\#33](https://github.com/rero/sonar/pull/33) ([sebastiendeleze](https://github.com/sebastiendeleze))
 - translations: Language switcher [\#30](https://github.com/rero/sonar/pull/30) ([sebastiendeleze](https://github.com/sebastiendeleze))
 - search: Faceted filters [\#29](https://github.com/rero/sonar/pull/29) ([sebastiendeleze](https://github.com/sebastiendeleze))
@@ -1049,7 +1118,3 @@
 - theming: Frontpage layout [\#9](https://github.com/rero/sonar/pull/9) ([sebastiendeleze](https://github.com/sebastiendeleze))
 - deployment: SONAR instance [\#8](https://github.com/rero/sonar/pull/8) ([sebastiendeleze](https://github.com/sebastiendeleze))
 - tests: Travis build [\#7](https://github.com/rero/sonar/pull/7) ([sebastiendeleze](https://github.com/sebastiendeleze))
-
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
