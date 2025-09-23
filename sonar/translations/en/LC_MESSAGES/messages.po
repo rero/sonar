@@ -9,17 +9,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SONAR 1.11.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2025-09-03 09:09+0200\n"
+"POT-Creation-Date: 2025-09-23 11:18+0200\n"
 "PO-Revision-Date: 2025-09-03 09:03+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
-"Language-Team: English <https://hosted.weblate.org/projects/rero_plus/sonar/"
-"en/>\n"
 "Language: en\n"
+"Language-Team: English "
+"<https://hosted.weblate.org/projects/rero_plus/sonar/en/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13.1-dev\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: sonar/jsonschemas/common/masked-v1.0.0.json:9
@@ -33,10 +32,6 @@ msgstr ""
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:359
 msgid "Abandoned"
 msgstr "Abandoned"
-
-#: sonar/theme/templates/sonar/footer.html:39
-msgid "About SONAR"
-msgstr "About SONAR"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:823
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:839
@@ -240,6 +235,10 @@ msgstr "CC0"
 msgid "Checksum"
 msgstr "Checksum"
 
+#: sonar/theme/templates/sonar/partial/test_info.html:20
+msgid "Choose your role:"
+msgstr ""
+
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:87
 msgid "City"
 msgstr "City"
@@ -320,7 +319,7 @@ msgstr "Conference"
 msgid "Confirm e-mail"
 msgstr "Confirm e-mail"
 
-#: sonar/theme/templates/sonar/footer.html:43
+#: sonar/theme/templates/sonar/footer.html:39
 msgid "Contact"
 msgstr "Contact"
 
@@ -810,10 +809,6 @@ msgstr "First and last name"
 msgid "First name"
 msgstr "First name"
 
-#: sonar/theme/templates/sonar/frontpage.html:105
-msgid "Follow us"
-msgstr "Follow us"
-
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:100
 msgid "Footer"
 msgstr "Footer"
@@ -934,8 +929,8 @@ msgid "Hash key"
 msgstr "Hash key"
 
 #: sonar/theme/templates/sonar/footer.html:35
-msgid "Help & Documentation"
-msgstr "Help & documentation"
+msgid "Help"
+msgstr ""
 
 #: sonar/help/templates/help/page_wiki_search_navigation.html:26
 msgid "Home"
@@ -1282,6 +1277,10 @@ msgstr "Metadata"
 msgid "Mimetype"
 msgstr "MIME type"
 
+#: sonar/theme/templates/sonar/partial/test_info.html:27
+msgid "More test logins and documentation are available on the"
+msgstr ""
+
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:391
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:601
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:992
@@ -1475,6 +1474,10 @@ msgstr "Pages"
 msgid "Parents"
 msgstr "Parents"
 
+#: sonar/theme/templates/sonar/partial/test_info.html:26
+msgid "Password:"
+msgstr ""
+
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:892
 msgid "Pedagogical and technological innovation"
 msgstr "Pedagogical and technological innovation"
@@ -1538,7 +1541,7 @@ msgstr "Post-doctorate supported by the HEP-VS"
 msgid "Postal code"
 msgstr "Postal code"
 
-#: sonar/theme/templates/sonar/footer.html:53
+#: sonar/theme/templates/sonar/footer.html:51
 msgid "Powered by"
 msgstr "Powered by"
 
@@ -1568,7 +1571,7 @@ msgstr "Primary key"
 msgid "Primary teacher"
 msgstr "Primary teacher"
 
-#: sonar/theme/templates/sonar/footer.html:56
+#: sonar/theme/templates/sonar/footer.html:54
 msgid "Privacy policy"
 msgstr "Privacy policy"
 
@@ -1913,9 +1916,9 @@ msgstr "Someone requested that the password for your SONAR account be reset."
 msgid "Source"
 msgstr "Source"
 
-#: sonar/theme/templates/sonar/frontpage.html:110
-msgid "Source code on"
-msgstr "Source code on"
+#: sonar/theme/templates/sonar/footer.html:42
+msgid "Source code"
+msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:749
 msgid "Special education teacher"
@@ -2080,6 +2083,10 @@ msgstr "Terms of acquisition"
 msgid "Tertiary teacher"
 msgstr "Tertiary teacher"
 
+#: sonar/theme/templates/sonar/partial/test_info.html:19
+msgid "Test logins"
+msgstr ""
+
 #: sonar/theme/templates/sonar/page.html:20
 msgid ""
 "The SONAR project aims to create a scholarly archive that collects, "
@@ -2094,7 +2101,7 @@ msgstr ""
 msgid "The SONAR team at RERO"
 msgstr "The SONAR team at RERO"
 
-#: sonar/theme/templates/sonar/frontpage.html:101
+#: sonar/theme/templates/sonar/frontpage.html:104
 msgid ""
 "The Swiss Open Access Repository is an archive of scholarly publications."
 " It collects and promotes open access publications by authors affiliated "
@@ -2125,8 +2132,8 @@ msgid ""
 "This project is the subject of an educational document or a report to the"
 " city or science"
 msgstr ""
-"This project is the subject of an educational document or a report to the "
-"city or science"
+"This project is the subject of an educational document or a report to the"
+" city or science"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:897
 msgid "This project promotes pedagogical or technological innovation"
@@ -2138,8 +2145,8 @@ msgid ""
 " it can have undesired effects, such as invalidating existing persistent "
 "identifiers (ARK)."
 msgstr ""
-"This property should only be changed in test environments. In production, it "
-"can have undesired effects, such as invalidating existing persistent "
+"This property should only be changed in test environments. In production,"
+" it can have undesired effects, such as invalidating existing persistent "
 "identifiers (ARK)."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:929
@@ -2322,10 +2329,6 @@ msgstr "Visible facets in the public interface for documents"
 msgid "Volume"
 msgstr "Volume"
 
-#: sonar/modules/users/utils.py:44
-msgid "Welcome to"
-msgstr "Welcome to"
-
 #: sonar/config.py:128
 msgid "Welcome to SONAR, the Swiss Open Access Repository!"
 msgstr "Welcome to SONAR, the Swiss Open Access Repository!"
@@ -2347,8 +2350,8 @@ msgid ""
 "What is the impact of research on public action or on internal or "
 "external governance?"
 msgstr ""
-"What is the impact of research on public action or on internal or external "
-"governance?"
+"What is the impact of research on public action or on internal or "
+"external governance?"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:864
 msgid "What is the impact of the research on the professional environment?"
@@ -2969,7 +2972,7 @@ msgstr "Printer"
 msgid "contribution_role_{role}"
 msgstr "contribution_role_{role}"
 
-#: sonar/config.py:657
+#: sonar/config.py:661
 msgid "contributor"
 msgstr "contributor"
 
@@ -3252,6 +3255,10 @@ msgstr "Funder type"
 #: sonar/translations/manual_translations.txt:36
 msgid "funding_fundingReceived"
 msgstr "Funding received"
+
+#: sonar/theme/templates/sonar/partial/test_info.html:28
+msgid "help page"
+msgstr ""
 
 #: sonar/translations/manual_translations.txt:39
 msgid "impactOnFormation"
@@ -5255,7 +5262,7 @@ msgstr "other files"
 msgid "p."
 msgstr "p."
 
-#: sonar/config.py:654
+#: sonar/config.py:658
 msgid "pid"
 msgstr "pid"
 
@@ -5325,7 +5332,7 @@ msgstr "secondary team"
 msgid "startDate"
 msgstr "start date"
 
-#: sonar/config.py:655
+#: sonar/config.py:659
 msgid "status"
 msgstr "status"
 
@@ -5351,7 +5358,7 @@ msgstr "supported by"
 msgid "uri"
 msgstr "URI"
 
-#: sonar/config.py:656
+#: sonar/config.py:660
 msgid "user"
 msgstr "user"
 
@@ -5402,3 +5409,4 @@ msgstr "vol."
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:427
 msgid "year"
 msgstr "year"
+
