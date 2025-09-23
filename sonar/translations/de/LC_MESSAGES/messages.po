@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SONAR 1.11.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2025-09-03 09:09+0200\n"
-"PO-Revision-Date: 2025-09-03 09:03+0000\n"
+"POT-Creation-Date: 2025-09-23 11:18+0200\n"
+"PO-Revision-Date: 2025-09-23 09:40+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "de/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13.1-dev\n"
+"X-Generator: Weblate 5.14-dev\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: sonar/jsonschemas/common/masked-v1.0.0.json:9
@@ -34,10 +34,6 @@ msgstr ""
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:359
 msgid "Abandoned"
 msgstr "Aufgegeben"
-
-#: sonar/theme/templates/sonar/footer.html:39
-msgid "About SONAR"
-msgstr "Über SONAR"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:823
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:839
@@ -239,6 +235,10 @@ msgstr "CC0"
 msgid "Checksum"
 msgstr "Checksum"
 
+#: sonar/theme/templates/sonar/partial/test_info.html:20
+msgid "Choose your role:"
+msgstr "Rolle wählen:"
+
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:87
 msgid "City"
 msgstr "Stadt"
@@ -319,7 +319,7 @@ msgstr "Konferenz"
 msgid "Confirm e-mail"
 msgstr "E-Mail-Adresse bestätigen"
 
-#: sonar/theme/templates/sonar/footer.html:43
+#: sonar/theme/templates/sonar/footer.html:39
 msgid "Contact"
 msgstr "Kontakt"
 
@@ -811,10 +811,6 @@ msgstr "Vor- und Nachname"
 msgid "First name"
 msgstr "Vorname"
 
-#: sonar/theme/templates/sonar/frontpage.html:105
-msgid "Follow us"
-msgstr "Folgen Sie uns"
-
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:100
 msgid "Footer"
 msgstr "Fusszeile"
@@ -935,8 +931,8 @@ msgid "Hash key"
 msgstr "Hash-Schlüssel"
 
 #: sonar/theme/templates/sonar/footer.html:35
-msgid "Help & Documentation"
-msgstr "Hilfe & Dokumentation"
+msgid "Help"
+msgstr "Hilfe"
 
 #: sonar/help/templates/help/page_wiki_search_navigation.html:26
 msgid "Home"
@@ -1286,6 +1282,10 @@ msgstr "Metadaten"
 msgid "Mimetype"
 msgstr "MIME-Typ"
 
+#: sonar/theme/templates/sonar/partial/test_info.html:27
+msgid "More test logins and documentation are available on the"
+msgstr "Weitere Test-Logins und Dokumentation finden Sie auf der"
+
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:391
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:601
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:992
@@ -1479,6 +1479,10 @@ msgstr "Seiten"
 msgid "Parents"
 msgstr "Eltern"
 
+#: sonar/theme/templates/sonar/partial/test_info.html:26
+msgid "Password:"
+msgstr "Passwort:"
+
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:892
 msgid "Pedagogical and technological innovation"
 msgstr "Pädagogische und technologische Innovation"
@@ -1542,7 +1546,7 @@ msgstr "Von HEP-VS unterstütztes Postdoktorat"
 msgid "Postal code"
 msgstr "Postleitzahl"
 
-#: sonar/theme/templates/sonar/footer.html:53
+#: sonar/theme/templates/sonar/footer.html:51
 msgid "Powered by"
 msgstr "Angetrieben durch"
 
@@ -1572,7 +1576,7 @@ msgstr "Primärschlüssel"
 msgid "Primary teacher"
 msgstr "Primarlehrer*in"
 
-#: sonar/theme/templates/sonar/footer.html:56
+#: sonar/theme/templates/sonar/footer.html:54
 msgid "Privacy policy"
 msgstr "Datenschutzbestimmungen"
 
@@ -1919,9 +1923,9 @@ msgstr ""
 msgid "Source"
 msgstr "Quelle"
 
-#: sonar/theme/templates/sonar/frontpage.html:110
-msgid "Source code on"
-msgstr "Quellcode bei"
+#: sonar/theme/templates/sonar/footer.html:42
+msgid "Source code"
+msgstr "Quellcode"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:749
 msgid "Special education teacher"
@@ -2086,6 +2090,10 @@ msgstr "Erwerbsbedingungen"
 msgid "Tertiary teacher"
 msgstr "Tertiärlehrer"
 
+#: sonar/theme/templates/sonar/partial/test_info.html:19
+msgid "Test logins"
+msgstr "Teste-Logins"
+
 #: sonar/theme/templates/sonar/page.html:20
 msgid ""
 "The SONAR project aims to create a scholarly archive that collects, "
@@ -2100,7 +2108,7 @@ msgstr ""
 msgid "The SONAR team at RERO"
 msgstr "Das SONAR-Team bei RERO"
 
-#: sonar/theme/templates/sonar/frontpage.html:101
+#: sonar/theme/templates/sonar/frontpage.html:104
 msgid ""
 "The Swiss Open Access Repository is an archive of scholarly publications."
 " It collects and promotes open access publications by authors affiliated "
@@ -2328,10 +2336,6 @@ msgstr "Sichtbare Facetten in der öffentlichen Oberfläche für Dokumente"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1791
 msgid "Volume"
 msgstr "Band"
-
-#: sonar/modules/users/utils.py:44
-msgid "Welcome to"
-msgstr "Willkommen bei"
 
 #: sonar/config.py:128
 msgid "Welcome to SONAR, the Swiss Open Access Repository!"
@@ -2976,7 +2980,7 @@ msgstr "Drucker"
 msgid "contribution_role_{role}"
 msgstr "contribution_role_{role}"
 
-#: sonar/config.py:657
+#: sonar/config.py:661
 msgid "contributor"
 msgstr "Mitwirkende"
 
@@ -3259,6 +3263,10 @@ msgstr "Art der Geldgeber"
 #: sonar/translations/manual_translations.txt:36
 msgid "funding_fundingReceived"
 msgstr "erhaltene Finanzierung"
+
+#: sonar/theme/templates/sonar/partial/test_info.html:28
+msgid "help page"
+msgstr "Hilfe-Seite"
 
 #: sonar/translations/manual_translations.txt:39
 msgid "impactOnFormation"
@@ -5262,7 +5270,7 @@ msgstr "andere Dateien"
 msgid "p."
 msgstr "S."
 
-#: sonar/config.py:654
+#: sonar/config.py:658
 msgid "pid"
 msgstr "PID"
 
@@ -5332,7 +5340,7 @@ msgstr "sekundäres Team"
 msgid "startDate"
 msgstr "Startdatum"
 
-#: sonar/config.py:655
+#: sonar/config.py:659
 msgid "status"
 msgstr "Status"
 
@@ -5358,7 +5366,7 @@ msgstr "gefördert durch"
 msgid "uri"
 msgstr "URI"
 
-#: sonar/config.py:656
+#: sonar/config.py:660
 msgid "user"
 msgstr "Benutzer"
 

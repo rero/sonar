@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SONAR 1.11.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2025-09-03 09:09+0200\n"
-"PO-Revision-Date: 2025-09-03 09:03+0000\n"
+"POT-Creation-Date: 2025-09-23 11:18+0200\n"
+"PO-Revision-Date: 2025-09-23 09:40+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "it/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13.1-dev\n"
+"X-Generator: Weblate 5.14-dev\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: sonar/jsonschemas/common/masked-v1.0.0.json:9
@@ -34,10 +34,6 @@ msgstr ""
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:359
 msgid "Abandoned"
 msgstr "Abbandonati"
-
-#: sonar/theme/templates/sonar/footer.html:39
-msgid "About SONAR"
-msgstr "A proposito di SONAR"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:823
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:839
@@ -239,6 +235,10 @@ msgstr "CC0"
 msgid "Checksum"
 msgstr "Somma di controllo"
 
+#: sonar/theme/templates/sonar/partial/test_info.html:20
+msgid "Choose your role:"
+msgstr "Scegliere un ruolo:"
+
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:87
 msgid "City"
 msgstr "Città"
@@ -308,8 +308,8 @@ msgid ""
 "Conditions under which the publisher, distributor, etc., will normally "
 "supply a resource, e.g., price of a resource."
 msgstr ""
-"Condizioni alle quali l'editore, il distributore, ecc. fornirà normalmente "
-"una risorsa, ad esempio il prezzo di una risorsa."
+"Condizioni alle quali l'editore, il distributore, ecc. fornirà "
+"normalmente una risorsa, ad esempio il prezzo di una risorsa."
 
 #: sonar/modules/documents/templates/documents/record.html:291
 msgid "Conference"
@@ -319,7 +319,7 @@ msgstr "Conferenza"
 msgid "Confirm e-mail"
 msgstr "Confermare E-mail"
 
-#: sonar/theme/templates/sonar/footer.html:43
+#: sonar/theme/templates/sonar/footer.html:39
 msgid "Contact"
 msgstr "Contatto"
 
@@ -811,10 +811,6 @@ msgstr "Nome e cognome"
 msgid "First name"
 msgstr "Nome"
 
-#: sonar/theme/templates/sonar/frontpage.html:105
-msgid "Follow us"
-msgstr "Seguici"
-
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:100
 msgid "Footer"
 msgstr "Piè di pagina"
@@ -935,8 +931,8 @@ msgid "Hash key"
 msgstr "Chiave hash"
 
 #: sonar/theme/templates/sonar/footer.html:35
-msgid "Help & Documentation"
-msgstr "Aiuto & documentazione"
+msgid "Help"
+msgstr "Aiuto"
 
 #: sonar/help/templates/help/page_wiki_search_navigation.html:26
 msgid "Home"
@@ -1283,6 +1279,10 @@ msgstr "Metadati"
 msgid "Mimetype"
 msgstr "Tipo MIME"
 
+#: sonar/theme/templates/sonar/partial/test_info.html:27
+msgid "More test logins and documentation are available on the"
+msgstr "Ulteriori login di prova e documentazione sono disponibili su"
+
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:391
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:601
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:992
@@ -1477,6 +1477,10 @@ msgstr "Pagine"
 msgid "Parents"
 msgstr "Genitori"
 
+#: sonar/theme/templates/sonar/partial/test_info.html:26
+msgid "Password:"
+msgstr "Password:"
+
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:892
 msgid "Pedagogical and technological innovation"
 msgstr "Innovazione pedagogica e tecnologica"
@@ -1540,7 +1544,7 @@ msgstr "Post-dottorato sostenuto dall'HEP-VS"
 msgid "Postal code"
 msgstr "Codice postale"
 
-#: sonar/theme/templates/sonar/footer.html:53
+#: sonar/theme/templates/sonar/footer.html:51
 msgid "Powered by"
 msgstr "Alimentato da"
 
@@ -1570,7 +1574,7 @@ msgstr "Chiave primaria"
 msgid "Primary teacher"
 msgstr "Insegnante di scuola primaria"
 
-#: sonar/theme/templates/sonar/footer.html:56
+#: sonar/theme/templates/sonar/footer.html:54
 msgid "Privacy policy"
 msgstr "Politica sulla riservatezza"
 
@@ -1917,9 +1921,9 @@ msgstr ""
 msgid "Source"
 msgstr "Fonte"
 
-#: sonar/theme/templates/sonar/frontpage.html:110
-msgid "Source code on"
-msgstr "Codice sorgente su"
+#: sonar/theme/templates/sonar/footer.html:42
+msgid "Source code"
+msgstr "Codice sorgente"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:749
 msgid "Special education teacher"
@@ -2084,6 +2088,10 @@ msgstr "Condizioni di acquisto"
 msgid "Tertiary teacher"
 msgstr "Insegnante di scuola superiore"
 
+#: sonar/theme/templates/sonar/partial/test_info.html:19
+msgid "Test logins"
+msgstr "Login di prova"
+
 #: sonar/theme/templates/sonar/page.html:20
 msgid ""
 "The SONAR project aims to create a scholarly archive that collects, "
@@ -2098,7 +2106,7 @@ msgstr ""
 msgid "The SONAR team at RERO"
 msgstr "Il team SONAR presso RERO"
 
-#: sonar/theme/templates/sonar/frontpage.html:101
+#: sonar/theme/templates/sonar/frontpage.html:104
 msgid ""
 "The Swiss Open Access Repository is an archive of scholarly publications."
 " It collects and promotes open access publications by authors affiliated "
@@ -2129,8 +2137,8 @@ msgid ""
 "This project is the subject of an educational document or a report to the"
 " city or science"
 msgstr ""
-"Questo progetto è oggetto di un documento didattico o di una relazione alla "
-"città o alla scienza"
+"Questo progetto è oggetto di un documento didattico o di una relazione "
+"alla città o alla scienza"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:897
 msgid "This project promotes pedagogical or technological innovation"
@@ -2325,10 +2333,6 @@ msgstr "Faccette visibili nell'interfaccia pubblica per i documenti"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1791
 msgid "Volume"
 msgstr "Volume"
-
-#: sonar/modules/users/utils.py:44
-msgid "Welcome to"
-msgstr "Benvenuti su"
 
 #: sonar/config.py:128
 msgid "Welcome to SONAR, the Swiss Open Access Repository!"
@@ -2973,7 +2977,7 @@ msgstr "Stampatore"
 msgid "contribution_role_{role}"
 msgstr "contribution_role_{role}"
 
-#: sonar/config.py:657
+#: sonar/config.py:661
 msgid "contributor"
 msgstr "Contributore"
 
@@ -3256,6 +3260,10 @@ msgstr "tipo di finanziatore"
 #: sonar/translations/manual_translations.txt:36
 msgid "funding_fundingReceived"
 msgstr "finanziamenti ricevuti"
+
+#: sonar/theme/templates/sonar/partial/test_info.html:28
+msgid "help page"
+msgstr "la pagina d'aiuto"
 
 #: sonar/translations/manual_translations.txt:39
 msgid "impactOnFormation"
@@ -5259,7 +5267,7 @@ msgstr "altri files"
 msgid "p."
 msgstr "p."
 
-#: sonar/config.py:654
+#: sonar/config.py:658
 msgid "pid"
 msgstr "pid"
 
@@ -5329,7 +5337,7 @@ msgstr "squadra secondaria"
 msgid "startDate"
 msgstr "data di inizio"
 
-#: sonar/config.py:655
+#: sonar/config.py:659
 msgid "status"
 msgstr "statuto"
 
@@ -5355,7 +5363,7 @@ msgstr "sostenuto da"
 msgid "uri"
 msgstr "URI"
 
-#: sonar/config.py:656
+#: sonar/config.py:660
 msgid "user"
 msgstr "utente"
 
