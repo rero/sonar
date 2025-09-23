@@ -34,4 +34,4 @@ def test_get_translations(client):
     # OK
     res = client.get(url_for("translations.get_translations", lang="fr"))
     assert res.status_code == 200
-    assert res.json["About SONAR"] == "À propos de SONAR"
+    assert res.json["Help"] == "Aide"
