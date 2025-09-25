@@ -15,14 +15,11 @@
 
 """Deposit rest views."""
 
-import re
 from datetime import datetime
-from io import BytesIO
 
 from flask import Blueprint, abort, current_app, jsonify, make_response, request
 from flask_babel import _
 from invenio_db import db
-from invenio_rest import ContentNegotiatedMethodView
 
 from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.pdf_extractor.pdf_extractor import PDFExtractor
@@ -31,81 +28,7 @@ from sonar.modules.subdivisions.api import Record as SubdivisionRecord
 from sonar.modules.users.api import UserRecord
 from sonar.modules.utils import get_language_value, send_email
 
-
-class FilesResource(ContentNegotiatedMethodView):
-    """Rest file management."""
-
-    @staticmethod
-    def get(pid=None):
-        """Get list of files associated with bucket."""
-        deposit = DepositRecord.get_record_by_pid(pid)
-        return make_response(jsonify(deposit.files.dumps()))
-
-    @staticmethod
-    def post(pid=None):
-        """Save the file and associate it to the deposit record."""
-        deposit = DepositRecord.get_record_by_pid(pid)
-
-        if not deposit:
-            abort(400)
-
-        if "key" not in request.args or "type" not in request.args:
-            abort(400)
-
-        # Type must be either "main" or "additional"
-        if request.args["type"] not in ["main", "additional"]:
-            abort(400)
-
-        key = request.args["key"]
-
-        # Store document
-        deposit.files[key] = BytesIO(request.get_data())
-        deposit.files[key]["label"] = re.search(r"(.*)\..*$", key).group(1)
-        deposit.files[key]["type"] = "file"
-
-        deposit.commit()
-        db.session.commit()
-
-        return make_response(jsonify(deposit.files[key].dumps()))
-
-
-class FileResource(ContentNegotiatedMethodView):
-    """Deposit file resource."""
-
-    @staticmethod
-    def put(pid=None, key=None):
-        """Update metadata linked to file."""
-        deposit = DepositRecord.get_record_by_pid(pid)
-
-        if not deposit:
-            abort(400)
-
-        json = request.get_json()
-
-        if key not in deposit.files:
-            abort(400)
-
-        for item in json.items():
-            deposit.files[key][item[0]] = item[1]
-
-        if not deposit.files[key].get("embargoDate"):
-            deposit.files[key].data.pop("embargoDate")
-
-        try:
-            deposit.commit()
-            db.session.commit()
-        except Exception:
-            abort(400)
-
-        return make_response(jsonify(deposit.files[key].dumps()))
-
-
-files_view = FilesResource.as_view("files")
-file_view = FileResource.as_view("file")
-
 api_blueprint = Blueprint("deposits", __name__, url_prefix="/deposits/<pid>/", template_folder="templates")
-api_blueprint.add_url_rule("/custom-files/<key>", view_func=file_view)
-api_blueprint.add_url_rule("/custom-files", view_func=files_view)
 
 
 @api_blueprint.route("/publish", methods=["POST"])
