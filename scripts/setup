@@ -96,6 +96,12 @@ invenio flask_wiki index
 section "Create organisations" "info"
 invenio fixtures organisations import "${fixtures_folder}/organisations/data.json"
 
+# Create OAI sets for organisations
+section "Create organisations OAI sets" "info"
+invenio documents oai create-set rero "RERO+" 'organisation.code:rero'
+invenio documents oai create-set fictivededicated "Université des sciences fictives" 'organisation.code:fictivededicated'
+invenio documents oai create-set fictiveshared "École des hautes études partagées" 'organisation.code:fictiveshared'
+
 section "Create users" "info"
 invenio fixtures users import "${fixtures_folder}/users/data.json"
 

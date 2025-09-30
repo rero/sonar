@@ -47,6 +47,7 @@ class Overdo(BaseOverdo):
                     "isShared": False,
                     "isDedicated": False,
                 },
+                with_bucket=True,
                 dbcommit=True,
             )
             organisation.reindex()

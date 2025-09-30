@@ -54,7 +54,7 @@ def import_organisations(file):
             files = record.pop("files", [])
 
             # Register record to DB
-            db_record = OrganisationRecord.create(record)
+            db_record = OrganisationRecord.create(record, with_bucket=True)
 
             # Add files
             for file in files:
@@ -68,6 +68,7 @@ def import_organisations(file):
 
             indexer.index(db_record)
         except Exception as error:
+            raise error
             click.secho(
                 f"Organisation {record} could not be imported: {error}",
                 fg="red",

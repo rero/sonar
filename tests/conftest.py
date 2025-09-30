@@ -33,6 +33,7 @@ from flask_security.utils import hash_password
 from invenio_access.models import ActionUsers, Role
 from invenio_db import db as db_
 from invenio_files_rest.models import Location
+from invenio_oaiserver.models import OAISet
 from invenio_queues.proxies import current_queues
 from invenio_search import current_search
 from sqlalchemy_utils import create_database, database_exists
@@ -87,7 +88,7 @@ def search(appctx):
     should used the function-scoped :py:data:`search_clear` fixture to leave the
     indexes clean for the following tests.
     """
-    from invenio_search import current_search, current_search_client
+    from invenio_search import current_search_client
     from invenio_search.errors import IndexAlreadyExistsError
 
     try:
@@ -236,14 +237,33 @@ def make_organisation(app, db, bucket_location):
         record = OrganisationRecord.get_record_by_pid(code)
 
         if not record:
-            record = OrganisationRecord.create(data, dbcommit=True)
+            record = OrganisationRecord.create(data, dbcommit=True, with_bucket=True)
             db.session.commit()
             record.reindex()
-            current_search.flush_and_refresh(index="documents-document-v1.0.0-percolators")
+            current_search.flush_and_refresh(index="organisations")
 
         return record
 
     return _make_organisation
+
+
+@pytest.fixture()
+def org_oaiset(db, organisation):
+    """Create an OAISet for organisation."""
+    code = organisation["code"]
+    oaiset = OAISet(
+        spec=code,
+        name=organisation["name"],
+        search_pattern=f'organisation.code:"{code}"',
+        system_created=True,
+    )
+    db.session.add(oaiset)
+    db.session.commit()
+    current_search.flush_and_refresh(index="documents-document-v1.0.0-percolators")
+    yield oaiset
+    db.session.delete(oaiset)
+    db.session.commit()
+    current_search.flush_and_refresh(index="documents-document-v1.0.0-percolators")
 
 
 @pytest.fixture()

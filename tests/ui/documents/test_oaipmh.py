@@ -18,7 +18,7 @@
 """Test OAIPMH URLS."""
 
 
-def test_oaipmh_get(client, app, document):
+def test_oaipmh_get(client, org_oaiset, document):
     """Test OAIPMH API."""
     res = client.get("/oai2d?verb=ListSets")
     assert res.status_code == 200
