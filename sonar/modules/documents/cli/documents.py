@@ -23,11 +23,12 @@ from flask.cli import with_appcontext
 from invenio_db import db
 from rero_invenio_files.pdf import PDFGenerator
 
-from sonar.modules.documents.cli.rerodoc import rerodoc
-from sonar.modules.documents.cli.urn import urn
 from sonar.modules.documents.serializers.schemas.dc import DublinCoreSchema
 
 from ..api import DocumentIndexer, DocumentRecord
+from .oai import oai
+from .rerodoc import rerodoc
+from .urn import urn
 
 
 @click.group()
@@ -37,6 +38,7 @@ def documents():
 
 documents.add_command(rerodoc)
 documents.add_command(urn)
+documents.add_command(oai)
 
 
 @click.group("documents")

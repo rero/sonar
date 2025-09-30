@@ -1,5 +1,5 @@
 # Swiss Open Access Repository
-# Copyright (C) 2021 RERO
+# Copyright (C) 2022 RERO
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -13,25 +13,32 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Test OAI sets corresponding to organisation."""
+"""OAI specific CLI commands."""
 
+import click
+from flask.cli import with_appcontext
+from invenio_db import db
 from invenio_oaiserver.models import OAISet
 
 
-def test_oai_set(organisation, document):
-    """Test OAI set synchronisation with organisation."""
-    # Document has a `_oai` property
-    assert document["_oai"]["id"] == f"oai:sonar.ch:{document['pid']}"
+@click.group()
+def oai():
+    """URN specific commands."""
 
-    # Set for organisation exists
-    sets = OAISet.query.all()
-    assert len(sets) == 1
-    assert sets[0].spec == "org"
-    assert sets[0].name == "org"
 
-    # New name is updated
-    organisation.update({"code": "org", "name": "New name"})
-    sets = OAISet.query.all()
-    assert len(sets) == 1
-    assert sets[0].spec == "org"
-    assert sets[0].name == "New name"
+@oai.command()
+@click.argument("code")
+@click.argument("name")
+@click.argument("pattern")
+@with_appcontext
+def create_set(code, name, pattern):
+    oaiset = OAISet(
+        spec=code,
+        name=name,
+        search_pattern=pattern,
+        system_created=True,
+    )
+    db.session.add(oaiset)
+    db.session.commit()
+    click.secho(f"OAI set '{code}' created.", fg="green")
+    click.secho("Please reindex existing documents if needed.", fg="yellow")

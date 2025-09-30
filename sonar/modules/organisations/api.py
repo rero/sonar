@@ -19,8 +19,6 @@ from functools import partial
 
 from flask import has_request_context
 from flask.globals import request_ctx
-from invenio_db import db
-from invenio_oaiserver.models import OAISet
 from werkzeug.local import LocalProxy
 
 from sonar.modules.users.api import current_user_record
@@ -116,21 +114,6 @@ class OrganisationRecord(SonarRecord):
     schema = "organisations/organisation-v1.0.0.json"
 
     @classmethod
-    def create(cls, data, id_=None, dbcommit=False, with_bucket=True, **kwargs):
-        """Create organisation record."""
-        # Create OAI set
-        code = data["code"]
-        oaiset = OAISet(
-            spec=code,
-            name=data["name"],
-            search_pattern=f'organisation.code:"{code}"',
-            system_created=True,
-        )
-        db.session.add(oaiset)
-
-        return super().create(data, id_=id_, dbcommit=dbcommit, with_bucket=with_bucket, **kwargs)
-
-    @classmethod
     def get_or_create(cls, code, name=None):
         """Get or create an organisation.
 
@@ -146,18 +129,6 @@ class OrganisationRecord(SonarRecord):
         organisation = cls.create({"code": code, "name": name if name else code}, dbcommit=True)
         organisation.reindex()
         return organisation
-
-    def update(self, data):
-        """Update data for record."""
-        # Update OAI set name according to organisation's name
-        oaiset = OAISet.query.filter(OAISet.spec == data["code"]).first()
-
-        if oaiset:
-            oaiset.name = data["name"]
-            db.session.commit()
-
-        super().update(data)
-        return self
 
 
 class OrganisationIndexer(SonarIndexer):
