@@ -122,7 +122,10 @@ info_msg "Install assets"
 rm -rf ${assets_folder}/node_modules/@rero
 
 # Build webpack assets
-invenio webpack buildall
+# TODO: remove CI when the following issue is solved:
+# https://github.com/inveniosoftware/invenio-assets/issues/162
+# on the patch-module the option --error-on-fail is switched on by default on CI
+CI="" invenio webpack buildall
 
 if [ ! -z "$ui_tgz" ]; then
   info_msg "Install UI from $ui_tgz"
@@ -132,9 +135,6 @@ fi
 # Copy sonar-ui files to static folder to use it with flask-assets
 mkdir -p ${static_folder}/sonar-ui
 cp -R ${assets_folder}/node_modules/@rero/sonar-ui/dist/sonar/* ${static_folder}/sonar-ui
-
-# Copy worker from pdfjs to avoid a 404 error when previewing PDF files.
-cp ${assets_folder}/node_modules/pdfjs-dist/build/pdf.worker.min.mjs ${static_folder}/js/pdfjs/
 
 # Compile translations catalogs
 info_msg "Compile translations catalogs"

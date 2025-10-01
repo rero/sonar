@@ -56,7 +56,6 @@ def _(x):
 
 # Application default theme, used in several modules (previewer, admin, ...)
 APP_THEME = ["bootstrap3"]
-WEBPACKEXT_PROJECT = "sonar.theme.webpack:project"
 
 # Rate limiting
 # =============
