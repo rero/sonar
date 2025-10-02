@@ -1,0 +1,126 @@
+[
+  {
+    "logs": [
+      {
+        "date": "2025-09-30T13:38:57.921169+00:00",
+        "user": "rero.sonar+submitter-dedicated-sub1@gmail.com",
+        "action": "submit"
+      }
+    ],
+    "step": "diffusion",
+    "user": "rero.sonar+submitter-dedicated-sub1@gmail.com",
+    "status": "to_validate",
+    "$schema": "https://sonar.ch/schemas/deposits/deposit-v1.0.0.json",
+    "metadata": {
+      "title": "Methodology in research papers",
+      "language": "eng",
+      "subtitle": "an analysis",
+      "publication": {
+        "pages": "132-134",
+        "number": "8",
+        "volume": "56",
+        "publishedIn": "Science"
+      },
+      "customField1": ["Probable"],
+      "documentDate": "2018",
+      "documentType": "coar:c_3e5a",
+      "identifiedBy": [
+        { "type": "uri", "value": "https://scholar.google.com/" }
+      ],
+      "classification": "65",
+      "otherLanguageTitle": {
+        "title": "La m\u00e9thodolgie dans les travaux de recherche",
+        "language": "fre"
+      }
+    },
+    "diffusion": { "masked": "not_masked", "license": "CC BY-SA" },
+    "contributors": [
+      {
+        "name": "Jack Dyke",
+        "role": "cre",
+        "affiliation": "UNIL",
+        "date_of_birth": "1985"
+      },
+      {
+        "name": "Robert Zenem",
+        "role": "ctb",
+        "affiliation": "HEP Valais",
+        "date_of_birth": "1991"
+      }
+    ]
+  },
+  {
+    "logs": [
+      {
+        "date": "2025-10-02T06:07:21.087327+00:00",
+        "user": "rero.sonar+submitter-dedicated-sub1@gmail.com",
+        "action": "submit"
+      },
+      {
+        "date": "2025-10-02T06:12:24.119853+00:00",
+        "user": "rero.sonar+submitter-dedicated-sub1@gmail.com",
+        "action": "ask_for_changes",
+        "comment": "Corriger la faute de frappe dans le titre, merci"
+      },
+      {
+        "date": "2025-10-02T06:16:52.634537+00:00",
+        "user": "rero.sonar+submitter-dedicated-sub1@gmail.com",
+        "action": "submit"
+      },
+      {
+        "date": "2025-10-02T06:17:41.003113+00:00",
+        "user": "rero.sonar+submitter-dedicated-sub1@gmail.com",
+        "action": "ask_for_changes",
+        "comment": "There is still an error in the title"
+      }
+    ],
+    "step": "diffusion",
+    "user": "rero.sonar+submitter-dedicated-sub1@gmail.com",
+    "status": "ask_for_changes",
+    "$schema": "https://sonar.ch/schemas/deposits/deposit-v1.0.0.json",
+    "metadata": {
+      "title": "Conferences about information tehcnology",
+      "language": "eng",
+      "subtitle": "using Python in libraries",
+      "documentDate": "2016",
+      "documentType": "coar:c_18cp"
+    },
+    "diffusion": { "masked": "not_masked", "license": "License undefined" },
+    "contributors": [{ "name": "Marvin Straite", "role": "cre" }]
+  },
+  {
+    "step": "contributors",
+    "user": "rero.sonar+submitter-dedicated-sub1@gmail.com",
+    "status": "in_progress",
+    "$schema": "https://sonar.ch/schemas/deposits/deposit-v1.0.0.json",
+    "_bucket": "d96ae40a-6f39-4905-a7a1-0fe8229c55d5",
+    "metadata": {
+      "title": "In progress",
+      "language": "ger",
+      "documentDate": "2023",
+      "documentType": "coar:c_816b"
+    }
+  },
+  {
+    "step": "diffusion",
+    "user": "rero.sonar+submitter-dedicated-sub2@gmail.com",
+    "status": "in_progress",
+    "$schema": "https://sonar.ch/schemas/deposits/deposit-v1.0.0.json",
+    "metadata": {
+      "title": "The sun and its effects on mood",
+      "language": "fre",
+      "subjects": [{ "language": "fre", "subjects": ["Psychologie"] }],
+      "subtitle": "meta-analysis",
+      "documentDate": "2026",
+      "documentType": "coar:c_8544"
+    },
+    "diffusion": {
+      "masked": "not_masked",
+      "license": "CC BY",
+      "oa_status": "green"
+    },
+    "contributors": [
+      { "name": "Bobby Kanotedit", "role": "cre", "affiliation": "UNIGE" }
+    ]
+  }
+]

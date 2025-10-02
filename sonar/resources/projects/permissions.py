@@ -22,7 +22,7 @@ from invenio_access.permissions import any_user
 from invenio_records_permissions import (
     RecordPermissionPolicy as BaseRecordPermissionPolicy,
 )
-from invenio_records_permissions.generators import AdminAction
+from invenio_records_permissions.generators import AdminAction, SystemProcess
 
 from sonar.modules.api import SonarRecord
 from sonar.modules.documents.api import DocumentRecord
@@ -114,8 +114,8 @@ class Delete(Update):
 class RecordPermissionPolicy(BaseRecordPermissionPolicy):
     """Projects permission policy."""
 
-    can_search = [Read(ActionNeed("admin-access"))]
-    can_create = [AdminAction(ActionNeed("admin-access"))]
-    can_read = [Read(ActionNeed("admin-access"))]
-    can_update = [Update(ActionNeed("admin-access"))]
-    can_delete = [Delete(ActionNeed("admin-access"))]
+    can_search = [Read(ActionNeed("admin-access")), SystemProcess()]
+    can_create = [AdminAction(ActionNeed("admin-access")), SystemProcess()]
+    can_read = [Read(ActionNeed("admin-access")), SystemProcess()]
+    can_update = [Update(ActionNeed("admin-access")), SystemProcess()]
+    can_delete = [Delete(ActionNeed("admin-access")), SystemProcess()]

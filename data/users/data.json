@@ -117,7 +117,8 @@
     "phone": "+41627676171",
     "organisation": {
       "$ref": "https://sonar.ch/api/organisations/fictivededicated"
-    }
+    },
+    "subdivision": {"$ref": "https://sonar.ch/api/subdivisions/1"}
   },
   {
     "first_name": "James",
@@ -132,7 +133,8 @@
     "phone": "+41269639084",
     "organisation": {
       "$ref": "https://sonar.ch/api/organisations/fictivededicated"
-    }
+    },
+    "subdivision": {"$ref": "https://sonar.ch/api/subdivisions/1"}
   },
   {
     "first_name": "Gabriel",
@@ -147,7 +149,8 @@
     "phone": "+41914105597",
     "organisation": {
       "$ref": "https://sonar.ch/api/organisations/fictivededicated"
-    }
+    },
+    "subdivision": {"$ref": "https://sonar.ch/api/subdivisions/2"}
   },
   {
     "first_name": "Michèle",
@@ -162,7 +165,8 @@
     "phone": "+41225022590",
     "organisation": {
       "$ref": "https://sonar.ch/api/organisations/fictivededicated"
-    }
+    },
+    "subdivision": {"$ref": "https://sonar.ch/api/subdivisions/2"}
   },
   {
     "first_name": "Shakira",
