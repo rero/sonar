@@ -1,0 +1,27 @@
+[
+  {
+    "description": [
+      {
+        "language": "eng",
+        "value": "A collection to list the **best** fictive research in the institution.\n\n1. Quality\n2. Age\n3. Epistemology"
+      },
+      {
+        "language": "fre",
+        "value": "Une collection visant \u00e0 r\u00e9pertorier les **meilleures** recherches fictives men\u00e9es au sein de l'institution.\n\n1. Qualit\u00e9\n2. \u00c2ge\n3. \u00c9pist\u00e9mologie"
+      }
+    ],
+    "name": [
+      { "language": "eng", "value": "Brand new research" },
+      { "language": "fre", "value": "Recherches flambant neuves" }
+    ],
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/fictivededicated"
+    },
+    "files": [
+      {
+        "key": "brand_new_research.png",
+        "path": "./files/brand_new_research.png"
+      }
+    ]
+  }
+]

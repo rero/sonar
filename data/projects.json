@@ -1,0 +1,18 @@
+[
+  {
+    "metadata": {
+      "name": "Study of paper submissions",
+      "validation": {
+        "status": "in_progress",
+        "action": "save",
+        "user": "rero.sonar+admin-dedicated@gmail.com"
+      },
+      "description": "We want to submit all sorts of papers",
+      "startDate": "2025-09-15",
+      "organisation": {
+        "$ref": "https://sonar.ch/api/organisations/fictivededicated"
+      },
+      "user": "rero.sonar+admin-dedicated@gmail.com"
+    }
+  }
+]

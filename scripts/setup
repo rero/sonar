@@ -94,7 +94,10 @@ invenio flask_wiki index
 
 # Create users and organisations
 section "Create organisations" "info"
-invenio fixtures organisations import "${fixtures_folder}/organisations/data.json"
+invenio fixtures import "${fixtures_folder}/organisations/data.json" org
+
+section "Create subdivisions" "info"
+invenio fixtures import "${fixtures_folder}/subdivisions.json" subd
 
 # Create OAI sets for organisations
 section "Create organisations OAI sets" "info"
@@ -105,7 +108,16 @@ invenio documents oai create-set fictiveshared "École des hautes études partag
 section "Create users" "info"
 invenio fixtures users import "${fixtures_folder}/users/data.json"
 
+section "Create collections" "info"
+invenio fixtures import "${fixtures_folder}/collections/data.json" coll
+
+section "Create projects" "info"
+invenio fixtures import "${fixtures_folder}/projects.json" projects
+
+section "Create deposits" "info"
+invenio fixtures import --random-files "${fixtures_folder}/deposits.json" depo
+
 section "Create documents" "info"
-invenio fixtures documents import "${fixtures_folder}/documents/data.json"
+invenio fixtures import --random-files "${fixtures_folder}/documents/data.json" doc
 
 message "\nInstallation finished successfully" "success"

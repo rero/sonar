@@ -1,0 +1,14 @@
+[
+  {
+    "name": [{ "language": "fre", "value": "Facult\u00e9 des lettres" }],
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/fictivededicated"
+    }
+  },
+  {
+    "name": [{ "language": "fre", "value": "Facult\u00e9 des sciences" }],
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/fictivededicated"
+    }
+  }
+]
