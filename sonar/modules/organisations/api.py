@@ -114,6 +114,19 @@ class OrganisationRecord(SonarRecord):
     schema = "organisations/organisation-v1.0.0.json"
 
     @classmethod
+    def create(cls, data, id_=None, dbcommit=False, with_bucket=True, **kwargs):
+        """Create an organisation record.
+
+        :param data: The metadata of the record.
+        :param id_: The id of the record.
+        :param dbcommit: If True commit the changes to the database.
+        :param with_bucket: If True create a bucket for the organisation.
+        :returns: The created record.
+        """
+
+        return super().create(data, id_=id_, dbcommit=dbcommit, with_bucket=with_bucket, **kwargs)
+
+    @classmethod
     def get_or_create(cls, code, name=None):
         """Get or create an organisation.
 

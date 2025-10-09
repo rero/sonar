@@ -19,7 +19,7 @@ import json
 import re
 import time
 from datetime import datetime
-from os import makedirs
+from os import makedirs, remove
 from os.path import exists, join
 
 import click
@@ -81,7 +81,7 @@ def transform_harvested_records(sender=None, records=None, **kwargs):
     click.echo(f"{len(records)} records harvested in {time.time() - start_time} seconds")
 
 
-def export_json(sender=None, records=None, **kwargs):
+def export_json(sender=None, records=None, clean_file=True, **kwargs):
     """Export records in JSON and store them in a file.
 
     :param sender: Sender of the signal.
@@ -90,17 +90,12 @@ def export_json(sender=None, records=None, **kwargs):
     if not kwargs.get("name") or kwargs.get("action") != "export":
         return
 
-    data_directory = current_app.config.get("SONAR_APP_STORAGE_PATH")
-    if not data_directory:
-        data_directory = current_app.instance_path
-    data_directory = join(data_directory, "data")
+    data_directory = join(current_app.instance_path, "data")
 
     if not exists(data_directory):
         makedirs(data_directory)
 
     records_to_export = []
-
-    click.echo(f"{len(records)} records harvested")
 
     for record in records:
         loader_schema = LoaderSchemaFactory.create(kwargs["name"])
@@ -114,9 +109,12 @@ def export_json(sender=None, records=None, **kwargs):
 
     # Export to webdav for HEG
     client = HegClient()
-    client.upload_file(file_name, file_path)
-
-    click.echo(f"{len(records_to_export)} records exported")
+    try:
+        client.upload_file(file_name, file_path)
+        if clean_file:
+            remove(file_name)
+    except Exception as e:
+        current_app.logger.error(f"HEG export failed: {e} for file {file_name}")
 
 
 def process_boosting(config):

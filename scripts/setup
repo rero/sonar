@@ -27,7 +27,7 @@ fi
 title "Application setup"
 
 fixtures_folder='./data'
-
+instance_path=$(invenio shell --no-term-title -c "print(app.instance_path)")
 
 message "All data will be cleared!" "warning"
 
@@ -42,10 +42,8 @@ celery --app sonar.celery purge -f
 section "Clear redis cache" "info"
 invenio shell --no-term-title -c "import redis; redis.StrictRedis.from_url(app.config['CACHE_REDIS_URL']).flushall(); print('Cache cleared')"
 
-fixtures_folder='./data'
-
 section "Clear files" "info"
-invenio utils clear-files
+invenio utils clear-files --yes-i-know
 
 section "Initialize database" "info"
 invenio db drop --yes-i-know
@@ -59,6 +57,13 @@ invenio index queue init purge
 section "Initialize invenio queues."
 invenio queues delete
 invenio queues declare
+
+# Create a default location for depositing files
+if [[ -z "${SONAR_FILES_PATH}" ]]; then
+  SONAR_FILES_PATH=${instance_path}/files
+fi
+section "Create location for storing files with ${SONAR_FILES_PATH}" "info"
+invenio files location create --default local "${SONAR_FILES_PATH}"
 
 # Create admin role to restrict access
 section "Create roles for users" "info"
@@ -83,9 +88,7 @@ invenio roles add monitoring@rero.ch monitoring
 # create token access for monitoring
 token_create monitoring monitoring@rero.ch ${INVENIO_RERO_ACCESS_TOKEN_MONITORING}
 
-# Create a default location for depositing files
-section "Create location for storing files" "info"
-invenio fixtures deposits create
+
 
 # Initialize flask wiki
 section "Initialize wiki search"
@@ -94,7 +97,7 @@ invenio flask_wiki index
 
 # Create users and organisations
 section "Create organisations" "info"
-invenio fixtures import "${fixtures_folder}/organisations/data.json" org
+invenio fixtures import "${fixtures_folder}/organisations/data.json" org --with-file-support
 
 section "Create subdivisions" "info"
 invenio fixtures import "${fixtures_folder}/subdivisions.json" subd
@@ -109,15 +112,15 @@ section "Create users" "info"
 invenio fixtures users import "${fixtures_folder}/users/data.json"
 
 section "Create collections" "info"
-invenio fixtures import "${fixtures_folder}/collections/data.json" coll
+invenio fixtures import "${fixtures_folder}/collections/data.json" coll --with-file-support
 
 section "Create projects" "info"
 invenio fixtures import "${fixtures_folder}/projects.json" projects
 
 section "Create deposits" "info"
-invenio fixtures import --random-files "${fixtures_folder}/deposits.json" depo
+invenio fixtures import --random-files "${fixtures_folder}/deposits.json" depo --with-file-support
 
 section "Create documents" "info"
-invenio fixtures import --random-files "${fixtures_folder}/documents/data.json" doc
+invenio fixtures import --random-files "${fixtures_folder}/documents/data.json" doc --with-file-support
 
 message "\nInstallation finished successfully" "success"

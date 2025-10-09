@@ -19,7 +19,7 @@ import os
 
 from click.testing import CliRunner
 
-import sonar.modules.deposits.cli as cli
+import sonar.modules.cli.utils as cli
 
 
 def test_create(app, script_info):
@@ -30,5 +30,5 @@ def test_create(app, script_info):
 
     os.makedirs(directory, 0o755, exist_ok=True)
 
-    result = runner.invoke(cli.create, obj=script_info)
-    assert "Location #1 created successfully" in result.output
+    result = runner.invoke(cli.clear_files, ["--yes-i-know"], obj=script_info)
+    assert "Finished" in result.output

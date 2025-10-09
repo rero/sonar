@@ -2,6 +2,7 @@
   "settings": {
     "number_of_shards": 8,
     "number_of_replicas": 2,
+    "index.mapping.total_fields.limit": 2000,
     "max_result_window": 20000
   },
   "mappings": {

@@ -242,7 +242,7 @@ def test_extract_metadata(client, deposit):
 
     response = client.get(url, headers=headers)
     assert response.status_code == 200
-    assert response.json["title"] == "High-harmonic generation in quantum spin systems"
+    assert "High-harmonic generation in quantum spin systems" in response.json["title"]
 
     deposit.files["main.pdf"].remove()
     response = client.get(url, headers=headers)

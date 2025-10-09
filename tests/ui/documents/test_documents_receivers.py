@@ -15,6 +15,7 @@
 
 """Test documents recievers."""
 
+import shutil
 from os import listdir
 from os.path import exists, join
 
@@ -55,15 +56,15 @@ def test_chunks():
 def test_export_json(app, bucket_location, monkeypatch, harvested_record):
     """Test export records to file."""
     # Patch the file upload to webdav.
-    import tempfile
 
-    app.config["SONAR_APP_STORAGE_PATH"] = tempfile.mkdtemp()
     monkeypatch.setattr("webdav3.client.Client.upload_file", lambda *args: True)
 
-    data_directory = join(app.config["SONAR_APP_STORAGE_PATH"], "data")
+    data_directory = join(app.instance_path, "data")
 
-    export_json(None, [harvested_record], name="rerodoc", action="not-existing")
+    export_json(None, [harvested_record], clean_file=False, name="rerodoc", action="not-existing")
     assert not exists(data_directory)
 
-    export_json(None, [harvested_record], name="rerodoc", action="export")
+    export_json(None, [harvested_record], clean_file=False, name="rerodoc", action="export")
     assert len(listdir(data_directory)) == 1
+
+    shutil.rmtree(data_directory)
