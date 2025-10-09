@@ -31,12 +31,9 @@ from invenio_oauth2server.models import Client, Token
 from invenio_records_rest.utils import obj_or_import_string
 from invenio_search.cli import search_version_check
 from invenio_search.proxies import current_search
-from werkzeug.local import LocalProxy
 from werkzeug.security import gen_salt
 
 from sonar.modules.api import SonarRecord
-
-_datastore = LocalProxy(lambda: current_app.extensions["security"].datastore)
 
 
 @click.group()
@@ -69,14 +66,26 @@ def es_init(force):
 
 @utils.command()
 @with_appcontext
-def clear_files():
+@click.option("-y", "--yes-i-know", is_flag=True)
+def clear_files(yes_i_know):
     """Remove all files and delete directory from all locations."""
-    for location in Location.query.all():
+
+    def remove_location(location):
+        """Remove a location directory."""
         try:
             shutil.rmtree(location.uri)
+            click.secho(f"Directory {location.uri} removed", fg="yellow")
         except Exception:
-            click.secho(f"Directory {location.uri} cannot be cleaned", fg="yellow")
+            click.secho(f"Directory {location.uri} cannot be cleaned", fg="red")
 
+    for location in Location.query.all():
+        if not yes_i_know:
+            if click.confirm(f"Will remove {location.uri}. Do you want to continue?"):
+                remove_location(location=location)
+            else:
+                click.secho(f"Location {location.uri} not removed", fg="yellow")
+        else:
+            remove_location(location=location)
     click.secho("Finished", fg="green")
 
 

@@ -528,9 +528,6 @@ SONAR_APP_UI_VERSION = "14.0.1"
 SONAR_APP_DEFAULT_ORGANISATION = "global"
 """Default organisation key."""
 
-SONAR_APP_STORAGE_PATH = None
-"""File storage location."""
-
 SONAR_APP_EXPORT_SERIALIZERS = {
     "org": ("sonar.modules.organisations.serializers.schemas.export:ExportSchemaV1"),
     "user": ("sonar.modules.users.serializers.schemas.export:ExportSchemaV1"),

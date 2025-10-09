@@ -19,7 +19,6 @@ from invenio_base.signals import app_loaded
 from invenio_oaiharvester.signals import oaiharvest_finished
 
 from sonar.modules.documents.receivers import (
-    export_json,
     set_boosting_query_fields,
     transform_harvested_records,
 )
@@ -42,7 +41,8 @@ class Documents:
 
         # Connect to oaiharvester signal
         oaiharvest_finished.connect(transform_harvested_records, weak=False)
-        oaiharvest_finished.connect(export_json, weak=False)
+        # disabled HEG export for now
+        # oaiharvest_finished.connect(export_json, weak=False)
 
         # Expand configuration.
         app_loaded.connect(set_boosting_query_fields)

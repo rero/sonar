@@ -36,8 +36,6 @@ from sonar.modules.documents.serializers.schemas.dc import DublinCoreSchema
 from sonar.modules.subdivisions.api import Record as SubdivisionRecord
 from sonar.modules.users.api import UserRecord
 
-from ..deposits.cli import deposits
-from ..organisations.cli.organisations import organisations
 from ..users.cli import users
 
 
@@ -85,8 +83,9 @@ def replace_user_from_dict(a_dict):
 @click.argument("file", type=click.File("r"))
 @click.argument("doc_type")
 @click.option("--random-files", "-r", is_flag=True, help="Print more output.")
+@click.option("--with-file-support", "-f", is_flag=True, help="Add file support.")
 @with_appcontext
-def import_data(file, doc_type, random_files):
+def import_data(file, doc_type, random_files, with_file_support):
     """Import organisations from JSON file."""
     click.secho(f"Importing {doc_type} from {file.name}")
 
@@ -130,18 +129,23 @@ def import_data(file, doc_type, random_files):
                             {"$ref": f"https://sonar.ch/api/subdivisions/{random.choice(subdivision_pids)}"}
                         ]
                     if doc_type in ["doc", "depo"]:
+                        data = record
+                        if doc_type == "depo":
+                            data = record["metadata"]
                         if random.randint(0, 10) == 0:
-                            record["collections"] = [
+                            data["collections"] = [
                                 {"$ref": f"https://sonar.ch/api/collections/{random.choice(collections_pids)}"}
                             ]
                         if random.randint(0, 10) == 0:
-                            record["projects"] = [
+                            data["projects"] = [
                                 {"$ref": f"https://sonar.ch/api/projects/{random.choice(project_pids)}"}
                             ]
 
                     files = record.pop("files", [])
+                    if not with_file_support and (files or random_files):
+                        raise ClickException("Files found in record but file support is not activated. Use -f option.")
                     # Register record to DB
-                    db_record = record_class.create(record)
+                    db_record = record_class.create(data=record, with_bucket=with_file_support)
                     # Add files
                     for file in files:
                         file_path = os.path.join(directory, file["path"])
@@ -167,5 +171,3 @@ def import_data(file, doc_type, random_files):
 
 
 fixtures.add_command(users)
-fixtures.add_command(organisations)
-fixtures.add_command(deposits)

@@ -40,11 +40,11 @@ def test_clear_files(app, script_info, bucket_location):
 
     # Delete ok
     assert isdir(bucket_location.uri)
-    result = runner.invoke(cli.clear_files, obj=script_info)
+    result = runner.invoke(cli.clear_files, ["--yes-i-know"], obj=script_info)
     assert not isdir(bucket_location.uri)
 
     # Directory not exists
-    result = runner.invoke(cli.clear_files, obj=script_info)
+    result = runner.invoke(cli.clear_files, ["--yes-i-know"], obj=script_info)
     assert result.output.find(f"Directory {bucket_location.uri} cannot be cleaned") != -1
 
 
