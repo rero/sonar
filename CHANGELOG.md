@@ -1,5 +1,17 @@
 # Changelog
 
+## [v1.12.1](https://github.com/rero/sonar/tree/v1.12.0) (2025-10-22)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.12.0...v1.12.1)
+
+**Fixes:**
+
+- fix: fixes setup script [#1058](https://github.com/rero/sonar/issues/1058) (by @jma)
+
+**Other:**
+
+- chore(actions): auto-assign PR author [#1059](https://github.com/rero/sonar/issues/1059) (by @PascalRepond)
+
 ## [v1.12.0](https://github.com/rero/sonar/tree/v1.12.0) (2025-10-08)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.11.0...v1.12.0)
