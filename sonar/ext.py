@@ -116,6 +116,7 @@ class SonarBase:
 
     def init_config(self, app):
         """Initialize configuration."""
+        app.config["ENV"] = os.getenv("APP_ENV") or "production"
         for k in dir(config_sonar):
             if k.startswith("SONAR_APP_"):
                 app.config.setdefault(k, getattr(config_sonar, k))
@@ -194,6 +195,7 @@ class Sonar(SonarBase):
 
     def init_config(self, app):
         """Initialize configuration."""
+        app.config["ENV"] = os.getenv("APP_ENV") or "production"
         for k in dir(config_sonar):
             if k.startswith("SONAR_APP_"):
                 app.config.setdefault(k, getattr(config_sonar, k))
