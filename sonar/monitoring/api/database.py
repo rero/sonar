@@ -16,6 +16,7 @@
 """DB monitoring."""
 
 from invenio_db import db
+from sqlalchemy import text
 
 
 class DatabaseMonitoring:
@@ -26,26 +27,28 @@ class DatabaseMonitoring:
 
         :returns: Dict with information about current connections.
         """
-        query = """
-            select
-                max_conn, used, res_for_super,
-                max_conn-used-res_for_super free
-            from
-                (
-                    select count(*) used
-                    from pg_stat_activity
-                ) t1,
-                (
-                    select setting::int res_for_super
-                    from pg_settings
-                    where name=$$superuser_reserved_connections$$
-                ) t2,
-                (
-                    select setting::int max_conn
-                    from pg_settings
-                    where name=$$max_connections$$
-                ) t3
-        """
+        query = text(
+            """
+                select
+                    max_conn, used, res_for_super,
+                    max_conn-used-res_for_super free
+                from
+                    (
+                        select count(*) used
+                        from pg_stat_activity
+                    ) t1,
+                    (
+                        select setting::int res_for_super
+                        from pg_settings
+                        where name=$$superuser_reserved_connections$$
+                    ) t2,
+                    (
+                        select setting::int max_conn
+                        from pg_settings
+                        where name=$$max_connections$$
+                    ) t3
+            """
+        )
         result = db.session.execute(query).first()
 
         return {
@@ -60,14 +63,16 @@ class DatabaseMonitoring:
 
         :returns: A list of the current activities.
         """
-        query = """
-            SELECT
-                pid, application_name, client_addr, client_port, backend_start,
-                xact_start, query_start,  wait_event, state, left(query, 64)
-            FROM
-                pg_stat_activity
-            ORDER BY query_start DESC
-        """
+        query = text(
+            """
+                SELECT
+                    pid, application_name, client_addr, client_port, backend_start,
+                    xact_start, query_start,  wait_event, state, left(query, 64)
+                FROM
+                    pg_stat_activity
+                ORDER BY query_start DESC
+            """
+        )
 
         def format_row(row):
             """Format returned row from DB."""
