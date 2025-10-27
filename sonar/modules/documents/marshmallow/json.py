@@ -291,7 +291,6 @@ class DocumentListMetadataSchemaV1(StrictKeysMixin):
             if itm.get("type") == "ark":
                 itm.pop("uri", None)
                 break
-
         return data
 
 
@@ -314,6 +313,9 @@ class DocumentMetadataSchemaV1(DocumentListMetadataSchemaV1):
         if doc := DocumentRecord.get_record_by_pid(data.get("pid")):
             item = doc.get("identifiedBy", [])
             data["identifiedBy"].extend([identifier for identifier in item if identifier.get("type") == "ark"])
+        # remove identifiedBy if empty to avoid validation error
+        if not data.get("identifiedBy"):
+            data.pop("identifiedBy", None)
         return data
 
 
