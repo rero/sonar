@@ -87,6 +87,14 @@ def test_post_put_delete(app, client, document_json, organisation):
     response = client.get(url_for("invenio_records_rest.doc_item", pid_value=data["pid"]))
 
     assert response.status_code == 410
+    data = deepcopy(document_json)
+    data["organisation"] = [{"$ref": f"https://sonar.ch/api/organisations/{organisation['code']}"}]
+    data.pop("identifiedBy", None)
+    ark_scheme = app.config.pop("SONAR_APP_ARK_SCHEME", None)
+    response = client.post(url_for("invenio_records_rest.doc_list"), headers=headers, data=json.dumps(data))
+    assert response.status_code == 201
+    client.delete(url_for("invenio_records_rest.doc_item", pid_value=response.json["metadata"]["pid"]))
+    app.config["SONAR_APP_ARK_SCHEME"] = ark_scheme
 
     # assert document_with_file.get_ark()
 
