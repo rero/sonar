@@ -23,13 +23,17 @@ from sonar.monitoring.api.database import DatabaseMonitoring
 def test_count(app, monkeypatch):
     """Test count connections."""
     db_monitoring = DatabaseMonitoring()
+    result = db_monitoring.count_connections()
+    assert isinstance(result, dict)
+    assert len(result) == 4
 
+    # patch result and test again
     class MockConnectionQuery:
         """Mock connection query."""
 
         def first(self):
             """Simulate returning the first result."""
-            return {"max_conn": 100, "used": 10, "res_for_super": 2, "free": 88}
+            return (100, 10, 2, 88)
 
     monkeypatch.setattr(db.session, "execute", lambda *args: MockConnectionQuery())
     assert db_monitoring.count_connections() == {
@@ -43,37 +47,41 @@ def test_count(app, monkeypatch):
 def test_activity(app, monkeypatch):
     """Test activity."""
     db_monitoring = DatabaseMonitoring()
+    result = db_monitoring.activity()
+    assert isinstance(result, dict)
 
+    # patch result and test again
     class MockActivityQuery:
         """Mock activity query."""
 
         def fetchall(self):
             """Simulate returning the results."""
             return [
-                {
-                    "application_name": "",
-                    "backend_start": "Mon, 08 Feb 2021 10:46:55 GMT",
-                    "client_addr": "10.233.92.25",
-                    "client_port": 33382,
-                    "left": "\n        SELECT\n            pid, application_name, client",
-                    "query_start": "Mon, 08 Feb 2021 10:46:55 GMT",
-                    "state": "active",
-                    "wait_event": None,
-                    "xact_start": "Mon, 08 Feb 2021 10:46:55 GMT",
-                }
+                (
+                    "PID",
+                    "",
+                    "10.233.92.25",
+                    33382,
+                    "Mon, 08 Feb 2021 10:46:55 GMT",
+                    "Mon, 08 Feb 2021 10:46:56 GMT",
+                    "Mon, 08 Feb 2021 10:46:57 GMT",
+                    None,
+                    "active",
+                    "\n        SELECT\n            pid, application_name, client",
+                )
             ]
 
     monkeypatch.setattr(db.session, "execute", lambda *args: MockActivityQuery())
-    assert db_monitoring.activity() == [
-        {
+    assert db_monitoring.activity() == {
+        "PID": {
             "application_name": "",
-            "backend_start": "Mon, 08 Feb 2021 10:46:55 GMT",
             "client_addr": "10.233.92.25",
             "client_port": 33382,
-            "left": "\n        SELECT\n            pid, application_name, client",
-            "query_start": "Mon, 08 Feb 2021 10:46:55 GMT",
-            "state": "active",
+            "backend_start": "Mon, 08 Feb 2021 10:46:55 GMT",
+            "xact_start": "Mon, 08 Feb 2021 10:46:56 GMT",
+            "query_start": "Mon, 08 Feb 2021 10:46:57 GMT",
             "wait_event": None,
-            "xact_start": "Mon, 08 Feb 2021 10:46:55 GMT",
+            "state": "active",
+            "left": "\n        SELECT\n            pid, application_name, client",
         }
-    ]
+    }
