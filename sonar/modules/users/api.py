@@ -32,6 +32,7 @@ from ..api import SonarIndexer, SonarRecord, SonarSearch
 from ..fetchers import id_fetcher
 from ..minters import id_minter
 from ..providers import Provider
+from .extensions import DeleteDepositsExtension, DeleteRolesExtension
 
 
 def get_current_user():
@@ -144,6 +145,8 @@ class UserRecord(SonarRecord):
         ROLE_USER,
     ]
 
+    _extensions = [DeleteDepositsExtension(), DeleteRolesExtension()]
+
     @classmethod
     def create(cls, data, id_=None, dbcommit=False, with_bucket=False, **kwargs):
         """Create a record and sync roles.
@@ -168,23 +171,6 @@ class UserRecord(SonarRecord):
         super().update(data)
         self.sync_roles()
         return self
-
-    def delete(self, force=False, dbcommit=False, delindex=False):
-        """Delete record and persistent identifier.
-
-        :param force: True to hard delete record.
-        :param dbcommit: True for validating database transaction.
-        :param delindex: True to remove record from index.
-        """
-        # Remove roles from user account.
-        self.remove_roles()
-
-        # Remove deposits.
-        from .tasks import delete_deposits
-
-        delete_deposits.delay(user_pid=self["pid"], force=force, dbcommit=dbcommit, delindex=delindex)
-
-        return super().delete(force=force, dbcommit=dbcommit, delindex=delindex)
 
     @cached_property
     def user(self):
@@ -360,8 +346,5 @@ class UserIndexer(SonarIndexer):
 
         :param record: Record instance.
         """
-        from ..deposits.api import DepositSearch
-
-        DepositSearch().filter("term", user__pid=record["pid"]).delete()
 
         return super().delete(record)

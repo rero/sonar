@@ -23,7 +23,7 @@ from ..deposits.api import DepositRecord, DepositSearch
 
 
 @shared_task()
-def delete_deposits(user_pid, force=False, dbcommit=True, delindex=False):
+def delete_deposits(user_pid, force=False, dbcommit=False, delindex=False):
     """Delete deposits for user.
 
     :param user_pid: User pid.
