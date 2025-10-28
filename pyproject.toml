@@ -69,6 +69,7 @@ dependencies = [
     "orcid>=1.0.3",
     "python3-saml>=1.16.0",
     "rero-invenio-files>=1.2.0",
+    "flask-admin<2.0.0",
 ]
 
 [dependency-groups]
