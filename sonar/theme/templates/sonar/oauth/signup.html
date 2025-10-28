@@ -17,7 +17,7 @@
 
 {%- extends config.OAUTHCLIENT_SETTINGS_TEMPLATE %}
 
-{% from "invenio_oauthclient/_macros.html" import render_field, form_errors %}
+{% from "invenio_accounts/_macros.html" import render_field, form_errors %}
 
 {% block body %}
 <div class="row justify-content-center">
@@ -39,9 +39,7 @@
         <form name="edit" method="post" role="form">
             {{ form_errors(form) }}
             {{ form.hidden_tag() }}
-            {{ render_field(form.profile.full_name) }}
-            {{ render_field(form.profile.username) }}
-            {{ render_field(form.email) }}
+            {{ render_field(form.email, autofocus=True, errormsg=False) }}
             <button type="submit" class="btn btn-secondary btn-lg btn-block text-light"><i class="fa fa-edit"></i>
                 {{ _('Sign up') }}</button>
         </form>

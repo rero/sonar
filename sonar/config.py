@@ -136,10 +136,6 @@ ACCOUNTS_USERINFO_HEADERS = True
 # make security blueprints available to the REST API
 ACCOUNTS_REGISTER_BLUEPRINT = True
 
-# User profiles
-# =============
-USERPROFILES = False
-
 # Celery configuration
 # ====================
 
