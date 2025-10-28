@@ -4527,6 +4527,7 @@ name = "sonar"
 version = "1.12.1"
 source = { editable = "." }
 dependencies = [
+    { name = "flask-admin" },
     { name = "flask-wiki" },
     { name = "fuzzywuzzy", extra = ["speedup"] },
     { name = "invenio-access" },
@@ -4604,6 +4605,7 @@ prod = [
 
 [package.metadata]
 requires-dist = [
+    { name = "flask-admin", specifier = "<2.0.0" },
     { name = "flask-wiki", specifier = ">=0.3.1" },
     { name = "fuzzywuzzy", extras = ["speedup"], specifier = ">=0.18.0" },
     { name = "invenio-access", specifier = ">=4.0.0,<6.0.0" },
