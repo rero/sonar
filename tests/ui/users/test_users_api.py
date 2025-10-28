@@ -223,6 +223,7 @@ def test_delete_user_deposit(app, db, deposit, user):
 
     query = DepositSearch().filter("term", user__pid=user["pid"])
     assert query.count() == 1
+
     user.delete(dbcommit=True, delindex=False)
     indexer = user.get_indexer_class()
     indexer().delete(user)
