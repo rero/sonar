@@ -326,6 +326,8 @@ class DocumentSchemaV1(StrictKeysMixin):
     metadata = fields.Nested(DocumentMetadataSchemaV1)
     links = fields.Dict(dump_only=True)
     explanation = fields.Raw(dump_only=True)
+    created = fields.Str(dump_only=True)
+    updated = fields.Str(dump_only=True)
 
 
 class DocumentReroSchemaV1(DocumentSchemaV1):
@@ -350,3 +352,5 @@ class DocumentListSchemaV1(StrictKeysMixin):
     metadata = fields.Nested(DocumentListMetadataSchemaV1)
     links = fields.Dict(dump_only=True)
     explanation = fields.Raw(dump_only=True)
+    created = fields.Str(dump_only=True)
+    updated = fields.Str(dump_only=True)
