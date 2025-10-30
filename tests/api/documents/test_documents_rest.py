@@ -30,6 +30,11 @@ def test_get(client, document_with_file):
     assert res.status_code == 200
     assert res.json["hits"]["total"]["value"] == 1
 
+    # created, updated
+    for hit in res.json["hits"]["hits"]:
+        assert "created" in hit
+        assert "updated" in hit
+
     # the search results does not contains permissions
     fdata = res.json["hits"]["hits"][0]["metadata"]["_files"][0]
     assert list(fdata.keys()) == [
@@ -57,6 +62,10 @@ def test_get(client, document_with_file):
     res = client.get(url_for("invenio_records_rest.doc_item", pid_value=document_with_file["pid"], format="rero"))
     assert res.status_code == 200
     assert "ark" not in [r["type"] for r in res.json["metadata"]["identifiedBy"]]
+
+    # created, updated
+    assert "created" in res.json
+    assert "updated" in res.json
 
 
 def test_post_put_delete(app, client, document_json, organisation):
