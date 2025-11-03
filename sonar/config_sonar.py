@@ -552,7 +552,7 @@ SONAR_APP_WEBDAV_HEG_PASSWORD = None
 
 SONAR_APP_HEG_DATA_DIRECTORY = "./data/heg"
 
-SONAR_APP_ORGANISATION_CONFIG = {"hepvs": {"home_template": "dedicated/hepvs/home.html", "projects": True}}
+SONAR_APP_ORGANISATION_CONFIG = {"hepvs": {"projects": True}}
 
 # FTP
 # ===
