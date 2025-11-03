@@ -87,15 +87,11 @@ along with this program. If not, see
 <div class="row justify-content-between">
   {% if g.get('organisation', {}).get('isDedicated') %}
   <div class="col-12">
-    {% if config.get('SONAR_APP_ORGANISATION_CONFIG', {}).get(g.organisation.pid, {}).get('home_template') %}
-    {% include config['SONAR_APP_ORGANISATION_CONFIG'][g.organisation.pid]['home_template'] %}
-    {% else %}
     {% if g.organisation.get('description') %}
     {{ g.organisation.description | language_value | markdown_filter | safe }}
     {% endif %}
     {% if  config.ENV != 'production' %}
       {% include "sonar/partial/test_info.html" %}
-    {% endif %}
     {% endif %}
   </div>
   {% else %}
