@@ -30,7 +30,6 @@ from invenio_records_resources.services.records.schema import ServiceSchemaWrapp
 from invenio_records_rest.utils import obj_or_import_string
 
 from sonar.modules.organisations.api import current_organisation
-from sonar.modules.utils import has_custom_resource
 
 from ..service import RecordService, RecordServiceConfig
 from .api import Record, RecordComponent
@@ -116,11 +115,10 @@ class ProjectsRecordService(RecordService):
     @property
     def schema(self):
         """Returns the data schema instance."""
-        schema_path = "sonar.resources.projects.schema:RecordSchema"
-
-        if has_custom_resource("projects"):
-            schema_path = f"sonar.dedicated.{current_organisation['code']}.projects.schema:RecordSchema"
-
-        schema = obj_or_import_string(schema_path)
-
+        try:
+            schema = obj_or_import_string(
+                f"sonar.dedicated.{current_organisation['code']}.projects.schema:RecordSchema"
+            )
+        except Exception:
+            schema = obj_or_import_string("sonar.resources.projects.schema:RecordSchema")
         return ServiceSchemaWrapper(self, schema=schema)
