@@ -15,6 +15,7 @@
 
 """API for projects resources."""
 
+from invenio_jsonschemas import current_jsonschemas
 from invenio_pidstore.providers.recordid import RecordIdProvider as BaseRecordIdProvider
 from invenio_records.dumpers import SearchDumper, SearchDumperExt
 from invenio_records.systemfields import ConstantField
@@ -25,7 +26,6 @@ from werkzeug.utils import cached_property
 from sonar.affiliations import AffiliationResolver
 from sonar.modules.organisations.api import OrganisationRecord, current_organisation
 from sonar.modules.users.api import UserRecord
-from sonar.modules.utils import has_custom_resource
 from sonar.modules.validation.extensions.validation import ValidationExtension
 from sonar.resources.api import Record as BaseRecord
 
@@ -74,11 +74,10 @@ class Record(BaseRecord):
     @cached_property
     def schema(self):
         """Return the schema."""
-        schema_key = "projects" if not has_custom_resource("projects") else f"{current_organisation['code']}/projects"
-
-        schema = f"https://sonar.ch/schemas/{schema_key}/project-v1.0.0.json"
-
-        return ConstantField("$schema", schema)
+        schema_url = current_jsonschemas.path_to_url(f"{current_organisation['code']}/projects/project-v1.0.0.json")
+        if not schema_url:
+            schema_url = current_jsonschemas.path_to_url("projects/project-v1.0.0.json")
+        return ConstantField("$schema", schema_url)
 
     def __repr__(self):
         """String representation of object.

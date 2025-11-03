@@ -19,9 +19,9 @@ import copy
 import re
 
 from invenio_jsonschemas import current_jsonschemas
+from invenio_jsonschemas.errors import JSONSchemaNotFound
 
 from sonar.modules.organisations.api import current_organisation
-from sonar.modules.utils import has_custom_resource
 
 
 class JSONSchemaBase:
@@ -52,12 +52,15 @@ class JSONSchemaBase:
         rec_type = re.sub("s$", "", rec_type)
 
         current_jsonschemas.get_schema.cache_clear()
-        schema_path = f"{self._resource_type}/{rec_type}-v1.0.0.json"
-
-        if has_custom_resource(self._resource_type):
-            schema_path = f"{current_organisation['code']}/{schema_path}"
-
-        self._schema = copy.deepcopy(current_jsonschemas.get_schema(schema_path, with_refs=self._with_refs))
+        try:
+            schema_path = f"{self._resource_type}/{rec_type}-v1.0.0.json"
+            self._schema = copy.deepcopy(
+                current_jsonschemas.get_schema(
+                    f"{current_organisation.get('code')}/{schema_path}", with_refs=self._with_refs
+                )
+            )
+        except (JSONSchemaNotFound, AttributeError):
+            self._schema = copy.deepcopy(current_jsonschemas.get_schema(schema_path, with_refs=self._with_refs))
 
     def get_schema(self):
         """Return the schema loaded.
