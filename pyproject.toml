@@ -4,7 +4,7 @@ version = "1.12.2"
 description = "SONAR is an archive of scholarly publications. It intends to collect, promote and preserve the publications of authors affiliated with Swiss public research institutions."
 authors = [{name = "RERO", email = "software@rero.ch"}]
 keywords = ["sonar", "invenio", "document repository"]
-license = "AGPL-3.0"
+license = "AGPL-3.0-or-later"
 license-files = ["LICENSE"]
 urls = {homepage = "https://www.rero.ch/en/products/sonar", repository="https://github.com/rero/sonar"}
 requires-python = ">= 3.9.2,<3.13"

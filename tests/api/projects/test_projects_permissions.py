@@ -16,32 +16,17 @@
 """Test project permissions."""
 
 import json
-import time
 
 from flask import url_for
 from invenio_access.permissions import any_user
 from invenio_accounts.testutils import login_user_via_session
 
 
-def test_list(
-    app,
-    client,
-    make_project,
-    superuser,
-    admin,
-    moderator,
-    submitter,
-    user,
-    make_user,
-    monkeypatch,
-):
+def test_list(app, client, make_project, superuser, admin, moderator, submitter, user, make_user, monkeypatch):
     """Test list projects permissions."""
     make_project("submitter", "org")
     make_project("admin", "org")
     make_project("submitter", "org2")
-
-    # Wait for record to be indexed.
-    time.sleep(1)
 
     # Not logged
     res = client.get(url_for("projects.search"))
@@ -67,6 +52,11 @@ def test_list(
     assert res.json["hits"]["total"] == 1
     assert "organisation" not in res.json["aggregations"]
     assert "user" not in res.json["aggregations"]
+
+    # CSV format
+    res = client.get(url_for("projects.search", format="text/csv"))
+    assert res.status_code == 200
+    assert '"pid";"name";"description";"startDate";"endDate"' in res.data.decode()
 
     # Query string
     res = client.get(url_for("projects.search", q="metadata.name.suggest:Proj"))
