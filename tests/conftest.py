@@ -736,6 +736,65 @@ def deposit(app, db, user, pdf_file, bucket_location, deposit_json, embargo_date
 
 
 @pytest.fixture()
+def project_hepvs_json():
+    """Project HEVs JSON."""
+    return {
+        "metadata": {
+            "statusHep": "Lecturer/professor",
+            "searchResultsValorised": "Results used",
+            "funding": {
+                "choice": True,
+                "funder": {
+                    "type": "​Swiss National Science Foundation",
+                    "number": "1111",
+                },
+                "fundingReceived": True,
+            },
+            "impactOnFormation": "Benefits of research",
+            "approvalDate": "2021-05-10",
+            "innerSearcher": ["John Doe"],
+            "mainTeam": "Education, childhood and the learning Society 21",
+            "startDate": "2021-05-11",
+            "promoteInnovation": {"choice": True, "reason": "Because"},
+            "impactOnProfessionalEnvironment": "Impact of the research",
+            "realizationFramework": [
+                "Master of Advanced Studies",
+                "CAS or DAS",
+            ],
+            "status": "In progress",
+            "relatedToMandate": {
+                "name": "Bern",
+                "choice": True,
+                "mandate": "Other locality (Switzerland)",
+                "briefDescription": "Description of the mandate",
+            },
+            "endDate": "2021-05-28",
+            "educationalDocument": {
+                "choice": True,
+                "briefDescription": "Description of the report",
+            },
+            "description": "Summary",
+            "keywords": ["Test"],
+            "name": "Project title",
+            "benefits": "Benefits in the research",
+            "externalPartners": {
+                "list": [
+                    {
+                        "institution": "RERO",
+                        "searcherName": "External partner",
+                    }
+                ],
+                "choice": True,
+            },
+            "actorsInvolved": [{"count": 2, "choice": "Apprentice"}],
+            "impactOnPublicAction": "Impact of the research",
+            "projectSponsor": "Sébastien Délèze",
+            "secondaryTeam": "Education, childhood and the learning Society 21",
+        },
+    }
+
+
+@pytest.fixture()
 def project_json():
     """Project JSON."""
     return {

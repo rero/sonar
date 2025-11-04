@@ -33,6 +33,7 @@ def test_load(app, monkeypatch):
 
     schema = JSONSchemaBase("projects")
     assert "hepvs" not in schema.get_schema()["id"]
+
     # Schema for custom resource
     monkeypatch.setattr("sonar.jsonschemas.json_schema_base.current_organisation", {"code": "hepvs"})
     schema = JSONSchemaBase("projects")

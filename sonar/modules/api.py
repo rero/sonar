@@ -25,7 +25,6 @@ import requests
 from flask import current_app
 from invenio_db import db
 from invenio_files_rest.helpers import compute_md5_checksum
-from invenio_indexer import current_record_to_index
 from invenio_indexer.api import RecordIndexer
 from invenio_jsonschemas import current_jsonschemas
 from invenio_pidstore.errors import PIDDoesNotExistError
@@ -356,25 +355,24 @@ class SonarIndexer(RecordIndexer):
 
     record_cls = SonarRecord
 
-    def index(self, record):
+    def index(self, record, **kwargs):
         """Indexing a record.
 
         :param record: Record to index.
         :returns: Indexation result
         """
-        return_value = super().index(record)
-
-        index_name = current_record_to_index(record)
+        return_value = super().index(record, **kwargs)
+        index_name = self.record_to_index(record)
         current_search.flush_and_refresh(index_name)
         return return_value
 
-    def delete(self, record):
+    def delete(self, record, **kwargs):
         """Delete a record.
 
         :param record: Record to remove from index.
         :returns: Indexation result
         """
-        return_value = super().delete(record)
-        index_name = current_record_to_index(record)
+        return_value = super().delete(record, **kwargs)
+        index_name = self.record_to_index(record)
         current_search.flush_and_refresh(index_name)
         return return_value

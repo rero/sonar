@@ -20,9 +20,19 @@ from flask_resources.serializers import JSONSerializer
 from invenio_records_resources.resources import RecordResourceConfig
 from invenio_records_resources.resources.records.headers import etag_headers
 
-from sonar.resources.projects.serializers.csv import CSVSerializer
-from sonar.resources.resource import RecordResource
-from sonar.resources.resources.responses import StreamResponseHandler
+from sonar.dedicated.hepvs.projects.serializers.csv import (
+    CSVSerializer as HepvsCSVSerializer,
+)
+from sonar.modules.organisations.api import current_organisation
+from sonar.resources.projects.serializers.csv import CSVSerializer as BaseCSVSerializer
+from sonar.resources.resources.responses import DynamicResponseHandler
+
+
+def csv_serializer_factory():
+    """CSV serializer factory."""
+    if current_organisation and current_organisation["code"] == "hepvs":
+        return HepvsCSVSerializer()
+    return BaseCSVSerializer()
 
 
 class ProjectsRecordResourceConfig(RecordResourceConfig):
@@ -34,38 +44,7 @@ class ProjectsRecordResourceConfig(RecordResourceConfig):
 
     response_handlers = {
         "application/json": ResponseHandler(JSONSerializer(), headers=etag_headers),
-        "text/csv": StreamResponseHandler(
-            CSVSerializer(
-                csv_included_fields=[
-                    "pid",
-                    "name",
-                    "description",
-                    "startDate",
-                    "endDate",
-                ]
-            ),
-            filename="projects.csv",
-            headers=etag_headers,
+        "text/csv": DynamicResponseHandler(
+            csv_serializer_factory, headers={"Content-disposition": "attachment; filename=projects.csv"}
         ),
     }
-
-    # # Request parsing
-    # request_read_args = {}
-    # request_view_args = {"pid_value": ma.fields.Str()}
-    # request_search_args = SearchRequestArgsSchema
-    # request_headers = {"if_match": ma.fields.Int()}
-    # request_body_parsers = {
-    #     "application/json": RequestBodyParser(JSONDeserializer())
-    # }
-    # default_content_type = "application/json"
-
-    # # Response handling
-    # response_handlers = {
-    #     "application/json": ResponseHandler(
-    #         JSONSerializer(), headers=etag_headers)
-    # }
-    # default_accept_mimetype = "application/json"
-
-
-class ProjectsRecordResource(RecordResource):
-    """Projects resource"."""

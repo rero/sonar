@@ -552,8 +552,6 @@ SONAR_APP_WEBDAV_HEG_PASSWORD = None
 
 SONAR_APP_HEG_DATA_DIRECTORY = "./data/heg"
 
-SONAR_APP_ORGANISATION_CONFIG = {"hepvs": {"projects": True}}
-
 # FTP
 # ===
 SONAR_APP_FTP_SNL_HOST = "https://change.me"

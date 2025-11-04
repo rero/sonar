@@ -29,12 +29,19 @@ from invenio_records_resources.services.records.params.querystr import (
 from invenio_records_resources.services.records.schema import ServiceSchemaWrapper
 from invenio_records_rest.utils import obj_or_import_string
 
+from sonar.modules.api import SonarIndexer
 from sonar.modules.organisations.api import current_organisation
 
 from ..service import RecordService, RecordServiceConfig
 from .api import Record, RecordComponent
 from .permissions import RecordPermissionPolicy
 from .results import RecordList
+
+
+class ProjectIndexer(SonarIndexer):
+    """Project indexer."""
+
+    record_cls = Record
 
 
 class PreFacetsParam(FacetsParam):
@@ -99,6 +106,7 @@ class ProjectsRecordServiceConfig(RecordServiceConfig):
     permission_policy_cls = RecordPermissionPolicy
 
     record_cls = Record
+    indexer_cls = ProjectIndexer
 
     result_list_cls = RecordList
 

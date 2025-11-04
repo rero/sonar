@@ -15,39 +15,21 @@
 
 """SONAR resources responses."""
 
-from flask import Response
-from flask import make_response as flask_make_response
 from flask_resources.responses import ResponseHandler
 
 
-class StreamResponseHandler(ResponseHandler):
-    """Stream response."""
+class DynamicResponseHandler(ResponseHandler):
+    """Dynamic response handler."""
 
-    filename = None
+    def __init__(self, serializer_factory, headers=None):
+        """Dynamic response handler initialization.
 
-    def __init__(self, serializer, filename="records", headers=None):
-        """Stream response initialization.
-
-        :param filename: File name.
-        :param serializer: Record serializer.
+        :param serializer_factory: A callable that returns a serializer.
         """
-        self.filename = filename
-        super().__init__(serializer=serializer, headers=headers)
+        self.serializer_factory = serializer_factory
+        super().__init__(serializer=None, headers=headers)
 
     def make_response(self, obj_or_list, code, many=False):
         """Builds a response for one object."""
-        # If view returns a response, bypass the serialization.
-        if isinstance(obj_or_list, Response):
-            return obj_or_list
-
-        # https://flask.palletsprojects.com/en/1.1.x/api/#flask.Flask.make_response
-        # (body, status, header)
-        serialize = self.serializer.serialize_object_list if many else self.serializer.serialize_object
-
-        response = flask_make_response(
-            ("" if obj_or_list is None else Response(self.serializer.serialize_object_list(obj_or_list))),
-            code,
-        )
-
-        response.headers["Content-Disposition"] = f"attachment; filename={self.filename}"
-        return response
+        self.serializer = self.serializer_factory()
+        return super().make_response(obj_or_list, code, many=many)

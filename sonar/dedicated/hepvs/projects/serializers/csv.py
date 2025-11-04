@@ -15,14 +15,53 @@
 
 """CSV serializer for HEP Valais projects."""
 
-from sonar.resources.projects.serializers.csv import CSVSerializer as BaseCSVSerializer
+from sonar.resources.projects.serializers.csv import CSVSerializerMixin
 
 
-class CSVSerializer(BaseCSVSerializer):
+class CSVSerializer(CSVSerializerMixin):
     """CSV serializer for HEP Valais projects."""
 
     chunk_size = 1000
-    list_separator = "|"
+
+    def __init__(self):
+        """Constructor."""
+        self.list_separator = "|"
+        super().__init__(
+            csv_included_fields=[
+                "pid",
+                "name",
+                "approvalDate",
+                "projectSponsor",
+                "statusHep",
+                "mainTeam",
+                "innerSearcher",
+                "secondaryTeam",
+                "externalPartners",
+                "status",
+                "startDate",
+                "endDate",
+                "description",
+                "keywords",
+                "realizationFramework",
+                "funding_funder_type",
+                "funding_funder_name",
+                "funding_funder_number",
+                "funding_fundingReceived",
+                "actorsInvolved",
+                "benefits",
+                "impactOnFormation",
+                "impactOnProfessionalEnvironment",
+                "impactOnPublicAction",
+                "promoteInnovation",
+                "relatedToMandate_mandate",
+                "relatedToMandate_name",
+                "relatedToMandate_briefDescription",
+                "educationalDocument",
+                "searchResultsValorised",
+            ],
+            csv_excluded_fields=[],
+            header_separator="_",
+        )
 
     def format_row(self, data):
         """Format the data for a single row.

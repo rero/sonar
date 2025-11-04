@@ -24,6 +24,7 @@ from flask_security import user_registered
 from flask_wiki import Wiki
 from invenio_files_rest.signals import file_deleted, file_downloaded, file_uploaded
 from invenio_indexer.signals import before_record_index
+from invenio_records_resources.resources import RecordResource
 from werkzeug.datastructures import MIMEAccept
 
 from sonar.filters import (
@@ -51,7 +52,6 @@ from sonar.modules.utils import (
 )
 from sonar.modules.validation.views import blueprint as validation_blueprint
 from sonar.resources.projects.resource import (
-    ProjectsRecordResource,
     ProjectsRecordResourceConfig,
 )
 from sonar.resources.projects.service import (
@@ -141,7 +141,7 @@ class SonarBase:
         """Create resources."""
         # Initialize the project resource with the corresponding service.
         project_service = ProjectsRecordService(ProjectsRecordServiceConfig())
-        projects_resource = ProjectsRecordResource(service=project_service, config=ProjectsRecordResourceConfig)
+        projects_resource = RecordResource(service=project_service, config=ProjectsRecordResourceConfig)
         self.resources["projects"] = projects_resource
 
     def get_endpoints(self):
