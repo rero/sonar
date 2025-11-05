@@ -1,5 +1,24 @@
 # Changelog
 
+## [v1.12.2](https://github.com/rero/sonar/tree/v1.12.2) (2025-11-05)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.12.1...v1.12.2)
+
+**Fixes:**
+
+- fix(deposits): make the subdivision field an autocomplete widget [#1075](https://github.com/rero/sonar/pull/1075) (by @PascalRepond)
+- fix(records): adds created, updated [#1069](https://github.com/rero/sonar/pull/1069) (by @rerowep)
+- fix(users): delete deposits [#1068](https://github.com/rero/sonar/pull/1068) (by @rerowep)
+- fix(monitoring): database [#1067](https://github.com/rero/sonar/pull/1067) (by @rerowep)
+- fix(editor): unable to create a document without identifiers [#1064](https://github.com/rero/sonar/pull/1064) (by @jma)
+- fix(login): fix oauth additionnal information form [#1066](https://github.com/rero/sonar/pull/1066) (by @jma)
+- fix(monitoring): database counts [#1063](https://github.com/rero/sonar/pull/1063) (by @rerowep)
+- fix: flask env does not exists anymore [#1062](https://github.com/rero/sonar/pull/1062) (by @jma)
+
+**Other changes:**
+
+- dependencies: use flask-admin < 2.0 [#1065](https://github.com/rero/sonar/pull/1065) (by @jma)
+
 ## [v1.12.1](https://github.com/rero/sonar/tree/v1.12.0) (2025-10-22)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.12.0...v1.12.1)
