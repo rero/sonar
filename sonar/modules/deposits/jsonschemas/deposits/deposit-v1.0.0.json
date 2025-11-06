@@ -1410,7 +1410,19 @@
             "properties": {
               "$ref": {
                 "type": "string",
-                "pattern": "^https://sonar.ch/api/subdivisions/.*?$"
+                "pattern": "^https://sonar.ch/api/subdivisions/.*?$",
+                "widget": {
+                  "formlyConfig": {
+                    "type": "remoteAutoComplete",
+                    "props": {
+                      "queryOptions": {
+                        "type": "subdivisions",
+                        "field": "name.value.suggest",
+                        "label": "label"
+                      }
+                    }
+                  }
+                }
               }
             },
             "required": [
