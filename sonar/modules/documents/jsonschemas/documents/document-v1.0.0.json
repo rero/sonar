@@ -1452,6 +1452,7 @@
                             "queryOptions": {
                               "type": "documents",
                               "field": "contribution.agent.preferred_name.suggest",
+                              "suggest": "/api/suggestions/completion",
                               "allowAdd": true
                             }
                         }
@@ -1616,6 +1617,7 @@
                           "queryOptions": {
                             "type": "documents",
                             "field": "contribution.agent.preferred_name.suggest",
+                            "suggest": "/api/suggestions/completion",
                             "allowAdd": true
                           }
                         }
@@ -1682,6 +1684,7 @@
                           "queryOptions": {
                             "type": "documents",
                             "field": "contribution.agent.preferred_name.suggest",
+                            "suggest": "/api/suggestions/completion",
                             "allowAdd": true
                           }
                         }
@@ -2199,11 +2202,12 @@
         "minLength": 1,
         "widget": {
           "formlyConfig": {
+            "type": "remoteAutoComplete",
             "props": {
-              "type": "remoteAutoComplete",
-              "formlyConfig": {
+              "queryOptions": {
                 "type": "documents",
                 "field": "customField1.suggest",
+                "suggest": "/api/suggestions/completion",
                 "allowAdd": true
               }
             }
@@ -2227,11 +2231,12 @@
         "minLength": 1,
         "widget": {
           "formlyConfig": {
+            "type": "remoteAutoComplete",
             "props": {
-              "type": "remoteAutoComplete",
-              "formlyConfig": {
+              "queryOptions": {
                 "type": "documents",
                 "field": "customField2.suggest",
+                "suggest": "/api/suggestions/completion",
                 "allowAdd": true
               }
             }
@@ -2255,11 +2260,12 @@
         "minLength": 1,
         "widget": {
           "formlyConfig": {
+            "type": "remoteAutoComplete",
             "props": {
-              "type": "remoteAutoComplete",
-              "formlyConfig": {
+              "queryOptions": {
                 "type": "documents",
                 "field": "customField3.suggest",
+                "suggest": "/api/suggestions/completion",
                 "allowAdd": true
               }
             }
