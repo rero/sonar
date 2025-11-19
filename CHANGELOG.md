@@ -1,5 +1,16 @@
 # Changelog
 
+## [v1.12.3](https://github.com/rero/sonar/tree/v1.12.3) (2025-11-19)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.12.2...v1.12.3)
+
+**Fixes:**
+
+- Projects : CSV export customised for HEPVS not working as expected  [#933](https://github.com/rero/sonar/issues/933) (by @jma)
+- fix: the autocomplete does not work on editors [#1076](https://github.com/rero/sonar/pull/1076) (by @jma)
+- fix(jsonschema): use invenio-jsonschema to configure jsonschemas [#1072](https://github.com/rero/sonar/pull/1072) (by @jma)
+- fix(frontpage): remove hepvs custom home page [#1071](https://github.com/rero/sonar/pull/1071) (by @jma)
+
 ## [v1.12.2](https://github.com/rero/sonar/tree/v1.12.2) (2025-11-05)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.12.1...v1.12.2)
