@@ -1196,6 +1196,7 @@
                     "queryOptions": {
                       "type": "documents",
                       "field": "contribution.agent.preferred_name.suggest",
+                      "suggest": "/api/suggestions/completion",
                       "allowAdd": true
                     }
                 }
