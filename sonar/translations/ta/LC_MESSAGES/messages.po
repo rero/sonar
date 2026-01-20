@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SONAR 1.11.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2025-09-23 11:18+0200\n"
+"POT-Creation-Date: 2026-02-10 13:30+0100\n"
 "PO-Revision-Date: 2025-08-30 18:01+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language: ta\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: sonar/jsonschemas/common/masked-v1.0.0.json:9
 msgid ""
@@ -27,7 +27,7 @@ msgstr ""
 "ஒரு முகமூடி ஆவணம் தொழில்முறை இடைமுகத்தில் தெரியும், ஆனால் பொது "
 "இடைமுகத்தில் இல்லை."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:359
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:360
 msgid "Abandoned"
 msgstr "கைவிடப்பட்டது"
 
@@ -63,20 +63,20 @@ msgstr "வளத்தின் பொருள், அதாவது வர�
 msgid "Acquisition terms"
 msgstr "கையகப்படுத்தல் விதிமுறைகள்"
 
-#: sonar/jsonschemas/common/validation-v1.0.0.json:77
+#: sonar/jsonschemas/common/validation-v1.0.0.json:98
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:226
 msgid "Action"
 msgstr "செயல்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:662
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:665
 msgid "Actor"
 msgstr "நடிகர்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:657
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:660
 msgid "Actor involved"
 msgstr "சம்பந்தப்பட்ட நடிகர்"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1318
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1319
 msgid "Add a new project"
 msgstr "புதிய திட்டத்தைச் சேர்க்கவும்"
 
@@ -90,15 +90,15 @@ msgstr "கூடுதல் பொருட்கள்"
 msgid "Administration"
 msgstr "நிர்வாகம்"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1206
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1567
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1207
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1568
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:223
 msgid "Affiliation"
 msgstr "இணைப்பு"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1427
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1591
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1657
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1592
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1659
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:175
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:324
 msgid "Agent"
@@ -108,7 +108,7 @@ msgstr "முகவர்"
 msgid "All languages"
 msgstr "அனைத்து மொழிகளும்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:729
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:732
 msgid "Allophone student"
 msgstr "அலோன் மாணவர்"
 
@@ -116,7 +116,7 @@ msgstr "அலோன் மாணவர்"
 msgid "Allowed IP addresses"
 msgstr "அனுமதிக்கப்பட்ட ஐபி முகவரிகள்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:793
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:796
 msgid "Animator"
 msgstr "அனிமேட்டர்"
 
@@ -124,7 +124,7 @@ msgstr "அனிமேட்டர்"
 msgid "Animators"
 msgstr "அனிமேட்டர்கள்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:697
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:700
 msgid "Apprentice"
 msgstr "பயிற்சி"
 
@@ -144,7 +144,7 @@ msgstr ""
 "குறைந்தது 3 எழுத்துக்கள் மற்றும் சிறிய எழுத்துக்கள் மற்றும் "
 "அடிக்கோடிட்டுக் காட்டப்பட்டிருக்க வேண்டும்."
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1871
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1874
 msgid "Author or editor"
 msgstr "ஆசிரியர் அல்லது ஆசிரியர்"
 
@@ -167,11 +167,11 @@ msgstr "மீண்டும் சோனார்"
 msgid "Best regards"
 msgstr "வாழ்த்துக்கள்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1005
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1008
 msgid "Brief description of the mandate"
 msgstr "ஆணை பற்றிய சுருக்கமான விளக்கம்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1043
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1046
 msgid "Brief description of the report"
 msgstr "அறிக்கையின் சுருக்கமான விளக்கம்"
 
@@ -194,7 +194,7 @@ msgstr "வாளி uuid"
 msgid "Bucket UUID used to store files"
 msgstr "கோப்புகளை சேமிக்க வாளி UUID பயன்படுத்தப்படுகிறது"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:511
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:513
 msgid "CAS or DAS"
 msgstr "CAS அல்லது DAS"
 
@@ -255,7 +255,7 @@ msgstr "வகைப்பாடு பகுதி"
 msgid "Classifications"
 msgstr "வகைப்பாடுகள்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:769
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:772
 msgid "Classroom teacher"
 msgstr "வகுப்பறை ஆசிரியர்"
 
@@ -284,24 +284,24 @@ msgstr "சேகரிப்பு"
 msgid "Collections"
 msgstr "சேகரிப்புகள்"
 
-#: sonar/jsonschemas/common/validation-v1.0.0.json:106
+#: sonar/jsonschemas/common/validation-v1.0.0.json:127
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:265
 msgid "Comment"
 msgstr "கருத்து"
 
-#: sonar/jsonschemas/common/validation-v1.0.0.json:107
+#: sonar/jsonschemas/common/validation-v1.0.0.json:128
 msgid "Comment associated with the current action."
 msgstr "தற்போதைய செயலுடன் தொடர்புடைய கருத்து."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:575
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:577
 msgid "Company"
 msgstr "நிறுவனம்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:355
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:356
 msgid "Completed"
 msgstr "முடிந்தது"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2059
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2062
 msgid ""
 "Conditions under which the publisher, distributor, etc., will normally "
 "supply a resource, e.g., price of a resource."
@@ -320,7 +320,7 @@ msgid "Contact"
 msgstr "தொடர்பு"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:578
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1770
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1773
 msgid "Contained in or submitted to (journal, book, proceedings)"
 msgstr "(பத்திரிகை, நூல், நடவடிக்கைகள்) இல் அல்லது சமர்ப்பிக்கப்பட்டவை"
 
@@ -339,7 +339,7 @@ msgid "Content notes"
 msgstr "உள்ளடக்க குறிப்புகள்"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1418
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1867
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1870
 msgid "Contribution"
 msgstr "பங்களிப்பு"
 
@@ -355,12 +355,12 @@ msgstr "பங்களிப்பாளர்"
 msgid "Contributors"
 msgstr "பங்களிப்பாளர்கள்"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2417
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2423
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:232
 msgid "Controlled affiliation"
 msgstr "கட்டுப்படுத்தப்பட்ட இணைப்பு"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2414
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2420
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:228
 msgid "Controlled affiliations"
 msgstr "கட்டுப்படுத்தப்பட்ட இணைப்புகள்"
@@ -370,11 +370,11 @@ msgid "Created:"
 msgstr "உருவாக்கப்பட்டது:"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:251
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:319
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:320
 msgid "Creativity, transformations and innovations in education"
 msgstr "படைப்பாற்றல், மாற்றங்கள் மற்றும் கல்வியில் புதுமைகள்"
 
-#: sonar/jsonschemas/common/validation-v1.0.0.json:78
+#: sonar/jsonschemas/common/validation-v1.0.0.json:99
 msgid "Current action done in the validation process."
 msgstr "சரிபார்ப்பு செயல்பாட்டில் செய்யப்படும் தற்போதைய நடவடிக்கை."
 
@@ -382,31 +382,31 @@ msgstr "சரிபார்ப்பு செயல்பாட்டில�
 msgid "Current cataloguing step."
 msgstr "தற்போதைய பட்டியலிடும் படி."
 
-#: sonar/jsonschemas/common/validation-v1.0.0.json:65
+#: sonar/jsonschemas/common/validation-v1.0.0.json:86
 msgid "Current status of the record in the validation process."
 msgstr "சரிபார்ப்பு செயல்பாட்டில் பதிவின் தற்போதைய நிலை."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1051
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2194
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2197
 msgid "Custom field 1"
 msgstr "தனிப்பயன் புலம் 1"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1072
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2222
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2226
 msgid "Custom field 2"
 msgstr "தனிப்பயன் புலம் 2"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1093
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2250
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2255
 msgid "Custom field 3"
 msgstr "தனிப்பயன் புலம் 3"
 
-#: sonar/jsonschemas/common/validation-v1.0.0.json:42
+#: sonar/jsonschemas/common/validation-v1.0.0.json:63
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:260
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:909
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:519
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1354
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1704
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1707
 msgid "Date"
 msgstr "திகதி"
 
@@ -418,22 +418,22 @@ msgstr "YYYYY-MM-DD வடிவத்தில் தேதி, EX: 1970-01-01"
 msgid "Date of approval by the Team Leader"
 msgstr "குழுத் தலைவரின் ஒப்புதல் தேதி"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1269
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1527
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1270
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1528
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:42
 msgid "Date of birth"
 msgstr "பிறந்த தேதி"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1274
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1539
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1275
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1540
 msgid "Date of death"
 msgstr "இறப்பு தேதி"
 
-#: sonar/jsonschemas/common/validation-v1.0.0.json:43
+#: sonar/jsonschemas/common/validation-v1.0.0.json:64
 msgid "Date when the log is created."
 msgstr "பதிவு உருவாக்கப்படும் தேதி."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:717
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:720
 msgid "Dean of a school"
 msgstr "ஒரு பள்ளியின் டீன்"
 
@@ -480,7 +480,7 @@ msgid "Describes the information of a single file in the record."
 msgstr "பதிவில் ஒரு கோப்பின் தகவலை விவரிக்கிறது."
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:73
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1328
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1329
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:47
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:55
 msgid "Description"
@@ -500,16 +500,16 @@ msgstr "பதவி"
 msgid "Diamond"
 msgstr "வைர"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1384
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1385
 #, fuzzy
 msgid "Diffusion"
 msgstr "பதிப்பு"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:713
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:716
 msgid "Director, head of HE training"
 msgstr "இயக்குனர், அவர் பயிற்சியின் தலைவர்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:709
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:712
 msgid "Director, head of establishment"
 msgstr "இயக்குனர், ச்தாபனத் தலைவர்"
 
@@ -522,21 +522,21 @@ msgstr "ஆய்வுக் கட்டுரை"
 msgid "Doctoral student"
 msgstr "முனைவர் மாணவர்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:495
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:497
 msgid "Doctorate not supported by the HEP-VS"
 msgstr "HEP-VS ஆல் ஆதரிக்கப்படவில்லை"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:491
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:493
 msgid "Doctorate supported by the HEP-VS"
 msgstr "HEP-VS ஆல் ஆதரிக்கப்படும் முனைவர் பட்டம்"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:594
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1439
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1440
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:3
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1064
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1132
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1774
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1827
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1777
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1830
 msgid "Document"
 msgstr "ஆவணம்"
 
@@ -544,7 +544,7 @@ msgstr "ஆவணம்"
 msgid "Document ID"
 msgstr "ஆவண ஐடி"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1440
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1441
 msgid "Document created on basis of this deposit."
 msgstr "இந்த வைப்புத்தொகையின் அடிப்படையில் உருவாக்கப்பட்ட ஆவணம்."
 
@@ -596,11 +596,11 @@ msgid "Edition"
 msgstr "பதிப்பு"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:239
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:307
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:308
 msgid "Education, childhood and the learning Society 21"
 msgstr "கல்வி, குழந்தை பருவ மற்றும் கற்றல் சங்கம் 21"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1033
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1036
 msgid "Educational document, report"
 msgstr "கல்வி ஆவணம், அறிக்கை"
 
@@ -614,12 +614,12 @@ msgid "Embargo date"
 msgstr "தடை தேதி"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:243
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:311
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:312
 msgid "Emotions, learning, and well-being at school"
 msgstr "பள்ளியில் உணர்ச்சிகள், கற்றல் மற்றும் நல்வாழ்வு"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:84
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1355
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1356
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:83
 msgid "End date"
 msgstr "இறுதி தேதி"
@@ -661,7 +661,7 @@ msgstr "எடுத்துக்காட்டு: 1, 4-5,…"
 msgid "Example: 10, 22-24, \\u2026"
 msgstr "எடுத்துக்காட்டு: 10, 22-24,…"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1263
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1264
 msgid "Example: 1111-2222-3333-4444"
 msgstr "எடுத்துக்காட்டு: 1111-222-333-4444"
 
@@ -685,8 +685,8 @@ msgstr "எடுத்துக்காட்டு: 2020"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:78
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:93
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1349
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1363
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1350
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1364
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:77
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:92
 msgid "Example: 2020-12-01"
@@ -700,7 +700,7 @@ msgstr "எடுத்துக்காட்டு: டியோ"
 msgid "Example: John"
 msgstr "எடுத்துக்காட்டு: சான்"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1877
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1880
 msgid "Example: Muller, Hans"
 msgstr "எடுத்துக்காட்டு: முல்லர், ஆன்ச்"
 
@@ -722,7 +722,7 @@ msgid "Example: https://www.rero.ch"
 msgstr "எடுத்துக்காட்டு: https://www.reo.ch"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:636
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1821
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1824
 #, fuzzy
 msgid "Examples: 135, 5-27, \\u2026"
 msgstr "எடுத்துக்காட்டுகள்: 135, 5-27,…"
@@ -731,7 +731,7 @@ msgstr "எடுத்துக்காட்டுகள்: 135, 5-27,…"
 msgid "Except within organisation"
 msgstr "நிறுவனத்திற்குள் தவிர"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1291
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1292
 msgid "Existing project"
 msgstr "தற்போதுள்ள திட்டம்"
 
@@ -753,16 +753,16 @@ msgstr "வெளிப்புற முகவரி"
 msgid "External link to the source"
 msgstr "மூலத்திற்கு வெளிப்புற இணைப்பு"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:386
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:387
 msgid "External partner"
 msgstr "வெளிப்புற பங்குதாரர்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:372
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:382
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:373
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:383
 msgid "External partners"
 msgstr "வெளிப்புற பங்காளிகள்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:377
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:378
 msgid "External partners are involved"
 msgstr "வெளிப்புற பங்காளிகள் ஈடுபட்டுள்ளனர்"
 
@@ -804,7 +804,7 @@ msgstr ""
 "உங்கள் பதிவை முடிக்க உங்கள் விவரங்களை நிரப்பவும். நீங்கள் இதை ஒரு முறை "
 "மட்டுமே செய்ய வேண்டும்."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:272
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:273
 msgid "First and last name"
 msgstr "முதல் மற்றும் கடைசி பெயர்"
 
@@ -847,28 +847,32 @@ msgstr "வளத்தின் வடிவம், அதாவது செ.�
 msgid "Formats"
 msgstr "வடிவங்கள்"
 
-#: sonar/config.py:75
+#: sonar/config.py:74
 msgid "French"
 msgstr "பிரஞ்சு"
+
+#: sonar/jsonschemas/common/validation-v1.0.0.json:43
+msgid "Full name of the user."
+msgstr ""
 
 #: sonar/theme/templates/sonar/stats/detail.html:36
 msgid "Full-text"
 msgstr "முழு உரை"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:247
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:315
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:316
 msgid "Fundamental learning"
 msgstr "அடிப்படை கற்றல்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:503
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:505
 msgid "Funded research"
 msgstr "நிதியளிக்கப்பட்ட ஆராய்ச்சி"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:530
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:532
 msgid "Funder"
 msgstr "மோசடி"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:588
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:590
 msgid "Funding number"
 msgstr "பொருள் எண்"
 
@@ -881,15 +885,15 @@ msgstr "பொருள் அமைப்பு"
 msgid "Funding organisations"
 msgstr "நிறுவனங்களுக்கு பொருள்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:520
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:522
 msgid "Funding request"
 msgstr "பொருள் கோரிக்கை"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:631
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:633
 msgid "Funding was granted for the project"
 msgstr "திட்டத்திற்கு பொருள் வழங்கப்பட்டது"
 
-#: sonar/config.py:75
+#: sonar/config.py:74
 msgid "German"
 msgstr "செர்மன்"
 
@@ -906,7 +910,7 @@ msgstr "நிறுவனம் வழங்குதல்"
 msgid "Green"
 msgstr "பச்சை"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:705
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:708
 msgid "Guidance counsellor"
 msgstr "வழிகாட்டுதல் ஆலோசகர்"
 
@@ -914,11 +918,11 @@ msgstr "வழிகாட்டுதல் ஆலோசகர்"
 msgid "HEP status"
 msgstr "எப் நிலை"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:563
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:565
 msgid "HES-SO"
 msgstr "அச்-சோ"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:559
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:561
 msgid "HES-SO Valais-Wallis"
 msgstr "Hes-so Valais-wallis"
 
@@ -940,7 +944,7 @@ msgid "Home"
 msgstr "வீடு"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:595
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1833
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1836
 msgid ""
 "Host document, for example a journal for an article, or a book for a book"
 " chapter."
@@ -948,7 +952,7 @@ msgstr ""
 "புரவலன் ஆவணம், எடுத்துக்காட்டாக ஒரு கட்டுரைக்கான செய்தித் தாள் அல்லது "
 "புத்தக அத்தியாயத்திற்கான நூல்."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1069
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1072
 msgid "How are research results used in training?"
 msgstr "பயிற்சியில் ஆராய்ச்சி முடிவுகள் எவ்வாறு பயன்படுத்தப்படுகின்றன?"
 
@@ -957,13 +961,13 @@ msgid "Hybrid"
 msgstr "கலப்பினம்"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:960
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2084
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2087
 msgid "ISBN/ISSN status should be selected in the list below."
 msgstr ""
 "ஐ.எச்.பி.என்/ஐ.எச்.எச்.என் நிலை கீழே உள்ள பட்டியலில் தேர்ந்தெடுக்கப்பட "
 "வேண்டும்."
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1462
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1463
 msgid "Identified by"
 msgstr "அடையாளம் காணப்பட்டது"
 
@@ -975,7 +979,7 @@ msgstr "அடையாளம் காணப்பட்டது"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:396
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:679
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:771
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1895
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1898
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:13
 #: sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0.json:13
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:13
@@ -992,7 +996,7 @@ msgstr "அடையாளங்காட்டி"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:393
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:675
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:767
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1891
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1894
 #: sonar/modules/documents/templates/documents/record.html:436
 msgid "Identifiers"
 msgstr "அடையாளங்காட்டிகள்"
@@ -1019,7 +1023,7 @@ msgstr ""
 "நீங்கள் புதியதாக உருவாக்கும் வரை உங்கள் கடவுச்சொல் மாறாது\n"
 " கடவுச்சொல்."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:351
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:352
 msgid "In progress"
 msgstr "முன்னேற்றத்தில் உள்ளது"
 
@@ -1029,15 +1033,15 @@ msgstr "முன்னேற்றத்தில் உள்ளது"
 msgid "Include in facets"
 msgstr "அம்சங்களில் சேர்க்கவும்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:761
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:764
 msgid "Inspector"
 msgstr "இன்ச்பெக்டர்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:396
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:397
 msgid "Institution"
 msgstr "நிறுவனம்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:499
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:501
 msgid "Internal research"
 msgstr "உள் ஆராய்ச்சி"
 
@@ -1048,10 +1052,6 @@ msgstr "உள் ஆராய்ச்சி கூட்டாளிகள்"
 #: sonar/theme/templates/sonar/page.html:57
 msgid "Invenio"
 msgstr "கண்டுபிடி"
-
-#: sonar/theme/webpack_assets/package.json:4
-msgid "Invenio assets"
-msgstr "சொத்துக்களைக் கண்டறியவும்"
 
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:170
 msgid "Investigator"
@@ -1070,11 +1070,11 @@ msgstr "அர்ப்பணிக்கப்பட்டுள்ளது"
 msgid "Is shared"
 msgstr "பகிரப்பட்டது"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1803
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1806
 msgid "Issue"
 msgstr "சிக்கல்"
 
-#: sonar/config.py:75
+#: sonar/config.py:74
 msgid "Italian"
 msgstr "இத்தாலிய"
 
@@ -1099,7 +1099,7 @@ msgstr "விசை"
 msgid "Key (filename) of the file."
 msgstr "கோப்பின் விசை (கோப்பு பெயர்)."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:434
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:435
 msgid "Keywords"
 msgstr "முக்கிய வார்த்தைகள்"
 
@@ -1133,7 +1133,7 @@ msgid "Languages"
 msgstr "மொழிகள்"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:255
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:323
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:324
 msgid "Languages, arts, cultures: mediation and teaching"
 msgstr "மொழிகள், கலை, கலாச்சாரங்கள்: மத்தியச்தம் மற்றும் கற்பித்தல்"
 
@@ -1189,7 +1189,7 @@ msgstr "பதிவில் இணைக்கப்பட்ட கோப்�
 msgid "List of logs."
 msgstr "பதிவுகளின் பட்டியல்."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:971
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:974
 msgid "Locality (Valais)"
 msgstr "இருப்பிடம் (வலாய்ச்)"
 
@@ -1220,7 +1220,7 @@ msgstr "%(type)s உடன் உள்நுழைக"
 msgid "Log in with SWITCHaai"
 msgstr "சுவிட்சாயுடன் உள்நுழைக"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:765
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:768
 msgid "Logopedist"
 msgstr "பேச்சு சிகிச்சையாளர்"
 
@@ -1258,24 +1258,24 @@ msgstr "முக்கிய தலைப்பு"
 msgid "Main titles"
 msgstr "முக்கிய தலைப்புகள்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:924
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:934
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:927
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:937
 msgid "Mandate"
 msgstr "ஆணை"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:483
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:485
 msgid "Master"
 msgstr "மாச்டர்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:487
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:489
 msgid "Master of Advanced Studies"
 msgstr "மேம்பட்ட ஆய்வுகளின் மாச்டர்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:773
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:776
 msgid "Mediator"
 msgstr "உடன்படுத்துபவர்"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1652
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1654
 msgid "Meeting"
 msgstr "கூட்டம்"
 
@@ -1292,12 +1292,13 @@ msgstr "ஊடகவகை"
 msgid "More test logins and documentation are available on the"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:391
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:601
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:992
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:392
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:603
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:995
+#: sonar/jsonschemas/common/validation-v1.0.0.json:42
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:27
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1188
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1323
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1324
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:39
 #: sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0.json:27
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:50
@@ -1320,7 +1321,7 @@ msgstr "முழு உரை இல்லை"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1020
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:712
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:911
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2034
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2037
 msgid "Note"
 msgstr "குறிப்பு"
 
@@ -1339,9 +1340,9 @@ msgstr ""
 msgid "Notes"
 msgstr "குறிப்புகள்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:819
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:822
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:615
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1716
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1719
 msgid "Number"
 msgstr "எண்"
 
@@ -1358,7 +1359,7 @@ msgstr "OAI-PMH பதிவு அடையாளங்காட்டி."
 msgid "OAI-PMH specific information."
 msgstr "OAI-PMH குறிப்பிட்ட செய்தி."
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1256
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1257
 msgid "ORCID"
 msgstr "அல்லது சிட்"
 
@@ -1418,16 +1419,16 @@ msgstr "அர்ப்பணிப்புக்கான நிறுவன �
 msgid "Organisations"
 msgstr "நிறுவனங்கள்"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1586
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1587
 msgid "Organization"
 msgstr "அமைப்பு"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:797
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:983
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:800
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:986
 msgid "Other"
 msgstr "மற்றொன்று"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:579
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:581
 msgid "Other (free field)"
 msgstr "மற்றவை (இலவச புலம்)"
 
@@ -1445,7 +1446,7 @@ msgstr ""
 "பிற பொருள் பண்புகள், அதாவது விளக்கப்படங்கள், கருப்பு மற்றும் வெள்ளை, "
 "அல்லது வண்ணம்."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:975
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:978
 msgid "Other canton (Switzerland)"
 msgstr "பிற கேன்டன் (சுவிட்சர்லாந்து)"
 
@@ -1464,7 +1465,7 @@ msgstr "பிற மின்னணு பதிப்புகள்"
 msgid "Other files"
 msgstr "பிற கோப்புகள்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:979
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:982
 msgid "Other locality (Switzerland)"
 msgstr "பிற இடம் (சுவிட்சர்லாந்து)"
 
@@ -1472,17 +1473,21 @@ msgstr "பிற இடம் (சுவிட்சர்லாந்து)"
 msgid "Other material characteristics"
 msgstr "பிற பொருள் பண்புகள்"
 
+#: sonar/jsonschemas/common/validation-v1.0.0.json:48
+msgid "PID"
+msgstr ""
+
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:29
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:29
 msgid "PID type"
 msgstr "பிஐடி வகை"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:630
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1815
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1818
 msgid "Pages"
 msgstr "பக்கங்கள்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:777
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:780
 msgid "Parents"
 msgstr "பெற்றோர்"
 
@@ -1490,7 +1495,7 @@ msgstr "பெற்றோர்"
 msgid "Password:"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:892
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:895
 msgid "Pedagogical and technological innovation"
 msgstr "கற்பித்தல் மற்றும் தொழில்நுட்ப கண்டுபிடிப்பு"
 
@@ -1507,6 +1512,10 @@ msgstr "தொடர்ச்சியான முகவரி"
 msgid "Persistent identifier"
 msgstr "தொடர்ச்சியான அடையாளங்காட்டி"
 
+#: sonar/jsonschemas/common/validation-v1.0.0.json:49
+msgid "Persistent identifier of the user."
+msgstr ""
+
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1422
 msgid "Person"
 msgstr "ஆள்"
@@ -1519,7 +1528,7 @@ msgstr "தொலைபேசி எண்"
 msgid "Phone number with the international prefix, without spaces."
 msgstr "இடைவெளிகள் இல்லாமல் பன்னாட்டு முன்னொட்டுடன் தொலைபேசி எண்."
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1692
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1695
 msgid "Place"
 msgstr "இடம்"
 
@@ -1545,7 +1554,7 @@ msgstr "நிலை"
 msgid "Position of the file, the first file in the list is the main file."
 msgstr "கோப்பின் நிலை, பட்டியலில் உள்ள முதல் கோப்பு முக்கிய கோப்பு."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:507
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:509
 msgid "Post-doctorate supported by the HEP-VS"
 msgstr "எப்-வி.எச் ஆதரிக்கப்படும் பிந்தைய முதுகலை"
 
@@ -1557,13 +1566,13 @@ msgstr "அஞ்சல் குறியீடு"
 msgid "Powered by"
 msgstr "மூலம் இயக்கப்படுகிறது"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:781
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:784
 msgid "Practitioner-trainer"
 msgstr "பயிற்சியாளர்-பயிற்சியாளர்"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1445
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1609
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1675
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1610
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1677
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:180
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:329
 msgid "Preferred name"
@@ -1579,7 +1588,7 @@ msgstr "முன்னோட்டம்"
 msgid "Primary key"
 msgstr "முதன்மை விசை"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:737
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:740
 msgid "Primary teacher"
 msgstr "முதன்மை ஆசிரியர்"
 
@@ -1591,7 +1600,7 @@ msgstr "தனியுரிமைக் கொள்கை"
 msgid "Private"
 msgstr "தனிப்பட்ட"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:567
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:569
 msgid "Private foundation"
 msgstr "தனியார் அடித்தளம்"
 
@@ -1600,7 +1609,7 @@ msgstr "தனியார் அடித்தளம்"
 msgid "Profile"
 msgstr "சுயவிவரம்"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1296
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1297
 msgid "Project"
 msgstr "திட்டம்"
 
@@ -1608,7 +1617,7 @@ msgstr "திட்டம்"
 msgid "Project sponsor"
 msgstr "திட்ட ஆதரவாளர்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:336
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:337
 msgid "Project status"
 msgstr "திட்ட நிலை"
 
@@ -1624,11 +1633,11 @@ msgstr "வழங்கல் நடவடிக்கைகள்"
 msgid "Provision activity"
 msgstr "வழங்கல் செயல்பாடு"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:785
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:788
 msgid "Psychologist"
 msgstr "உளவியலாளர்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:789
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:792
 msgid "Psychomotrician"
 msgstr "சைக்கோமோட்ரிசியன்"
 
@@ -1640,7 +1649,7 @@ msgstr "பொது"
 msgid "Public access from"
 msgstr "இருந்து பொது அணுகல்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:571
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:573
 msgid "Public foundation"
 msgstr "பொது அறக்கட்டளை"
 
@@ -1651,7 +1660,7 @@ msgstr "பொது அறக்கட்டளை"
 msgid "Public note"
 msgstr "பொது குறிப்பு"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1838
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1841
 msgid "Publication"
 msgstr "வெளியீடு"
 
@@ -1664,7 +1673,7 @@ msgid "Publication statement"
 msgstr "வெளியீட்டு அறிக்கை"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:670
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1849
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1852
 msgid "Publication statement of the host document if it is a book, for example \\"
 msgstr ""
 "புரவலன் ஆவணத்தின் வெளியீட்டு அறிக்கை இது ஒரு புத்தகமாக இருந்தால், "
@@ -1679,16 +1688,16 @@ msgid "Publisher"
 msgstr "வெளியீட்டாளர்"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:923
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2046
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2049
 msgid "Qualifier"
 msgstr "தகுதி"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:457
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:463
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:459
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:465
 msgid "Realization framework"
 msgstr "உணர்தல் கட்டமைப்பு"
 
-#: sonar/modules/validation/api.py:218
+#: sonar/modules/validation/api.py:222
 msgid "Record validation"
 msgstr "பதிவு சரிபார்ப்பு"
 
@@ -1706,14 +1715,14 @@ msgid "Relationship with a document, dataset, etc."
 msgstr "ஒரு ஆவணம், தரவுத்தொகுப்பு போன்றவற்றுடன் உறவு."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:4
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1286
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2154
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1287
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2157
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:4
 msgid "Research project"
 msgstr "ஆராய்ச்சி திட்டம்"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1282
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2150
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1283
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2153
 #: sonar/modules/documents/templates/documents/record.html:214
 msgid "Research projects"
 msgstr "ஆராய்ச்சி திட்டங்கள்"
@@ -1742,14 +1751,14 @@ msgstr "நிறுவனத்திற்கு தடைசெய்யப�
 msgid "Rights reserved"
 msgstr "உரிமைகள் பாதுகாக்கப்பட்டவை"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1211
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2368
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1212
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2374
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:126
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:197
 msgid "Role"
 msgstr "பங்கு"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2362
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2368
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:193
 msgid "Roles"
 msgstr "பாத்திரங்கள்"
@@ -1766,7 +1775,7 @@ msgstr "சோனார் வைப்பு v1.0.0"
 msgid "SONAR logo"
 msgstr "ஒலி லோகோ"
 
-#: sonar/config.py:289
+#: sonar/config.py:284
 msgid "SONAR password reset"
 msgstr "சோனார் கடவுச்சொல் மீட்டமைப்பு"
 
@@ -1811,11 +1820,11 @@ msgstr "சேகரிப்பில் தேடுங்கள்"
 msgid "Search publications, authors, projects..."
 msgstr "வெளியீடுகள், ஆசிரியர்கள், திட்டங்களைத் தேடுங்கள் ..."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:741
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:744
 msgid "Secondary teacher"
 msgstr "இரண்டாம் நிலை ஆசிரியர்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:291
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:292
 msgid "Secondary team"
 msgstr "இரண்டாம் நிலை அணி"
 
@@ -1823,7 +1832,7 @@ msgstr "இரண்டாம் நிலை அணி"
 msgid "See live"
 msgstr "நேரலையில் காண்க"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1407
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1408
 msgid ""
 "Select a subdivision (department, institute, faculty, other) if this "
 "publication belongs to it in your organisation."
@@ -1874,7 +1883,7 @@ msgstr "மேலும் காட்டு"
 #: sonar/theme/templates/sonar/accounts/login.html:56
 #: sonar/theme/templates/sonar/accounts/reset_password.html:39
 #: sonar/theme/templates/sonar/accounts/signup.html:42
-#: sonar/theme/templates/sonar/oauth/signup.html:46
+#: sonar/theme/templates/sonar/oauth/signup.html:44
 #: sonar/theme/templates/sonar/partial/navbar.html:70
 msgid "Sign up"
 msgstr "பதிவு செய்க"
@@ -1908,7 +1917,7 @@ msgstr "அளவு"
 msgid "Size of the file in bytes."
 msgstr "பைட்டுகளில் கோப்பின் அளவு."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:701
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:704
 msgid "Social Assistant"
 msgstr "சமூக உதவியாளர்"
 
@@ -1922,8 +1931,8 @@ msgstr ""
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:553
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:940
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1028
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1491
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2064
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1492
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2067
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:127
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:264
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:368
@@ -1934,13 +1943,13 @@ msgstr "மூலம்"
 msgid "Source code"
 msgstr ""
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:749
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:752
 msgid "Special education teacher"
 msgstr "சிறப்பு கல்வி ஆசிரியர்"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:69
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1341
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1843
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1342
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1846
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:68
 msgid "Start date"
 msgstr "தொடக்க தேதி"
@@ -1953,24 +1962,24 @@ msgstr "வெளியீட்டு தேதி"
 msgid "Stat ID."
 msgstr "மாநில ஐடி."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:955
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:958
 msgid "State of Valais, Education service"
 msgstr "வலாய்ச் மாநிலம், கல்வி பணி"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:959
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:962
 msgid "State of Valais, Higher education service"
 msgstr "வலாய்ச் மாநிலம், உயர் கல்வி பணி"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:963
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:966
 msgid "State of Valais, other services"
 msgstr "வலாய்ச் மாநிலம், பிற சேவைகள்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:967
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:970
 msgid "State of Valais, parastatal institution"
 msgstr "வலாய்ச் மாநிலம், பராச்டாடல் நிறுவனம்"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:495
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1848
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1851
 msgid "Statement"
 msgstr "அறிக்கை"
 
@@ -2001,10 +2010,10 @@ msgid "Stats for"
 msgstr "புள்ளிவிவரங்கள்"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:39
-#: sonar/jsonschemas/common/validation-v1.0.0.json:64
+#: sonar/jsonschemas/common/validation-v1.0.0.json:85
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:148
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:953
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2077
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2080
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:39
 msgid "Status"
 msgstr "நிலை"
@@ -2021,26 +2030,26 @@ msgstr "தெரு"
 msgid "Street and number of the address, separated by a coma."
 msgstr "வீதி மற்றும் முகவரியின் எண்ணிக்கை, கோமாவால் பிரிக்கப்பட்டுள்ளது."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:725
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:728
 msgid "Student"
 msgstr "மாணவர்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:733
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:736
 msgid "Student in special education"
 msgstr "சிறப்பு கல்வியில் மாணவர்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:753
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:756
 msgid "Student in training"
 msgstr "பயிற்சியில் மாணவர்"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1406
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2285
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1407
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2291
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:160
 msgid "Subdivision"
 msgstr "உட்பிரிவு"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1402
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2281
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1403
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2287
 #: sonar/modules/subdivisions/jsonschemas/subdivisions/subdivision-v1.0.0.json:4
 msgid "Subdivisions"
 msgstr "துணைப்பிரிவுகள்"
@@ -2073,15 +2082,15 @@ msgstr "வசன வரிகள்"
 msgid "Super administration"
 msgstr "சூப்பர் நிர்வாகம்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:363
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:364
 msgid "Suspended"
 msgstr "இடைநீக்கம்"
 
-#: sonar/config.py:96 sonar/config.py:100
+#: sonar/config.py:95 sonar/config.py:99
 msgid "Swiss Open Access Repository"
 msgstr "சுவிச் திறந்த அணுகல் களஞ்சியம்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:555
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:557
 msgid "Swissuniversities"
 msgstr "சுவிச் யுனிவர்சிட்டிகள்"
 
@@ -2089,12 +2098,12 @@ msgstr "சுவிச் யுனிவர்சிட்டிகள்"
 msgid "Table of contents"
 msgstr "உள்ளடக்க அட்டவணை"
 
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2058
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2061
 #, fuzzy
 msgid "Terms of acquisition"
 msgstr "நடிகரின் வகை"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:745
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:748
 msgid "Tertiary teacher"
 msgstr "மூன்றாம் நிலை ஆசிரியர்"
 
@@ -2116,7 +2125,7 @@ msgstr ""
 msgid "The SONAR team at RERO"
 msgstr "ரெரோவில் உள்ள சோனார் அணி"
 
-#: sonar/theme/templates/sonar/frontpage.html:104
+#: sonar/theme/templates/sonar/frontpage.html:100
 msgid ""
 "The Swiss Open Access Repository is an archive of scholarly publications."
 " It collects and promotes open access publications by authors affiliated "
@@ -2136,11 +2145,11 @@ msgstr "இந்த ஆவணம் சொந்தமான அமைப்ப
 msgid "This domain name must be unique."
 msgstr "இந்த டொமைன் பெயர் தனித்துவமாக இருக்க வேண்டும்."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:525
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:527
 msgid "This project has been submitted for funding"
 msgstr "இந்த திட்டம் நிதியுதவிக்காக சமர்ப்பிக்கப்பட்டுள்ளது"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1038
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1041
 msgid ""
 "This project is the subject of an educational document or a report to the"
 " city or science"
@@ -2148,7 +2157,7 @@ msgstr ""
 "இந்த திட்டம் ஒரு கல்வி ஆவணம் அல்லது நகரம் அல்லது அறிவியலுக்கான "
 "அறிக்கையின் பொருள்"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:897
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:900
 msgid "This project promotes pedagogical or technological innovation"
 msgstr "இந்த திட்டம் கற்பித்தல் அல்லது தொழில்நுட்ப கண்டுபிடிப்புகளை ஊக்குவிக்கிறது"
 
@@ -2162,7 +2171,7 @@ msgstr ""
 "தற்போதுள்ள தொடர்ச்சியான அடையாளங்காட்டிகளை (ARK) செல்லாததாக்குவது போன்ற "
 "விரும்பத்தகாத விளைவுகளை இது ஏற்படுத்தும்."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:929
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:932
 msgid "This research is linked to a mandate"
 msgstr "இந்த ஆராய்ச்சி ஒரு ஆணையுடன் இணைக்கப்பட்டுள்ளது"
 
@@ -2172,7 +2181,7 @@ msgstr "இந்த ஆராய்ச்சி ஒரு ஆணையுடன
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1035
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:281
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:685
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1832
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1835
 msgid "Title"
 msgstr "தலைப்பு"
 
@@ -2196,12 +2205,12 @@ msgstr ""
 "வழங்காது, ஆனால் எதிர்காலத்தில் நீங்கள் ஆவண பட்டியல்களை உருவாக்கி "
 "கோரிக்கைகளைச் சேமிக்க முடியும்."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:757
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:760
 msgid "Trainer"
 msgstr "பயிற்சியாளர்"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:259
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:327
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:328
 msgid "Training and professionalization"
 msgstr "பயிற்சி மற்றும் தொழில்மயமாக்கல்"
 
@@ -2218,10 +2227,10 @@ msgstr "பயிற்சி மற்றும் தொழில்மயம�
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1243
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1275
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1432
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1467
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1596
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1662
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1900
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1468
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1597
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1664
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1903
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:103
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:244
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:348
@@ -2229,7 +2238,7 @@ msgstr "பயிற்சி மற்றும் தொழில்மயம�
 msgid "Type"
 msgstr "வகை"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:806
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:809
 msgid "Type of actor"
 msgstr "நடிகரின் வகை"
 
@@ -2262,8 +2271,9 @@ msgstr "பயன்பாடு மற்றும் அணுகல் கொ
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:128
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:133
-#: sonar/jsonschemas/common/validation-v1.0.0.json:90
-#: sonar/jsonschemas/common/validation-v1.0.0.json:96
+#: sonar/jsonschemas/common/validation-v1.0.0.json:36
+#: sonar/jsonschemas/common/validation-v1.0.0.json:111
+#: sonar/jsonschemas/common/validation-v1.0.0.json:117
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:132
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:140
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:214
@@ -2278,9 +2288,13 @@ msgstr "பயனர்"
 msgid "User Profile"
 msgstr "சுயவிவரம்"
 
-#: sonar/jsonschemas/common/validation-v1.0.0.json:91
+#: sonar/jsonschemas/common/validation-v1.0.0.json:112
 msgid "User which created the record."
 msgstr "பதிவை உருவாக்கிய பயனர்."
+
+#: sonar/jsonschemas/common/validation-v1.0.0.json:37
+msgid "User who performed the action."
+msgstr ""
 
 #: sonar/jsonschemas/common/validation-v1.0.0.json:2
 msgid "Validation"
@@ -2301,8 +2315,8 @@ msgstr "சரிபார்ப்பு"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:734
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:906
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1013
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1504
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2029
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1505
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2032
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:52
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:105
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:252
@@ -2326,7 +2340,7 @@ msgstr "மதிப்புகள்"
 msgid "Version UUID"
 msgstr "பதிப்பு UUID"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:721
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:724
 msgid "Vice-rector HE"
 msgstr "துணை-ரெக்டர் அவர்"
 
@@ -2339,25 +2353,29 @@ msgid "Visible facets in the public interface for documents"
 msgstr "ஆவணங்களுக்கான பொது இடைமுகத்தில் தெரியும் நற்பொருத்தங்கள்"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:600
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1791
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1794
 msgid "Volume"
 msgstr "தொகுதி"
 
-#: sonar/config.py:128
+#: sonar/modules/users/utils.py:44
+msgid "Welcome to"
+msgstr ""
+
+#: sonar/config.py:127
 msgid "Welcome to SONAR, the Swiss Open Access Repository!"
 msgstr "சுவிச் திறந்த அணுகல் களஞ்சியமான சோனருக்கு வருக!"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:836
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:839
 msgid ""
 "What are the benefits and quality improvements in the research in this "
 "project?"
 msgstr "இந்த திட்டத்தின் ஆராய்ச்சியில் நன்மைகள் மற்றும் தர மேம்பாடுகள் என்ன?"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:850
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:853
 msgid "What are the benefits of research in training?"
 msgstr "பயிற்சியில் ஆராய்ச்சியின் நன்மைகள் என்ன?"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:878
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:881
 msgid ""
 "What is the impact of research on public action or on internal or "
 "external governance?"
@@ -2365,24 +2383,24 @@ msgstr ""
 "பொது நடவடிக்கை அல்லது உள் அல்லது வெளிப்புற நிர்வாகத்தில் ஆராய்ச்சியின் "
 "தாக்கம் என்ன?"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:864
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:867
 msgid "What is the impact of the research on the professional environment?"
 msgstr "தொழில்முறை சூழலில் ஆராய்ச்சியின் தாக்கம் என்ன?"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:653
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:655
 msgid "Who are the actors involved in the field?"
 msgstr "துறையில் சம்பந்தப்பட்ட நடிகர்கள் யார்?"
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:902
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:905
 msgid "Why?"
 msgstr "ஏன்?"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:642
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1779
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1782
 msgid "Year"
 msgstr "ஆண்டு"
 
-#: sonar/config.py:290
+#: sonar/config.py:285
 msgid "Your SONAR password has been reset"
 msgstr "உங்கள் சோனார் கடவுச்சொல் மீட்டமைக்கப்பட்டுள்ளது"
 
@@ -2395,7 +2413,7 @@ msgstr "உங்கள் நிறுவனம்"
 msgid "Your password has been successfully reset."
 msgstr "உங்கள் கடவுச்சொல் வெற்றிகரமாக மீட்டமைக்கப்பட்டுள்ளது."
 
-#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:551
+#: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:553
 #, fuzzy
 msgid "\\u200bSwiss National Science Foundation"
 msgstr "சுவிச் தேசிய அறிவியல் அறக்கட்டளை"
@@ -2422,7 +2440,7 @@ msgstr "பி.எஃப்: முகவர்"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:451
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:809
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1932
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1935
 msgid "bf:AudioIssueNumber"
 msgstr "பி.எஃப்: ஆடியோசுவேனம்பர்"
 
@@ -2436,27 +2454,27 @@ msgstr "பி.எஃப்: வகைப்பாடு"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:436
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:813
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1936
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1939
 msgid "bf:Doi"
 msgstr "பி.எஃப்: இரண்டு"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:455
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:817
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1940
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1943
 msgid "bf:Ean"
 msgstr "பி.எஃப்: எச்"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:459
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:821
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1944
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1947
 msgid "bf:Gtin14Number"
 msgstr "BF: GTIN14Number"
 
 #: sonar/jsonschemas/common/identifiedby-v1.0.0.json:19
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:463
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:825
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1478
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1948
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1479
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1951
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:114
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:253
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:357
@@ -2465,45 +2483,45 @@ msgstr "பி.எஃப்: அடையாளங்காட்டி"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:467
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:829
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1952
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1955
 msgid "bf:Isan"
 msgstr "பி.எஃப்: பிறகு"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:446
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:833
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1956
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1959
 msgid "bf:Isbn"
 msgstr "பி.எஃப்: ஐ.எச்.பி.என்"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:471
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:837
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1960
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1963
 msgid "bf:Ismn"
 msgstr "பி.எஃப்: ஐ.எச்.எம்.என்"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:475
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:841
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1964
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1967
 msgid "bf:Isrc"
 msgstr "பி.எஃப்: ஐ.எச்.ஆர்.சி"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:479
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:845
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1968
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1971
 msgid "bf:Issn"
 msgstr "பி.எஃப்: ஐ.எச்.எச்.என்"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:483
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:849
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1972
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1975
 msgid "bf:IssnL"
 msgstr "பி.எஃப்: ஐ.எச்.எச்.என்.எல்"
 
 #: sonar/jsonschemas/common/identifiedby-v1.0.0.json:23
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:487
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:853
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1482
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1976
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1483
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1979
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:118
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:257
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:361
@@ -2516,25 +2534,25 @@ msgstr "பி.எஃப்: விளைவாக்கம்"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:491
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:857
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1980
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1983
 msgid "bf:MatrixNumber"
 msgstr "பி.எஃப்: மேட்ரிக்ச்நம்பர்"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:495
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:861
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1984
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1987
 msgid "bf:MusicDistributorNumber"
 msgstr "பி.எஃப்: இசை விநியோகச்தர் எண்"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:499
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:865
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1988
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1991
 msgid "bf:MusicPlate"
 msgstr "பனி: மியூசிக்லெட்"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:503
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:869
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1992
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1995
 msgid "bf:MusicPublisherNumber"
 msgstr "பி.எஃப்: மியூசிக் பப்ளிசர்நம்பர்"
 
@@ -2548,37 +2566,37 @@ msgstr "பி.எஃப்: வெளியீடு"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:507
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:873
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1996
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1999
 msgid "bf:PublisherNumber"
 msgstr "பி.எஃப்: வெளியீட்டாளர்"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:527
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:893
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2016
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2019
 msgid "bf:ReportNumber"
 msgstr "பி.எஃப்: அறிக்கை எண்"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:531
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:897
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2020
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2023
 msgid "bf:Strn"
 msgstr "பி.எஃப்: எச்.டி.ஆர்.என்"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:511
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:877
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2000
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2003
 msgid "bf:Upc"
 msgstr "பி.எஃப்: யுபிசி"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:515
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:881
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2004
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2007
 msgid "bf:Urn"
 msgstr "பி.எஃப்: அர்ன்"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:519
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:885
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2008
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2011
 msgid "bf:VideoRecordingNumber"
 msgstr "BF: videoRecordingNumber"
 
@@ -2951,33 +2969,33 @@ msgstr "CoinVestigator"
 msgid "collection"
 msgstr "சேகரிப்பு"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1227
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2385
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1228
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2391
 msgid "contribution_role_cre"
 msgstr "பங்களிப்பு_ரோல்_க்ரே"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1231
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2389
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1232
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2395
 msgid "contribution_role_ctb"
 msgstr "பங்களிப்பு_ரோல்_க்டிபி"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1239
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2397
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1240
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2403
 msgid "contribution_role_dgc"
 msgstr "பங்களிப்பு_ரோல்_டிசிசி"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1243
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2401
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1244
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2407
 msgid "contribution_role_dgs"
 msgstr "பங்களிப்பு_ரோல்_டிசிஎச்"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1235
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2393
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1236
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2399
 msgid "contribution_role_edt"
 msgstr "பங்களிப்பு_ரோல்_இடி"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1247
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2405
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1248
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2411
 msgid "contribution_role_prt"
 msgstr "பங்களிப்பு_ரோல்_பிர்ட்"
 
@@ -2986,7 +3004,7 @@ msgstr "பங்களிப்பு_ரோல்_பிர்ட்"
 msgid "contribution_role_{role}"
 msgstr "பங்களிப்பு_ரோல்_ {role}"
 
-#: sonar/config.py:661
+#: sonar/config.py:656
 msgid "contributor"
 msgstr "பங்களிப்பாளர்"
 
@@ -3299,9 +3317,9 @@ msgid "keywords"
 msgstr "முக்கிய வார்த்தைகள்"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:804
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1421
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1422
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1208
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2299
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2305
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:174
 msgid "label"
 msgstr "சிட்டை"
@@ -5259,8 +5277,8 @@ msgstr "மொழி"
 msgid "mainTeam"
 msgstr "பராமரிப்பு"
 
-#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1306
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2167
+#: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1307
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2170
 msgid "name"
 msgstr "பெயர்"
 
@@ -5276,7 +5294,7 @@ msgstr "பிற கோப்புகள்"
 msgid "p."
 msgstr "ப."
 
-#: sonar/config.py:658
+#: sonar/config.py:653
 msgid "pid"
 msgstr "பிஐடி"
 
@@ -5346,7 +5364,7 @@ msgstr "இரண்டாம் நிலை"
 msgid "startDate"
 msgstr "தொடக்க தேதி"
 
-#: sonar/config.py:659
+#: sonar/config.py:654
 msgid "status"
 msgstr "நிலை"
 
@@ -5368,53 +5386,33 @@ msgstr "ஆதரிக்கிறது"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:523
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:889
-#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2012
+#: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2015
 msgid "uri"
 msgstr "யூரி"
 
-#: sonar/config.py:660
+#: sonar/config.py:655
 msgid "user"
 msgstr "பயனர்"
 
-#: sonar/translations/manual_translations.txt:59
+#: sonar/translations/manual_translations.txt:52
 msgid "validation_action_approve"
 msgstr "validation_action_approve"
 
-#: sonar/translations/manual_translations.txt:61
+#: sonar/translations/manual_translations.txt:54
 msgid "validation_action_ask_for_changes"
 msgstr "validation_action_ask_for_changes"
 
-#: sonar/translations/manual_translations.txt:58
+#: sonar/translations/manual_translations.txt:51
 msgid "validation_action_publish"
 msgstr "validation_action_publish"
 
-#: sonar/translations/manual_translations.txt:60
+#: sonar/translations/manual_translations.txt:53
 msgid "validation_action_reject"
 msgstr "validation_action_reject"
 
-#: sonar/translations/manual_translations.txt:57
+#: sonar/translations/manual_translations.txt:50
 msgid "validation_action_save"
 msgstr "validation_action_save"
-
-#: sonar/translations/manual_translations.txt:54
-msgid "validation_status_ask_for_changes"
-msgstr "validation_status_ask_for_changes"
-
-#: sonar/translations/manual_translations.txt:50
-msgid "validation_status_in_progress"
-msgstr "validation_status_in_progress"
-
-#: sonar/translations/manual_translations.txt:53
-msgid "validation_status_rejected"
-msgstr "validation_status_rejected"
-
-#: sonar/translations/manual_translations.txt:51
-msgid "validation_status_to_validate"
-msgstr "validation_status_to_validate"
-
-#: sonar/translations/manual_translations.txt:52
-msgid "validation_status_validated"
-msgstr "validation_status_validated"
 
 #: sonar/modules/documents/views.py:200
 msgid "vol."
