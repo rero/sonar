@@ -8,16 +8,18 @@ msgstr ""
 "Project-Id-Version: SONAR 1.11.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
 "POT-Creation-Date: 2025-09-23 11:18+0200\n"
-"PO-Revision-Date: 2025-08-30 18:01+0000\n"
+"PO-Revision-Date: 2025-10-30 04:24+0000\n"
 "Last-Translator: Галина Нежурбіда <nezhga29@gmail.com>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/rero_plus/"
+"sonar/uk/>\n"
 "Language: uk\n"
-"Language-Team: Ukrainian "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/uk/>\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural="
+"(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? "
+"1 : 2);\n"
+"X-Generator: Weblate 5.14.1-dev\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: sonar/jsonschemas/common/masked-v1.0.0.json:9
@@ -27,8 +29,9 @@ msgid ""
 msgstr "Прихований документ видно в професійному інтерфейсі, але не в публічному."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:359
+#, fuzzy
 msgid "Abandoned"
-msgstr ""
+msgstr "Покинутий"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:823
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:839
@@ -61,11 +64,11 @@ msgstr "Супровідні матеріали"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:956
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:663
 msgid "Accompanying material of the resource, i.e. maps."
-msgstr ""
+msgstr "Супровідні матеріали до ресурсу, наприклад, карти."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:935
 msgid "Acquisition terms"
-msgstr ""
+msgstr "Умови придбання"
 
 #: sonar/jsonschemas/common/validation-v1.0.0.json:77
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:226
@@ -74,12 +77,14 @@ msgid "Action"
 msgstr "Дія"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:662
+#, fuzzy
 msgid "Actor"
-msgstr ""
+msgstr "Актор"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:657
+#, fuzzy
 msgid "Actor involved"
-msgstr ""
+msgstr "актор, задіяний"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1318
 #, fuzzy
@@ -93,14 +98,16 @@ msgstr "Додаткові матеріали"
 
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:30
 #: sonar/theme/templates/sonar/partial/navbar.html:58
+#, fuzzy
 msgid "Administration"
-msgstr ""
+msgstr "Адміністрація/управління"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1206
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1567
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:223
+#, fuzzy
 msgid "Affiliation"
-msgstr ""
+msgstr "Приналежність"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1427
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1591
@@ -117,8 +124,9 @@ msgid "All languages"
 msgstr "Усі мови"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:729
+#, fuzzy
 msgid "Allophone student"
-msgstr ""
+msgstr "Студент-алофон (іноземець)"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:199
 #, fuzzy
@@ -127,23 +135,25 @@ msgstr "Дозволені IP-адреси"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:793
 msgid "Animator"
-msgstr ""
+msgstr "Аніматор"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:209
 msgid "Animators"
-msgstr ""
+msgstr "Аніматори"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:697
+#, fuzzy
 msgid "Apprentice"
-msgstr ""
+msgstr "Учень"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:216
 msgid "Ark Name Assigning Authority Number (NAAN)"
 msgstr ""
 
 #: sonar/modules/deposits/rest.py:210
+#, fuzzy
 msgid "Ask for changes on deposit"
-msgstr ""
+msgstr "Запит на зміни до депозиту"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:19
 #, fuzzy
@@ -166,26 +176,28 @@ msgstr "Автори / Редактори"
 
 #: sonar/modules/documents/templates/documents/record.html:57
 #: sonar/theme/templates/sonar/projects/detail.html:15
+#, fuzzy
 msgid "Back"
-msgstr ""
+msgstr "Назад"
 
 #: sonar/theme/templates/sonar/partial/organisation.html:50
 msgid "Back to SONAR"
-msgstr ""
+msgstr "Повернутися до SONAR"
 
 #: sonar/templates/security/email/reset_instructions.html:30
 #: sonar/templates/security/email/reset_notice.html:25
 #: sonar/templates/security/email/welcome.html:9
+#, fuzzy
 msgid "Best regards"
-msgstr ""
+msgstr "З найкращими побажаннями"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1005
 msgid "Brief description of the mandate"
-msgstr ""
+msgstr "Короткий опис замовлення"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1043
 msgid "Brief description of the report"
-msgstr ""
+msgstr "Короткий опис звіту"
 
 #: sonar/jsonschemas/common/oa-status-v1.0.0.json:29
 #, fuzzy
@@ -208,8 +220,9 @@ msgid "Bucket UUID used to store files"
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:511
+#, fuzzy
 msgid "CAS or DAS"
-msgstr ""
+msgstr "CAS або DAS"
 
 #: sonar/jsonschemas/common/license-v1.0.0.json:28
 msgid "CC BY"
@@ -248,8 +261,9 @@ msgid "Checksum"
 msgstr "Контрольна сума"
 
 #: sonar/theme/templates/sonar/partial/test_info.html:20
+#, fuzzy
 msgid "Choose your role:"
-msgstr ""
+msgstr "Оберіть свою роль:"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:87
 msgid "City"
@@ -264,7 +278,7 @@ msgstr "Класифікація"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1289
 msgid "Classification portion"
-msgstr ""
+msgstr "Класифікаційна частина"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1231
 #, fuzzy
@@ -278,15 +292,15 @@ msgstr "Класний керівник"
 
 #: sonar/jsonschemas/common/oa-status-v1.0.0.json:37
 msgid "Closed"
-msgstr ""
+msgstr "Зачинено"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:18
 msgid "Code"
-msgstr ""
+msgstr "Код"
 
 #: sonar/theme/templates/sonar/stats/index.html:26
 msgid "Collect now"
-msgstr ""
+msgstr "Забрати зараз"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:790
 msgid "Collection"
@@ -304,7 +318,7 @@ msgstr ""
 #: sonar/jsonschemas/common/validation-v1.0.0.json:106
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:265
 msgid "Comment"
-msgstr ""
+msgstr "Коментар"
 
 #: sonar/jsonschemas/common/validation-v1.0.0.json:107
 #, fuzzy
@@ -322,10 +336,13 @@ msgid "Completed"
 msgstr "Завершено"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2059
+#, fuzzy
 msgid ""
 "Conditions under which the publisher, distributor, etc., will normally "
 "supply a resource, e.g., price of a resource."
 msgstr ""
+"Умови, за яких видавець, розповсюджувач тощо зазвичай постачає ресурс, "
+"наприклад, ціна ресурсу."
 
 #: sonar/modules/documents/templates/documents/record.html:291
 msgid "Conference"
@@ -388,44 +405,53 @@ msgstr ""
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2414
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:228
+#, fuzzy
 msgid "Controlled affiliations"
-msgstr ""
+msgstr "Контрольовані афілійовані особи/Приналежність до інституту (перевірена)"
 
 #: sonar/help/templates/help/page_wiki.html:41
 msgid "Created:"
-msgstr ""
+msgstr "Створено:"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:251
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:319
 msgid "Creativity, transformations and innovations in education"
-msgstr ""
+msgstr "Креативність, трансформації та інновації в освіті"
 
 #: sonar/jsonschemas/common/validation-v1.0.0.json:78
+#, fuzzy
 msgid "Current action done in the validation process."
 msgstr ""
+"Поточна дія, виконана в процесі перевірки./Дія, що триває в процесі перевірки"
+"./Поточну дію в процесі перевірки виконано."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:189
+#, fuzzy
 msgid "Current cataloguing step."
-msgstr ""
+msgstr "Поточний етап каталогізації."
 
 #: sonar/jsonschemas/common/validation-v1.0.0.json:65
+#, fuzzy
 msgid "Current status of the record in the validation process."
-msgstr ""
+msgstr "Поточний статус запису в процесі перевірки."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1051
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2194
+#, fuzzy
 msgid "Custom field 1"
-msgstr ""
+msgstr "Налаштоване поле 1/1е поле клієнта/замовлення"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1072
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2222
+#, fuzzy
 msgid "Custom field 2"
-msgstr ""
+msgstr "Спеціальне поле 2"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1093
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2250
+#, fuzzy
 msgid "Custom field 3"
-msgstr ""
+msgstr "Налаштоване поле 3"
 
 #: sonar/jsonschemas/common/validation-v1.0.0.json:42
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:260
@@ -434,7 +460,7 @@ msgstr ""
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1354
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1704
 msgid "Date"
-msgstr ""
+msgstr "Дата"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:43
 #, fuzzy
@@ -458,32 +484,34 @@ msgid "Date of death"
 msgstr "Дата смерті"
 
 #: sonar/jsonschemas/common/validation-v1.0.0.json:43
+#, fuzzy
 msgid "Date when the log is created."
-msgstr ""
+msgstr "Дата створення журналу."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:717
+#, fuzzy
 msgid "Dean of a school"
-msgstr ""
+msgstr "Декан навчального закладу"
 
 #: sonar/templates/security/email/reset_instructions.html:20
 #: sonar/templates/security/email/reset_notice.html:20
 msgid "Dear"
-msgstr ""
+msgstr "Шановний/Шановна"
 
 #: sonar/templates/security/email/welcome.html:1
-#, python-format
+#, fuzzy, python-format
 msgid "Dear %(email)s"
-msgstr ""
+msgstr "Шановний %(email)s"
 
 #: sonar/templates/security/email/reset_instructions.html:22
 #: sonar/templates/security/email/reset_notice.html:22
 msgid "Dear user"
-msgstr ""
+msgstr "Шановний користувач"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:894
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1339
 msgid "Degree"
-msgstr ""
+msgstr "Ступінь (науковий)"
 
 #: sonar/theme/templates/sonar/partial/navbar.html:78
 msgid "Deposit a publication"
@@ -788,7 +816,7 @@ msgstr ""
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:25
 msgid "File"
-msgstr ""
+msgstr "Файл"
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:155
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:41
@@ -950,35 +978,39 @@ msgstr ""
 
 #: sonar/theme/templates/sonar/footer.html:35
 msgid "Help"
-msgstr ""
+msgstr "Допомога"
 
 #: sonar/help/templates/help/page_wiki_search_navigation.html:26
 msgid "Home"
-msgstr ""
+msgstr "Домівка"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:595
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1833
+#, fuzzy
 msgid ""
 "Host document, for example a journal for an article, or a book for a book"
 " chapter."
 msgstr ""
+"Основний документ, наприклад, журнал для статті або книга для розділу книги."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1069
 msgid "How are research results used in training?"
-msgstr ""
+msgstr "Як результати досліджень використовуються в навчанні?"
 
 #: sonar/jsonschemas/common/oa-status-v1.0.0.json:25
+#, fuzzy
 msgid "Hybrid"
-msgstr ""
+msgstr "Гібридний"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:960
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2084
 msgid "ISBN/ISSN status should be selected in the list below."
-msgstr ""
+msgstr "ISBN/ISSN слід вибрати зі списку нижче."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1462
+#, fuzzy
 msgid "Identified by"
-msgstr ""
+msgstr "Визначено за"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:9
 #: sonar/jsonschemas/common/identifiedby-v1.0.0.json:2
@@ -1000,7 +1032,7 @@ msgstr ""
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:343
 #: sonar/theme/templates/sonar/projects/detail.html:30
 msgid "Identifier"
-msgstr ""
+msgstr "Ідентифікатор"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:393
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:675
@@ -1008,15 +1040,17 @@ msgstr ""
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1891
 #: sonar/modules/documents/templates/documents/record.html:436
 msgid "Identifiers"
-msgstr ""
+msgstr "Ідентифікатори"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:116
+#, fuzzy
 msgid "If the value is set to true, the file will point to the external link."
-msgstr ""
+msgstr "Якщо значення встановлено на true, це - зовнішнє посилання."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:94
+#, fuzzy
 msgid "If this field is filled in, the file points to the specified URL."
-msgstr ""
+msgstr "Якщо це поле заповнено, файл вказує на URL-адресу."
 
 #: sonar/templates/security/email/reset_instructions.html:28
 msgid ""
@@ -1024,36 +1058,43 @@ msgid ""
 "won't change until you create a new\n"
 "  password."
 msgstr ""
+"Якщо ви не надсилали цей запит, можете проігнорувати цей лист. Ваш пароль не "
+"зміниться, доки ви не створите новий пароль."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:351
+#, fuzzy
 msgid "In progress"
-msgstr ""
+msgstr "У роботі"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:271
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:322
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:373
+#, fuzzy
 msgid "Include in facets"
-msgstr ""
+msgstr "Включити у фасети"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:761
+#, fuzzy
 msgid "Inspector"
-msgstr ""
+msgstr "Інспектор"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:396
 msgid "Institution"
-msgstr ""
+msgstr "Установа"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:499
+#, fuzzy
 msgid "Internal research"
-msgstr ""
+msgstr "Внутрішнє дослідження"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:268
+#, fuzzy
 msgid "Internal research associates"
-msgstr ""
+msgstr "Внутрішні наукові співробітники"
 
 #: sonar/theme/templates/sonar/page.html:57
 msgid "Invenio"
-msgstr ""
+msgstr "Invenio"
 
 #: sonar/theme/webpack_assets/package.json:4
 msgid "Invenio assets"
@@ -1069,24 +1110,27 @@ msgid "Investigators"
 msgstr ""
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:159
+#, fuzzy
 msgid "Is dedicated"
-msgstr ""
+msgstr "Є спеціалізованою організацією"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:153
+#, fuzzy
 msgid "Is shared"
-msgstr ""
+msgstr "Буде відображатися на спільному порталі"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1803
 msgid "Issue"
-msgstr ""
+msgstr "Номер/випуск"
 
 #: sonar/config.py:75
+#, fuzzy
 msgid "Italian"
-msgstr ""
+msgstr "італійська"
 
 #: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:5
 msgid "JSON schema for statistics."
-msgstr ""
+msgstr "JSON-схема для статистики."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:899
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1344
@@ -1283,7 +1327,7 @@ msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:273
 msgid "Metadata"
-msgstr ""
+msgstr "Метадані"
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:175
 msgid "Mimetype"
@@ -1484,48 +1528,52 @@ msgstr ""
 
 #: sonar/theme/templates/sonar/partial/test_info.html:26
 msgid "Password:"
-msgstr ""
+msgstr "Пароль:"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:892
 msgid "Pedagogical and technological innovation"
-msgstr ""
+msgstr "Педагогічні та технологічні інновації"
 
 #: sonar/theme/templates/sonar/projects/detail.html:24
 msgid "Period"
-msgstr ""
+msgstr "Період"
 
 #: sonar/modules/documents/templates/documents/record.html:453
 msgid "Persistent URL"
-msgstr ""
+msgstr "Постійна URL-адреса"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:19
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:19
 msgid "Persistent identifier"
-msgstr ""
+msgstr "Постійний ідентифікатор"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1422
+#, fuzzy
 msgid "Person"
-msgstr ""
+msgstr "Персона"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:92
 msgid "Phone number"
-msgstr ""
+msgstr "Номер телефону"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:93
 msgid "Phone number with the international prefix, without spaces."
-msgstr ""
+msgstr "Номер телефону з міжнародним префіксом, без пробілів."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1692
+#, fuzzy
 msgid "Place"
-msgstr ""
+msgstr "Місце (Розташування)"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:221
+#, fuzzy
 msgid "Platform name"
-msgstr ""
+msgstr "Назва платформи"
 
 #: sonar/templates/security/email/welcome.html:5
+#, fuzzy
 msgid "Please confirm your e-mail by clicking here"
-msgstr ""
+msgstr "Будь ласка, підтвердіть свою електронну адресу, натиснувши тут"
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:186
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:87
@@ -1855,8 +1903,9 @@ msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:104
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:191
+#, fuzzy
 msgid "Should be in the following format: 2022-12-31 (YYYY-MM-DD)."
-msgstr ""
+msgstr "Має бути в такому форматі: 2022-12-31 (РРРР-ММ-ДД)."
 
 #: sonar/modules/documents/templates/documents/record.html:118
 msgid "Show more"
@@ -2080,8 +2129,9 @@ msgid "Table of contents"
 msgstr ""
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2058
+#, fuzzy
 msgid "Terms of acquisition"
-msgstr ""
+msgstr "Умови придбання"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:745
 msgid "Tertiary teacher"
@@ -2159,20 +2209,25 @@ msgid "Title in other language"
 msgstr ""
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:277
+#, fuzzy
 msgid "Titles"
-msgstr ""
+msgstr "Назви"
 
 #: sonar/templates/security/email/welcome.html:8
+#, fuzzy
 msgid ""
 "To be able to deposit publications, you must be registered against a "
 "SONAR institution. For now, your account does not provide additional "
 "features, but in the future you will be able to create document lists and"
 " save requests."
 msgstr ""
+"Щоб мати змогу депонувати публікації, Ви повинні бути зареєстровані в "
+"установі SONAR. Наразі Ваш обліковий запис не надає додаткових функцій, але "
+"в майбутньому Ви зможете створювати списки документів та зберігати запити."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:757
 msgid "Trainer"
-msgstr ""
+msgstr "Тренер"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:259
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:327
@@ -2248,8 +2303,9 @@ msgid "User"
 msgstr ""
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:5
+#, fuzzy
 msgid "User Profile"
-msgstr ""
+msgstr "Профіль користувача"
 
 #: sonar/jsonschemas/common/validation-v1.0.0.json:91
 msgid "User which created the record."
@@ -2308,37 +2364,44 @@ msgid "Visibility"
 msgstr ""
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:391
+#, fuzzy
 msgid "Visible facets in the public interface for documents"
-msgstr ""
+msgstr "Видимі фасети у публічному інтерфейсі для документів"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:600
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1791
 msgid "Volume"
-msgstr ""
+msgstr "Том"
 
 #: sonar/config.py:128
 msgid "Welcome to SONAR, the Swiss Open Access Repository!"
-msgstr ""
+msgstr "Ласкаво просимо до SONAR, швейцарського репозитарію відкритого доступу!"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:836
+#, fuzzy
 msgid ""
 "What are the benefits and quality improvements in the research in this "
 "project?"
-msgstr ""
+msgstr "Які переваги та покращення якості досліджень у цьому проєкті?"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:850
+#, fuzzy
 msgid "What are the benefits of research in training?"
-msgstr ""
+msgstr "Які переваги досліджень у навчанні?"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:878
+#, fuzzy
 msgid ""
 "What is the impact of research on public action or on internal or "
 "external governance?"
 msgstr ""
+"Який вплив мають дослідження на державну політику або на внутрішнє чи "
+"зовнішнє управління?"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:864
+#, fuzzy
 msgid "What is the impact of the research on the professional environment?"
-msgstr ""
+msgstr "Який вплив дослідження має на професійне середовище?"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:653
 msgid "Who are the actors involved in the field?"
@@ -2368,7 +2431,7 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:551
 msgid "\\u200bSwiss National Science Foundation"
-msgstr ""
+msgstr "Швейцарський національний науковий фонд"
 
 #: sonar/translations/manual_translations.txt:37
 msgid "actorsInvolved"
@@ -3241,8 +3304,9 @@ msgid "funding_fundingReceived"
 msgstr ""
 
 #: sonar/theme/templates/sonar/partial/test_info.html:28
+#, fuzzy
 msgid "help page"
-msgstr ""
+msgstr "сторінка довідки"
 
 #: sonar/translations/manual_translations.txt:39
 msgid "impactOnFormation"
@@ -5394,4 +5458,3 @@ msgstr ""
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:427
 msgid "year"
 msgstr ""
-
