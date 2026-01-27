@@ -23,6 +23,7 @@ import tempfile
 from datetime import date
 from io import BytesIO
 from os.path import dirname, join
+from types import SimpleNamespace
 from unittest import mock
 
 import pytest
@@ -826,11 +827,6 @@ def project_json():
                     },
                 }
             ],
-            "validation": {
-                "user": {"$ref": "https://sonar.ch/api/users/orgsubmitter"},
-                "status": "validated",
-                "action": "save",
-            },
         }
     }
 
@@ -867,6 +863,36 @@ def project(app, db, es, admin, organisation, project_json):
         project = sonar.service("projects").create(None, json)
     app.extensions["invenio-search"].flush_and_refresh(index="projects")
     return project
+
+
+@pytest.fixture()
+def project_with_validation(app, db, es, make_organisation, make_user, roles, project_hepvs_json):
+    """Project fixture with validation workflow enabled (for validation tests).
+
+    Uses HEPVS organisation since validation workflow is only available for HEPVS.
+    Returns a SimpleNamespace with: project, submitter, moderator
+    """
+
+    make_organisation(code="hepvs", is_shared=False)
+    admin = make_user("admin", organisation="hepvs", access="admin-access")
+    submitter = make_user("submitter", organisation="hepvs", access="submitter-access")
+    moderator = make_user("moderator", organisation="hepvs", access="moderator-access")
+
+    json = copy.deepcopy(project_hepvs_json)
+    json["metadata"]["user"] = {"$ref": f"https://sonar.ch/api/users/{admin['pid']}"}
+    json["metadata"]["organisation"] = {"$ref": "https://sonar.ch/api/organisations/hepvs"}
+    json["metadata"]["validation"] = {
+        "user": {"$ref": f"https://sonar.ch/api/users/{submitter['pid']}"},
+        "status": "validated",
+        "action": "save",
+    }
+
+    with (
+        mock.patch("invenio_records_resources.services.base.service.Service.require_permission"),
+    ):
+        project = sonar.service("projects").create(None, json)
+    app.extensions["invenio-search"].flush_and_refresh(index="projects")
+    return SimpleNamespace(project=project, submitter=submitter, moderator=moderator)
 
 
 @pytest.fixture()

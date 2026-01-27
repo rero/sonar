@@ -19,8 +19,8 @@ from datetime import datetime, timezone
 
 from flask import current_app
 from flask_babel import _
-from invenio_i18n.ext import current_i18n
 
+from sonar.filters import get_admin_record_detail_url
 from sonar.modules.users.api import UserRecord, current_user_record
 from sonar.modules.users.exceptions import (
     UserIsNotOwnerOfRecordError,
@@ -97,13 +97,16 @@ class Validation:
         ]:
             self._update_status(validation, Status.TO_VALIDATE)
             # Send mail to moderators
-            self._send_email(
-                user.get_moderators_emails(),
-                Status.TO_VALIDATE,
-                record=record,
-                user=user,
-                app=current_app,
-            )
+            moderators_emails = user.get_moderators_emails()
+            if moderators_emails:
+                self._send_email(
+                    moderators_emails,
+                    Status.TO_VALIDATE,
+                    record=record,
+                    record_url=get_admin_record_detail_url(record),
+                    user=user,
+                    app=current_app,
+                )
 
     def _moderator_process(self, record, user):
         """Process for moderator.
@@ -136,6 +139,7 @@ class Validation:
                     user=user,
                     moderator=current_user_record,
                     record=record,
+                    record_url=get_admin_record_detail_url(record),
                     app=current_app,
                     comment=comment,
                 )
@@ -188,18 +192,18 @@ class Validation:
         user = current_user_record
 
         validation.setdefault("logs", [])
-        validation["logs"].append(
-            {
-                "status": validation["status"],
-                "action": validation["action"],
-                "user": {
-                    "pid": user["pid"],
-                    "name": f"{user['first_name']} {user['last_name']}",
-                },
-                "date": datetime.now(timezone.utc).isoformat(),
-                "comment": validation.get("comment"),
-            }
-        )
+        log_entry = {
+            "status": validation["status"],
+            "action": validation["action"],
+            "user": {
+                "pid": user["pid"],
+                "name": f"{user['first_name']} {user['last_name']}",
+            },
+            "date": datetime.now(timezone.utc).isoformat(),
+        }
+        if validation.get("comment"):
+            log_entry["comment"] = validation["comment"]
+        validation["logs"].append(log_entry)
 
         # Clear comment.
         validation.pop("comment", None)
@@ -219,5 +223,4 @@ class Validation:
             f"validation/email/{email_type}",
             kwargs,
             False,
-            current_i18n.language,
         )

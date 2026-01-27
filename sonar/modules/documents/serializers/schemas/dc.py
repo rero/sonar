@@ -128,7 +128,7 @@ class DublinCoreSchema(BaseSchema):
         if "_files" in obj["metadata"]:
             # Extraction of files only with a type file
             files = filter(
-                lambda f: ("type" in f and f["type"] == "file"),
+                lambda f: "type" in f and f["type"] == "file",
                 obj["metadata"]["_files"],
             )
             # Files sorting

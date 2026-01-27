@@ -76,5 +76,58 @@
         "path": "./files/fictiveshared.jpg"
       }
     ]
+  },
+  {
+    "code": "hepvs",
+    "name": "Haute école pédagogique du Valais",
+    "description": [
+      {
+        "language": "fre",
+        "value": "La Haute école pédagogique du Valais (HEP-VS) forme les enseignants de demain et mène des recherches en sciences de l'éducation pour améliorer les pratiques pédagogiques."
+      },
+      {
+        "language": "eng",
+        "value": "The Valais University of Teacher Education (HEP-VS) trains tomorrow's teachers and conducts research in education sciences to improve pedagogical practices."
+      }
+    ],
+    "isShared": true,
+    "isDedicated": true,
+    "serverName": "hepvs.test.com",
+    "platformName": "#Haute école pédagogique du Valais\n#Valais University of Teacher Education",
+    "documentsCustomField1": {
+      "includeInFacets": true,
+      "label": [
+        {
+          "language": "fre",
+          "value": "Équipe de recherche"
+        },
+        {
+          "language": "eng",
+          "value": "Research team"
+        }
+      ]
+    },
+    "documentsCustomField2": {
+      "includeInFacets": true,
+      "label": [
+        {
+          "language": "fre",
+          "value": "Domaine"
+        },
+        {
+          "language": "eng",
+          "value": "Domain"
+        }
+      ]
+    },
+    "documentsCustomField3": {
+      "includeInFacets": false
+    },
+    "files": [
+      {
+        "key": "hepvs.png",
+        "path": "./files/hepvs.png"
+      }
+    ]
   }
 ]

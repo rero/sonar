@@ -2,17 +2,192 @@
   {
     "metadata": {
       "name": "Study of paper submissions",
-      "validation": {
-        "status": "in_progress",
-        "action": "save",
-        "user": "rero.sonar+admin-dedicated@gmail.com"
-      },
       "description": "We want to submit all sorts of papers",
       "startDate": "2025-09-15",
       "organisation": {
         "$ref": "https://sonar.ch/api/organisations/fictivededicated"
       },
       "user": "rero.sonar+admin-dedicated@gmail.com"
+    }
+  },
+  {
+    "metadata": {
+      "name": "Impact des pratiques pédagogiques innovantes sur l'apprentissage des élèves",
+      "description": "Ce projet de recherche vise à analyser l'impact des pratiques pédagogiques innovantes, notamment l'utilisation des technologies numériques et des méthodes actives d'apprentissage, sur les résultats scolaires et le bien-être des élèves du primaire en Valais.",
+      "startDate": "2024-09-01",
+      "endDate": "2026-08-31",
+      "approvalDate": "2024-06-15",
+      "projectSponsor": "Marie Dupont",
+      "statusHep": "Lecturer/professor",
+      "mainTeam": "Education, childhood and the learning Society 21",
+      "secondaryTeam": "Fundamental learning",
+      "innerSearcher": ["Pierre Favre", "Sophie Roh"],
+      "status": "In progress",
+      "externalPartners": {
+        "choice": true,
+        "list": [
+          {
+            "searcherName": "Dr. Thomas Müller",
+            "institution": "Université de Genève"
+          }
+        ]
+      },
+      "keywords": ["pédagogie", "innovation", "apprentissage", "numérique", "primaire"],
+      "realizationFramework": ["Internal research", "Funded research"],
+      "funding": {
+        "choice": true,
+        "funder": {
+          "type": "Swissuniversities",
+          "number": "SWU-2024-12345"
+        },
+        "fundingReceived": true
+      },
+      "actorsInvolved": [
+        {
+          "choice": "Primary teacher",
+          "count": 25
+        },
+        {
+          "choice": "Student",
+          "count": 450
+        }
+      ],
+      "benefits": "Cette recherche permettra de développer des recommandations pratiques pour améliorer l'enseignement primaire et d'identifier les facteurs clés de succès des innovations pédagogiques.",
+      "impactOnFormation": "Les résultats seront intégrés dans les modules de formation initiale des futurs enseignants de la HEP-VS.",
+      "impactOnProfessionalEnvironment": "Les enseignants du terrain bénéficieront d'outils et de méthodes validés scientifiquement pour améliorer leurs pratiques.",
+      "impactOnPublicAction": "Les résultats permettront d'orienter les politiques éducatives cantonales en matière d'innovation pédagogique.",
+      "promoteInnovation": {
+        "choice": true,
+        "reason": "Le projet explore des approches pédagogiques novatrices intégrant les technologies numériques et les méthodes d'apprentissage actif."
+      },
+      "relatedToMandate": {
+        "choice": true,
+        "mandate": "State of Valais, Education service",
+        "briefDescription": "Mandat du Service de l'enseignement pour évaluer l'impact des innovations pédagogiques dans les écoles primaires valaisannes."
+      },
+      "educationalDocument": {
+        "choice": false
+      },
+      "searchResultsValorised": "Les résultats seront présentés lors de conférences pédagogiques et publiés dans des revues spécialisées. Un guide pratique sera également élaboré à destination des enseignants.",
+      "validation": {
+        "status": "validated",
+        "action": "approve",
+        "user": {
+          "$ref": "https://sonar.ch/api/users/18"
+        },
+        "logs": [
+          {
+            "status": "to_validate",
+            "action": "publish",
+            "user": {
+              "pid": "18",
+              "name": "Sophie Roh"
+            },
+            "date": "2024-09-10T08:30:00+00:00"
+          },
+          {
+            "status": "validated",
+            "action": "approve",
+            "user": {
+              "pid": "17",
+              "name": "Pierre Favre"
+            },
+            "date": "2024-09-12T14:15:00+00:00"
+          }
+        ]
+      },
+      "organisation": {
+        "$ref": "https://sonar.ch/api/organisations/hepvs"
+      },
+      "user": "rero.sonar+submitter-hepvs@gmail.com"
+    }
+  },
+  {
+    "metadata": {
+      "name": "Formation des enseignants à l'accompagnement des élèves à besoins éducatifs particuliers",
+      "description": "Ce projet examine les compétences nécessaires aux enseignants pour accompagner efficacement les élèves à besoins éducatifs particuliers dans les classes ordinaires.",
+      "startDate": "2025-01-15",
+      "endDate": "2027-01-14",
+      "approvalDate": "2024-11-20",
+      "projectSponsor": "Pierre Favre",
+      "statusHep": "Scientific collaborator",
+      "mainTeam": "Training and professionalization",
+      "innerSearcher": ["Anne Cretton"],
+      "status": "In progress",
+      "externalPartners": {
+        "choice": false
+      },
+      "keywords": ["formation", "inclusion", "besoins particuliers", "enseignants"],
+      "realizationFramework": ["Doctorate supported by the HEP-VS"],
+      "funding": {
+        "choice": false
+      },
+      "actorsInvolved": [
+        {
+          "choice": "Special education teacher",
+          "count": 15
+        },
+        {
+          "choice": "Student in training",
+          "count": 80
+        }
+      ],
+      "benefits": "Amélioration des pratiques inclusives et développement d'outils de formation adaptés.",
+      "impactOnFormation": "Intégration de modules spécifiques sur l'inclusion dans le cursus de formation des enseignants.",
+      "impactOnProfessionalEnvironment": "Renforcement des compétences des enseignants en exercice pour l'accueil des élèves à besoins particuliers.",
+      "impactOnPublicAction": "Contribution à la politique cantonale d'école inclusive.",
+      "promoteInnovation": {
+        "choice": false
+      },
+      "relatedToMandate": {
+        "choice": false
+      },
+      "educationalDocument": {
+        "choice": true,
+        "briefDescription": "Rapport destiné au Service de l'enseignement spécialisé sur les besoins en formation des enseignants."
+      },
+      "searchResultsValorised": "Les résultats alimenteront directement les programmes de formation continue proposés par la HEP-VS.",
+      "validation": {
+        "status": "in_progress",
+        "action": "save",
+        "user": {
+          "$ref": "https://sonar.ch/api/users/18"
+        },
+        "logs": [
+          {
+            "status": "to_validate",
+            "action": "publish",
+            "user": {
+              "pid": "18",
+              "name": "Sophie Roh"
+            },
+            "date": "2025-02-01T10:00:00+00:00"
+          },
+          {
+            "status": "ask_for_changes",
+            "action": "ask_for_changes",
+            "user": {
+              "pid": "17",
+              "name": "Pierre Favre"
+            },
+            "comment": "Merci de préciser les modalités de collaboration avec les enseignants spécialisés.",
+            "date": "2025-02-03T09:45:00+00:00"
+          },
+          {
+            "status": "in_progress",
+            "action": "save",
+            "user": {
+              "pid": "18",
+              "name": "Sophie Roh"
+            },
+            "date": "2025-02-05T16:20:00+00:00"
+          }
+        ]
+      },
+      "organisation": {
+        "$ref": "https://sonar.ch/api/organisations/hepvs"
+      },
+      "user": "rero.sonar+submitter-hepvs@gmail.com"
     }
   }
 ]

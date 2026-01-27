@@ -227,5 +227,99 @@
     "organisation": {
       "$ref": "https://sonar.ch/api/organisations/fictiveshared"
     }
+  },
+  {
+    "first_name": "Marie",
+    "last_name": "Dupont",
+    "email": "rero.sonar+admin-hepvs@gmail.com",
+    "password": "$pbkdf2-sha512$25000$$rgcQc4m46/SXTLzSTD5oMSK/vzyfOBvR3fJ70CqBFFbZ5Y6EAK3ehKQz7bCprkuV9UkXVMjMmDTaD7i6ArrWiw",
+    "role": "admin",
+    "birth_date": "1975-06-15",
+    "street": "Avenue de la Gare 12",
+    "postal_code": "1950",
+    "city": "Sion",
+    "phone": "+41276068600",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/hepvs"
+    }
+  },
+  {
+    "first_name": "Pierre",
+    "last_name": "Favre",
+    "email": "rero.sonar+moderator-hepvs@gmail.com",
+    "password": "$pbkdf2-sha512$25000$$rgcQc4m46/SXTLzSTD5oMSK/vzyfOBvR3fJ70CqBFFbZ5Y6EAK3ehKQz7bCprkuV9UkXVMjMmDTaD7i6ArrWiw",
+    "role": "moderator",
+    "birth_date": "1980-03-22",
+    "street": "Rue des Creusets 5",
+    "postal_code": "1950",
+    "city": "Sion",
+    "phone": "+41276068601",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/hepvs"
+    },
+    "subdivision": {"$ref": "https://sonar.ch/api/subdivisions/3"}
+  },
+  {
+    "first_name": "Sophie",
+    "last_name": "Roh",
+    "email": "rero.sonar+submitter-hepvs@gmail.com",
+    "password": "$pbkdf2-sha512$25000$$rgcQc4m46/SXTLzSTD5oMSK/vzyfOBvR3fJ70CqBFFbZ5Y6EAK3ehKQz7bCprkuV9UkXVMjMmDTaD7i6ArrWiw",
+    "role": "submitter",
+    "birth_date": "1985-11-08",
+    "street": "Chemin des Collines 7",
+    "postal_code": "3960",
+    "city": "Sierre",
+    "phone": "+41276068602",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/hepvs"
+    },
+    "subdivision": {"$ref": "https://sonar.ch/api/subdivisions/3"}
+  },
+  {
+    "first_name": "Lucas",
+    "last_name": "Zufferey",
+    "email": "rero.sonar+user-hepvs@gmail.com",
+    "password": "$pbkdf2-sha512$25000$$rgcQc4m46/SXTLzSTD5oMSK/vzyfOBvR3fJ70CqBFFbZ5Y6EAK3ehKQz7bCprkuV9UkXVMjMmDTaD7i6ArrWiw",
+    "role": "user",
+    "birth_date": "1990-07-30",
+    "street": "Route de Fully 18",
+    "postal_code": "1920",
+    "city": "Martigny",
+    "phone": "+41276068603",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/hepvs"
+    }
+  },
+  {
+    "first_name": "Anne",
+    "last_name": "Cretton",
+    "email": "rero.sonar+moderator-hepvs-sub2@gmail.com",
+    "password": "$pbkdf2-sha512$25000$$rgcQc4m46/SXTLzSTD5oMSK/vzyfOBvR3fJ70CqBFFbZ5Y6EAK3ehKQz7bCprkuV9UkXVMjMmDTaD7i6ArrWiw",
+    "role": "moderator",
+    "birth_date": "1978-01-14",
+    "street": "Rue du Bourg 3",
+    "postal_code": "1870",
+    "city": "Monthey",
+    "phone": "+41276068604",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/hepvs"
+    },
+    "subdivision": {"$ref": "https://sonar.ch/api/subdivisions/4"}
+  },
+  {
+    "first_name": "Jean",
+    "last_name": "Carron",
+    "email": "rero.sonar+submitter-hepvs-sub2@gmail.com",
+    "password": "$pbkdf2-sha512$25000$$rgcQc4m46/SXTLzSTD5oMSK/vzyfOBvR3fJ70CqBFFbZ5Y6EAK3ehKQz7bCprkuV9UkXVMjMmDTaD7i6ArrWiw",
+    "role": "submitter",
+    "birth_date": "1982-09-25",
+    "street": "Avenue des Alpes 22",
+    "postal_code": "3900",
+    "city": "Brig",
+    "phone": "+41276068605",
+    "organisation": {
+      "$ref": "https://sonar.ch/api/organisations/hepvs"
+    },
+    "subdivision": {"$ref": "https://sonar.ch/api/subdivisions/4"}
   }
 ]

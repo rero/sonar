@@ -70,6 +70,9 @@ dependencies = [
     "python3-saml>=1.16.0",
     "rero-invenio-files>=1.2.0",
     "flask-admin<2.0.0",
+    # Required for pkg_resources used by fs (PyFilesystem2), not bundled in Python 3.12+ venvs
+    # TODO: remove once invenio-files-rest>=4.0.0 (drops fs/PyFilesystem2 dependency)
+    "setuptools<82",
 ]
 
 [dependency-groups]

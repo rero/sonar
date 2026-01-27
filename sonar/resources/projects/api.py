@@ -18,14 +18,14 @@
 from invenio_jsonschemas import current_jsonschemas
 from invenio_pidstore.providers.recordid import RecordIdProvider as BaseRecordIdProvider
 from invenio_records.dumpers import SearchDumper, SearchDumperExt
-from invenio_records.systemfields import ConstantField
+from invenio_records.systemfields import SystemField
 from invenio_records_resources.records.systemfields import IndexField, PIDField
 from invenio_records_resources.services.records.components import ServiceComponent
-from werkzeug.utils import cached_property
 
 from sonar.affiliations import AffiliationResolver
-from sonar.modules.organisations.api import OrganisationRecord, current_organisation
+from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.users.api import UserRecord
+from sonar.modules.utils import get_pid_from_ref_or_data
 from sonar.modules.validation.extensions.validation import ValidationExtension
 from sonar.resources.api import Record as BaseRecord
 
@@ -51,6 +51,24 @@ class SearchDumperObjectsExt(SearchDumperExt):
             }
 
 
+class JSONSchemaField(SystemField):
+    """JSON Schema system field."""
+
+    def pre_commit(self, record):
+        """Change the $schema before validation."""
+        record["$schema"] = self._get_schema(record)
+
+    def _get_schema(self, data):
+        """Get the JSON schema URL for the record."""
+        schema_url = current_jsonschemas.path_to_url("projects/project-v1.0.0.json")
+        if org := data.get("metadata", {}).get("organisation"):
+            current_organisation = get_pid_from_ref_or_data(org)
+            schema_url = (
+                current_jsonschemas.path_to_url(f"{current_organisation}/projects/project-v1.0.0.json") or schema_url
+            )
+        return schema_url
+
+
 class Record(BaseRecord):
     """API for projects resources."""
 
@@ -71,13 +89,7 @@ class Record(BaseRecord):
 
     _extensions = [ValidationExtension()]
 
-    @cached_property
-    def schema(self):
-        """Return the schema."""
-        schema_url = current_jsonschemas.path_to_url(f"{current_organisation['code']}/projects/project-v1.0.0.json")
-        if not schema_url:
-            schema_url = current_jsonschemas.path_to_url("projects/project-v1.0.0.json")
-        return ConstantField("$schema", schema_url)
+    schema = JSONSchemaField("$schema")
 
     def __repr__(self):
         """String representation of object.

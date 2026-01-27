@@ -15,6 +15,8 @@
 
 """Projects service."""
 
+import contextlib
+
 from invenio_records_resources.services import SearchOptions as BaseSearchOptions
 from invenio_records_resources.services.records.facets import TermsFacet
 from invenio_records_resources.services.records.params import (
@@ -30,7 +32,7 @@ from invenio_records_resources.services.records.schema import ServiceSchemaWrapp
 from invenio_records_rest.utils import obj_or_import_string
 
 from sonar.modules.api import SonarIndexer
-from sonar.modules.organisations.api import current_organisation
+from sonar.modules.utils import get_pid_from_ref_or_data
 
 from ..service import RecordService, RecordServiceConfig
 from .api import Record, RecordComponent
@@ -115,6 +117,29 @@ class ProjectsRecordServiceConfig(RecordServiceConfig):
     components = [*RecordServiceConfig.components, RecordComponent]
 
 
+class ProjectServiceSchemaWrapper(ServiceSchemaWrapper):
+    def _get_organisation_pid(self, data):
+        """Get organisation PID from data"""
+        if org := data.get("metadata", {}).get("organisation"):
+            return get_pid_from_ref_or_data(org)
+        return None
+
+    def _set_schema(self, data):
+        if organisation_pid := self._get_organisation_pid(data):
+            with contextlib.suppress(ImportError):
+                self.schema = obj_or_import_string(f"sonar.dedicated.{organisation_pid}.projects.schema:RecordSchema")
+
+    def load(self, data, schema_args=None, context=None, raise_errors=True):
+        """Load data with dynamic schema_args + context + raise or not."""
+        self._set_schema(data)
+        return super().load(data, schema_args, context, raise_errors)
+
+    def dump(self, data, schema_args=None, context=None):
+        """Dump data using wrapped schema and dynamic schema_args + context."""
+        self._set_schema(data)
+        return super().dump(data, schema_args, context)
+
+
 class ProjectsRecordService(RecordService):
     """Projects service."""
 
@@ -123,10 +148,6 @@ class ProjectsRecordService(RecordService):
     @property
     def schema(self):
         """Returns the data schema instance."""
-        try:
-            schema = obj_or_import_string(
-                f"sonar.dedicated.{current_organisation['code']}.projects.schema:RecordSchema"
-            )
-        except Exception:
-            schema = obj_or_import_string("sonar.resources.projects.schema:RecordSchema")
-        return ServiceSchemaWrapper(self, schema=schema)
+        schema = obj_or_import_string("sonar.resources.projects.schema:RecordSchema")
+
+        return ProjectServiceSchemaWrapper(self, schema=schema)

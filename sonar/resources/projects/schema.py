@@ -21,12 +21,10 @@ from invenio_records_resources.services.records.schema import BaseRecordSchema
 from marshmallow import Schema, fields, pre_dump, pre_load
 
 from sonar.modules.documents.api import DocumentRecord
-from sonar.modules.users.api import current_user_record
-from sonar.modules.validation.schemas.validation import ValidationSchemaMixin
 from sonar.proxies import sonar
 
 
-class MetadataSchema(Schema, ValidationSchemaMixin):
+class MetadataSchema(Schema):
     """Schema for the project metadata."""
 
     name = fields.Str(required=True)
@@ -50,39 +48,6 @@ class MetadataSchema(Schema, ValidationSchemaMixin):
         """
         data.pop("permissions", None)
         data.pop("documents", None)
-
-        return data
-
-    @pre_load
-    def guess_organisation(self, data, **kwargs):
-        """Guess organisation from current logged user.
-
-        :param data: Dict of record data.
-        :returns: Modified dict of record data.
-        """
-        # Organisation already attached to project, we do nothing.
-        if data.get("organisation"):
-            return data
-
-        # Store current user organisation in new project.
-        if current_user_record.get("organisation"):
-            data["organisation"] = current_user_record["organisation"]
-
-        return data
-
-    @pre_load
-    def guess_user(self, data, **kwargs):
-        """Guess user.
-
-        :param data: Dict of record data.
-        :returns: Modified dict of record data.
-        """
-        # If user is already set, we don't set it.
-        if data.get("user") or not current_user_record:
-            return data
-
-        # Store current user in project.
-        data["user"] = {"$ref": current_user_record.get_ref_link("users", current_user_record["pid"])}
 
         return data
 

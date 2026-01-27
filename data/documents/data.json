@@ -59628,5 +59628,625 @@
         "startDate": "2006"
       }
     ]
+  },
+  {
+    "$schema": "https://sonar.ch/schemas/documents/document-v1.0.0.json",
+    "documentType": "coar:c_2f33",
+    "masked": "not_masked",
+    "oa_status": "gold",
+    "organisation": [
+      {
+        "$ref": "https://sonar.ch/api/organisations/hepvs"
+      }
+    ],
+    "language": [
+      {
+        "type": "bf:Language",
+        "value": "fre"
+      }
+    ],
+    "title": [
+      {
+        "mainTitle": [
+          {
+            "language": "fre",
+            "value": "Impact des pratiques numériques sur l'apprentissage en classe primaire"
+          }
+        ],
+        "type": "bf:Title"
+      }
+    ],
+    "abstracts": [
+      {
+        "language": "fre",
+        "value": "Cette étude examine l'impact des outils numériques sur les processus d'apprentissage des élèves du primaire en Valais. Les résultats montrent une amélioration significative de l'engagement des élèves et de la différenciation pédagogique lorsque les technologies sont intégrées de manière réfléchie dans les pratiques enseignantes."
+      }
+    ],
+    "identifiedBy": [
+      {
+        "type": "bf:Doi",
+        "value": "10.1234/hepvs.2024.001"
+      }
+    ],
+    "contribution": [
+      {
+        "agent": {
+          "type": "bf:Person",
+          "preferred_name": "Marie Dupont"
+        },
+        "role": [
+          "cre"
+        ],
+        "affiliation": "HEP-VS"
+      },
+      {
+        "agent": {
+          "type": "bf:Person",
+          "preferred_name": "Pierre Favre"
+        },
+        "role": [
+          "cre"
+        ],
+        "affiliation": "HEP-VS"
+      }
+    ],
+    "customField1": ["Education, childhood and the learning Society 21"],
+    "customField2": ["Didactique"],
+    "subjects": [
+      {
+        "label": {
+          "value": [
+            "Technologies éducatives"
+          ],
+          "language": "fre"
+        }
+      },
+      {
+        "label": {
+          "value": [
+            "Pédagogie numérique"
+          ],
+          "language": "fre"
+        }
+      },
+      {
+        "label": {
+          "value": [
+            "Enseignement primaire"
+          ],
+          "language": "fre"
+        }
+      }
+    ],
+    "provisionActivity": [
+      {
+        "type": "bf:Publication",
+        "statement": [
+          {
+            "type": "bf:Place",
+            "label": [
+              {
+                "value": "Saint-Maurice"
+              }
+            ]
+          },
+          {
+            "type": "bf:Agent",
+            "label": [
+              {
+                "value": "Éditions HEP-VS"
+              }
+            ]
+          },
+          {
+            "type": "Date",
+            "label": [
+              {
+                "value": "2024"
+              }
+            ]
+          }
+        ],
+        "startDate": "2024"
+      }
+    ]
+  },
+  {
+    "$schema": "https://sonar.ch/schemas/documents/document-v1.0.0.json",
+    "documentType": "coar:c_6501",
+    "masked": "not_masked",
+    "oa_status": "hybrid",
+    "organisation": [
+      {
+        "$ref": "https://sonar.ch/api/organisations/hepvs"
+      }
+    ],
+    "language": [
+      {
+        "type": "bf:Language",
+        "value": "fre"
+      }
+    ],
+    "title": [
+      {
+        "mainTitle": [
+          {
+            "language": "fre",
+            "value": "Formation des enseignants à l'inclusion scolaire : état des lieux et perspectives"
+          }
+        ],
+        "type": "bf:Title"
+      }
+    ],
+    "abstracts": [
+      {
+        "language": "fre",
+        "value": "Cet article analyse les dispositifs de formation à l'inclusion scolaire proposés aux futurs enseignants de la HEP-VS. L'étude met en évidence les compétences clés à développer pour accompagner efficacement les élèves à besoins éducatifs particuliers dans les classes ordinaires du canton du Valais."
+      }
+    ],
+    "identifiedBy": [
+      {
+        "type": "bf:Doi",
+        "value": "10.1234/hepvs.2024.002"
+      }
+    ],
+    "contribution": [
+      {
+        "agent": {
+          "type": "bf:Person",
+          "preferred_name": "Anne Cretton"
+        },
+        "role": [
+          "cre"
+        ],
+        "affiliation": "HEP-VS"
+      }
+    ],
+    "partOf": [
+      {
+        "document": {
+          "title": "Revue suisse des sciences de l'éducation",
+          "publication": {
+            "statement": "Berne : SSRE",
+            "startDate": "2024"
+          }
+        },
+        "numberingYear": "2024",
+        "numberingVolume": "46",
+        "numberingIssue": "2",
+        "numberingPages": "245-268"
+      }
+    ],
+    "customField1": ["Training and professionalization"],
+    "customField2": ["Pédagogie spécialisée"],
+    "subjects": [
+      {
+        "label": {
+          "value": [
+            "Inclusion scolaire"
+          ],
+          "language": "fre"
+        }
+      },
+      {
+        "label": {
+          "value": [
+            "Formation des enseignants"
+          ],
+          "language": "fre"
+        }
+      },
+      {
+        "label": {
+          "value": [
+            "Besoins éducatifs particuliers"
+          ],
+          "language": "fre"
+        }
+      }
+    ],
+    "provisionActivity": [
+      {
+        "type": "bf:Publication",
+        "statement": [
+          {
+            "type": "bf:Place",
+            "label": [
+              {
+                "value": "Berne"
+              }
+            ]
+          },
+          {
+            "type": "bf:Agent",
+            "label": [
+              {
+                "value": "SSRE"
+              }
+            ]
+          },
+          {
+            "type": "Date",
+            "label": [
+              {
+                "value": "2024"
+              }
+            ]
+          }
+        ],
+        "startDate": "2024"
+      }
+    ]
+  },
+  {
+    "$schema": "https://sonar.ch/schemas/documents/document-v1.0.0.json",
+    "documentType": "coar:c_18cp",
+    "masked": "not_masked",
+    "oa_status": "green",
+    "organisation": [
+      {
+        "$ref": "https://sonar.ch/api/organisations/hepvs"
+      }
+    ],
+    "language": [
+      {
+        "type": "bf:Language",
+        "value": "fre"
+      }
+    ],
+    "title": [
+      {
+        "mainTitle": [
+          {
+            "language": "fre",
+            "value": "Le bilinguisme dans les écoles valaisannes : défis et opportunités pour les enseignants"
+          }
+        ],
+        "type": "bf:Title"
+      }
+    ],
+    "abstracts": [
+      {
+        "language": "fre",
+        "value": "Cette recherche explore les pratiques pédagogiques des enseignants valaisans face au bilinguisme français-allemand. L'étude identifie les stratégies efficaces pour valoriser le plurilinguisme des élèves et propose des recommandations pour la formation continue des enseignants."
+      }
+    ],
+    "identifiedBy": [
+      {
+        "type": "bf:Doi",
+        "value": "10.1234/hepvs.2023.003"
+      }
+    ],
+    "contribution": [
+      {
+        "agent": {
+          "type": "bf:Person",
+          "preferred_name": "Sophie Roh"
+        },
+        "role": [
+          "cre"
+        ],
+        "affiliation": "HEP-VS"
+      },
+      {
+        "agent": {
+          "type": "bf:Person",
+          "preferred_name": "Lucas Zufferey"
+        },
+        "role": [
+          "cre"
+        ],
+        "affiliation": "HEP-VS"
+      }
+    ],
+    "customField1": ["Language didactics and plurilingualism"],
+    "customField2": ["Didactique des langues"],
+    "subjects": [
+      {
+        "label": {
+          "value": [
+            "Bilinguisme"
+          ],
+          "language": "fre"
+        }
+      },
+      {
+        "label": {
+          "value": [
+            "Plurilinguisme"
+          ],
+          "language": "fre"
+        }
+      },
+      {
+        "label": {
+          "value": [
+            "Didactique des langues"
+          ],
+          "language": "fre"
+        }
+      }
+    ],
+    "provisionActivity": [
+      {
+        "type": "bf:Publication",
+        "statement": [
+          {
+            "type": "bf:Place",
+            "label": [
+              {
+                "value": "Brigue"
+              }
+            ]
+          },
+          {
+            "type": "bf:Agent",
+            "label": [
+              {
+                "value": "Éditions HEP-VS"
+              }
+            ]
+          },
+          {
+            "type": "Date",
+            "label": [
+              {
+                "value": "2023"
+              }
+            ]
+          }
+        ],
+        "startDate": "2023"
+      }
+    ]
+  },
+  {
+    "$schema": "https://sonar.ch/schemas/documents/document-v1.0.0.json",
+    "documentType": "coar:c_c94f",
+    "masked": "not_masked",
+    "oa_status": "diamond",
+    "organisation": [
+      {
+        "$ref": "https://sonar.ch/api/organisations/hepvs"
+      }
+    ],
+    "language": [
+      {
+        "type": "bf:Language",
+        "value": "ger"
+      }
+    ],
+    "title": [
+      {
+        "mainTitle": [
+          {
+            "language": "ger",
+            "value": "Innovative Lehrpraktiken im Walliser Bildungssystem: Eine empirische Studie"
+          }
+        ],
+        "type": "bf:Title"
+      }
+    ],
+    "abstracts": [
+      {
+        "language": "ger",
+        "value": "Diese Studie untersucht innovative Lehrpraktiken in Walliser Schulen. Die Ergebnisse zeigen, dass kooperatives Lernen und projektbasierter Unterricht besonders positive Auswirkungen auf die Motivation und Leistung der Schülerinnen und Schüler haben."
+      }
+    ],
+    "identifiedBy": [
+      {
+        "type": "bf:Doi",
+        "value": "10.1234/hepvs.2024.004"
+      }
+    ],
+    "contribution": [
+      {
+        "agent": {
+          "type": "bf:Person",
+          "preferred_name": "Jean Carron"
+        },
+        "role": [
+          "cre"
+        ],
+        "affiliation": "HEP-VS"
+      }
+    ],
+    "partOf": [
+      {
+        "document": {
+          "title": "Schweizerische Zeitschrift für Bildungswissenschaften",
+          "publication": {
+            "statement": "Bern : SGBF",
+            "startDate": "2024"
+          }
+        },
+        "numberingYear": "2024",
+        "numberingVolume": "46",
+        "numberingIssue": "1",
+        "numberingPages": "112-135"
+      }
+    ],
+    "customField1": ["Education, childhood and the learning Society 21"],
+    "customField2": ["Pädagogik"],
+    "subjects": [
+      {
+        "label": {
+          "value": [
+            "Innovative Pädagogik"
+          ],
+          "language": "ger"
+        }
+      },
+      {
+        "label": {
+          "value": [
+            "Kooperatives Lernen"
+          ],
+          "language": "ger"
+        }
+      },
+      {
+        "label": {
+          "value": [
+            "Projektbasierter Unterricht"
+          ],
+          "language": "ger"
+        }
+      }
+    ],
+    "provisionActivity": [
+      {
+        "type": "bf:Publication",
+        "statement": [
+          {
+            "type": "bf:Place",
+            "label": [
+              {
+                "value": "Bern"
+              }
+            ]
+          },
+          {
+            "type": "bf:Agent",
+            "label": [
+              {
+                "value": "SGBF"
+              }
+            ]
+          },
+          {
+            "type": "Date",
+            "label": [
+              {
+                "value": "2024"
+              }
+            ]
+          }
+        ],
+        "startDate": "2024"
+      }
+    ]
+  },
+  {
+    "$schema": "https://sonar.ch/schemas/documents/document-v1.0.0.json",
+    "documentType": "coar:c_ba08",
+    "masked": "not_masked",
+    "oa_status": "bronze",
+    "organisation": [
+      {
+        "$ref": "https://sonar.ch/api/organisations/hepvs"
+      }
+    ],
+    "language": [
+      {
+        "type": "bf:Language",
+        "value": "fre"
+      }
+    ],
+    "title": [
+      {
+        "mainTitle": [
+          {
+            "language": "fre",
+            "value": "Évaluation formative et différenciation pédagogique : pratiques des enseignants valaisans"
+          }
+        ],
+        "type": "bf:Title"
+      }
+    ],
+    "abstracts": [
+      {
+        "language": "fre",
+        "value": "Ce rapport de recherche présente les résultats d'une enquête menée auprès de 150 enseignants du canton du Valais sur leurs pratiques d'évaluation formative. L'étude met en lumière les liens entre évaluation formative et différenciation pédagogique, et propose des pistes pour améliorer l'accompagnement des élèves en difficulté."
+      }
+    ],
+    "identifiedBy": [
+      {
+        "type": "bf:Doi",
+        "value": "10.1234/hepvs.2023.005"
+      }
+    ],
+    "contribution": [
+      {
+        "agent": {
+          "type": "bf:Person",
+          "preferred_name": "Pierre Favre"
+        },
+        "role": [
+          "cre"
+        ],
+        "affiliation": "HEP-VS"
+      },
+      {
+        "agent": {
+          "type": "bf:Person",
+          "preferred_name": "Marie Dupont"
+        },
+        "role": [
+          "cre"
+        ],
+        "affiliation": "HEP-VS"
+      }
+    ],
+    "customField1": ["Fundamental learning"],
+    "customField2": ["Évaluation"],
+    "subjects": [
+      {
+        "label": {
+          "value": [
+            "Évaluation formative"
+          ],
+          "language": "fre"
+        }
+      },
+      {
+        "label": {
+          "value": [
+            "Différenciation pédagogique"
+          ],
+          "language": "fre"
+        }
+      },
+      {
+        "label": {
+          "value": [
+            "Accompagnement scolaire"
+          ],
+          "language": "fre"
+        }
+      }
+    ],
+    "provisionActivity": [
+      {
+        "type": "bf:Publication",
+        "statement": [
+          {
+            "type": "bf:Place",
+            "label": [
+              {
+                "value": "Saint-Maurice"
+              }
+            ]
+          },
+          {
+            "type": "bf:Agent",
+            "label": [
+              {
+                "value": "HEP-VS Publications"
+              }
+            ]
+          },
+          {
+            "type": "Date",
+            "label": [
+              {
+                "value": "2023"
+              }
+            ]
+          }
+        ],
+        "startDate": "2023"
+      }
+    ]
   }
 ]

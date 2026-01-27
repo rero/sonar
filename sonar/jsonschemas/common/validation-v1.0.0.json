@@ -33,7 +33,28 @@
             "$ref": "#/definitions/action"
           },
           "user": {
-            "$ref": "#/definitions/user"
+            "title": "User",
+            "description": "User who performed the action.",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "title": "Name",
+                "description": "Full name of the user.",
+                "type": "string",
+                "minLength": 1
+              },
+              "pid": {
+                "title": "PID",
+                "description": "Persistent identifier of the user.",
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "name",
+              "pid"
+            ]
           },
           "comment": {
             "$ref": "#/definitions/comment"

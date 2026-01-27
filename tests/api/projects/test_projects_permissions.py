@@ -15,6 +15,7 @@
 
 """Test project permissions."""
 
+import copy
 import json
 
 from flask import url_for
@@ -91,37 +92,45 @@ def test_list(app, client, make_project, superuser, admin, moderator, submitter,
     assert res.json["hits"]["total"] == 3
 
 
-def test_create(client, project_json, superuser, admin, moderator, submitter, user):
+def test_create(client, project_json, superuser, admin, moderator, submitter, organisation, user):
     """Test create project permissions."""
     headers = {"Content-Type": "application/json", "Accept": "application/json"}
+    proj_json = copy.deepcopy(project_json)
+    proj_json["metadata"]["organisation"] = {"$ref": f"https://sonar.ch/api/organisations/{organisation['pid']}"}
 
     # Not logged
-    res = client.post(url_for("projects.search"), data=json.dumps(project_json), headers=headers)
+    proj_json["metadata"]["user"] = {"$ref": f"https://sonar.ch/api/users/{admin['pid']}"}
+    res = client.post(url_for("projects.search"), data=json.dumps(proj_json), headers=headers)
     assert res.status_code == 403
 
     # User
+    proj_json["metadata"]["user"] = {"$ref": f"https://sonar.ch/api/users/{user['pid']}"}
     login_user_via_session(client, email=user["email"])
-    res = client.post(url_for("projects.search"), data=json.dumps(project_json), headers=headers)
+    res = client.post(url_for("projects.search"), data=json.dumps(proj_json), headers=headers)
     assert res.status_code == 403
 
     # submitter
+    proj_json["metadata"]["user"] = {"$ref": f"https://sonar.ch/api/users/{submitter['pid']}"}
     login_user_via_session(client, email=submitter["email"])
-    res = client.post(url_for("projects.search"), data=json.dumps(project_json), headers=headers)
+    res = client.post(url_for("projects.search"), data=json.dumps(proj_json), headers=headers)
     assert res.status_code == 201
 
     # Moderator
+    proj_json["metadata"]["user"] = {"$ref": f"https://sonar.ch/api/users/{moderator['pid']}"}
     login_user_via_session(client, email=moderator["email"])
-    res = client.post(url_for("projects.search"), data=json.dumps(project_json), headers=headers)
+    res = client.post(url_for("projects.search"), data=json.dumps(proj_json), headers=headers)
     assert res.status_code == 201
 
     # Admin
+    proj_json["metadata"]["user"] = {"$ref": f"https://sonar.ch/api/users/{admin['pid']}"}
     login_user_via_session(client, email=admin["email"])
-    res = client.post(url_for("projects.search"), data=json.dumps(project_json), headers=headers)
+    res = client.post(url_for("projects.search"), data=json.dumps(proj_json), headers=headers)
     assert res.status_code == 201
 
     # Super user
+    proj_json["metadata"]["user"] = {"$ref": f"https://sonar.ch/api/users/{superuser['pid']}"}
     login_user_via_session(client, email=superuser["email"])
-    res = client.post(url_for("projects.search"), data=json.dumps(project_json), headers=headers)
+    res = client.post(url_for("projects.search"), data=json.dumps(proj_json), headers=headers)
     assert res.status_code == 201
 
 
@@ -262,24 +271,6 @@ def test_update(client, make_project, superuser, admin, moderator, submitter, us
         headers=headers,
     )
     assert res.status_code == 200
-
-    # Save status rejected --> OK
-    project2.data["metadata"]["validation"]["status"] = "rejected"
-    res = client.put(
-        url_for("projects.read", pid_value=project2["id"]),
-        data=json.dumps(project2.data),
-        headers=headers,
-    )
-    assert res.status_code == 200
-
-    # Record is rejected, new save is not possible
-    project2.data["metadata"]["validation"]["status"] = "validated"
-    res = client.put(
-        url_for("projects.read", pid_value=project2["id"]),
-        data=json.dumps(project2.data),
-        headers=headers,
-    )
-    assert res.status_code == 403
 
 
 def test_delete(client, db, document, make_project, superuser, admin, moderator, submitter, user):

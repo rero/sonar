@@ -31,7 +31,9 @@ from .minters import id_minter
 
 def get_current_organisation():
     """Return current organisation from context."""
-    if has_request_context() and not hasattr(request_ctx, "organisation_record"):
+    if not has_request_context():
+        return None
+    if not hasattr(request_ctx, "organisation_record"):
         request_ctx.organisation_record = (
             None
             if (not current_user_record or not current_user_record.get("organisation"))

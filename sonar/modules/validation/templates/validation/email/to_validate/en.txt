@@ -4,4 +4,4 @@ A record "{{ record | string }}" (#{{ record.pid.pid_value }}) has been submitte
 
 You can review this record by following this link:
 
-{{ record | get_admin_record_detail_url }}
+{{ record_url }}

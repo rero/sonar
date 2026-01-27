@@ -129,6 +129,17 @@ def get_current_language():
     return get_locale()
 
 
+def get_pid_from_ref_or_data(data):
+    """Return the resource pid from a $ref or a resolved object.
+
+    :param data: Dict containing either a $ref URL or a resolved object with pid.
+    :returns: The PID string.
+    """
+    if "$ref" in data:
+        return data["$ref"].split("/")[-1]
+    return data.get("pid")
+
+
 def get_view_code():
     """Return view code corresponding to organisation.
 
