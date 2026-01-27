@@ -488,7 +488,9 @@
       ],
       "required": [
         "name",
-        "startDate"
+        "startDate",
+        "user",
+        "organisation"
       ]
     }
   }

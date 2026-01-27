@@ -220,7 +220,7 @@ def contributors(record, meeting=False):
     if list(filter(lambda d: "agent" in d, record.get("contribution"))):
         contributors = list(
             filter(
-                lambda d: (d["agent"]["type"] == "bf:Meeting" if meeting else d["agent"]["type"] != "bf:Meeting"),
+                lambda d: d["agent"]["type"] == "bf:Meeting" if meeting else d["agent"]["type"] != "bf:Meeting",
                 record.get("contribution"),
             )
         )

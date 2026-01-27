@@ -107,6 +107,7 @@ section "Create organisations OAI sets" "info"
 invenio documents oai create-set rero "RERO+" 'organisation.code:rero'
 invenio documents oai create-set fictivededicated "Université des sciences fictives" 'organisation.code:fictivededicated'
 invenio documents oai create-set fictiveshared "École des hautes études partagées" 'organisation.code:fictiveshared'
+invenio documents oai create-set hepvs "Haute école pédagogique du Valais" 'organisation.code:hepvs'
 
 section "Create users" "info"
 invenio fixtures users import "${fixtures_folder}/users/data.json"

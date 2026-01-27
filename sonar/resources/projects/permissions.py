@@ -46,9 +46,18 @@ class Read(AdminAction):
         if current_user_record.is_moderator or (request.args.get("q") and ".suggest" in request.args["q"]):
             must = [Q("term", metadata__organisation__pid=current_organisation["pid"])]
 
-            # In suggestions only records published can be queried.
+            # In suggestions, show all projects without validation field (orgs without workflow)
+            # or only validated projects (orgs with validation workflow).
             if request.args.get("q") and ".suggest" in request.args["q"]:
-                must.append(Q("term", metadata__validation__status=Status.VALIDATED))
+                must.append(
+                    Q(
+                        "bool",
+                        should=[
+                            Q("bool", must_not=[Q("exists", field="metadata.validation.status")]),
+                            Q("term", metadata__validation__status=Status.VALIDATED),
+                        ],
+                    )
+                )
 
             return Q("bool", must=must)
 

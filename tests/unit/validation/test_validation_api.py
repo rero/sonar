@@ -58,9 +58,11 @@ def test_load_user(client, submitter, moderator):
         assert isinstance(exception.value, UserIsNotOwnerOfRecordError)
 
 
-def test_submitter_process(client, submitter, project):
+def test_submitter_process(client, project_with_validation):
     """Test validation process."""
     validation = Validation()
+    submitter = project_with_validation.submitter
+    project = project_with_validation.project
 
     # No validation metadata
     record = {}
@@ -89,8 +91,37 @@ def test_submitter_process(client, submitter, project):
         assert project._record["metadata"]["validation"]["status"] == "to_validate"
 
 
-def test_moderator_process(client, moderator, project):
+def test_submitter_publish_without_moderators(client, project_with_validation):
+    """Test that publish works even when no moderators are configured.
+
+    When get_moderators_emails() returns an empty list, no exception should be
+    raised and the status should still change to to_validate.
+    """
+    from unittest import mock
+
+    validation = Validation()
+    submitter = project_with_validation.submitter
+    project = project_with_validation.project
+
+    login_user_via_view(client, email=submitter["email"], password="123456")
+
+    project._record["metadata"]["validation"]["action"] = "publish"
+    project._record["metadata"]["validation"]["status"] = "in_progress"
+
+    # Mock get_moderators_emails to return empty list
+    with mock.patch.object(type(submitter), "get_moderators_emails", return_value=[]):
+        # Should not raise an exception
+        validation.process(project._record)
+
+    # Status should still change to to_validate
+    assert project._record["metadata"]["validation"]["status"] == "to_validate"
+
+
+def test_moderator_process(client, project_with_validation):
     """Test moderator validation process."""
+    moderator = project_with_validation.moderator
+    project = project_with_validation.project
+
     login_user_via_view(client, email=moderator["email"], password="123456")
 
     validation = Validation()

@@ -17,11 +17,12 @@
 
 from marshmallow import fields
 
+from sonar.modules.validation.schemas.validation import ValidationSchemaMixin
 from sonar.resources.projects.schema import MetadataSchema as BaseMetadataSchema
 from sonar.resources.projects.schema import RecordSchema as BaseRecordSchema
 
 
-class MetadataSchema(BaseMetadataSchema):
+class MetadataSchema(BaseMetadataSchema, ValidationSchemaMixin):
     """Schema for the project metadata."""
 
     projectSponsor = fields.Str()

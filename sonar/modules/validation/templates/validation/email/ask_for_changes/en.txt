@@ -9,4 +9,4 @@ Hi {{ user.first_name }},
 {% endif %}
 You can follow this link to make changes to your record:
 
-{{ record | get_admin_record_detail_url }}
+{{ record_url }}

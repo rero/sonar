@@ -27,6 +27,7 @@ class ValidationExtension(BaseRecordExtension):
         """Hook executed before DB persistences.
 
         This method processes the validation on the record.
+        Validation is only processed for organisations with validation workflow enabled.
 
         :param record: Record to check.
         """

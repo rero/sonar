@@ -22,13 +22,15 @@ from invenio_accounts.testutils import login_user_via_session
 from invenio_search import current_search
 
 
-def test_completion(client, project_json, make_user):
+def test_completion(client, project_hepvs_json, make_user):
     """Test completion suggestions."""
     user = make_user("admin", organisation="hepvs", access="admin-access")
     login_user_via_session(client, email=user["email"])
 
-    project_json["metadata"]["projectSponsor"] = "Sponsor 1"
-    res = client.post(url_for("projects.search"), data=json.dumps(project_json))
+    project_hepvs_json["metadata"]["organisation"] = {"$ref": "https://sonar.ch/api/organisations/hepvs"}
+    project_hepvs_json["metadata"]["user"] = {"$ref": f"https://sonar.ch/api/users/{user['pid']}"}
+    project_hepvs_json["metadata"]["projectSponsor"] = "Sponsor 1"
+    res = client.post(url_for("projects.search"), data=json.dumps(project_hepvs_json))
     # Ensure project is indexed
     current_search.flush_and_refresh(index="projects")
 
