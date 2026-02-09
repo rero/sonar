@@ -27,7 +27,7 @@
     ],
     "isShared": true,
     "isDedicated": true,
-    "serverName": "fictivededicated.test.com",
+    "serverName": "fictivededicated.test.rero.ch",
     "platformName": "#Université des sciences fictives\n#University of Fictive Sciences",
     "documentsCustomField1": {
       "includeInFacets": true,
@@ -92,7 +92,7 @@
     ],
     "isShared": true,
     "isDedicated": true,
-    "serverName": "hepvs.test.com",
+    "serverName": "hepvs.test.rero.ch",
     "platformName": "#Haute école pédagogique du Valais\n#Valais University of Teacher Education",
     "documentsCustomField1": {
       "includeInFacets": true,
