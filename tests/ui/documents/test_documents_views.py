@@ -1,5 +1,5 @@
 # Swiss Open Access Repository
-# Copyright (C) 2021 RERO
+# Copyright (C) 2021-2026 RERO
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -14,6 +14,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """Test documents views."""
+
+from unittest import mock
 
 import pytest
 from flask import g, render_template_string, url_for
@@ -113,6 +115,29 @@ def test_store_organisation(client, db, organisation):
     db.session.commit()
     assert client.get(url_for("index", view="org")).status_code == 404
     assert not g.get("organisation")
+
+
+def test_global_view_blocked_on_dedicated_portal(client, organisation):
+    """Test that the global view is blocked on dedicated portals."""
+    # On the main domain, /global passes the converter and Werkzeug redirects
+    # it to the canonical URL "/" (308 → 200). Note: url_for("index",
+    # view="global") generates "/" directly, bypassing the converter entirely.
+    assert client.get("/global", follow_redirects=True).status_code == 200
+
+    # On a dedicated portal, the converter raises ValidationError for "global",
+    # so no route matches /global and Flask returns 404.
+    with mock.patch(
+        "sonar.route_converters.OrganisationSearch.get_organisation_pid_by_server_name",
+        return_value="org",
+    ):
+        assert client.get("/global").status_code == 404
+
+    # The org's own view still works on a dedicated portal.
+    with mock.patch(
+        "sonar.route_converters.OrganisationSearch.get_organisation_pid_by_server_name",
+        return_value="org",
+    ):
+        assert client.get(url_for("index", view="org")).status_code == 200
 
 
 def test_index(client):
