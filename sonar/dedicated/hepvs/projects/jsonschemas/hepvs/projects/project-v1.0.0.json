@@ -267,8 +267,8 @@
         "innerSearcher": {
           "title": "Internal research associates",
           "type": "array",
+          "default": [null],
           "minItems": 1,
-          "default": [],
           "items": {
             "title": "First and last name",
             "type": "string",
@@ -435,7 +435,7 @@
           "title": "Keywords",
           "type": "array",
           "minItems": 1,
-          "default": [],
+          "default": [null],
           "maxItems": 5,
           "items": {
             "type": "string",
@@ -655,7 +655,6 @@
           "title": "Who are the actors involved in the field?",
           "type": "array",
           "minItems": 1,
-          "default": [],
           "items": {
             "title": "Actor involved",
             "type": "object",

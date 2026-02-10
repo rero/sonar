@@ -523,7 +523,7 @@ SONAR_APP_DISABLE_PERMISSION_CHECKS = False
 """Disable permission checks during API calls. Useful when API is test from
 command line or progams like postman."""
 
-SONAR_APP_UI_VERSION = "19.0.2"
+SONAR_APP_UI_VERSION = "19.0.3"
 
 SONAR_APP_DEFAULT_ORGANISATION = "global"
 """Default organisation key."""
