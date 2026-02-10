@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: SONAR 1.11.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
 "POT-Creation-Date: 2026-02-10 13:30+0100\n"
-"PO-Revision-Date: 2025-09-23 09:40+0000\n"
+"PO-Revision-Date: 2026-02-10 12:42+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
+"de/>\n"
 "Language: de\n"
-"Language-Team: German "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/de/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.16-dev\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: sonar/jsonschemas/common/masked-v1.0.0.json:9
@@ -851,7 +852,7 @@ msgstr "Französisch"
 
 #: sonar/jsonschemas/common/validation-v1.0.0.json:43
 msgid "Full name of the user."
-msgstr ""
+msgstr "Vollständiger Name des Benutzers."
 
 #: sonar/theme/templates/sonar/stats/detail.html:36
 msgid "Full-text"
@@ -1467,7 +1468,7 @@ msgstr "Sonstige Materialeigenschaften"
 
 #: sonar/jsonschemas/common/validation-v1.0.0.json:48
 msgid "PID"
-msgstr ""
+msgstr "PID"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:29
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:29
@@ -1506,7 +1507,7 @@ msgstr "Persistent Identifier"
 
 #: sonar/jsonschemas/common/validation-v1.0.0.json:49
 msgid "Persistent identifier of the user."
-msgstr ""
+msgstr "Persistent Identifier des Benutzers."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1422
 msgid "Person"
@@ -2287,7 +2288,7 @@ msgstr "Benutzer, der die Ressource erstellt hat."
 
 #: sonar/jsonschemas/common/validation-v1.0.0.json:37
 msgid "User who performed the action."
-msgstr ""
+msgstr "Benutzer, der die Aktion ausgeführt hat."
 
 #: sonar/jsonschemas/common/validation-v1.0.0.json:2
 msgid "Validation"
@@ -2352,7 +2353,7 @@ msgstr "Band"
 
 #: sonar/modules/users/utils.py:44
 msgid "Welcome to"
-msgstr ""
+msgstr "Willkommen bei"
 
 #: sonar/config.py:127
 msgid "Welcome to SONAR, the Swiss Open Access Repository!"
@@ -5414,4 +5415,3 @@ msgstr "Bd."
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:427
 msgid "year"
 msgstr "Jahr"
-
