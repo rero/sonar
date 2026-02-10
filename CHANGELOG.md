@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.12.4](https://github.com/rero/sonar/tree/v1.12.4) (2026-02-10)
+
+[Full Changelog](https://github.com/rero/sonar/compare/v1.12.3...v1.12.4)
+
+**Fixes:**
+
+- refactor(validation): scope validation workflow to configured organisations only [#1081](https://github.com/rero/sonar/pull/1081) (by @PascalRepond & @jma)
+
 ## [v1.12.3](https://github.com/rero/sonar/tree/v1.12.3) (2025-11-19)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.12.2...v1.12.3)

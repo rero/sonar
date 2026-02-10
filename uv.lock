@@ -5471,7 +5471,7 @@ wheels = [
 
 [[package]]
 name = "sonar"
-version = "1.12.3"
+version = "1.12.4"
 source = { editable = "." }
 dependencies = [
     { name = "flask-admin" },
