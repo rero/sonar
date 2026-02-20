@@ -52,7 +52,6 @@ dependencies = [
     "invenio-records-files>=1.2.1,<2.0.0",
     "python-dotenv>=0.13.0",
     "sentry-sdk<2.0.0",
-    "rero-invenio-base>=0.3.1",
     "jsonresolver",
     "flask-wiki>=0.3.1",
     "poethepoet",
@@ -79,7 +78,6 @@ dependencies = [
 dev = [
     ## Python packages development dependencies
     "pytest-invenio>=3.0.0,<4.0.0",
-    "Sphinx>=4.5.0",
     "Flask-Debugtoolbar>=0.10.1",
     "pip-audit>=2.8.0,<3.0.0",
     "mock>=2.0.0",
@@ -227,13 +225,13 @@ json = "sonar.modules.babel_extractors:extract_json"
 
 
 [tool.pytest.ini_options]
-addopts = "--color=yes --ruff --exclude-warning-annotations --doctest-glob='*.rst' --doctest-modules --cov=sonar --cov-report=term-missing --ignore=setup.py --ignore=docs/conf.py -p celery.contrib.pytest"
-testpaths = ["docs", "tests", "sonar"]
+addopts = "--color=yes --ruff --exclude-warning-annotations --doctest-modules --cov=sonar --cov-report=term-missing --ignore=setup.py -p celery.contrib.pytest"
+testpaths = ["tests", "sonar"]
 # Not displaying all the PendingDeprecationWarnings from invenio
 filterwarnings = "ignore::PendingDeprecationWarning"
 
 [tool.ruff]
-extend-exclude = ["config.py", "conf.py"]
+extend-exclude = ["config.py"]
 line-length = 120
 
 [tool.ruff.lint]

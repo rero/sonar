@@ -87,6 +87,4 @@ ruff format --check .
 info_msg "Test linting:"
 ruff check sonar tests
 
-info_msg "Sphinx-build:"
-sphinx-build -qnNW docs docs/_build/html
 pytest
