@@ -1,3 +1,13 @@
+[build-system]
+requires = ["uv_build"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-root = "."
+
+[tool.uv]
+package = true
+
 [project]
 name = "SONAR"
 version = "1.12.4"
@@ -123,24 +133,24 @@ invenio_i18n = "invenio_i18n:InvenioI18N"
 org_code = "sonar.route_converters:OrganisationCodeConverter"
 
 [project.entry-points."invenio_base.blueprints"]
-help = "sonar.help.views:blueprint"
+ark = "sonar.modules.ark.views:blueprint"
 collections = "sonar.modules.collections.views:blueprint"
 documents = "sonar.modules.documents.views:blueprint"
+help = "sonar.help.views:blueprint"
 pdf_extractor = "sonar.modules.pdf_extractor.views.client:blueprint"
 shibboleth_authenticator = "sonar.modules.shibboleth_authenticator.views.client:blueprint"
-theme = "sonar.theme.views:blueprint"
-validation = "sonar.modules.validation.views:blueprint"
-users = "sonar.modules.users.views:blueprint"
 sitemap = "sonar.modules.sitemap.views:blueprint"
-ark = "sonar.modules.ark.views:blueprint"
+theme = "sonar.theme.views:blueprint"
+users = "sonar.modules.users.views:blueprint"
+validation = "sonar.modules.validation.views:blueprint"
 
 [project.entry-points."invenio_base.api_blueprints"]
 deposits = "sonar.modules.deposits.rest:api_blueprint"
 documents = "sonar.modules.documents.rest:api_blueprint"
-pdf_extractor = "sonar.modules.pdf_extractor.views.api:api_blueprint"
-swisscovery = "sonar.modules.swisscovery.rest:api_blueprint"
 monitoring = "sonar.monitoring.views:api_blueprint"
+pdf_extractor = "sonar.modules.pdf_extractor.views.api:api_blueprint"
 suggestions = "sonar.suggestions.rest:api_blueprint"
+swisscovery = "sonar.modules.swisscovery.rest:api_blueprint"
 translations = "sonar.translations.rest:api_blueprint"
 users = "sonar.modules.users.views:blueprint"
 
@@ -195,26 +205,26 @@ subdivisions_id = "sonar.modules.subdivisions.api:pid_minter"
 stats_id = "sonar.modules.stats.api:pid_minter"
 
 [project.entry-points."invenio_pidstore.fetchers"]
+collections_id = "sonar.modules.collections.api:pid_fetcher"
+deposit_id = "sonar.modules.deposits.api:deposit_pid_fetcher"
 document_id = "sonar.modules.documents.api:document_pid_fetcher"
 organisation_id = "sonar.modules.organisations.api:organisation_pid_fetcher"
-user_id = "sonar.modules.users.api:user_pid_fetcher"
-deposit_id = "sonar.modules.deposits.api:deposit_pid_fetcher"
-collections_id = "sonar.modules.collections.api:pid_fetcher"
-subdivisions_id = "sonar.modules.subdivisions.api:pid_fetcher"
 stats_id = "sonar.modules.stats.api:pid_fetcher"
+subdivisions_id = "sonar.modules.subdivisions.api:pid_fetcher"
+user_id = "sonar.modules.users.api:user_pid_fetcher"
 
 [project.entry-points."invenio_records.jsonresolver"]
-organisation = "sonar.modules.organisations.jsonresolvers"
-user = "sonar.modules.users.jsonresolvers"
-document = "sonar.modules.documents.jsonresolvers"
-project = "sonar.resources.projects.jsonresolvers"
 collections = "sonar.modules.collections.jsonresolvers"
+document = "sonar.modules.documents.jsonresolvers"
+organisation = "sonar.modules.organisations.jsonresolvers"
+project = "sonar.resources.projects.jsonresolvers"
 subdivisions = "sonar.modules.subdivisions.jsonresolvers"
+user = "sonar.modules.users.jsonresolvers"
 
 [project.entry-points."invenio_celery.tasks"]
 documents = "sonar.modules.documents.tasks"
-stats = "sonar.modules.stats.tasks"
 sitemap = "sonar.modules.sitemap.tasks"
+stats = "sonar.modules.stats.tasks"
 users = "sonar.modules.users.tasks"
 
 [project.entry-points."invenio_admin.views"]
@@ -242,28 +252,21 @@ ignore = ["D100", "D101", "D103", "D200", "D202", "D205", "D400", "D401", "F403"
 convention = "pep257"
 
 [tool.poe.tasks]
+# Setup
 bootstrap = {cmd = "./scripts/bootstrap", help = "Runs bootstrap"}
 console = {cmd = "./scripts/console", help = "Opens invenio shell"}
+server = {cmd = "./scripts/server", help = "Starts the server"}
+setup = {cmd = "./scripts/setup", help = "Runs setup"}
+
+# Tests
 format =  {cmd = "ruff format .", help = "Formats all files"}
 lint = {cmd = "ruff check sonar tests", help = "Checks linting"}
 run_tests = {cmd = "./scripts/test", help = "Runs all tests"}
 tests = {cmd = "pytest", help = "pytest"}
 tests_debug = {cmd = "./scripts/pytest -s --v --no-cov", help = "pytest -s --v --no-cov"}
-server = {cmd = "./scripts/server", help = "Starts the server "}
-setup = {cmd = "./scripts/setup", help = "Runs setup"}
 
 # Translations
 compile_catalog = {cmd = "pybabel compile -d sonar/translations/", help = "compile message catalogs to MO files"}
 extract_messages = {cmd = "pybabel extract sonar/ --project --copyright-holder=RERO --project=SONAR --msgid-bugs-address=software@rero.ch -F babel.ini -o sonar/translations/messages.pot -c NOTE --sort-output", help = "extract messages from source files and generate a POT file"}
 init_catalog = {cmd = "pybabel init -i sonar/translations/messages.pot -d sonar/translations/", help = "create new message catalogs from a POT file"}
 update_catalog = {cmd = "pybabel update -i sonar/translations/messages.pot -d sonar/translations", help = "update existing message catalogs from a POT file"}
-
-[build-system]
-requires = ["uv_build"]
-build-backend = "uv_build"
-
-[tool.uv.build-backend]
-module-root = "."
-
-[tool.uv]
-package = true

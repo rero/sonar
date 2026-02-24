@@ -76,7 +76,7 @@ data/backups/
 # Celery
 celerybeat-schedule.*
 
-# Wiki files
-wiki/
+# Wiki files (only ignore generated search index)
+data/wiki/_index/
 
 .python-version
