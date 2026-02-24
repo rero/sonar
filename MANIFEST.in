@@ -1,5 +1,5 @@
 # Swiss Open Access Repository
-# Copyright (C) 2021 RERO
+# Copyright (C) 2021-2026 RERO
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -54,7 +54,7 @@ prune docs/_build
 
 recursive-include _sources *.txt
 recursive-include _static *.css *.js *.png
-recursive-include data *.crt *.json *.csv *.jpg
+recursive-include data *.crt *.csv *.jpg *.json *.md *.png
 recursive-include docker *.cfg *.conf *.crt *.ini *.key *.pem *.sh
 recursive-include docs *.bat *.py *.rst *.txt Makefile
 recursive-include sonar *.babelrc *.eslintignore *.gitkeep *.json *.html *.js *.scss *.css *.png *.jpg *.svg *.po *.pot *.mo *.py *.txt *.woff *.woff2
