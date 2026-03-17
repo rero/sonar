@@ -1,5 +1,5 @@
 # Swiss Open Access Repository
-# Copyright (C) 2021 RERO
+# Copyright (C) 2021-2026 RERO
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -433,7 +433,6 @@ def document_json(app, db, bucket_location, organisation):
     return {
         "identifiedBy": [
             {"value": "oai:doc.rero.ch:20050302172954-WU", "type": "bf:Identifier"},
-            {"value": "111111", "type": "bf:Local", "source": "RERO DOC"},
             {"value": "R003415713", "type": "bf:Local", "source": "RERO"},
         ],
         "language": [{"value": "eng", "type": "bf:Language"}],

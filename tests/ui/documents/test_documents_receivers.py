@@ -1,5 +1,5 @@
 # Swiss Open Access Repository
-# Copyright (C) 2021 RERO
+# Copyright (C) 2021-2026 RERO
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -29,17 +29,17 @@ from sonar.modules.documents.receivers import (
 def test_transform_harvested_records(app, bucket_location, capsys, harvested_record):
     """Test harvested record transformation."""
 
-    transform_harvested_records(None, [harvested_record], name="rerodoc", max="1")
+    transform_harvested_records(None, [harvested_record], name="archive_ouverte_unige", max="1")
     captured = capsys.readouterr()
     assert captured.out.find("1 records harvested") != -1
 
     # Max set to 0 --> import all
-    transform_harvested_records(None, [harvested_record], name="rerodoc", max="0")
+    transform_harvested_records(None, [harvested_record], name="archive_ouverte_unige", max="0")
     captured = capsys.readouterr()
     assert captured.out.find("1 records harvested") != -1
 
     # Not an import
-    transform_harvested_records(None, [harvested_record], name="rerodoc", max="1", action="not-existing")
+    transform_harvested_records(None, [harvested_record], name="archive_ouverte_unige", max="1", action="not-existing")
     captured = capsys.readouterr()
     assert captured.out == ""
 
@@ -61,10 +61,10 @@ def test_export_json(app, bucket_location, monkeypatch, harvested_record):
 
     data_directory = join(app.instance_path, "data")
 
-    export_json(None, [harvested_record], clean_file=False, name="rerodoc", action="not-existing")
+    export_json(None, [harvested_record], clean_file=False, name="archive_ouverte_unige", action="not-existing")
     assert not exists(data_directory)
 
-    export_json(None, [harvested_record], clean_file=False, name="rerodoc", action="export")
+    export_json(None, [harvested_record], clean_file=False, name="archive_ouverte_unige", action="export")
     assert len(listdir(data_directory)) == 1
 
     shutil.rmtree(data_directory)

@@ -1,5 +1,5 @@
 # Swiss Open Access Repository
-# Copyright (C) 2021 RERO
+# Copyright (C) 2021-2026 RERO
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -28,26 +28,12 @@ from sonar.modules.documents.api import DocumentRecord
 def test_get_record_by_identifier(app, db, document):
     """Test getting record by its identifier."""
     # Record found
-    record = DocumentRecord.get_record_by_identifier(
-        [
-            {"value": "111111", "type": "bf:Local", "source": "RERO DOC"},
-            {"value": "R003415713", "type": "bf:Local", "source": "RERO"},
-        ]
-    )
+    record = DocumentRecord.get_record_by_identifier([{"value": "R003415713", "type": "bf:Local", "source": "RERO"}])
     assert record["pid"] == document["pid"]
 
     # Not matching complete identifier
     record = DocumentRecord.get_record_by_identifier(
-        [
-            {"value": "111111", "type": "bf:Local", "source": "Unmatching"},
-            {"value": "R003415713", "type": "bf:Local", "source": "RERO"},
-        ]
-    )
-    assert not record
-
-    # Mixing identifier data
-    record = DocumentRecord.get_record_by_identifier(
-        [{"value": "R003415713", "type": "bf:Local", "source": "RERO DOC"}]
+        [{"value": "R003415713", "type": "bf:Local", "source": "Unmatching"}]
     )
     assert not record
 

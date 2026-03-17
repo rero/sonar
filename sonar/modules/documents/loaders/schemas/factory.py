@@ -1,5 +1,5 @@
 # Swiss Open Access Repository
-# Copyright (C) 2021 RERO
+# Copyright (C) 2021-2026 RERO
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -17,14 +17,12 @@
 
 from .archive_ouverte_unige import ArchiveOuverteUnigeSchema
 from .boris import BorisSchema
-from .rerodoc import RerodocSchema
 
 
 class LoaderSchemaFactory:
     """Factory for creating a loader schema."""
 
     schemas = {
-        "rerodoc": RerodocSchema,
         "archive_ouverte_unige": ArchiveOuverteUnigeSchema,
         "boris": BorisSchema,
     }
