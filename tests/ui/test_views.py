@@ -1,5 +1,5 @@
 # Swiss Open Access Repository
-# Copyright (C) 2021 RERO
+# Copyright (C) 2021-2026 RERO
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -316,45 +316,6 @@ def test_record_image_url(client):
 
     # Take files corresponding to key
     assert record_image_url(record, "org", "test2.jpg") == "/organisations/1/files/test2.jpg"
-
-
-def test_rerodoc_redirection(client, app, document, organisation):
-    """Test redirection with RERODOC identifier."""
-    global_view = app.config.get("SONAR_APP_DEFAULT_ORGANISATION")
-    # does not exist
-    res = client.get(url_for("sonar.rerodoc_redirection", pid="NOT-EXISTING"))
-    assert res.status_code == 404
-
-    # Files
-    res = client.get(url_for("sonar.rerodoc_redirection", pid="111111", filename="test.pdf"))
-    assert res.status_code == 302
-    assert res.location.find(f"/documents/{document['pid']}/files/test.pdf") != -1
-
-    def changeorg(key, value):
-        organisation[key] = value
-        organisation.commit()
-        organisation.dbcommit()
-        # Note: this is not needed as all is done from the db
-        # organisation.reindex()
-
-    # No dedicated
-    changeorg("isShared", False)
-    res = client.get(url_for("sonar.rerodoc_redirection", pid="111111"))
-    assert res.status_code == 302
-    assert res.location.find(f"/{global_view}/documents/{document['pid']}") != -1
-
-    # Dedicated
-    changeorg("isDedicated", True)
-    res = client.get(url_for("sonar.rerodoc_redirection", pid="111111"))
-    assert res.status_code == 302
-    assert res.location.find(f"/{organisation['code']}/documents/{document['pid']}") != -1
-
-    # Shared
-    changeorg("isDedicated", False)
-    changeorg("isShared", True)
-    res = client.get(url_for("sonar.rerodoc_redirection", pid="111111"))
-    assert res.status_code == 302
-    assert res.location.find(f"/{organisation['code']}/documents/{document['pid']}") != -1
 
 
 def test_format_date(app):

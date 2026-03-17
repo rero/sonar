@@ -1,5 +1,5 @@
 # Swiss Open Access Repository
-# Copyright (C) 2021 RERO
+# Copyright (C) 2021-2026 RERO
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -18,7 +18,6 @@
 import click
 
 from .oai import oai
-from .rerodoc import rerodoc
 from .urn import urn
 
 
@@ -27,6 +26,5 @@ def documents():
     """Commands for documents."""
 
 
-documents.add_command(rerodoc)
 documents.add_command(urn)
 documents.add_command(oai)

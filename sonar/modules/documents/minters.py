@@ -1,5 +1,5 @@
 # Swiss Open Access Repository
-# Copyright (C) 2021 RERO
+# Copyright (C) 2021-2026 RERO
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -19,7 +19,6 @@ from flask import current_app
 from invenio_oaiserver.minters import oaiid_minter
 from invenio_oaiserver.provider import OAIIDProvider
 from invenio_pidstore.errors import PIDAlreadyExists, PIDDoesNotExistError
-from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 
 from sonar.modules.ark.api import Ark
 
@@ -48,26 +47,12 @@ def id_minter(record_uuid, data, provider, pid_key="pid", object_type="rec"):
 def external_minters(record_uuid, data, pid_key="pid"):
     """External minters.
 
-    RERO DOC and ARK.
+    ARK.
 
     :param record_uuid: Record UUID.
     :param data: Record data.
     :param pid_key: PID key.
-    :returns: Created PID object.
     """
-    for identifier in data.get("identifiedBy", []):
-        if identifier.get("source") == "RERO DOC":
-            try:
-                pid = PersistentIdentifier.create(
-                    "rerod",
-                    identifier["value"],
-                    object_type="rec",
-                    object_uuid=record_uuid,
-                    status=PIDStatus.REGISTERED,
-                )
-                pid.redirect(PersistentIdentifier.get("doc", data[pid_key]))
-            except PIDAlreadyExists:
-                pass
     new_data = current_app.extensions.get("invenio-records").replace_refs(data.get("organisation", [{}])[0])
     naan = new_data.get("arkNAAN")
 

@@ -1,5 +1,5 @@
 # Swiss Open Access Repository
-# Copyright (C) 2021 RERO
+# Copyright (C) 2021-2026 RERO
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -23,7 +23,7 @@ from invenio_app.factory import create_ui
 
 @pytest.fixture(scope="module")
 def harvested_record():
-    """Return test XML output file path."""
+    """Return test XML record."""
     with open(os.path.join(os.path.dirname(__file__), "data", "harvested_record.xml")) as file:
         yield file.read()
 
