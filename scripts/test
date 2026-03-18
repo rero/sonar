@@ -79,6 +79,12 @@ add_exceptions "CVE-2025-66418"
 add_exceptions "CVE-2025-66471"
 # urllib3   1.26.20 CVE-2026-21441 2.6.3
 add_exceptions "CVE-2026-21441"
+# pyjwt   2.11.0  CVE-2026-32597      2.12.0
+add_exceptions "CVE-2026-32597"
+# tornado 6.5.4   GHSA-78cv-mqj4-43f7 6.5.5
+add_exceptions "GHSA-78cv-mqj4-43f7"
+# tornado 6.5.4   CVE-2026-31958      6.5.5
+add_exceptions "CVE-2026-31958"
 PIPAPI_PYTHON_LOCATION=$(which python) pip-audit ${pip_audit_exceptions}
 
 

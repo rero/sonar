@@ -555,7 +555,7 @@
             "widget": {
               "formlyConfig": {
                 "expressions": {
-                  "props.required": "field.parent.model.type && field.parent.model.type !== 'bf:Publication'"
+                  "props.required": "field?.parent?.model?.type !== 'bf:Publication'"
                 },
                 "props": {
                   "hide": true
