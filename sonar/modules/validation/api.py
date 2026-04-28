@@ -15,7 +15,7 @@
 
 """Validation API."""
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from flask import current_app
 from flask_babel import _
@@ -199,7 +199,7 @@ class Validation:
                 "pid": user["pid"],
                 "name": f"{user['first_name']} {user['last_name']}",
             },
-            "date": datetime.now(timezone.utc).isoformat(),
+            "date": datetime.now(UTC).isoformat(),
         }
         if validation.get("comment"):
             log_entry["comment"] = validation["comment"]

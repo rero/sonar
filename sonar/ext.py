@@ -1,5 +1,5 @@
 # Swiss Open Access Repository
-# Copyright (C) 2025 RERO
+# Copyright (C) 2025-2026 RERO
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -20,7 +20,8 @@ import os
 import jinja2
 from flask import current_app, render_template, request
 from flask_bootstrap import Bootstrap4
-from flask_security import user_registered
+from flask_principal import RoleNeed, identity_loaded
+from flask_security import current_user, user_registered
 from flask_wiki import Wiki
 from invenio_files_rest.signals import file_deleted, file_downloaded, file_uploaded
 from invenio_indexer.signals import before_record_index
@@ -62,6 +63,12 @@ from sonar.signals import file_download_proxy
 
 from . import config_sonar
 from .version import __version__
+
+
+def _add_role_name_needs(sender, identity):
+    """Add ``RoleNeed(role.name)`` for each of the current user's roles."""
+    for role in getattr(current_user, "roles", []):
+        identity.provides.add(RoleNeed(role.name))
 
 
 def utility_processor():
@@ -113,6 +120,12 @@ class SonarBase:
 
         # Add user's full name before record index
         before_record_index.connect(add_full_name, weak=False)
+
+        # ``invenio_accounts.models.Role.id`` defaults to a UUID, so the
+        # identity loader from flask-security adds ``RoleNeed(role.id)``.
+        # SONAR's permission objects use ``RoleNeed(<role-name>)`` instead,
+        # so we also expose the role name as a Need on every identity load.
+        identity_loaded.connect_via(app)(_add_role_name_needs)
 
     def init_config(self, app):
         """Initialize configuration."""

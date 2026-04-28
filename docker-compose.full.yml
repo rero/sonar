@@ -38,7 +38,6 @@
 # - Message queue: RabbitMQ (exposed ports: 5672, 15672)
 # - Elasticsearch (exposed ports: 9200, 9300)
 #
-version: '2.3'
 services:
   # Load balancer
   # http://127.0.0.1 (redirects to https)

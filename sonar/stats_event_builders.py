@@ -14,10 +14,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """Inveio stats signal receivers for record-view events."""
 
-from datetime import datetime
+from datetime import UTC, datetime
 
 from flask import request
-from invenio_stats.utils import get_user
+from invenio_stats.utils import format_datetime_iso, get_user
 
 from .modules.documents.api import DocumentRecord
 
@@ -29,7 +29,7 @@ def record_view_event_builder(event, sender_app, pid=None, record=None, **kwargs
     event.update(
         {
             # When:
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": format_datetime_iso(datetime.now(UTC)),
             # What:
             "record_id": str(record.id),
             "pid_type": pid.pid_type,

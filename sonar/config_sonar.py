@@ -586,6 +586,7 @@ SONAR_APP_DOCUMENT_IDENTIFIER_LINK = {
         "swisscovery": "https://swisscovery.ch/permalink/41SLSP_NETWORK/1ufb5t2/alma_identifier_",
     },
     "bf:Urn": {"default": "https://nbn-resolving.org/_identifier_"},
+    "uri": {"default": "_identifier_"},
 }
 
 # URN

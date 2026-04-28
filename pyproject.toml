@@ -1,5 +1,5 @@
 [build-system]
-requires = ["uv_build"]
+requires = ["uv_build<1.0.0"]
 build-backend = "uv_build"
 
 [tool.uv.build-backend]
@@ -17,82 +17,77 @@ keywords = ["sonar", "invenio", "document repository"]
 license = "AGPL-3.0-or-later"
 license-files = ["LICENSE"]
 urls = {homepage = "https://www.rero.ch/en/products/sonar", repository="https://github.com/rero/sonar"}
-requires-python = ">= 3.9.2,<3.13"
+requires-python = ">=3.14,<3.15"
 
 dependencies = [
-    "invenio-oaiharvester @ git+https://github.com/inveniosoftware/invenio-oaiharvester.git@v1.0.0a4",
-    "invenio-search [elasticsearch7]>=3.0.0,<4.0.0",
+    "invenio-oaiharvester>=1.0.0a4",
+    "invenio-search[elasticsearch7]>=3.0.0",
     # Invenio core modules
-    "invenio-app>=2.0.0,<3.0.0",
-    "invenio-base>=2.0.0,<3.0.0",
-    "invenio-cache>=2.0.0,<3.0.0",
-    "invenio-celery>=2.0.2,<3.0.0",
-    "invenio-config>=1.0.3,<2.0.0",
-    "invenio-i18n>=3.4.2,<4.0.0",
-    "invenio-db [postgresql]>=2.0.0,<3.0.0",
+    "invenio-app>=3.0.0",
+    "invenio-base>=2.0.0",
+    "invenio-cache>=2.0.0",
+    "invenio-celery>=2.0.2",
+    "invenio-config>=1.0.3",
+    "invenio-i18n>=3.4.2",
+    "invenio-db[postgresql]>=2.0.0",
     # Invenio base bundle
-    "invenio-admin>=1.5.2,<2.0.0",
-    "invenio-assets>=4.0.0,<5.0.0",
-    "invenio-formatter>=3.0.0,<4.0.0",
-    "invenio-logging [sentry]>=4.0.0,<5.0.0",
-    "invenio-mail>=2.0.0,<3.0.0",
-    "invenio-rest>=2.0.0,<3.0.0",
-    "invenio-theme>4.0.0,<5.0.0",
+    "invenio-admin>=1.6.0",
+    "invenio-assets>=4.0.0",
+    "invenio-formatter>=3.0.0",
+    "invenio-logging[sentry]>=4.0.0",
+    "invenio-mail>=2.0.0",
+    "invenio-rest>=3.0.0",
+    "invenio-theme>=4.0.0",
     # Invenio auth bundle
-    "invenio-access>=4.0.0,<6.0.0",
-    "invenio-accounts>=6.0.0,<7.0.0",
+    "invenio-access>=4.0.0",
+    "invenio-accounts>=6.0.0",
     "invenio-userprofiles>=4.1.0",
-    "invenio-oauth2server>=3.0.0,<4.0.0",
-    "invenio-oauthclient>=5.0.0,<6.0.0",
+    "invenio-oauth2server>=3.0.0",
+    "invenio-oauthclient>=5.0.0",
     # Invenio metadata bundle
-    "invenio-indexer>=3.0.0,<4.0.0",
-    "invenio-jsonschemas>=2.0.0,<3.0.0",
-    "invenio-oaiserver>=3.0.0,<4.0.0",
-    "invenio-pidstore>=2.0.0,<3.0.0",
-    "invenio-records-rest [dublincore]>=3.0.0,<4.0.0",
-    "invenio-records-ui>=2.0.0,<3.0.0",
-    "invenio-records>=3.0.0,<4.0.0",
-    "invenio-search-ui>=4.0.0,<5.0.0",
+    "invenio-indexer>=4.0.0",
+    "invenio-jsonschemas>=2.0.0",
+    "invenio-oaiserver>=4.0.0",
+    "invenio-pidstore>=3.0.0",
+    "invenio-records-rest[dublincore]>=3.0.0",
+    "invenio-records-ui>=2.0.0",
+    "invenio-records>=4.0.0",
+    "invenio-search-ui>=4.0.0",
     "invenio-stats",
     "invenio-records-resources",
     "rero-invenio-base>=0.3.1",
     # Files
-    "invenio-files-rest>=3.0.0,<4.0.0",
-    "invenio-previewer>=3.0.0,<4.0.0",
-    "invenio-records-files>=1.2.1,<2.0.0",
+    "invenio-files-rest>=3.0.0",
+    "invenio-previewer>=3.0.0",
+    "invenio-records-files>=1.2.1",
+    "rero-invenio-files>=1.2.0",
     "python-dotenv>=0.13.0",
-    "sentry-sdk<2.0.0",
+    "sentry-sdk",
     "jsonresolver",
     "flask-wiki>=0.3.1",
     "poethepoet",
     ## SONAR Specific
-    "fuzzywuzzy [speedup]>=0.18.0",
+    "fuzzywuzzy[speedup]>=0.18.0",
     "pycountry>=23.12.11",
     "netaddr>=0.9.0",
     "wand>=0.6.13",
     "webdavclient3>=3.14.6",
-    "pysftp>=0.2.9",
-    # Paramiko >=4.0.0 incompatible with pysftp
-    "paramiko<4.0.0",
+    "sftpretty>=1.0.0",
     "python-slugify",
     "orcid>=1.0.3",
     "python3-saml>=1.16.0",
-    "rero-invenio-files>=1.2.0",
-    "flask-admin<2.0.0",
-    # Required for pkg_resources used by fs (PyFilesystem2), not bundled in Python 3.12+ venvs
-    # TODO: remove once invenio-files-rest>=4.0.0 (drops fs/PyFilesystem2 dependency)
-    "setuptools<82",
+    "flask-admin>=1.6.1",
+    # needed for elasticsearch 7.13.4
+    "urllib3<2.0.0",
 ]
 
 [dependency-groups]
 dev = [
     ## Python packages development dependencies
-    "pytest-invenio>=3.0.0,<4.0.0",
+    "pytest-invenio>=3.0.0",
     "Flask-Debugtoolbar>=0.10.1",
-    "pip-audit>=2.8.0,<3.0.0",
-    "mock>=2.0.0",
+    "pip-audit>=2.8.0",
     "beautifulsoup4>=4.11.1",
-    "appnope",
     "requests-mock>=1.11.0",
     "coveralls>=4.0.1",
     "ruff>=0.12.9",

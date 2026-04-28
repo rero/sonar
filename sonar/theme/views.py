@@ -23,11 +23,11 @@ this file.
 import contextlib
 import re
 from copy import deepcopy
-from datetime import datetime
+from datetime import UTC, datetime
 from urllib.parse import urlparse
+from zoneinfo import ZoneInfo
 
 import dateutil.parser
-import pytz
 from flask import (
     Blueprint,
     abort,
@@ -266,10 +266,10 @@ def format_date(date, format="%d/%m/%Y"):  # noqa: A002
 
     # Add timezone info
     if not date.tzinfo:
-        date = pytz.utc.localize(date)
+        date = date.replace(tzinfo=UTC)
 
     # Change date to the right timezone
-    timezone = pytz.timezone(current_app.config.get("BABEL_DEFAULT_TIMEZONE"))
+    timezone = ZoneInfo(current_app.config.get("BABEL_DEFAULT_TIMEZONE"))
     date = date.astimezone(timezone)
 
     return date.strftime(format)

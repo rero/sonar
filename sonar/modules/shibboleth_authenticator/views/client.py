@@ -114,7 +114,7 @@ def authorized(remote_app=None):
                     raise ValueError
                 # Store next url
                 set_session_next_url(remote_app, state["next"])
-            except (ValueError, BadData):
+            except ValueError, BadData:
                 if current_app.config.get("OAUTHCLIENT_STATE_ENABLED", True) or (
                     not (current_app.debug or current_app.testing)
                 ):
