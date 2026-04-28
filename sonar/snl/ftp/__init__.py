@@ -15,7 +15,7 @@
 
 """SNL FTP repository."""
 
-from pysftp import Connection
+from sftpretty import Connection
 
 
 class SNLRepository:

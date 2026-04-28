@@ -21,7 +21,6 @@
 
 - `git`
 - `docker`, `docker-compose`
-- `python`, `pip`, `pyenv`
 - `uv`
 
 ## Installation
@@ -32,15 +31,14 @@ First, create your working directory and `cd` into it. Clone the project into th
 git clone https://github.com/rero/sonar.git
 ```
 
-You need to install `uv`, it will handle the virtual environment creation for the project
-in order to sandbox our Python environment, as well as manage the dependency installation,
-among other things.
+You need to install `uv`, it will handle Python installation, the virtual environment
+creation for the project in order to sandbox our Python environment, as well as manage
+the dependency installation, among other things.
 
 ```console
-pyenv install 3.12
-cd sonar
-pyenv local 3.12
 curl -LsSf https://astral.sh/uv/install.sh | sh
+cd sonar
+uv python install 3.14
 ```
 
 See the [uv installation documentation](https://docs.astral.sh/uv/getting-started/installation) for more detail.

@@ -15,7 +15,7 @@
 
 """Urn API."""
 
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 from flask import current_app
 from invenio_db import db
@@ -173,7 +173,7 @@ class Urn:
 
             query = DocumentSearch().filter("terms", _id=uuuids)
             if days:
-                date = datetime.now(timezone.utc) - timedelta(days=days)
+                date = datetime.now(UTC) - timedelta(days=days)
                 query = query.filter("range", _created={"gte": date})
 
             def get_pids(query):

@@ -59,7 +59,7 @@ class JSONSchemaBase:
                     f"{current_organisation.get('code')}/{schema_path}", with_refs=self._with_refs
                 )
             )
-        except (JSONSchemaNotFound, AttributeError):
+        except JSONSchemaNotFound, AttributeError:
             self._schema = copy.deepcopy(current_jsonschemas.get_schema(schema_path, with_refs=self._with_refs))
 
     def get_schema(self):

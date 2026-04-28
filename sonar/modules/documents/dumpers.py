@@ -17,7 +17,6 @@
 
 from copy import deepcopy
 
-import pytz
 from invenio_records.api import _records_state
 from invenio_records.dumpers import Dumper
 
@@ -46,8 +45,8 @@ class IndexerDumper(Dumper):
     @staticmethod
     def _add_dates(record, data):
         """Adds isOpenAccess field."""
-        data["_created"] = pytz.utc.localize(record.created).isoformat() if record.created else None
-        data["_updated"] = pytz.utc.localize(record.updated).isoformat() if record.updated else None
+        data["_created"] = record.created.isoformat() if record.created else None
+        data["_updated"] = record.updated.isoformat() if record.updated else None
 
     @staticmethod
     def _replace_refs(data):

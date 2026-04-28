@@ -16,9 +16,9 @@
 """Test SONAR views."""
 
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 import pytest
-import pytz
 from flask import url_for
 from invenio_accounts.testutils import login_user_via_session, login_user_via_view
 
@@ -325,7 +325,7 @@ def test_format_date(app):
     date = datetime(1984, 5, 10, 14, 30)
     assert format_date(date, "%d/%m/%Y %H:%M") == "10/05/1984 16:30"
 
-    timezone = pytz.timezone("Europe/Zurich")
+    timezone = ZoneInfo("Europe/Zurich")
     date = datetime(1984, 5, 10, 14, 30, tzinfo=timezone)
     assert format_date(date, "%d/%m/%Y %H:%M") == "10/05/1984 14:30"
 
