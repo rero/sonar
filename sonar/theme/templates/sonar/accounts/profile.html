@@ -26,11 +26,12 @@ along with this program. If not, see
   <style>
     @layer bootstrap, theme, sonar-ui, primeng, utilities;
   </style>
-  <link rel="stylesheet" href="/static/sonar-ui/browser/styles.css?{{ ui_version }}">
+  <style type="text/css" data-primeng-style-id="layer-order"></style>
+  {{ angular_assets('@rero/sonar-ui/dist/sonar/browser', 'css') }}
   {{ webpack[get_specific_theme()] }}
 {%- endblock %}
 
 {%- block javascript %}
-  <script src="/static/sonar-ui/browser/polyfills.js?{{ ui_version }}" type="module"></script>
-  <script src="/static/sonar-ui/browser/main.js?{{ ui_version }}" type="module"></script>
+  {{ angular_assets('@rero/sonar-ui/dist/sonar/browser', 'modulepreload') }}
+  {{ angular_assets('@rero/sonar-ui/dist/sonar/browser', 'js') }}
 {%- endblock javascript %}

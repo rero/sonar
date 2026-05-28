@@ -17,8 +17,6 @@
 
 from flask_webpackext import WebpackBundle
 
-from sonar.config_sonar import SONAR_APP_UI_VERSION
-
 theme = WebpackBundle(
     __name__,
     "assets",
@@ -31,11 +29,5 @@ theme = WebpackBundle(
         "unifr-theme": "./scss/unifr/theme.scss",
         "preview": "./scss/preview.scss",
     },
-    dependencies={
-        "bootstrap": "^4.3",
-        "popper.js": "^1.12",
-        "font-awesome": "^4.0",
-        "ngx-toastr": "^10.2.0",
-        "@rero/sonar-ui": SONAR_APP_UI_VERSION,
-    },
+    dependencies={"bootstrap": "^4.3", "popper.js": "^1.12", "font-awesome": "^4.0", "ngx-toastr": "^10.2.0"},
 )

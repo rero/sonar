@@ -61,7 +61,7 @@ flags=()
 deploy=false
 cmd="uv sync --frozen"
 ci=false
-ui_tgz=""
+tgz_file=""
 
 # uv is a mandatory condition to launch this program!
 if [[ -z "${VIRTUAL_ENV}" ]]; then
@@ -72,12 +72,13 @@ fi
 # Check arguments and options
 while test $# -gt 0; do
     case "$1" in
-        --ui)
-            if [ ! -z "$2" ]; then
-              ui_tgz=$2
-              shift
-            fi
-            ;;
+        -t|--tgz_package)
+          tgz_file=$2
+          if [[ ! -f "${tgz_file}" ]]
+          then
+            error_msg+exit "package tgz file does not exist: ${tgz_file}"
+          fi
+          shift;;
         -c|--ci)
           # We are probably running webaction, check for env variables
           ci=true ;;
@@ -119,7 +120,7 @@ static_folder=$(invenio shell --no-term-title -c "print('static_folder:%s' % app
 info_msg "Install assets"
 
 # Remove installed RERO packages (in case they was installed with pack)
-rm -rf ${assets_folder}/node_modules/@rero
+rm -rf ${static_folder}/node_modules
 
 # Build webpack assets
 # TODO: remove CI when the following issue is solved:
@@ -127,14 +128,17 @@ rm -rf ${assets_folder}/node_modules/@rero
 # on the patch-module the option --error-on-fail is switched on by default on CI
 CI="" invenio webpack buildall
 
-if [ ! -z "$ui_tgz" ]; then
-  info_msg "Install UI from $ui_tgz"
-  npm i $ui_tgz --prefix $assets_folder
+
+# install sonar-ui
+info_msg "Install static folder npm dependencies in: ${static_folder}"
+if [[ -f "${tgz_file}" ]]
+then
+  info_msg "Install SONAR-UI from tgz: ${tgz_file}"
+  npm install --no-save --only=prod --no-fund --no-audit  "${tgz_file}" --prefix "${static_folder}"
+else
+  npm install --no-save --only=prod --no-fund --no-audit  @rero/sonar-ui@19.0.3 --prefix "${static_folder}"
 fi
 
-# Copy sonar-ui files to static folder to use it with flask-assets
-mkdir -p ${static_folder}/sonar-ui
-cp -R ${assets_folder}/node_modules/@rero/sonar-ui/dist/sonar/* ${static_folder}/sonar-ui
 
 # Compile translations catalogs
 info_msg "Compile translations catalogs"

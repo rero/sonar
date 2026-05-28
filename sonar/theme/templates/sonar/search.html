@@ -11,7 +11,7 @@
 
 {%- block javascript %}
 {{ super() }}
-  <link rel="stylesheet" href="/static/sonar-ui/browser/styles.css?{{ ui_version }}">
-  <script src="/static/sonar-ui/browser/polyfills.js?{{ ui_version }}" type="module"></script>
-  <script src="/static/sonar-ui/browser/main.js?{{ ui_version }}" type="module"></script>
+  {{ angular_assets('@rero/sonar-ui/dist/sonar/browser', 'css') }}
+  {{ angular_assets('@rero/sonar-ui/dist/sonar/browser', 'modulepreload') }}
+  {{ angular_assets('@rero/sonar-ui/dist/sonar/browser', 'js') }}
 {%- endblock javascript %}

@@ -20,6 +20,7 @@
       font-size: 1rem
     }
   </style>
+  <style type="text/css" data-primeng-style-id="layer-order"></style>
   <link rel="apple-touch-icon" sizes="57x57" href="/static/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/static/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="/static/apple-icon-72x72.png">
@@ -34,13 +35,13 @@
   <link rel="icon" type="image/png" sizes="96x96" href="/static/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
   <link rel="manifest" href="/static/manifest.json">
-  <link rel="stylesheet" href="/static/sonar-ui/browser/styles.css?{{ ui_version }}">
+  {{ angular_assets('@rero/sonar-ui/dist/sonar/browser', 'css') }}
 </head>
 
 <body>
   <sonar-root class="sonar-ui"></sonar-root>
-  <script src="/static/sonar-ui/browser/polyfills.js?{{ ui_version }}" type="module"></script>
-  <script src="/static/sonar-ui/browser/main.js?{{ ui_version }}" type="module"></script>
+  {{ angular_assets('@rero/sonar-ui/dist/sonar/browser', 'modulepreload') }}
+  {{ angular_assets('@rero/sonar-ui/dist/sonar/browser', 'js') }}
 </body>
 
 </html>
