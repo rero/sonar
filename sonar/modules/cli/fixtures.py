@@ -18,7 +18,6 @@
 import json
 import os
 import random
-from io import BytesIO
 from random import randint
 
 import click
@@ -186,7 +185,7 @@ def import_data(file, doc_type, random_files, with_file_support):
                         file_path = os.path.join(directory, file["path"])
                         if os.path.isfile(file_path):
                             with open(file_path, "rb") as f:
-                                db_record.files[file["key"]] = BytesIO(f.read())
+                                db_record.add_file(f.read(), file["key"])
                     if random_files:
                         data = extract_metadata({"metadata": db_record})
                         for i in range(1, randint(2, 5)):
