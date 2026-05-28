@@ -29,6 +29,7 @@ from invenio_records_resources.resources import RecordResource
 from werkzeug.datastructures import MIMEAccept
 
 from sonar.filters import (
+    angular_assets,
     favicon,
     get_admin_record_detail_url,
     get_organisation_by_pid,
@@ -77,7 +78,6 @@ def utility_processor():
         "has_submitter_access": has_submitter_access,
         "has_admin_access": has_admin_access,
         "has_superuser_access": has_superuser_access,
-        "ui_version": config_sonar.SONAR_APP_UI_VERSION,
         "aai_providers": get_switch_aai_providers,
         "view_code": get_view_code(),
         "current_user_record": current_user_record,
@@ -195,6 +195,9 @@ class Sonar(SonarBase):
         Wiki(app)
 
         app.context_processor(utility_processor)
+
+        # add template globals
+        app.add_template_global(angular_assets)
 
         # add template filters
         app.add_template_filter(nl2br)
