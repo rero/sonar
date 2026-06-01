@@ -30,6 +30,7 @@ def extract_text_from_content(content):
     """
     with tempfile.NamedTemporaryFile(mode="w+b", suffix=".pdf") as temp:
         temp.write(content)
+        temp.flush()
         return extract_text_from_file(temp.name)
 
 

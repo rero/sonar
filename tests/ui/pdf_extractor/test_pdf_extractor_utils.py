@@ -18,7 +18,16 @@
 import json
 import os
 
-from sonar.modules.pdf_extractor.utils import format_extracted_data
+from sonar.modules.pdf_extractor.utils import extract_text_from_content, format_extracted_data
+
+
+def test_extract_text_from_content(app, pdf_file):
+    """Test that text is correctly extracted from PDF binary content."""
+    with open(pdf_file, "rb") as f:
+        content = f.read()
+    text = extract_text_from_content(content)
+    assert isinstance(text, str)
+    assert len(text) > 0
 
 
 def test_format_extracted_data(app):
