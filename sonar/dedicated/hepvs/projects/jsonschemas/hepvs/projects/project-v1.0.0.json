@@ -174,7 +174,7 @@
               "props": {
                 "queryOptions": {
                   "type": "projects",
-                  "field": "metadata.projectSponsor.suggest,metadata.innerSearcher.suggest",
+                  "field": "metadata.projectSponsor,metadata.innerSearcher",
                   "suggest": "/api/suggestions/completion",
                   "allowAdd": true
                 }
@@ -279,7 +279,7 @@
                 "props": {
                   "queryOptions": {
                     "type": "projects",
-                    "field": "metadata.projectSponsor.suggest,metadata.innerSearcher.suggest",
+                    "field": "metadata.projectSponsor,metadata.innerSearcher",
                     "suggest": "/api/suggestions/completion",
                     "allowAdd": true
                   }
@@ -446,7 +446,7 @@
                 "props": {
                   "queryOptions": {
                     "type": "projects",
-                    "field": "metadata.keywords.suggest",
+                    "field": "metadata.keywords",
                     "suggest": "/api/suggestions/completion",
                     "allowAdd": true
                   }

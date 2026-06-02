@@ -17,12 +17,21 @@
 
 from flask import Blueprint, current_app, jsonify, request
 
+from sonar.modules.organisations.api import current_organisation
+from sonar.modules.permissions import has_superuser_access, is_user_logged_and_submitter
 from sonar.proxies import sonar
 
 api_blueprint = Blueprint("suggestions", __name__, url_prefix="/suggestions")
 
+# Organisation filter field per resource, using ES double-underscore path notation.
+_ORG_FIELDS = {
+    "projects": "metadata__organisation__pid",
+    "documents": "organisation__pid",
+}
+
 
 @api_blueprint.route("/completion", methods=["GET"])
+@is_user_logged_and_submitter
 def completion():
     """Suggestions completion."""
     query = request.args.get("q")
@@ -38,7 +47,6 @@ def completion():
     if not resource:
         return jsonify({"error": "No resource parameter given"}), 400
 
-    # Suggestions from multiple fields possible
     fields = field.split(",")
 
     search = None
@@ -57,12 +65,27 @@ def completion():
     results = []
 
     try:
-        search = search.source(excludes="*")
+        # Organisation filter for non-superusers
+        if not has_superuser_access() and current_organisation:
+            org_field = _ORG_FIELDS.get(resource)
+            if org_field:
+                search = search.filter("term", **{org_field: current_organisation["pid"]})
 
-        for field in fields:
-            search = search.suggest(field, query, completion={"field": field, "skip_duplicates": True})
-        for suggestion in search.execute().suggest.to_dict().values():
-            results = results + [option["text"] for option in suggestion[0]["options"]]
+        for field_name in fields:
+            field_search = search.query("match_phrase_prefix", **{field_name: query}).source(includes=[field_name])[:20]
+
+            for hit in field_search.execute():
+                value = hit.to_dict()
+                for part in field_name.split("."):
+                    if not isinstance(value, dict):
+                        value = None
+                        break
+                    value = value.get(part)
+                if isinstance(value, str):
+                    results.append(value)
+                elif isinstance(value, list):
+                    results.extend(v for v in value if isinstance(v, str))
+
     except Exception:
         return jsonify({"error": "Bad request"}), 400
 

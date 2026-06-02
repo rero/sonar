@@ -134,34 +134,13 @@
             }
           },
           "projectSponsor": {
-            "type": "text",
-            "fields": {
-              "suggest": {
-                "type": "completion",
-                "analyzer": "default",
-                "max_input_length": 100
-              }
-            }
+            "type": "text"
           },
           "innerSearcher": {
-            "type": "text",
-            "fields": {
-              "suggest": {
-                "type": "completion",
-                "analyzer": "default",
-                "max_input_length": 100
-              }
-            }
+            "type": "text"
           },
           "keywords": {
-            "type": "text",
-            "fields": {
-              "suggest": {
-                "type": "completion",
-                "analyzer": "default",
-                "max_input_length": 100
-              }
-            }
+            "type": "text"
           },
           "validation": {
             "type": "object",

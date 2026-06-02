@@ -95,9 +95,9 @@ class SearchOptions(BaseSearchOptions):
     suggest_parser_cls = SuggestQueryParser.factory(
         fields=[
             "metadata.name.suggest",
-            "metadata.projectSponsor.suggest",
-            "metadata.innerSearcher.suggest",
-            "metadata.keywords.suggest",
+            "metadata.projectSponsor",
+            "metadata.innerSearcher",
+            "metadata.keywords",
         ]
     )
 

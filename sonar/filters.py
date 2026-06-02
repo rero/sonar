@@ -67,11 +67,7 @@ def angular_assets(package, _type="js"):
 
     tags = [normalize_url(t) for t in re.findall(tag_patterns[_type], content)]
 
-    class HTMLSafe:
-        def __html__():
-            return Markup("\n".join(tags))
-
-    return HTMLSafe
+    return Markup("\n".join(tags))
 
 
 def nl2br(string):
