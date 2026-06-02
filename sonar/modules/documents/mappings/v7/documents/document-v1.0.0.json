@@ -6,7 +6,9 @@
   },
   "mappings": {
     "_source": {
-      "excludes": ["fulltext"]
+      "excludes": [
+        "fulltext"
+      ]
     },
     "date_detection": false,
     "numeric_detection": false,
@@ -402,11 +404,6 @@
                 "fields": {
                   "raw": {
                     "type": "keyword"
-                  },
-                  "suggest": {
-                    "type": "completion",
-                    "analyzer": "default",
-                    "max_input_length": 100
                   }
                 }
               },
@@ -570,11 +567,6 @@
         "fields": {
           "raw": {
             "type": "keyword"
-          },
-          "suggest": {
-            "type": "completion",
-            "analyzer": "default",
-            "max_input_length": 100
           }
         }
       },
@@ -583,11 +575,6 @@
         "fields": {
           "raw": {
             "type": "keyword"
-          },
-          "suggest": {
-            "type": "completion",
-            "analyzer": "default",
-            "max_input_length": 100
           }
         }
       },
@@ -596,11 +583,6 @@
         "fields": {
           "raw": {
             "type": "keyword"
-          },
-          "suggest": {
-            "type": "completion",
-            "analyzer": "default",
-            "max_input_length": 100
           }
         }
       },

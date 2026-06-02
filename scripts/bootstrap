@@ -117,6 +117,10 @@ invenio collect -v
 assets_folder=$(invenio shell --no-term-title -c "print(app.config.get('WEBPACKEXT_PROJECT_BUILDDIR'))")
 static_folder=$(invenio shell --no-term-title -c "print('static_folder:%s' % app.static_folder)"|grep static_folder| cut -d: -f2-)
 
+if [[ -z "${static_folder}" ]]; then
+  error_msg+exit "static_folder could not be determined"
+fi
+
 info_msg "Install assets"
 
 # Remove installed RERO packages (in case they was installed with pack)
@@ -134,9 +138,9 @@ info_msg "Install static folder npm dependencies in: ${static_folder}"
 if [[ -f "${tgz_file}" ]]
 then
   info_msg "Install SONAR-UI from tgz: ${tgz_file}"
-  npm install --no-save --only=prod --no-fund --no-audit  "${tgz_file}" --prefix "${static_folder}"
+  npm install --no-save --omit=dev --no-fund --no-audit  "${tgz_file}" --prefix "${static_folder}"
 else
-  npm install --no-save --only=prod --no-fund --no-audit  @rero/sonar-ui@19.0.3 --prefix "${static_folder}"
+  npm install --no-save --omit=dev --no-fund --no-audit  @rero/sonar-ui@21.0.0 -prefix "${static_folder}"
 fi
 
 

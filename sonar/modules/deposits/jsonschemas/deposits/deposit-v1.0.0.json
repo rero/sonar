@@ -800,7 +800,7 @@
                     "props": {
                       "queryOptions": {
                         "type": "collections",
-                        "field": "name.value.suggest",
+                        "field": "name.value",
                         "label": "label"
                       }
                     }
@@ -1059,7 +1059,7 @@
                 "props": {
                   "queryOptions": {
                     "type": "documents",
-                    "field": "customField1.suggest",
+                    "field": "customField1",
                     "suggest": "/api/suggestions/completion",
                     "allowAdd": true
                   }
@@ -1080,7 +1080,7 @@
                 "props": {
                   "queryOptions": {
                     "type": "documents",
-                    "field": "customField2.suggest",
+                    "field": "customField2",
                     "suggest": "/api/suggestions/completion",
                     "allowAdd": true
                   }
@@ -1101,7 +1101,7 @@
                 "props": {
                   "queryOptions": {
                     "type": "documents",
-                    "field": "customField3.suggest",
+                    "field": "customField3",
                     "suggest": "/api/suggestions/completion",
                     "allowAdd": true
                   }
@@ -1195,7 +1195,7 @@
                 "props": {
                     "queryOptions": {
                       "type": "documents",
-                      "field": "contribution.agent.preferred_name.suggest",
+                      "field": "contribution.agent.preferred_name",
                       "suggest": "/api/suggestions/completion",
                       "allowAdd": true
                     }
@@ -1303,7 +1303,7 @@
                     "props": {
                       "queryOptions": {
                         "type": "projects",
-                        "field": "metadata.name.suggest",
+                        "field": "metadata.name",
                         "label": "name"
                       }
                     }
@@ -1418,7 +1418,7 @@
                     "props": {
                       "queryOptions": {
                         "type": "subdivisions",
-                        "field": "name.value.suggest",
+                        "field": "name.value",
                         "label": "label"
                       }
                     }
