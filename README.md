@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: Fondation RERO+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
 # Swiss Open Access Repository
 
 [![CI](https://github.com/rero/sonar/workflows/CI/badge.svg)](https://github.com/rero/sonar/actions?query=workflow%3ACI)
