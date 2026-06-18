@@ -1,5 +1,7 @@
 # Changelog
 
+<!-- version list -->
+
 ## [v1.12.4](https://github.com/rero/sonar/tree/v1.12.4) (2026-02-10)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.12.3...v1.12.4)
