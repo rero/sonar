@@ -3,8 +3,6 @@
 
 """Query for documents."""
 
-import re
-
 from elasticsearch_dsl.query import Q
 from flask import current_app, request
 
@@ -20,13 +18,9 @@ def documents_query_parser(qstr=None):
         return Q()
     fields = current_app.config.get("SONAR_DOCUMENT_QUERY_BOOSTING", ["*"]).copy()
 
-    # Special treatment for fulltext, we want to search in all fields and
-    # additionally in the fulltext field.
-    if "fulltext:" in qstr:
-        result = re.match(r"^fulltext:(.*)$", qstr)
-        qstr = result.group(1)
-    else:
-        # remove the fulltext field
+    # The fulltext field is searched only when the `fulltext` query argument is
+    # enabled; otherwise it is removed from the searched fields.
+    if request.args.get("fulltext", None) in [None, "0", "false", 0, False]:
         fields = [field for field in fields if not field.startswith("fulltext")]
 
     operator, query_type = get_operator_and_query_type(qstr)

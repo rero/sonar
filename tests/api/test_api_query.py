@@ -90,11 +90,12 @@ def test_api_query(client, document_with_file, document_json, make_document, sup
     assert response.status_code == 200
     assert response.json["hits"]["total"]["value"] == 1
 
-    # Test search in fulltext
+    # Test search in fulltext: enabled with the `fulltext` query argument
     response = client.get(
         url_for(
             "invenio_records_rest.doc_list",
-            q="fulltext:(theoretically study the high-harmonic)",
+            q="theoretically study the high-harmonic",
+            fulltext="true",
             debug=1,
         ),
         headers=headers,
@@ -103,10 +104,11 @@ def test_api_query(client, document_with_file, document_json, make_document, sup
     assert response.json["hits"]["total"]["value"] == 1
     assert response.json["hits"]["hits"][0]["explanation"]["details"]
 
+    # Without the `fulltext` argument the fulltext field is not searched
     response = client.get(
         url_for(
             "invenio_records_rest.doc_list",
-            q="(theoretically study the high-harmonic)",
+            q="theoretically study the high-harmonic",
             debug=1,
         ),
         headers=headers,
