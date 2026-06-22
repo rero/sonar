@@ -281,6 +281,7 @@ cmd = "semantic-release version --no-push --no-tag --no-commit"
 help = "Generate changelog and bump version locally (does not push, tag, or commit - for local testing only)"
 
 [tool.semantic_release]
+version_variables = ["sonar/version.py:__version__"]
 version_toml = ["pyproject.toml:project.version"]
 tag_format = "v{version}"
 commit_message = "chore(release): v{version}"
