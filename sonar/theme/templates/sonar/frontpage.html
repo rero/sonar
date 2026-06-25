@@ -73,7 +73,7 @@ along with this program. If not, see
   </div>
 </div>
 {%- endif %}
-<div class="bg-secondary text-light text-center py-2">
+<div class="bg-middle-bar text-light text-center py-2">
   {% if not g.get('organisation', {}).get('isDedicated') and config.ENV != 'production' and current_user_record.is_submitter %}
   <h6 class="m-0 mt-1">
     <strong>{{ _('Note: Publications manually deposited in this test portal might occasionally need to be deleted, for operational reasons.') }}</strong>
