@@ -1,0 +1,38 @@
+// SPDX-FileCopyrightText: Fondation RERO+
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+@layer bootstrap {
+  @import "variables";
+  @import "../common/theme";
+
+  .bg-header {
+    background-color: $primary;
+
+    .nav-link {
+      color: $color-gray !important;
+    }
+
+    .btn-outline-light {
+      color: $color-gray;
+      border-color: $color-gray;
+    }
+  }
+
+  .bg-organisation {
+    background-color: $primary !important;
+    color: $color-gray !important;
+
+    .nav-link {
+      color: $color-gray !important;
+    }
+
+    .btn-outline-light {
+      color: $color-gray;
+      border-color: $color-gray;
+    }
+  }
+
+  .bg-middle-bar {
+    background-color: $color-gray !important;
+  }
+}
