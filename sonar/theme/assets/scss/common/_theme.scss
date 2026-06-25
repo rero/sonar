@@ -12,6 +12,9 @@
     background-color: $bg-organisation;
 }
 
+.bg-middle-bar {
+  background-color: $secondary !important;
+}
 
 // Avoid dropdown menu to appear under the wiki TOC.
 div.wiki-page div.sticky-top {
