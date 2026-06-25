@@ -15,6 +15,7 @@ theme = WebpackBundle(
         "vge-theme": "./scss/vge/theme.scss",
         "hepbejune-theme": "./scss/hepbejune/theme.scss",
         "unifr-theme": "./scss/unifr/theme.scss",
+        "fernuni-theme": "./scss/fernuni/theme.scss",
         "preview": "./scss/preview.scss",
     },
     dependencies={"bootstrap": "^4.3", "popper.js": "^1.12", "font-awesome": "^4.0", "ngx-toastr": "^10.2.0"},
