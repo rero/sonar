@@ -37,7 +37,16 @@ def get_record():
         "startRecord": "1",
         "query": f'({search_type}="{query}")',
     }
-    response = requests.get(current_app.config.get("SONAR_APP_SWISSCOVERY_SEARCH_URL"), params=params)
+    try:
+        response = requests.get(
+            current_app.config.get("SONAR_APP_SWISSCOVERY_SEARCH_URL"),
+            params=params,
+            timeout=current_app.config.get("SONAR_APP_SWISSCOVERY_TIMEOUT"),
+        )
+        response.raise_for_status()
+    except requests.exceptions.RequestException:
+        return jsonify({"message": "Swisscovery service unavailable"}), 503
+
     result = xmltodict.parse(response.text)
 
     if not result["sru:searchRetrieveResponse"].get("sru:records") or not result["sru:searchRetrieveResponse"][
