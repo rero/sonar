@@ -26,6 +26,7 @@ from flask import (
     request,
     url_for,
 )
+from flask_babel import gettext as _
 from flask_login import current_user, login_required
 from flask_menu import current_menu
 from invenio_jsonschemas import current_jsonschemas
@@ -121,7 +122,13 @@ def manage(path=None):
 @blueprint.route("/logged-user/", methods=["GET"])
 def logged_user():
     """Current logged user informations in JSON."""
-    data = {"settings": {"document_identifier_link": current_app.config.get("SONAR_APP_DOCUMENT_IDENTIFIER_LINK")}}
+    data = {
+        "settings": {
+            "document_identifier_link": current_app.config.get("SONAR_APP_DOCUMENT_IDENTIFIER_LINK"),
+            "availableLanguages": [{"code": "en", "name": _("English")}]
+            + [{"code": code, "name": name} for code, name in current_app.config.get("I18N_LANGUAGES", [])],
+        }
+    }
 
     if not current_user.is_anonymous:
         user = current_user_record
