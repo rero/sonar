@@ -366,21 +366,33 @@ RECORDS_REST_ENDPOINTS = {
                 "sonar.modules.documents.serializers" ":json_doc_response"
             ),
             "text/xml": ("sonar.modules.documents.serializers" ":dc_v1_response"),
+            "application/x-bibtex": ("sonar.modules.documents.serializers" ":bibtex_v1_response"),
+            "application/x-research-info-systems": (
+                "sonar.modules.documents.serializers" ":ris_v1_response"
+            ),
         },
         record_serializers_aliases={
             "json": "application/json",
             "rero": "application/rero+json",
             "dc": "text/xml",
+            "bibtex": "application/x-bibtex",
+            "ris": "application/x-research-info-systems",
         },
         search_serializers={
             "application/json": (
                 "sonar.modules.documents.serializers" ":json_v1_search"
             ),
             "text/xml": ("sonar.modules.documents.serializers" ":dc_v1_search"),
+            "application/x-bibtex": ("sonar.modules.documents.serializers" ":bibtex_v1_search"),
+            "application/x-research-info-systems": (
+                "sonar.modules.documents.serializers" ":ris_v1_search"
+            ),
         },
         search_serializers_aliases={
             "json": "application/json",
             "dc": "text/xml",
+            "bibtex": "application/x-bibtex",
+            "ris": "application/x-research-info-systems",
         },
         record_loaders={
             "application/json": ("sonar.modules.documents.loaders" ":json_v1"),

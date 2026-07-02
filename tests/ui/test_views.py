@@ -68,6 +68,10 @@ def test_logged_user(app, client, superuser, admin, moderator, submitter, user):
     res = client.get(url)
     assert res.json["settings"]
     assert not res.json.get("metadata")
+    serializers = res.json["settings"]["document_serializers"]
+    assert isinstance(serializers, list)
+    assert all("format" in s and "icon" in s for s in serializers)
+    assert not any(s["format"] == "rero" for s in serializers)
 
     # Logged as admin
     login_user_via_session(client, email=admin["email"])

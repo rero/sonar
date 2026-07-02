@@ -3,7 +3,10 @@
 
 """Documents rest views."""
 
-from flask import Blueprint, current_app, jsonify, request
+from datetime import UTC, datetime
+
+from flask import Blueprint, Response, current_app, jsonify, request
+from werkzeug.utils import secure_filename
 
 from sonar.modules.organisations.api import OrganisationRecord, current_organisation
 from sonar.modules.users.api import current_user_record
@@ -76,3 +79,51 @@ def aggregations():
         aggregations_list.remove("subdivision")
 
     return jsonify(aggregations_list)
+
+
+@api_blueprint.route("/<pid_value>/export/<fmt>", methods=["GET"])
+def export(pid_value, fmt):
+    """Export a document record in the requested format as a downloadable file.
+
+    :param pid_value: Document PID.
+    :param fmt: Format alias (json, dc, bibtex, ris).
+    """
+    from invenio_pidstore.errors import PIDDoesNotExistError
+    from invenio_pidstore.models import PersistentIdentifier
+    from sqlalchemy.exc import SQLAlchemyError
+
+    from sonar.modules.documents.api import DocumentRecord
+    from sonar.modules.documents.serializers import bibtex_v1, dc_v1, json_v1, ris_v1
+
+    formats = {
+        "json": (json_v1, "application/json", ".json"),
+        "dc": (dc_v1, "text/xml", ".xml"),
+        "bibtex": (bibtex_v1, "application/x-bibtex", ".bib"),
+        "ris": (ris_v1, "application/x-research-info-systems", ".ris"),
+    }
+
+    if fmt not in formats:
+        return jsonify({"message": f"Unsupported format '{fmt}'. Choose from: {', '.join(formats)}"}), 400
+
+    try:
+        pid = PersistentIdentifier.get(DocumentRecord.provider.pid_type, pid_value)
+        record = DocumentRecord.get_record_by_pid(pid_value)
+    except PIDDoesNotExistError:
+        return jsonify({"message": "Document not found"}), 404
+    except SQLAlchemyError:
+        current_app.logger.exception("Unexpected DB error while resolving document %s", pid_value)
+        raise
+
+    if record is None:
+        return jsonify({"message": "Document not found"}), 404
+
+    serializer, mimetype, extension = formats[fmt]
+    body = serializer.serialize(pid, record)
+    today = datetime.now(UTC).strftime("%Y%m%d")
+    safe_pid_value = secure_filename(pid_value)
+
+    return Response(
+        body,
+        mimetype=mimetype,
+        headers={"Content-Disposition": f"attachment; filename={today}-{safe_pid_value}{extension}"},
+    )

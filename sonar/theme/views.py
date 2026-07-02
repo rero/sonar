@@ -47,6 +47,13 @@ from sonar.modules.users.api import current_user_record
 from sonar.modules.users.permissions import UserPermission
 from sonar.resources.projects.permissions import RecordPermissionPolicy
 
+_SERIALIZER_ICONS = {
+    "json": "fa-file-code-o",
+    "dc": "fa-file-code-o",
+    "bibtex": "fa-file-text-o",
+    "ris": "fa-file-text-o",
+}
+
 blueprint = Blueprint("sonar", __name__, template_folder="templates", static_folder="static")
 
 
@@ -121,7 +128,17 @@ def manage(path=None):
 @blueprint.route("/logged-user/", methods=["GET"])
 def logged_user():
     """Current logged user informations in JSON."""
-    data = {"settings": {"document_identifier_link": current_app.config.get("SONAR_APP_DOCUMENT_IDENTIFIER_LINK")}}
+    doc_endpoint = current_app.config.get("RECORDS_REST_ENDPOINTS", {}).get("doc", {})
+    data = {
+        "settings": {
+            "document_identifier_link": current_app.config.get("SONAR_APP_DOCUMENT_IDENTIFIER_LINK"),
+            "document_serializers": [
+                {"format": s, "icon": _SERIALIZER_ICONS.get(s, "fa-file-o")}
+                for s in doc_endpoint.get("record_serializers_aliases", {})
+                if s != "rero"
+            ],
+        }
+    }
 
     if not current_user.is_anonymous:
         user = current_user_record

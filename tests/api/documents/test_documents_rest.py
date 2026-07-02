@@ -4,6 +4,7 @@
 """Test REST endpoint for documents."""
 
 import json
+import re
 from copy import deepcopy
 
 from flask import url_for
@@ -208,3 +209,65 @@ def test_aggregations(app, client, document, superuser, admin):
         "subdivision",
         {"key": "customField1", "name": "Test"},
     ]
+
+
+def test_export_invalid_format(client, document):
+    """Unsupported format returns 400."""
+    res = client.get(url_for("documents.export", pid_value=document["pid"], fmt="unknown"))
+    assert res.status_code == 400
+    assert "format" in res.json["message"].lower()
+
+
+def test_export_not_found(db, client):
+    """Unknown pid returns 404 for export."""
+    res = client.get(url_for("documents.export", pid_value="unknown-pid", fmt="json"))
+    assert res.status_code == 404
+
+
+def _assert_export_filename(headers, pid, extension):
+    """Assert Content-Disposition contains a dated filename."""
+    assert re.search(rf"\d{{8}}-{re.escape(pid)}{re.escape(extension)}", headers["Content-Disposition"])
+
+
+def test_export_json(client, document):
+    """JSON export returns attachment with .json extension."""
+    res = client.get(url_for("documents.export", pid_value=document["pid"], fmt="json"))
+    assert res.status_code == 200
+    assert res.content_type == "application/json"
+    _assert_export_filename(res.headers, document["pid"], ".json")
+
+
+def test_export_bibtex(client, document):
+    """BibTeX export returns attachment with .bib extension."""
+    res = client.get(url_for("documents.export", pid_value=document["pid"], fmt="bibtex"))
+    assert res.status_code == 200
+    assert res.content_type == "application/x-bibtex"
+    _assert_export_filename(res.headers, document["pid"], ".bib")
+    assert "@" in res.data.decode()
+
+
+def test_export_ris(client, document):
+    """RIS export returns attachment with .ris extension."""
+    res = client.get(url_for("documents.export", pid_value=document["pid"], fmt="ris"))
+    assert res.status_code == 200
+    assert res.content_type == "application/x-research-info-systems"
+    _assert_export_filename(res.headers, document["pid"], ".ris")
+    assert "TY  -" in res.data.decode()
+
+
+def test_export_dc(client, document):
+    """Dublin Core export returns attachment with .xml extension."""
+    res = client.get(url_for("documents.export", pid_value=document["pid"], fmt="dc"))
+    assert res.status_code == 200
+    assert res.content_type.startswith("text/xml")
+    _assert_export_filename(res.headers, document["pid"], ".xml")
+
+
+def test_export_sanitizes_filename(client, make_document):
+    """Content-Disposition filename is sanitized from unsafe pid characters."""
+    doc = make_document(organisation="org", pid='foo"; evil')
+    res = client.get(url_for("documents.export", pid_value=doc["pid"], fmt="json"))
+    assert res.status_code == 200
+    disposition = res.headers["Content-Disposition"]
+    assert '"' not in disposition.split("filename=", 1)[1]
+    assert ";" not in disposition.split("filename=", 1)[1]
