@@ -26,7 +26,7 @@ from flask import (
     request,
     url_for,
 )
-from flask_babel import gettext as _
+from flask_babel import lazy_gettext as _
 from flask_login import current_user, login_required
 from flask_menu import current_menu
 from invenio_jsonschemas import current_jsonschemas
@@ -38,6 +38,7 @@ from sonar.modules.collections.permissions import (
 )
 from sonar.modules.deposits.permissions import DepositPermission
 from sonar.modules.documents.permissions import DocumentPermission
+from sonar.modules.documents.utils import get_document_serializers
 from sonar.modules.organisations.api import OrganisationSearch
 from sonar.modules.organisations.permissions import OrganisationPermission
 from sonar.modules.permissions import can_access_manage_view
@@ -121,6 +122,7 @@ def logged_user():
             "document_identifier_link": current_app.config.get("SONAR_APP_DOCUMENT_IDENTIFIER_LINK"),
             "availableLanguages": [{"code": "en", "name": _("English")}]
             + [{"code": code, "name": name} for code, name in current_app.config.get("I18N_LANGUAGES", [])],
+            "document_serializers": get_document_serializers(),
         }
     }
 

@@ -7,6 +7,7 @@ import os
 from datetime import datetime
 
 from flask import current_app, request
+from flask_babel import lazy_gettext as _
 
 from sonar.modules.api import SonarRecord
 from sonar.modules.organisations.api import OrganisationRecord, current_organisation
@@ -234,3 +235,35 @@ def get_organisations(record):
         organisations.append(OrganisationRecord.get_record_by_pid(organisation_pid))
 
     return organisations
+
+
+#: Label and icon for each document serializer format exposed to end users.
+#: label uses lazy_gettext, not gettext, since this dict is built once at
+#: import time, outside of any request context, and the label must still
+#: resolve to the right language per request.
+_SERIALIZER_META = {
+    "json_export": {"label": _("JSON data"), "icon": "fa-regular fa-file-code"},
+    "dc": {"label": _("Dublin Core"), "icon": "fa-regular fa-file-code"},
+    "bibtex": {"label": _("BibTeX"), "icon": "fa-regular fa-file-lines"},
+    "ris": {"label": _("RIS (Zotero, …)"), "icon": "fa-regular fa-file-lines"},
+}
+
+
+def get_document_serializers():
+    """Return downloadable document export formats, with label and icon.
+
+    Excludes "json" and "rero", the plain JSON aliases consumed internally
+    by the UI, which are not meant to be offered as a download option.
+
+    :returns: list of dicts with "format", "label" and "icon" keys.
+    """
+    doc_endpoint = current_app.config.get("RECORDS_REST_ENDPOINTS", {}).get("doc", {})
+    return [
+        {
+            "format": s,
+            "label": str(_SERIALIZER_META.get(s, {}).get("label", s)),
+            "icon": _SERIALIZER_META.get(s, {}).get("icon", "fa-file-o"),
+        }
+        for s in doc_endpoint.get("record_serializers_aliases", {})
+        if s not in ("json", "rero")
+    ]

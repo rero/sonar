@@ -1,0 +1,15 @@
+{# SPDX-FileCopyrightText: Fondation RERO+ #}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+
+<h5 id="export" class="mt-3">{{ _('Export to…') }}</h5>
+<hr class="mb-3 mt-0" />
+<div class="d-flex flex-wrap flex-sm-nowrap">
+  {% for serializer in document_serializers %}
+  <a class="text-decoration-none mb-3" href="/api/documents/{{record.pid}}?format={{ serializer.format }}">
+    <div class="d-flex flex-column align-items-center text-muted export-item">
+      <i class="fa-2x {{ serializer.icon }}"></i>
+      <span class="text-center">{{ serializer.label }}</span>
+    </div>
+  </a>
+  {% endfor %}
+</div>

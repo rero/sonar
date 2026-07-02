@@ -12,6 +12,7 @@ from invenio_records_ui.signals import record_viewed
 
 from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.documents.utils import (
+    get_document_serializers,
     has_external_urls_for_files,
     populate_files_properties,
 )
@@ -98,6 +99,7 @@ def detail(pid, record, template=None, **kwargs):
         view=kwargs.get("view"),
         schema_org_data=schema_org_data,
         google_scholar_data=google_scholar_data,
+        document_serializers=get_document_serializers(),
     )
 
 

@@ -32,6 +32,16 @@ def test_publication_statement_text():
     assert utils.publication_statement_text({"type": "bf:Publication", "startDate": "1990-12-31"}) == "31.12.1990"
 
 
+def test_get_document_serializers(app):
+    """Downloadable formats are returned with a label and icon, excluding json/rero."""
+    serializers = utils.get_document_serializers()
+    formats = [s["format"] for s in serializers]
+    assert "json" not in formats
+    assert "rero" not in formats
+    assert set(formats) == {"json_export", "dc", "bibtex", "ris"}
+    assert all("label" in s and "icon" in s for s in serializers)
+
+
 def test_get_file_restriction(app, organisation, admin, monkeypatch, embargo_date):
     """Test if a file is restricted by embargo date and/or organisation."""
     # No view arg, file is allowed

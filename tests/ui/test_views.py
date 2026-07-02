@@ -69,6 +69,11 @@ def test_logged_user(app, client, superuser, admin, moderator, submitter, user):
     assert res.json["settings"]["document_identifier_link"]
     assert res.json["settings"]["availableLanguages"]
     assert not res.json.get("metadata")
+    serializers = res.json["settings"]["document_serializers"]
+    assert isinstance(serializers, list)
+    assert all("format" in s and "label" in s and "icon" in s for s in serializers)
+    assert not any(s["format"] in ("json", "rero") for s in serializers)
+    assert any(s["format"] == "json_export" for s in serializers)
 
     # Logged as admin
     login_user_via_session(client, email=admin["email"])
