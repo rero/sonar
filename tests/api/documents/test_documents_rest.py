@@ -4,8 +4,11 @@
 """Test REST endpoint for documents."""
 
 import json
+import re
 from copy import deepcopy
+from unittest import mock
 
+import pytest
 from flask import url_for
 from invenio_accounts.testutils import login_user_via_session
 
@@ -56,10 +59,57 @@ def test_get(client, document_with_file):
     assert "updated" in res.json
 
 
-def test_post_put_delete(app, client, document_json, organisation):
+@pytest.mark.parametrize(
+    ("fmt", "extension"), [("bibtex", ".bib"), ("ris", ".ris"), ("dc", ".xml"), ("json_export", ".json")]
+)
+def test_get_content_disposition_on_export_formats(client, document_with_file, fmt, extension):
+    """Attachment formats set a Content-Disposition filename based on pid and revision."""
+    pid = document_with_file["pid"]
+    revision_id = document_with_file.model.version_id - 1
+    res = client.get(url_for("invenio_records_rest.doc_item", pid_value=pid, format=fmt))
+    assert res.status_code == 200
+    assert res.headers["Content-Disposition"] == f"attachment; filename={pid}-{revision_id}{extension}"
+
+
+def test_get_json_format_has_no_content_disposition(client, document_with_file):
+    """The plain "json" alias used by the UI is not sent as an attachment."""
+    pid = document_with_file["pid"]
+    res = client.get(url_for("invenio_records_rest.doc_item", pid_value=pid, format="json"))
+    assert res.status_code == 200
+    assert "Content-Disposition" not in res.headers
+
+
+@pytest.mark.parametrize(
+    ("fmt", "extension"), [("bibtex", ".bib"), ("ris", ".ris"), ("dc", ".xml"), ("json_export", ".json")]
+)
+def test_search_content_disposition_on_export_formats(client, document_with_file, fmt, extension):
+    """Attachment formats set a Content-Disposition filename based on the export date and time."""
+    res = client.get(url_for("invenio_records_rest.doc_list", view="global", format=fmt))
+    assert res.status_code == 200
+    assert re.fullmatch(
+        rf"attachment; filename=documents-export-\d{{8}}-\d{{4}}{re.escape(extension)}",
+        res.headers["Content-Disposition"],
+    )
+
+
+def test_search_json_format_has_no_content_disposition(client, document_with_file):
+    """The plain "json" alias used by the UI is not sent as an attachment."""
+    res = client.get(url_for("invenio_records_rest.doc_list", view="global", format="json"))
+    assert res.status_code == 200
+    assert "Content-Disposition" not in res.headers
+
+
+def test_get_default_json_has_no_content_disposition(client, document_with_file):
+    """The default JSON response is not sent as an attachment."""
+    res = client.get(url_for("invenio_records_rest.doc_item", pid_value=document_with_file["pid"]))
+    assert res.status_code == 200
+    assert "Content-Disposition" not in res.headers
+
+
+def test_post_put_delete(app, client, document_json, organisation, monkeypatch):
     """Test putting metadata on existing file."""
     # Disable configuration
-    app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
+    monkeypatch.setitem(app.config, "SONAR_APP_DISABLE_PERMISSION_CHECKS", True)
     headers = [("Content-Type", "application/json")]
     data = deepcopy(document_json)
     data["organisation"] = [{"$ref": f"https://sonar.ch/api/organisations/{organisation['code']}"}]
@@ -208,3 +258,21 @@ def test_aggregations(app, client, document, superuser, admin):
         "subdivision",
         {"key": "customField1", "name": "Test"},
     ]
+
+
+def test_export_sanitizes_filename(client, make_document):
+    """Content-Disposition filename is sanitized from unsafe pid characters."""
+    doc = make_document(organisation="org", pid='foo"; evil')
+    res = client.get(url_for("invenio_records_rest.doc_item", pid_value=doc["pid"], format="bibtex"))
+    assert res.status_code == 200
+    disposition = res.headers["Content-Disposition"]
+    assert '"' not in disposition.split("filename=", 1)[1]
+    assert ";" not in disposition.split("filename=", 1)[1]
+
+
+def test_export_masked_document_denied_anonymous(client, document):
+    """Anonymous export of a masked document is denied with 401."""
+    magic_mock = mock.MagicMock(return_value=True)
+    with mock.patch("sonar.modules.documents.api.DocumentRecord.is_masked", magic_mock):
+        res = client.get(url_for("invenio_records_rest.doc_item", pid_value=document["pid"], format="bibtex"))
+        assert res.status_code == 401

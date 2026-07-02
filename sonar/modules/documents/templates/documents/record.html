@@ -463,9 +463,12 @@
   </div>
   {% endif %}
 
+  <!-- Export -->
+  {% include 'documents/_export.html' %}
+
   <!-- Statistics -->
-  <h5 id="stats" class="mt-5">{{ _('Statistics') }}</h5>
-  <hr class="mb-4 mt-0" />
+  <h5 id="stats" class="mt-3">{{ _('Statistics') }}</h5>
+  <hr class="mb-2 mt-0" />
   <div class="row">
     <div class="col">
       <strong>{{ _('Document views') }}:</strong> {{ stats['record-view'] }}
