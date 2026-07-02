@@ -5,6 +5,7 @@
 
 from flask import Blueprint, current_app, jsonify, request
 
+from sonar.modules.documents.citations import citation_registry
 from sonar.modules.organisations.api import OrganisationRecord, current_organisation
 from sonar.modules.users.api import current_user_record
 from sonar.modules.utils import get_language_value
@@ -76,3 +77,51 @@ def aggregations():
         aggregations_list.remove("subdivision")
 
     return jsonify(aggregations_list)
+
+
+@api_blueprint.route("/citation-styles", methods=["GET"])
+def citation_styles():
+    """Return the list of supported citation styles."""
+    return jsonify(citation_registry.styles_info())
+
+
+@api_blueprint.route("/<pid_value>/citation", methods=["GET"])
+def citation(pid_value):
+    """Return a formatted bibliographic citation for a document."""
+    from sonar.modules.documents.api import DocumentRecord
+
+    style = request.args.get("style", "apa_7")
+    lang = request.args.get("lang")
+
+    if style not in citation_registry.supported_styles:
+        return (
+            jsonify(
+                {
+                    "message": f"Unsupported style '{style}'. Choose from: {', '.join(citation_registry.supported_styles)}"
+                }
+            ),
+            400,
+        )
+
+    record = DocumentRecord.get_record_by_pid(pid_value)
+    if record is None:
+        return jsonify({"message": "Document not found"}), 404
+
+    from sonar.modules.documents.permissions import DocumentPermission
+
+    if not DocumentPermission.read(current_user_record, record):
+        if not current_user_record:
+            return jsonify({"message": "Authentication required"}), 401
+        return jsonify({"message": "Permission denied"}), 403
+
+    try:
+        citation_text = citation_registry.format(record, style, lang=lang, host_url=request.host_url)
+    except AttributeError, UnboundLocalError:
+        # citeproc-py can raise these deep inside its own rendering code on
+        # unexpected CSL data (e.g. a style/field combination it doesn't
+        # support, see the citations.registry module docstring), rather than
+        # a bug in our own mapping.
+        current_app.logger.exception("Citation rendering failed for document %s (style=%s)", pid_value, style)
+        return jsonify({"message": "Citation could not be generated for this document."}), 500
+
+    return jsonify({"citation": citation_text})

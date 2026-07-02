@@ -392,6 +392,18 @@ wheels = [
 ]
 
 [[package]]
+name = "citeproc-py"
+version = "0.10.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "lxml" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/05/e6/f97aa815a7d8e6fbed1923f755defa3dd2fa49af99698dce8822be7bc397/citeproc_py-0.10.1.tar.gz", hash = "sha256:41e7247ae90fd185b2432e1484776507ac8542ddf491ceec1d9937b3a4c25843", size = 267348, upload-time = "2026-07-08T22:06:09.807Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ae/80/bacafa527858774f53271224ca83e5fc22e4b116c1bfe7e4d4f9dfb3e305/citeproc_py-0.10.1-py3-none-any.whl", hash = "sha256:9058b231603fdd71566c85cb5b9d30c507d0bbdbca833acfcdbd972d1030f889", size = 356183, upload-time = "2026-07-08T22:06:08.558Z" },
+]
+
+[[package]]
 name = "click"
 version = "8.4.2"
 source = { registry = "https://pypi.org/simple" }
@@ -3874,6 +3886,7 @@ name = "sonar"
 version = "1.12.4"
 source = { editable = "." }
 dependencies = [
+    { name = "citeproc-py" },
     { name = "flask-admin" },
     { name = "flask-wiki" },
     { name = "fuzzywuzzy", extra = ["speedup"] },
@@ -3948,6 +3961,7 @@ prod = [
 
 [package.metadata]
 requires-dist = [
+    { name = "citeproc-py", specifier = ">=0.10.1" },
     { name = "flask-admin", specifier = ">=1.6.1" },
     { name = "flask-wiki", specifier = ">=0.3.1" },
     { name = "fuzzywuzzy", extras = ["speedup"], specifier = ">=0.18.0" },
