@@ -44,9 +44,10 @@ def search_factory(self, search, query_parser=None):
         return (search, urlkwargs)
 
     view = request.args.get("view")
+    is_privileged = current_user_record and current_user_record.is_moderator
 
-    # Public search
-    if view:
+    # Public search: anonymous or non-moderator users, with or without a view.
+    if not is_privileged:
         # Don't display masked records
         search = search.filter(
             "bool",
@@ -64,17 +65,26 @@ def search_factory(self, search, query_parser=None):
             ],
         )
 
-        # Filter record by organisation view.
-        if view != current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION"):
+        # Filter record by organisation view. No view means the global scope
+        # (all organisations).
+        if view and view != current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION"):
             search = search.filter("term", organisation__pid=view)
 
         # Filter collection
         if request.args.get("collection_view"):
             search = search.filter("term", collections__pid=request.args["collection_view"])
-    # Admin
+    # Moderator/admin
     else:
+        if view:
+            # Filter record by organisation view.
+            if view != current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION"):
+                search = search.filter("term", organisation__pid=view)
+
+            # Filter collection
+            if request.args.get("collection_view"):
+                search = search.filter("term", collections__pid=request.args["collection_view"])
         # Filters records by user's organisation
-        if not current_user_record.is_superuser:
+        elif not current_user_record.is_superuser:
             search = search.filter("term", organisation__pid=current_organisation["pid"])
 
     return (search, urlkwargs)

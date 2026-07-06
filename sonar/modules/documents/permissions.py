@@ -3,7 +3,6 @@
 
 """Permissions for documents."""
 
-from flask import request
 from invenio_files_rest.models import Bucket, ObjectVersion
 from invenio_pidstore.errors import PIDDoesNotExistError
 from invenio_pidstore.models import PersistentIdentifier
@@ -26,13 +25,9 @@ class DocumentPermission(RecordPermission):
         :param record: Record to check.
         :returns: True is action can be done.
         """
-        # Documents are accessible in public view, but eventually filtered
-        # later by organisation
-        if request.args.get("view"):
-            return True
-
-        # Only for moderators users.
-        return bool(user and user.is_moderator and current_organisation)
+        # Listing is always allowed. Anonymous and non-moderator users are
+        # restricted to the safe (non-masked) scope in the search factory.
+        return True
 
     @classmethod
     def create(cls, user, record=None):

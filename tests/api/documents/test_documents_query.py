@@ -110,3 +110,48 @@ def test_masked_document(db, client, organisation, document, search_clear):
     res = client.get(url_for("invenio_records_rest.doc_list", view="global"))
     assert res.status_code == 200
     assert res.json["hits"]["total"]["value"] == 0
+
+
+def test_anonymous_document_list_without_view(db, client, organisation, document, search_clear):
+    """Test anonymous document list defaults to the global, non-masked scope."""
+    # No view: behaves like the global view for anonymous users.
+    res = client.get(url_for("invenio_records_rest.doc_list"))
+    assert res.status_code == 200
+    assert res.json["hits"]["total"]["value"] == 1
+
+    # Masked documents are excluded, with or without a view.
+    document["masked"] = "masked_for_all"
+    document.commit()
+    document.reindex()
+    db.session.commit()
+    res = client.get(url_for("invenio_records_rest.doc_list"))
+    assert res.status_code == 200
+    assert res.json["hits"]["total"]["value"] == 0
+
+    # Masked for external IPs, IP is not allowed.
+    document["masked"] = "masked_for_external_ips"
+    document.commit()
+    document.reindex()
+    db.session.commit()
+    res = client.get(url_for("invenio_records_rest.doc_list"))
+    assert res.status_code == 200
+    assert res.json["hits"]["total"]["value"] == 0
+
+    # Masked for external IPs, IP is allowed.
+    organisation["allowedIps"] = "127.0.0.1/32"
+    organisation.commit()
+    db.session.commit()
+    organisation.reindex()
+    document.reindex()
+    res = client.get(url_for("invenio_records_rest.doc_list"))
+    assert res.status_code == 200
+    assert res.json["hits"]["total"]["value"] == 1
+
+    # Org-scoped view still filters by organisation for anonymous users.
+    res = client.get(url_for("invenio_records_rest.doc_list", view="org"))
+    assert res.status_code == 200
+    assert res.json["hits"]["total"]["value"] == 1
+
+    res = client.get(url_for("invenio_records_rest.doc_list", view="org2"))
+    assert res.status_code == 200
+    assert res.json["hits"]["total"]["value"] == 0
