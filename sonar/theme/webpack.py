@@ -18,5 +18,10 @@ theme = WebpackBundle(
         "fernuni-theme": "./scss/fernuni/theme.scss",
         "preview": "./scss/preview.scss",
     },
-    dependencies={"bootstrap": "^4.3", "popper.js": "^1.12", "font-awesome": "^4.0", "ngx-toastr": "^10.2.0"},
+    dependencies={
+        "bootstrap": "^4.3",
+        "popper.js": "^1.12",
+        "@fortawesome/fontawesome-free": "^7.0.0",
+        "ngx-toastr": "^10.2.0",
+    },
 )

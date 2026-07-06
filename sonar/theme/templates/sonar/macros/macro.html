@@ -22,21 +22,21 @@
   <div class="my-2">
     {% if file.links.external %}
     <a href="{{ file.links.external }}" target="_blank">
-      <i class="fa fa-external-link mx-1"></i>
+      <i class="fa-solid fa-up-right-from-square mx-1"></i>
     </a>
     {% endif %}
     {% if file.links.preview %}
     <a href="{{ file.links.preview }}" data-title="{{ file.label }}" class="previewLink">
-      <i class="fa fa-eye mx-1"></i>
+      <i class="fa-solid fa-eye mx-1"></i>
     </a>
     {% endif %}
     {% if file.links.download %}
     <a href="{{ file.links.download }}?download">
-      <i class="fa fa-download mx-1"></i>
+      <i class="fa-solid fa-download mx-1"></i>
     </a>
     {% endif %}
     <a href="{{ request.url }}#stats" class="sonar-tooltip" data-toggle="tooltip" data-placement="top" title="{{ _('File downloads') }}: {{ n_download }}">
-      <i class="fa fa-bar-chart mx-1"></i>
+      <i class="fa-solid fa-chart-bar mx-1"></i>
     </a>
   </div>
 </div>
@@ -115,7 +115,7 @@
 {% endmacro %}
 
 {% macro contributor_icon(contribution) %}
-{%- set types = { 'bf:Meeting': 'fa-users', 'bf:Organization': 'fa-building', 'bf:Person': 'fa-user'} -%}
+{%- set types = { 'bf:Meeting': 'fa-solid fa-users', 'bf:Organization': 'fa-solid fa-building', 'bf:Person': 'fa-solid fa-user'} -%}
 {% if contribution.agent.type in types %}
 <i class="fa {{ types[contribution.agent.type] }} mr-1"></i>
 {% endif%}

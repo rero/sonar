@@ -26,8 +26,7 @@
             {{ form_errors(form) }}
             {{ form.hidden_tag() }}
             {{ render_field(form.email, autofocus=True, errormsg=False) }}
-            <button type="submit" class="btn btn-secondary btn-lg btn-block text-light"><i class="fa fa-edit"></i>
-                {{ _('Sign up') }}</button>
+            <button type="submit" class="btn btn-secondary btn-lg btn-block text-light">{{ _('Sign up') }}</button>
         </form>
         {%- endblock %}
     </div>

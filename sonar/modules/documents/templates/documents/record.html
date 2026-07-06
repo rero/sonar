@@ -39,7 +39,7 @@
 <section class="mt-3">
   <div class="mb-3">
     <a href="javascript: history.back(-1)">
-      <i class="fa fa-arrow-left mr-1"></i> {{ _('Back') }}
+      <i class="fa-solid fa-arrow-left mr-1"></i> {{ _('Back') }}
     </a>
   </div>
   <div class="row">
@@ -167,7 +167,7 @@
         <h5 class="d-inline">
           <a href="{{ url_for('documents.search', view=view_code, q='subjects.label.value:' + quote + value + quote) }}">
             <span class="badge badge-secondary text-light font-weight-light">
-              <i class="fa fa-tag mx-1"></i> {{ value }}
+              <i class="fa-solid fa-tag mx-1"></i> {{ value }}
             </span></a>
         </h5>
         {% endfor %}

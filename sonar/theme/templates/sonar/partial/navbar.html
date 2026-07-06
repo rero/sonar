@@ -23,7 +23,7 @@
     {% endif %}
     <button class="ml-auto navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <i class="fa fa-bars p-1"></i>
+      <i class="fa-solid fa-bars p-1"></i>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       {% if not admin %}
@@ -36,7 +36,7 @@
           value="{{ request.args.get('q', '') }}">
         <button class="btn btn-outline-light {{ 'btn-sm' if g.get('organisation') else '' }} my-2 my-sm-0" type="submit"
           aria-label="{{ _('Search') }}">
-          <i class="fa fa-search"></i>
+          <i class="fa-solid fa-magnifying-glass"></i>
         </button>
       </form>
       {% endif %}
@@ -47,13 +47,13 @@
         {%- if not current_user.is_authenticated %}
         <li class="nav-item px-3">
           <a class="nav-link" href="{{ url_for_security('login', next=request.path) }}" title="{{ _('Log in') }}">
-            {{ _('Log in') }}
+            <i class="fa-solid fa-right-to-bracket mr-1"></i>{{ _('Log in') }}
           </a>
         </li>
         {% if security.registerable %}
         <li class="nav-item">
           <a class="btn btn-outline-light" href="{{ url_for_security('register') }}">
-            <strong>{{ _('Sign up') }}</strong>
+            <i class="fa-solid fa-user-plus mr-1"></i><strong>{{ _('Sign up') }}</strong>
           </a>
         </li>
         {% endif %}
@@ -61,6 +61,7 @@
         {% if current_user_record.role == 'submitter'  %}
         <li class="nav-item">
           <a class="btn btn-outline-light" href="{{ url_for('sonar.manage', path='deposit/create')}}">
+            <i class="fa-solid fa-file-circle-plus"></i>
             {{ _('Deposit a publication') }}
           </a>
         </li>
@@ -69,7 +70,7 @@
           {% with dropdownId='userLinkDropdown' %}
           <a class="nav-link dropdown-toggle dropdown-toggle-custom" href="#" id="{{ dropdownId }}" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-user mr-2"></i>
+            <i class="fa-solid fa-user"></i>
             {% if current_user_record %}
             {{ current_user_record.last_name }}, {{ current_user_record.first_name }}
             {% else %}
@@ -84,6 +85,7 @@
         <li class="nav-item dropdown pl-3">
           <a class="nav-link dropdown-toggle dropdown-toggle-custom" href="#" id="languageDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-language"></i>
             {{ current_i18n.language|upper }}
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languageDropdown">
