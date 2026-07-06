@@ -27,9 +27,10 @@ def test_list(
     make_document(organisation=None, with_file=True)
     make_document(organisation="org", with_file=True)
 
-    # Not logged
+    # Not logged: public, global scope, no view required.
     res = client.get(url_for("invenio_records_rest.doc_list"))
-    assert res.status_code == 401
+    assert res.status_code == 200
+    assert res.json["hits"]["total"]["value"] == 2
 
     # Not logged but permission checks disabled
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
@@ -38,15 +39,17 @@ def test_list(
     assert res.json["hits"]["total"]["value"] == 2
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
 
-    # Logged as user
+    # Logged as user: same public, global scope as anonymous.
     login_user_via_session(client, email=user["email"])
     res = client.get(url_for("invenio_records_rest.doc_list"))
-    assert res.status_code == 403
+    assert res.status_code == 200
+    assert res.json["hits"]["total"]["value"] == 2
 
-    # Logged as submitter
+    # Logged as submitter: same public, global scope as anonymous.
     login_user_via_session(client, email=submitter["email"])
     res = client.get(url_for("invenio_records_rest.doc_list"))
-    assert res.status_code == 403
+    assert res.status_code == 200
+    assert res.json["hits"]["total"]["value"] == 2
 
     # Logged as moderator
     login_user_via_session(client, email=moderator["email"])
