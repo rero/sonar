@@ -6,10 +6,10 @@
 {%- block body %}
 <div class="pull-right mt-2">
   <a href="{{ url_for('documentsstats.collect') }}" class="btn btn-primary btn-sm">
-    <i class="fa fa-refresh mr-2"></i>{{ _('See live') }}
+    <i class="fa-solid fa-arrows-rotate mr-2"></i>{{ _('See live') }}
   </a>
   <a href="{{ url_for('documentsstats.collect', save=1) }}" class="btn btn-primary btn-sm">
-    <i class="fa fa-save mr-2"></i>{{ _('Collect now') }}
+    <i class="fa-solid fa-floppy-disk mr-2"></i>{{ _('Collect now') }}
   </a>
 </div>
 <h1>{{ _('Stats') }}</h1>
@@ -21,7 +21,7 @@
       {{ record._source._created | format_date('%d/%m/%Y %H:%M') }}
     </a>
     <a href="/api/billing/stats/{{record._source.pid}}?format=text/csv" class="btn btn-outline-primary btn-sm">
-      <i class="fa fa-download"></i>
+      <i class="fa-solid fa-download"></i>
     </a>
   </div>
   {% endfor %}
