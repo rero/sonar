@@ -1,0 +1,100 @@
+# Continuous localization buffer. Keeps the `translations` branch equal to
+# `staging` plus the not-yet-released translations: it merges (never rebases)
+# `staging` into the buffer, regenerates the gettext catalogs from the code, and
+# pushes back to `translations` only when the set of messages actually changes.
+# Weblate edits the same branch (translations only); the buffer is squash-merged
+# into `staging` once per release.
+#
+# Invariants: no rebase, no force-push, no branch lock.
+
+name: Extract translations
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # every day at 02:00 UTC (aligns with Weblate's 24h commit window)
+  workflow_dispatch:
+
+concurrency:
+  group: extract-translations # one run at a time -> no CI<->CI race
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          ref: translations
+          fetch-depth: 0
+          persist-credentials: false # token is configured just before the push (see below)
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Set up Python
+        run: uv python install 3.14
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      - name: Bring staging code into the buffer
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin staging
+          git merge --no-edit origin/staging # MERGE (never rebase) -> translations is never rewritten
+
+      - name: Extract + update catalogs
+        run: |
+          uv run poe extract_messages                       # regenerate messages.pot (source keys)
+          uv run poe update_catalog -- --no-fuzzy-matching  # update .po from .pot, never guess a translation
+
+      - name: Commit & push if catalogs changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          I18N_PATH='sonar/translations/'
+          # pybabel rewrites POT-Creation-Date on every run, so ignore it (and the
+          # Weblate revision date): without this the job would push a content-free
+          # commit every single night. Any other churn (source locations, Babel
+          # version) is cosmetic noise on this disposable buffer and is allowed
+          # through -- staging only ever sees the squashed release commit.
+          if git diff --quiet \
+            -I '^"POT-Creation-Date:' \
+            -I '^"PO-Revision-Date:' \
+            -- "$I18N_PATH"; then
+            echo "No catalog changes."
+            exit 0
+          fi
+          git add "$I18N_PATH"
+          git commit -m "chore(i18n): extract messages"
+          # Authenticate only now, after the third-party install steps have run, so
+          # the push token is never present in git config during dependency install.
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          # Absorb any Weblate commit that landed in the meantime (merge, not rebase),
+          # then push. Retry a few times and fail loudly if every attempt is rejected.
+          pushed=false
+          for i in 1 2 3; do
+            if ! git fetch origin translations; then
+              echo "fetch failed, retrying ($i)"; sleep 5; continue
+            fi
+            if ! git merge --no-edit origin/translations; then
+              echo "merge conflict with origin/translations; aborting to retry ($i)"
+              git merge --abort; sleep 5; continue
+            fi
+            if git push origin translations; then
+              pushed=true; break
+            fi
+            echo "push rejected, retrying ($i)"; sleep 5
+          done
+          if [ "$pushed" != true ]; then
+            echo "::error::failed to push to translations after 3 attempts"
+            exit 1
+          fi
