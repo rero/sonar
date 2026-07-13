@@ -3,6 +3,8 @@
 
 """Deposits JSON schema class."""
 
+from flask import current_app
+
 from sonar.modules.users.api import current_user_record
 
 from .json_schema_base import JSONSchemaBase
@@ -21,6 +23,11 @@ class DepositsJSONSchema(JSONSchemaBase):
         organisation = {}
         if current_user_record:
             organisation = current_user_record.replace_refs().get("organisation")
+
+        if organisation.get("code") in current_app.config.get(
+            "SONAR_APP_DEPOSITS_DISABLE_NEW_PROJECT_ORGANISATIONS", []
+        ):
+            schema["properties"]["projects"]["items"]["oneOf"].pop(1)
 
         if not current_user_record or (current_user_record.is_moderator and organisation.get("isDedicated", False)):
             return schema
