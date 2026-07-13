@@ -183,6 +183,10 @@ JSONSCHEMAS_URL_SCHEME = "https"
 JSONSCHEMAS_HOST = "sonar.ch"
 JSONSCHEMAS_REPLACE_REFS = True
 
+#: List of organisation codes for which the "Add a new project" option
+#: is removed from the deposit's projects field.
+SONAR_APP_DEPOSITS_DISABLE_NEW_PROJECT_ORGANISATIONS = ["hepvs"]
+
 # Flask configuration
 # ===================
 # See details on
