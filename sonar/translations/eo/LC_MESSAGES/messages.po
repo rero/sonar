@@ -10,19 +10,19 @@ msgstr ""
 "POT-Creation-Date: 2026-02-10 13:30+0100\n"
 "PO-Revision-Date: 2022-04-28 11:09+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
+"Language-Team: Esperanto <https://hosted.weblate.org/projects/rero_plus/"
+"sonar/eo/>\n"
 "Language: eo\n"
-"Language-Team: Esperanto "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/eo/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: sonar/jsonschemas/common/masked-v1.0.0.json:9
 msgid ""
-"A masked document is visible in the professional interface, but not in "
-"the public interface."
+"A masked document is visible in the professional interface, but not in the "
+"public interface."
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:360
@@ -792,8 +792,8 @@ msgstr "Dosieroj"
 
 #: sonar/theme/templates/sonar/oauth/signup.html:35
 msgid ""
-"Fill in your details to complete your registration. You only have to do "
-"this once."
+"Fill in your details to complete your registration. You only have to do this "
+"once."
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:273
@@ -941,8 +941,8 @@ msgstr "Montri pli"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:595
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1836
 msgid ""
-"Host document, for example a journal for an article, or a book for a book"
-" chapter."
+"Host document, for example a journal for an article, or a book for a book "
+"chapter."
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1072
@@ -1002,8 +1002,8 @@ msgstr ""
 
 #: sonar/templates/security/email/reset_instructions.html:28
 msgid ""
-"If you didn't request this, you can ignore this e-mail. Your password "
-"won't change until you create a new\n"
+"If you didn't request this, you can ignore this e-mail. Your password won't "
+"change until you create a new\n"
 "  password."
 msgstr ""
 
@@ -1153,10 +1153,10 @@ msgstr "Ligitaj dokumentoj"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:200
 msgid ""
-"List of IP addresses or ranges that allow access to private files "
-"(access: embargoed or restricted), which are accessible only within the "
-"organisation. Note: the bibliographic record (metadata) is always public."
-" Enter one rule per line."
+"List of IP addresses or ranges that allow access to private files (access: "
+"embargoed or restricted), which are accessible only within the organisation. "
+"Note: the bibliographic record (metadata) is always public. Enter one rule "
+"per line."
 msgstr ""
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:141
@@ -1308,8 +1308,8 @@ msgstr "Noto"
 
 #: sonar/theme/templates/sonar/frontpage.html:79
 msgid ""
-"Note: Publications manually deposited in this test portal might "
-"occasionally need to be deleted, for operational reasons."
+"Note: Publications manually deposited in this test portal might occasionally "
+"need to be deleted, for operational reasons."
 msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1016
@@ -1654,7 +1654,8 @@ msgstr "Loko de eldonejo"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:670
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1852
-msgid "Publication statement of the host document if it is a book, for example \\"
+msgid ""
+"Publication statement of the host document if it is a book, for example \\"
 msgstr ""
 
 #: sonar/modules/documents/templates/documents/record.html:166
@@ -2087,9 +2088,9 @@ msgstr ""
 
 #: sonar/theme/templates/sonar/page.html:20
 msgid ""
-"The SONAR project aims to create a scholarly archive that collects, "
-"promotes and preserves the publications of authors affiliated with Swiss "
-"public research institutions."
+"The SONAR project aims to create a scholarly archive that collects, promotes "
+"and preserves the publications of authors affiliated with Swiss public "
+"research institutions."
 msgstr ""
 
 #: sonar/templates/security/email/welcome.html:10
@@ -2098,15 +2099,15 @@ msgstr ""
 
 #: sonar/theme/templates/sonar/frontpage.html:100
 msgid ""
-"The Swiss Open Access Repository is an archive of scholarly publications."
-" It collects and promotes open access publications by authors affiliated "
-"with Swiss public research institutions."
+"The Swiss Open Access Repository is an archive of scholarly publications. It "
+"collects and promotes open access publications by authors affiliated with "
+"Swiss public research institutions."
 msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:787
 msgid ""
-"The names of the organisation's specific/patrimonial collections to which"
-" this document belongs"
+"The names of the organisation's specific/patrimonial collections to which "
+"this document belongs"
 msgstr ""
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:191
@@ -2119,8 +2120,8 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1041
 msgid ""
-"This project is the subject of an educational document or a report to the"
-" city or science"
+"This project is the subject of an educational document or a report to the "
+"city or science"
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:900
@@ -2129,8 +2130,8 @@ msgstr ""
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:236
 msgid ""
-"This property should only be changed in test environments. In production,"
-" it can have undesired effects, such as invalidating existing persistent "
+"This property should only be changed in test environments. In production, it "
+"can have undesired effects, such as invalidating existing persistent "
 "identifiers (ARK)."
 msgstr ""
 
@@ -2158,10 +2159,9 @@ msgstr "Titoloj"
 
 #: sonar/templates/security/email/welcome.html:8
 msgid ""
-"To be able to deposit publications, you must be registered against a "
-"SONAR institution. For now, your account does not provide additional "
-"features, but in the future you will be able to create document lists and"
-" save requests."
+"To be able to deposit publications, you must be registered against a SONAR "
+"institution. For now, your account does not provide additional features, but "
+"in the future you will be able to create document lists and save requests."
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:760
@@ -2336,8 +2336,8 @@ msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:881
 msgid ""
-"What is the impact of research on public action or on internal or "
-"external governance?"
+"What is the impact of research on public action or on internal or external "
+"governance?"
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:867
@@ -5386,4 +5386,3 @@ msgstr "vol."
 #, fuzzy
 msgid "year"
 msgstr "Jaro"
-

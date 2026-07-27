@@ -10,22 +10,21 @@ msgstr ""
 "POT-Creation-Date: 2026-02-10 13:30+0100\n"
 "PO-Revision-Date: 2025-08-30 18:01+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/rero_plus/sonar/ta/"
+">\n"
 "Language: ta\n"
-"Language-Team: Tamil "
-"<https://hosted.weblate.org/projects/rero_plus/sonar/ta/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: sonar/jsonschemas/common/masked-v1.0.0.json:9
 msgid ""
-"A masked document is visible in the professional interface, but not in "
-"the public interface."
+"A masked document is visible in the professional interface, but not in the "
+"public interface."
 msgstr ""
-"ஒரு முகமூடி ஆவணம் தொழில்முறை இடைமுகத்தில் தெரியும், ஆனால் பொது "
-"இடைமுகத்தில் இல்லை."
+"ஒரு முகமூடி ஆவணம் தொழில்முறை இடைமுகத்தில் தெரியும், ஆனால் பொது இடைமுகத்தில் இல்லை."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:360
 msgid "Abandoned"
@@ -141,8 +140,8 @@ msgid ""
 "At least 3 characters and must contain only lower case characters and "
 "underscores."
 msgstr ""
-"குறைந்தது 3 எழுத்துக்கள் மற்றும் சிறிய எழுத்துக்கள் மற்றும் "
-"அடிக்கோடிட்டுக் காட்டப்பட்டிருக்க வேண்டும்."
+"குறைந்தது 3 எழுத்துக்கள் மற்றும் சிறிய எழுத்துக்கள் மற்றும் அடிக்கோடிட்டுக் காட்டப்பட்டிருக்க "
+"வேண்டும்."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1874
 msgid "Author or editor"
@@ -567,8 +566,8 @@ msgstr "ஆவண தேதி"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1050
 msgid "Document is harvested or not, will disable record edition or similar."
 msgstr ""
-"ஆவணம் அறுவடை செய்யப்படுகிறது அல்லது இல்லை, பதிவு பதிப்பை முடக்கும் அல்லது"
-" ஒத்ததாக இருக்கும்."
+"ஆவணம் அறுவடை செய்யப்படுகிறது அல்லது இல்லை, பதிவு பதிப்பை முடக்கும் அல்லது ஒத்ததாக "
+"இருக்கும்."
 
 #: sonar/jsonschemas/common/type-v1.0.0.json:2
 msgid "Document type"
@@ -644,8 +643,8 @@ msgid ""
 "Enter your email address below and we will send you a link to reset your "
 "password."
 msgstr ""
-"உங்கள் மின்னஞ்சல் முகவரியை கீழே உள்ளிடவும், உங்கள் கடவுச்சொல்லை "
-"மீட்டமைக்க ஒரு இணைப்பை நாங்கள் உங்களுக்கு அனுப்புவோம்."
+"உங்கள் மின்னஞ்சல் முகவரியை கீழே உள்ளிடவும், உங்கள் கடவுச்சொல்லை மீட்டமைக்க ஒரு இணைப்பை நாங்கள் "
+"உங்களுக்கு அனுப்புவோம்."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:547
 msgid "Example (DOI): 10.3406/spira.2016.1748"
@@ -798,11 +797,11 @@ msgstr "கோப்புகள்"
 
 #: sonar/theme/templates/sonar/oauth/signup.html:35
 msgid ""
-"Fill in your details to complete your registration. You only have to do "
-"this once."
+"Fill in your details to complete your registration. You only have to do this "
+"once."
 msgstr ""
-"உங்கள் பதிவை முடிக்க உங்கள் விவரங்களை நிரப்பவும். நீங்கள் இதை ஒரு முறை "
-"மட்டுமே செய்ய வேண்டும்."
+"உங்கள் பதிவை முடிக்க உங்கள் விவரங்களை நிரப்பவும். நீங்கள் இதை ஒரு முறை மட்டுமே செய்ய "
+"வேண்டும்."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:273
 msgid "First and last name"
@@ -946,11 +945,11 @@ msgstr "வீடு"
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:595
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1836
 msgid ""
-"Host document, for example a journal for an article, or a book for a book"
-" chapter."
+"Host document, for example a journal for an article, or a book for a book "
+"chapter."
 msgstr ""
-"புரவலன் ஆவணம், எடுத்துக்காட்டாக ஒரு கட்டுரைக்கான செய்தித் தாள் அல்லது "
-"புத்தக அத்தியாயத்திற்கான நூல்."
+"புரவலன் ஆவணம், எடுத்துக்காட்டாக ஒரு கட்டுரைக்கான செய்தித் தாள் அல்லது புத்தக "
+"அத்தியாயத்திற்கான நூல்."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1072
 msgid "How are research results used in training?"
@@ -963,9 +962,7 @@ msgstr "கலப்பினம்"
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:960
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2087
 msgid "ISBN/ISSN status should be selected in the list below."
-msgstr ""
-"ஐ.எச்.பி.என்/ஐ.எச்.எச்.என் நிலை கீழே உள்ள பட்டியலில் தேர்ந்தெடுக்கப்பட "
-"வேண்டும்."
+msgstr "ஐ.எச்.பி.என்/ஐ.எச்.எச்.என் நிலை கீழே உள்ள பட்டியலில் தேர்ந்தெடுக்கப்பட வேண்டும்."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1463
 msgid "Identified by"
@@ -1003,24 +1000,20 @@ msgstr "அடையாளங்காட்டிகள்"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:116
 msgid "If the value is set to true, the file will point to the external link."
-msgstr ""
-"மதிப்பு உண்மை என அமைக்கப்பட்டால், கோப்பு வெளிப்புற இணைப்பை "
-"சுட்டிக்காட்டும்."
+msgstr "மதிப்பு உண்மை என அமைக்கப்பட்டால், கோப்பு வெளிப்புற இணைப்பை சுட்டிக்காட்டும்."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:94
 msgid "If this field is filled in, the file points to the specified URL."
-msgstr ""
-"இந்த புலம் நிரப்பப்பட்டால், கோப்பு குறிப்பிட்ட முகவரி ஐ "
-"சுட்டிக்காட்டுகிறது."
+msgstr "இந்த புலம் நிரப்பப்பட்டால், கோப்பு குறிப்பிட்ட முகவரி ஐ சுட்டிக்காட்டுகிறது."
 
 #: sonar/templates/security/email/reset_instructions.html:28
 msgid ""
-"If you didn't request this, you can ignore this e-mail. Your password "
-"won't change until you create a new\n"
+"If you didn't request this, you can ignore this e-mail. Your password won't "
+"change until you create a new\n"
 "  password."
 msgstr ""
-"இதை நீங்கள் கோரவில்லை என்றால், இந்த மின்னஞ்சலை நீங்கள் புறக்கணிக்கலாம். "
-"நீங்கள் புதியதாக உருவாக்கும் வரை உங்கள் கடவுச்சொல் மாறாது\n"
+"இதை நீங்கள் கோரவில்லை என்றால், இந்த மின்னஞ்சலை நீங்கள் புறக்கணிக்கலாம். நீங்கள் புதியதாக "
+"உருவாக்கும் வரை உங்கள் கடவுச்சொல் மாறாது\n"
 " கடவுச்சொல்."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:352
@@ -1168,15 +1161,15 @@ msgstr "இணைக்கப்பட்ட ஆவணங்கள்"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:200
 msgid ""
-"List of IP addresses or ranges that allow access to private files "
-"(access: embargoed or restricted), which are accessible only within the "
-"organisation. Note: the bibliographic record (metadata) is always public."
-" Enter one rule per line."
+"List of IP addresses or ranges that allow access to private files (access: "
+"embargoed or restricted), which are accessible only within the organisation. "
+"Note: the bibliographic record (metadata) is always public. Enter one rule "
+"per line."
 msgstr ""
-"தனிப்பட்ட கோப்புகளை அணுக அனுமதிக்கும் ஐபி முகவரிகள் அல்லது வரம்புகளின் "
-"பட்டியல் (அணுகல்: தடைசெய்யப்பட்ட அல்லது தடைசெய்யப்பட்ட), அவை "
-"நிறுவனத்திற்குள் மட்டுமே அணுகக்கூடியவை. குறிப்பு: நூலியல் பதிவு "
-"(மெட்டாடேட்டா) எப்போதும் பொது. ஒரு வரிக்கு ஒரு விதியை உள்ளிடவும்."
+"தனிப்பட்ட கோப்புகளை அணுக அனுமதிக்கும் ஐபி முகவரிகள் அல்லது வரம்புகளின் பட்டியல் (அணுகல்: "
+"தடைசெய்யப்பட்ட அல்லது தடைசெய்யப்பட்ட), அவை நிறுவனத்திற்குள் மட்டுமே அணுகக்கூடியவை. "
+"குறிப்பு: நூலியல் பதிவு (மெட்டாடேட்டா) எப்போதும் பொது. ஒரு வரிக்கு ஒரு விதியை "
+"உள்ளிடவும்."
 
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:141
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:28
@@ -1327,12 +1320,11 @@ msgstr "குறிப்பு"
 
 #: sonar/theme/templates/sonar/frontpage.html:79
 msgid ""
-"Note: Publications manually deposited in this test portal might "
-"occasionally need to be deleted, for operational reasons."
+"Note: Publications manually deposited in this test portal might occasionally "
+"need to be deleted, for operational reasons."
 msgstr ""
-"குறிப்பு: இந்த சோதனை போர்ட்டலில் கைமுறையாக டெபாசிட் செய்யப்பட்ட "
-"வெளியீடுகள் செயல்பாட்டு காரணங்களுக்காக எப்போதாவது நீக்கப்பட "
-"வேண்டியிருக்கும்."
+"குறிப்பு: இந்த சோதனை போர்ட்டலில் கைமுறையாக டெபாசிட் செய்யப்பட்ட வெளியீடுகள் செயல்பாட்டு "
+"காரணங்களுக்காக எப்போதாவது நீக்கப்பட வேண்டியிருக்கும்."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1016
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:708
@@ -1442,9 +1434,7 @@ msgstr "பிற பொருள் பண்புகள்"
 msgid ""
 "Other Material Characteristics, i.e. illustrations, black and white, or "
 "coloured."
-msgstr ""
-"பிற பொருள் பண்புகள், அதாவது விளக்கப்படங்கள், கருப்பு மற்றும் வெள்ளை, "
-"அல்லது வண்ணம்."
+msgstr "பிற பொருள் பண்புகள், அதாவது விளக்கப்படங்கள், கருப்பு மற்றும் வெள்ளை, அல்லது வண்ணம்."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:978
 msgid "Other canton (Switzerland)"
@@ -1674,10 +1664,10 @@ msgstr "வெளியீட்டு அறிக்கை"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:670
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1852
-msgid "Publication statement of the host document if it is a book, for example \\"
+msgid ""
+"Publication statement of the host document if it is a book, for example \\"
 msgstr ""
-"புரவலன் ஆவணத்தின் வெளியீட்டு அறிக்கை இது ஒரு புத்தகமாக இருந்தால், "
-"எடுத்துக்காட்டாக \\"
+"புரவலன் ஆவணத்தின் வெளியீட்டு அறிக்கை இது ஒரு புத்தகமாக இருந்தால், எடுத்துக்காட்டாக \\"
 
 #: sonar/modules/documents/templates/documents/record.html:166
 msgid "Published in"
@@ -1837,8 +1827,8 @@ msgid ""
 "Select a subdivision (department, institute, faculty, other) if this "
 "publication belongs to it in your organisation."
 msgstr ""
-"இந்த வெளியீடு உங்கள் நிறுவனத்தில் சொந்தமானது என்றால் ஒரு உட்பிரிவைத் "
-"தேர்ந்தெடுக்கவும் (துறை, நிறுவனம், ஆசிரிய, மற்றவை)."
+"இந்த வெளியீடு உங்கள் நிறுவனத்தில் சொந்தமானது என்றால் ஒரு உட்பிரிவைத் தேர்ந்தெடுக்கவும் "
+"(துறை, நிறுவனம், ஆசிரிய, மற்றவை)."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:682
 msgid "Serie"
@@ -1924,8 +1914,7 @@ msgstr "சமூக உதவியாளர்"
 #: sonar/templates/security/email/reset_instructions.html:24
 msgid "Someone requested that the password for your SONAR account be reset."
 msgstr ""
-"உங்கள் சோனார் கணக்கிற்கான கடவுச்சொல் மீட்டமைக்கப்பட வேண்டும் என்று ஒருவர்"
-" கேட்டுக்கொண்டார்."
+"உங்கள் சோனார் கணக்கிற்கான கடவுச்சொல் மீட்டமைக்கப்பட வேண்டும் என்று ஒருவர் கேட்டுக்கொண்டார்."
 
 #: sonar/jsonschemas/common/identifiedby-v1.0.0.json:32
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:553
@@ -2113,13 +2102,13 @@ msgstr ""
 
 #: sonar/theme/templates/sonar/page.html:20
 msgid ""
-"The SONAR project aims to create a scholarly archive that collects, "
-"promotes and preserves the publications of authors affiliated with Swiss "
-"public research institutions."
+"The SONAR project aims to create a scholarly archive that collects, promotes "
+"and preserves the publications of authors affiliated with Swiss public "
+"research institutions."
 msgstr ""
-"சோனார் திட்டம் சுவிச் பொது ஆராய்ச்சி நிறுவனங்களுடன் இணைந்த ஆசிரியர்களின் "
-"வெளியீடுகளை சேகரித்து, ஊக்குவிக்கும் மற்றும் பாதுகாக்கும் ஒரு அறிவார்ந்த "
-"காப்பகத்தை உருவாக்குவதை நோக்கமாகக் கொண்டுள்ளது."
+"சோனார் திட்டம் சுவிச் பொது ஆராய்ச்சி நிறுவனங்களுடன் இணைந்த ஆசிரியர்களின் வெளியீடுகளை "
+"சேகரித்து, ஊக்குவிக்கும் மற்றும் பாதுகாக்கும் ஒரு அறிவார்ந்த காப்பகத்தை உருவாக்குவதை "
+"நோக்கமாகக் கொண்டுள்ளது."
 
 #: sonar/templates/security/email/welcome.html:10
 msgid "The SONAR team at RERO"
@@ -2127,18 +2116,18 @@ msgstr "ரெரோவில் உள்ள சோனார் அணி"
 
 #: sonar/theme/templates/sonar/frontpage.html:100
 msgid ""
-"The Swiss Open Access Repository is an archive of scholarly publications."
-" It collects and promotes open access publications by authors affiliated "
-"with Swiss public research institutions."
+"The Swiss Open Access Repository is an archive of scholarly publications. It "
+"collects and promotes open access publications by authors affiliated with "
+"Swiss public research institutions."
 msgstr ""
-"சுவிச் திறந்த அணுகல் களஞ்சியம் அறிவார்ந்த வெளியீடுகளின் காப்பகமாகும். இது"
-" சுவிச் பொது ஆராய்ச்சி நிறுவனங்களுடன் இணைந்த ஆசிரியர்களால் திறந்த அணுகல் "
-"வெளியீடுகளை சேகரித்து ஊக்குவிக்கிறது."
+"சுவிச் திறந்த அணுகல் களஞ்சியம் அறிவார்ந்த வெளியீடுகளின் காப்பகமாகும். இது சுவிச் பொது "
+"ஆராய்ச்சி நிறுவனங்களுடன் இணைந்த ஆசிரியர்களால் திறந்த அணுகல் வெளியீடுகளை சேகரித்து "
+"ஊக்குவிக்கிறது."
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:787
 msgid ""
-"The names of the organisation's specific/patrimonial collections to which"
-" this document belongs"
+"The names of the organisation's specific/patrimonial collections to which "
+"this document belongs"
 msgstr "இந்த ஆவணம் சொந்தமான அமைப்பின் குறிப்பிட்ட/தேசபக்த தொகுப்புகளின் பெயர்கள்"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:191
@@ -2151,11 +2140,9 @@ msgstr "இந்த திட்டம் நிதியுதவிக்க�
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1041
 msgid ""
-"This project is the subject of an educational document or a report to the"
-" city or science"
-msgstr ""
-"இந்த திட்டம் ஒரு கல்வி ஆவணம் அல்லது நகரம் அல்லது அறிவியலுக்கான "
-"அறிக்கையின் பொருள்"
+"This project is the subject of an educational document or a report to the "
+"city or science"
+msgstr "இந்த திட்டம் ஒரு கல்வி ஆவணம் அல்லது நகரம் அல்லது அறிவியலுக்கான அறிக்கையின் பொருள்"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:900
 msgid "This project promotes pedagogical or technological innovation"
@@ -2163,13 +2150,13 @@ msgstr "இந்த திட்டம் கற்பித்தல் அல
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:236
 msgid ""
-"This property should only be changed in test environments. In production,"
-" it can have undesired effects, such as invalidating existing persistent "
+"This property should only be changed in test environments. In production, it "
+"can have undesired effects, such as invalidating existing persistent "
 "identifiers (ARK)."
 msgstr ""
-"இந்த சொத்து சோதனை சூழல்களில் மட்டுமே மாற்றப்பட வேண்டும். உற்பத்தியில், "
-"தற்போதுள்ள தொடர்ச்சியான அடையாளங்காட்டிகளை (ARK) செல்லாததாக்குவது போன்ற "
-"விரும்பத்தகாத விளைவுகளை இது ஏற்படுத்தும்."
+"இந்த சொத்து சோதனை சூழல்களில் மட்டுமே மாற்றப்பட வேண்டும். உற்பத்தியில், தற்போதுள்ள "
+"தொடர்ச்சியான அடையாளங்காட்டிகளை (ARK) செல்லாததாக்குவது போன்ற விரும்பத்தகாத விளைவுகளை "
+"இது ஏற்படுத்தும்."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:932
 msgid "This research is linked to a mandate"
@@ -2195,15 +2182,13 @@ msgstr "தலைப்புகள்"
 
 #: sonar/templates/security/email/welcome.html:8
 msgid ""
-"To be able to deposit publications, you must be registered against a "
-"SONAR institution. For now, your account does not provide additional "
-"features, but in the future you will be able to create document lists and"
-" save requests."
+"To be able to deposit publications, you must be registered against a SONAR "
+"institution. For now, your account does not provide additional features, but "
+"in the future you will be able to create document lists and save requests."
 msgstr ""
-"வெளியீடுகளை டெபாசிட் செய்ய, நீங்கள் ஒரு சோனார் நிறுவனத்திற்கு எதிராக "
-"பதிவு செய்யப்பட வேண்டும். இப்போதைக்கு, உங்கள் கணக்கு கூடுதல் அம்சங்களை "
-"வழங்காது, ஆனால் எதிர்காலத்தில் நீங்கள் ஆவண பட்டியல்களை உருவாக்கி "
-"கோரிக்கைகளைச் சேமிக்க முடியும்."
+"வெளியீடுகளை டெபாசிட் செய்ய, நீங்கள் ஒரு சோனார் நிறுவனத்திற்கு எதிராக பதிவு செய்யப்பட "
+"வேண்டும். இப்போதைக்கு, உங்கள் கணக்கு கூடுதல் அம்சங்களை வழங்காது, ஆனால் எதிர்காலத்தில் நீங்கள் "
+"ஆவண பட்டியல்களை உருவாக்கி கோரிக்கைகளைச் சேமிக்க முடியும்."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:760
 msgid "Trainer"
@@ -2377,11 +2362,9 @@ msgstr "பயிற்சியில் ஆராய்ச்சியின�
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:881
 msgid ""
-"What is the impact of research on public action or on internal or "
-"external governance?"
-msgstr ""
-"பொது நடவடிக்கை அல்லது உள் அல்லது வெளிப்புற நிர்வாகத்தில் ஆராய்ச்சியின் "
-"தாக்கம் என்ன?"
+"What is the impact of research on public action or on internal or external "
+"governance?"
+msgstr "பொது நடவடிக்கை அல்லது உள் அல்லது வெளிப்புற நிர்வாகத்தில் ஆராய்ச்சியின் தாக்கம் என்ன?"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:867
 msgid "What is the impact of the research on the professional environment?"
@@ -5421,4 +5404,3 @@ msgstr "தொகுதி."
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:427
 msgid "year"
 msgstr "ஆண்டு"
-
