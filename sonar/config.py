@@ -759,6 +759,17 @@ ORCID_APP_CREDENTIALS = dict(
     consumer_secret=os.environ.get("ORCID_CONSUMER_SECRET", ""),
 )
 
+# Extend the oauthlib allowed character set for Lucene query syntax.
+# Characters that commonly appear unencoded in query strings:
+#   $  - MARC subfield codes ($a, $b, ...)
+#   [] - inclusive range queries (date:[x TO y])
+#   {} - exclusive range queries (date:{x TO y})
+#   ^  - boost factor (term^2)
+#   "  - phrase queries ("exact phrase")
+#   |  - OR operator (||)
+#   '  - apostrophe in text queries (O'Brien); also in oauthlib's own default
+OAUTH2SERVER_ALLOWED_URLENCODE_CHARACTERS = "=&;:%+~,*@!()/?$'[]{}^\"|"
+
 # Shibboleth authentication
 # =========================
 SHIBBOLETH_SERVICE_PROVIDER = dict(
