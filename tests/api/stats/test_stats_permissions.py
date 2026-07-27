@@ -17,8 +17,8 @@ def test_list(app, client, document, superuser, admin, moderator, submitter, use
     res = client.get(url_for("invenio_records_rest.stat_list"))
     assert res.status_code == 401
 
-    for user in [superuser, admin, moderator, submitter, user]:
-        login_user_via_session(client, email=user["email"])
+    for logged_user in [superuser, admin, moderator, submitter, user]:
+        login_user_via_session(client, email=logged_user["email"])
         res = client.get(url_for("invenio_records_rest.stat_list"))
         assert res.status_code == 403
 
@@ -31,8 +31,8 @@ def test_create(client, superuser, admin, moderator, submitter, user, search_cle
     res = client.post(url_for("invenio_records_rest.stat_list"), data=json.dumps({}), headers=headers)
     assert res.status_code == 401
 
-    for user in [superuser, admin, moderator, submitter, user]:
-        login_user_via_session(client, email=user["email"])
+    for logged_user in [superuser, admin, moderator, submitter, user]:
+        login_user_via_session(client, email=logged_user["email"])
         res = client.post(
             url_for("invenio_records_rest.stat_list"),
             data=json.dumps({}),
@@ -49,8 +49,8 @@ def test_read(client, document, superuser, admin, moderator, submitter, user, se
     res = client.get(url_for("invenio_records_rest.stat_item", pid_value=record["pid"]))
     assert res.status_code == 401
 
-    for user in [admin, moderator, submitter, user]:
-        login_user_via_session(client, email=user["email"])
+    for logged_user in [admin, moderator, submitter, user]:
+        login_user_via_session(client, email=logged_user["email"])
         res = client.get(url_for("invenio_records_rest.stat_item", pid_value=record["pid"]))
         assert res.status_code == 403
 
@@ -78,8 +78,8 @@ def test_update(client, superuser, admin, moderator, submitter, user, search_cle
     )
     assert res.status_code == 401
 
-    for user in [superuser, admin, moderator, submitter, user]:
-        login_user_via_session(client, email=user["email"])
+    for logged_user in [superuser, admin, moderator, submitter, user]:
+        login_user_via_session(client, email=logged_user["email"])
         res = client.put(
             url_for("invenio_records_rest.stat_item", pid_value=record["pid"]),
             data=json.dumps(record.dumps()),
@@ -95,7 +95,7 @@ def test_delete(client, superuser, admin, moderator, submitter, user, search_cle
     res = client.delete(url_for("invenio_records_rest.stat_item", pid_value=record["pid"]))
     assert res.status_code == 401
 
-    for user in [superuser, admin, moderator, submitter, user]:
-        login_user_via_session(client, email=user["email"])
+    for logged_user in [superuser, admin, moderator, submitter, user]:
+        login_user_via_session(client, email=logged_user["email"])
         res = client.delete(url_for("invenio_records_rest.stat_item", pid_value=record["pid"]))
         assert res.status_code == 403

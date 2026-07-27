@@ -26,7 +26,6 @@ class DocumentPermission(RecordPermission):
         :param record: Record to check.
         :returns: True is action can be done.
         """
-
         # Documents are accessible in public view, but eventually filtered
         # later by organisation
         if request.args.get("view"):
@@ -114,12 +113,13 @@ class DocumentPermission(RecordPermission):
         :param record: Record to check.
         :returns: True if action can be done.
         """
-        # Delete only documents with no URN or no registred URN
+        # A URN is never released, so documents holding one cannot be deleted,
+        # whether the URN is only reserved or already registered on the DNB.
         document = DocumentRecord.get_record_by_pid(record["pid"])
         if document:
             # check if document has urn
             try:
-                urn_identifier = PersistentIdentifier.get_by_object("urn", "rec", document.id)
+                PersistentIdentifier.get_by_object("urn", "rec", document.id)
             except PIDDoesNotExistError:
                 return False
 

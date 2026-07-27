@@ -8,12 +8,14 @@ import re
 KEY_VAL_REGEX = re.compile(r'"(.*?)"\s*:\s*"(.*?)"')
 
 
-def extract(fileobj, keys=["title"]):
+def extract(fileobj, keys=None):
     """Extract translation from a json file.
 
     :param fileobj: File object to extract translations from.
     :param keys: Properties to take into account.
     """
+    if keys is None:
+        keys = ["title"]
     translations = []
     line = 1
     for v in fileobj:

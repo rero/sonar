@@ -151,7 +151,6 @@ def test_create(client, document_json, superuser, admin, moderator, submitter, u
 
 def test_read(client, document, make_user, superuser, admin, moderator, submitter, user):
     """Test read documents permissions."""
-
     # Not logged
     res = client.get(url_for("invenio_records_rest.doc_item", pid_value=document["pid"]))
     assert res.status_code == 200
@@ -230,7 +229,6 @@ def test_update(
     make_subdivision,
 ):
     """Test update documents permissions."""
-
     headers = {"Content-Type": "application/json", "Accept": "application/json"}
 
     # Not logged
@@ -358,7 +356,6 @@ def test_delete(
     user,
 ):
     """Test delete documents permissions."""
-
     # Not logged
     res = client.delete(url_for("invenio_records_rest.doc_item", pid_value=document["pid"]))
     assert res.status_code == 401

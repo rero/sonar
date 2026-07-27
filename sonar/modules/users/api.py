@@ -334,5 +334,4 @@ class UserIndexer(SonarIndexer):
 
         :param record: Record instance.
         """
-
         return super().delete(record)

@@ -38,7 +38,6 @@ def test_update_delete(client, superuser, admin, moderator, submitter, user, doc
 
 def test_read_metadata(client, superuser, admin, moderator, submitter, user, document_with_file):
     """Test read files permissions."""
-
     users = [superuser, admin, moderator, submitter, user, None]
     url_files = url_for("invenio_records_files.doc_bucket_api", pid_value=document_with_file.get("pid"))
     for u, status in zip(users, [200, 200, 200, 200, 200, 200]):
@@ -72,7 +71,6 @@ def test_read_content(
     document_with_file,
 ):
     """Test read documents permissions."""
-
     file_name = "test1.pdf"
     users = [superuser, admin, moderator, submitter, user, user_without_org, None]
     url_file_content = url_for(

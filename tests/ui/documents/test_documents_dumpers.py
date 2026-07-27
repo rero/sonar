@@ -30,7 +30,6 @@ def test_document_indexer_dumper(document, pdf_file):
 
 def test_document_indexer_dumper_identifiers(document):
     """Test the additional identifiers produced by the dumper."""
-
     types = [
         "bf:AudioIssueNumber",
         "bf:Doi",

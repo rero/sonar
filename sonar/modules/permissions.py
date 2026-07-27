@@ -300,7 +300,7 @@ class FilesPermission(RecordPermission):
     ]
     delete_actions = ["object-delete", "object-delete-version", "multipart-delete"]
 
-    def __init__(self, record, func, user=None, pid=None, parent_record={}):
+    def __init__(self, record, func, user=None, pid=None, parent_record=None):
         """Initialize a file permission object.
 
         :param record: Record to check.
@@ -310,6 +310,8 @@ class FilesPermission(RecordPermission):
         instance.
         :param parent_record: the record related to the bucket.
         """
+        if parent_record is None:
+            parent_record = {}
         self.pid = pid
         self.parent_record = parent_record
         super().__init__(record, func, user)

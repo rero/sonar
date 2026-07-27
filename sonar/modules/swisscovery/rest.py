@@ -55,7 +55,7 @@ def get_record():
 
     # Regular expression to remove the << and >> around a value in the title
     # Ex: <<La>> vie est belle => La vie est belle
-    pattern = re.compile("<<(.+)>>", re.S)
+    pattern = re.compile("<<(.+)>>", re.DOTALL)
     for title in record.get("title", []):
         for main_title in title.get("mainTitle", []):
             main_title["value"] = re.sub(pattern, r"\1", main_title["value"])

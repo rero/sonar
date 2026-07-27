@@ -79,12 +79,12 @@ class Urn:
         # chars
         digit_sequence = ""
         for idx, element in enumerate(urn, 0):
-            digits = conversion_table[urn[idx].upper()]
+            digits = conversion_table[element.upper()]
             digit_sequence = digit_sequence + digits
         # calculate product sum
         product_sum = 0
         for idx, element in enumerate(digit_sequence, 0):
-            product_sum = product_sum + ((idx + 1) * int(digit_sequence[idx]))
+            product_sum = product_sum + ((idx + 1) * int(element))
         # read the last number of the digit sequence and calculate the quotient
         last_number = int(digit_sequence[-1])
         quotient = int(product_sum / last_number)

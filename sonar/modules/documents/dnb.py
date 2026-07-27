@@ -94,7 +94,6 @@ class DnbUrnService:
         """
         # Documentation: https://wiki.dnb.de/display/URNSERVDOK/URN-Service+API
         # https://wiki.dnb.de/display/URNSERVDOK/Beispiele%3A+URN-Verwaltung
-        answer = False
         try:
             response = requests.get(f"{cls.base_url()}/urn/{urn_code}", headers=cls.headers())
             if response.status_code != 200:

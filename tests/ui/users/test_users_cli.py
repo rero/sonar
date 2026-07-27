@@ -5,7 +5,7 @@
 
 from click.testing import CliRunner
 
-import sonar.modules.users.cli as cli
+from sonar.modules.users import cli
 
 
 def test_import_users(app, script_info, organisation, roles):

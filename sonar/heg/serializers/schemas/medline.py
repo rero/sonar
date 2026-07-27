@@ -42,7 +42,6 @@ class MedlineSchema(HEGSchema):
 
     def get_subjects(self, obj):
         """Get subjects."""
-
         subjects = [{"label": {"language": obj["language"], "value": [item]}} for item in obj.get("keywords", [])]
 
         for item in obj.get("mesh_terms", []):

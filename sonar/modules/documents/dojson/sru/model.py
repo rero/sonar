@@ -297,8 +297,6 @@ def marc21_to_language_and_provision_activity_from_008(self, key, value):
 
     self["provisionActivity"] = provision_activity
 
-    return
-
 
 @overdo.over("title", "^245..")
 @utils.for_each_value
@@ -429,8 +427,6 @@ def marc21_to_extent_from_300(self, key, value):
     # Additional materials
     if value.get("e"):
         self["additionalMaterials"] = value["e"]
-
-    return
 
 
 @overdo.over("dissertation", "^502..")
@@ -582,8 +578,6 @@ def marc21_to_provision_activity_from_264_1(self, key, value):
 
     self["provisionActivity"] = provision_activity
 
-    return
-
 
 @overdo.over("provisionActivity", "^264.(1|3)")
 @utils.ignore_value
@@ -604,8 +598,6 @@ def marc21_to_provision_activity_from_264_3(self, key, value):
 
     provision_activity.append(manufacture)
     self["provisionActivity"] = provision_activity
-
-    return
 
 
 @overdo.over("notes", "^(500|504|508|510|511|530|545|555)..")

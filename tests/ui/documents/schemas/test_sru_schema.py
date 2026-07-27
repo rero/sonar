@@ -8,7 +8,6 @@ from sonar.modules.documents.loaders.schemas.sru import SRUSchema
 
 def test_title():
     """Test title."""
-
     # No 245
     xml = """
     <record></record>
@@ -73,7 +72,6 @@ def test_title():
 
 def test_language():
     """Test language."""
-
     # No 008
     xml = """
     <record></record>

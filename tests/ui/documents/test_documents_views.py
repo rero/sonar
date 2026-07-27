@@ -8,7 +8,7 @@ from unittest import mock
 import pytest
 from flask import g, render_template_string, url_for
 
-import sonar.modules.documents.views as views
+from sonar.modules.documents import views
 
 
 def test_contribution_text():

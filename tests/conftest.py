@@ -202,7 +202,6 @@ def app_config(app_config):
         "127.0.0.1",
         "org.domain.com",
     ]
-    app_config
     return app_config
 
 
@@ -733,7 +732,7 @@ def project_hepvs_json():
             "funding": {
                 "choice": True,
                 "funder": {
-                    "type": "​Swiss National Science Foundation",
+                    "type": "\u200bSwiss National Science Foundation",
                     "number": "1111",
                 },
                 "fundingReceived": True,
@@ -859,7 +858,6 @@ def project_with_validation(app, db, es, make_organisation, make_user, roles, pr
     Uses HEPVS organisation since validation workflow is only available for HEPVS.
     Returns a SimpleNamespace with: project, submitter, moderator
     """
-
     make_organisation(code="hepvs", is_shared=False)
     admin = make_user("admin", organisation="hepvs", access="admin-access")
     submitter = make_user("submitter", organisation="hepvs", access="submitter-access")

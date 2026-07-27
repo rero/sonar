@@ -7,6 +7,7 @@ from flask import url_for
 
 
 def test_collection_query(db, client, document, collection, search_clear):
+    """Test documents query filtered by collection."""
     document["collections"] = [{"$ref": f"https://sonar.ch/api/collections/{collection['pid']}"}]
     document.commit()
     db.session.commit()
@@ -25,7 +26,6 @@ def test_collection_query(db, client, document, collection, search_clear):
 
 def test_identifiers_query(client, document, search_clear):
     """Test identifiers search query."""
-
     res = client.get(
         url_for(
             "invenio_records_rest.doc_list",

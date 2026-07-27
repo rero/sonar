@@ -169,11 +169,11 @@ def import_data(file, doc_type, random_files, with_file_support):
                     # Register record to DB
                     db_record = record_class.create(data=record, with_bucket=with_file_support)
                     # Add files
-                    for file in files:
-                        file_path = os.path.join(directory, file["path"])
+                    for record_file in files:
+                        file_path = os.path.join(directory, record_file["path"])
                         if os.path.isfile(file_path):
                             with open(file_path, "rb") as f:
-                                db_record.add_file(f.read(), file["key"])
+                                db_record.add_file(f.read(), record_file["key"])
                     if random_files:
                         data = extract_metadata({"metadata": db_record})
                         for i in range(1, randint(2, 5)):

@@ -41,7 +41,9 @@ def completion():
     try:
         service = sonar.service(resource)
         search = service.config.search.search_cls(index=resource)
-    except Exception as err:
+    except AttributeError:
+        # `sonar.service()` returns None for resources without a service,
+        # fall back on the REST endpoints.
         endpoints = current_app.config.get("RECORDS_REST_ENDPOINTS")
         for config in endpoints.values():
             if config.get("search_index") == resource:

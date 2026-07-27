@@ -71,7 +71,7 @@ def import_records(file, remove_file):
             file_path = path.join(target_directory, single_file)
 
             with open(file_path) as json_file:
-                for data in json_file.readlines():
+                for data in json_file:
                     data = json.loads(data)
                     try:
                         heg_record = HEGRecord(data)

@@ -48,7 +48,6 @@ def test_create_project(admin, organisation, project_json):
 
 def test_create_project_hepvs(app, admin, make_organisation, project_hepvs_json):
     """Test creating a HEPVS project."""
-
     # Set the user and organisation in the JSON
     organisation = make_organisation(code="hepvs")
     json = copy.deepcopy(project_hepvs_json)

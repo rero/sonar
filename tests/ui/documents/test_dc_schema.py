@@ -12,6 +12,7 @@ from sonar.modules.documents.serializers.oai_dc import SonarDublinCoreXMLSeriali
 
 @pytest.fixture()
 def contributors():
+    """Contributors fixture."""
     return [
         {
             "agent": {"preferred_name": "Creator 1"},
@@ -81,6 +82,7 @@ def test_creators(minimal_document, contributors):
 
 
 def test_dates(app, minimal_document, embargo_date):
+    """Test dates serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
     assert result["dates"] == []
 
@@ -119,6 +121,7 @@ def test_dates(app, minimal_document, embargo_date):
 
 
 def test_descriptions(minimal_document):
+    """Test descriptions serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
     assert result["descriptions"] == []
 
@@ -131,6 +134,7 @@ def test_descriptions(minimal_document):
 
 
 def test_descriptions_attributes(minimal_document):
+    """Test descriptions attributes serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
     assert result["descriptions"] == []
 
@@ -152,11 +156,13 @@ def test_descriptions_attributes(minimal_document):
 
 
 def test_descriptions_xml_control_char(minimal_document):
+    """Test descriptions serialization with XML control chars."""
     minimal_document["abstracts"] = [{"language": "fre", "value": "sous\x02évalués"}]
     assert SonarDublinCoreXMLSerializer().serialize_object_xml({"_source": minimal_document})
 
 
 def test_formats(minimal_document):
+    """Test formats serialization."""
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
     assert result["formats"] == []
 
