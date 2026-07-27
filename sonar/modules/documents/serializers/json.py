@@ -5,8 +5,6 @@
 
 from datetime import datetime
 
-from flask import request
-
 from sonar.modules.collections.api import Record as CollectionRecord
 from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.serializers import JSONSerializer as BasedJSONSerializer
@@ -18,8 +16,6 @@ class JSONSerializer(BasedJSONSerializer):
 
     def post_process_serialize_search(self, results, pid_fetcher):
         """Post process the search results."""
-        view = request.args.get("view")
-
         if results["aggregations"].get("year"):
             results["aggregations"]["year"]["type"] = "range"
             results["aggregations"]["year"]["config"] = {

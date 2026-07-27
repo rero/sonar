@@ -15,8 +15,8 @@ from sonar.theme.views import format_date, record_image_url
 
 
 def test_error(client):
-    """Test error page"""
-    with pytest.raises(Exception):
+    """Test error page."""
+    with pytest.raises(RuntimeError):
         assert client.get(url_for("sonar.error"))
 
 

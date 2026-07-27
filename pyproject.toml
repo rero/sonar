@@ -241,8 +241,20 @@ extend-exclude = ["config.py"]
 line-length = 120
 
 [tool.ruff.lint]
-extend-select = ["A", "C4", "INT", "ISC", "T20", "PIE", "Q", "RET", "SIM", "I", "N", "PERF", "W", "D", "F", "UP", "RUF"]
-ignore = ["D100", "D101", "D103", "D200", "D202", "D205", "D400", "D401", "F403", "F405", "F841", "N815", "PERF203", "RUF012"]
+extend-select = ["A", "C4", "D", "F", "I", "INT", "ISC", "N", "PERF", "PIE", "Q", "RET", "RUF", "SIM", "T20", "UP", "W"]
+ignore = [
+    "BLE001",  # blind-except: catching `Exception` is deliberate around external services and harvesters
+    "D401",    # non-imperative-mood: docstring wording is left to the author
+    "DTZ",     # flake8-datetimez: naive dates are intentional (embargo dates, sitemap, display formatting)
+    "RUF012",  # mutable-class-default: Invenio base classes rely on mutable class attributes
+    "TRY002",  # raise-vanilla-class: TODO replace the bare `Exception` raises with a SonarError hierarchy
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Marshmallow and serializer schemas mirror the camelCase fields of the JSON schemas.
+"**/marshmallow/*.py" = ["N815"]
+"**/schema.py" = ["N815"]
+"**/schemas/*.py" = ["N815"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"

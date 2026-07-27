@@ -12,6 +12,7 @@ from sonar.modules.documents.serializers import schemaorg_v1
 
 @pytest.fixture()
 def contributors():
+    """Contributors fixture."""
     return [
         {
             "agent": {"preferred_name": "Creator 1"},

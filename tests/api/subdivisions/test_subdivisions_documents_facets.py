@@ -8,6 +8,7 @@ from invenio_accounts.testutils import login_user_via_session
 
 
 def test_list(app, db, client, document, subdivision, superuser):
+    """Test subdivision facet on documents list."""
     document["subdivisions"] = [{"$ref": f"https://sonar.ch/api/subdivisions/{subdivision['pid']}"}]
     document.commit()
     db.session.commit()

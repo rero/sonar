@@ -106,8 +106,10 @@ class ProjectsRecordServiceConfig(RecordServiceConfig):
 
 
 class ProjectServiceSchemaWrapper(ServiceSchemaWrapper):
+    """Schema wrapper injecting the organisation into project data."""
+
     def _get_organisation_pid(self, data):
-        """Get organisation PID from data"""
+        """Get organisation PID from data."""
         if org := data.get("metadata", {}).get("organisation"):
             return get_pid_from_ref_or_data(org)
         return None

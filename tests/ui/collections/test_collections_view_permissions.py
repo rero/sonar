@@ -10,7 +10,6 @@ from invenio_accounts.testutils import login_user_via_session
 
 def test_read(client, superuser, admin, moderator, submitter, user, collection_with_file):
     """Test read collections permissions."""
-
     file_name = "test1.pdf"
     users = [superuser, admin, moderator, submitter, user, None]
     url_file_content = url_for(

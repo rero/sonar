@@ -6,7 +6,7 @@
 import pytest
 from onelogin.saml2.auth import OneLogin_Saml2_Auth
 
-import sonar.modules.shibboleth_authenticator.auth as auth
+from sonar.modules.shibboleth_authenticator import auth
 
 
 def test_get_identity_provider_configuration(app):

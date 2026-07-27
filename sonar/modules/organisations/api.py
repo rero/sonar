@@ -113,7 +113,6 @@ class OrganisationRecord(SonarRecord):
         :param with_bucket: If True create a bucket for the organisation.
         :returns: The created record.
         """
-
         return super().create(data, id_=id_, dbcommit=dbcommit, with_bucket=with_bucket, **kwargs)
 
     @classmethod

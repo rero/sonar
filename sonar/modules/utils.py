@@ -11,7 +11,7 @@ import requests
 from flask import abort, current_app, g, request
 from invenio_i18n.selectors import get_locale
 from invenio_mail.api import TemplatedMessage
-from netaddr import IPAddress, IPGlob, IPNetwork, IPSet
+from netaddr import AddrFormatError, IPAddress, IPGlob, IPNetwork, IPSet
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 from wand.color import Color
@@ -175,7 +175,7 @@ def is_ip_in_list(ip_address, addresses_list):
     :returns: True if given IP is in list.
     """
     if not isinstance(addresses_list, list):
-        raise Exception("Given parameter is not a list.")
+        raise TypeError("Given parameter is not a list.")
 
     ip_set = IPSet()
 
@@ -190,8 +190,8 @@ def is_ip_in_list(ip_address, addresses_list):
             # Simple IP
             else:
                 ip_set.add(IPAddress(ip_range))
-        except Exception:
-            pass
+        except AddrFormatError, ValueError:
+            continue
 
     try:
         return ip_address in ip_set
@@ -285,8 +285,8 @@ def get_ips_list(ranges):
             # Simple IP
             else:
                 ip_set.add(IPAddress(ip_range))
-        except Exception:
-            pass
+        except AddrFormatError, ValueError:
+            continue
 
     return [str(ip.cidr) for ip in ip_set.iter_cidrs()]
 

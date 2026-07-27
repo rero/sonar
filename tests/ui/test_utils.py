@@ -8,7 +8,21 @@ import os
 import pytest
 from flask import g
 
-from sonar.modules.utils import *
+from sonar.modules.utils import (
+    change_filename_extension,
+    create_thumbnail_from_file,
+    format_date,
+    get_bibliographic_code_from_language,
+    get_current_ip,
+    get_current_language,
+    get_ips_list,
+    get_language_value,
+    get_specific_theme,
+    get_switch_aai_providers,
+    get_view_code,
+    is_ip_in_list,
+    remove_html,
+)
 
 
 def test_change_filename_extension(app):
@@ -120,7 +134,7 @@ def test_is_ip_in_list():
     assert not is_ip_in_list("wrong", [])
 
     # Not a list
-    with pytest.raises(Exception) as exception:
+    with pytest.raises(TypeError) as exception:
         is_ip_in_list("10.10.10.10", "Not a list")
     assert str(exception.value) == "Given parameter is not a list."
 

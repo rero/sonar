@@ -16,7 +16,6 @@ from sonar.modules.documents.receivers import (
 
 def test_transform_harvested_records(app, bucket_location, capsys, harvested_record):
     """Test harvested record transformation."""
-
     transform_harvested_records(None, [harvested_record], name="archive_ouverte_unige", max="1")
     captured = capsys.readouterr()
     assert captured.out.find("1 records harvested") != -1

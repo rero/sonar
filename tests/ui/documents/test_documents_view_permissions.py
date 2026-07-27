@@ -19,7 +19,6 @@ def test_read(
     document_with_file,
 ):
     """Test read documents permissions."""
-
     file_name = "test1.pdf"
     users = [superuser, admin, moderator, submitter, user, user_without_org, None]
     url_file_content = url_for(

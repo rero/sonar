@@ -8,7 +8,6 @@ from flask import url_for
 
 def test_ark_query(db, client, organisation, document, search_clear):
     """Test ark search query."""
-
     # an empty query: the document should be in the results
     res = client.get(url_for("invenio_records_rest.doc_list", view="global"))
     assert res.status_code == 200

@@ -20,6 +20,7 @@ def oai():
 @click.argument("pattern")
 @with_appcontext
 def create_set(code, name, pattern):
+    """Create an OAI set."""
     oaiset = OAISet(
         spec=code,
         name=name,

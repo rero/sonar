@@ -25,7 +25,6 @@ def test_ark_disabled_cli(app, script_info):
 
 def test_ark_cli_cfg(app, script_info):
     """Test ARK command line interface."""
-
     runner = CliRunner()
 
     # ark server config

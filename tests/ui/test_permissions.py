@@ -19,7 +19,6 @@ from sonar.modules.permissions import (
 
 def test_has_submitter_access(app, client, user_without_role, submitter):
     """Test if user has an submitter access."""
-
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
     assert has_submitter_access()
 
@@ -37,7 +36,6 @@ def test_has_submitter_access(app, client, user_without_role, submitter):
 
 def test_has_admin_access(app, client, user_without_role, admin):
     """Test if user has an admin access."""
-
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
     assert has_admin_access()
 
@@ -83,7 +81,7 @@ def test_list_permission_factory(app, client, superuser):
 
 
 def test_create_permission_factory(app, client, superuser, document):
-    """Test create permission factory"""
+    """Test create permission factory."""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
     assert record_permission_factory(action="create", record=document).can()
 
@@ -95,7 +93,7 @@ def test_create_permission_factory(app, client, superuser, document):
 
 
 def test_read_permission_factory(app, client, superuser, document):
-    """Test read permission factory"""
+    """Test read permission factory."""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
     assert record_permission_factory(action="read", record=document).can()
 
@@ -107,7 +105,7 @@ def test_read_permission_factory(app, client, superuser, document):
 
 
 def test_update_permission_factory(app, client, superuser, document):
-    """Test update permission factory"""
+    """Test update permission factory."""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
     assert record_permission_factory(action="update", record=document).can()
 
@@ -119,7 +117,7 @@ def test_update_permission_factory(app, client, superuser, document):
 
 
 def test_delete_permission_factory(app, client, superuser, document):
-    """Test delete permission factory"""
+    """Test delete permission factory."""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
     assert record_permission_factory(action="delete", record=document).can()
 
@@ -131,7 +129,7 @@ def test_delete_permission_factory(app, client, superuser, document):
 
 
 def test_unknown_permission_factory(app, client, superuser, document):
-    """Test unknown permission factory"""
+    """Test unknown permission factory."""
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
     assert record_permission_factory(document, "unknown").can()
 

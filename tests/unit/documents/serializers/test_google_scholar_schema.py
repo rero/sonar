@@ -12,6 +12,7 @@ from sonar.modules.documents.serializers import google_scholar_v1
 
 @pytest.fixture()
 def contributors():
+    """Contributors fixture."""
     return [
         {
             "agent": {"preferred_name": "Creator 1"},

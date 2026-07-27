@@ -11,5 +11,4 @@ class DeleteRolesExtension(RecordExtension):
 
     def post_delete(self, record, force=False):
         """Called after a record is deleted."""
-
         record.remove_roles()

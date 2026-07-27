@@ -36,7 +36,6 @@ def test_update_delete(client, superuser, admin, moderator, submitter, user, org
 
 def test_read_metadata(client, superuser, admin, moderator, submitter, user, organisation_with_file):
     """Test read files permissions."""
-
     users = [superuser, admin, moderator, submitter, user, None]
     url_files = url_for(
         "invenio_records_files.org_bucket_api",
@@ -53,7 +52,6 @@ def test_read_metadata(client, superuser, admin, moderator, submitter, user, org
 
 def test_read_content(client, superuser, admin, moderator, submitter, user, organisation_with_file):
     """Test read organisations permissions."""
-
     file_name = "test1.pdf"
     users = [superuser, admin, moderator, submitter, user, None]
     url_file_content = url_for(
