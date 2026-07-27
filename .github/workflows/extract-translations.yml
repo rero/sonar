@@ -1,9 +1,13 @@
-# Continuous localization buffer. Keeps the `translations` branch equal to
-# `staging` plus the not-yet-released translations: it merges (never rebases)
-# `staging` into the buffer, regenerates the gettext catalogs from the code, and
-# pushes back to `translations` only when the set of messages actually changes.
-# Weblate edits the same branch (translations only); the buffer is squash-merged
-# into `staging` once per release.
+# Continuous localization buffer (the CI owns the template, Weblate
+# owns the translations). Keeps the `translations` branch equal to `staging` plus
+# the not-yet-released translations: it merges (never rebases) `staging` into the
+# buffer, regenerates the gettext template (messages.pot) from the code, and
+# pushes back to `translations` only when the set of source messages changes. It
+# never writes the .po files -- Weblate is their sole editor, via the "Update PO
+# files to match POT (msgmerge)" add-on. The two actors therefore touch disjoint
+# files (CI: messages.pot, Weblate: */LC_MESSAGES/*.po), so a CI<->Weblate
+# conflict is impossible by construction. The buffer is squash-merged into
+# `staging` once per release.
 #
 # Invariants: no rebase, no force-push, no branch lock.
 
@@ -23,6 +27,9 @@ permissions:
 
 jobs:
   extract:
+    # Never run on forks: the job pushes to rero/sonar and would always fail
+    # elsewhere. Skipped (not failed) on any other repository.
+    if: github.repository == 'rero/sonar'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -51,50 +58,28 @@ jobs:
           git fetch origin staging
           git merge --no-edit origin/staging # MERGE (never rebase) -> translations is never rewritten
 
-      - name: Extract + update catalogs
-        run: |
-          uv run poe extract_messages                       # regenerate messages.pot (source keys)
-          uv run poe update_catalog -- --no-fuzzy-matching  # update .po from .pot, never guess a translation
+      - name: Extract message template
+        run: uv run poe extract_messages # regenerate messages.pot (source keys only; Weblate owns the .po)
 
-      - name: Commit & push if catalogs changed
+      - name: Commit & push if the template changed
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          I18N_PATH='sonar/translations/'
-          # pybabel rewrites POT-Creation-Date on every run, so ignore it (and the
-          # Weblate revision date): without this the job would push a content-free
-          # commit every single night. Any other churn (source locations, Babel
-          # version) is cosmetic noise on this disposable buffer and is allowed
-          # through -- staging only ever sees the squashed release commit.
-          if git diff --quiet \
-            -I '^"POT-Creation-Date:' \
-            -I '^"PO-Revision-Date:' \
-            -- "$I18N_PATH"; then
-            echo "No catalog changes."
-            exit 0
+          POT='sonar/translations/messages.pot'
+          # Ignore POT-Creation-Date (rewritten every run) to skip content-free commits.
+          if git diff --quiet -I '^"POT-Creation-Date:' -- "$POT"; then
+            echo "No template changes."; exit 0
           fi
-          git add "$I18N_PATH"
+          git add "$POT"
           git commit -m "chore(i18n): extract messages"
-          # Authenticate only now, after the third-party install steps have run, so
-          # the push token is never present in git config during dependency install.
+          # Set the token only now, so it is never in git config during dependency install.
           git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          # Absorb any Weblate commit that landed in the meantime (merge, not rebase),
-          # then push. Retry a few times and fail loudly if every attempt is rejected.
-          pushed=false
+          # Absorb any concurrent Weblate commit (merge, never rebase), then push; retry the race.
           for i in 1 2 3; do
-            if ! git fetch origin translations; then
-              echo "fetch failed, retrying ($i)"; sleep 5; continue
-            fi
-            if ! git merge --no-edit origin/translations; then
-              echo "merge conflict with origin/translations; aborting to retry ($i)"
-              git merge --abort; sleep 5; continue
-            fi
-            if git push origin translations; then
-              pushed=true; break
-            fi
-            echo "push rejected, retrying ($i)"; sleep 5
+            git fetch origin translations \
+              && git merge --no-edit origin/translations \
+              && git push origin translations && exit 0
+            git merge --abort 2>/dev/null || true
+            echo "attempt $i failed, retrying"; sleep 5
           done
-          if [ "$pushed" != true ]; then
-            echo "::error::failed to push to translations after 3 attempts"
-            exit 1
-          fi
+          echo "::error::failed to push to translations after 3 attempts"; exit 1
