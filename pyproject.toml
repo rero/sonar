@@ -126,6 +126,9 @@ documents = "sonar.modules.documents:Documents"
 organisations = "sonar.modules.organisations:Organisations"
 invenio_i18n = "invenio_i18n:InvenioI18N"
 
+[project.entry-points."invenio_base.api_finalize_app"]
+sonar = "sonar.ext:api_finalize_app"
+
 [project.entry-points."invenio_base.converters"]
 org_code = "sonar.route_converters:OrganisationCodeConverter"
 

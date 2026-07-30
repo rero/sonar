@@ -6,7 +6,7 @@
 import os
 
 import jinja2
-from flask import current_app, render_template, request
+from flask import abort, current_app, render_template, request
 from flask_bootstrap import Bootstrap4
 from flask_principal import RoleNeed, identity_loaded
 from flask_security import current_user, user_registered
@@ -255,3 +255,31 @@ class SonarAPI(SonarBase):
             """
             if request.args.get("format"):
                 request.accept_mimetypes = MIMEAccept([(request.args["format"], 1)])
+
+
+def api_finalize_app(app):
+    """Finalize the API application.
+
+    The Flask-Security blueprint is registered on the API application (see
+    ``ACCOUNTS_REGISTER_BLUEPRINT``) to let ``url_for_security`` build links
+    pointing to the UI application. Its views rendering a template cannot work
+    here, as the SONAR templates are only registered on the UI application, so
+    they are disabled. Their REST counterparts are provided by
+    ``invenio-accounts``.
+
+    :param app: The Flask application.
+    """
+
+    def view_not_found(*args, **kwargs):
+        """Abort with a not found error."""
+        abort(404)
+
+    for endpoint in [
+        "security.change_password",
+        "security.forgot_password",
+        "security.login",
+        "security.register",
+        "security.reset_password",
+        "security.send_confirmation",
+    ]:
+        app.view_functions[endpoint] = view_not_found
