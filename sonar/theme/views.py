@@ -105,12 +105,6 @@ def profile(pid=None):
     return render_template("sonar/accounts/profile.html")
 
 
-@blueprint.route("/error")
-def error():
-    """Error to generate exception for test purposes."""
-    raise RuntimeError("this is an error for test purposes")
-
-
 @blueprint.route("/manage/")
 @blueprint.route("/manage/<path:path>")
 @can_access_manage_view
