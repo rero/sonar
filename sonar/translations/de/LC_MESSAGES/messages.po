@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SONAR 1.11.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2026-07-27 12:41+0000\n"
+"POT-Creation-Date: 2026-07-30 05:10+0000\n"
 "PO-Revision-Date: 2026-02-10 12:42+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
@@ -30,6 +30,10 @@ msgid ""
 msgstr ""
 "Ein ausgeblendetes Dokument ist in der professionellen Oberfläche sichtbar, "
 "aber nicht in der öffentlichen Oberfläche."
+
+#: sonar/modules/documents/citations/registry.py:65
+msgid "APA (7th edition)"
+msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:360
 msgid "Abandoned"
@@ -235,6 +239,10 @@ msgstr "CC0"
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:496
 msgid "Checksum"
 msgstr "Checksum"
+
+#: sonar/modules/documents/citations/registry.py:66
+msgid "Chicago (17th edition)"
+msgstr ""
 
 #: sonar/theme/templates/sonar/partial/test_info.html:6
 msgid "Choose your role:"
@@ -929,6 +937,10 @@ msgstr "HES-SO"
 msgid "HES-SO Valais-Wallis"
 msgstr "HES-SO Valais-Wallis"
 
+#: sonar/modules/documents/citations/registry.py:68
+msgid "Harvard (12th edition)"
+msgstr ""
+
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1049
 msgid "Harvested"
 msgstr "Gesammelt"
@@ -1242,6 +1254,10 @@ msgstr "MD5 checksum der Datei."
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:491
 msgid "MIME type"
 msgstr "MIME-Typ"
+
+#: sonar/modules/documents/citations/registry.py:67
+msgid "MLA (9th edition)"
+msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:222
 msgid "Main team"

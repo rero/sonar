@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SONAR 1.11.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2026-07-27 12:41+0000\n"
+"POT-Creation-Date: 2026-07-30 05:10+0000\n"
 "PO-Revision-Date: 2025-10-30 04:24+0000\n"
 "Last-Translator: Галина Нежурбіда <nezhga29@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/rero_plus/"
@@ -26,6 +26,10 @@ msgid ""
 "public interface."
 msgstr ""
 "Прихований документ видно в професійному інтерфейсі, але не в публічному."
+
+#: sonar/modules/documents/citations/registry.py:65
+msgid "APA (7th edition)"
+msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:360
 #, fuzzy
@@ -257,6 +261,10 @@ msgstr "CC0"
 #, fuzzy
 msgid "Checksum"
 msgstr "Контрольна сума"
+
+#: sonar/modules/documents/citations/registry.py:66
+msgid "Chicago (17th edition)"
+msgstr ""
 
 #: sonar/theme/templates/sonar/partial/test_info.html:6
 #, fuzzy
@@ -975,6 +983,10 @@ msgstr ""
 msgid "HES-SO Valais-Wallis"
 msgstr ""
 
+#: sonar/modules/documents/citations/registry.py:68
+msgid "Harvard (12th edition)"
+msgstr ""
+
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1049
 msgid "Harvested"
 msgstr ""
@@ -1294,6 +1306,10 @@ msgstr ""
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:54
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:491
 msgid "MIME type"
+msgstr ""
+
+#: sonar/modules/documents/citations/registry.py:67
+msgid "MLA (9th edition)"
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:222
