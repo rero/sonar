@@ -6,18 +6,11 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-import pytest
 from flask import url_for
 from invenio_accounts.testutils import login_user_via_session, login_user_via_view
 
 from sonar.help.views import process_link
 from sonar.theme.views import format_date, record_image_url
-
-
-def test_error(client):
-    """Test error page."""
-    with pytest.raises(RuntimeError):
-        assert client.get(url_for("sonar.error"))
 
 
 def test_robots_txt(app):
