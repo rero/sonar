@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SONAR VERSION\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2026-07-27 12:41+0000\n"
+"POT-Creation-Date: 2026-07-30 05:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,10 @@ msgstr ""
 msgid ""
 "A masked document is visible in the professional interface, but not in "
 "the public interface."
+msgstr ""
+
+#: sonar/modules/documents/citations/registry.py:65
+msgid "APA (7th edition)"
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:360
@@ -225,6 +229,10 @@ msgstr ""
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:59
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:496
 msgid "Checksum"
+msgstr ""
+
+#: sonar/modules/documents/citations/registry.py:66
+msgid "Chicago (17th edition)"
 msgstr ""
 
 #: sonar/theme/templates/sonar/partial/test_info.html:6
@@ -913,6 +921,10 @@ msgstr ""
 msgid "HES-SO Valais-Wallis"
 msgstr ""
 
+#: sonar/modules/documents/citations/registry.py:68
+msgid "Harvard (12th edition)"
+msgstr ""
+
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1049
 msgid "Harvested"
 msgstr ""
@@ -1216,6 +1228,10 @@ msgstr ""
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:54
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:491
 msgid "MIME type"
+msgstr ""
+
+#: sonar/modules/documents/citations/registry.py:67
+msgid "MLA (9th edition)"
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:222
