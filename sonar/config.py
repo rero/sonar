@@ -879,6 +879,8 @@ STATS_EVENTS = {
         "params": {
             "preprocessors": [
                 "invenio_stats.processors:flag_robots",
+                # An event with a forged IP address is not a real visit
+                "sonar.stats_event_builders:flag_invalid_ip_as_robot",
                 # Don't index robot events
                 lambda doc: doc if not doc["is_robot"] else None,
                 "invenio_stats.processors:flag_machines",
@@ -899,6 +901,8 @@ STATS_EVENTS = {
         "params": {
             "preprocessors": [
                 "invenio_stats.processors:flag_robots",
+                # An event with a forged IP address is not a real visit
+                "sonar.stats_event_builders:flag_invalid_ip_as_robot",
                 # Don't index robot events
                 lambda doc: doc if not doc["is_robot"] else None,
                 "invenio_stats.processors:flag_machines",
