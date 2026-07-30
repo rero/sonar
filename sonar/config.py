@@ -121,8 +121,6 @@ ACCOUNTS_SESSION_REDIS_URL = "redis://localhost:6379/1"
 #: proxies) removes these headers again before sending the response to the
 #: client. Set to False, in case of doubt.
 ACCOUNTS_USERINFO_HEADERS = True
-# make security blueprints available to the REST API
-ACCOUNTS_REGISTER_BLUEPRINT = True
 
 # Celery configuration
 # ====================
