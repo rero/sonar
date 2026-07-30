@@ -6,6 +6,7 @@
 from invenio_accounts.testutils import login_user_via_view
 
 from sonar.dedicated.hepvs.projects.schema import RecordSchema
+from sonar.dedicated.hepvs.projects.serializers.csv import CSVSerializer
 from sonar.proxies import sonar
 from sonar.resources.projects.api import Record
 from sonar.theme.views import schemas
@@ -46,3 +47,22 @@ def test_api(client, make_user):
     # Access the field class directly from Record class to test _get_schema
     schema_field = Record.schema
     assert schema_field._get_schema(record_data) == "https://sonar.ch/schemas/hepvs/projects/project-v1.0.0.json"
+
+
+def test_csv_format_row_without_conditional_fields():
+    """Test CSV row formatting when conditional sub-fields are not stored."""
+    data = {
+        "externalPartners": {"choice": True},
+        "educationalDocument": {"choice": True},
+        "promoteInnovation": {"choice": True},
+        "actorsInvolved": [{"choice": "Other", "count": 2}],
+    }
+
+    CSVSerializer().format_row(data)
+
+    assert data == {
+        "externalPartners": "",
+        "educationalDocument": "",
+        "promoteInnovation": "",
+        "actorsInvolved": "Other (2)",
+    }
