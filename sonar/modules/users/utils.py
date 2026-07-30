@@ -3,9 +3,10 @@
 
 """Utils functions for user module."""
 
+from urllib.parse import urlencode
+
 from flask_babel import _
-from flask_security import url_for_security
-from flask_security.recoverable import generate_reset_password_token
+from invenio_accounts.utils import default_reset_password_link_func
 
 from sonar.modules.organisations.utils import platform_name
 from sonar.modules.utils import send_email
@@ -24,8 +25,10 @@ def send_welcome_email(user_record, user):
     if pname:
         plain_platform_name = pname
 
-    token = generate_reset_password_token(user)
-    reset_link = url_for_security("reset_password", token=token, next=f"/{code}", _external=True)
+    # The link points to the UI application, as the Flask-Security views are
+    # not registered on the API application.
+    _token, reset_link = default_reset_password_link_func(user)
+    reset_link = f"{reset_link}?{urlencode({'next': f'/{code}'})}"
 
     send_email(
         [user_record["email"]],

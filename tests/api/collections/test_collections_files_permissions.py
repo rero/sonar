@@ -4,7 +4,6 @@
 """Test collections files permissions."""
 
 from flask import url_for
-from flask_security import url_for_security
 from invenio_accounts.testutils import login_user_via_session
 
 
@@ -23,7 +22,7 @@ def test_update_delete(client, superuser, admin, moderator, submitter, user, col
         if u:
             login_user_via_session(client, email=u["email"])
         else:
-            client.get(url_for_security("logout"))
+            client.get(url_for("invenio_accounts_rest_auth.logout"))
         with open(pdf_file, "rb") as f:
             res = client.put(url_file_content, input_stream=f)
             assert res.status_code == status
@@ -45,7 +44,7 @@ def test_read_metadata(client, superuser, admin, moderator, submitter, user, col
         if u:
             login_user_via_session(client, email=u["email"])
         else:
-            client.get(url_for_security("logout"))
+            client.get(url_for("invenio_accounts_rest_auth.logout"))
         res = client.get(url_files)
         assert res.status_code == status
 
@@ -63,6 +62,6 @@ def test_read_content(client, superuser, admin, moderator, submitter, user, coll
         if u:
             login_user_via_session(client, email=u["email"])
         else:
-            client.get(url_for_security("logout"))
+            client.get(url_for("invenio_accounts_rest_auth.logout"))
         res = client.get(url_file_content)
         assert res.status_code == status

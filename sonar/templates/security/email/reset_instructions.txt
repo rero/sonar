@@ -6,7 +6,7 @@
 
 {{ _('Someone requested that the password for your SONAR account be reset.') }}
 
-{{ _('Reset my password') }}: {{ reset_link.replace('/api', '') }}
+{{ _('Reset my password') }}: {{ reset_link }}
 
 {{ _('If you didn\'t request this, you can ignore this e-mail. Your password won\'t change until you create a new
   password.') }}
