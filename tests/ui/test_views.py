@@ -13,6 +13,13 @@ from sonar.help.views import process_link
 from sonar.theme.views import format_date, record_image_url
 
 
+def test_index_trailing_slash(client, organisation):
+    """Test that the homepage with a trailing slash redirects to the canonical URL."""
+    res = client.get(f"/{organisation['code']}/")
+    assert res.status_code == 301
+    assert res.location == url_for("index", view=organisation["code"])
+
+
 def test_robots_txt(app):
     """Test le robots.txt file."""
     with app.test_client() as client:
