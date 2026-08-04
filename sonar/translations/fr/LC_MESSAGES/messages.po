@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: SONAR 1.11.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
 "POT-Creation-Date: 2026-08-04 05:16+0000\n"
-"PO-Revision-Date: 2026-02-10 12:42+0000\n"
+"PO-Revision-Date: 2026-08-05 05:16+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "fr/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 2026.8.1.dev0\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: sonar/jsonschemas/common/masked-v1.0.0.json:9
@@ -34,7 +34,7 @@ msgstr ""
 
 #: sonar/modules/documents/citations/registry.py:65
 msgid "APA (7th edition)"
-msgstr ""
+msgstr "APA (7e édition)"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:360
 msgid "Abandoned"
@@ -244,7 +244,7 @@ msgstr "Somme de contrôle"
 
 #: sonar/modules/documents/citations/registry.py:66
 msgid "Chicago (17th edition)"
-msgstr ""
+msgstr "Chicago (17e édition)"
 
 #: sonar/theme/templates/sonar/partial/test_info.html:6
 msgid "Choose your role:"
@@ -642,7 +642,7 @@ msgstr "Date 2"
 
 #: sonar/theme/views.py:122
 msgid "English"
-msgstr ""
+msgstr "Anglais"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:70
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:85
@@ -940,7 +940,7 @@ msgstr "HES-SO Valais-Wallis"
 
 #: sonar/modules/documents/citations/registry.py:68
 msgid "Harvard (12th edition)"
-msgstr ""
+msgstr "Harvard (12e édition)"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1049
 msgid "Harvested"
@@ -1258,7 +1258,7 @@ msgstr "Type MIME"
 
 #: sonar/modules/documents/citations/registry.py:67
 msgid "MLA (9th edition)"
-msgstr ""
+msgstr "MLA (9e édition)"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:222
 msgid "Main team"
@@ -2228,10 +2228,8 @@ msgid "Training and professionalization"
 msgstr "Formation et professionnalisation"
 
 #: sonar/translations/manual_translations.txt:5
-#, fuzzy
-#| msgid "Organisations"
 msgid "Translation test"
-msgstr "Organisations"
+msgstr "Test de traduction"
 
 #: sonar/jsonschemas/common/identifiedby-v1.0.0.json:8
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:77
