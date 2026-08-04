@@ -70,6 +70,10 @@ def test_get_switch_aai_providers(app):
     app.config["SHIBBOLETH_IDENTITY_PROVIDERS"] = {"idp": {}, "idpdev": {"dev": True}}
     assert get_switch_aai_providers() == ["idp"]
 
+    # No provider is offered when the service provider key pair is missing
+    app.config["SHIBBOLETH_SERVICE_PROVIDER"] = {"entity_id": "entity_id"}
+    assert get_switch_aai_providers() == []
+
 
 def test_get_current_language(app):
     """Test getting the current language."""
