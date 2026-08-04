@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SONAR 1.11.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2026-07-30 05:10+0000\n"
+"POT-Creation-Date: 2026-08-04 05:16+0000\n"
 "PO-Revision-Date: 2022-04-28 11:09+0000\n"
 "Last-Translator: Nicolas Prongué <n.prongue@outlook.com>\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/rero_plus/"
@@ -632,7 +632,7 @@ msgstr "Fina dato"
 msgid "End date of publication"
 msgstr ""
 
-#: sonar/theme/views.py:128
+#: sonar/theme/views.py:122
 msgid "English"
 msgstr ""
 
@@ -1774,7 +1774,7 @@ msgstr ""
 msgid "SONAR logo"
 msgstr "Emblemo de SONAR"
 
-#: sonar/config.py:272
+#: sonar/config.py:270
 msgid "SONAR password reset"
 msgstr ""
 
@@ -2342,7 +2342,7 @@ msgstr ""
 msgid "Volume"
 msgstr "Volumo"
 
-#: sonar/modules/users/utils.py:32
+#: sonar/modules/users/utils.py:35
 msgid "Welcome to"
 msgstr ""
 
@@ -2383,7 +2383,7 @@ msgstr ""
 msgid "Year"
 msgstr "Jaro"
 
-#: sonar/config.py:273
+#: sonar/config.py:271
 msgid "Your SONAR password has been reset"
 msgstr ""
 
@@ -2988,7 +2988,7 @@ msgstr ""
 msgid "contribution_role_{role}"
 msgstr ""
 
-#: sonar/config.py:644
+#: sonar/config.py:642
 msgid "contributor"
 msgstr "Kontribuinto"
 
@@ -5283,7 +5283,7 @@ msgstr "aliaj dosieroj"
 msgid "p."
 msgstr "p."
 
-#: sonar/config.py:641
+#: sonar/config.py:639
 msgid "pid"
 msgstr "PID"
 
@@ -5353,7 +5353,7 @@ msgstr ""
 msgid "startDate"
 msgstr ""
 
-#: sonar/config.py:642
+#: sonar/config.py:640
 msgid "status"
 msgstr "stato"
 
@@ -5380,7 +5380,7 @@ msgstr "subtenata de"
 msgid "uri"
 msgstr "URI"
 
-#: sonar/config.py:643
+#: sonar/config.py:641
 msgid "user"
 msgstr "uzanto"
 

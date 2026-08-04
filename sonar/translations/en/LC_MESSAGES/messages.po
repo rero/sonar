@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SONAR 1.11.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2026-07-30 05:10+0000\n"
+"POT-Creation-Date: 2026-08-04 05:16+0000\n"
 "PO-Revision-Date: 2026-02-10 12:42+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
 "Language-Team: English <https://hosted.weblate.org/projects/rero_plus/sonar/"
@@ -638,7 +638,7 @@ msgstr "End date"
 msgid "End date of publication"
 msgstr "Date 2"
 
-#: sonar/theme/views.py:128
+#: sonar/theme/views.py:122
 msgid "English"
 msgstr ""
 
@@ -1785,7 +1785,7 @@ msgstr "SONAR deposit v1.0.0"
 msgid "SONAR logo"
 msgstr "SONAR logo"
 
-#: sonar/config.py:272
+#: sonar/config.py:270
 msgid "SONAR password reset"
 msgstr "SONAR password reset"
 
@@ -2369,7 +2369,7 @@ msgstr "Visible facets in the public interface for documents"
 msgid "Volume"
 msgstr "Volume"
 
-#: sonar/modules/users/utils.py:32
+#: sonar/modules/users/utils.py:35
 msgid "Welcome to"
 msgstr "Welcome to"
 
@@ -2414,7 +2414,7 @@ msgstr "Why?"
 msgid "Year"
 msgstr "Year"
 
-#: sonar/config.py:273
+#: sonar/config.py:271
 msgid "Your SONAR password has been reset"
 msgstr "Your SONAR password has been reset"
 
@@ -3016,7 +3016,7 @@ msgstr "Printer"
 msgid "contribution_role_{role}"
 msgstr "contribution_role_{role}"
 
-#: sonar/config.py:644
+#: sonar/config.py:642
 msgid "contributor"
 msgstr "contributor"
 
@@ -5306,7 +5306,7 @@ msgstr "other files"
 msgid "p."
 msgstr "p."
 
-#: sonar/config.py:641
+#: sonar/config.py:639
 msgid "pid"
 msgstr "pid"
 
@@ -5376,7 +5376,7 @@ msgstr "secondary team"
 msgid "startDate"
 msgstr "start date"
 
-#: sonar/config.py:642
+#: sonar/config.py:640
 msgid "status"
 msgstr "status"
 
@@ -5402,7 +5402,7 @@ msgstr "supported by"
 msgid "uri"
 msgstr "URI"
 
-#: sonar/config.py:643
+#: sonar/config.py:641
 msgid "user"
 msgstr "user"
 
