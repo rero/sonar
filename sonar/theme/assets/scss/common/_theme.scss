@@ -35,3 +35,14 @@ div.wiki-page div.sticky-top {
 .export-item {
   width: 110px;
 }
+
+// Only show the focus ring for keyboard navigation, not on a mouse click.
+.btn:focus:not(:focus-visible),
+.btn.focus:not(:focus-visible),
+.btn:active:not(:focus-visible) {
+  outline: 0 !important;
+  outline-style: none !important;
+  outline-width: 0 !important;
+  box-shadow: none !important;
+  -moz-outline-style: none !important;
+}
