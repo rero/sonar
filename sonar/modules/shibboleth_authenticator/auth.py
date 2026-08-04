@@ -42,7 +42,9 @@ def init_saml_auth(req, remote_app):
     with open(sp_config["private_key"]) as content_file:
         private_key = content_file.read()
 
-    with open(f"./data/idp_certificates/{remote_app}.crt") as content_file:
+    idp_certificates_path = current_app.config.get("SHIBBOLETH_IDENTITY_PROVIDERS_CERTIFICATES_PATH")
+
+    with open(f"{idp_certificates_path}/{remote_app}.crt") as content_file:
         idp_cert = content_file.read()
 
     # Create auth object with settings below
