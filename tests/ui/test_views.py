@@ -256,6 +256,15 @@ def test_schema_deposits(client, moderator, submitter, moderator_dedicated):
     assert "subdivisions" in res.json["schema"]["properties"]["diffusion"]["propertiesOrder"]
 
 
+def test_login_switch_aai_button(app, client):
+    """Test the SWITCHaai button is only displayed when SAML is configured."""
+    assert b"SWITCHaai" in client.get(url_for("security.login")).data
+
+    # Without a service provider key pair no provider can be offered
+    app.config["SHIBBOLETH_SERVICE_PROVIDER"] = {"entity_id": "entity_id"}
+    assert b"SWITCHaai" not in client.get(url_for("security.login")).data
+
+
 def test_profile(client, user):
     """Test profile page."""
     # Not logged

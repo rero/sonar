@@ -266,6 +266,7 @@ convention = "pep257"
 [tool.poe.tasks]
 # Setup
 bootstrap = {cmd = "./scripts/bootstrap", help = "Runs bootstrap"}
+certs = {cmd = "./scripts/gen-certs", help = "Generates the development certificates"}
 console = {cmd = "./scripts/console", help = "Opens invenio shell"}
 server = {cmd = "./scripts/server", help = "Starts the server"}
 setup = {cmd = "./scripts/setup", help = "Runs setup"}

@@ -20,29 +20,36 @@ def test_get_identity_provider_configuration(app):
     assert auth.get_identity_provider_configuration("idp").get("entity_id") == "https://idp.com/shibboleth"
 
 
-def test_init_saml_auth(app, request):
+def test_init_saml_auth(app, request, saml_certificates):
     """Test SAML auth initialization."""
-    # Valid init without strict mode
+    certificate = saml_certificates.certificate
+    private_key = saml_certificates.private_key
+
+    # Strict mode defaults to True when not configured
     app.config.update(
         SHIBBOLETH_SERVICE_PROVIDER={
             "debug": True,
             "entity_id": "entity_id",
-            "x509cert": "./docker/nginx/sp.pem",
-            "private_key": "./docker/nginx/sp.key",
+            "x509cert": certificate,
+            "private_key": private_key,
         }
     )
-    assert isinstance(auth.init_saml_auth(request, "idp"), OneLogin_Saml2_Auth)
+    saml_auth = auth.init_saml_auth(request, "idp")
+    assert isinstance(saml_auth, OneLogin_Saml2_Auth)
+    assert saml_auth.get_settings().is_strict()
 
-    # Valid init without debug
+    # Debug mode defaults to False when not configured
     app.config.update(
         SHIBBOLETH_SERVICE_PROVIDER={
             "strict": True,
             "entity_id": "entity_id",
-            "x509cert": "./docker/nginx/sp.pem",
-            "private_key": "./docker/nginx/sp.key",
+            "x509cert": certificate,
+            "private_key": private_key,
         }
     )
-    assert isinstance(auth.init_saml_auth(request, "idp"), OneLogin_Saml2_Auth)
+    saml_auth = auth.init_saml_auth(request, "idp")
+    assert isinstance(saml_auth, OneLogin_Saml2_Auth)
+    assert not saml_auth.get_settings().is_debug_active()
 
     # Init failed caused by certificate lack
     app.config.update(
@@ -50,7 +57,7 @@ def test_init_saml_auth(app, request):
             "debug": True,
             "strict": True,
             "entity_id": "entity_id",
-            "private_key": "./docker/nginx/sp.key",
+            "private_key": private_key,
         }
     )
     with pytest.raises(Exception) as e:
@@ -63,7 +70,7 @@ def test_init_saml_auth(app, request):
             "debug": True,
             "strict": True,
             "entity_id": "entity_id",
-            "x509cert": "./docker/nginx/sp.pem",
+            "x509cert": certificate,
         }
     )
     with pytest.raises(Exception) as e:
@@ -75,8 +82,8 @@ def test_init_saml_auth(app, request):
         SHIBBOLETH_SERVICE_PROVIDER={
             "debug": True,
             "strict": True,
-            "x509cert": "./docker/nginx/sp.pem",
-            "private_key": "./docker/nginx/sp.key",
+            "x509cert": certificate,
+            "private_key": private_key,
         }
     )
     with pytest.raises(Exception) as e:

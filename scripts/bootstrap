@@ -50,6 +50,7 @@ deploy=false
 cmd="uv sync --frozen"
 ci=false
 tgz_file=""
+force_certs=false
 
 # uv is a mandatory condition to launch this program!
 if [[ -z "${VIRTUAL_ENV}" ]]; then
@@ -72,6 +73,9 @@ while test $# -gt 0; do
           ci=true ;;
         --deploy)
             deploy=true
+            ;;
+        --force-certs)
+            force_certs=true
             ;;
         *) error_msg "Option $1 not recognized" ;;
     esac
@@ -131,6 +135,16 @@ else
   npm install --no-save --omit=dev --no-fund --no-audit  @rero/sonar-ui@21.0.0 -prefix "${static_folder}"
 fi
 
+
+# Generate the certificates used by the HTTPS development server. Skipped on
+# deploy, where the application image has no use for a development private key.
+if ! $deploy ; then
+  if $force_certs ; then
+    $(dirname "$0")/gen-certs --force
+  else
+    $(dirname "$0")/gen-certs
+  fi
+fi
 
 # Compile translations catalogs
 info_msg "Compile translations catalogs"

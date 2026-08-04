@@ -8,7 +8,7 @@ import os
 import shutil
 import sys
 import tempfile
-from datetime import date
+from datetime import UTC, date, datetime, timedelta
 from io import BytesIO
 from os.path import dirname, join
 from types import SimpleNamespace
@@ -16,6 +16,10 @@ from unittest import mock
 
 import pytest
 import requests_mock
+from cryptography import x509
+from cryptography.hazmat.primitives import hashes, serialization
+from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.x509.oid import NameOID
 from dotenv import load_dotenv
 from flask_principal import ActionNeed
 from flask_security.utils import hash_password
@@ -135,8 +139,55 @@ def instance_path():
         shutil.rmtree(path)
 
 
+@pytest.fixture(scope="session")
+def saml_certificates(tmp_path_factory):
+    """Generate the SAML certificates needed by the tests.
+
+    Certificates are only read and formatted, never used to validate a real
+    signature, so ephemeral ones are enough and no key material has to be
+    versioned.
+    """
+    path = tmp_path_factory.mktemp("saml")
+
+    def create_certificate(common_name):
+        """Create a self signed certificate and its private key."""
+        key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+        name = x509.Name([x509.NameAttribute(NameOID.COMMON_NAME, common_name)])
+        certificate = (
+            x509.CertificateBuilder()
+            .subject_name(name)
+            .issuer_name(name)
+            .public_key(key.public_key())
+            .serial_number(x509.random_serial_number())
+            .not_valid_before(datetime.now(UTC))
+            .not_valid_after(datetime.now(UTC) + timedelta(days=1))
+            .sign(key, hashes.SHA256())
+        )
+        return key, certificate
+
+    key, certificate = create_certificate("sonar.ch")
+    (path / "sp.pem").write_bytes(certificate.public_bytes(serialization.Encoding.PEM))
+    (path / "sp.key").write_bytes(
+        key.private_bytes(
+            serialization.Encoding.PEM,
+            serialization.PrivateFormat.PKCS8,
+            serialization.NoEncryption(),
+        )
+    )
+
+    # Named after the "idp" identity provider key configured below.
+    _, idp_certificate = create_certificate("idp.com")
+    (path / "idp.crt").write_bytes(idp_certificate.public_bytes(serialization.Encoding.PEM))
+
+    return SimpleNamespace(
+        path=str(path),
+        certificate=str(path / "sp.pem"),
+        private_key=str(path / "sp.key"),
+    )
+
+
 @pytest.fixture(scope="module", autouse=True)
-def app_config(app_config):
+def app_config(app_config, saml_certificates):
     """Define configuration for module."""
     help_test_dir = join(dirname(__file__), "data", "help")
 
@@ -144,9 +195,13 @@ def app_config(app_config):
         "strict": True,
         "debug": True,
         "entity_id": "entity_id",
-        "x509cert": "./docker/nginx/sp.pem",
-        "private_key": "./docker/nginx/sp.key",
+        "x509cert": saml_certificates.certificate,
+        "private_key": saml_certificates.private_key,
     }
+    # The extension overwrites the two keys above with these values.
+    app_config["SHIBBOLETH_SERVICE_PROVIDER_CERTIFICATE"] = saml_certificates.certificate
+    app_config["SHIBBOLETH_SERVICE_PROVIDER_PRIVATE_KEY"] = saml_certificates.private_key
+    app_config["SHIBBOLETH_IDENTITY_PROVIDERS_CERTIFICATES_PATH"] = saml_certificates.path
 
     app_config["SHIBBOLETH_IDENTITY_PROVIDERS"] = {
         "idp": {
