@@ -45,7 +45,7 @@
   <div class="row">
     <div class="col-lg-3 text-center">
       {% if files and files | length > 0 %}
-      <div class="mb-4">
+      <div class="mb-3">
         {{ thumbnail(record, first_file,
         stats['file-download'][first_file['key']]['count'] or 0) }}
       </div>
@@ -55,8 +55,13 @@
 
       <!-- DOCUMENT TYPE -->
       {% if record.documentType %}
-      <h5 class="my-4">{{ _('document_type_' + record.documentType) }}</h5>
+      <h5 class="my-3">{{ _('document_type_' + record.documentType) }}</h5>
       {% endif %}
+
+      <!-- Citation -->
+      <div class="mb-3">
+        {% include 'documents/_citation.html' %}
+      </div>
 
       {% if files and files | length > 1 %}
       <p>
@@ -558,4 +563,5 @@
     });
   });
 </script>
+<script src="/static/js/citation.js"></script>
 {% endblock javascript %}
