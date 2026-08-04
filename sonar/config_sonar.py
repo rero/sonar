@@ -509,7 +509,7 @@ SONAR_APP_ENABLE_CORS = True
 
 SONAR_APP_DISABLE_PERMISSION_CHECKS = False
 """Disable permission checks during API calls. Useful when API is test from
-command line or progams like postman."""
+command line or programs like postman."""
 
 SONAR_APP_DEFAULT_ORGANISATION = "global"
 """Default organisation key."""
@@ -562,6 +562,7 @@ SONAR_APP_ARK_SHOULDER = "ffk3"
 
 SONAR_APP_SWISSCOVERY_SEARCH_URL = "https://swisscovery.ch/view/sru/41SLSP_NETWORK"
 SONAR_APP_SWISSCOVERY_SEARCH_VERSION = "1.1"
+SONAR_APP_SWISSCOVERY_TIMEOUT = 10
 
 # Link on document identifier
 # Add the source identifier in lowercase (Ex: orcid)

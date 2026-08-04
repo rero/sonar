@@ -74,7 +74,9 @@ class CSVSerializer(CSVSerializerMixin):
             :param actor: Actor dictionary.
             :returns: String representation of the actor.
             """
-            text = actor["choice"] if actor["choice"] != "Other" else actor["other"]
+            text = actor["choice"]
+            if text == "Other":
+                text = actor.get("other", text)
             if actor.get("count"):
                 text = f"{text} ({actor['count']})"
             return text
@@ -85,14 +87,14 @@ class CSVSerializer(CSVSerializerMixin):
 
         # External partners
         if data.get("externalPartners"):
-            if not data["externalPartners"]["choice"]:
+            if not data["externalPartners"].get("choice"):
                 data.pop("externalPartners")
             else:
                 data["externalPartners"] = self.list_separator.join(
                     list(
                         map(
                             transform_external_partners,
-                            data["externalPartners"]["list"],
+                            data["externalPartners"].get("list", []),
                         )
                     )
                 )
@@ -105,10 +107,10 @@ class CSVSerializer(CSVSerializerMixin):
 
         # Educational document
         if data.get("educationalDocument"):
-            if not data["educationalDocument"]["choice"]:
+            if not data["educationalDocument"].get("choice"):
                 data.pop("educationalDocument")
             else:
-                data["educationalDocument"] = data["educationalDocument"]["briefDescription"]
+                data["educationalDocument"] = data["educationalDocument"].get("briefDescription", "")
 
         # Funder
         if not data.get("funding", {}).get("choice"):
@@ -120,7 +122,7 @@ class CSVSerializer(CSVSerializerMixin):
 
         # Promote innovation
         if data.get("promoteInnovation"):
-            if not data["promoteInnovation"]["choice"]:
+            if not data["promoteInnovation"].get("choice"):
                 data.pop("promoteInnovation")
             else:
-                data["promoteInnovation"] = data["promoteInnovation"]["reason"]
+                data["promoteInnovation"] = data["promoteInnovation"].get("reason", "")

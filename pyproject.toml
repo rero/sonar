@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: Fondation RERO+
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 [build-system]
 requires = ["uv_build<1.0.0"]
 build-backend = "uv_build"

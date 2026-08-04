@@ -3,6 +3,9 @@
 
 """Test swisscovery rest API."""
 
+from unittest.mock import MagicMock, patch
+
+import requests
 from flask import url_for
 from invenio_accounts.testutils import login_user_via_session
 
@@ -24,6 +27,20 @@ def test_get_record(client, user, submitter):
     login_user_via_session(client, email=submitter["email"])
     res = client.get(url)
     assert res.status_code == 400
+
+    # Service unavailable (timeout)
+    with patch("sonar.modules.swisscovery.rest.requests.get") as mock_get:
+        mock_get.side_effect = requests.exceptions.Timeout()
+        res = client.get(url_for("swisscovery.get_record", query="anything", type="mms_id"))
+        assert res.status_code == 503
+
+    # Service unavailable (HTTP error)
+    with patch("sonar.modules.swisscovery.rest.requests.get") as mock_get:
+        mock_response = MagicMock()
+        mock_response.raise_for_status.side_effect = requests.exceptions.HTTPError()
+        mock_get.return_value = mock_response
+        res = client.get(url_for("swisscovery.get_record", query="anything", type="mms_id"))
+        assert res.status_code == 503
 
     # No record found
     login_user_via_session(client, email=submitter["email"])

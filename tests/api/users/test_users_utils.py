@@ -8,6 +8,18 @@ from flask_mail import Mail
 from sonar.modules.users.utils import send_welcome_email
 
 
+def test_send_welcome_email_reset_link(app, user):
+    """Test that the reset password link points to the UI application."""
+    account = app.extensions["security"].datastore.find_user(email=user["email"])
+
+    # The API application is mounted on `/api` by the WSGI dispatcher.
+    with app.test_request_context(environ_overrides={"SCRIPT_NAME": "/api"}), Mail().record_messages() as outbox:
+        send_welcome_email(user, account)
+
+    assert 'href="http://localhost/lost-password/' in outbox[0].html
+    assert "next=%2Forg" in outbox[0].html
+
+
 def test_send_welcome_email(app, user, submitter, moderator, admin):
     """Test send welcome email."""
     datastore = app.extensions["security"].datastore
