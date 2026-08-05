@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SONAR VERSION\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2026-08-04 05:16+0000\n"
+"POT-Creation-Date: 2026-08-05 05:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -163,6 +163,10 @@ msgstr ""
 #: sonar/templates/security/email/reset_notice.html:10
 #: sonar/templates/security/email/welcome.html:12
 msgid "Best regards"
+msgstr ""
+
+#: sonar/modules/documents/utils.py:247
+msgid "BibTeX"
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1007
@@ -573,7 +577,7 @@ msgstr ""
 msgid "Document type"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:471
+#: sonar/modules/documents/templates/documents/record.html:474
 msgid "Document views"
 msgstr ""
 
@@ -583,6 +587,10 @@ msgstr ""
 
 #: sonar/theme/templates/sonar/stats/detail.html:10
 msgid "Download"
+msgstr ""
+
+#: sonar/modules/documents/utils.py:246
+msgid "Dublin Core"
 msgstr ""
 
 #: sonar/templates/security/email/welcome.html:15
@@ -627,7 +635,7 @@ msgstr ""
 msgid "End date of publication"
 msgstr ""
 
-#: sonar/theme/views.py:122
+#: sonar/theme/views.py:123
 msgid "English"
 msgstr ""
 
@@ -733,6 +741,10 @@ msgstr ""
 msgid "Existing project"
 msgstr ""
 
+#: sonar/modules/documents/templates/documents/_export.html:4
+msgid "Export to…"
+msgstr ""
+
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:949
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:618
 msgid "Extent"
@@ -775,7 +787,7 @@ msgstr ""
 msgid "File UUID"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:472
+#: sonar/modules/documents/templates/documents/record.html:475
 #: sonar/theme/templates/sonar/macros/macro.html:38
 msgid "File downloads"
 msgstr ""
@@ -1066,13 +1078,17 @@ msgstr ""
 msgid "Italian"
 msgstr ""
 
+#: sonar/modules/documents/utils.py:245
+msgid "JSON data"
+msgstr ""
+
 #: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:5
 msgid "JSON schema for statistics."
 msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:899
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1344
-#: sonar/modules/documents/views.py:270
+#: sonar/modules/documents/views.py:272
 msgid "Jury note"
 msgstr ""
 
@@ -1560,7 +1576,7 @@ msgstr ""
 msgid "Preferred name"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:492
+#: sonar/modules/documents/templates/documents/record.html:495
 #: sonar/theme/templates/sonar/preview/base.html:8
 msgid "Preview"
 msgstr ""
@@ -1672,6 +1688,10 @@ msgstr ""
 msgid "Qualifier"
 msgstr ""
 
+#: sonar/modules/documents/utils.py:248
+msgid "RIS (Zotero, …)"
+msgstr ""
+
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:459
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:465
 msgid "Realization framework"
@@ -1755,7 +1775,7 @@ msgstr ""
 msgid "SONAR logo"
 msgstr ""
 
-#: sonar/config.py:270
+#: sonar/config.py:274
 msgid "SONAR password reset"
 msgstr ""
 
@@ -1971,7 +1991,7 @@ msgstr ""
 msgid "Statistic"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:467
+#: sonar/modules/documents/templates/documents/record.html:470
 #: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:21
 msgid "Statistics"
 msgstr ""
@@ -2361,7 +2381,7 @@ msgstr ""
 msgid "Year"
 msgstr ""
 
-#: sonar/config.py:271
+#: sonar/config.py:275
 msgid "Your SONAR password has been reset"
 msgstr ""
 
@@ -2958,12 +2978,12 @@ msgstr ""
 msgid "contribution_role_prt"
 msgstr ""
 
-#: sonar/modules/documents/views.py:291
+#: sonar/modules/documents/views.py:293
 #, python-brace-format
 msgid "contribution_role_{role}"
 msgstr ""
 
-#: sonar/config.py:642
+#: sonar/config.py:666
 msgid "contributor"
 msgstr ""
 
@@ -5241,7 +5261,7 @@ msgstr ""
 msgid "name"
 msgstr ""
 
-#: sonar/modules/documents/views.py:191
+#: sonar/modules/documents/views.py:193
 msgid "no."
 msgstr ""
 
@@ -5249,11 +5269,11 @@ msgstr ""
 msgid "other files"
 msgstr ""
 
-#: sonar/modules/documents/views.py:194
+#: sonar/modules/documents/views.py:196
 msgid "p."
 msgstr ""
 
-#: sonar/config.py:639
+#: sonar/config.py:663
 msgid "pid"
 msgstr ""
 
@@ -5323,7 +5343,7 @@ msgstr ""
 msgid "startDate"
 msgstr ""
 
-#: sonar/config.py:640
+#: sonar/config.py:664
 msgid "status"
 msgstr ""
 
@@ -5349,7 +5369,7 @@ msgstr ""
 msgid "uri"
 msgstr ""
 
-#: sonar/config.py:641
+#: sonar/config.py:665
 msgid "user"
 msgstr ""
 
@@ -5373,7 +5393,7 @@ msgstr ""
 msgid "validation_action_save"
 msgstr ""
 
-#: sonar/modules/documents/views.py:188
+#: sonar/modules/documents/views.py:190
 msgid "vol."
 msgstr ""
 
