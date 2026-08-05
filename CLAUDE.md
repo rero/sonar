@@ -78,6 +78,7 @@ Each module has a `permissions.py` using `invenio-records-permissions`. Access i
 - Be clear and concise in the docstrings and do not over-comment the code.
 - Do not use Python type annotations (no `-> str`, `: str`, etc. in signatures).
 - Ruff is configured with `line-length = 120` and pep257 docstring convention; see `[tool.ruff]` in `pyproject.toml` for the enabled rule sets.
+- Since Python 3.14 (PEP 758), parentheses around multiple exception types are optional when the handler has no `as` clause: `except AttributeError, UnboundLocalError:` is valid and equivalent to `except (AttributeError, UnboundLocalError):` — not the old Python 2 comma syntax. `ruff format` only removes the parentheses this way when its `target-version` resolves to Python 3.14+ (here, from `requires-python` in `pyproject.toml`); this is expected, not a bug.
 - Commit messages follow [Conventional Commits](https://www.conventionalcommits.org)
 
 ### Translations

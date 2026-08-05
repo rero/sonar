@@ -6,7 +6,7 @@
 import os
 
 import jinja2
-from flask import current_app, render_template, request
+from flask import current_app, redirect, render_template, request, url_for
 from flask_bootstrap import Bootstrap4
 from flask_principal import RoleNeed, identity_loaded
 from flask_security import current_user, user_registered
@@ -228,6 +228,16 @@ class Sonar(SonarBase):
         def index(view):
             """Homepage."""
             return render_template("sonar/frontpage.html", view=view)
+
+        @app.route("/<org_code:view>/")
+        def index_trailing_slash(view):
+            """Redirect to the canonical homepage, without the trailing slash.
+
+            Werkzeug only redirects a URL missing a trailing slash to the rule
+            declaring one, not the other way around, so the trailing slash form
+            has to be handled explicitly.
+            """
+            return redirect(url_for("index", view=view), code=301)
 
 
 class SonarAPI(SonarBase):

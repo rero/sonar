@@ -13,6 +13,13 @@ from sonar.help.views import process_link
 from sonar.theme.views import format_date, record_image_url
 
 
+def test_index_trailing_slash(client, organisation):
+    """Test that the homepage with a trailing slash redirects to the canonical URL."""
+    res = client.get(f"/{organisation['code']}/")
+    assert res.status_code == 301
+    assert res.location == url_for("index", view=organisation["code"])
+
+
 def test_robots_txt(app):
     """Test le robots.txt file."""
     with app.test_client() as client:
@@ -62,6 +69,11 @@ def test_logged_user(app, client, superuser, admin, moderator, submitter, user):
     assert res.json["settings"]["document_identifier_link"]
     assert res.json["settings"]["availableLanguages"]
     assert not res.json.get("metadata")
+    serializers = res.json["settings"]["document_serializers"]
+    assert isinstance(serializers, list)
+    assert all("format" in s and "label" in s and "icon" in s for s in serializers)
+    assert not any(s["format"] in ("json", "rero") for s in serializers)
+    assert any(s["format"] == "json_export" for s in serializers)
 
     # Logged as admin
     login_user_via_session(client, email=admin["email"])
