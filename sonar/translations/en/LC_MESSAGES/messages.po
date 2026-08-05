@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: SONAR 1.11.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
 "POT-Creation-Date: 2026-08-05 07:21+0000\n"
-"PO-Revision-Date: 2026-02-10 12:42+0000\n"
+"PO-Revision-Date: 2026-08-05 07:38+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
 "Language-Team: English <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "en/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 2026.8.1.dev0\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: sonar/jsonschemas/common/masked-v1.0.0.json:9
@@ -32,7 +32,7 @@ msgstr ""
 
 #: sonar/modules/documents/citations/registry.py:65
 msgid "APA (7th edition)"
-msgstr ""
+msgstr "APA (7th edition)"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:360
 msgid "Abandoned"
@@ -125,11 +125,11 @@ msgstr "Allowed IP addresses"
 
 #: sonar/modules/documents/templates/documents/_citation.html:21
 msgid "An error occurred while loading citation styles"
-msgstr ""
+msgstr "An error occurred while loading citation styles"
 
 #: sonar/modules/documents/templates/documents/_citation.html:22
 msgid "An error occurred while loading the citation"
-msgstr ""
+msgstr "An error occurred while loading the citation"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:795
 msgid "Animator"
@@ -178,7 +178,7 @@ msgstr "Back to SONAR"
 
 #: sonar/modules/documents/templates/documents/_citation.html:47
 msgid "Be sure to check the citation before using it"
-msgstr ""
+msgstr "Be sure to check the citation before using it"
 
 #: sonar/templates/security/email/reset_instructions.html:15
 #: sonar/templates/security/email/reset_notice.html:10
@@ -188,7 +188,7 @@ msgstr "Best regards"
 
 #: sonar/modules/documents/utils.py:247
 msgid "BibTeX"
-msgstr ""
+msgstr "BibTeX"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:1007
 msgid "Brief description of the mandate"
@@ -258,7 +258,7 @@ msgstr "Checksum"
 
 #: sonar/modules/documents/citations/registry.py:66
 msgid "Chicago (17th edition)"
-msgstr ""
+msgstr "Chicago (17th edition)"
 
 #: sonar/theme/templates/sonar/partial/test_info.html:6
 msgid "Choose your role:"
@@ -266,14 +266,12 @@ msgstr "Choose your role:"
 
 #: sonar/modules/documents/templates/documents/_citation.html:27
 #: sonar/modules/documents/templates/documents/_citation.html:57
-#, fuzzy
-#| msgid "Dissertation"
 msgid "Citation"
-msgstr "Dissertation"
+msgstr "Citation"
 
 #: sonar/modules/documents/templates/documents/_citation.html:5
 msgid "Cite"
-msgstr ""
+msgstr "Cite"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:87
 msgid "City"
@@ -299,10 +297,8 @@ msgstr "Classroom teacher"
 
 #: sonar/modules/documents/templates/documents/_citation.html:28
 #: sonar/modules/documents/templates/documents/_citation.html:58
-#, fuzzy
-#| msgid "Closed"
 msgid "Close"
-msgstr "Closed"
+msgstr "Close"
 
 #: sonar/jsonschemas/common/oa-status-v1.0.0.json:37
 msgid "Closed"
@@ -414,7 +410,7 @@ msgstr "Controlled affiliations"
 
 #: sonar/modules/documents/templates/documents/_citation.html:41
 msgid "Copy to the clipboard"
-msgstr ""
+msgstr "Copy to the clipboard"
 
 #: sonar/help/templates/help/page_wiki.html:27
 msgid "Created:"
@@ -635,10 +631,8 @@ msgid "Download"
 msgstr "Download"
 
 #: sonar/modules/documents/utils.py:246
-#, fuzzy
-#| msgid "Public note"
 msgid "Dublin Core"
-msgstr "Public note"
+msgstr "Dublin Core"
 
 #: sonar/templates/security/email/welcome.html:15
 msgid "E-mail"
@@ -684,7 +678,7 @@ msgstr "Date 2"
 
 #: sonar/theme/views.py:123
 msgid "English"
-msgstr ""
+msgstr "English"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:70
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:85
@@ -792,7 +786,7 @@ msgstr "Existing project"
 
 #: sonar/modules/documents/templates/documents/_export.html:4
 msgid "Export to…"
-msgstr ""
+msgstr "Export to…"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:949
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:618
@@ -986,7 +980,7 @@ msgstr "HES-SO Valais-Wallis"
 
 #: sonar/modules/documents/citations/registry.py:68
 msgid "Harvard (12th edition)"
-msgstr ""
+msgstr "Harvard (12th edition)"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1049
 msgid "Harvested"
@@ -1135,7 +1129,7 @@ msgstr "Italian"
 
 #: sonar/modules/documents/utils.py:245
 msgid "JSON data"
-msgstr ""
+msgstr "JSON data"
 
 #: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:5
 msgid "JSON schema for statistics."
@@ -1250,7 +1244,7 @@ msgstr "List of logs."
 
 #: sonar/modules/documents/templates/documents/_citation.html:19
 msgid "Loading…"
-msgstr ""
+msgstr "Loading…"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:973
 msgid "Locality (Valais)"
@@ -1311,7 +1305,7 @@ msgstr "MIME type"
 
 #: sonar/modules/documents/citations/registry.py:67
 msgid "MLA (9th edition)"
-msgstr ""
+msgstr "MLA (9th edition)"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:222
 msgid "Main team"
@@ -1760,7 +1754,7 @@ msgstr "Qualifier"
 
 #: sonar/modules/documents/utils.py:248
 msgid "RIS (Zotero, …)"
-msgstr ""
+msgstr "RIS (Zotero, …)"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:459
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:465
@@ -1905,7 +1899,7 @@ msgstr "See live"
 #: sonar/modules/documents/templates/documents/_citation.html:20
 #: sonar/modules/documents/templates/documents/_citation.html:39
 msgid "Select a style on the left"
-msgstr ""
+msgstr "Select a style on the left"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1408
 msgid ""
@@ -2217,7 +2211,7 @@ msgstr ""
 
 #: sonar/modules/documents/templates/documents/_citation.html:62
 msgid "The text has been copied to the clipboard"
-msgstr ""
+msgstr "The text has been copied to the clipboard"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:191
 msgid "This domain name must be unique."
@@ -2291,10 +2285,8 @@ msgid "Training and professionalization"
 msgstr "Training and professionalisation"
 
 #: sonar/translations/manual_translations.txt:5
-#, fuzzy
-#| msgid "Organisations"
 msgid "Translation test"
-msgstr "Organisations"
+msgstr "Translation test"
 
 #: sonar/jsonschemas/common/identifiedby-v1.0.0.json:8
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:77
