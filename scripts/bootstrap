@@ -128,7 +128,7 @@ then
   info_msg "Install SONAR-UI from tgz: ${tgz_file}"
   npm install --no-save --omit=dev --no-fund --no-audit  "${tgz_file}" --prefix "${static_folder}"
 else
-  npm install --no-save --omit=dev --no-fund --no-audit  @rero/sonar-ui@21.0.0 -prefix "${static_folder}"
+  npm install --no-save --omit=dev --no-fund --no-audit  @rero/sonar-ui@21.1.0 -prefix "${static_folder}"
 fi
 
 
