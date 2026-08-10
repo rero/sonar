@@ -6,4 +6,4 @@
 This file is imported by ``sonar.__init__``.
 """
 
-__version__ = "1.12.4"
+__version__ = "1.13.0"

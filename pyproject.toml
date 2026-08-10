@@ -13,7 +13,7 @@ package = true
 
 [project]
 name = "SONAR"
-version = "1.12.4"
+version = "1.13.0"
 description = "SONAR is an archive of scholarly publications. It intends to collect, promote and preserve the publications of authors affiliated with Swiss public research institutions."
 authors = [{name = "RERO", email = "software@rero.ch"}]
 keywords = ["sonar", "invenio", "document repository"]
@@ -70,7 +70,7 @@ dependencies = [
     "flask-wiki>=0.3.1",
     "poethepoet",
     ## SONAR Specific
-    "citeproc-py>=0.10.1",
+    "citeproc-py>=0.11.0",
     "fuzzywuzzy[speedup]>=0.18.0",
     "pycountry>=23.12.11",
     "netaddr>=0.9.0",
