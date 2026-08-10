@@ -411,14 +411,14 @@ wheels = [
 
 [[package]]
 name = "citeproc-py"
-version = "0.10.7"
+version = "0.11.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "lxml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/db/12/f91a548419892726bf675c936e48b2ed65aafff09a1f20d4ce1cfc47b218/citeproc_py-0.10.7.tar.gz", hash = "sha256:e2e56f7c4a63a659679de1055d36c6b961e10a7d65945d082f208462229d356f", size = 276235, upload-time = "2026-08-10T22:35:13.109Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5f/59/7b260679722fe81bce41b85f5730c07b679681d2f84df34fbe7993beff28/citeproc_py-0.11.0.tar.gz", hash = "sha256:b96933c938aee06ff74590cdf68bae657c04e2fb29d6cd2e693aa0d97de37bc2", size = 277307, upload-time = "2026-08-20T15:21:27.86Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/32/96/385eb384eec40ea60cdd4f0b3db288e7f2f53cc96f3a55883605e7fe6b3d/citeproc_py-0.10.7-py3-none-any.whl", hash = "sha256:c5192d59fdfde00a33945b9a85a11fa23200be3fac99dfa6856f06c415f7d40b", size = 386751, upload-time = "2026-08-10T22:35:11.914Z" },
+    { url = "https://files.pythonhosted.org/packages/aa/7b/c7a5b46787d2fb2ddcb9710534d998ff8f2514116d783bc35dcafafdb1c2/citeproc_py-0.11.0-py3-none-any.whl", hash = "sha256:e0249b150b8f884581c4cf15e73ded54a417aeecfcd4009995f747e711101194", size = 387538, upload-time = "2026-08-20T15:21:26.556Z" },
 ]
 
 [[package]]
@@ -3809,7 +3809,7 @@ prod = [
 
 [package.metadata]
 requires-dist = [
-    { name = "citeproc-py", specifier = ">=0.10.1" },
+    { name = "citeproc-py", specifier = ">=0.11.0" },
     { name = "flask-admin", specifier = ">=1.6.1" },
     { name = "flask-wiki", specifier = ">=0.3.1" },
     { name = "fuzzywuzzy", extras = ["speedup"], specifier = ">=0.18.0" },
