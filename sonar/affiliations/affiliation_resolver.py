@@ -22,14 +22,11 @@ class AffiliationResolver:
         """
         affiliations = []
 
-        with open(CSV_FILE) as file:
+        with open(CSV_FILE, encoding="utf-8") as file:
             reader = csv.reader(file, delimiter="\t")
             for row in reader:
                 affiliation = []
-                for index, value in enumerate(row):
-                    if index > 0 and value:
-                        affiliation.append(value)
-
+                affiliation.extend(value for index, value in enumerate(row) if index > 0 and value)
                 if affiliation:
                     affiliations.append(affiliation)
 
