@@ -24,6 +24,10 @@ def test_resolve():
     test_string = "IST"
     assert affiliation_resolver.resolve(test_string) == ["IST"]
 
+    # accented forms are matched against their decoded standard form
+    test_string = "Centre médical universitaire, Université de Genève"
+    assert affiliation_resolver.resolve(test_string) == ["University of Geneva and HUG"]
+
     test_string = (
         "Clinic for Cardiovascular Surgery, University HospitalZurich, Raemistrasse 100, 8091 Zurich, Switzerland"
     )
