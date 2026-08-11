@@ -29,7 +29,7 @@
               "suggest": {
                 "type": "text",
                 "analyzer": "autocomplete",
-                "search_analyzer": "standard"
+                "search_analyzer": "search_autocomplete"
               },
               "raw": {
                 "type": "keyword",

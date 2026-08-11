@@ -170,7 +170,7 @@
               "props": {
                 "queryOptions": {
                   "type": "subdivisions",
-                  "field": "name.value",
+                  "field": "name.value.suggest",
                   "label": "label"
                 }
               }

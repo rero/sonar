@@ -1204,7 +1204,7 @@
                 "props": {
                   "queryOptions": {
                     "type": "collections",
-                    "field": "name.value",
+                    "field": "name.value.suggest",
                     "label": "label"
                   }
                 }
@@ -2169,7 +2169,7 @@
                   "queryOptions": {
                     "type": "projects",
                     "label": "name",
-                    "field": "metadata.name"
+                    "field": "metadata.name.suggest"
                   }
                 }
               }
@@ -2302,7 +2302,7 @@
                 "props": {
                   "queryOptions": {
                     "type": "subdivisions",
-                    "field": "name.value",
+                    "field": "name.value.suggest",
                     "label": "label"
                   }
                 }

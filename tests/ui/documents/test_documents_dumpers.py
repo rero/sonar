@@ -26,6 +26,7 @@ def test_document_indexer_dumper(document, pdf_file):
     assert "ips" in data["organisation"][0]
     assert "isOpenAccess" in data
     assert "identifiers" in data
+    assert {"field": "customField1", "value": "Test"} in data["suggestions"]
 
 
 def test_document_indexer_dumper_identifiers(document):
