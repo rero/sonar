@@ -12,6 +12,8 @@ Your institution approved your deposit "{{ deposit.metadata.title }}".
 ==================
 {% endif %}
 
-The deposit will be published shortly on SONAR application.
+The deposit has been published on SONAR application:
+
+{{ document_url }}
 
 Thank you for your submission!
