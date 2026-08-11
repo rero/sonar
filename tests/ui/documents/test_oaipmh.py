@@ -3,6 +3,10 @@
 
 """Test OAIPMH URLS."""
 
+from sonar.modules.documents.dumpers import IndexerDumper
+from sonar.modules.documents.oaipmh_utils import getrecord_fetcher
+from sonar.suggestions.dumpers import FIELD as SUGGESTIONS_FIELD
+
 
 def test_oaipmh_get(client, org_oaiset, document):
     """Test OAIPMH API."""
@@ -17,6 +21,12 @@ def test_oaipmh_get(client, org_oaiset, document):
     res = client.get("/oai2d?verb=GetRecord&metadataPrefix=oai_dc&identifier=oai:sonar.ch:1")
     assert res.status_code == 200
     assert "<setSpec>org</setSpec>" in res.text
+
+
+def test_oaipmh_getrecord_fetcher(app, document):
+    """Test that the fetched record drops the values denormalized for the index."""
+    assert SUGGESTIONS_FIELD in document.dumps(IndexerDumper())
+    assert SUGGESTIONS_FIELD not in getrecord_fetcher(document.id)
 
 
 def test_oaipmh_get_deleted_document(client, document):

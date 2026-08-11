@@ -3,10 +3,14 @@
   "settings": {
     "analysis": {
       "filter": {
-        "autocomplete_filter": {
+        "edge_ngram_filter": {
           "type": "edge_ngram",
           "min_gram": 1,
-          "max_gram": 20
+          "max_gram": 30
+        },
+        "truncate_filter": {
+          "type": "truncate",
+          "length": 30
         }
       },
       "tokenizer": {
@@ -51,7 +55,19 @@
           "tokenizer": "standard",
           "filter": [
             "lowercase",
-            "autocomplete_filter"
+            "icu_folding",
+            "german_normalization",
+            "edge_ngram_filter"
+          ]
+        },
+        "search_autocomplete": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "icu_folding",
+            "german_normalization",
+            "truncate_filter"
           ]
         }
       }

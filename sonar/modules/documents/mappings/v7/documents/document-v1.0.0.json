@@ -7,7 +7,8 @@
   "mappings": {
     "_source": {
       "excludes": [
-        "fulltext"
+        "fulltext",
+        "suggestions"
       ]
     },
     "date_detection": false,
@@ -15,6 +16,25 @@
     "properties": {
       "fulltext": {
         "type": "text"
+      },
+      "suggestions": {
+        "type": "nested",
+        "properties": {
+          "field": {
+            "type": "keyword"
+          },
+          "value": {
+            "type": "text",
+            "analyzer": "autocomplete",
+            "search_analyzer": "search_autocomplete",
+            "norms": false,
+            "fields": {
+              "raw": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
       },
       "$schema": {
         "type": "keyword"

@@ -171,6 +171,16 @@ CELERY_BROKER_HEARTBEAT = 0
 #: Bulk index request timeout
 INDEXER_BULK_REQUEST_TIMEOUT = 60
 
+# Suggestions
+# ===========
+#: Suggestions returned, ie. size of the terms aggregation.
+SONAR_APP_SUGGESTIONS_MAX_RESULTS = 20
+#: Values each shard returns before the merge. The indices have several shards
+#: and most values appear in a single record, so the default
+#: (`SONAR_APP_SUGGESTIONS_MAX_RESULTS * 1.5 + 10`) would leave out matching
+#: values.
+SONAR_APP_SUGGESTIONS_SHARD_SIZE = 200
+
 # Database
 # ========
 #: Database URI including user and password

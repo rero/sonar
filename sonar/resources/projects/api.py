@@ -16,11 +16,15 @@ from sonar.modules.users.api import UserRecord
 from sonar.modules.utils import get_pid_from_ref_or_data
 from sonar.modules.validation.extensions.validation import ValidationExtension
 from sonar.resources.api import Record as BaseRecord
+from sonar.suggestions.dumpers import SuggestionsDumperExt
 
 from . import models
 
 # Custom provider to set the PID type
 RecordIdProvider = type("RecordIdProvider", (BaseRecordIdProvider,), {"pid_type": "proj"})
+
+# Fields the editor autocompletes through `/api/suggestions/completion`.
+SUGGESTION_FIELDS = ["metadata.projectSponsor", "metadata.innerSearcher", "metadata.keywords"]
 
 
 class SearchDumperObjectsExt(SearchDumperExt):
@@ -73,7 +77,7 @@ class Record(BaseRecord):
     # PID type retrieved from provider
     pid_type = RecordIdProvider.pid_type
 
-    dumper = SearchDumper(extensions=[SearchDumperObjectsExt()])
+    dumper = SearchDumper(extensions=[SearchDumperObjectsExt(), SuggestionsDumperExt(SUGGESTION_FIELDS)])
 
     _extensions = [ValidationExtension()]
 

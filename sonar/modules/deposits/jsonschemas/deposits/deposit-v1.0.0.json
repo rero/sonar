@@ -800,7 +800,7 @@
                     "props": {
                       "queryOptions": {
                         "type": "collections",
-                        "field": "name.value",
+                        "field": "name.value.suggest",
                         "label": "label"
                       }
                     }
@@ -1303,7 +1303,7 @@
                     "props": {
                       "queryOptions": {
                         "type": "projects",
-                        "field": "metadata.name",
+                        "field": "metadata.name.suggest",
                         "label": "name"
                       }
                     }
@@ -1418,7 +1418,7 @@
                     "props": {
                       "queryOptions": {
                         "type": "subdivisions",
-                        "field": "name.value",
+                        "field": "name.value.suggest",
                         "label": "label"
                       }
                     }
