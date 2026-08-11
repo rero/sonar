@@ -111,9 +111,39 @@ def test_completion(client, project_hepvs_json, make_user, user_without_role):
     assert res.status_code == 200
     assert res.json == ["USI Research Project"]
 
-    # Users resource has no organisation filter — query by name prefix
-    current_search.flush_and_refresh(index="users")
-    login_user_via_session(client, email=user_hepvs["email"])
-    res = client.get(url_for("suggestions.completion", q="Hepvs", field="full_name", resource="users"))
+
+def test_completion_array_field(client, document_json, make_document, make_user, search_clear):
+    """Test completion suggestions on a field nested in an array."""
+    document_json["contribution"] = [
+        {
+            "agent": {"type": "bf:Person", "preferred_name": "Dupont, Jean"},
+            "role": ["cre"],
+        },
+        {
+            "agent": {"type": "bf:Person", "preferred_name": "Zimmermann, Ada"},
+            "role": ["cre"],
+        },
+    ]
+    make_document(organisation="org")
+    current_search.flush_and_refresh(index="documents")
+
+    user = make_user("admin", organisation="org")
+    login_user_via_session(client, email=user["email"])
+
+    field = "contribution.agent.preferred_name.suggest"
+
+    # A partial word is enough, the whole word is not required
+    for query in ["D", "Dup", "dupont", "Dupont, Jean"]:
+        res = client.get(url_for("suggestions.completion", q=query, field=field, resource="documents"))
+        assert res.status_code == 200
+        assert res.json == ["Dupont, Jean"]
+
+    # A matching record does not suggest the other values of its field
+    res = client.get(url_for("suggestions.completion", q="Zim", field=field, resource="documents"))
     assert res.status_code == 200
-    assert res.json == ["Hepvsadmin Doe"]
+    assert res.json == ["Zimmermann, Ada"]
+
+    # Unknown value
+    res = client.get(url_for("suggestions.completion", q="Nobody", field=field, resource="documents"))
+    assert res.status_code == 200
+    assert res.json == []

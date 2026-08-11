@@ -1204,7 +1204,7 @@
                 "props": {
                   "queryOptions": {
                     "type": "collections",
-                    "field": "name.value",
+                    "field": "name.value.suggest",
                     "label": "label"
                   }
                 }
@@ -1451,7 +1451,7 @@
                         "props": {
                             "queryOptions": {
                               "type": "documents",
-                              "field": "contribution.agent.preferred_name",
+                              "field": "contribution.agent.preferred_name.suggest",
                               "suggest": "/api/suggestions/completion",
                               "allowAdd": true
                             }
@@ -1616,7 +1616,7 @@
                         "props": {
                           "queryOptions": {
                             "type": "documents",
-                            "field": "contribution.agent.preferred_name",
+                            "field": "contribution.agent.preferred_name.suggest",
                             "suggest": "/api/suggestions/completion",
                             "allowAdd": true
                           }
@@ -1683,7 +1683,7 @@
                         "props": {
                           "queryOptions": {
                             "type": "documents",
-                            "field": "contribution.agent.preferred_name",
+                            "field": "contribution.agent.preferred_name.suggest",
                             "suggest": "/api/suggestions/completion",
                             "allowAdd": true
                           }
@@ -2168,7 +2168,7 @@
                   "queryOptions": {
                     "type": "projects",
                     "label": "name",
-                    "field": "metadata.name"
+                    "field": "metadata.name.suggest"
                   }
                 }
               }
@@ -2206,7 +2206,7 @@
             "props": {
               "queryOptions": {
                 "type": "documents",
-                "field": "customField1",
+                "field": "customField1.suggest",
                 "suggest": "/api/suggestions/completion",
                 "allowAdd": true
               }
@@ -2235,7 +2235,7 @@
             "props": {
               "queryOptions": {
                 "type": "documents",
-                "field": "customField2",
+                "field": "customField2.suggest",
                 "suggest": "/api/suggestions/completion",
                 "allowAdd": true
               }
@@ -2264,7 +2264,7 @@
             "props": {
               "queryOptions": {
                 "type": "documents",
-                "field": "customField3",
+                "field": "customField3.suggest",
                 "suggest": "/api/suggestions/completion",
                 "allowAdd": true
               }
@@ -2301,7 +2301,7 @@
                 "props": {
                   "queryOptions": {
                     "type": "subdivisions",
-                    "field": "name.value",
+                    "field": "name.value.suggest",
                     "label": "label"
                   }
                 }
