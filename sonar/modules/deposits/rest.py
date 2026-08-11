@@ -7,17 +7,39 @@ import re
 from datetime import datetime
 from io import BytesIO
 
-from flask import Blueprint, abort, current_app, jsonify, make_response, request
+from flask import Blueprint, abort, current_app, jsonify, make_response, request, url_for
 from flask_babel import _
 from invenio_db import db
 from invenio_rest import ContentNegotiatedMethodView
+from werkzeug.routing import BuildError
 
 from sonar.modules.deposits.api import DepositRecord
 from sonar.modules.pdf_extractor.pdf_extractor import PDFExtractor
 from sonar.modules.pdf_extractor.utils import format_extracted_data
 from sonar.modules.subdivisions.api import Record as SubdivisionRecord
 from sonar.modules.users.api import UserRecord
-from sonar.modules.utils import get_language_value, send_email
+from sonar.modules.utils import get_language_value, get_pid_from_ref_or_data, send_email
+
+
+def _get_published_document_url(deposit, deposit_user):
+    """Build the public URL of the document created from a deposit."""
+    document_pid = DepositRecord.get_pid_by_ref_link(deposit["document"]["$ref"])
+    view = current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION")
+
+    if organisation_data := deposit_user.get("organisation"):
+        view = get_pid_from_ref_or_data(organisation_data) or view
+
+    try:
+        return url_for(
+            "invenio_records_ui.doc",
+            view=view,
+            pid_value=document_pid,
+            _external=True,
+        )
+    except BuildError:
+        # The API application does not register UI endpoints, but serves under
+        # the same public host and uses the UI route configured for documents.
+        return f"{request.host_url.rstrip('/')}/{view}/documents/{document_pid}"
 
 
 class FilesResource(ContentNegotiatedMethodView):
@@ -206,18 +228,22 @@ def review(pid=None):
     # Load user who creates the deposit
     deposit_user = UserRecord.get_record_by_ref_link(deposit["user"]["$ref"])
 
+    email_context = {
+        "deposit": deposit,
+        "deposit_user": deposit_user,
+        "user": user,
+        "date": datetime.now().strftime("%d.%m.%Y %H:%M:%S"),
+        "comment": payload["comment"],
+        "link": current_app.config.get("SONAR_APP_ANGULAR_URL"),
+    }
+    if payload["action"] == DepositRecord.REVIEW_ACTION_APPROVE:
+        email_context["document_url"] = _get_published_document_url(deposit, deposit_user)
+
     send_email(
         [deposit_user["email"]],
         subject,
         f"deposits/email/{payload['action']}",
-        {
-            "deposit": deposit,
-            "deposit_user": deposit_user,
-            "user": user,
-            "date": datetime.now().strftime("%d.%m.%Y %H:%M:%S"),
-            "comment": payload["comment"],
-            "link": current_app.config.get("SONAR_APP_ANGULAR_URL"),
-        },
+        email_context,
         False,
     )
 
