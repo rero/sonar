@@ -17,22 +17,22 @@ def test_contribution_text():
     assert (
         views.contribution_text(
             {
-                "agent": {"type": "bf:Person", "preferred_name": "John Doe"},
+                "agent": {"type": "bf:Person", "preferred_name": "Doe, John"},
                 "role": ["cre"],
             }
         )
-        == "John Doe"
+        == "Doe, John"
     )
 
     # Contributor
     assert (
         views.contribution_text(
             {
-                "agent": {"type": "bf:Person", "preferred_name": "John Doe"},
+                "agent": {"type": "bf:Person", "preferred_name": "Doe, John"},
                 "role": ["ctb"],
             }
         )
-        == "John Doe (contribution_role_ctb)"
+        == "Doe, John (contribution_role_ctb)"
     )
 
     # Meeting with only number

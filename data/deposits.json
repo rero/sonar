@@ -36,13 +36,13 @@
     "diffusion": { "masked": "not_masked", "license": "CC BY-SA" },
     "contributors": [
       {
-        "name": "Jack Dyke",
+        "name": "Dyke, Jack",
         "role": "cre",
         "affiliation": "UNIL",
         "date_of_birth": "1985"
       },
       {
-        "name": "Robert Zenem",
+        "name": "Zenem, Robert",
         "role": "ctb",
         "affiliation": "HEP Valais",
         "date_of_birth": "1991"
@@ -86,7 +86,7 @@
       "documentType": "coar:c_18cp"
     },
     "diffusion": { "masked": "not_masked", "license": "License undefined" },
-    "contributors": [{ "name": "Marvin Straite", "role": "cre" }]
+    "contributors": [{ "name": "Straite, Marvin", "role": "cre" }]
   },
   {
     "step": "contributors",
@@ -120,7 +120,7 @@
       "oa_status": "green"
     },
     "contributors": [
-      { "name": "Bobby Kanotedit", "role": "cre", "affiliation": "UNIGE" }
+      { "name": "Kanotedit, Bobby", "role": "cre", "affiliation": "UNIGE" }
     ]
   }
 ]
