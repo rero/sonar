@@ -42,7 +42,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Noah Müller"
+          "preferred_name": "Müller, Noah"
         },
         "role": [
           "cre"
@@ -152,7 +152,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Oliver Zimmermann"
+          "preferred_name": "Zimmermann, Oliver"
         },
         "role": [
           "cre"
@@ -277,7 +277,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Elijah Bianchi"
+          "preferred_name": "Bianchi, Elijah"
         },
         "role": [
           "cre"
@@ -402,7 +402,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lucas Martinez"
+          "preferred_name": "Martinez, Lucas"
         },
         "role": [
           "cre"
@@ -527,7 +527,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mateo Gomez"
+          "preferred_name": "Gomez, Mateo"
         },
         "role": [
           "cre"
@@ -537,7 +537,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Diego Perez"
+          "preferred_name": "Perez, Diego"
         },
         "role": [
           "ctb"
@@ -647,7 +647,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Levi Davis"
+          "preferred_name": "Davis, Levi"
         },
         "role": [
           "cre"
@@ -772,7 +772,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ethan Li"
+          "preferred_name": "Li, Ethan"
         },
         "role": [
           "cre"
@@ -897,7 +897,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Alexander Zhou"
+          "preferred_name": "Zhou, Alexander"
         },
         "role": [
           "cre"
@@ -1007,7 +1007,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "James Hussein"
+          "preferred_name": "Hussein, James"
         },
         "role": [
           "cre"
@@ -1117,7 +1117,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Emma Oliveira"
+          "preferred_name": "Oliveira, Emma"
         },
         "role": [
           "cre"
@@ -1127,7 +1127,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Martina Ferreira"
+          "preferred_name": "Ferreira, Martina"
         },
         "role": [
           "ctb"
@@ -1237,7 +1237,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Olivia Martin"
+          "preferred_name": "Martin, Olivia"
         },
         "role": [
           "cre"
@@ -1356,7 +1356,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ava Lambert"
+          "preferred_name": "Lambert, Ava"
         },
         "role": [
           "cre"
@@ -1466,7 +1466,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sophia Weber"
+          "preferred_name": "Weber, Sophia"
         },
         "role": [
           "cre"
@@ -1576,7 +1576,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Amelia Russo"
+          "preferred_name": "Russo, Amelia"
         },
         "role": [
           "cre"
@@ -1701,7 +1701,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mia Greco"
+          "preferred_name": "Greco, Mia"
         },
         "role": [
           "cre"
@@ -1711,7 +1711,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Omar Marino"
+          "preferred_name": "Marino, Omar"
         },
         "role": [
           "ctb"
@@ -1821,7 +1821,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Charlotte Hernandez"
+          "preferred_name": "Hernandez, Charlotte"
         },
         "role": [
           "cre"
@@ -1946,7 +1946,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Isabella Williams"
+          "preferred_name": "Williams, Isabella"
         },
         "role": [
           "cre"
@@ -2071,7 +2071,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Evelyn Taylor"
+          "preferred_name": "Taylor, Evelyn"
         },
         "role": [
           "cre"
@@ -2181,7 +2181,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Harper Huang"
+          "preferred_name": "Huang, Harper"
         },
         "role": [
           "cre"
@@ -2306,7 +2306,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Louis Khan"
+          "preferred_name": "Khan, Louis"
         },
         "role": [
           "cre"
@@ -2316,7 +2316,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hassan Ali"
+          "preferred_name": "Ali, Hassan"
         },
         "role": [
           "ctb"
@@ -2426,7 +2426,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hugo Silva"
+          "preferred_name": "Silva, Hugo"
         },
         "role": [
           "cre"
@@ -2536,7 +2536,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Arthur Almeida"
+          "preferred_name": "Almeida, Arthur"
         },
         "role": [
           "cre"
@@ -2670,7 +2670,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jules Moreau"
+          "preferred_name": "Moreau, Jules"
         },
         "role": [
           "cre"
@@ -2780,7 +2780,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Chloé Meier"
+          "preferred_name": "Meier, Chloé"
         },
         "role": [
           "cre"
@@ -2890,7 +2890,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Camille Huber"
+          "preferred_name": "Huber, Camille"
         },
         "role": [
           "cre"
@@ -2900,7 +2900,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ming Zimmermann"
+          "preferred_name": "Zimmermann, Ming"
         },
         "role": [
           "ctb"
@@ -3010,7 +3010,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Léa Romano"
+          "preferred_name": "Romano, Léa"
         },
         "role": [
           "cre"
@@ -3120,7 +3120,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Manon Lopez"
+          "preferred_name": "Lopez, Manon"
         },
         "role": [
           "cre"
@@ -3230,7 +3230,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nora Diaz"
+          "preferred_name": "Diaz, Nora"
         },
         "role": [
           "cre"
@@ -3355,7 +3355,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Zoé Miller"
+          "preferred_name": "Miller, Zoé"
         },
         "role": [
           "cre"
@@ -3480,7 +3480,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Luca Liu"
+          "preferred_name": "Liu, Luca"
         },
         "role": [
           "cre"
@@ -3490,7 +3490,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jia Li"
+          "preferred_name": "Li, Jia"
         },
         "role": [
           "ctb"
@@ -3615,7 +3615,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Marco Ahmed"
+          "preferred_name": "Ahmed, Marco"
         },
         "role": [
           "cre"
@@ -3725,7 +3725,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Giulia Rahman"
+          "preferred_name": "Rahman, Giulia"
         },
         "role": [
           "cre"
@@ -3835,7 +3835,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sofia Pereira"
+          "preferred_name": "Pereira, Sofia"
         },
         "role": [
           "cre"
@@ -3954,7 +3954,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Alessia Bernard"
+          "preferred_name": "Bernard, Alessia"
         },
         "role": [
           "cre"
@@ -4064,7 +4064,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Matteo Bonnet"
+          "preferred_name": "Bonnet, Matteo"
         },
         "role": [
           "cre"
@@ -4074,7 +4074,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ingrid Lambert"
+          "preferred_name": "Lambert, Ingrid"
         },
         "role": [
           "ctb"
@@ -4184,7 +4184,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Chiara Fischer"
+          "preferred_name": "Fischer, Chiara"
         },
         "role": [
           "cre"
@@ -4294,7 +4294,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lorenzo Ferrari"
+          "preferred_name": "Ferrari, Lorenzo"
         },
         "role": [
           "cre"
@@ -4419,7 +4419,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Elena Conti"
+          "preferred_name": "Conti, Elena"
         },
         "role": [
           "cre"
@@ -4544,7 +4544,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Aurora Sanchez"
+          "preferred_name": "Sanchez, Aurora"
         },
         "role": [
           "cre"
@@ -4654,7 +4654,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jonas Brown"
+          "preferred_name": "Brown, Jonas"
         },
         "role": [
           "cre"
@@ -4664,7 +4664,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lars Williams"
+          "preferred_name": "Williams, Lars"
         },
         "role": [
           "ctb"
@@ -4789,7 +4789,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lukas Zhang"
+          "preferred_name": "Zhang, Lukas"
         },
         "role": [
           "cre"
@@ -4899,7 +4899,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nina Zhao"
+          "preferred_name": "Zhao, Nina"
         },
         "role": [
           "cre"
@@ -5009,7 +5009,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lea Mohamed"
+          "preferred_name": "Mohamed, Lea"
         },
         "role": [
           "cre"
@@ -5119,7 +5119,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Fabian Santos"
+          "preferred_name": "Santos, Fabian"
         },
         "role": [
           "cre"
@@ -5238,7 +5238,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Simon Carvalho"
+          "preferred_name": "Carvalho, Simon"
         },
         "role": [
           "cre"
@@ -5248,7 +5248,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Oliver Almeida"
+          "preferred_name": "Almeida, Oliver"
         },
         "role": [
           "ctb"
@@ -5358,7 +5358,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mia Girard"
+          "preferred_name": "Girard, Mia"
         },
         "role": [
           "cre"
@@ -5483,7 +5483,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ben Schmidt"
+          "preferred_name": "Schmidt, Ben"
         },
         "role": [
           "cre"
@@ -5608,7 +5608,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Finn Baumann"
+          "preferred_name": "Baumann, Finn"
         },
         "role": [
           "cre"
@@ -5718,7 +5718,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mila Galli"
+          "preferred_name": "Galli, Mila"
         },
         "role": [
           "cre"
@@ -5828,7 +5828,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ana Gonzalez"
+          "preferred_name": "Gonzalez, Ana"
         },
         "role": [
           "cre"
@@ -5838,7 +5838,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ethan Lopez"
+          "preferred_name": "Lopez, Ethan"
         },
         "role": [
           "ctb"
@@ -5963,7 +5963,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Carla Smith"
+          "preferred_name": "Smith, Carla"
         },
         "role": [
           "cre"
@@ -6073,7 +6073,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Diego Wilson"
+          "preferred_name": "Wilson, Diego"
         },
         "role": [
           "cre"
@@ -6198,7 +6198,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Pablo Chen"
+          "preferred_name": "Chen, Pablo"
         },
         "role": [
           "cre"
@@ -6323,7 +6323,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lucía Hassan"
+          "preferred_name": "Hassan, Lucía"
         },
         "role": [
           "cre"
@@ -6448,7 +6448,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Valeria Farouk"
+          "preferred_name": "Farouk, Valeria"
         },
         "role": [
           "cre"
@@ -6458,7 +6458,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ava Rahman"
+          "preferred_name": "Rahman, Ava"
         },
         "role": [
           "ctb"
@@ -6592,7 +6592,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Santiago Costa"
+          "preferred_name": "Costa, Santiago"
         },
         "role": [
           "cre"
@@ -6702,7 +6702,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Martina Dubois"
+          "preferred_name": "Dubois, Martina"
         },
         "role": [
           "cre"
@@ -6827,7 +6827,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sofía Franco"
+          "preferred_name": "Franco, Sofía"
         },
         "role": [
           "cre"
@@ -6937,7 +6937,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Daniel Wagner"
+          "preferred_name": "Wagner, Daniel"
         },
         "role": [
           "cre"
@@ -7062,7 +7062,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Fatima Esposito"
+          "preferred_name": "Esposito, Fatima"
         },
         "role": [
           "cre"
@@ -7072,7 +7072,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Isabella Ferrari"
+          "preferred_name": "Ferrari, Isabella"
         },
         "role": [
           "ctb"
@@ -7197,7 +7197,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Aisha Garcia"
+          "preferred_name": "Garcia, Aisha"
         },
         "role": [
           "cre"
@@ -7322,7 +7322,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Omar Perez"
+          "preferred_name": "Perez, Omar"
         },
         "role": [
           "cre"
@@ -7432,7 +7432,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Yusuf Jones"
+          "preferred_name": "Jones, Yusuf"
         },
         "role": [
           "cre"
@@ -7542,7 +7542,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Layla Wang"
+          "preferred_name": "Wang, Layla"
         },
         "role": [
           "cre"
@@ -7667,7 +7667,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Zara Wu"
+          "preferred_name": "Wu, Zara"
         },
         "role": [
           "cre"
@@ -7677,7 +7677,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Arthur Zhao"
+          "preferred_name": "Zhao, Arthur"
         },
         "role": [
           "ctb"
@@ -7787,7 +7787,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Karim Ibrahim"
+          "preferred_name": "Ibrahim, Karim"
         },
         "role": [
           "cre"
@@ -7906,7 +7906,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hassan Ferreira"
+          "preferred_name": "Ferreira, Hassan"
         },
         "role": [
           "cre"
@@ -8031,7 +8031,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mariam Sousa"
+          "preferred_name": "Sousa, Mariam"
         },
         "role": [
           "cre"
@@ -8141,7 +8141,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Noor Roux"
+          "preferred_name": "Roux, Noor"
         },
         "role": [
           "cre"
@@ -8251,7 +8251,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Wei Keller"
+          "preferred_name": "Keller, Wei"
         },
         "role": [
           "cre"
@@ -8261,7 +8261,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Manon Schmidt"
+          "preferred_name": "Schmidt, Manon"
         },
         "role": [
           "ctb"
@@ -8371,7 +8371,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Li Rossi"
+          "preferred_name": "Rossi, Li"
         },
         "role": [
           "cre"
@@ -8481,7 +8481,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ming Marino"
+          "preferred_name": "Marino, Ming"
         },
         "role": [
           "cre"
@@ -8591,7 +8591,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Xiao Rodriguez"
+          "preferred_name": "Rodriguez, Xiao"
         },
         "role": [
           "cre"
@@ -8716,7 +8716,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Yue Johnson"
+          "preferred_name": "Johnson, Yue"
         },
         "role": [
           "cre"
@@ -8841,7 +8841,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lan Moore"
+          "preferred_name": "Moore, Lan"
         },
         "role": [
           "cre"
@@ -8851,7 +8851,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Giulia Wilson"
+          "preferred_name": "Wilson, Giulia"
         },
         "role": [
           "ctb"
@@ -8976,7 +8976,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hao Yang"
+          "preferred_name": "Yang, Hao"
         },
         "role": [
           "cre"
@@ -9101,7 +9101,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jia Ali"
+          "preferred_name": "Ali, Jia"
         },
         "role": [
           "cre"
@@ -9235,7 +9235,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lei Saleh"
+          "preferred_name": "Saleh, Lei"
         },
         "role": [
           "cre"
@@ -9360,7 +9360,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Tao Rodrigues"
+          "preferred_name": "Rodrigues, Tao"
         },
         "role": [
           "cre"
@@ -9470,7 +9470,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sven Lefevre"
+          "preferred_name": "Lefevre, Sven"
         },
         "role": [
           "cre"
@@ -9480,7 +9480,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lorenzo Dubois"
+          "preferred_name": "Dubois, Lorenzo"
         },
         "role": [
           "ctb"
@@ -9590,7 +9590,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Erik Müller"
+          "preferred_name": "Müller, Erik"
         },
         "role": [
           "cre"
@@ -9700,7 +9700,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ingrid Zimmermann"
+          "preferred_name": "Zimmermann, Ingrid"
         },
         "role": [
           "cre"
@@ -9810,7 +9810,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Astrid Bianchi"
+          "preferred_name": "Bianchi, Astrid"
         },
         "role": [
           "cre"
@@ -9935,7 +9935,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ola Martinez"
+          "preferred_name": "Martinez, Ola"
         },
         "role": [
           "cre"
@@ -10045,7 +10045,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Kari Gomez"
+          "preferred_name": "Gomez, Kari"
         },
         "role": [
           "cre"
@@ -10055,7 +10055,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nina Perez"
+          "preferred_name": "Perez, Nina"
         },
         "role": [
           "ctb"
@@ -10180,7 +10180,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Maja Davis"
+          "preferred_name": "Davis, Maja"
         },
         "role": [
           "cre"
@@ -10305,7 +10305,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lars Li"
+          "preferred_name": "Li, Lars"
         },
         "role": [
           "cre"
@@ -10430,7 +10430,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nils Zhou"
+          "preferred_name": "Zhou, Nils"
         },
         "role": [
           "cre"
@@ -10549,7 +10549,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ida Hussein"
+          "preferred_name": "Hussein, Ida"
         },
         "role": [
           "cre"
@@ -10674,7 +10674,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Liam Oliveira"
+          "preferred_name": "Oliveira, Liam"
         },
         "role": [
           "cre"
@@ -10684,7 +10684,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ben Ferreira"
+          "preferred_name": "Ferreira, Ben"
         },
         "role": [
           "ctb"
@@ -10809,7 +10809,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Noah Martin"
+          "preferred_name": "Martin, Noah"
         },
         "role": [
           "cre"
@@ -10934,7 +10934,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Oliver Lambert"
+          "preferred_name": "Lambert, Oliver"
         },
         "role": [
           "cre"
@@ -11044,7 +11044,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Elijah Weber"
+          "preferred_name": "Weber, Elijah"
         },
         "role": [
           "cre"
@@ -11169,7 +11169,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lucas Russo"
+          "preferred_name": "Russo, Lucas"
         },
         "role": [
           "cre"
@@ -11279,7 +11279,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mateo Greco"
+          "preferred_name": "Greco, Mateo"
         },
         "role": [
           "cre"
@@ -11289,7 +11289,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Diego Marino"
+          "preferred_name": "Marino, Diego"
         },
         "role": [
           "ctb"
@@ -11414,7 +11414,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Levi Hernandez"
+          "preferred_name": "Hernandez, Levi"
         },
         "role": [
           "cre"
@@ -11539,7 +11539,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ethan Williams"
+          "preferred_name": "Williams, Ethan"
         },
         "role": [
           "cre"
@@ -11649,7 +11649,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Alexander Taylor"
+          "preferred_name": "Taylor, Alexander"
         },
         "role": [
           "cre"
@@ -11759,7 +11759,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "James Huang"
+          "preferred_name": "Huang, James"
         },
         "role": [
           "cre"
@@ -11878,7 +11878,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Emma Khan"
+          "preferred_name": "Khan, Emma"
         },
         "role": [
           "cre"
@@ -11888,7 +11888,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Martina Ali"
+          "preferred_name": "Ali, Martina"
         },
         "role": [
           "ctb"
@@ -12013,7 +12013,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Olivia Silva"
+          "preferred_name": "Silva, Olivia"
         },
         "role": [
           "cre"
@@ -12123,7 +12123,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ava Almeida"
+          "preferred_name": "Almeida, Ava"
         },
         "role": [
           "cre"
@@ -12248,7 +12248,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sophia Moreau"
+          "preferred_name": "Moreau, Sophia"
         },
         "role": [
           "cre"
@@ -12358,7 +12358,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Amelia Meier"
+          "preferred_name": "Meier, Amelia"
         },
         "role": [
           "cre"
@@ -12468,7 +12468,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mia Huber"
+          "preferred_name": "Huber, Mia"
         },
         "role": [
           "cre"
@@ -12478,7 +12478,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Omar Zimmermann"
+          "preferred_name": "Zimmermann, Omar"
         },
         "role": [
           "ctb"
@@ -12603,7 +12603,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Charlotte Romano"
+          "preferred_name": "Romano, Charlotte"
         },
         "role": [
           "cre"
@@ -12713,7 +12713,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Isabella Lopez"
+          "preferred_name": "Lopez, Isabella"
         },
         "role": [
           "cre"
@@ -12823,7 +12823,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Evelyn Diaz"
+          "preferred_name": "Diaz, Evelyn"
         },
         "role": [
           "cre"
@@ -12948,7 +12948,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Harper Miller"
+          "preferred_name": "Miller, Harper"
         },
         "role": [
           "cre"
@@ -13058,7 +13058,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Louis Liu"
+          "preferred_name": "Liu, Louis"
         },
         "role": [
           "cre"
@@ -13068,7 +13068,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hassan Li"
+          "preferred_name": "Li, Hassan"
         },
         "role": [
           "ctb"
@@ -13187,7 +13187,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hugo Ahmed"
+          "preferred_name": "Ahmed, Hugo"
         },
         "role": [
           "cre"
@@ -13312,7 +13312,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Arthur Rahman"
+          "preferred_name": "Rahman, Arthur"
         },
         "role": [
           "cre"
@@ -13437,7 +13437,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jules Pereira"
+          "preferred_name": "Pereira, Jules"
         },
         "role": [
           "cre"
@@ -13547,7 +13547,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Chloé Bernard"
+          "preferred_name": "Bernard, Chloé"
         },
         "role": [
           "cre"
@@ -13672,7 +13672,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Camille Bonnet"
+          "preferred_name": "Bonnet, Camille"
         },
         "role": [
           "cre"
@@ -13682,7 +13682,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ming Lambert"
+          "preferred_name": "Lambert, Ming"
         },
         "role": [
           "ctb"
@@ -13792,7 +13792,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Léa Fischer"
+          "preferred_name": "Fischer, Léa"
         },
         "role": [
           "cre"
@@ -13902,7 +13902,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Manon Ferrari"
+          "preferred_name": "Ferrari, Manon"
         },
         "role": [
           "cre"
@@ -14027,7 +14027,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nora Conti"
+          "preferred_name": "Conti, Nora"
         },
         "role": [
           "cre"
@@ -14137,7 +14137,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Zoé Sanchez"
+          "preferred_name": "Sanchez, Zoé"
         },
         "role": [
           "cre"
@@ -14247,7 +14247,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Luca Brown"
+          "preferred_name": "Brown, Luca"
         },
         "role": [
           "cre"
@@ -14257,7 +14257,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jia Williams"
+          "preferred_name": "Williams, Jia"
         },
         "role": [
           "ctb"
@@ -14367,7 +14367,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Marco Zhang"
+          "preferred_name": "Zhang, Marco"
         },
         "role": [
           "cre"
@@ -14486,7 +14486,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Giulia Zhao"
+          "preferred_name": "Zhao, Giulia"
         },
         "role": [
           "cre"
@@ -14596,7 +14596,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sofia Mohamed"
+          "preferred_name": "Mohamed, Sofia"
         },
         "role": [
           "cre"
@@ -14706,7 +14706,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Alessia Santos"
+          "preferred_name": "Santos, Alessia"
         },
         "role": [
           "cre"
@@ -14831,7 +14831,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Matteo Carvalho"
+          "preferred_name": "Carvalho, Matteo"
         },
         "role": [
           "cre"
@@ -14841,7 +14841,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ingrid Almeida"
+          "preferred_name": "Almeida, Ingrid"
         },
         "role": [
           "ctb"
@@ -14951,7 +14951,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Chiara Girard"
+          "preferred_name": "Girard, Chiara"
         },
         "role": [
           "cre"
@@ -15061,7 +15061,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lorenzo Schmidt"
+          "preferred_name": "Schmidt, Lorenzo"
         },
         "role": [
           "cre"
@@ -15171,7 +15171,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Elena Baumann"
+          "preferred_name": "Baumann, Elena"
         },
         "role": [
           "cre"
@@ -15281,7 +15281,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Aurora Galli"
+          "preferred_name": "Galli, Aurora"
         },
         "role": [
           "cre"
@@ -15406,7 +15406,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jonas Gonzalez"
+          "preferred_name": "Gonzalez, Jonas"
         },
         "role": [
           "cre"
@@ -15416,7 +15416,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lars Lopez"
+          "preferred_name": "Lopez, Lars"
         },
         "role": [
           "ctb"
@@ -15526,7 +15526,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lukas Smith"
+          "preferred_name": "Smith, Lukas"
         },
         "role": [
           "cre"
@@ -15636,7 +15636,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nina Wilson"
+          "preferred_name": "Wilson, Nina"
         },
         "role": [
           "cre"
@@ -15755,7 +15755,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lea Chen"
+          "preferred_name": "Chen, Lea"
         },
         "role": [
           "cre"
@@ -15865,7 +15865,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Fabian Hassan"
+          "preferred_name": "Hassan, Fabian"
         },
         "role": [
           "cre"
@@ -15975,7 +15975,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Simon Farouk"
+          "preferred_name": "Farouk, Simon"
         },
         "role": [
           "cre"
@@ -15985,7 +15985,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Oliver Rahman"
+          "preferred_name": "Rahman, Oliver"
         },
         "role": [
           "ctb"
@@ -16110,7 +16110,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mia Costa"
+          "preferred_name": "Costa, Mia"
         },
         "role": [
           "cre"
@@ -16220,7 +16220,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ben Dubois"
+          "preferred_name": "Dubois, Ben"
         },
         "role": [
           "cre"
@@ -16345,7 +16345,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Finn Franco"
+          "preferred_name": "Franco, Finn"
         },
         "role": [
           "cre"
@@ -16455,7 +16455,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mila Wagner"
+          "preferred_name": "Wagner, Mila"
         },
         "role": [
           "cre"
@@ -16565,7 +16565,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ana Esposito"
+          "preferred_name": "Esposito, Ana"
         },
         "role": [
           "cre"
@@ -16575,7 +16575,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ethan Ferrari"
+          "preferred_name": "Ferrari, Ethan"
         },
         "role": [
           "ctb"
@@ -16685,7 +16685,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Carla Garcia"
+          "preferred_name": "Garcia, Carla"
         },
         "role": [
           "cre"
@@ -16810,7 +16810,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Diego Perez"
+          "preferred_name": "Perez, Diego"
         },
         "role": [
           "cre"
@@ -16920,7 +16920,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Pablo Jones"
+          "preferred_name": "Jones, Pablo"
         },
         "role": [
           "cre"
@@ -17054,7 +17054,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lucía Wang"
+          "preferred_name": "Wang, Lucía"
         },
         "role": [
           "cre"
@@ -17164,7 +17164,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Valeria Wu"
+          "preferred_name": "Wu, Valeria"
         },
         "role": [
           "cre"
@@ -17174,7 +17174,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ava Zhao"
+          "preferred_name": "Zhao, Ava"
         },
         "role": [
           "ctb"
@@ -17284,7 +17284,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Santiago Ibrahim"
+          "preferred_name": "Ibrahim, Santiago"
         },
         "role": [
           "cre"
@@ -17394,7 +17394,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Martina Ferreira"
+          "preferred_name": "Ferreira, Martina"
         },
         "role": [
           "cre"
@@ -17504,7 +17504,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sofía Sousa"
+          "preferred_name": "Sousa, Sofía"
         },
         "role": [
           "cre"
@@ -17629,7 +17629,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Daniel Roux"
+          "preferred_name": "Roux, Daniel"
         },
         "role": [
           "cre"
@@ -17739,7 +17739,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Fatima Keller"
+          "preferred_name": "Keller, Fatima"
         },
         "role": [
           "cre"
@@ -17749,7 +17749,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Isabella Schmidt"
+          "preferred_name": "Schmidt, Isabella"
         },
         "role": [
           "ctb"
@@ -17874,7 +17874,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Aisha Rossi"
+          "preferred_name": "Rossi, Aisha"
         },
         "role": [
           "cre"
@@ -17999,7 +17999,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Omar Marino"
+          "preferred_name": "Marino, Omar"
         },
         "role": [
           "cre"
@@ -18124,7 +18124,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Yusuf Rodriguez"
+          "preferred_name": "Rodriguez, Yusuf"
         },
         "role": [
           "cre"
@@ -18234,7 +18234,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Layla Johnson"
+          "preferred_name": "Johnson, Layla"
         },
         "role": [
           "cre"
@@ -18368,7 +18368,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Zara Moore"
+          "preferred_name": "Moore, Zara"
         },
         "role": [
           "cre"
@@ -18378,7 +18378,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Arthur Wilson"
+          "preferred_name": "Wilson, Arthur"
         },
         "role": [
           "ctb"
@@ -18503,7 +18503,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Karim Yang"
+          "preferred_name": "Yang, Karim"
         },
         "role": [
           "cre"
@@ -18613,7 +18613,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hassan Ali"
+          "preferred_name": "Ali, Hassan"
         },
         "role": [
           "cre"
@@ -18723,7 +18723,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mariam Saleh"
+          "preferred_name": "Saleh, Mariam"
         },
         "role": [
           "cre"
@@ -18848,7 +18848,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Noor Rodrigues"
+          "preferred_name": "Rodrigues, Noor"
         },
         "role": [
           "cre"
@@ -18958,7 +18958,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Wei Lefevre"
+          "preferred_name": "Lefevre, Wei"
         },
         "role": [
           "cre"
@@ -18968,7 +18968,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Manon Dubois"
+          "preferred_name": "Dubois, Manon"
         },
         "role": [
           "ctb"
@@ -19078,7 +19078,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Li Müller"
+          "preferred_name": "Müller, Li"
         },
         "role": [
           "cre"
@@ -19203,7 +19203,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ming Zimmermann"
+          "preferred_name": "Zimmermann, Ming"
         },
         "role": [
           "cre"
@@ -19313,7 +19313,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Xiao Bianchi"
+          "preferred_name": "Bianchi, Xiao"
         },
         "role": [
           "cre"
@@ -19423,7 +19423,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Yue Martinez"
+          "preferred_name": "Martinez, Yue"
         },
         "role": [
           "cre"
@@ -19533,7 +19533,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lan Gomez"
+          "preferred_name": "Gomez, Lan"
         },
         "role": [
           "cre"
@@ -19543,7 +19543,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Giulia Perez"
+          "preferred_name": "Perez, Giulia"
         },
         "role": [
           "ctb"
@@ -19662,7 +19662,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hao Davis"
+          "preferred_name": "Davis, Hao"
         },
         "role": [
           "cre"
@@ -19772,7 +19772,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jia Li"
+          "preferred_name": "Li, Jia"
         },
         "role": [
           "cre"
@@ -19882,7 +19882,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lei Zhou"
+          "preferred_name": "Zhou, Lei"
         },
         "role": [
           "cre"
@@ -19992,7 +19992,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Tao Hussein"
+          "preferred_name": "Hussein, Tao"
         },
         "role": [
           "cre"
@@ -20102,7 +20102,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sven Oliveira"
+          "preferred_name": "Oliveira, Sven"
         },
         "role": [
           "cre"
@@ -20112,7 +20112,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lorenzo Ferreira"
+          "preferred_name": "Ferreira, Lorenzo"
         },
         "role": [
           "ctb"
@@ -20237,7 +20237,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Erik Martin"
+          "preferred_name": "Martin, Erik"
         },
         "role": [
           "cre"
@@ -20362,7 +20362,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ingrid Lambert"
+          "preferred_name": "Lambert, Ingrid"
         },
         "role": [
           "cre"
@@ -20487,7 +20487,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Astrid Weber"
+          "preferred_name": "Weber, Astrid"
         },
         "role": [
           "cre"
@@ -20612,7 +20612,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ola Russo"
+          "preferred_name": "Russo, Ola"
         },
         "role": [
           "cre"
@@ -20722,7 +20722,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Kari Greco"
+          "preferred_name": "Greco, Kari"
         },
         "role": [
           "cre"
@@ -20732,7 +20732,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nina Marino"
+          "preferred_name": "Marino, Nina"
         },
         "role": [
           "ctb"
@@ -20842,7 +20842,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Maja Hernandez"
+          "preferred_name": "Hernandez, Maja"
         },
         "role": [
           "cre"
@@ -20961,7 +20961,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lars Williams"
+          "preferred_name": "Williams, Lars"
         },
         "role": [
           "cre"
@@ -21086,7 +21086,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nils Taylor"
+          "preferred_name": "Taylor, Nils"
         },
         "role": [
           "cre"
@@ -21196,7 +21196,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ida Huang"
+          "preferred_name": "Huang, Ida"
         },
         "role": [
           "cre"
@@ -21306,7 +21306,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Liam Khan"
+          "preferred_name": "Khan, Liam"
         },
         "role": [
           "cre"
@@ -21316,7 +21316,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ben Ali"
+          "preferred_name": "Ali, Ben"
         },
         "role": [
           "ctb"
@@ -21426,7 +21426,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Noah Silva"
+          "preferred_name": "Silva, Noah"
         },
         "role": [
           "cre"
@@ -21551,7 +21551,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Oliver Almeida"
+          "preferred_name": "Almeida, Oliver"
         },
         "role": [
           "cre"
@@ -21661,7 +21661,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Elijah Moreau"
+          "preferred_name": "Moreau, Elijah"
         },
         "role": [
           "cre"
@@ -21771,7 +21771,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lucas Meier"
+          "preferred_name": "Meier, Lucas"
         },
         "role": [
           "cre"
@@ -21881,7 +21881,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mateo Huber"
+          "preferred_name": "Huber, Mateo"
         },
         "role": [
           "cre"
@@ -21891,7 +21891,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Diego Zimmermann"
+          "preferred_name": "Zimmermann, Diego"
         },
         "role": [
           "ctb"
@@ -22016,7 +22016,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Levi Romano"
+          "preferred_name": "Romano, Levi"
         },
         "role": [
           "cre"
@@ -22141,7 +22141,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ethan Lopez"
+          "preferred_name": "Lopez, Ethan"
         },
         "role": [
           "cre"
@@ -22260,7 +22260,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Alexander Diaz"
+          "preferred_name": "Diaz, Alexander"
         },
         "role": [
           "cre"
@@ -22385,7 +22385,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "James Miller"
+          "preferred_name": "Miller, James"
         },
         "role": [
           "cre"
@@ -22510,7 +22510,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Emma Liu"
+          "preferred_name": "Liu, Emma"
         },
         "role": [
           "cre"
@@ -22520,7 +22520,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Martina Li"
+          "preferred_name": "Li, Martina"
         },
         "role": [
           "ctb"
@@ -22630,7 +22630,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Olivia Ahmed"
+          "preferred_name": "Ahmed, Olivia"
         },
         "role": [
           "cre"
@@ -22740,7 +22740,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ava Rahman"
+          "preferred_name": "Rahman, Ava"
         },
         "role": [
           "cre"
@@ -22850,7 +22850,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sophia Pereira"
+          "preferred_name": "Pereira, Sophia"
         },
         "role": [
           "cre"
@@ -22960,7 +22960,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Amelia Bernard"
+          "preferred_name": "Bernard, Amelia"
         },
         "role": [
           "cre"
@@ -23070,7 +23070,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mia Bonnet"
+          "preferred_name": "Bonnet, Mia"
         },
         "role": [
           "cre"
@@ -23080,7 +23080,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Omar Lambert"
+          "preferred_name": "Lambert, Omar"
         },
         "role": [
           "ctb"
@@ -23205,7 +23205,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Charlotte Fischer"
+          "preferred_name": "Fischer, Charlotte"
         },
         "role": [
           "cre"
@@ -23330,7 +23330,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Isabella Ferrari"
+          "preferred_name": "Ferrari, Isabella"
         },
         "role": [
           "cre"
@@ -23455,7 +23455,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Evelyn Conti"
+          "preferred_name": "Conti, Evelyn"
         },
         "role": [
           "cre"
@@ -23574,7 +23574,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Harper Sanchez"
+          "preferred_name": "Sanchez, Harper"
         },
         "role": [
           "cre"
@@ -23684,7 +23684,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Louis Brown"
+          "preferred_name": "Brown, Louis"
         },
         "role": [
           "cre"
@@ -23694,7 +23694,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hassan Williams"
+          "preferred_name": "Williams, Hassan"
         },
         "role": [
           "ctb"
@@ -23819,7 +23819,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hugo Zhang"
+          "preferred_name": "Zhang, Hugo"
         },
         "role": [
           "cre"
@@ -23929,7 +23929,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Arthur Zhao"
+          "preferred_name": "Zhao, Arthur"
         },
         "role": [
           "cre"
@@ -24039,7 +24039,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jules Mohamed"
+          "preferred_name": "Mohamed, Jules"
         },
         "role": [
           "cre"
@@ -24149,7 +24149,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Chloé Santos"
+          "preferred_name": "Santos, Chloé"
         },
         "role": [
           "cre"
@@ -24259,7 +24259,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Camille Carvalho"
+          "preferred_name": "Carvalho, Camille"
         },
         "role": [
           "cre"
@@ -24269,7 +24269,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ming Almeida"
+          "preferred_name": "Almeida, Ming"
         },
         "role": [
           "ctb"
@@ -24379,7 +24379,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Léa Girard"
+          "preferred_name": "Girard, Léa"
         },
         "role": [
           "cre"
@@ -24489,7 +24489,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Manon Schmidt"
+          "preferred_name": "Schmidt, Manon"
         },
         "role": [
           "cre"
@@ -24614,7 +24614,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nora Baumann"
+          "preferred_name": "Baumann, Nora"
         },
         "role": [
           "cre"
@@ -24739,7 +24739,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Zoé Galli"
+          "preferred_name": "Galli, Zoé"
         },
         "role": [
           "cre"
@@ -24873,7 +24873,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Luca Gonzalez"
+          "preferred_name": "Gonzalez, Luca"
         },
         "role": [
           "cre"
@@ -24883,7 +24883,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jia Lopez"
+          "preferred_name": "Lopez, Jia"
         },
         "role": [
           "ctb"
@@ -24993,7 +24993,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Marco Smith"
+          "preferred_name": "Smith, Marco"
         },
         "role": [
           "cre"
@@ -25118,7 +25118,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Giulia Wilson"
+          "preferred_name": "Wilson, Giulia"
         },
         "role": [
           "cre"
@@ -25243,7 +25243,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sofia Chen"
+          "preferred_name": "Chen, Sofia"
         },
         "role": [
           "cre"
@@ -25353,7 +25353,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Alessia Hassan"
+          "preferred_name": "Hassan, Alessia"
         },
         "role": [
           "cre"
@@ -25478,7 +25478,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Matteo Farouk"
+          "preferred_name": "Farouk, Matteo"
         },
         "role": [
           "cre"
@@ -25488,7 +25488,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ingrid Rahman"
+          "preferred_name": "Rahman, Ingrid"
         },
         "role": [
           "ctb"
@@ -25598,7 +25598,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Chiara Costa"
+          "preferred_name": "Costa, Chiara"
         },
         "role": [
           "cre"
@@ -25708,7 +25708,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lorenzo Dubois"
+          "preferred_name": "Dubois, Lorenzo"
         },
         "role": [
           "cre"
@@ -25818,7 +25818,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Elena Franco"
+          "preferred_name": "Franco, Elena"
         },
         "role": [
           "cre"
@@ -25928,7 +25928,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Aurora Wagner"
+          "preferred_name": "Wagner, Aurora"
         },
         "role": [
           "cre"
@@ -26038,7 +26038,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jonas Esposito"
+          "preferred_name": "Esposito, Jonas"
         },
         "role": [
           "cre"
@@ -26048,7 +26048,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lars Ferrari"
+          "preferred_name": "Ferrari, Lars"
         },
         "role": [
           "ctb"
@@ -26167,7 +26167,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lukas Garcia"
+          "preferred_name": "Garcia, Lukas"
         },
         "role": [
           "cre"
@@ -26292,7 +26292,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nina Perez"
+          "preferred_name": "Perez, Nina"
         },
         "role": [
           "cre"
@@ -26402,7 +26402,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lea Jones"
+          "preferred_name": "Jones, Lea"
         },
         "role": [
           "cre"
@@ -26527,7 +26527,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Fabian Wang"
+          "preferred_name": "Wang, Fabian"
         },
         "role": [
           "cre"
@@ -26652,7 +26652,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Simon Wu"
+          "preferred_name": "Wu, Simon"
         },
         "role": [
           "cre"
@@ -26662,7 +26662,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Oliver Zhao"
+          "preferred_name": "Zhao, Oliver"
         },
         "role": [
           "ctb"
@@ -26787,7 +26787,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mia Ibrahim"
+          "preferred_name": "Ibrahim, Mia"
         },
         "role": [
           "cre"
@@ -26912,7 +26912,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ben Ferreira"
+          "preferred_name": "Ferreira, Ben"
         },
         "role": [
           "cre"
@@ -27022,7 +27022,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Finn Sousa"
+          "preferred_name": "Sousa, Finn"
         },
         "role": [
           "cre"
@@ -27147,7 +27147,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mila Roux"
+          "preferred_name": "Roux, Mila"
         },
         "role": [
           "cre"
@@ -27257,7 +27257,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ana Keller"
+          "preferred_name": "Keller, Ana"
         },
         "role": [
           "cre"
@@ -27267,7 +27267,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ethan Schmidt"
+          "preferred_name": "Schmidt, Ethan"
         },
         "role": [
           "ctb"
@@ -27377,7 +27377,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Carla Rossi"
+          "preferred_name": "Rossi, Carla"
         },
         "role": [
           "cre"
@@ -27496,7 +27496,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Diego Marino"
+          "preferred_name": "Marino, Diego"
         },
         "role": [
           "cre"
@@ -27606,7 +27606,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Pablo Rodriguez"
+          "preferred_name": "Rodriguez, Pablo"
         },
         "role": [
           "cre"
@@ -27731,7 +27731,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lucía Johnson"
+          "preferred_name": "Johnson, Lucía"
         },
         "role": [
           "cre"
@@ -27856,7 +27856,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Valeria Moore"
+          "preferred_name": "Moore, Valeria"
         },
         "role": [
           "cre"
@@ -27866,7 +27866,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ava Wilson"
+          "preferred_name": "Wilson, Ava"
         },
         "role": [
           "ctb"
@@ -27991,7 +27991,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Santiago Yang"
+          "preferred_name": "Yang, Santiago"
         },
         "role": [
           "cre"
@@ -28116,7 +28116,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Martina Ali"
+          "preferred_name": "Ali, Martina"
         },
         "role": [
           "cre"
@@ -28226,7 +28226,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sofía Saleh"
+          "preferred_name": "Saleh, Sofía"
         },
         "role": [
           "cre"
@@ -28351,7 +28351,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Daniel Rodrigues"
+          "preferred_name": "Rodrigues, Daniel"
         },
         "role": [
           "cre"
@@ -28461,7 +28461,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Fatima Lefevre"
+          "preferred_name": "Lefevre, Fatima"
         },
         "role": [
           "cre"
@@ -28471,7 +28471,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Isabella Dubois"
+          "preferred_name": "Dubois, Isabella"
         },
         "role": [
           "ctb"
@@ -28581,7 +28581,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Aisha Müller"
+          "preferred_name": "Müller, Aisha"
         },
         "role": [
           "cre"
@@ -28691,7 +28691,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Omar Zimmermann"
+          "preferred_name": "Zimmermann, Omar"
         },
         "role": [
           "cre"
@@ -28810,7 +28810,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Yusuf Bianchi"
+          "preferred_name": "Bianchi, Yusuf"
         },
         "role": [
           "cre"
@@ -28935,7 +28935,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Layla Martinez"
+          "preferred_name": "Martinez, Layla"
         },
         "role": [
           "cre"
@@ -29045,7 +29045,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Zara Gomez"
+          "preferred_name": "Gomez, Zara"
         },
         "role": [
           "cre"
@@ -29055,7 +29055,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Arthur Perez"
+          "preferred_name": "Perez, Arthur"
         },
         "role": [
           "ctb"
@@ -29165,7 +29165,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Karim Davis"
+          "preferred_name": "Davis, Karim"
         },
         "role": [
           "cre"
@@ -29275,7 +29275,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hassan Li"
+          "preferred_name": "Li, Hassan"
         },
         "role": [
           "cre"
@@ -29400,7 +29400,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mariam Zhou"
+          "preferred_name": "Zhou, Mariam"
         },
         "role": [
           "cre"
@@ -29525,7 +29525,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Noor Hussein"
+          "preferred_name": "Hussein, Noor"
         },
         "role": [
           "cre"
@@ -29635,7 +29635,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Wei Oliveira"
+          "preferred_name": "Oliveira, Wei"
         },
         "role": [
           "cre"
@@ -29645,7 +29645,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Manon Ferreira"
+          "preferred_name": "Ferreira, Manon"
         },
         "role": [
           "ctb"
@@ -29755,7 +29755,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Li Martin"
+          "preferred_name": "Martin, Li"
         },
         "role": [
           "cre"
@@ -29880,7 +29880,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ming Lambert"
+          "preferred_name": "Lambert, Ming"
         },
         "role": [
           "cre"
@@ -29990,7 +29990,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Xiao Weber"
+          "preferred_name": "Weber, Xiao"
         },
         "role": [
           "cre"
@@ -30109,7 +30109,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Yue Russo"
+          "preferred_name": "Russo, Yue"
         },
         "role": [
           "cre"
@@ -30219,7 +30219,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lan Greco"
+          "preferred_name": "Greco, Lan"
         },
         "role": [
           "cre"
@@ -30229,7 +30229,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Giulia Marino"
+          "preferred_name": "Marino, Giulia"
         },
         "role": [
           "ctb"
@@ -30339,7 +30339,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hao Hernandez"
+          "preferred_name": "Hernandez, Hao"
         },
         "role": [
           "cre"
@@ -30449,7 +30449,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jia Williams"
+          "preferred_name": "Williams, Jia"
         },
         "role": [
           "cre"
@@ -30574,7 +30574,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lei Taylor"
+          "preferred_name": "Taylor, Lei"
         },
         "role": [
           "cre"
@@ -30699,7 +30699,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Tao Huang"
+          "preferred_name": "Huang, Tao"
         },
         "role": [
           "cre"
@@ -30824,7 +30824,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sven Khan"
+          "preferred_name": "Khan, Sven"
         },
         "role": [
           "cre"
@@ -30834,7 +30834,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lorenzo Ali"
+          "preferred_name": "Ali, Lorenzo"
         },
         "role": [
           "ctb"
@@ -30944,7 +30944,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Erik Silva"
+          "preferred_name": "Silva, Erik"
         },
         "role": [
           "cre"
@@ -31069,7 +31069,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ingrid Almeida"
+          "preferred_name": "Almeida, Ingrid"
         },
         "role": [
           "cre"
@@ -31194,7 +31194,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Astrid Moreau"
+          "preferred_name": "Moreau, Astrid"
         },
         "role": [
           "cre"
@@ -31319,7 +31319,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ola Meier"
+          "preferred_name": "Meier, Ola"
         },
         "role": [
           "cre"
@@ -31438,7 +31438,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Kari Huber"
+          "preferred_name": "Huber, Kari"
         },
         "role": [
           "cre"
@@ -31448,7 +31448,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nina Zimmermann"
+          "preferred_name": "Zimmermann, Nina"
         },
         "role": [
           "ctb"
@@ -31558,7 +31558,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Maja Romano"
+          "preferred_name": "Romano, Maja"
         },
         "role": [
           "cre"
@@ -31668,7 +31668,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lars Lopez"
+          "preferred_name": "Lopez, Lars"
         },
         "role": [
           "cre"
@@ -31793,7 +31793,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nils Diaz"
+          "preferred_name": "Diaz, Nils"
         },
         "role": [
           "cre"
@@ -31918,7 +31918,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ida Miller"
+          "preferred_name": "Miller, Ida"
         },
         "role": [
           "cre"
@@ -32028,7 +32028,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Liam Liu"
+          "preferred_name": "Liu, Liam"
         },
         "role": [
           "cre"
@@ -32038,7 +32038,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ben Li"
+          "preferred_name": "Li, Ben"
         },
         "role": [
           "ctb"
@@ -32163,7 +32163,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Noah Ahmed"
+          "preferred_name": "Ahmed, Noah"
         },
         "role": [
           "cre"
@@ -32273,7 +32273,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Oliver Rahman"
+          "preferred_name": "Rahman, Oliver"
         },
         "role": [
           "cre"
@@ -32398,7 +32398,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Elijah Pereira"
+          "preferred_name": "Pereira, Elijah"
         },
         "role": [
           "cre"
@@ -32508,7 +32508,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lucas Bernard"
+          "preferred_name": "Bernard, Lucas"
         },
         "role": [
           "cre"
@@ -32618,7 +32618,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mateo Bonnet"
+          "preferred_name": "Bonnet, Mateo"
         },
         "role": [
           "cre"
@@ -32628,7 +32628,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Diego Lambert"
+          "preferred_name": "Lambert, Diego"
         },
         "role": [
           "ctb"
@@ -32747,7 +32747,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Levi Fischer"
+          "preferred_name": "Fischer, Levi"
         },
         "role": [
           "cre"
@@ -32872,7 +32872,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ethan Ferrari"
+          "preferred_name": "Ferrari, Ethan"
         },
         "role": [
           "cre"
@@ -32982,7 +32982,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Alexander Conti"
+          "preferred_name": "Conti, Alexander"
         },
         "role": [
           "cre"
@@ -33092,7 +33092,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "James Sanchez"
+          "preferred_name": "Sanchez, James"
         },
         "role": [
           "cre"
@@ -33202,7 +33202,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Emma Brown"
+          "preferred_name": "Brown, Emma"
         },
         "role": [
           "cre"
@@ -33212,7 +33212,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Martina Williams"
+          "preferred_name": "Williams, Martina"
         },
         "role": [
           "ctb"
@@ -33322,7 +33322,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Olivia Zhang"
+          "preferred_name": "Zhang, Olivia"
         },
         "role": [
           "cre"
@@ -33447,7 +33447,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ava Zhao"
+          "preferred_name": "Zhao, Ava"
         },
         "role": [
           "cre"
@@ -33572,7 +33572,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sophia Mohamed"
+          "preferred_name": "Mohamed, Sophia"
         },
         "role": [
           "cre"
@@ -33697,7 +33697,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Amelia Santos"
+          "preferred_name": "Santos, Amelia"
         },
         "role": [
           "cre"
@@ -33822,7 +33822,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mia Carvalho"
+          "preferred_name": "Carvalho, Mia"
         },
         "role": [
           "cre"
@@ -33832,7 +33832,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Omar Almeida"
+          "preferred_name": "Almeida, Omar"
         },
         "role": [
           "ctb"
@@ -33957,7 +33957,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Charlotte Girard"
+          "preferred_name": "Girard, Charlotte"
         },
         "role": [
           "cre"
@@ -34091,7 +34091,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Isabella Schmidt"
+          "preferred_name": "Schmidt, Isabella"
         },
         "role": [
           "cre"
@@ -34201,7 +34201,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Evelyn Baumann"
+          "preferred_name": "Baumann, Evelyn"
         },
         "role": [
           "cre"
@@ -34311,7 +34311,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Harper Galli"
+          "preferred_name": "Galli, Harper"
         },
         "role": [
           "cre"
@@ -34421,7 +34421,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Louis Gonzalez"
+          "preferred_name": "Gonzalez, Louis"
         },
         "role": [
           "cre"
@@ -34431,7 +34431,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hassan Lopez"
+          "preferred_name": "Lopez, Hassan"
         },
         "role": [
           "ctb"
@@ -34556,7 +34556,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hugo Smith"
+          "preferred_name": "Smith, Hugo"
         },
         "role": [
           "cre"
@@ -34681,7 +34681,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Arthur Wilson"
+          "preferred_name": "Wilson, Arthur"
         },
         "role": [
           "cre"
@@ -34791,7 +34791,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jules Chen"
+          "preferred_name": "Chen, Jules"
         },
         "role": [
           "cre"
@@ -34916,7 +34916,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Chloé Hassan"
+          "preferred_name": "Hassan, Chloé"
         },
         "role": [
           "cre"
@@ -35041,7 +35041,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Camille Farouk"
+          "preferred_name": "Farouk, Camille"
         },
         "role": [
           "cre"
@@ -35051,7 +35051,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ming Rahman"
+          "preferred_name": "Rahman, Ming"
         },
         "role": [
           "ctb"
@@ -35161,7 +35161,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Léa Costa"
+          "preferred_name": "Costa, Léa"
         },
         "role": [
           "cre"
@@ -35286,7 +35286,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Manon Dubois"
+          "preferred_name": "Dubois, Manon"
         },
         "role": [
           "cre"
@@ -35420,7 +35420,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nora Franco"
+          "preferred_name": "Franco, Nora"
         },
         "role": [
           "cre"
@@ -35545,7 +35545,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Zoé Wagner"
+          "preferred_name": "Wagner, Zoé"
         },
         "role": [
           "cre"
@@ -35655,7 +35655,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Luca Esposito"
+          "preferred_name": "Esposito, Luca"
         },
         "role": [
           "cre"
@@ -35665,7 +35665,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jia Ferrari"
+          "preferred_name": "Ferrari, Jia"
         },
         "role": [
           "ctb"
@@ -35790,7 +35790,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Marco Garcia"
+          "preferred_name": "Garcia, Marco"
         },
         "role": [
           "cre"
@@ -35900,7 +35900,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Giulia Perez"
+          "preferred_name": "Perez, Giulia"
         },
         "role": [
           "cre"
@@ -36010,7 +36010,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sofia Jones"
+          "preferred_name": "Jones, Sofia"
         },
         "role": [
           "cre"
@@ -36120,7 +36120,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Alessia Wang"
+          "preferred_name": "Wang, Alessia"
         },
         "role": [
           "cre"
@@ -36230,7 +36230,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Matteo Wu"
+          "preferred_name": "Wu, Matteo"
         },
         "role": [
           "cre"
@@ -36240,7 +36240,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ingrid Zhao"
+          "preferred_name": "Zhao, Ingrid"
         },
         "role": [
           "ctb"
@@ -36365,7 +36365,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Chiara Ibrahim"
+          "preferred_name": "Ibrahim, Chiara"
         },
         "role": [
           "cre"
@@ -36475,7 +36475,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lorenzo Ferreira"
+          "preferred_name": "Ferreira, Lorenzo"
         },
         "role": [
           "cre"
@@ -36600,7 +36600,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Elena Sousa"
+          "preferred_name": "Sousa, Elena"
         },
         "role": [
           "cre"
@@ -36734,7 +36734,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Aurora Roux"
+          "preferred_name": "Roux, Aurora"
         },
         "role": [
           "cre"
@@ -36844,7 +36844,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jonas Keller"
+          "preferred_name": "Keller, Jonas"
         },
         "role": [
           "cre"
@@ -36854,7 +36854,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lars Schmidt"
+          "preferred_name": "Schmidt, Lars"
         },
         "role": [
           "ctb"
@@ -36964,7 +36964,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lukas Rossi"
+          "preferred_name": "Rossi, Lukas"
         },
         "role": [
           "cre"
@@ -37089,7 +37089,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nina Marino"
+          "preferred_name": "Marino, Nina"
         },
         "role": [
           "cre"
@@ -37199,7 +37199,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lea Rodriguez"
+          "preferred_name": "Rodriguez, Lea"
         },
         "role": [
           "cre"
@@ -37309,7 +37309,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Fabian Johnson"
+          "preferred_name": "Johnson, Fabian"
         },
         "role": [
           "cre"
@@ -37434,7 +37434,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Simon Moore"
+          "preferred_name": "Moore, Simon"
         },
         "role": [
           "cre"
@@ -37444,7 +37444,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Oliver Wilson"
+          "preferred_name": "Wilson, Oliver"
         },
         "role": [
           "ctb"
@@ -37554,7 +37554,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mia Yang"
+          "preferred_name": "Yang, Mia"
         },
         "role": [
           "cre"
@@ -37679,7 +37679,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ben Ali"
+          "preferred_name": "Ali, Ben"
         },
         "role": [
           "cre"
@@ -37789,7 +37789,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Finn Saleh"
+          "preferred_name": "Saleh, Finn"
         },
         "role": [
           "cre"
@@ -37899,7 +37899,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mila Rodrigues"
+          "preferred_name": "Rodrigues, Mila"
         },
         "role": [
           "cre"
@@ -38018,7 +38018,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ana Lefevre"
+          "preferred_name": "Lefevre, Ana"
         },
         "role": [
           "cre"
@@ -38028,7 +38028,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ethan Dubois"
+          "preferred_name": "Dubois, Ethan"
         },
         "role": [
           "ctb"
@@ -38153,7 +38153,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Carla Müller"
+          "preferred_name": "Müller, Carla"
         },
         "role": [
           "cre"
@@ -38278,7 +38278,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Diego Zimmermann"
+          "preferred_name": "Zimmermann, Diego"
         },
         "role": [
           "cre"
@@ -38388,7 +38388,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Pablo Bianchi"
+          "preferred_name": "Bianchi, Pablo"
         },
         "role": [
           "cre"
@@ -38513,7 +38513,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lucía Martinez"
+          "preferred_name": "Martinez, Lucía"
         },
         "role": [
           "cre"
@@ -38638,7 +38638,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Valeria Gomez"
+          "preferred_name": "Gomez, Valeria"
         },
         "role": [
           "cre"
@@ -38648,7 +38648,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ava Perez"
+          "preferred_name": "Perez, Ava"
         },
         "role": [
           "ctb"
@@ -38758,7 +38758,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Santiago Davis"
+          "preferred_name": "Davis, Santiago"
         },
         "role": [
           "cre"
@@ -38883,7 +38883,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Martina Li"
+          "preferred_name": "Li, Martina"
         },
         "role": [
           "cre"
@@ -38993,7 +38993,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sofía Zhou"
+          "preferred_name": "Zhou, Sofía"
         },
         "role": [
           "cre"
@@ -39103,7 +39103,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Daniel Hussein"
+          "preferred_name": "Hussein, Daniel"
         },
         "role": [
           "cre"
@@ -39228,7 +39228,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Fatima Oliveira"
+          "preferred_name": "Oliveira, Fatima"
         },
         "role": [
           "cre"
@@ -39238,7 +39238,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Isabella Ferreira"
+          "preferred_name": "Ferreira, Isabella"
         },
         "role": [
           "ctb"
@@ -39357,7 +39357,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Aisha Martin"
+          "preferred_name": "Martin, Aisha"
         },
         "role": [
           "cre"
@@ -39467,7 +39467,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Omar Lambert"
+          "preferred_name": "Lambert, Omar"
         },
         "role": [
           "cre"
@@ -39577,7 +39577,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Yusuf Weber"
+          "preferred_name": "Weber, Yusuf"
         },
         "role": [
           "cre"
@@ -39687,7 +39687,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Layla Russo"
+          "preferred_name": "Russo, Layla"
         },
         "role": [
           "cre"
@@ -39812,7 +39812,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Zara Greco"
+          "preferred_name": "Greco, Zara"
         },
         "role": [
           "cre"
@@ -39822,7 +39822,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Arthur Marino"
+          "preferred_name": "Marino, Arthur"
         },
         "role": [
           "ctb"
@@ -39932,7 +39932,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Karim Hernandez"
+          "preferred_name": "Hernandez, Karim"
         },
         "role": [
           "cre"
@@ -40057,7 +40057,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hassan Williams"
+          "preferred_name": "Williams, Hassan"
         },
         "role": [
           "cre"
@@ -40182,7 +40182,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mariam Taylor"
+          "preferred_name": "Taylor, Mariam"
         },
         "role": [
           "cre"
@@ -40292,7 +40292,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Noor Huang"
+          "preferred_name": "Huang, Noor"
         },
         "role": [
           "cre"
@@ -40417,7 +40417,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Wei Khan"
+          "preferred_name": "Khan, Wei"
         },
         "role": [
           "cre"
@@ -40427,7 +40427,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Manon Ali"
+          "preferred_name": "Ali, Manon"
         },
         "role": [
           "ctb"
@@ -40537,7 +40537,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Li Silva"
+          "preferred_name": "Silva, Li"
         },
         "role": [
           "cre"
@@ -40671,7 +40671,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ming Almeida"
+          "preferred_name": "Almeida, Ming"
         },
         "role": [
           "cre"
@@ -40781,7 +40781,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Xiao Moreau"
+          "preferred_name": "Moreau, Xiao"
         },
         "role": [
           "cre"
@@ -40906,7 +40906,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Yue Meier"
+          "preferred_name": "Meier, Yue"
         },
         "role": [
           "cre"
@@ -41016,7 +41016,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lan Huber"
+          "preferred_name": "Huber, Lan"
         },
         "role": [
           "cre"
@@ -41026,7 +41026,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Giulia Zimmermann"
+          "preferred_name": "Zimmermann, Giulia"
         },
         "role": [
           "ctb"
@@ -41136,7 +41136,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hao Romano"
+          "preferred_name": "Romano, Hao"
         },
         "role": [
           "cre"
@@ -41261,7 +41261,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jia Lopez"
+          "preferred_name": "Lopez, Jia"
         },
         "role": [
           "cre"
@@ -41371,7 +41371,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lei Diaz"
+          "preferred_name": "Diaz, Lei"
         },
         "role": [
           "cre"
@@ -41496,7 +41496,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Tao Miller"
+          "preferred_name": "Miller, Tao"
         },
         "role": [
           "cre"
@@ -41606,7 +41606,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sven Liu"
+          "preferred_name": "Liu, Sven"
         },
         "role": [
           "cre"
@@ -41616,7 +41616,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lorenzo Li"
+          "preferred_name": "Li, Lorenzo"
         },
         "role": [
           "ctb"
@@ -41741,7 +41741,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Erik Ahmed"
+          "preferred_name": "Ahmed, Erik"
         },
         "role": [
           "cre"
@@ -41851,7 +41851,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ingrid Rahman"
+          "preferred_name": "Rahman, Ingrid"
         },
         "role": [
           "cre"
@@ -41985,7 +41985,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Astrid Pereira"
+          "preferred_name": "Pereira, Astrid"
         },
         "role": [
           "cre"
@@ -42095,7 +42095,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ola Bernard"
+          "preferred_name": "Bernard, Ola"
         },
         "role": [
           "cre"
@@ -42205,7 +42205,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Kari Bonnet"
+          "preferred_name": "Bonnet, Kari"
         },
         "role": [
           "cre"
@@ -42215,7 +42215,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nina Lambert"
+          "preferred_name": "Lambert, Nina"
         },
         "role": [
           "ctb"
@@ -42325,7 +42325,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Maja Fischer"
+          "preferred_name": "Fischer, Maja"
         },
         "role": [
           "cre"
@@ -42435,7 +42435,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lars Ferrari"
+          "preferred_name": "Ferrari, Lars"
         },
         "role": [
           "cre"
@@ -42545,7 +42545,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nils Conti"
+          "preferred_name": "Conti, Nils"
         },
         "role": [
           "cre"
@@ -42670,7 +42670,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ida Sanchez"
+          "preferred_name": "Sanchez, Ida"
         },
         "role": [
           "cre"
@@ -42780,7 +42780,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Liam Brown"
+          "preferred_name": "Brown, Liam"
         },
         "role": [
           "cre"
@@ -42790,7 +42790,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ben Williams"
+          "preferred_name": "Williams, Ben"
         },
         "role": [
           "ctb"
@@ -42900,7 +42900,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Noah Zhang"
+          "preferred_name": "Zhang, Noah"
         },
         "role": [
           "cre"
@@ -43010,7 +43010,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Oliver Zhao"
+          "preferred_name": "Zhao, Oliver"
         },
         "role": [
           "cre"
@@ -43120,7 +43120,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Elijah Mohamed"
+          "preferred_name": "Mohamed, Elijah"
         },
         "role": [
           "cre"
@@ -43254,7 +43254,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lucas Santos"
+          "preferred_name": "Santos, Lucas"
         },
         "role": [
           "cre"
@@ -43379,7 +43379,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mateo Carvalho"
+          "preferred_name": "Carvalho, Mateo"
         },
         "role": [
           "cre"
@@ -43389,7 +43389,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Diego Almeida"
+          "preferred_name": "Almeida, Diego"
         },
         "role": [
           "ctb"
@@ -43499,7 +43499,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Levi Girard"
+          "preferred_name": "Girard, Levi"
         },
         "role": [
           "cre"
@@ -43624,7 +43624,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ethan Schmidt"
+          "preferred_name": "Schmidt, Ethan"
         },
         "role": [
           "cre"
@@ -43749,7 +43749,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Alexander Baumann"
+          "preferred_name": "Baumann, Alexander"
         },
         "role": [
           "cre"
@@ -43859,7 +43859,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "James Galli"
+          "preferred_name": "Galli, James"
         },
         "role": [
           "cre"
@@ -43984,7 +43984,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Emma Gonzalez"
+          "preferred_name": "Gonzalez, Emma"
         },
         "role": [
           "cre"
@@ -43994,7 +43994,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Martina Lopez"
+          "preferred_name": "Lopez, Martina"
         },
         "role": [
           "ctb"
@@ -44119,7 +44119,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Olivia Smith"
+          "preferred_name": "Smith, Olivia"
         },
         "role": [
           "cre"
@@ -44244,7 +44244,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ava Wilson"
+          "preferred_name": "Wilson, Ava"
         },
         "role": [
           "cre"
@@ -44369,7 +44369,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sophia Chen"
+          "preferred_name": "Chen, Sophia"
         },
         "role": [
           "cre"
@@ -44494,7 +44494,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Amelia Hassan"
+          "preferred_name": "Hassan, Amelia"
         },
         "role": [
           "cre"
@@ -44628,7 +44628,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mia Farouk"
+          "preferred_name": "Farouk, Mia"
         },
         "role": [
           "cre"
@@ -44638,7 +44638,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Omar Rahman"
+          "preferred_name": "Rahman, Omar"
         },
         "role": [
           "ctb"
@@ -44763,7 +44763,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Charlotte Costa"
+          "preferred_name": "Costa, Charlotte"
         },
         "role": [
           "cre"
@@ -44873,7 +44873,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Isabella Dubois"
+          "preferred_name": "Dubois, Isabella"
         },
         "role": [
           "cre"
@@ -44998,7 +44998,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Evelyn Franco"
+          "preferred_name": "Franco, Evelyn"
         },
         "role": [
           "cre"
@@ -45108,7 +45108,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Harper Wagner"
+          "preferred_name": "Wagner, Harper"
         },
         "role": [
           "cre"
@@ -45233,7 +45233,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Louis Esposito"
+          "preferred_name": "Esposito, Louis"
         },
         "role": [
           "cre"
@@ -45243,7 +45243,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hassan Ferrari"
+          "preferred_name": "Ferrari, Hassan"
         },
         "role": [
           "ctb"
@@ -45353,7 +45353,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hugo Garcia"
+          "preferred_name": "Garcia, Hugo"
         },
         "role": [
           "cre"
@@ -45478,7 +45478,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Arthur Perez"
+          "preferred_name": "Perez, Arthur"
         },
         "role": [
           "cre"
@@ -45603,7 +45603,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jules Jones"
+          "preferred_name": "Jones, Jules"
         },
         "role": [
           "cre"
@@ -45728,7 +45728,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Chloé Wang"
+          "preferred_name": "Wang, Chloé"
         },
         "role": [
           "cre"
@@ -45853,7 +45853,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Camille Wu"
+          "preferred_name": "Wu, Camille"
         },
         "role": [
           "cre"
@@ -45863,7 +45863,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ming Zhao"
+          "preferred_name": "Zhao, Ming"
         },
         "role": [
           "ctb"
@@ -45997,7 +45997,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Léa Ibrahim"
+          "preferred_name": "Ibrahim, Léa"
         },
         "role": [
           "cre"
@@ -46107,7 +46107,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Manon Ferreira"
+          "preferred_name": "Ferreira, Manon"
         },
         "role": [
           "cre"
@@ -46217,7 +46217,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nora Sousa"
+          "preferred_name": "Sousa, Nora"
         },
         "role": [
           "cre"
@@ -46342,7 +46342,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Zoé Roux"
+          "preferred_name": "Roux, Zoé"
         },
         "role": [
           "cre"
@@ -46467,7 +46467,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Luca Keller"
+          "preferred_name": "Keller, Luca"
         },
         "role": [
           "cre"
@@ -46477,7 +46477,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jia Schmidt"
+          "preferred_name": "Schmidt, Jia"
         },
         "role": [
           "ctb"
@@ -46587,7 +46587,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Marco Rossi"
+          "preferred_name": "Rossi, Marco"
         },
         "role": [
           "cre"
@@ -46697,7 +46697,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Giulia Marino"
+          "preferred_name": "Marino, Giulia"
         },
         "role": [
           "cre"
@@ -46822,7 +46822,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sofia Rodriguez"
+          "preferred_name": "Rodriguez, Sofia"
         },
         "role": [
           "cre"
@@ -46947,7 +46947,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Alessia Johnson"
+          "preferred_name": "Johnson, Alessia"
         },
         "role": [
           "cre"
@@ -47072,7 +47072,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Matteo Moore"
+          "preferred_name": "Moore, Matteo"
         },
         "role": [
           "cre"
@@ -47082,7 +47082,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ingrid Wilson"
+          "preferred_name": "Wilson, Ingrid"
         },
         "role": [
           "ctb"
@@ -47207,7 +47207,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Chiara Yang"
+          "preferred_name": "Yang, Chiara"
         },
         "role": [
           "cre"
@@ -47326,7 +47326,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lorenzo Ali"
+          "preferred_name": "Ali, Lorenzo"
         },
         "role": [
           "cre"
@@ -47436,7 +47436,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Elena Saleh"
+          "preferred_name": "Saleh, Elena"
         },
         "role": [
           "cre"
@@ -47561,7 +47561,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Aurora Rodrigues"
+          "preferred_name": "Rodrigues, Aurora"
         },
         "role": [
           "cre"
@@ -47686,7 +47686,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jonas Lefevre"
+          "preferred_name": "Lefevre, Jonas"
         },
         "role": [
           "cre"
@@ -47696,7 +47696,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lars Dubois"
+          "preferred_name": "Dubois, Lars"
         },
         "role": [
           "ctb"
@@ -47821,7 +47821,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lukas Müller"
+          "preferred_name": "Müller, Lukas"
         },
         "role": [
           "cre"
@@ -47931,7 +47931,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nina Zimmermann"
+          "preferred_name": "Zimmermann, Nina"
         },
         "role": [
           "cre"
@@ -48041,7 +48041,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lea Bianchi"
+          "preferred_name": "Bianchi, Lea"
         },
         "role": [
           "cre"
@@ -48166,7 +48166,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Fabian Martinez"
+          "preferred_name": "Martinez, Fabian"
         },
         "role": [
           "cre"
@@ -48291,7 +48291,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Simon Gomez"
+          "preferred_name": "Gomez, Simon"
         },
         "role": [
           "cre"
@@ -48301,7 +48301,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Oliver Perez"
+          "preferred_name": "Perez, Oliver"
         },
         "role": [
           "ctb"
@@ -48426,7 +48426,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mia Davis"
+          "preferred_name": "Davis, Mia"
         },
         "role": [
           "cre"
@@ -48536,7 +48536,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ben Li"
+          "preferred_name": "Li, Ben"
         },
         "role": [
           "cre"
@@ -48655,7 +48655,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Finn Zhou"
+          "preferred_name": "Zhou, Finn"
         },
         "role": [
           "cre"
@@ -48765,7 +48765,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mila Hussein"
+          "preferred_name": "Hussein, Mila"
         },
         "role": [
           "cre"
@@ -48890,7 +48890,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ana Oliveira"
+          "preferred_name": "Oliveira, Ana"
         },
         "role": [
           "cre"
@@ -48900,7 +48900,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ethan Ferreira"
+          "preferred_name": "Ferreira, Ethan"
         },
         "role": [
           "ctb"
@@ -49010,7 +49010,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Carla Martin"
+          "preferred_name": "Martin, Carla"
         },
         "role": [
           "cre"
@@ -49120,7 +49120,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Diego Lambert"
+          "preferred_name": "Lambert, Diego"
         },
         "role": [
           "cre"
@@ -49230,7 +49230,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Pablo Weber"
+          "preferred_name": "Weber, Pablo"
         },
         "role": [
           "cre"
@@ -49340,7 +49340,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lucía Russo"
+          "preferred_name": "Russo, Lucía"
         },
         "role": [
           "cre"
@@ -49465,7 +49465,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Valeria Greco"
+          "preferred_name": "Greco, Valeria"
         },
         "role": [
           "cre"
@@ -49475,7 +49475,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ava Marino"
+          "preferred_name": "Marino, Ava"
         },
         "role": [
           "ctb"
@@ -49585,7 +49585,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Santiago Hernandez"
+          "preferred_name": "Hernandez, Santiago"
         },
         "role": [
           "cre"
@@ -49695,7 +49695,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Martina Williams"
+          "preferred_name": "Williams, Martina"
         },
         "role": [
           "cre"
@@ -49820,7 +49820,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sofía Taylor"
+          "preferred_name": "Taylor, Sofía"
         },
         "role": [
           "cre"
@@ -49954,7 +49954,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Daniel Huang"
+          "preferred_name": "Huang, Daniel"
         },
         "role": [
           "cre"
@@ -50064,7 +50064,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Fatima Khan"
+          "preferred_name": "Khan, Fatima"
         },
         "role": [
           "cre"
@@ -50074,7 +50074,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Isabella Ali"
+          "preferred_name": "Ali, Isabella"
         },
         "role": [
           "ctb"
@@ -50199,7 +50199,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Aisha Silva"
+          "preferred_name": "Silva, Aisha"
         },
         "role": [
           "cre"
@@ -50324,7 +50324,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Omar Almeida"
+          "preferred_name": "Almeida, Omar"
         },
         "role": [
           "cre"
@@ -50449,7 +50449,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Yusuf Moreau"
+          "preferred_name": "Moreau, Yusuf"
         },
         "role": [
           "cre"
@@ -50559,7 +50559,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Layla Meier"
+          "preferred_name": "Meier, Layla"
         },
         "role": [
           "cre"
@@ -50669,7 +50669,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Zara Huber"
+          "preferred_name": "Huber, Zara"
         },
         "role": [
           "cre"
@@ -50679,7 +50679,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Arthur Zimmermann"
+          "preferred_name": "Zimmermann, Arthur"
         },
         "role": [
           "ctb"
@@ -50804,7 +50804,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Karim Romano"
+          "preferred_name": "Romano, Karim"
         },
         "role": [
           "cre"
@@ -50914,7 +50914,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hassan Lopez"
+          "preferred_name": "Lopez, Hassan"
         },
         "role": [
           "cre"
@@ -51024,7 +51024,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mariam Diaz"
+          "preferred_name": "Diaz, Mariam"
         },
         "role": [
           "cre"
@@ -51149,7 +51149,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Noor Miller"
+          "preferred_name": "Miller, Noor"
         },
         "role": [
           "cre"
@@ -51268,7 +51268,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Wei Liu"
+          "preferred_name": "Liu, Wei"
         },
         "role": [
           "cre"
@@ -51278,7 +51278,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Manon Li"
+          "preferred_name": "Li, Manon"
         },
         "role": [
           "ctb"
@@ -51403,7 +51403,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Li Ahmed"
+          "preferred_name": "Ahmed, Li"
         },
         "role": [
           "cre"
@@ -51528,7 +51528,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ming Rahman"
+          "preferred_name": "Rahman, Ming"
         },
         "role": [
           "cre"
@@ -51638,7 +51638,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Xiao Pereira"
+          "preferred_name": "Pereira, Xiao"
         },
         "role": [
           "cre"
@@ -51763,7 +51763,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Yue Bernard"
+          "preferred_name": "Bernard, Yue"
         },
         "role": [
           "cre"
@@ -51873,7 +51873,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lan Bonnet"
+          "preferred_name": "Bonnet, Lan"
         },
         "role": [
           "cre"
@@ -51883,7 +51883,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Giulia Lambert"
+          "preferred_name": "Lambert, Giulia"
         },
         "role": [
           "ctb"
@@ -51993,7 +51993,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hao Fischer"
+          "preferred_name": "Fischer, Hao"
         },
         "role": [
           "cre"
@@ -52103,7 +52103,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jia Ferrari"
+          "preferred_name": "Ferrari, Jia"
         },
         "role": [
           "cre"
@@ -52213,7 +52213,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lei Conti"
+          "preferred_name": "Conti, Lei"
         },
         "role": [
           "cre"
@@ -52323,7 +52323,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Tao Sanchez"
+          "preferred_name": "Sanchez, Tao"
         },
         "role": [
           "cre"
@@ -52448,7 +52448,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sven Brown"
+          "preferred_name": "Brown, Sven"
         },
         "role": [
           "cre"
@@ -52458,7 +52458,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lorenzo Williams"
+          "preferred_name": "Williams, Lorenzo"
         },
         "role": [
           "ctb"
@@ -52577,7 +52577,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Erik Zhang"
+          "preferred_name": "Zhang, Erik"
         },
         "role": [
           "cre"
@@ -52687,7 +52687,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ingrid Zhao"
+          "preferred_name": "Zhao, Ingrid"
         },
         "role": [
           "cre"
@@ -52797,7 +52797,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Astrid Mohamed"
+          "preferred_name": "Mohamed, Astrid"
         },
         "role": [
           "cre"
@@ -52907,7 +52907,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ola Santos"
+          "preferred_name": "Santos, Ola"
         },
         "role": [
           "cre"
@@ -53032,7 +53032,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Kari Carvalho"
+          "preferred_name": "Carvalho, Kari"
         },
         "role": [
           "cre"
@@ -53042,7 +53042,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nina Almeida"
+          "preferred_name": "Almeida, Nina"
         },
         "role": [
           "ctb"
@@ -53167,7 +53167,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Maja Girard"
+          "preferred_name": "Girard, Maja"
         },
         "role": [
           "cre"
@@ -53277,7 +53277,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lars Schmidt"
+          "preferred_name": "Schmidt, Lars"
         },
         "role": [
           "cre"
@@ -53402,7 +53402,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nils Baumann"
+          "preferred_name": "Baumann, Nils"
         },
         "role": [
           "cre"
@@ -53512,7 +53512,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ida Galli"
+          "preferred_name": "Galli, Ida"
         },
         "role": [
           "cre"
@@ -53622,7 +53622,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Liam Gonzalez"
+          "preferred_name": "Gonzalez, Liam"
         },
         "role": [
           "cre"
@@ -53632,7 +53632,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ben Lopez"
+          "preferred_name": "Lopez, Ben"
         },
         "role": [
           "ctb"
@@ -53742,7 +53742,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Noah Smith"
+          "preferred_name": "Smith, Noah"
         },
         "role": [
           "cre"
@@ -53861,7 +53861,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Oliver Wilson"
+          "preferred_name": "Wilson, Oliver"
         },
         "role": [
           "cre"
@@ -53986,7 +53986,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Elijah Chen"
+          "preferred_name": "Chen, Elijah"
         },
         "role": [
           "cre"
@@ -54111,7 +54111,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lucas Hassan"
+          "preferred_name": "Hassan, Lucas"
         },
         "role": [
           "cre"
@@ -54221,7 +54221,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mateo Farouk"
+          "preferred_name": "Farouk, Mateo"
         },
         "role": [
           "cre"
@@ -54231,7 +54231,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Diego Rahman"
+          "preferred_name": "Rahman, Diego"
         },
         "role": [
           "ctb"
@@ -54341,7 +54341,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Levi Costa"
+          "preferred_name": "Costa, Levi"
         },
         "role": [
           "cre"
@@ -54451,7 +54451,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ethan Dubois"
+          "preferred_name": "Dubois, Ethan"
         },
         "role": [
           "cre"
@@ -54576,7 +54576,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Alexander Franco"
+          "preferred_name": "Franco, Alexander"
         },
         "role": [
           "cre"
@@ -54686,7 +54686,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "James Wagner"
+          "preferred_name": "Wagner, James"
         },
         "role": [
           "cre"
@@ -54796,7 +54796,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Emma Esposito"
+          "preferred_name": "Esposito, Emma"
         },
         "role": [
           "cre"
@@ -54806,7 +54806,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Martina Ferrari"
+          "preferred_name": "Ferrari, Martina"
         },
         "role": [
           "ctb"
@@ -54916,7 +54916,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Olivia Garcia"
+          "preferred_name": "Garcia, Olivia"
         },
         "role": [
           "cre"
@@ -55041,7 +55041,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ava Perez"
+          "preferred_name": "Perez, Ava"
         },
         "role": [
           "cre"
@@ -55160,7 +55160,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sophia Jones"
+          "preferred_name": "Jones, Sophia"
         },
         "role": [
           "cre"
@@ -55285,7 +55285,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Amelia Wang"
+          "preferred_name": "Wang, Amelia"
         },
         "role": [
           "cre"
@@ -55395,7 +55395,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mia Wu"
+          "preferred_name": "Wu, Mia"
         },
         "role": [
           "cre"
@@ -55405,7 +55405,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Omar Zhao"
+          "preferred_name": "Zhao, Omar"
         },
         "role": [
           "ctb"
@@ -55515,7 +55515,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Charlotte Ibrahim"
+          "preferred_name": "Ibrahim, Charlotte"
         },
         "role": [
           "cre"
@@ -55640,7 +55640,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Isabella Ferreira"
+          "preferred_name": "Ferreira, Isabella"
         },
         "role": [
           "cre"
@@ -55750,7 +55750,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Evelyn Sousa"
+          "preferred_name": "Sousa, Evelyn"
         },
         "role": [
           "cre"
@@ -55860,7 +55860,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Harper Roux"
+          "preferred_name": "Roux, Harper"
         },
         "role": [
           "cre"
@@ -55985,7 +55985,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Louis Keller"
+          "preferred_name": "Keller, Louis"
         },
         "role": [
           "cre"
@@ -55995,7 +55995,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hassan Schmidt"
+          "preferred_name": "Schmidt, Hassan"
         },
         "role": [
           "ctb"
@@ -56105,7 +56105,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Hugo Rossi"
+          "preferred_name": "Rossi, Hugo"
         },
         "role": [
           "cre"
@@ -56215,7 +56215,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Arthur Marino"
+          "preferred_name": "Marino, Arthur"
         },
         "role": [
           "cre"
@@ -56325,7 +56325,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jules Rodriguez"
+          "preferred_name": "Rodriguez, Jules"
         },
         "role": [
           "cre"
@@ -56444,7 +56444,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Chloé Johnson"
+          "preferred_name": "Johnson, Chloé"
         },
         "role": [
           "cre"
@@ -56554,7 +56554,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Camille Moore"
+          "preferred_name": "Moore, Camille"
         },
         "role": [
           "cre"
@@ -56564,7 +56564,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ming Wilson"
+          "preferred_name": "Wilson, Ming"
         },
         "role": [
           "ctb"
@@ -56689,7 +56689,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Léa Yang"
+          "preferred_name": "Yang, Léa"
         },
         "role": [
           "cre"
@@ -56799,7 +56799,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Manon Ali"
+          "preferred_name": "Ali, Manon"
         },
         "role": [
           "cre"
@@ -56909,7 +56909,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nora Saleh"
+          "preferred_name": "Saleh, Nora"
         },
         "role": [
           "cre"
@@ -57034,7 +57034,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Zoé Rodrigues"
+          "preferred_name": "Rodrigues, Zoé"
         },
         "role": [
           "cre"
@@ -57159,7 +57159,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Luca Lefevre"
+          "preferred_name": "Lefevre, Luca"
         },
         "role": [
           "cre"
@@ -57169,7 +57169,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jia Dubois"
+          "preferred_name": "Dubois, Jia"
         },
         "role": [
           "ctb"
@@ -57294,7 +57294,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Marco Müller"
+          "preferred_name": "Müller, Marco"
         },
         "role": [
           "cre"
@@ -57404,7 +57404,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Giulia Zimmermann"
+          "preferred_name": "Zimmermann, Giulia"
         },
         "role": [
           "cre"
@@ -57529,7 +57529,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sofia Bianchi"
+          "preferred_name": "Bianchi, Sofia"
         },
         "role": [
           "cre"
@@ -57639,7 +57639,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Alessia Martinez"
+          "preferred_name": "Martinez, Alessia"
         },
         "role": [
           "cre"
@@ -57773,7 +57773,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Matteo Gomez"
+          "preferred_name": "Gomez, Matteo"
         },
         "role": [
           "cre"
@@ -57783,7 +57783,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ingrid Perez"
+          "preferred_name": "Perez, Ingrid"
         },
         "role": [
           "ctb"
@@ -57908,7 +57908,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Chiara Davis"
+          "preferred_name": "Davis, Chiara"
         },
         "role": [
           "cre"
@@ -58033,7 +58033,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lorenzo Li"
+          "preferred_name": "Li, Lorenzo"
         },
         "role": [
           "cre"
@@ -58143,7 +58143,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Elena Zhou"
+          "preferred_name": "Zhou, Elena"
         },
         "role": [
           "cre"
@@ -58253,7 +58253,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Aurora Hussein"
+          "preferred_name": "Hussein, Aurora"
         },
         "role": [
           "cre"
@@ -58378,7 +58378,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jonas Oliveira"
+          "preferred_name": "Oliveira, Jonas"
         },
         "role": [
           "cre"
@@ -58388,7 +58388,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lars Ferreira"
+          "preferred_name": "Ferreira, Lars"
         },
         "role": [
           "ctb"
@@ -58513,7 +58513,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lukas Martin"
+          "preferred_name": "Martin, Lukas"
         },
         "role": [
           "cre"
@@ -58623,7 +58623,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Nina Lambert"
+          "preferred_name": "Lambert, Nina"
         },
         "role": [
           "cre"
@@ -58733,7 +58733,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lea Weber"
+          "preferred_name": "Weber, Lea"
         },
         "role": [
           "cre"
@@ -58858,7 +58858,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Fabian Russo"
+          "preferred_name": "Russo, Fabian"
         },
         "role": [
           "cre"
@@ -58968,7 +58968,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Simon Greco"
+          "preferred_name": "Greco, Simon"
         },
         "role": [
           "cre"
@@ -58978,7 +58978,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Oliver Marino"
+          "preferred_name": "Marino, Oliver"
         },
         "role": [
           "ctb"
@@ -59097,7 +59097,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mia Hernandez"
+          "preferred_name": "Hernandez, Mia"
         },
         "role": [
           "cre"
@@ -59222,7 +59222,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ben Williams"
+          "preferred_name": "Williams, Ben"
         },
         "role": [
           "cre"
@@ -59332,7 +59332,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Finn Taylor"
+          "preferred_name": "Taylor, Finn"
         },
         "role": [
           "cre"
@@ -59442,7 +59442,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Mila Huang"
+          "preferred_name": "Huang, Mila"
         },
         "role": [
           "cre"
@@ -59552,7 +59552,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ana Khan"
+          "preferred_name": "Khan, Ana"
         },
         "role": [
           "cre"
@@ -59562,7 +59562,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Ethan Ali"
+          "preferred_name": "Ali, Ethan"
         },
         "role": [
           "ctb"
@@ -59672,7 +59672,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Marie Dupont"
+          "preferred_name": "Dupont, Marie"
         },
         "role": [
           "cre"
@@ -59682,7 +59682,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Pierre Favre"
+          "preferred_name": "Favre, Pierre"
         },
         "role": [
           "cre"
@@ -59794,7 +59794,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Anne Cretton"
+          "preferred_name": "Cretton, Anne"
         },
         "role": [
           "cre"
@@ -59921,7 +59921,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Sophie Roh"
+          "preferred_name": "Roh, Sophie"
         },
         "role": [
           "cre"
@@ -59931,7 +59931,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Lucas Zufferey"
+          "preferred_name": "Zufferey, Lucas"
         },
         "role": [
           "cre"
@@ -60043,7 +60043,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Jean Carron"
+          "preferred_name": "Carron, Jean"
         },
         "role": [
           "cre"
@@ -60170,7 +60170,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Pierre Favre"
+          "preferred_name": "Favre, Pierre"
         },
         "role": [
           "cre"
@@ -60180,7 +60180,7 @@
       {
         "agent": {
           "type": "bf:Person",
-          "preferred_name": "Marie Dupont"
+          "preferred_name": "Dupont, Marie"
         },
         "role": [
           "cre"

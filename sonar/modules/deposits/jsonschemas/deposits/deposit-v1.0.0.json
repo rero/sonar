@@ -1186,13 +1186,13 @@
         "properties": {
           "name": {
             "title": "Name",
-            "description": "Last name, first name, ex: Doe, John",
             "type": "string",
             "minLength": 1,
             "widget": {
               "formlyConfig": {
                 "type": "remoteAutoComplete",
                 "props": {
+                    "placeholder": "Example: Muller, Hans",
                     "queryOptions": {
                       "type": "documents",
                       "field": "contribution.agent.preferred_name",
