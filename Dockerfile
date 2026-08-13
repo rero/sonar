@@ -16,9 +16,9 @@ RUN chown -R invenio:invenio ${WORKING_DIR}
 
 USER 1000
 
-# Run bootstrap
+ENV LANG=C.UTF-8
 ENV TERM=xterm-256color
-# to avoid lxml conflict
+# avoid lxml conflict
 ENV UWSGI_PROFILE_OVERRIDE="xml=no"
 ARG UI_TGZ=""
 ENV INVENIO_COLLECT_STORAGE='flask_collect.storage.file'
