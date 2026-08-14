@@ -142,69 +142,11 @@
   {%- endblock page_body %}
 
   {% include 'sonar/footer.html' %}
+  {# Outside of the javascript block, as templates overriding it would drop the menus behaviour. #}
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   {%- endblock body_inner %}
 
-  {%- block javascript %}
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Toggle display
-      const toggleDisplay = document.getElementsByClassName('toggle-display');
-      Array.prototype.forEach.call(toggleDisplay, function (el, i) {
-        el.addEventListener('click', function (event) {
-          const targetElement = document.getElementById(el.dataset.target);
-          if (targetElement) {
-            if (targetElement.className.search('d-none') !== -1) {
-              targetElement.classList.remove('d-none')
-            } else {
-              targetElement.classList.add('d-none')
-            }
-          }
-          event.preventDefault();
-        });
-      });
-
-      document.addEventListener('click', function (event) {
-        let link = event.target;
-
-        const dropdowns = document.getElementsByClassName('dropdown-menu show');
-
-        // If the clicked element doesn't have the right selector, bail
-        if (!link.matches('.dropdown-toggle') && !link.matches('.navbar-toggler')) {
-          link = link.parentNode
-
-          // This can maybe be a span inside link
-          if (!link.matches('.dropdown-toggle') && !link.matches('.navbar-toggler')) {
-            Array.prototype.forEach.call(dropdowns, function (el, i) {
-              el.classList.remove('show');
-            });
-            return;
-          }
-        };
-
-        // Don't follow the link
-        event.preventDefault();
-
-        // Dropdown corresponding to link
-        const dropdown = link.nextElementSibling;
-
-        // Hide all dropdowns
-        Array.prototype.forEach.call(dropdowns, function (el, i) {
-          if (el.isEqualNode(dropdown) === false) {
-            el.classList.remove('show');
-          }
-        });
-
-        // Already shown
-        if (dropdown.className.search('show') !== -1) {
-          dropdown.classList.remove('show')
-        } else {
-          dropdown.classList.add('show')
-        }
-      }, false);
-    });
-  </script>
-
-  {%- endblock javascript %}
+  {%- block javascript %}{%- endblock javascript %}
   {%- endblock outer_body %}
 </body>
 

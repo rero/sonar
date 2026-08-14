@@ -1,43 +1,40 @@
 // SPDX-FileCopyrightText: Fondation RERO+
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-document.addEventListener("DOMContentLoaded", function () {
-  document.addEventListener('click', function (event) {
-    let link = event.target;
+// Minimal replacement for the bootstrap dropdown and collapse plugins, which are
+// only loaded on the few pages needing jQuery.
 
-    const dropdowns = document.getElementsByClassName('dropdown-menu show');
+// Reflect the visibility of a menu on the toggle controlling it.
+function setExpanded(toggle, expanded) {
+  if (toggle && toggle.dataset.toggle) {
+    toggle.setAttribute("aria-expanded", expanded);
+  }
+}
 
-    // If the clicked element doesn't have the right selector, bail
-    if (!link.matches('.dropdown-toggle')) {
-      link = link.parentNode
+document.addEventListener("click", function (event) {
+  // Some pages load the bootstrap plugins, which then handle the menus themselves.
+  if (window.jQuery && window.jQuery.fn.collapse) {
+    return;
+  }
 
-      // This can maybe be a span inside link
-      if (!link.matches('.dropdown-toggle')) {
-        Array.prototype.forEach.call(dropdowns, function (el, i) {
-          el.classList.remove('show');
-        });
-        return;
-      }
-    };
+  const toggle = event.target.closest('[data-toggle="dropdown"], [data-toggle="collapse"]');
 
-    // Don't follow the link
-    event.preventDefault();
+  // The controlled element is either referenced by `data-target` or placed right after the toggle.
+  const target =
+    toggle && (toggle.dataset.target ? document.querySelector(toggle.dataset.target) : toggle.nextElementSibling);
 
-    // Dropdown corresponding to link
-    const dropdown = link.nextElementSibling;
-
-    // Hide all dropdowns
-    Array.prototype.forEach.call(dropdowns, function (el, i) {
-      if (el.isEqualNode(dropdown) === false) {
-        el.classList.remove('show');
-      }
-    });
-
-    // Already shown
-    if (dropdown.className.search('show') !== -1) {
-      dropdown.classList.remove('show')
-    } else {
-      dropdown.classList.add('show')
+  // Any click outside of an open dropdown closes it.
+  document.querySelectorAll(".dropdown-menu.show").forEach(function (menu) {
+    if (menu !== target) {
+      menu.classList.remove("show");
+      setExpanded(menu.previousElementSibling, false);
     }
-  }, false);
+  });
+
+  if (!target) {
+    return;
+  }
+
+  event.preventDefault();
+  setExpanded(toggle, target.classList.toggle("show"));
 });

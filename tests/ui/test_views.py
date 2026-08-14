@@ -20,6 +20,18 @@ def test_index_trailing_slash(client, organisation):
     assert res.location == url_for("index", view=organisation["code"])
 
 
+def test_navbar_search_outside_collapsible_menu(client):
+    """Test that the navbar search field is not hidden behind the hamburger menu."""
+    res = client.get(url_for("documents.search", view="global"))
+    assert res.status_code == 200
+
+    html = res.get_data(as_text=True)
+    search_field = html.find('<input name="q"')
+    collapsible_menu = html.find('id="navbarSupportedContent"')
+    assert search_field != -1
+    assert search_field < collapsible_menu
+
+
 def test_robots_txt(app):
     """Test le robots.txt file."""
     with app.test_client() as client:
@@ -277,6 +289,8 @@ def test_profile(client, user):
     # Logged
     res = client.get(url_for("sonar.profile", pid=user["pid"]))
     assert res.status_code == 200
+    # The page specific javascript block must not drop the menus behaviour.
+    assert "/static/js/app.js" in res.get_data(as_text=True)
 
     # Wrong PID
     res = client.get(url_for("sonar.profile", pid="wrong"))
