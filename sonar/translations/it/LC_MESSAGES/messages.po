@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: SONAR 1.11.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
 "POT-Creation-Date: 2026-08-14 04:10+0000\n"
-"PO-Revision-Date: 2026-08-05 07:38+0000\n"
+"PO-Revision-Date: 2026-08-15 08:51+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "it/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.8.1.dev0\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: sonar/jsonschemas/common/masked-v1.0.0.json:9
@@ -2695,10 +2695,8 @@ msgid "classification_159.9"
 msgstr "Psychology"
 
 #: sonar/jsonschemas/common/classification-v1.0.0.json:463
-#, fuzzy
-#| msgid "classification_159.953"
 msgid "classification_159.943"
-msgstr "Memory and learning"
+msgstr "Psicomotricità"
 
 #: sonar/jsonschemas/common/classification-v1.0.0.json:467
 msgid "classification_159.953"
