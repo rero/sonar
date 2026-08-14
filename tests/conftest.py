@@ -427,7 +427,7 @@ def document_json(app, db, bucket_location, organisation):
             {
                 "agent": {
                     "type": "bf:Person",
-                    "preferred_name": "John, Doe",
+                    "preferred_name": "Doe, John",
                     "date_of_birth": "1960",
                     "date_of_death": "2000",
                 },
@@ -471,7 +471,7 @@ def document_json(app, db, bucket_location, organisation):
         "partOf": [
             {
                 "document": {
-                    "contribution": ["Renato, Ferrari", "Albano, Mesta"],
+                    "contribution": ["Ferrari, Renato", "Mesta, Albano"],
                     "publication": {
                         "startDate": "2019-05-05",
                         "statement": "John Doe Publications inc.",
@@ -631,7 +631,7 @@ def deposit_json(collection, subdivision):
             "partOf": [
                 {
                     "document": {
-                        "contribution": ["Renato, Ferrari", "Albano, Mesta"],
+                        "contribution": ["Ferrari, Renato", "Mesta, Albano"],
                         "title": "Journal du dimanche",
                         "identifiedBy": [
                             {"type": "bf:Isbn", "value": "958710532X"},
@@ -793,7 +793,7 @@ def project_json():
             "identifiedBy": {"type": "bf:Local", "source": "RERO", "value": "1111"},
             "investigators": [
                 {
-                    "agent": {"preferred_name": "John Doe"},
+                    "agent": {"preferred_name": "Doe, John"},
                     "role": ["investigator"],
                     "affiliation": "IST",
                     "identifiedBy": {

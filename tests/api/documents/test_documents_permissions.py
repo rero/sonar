@@ -184,7 +184,7 @@ def test_read(client, document, make_user, superuser, admin, moderator, submitte
         "update": True,
     }
     assert (
-        res.json["metadata"]["partOf"][0]["text"] == "Journal du dimanche / Renato, Ferrari ; Albano, Mesta. "
+        res.json["metadata"]["partOf"][0]["text"] == "Journal du dimanche / Ferrari, Renato ; Mesta, Albano. "
         "- John Doe Publications inc.. - 2020, vol. 6, no. 12, p. 135-139"
     )
     assert res.json["metadata"]["provisionActivity"][0]["text"] == {

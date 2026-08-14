@@ -1449,6 +1449,7 @@
                       "formlyConfig": {
                         "type": "remoteAutoComplete",
                         "props": {
+                            "placeholder": "Example: Muller, Hans",
                             "queryOptions": {
                               "type": "documents",
                               "field": "contribution.agent.preferred_name",

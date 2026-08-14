@@ -81,6 +81,7 @@
     "82",
     "91",
     "159.9",
+    "159.943",
     "159.953",
     "796",
     "93/94",
@@ -458,6 +459,10 @@
                 "label": "classification_159.9",
                 "data": "159.9",
                 "children": [
+                  {
+                    "label": "classification_159.943",
+                    "data": "159.943"
+                  },
                   {
                     "label": "classification_159.953",
                     "data": "159.953"
