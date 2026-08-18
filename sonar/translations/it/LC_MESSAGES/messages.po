@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SONAR 1.11.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2026-08-14 04:10+0000\n"
+"POT-Creation-Date: 2026-08-18 02:56+0000\n"
 "PO-Revision-Date: 2026-08-18 02:56+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/rero_plus/sonar/"
@@ -1840,7 +1840,7 @@ msgstr "Deposito SONAR v1.0.0"
 msgid "SONAR logo"
 msgstr "Logo di SONAR"
 
-#: sonar/config.py:274
+#: sonar/config.py:284
 msgid "SONAR password reset"
 msgstr "Reimpostazione della password SONAR"
 
@@ -2479,7 +2479,7 @@ msgstr "Perché?"
 msgid "Year"
 msgstr "Anno"
 
-#: sonar/config.py:275
+#: sonar/config.py:285
 msgid "Your SONAR password has been reset"
 msgstr "La tua password SONAR è stata reimpostata"
 
@@ -3085,7 +3085,7 @@ msgstr "Stampatore"
 msgid "contribution_role_{role}"
 msgstr "contribution_role_{role}"
 
-#: sonar/config.py:666
+#: sonar/config.py:676
 msgid "contributor"
 msgstr "Contributore"
 
@@ -5375,7 +5375,7 @@ msgstr "altri files"
 msgid "p."
 msgstr "p."
 
-#: sonar/config.py:663
+#: sonar/config.py:673
 msgid "pid"
 msgstr "pid"
 
@@ -5445,7 +5445,7 @@ msgstr "squadra secondaria"
 msgid "startDate"
 msgstr "data di inizio"
 
-#: sonar/config.py:664
+#: sonar/config.py:674
 msgid "status"
 msgstr "stato"
 
@@ -5471,7 +5471,7 @@ msgstr "sostenuto da"
 msgid "uri"
 msgstr "URI"
 
-#: sonar/config.py:665
+#: sonar/config.py:675
 msgid "user"
 msgstr "utente"
 
