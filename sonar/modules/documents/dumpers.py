@@ -9,6 +9,15 @@ from invenio_records.api import _records_state
 from invenio_records.dumpers import Dumper
 
 from sonar.modules.utils import get_ips_list
+from sonar.suggestions.dumpers import SuggestionsDumperExt
+
+# Fields the editor autocompletes through `/api/suggestions/completion`.
+SUGGESTION_FIELDS = [
+    "contribution.agent.preferred_name",
+    "customField1",
+    "customField2",
+    "customField3",
+]
 
 
 class ReplaceRefsDumper(Dumper):
@@ -29,6 +38,8 @@ class ReplaceRefsDumper(Dumper):
 
 class IndexerDumper(Dumper):
     """Document indexer dumper."""
+
+    _suggestions = SuggestionsDumperExt(SUGGESTION_FIELDS)
 
     @staticmethod
     def _add_dates(record, data):
@@ -93,6 +104,7 @@ class IndexerDumper(Dumper):
         self._process_organisation_ips(record, data)
         self._process_fulltext(record, data)
         self._process_identifiers(record, data)
+        self._suggestions.dump(record, data)
 
         return data
 

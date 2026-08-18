@@ -5,11 +5,35 @@
     "max_result_window": 20000
   },
   "mappings": {
+    "_source": {
+      "excludes": [
+        "suggestions"
+      ]
+    },
     "date_detection": false,
     "numeric_detection": false,
     "properties": {
       "id": {
         "type": "keyword"
+      },
+      "suggestions": {
+        "type": "nested",
+        "properties": {
+          "field": {
+            "type": "keyword"
+          },
+          "value": {
+            "type": "text",
+            "analyzer": "autocomplete",
+            "search_analyzer": "search_autocomplete",
+            "norms": false,
+            "fields": {
+              "raw": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
       },
       "metadata": {
         "type": "object",
@@ -20,7 +44,7 @@
               "suggest": {
                 "type": "text",
                 "analyzer": "autocomplete",
-                "search_analyzer": "standard"
+                "search_analyzer": "search_autocomplete"
               },
               "raw": {
                 "type": "keyword",
