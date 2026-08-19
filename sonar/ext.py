@@ -4,6 +4,7 @@
 """Document extension."""
 
 import os
+from copy import deepcopy
 
 import jinja2
 from flask import current_app, redirect, render_template, request, url_for
@@ -73,6 +74,35 @@ def utility_processor():
     }
 
 
+def _set_default_terms_aggregation_sizes(aggregation, size, shard_size):
+    """Set the default sizes recursively on terms aggregations."""
+    terms = aggregation.get("terms")
+    if isinstance(terms, dict):
+        terms.setdefault("size", size)
+        terms.setdefault("shard_size", shard_size)
+
+    # Recursively apply to nested aggregations
+    for key in ("aggs", "aggregations"):
+        nested_aggregations = aggregation.get(key)
+        if isinstance(nested_aggregations, dict):
+            for nested_aggregation in nested_aggregations.values():
+                if isinstance(nested_aggregation, dict):
+                    _set_default_terms_aggregation_sizes(nested_aggregation, size, shard_size)
+
+
+def _configure_default_terms_aggregation_sizes(app):
+    """Apply the default sizes to configured terms aggregations."""
+    facets = deepcopy(app.config["RECORDS_REST_FACETS"])
+    shard_size = app.config["SONAR_APP_AGGREGATION_SHARD_SIZE"]
+    size = app.config["SONAR_APP_AGGREGATION_SIZE"]
+
+    for facet in facets.values():
+        if isinstance(facet, dict):
+            _set_default_terms_aggregation_sizes(facet, size, shard_size)
+
+    app.config["RECORDS_REST_FACETS"] = facets
+
+
 class SonarBase:
     """SONAR BASE extension."""
 
@@ -94,6 +124,7 @@ class SonarBase:
     def init_app(self, app):
         """Flask application initialization."""
         self.init_config(app)
+        _configure_default_terms_aggregation_sizes(app)
         self.create_resources()
 
         app.extensions["sonar"] = self
