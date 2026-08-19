@@ -66,8 +66,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           POT='sonar/translations/messages.pot'
-          # Ignore POT-Creation-Date (rewritten every run) to skip content-free commits.
-          if git diff --quiet -I '^"POT-Creation-Date:' -- "$POT"; then
+          # Ignore POT-Creation-Date (rewritten every run) and the #: source locations
+          # (they churn on any line shift) to skip content-free commits.
+          if git diff --quiet -I '^"POT-Creation-Date:' -I '^#:' -- "$POT"; then
             echo "No template changes."; exit 0
           fi
           git add "$POT"
