@@ -5,6 +5,7 @@
 
 import contextlib
 
+from flask import current_app
 from invenio_records_resources.services import SearchOptions as BaseSearchOptions
 from invenio_records_resources.services.records.facets import TermsFacet
 from invenio_records_resources.services.records.params import (
@@ -51,6 +52,28 @@ class PreFacetsParam(FacetsParam):
         return search.filter(post_filter)
 
 
+class ConfiguredFacets:
+    """Provide dynamically configured facets as a class property.
+
+    Invenio accesses facets directly from the SearchOptions class. This
+    descriptor builds them on access using the current application
+    configuration.
+    """
+
+    def __get__(self, obj, objtype=None):
+        """Build facets using the current application configuration."""
+        sizes = {
+            "size": current_app.config["SONAR_APP_AGGREGATION_SIZE"],
+            "shard_size": current_app.config["SONAR_APP_AGGREGATION_SHARD_SIZE"],
+        }
+
+        return {
+            "user": TermsFacet(field="metadata.user.pid", **sizes),
+            "organisation": TermsFacet(field="metadata.organisation.pid", **sizes),
+            "status": TermsFacet(field="metadata.validation.status", **sizes),
+        }
+
+
 class SearchOptions(BaseSearchOptions):
     """Search options."""
 
@@ -74,11 +97,7 @@ class SearchOptions(BaseSearchOptions):
         PreFacetsParam,
     ]
 
-    facets = {
-        "user": TermsFacet(field="metadata.user.pid"),
-        "organisation": TermsFacet(field="metadata.organisation.pid"),
-        "status": TermsFacet(field="metadata.validation.status"),
-    }
+    facets = ConfiguredFacets()
 
     suggest_parser_cls = SuggestQueryParser.factory(
         fields=[
