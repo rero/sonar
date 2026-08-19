@@ -6,10 +6,26 @@
 import json
 
 from flask import url_for
+from flask_mail import Mail
 from invenio_accounts.testutils import login_user_via_session
 
-from sonar.modules.deposits.rest import FilesResource
+from sonar.modules.deposits.rest import FilesResource, _get_published_document_url
 from sonar.modules.users.api import UserRecord
+
+
+def test_get_published_document_url(app):
+    """Test published document URLs with organisation and global views."""
+    deposit = {"document": {"$ref": "https://sonar.ch/api/documents/123"}}
+
+    with app.test_request_context(base_url="https://sonar.ch"):
+        assert (
+            _get_published_document_url(
+                deposit,
+                {"organisation": {"$ref": "https://sonar.ch/api/organisations/org"}},
+            )
+            == "https://sonar.ch/org/documents/123"
+        )
+        assert _get_published_document_url(deposit, {}) == "https://sonar.ch/global/documents/123"
 
 
 def test_get(app, deposit):
@@ -174,18 +190,23 @@ def test_review(client, db, user, moderator, deposit):
     login_user_via_session(client, email=moderator["email"])
 
     # Valid approval request
-    response = client.post(
-        url,
-        data=json.dumps(
-            {
-                "action": "approve",
-                "comment": None,
-                "user": {"$ref": UserRecord.get_ref_link("users", moderator["pid"])},
-            }
-        ),
-        headers=headers,
-    )
-    assert response.status_code == 200
+    with Mail().record_messages() as outbox:
+        response = client.post(
+            url,
+            data=json.dumps(
+                {
+                    "action": "approve",
+                    "comment": None,
+                    "user": {"$ref": UserRecord.get_ref_link("users", moderator["pid"])},
+                }
+            ),
+            headers=headers,
+        )
+        assert response.status_code == 200
+        document_pid = response.json["document"]["$ref"].rsplit("/", 1)[-1]
+        document_url = f"http://localhost/org/documents/{document_pid}"
+        assert len(outbox) == 1
+        assert document_url in outbox[0].body
 
     # Valid refusal request
     deposit["status"] = "to_validate"

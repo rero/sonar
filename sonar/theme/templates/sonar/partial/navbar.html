@@ -21,26 +21,29 @@
       {% endif %}
     </a>
     {% endif %}
-    <button class="ml-auto navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <i class="fa-solid fa-bars p-1"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      {% if not admin %}
-      {% if page != 'home' %}
+    <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 justify-content-end my-2 my-lg-0 ml-lg-3">
+      {% if not admin and page != 'home' %}
       <form
         action="{{ url_for('documents.search', view=view_code if g.get('organisation', {}).get('isDedicated') else config.SONAR_APP_DEFAULT_ORGANISATION) }}"
-        class="form-inline my-2 my-lg-0 ml-lg-3">
-        <input name="q" class="form-control {{ 'form-control-sm' if g.get('organisation') and page == 'home' else '' }} mr-sm-2"
-          type="search" placeholder="{{ _('Search') }}" aria-label="{{ _('Search') }}"
-          value="{{ request.args.get('q', '') }}">
-        <button class="btn btn-outline-light {{ 'btn-sm' if g.get('organisation') else '' }} my-2 my-sm-0" type="submit"
-          aria-label="{{ _('Search') }}">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
+        class="flex-grow-1 flex-lg-grow-0">
+        <div class="input-group">
+          <input name="q" class="form-control" type="search" placeholder="{{ _('Search') }}"
+            aria-label="{{ _('Search') }}" value="{{ request.args.get('q', '') }}">
+          <div class="input-group-append">
+            <button class="btn btn-outline-light" type="submit" aria-label="{{ _('Search') }}">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </div>
       </form>
       {% endif %}
-      {% else %}
+      <button class="navbar-toggler ml-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars p-1"></i>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      {% if admin %}
       <span class="navbar-text text-secondary">{{ _('Administration')|upper }}</span>
       {% endif %}
       <ul class="navbar-nav ml-auto">
