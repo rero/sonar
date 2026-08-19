@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SONAR VERSION\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2026-08-18 02:56+0000\n"
+"POT-Creation-Date: 2026-08-19 02:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,7 +86,7 @@ msgid "Additional materials"
 msgstr ""
 
 #: sonar/theme/templates/sonar/partial/dropdown_user.html:23
-#: sonar/theme/templates/sonar/partial/navbar.html:44
+#: sonar/theme/templates/sonar/partial/navbar.html:47
 msgid "Administration"
 msgstr ""
 
@@ -140,7 +140,7 @@ msgstr ""
 msgid "Ark Name Assigning Authority Number (NAAN)"
 msgstr ""
 
-#: sonar/modules/deposits/rest.py:198
+#: sonar/modules/deposits/rest.py:220
 msgid "Ask for changes on deposit"
 msgstr ""
 
@@ -493,19 +493,19 @@ msgstr ""
 msgid "Degree"
 msgstr ""
 
-#: sonar/theme/templates/sonar/partial/navbar.html:65
+#: sonar/theme/templates/sonar/partial/navbar.html:68
 msgid "Deposit a publication"
 msgstr ""
 
-#: sonar/modules/deposits/rest.py:189
+#: sonar/modules/deposits/rest.py:211
 msgid "Deposit approval"
 msgstr ""
 
-#: sonar/modules/deposits/rest.py:195
+#: sonar/modules/deposits/rest.py:217
 msgid "Deposit rejection"
 msgstr ""
 
-#: sonar/modules/deposits/rest.py:128
+#: sonar/modules/deposits/rest.py:150
 msgid "Deposit to validate"
 msgstr ""
 
@@ -1234,8 +1234,8 @@ msgstr ""
 #: sonar/theme/templates/sonar/accounts/login.html:19
 #: sonar/theme/templates/sonar/accounts/reset_password.html:31
 #: sonar/theme/templates/sonar/accounts/signup.html:47
-#: sonar/theme/templates/sonar/partial/navbar.html:49
-#: sonar/theme/templates/sonar/partial/navbar.html:50
+#: sonar/theme/templates/sonar/partial/navbar.html:52
+#: sonar/theme/templates/sonar/partial/navbar.html:53
 msgid "Log in"
 msgstr ""
 
@@ -1838,8 +1838,9 @@ msgstr ""
 #: sonar/help/templates/help/page_wiki_search_navigation.html:20
 #: sonar/help/templates/help/page_wiki_search_navigation.html:23
 #: sonar/theme/templates/sonar/frontpage.html:50
-#: sonar/theme/templates/sonar/partial/navbar.html:35
-#: sonar/theme/templates/sonar/partial/navbar.html:38
+#: sonar/theme/templates/sonar/partial/navbar.html:30
+#: sonar/theme/templates/sonar/partial/navbar.html:31
+#: sonar/theme/templates/sonar/partial/navbar.html:33
 #: sonar/theme/templates/sonar/partial/organisation.html:24
 msgid "Search"
 msgstr ""
@@ -1919,7 +1920,7 @@ msgstr ""
 #: sonar/theme/templates/sonar/accounts/reset_password.html:33
 #: sonar/theme/templates/sonar/accounts/signup.html:28
 #: sonar/theme/templates/sonar/oauth/signup.html:29
-#: sonar/theme/templates/sonar/partial/navbar.html:56
+#: sonar/theme/templates/sonar/partial/navbar.html:59
 msgid "Sign up"
 msgstr ""
 
