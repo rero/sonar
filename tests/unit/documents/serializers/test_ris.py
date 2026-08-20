@@ -78,6 +78,140 @@ def test_ris_thesis_institution_and_degree():
     assert "M3  - PhD" in result
 
 
+def test_ris_thesis_institution_overrides_publisher_but_keeps_place():
+    """A thesis's granting institution takes the PB slot, its own place is kept."""
+    metadata = {
+        "documentType": "coar:c_7a1f",
+        "provisionActivity": [
+            {
+                "type": "bf:Publication",
+                "startDate": "2017",
+                "statement": [
+                    {"type": "bf:Place", "label": [{"value": "Experimenton"}]},
+                    {"type": "bf:Agent", "label": [{"value": "Mirage Editions"}]},
+                ],
+            }
+        ],
+        "dissertation": {"grantingInstitution": "École des hautes études partagées", "degree": "Travail de bachelor"},
+    }
+    result = serialize_record_to_ris(metadata)
+    assert "PB  - École des hautes études partagées" in result
+    assert "CY  - Experimenton" in result
+    assert "Mirage Editions" not in result
+
+
+def test_ris_thesis_publisher_used_without_granting_institution():
+    """A thesis with no granting institution keeps its own publisher as PB."""
+    metadata = {
+        "documentType": "coar:c_db06",
+        "provisionActivity": [
+            {
+                "type": "bf:Publication",
+                "statement": [{"type": "bf:Agent", "label": [{"value": "Université de l'Exemple"}]}],
+            }
+        ],
+    }
+    assert "PB  - Université de l'Exemple" in serialize_record_to_ris(metadata)
+
+
+def test_ris_hosted_item_keeps_its_own_place_and_publisher():
+    """A hosted item keeps its own place/publisher, which the host does not provide."""
+    metadata = {
+        "documentType": "coar:c_6501",
+        "provisionActivity": [
+            {
+                "type": "bf:Publication",
+                "startDate": "2021",
+                "statement": [
+                    {"type": "bf:Place", "label": [{"value": "Hypothetica"}]},
+                    {"type": "bf:Agent", "label": [{"value": "Conceptual Press"}]},
+                ],
+            }
+        ],
+        "partOf": [{"document": {"title": "Transactions on Conceptual Systems"}, "numberingYear": "2007"}],
+    }
+    result = serialize_record_to_ris(metadata)
+    assert "CY  - Hypothetica" in result
+    assert "PB  - Conceptual Press" in result
+    assert "JO  - Transactions on Conceptual Systems" in result
+
+
+def test_ris_host_publication_statement_fills_publisher_and_place():
+    """A chapter's PB/CY come from the host publication statement."""
+    metadata = {
+        "documentType": "coar:c_3248",
+        "provisionActivity": [
+            {
+                "type": "bf:Publication",
+                "startDate": "2016",
+                "statement": [{"type": "bf:Agent", "label": [{"value": "Imported Press"}]}],
+            }
+        ],
+        "partOf": [{"document": {"title": "Le livre hôte", "publication": {"statement": "Paris : PUF, 2016"}}}],
+    }
+    result = serialize_record_to_ris(metadata)
+    assert "CY  - Paris" in result
+    assert "PB  - PUF" in result
+    assert "Imported Press" not in result
+
+
+def test_ris_host_statement_without_place_keeps_the_record_place():
+    """A host statement stating only its publisher leaves the record's own CY in place."""
+    metadata = {
+        "documentType": "coar:c_3248",
+        "provisionActivity": [
+            {
+                "type": "bf:Publication",
+                "startDate": "2016",
+                "statement": [
+                    {"type": "bf:Place", "label": [{"value": "Genève"}]},
+                    {"type": "bf:Agent", "label": [{"value": "Droz"}]},
+                ],
+            }
+        ],
+        "partOf": [{"document": {"title": "Le livre hôte", "publication": {"statement": "PUF"}}}],
+    }
+    result = serialize_record_to_ris(metadata)
+    assert "CY  - Genève" in result
+    assert "PB  - PUF" in result
+
+
+def test_ris_series_entry_does_not_replace_own_publisher():
+    """A monograph in a series keeps its own place/publisher, as a series carries no statement."""
+    metadata = {
+        "documentType": "coar:c_2f33",
+        "provisionActivity": [
+            {
+                "type": "bf:Publication",
+                "startDate": "2019",
+                "statement": [
+                    {"type": "bf:Place", "label": [{"value": "Bern"}]},
+                    {"type": "bf:Agent", "label": [{"value": "Peter Lang"}]},
+                ],
+            }
+        ],
+        "partOf": [{"document": {"title": "Studien zur Germanistik"}, "numberingVolume": "12"}],
+    }
+    result = serialize_record_to_ris(metadata)
+    assert "CY  - Bern" in result
+    assert "PB  - Peter Lang" in result
+
+
+def test_ris_other_identifiers_are_exported_as_notes():
+    """Identifiers with no dedicated RIS tag (ark, URN...) are kept as notes, not dropped."""
+    metadata = {
+        "identifiedBy": [
+            {"type": "ark", "value": "ark-000279"},
+            {"type": "ark", "value": "ark:/99999/ffk3312"},
+            {"type": "bf:Urn", "value": "Urn-000307"},
+        ]
+    }
+    result = serialize_record_to_ris(metadata)
+    assert "N1  - ARK: ark-000279" in result
+    assert "N1  - ARK: ark:/99999/ffk3312" in result
+    assert "N1  - URN: Urn-000307" in result
+
+
 def test_ris_pages_with_double_dash():
     """A page range using a double dash is still parsed correctly."""
     metadata = {"partOf": [{"numberingPages": "135--142"}]}

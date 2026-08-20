@@ -8,6 +8,7 @@ from sonar.modules.documents.serializers.common import (
     extract_authors,
     extract_dissertation,
     extract_editors,
+    extract_host_publication,
     extract_identifiers,
     extract_journal_info,
     extract_publication_info,
@@ -146,6 +147,36 @@ def test_extract_journal_info_missing():
     assert extract_journal_info({}) == (None, None, None, None)
 
 
+def test_extract_host_publication_splits_the_isbd_statement():
+    """An ISBD-shaped host statement yields the place and the publisher, whatever date closes it."""
+    for statement in ("Paris : PUF", "Paris : PUF, 2016", "Paris : PUF, cop. 2016", "Paris : PUF, [2016-2018]"):
+        metadata = {"partOf": [{"document": {"publication": {"statement": statement}}}]}
+        assert extract_host_publication(metadata) == ("Paris", "PUF")
+
+
+def test_extract_host_publication_without_place():
+    """A statement with no separator is the publisher alone, never a place."""
+    for statement in ("PUF", "PUF, 2016"):
+        metadata = {"partOf": [{"document": {"publication": {"statement": statement}}}]}
+        assert extract_host_publication(metadata) == (None, "PUF")
+
+
+def test_extract_host_publication_skips_entries_without_statement():
+    """A series entry (no statement) is skipped in favour of the host that has one."""
+    metadata = {
+        "partOf": [
+            {"document": {"title": "Studien zur Germanistik"}, "numberingVolume": "12"},
+            {"document": {"publication": {"statement": "Bern : Peter Lang, 2019"}}},
+        ]
+    }
+    assert extract_host_publication(metadata) == ("Bern", "Peter Lang")
+
+
+def test_extract_host_publication_missing():
+    """No partOf statement at all returns a tuple of None."""
+    assert extract_host_publication({"partOf": [{"numberingYear": "2019"}]}) == (None, None)
+
+
 def test_extract_abstract():
     """The first non-empty abstract value is returned."""
     metadata = {"abstracts": [{"value": ""}, {"value": "Real abstract"}, {"value": "Second abstract"}]}
@@ -200,13 +231,13 @@ def test_extract_identifiers_top_level():
             {"type": "bf:Issn", "value": "1234-5678"},
         ]
     }
-    assert extract_identifiers(metadata) == ("10.1000/abc", "978-3-16-148410-0", "1234-5678")
+    assert extract_identifiers(metadata) == ("10.1000/abc", "978-3-16-148410-0", "1234-5678", [])
 
 
 def test_extract_identifiers_falls_back_to_part_of():
     """The host document's ISSN is used when there is none at the top level."""
     metadata = {"partOf": [{"document": {"identifiedBy": [{"type": "bf:Issn", "value": "1234-5678"}]}}]}
-    assert extract_identifiers(metadata) == (None, None, "1234-5678")
+    assert extract_identifiers(metadata) == (None, None, "1234-5678", [])
 
 
 def test_extract_identifiers_top_level_wins_over_part_of():
@@ -215,12 +246,43 @@ def test_extract_identifiers_top_level_wins_over_part_of():
         "identifiedBy": [{"type": "bf:Issn", "value": "1111-1111"}],
         "partOf": [{"document": {"identifiedBy": [{"type": "bf:Issn", "value": "2222-2222"}]}}],
     }
-    assert extract_identifiers(metadata) == (None, None, "1111-1111")
+    assert extract_identifiers(metadata) == (None, None, "1111-1111", [])
 
 
 def test_extract_identifiers_missing():
-    """No identifiedBy nor partOf field returns a tuple of None."""
-    assert extract_identifiers({}) == (None, None, None)
+    """No identifiedBy nor partOf field returns a tuple of None and an empty list."""
+    assert extract_identifiers({}) == (None, None, None, [])
+
+
+def test_extract_identifiers_other_types_are_all_preserved():
+    """Non-DOI/ISBN/ISSN identifiers are all returned, including repeats of the same type."""
+    metadata = {
+        "identifiedBy": [
+            {"type": "ark", "value": "ark-000279"},
+            {"type": "ark", "value": "ark:/99999/ffk3312"},
+            {"type": "bf:Urn", "value": "Urn-000307"},
+            {"type": "bf:Local", "value": "LOCAL-1"},
+        ]
+    }
+    _, _, _, other = extract_identifiers(metadata)
+    assert other == [
+        ("ark", "ark-000279"),
+        ("ark", "ark:/99999/ffk3312"),
+        ("urn", "Urn-000307"),
+        ("local", "LOCAL-1"),
+    ]
+
+
+def test_extract_identifiers_label_comes_from_the_type():
+    """Any identifier type is labeled from its own name, including one added later."""
+    metadata = {
+        "identifiedBy": [
+            {"type": "bf:ReportNumber", "value": "R-1"},
+            {"type": "bf:SomeFutureType", "value": "X"},
+        ]
+    }
+    _, _, _, other = extract_identifiers(metadata)
+    assert other == [("reportnumber", "R-1"), ("somefuturetype", "X")]
 
 
 def test_extract_url_uses_permalink_when_present():

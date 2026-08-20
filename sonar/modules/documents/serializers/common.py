@@ -3,6 +3,12 @@
 
 """Shared metadata extraction helpers for citation serializers (BibTeX, RIS)."""
 
+from sonar.modules.documents.citations.type_mapping import TYPE_MAPPING
+
+#: Document types the exporters handle as a thesis, derived from the CSL type
+#: mapping so a new thesis type is classified in a single place.
+THESIS_DOCUMENT_TYPES = frozenset(doc_type for doc_type, csl_type in TYPE_MAPPING.items() if csl_type == "thesis")
+
 
 def unwrap_metadata(record):
     """Return a record's metadata dict, keeping "pid"/"permalink" reachable.
@@ -92,6 +98,27 @@ def extract_journal_info(metadata):
     return journal, part.get("numberingVolume"), part.get("numberingIssue"), part.get("numberingPages")
 
 
+def extract_host_publication(metadata):
+    """Return (place, publisher) parsed from the host document's publication statement.
+
+    A hosted item's publisher and place are those of its container in
+    BibTeX, RIS and CSL alike. The host holds them as a single ISBD-shaped
+    statement ("Paris : PUF, 2016"), which both formats want split and
+    without the date. The date closes the statement, so whatever follows the last
+    comma is dropped. Entries carrying no statement are skipped; a statement
+    that does not split becomes the publisher alone.
+    """
+    for part in metadata.get("partOf", []):
+        statement = part.get("document", {}).get("publication", {}).get("statement")
+        if not statement:
+            continue
+        place, _, publisher = statement.partition(":")
+        if publisher.strip():
+            return place.strip() or None, publisher.rsplit(",", 1)[0].strip() or None
+        return None, place.rsplit(",", 1)[0].strip() or None
+    return None, None
+
+
 def extract_abstract(metadata):
     """Return the first non-empty abstract value."""
     for abstract in metadata.get("abstracts", []):
@@ -123,21 +150,30 @@ def extract_dissertation(metadata):
 
 
 def extract_identifiers(metadata):
-    """Return DOI, ISBN and ISSN, falling back to the host document (partOf).
+    """Return (doi, isbn, issn, other_identifiers).
 
-    A journal's ISSN or a host book's ISBN is stored in partOf for articles
-    and book chapters, not at the top level. The top level wins when present.
+    other_identifiers lists every non-DOI/ISBN/ISSN identifier as
+    (label, value) pairs, in encounter order, including repeats of the
+    same type.
     """
     result = {}
+    other_identifiers = []
     sources = [metadata.get("identifiedBy", [])]
     sources += [p.get("document", {}).get("identifiedBy", []) for p in metadata.get("partOf", [])]
     type_map = {"bf:Doi": "doi", "bf:Isbn": "isbn", "bf:Issn": "issn", "bf:IssnL": "issn"}
     for identifiers in sources:
         for identifier in identifiers:
-            key = type_map.get(identifier.get("type"))
-            if key and identifier.get("value") and key not in result:
-                result[key] = identifier["value"]
-    return result.get("doi"), result.get("isbn"), result.get("issn")
+            value = identifier.get("value")
+            if not value:
+                continue
+            id_type = identifier.get("type")
+            key = type_map.get(id_type)
+            if key:
+                if key not in result:
+                    result[key] = value
+            else:
+                other_identifiers.append(((id_type or "bf:Identifier").removeprefix("bf:").lower(), value))
+    return result.get("doi"), result.get("isbn"), result.get("issn"), other_identifiers
 
 
 def extract_url(metadata):
