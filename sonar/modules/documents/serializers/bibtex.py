@@ -4,15 +4,16 @@
 """BibTeX serializer."""
 
 import re
-import string
 
 from invenio_records_rest.serializers.base import SerializerMixinInterface
 
 from .common import (
+    THESIS_DOCUMENT_TYPES,
     extract_abstract,
     extract_authors,
     extract_dissertation,
     extract_editors,
+    extract_host_publication,
     extract_identifiers,
     extract_journal_info,
     extract_publication_info,
@@ -67,13 +68,15 @@ _COAR_TO_BIBTEX = {
     "coar:c_18hj": "techreport",
     "coar:c_18ws": "techreport",
     "coar:c_18gh": "techreport",
-    "coar:c_46ec": "phdthesis",
+    # Only PHD thesis has a matching entry type. Every other level
+    # rides on "mastersthesis", whose "type" field replaces the printed label.
+    "coar:c_46ec": "mastersthesis",
     "coar:c_7a1f": "mastersthesis",
     "coar:c_db06": "phdthesis",
     "coar:c_bdcc": "mastersthesis",
-    "habilitation_thesis": "phdthesis",
+    "habilitation_thesis": "mastersthesis",
     "advanced_studies_thesis": "mastersthesis",
-    "other_thesis": "phdthesis",
+    "other_thesis": "mastersthesis",
     "coar:c_8042": "techreport",
     "coar:c_1843": "misc",
     "coar:R60J-J5BD": "misc",
@@ -87,13 +90,19 @@ def _bibtex_entry_type(doc_type):
 
 
 def _bibtex_key(metadata):
-    """Generate a BibTeX cite key from first author and year."""
-    authors = extract_authors(metadata)
-    last_name = authors[0].split(",")[0].strip() if authors else "unknown"
+    """Generate a BibTeX cite key from first author (or editor), year and pid.
+
+    The pid keeps keys unique across independent calls (e.g. paginated
+    exports), which share no collision state.
+    """
+    names = extract_authors(metadata) or extract_editors(metadata)
+    last_name = names[0].split(",")[0].strip() if names else "unknown"
     # BibTeX keys cannot contain whitespace: collapse multi-word last names
     # like "van der Berg" into a single token.
     name = re.sub(r"\s+", "", last_name)
-    return f"{name}{extract_year(metadata) or ''}"
+    base = f"{name}{extract_year(metadata) or ''}"
+    pid = metadata.get("pid")
+    return f"{base}-{pid}" if pid else base
 
 
 _BIBTEX_ESCAPE = {
@@ -127,26 +136,12 @@ def _bibtex_field(name, value, escape=True):
     return f"  {name:<12} = {{{text}}}"
 
 
-def serialize_record_to_bibtex(metadata, used_keys=None):
-    """Serialize a document metadata dict to a BibTeX entry string.
-
-    :param used_keys: Optional set of cite keys already emitted in the same
-        export (e.g. a search result with several entries). When the
-        generated key collides with one already in the set, a letter suffix
-        ("a", "b", ...) is appended to keep cite keys unique, as BibTeX
-        consumers can otherwise reject or silently overwrite one entry.
-    """
+def serialize_record_to_bibtex(metadata):
+    """Serialize a document metadata dict to a BibTeX entry string."""
     doc_type = metadata.get("documentType", "")
     entry_type = _bibtex_entry_type(doc_type)
+    is_thesis = doc_type in THESIS_DOCUMENT_TYPES
     key = _bibtex_key(metadata)
-
-    if used_keys is not None:
-        base_key = key
-        suffix_index = 0
-        while key in used_keys:
-            key = f"{base_key}{string.ascii_lowercase[suffix_index]}"
-            suffix_index += 1
-        used_keys.add(key)
 
     fields = []
 
@@ -163,20 +158,27 @@ def serialize_record_to_bibtex(metadata, used_keys=None):
     if title := extract_title(metadata):
         fields.append(_bibtex_field("title", title))
 
-    # Publication info
     _, place, publisher = extract_publication_info(metadata)
+    # A hosted item's publisher/address are those of its container, which does
+    # not always state its place: the record's own is then kept.
+    host_place, host_publisher = extract_host_publication(metadata)
+    if host_publisher:
+        place, publisher = host_place or place, host_publisher
     if year := extract_year(metadata):
         fields.append(_bibtex_field("year", year))
     if place:
         fields.append(_bibtex_field("address", place))
-    if publisher:
-        fields.append(_bibtex_field("publisher", publisher))
 
-    # Thesis: granting institution -> school
-    if entry_type in ("phdthesis", "mastersthesis"):
-        _, school, _ = extract_dissertation(metadata)
-        if school:
+    # Thesis: "school" is the publisher slot of a thesis entry.
+    # "type" states the precise degree.
+    if is_thesis:
+        degree, institution, _ = extract_dissertation(metadata)
+        if school := institution or publisher:
             fields.append(_bibtex_field("school", school))
+        if degree:
+            fields.append(_bibtex_field("type", degree))
+    elif publisher:
+        fields.append(_bibtex_field("publisher", publisher))
 
     # Host document: journal for articles, book/proceedings title otherwise
     journal, volume, issue, pages = extract_journal_info(metadata)
@@ -191,13 +193,20 @@ def serialize_record_to_bibtex(metadata, used_keys=None):
         fields.append(_bibtex_field("pages", pages))
 
     # Identifiers
-    doi, isbn, issn = extract_identifiers(metadata)
+    doi, isbn, issn, other_identifiers = extract_identifiers(metadata)
     if doi:
         fields.append(_bibtex_field("doi", doi, escape=False))
     if isbn:
         fields.append(_bibtex_field("isbn", isbn, escape=False))
     if issn:
         fields.append(_bibtex_field("issn", issn, escape=False))
+    # BibTeX field names must be unique within an entry: number repeated
+    # "other" identifier labels instead of overwriting the earlier field.
+    label_counts = {}
+    for label, value in other_identifiers:
+        label_counts[label] = label_counts.get(label, 0) + 1
+        field_name = label if label_counts[label] == 1 else f"{label}{label_counts[label]}"
+        fields.append(_bibtex_field(field_name, value, escape=False))
 
     # Abstract
     if abstract := extract_abstract(metadata):
@@ -222,9 +231,5 @@ class BibTeXSerializer(SerializerMixinInterface):
 
     def serialize_search(self, pid_fetcher, search_result, links=None, item_links_factory=None):
         """Serialize search results to BibTeX (one entry per hit)."""
-        used_keys = set()
-        entries = [
-            serialize_record_to_bibtex(unwrap_metadata(hit["_source"]), used_keys=used_keys)
-            for hit in search_result["hits"]["hits"]
-        ]
+        entries = [serialize_record_to_bibtex(unwrap_metadata(hit["_source"])) for hit in search_result["hits"]["hits"]]
         return "\n\n".join(entries)

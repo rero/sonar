@@ -8,10 +8,12 @@ import re
 from invenio_records_rest.serializers.base import SerializerMixinInterface
 
 from .common import (
+    THESIS_DOCUMENT_TYPES,
     extract_abstract,
     extract_authors,
     extract_dissertation,
     extract_editors,
+    extract_host_publication,
     extract_identifiers,
     extract_journal_info,
     extract_publication_info,
@@ -111,21 +113,27 @@ def serialize_record_to_ris(metadata):
     if title := extract_title(metadata):
         lines.append(_ris_line("TI", title))
 
-    # Publication info
+    # Publication info: a hosted item's place/publisher are those of its
+    # container, which does not always state its place: the record's own is
+    # then kept.
     _, place, publisher = extract_publication_info(metadata)
+    host_place, host_publisher = extract_host_publication(metadata)
+    if host_publisher:
+        place, publisher = host_place or place, host_publisher
     if year := extract_year(metadata):
         lines.append(_ris_line("PY", year))
     if place:
         lines.append(_ris_line("CY", place))
 
-    # Thesis: institution -> PB (if not already set), degree -> M3
-    if doc_type == "THES":
+    # Thesis: PB is a single slot, so the granting institution overrides the
+    # generic publisher there; M3 states the degree.
+    if metadata.get("documentType") in THESIS_DOCUMENT_TYPES:
         degree, institution, _ = extract_dissertation(metadata)
-        if institution and not publisher:
-            lines.append(_ris_line("PB", institution))
+        if issuer := institution or publisher:
+            lines.append(_ris_line("PB", issuer))
         if degree:
             lines.append(_ris_line("M3", degree))
-    if publisher:
+    elif publisher:
         lines.append(_ris_line("PB", publisher))
 
     # Host document: JO for journals, T2 (secondary title) for chapters/proceedings
@@ -137,21 +145,22 @@ def serialize_record_to_ris(metadata):
         lines.append(_ris_line("VL", volume))
     if issue:
         lines.append(_ris_line("IS", issue))
-    if pages:
-        page_numbers = re.findall(r"\d+", pages)
-        if page_numbers:
-            lines.append(_ris_line("SP", page_numbers[0]))
-            if len(page_numbers) > 1:
-                lines.append(_ris_line("EP", page_numbers[1]))
+    if pages and (page_numbers := re.findall(r"\d+", pages)):
+        lines.append(_ris_line("SP", page_numbers[0]))
+        if len(page_numbers) > 1:
+            lines.append(_ris_line("EP", page_numbers[1]))
 
     # Identifiers
-    doi, isbn, issn = extract_identifiers(metadata)
+    doi, isbn, issn, other_identifiers = extract_identifiers(metadata)
     if doi:
         lines.append(_ris_line("DO", doi))
     if isbn:
         lines.append(_ris_line("SN", isbn))
     if issn:
         lines.append(_ris_line("SN", issn))
+    # RIS has no dedicated tag for ark/URN/local/report-number-style
+    # identifiers: export them as labeled notes instead of dropping them.
+    lines.extend(_ris_line("N1", f"{label.upper()}: {value}") for label, value in other_identifiers)
 
     # Abstract
     if abstract := extract_abstract(metadata):
