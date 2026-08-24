@@ -255,21 +255,21 @@ def test_extract_identifiers_missing():
 
 
 def test_extract_identifiers_other_types_are_all_preserved():
-    """Non-DOI/ISBN/ISSN identifiers are all returned, including repeats of the same type."""
+    """Non-DOI/ISBN/ISSN identifiers are all returned, record first, then the host document."""
     metadata = {
         "identifiedBy": [
-            {"type": "ark", "value": "ark-000279"},
-            {"type": "ark", "value": "ark:/99999/ffk3312"},
-            {"type": "bf:Urn", "value": "Urn-000307"},
+            {"type": "ark", "value": "ark:/99999/ffk3279"},
+            {"type": "bf:Urn", "value": "urn:nbn:ch:rero-006-3078"},
             {"type": "bf:Local", "value": "LOCAL-1"},
-        ]
+        ],
+        "partOf": [{"document": {"identifiedBy": [{"type": "bf:Local", "value": "LOCAL-2"}]}}],
     }
     _, _, _, other = extract_identifiers(metadata)
     assert other == [
-        ("ark", "ark-000279"),
-        ("ark", "ark:/99999/ffk3312"),
-        ("urn", "Urn-000307"),
+        ("ark", "ark:/99999/ffk3279"),
+        ("urn", "urn:nbn:ch:rero-006-3078"),
         ("local", "LOCAL-1"),
+        ("local", "LOCAL-2"),
     ]
 
 

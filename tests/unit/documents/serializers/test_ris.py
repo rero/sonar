@@ -201,15 +201,13 @@ def test_ris_other_identifiers_are_exported_as_notes():
     """Identifiers with no dedicated RIS tag (ark, URN...) are kept as notes, not dropped."""
     metadata = {
         "identifiedBy": [
-            {"type": "ark", "value": "ark-000279"},
-            {"type": "ark", "value": "ark:/99999/ffk3312"},
-            {"type": "bf:Urn", "value": "Urn-000307"},
+            {"type": "ark", "value": "ark:/99999/ffk3279"},
+            {"type": "bf:Urn", "value": "urn:nbn:ch:rero-006-3078"},
         ]
     }
     result = serialize_record_to_ris(metadata)
-    assert "N1  - ARK: ark-000279" in result
-    assert "N1  - ARK: ark:/99999/ffk3312" in result
-    assert "N1  - URN: Urn-000307" in result
+    assert "N1  - ARK: ark:/99999/ffk3279" in result
+    assert "N1  - URN: urn:nbn:ch:rero-006-3078" in result
 
 
 def test_ris_pages_with_double_dash():
