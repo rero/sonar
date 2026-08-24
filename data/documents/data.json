@@ -1521,12 +1521,6 @@
         "value": "Le présent article examine les développements récents des matériaux pour le stockage de l'énergie. L'analyse s'appuie sur un corpus constitué entre 2020 et 2025 et croise des indicateurs quantitatifs avec une lecture qualitative des sources. L'étude souligne l'importance des pratiques de données ouvertes pour la reproductibilité de ce type de recherche."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000011"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -1915,12 +1909,6 @@
         "value": "Die vorliegende Studie liefert einen vergleichend angelegten Beitrag zum Reinforcement Learning. Der Ansatz kombiniert statistische Modellierung mit einer Reihe leitfadengestützter Interviews in mehreren Schweizer Institutionen. Die Befunde bestätigen die Ausgangshypothesen, offenbaren zugleich aber erhebliche Unterschiede zwischen den untersuchten Kontexten."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000014"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -2090,12 +2078,6 @@
       {
         "language": "ger",
         "value": "Der Beitrag untersucht die jüngeren Entwicklungen der Mensch-Computer-Interaktion. Die Analyse stützt sich auf ein zwischen 2011 und 2013 aufgebautes Korpus und verbindet quantitative Kennzahlen mit einer qualitativen Auswertung der Quellen. Die Autorinnen und Autoren kommen zu dem Schluss, dass sich das Vorgehen unter den in der Diskussion genannten Vorbehalten auf benachbarte Felder übertragen lässt."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000015"
       }
     ],
     "contribution": [
@@ -2565,12 +2547,6 @@
       {
         "language": "eng",
         "value": "The present study investigates fairness in machine learning in an academic research context. The approach combines statistical modelling with a series of semi-structured interviews conducted in several Swiss institutions. The results show a marked effect that had not been documented before and open promising avenues for further work."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000019"
       }
     ],
     "contribution": [
@@ -3117,12 +3093,6 @@
         "value": "This contribution offers a critical review of recent work on privacy-preserving analytics. The approach combines statistical modelling with a series of semi-structured interviews conducted in several Swiss institutions. The results show a marked effect that had not been documented before and open promising avenues for further work."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000023"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -3253,12 +3223,6 @@
       {
         "language": "ger",
         "value": "Der Beitrag untersucht die jüngeren Entwicklungen des affektiven Rechnens. Die Methodik beruht auf einer systematischen Literaturübersicht, ergänzt durch zwei unabhängige Fallstudien. Die Studie unterstreicht die Bedeutung offener Datenpraktiken für die Reproduzierbarkeit dieser Art von Forschung."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000024"
       }
     ],
     "contribution": [
@@ -3704,12 +3668,6 @@
         "value": "This paper sets out a methodological framework for the study of cognitive modelling. The analysis draws on a corpus assembled between 2020 and 2022 and combines quantitative indicators with a qualitative reading of the sources. The findings confirm the initial hypotheses while revealing significant variation between the contexts studied."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000027"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -3822,12 +3780,6 @@
       {
         "language": "eng",
         "value": "This article examines robot motion planning from a comparative perspective. The analysis draws on a corpus assembled between 2015 and 2020 and combines quantitative indicators with a qualitative reading of the sources. The study underlines the importance of open data practices for the reproducibility of this type of research."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000028"
       }
     ],
     "contribution": [
@@ -4406,12 +4358,6 @@
       {
         "language": "fre",
         "value": "Cette contribution propose une synthèse critique des travaux sur l'écologie computationnelle. Les expériences ont été répétées sur plusieurs jeux de données indépendants afin d'éprouver la robustesse des résultats. Les conclusions confirment les hypothèses initiales tout en révélant des variations importantes entre les contextes étudiés."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000032"
       }
     ],
     "contribution": [
@@ -6991,12 +6937,6 @@
         "value": "Der Beitrag untersucht die jüngeren Entwicklungen von Wissensgraphen. Der Ansatz kombiniert statistische Modellierung mit einer Reihe leitfadengestützter Interviews in mehreren Schweizer Institutionen. Die Studie unterstreicht die Bedeutung offener Datenpraktiken für die Reproduzierbarkeit dieser Art von Forschung."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000051"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -7258,12 +7198,6 @@
         "value": "Cet article présente un cadre méthodologique pour l'étude de la recherche opérationnelle. La méthodologie repose sur une revue systématique de la littérature complétée par deux études de cas indépendantes. L'étude souligne l'importance des pratiques de données ouvertes pour la reproductibilité de ce type de recherche."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000053"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -7389,12 +7323,6 @@
       {
         "language": "eng",
         "value": "This paper sets out a methodological framework for the study of explainable AI. The methodology rests on a systematic literature review completed by two independent case studies. The authors conclude that the approach can be transferred to neighbouring fields, subject to the limitations set out in the discussion."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000054"
       }
     ],
     "contribution": [
@@ -7669,12 +7597,6 @@
         "value": "Questo studio verte sull'elaborazione multilingue del linguaggio e ne propone una lettura comparata. L'approccio associa una modellizzazione statistica a una serie di interviste semi-strutturate condotte in diverse istituzioni svizzere. Lo studio sottolinea l'importanza delle pratiche di dati aperti per la riproducibilità di questo tipo di ricerca."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000056"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -7828,12 +7750,6 @@
       {
         "language": "ger",
         "value": "Der Beitrag untersucht die jüngeren Entwicklungen der medizinischen Bildgebung. Die Daten wurden zwischen 2019 und 2023 erhoben und mit offenen, reproduzierbaren Werkzeugen ausgewertet, deren Quellcode frei zugänglich ist. Die Autorinnen und Autoren kommen zu dem Schluss, dass sich das Vorgehen unter den in der Diskussion genannten Vorbehalten auf benachbarte Felder übertragen lässt."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000057"
       }
     ],
     "contribution": [
@@ -8720,12 +8636,6 @@
         "value": "This paper sets out a methodological framework for the study of computational linguistics. The experiments were repeated on several independent datasets in order to test the robustness of the results. The results show a marked effect that had not been documented before and open promising avenues for further work."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000063"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -8879,12 +8789,6 @@
       {
         "language": "eng",
         "value": "The present study investigates reinforcement learning in an academic research context. The experiments were repeated on several independent datasets in order to test the robustness of the results. The results show a marked effect that had not been documented before and open promising avenues for further work."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000064"
       }
     ],
     "contribution": [
@@ -9118,12 +9022,6 @@
         "value": "Die Autorinnen und Autoren analysieren die aktuellen Herausforderungen des Information Retrieval. Die Methodik beruht auf einer systematischen Literaturübersicht, ergänzt durch zwei unabhängige Fallstudien. Die Ergebnisse legen nahe, mehrere in der Disziplin weit verbreitete Annahmen erneut zu prüfen."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000066"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -9249,12 +9147,6 @@
         "value": "Cette contribution propose une synthèse critique des travaux sur les chaînes de traitement bio-informatiques. Les données ont été collectées entre 2013 et 2016 puis traitées à l'aide d'outils ouverts et reproductibles dont le code source est accessible. Les résultats mettent en évidence un effet marqué, jusqu'ici peu documenté, et ouvrent des pistes prometteuses pour la suite des travaux."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000067"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -9374,12 +9266,6 @@
       {
         "language": "eng",
         "value": "This article examines educational data mining from a comparative perspective. The analysis draws on a corpus assembled between 2022 and 2024 and combines quantitative indicators with a qualitative reading of the sources. The results invite a re-examination of several assumptions that are widely shared in the field."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000068"
       }
     ],
     "contribution": [
@@ -10296,12 +10182,6 @@
         "value": "The authors analyse current developments in the semantic web. The methodology rests on a systematic literature review completed by two independent case studies. The results show a marked effect that had not been documented before and open promising avenues for further work."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000075"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -10436,12 +10316,6 @@
       {
         "language": "ger",
         "value": "Die vorliegende Studie liefert einen vergleichend angelegten Beitrag zur alpinen Hydrologie. Die Daten wurden zwischen 2020 und 2022 erhoben und mit offenen, reproduzierbaren Werkzeugen ausgewertet, deren Quellcode frei zugänglich ist. Die Ergebnisse legen nahe, mehrere in der Disziplin weit verbreitete Annahmen erneut zu prüfen."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000076"
       }
     ],
     "contribution": [
@@ -10866,12 +10740,6 @@
         "value": "Die vorliegende Studie liefert einen vergleichend angelegten Beitrag zum föderierten Lernen. Die Methodik beruht auf einer systematischen Literaturübersicht, ergänzt durch zwei unabhängige Fallstudien. Die Autorinnen und Autoren kommen zu dem Schluss, dass sich das Vorgehen unter den in der Diskussion genannten Vorbehalten auf benachbarte Felder übertragen lässt."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000079"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -11009,12 +10877,6 @@
       {
         "language": "eng",
         "value": "This paper sets out a methodological framework for the study of complex networks. The methodology rests on a systematic literature review completed by two independent case studies. The study underlines the importance of open data practices for the reproducibility of this type of research."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000080"
       }
     ],
     "contribution": [
@@ -11569,12 +11431,6 @@
         "value": "This article examines seismology from a comparative perspective. The methodology rests on a systematic literature review completed by two independent case studies. The findings confirm the initial hypotheses while revealing significant variation between the contexts studied."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000084"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -11847,12 +11703,6 @@
         "value": "This paper sets out a methodological framework for the study of tropical deforestation. The experiments were repeated on several independent datasets in order to test the robustness of the results. The results show a marked effect that had not been documented before and open promising avenues for further work."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000086"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -12120,12 +11970,6 @@
       {
         "language": "fre",
         "value": "Cette contribution propose une synthèse critique des travaux sur l'interaction homme-robot. La démarche associe une modélisation statistique à une série d'entretiens semi-directifs menés dans plusieurs institutions suisses. Les résultats invitent à réexaminer plusieurs présupposés largement partagés dans la discipline."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000088"
       }
     ],
     "contribution": [
@@ -12814,12 +12658,6 @@
         "value": "Diese Arbeit bietet eine kritische Übersicht der Forschung zur Finanzökonometrie. Die Daten wurden zwischen 2019 und 2024 erhoben und mit offenen, reproduzierbaren Werkzeugen ausgewertet, deren Quellcode frei zugänglich ist. Die Ergebnisse zeigen einen deutlichen, bislang kaum dokumentierten Effekt und eröffnen vielversprechende Perspektiven für weitere Arbeiten."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000093"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -13371,12 +13209,6 @@
       {
         "language": "fre",
         "value": "Cette étude porte sur la circulation océanique et en propose une lecture comparative. Les données ont été collectées entre 2014 et 2016 puis traitées à l'aide d'outils ouverts et reproductibles dont le code source est accessible. L'étude souligne l'importance des pratiques de données ouvertes pour la reproductibilité de ce type de recherche."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000097"
       }
     ],
     "contribution": [
@@ -14840,12 +14672,6 @@
         "value": "The present study investigates additive manufacturing in an academic research context. The methodology rests on a systematic literature review completed by two independent case studies. The findings confirm the initial hypotheses while revealing significant variation between the contexts studied."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000109"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -15376,12 +15202,6 @@
       {
         "language": "ita",
         "value": "Questo contributo propone una sintesi critica delle ricerche sulla linguistica computazionale. La metodologia si fonda su una rassegna sistematica della letteratura completata da due casi di studio indipendenti. Le conclusioni confermano le ipotesi iniziali, rivelando al contempo variazioni significative tra i contesti studiati."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000113"
       }
     ],
     "contribution": [
@@ -16966,12 +16786,6 @@
         "value": "Le présent article examine les développements récents du web sémantique. Les expériences ont été répétées sur plusieurs jeux de données indépendants afin d'éprouver la robustesse des résultats. Les résultats invitent à réexaminer plusieurs présupposés largement partagés dans la discipline."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000125"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -17238,12 +17052,6 @@
       {
         "language": "eng",
         "value": "This article examines cognitive modelling from a comparative perspective. The approach combines statistical modelling with a series of semi-structured interviews conducted in several Swiss institutions. The findings confirm the initial hypotheses while revealing significant variation between the contexts studied."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000127"
       }
     ],
     "contribution": [
@@ -17860,12 +17668,6 @@
         "value": "Die Autorinnen und Autoren analysieren die aktuellen Herausforderungen der Kulturanalytik. Die Experimente wurden auf mehreren unabhängigen Datensätzen wiederholt, um die Robustheit der Ergebnisse zu prüfen. Die Befunde bestätigen die Ausgangshypothesen, offenbaren zugleich aber erhebliche Unterschiede zwischen den untersuchten Kontexten."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000131"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -18385,12 +18187,6 @@
       {
         "language": "eng",
         "value": "This article examines autonomous navigation from a comparative perspective. The approach combines statistical modelling with a series of semi-structured interviews conducted in several Swiss institutions. The findings confirm the initial hypotheses while revealing significant variation between the contexts studied."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000135"
       }
     ],
     "contribution": [
@@ -19873,12 +19669,6 @@
         "value": "This article examines quantum simulation from a comparative perspective. The analysis draws on a corpus assembled between 2021 and 2024 and combines quantitative indicators with a qualitative reading of the sources. The results show a marked effect that had not been documented before and open promising avenues for further work."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000142"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -19998,12 +19788,6 @@
       {
         "language": "fre",
         "value": "Cette contribution propose une synthèse critique des travaux sur l'économétrie financière. L'analyse s'appuie sur un corpus constitué entre 2009 et 2012 et croise des indicateurs quantitatifs avec une lecture qualitative des sources. Les résultats invitent à réexaminer plusieurs présupposés largement partagés dans la discipline."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000143"
       }
     ],
     "contribution": [
@@ -21705,12 +21489,6 @@
         "value": "This contribution offers a critical review of recent work on knowledge graphs. The experiments were repeated on several independent datasets in order to test the robustness of the results. The authors conclude that the approach can be transferred to neighbouring fields, subject to the limitations set out in the discussion."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000151"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -22077,12 +21855,6 @@
       {
         "language": "ger",
         "value": "Diese Arbeit bietet eine kritische Übersicht der Forschung zur erklärbaren künstlichen Intelligenz. Die Daten wurden zwischen 2001 und 2005 erhoben und mit offenen, reproduzierbaren Werkzeugen ausgewertet, deren Quellcode frei zugänglich ist. Die Ergebnisse zeigen einen deutlichen, bislang kaum dokumentierten Effekt und eröffnen vielversprechende Perspektiven für weitere Arbeiten."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000154"
       }
     ],
     "contribution": [
@@ -23281,12 +23053,6 @@
         "value": "The present study investigates computational linguistics in an academic research context. The analysis draws on a corpus assembled between 2012 and 2014 and combines quantitative indicators with a qualitative reading of the sources. The results show a marked effect that had not been documented before and open promising avenues for further work."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000163"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -24279,12 +24045,6 @@
         "value": "Der Aufsatz entwickelt einen methodischen Rahmen für die Untersuchung der Quantenkryptografie. Die Analyse stützt sich auf ein zwischen 2020 und 2024 aufgebautes Korpus und verbindet quantitative Kennzahlen mit einer qualitativen Auswertung der Quellen. Die Ergebnisse zeigen einen deutlichen, bislang kaum dokumentierten Effekt und eröffnen vielversprechende Perspektiven für weitere Arbeiten."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000170"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -24898,12 +24658,6 @@
       {
         "language": "eng",
         "value": "The present study investigates the semantic web in an academic research context. The approach combines statistical modelling with a series of semi-structured interviews conducted in several Swiss institutions. The results show a marked effect that had not been documented before and open promising avenues for further work."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000175"
       }
     ],
     "contribution": [
@@ -25877,12 +25631,6 @@
       {
         "language": "fre",
         "value": "Cet article présente un cadre méthodologique pour l'étude de l'écologie computationnelle. Les expériences ont été répétées sur plusieurs jeux de données indépendants afin d'éprouver la robustesse des résultats. Les auteurs concluent que la démarche est transposable à des domaines voisins, sous réserve des limites exposées en discussion."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000182"
       }
     ],
     "contribution": [
@@ -27296,12 +27044,6 @@
       {
         "language": "eng",
         "value": "This contribution offers a critical review of recent work on financial econometrics. The analysis draws on a corpus assembled between 2015 and 2017 and combines quantitative indicators with a qualitative reading of the sources. The findings confirm the initial hypotheses while revealing significant variation between the contexts studied."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000193"
       }
     ],
     "contribution": [
@@ -29288,12 +29030,6 @@
         "value": "Die Autorinnen und Autoren analysieren die aktuellen Herausforderungen der erklärbaren künstlichen Intelligenz. Die Daten wurden zwischen 2015 und 2018 erhoben und mit offenen, reproduzierbaren Werkzeugen ausgewertet, deren Quellcode frei zugänglich ist. Die Autorinnen und Autoren kommen zu dem Schluss, dass sich das Vorgehen unter den in der Diskussion genannten Vorbehalten auf benachbarte Felder übertragen lässt."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000204"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -29547,12 +29283,6 @@
       {
         "language": "eng",
         "value": "This contribution offers a critical review of recent work on multilingual natural language processing. The experiments were repeated on several independent datasets in order to test the robustness of the results. The study underlines the importance of open data practices for the reproducibility of this type of research."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000206"
       }
     ],
     "contribution": [
@@ -29859,12 +29589,6 @@
       {
         "language": "fre",
         "value": "Le présent article examine les développements récents de l'intelligence artificielle géospatiale. La méthodologie repose sur une revue systématique de la littérature complétée par deux études de cas indépendantes. Les auteurs concluent que la démarche est transposable à des domaines voisins, sous réserve des limites exposées en discussion."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000208"
       }
     ],
     "contribution": [
@@ -30226,12 +29950,6 @@
       {
         "language": "ita",
         "value": "Questo studio verte sulla produzione additiva e ne propone una lettura comparata. I dati sono stati raccolti tra il 2014 e il 2016 ed elaborati con strumenti aperti e riproducibili il cui codice sorgente è accessibile. I risultati evidenziano un effetto marcato, finora poco documentato, e aprono prospettive promettenti per i lavori successivi."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000209"
       }
     ],
     "contribution": [
@@ -30897,12 +30615,6 @@
         "value": "Die vorliegende Studie liefert einen vergleichend angelegten Beitrag zum Reinforcement Learning. Die Daten wurden zwischen 2020 und 2022 erhoben und mit offenen, reproduzierbaren Werkzeugen ausgewertet, deren Quellcode frei zugänglich ist. Die Autorinnen und Autoren kommen zu dem Schluss, dass sich das Vorgehen unter den in der Diskussion genannten Vorbehalten auf benachbarte Felder übertragen lässt."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000214"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -31480,12 +31192,6 @@
         "value": "Die vorliegende Studie liefert einen vergleichend angelegten Beitrag zur bildungsbezogenen Datenanalyse. Die Daten wurden zwischen 2016 und 2020 erhoben und mit offenen, reproduzierbaren Werkzeugen ausgewertet, deren Quellcode frei zugänglich ist. Die Studie unterstreicht die Bedeutung offener Datenpraktiken für die Reproduzierbarkeit dieser Art von Forschung."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000218"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -32045,12 +31751,6 @@
         "value": "Diese Arbeit bietet eine kritische Übersicht der Forschung zum computergestützten Proteindesign. Die Methodik beruht auf einer systematischen Literaturübersicht, ergänzt durch zwei unabhängige Fallstudien. Die Ergebnisse zeigen einen deutlichen, bislang kaum dokumentierten Effekt und eröffnen vielversprechende Perspektiven für weitere Arbeiten."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000222"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -32145,12 +31845,6 @@
       {
         "language": "eng",
         "value": "The present study investigates privacy-preserving analytics in an academic research context. Data were collected between 2018 and 2022 and processed with open, reproducible tools whose source code is publicly available. The results invite a re-examination of several assumptions that are widely shared in the field."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000223"
       }
     ],
     "contribution": [
@@ -32394,12 +32088,6 @@
       {
         "language": "ger",
         "value": "Der Beitrag untersucht die jüngeren Entwicklungen des semantischen Webs. Die Analyse stützt sich auf ein zwischen 2001 und 2006 aufgebautes Korpus und verbindet quantitative Kennzahlen mit einer qualitativen Auswertung der Quellen. Die Autorinnen und Autoren kommen zu dem Schluss, dass sich das Vorgehen unter den in der Diskussion genannten Vorbehalten auf benachbarte Felder übertragen lässt."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000225"
       }
     ],
     "contribution": [
@@ -34158,12 +33846,6 @@
         "value": "Der Aufsatz entwickelt einen methodischen Rahmen für die Untersuchung der Mensch-Roboter-Interaktion. Der Ansatz kombiniert statistische Modellierung mit einer Reihe leitfadengestützter Interviews in mehreren Schweizer Institutionen. Die Ergebnisse zeigen einen deutlichen, bislang kaum dokumentierten Effekt und eröffnen vielversprechende Perspektiven für weitere Arbeiten."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000238"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -34687,12 +34369,6 @@
       {
         "language": "ita",
         "value": "Gli autori analizzano le sfide attuali della simulazione quantistica. La metodologia si fonda su una rassegna sistematica della letteratura completata da due casi di studio indipendenti. I risultati evidenziano un effetto marcato, finora poco documentato, e aprono prospettive promettenti per i lavori successivi."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000242"
       }
     ],
     "contribution": [
@@ -35247,12 +34923,6 @@
       {
         "language": "eng",
         "value": "This contribution offers a critical review of recent work on spatial statistics. The analysis draws on a corpus assembled between 2020 and 2022 and combines quantitative indicators with a qualitative reading of the sources. The findings confirm the initial hypotheses while revealing significant variation between the contexts studied."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000246"
       }
     ],
     "contribution": [
@@ -36408,12 +36078,6 @@
         "value": "Der Aufsatz entwickelt einen methodischen Rahmen für die Untersuchung der erklärbaren künstlichen Intelligenz. Die Experimente wurden auf mehreren unabhängigen Datensätzen wiederholt, um die Robustheit der Ergebnisse zu prüfen. Die Befunde bestätigen die Ausgangshypothesen, offenbaren zugleich aber erhebliche Unterschiede zwischen den untersuchten Kontexten."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000254"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -37114,12 +36778,6 @@
         "value": "Cet article présente un cadre méthodologique pour l'étude de la fabrication additive. La méthodologie repose sur une revue systématique de la littérature complétée par deux études de cas indépendantes. Les résultats invitent à réexaminer plusieurs présupposés largement partagés dans la discipline."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000259"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -37394,12 +37052,6 @@
       {
         "language": "ita",
         "value": "Il presente articolo esamina gli sviluppi recenti dei materiali per l'accumulo di energia. I dati sono stati raccolti tra il 2018 e il 2022 ed elaborati con strumenti aperti e riproducibili il cui codice sorgente è accessibile. Gli autori concludono che l'approccio è trasferibile a settori affini, fatte salve le limitazioni esposte nella discussione."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000261"
       }
     ],
     "contribution": [
@@ -38054,12 +37706,6 @@
       {
         "language": "eng",
         "value": "This contribution offers a critical review of recent work on information retrieval. The experiments were repeated on several independent datasets in order to test the robustness of the results. The results show a marked effect that had not been documented before and open promising avenues for further work."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000266"
       }
     ],
     "contribution": [
@@ -38972,12 +38618,6 @@
         "value": "The authors analyse current developments in privacy-preserving analytics. The methodology rests on a systematic literature review completed by two independent case studies. The results invite a re-examination of several assumptions that are widely shared in the field."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000273"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -39612,12 +39252,6 @@
         "value": "Diese Arbeit bietet eine kritische Übersicht der Forschung zur Roboterbahnplanung. Der Ansatz kombiniert statistische Modellierung mit einer Reihe leitfadengestützter Interviews in mehreren Schweizer Institutionen. Die Ergebnisse zeigen einen deutlichen, bislang kaum dokumentierten Effekt und eröffnen vielversprechende Perspektiven für weitere Arbeiten."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000278"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -39712,12 +39346,6 @@
       {
         "language": "ger",
         "value": "Die vorliegende Studie liefert einen vergleichend angelegten Beitrag zum föderierten Lernen. Die Daten wurden zwischen 2022 und 2024 erhoben und mit offenen, reproduzierbaren Werkzeugen ausgewertet, deren Quellcode frei zugänglich ist. Die Ergebnisse zeigen einen deutlichen, bislang kaum dokumentierten Effekt und eröffnen vielversprechende Perspektiven für weitere Arbeiten."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000279"
       }
     ],
     "contribution": [
@@ -40475,12 +40103,6 @@
       {
         "language": "ita",
         "value": "Il presente articolo esamina gli sviluppi recenti della sismologia. L'analisi si basa su un corpus costituito tra il 2016 e il 2019 e incrocia indicatori quantitativi con una lettura qualitativa delle fonti. I risultati invitano a riesaminare diversi presupposti ampiamente condivisi nella disciplina."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000284"
       }
     ],
     "contribution": [
@@ -41884,12 +41506,6 @@
       {
         "language": "eng",
         "value": "This paper sets out a methodological framework for the study of graph learning. The methodology rests on a systematic literature review completed by two independent case studies. The results invite a re-examination of several assumptions that are widely shared in the field."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000295"
       }
     ],
     "contribution": [
@@ -43584,12 +43200,6 @@
         "value": "This paper sets out a methodological framework for the study of geospatial artificial intelligence. The methodology rests on a systematic literature review completed by two independent case studies. The results invite a re-examination of several assumptions that are widely shared in the field."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000308"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -44560,12 +44170,6 @@
         "value": "This paper sets out a methodological framework for the study of human-computer interaction. Data were collected between 2022 and 2024 and processed with open, reproducible tools whose source code is publicly available. The results invite a re-examination of several assumptions that are widely shared in the field."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000315"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -45483,12 +45087,6 @@
         "value": "Der Beitrag untersucht die jüngeren Entwicklungen des computergestützten Proteindesigns. Die Daten wurden zwischen 2019 und 2024 erhoben und mit offenen, reproduzierbaren Werkzeugen ausgewertet, deren Quellcode frei zugänglich ist. Die Ergebnisse legen nahe, mehrere in der Disziplin weit verbreitete Annahmen erneut zu prüfen."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000322"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -45637,12 +45235,6 @@
       {
         "language": "ita",
         "value": "Gli autori analizzano le sfide attuali dell'analisi rispettosa della privacy. L'analisi si basa su un corpus costituito tra il 2017 e il 2020 e incrocia indicatori quantitativi con una lettura qualitativa delle fonti. Gli autori concludono che l'approccio è trasferibile a settori affini, fatte salve le limitazioni esposte nella discussione."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000323"
       }
     ],
     "contribution": [
@@ -45889,12 +45481,6 @@
       {
         "language": "eng",
         "value": "The present study investigates the semantic web in an academic research context. The experiments were repeated on several independent datasets in order to test the robustness of the results. The results show a marked effect that had not been documented before and open promising avenues for further work."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000325"
       }
     ],
     "contribution": [
@@ -46442,12 +46028,6 @@
         "value": "This article examines federated learning from a comparative perspective. The methodology rests on a systematic literature review completed by two independent case studies. The findings confirm the initial hypotheses while revealing significant variation between the contexts studied."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000329"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -46706,12 +46286,6 @@
         "value": "Le présent article examine les développements récents de l'analytique culturelle. La méthodologie repose sur une revue systématique de la littérature complétée par deux études de cas indépendantes. Les résultats invitent à réexaminer plusieurs présupposés largement partagés dans la discipline."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000331"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -46948,12 +46522,6 @@
       {
         "language": "fre",
         "value": "Le présent article examine les développements récents de l'informatique des matériaux. La méthodologie repose sur une revue systématique de la littérature complétée par deux études de cas indépendantes. Les conclusions confirment les hypothèses initiales tout en révélant des variations importantes entre les contextes étudiés."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000333"
       }
     ],
     "contribution": [
@@ -47308,12 +46876,6 @@
       {
         "language": "eng",
         "value": "This article examines tropical deforestation from a comparative perspective. The experiments were repeated on several independent datasets in order to test the robustness of the results. The results invite a re-examination of several assumptions that are widely shared in the field."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000336"
       }
     ],
     "contribution": [
@@ -47877,12 +47439,6 @@
       {
         "language": "eng",
         "value": "This paper sets out a methodological framework for the study of time series forecasting. The analysis draws on a corpus assembled between 2015 and 2018 and combines quantitative indicators with a qualitative reading of the sources. The study underlines the importance of open data practices for the reproducibility of this type of research."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000340"
       }
     ],
     "contribution": [
@@ -48695,12 +48251,6 @@
         "value": "This paper sets out a methodological framework for the study of spatial statistics. The analysis draws on a corpus assembled between 2019 and 2021 and combines quantitative indicators with a qualitative reading of the sources. The authors conclude that the approach can be transferred to neighbouring fields, subject to the limitations set out in the discussion."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000346"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -48818,12 +48368,6 @@
       {
         "language": "eng",
         "value": "The authors analyse current developments in ocean circulation. Data were collected between 2017 and 2020 and processed with open, reproducible tools whose source code is publicly available. The results show a marked effect that had not been documented before and open promising avenues for further work."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000347"
       }
     ],
     "contribution": [
@@ -50143,12 +49687,6 @@
         "value": "Cette étude porte sur le traitement automatique multilingue et en propose une lecture comparative. Les données ont été collectées entre 2020 et 2022 puis traitées à l'aide d'outils ouverts et reproductibles dont le code source est accessible. L'étude souligne l'importance des pratiques de données ouvertes pour la reproductibilité de ce type de recherche."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000356"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -50314,12 +49852,6 @@
       {
         "language": "eng",
         "value": "This contribution offers a critical review of recent work on medical imaging. The approach combines statistical modelling with a series of semi-structured interviews conducted in several Swiss institutions. The results show a marked effect that had not been documented before and open promising avenues for further work."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000357"
       }
     ],
     "contribution": [
@@ -51940,12 +51472,6 @@
         "value": "The authors analyse current developments in fairness in machine learning. The approach combines statistical modelling with a series of semi-structured interviews conducted in several Swiss institutions. The results invite a re-examination of several assumptions that are widely shared in the field."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000369"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -53031,12 +52557,6 @@
       {
         "language": "ita",
         "value": "Il presente articolo esamina gli sviluppi recenti della modellizzazione cognitiva. I dati sono stati raccolti tra il 2015 e il 2020 ed elaborati con strumenti aperti e riproducibili il cui codice sorgente è accessibile. I risultati invitano a riesaminare diversi presupposti ampiamente condivisi nella disciplina."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000377"
       }
     ],
     "contribution": [
@@ -54324,12 +53844,6 @@
         "value": "The authors analyse current developments in astrophysical plasmas. The approach combines statistical modelling with a series of semi-structured interviews conducted in several Swiss institutions. The study underlines the importance of open data practices for the reproducibility of this type of research."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000387"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -55592,12 +55106,6 @@
       {
         "language": "ger",
         "value": "Die Autorinnen und Autoren analysieren die aktuellen Herausforderungen der räumlichen Statistik. Die Experimente wurden auf mehreren unabhängigen Datensätzen wiederholt, um die Robustheit der Ergebnisse zu prüfen. Die Studie unterstreicht die Bedeutung offener Datenpraktiken für die Reproduzierbarkeit dieser Art von Forschung."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000396"
       }
     ],
     "contribution": [
@@ -56938,12 +56446,6 @@
         "value": "Die vorliegende Studie liefert einen vergleichend angelegten Beitrag zur mehrsprachigen Sprachverarbeitung. Die Experimente wurden auf mehreren unabhängigen Datensätzen wiederholt, um die Robustheit der Ergebnisse zu prüfen. Die Autorinnen und Autoren kommen zu dem Schluss, dass sich das Vorgehen unter den in der Diskussion genannten Vorbehalten auf benachbarte Felder übertragen lässt."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000406"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -57598,12 +57100,6 @@
         "value": "This paper sets out a methodological framework for the study of energy storage materials. Data were collected between 2019 and 2021 and processed with open, reproducible tools whose source code is publicly available. The authors conclude that the approach can be transferred to neighbouring fields, subject to the limitations set out in the discussion."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000411"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -57863,12 +57359,6 @@
         "value": "The authors analyse current developments in computational linguistics. The experiments were repeated on several independent datasets in order to test the robustness of the results. The findings confirm the initial hypotheses while revealing significant variation between the contexts studied."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000413"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -57981,12 +57471,6 @@
       {
         "language": "eng",
         "value": "The authors analyse current developments in reinforcement learning. The experiments were repeated on several independent datasets in order to test the robustness of the results. The findings confirm the initial hypotheses while revealing significant variation between the contexts studied."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000414"
       }
     ],
     "contribution": [
@@ -58119,12 +57603,6 @@
       {
         "language": "ger",
         "value": "Der Aufsatz entwickelt einen methodischen Rahmen für die Untersuchung der Mensch-Computer-Interaktion. Die Methodik beruht auf einer systematischen Literaturübersicht, ergänzt durch zwei unabhängige Fallstudien. Die Ergebnisse legen nahe, mehrere in der Disziplin weit verbreitete Annahmen erneut zu prüfen."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000415"
       }
     ],
     "contribution": [
@@ -58961,12 +58439,6 @@
         "value": "Cette contribution propose une synthèse critique des travaux sur la conception computationnelle de protéines. Les expériences ont été répétées sur plusieurs jeux de données indépendants afin d'éprouver la robustesse des résultats. L'étude souligne l'importance des pratiques de données ouvertes pour la reproductibilité de ce type de recherche."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000422"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -59089,12 +58561,6 @@
       {
         "language": "eng",
         "value": "This paper sets out a methodological framework for the study of privacy-preserving analytics. The analysis draws on a corpus assembled between 2006 and 2011 and combines quantitative indicators with a qualitative reading of the sources. The authors conclude that the approach can be transferred to neighbouring fields, subject to the limitations set out in the discussion."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000423"
       }
     ],
     "contribution": [
@@ -59790,12 +59256,6 @@
       {
         "language": "ita",
         "value": "L'articolo presenta un quadro metodologico per lo studio della pianificazione del moto robotico. Gli esperimenti sono stati ripetuti su più insiemi di dati indipendenti per verificare la robustezza dei risultati. Lo studio sottolinea l'importanza delle pratiche di dati aperti per la riproducibilità di questo tipo di ricerca."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000428"
       }
     ],
     "contribution": [
@@ -60518,12 +59978,6 @@
         "value": "Die vorliegende Studie liefert einen vergleichend angelegten Beitrag zur Materialinformatik. Der Ansatz kombiniert statistische Modellierung mit einer Reihe leitfadengestützter Interviews in mehreren Schweizer Institutionen. Die Autorinnen und Autoren kommen zu dem Schluss, dass sich das Vorgehen unter den in der Diskussion genannten Vorbehalten auf benachbarte Felder übertragen lässt."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000433"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -60830,12 +60284,6 @@
         "value": "Die Autorinnen und Autoren analysieren die aktuellen Herausforderungen der autonomen Navigation. Die Experimente wurden auf mehreren unabhängigen Datensätzen wiederholt, um die Robustheit der Ergebnisse zu prüfen. Die Ergebnisse legen nahe, mehrere in der Disziplin weit verbreitete Annahmen erneut zu prüfen."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000435"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -61064,12 +60512,6 @@
       {
         "language": "ger",
         "value": "Die Autorinnen und Autoren analysieren die aktuellen Herausforderungen astrophysikalischer Plasmen. Die Analyse stützt sich auf ein zwischen 2011 und 2013 aufgebautes Korpus und verbindet quantitative Kennzahlen mit einer qualitativen Auswertung der Quellen. Die Ergebnisse legen nahe, mehrere in der Disziplin weit verbreitete Annahmen erneut zu prüfen."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000437"
       }
     ],
     "contribution": [
@@ -61374,12 +60816,6 @@
         "value": "Der Beitrag untersucht die jüngeren Entwicklungen der verteilten Optimierung. Der Ansatz kombiniert statistische Modellierung mit einer Reihe leitfadengestützter Interviews in mehreren Schweizer Institutionen. Die Ergebnisse zeigen einen deutlichen, bislang kaum dokumentierten Effekt und eröffnen vielversprechende Perspektiven für weitere Arbeiten."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000439"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -61489,12 +60925,6 @@
       {
         "language": "fre",
         "value": "Les auteurs analysent les enjeux actuels de la prévision de séries temporelles. Les expériences ont été répétées sur plusieurs jeux de données indépendants afin d'éprouver la robustesse des résultats. L'étude souligne l'importance des pratiques de données ouvertes pour la reproductibilité de ce type de recherche."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000440"
       }
     ],
     "contribution": [
@@ -61619,12 +61049,6 @@
       {
         "language": "eng",
         "value": "This contribution offers a critical review of recent work on smart mobility. Data were collected between 2018 and 2022 and processed with open, reproducible tools whose source code is publicly available. The results show a marked effect that had not been documented before and open promising avenues for further work."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000441"
       }
     ],
     "contribution": [
@@ -61867,12 +61291,6 @@
       {
         "language": "fre",
         "value": "Cet article présente un cadre méthodologique pour l'étude de l'économétrie financière. L'analyse s'appuie sur un corpus constitué entre 2005 et 2007 et croise des indicateurs quantitatifs avec une lecture qualitative des sources. Les résultats invitent à réexaminer plusieurs présupposés largement partagés dans la discipline."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000443"
       }
     ],
     "contribution": [
@@ -62141,12 +61559,6 @@
         "value": "This paper sets out a methodological framework for the study of graph learning. Data were collected between 2021 and 2023 and processed with open, reproducible tools whose source code is publicly available. The authors conclude that the approach can be transferred to neighbouring fields, subject to the limitations set out in the discussion."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000445"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -62272,12 +61684,6 @@
       {
         "language": "ita",
         "value": "Gli autori analizzano le sfide attuali della statistica spaziale. La metodologia si fonda su una rassegna sistematica della letteratura completata da due casi di studio indipendenti. Gli autori concludono che l'approccio è trasferibile a settori affini, fatte salve le limitazioni esposte nella discussione."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000446"
       }
     ],
     "contribution": [
@@ -62412,12 +61818,6 @@
       {
         "language": "eng",
         "value": "This article examines ocean circulation from a comparative perspective. The approach combines statistical modelling with a series of semi-structured interviews conducted in several Swiss institutions. The results invite a re-examination of several assumptions that are widely shared in the field."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000447"
       }
     ],
     "contribution": [
@@ -62837,12 +62237,6 @@
         "value": "This paper sets out a methodological framework for the study of agroecology. The analysis draws on a corpus assembled between 2014 and 2017 and combines quantitative indicators with a qualitative reading of the sources. The results invite a re-examination of several assumptions that are widely shared in the field."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000450"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -63095,12 +62489,6 @@
         "value": "Der Aufsatz entwickelt einen methodischen Rahmen für die Untersuchung cyber-physischer Systeme. Die Experimente wurden auf mehreren unabhängigen Datensätzen wiederholt, um die Robustheit der Ergebnisse zu prüfen. Die Befunde bestätigen die Ausgangshypothesen, offenbaren zugleich aber erhebliche Unterschiede zwischen den untersuchten Kontexten."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000452"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -63236,12 +62624,6 @@
       {
         "language": "ger",
         "value": "Der Beitrag untersucht die jüngeren Entwicklungen des Operations Research. Die Daten wurden zwischen 2020 und 2022 erhoben und mit offenen, reproduzierbaren Werkzeugen ausgewertet, deren Quellcode frei zugänglich ist. Die Studie unterstreicht die Bedeutung offener Datenpraktiken für die Reproduzierbarkeit dieser Art von Forschung."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000453"
       }
     ],
     "contribution": [
@@ -63511,12 +62893,6 @@
       {
         "language": "ger",
         "value": "Der Beitrag untersucht die jüngeren Entwicklungen der genomischen Epidemiologie. Der Ansatz kombiniert statistische Modellierung mit einer Reihe leitfadengestützter Interviews in mehreren Schweizer Institutionen. Die Ergebnisse zeigen einen deutlichen, bislang kaum dokumentierten Effekt und eröffnen vielversprechende Perspektiven für weitere Arbeiten."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000455"
       }
     ],
     "contribution": [
@@ -64085,12 +63461,6 @@
         "value": "Der Aufsatz entwickelt einen methodischen Rahmen für die Untersuchung der additiven Fertigung. Die Experimente wurden auf mehreren unabhängigen Datensätzen wiederholt, um die Robustheit der Ergebnisse zu prüfen. Die Befunde bestätigen die Ausgangshypothesen, offenbaren zugleich aber erhebliche Unterschiede zwischen den untersuchten Kontexten."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000459"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -64347,12 +63717,6 @@
       {
         "language": "eng",
         "value": "This paper sets out a methodological framework for the study of energy storage materials. Data were collected between 2010 and 2014 and processed with open, reproducible tools whose source code is publicly available. The study underlines the importance of open data practices for the reproducibility of this type of research."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000461"
       }
     ],
     "contribution": [
@@ -65057,12 +64421,6 @@
         "value": "This paper sets out a methodological framework for the study of information retrieval. The methodology rests on a systematic literature review completed by two independent case studies. The results show a marked effect that had not been documented before and open promising avenues for further work."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000466"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -65681,12 +65039,6 @@
         "value": "This article examines quantum cryptography from a comparative perspective. The analysis draws on a corpus assembled between 2018 and 2023 and combines quantitative indicators with a qualitative reading of the sources. The results invite a re-examination of several assumptions that are widely shared in the field."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000470"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -66224,12 +65576,6 @@
       {
         "language": "eng",
         "value": "This contribution offers a critical review of recent work on affective computing. The approach combines statistical modelling with a series of semi-structured interviews conducted in several Swiss institutions. The authors conclude that the approach can be transferred to neighbouring fields, subject to the limitations set out in the discussion."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000474"
       }
     ],
     "contribution": [
@@ -67453,12 +66799,6 @@
         "value": "This paper sets out a methodological framework for the study of computational ecology. The approach combines statistical modelling with a series of semi-structured interviews conducted in several Swiss institutions. The authors conclude that the approach can be transferred to neighbouring fields, subject to the limitations set out in the discussion."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000482"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -67586,12 +66926,6 @@
       {
         "language": "fre",
         "value": "Les auteurs analysent les enjeux actuels de l'informatique des matériaux. La démarche associe une modélisation statistique à une série d'entretiens semi-directifs menés dans plusieurs institutions suisses. L'étude souligne l'importance des pratiques de données ouvertes pour la reproductibilité de ce type de recherche."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000483"
       }
     ],
     "contribution": [
@@ -67823,12 +67157,6 @@
       {
         "language": "fre",
         "value": "Les auteurs analysent les enjeux actuels de la navigation autonome. Les expériences ont été répétées sur plusieurs jeux de données indépendants afin d'éprouver la robustesse des résultats. Les conclusions confirment les hypothèses initiales tout en révélant des variations importantes entre les contextes étudiés."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000485"
       }
     ],
     "contribution": [
@@ -68096,12 +67424,6 @@
       {
         "language": "fre",
         "value": "Les auteurs analysent les enjeux actuels des plasmas astrophysiques. Les expériences ont été répétées sur plusieurs jeux de données indépendants afin d'éprouver la robustesse des résultats. Les résultats mettent en évidence un effet marqué, jusqu'ici peu documenté, et ouvrent des pistes prometteuses pour la suite des travaux."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000487"
       }
     ],
     "contribution": [
@@ -68670,12 +67992,6 @@
       {
         "language": "ger",
         "value": "Der Aufsatz entwickelt einen methodischen Rahmen für die Untersuchung der intelligenten Mobilität. Die Experimente wurden auf mehreren unabhängigen Datensätzen wiederholt, um die Robustheit der Ergebnisse zu prüfen. Die Autorinnen und Autoren kommen zu dem Schluss, dass sich das Vorgehen unter den in der Diskussion genannten Vorbehalten auf benachbarte Felder übertragen lässt."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000491"
       }
     ],
     "contribution": [
@@ -69321,12 +68637,6 @@
         "value": "Questo studio verte sulla statistica spaziale e ne propone una lettura comparata. I dati sono stati raccolti tra il 2008 e il 2013 ed elaborati con strumenti aperti e riproducibili il cui codice sorgente è accessibile. Le conclusioni confermano le ipotesi iniziali, rivelando al contempo variazioni significative tra i contesti studiati."
       }
     ],
-    "identifiedBy": [
-      {
-        "type": "ark",
-        "value": "ark-000496"
-      }
-    ],
     "contribution": [
       {
         "agent": {
@@ -69648,12 +68958,6 @@
       {
         "language": "ger",
         "value": "Der Beitrag untersucht die jüngeren Entwicklungen des Edge Computing. Die Daten wurden zwischen 2015 und 2018 erhoben und mit offenen, reproduzierbaren Werkzeugen ausgewertet, deren Quellcode frei zugänglich ist. Die Autorinnen und Autoren kommen zu dem Schluss, dass sich das Vorgehen unter den in der Diskussion genannten Vorbehalten auf benachbarte Felder übertragen lässt."
-      }
-    ],
-    "identifiedBy": [
-      {
-        "type": "bf:Urn",
-        "value": "Urn-000498"
       }
     ],
     "contribution": [

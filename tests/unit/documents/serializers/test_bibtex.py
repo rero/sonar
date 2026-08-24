@@ -235,21 +235,19 @@ def test_bibtex_series_entry_does_not_replace_own_publisher():
 
 def test_bibtex_other_identifiers_get_their_own_field():
     """Identifiers with no dedicated BibTeX field (ark, URN...) are kept, not dropped."""
-    metadata = {"identifiedBy": [{"type": "bf:Urn", "value": "Urn-000307"}]}
-    assert "urn          = {Urn-000307}," in serialize_record_to_bibtex(metadata)
+    metadata = {"identifiedBy": [{"type": "bf:Urn", "value": "urn:nbn:ch:rero-006-3078"}]}
+    assert "urn          = {urn:nbn:ch:rero-006-3078}," in serialize_record_to_bibtex(metadata)
 
 
 def test_bibtex_duplicate_identifier_types_get_numbered_fields():
-    """Two identifiers of the same "other" type produce distinct field names, as BibTeX requires unique names."""
+    """A type repeated between the record and its host document gets distinct field names, as BibTeX requires."""
     metadata = {
-        "identifiedBy": [
-            {"type": "ark", "value": "ark-000279"},
-            {"type": "ark", "value": "ark:/99999/ffk3312"},
-        ]
+        "identifiedBy": [{"type": "bf:Local", "value": "LOCAL-1"}],
+        "partOf": [{"document": {"identifiedBy": [{"type": "bf:Local", "value": "LOCAL-2"}]}}],
     }
     result = serialize_record_to_bibtex(metadata)
-    assert "ark          = {ark-000279}," in result
-    assert "ark2         = {ark:/99999/ffk3312}," in result
+    assert "local        = {LOCAL-1}," in result
+    assert "local2       = {LOCAL-2}," in result
 
 
 def test_bibtex_escapes_special_characters():
