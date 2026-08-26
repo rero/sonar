@@ -168,7 +168,7 @@ def app_config(app_config):
     app_config["SONAR_APP_ARK_SHOULDER"] = "ffk3"
 
     # Celery
-    app_config["CACHE_TYPE"] = "simple"
+    app_config["CACHE_TYPE"] = "SimpleCache"
     app_config["CELERY_BROKER_URL"] = "memory://"
     app_config["CELERY_CACHE_BACKEND"] = "memory"
     app_config["CELERY_RESULT_BACKEND"] = "cache"
