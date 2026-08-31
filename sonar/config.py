@@ -580,41 +580,58 @@ RECORDS_REST_ENDPOINTS["subd"] = SubdivisionConfiguration.rest_endpoint
 RECORDS_REST_ENDPOINTS["stat"] = StatConfiguration.rest_endpoint
 """REST endpoints for statistics."""
 
-DEFAULT_AGGREGATION_SIZE = 50
+SONAR_APP_AGGREGATION_SIZE = 50
 """Default size for aggregations."""
+
+SONAR_APP_AGGREGATION_SHARD_SIZE = 1000
+"""Default shard size for terms aggregations."""
 
 RECORDS_REST_FACETS = {
     "documents": dict(
         aggs=dict(
-            masked=dict(terms=dict(field="masked", size=DEFAULT_AGGREGATION_SIZE)),
+            masked=dict(
+                terms=dict(
+                    field="masked",
+                )
+            ),
             subdivision=dict(
-                terms=dict(field="subdivisions.pid", size=DEFAULT_AGGREGATION_SIZE)
+                terms=dict(
+                    field="subdivisions.pid",
+                )
             ),
             organisation=dict(
-                terms=dict(field="organisation.pid", size=DEFAULT_AGGREGATION_SIZE)
+                terms=dict(
+                    field="organisation.pid",
+                )
             ),
             language=dict(
-                terms=dict(field="language.value", size=DEFAULT_AGGREGATION_SIZE)
+                terms=dict(
+                    field="language.value",
+                )
             ),
             subject=dict(
-                terms=dict(field="facet_subjects", size=DEFAULT_AGGREGATION_SIZE)
+                terms=dict(
+                    field="facet_subjects",
+                )
             ),
             collection=dict(
-                terms=dict(field="collections.pid", size=DEFAULT_AGGREGATION_SIZE)
+                terms=dict(
+                    field="collections.pid",
+                )
             ),
             document_type=dict(
-                terms=dict(field="documentType", size=DEFAULT_AGGREGATION_SIZE)
+                terms=dict(
+                    field="documentType",
+                )
             ),
             controlled_affiliation=dict(
                 terms=dict(
                     field="contribution.controlledAffiliation.raw",
-                    size=DEFAULT_AGGREGATION_SIZE,
                 )
             ),
             author=dict(
                 terms=dict(
                     field="contribution.agent.preferred_name.raw",
-                    size=DEFAULT_AGGREGATION_SIZE,
                 )
             ),
             year=dict(
@@ -625,13 +642,19 @@ RECORDS_REST_FACETS = {
                 )
             ),
             customField1=dict(
-                terms=dict(field="customField1.raw", size=DEFAULT_AGGREGATION_SIZE)
+                terms=dict(
+                    field="customField1.raw",
+                )
             ),
             customField2=dict(
-                terms=dict(field="customField2.raw", size=DEFAULT_AGGREGATION_SIZE)
+                terms=dict(
+                    field="customField2.raw",
+                )
             ),
             customField3=dict(
-                terms=dict(field="customField3.raw", size=DEFAULT_AGGREGATION_SIZE)
+                terms=dict(
+                    field="customField3.raw",
+                )
             ),
         ),
         filters={
@@ -659,13 +682,23 @@ RECORDS_REST_FACETS = {
         aggs=dict(
             subdivision=dict(
                 terms=dict(
-                    field="diffusion.subdivisions.pid", size=DEFAULT_AGGREGATION_SIZE
+                    field="diffusion.subdivisions.pid",
                 )
             ),
-            status=dict(terms=dict(field="status", size=DEFAULT_AGGREGATION_SIZE)),
-            user=dict(terms=dict(field="user.pid", size=DEFAULT_AGGREGATION_SIZE)),
+            status=dict(
+                terms=dict(
+                    field="status",
+                )
+            ),
+            user=dict(
+                terms=dict(
+                    field="user.pid",
+                )
+            ),
             contributor=dict(
-                terms=dict(field="facet_contributors", size=DEFAULT_AGGREGATION_SIZE)
+                terms=dict(
+                    field="facet_contributors",
+                )
             ),
         ),
         filters={
@@ -682,7 +715,9 @@ RECORDS_REST_FACETS = {
                 "filter": {"bool": {"must_not": {"exists": {"field": "organisation"}}}}
             },
             "subdivision": {
-                "terms": {"field": "subdivision.pid", "size": DEFAULT_AGGREGATION_SIZE}
+                "terms": {
+                    "field": "subdivision.pid",
+                }
             },
         },
         "filters": {
