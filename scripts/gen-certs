@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# SPDX-FileCopyrightText: Fondation RERO+
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+source $(dirname "$0")/functions
+
+set -e
+
+PROGRAM=`basename $0`
+CERTS_DIR="$(dirname "$0")/../.certs"
+CERT="${CERTS_DIR}/dev.crt"
+KEY="${CERTS_DIR}/dev.key"
+HOSTS=(sonar.ch localhost 127.0.0.1 ::1)
+force=false
+
+while test $# -gt 0; do
+    case "$1" in
+        -f|--force)
+          force=true ;;
+        *) message "Option $1 not recognized" "error" ;;
+    esac
+    shift
+done
+
+section "Generate development certificates" "info"
+
+if [[ -f "${CERT}" && -f "${KEY}" ]] && ! $force ; then
+  message "Certificates already exist, skipping. Use --force to regenerate." "info"
+  exit 0
+fi
+
+mkdir -p "${CERTS_DIR}"
+
+if command -v mkcert &> /dev/null; then
+  # mkcert signs with a local CA, so browsers accept the certificate without
+  # warning. This matters for SAML: the identity provider answers with an
+  # auto-submitted POST, and clicking through a browser interstitial loses it.
+  message "Generating with mkcert" "info"
+  mkcert -cert-file "${CERT}" -key-file "${KEY}" "${HOSTS[@]}"
+  message "Run 'mkcert -install' once if the certificate is not trusted yet." "info"
+else
+  # Fallback used by the CI and any environment without mkcert. The browser
+  # will warn about the unknown issuer.
+  message "mkcert not found, generating a self-signed certificate with openssl" "info"
+  openssl req -x509 -newkey rsa:4096 -sha256 -days 825 -nodes \
+    -keyout "${KEY}" -out "${CERT}" \
+    -subj "/CN=sonar.ch" \
+    -addext "subjectAltName=DNS:sonar.ch,DNS:localhost,IP:127.0.0.1,IP:::1"
+fi
+
+chmod 600 "${KEY}"
+
+message "Certificates generated in ${CERTS_DIR}" "success"

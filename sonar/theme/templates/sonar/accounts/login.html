@@ -28,11 +28,13 @@
               <img src="{{ url_for('static', filename='images/orcid.svg')}}" alt="ORCID" width="20">
             </a>
           </div>
+          {% if aai_providers() %}
           <div class="col">
             {% with label = _('Log in with SWITCHaai') %}
             {% include 'sonar/partial/switch_aai_dropdown.html' %}
             {% endwith %}
           </div>
+          {% endif %}
         </div>
       </div>
     </div>

@@ -17,3 +17,5 @@ Procfile*
 celerybeat-schedule
 
 .venv/
+
+.certs/

@@ -17,12 +17,12 @@ def valid_attributes():
 
 
 @pytest.fixture(scope="module")
-def valid_sp_configuration():
+def valid_sp_configuration(saml_certificates):
     """Fixture for valid service provider configuration."""
     return {
         "strict": True,
         "debug": True,
         "entity_id": "entity_id",
-        "x509cert": "./docker/nginx/sp.pem",
-        "private_key": "./docker/nginx/sp.key",
+        "x509cert": saml_certificates.certificate,
+        "private_key": saml_certificates.private_key,
     }

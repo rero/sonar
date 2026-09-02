@@ -45,10 +45,20 @@ if [[ -z "${FLASK_DEBUG}" ]]; then
   export FLASK_DEBUG=True
 fi
 
+cert="$script_path"/../.certs/dev.crt
+key="$script_path"/../.certs/dev.key
+
+# Checked before anything is started, so that a missing certificate does not
+# leave a celery worker behind.
+if [[ ! -f "${cert}" || ! -f "${key}" ]]; then
+  message "Development certificates not found, run: uv run poe certs" "error"
+  exit 1
+fi
+
 # Start Worker and Beat
 if $worker; then
   section "Start celery worker" "info"
-  celery --app sonar.celery worker --loglevel ${CELERY_LOG_LEVEL} --beat & PID_CELERY=$!
+  celery --app sonar.celery worker --loglevel ${CELERY_LOG_LEVEL} --beat & pid_celery=$!
   message "Done" "success"
 fi
 
@@ -56,8 +66,8 @@ fi
 # Start web server
 section "Start web server" "info"
 invenio run \
-       --cert "$script_path"/../docker/nginx/test.crt \
-       --key "$script_path"/../docker/nginx/test.key \
+       --cert "${cert}" \
+       --key "${key}" \
        -p $PORT & pid_server=$!
 
 message "Done" "success"

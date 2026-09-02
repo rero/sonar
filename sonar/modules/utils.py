@@ -85,6 +85,12 @@ def send_email(recipients, subject, template, ctx=None, html=True, lang="en"):
 
 def get_switch_aai_providers():
     """Return the list of available SWITCHaai providers."""
+    # Without a service provider key pair no SAML request can be signed, so no
+    # provider is offered rather than letting the user reach a dead end.
+    service_provider = current_app.config.get("SHIBBOLETH_SERVICE_PROVIDER", {})
+    if not service_provider.get("x509cert") or not service_provider.get("private_key"):
+        return []
+
     providers = []
     for provider, data in current_app.config.get("SHIBBOLETH_IDENTITY_PROVIDERS").items():
         # Don't take providers flagged as dev in production mode
