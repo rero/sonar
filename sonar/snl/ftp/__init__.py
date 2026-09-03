@@ -45,6 +45,7 @@ class SNLRepository:
             password=self.password,
             allow_agent=False,
             look_for_keys=False,
+            timeout=30,
         )
         self.client = self.ssh.open_sftp()
         self.client.chdir(self.directory)

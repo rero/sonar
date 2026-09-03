@@ -46,7 +46,7 @@ def test_connect(mock_ssh_client):
     repository.ssh.load_system_host_keys.assert_called_with()
     repository.ssh.get_host_keys.return_value.add.assert_not_called()
     repository.ssh.connect.assert_called_with(
-        "snl_host", username="user", password="password", allow_agent=False, look_for_keys=False
+        "snl_host", username="user", password="password", allow_agent=False, look_for_keys=False, timeout=30
     )
     repository.client.chdir.assert_called_with("/snl_folder")
 
