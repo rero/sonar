@@ -10,8 +10,6 @@
 {%- block css %}
 {{ super() }}
 <link href="{{ url_for('wiki.static', filename='css/wiki.css') }}" rel="stylesheet" />
-<!-- EasyMDE -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde@2.16.1/dist/easymde.min.css">
 {%- endblock %}
 
 {%- block page_body %}
@@ -24,6 +22,10 @@
       {%- from "sonar/macros/messages.html" import flashed_messages with context -%}
       <div class="container my-3">{{ flashed_messages() }}</div>
       {%- endblock %}
+      {# The toasts the wiki raises from the browser, revealed by wiki.js. #}
+      <div class="wiki-toasts">
+        {%- include "wiki/toasts.html" %}
+      </div>
       {% block content %} {% endblock %}
     {%- endblock body %}
   </div>
@@ -31,8 +33,6 @@
 
 {%- block javascript %}
 {{ super() }}
-<!-- EasyMDE -->
-<script src="https://cdn.jsdelivr.net/npm/easymde@2.16.1/dist/easymde.min.js"></script>
 {{ bootstrap.load_js() }}
 <script type="text/javascript" src="{{ url_for('wiki.static', filename='js/wiki.js') }}"></script>
 {%- endblock javascript %}

@@ -1075,7 +1075,7 @@ wheels = [
 
 [[package]]
 name = "flask-wiki"
-version = "2.0.0"
+version = "4.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "babel" },
@@ -1086,15 +1086,14 @@ dependencies = [
     { name = "flask-babel" },
     { name = "flask-wtf" },
     { name = "markdown" },
-    { name = "markdown-captions" },
     { name = "poethepoet" },
     { name = "werkzeug" },
     { name = "whoosh-reloaded" },
     { name = "wtforms" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/fb/6e/fec51c340ec69d8929100a11b2f500c7df063704a040dd614a350235e613/flask_wiki-2.0.0.tar.gz", hash = "sha256:abe0443cbfe60f2afe765532440073d6c75ebb02a70a561b89f928430c129654", size = 693018, upload-time = "2026-03-26T15:20:28.964Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c4/1e/172fc02404f2b7b9fad841028f021e357f6e1c74195b32b46cf388b40056/flask_wiki-4.0.0.tar.gz", hash = "sha256:cd9d7257771bbf458d5916bc9f89bc3a05785f604461ecd02146f70c05eeb31d", size = 35193, upload-time = "2026-09-04T08:53:36.403Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/94/45/159e87f3191fbd2a15120e17c2799d6e48d42bd439ee76e60c1eb2e70f9e/flask_wiki-2.0.0-py3-none-any.whl", hash = "sha256:2622f336a033fd393472c92d38a20303e762e719ee58edca271d9c791fd53879", size = 720730, upload-time = "2026-03-26T15:20:30.188Z" },
+    { url = "https://files.pythonhosted.org/packages/dc/e1/c0d2a7eca05a34e6eaa29162c38b0b219f1b2ccf862ea176b46b5c6ca14f/flask_wiki-4.0.0-py3-none-any.whl", hash = "sha256:d86d25f19400774dc94534b39711b012bb85c92439a3434706095bb4b5b98c88", size = 58337, upload-time = "2026-09-04T08:53:35.439Z" },
 ]
 
 [[package]]
@@ -2350,15 +2349,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/29/6f/da4c6aea59b3001f2
 wheels = [
     { url = "https://files.pythonhosted.org/packages/64/69/4a5af2bc115a9a33fefe51709749de8262be3f9ba063d1753a837cdbc49c/markdown-3.10.3-py3-none-any.whl", hash = "sha256:fa6c92a00a4a3c98b22728c64a935ae1928250ae65058a6ded814d2cc29a4cea", size = 110757, upload-time = "2026-07-30T19:05:27.883Z" },
 ]
-
-[[package]]
-name = "markdown-captions"
-version = "2.1.2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "markdown" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/81/1d/15ef64ed904c85d0520d632ec6844b7da886a45b0cb7970644be493181d0/markdown-captions-2.1.2.tar.gz", hash = "sha256:1c3ec0b674dd41a4c5f125724188c32a17bd46fd527db29f0c55a001e2d7abaf", size = 3031, upload-time = "2022-07-19T22:29:28.959Z" }
 
 [[package]]
 name = "markdown-it-py"
@@ -3811,7 +3801,7 @@ prod = [
 requires-dist = [
     { name = "citeproc-py", specifier = ">=0.11.0" },
     { name = "flask-admin", specifier = ">=1.6.1" },
-    { name = "flask-wiki", specifier = ">=0.3.1" },
+    { name = "flask-wiki", specifier = ">=4.0.0" },
     { name = "fuzzywuzzy", extras = ["speedup"], specifier = ">=0.18.0" },
     { name = "invenio-access", specifier = ">=4.0.0" },
     { name = "invenio-accounts", specifier = ">=6.0.0" },
