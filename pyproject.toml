@@ -67,7 +67,7 @@ dependencies = [
     "python-dotenv>=0.13.0",
     "sentry-sdk",
     "jsonresolver",
-    "flask-wiki>=0.3.1",
+    "flask-wiki>=4.0.0",
     "poethepoet",
     ## SONAR Specific
     "citeproc-py>=0.11.0",
@@ -135,7 +135,6 @@ org_code = "sonar.route_converters:OrganisationCodeConverter"
 ark = "sonar.modules.ark.views:blueprint"
 collections = "sonar.modules.collections.views:blueprint"
 documents = "sonar.modules.documents.views:blueprint"
-help = "sonar.help.views:blueprint"
 pdf_extractor = "sonar.modules.pdf_extractor.views.client:blueprint"
 shibboleth_authenticator = "sonar.modules.shibboleth_authenticator.views.client:blueprint"
 sitemap = "sonar.modules.sitemap.views:blueprint"
