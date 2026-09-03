@@ -117,6 +117,7 @@ def snl_upload_file(urn_code):
         user=current_app.config.get("SONAR_APP_FTP_SNL_USER"),
         password=current_app.config.get("SONAR_APP_FTP_SNL_PASSWORD"),
         directory=current_app.config.get("SONAR_APP_FTP_SNL_PATH"),
+        host_key=current_app.config.get("SONAR_APP_FTP_SNL_HOST_KEY"),
     )
     snl_repository.connect()
 
@@ -133,6 +134,8 @@ def snl_upload_file(urn_code):
             click.secho(f"Successfully uploaded file {os.path.basename(_file.key)}.", fg="green")
         except Exception as exception:
             click.secho(str(exception), fg="red")
+
+    snl_repository.close()
 
     # print email template
     template_email_snl = current_app.config.get("SONAR_APP_SNL_EMAIL_TEMPLATE")
@@ -154,9 +157,18 @@ def snl_list_files():
         user=current_app.config.get("SONAR_APP_FTP_SNL_USER"),
         password=current_app.config.get("SONAR_APP_FTP_SNL_PASSWORD"),
         directory=current_app.config.get("SONAR_APP_FTP_SNL_PATH"),
+        host_key=current_app.config.get("SONAR_APP_FTP_SNL_HOST_KEY"),
     )
     snl_repository.connect()
-    snl_repository.client.walktree(".", lambda x: click.secho(x), lambda x: click.secho(x), lambda x: click.secho(x))
+    files = list(snl_repository.list_files())
+    snl_repository.close()
+
+    if not files:
+        click.secho("No file found on SNL server.", fg="yellow")
+        return
+
+    for path in files:
+        click.secho(path)
 
 
 @urn.command()

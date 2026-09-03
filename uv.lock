@@ -3630,18 +3630,6 @@ wheels = [
 ]
 
 [[package]]
-name = "sftpretty"
-version = "1.2.2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "paramiko" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/6e/0f/8ba89d9f8e15855ae11dd4df6e8558e4e2b86457808dee2dcfc49d2c3752/sftpretty-1.2.2.tar.gz", hash = "sha256:d10aaf5effd5d00a4a60ce3da4d817781b2f5cbbe6145da8a09f6733a9cfabbc", size = 32451, upload-time = "2026-05-11T05:18:55.831Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/a0/da/571c9004d788d1d2cd25e3e13aff1a998b3aa69c719e286c25c789e334ca/sftpretty-1.2.2-py3-none-any.whl", hash = "sha256:87687446293ecc095b0a252b18dcc01cc5be1f15e646a84b213d7fa8a4703dc1", size = 21649, upload-time = "2026-05-11T05:18:54.604Z" },
-]
-
-[[package]]
 name = "shellingham"
 version = "1.5.4"
 source = { registry = "https://pypi.org/simple" }
@@ -3776,6 +3764,7 @@ dependencies = [
     { name = "jsonresolver" },
     { name = "netaddr" },
     { name = "orcid" },
+    { name = "paramiko" },
     { name = "poethepoet" },
     { name = "pycountry" },
     { name = "python-dotenv" },
@@ -3784,7 +3773,6 @@ dependencies = [
     { name = "rero-invenio-base" },
     { name = "rero-invenio-files" },
     { name = "sentry-sdk" },
-    { name = "sftpretty" },
     { name = "urllib3" },
     { name = "wand" },
     { name = "webdavclient3" },
@@ -3850,6 +3838,7 @@ requires-dist = [
     { name = "jsonresolver" },
     { name = "netaddr", specifier = ">=0.9.0" },
     { name = "orcid", specifier = ">=1.0.3" },
+    { name = "paramiko", specifier = ">=5.0.0" },
     { name = "poethepoet" },
     { name = "pycountry", specifier = ">=23.12.11" },
     { name = "python-dotenv", specifier = ">=0.13.0" },
@@ -3858,7 +3847,6 @@ requires-dist = [
     { name = "rero-invenio-base", specifier = ">=0.3.1" },
     { name = "rero-invenio-files", specifier = ">=1.2.0" },
     { name = "sentry-sdk" },
-    { name = "sftpretty", specifier = ">=1.0.0" },
     { name = "urllib3", specifier = "<2.0.0" },
     { name = "wand", specifier = ">=0.6.13" },
     { name = "webdavclient3", specifier = ">=3.14.6" },

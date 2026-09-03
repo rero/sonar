@@ -76,7 +76,7 @@ dependencies = [
     "netaddr>=0.9.0",
     "wand>=0.6.13",
     "webdavclient3>=3.14.6",
-    "sftpretty>=1.0.0",
+    "paramiko>=5.0.0",
     "python-slugify",
     "orcid>=1.0.3",
     "python3-saml>=1.16.0",
