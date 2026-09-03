@@ -82,6 +82,20 @@ def register():
     click.secho(f"{idx} URN registered.", fg="green")
 
 
+def create_snl_repository():
+    """Create a SNL repository from the application configuration.
+
+    :returns: SNLRepository object.
+    """
+    return SNLRepository(
+        host=current_app.config.get("SONAR_APP_FTP_SNL_HOST"),
+        user=current_app.config.get("SONAR_APP_FTP_SNL_USER"),
+        password=current_app.config.get("SONAR_APP_FTP_SNL_PASSWORD"),
+        directory=current_app.config.get("SONAR_APP_FTP_SNL_PATH"),
+        host_key=current_app.config.get("SONAR_APP_FTP_SNL_HOST_KEY"),
+    )
+
+
 @urn.command("snl-upload-file")
 @click.argument("urn_code")
 @with_appcontext
@@ -112,12 +126,7 @@ def snl_upload_file(urn_code):
         click.secho("Error: the document does not contains any files.")
         return
 
-    snl_repository = SNLRepository(
-        host=current_app.config.get("SONAR_APP_FTP_SNL_HOST"),
-        user=current_app.config.get("SONAR_APP_FTP_SNL_USER"),
-        password=current_app.config.get("SONAR_APP_FTP_SNL_PASSWORD"),
-        directory=current_app.config.get("SONAR_APP_FTP_SNL_PATH"),
-    )
+    snl_repository = create_snl_repository()
     snl_repository.connect()
 
     dnb_base_urn = current_app.config.get("SONAR_APP_FTP_SNL_PATH")
@@ -134,6 +143,8 @@ def snl_upload_file(urn_code):
         except Exception as exception:
             click.secho(str(exception), fg="red")
 
+    snl_repository.close()
+
     # print email template
     template_email_snl = current_app.config.get("SONAR_APP_SNL_EMAIL_TEMPLATE")
 
@@ -149,14 +160,17 @@ def snl_upload_file(urn_code):
 @with_appcontext
 def snl_list_files():
     """List files uploaded on SNL server."""
-    snl_repository = SNLRepository(
-        host=current_app.config.get("SONAR_APP_FTP_SNL_HOST"),
-        user=current_app.config.get("SONAR_APP_FTP_SNL_USER"),
-        password=current_app.config.get("SONAR_APP_FTP_SNL_PASSWORD"),
-        directory=current_app.config.get("SONAR_APP_FTP_SNL_PATH"),
-    )
+    snl_repository = create_snl_repository()
     snl_repository.connect()
-    snl_repository.client.walktree(".", lambda x: click.secho(x), lambda x: click.secho(x), lambda x: click.secho(x))
+    files = list(snl_repository.list_files())
+    snl_repository.close()
+
+    if not files:
+        click.secho("No file found on SNL server.", fg="yellow")
+        return
+
+    for path in files:
+        click.secho(path)
 
 
 @urn.command()

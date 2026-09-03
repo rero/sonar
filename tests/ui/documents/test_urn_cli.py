@@ -9,16 +9,17 @@ from unittest import mock
 from click.testing import CliRunner
 from invenio_pidstore.providers.base import BaseProvider
 
-from sonar.modules.documents.cli.urn import snl_upload_file
+from sonar.modules.documents.cli.urn import snl_list_files, snl_upload_file
 from sonar.snl.ftp import SNLRepository
 
 
-@mock.patch("sonar.snl.ftp.Connection", autospec=True)
-def test_snl_upload_file(mock_ftp_constructor, app, script_info, minimal_thesis_document_with_urn):
+@mock.patch("sonar.snl.ftp.SSHClient", autospec=True)
+def test_snl_upload_file(mock_ssh_constructor, app, script_info, minimal_thesis_document_with_urn):
     """Test upload file."""
     app.config["SONAR_APP_FTP_SNL_PATH"] = "/rero"
 
-    mock_ftp = mock_ftp_constructor.return_value
+    mock_ftp = mock_ssh_constructor.return_value.open_sftp.return_value
+    mock_ftp.stat.side_effect = FileNotFoundError
 
     repository = SNLRepository("snl_host", "user", "password", "snl_folder")
     repository.connect()
@@ -53,4 +54,22 @@ def test_snl_upload_file(mock_ftp_constructor, app, script_info, minimal_thesis_
             obj=script_info,
         )
         assert "Template of email to send to SNL:" in result.output
-        mock_ftp.mkdir.assert_called_with("/rero/rero-006-17")
+        mock_ftp.mkdir.assert_called_with("/rero/rero-006-17", mode=0o777)
+
+
+@mock.patch("sonar.snl.ftp.SNLRepository.list_files")
+@mock.patch("sonar.snl.ftp.SSHClient", autospec=True)
+def test_snl_list_files(mock_ssh_constructor, mock_list_files, app, script_info):
+    """Test listing of the files stored on the SNL server."""
+    mock_list_files.return_value = ["./rero-006-17/test.pdf", "./readme.txt"]
+
+    runner = CliRunner()
+    result = runner.invoke(snl_list_files, obj=script_info)
+
+    assert result.output == "./rero-006-17/test.pdf\n./readme.txt\n"
+
+    # empty server
+    mock_list_files.return_value = []
+    result = runner.invoke(snl_list_files, obj=script_info)
+
+    assert result.output == "No file found on SNL server.\n"
