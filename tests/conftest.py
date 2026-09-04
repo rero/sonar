@@ -357,6 +357,17 @@ def user_without_role(app, db):
 
 
 @pytest.fixture()
+def wiki_editor(app, db):
+    """Create user account with the wiki editor role."""
+    datastore = app.extensions["security"].datastore
+    user = datastore.create_user(email="editor@rero.ch", password=hash_password("123456"), active=True)
+    datastore.add_role_to_user(user, datastore.find_or_create_role("editor"))
+    db.session.commit()
+
+    return user
+
+
+@pytest.fixture()
 def user_without_org(make_user):
     """Create user without organisation."""
     return make_user("user", None)

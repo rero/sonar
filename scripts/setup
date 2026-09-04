@@ -78,6 +78,11 @@ token_create monitoring monitoring@rero.ch ${INVENIO_RERO_ACCESS_TOKEN_MONITORIN
 
 
 
+section "Create user for wiki edition" "info"
+invenio users create --active --confirm --password editor editor@rero.ch
+invenio roles create editor
+invenio roles add editor@rero.ch editor
+
 # Initialize flask wiki
 section "Initialize wiki search"
 invenio flask_wiki init-index
