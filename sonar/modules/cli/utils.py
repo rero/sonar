@@ -225,8 +225,8 @@ SPDX_EXTENSIONS = (
     ".toml",
     ".yml",
 )
-# `.github` templates and generated content have no license header
-SPDX_EXCLUDED_PATHS = (".github/", "CHANGELOG.md")
+# `.github` templates, generated content and wiki pages have no license header
+SPDX_EXCLUDED_PATHS = (".github/", "CHANGELOG.md", "data/wiki/", "tests/data/help/")
 
 
 def needs_spdx_header(file_name):

@@ -28,6 +28,12 @@
 {{ google_scholar_data | safe }}
 {% endblock head %}
 
+{# The toast citation.js reveals once the citation is in the clipboard. #}
+{%- block toasts %}
+{%- from "sonar/macros/messages.html" import toast with context -%}
+{{ toast(_('The text has been copied to the clipboard'), 'success', id='citation-toast') }}
+{%- endblock toasts %}
+
 {%- block body %}
 
 {% set files = record.get_files_list() %}

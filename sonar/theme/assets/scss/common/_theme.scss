@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 @import "~bootstrap/scss/bootstrap";
-@import '~ngx-toastr/toastr-bs4-alert';
 
 .bg-header {
   background-color: #15334D;
@@ -45,4 +44,39 @@ div.wiki-page div.sticky-top {
   outline-width: 0 !important;
   box-shadow: none !important;
   -moz-outline-style: none !important;
+}
+
+// The toast stack of the application, anchored where the PrimeNG toasts of the
+// user interface are.
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1080;
+  pointer-events: none;
+}
+
+.toast-container .toast {
+  border: 0;
+  pointer-events: auto;
+}
+
+.toast-container .toast-info {
+  background-color: theme-color("info");
+  color: color-yiq(theme-color("info"));
+}
+
+.toast-container .toast-success {
+  background-color: theme-color("success");
+  color: color-yiq(theme-color("success"));
+}
+
+.toast-container .toast-warning {
+  background-color: theme-color("warning");
+  color: color-yiq(theme-color("warning"));
+}
+
+.toast-container .toast-danger {
+  background-color: theme-color("danger");
+  color: color-yiq(theme-color("danger"));
 }

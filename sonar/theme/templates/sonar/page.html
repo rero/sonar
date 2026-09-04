@@ -130,13 +130,17 @@
     {% include 'sonar/partial/organisation.html' %}
     {%- endblock header %}
   </header>
-  {%- block page_body %}
-  <div class="container my-5">
+  {# The toast stack of the application: the messages flashed by the server, and
+     the toasts a page reveals from the browser. #}
+  <div class="toast-container" aria-live="polite" aria-atomic="true">
     {%- block flashmessages %}
     {%- from "sonar/macros/messages.html" import flashed_messages with context -%}
-    <div class="my-5">{{ flashed_messages() }}</div>
+    {{ flashed_messages() }}
     {%- endblock %}
-
+    {%- block toasts %}{%- endblock toasts %}
+  </div>
+  {%- block page_body %}
+  <div class="container my-5">
     {%- block body %}{%- endblock body %}
   </div>
   {%- endblock page_body %}

@@ -38,3 +38,14 @@ document.addEventListener("click", function (event) {
   event.preventDefault();
   setExpanded(toggle, target.classList.toggle("show"));
 });
+
+// Dismiss the toasts rendered visible by the server. The ones a page reveals by
+// their id are dismissed by the plugin showing them.
+document.querySelectorAll(".toast-container .toast.show").forEach(function (toast) {
+  setTimeout(function () {
+    toast.classList.remove("show");
+    setTimeout(function () {
+      toast.remove();
+    }, 150);
+  }, 5000);
+});

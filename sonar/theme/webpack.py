@@ -22,6 +22,5 @@ theme = WebpackBundle(
         "bootstrap": "^4.3",
         "popper.js": "^1.12",
         "@fortawesome/fontawesome-free": "^7.0.0",
-        "ngx-toastr": "^10.2.0",
     },
 )
