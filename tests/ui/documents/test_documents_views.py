@@ -166,7 +166,7 @@ def test_detail(app, client, organisation, document_with_file):
     assert soup.find(id="citationModal")
     assert soup.find("button", attrs={"data-target": "#citationModal"})
     assert soup.find(id="citation-styles")
-    assert soup.find(id="citation-toast")
+    assert soup.select_one(".toast-container .toast#citation-toast")
 
     assert client.get(url_for("invenio_records_ui.doc", view="global", pid_value="not-existing")).status_code == 404
 
