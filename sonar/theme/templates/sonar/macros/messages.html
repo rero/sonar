@@ -1,16 +1,20 @@
 {# SPDX-FileCopyrightText: Fondation RERO+ #}
 {# SPDX-License-Identifier: AGPL-3.0-or-later #}
 
+{# A toast of the application. It shows as soon as it is rendered, unless it
+   carries an id: it then waits for a script to reveal it by that id. #}
+{%- macro toast(message, category='info', id=None, autoshow=False) -%}
+  {%- set category = 'danger' if category in ['error', 'critical'] else category %}
+  {%- set category = 'info' if category not in ['info', 'danger', 'warning', 'success'] else category %}
+  <div class="toast fade toast-{{ category }} {{ 'hide' if id and not autoshow else 'show' }}"
+    {%- if id %} id="{{ id }}"{% endif %} data-delay="5000" role="status">
+    <div class="toast-body">{{ message }}</div>
+  </div>
+{%- endmacro %}
+
+{# The messages flashed by the server, as toasts of the application stack. #}
 {%- macro flashed_messages() -%}
-  {%- block messages %}
-    {%- for category, msg in get_flashed_messages(with_categories=True) %}
-      {%- set category = 'info' if category not in ['info', 'danger', 'warning', 'success'] else category %}
-      <div class="alert alert-{{ category }}">
-        <div class="container">
-          <a class="close" data-dismiss="alert" href="#">&times;</a>
-            {{ msg }}
-        </div>
-      </div>
-    {%- endfor %}
-  {%- endblock messages %}
+  {%- for category, message in get_flashed_messages(with_categories=True) %}
+    {{ toast(message, category) }}
+  {%- endfor %}
 {%- endmacro %}

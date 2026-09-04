@@ -17,7 +17,7 @@
       <div class="col py-4 py-lg-5 text-center text-lg-left">
         <div class="d-lg-flex flex-row">
           <div>
-            {% set helplink = url_for('help.index', view=organisation.get('pid')) if organisation.get('isDedicated') else url_for('wiki.index') %}
+            {% set helplink = url_for('wiki.index', view=organisation.get('pid') if organisation.get('isDedicated') else config.SONAR_APP_DEFAULT_ORGANISATION) %}
             <a href="{{ helplink }}"><i class="fa-solid fa-circle-question mr-1"></i>{{ _('Help') }}</a>
           </div>
           <div class="d-none d-lg-block mx-3">|</div>

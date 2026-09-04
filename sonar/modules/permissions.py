@@ -24,6 +24,7 @@ submitter_access_permission = Permission(
 
 moderator_access_permission = Permission(RoleNeed("moderator"), RoleNeed("admin"), RoleNeed("superuser"))
 monitoring_access_permission = Permission(RoleNeed("superuser"), RoleNeed("monitoring"))
+wiki_editor_access_permission = Permission(RoleNeed("editor"))
 
 # Allow access without permission check
 allow_access = type("Allow", (), {"can": lambda self: True})()
@@ -157,9 +158,9 @@ def files_permission_factory(obj, action, pid=None, record=None):
 def wiki_edit_permission():
     """Wiki edition permission.
 
-    :return: true if the logged user has the superuser role.
+    :return: true if the logged user has the superuser or the editor role.
     """
-    return has_superuser_access()
+    return has_superuser_access() or wiki_editor_access_permission.can()
 
 
 class RecordPermission:

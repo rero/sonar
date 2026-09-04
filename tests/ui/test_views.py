@@ -6,10 +6,10 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
+from bs4 import BeautifulSoup
 from flask import url_for
 from invenio_accounts.testutils import login_user_via_session, login_user_via_view
 
-from sonar.help.views import process_link
 from sonar.theme.views import format_date, record_image_url
 
 
@@ -338,14 +338,27 @@ def test_format_date(app):
     assert format_date(date, "%d/%m/%Y %H:%M") == "10/05/1984 14:30"
 
 
-def test_process_link():
-    """Test process_link filter."""
-    assert process_link("[search tips](/help/search_tips/)", "view") == "[search tips](/view/help/search_tips/)"
+def test_flashed_messages_in_the_toast_stack(client):
+    """Test that the messages flashed by the server are rendered as toasts."""
+    with client.session_transaction() as session:
+        session["_flashes"] = [("success", "Saved"), ("error", "Failed")]
 
-    assert (
-        process_link(
-            '![SONAR_collection.JPG](/help/files/SONAR_collection.JPG "SONAR_collection.JPG")',
-            "view",
-        )
-        == '![SONAR_collection.JPG](/help/files/SONAR_collection.JPG "SONAR_collection.JPG")'
-    )
+    res = client.get(url_for("index", view="global"))
+    assert res.status_code == 200
+
+    soup = BeautifulSoup(res.data, "html.parser")
+    toasts = soup.select(".toast-container .toast")
+    assert [(toast["class"], toast.get_text(strip=True)) for toast in toasts] == [
+        (["toast", "fade", "toast-success", "show"], "Saved"),
+        (["toast", "fade", "toast-danger", "show"], "Failed"),
+    ]
+
+
+def test_wiki_toasts_in_the_toast_stack(client):
+    """Test that the toasts of the wiki are rendered in the stack of the application."""
+    res = client.get(url_for("wiki.index", view="global"), follow_redirects=True)
+    assert res.status_code == 200
+
+    soup = BeautifulSoup(res.data, "html.parser")
+    assert soup.select_one(".toast-container .toast.toast-success#copy-success")
+    assert soup.select_one(".toast-container .toast.toast-danger#copy-error")

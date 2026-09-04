@@ -862,13 +862,17 @@ DB_VERSIONING = False
 
 # WIKI
 # ====
+# Serve the Bootstrap assets from the package, the wiki base template loads them.
+BOOTSTRAP_SERVE_LOCAL = True
 WIKI_CONTENT_DIR = "./data/wiki"
 WIKI_INDEX_DIR = "./data/wiki/_index"
-WIKI_URL_PREFIX = "/help"
+WIKI_URL_PREFIX = "/<org_code:view>/help"
 WIKI_LANGUAGES = {"en": "English", "fr": "French", "de": "German", "it": "Italian"}
 WIKI_CURRENT_LANGUAGE = get_current_language
 WIKI_UPLOAD_FOLDER = os.path.join(WIKI_CONTENT_DIR, "files")
 WIKI_BASE_TEMPLATE = "sonar/page_wiki.html"
+WIKI_ICON_TEMPLATE = "wiki/icons/fontawesome.html"
+WIKI_TOAST_TEMPLATE = "sonar/macros/messages.html"
 WIKI_EDIT_VIEW_PERMISSION = wiki_edit_permission
 WIKI_EDIT_UI_PERMISSION = wiki_edit_permission
 WIKI_MARKDOWN_EXTENSIONS = set(("extra",))
