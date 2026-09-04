@@ -6,6 +6,7 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
+from bs4 import BeautifulSoup
 from flask import url_for
 from invenio_accounts.testutils import login_user_via_session, login_user_via_view
 
@@ -335,3 +336,29 @@ def test_format_date(app):
     timezone = ZoneInfo("Europe/Zurich")
     date = datetime(1984, 5, 10, 14, 30, tzinfo=timezone)
     assert format_date(date, "%d/%m/%Y %H:%M") == "10/05/1984 14:30"
+
+
+def test_flashed_messages_in_the_toast_stack(client):
+    """Test that the messages flashed by the server are rendered as toasts."""
+    with client.session_transaction() as session:
+        session["_flashes"] = [("success", "Saved"), ("error", "Failed")]
+
+    res = client.get(url_for("index", view="global"))
+    assert res.status_code == 200
+
+    soup = BeautifulSoup(res.data, "html.parser")
+    toasts = soup.select(".toast-container .toast")
+    assert [(toast["class"], toast.get_text(strip=True)) for toast in toasts] == [
+        (["toast", "fade", "toast-success", "show"], "Saved"),
+        (["toast", "fade", "toast-danger", "show"], "Failed"),
+    ]
+
+
+def test_wiki_toasts_in_the_toast_stack(client):
+    """Test that the toasts of the wiki are rendered in the stack of the application."""
+    res = client.get(url_for("wiki.index", view="global"), follow_redirects=True)
+    assert res.status_code == 200
+
+    soup = BeautifulSoup(res.data, "html.parser")
+    assert soup.select_one(".toast-container .toast.toast-success#copy-success")
+    assert soup.select_one(".toast-container .toast.toast-danger#copy-error")

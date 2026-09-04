@@ -12,20 +12,17 @@
 <link href="{{ url_for('wiki.static', filename='css/wiki.css') }}" rel="stylesheet" />
 {%- endblock %}
 
+{# The toasts the wiki raises from the browser, revealed by wiki.js. #}
+{%- block toasts %}
+  {%- include "wiki/toasts.html" %}
+{%- endblock toasts %}
+
 {%- block page_body %}
   <div class="container-fluid">
     {%- block body %}
       {% block navigation %}
         {%- include "wiki/navigation.html" %}
       {%- endblock navigation %}
-      {%- block flashmessages %}
-      {%- from "sonar/macros/messages.html" import flashed_messages with context -%}
-      <div class="container my-3">{{ flashed_messages() }}</div>
-      {%- endblock %}
-      {# The toasts the wiki raises from the browser, revealed by wiki.js. #}
-      <div class="wiki-toasts">
-        {%- include "wiki/toasts.html" %}
-      </div>
       {% block content %} {% endblock %}
     {%- endblock body %}
   </div>

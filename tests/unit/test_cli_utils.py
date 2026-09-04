@@ -20,6 +20,9 @@ def test_needs_spdx_header(tmp_path):
     # third party citation styles keep their own copyright
     assert not needs_spdx_header("sonar/modules/documents/citations/styles/apa-7th-edition.csl")
     assert not needs_spdx_header(".github/workflows/release.yml")
+    # wiki pages are rendered as is, a header would show up in the content
+    assert not needs_spdx_header("data/wiki/home_en.md")
+    assert not needs_spdx_header("tests/data/help/home_en.md")
 
 
 def test_has_spdx_header(tmp_path):

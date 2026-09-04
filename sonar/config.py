@@ -871,8 +871,8 @@ WIKI_LANGUAGES = {"en": "English", "fr": "French", "de": "German", "it": "Italia
 WIKI_CURRENT_LANGUAGE = get_current_language
 WIKI_UPLOAD_FOLDER = os.path.join(WIKI_CONTENT_DIR, "files")
 WIKI_BASE_TEMPLATE = "sonar/page_wiki.html"
-# Render the wiki icons with the Font Awesome shipped by the theme bundle.
 WIKI_ICON_TEMPLATE = "wiki/icons/fontawesome.html"
+WIKI_TOAST_TEMPLATE = "sonar/macros/messages.html"
 WIKI_EDIT_VIEW_PERMISSION = wiki_edit_permission
 WIKI_EDIT_UI_PERMISSION = wiki_edit_permission
 WIKI_MARKDOWN_EXTENSIONS = set(("extra",))
