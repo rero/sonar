@@ -544,6 +544,9 @@ SONAR_APP_FTP_SNL_HOST = "https://change.me"
 SONAR_APP_FTP_SNL_USER = "changeMe"
 SONAR_APP_FTP_SNL_PASSWORD = "changeMe"
 SONAR_APP_FTP_SNL_PATH = "changeMe"
+# Public host key of the SNL server, as a `known_hosts` line. When it is not
+# set, the host key is looked up in the `known_hosts` file of the user.
+SONAR_APP_FTP_SNL_HOST_KEY = ""
 SONAR_APP_SNL_EMAIL_TEMPLATE = "sonar/modules/documents/templates/documents/emailSNL.txt"
 
 """FTP connection to SNL server."""
