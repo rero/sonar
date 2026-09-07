@@ -4,7 +4,8 @@
 """API Views."""
 
 from flask import Blueprint, render_template
-from flask_login import login_required
+
+from sonar.modules.permissions import is_user_logged_and_submitter
 
 blueprint = Blueprint(
     "pdf",
@@ -16,7 +17,7 @@ blueprint = Blueprint(
 
 
 @blueprint.route("/test", methods=["GET"])
-@login_required
+@is_user_logged_and_submitter
 def test():
     """Test upload file and extracting metadata."""
     return render_template("test.html")
