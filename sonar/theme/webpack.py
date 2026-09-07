@@ -17,10 +17,16 @@ theme = WebpackBundle(
         "unifr-theme": "./scss/unifr/theme.scss",
         "fernuni-theme": "./scss/fernuni/theme.scss",
         "preview": "./scss/preview.scss",
+        "sonar-bootstrap": "./js/sonar/bootstrap.js",
+        "sonar-katex": "./js/sonar/katex.js",
     },
     dependencies={
+        # jQuery and Popper are pinned by Bootstrap 4: it accepts no jQuery 4, and
+        # popper.js 1.16.1 is the last release before the incompatible @popperjs/core.
         "bootstrap": "^4.3",
-        "popper.js": "^1.12",
+        "popper.js": "^1.16.1",
+        "jquery": "^3.7",
+        "katex": "^0.16.22",
         "@fortawesome/fontawesome-free": "^7.0.0",
     },
 )

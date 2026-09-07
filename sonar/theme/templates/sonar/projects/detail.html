@@ -95,6 +95,7 @@
 
 {% block javascript %}
 {{super()}}
+{{ webpack['sonar-bootstrap.js'] }}
 <script>
   $(document).ready(function () {
     $('.affiliation-tooltip').tooltip();

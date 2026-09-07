@@ -117,6 +117,6 @@
 {% macro contributor_icon(contribution) %}
 {%- set types = { 'bf:Meeting': 'fa-solid fa-users', 'bf:Organization': 'fa-solid fa-building', 'bf:Person': 'fa-solid fa-user'} -%}
 {% if contribution.agent.type in types %}
-<i class="fa {{ types[contribution.agent.type] }} mr-1"></i>
+<i class="{{ types[contribution.agent.type] }} mr-1"></i>
 {% endif%}
 {% endmacro %}

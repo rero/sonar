@@ -233,30 +233,18 @@ APP_DEFAULT_SECURE_HEADERS = {
             "'self'",
             "'unsafe-inline'",
             "'unsafe-eval'",
-            "https://code.jquery.com",
-            "https://cdnjs.cloudflare.com",
-            "https://stackpath.bootstrapcdn.com",
             "https://www.googletagmanager.com",
             "https://www.google-analytics.com",
-            "https://cdn.jsdelivr.net",
         ],
         "style-src": [
             "'self'",
             "'unsafe-inline'",
-            "https://cdnjs.cloudflare.com",
-            "https://fonts.googleapis.com",
-            "https://maxcdn.bootstrapcdn.com",
-            "https://cdn.jsdelivr.net",
         ],
         "font-src": [
             "'self'",
             "data:",
             "blob:",
             "'unsafe-inline'",
-            "https://cdnjs.cloudflare.com",
-            "https://fonts.gstatic.com",
-            "https://maxcdn.bootstrapcdn.com",
-            "https://cdn.jsdelivr.net",
         ],
         "img-src": [
             "'self'",
@@ -898,8 +886,6 @@ DB_VERSIONING = False
 
 # WIKI
 # ====
-# Serve the Bootstrap assets from the package, the wiki base template loads them.
-BOOTSTRAP_SERVE_LOCAL = True
 WIKI_CONTENT_DIR = "./data/wiki"
 WIKI_INDEX_DIR = "./data/wiki/_index"
 WIKI_URL_PREFIX = "/<org_code:view>/help"

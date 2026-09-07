@@ -33,6 +33,51 @@ def test_navbar_search_outside_collapsible_menu(client):
     assert search_field < collapsible_menu
 
 
+def test_assets_are_served_by_the_application(client, db, organisation, document_with_file):
+    """Test that the pages load their scripts and stylesheets from no third-party host."""
+    urls = [
+        url_for("documents.search", view="global"),
+        url_for("invenio_records_ui.doc", view="global", pid_value=document_with_file["pid"]),
+        url_for("wiki.index", view="global"),
+    ]
+
+    # The analytics tag is the one third-party script the application loads on
+    # purpose, from the host the CSP allows in `script-src`.
+    analytics = {"www.googletagmanager.com"}
+
+    for url in urls:
+        res = client.get(url, follow_redirects=True)
+        assert res.status_code == 200
+
+        soup = BeautifulSoup(res.data, "html.parser")
+        assets = [tag["src"] for tag in soup.select("script[src]")]
+        assets += [tag["href"] for tag in soup.select('link[rel="stylesheet"][href]')]
+        assert assets
+        # An asset served by the application has no netloc.
+        hosts = {urlsplit(asset).netloc for asset in assets}
+        assert not hosts - {""} - analytics, url
+
+
+def test_pages_calling_jquery_load_it(client, db, organisation, document_with_file, project, user):
+    """Test that the pages whose scripts call jQuery load the bundle providing it."""
+    login_user_via_view(client, email=user["email"], password="123456")
+
+    urls = [
+        url_for("invenio_records_ui.doc", view="global", pid_value=document_with_file["pid"]),
+        url_for("invenio_records_ui.proj", view="global", pid_value=project.id),
+        url_for("wiki.index", view="global"),
+        "/pdf-extractor/test",
+    ]
+
+    for url in urls:
+        res = client.get(url, follow_redirects=True)
+        assert res.status_code == 200
+
+        soup = BeautifulSoup(res.data, "html.parser")
+        scripts = [tag["src"] for tag in soup.select("script[src]")]
+        assert any("sonar-bootstrap" in src for src in scripts), url
+
+
 def test_robots_txt(app):
     """Test le robots.txt file."""
     with app.test_client() as client:
