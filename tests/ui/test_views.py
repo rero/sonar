@@ -4,6 +4,7 @@
 """Test SONAR views."""
 
 from datetime import datetime
+from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
@@ -362,3 +363,26 @@ def test_wiki_toasts_in_the_toast_stack(client, db):
     soup = BeautifulSoup(res.data, "html.parser")
     assert soup.select_one(".toast-container .toast.toast-success#copy-success")
     assert soup.select_one(".toast-container .toast.toast-danger#copy-error")
+
+
+def test_help_served_without_the_default_organisation_code(client, db):
+    """Test that the help of the platform hangs from /help and not from /global/help."""
+    redirected = client.get("/global/help/")
+    assert redirected.status_code == 308
+    assert urlsplit(redirected.location).path == "/help/"
+
+    res = client.get("/help/", follow_redirects=True)
+    assert res.status_code == 200
+
+    soup = BeautifulSoup(res.data, "html.parser")
+    assert soup.select_one("#navbarNav form")["action"] == "/help/search"
+
+
+def test_help_served_through_an_organisation_view(client, organisation):
+    """Test that the help reached through an organisation view keeps its code in the URLs."""
+    code = organisation["code"]
+    res = client.get(f"/{code}/help/", follow_redirects=True)
+    assert res.status_code == 200
+
+    soup = BeautifulSoup(res.data, "html.parser")
+    assert soup.select_one("#navbarNav form")["action"] == f"/{code}/help/search"

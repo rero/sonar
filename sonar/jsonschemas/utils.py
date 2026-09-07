@@ -3,13 +3,10 @@
 
 """JSON schemas utils."""
 
+from functools import lru_cache
+
 from invenio_jsonschemas.proxies import current_jsonschemas
 from jsonresolver.contrib.jsonref import _JsonLoader
-
-try:
-    from functools import lru_cache
-except ImportError:
-    from functools32 import lru_cache
 
 
 class JsonLoader(_JsonLoader):
@@ -25,7 +22,8 @@ class JsonLoader(_JsonLoader):
         loaded JSON documents is not used
     """
 
-    @lru_cache(maxsize=1000)
+    # B019 is safe here: the loader is instantiated once per application (JSONSCHEMAS_LOADER_CLS).
+    @lru_cache(maxsize=1000)  # noqa: B019
     def get_remote_json(self, uri, **kwargs):
         """Get remote json.
 

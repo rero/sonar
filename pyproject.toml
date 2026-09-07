@@ -36,7 +36,6 @@ dependencies = [
     # Invenio base bundle
     "invenio-admin>=1.6.0",
     "invenio-assets>=4.0.0",
-    "invenio-formatter>=3.0.0",
     "invenio-logging[sentry]>=4.0.0",
     "invenio-mail>=2.0.0",
     "invenio-rest>=3.0.0",
@@ -55,7 +54,6 @@ dependencies = [
     "invenio-records-rest[dublincore]>=3.0.0",
     "invenio-records-ui>=2.0.0",
     "invenio-records>=4.0.0",
-    "invenio-search-ui>=4.0.0",
     "invenio-stats",
     "invenio-records-resources",
     "rero-invenio-base>=0.3.1",
@@ -65,7 +63,6 @@ dependencies = [
     "invenio-records-files>=1.2.1",
     "rero-invenio-files>=1.2.0",
     "python-dotenv>=0.13.0",
-    "sentry-sdk",
     "jsonresolver",
     "flask-wiki>=4.0.0",
     "poethepoet",

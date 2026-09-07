@@ -21,6 +21,7 @@ from invenio_stats.aggregations import StatAggregator
 from invenio_stats.processors import EventsIndexer
 from invenio_stats.queries import ESTermsQuery
 
+from sonar.config_sonar import SONAR_APP_DEFAULT_ORGANISATION
 from sonar.modules.collections.config import Configuration as CollectionConfiguration
 from sonar.modules.deposits.api import DepositRecord, DepositSearch
 from sonar.modules.deposits.permissions import DepositPermission
@@ -867,6 +868,8 @@ BOOTSTRAP_SERVE_LOCAL = True
 WIKI_CONTENT_DIR = "./data/wiki"
 WIKI_INDEX_DIR = "./data/wiki/_index"
 WIKI_URL_PREFIX = "/<org_code:view>/help"
+# The help of the default organisation hangs from /help, without its code
+WIKI_URL_PREFIX_DEFAULTS = {"view": SONAR_APP_DEFAULT_ORGANISATION}
 WIKI_LANGUAGES = {"en": "English", "fr": "French", "de": "German", "it": "Italian"}
 WIKI_CURRENT_LANGUAGE = get_current_language
 WIKI_UPLOAD_FOLDER = os.path.join(WIKI_CONTENT_DIR, "files")
