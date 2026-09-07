@@ -17,6 +17,7 @@
 
 {%- block javascript %}
 {{ super() }}
+{{ webpack['sonar-bootstrap.js'] }}
 <script src="{{ url_for('static', filename='pdf_extractor/test.js') }}"></script>
 {%- endblock javascript %}
 

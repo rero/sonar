@@ -30,6 +30,6 @@
 
 {%- block javascript %}
 {{ super() }}
-{{ bootstrap.load_js() }}
+{{ webpack['sonar-bootstrap.js'] }}
 <script type="text/javascript" src="{{ url_for('wiki.static', filename='js/wiki.js') }}"></script>
 {%- endblock javascript %}
