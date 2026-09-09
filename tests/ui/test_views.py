@@ -58,9 +58,9 @@ def test_assets_are_served_by_the_application(client, db, organisation, document
         assert not hosts - {""} - analytics, url
 
 
-def test_pages_calling_jquery_load_it(client, db, organisation, document_with_file, project, user):
+def test_pages_calling_jquery_load_it(client, db, organisation, document_with_file, project, submitter):
     """Test that the pages whose scripts call jQuery load the bundle providing it."""
-    login_user_via_view(client, email=user["email"], password="123456")
+    login_user_via_view(client, email=submitter["email"], password="123456")
 
     urls = [
         url_for("invenio_records_ui.doc", view="global", pid_value=document_with_file["pid"]),
