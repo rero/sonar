@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SONAR VERSION\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
-"POT-Creation-Date: 2026-08-19 02:57+0000\n"
+"POT-Creation-Date: 2026-09-08 06:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,7 +50,7 @@ msgstr ""
 msgid "Access allowed from the organisation's IP addresses"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:379
+#: sonar/modules/documents/templates/documents/record.html:385
 msgid "Accompanying material"
 msgstr ""
 
@@ -104,10 +104,6 @@ msgstr ""
 msgid "Agent"
 msgstr ""
 
-#: sonar/help/templates/help/page_wiki_search.html:19
-msgid "All languages"
-msgstr ""
-
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:731
 msgid "Allophone student"
 msgstr ""
@@ -158,7 +154,7 @@ msgstr ""
 msgid "Authors / Editors"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:42
+#: sonar/modules/documents/templates/documents/record.html:48
 #: sonar/theme/templates/sonar/projects/detail.html:18
 msgid "Back"
 msgstr ""
@@ -256,7 +252,6 @@ msgid "Choose your role:"
 msgstr ""
 
 #: sonar/modules/documents/templates/documents/_citation.html:27
-#: sonar/modules/documents/templates/documents/_citation.html:57
 msgid "Citation"
 msgstr ""
 
@@ -270,7 +265,7 @@ msgstr ""
 
 #: sonar/jsonschemas/common/classification-v1.0.0.json:2
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1235
-#: sonar/modules/documents/templates/documents/record.html:311
+#: sonar/modules/documents/templates/documents/record.html:317
 msgid "Classification"
 msgstr ""
 
@@ -287,7 +282,6 @@ msgid "Classroom teacher"
 msgstr ""
 
 #: sonar/modules/documents/templates/documents/_citation.html:28
-#: sonar/modules/documents/templates/documents/_citation.html:58
 msgid "Close"
 msgstr ""
 
@@ -312,7 +306,7 @@ msgstr ""
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:786
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1190
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1194
-#: sonar/modules/documents/templates/documents/record.html:229
+#: sonar/modules/documents/templates/documents/record.html:235
 msgid "Collections"
 msgstr ""
 
@@ -339,7 +333,7 @@ msgid ""
 "supply a resource, e.g., price of a resource."
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:281
+#: sonar/modules/documents/templates/documents/record.html:287
 msgid "Conference"
 msgstr ""
 
@@ -356,7 +350,7 @@ msgstr ""
 msgid "Contained in or submitted to (journal, book, proceedings)"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:297
+#: sonar/modules/documents/templates/documents/record.html:303
 msgid "Content"
 msgstr ""
 
@@ -399,10 +393,6 @@ msgstr ""
 
 #: sonar/modules/documents/templates/documents/_citation.html:41
 msgid "Copy to the clipboard"
-msgstr ""
-
-#: sonar/help/templates/help/page_wiki.html:27
-msgid "Created:"
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:251
@@ -607,7 +597,7 @@ msgstr ""
 msgid "Document type"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:479
+#: sonar/modules/documents/templates/documents/record.html:485
 msgid "Document views"
 msgstr ""
 
@@ -819,7 +809,7 @@ msgstr ""
 msgid "File UUID"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:480
+#: sonar/modules/documents/templates/documents/record.html:486
 #: sonar/theme/templates/sonar/macros/macro.html:38
 msgid "File downloads"
 msgstr ""
@@ -886,7 +876,7 @@ msgstr ""
 msgid "Formats"
 msgstr ""
 
-#: sonar/config.py:62
+#: sonar/config.py:63
 msgid "French"
 msgstr ""
 
@@ -932,7 +922,7 @@ msgstr ""
 msgid "Funding was granted for the project"
 msgstr ""
 
-#: sonar/config.py:62
+#: sonar/config.py:63
 msgid "German"
 msgstr ""
 
@@ -980,10 +970,6 @@ msgstr ""
 
 #: sonar/theme/templates/sonar/footer.html:21
 msgid "Help"
-msgstr ""
-
-#: sonar/help/templates/help/page_wiki_search_navigation.html:12
-msgid "Home"
 msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:595
@@ -1036,7 +1022,7 @@ msgstr ""
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:675
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:767
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1895
-#: sonar/modules/documents/templates/documents/record.html:426
+#: sonar/modules/documents/templates/documents/record.html:432
 msgid "Identifiers"
 msgstr ""
 
@@ -1106,7 +1092,7 @@ msgstr ""
 msgid "Issue"
 msgstr ""
 
-#: sonar/config.py:62
+#: sonar/config.py:63
 msgid "Italian"
 msgstr ""
 
@@ -1160,7 +1146,7 @@ msgstr ""
 
 #: sonar/jsonschemas/common/language-v1.0.0.json:2
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:370
-#: sonar/modules/documents/templates/documents/record.html:264
+#: sonar/modules/documents/templates/documents/record.html:270
 msgid "Language"
 msgstr ""
 
@@ -1177,16 +1163,12 @@ msgstr ""
 msgid "Last name"
 msgstr ""
 
-#: sonar/help/templates/help/page_wiki.html:27
-msgid "Last updated:"
-msgstr ""
-
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:201
 msgid "Lecturer/professor"
 msgstr ""
 
 #: sonar/jsonschemas/common/license-v1.0.0.json:2
-#: sonar/modules/documents/templates/documents/record.html:389
+#: sonar/modules/documents/templates/documents/record.html:395
 msgid "License"
 msgstr ""
 
@@ -1368,7 +1350,7 @@ msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1016
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:708
-#: sonar/modules/documents/templates/documents/record.html:354
+#: sonar/modules/documents/templates/documents/record.html:360
 msgid "Notes"
 msgstr ""
 
@@ -1407,7 +1389,7 @@ msgstr ""
 msgid "Only one value per language is allowed"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:416
+#: sonar/modules/documents/templates/documents/record.html:422
 msgid "Open Access status"
 msgstr ""
 
@@ -1482,7 +1464,7 @@ msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:744
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1059
-#: sonar/modules/documents/templates/documents/record.html:328
+#: sonar/modules/documents/templates/documents/record.html:334
 msgid "Other electronic version"
 msgstr ""
 
@@ -1491,7 +1473,7 @@ msgstr ""
 msgid "Other electronic versions"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:453
+#: sonar/modules/documents/templates/documents/record.html:459
 msgid "Other files"
 msgstr ""
 
@@ -1499,7 +1481,7 @@ msgstr ""
 msgid "Other locality (Switzerland)"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:368
+#: sonar/modules/documents/templates/documents/record.html:374
 msgid "Other material characteristics"
 msgstr ""
 
@@ -1533,7 +1515,7 @@ msgstr ""
 msgid "Period"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:443
+#: sonar/modules/documents/templates/documents/record.html:449
 msgid "Persistent URL"
 msgstr ""
 
@@ -1608,7 +1590,7 @@ msgstr ""
 msgid "Preferred name"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:500
+#: sonar/modules/documents/templates/documents/record.html:506
 #: sonar/theme/templates/sonar/preview/base.html:8
 msgid "Preview"
 msgstr ""
@@ -1707,7 +1689,7 @@ msgstr ""
 msgid "Publication statement of the host document if it is a book, for example \\"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:156
+#: sonar/modules/documents/templates/documents/record.html:162
 msgid "Published in"
 msgstr ""
 
@@ -1737,7 +1719,7 @@ msgstr ""
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1117
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1122
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1126
-#: sonar/modules/documents/templates/documents/record.html:333
+#: sonar/modules/documents/templates/documents/record.html:339
 msgid "Related to"
 msgstr ""
 
@@ -1755,7 +1737,7 @@ msgstr ""
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:1283
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2154
-#: sonar/modules/documents/templates/documents/record.html:204
+#: sonar/modules/documents/templates/documents/record.html:210
 msgid "Research projects"
 msgstr ""
 
@@ -1807,7 +1789,7 @@ msgstr ""
 msgid "SONAR logo"
 msgstr ""
 
-#: sonar/config.py:284
+#: sonar/config.py:285
 msgid "SONAR password reset"
 msgstr ""
 
@@ -1834,9 +1816,6 @@ msgstr ""
 msgid "Scientific collaborator"
 msgstr ""
 
-#: sonar/help/templates/help/page_wiki_search_navigation.html:19
-#: sonar/help/templates/help/page_wiki_search_navigation.html:20
-#: sonar/help/templates/help/page_wiki_search_navigation.html:23
 #: sonar/theme/templates/sonar/frontpage.html:50
 #: sonar/theme/templates/sonar/partial/navbar.html:30
 #: sonar/theme/templates/sonar/partial/navbar.html:31
@@ -1885,7 +1864,7 @@ msgstr ""
 msgid "Series"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:340
+#: sonar/modules/documents/templates/documents/record.html:346
 msgid "Series statement"
 msgstr ""
 
@@ -1911,7 +1890,7 @@ msgstr ""
 msgid "Should be in the following format: 2022-12-31 (YYYY-MM-DD)."
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:108
+#: sonar/modules/documents/templates/documents/record.html:114
 msgid "Show more"
 msgstr ""
 
@@ -2029,7 +2008,7 @@ msgstr ""
 msgid "Statistic"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:475
+#: sonar/modules/documents/templates/documents/record.html:481
 #: sonar/modules/stats/jsonschemas/stats/stat-v1.0.0.json:21
 msgid "Statistics"
 msgstr ""
@@ -2099,7 +2078,7 @@ msgstr ""
 msgid "Subjects"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:156
+#: sonar/modules/documents/templates/documents/record.html:162
 msgid "Submitted to"
 msgstr ""
 
@@ -2120,16 +2099,12 @@ msgstr ""
 msgid "Suspended"
 msgstr ""
 
-#: sonar/config.py:83 sonar/config.py:87
+#: sonar/config.py:84 sonar/config.py:88
 msgid "Swiss Open Access Repository"
 msgstr ""
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:557
 msgid "Swissuniversities"
-msgstr ""
-
-#: sonar/help/templates/help/page_wiki.html:38
-msgid "Table of contents"
 msgstr ""
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:2062
@@ -2168,7 +2143,7 @@ msgid ""
 " this document belongs"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/_citation.html:62
+#: sonar/modules/documents/templates/documents/record.html:34
 msgid "The text has been copied to the clipboard"
 msgstr ""
 
@@ -2386,7 +2361,7 @@ msgstr ""
 msgid "Welcome to"
 msgstr ""
 
-#: sonar/config.py:115
+#: sonar/config.py:116
 msgid "Welcome to SONAR, the Swiss Open Access Repository!"
 msgstr ""
 
@@ -2423,7 +2398,7 @@ msgstr ""
 msgid "Year"
 msgstr ""
 
-#: sonar/config.py:285
+#: sonar/config.py:286
 msgid "Your SONAR password has been reset"
 msgstr ""
 
@@ -3029,7 +3004,7 @@ msgstr ""
 msgid "contribution_role_{role}"
 msgstr ""
 
-#: sonar/config.py:676
+#: sonar/config.py:710
 msgid "contributor"
 msgstr ""
 
@@ -5311,7 +5286,7 @@ msgstr ""
 msgid "no."
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:68
+#: sonar/modules/documents/templates/documents/record.html:74
 msgid "other files"
 msgstr ""
 
@@ -5319,7 +5294,7 @@ msgstr ""
 msgid "p."
 msgstr ""
 
-#: sonar/config.py:673
+#: sonar/config.py:707
 msgid "pid"
 msgstr ""
 
@@ -5350,12 +5325,6 @@ msgstr ""
 #: sonar/translations/manual_translations.txt:35
 msgid "relatedToMandate_name"
 msgstr ""
-
-#: sonar/help/templates/help/page_wiki_search.html:18
-msgid "result"
-msgid_plural "results"
-msgstr[0] ""
-msgstr[1] ""
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:139
 msgid "role_admin"
@@ -5389,7 +5358,7 @@ msgstr ""
 msgid "startDate"
 msgstr ""
 
-#: sonar/config.py:674
+#: sonar/config.py:708
 msgid "status"
 msgstr ""
 
@@ -5405,7 +5374,7 @@ msgstr ""
 msgid "subject"
 msgstr ""
 
-#: sonar/modules/documents/templates/documents/record.html:214
+#: sonar/modules/documents/templates/documents/record.html:220
 msgid "supported by"
 msgstr ""
 
@@ -5415,7 +5384,7 @@ msgstr ""
 msgid "uri"
 msgstr ""
 
-#: sonar/config.py:675
+#: sonar/config.py:709
 msgid "user"
 msgstr ""
 
