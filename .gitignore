@@ -80,3 +80,6 @@ celerybeat-schedule*
 data/wiki/_index/
 
 .python-version
+
+# Claude Code local settings
+/.claude/settings.local.json
