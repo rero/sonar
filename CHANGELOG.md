@@ -2,6 +2,260 @@
 
 <!-- version list -->
 
+## v1.13.0 (2026-09-16)
+
+### Bug Fixes
+
+- Protect API endpoints of pdf-extractor
+  ([`a5a6b89`](https://github.com/rero/sonar/commit/a5a6b890c2de71e6426e44d2705b7bb955243cc1))
+
+- Remove the error generation route
+  ([`50941f4`](https://github.com/rero/sonar/commit/50941f4d3f7bb8d1e1dfcbbbe85e0c34272c4c0c))
+
+- Update invenio-cache and adapt variables
+  ([`c4b79f0`](https://github.com/rero/sonar/commit/c4b79f0f46f9f6cd76433fef684a433c3a3be746))
+
+- **api**: Unregister the Flask-Security views from the API
+  ([`20ff05d`](https://github.com/rero/sonar/commit/20ff05daaa23200a299c44ed0af6ae9fd8ce0831))
+
+- **data**: Drop hardcoded ARK and URN from the document fixtures
+  ([`848c076`](https://github.com/rero/sonar/commit/848c0766eb0fbc53fa0ba4a4c8fcee3ef739554e))
+
+- **deposits**: Force utf-8 for affiliation resolver
+  ([`410f6d7`](https://github.com/rero/sonar/commit/410f6d7b66af94398a872d76a868cd50898ec5ea))
+
+- **docker**: Raise Elasticsearch mem_limit to avoid OOM kills
+  ([`0bdae3a`](https://github.com/rero/sonar/commit/0bdae3a73113c1da9895d832daa596d20eaa8339))
+
+- **docker**: Set the UTF-8 locale dropped by the Python image since 3.13
+  ([`af300f9`](https://github.com/rero/sonar/commit/af300f9b0af7b2962af04174d6cbd9805c4aae7f))
+
+- **docker**: Use correct bootstrap flag for UI package
+  ([`9afb0d6`](https://github.com/rero/sonar/commit/9afb0d67d1620b9794dd620c02a8c8069f6fb840))
+
+- **document**: Fix editor crash on missing provisionActivity model
+  ([`3dac740`](https://github.com/rero/sonar/commit/3dac740c8d4f022b4a942797212697cf35addde6))
+
+- **documents**: Allow anonymous document listing
+  ([`2d18ed4`](https://github.com/rero/sonar/commit/2d18ed4f2b3d23699c8154a4982ba60a6d991832))
+
+- **documents**: Correct context, identifiers and cite keys in RIS/BibTeX export
+  ([`56fa672`](https://github.com/rero/sonar/commit/56fa6721e872c26e7a0298391c4c2977559eb4e1))
+
+- **documents**: Trigger fulltext search via the `fulltext` query argument
+  ([`af98341`](https://github.com/rero/sonar/commit/af98341ea26b0e6d2a0a83de73185d0a96cf5eb7))
+
+- **fixtures**: Fixes missing thumbnail
+  ([`4292e1e`](https://github.com/rero/sonar/commit/4292e1e3351c5e42667e61d1c5f7d083b0d8a105))
+
+- **fixtures**: Scope random links to the document's organisation
+  ([`d5cb333`](https://github.com/rero/sonar/commit/d5cb333dc88df3ed87e80191e64b2bad221d855d))
+
+- **oaipmh**: Return idDoesNotExist for deleted documents
+  ([`ada1ce0`](https://github.com/rero/sonar/commit/ada1ce04f8c3ede5951893cdebb17032248f0e36))
+
+- **pdf_extractor**: Flush temp file buffer before pdftotext reads it
+  ([`15cd78d`](https://github.com/rero/sonar/commit/15cd78d3350a285c36e5c6ac75b24eca9bc3d3ce))
+
+- **projects**: Accept the quoted ETag in the `If-Match` header
+  ([`e29d20a`](https://github.com/rero/sonar/commit/e29d20ab7cacd2354622058a8bd4525146d91530))
+
+- **projects**: Avoid KeyError in HEP-VS CSV export
+  ([`e9a0351`](https://github.com/rero/sonar/commit/e9a0351206f202baf427d43c354325dfb48bb704))
+
+- **release**: Bump version.py on release
+  ([`ec5145d`](https://github.com/rero/sonar/commit/ec5145de2cffe0760dd681f383ceae8facbd6749))
+
+- **search**: Allow Lucene/MARC special chars in query strings
+  ([`9453abe`](https://github.com/rero/sonar/commit/9453abe2d328058c9764505257e5e506fe25db80))
+
+- **search**: Author facet counts
+  ([`43dfb01`](https://github.com/rero/sonar/commit/43dfb0135acc9b949d0167d9f992a891d33a06f5))
+
+- **snl**: Bound the connection to the SNL server in time
+  ([`94601aa`](https://github.com/rero/sonar/commit/94601aa025390d31de127ce7b682a75344ba3e86))
+
+- **snl**: Repair the SFTP repository and drop the sftpretty wrapper
+  ([`15dc3e4`](https://github.com/rero/sonar/commit/15dc3e494d80d42fec798cb666222c0e3a53d0c2))
+
+- **stat-events**: Ignore forged IP addresses
+  ([`f19c205`](https://github.com/rero/sonar/commit/f19c20551e5c159082f922fe42c6749c58b93bea))
+
+- **suggestions**: Suggest values, not records
+  ([`f5b9f73`](https://github.com/rero/sonar/commit/f5b9f733db13713c6e9539767b8d7fcf372233c4))
+
+- **swisscovery**: Add timeout and error handling for remote service
+  ([`4cbb372`](https://github.com/rero/sonar/commit/4cbb3729d11503756c9cb05cfbe517acfc41dc92))
+
+- **views**: Deny global view access on dedicated portals
+  ([`c7d96da`](https://github.com/rero/sonar/commit/c7d96da424fd7fe7227242e7955d876334472da9))
+
+- **views**: Serve the organisation homepage with a trailing slash
+  ([`3be08d7`](https://github.com/rero/sonar/commit/3be08d7d54a6de35e2055f27cb372955a3c24369))
+
+### Build System
+
+- Bump citeproc-py
+  ([`b761f77`](https://github.com/rero/sonar/commit/b761f77861b42248a745bac5885a6d1da601e54e))
+
+- Update dependencies
+  ([`07f34fa`](https://github.com/rero/sonar/commit/07f34fa4f16204e5af3b27e5af681f19f60337df))
+
+- Update dependencies
+  ([`2288da4`](https://github.com/rero/sonar/commit/2288da4d660bd10ed17cda03161f8c55b4830992))
+
+- Update dependencies
+  ([`1d1f2dd`](https://github.com/rero/sonar/commit/1d1f2ddb01f21c43245450955ba356fef2e164eb))
+
+- Update dependencies
+  ([`fed9cb9`](https://github.com/rero/sonar/commit/fed9cb9a999569bd655c6e5bb770ec830526974b))
+
+- **deps**: Run python-semantic-release through uvx
+  ([`d327fb1`](https://github.com/rero/sonar/commit/d327fb121b5487ddfcf942a46cc0752592128a42))
+
+### Chores
+
+- Add 159.943 to classifications
+  ([`c094465`](https://github.com/rero/sonar/commit/c094465fcf99ae0e7f96df3a3e5ce9736ac30232))
+
+- Remove Sphinx documentation infrastructure and unused Invenio defaults
+  ([`171f7c7`](https://github.com/rero/sonar/commit/171f7c7daa89065c340471b056ca351b0b0de12b))
+
+- Revert rabbitmq to 4.2 and add claude behavioural guidelines
+  ([`91328cf`](https://github.com/rero/sonar/commit/91328cf723b4a1dc874c3090c442ef848ada3679))
+
+- Translate v1.13.0
+  ([`9f06a64`](https://github.com/rero/sonar/commit/9f06a64d65ce60dcdf0675556d9d3f11c0bc246d))
+
+- Translations
+  ([`45ae391`](https://github.com/rero/sonar/commit/45ae39107c720daac9a5bf62584b895402c9ba7a))
+
+- Update cryptography to v50
+  ([`52e3a96`](https://github.com/rero/sonar/commit/52e3a969e573b649f7eef4c0243bbb707f127d11))
+
+- Update dependencies
+  ([`b5c813a`](https://github.com/rero/sonar/commit/b5c813a5780edb1451fc2b654dd7c75f1983ab1b))
+
+- Upgrade to Python 3.14 and modernize dependencies
+  ([`ec5f58f`](https://github.com/rero/sonar/commit/ec5f58f90d7168aeda395457ddd344d0b9a51b91))
+
+- V1.13.0 translations
+  ([`d0c6892`](https://github.com/rero/sonar/commit/d0c689206968d22c1ec1bd49480ca7b89f0c2fc7))
+
+### Code Style
+
+- Add CSS class to the middle bar in the home page
+  ([`67337a7`](https://github.com/rero/sonar/commit/67337a76c957eb8833ced6aa1f733d2c5fb18fa3))
+
+- Add missing license headers
+  ([`428de8c`](https://github.com/rero/sonar/commit/428de8c7ae955c6b515793736aa87ed7d5c45870))
+
+- Replace verbose license headers with SPDX tags
+  ([`5e1148c`](https://github.com/rero/sonar/commit/5e1148cabd15d23c12e1fdafb73bf47871d4af9e))
+
+- Use "Last name, First name" contributor format
+  ([`799c14d`](https://github.com/rero/sonar/commit/799c14d879a20831743ea6cbf89e17cada15c5b3))
+
+### Continuous Integration
+
+- Add a license header check
+  ([`ba93ca1`](https://github.com/rero/sonar/commit/ba93ca17b6e2b6f8c1c4742b1e04e4c01c4af0a9))
+
+- Add automatic release workflow
+  ([`e469bce`](https://github.com/rero/sonar/commit/e469bce7a5780680ff81a57cc47eec61ee9fa0f9))
+
+- Add continuous translation extraction workflow
+  ([`3acf186`](https://github.com/rero/sonar/commit/3acf1868b5b033852a0616faf40a803df2d1e2c9))
+
+- Bump actions to latest versions
+  ([`f37bc16`](https://github.com/rero/sonar/commit/f37bc167eab4a5adf05f1df9bb9f4c345d56bdbb))
+
+- Bump actions/checkout from 6.0.3 to 7.0.0
+  ([`0c06b1a`](https://github.com/rero/sonar/commit/0c06b1a04a4b9996da611409aa985857bfdd2dc8))
+
+- Bump astral-sh/setup-uv from 9.0.0 to 10.0.1
+  ([`09641b5`](https://github.com/rero/sonar/commit/09641b5f8a11613cd2ee04fe82fe98f36c42a623))
+
+- Scope translation extraction to the message template
+  ([`cebf53e`](https://github.com/rero/sonar/commit/cebf53e48a778af3423ec7f1bb59064fb6faa95f))
+
+- Skip location-only changes in the template
+  ([`aa12e16`](https://github.com/rero/sonar/commit/aa12e16797da368d5d418147d544539264fd8738))
+
+- **data**: Make demo data more coherent
+  ([`31eae92`](https://github.com/rero/sonar/commit/31eae92453b781ad174481c4316bd63fb67f05c0))
+
+### Documentation
+
+- Add Claude commit and review capabilities
+  ([`b005ce4`](https://github.com/rero/sonar/commit/b005ce45170a8a42883abc33b4eaa22118536bbb))
+
+- Keep only non-derivable rules in CLAUDE.md
+  ([`78c3781`](https://github.com/rero/sonar/commit/78c3781ef813003bf16592593b512132747e63e3))
+
+- Relocate wiki content to data/ and reorganize project config
+  ([`cda4643`](https://github.com/rero/sonar/commit/cda464353e455d886f50d5046b7efb8504556da8))
+
+### Features
+
+- Bump sonar-ui to v21.1.0
+  ([`a0a1463`](https://github.com/rero/sonar/commit/a0a1463182797824b07d100d6bc6c98726e75513))
+
+- **deposits**: Add doc link to email approval
+  ([`d0628c4`](https://github.com/rero/sonar/commit/d0628c414edbf60033e26e97306be708876b0a55))
+
+- **deposits**: Hide add new project option
+  ([`85451d9`](https://github.com/rero/sonar/commit/85451d9844d5d31d4853a81022c66b2b3c7083d1))
+
+- **documents**: Add bibliographic citation
+  ([`80fbbc0`](https://github.com/rero/sonar/commit/80fbbc0c628448238ba26b1c5c29ae40fb47d440))
+
+- **documents**: Add BibTeX, RIS serializers and export
+  ([`7ab632e`](https://github.com/rero/sonar/commit/7ab632e0dbaac68c8be8273fcdbcfdcf3ae5ba79))
+
+- **documents**: Add citation modal to document detail page
+  ([`8e56420`](https://github.com/rero/sonar/commit/8e56420c1df421d6c8f22be534c6bd59db663a41))
+
+- **icons**: Migrate to Font Awesome v7
+  ([`4b22938`](https://github.com/rero/sonar/commit/4b22938f97da6680fea95f0beb0c77b8a264d076))
+
+- **suggestions**: Restrict completion endpoint to submitter role with org filter
+  ([`6dfd183`](https://github.com/rero/sonar/commit/6dfd183c70ab744eb57980aab273f50c25f3a21d))
+
+- **theme**: Expose available languages in logged_user endpoint
+  ([`9240402`](https://github.com/rero/sonar/commit/9240402c5a55538831a07cc7fe9963563f6dac24))
+
+- **theme**: Gather the server messages in a single toast stack
+  ([`a9fc12e`](https://github.com/rero/sonar/commit/a9fc12e9cd022ed82fe7e521c4e52c67f4e9eefa))
+
+- **theme**: Keep the search bar visible on small screens
+  ([`5da4266`](https://github.com/rero/sonar/commit/5da4266c5795791a982385b8624eda181aea6627))
+
+- **theme**: Replace hardcoded sonar-ui assets with angular_assets filter
+  ([`87f56af`](https://github.com/rero/sonar/commit/87f56af308f73390a1d4e2155babc56d23f9fc91))
+
+- **wiki**: Open the help edition to the editor role
+  ([`93fa343`](https://github.com/rero/sonar/commit/93fa3436b1fc89ce2d31d3a135ff985ab9de0800))
+
+### Performance Improvements
+
+- Bundle frontend libraries locally
+  ([`45a3b71`](https://github.com/rero/sonar/commit/45a3b71a2d4cf3f627fd08dffddd8c3f99d62817))
+
+### Refactoring
+
+- Remove RERODOC harvesting pipeline and legacy URL support
+  ([`fa3bacf`](https://github.com/rero/sonar/commit/fa3bacfa8a0c30bd06fc3764a9ecf6896ccf3159))
+
+- Serve the help pages with flask-wiki itself
+  ([`53902d9`](https://github.com/rero/sonar/commit/53902d9ed22f7b984bb2400a216f5d930c1b1197))
+
+### Testing
+
+- Fix missing user login in jquery test
+  ([`b4d8540`](https://github.com/rero/sonar/commit/b4d8540c107d6b215034bb75dd14a0ee3354c5bd))
+
+
 ## [v1.12.4](https://github.com/rero/sonar/tree/v1.12.4) (2026-02-10)
 
 [Full Changelog](https://github.com/rero/sonar/compare/v1.12.3...v1.12.4)
