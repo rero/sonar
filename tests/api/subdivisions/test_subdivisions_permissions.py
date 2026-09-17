@@ -33,7 +33,7 @@ def test_list(
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
     res = client.get(url_for("invenio_records_rest.subd_list"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 2
+    assert res.json["hits"]["total"] == 2
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
 
     # Logged as user
@@ -55,13 +55,13 @@ def test_list(
     login_user_via_session(client, email=admin["email"])
     res = client.get(url_for("invenio_records_rest.subd_list"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
 
     # Logged as superuser
     login_user_via_session(client, email=superuser["email"])
     res = client.get(url_for("invenio_records_rest.subd_list"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 2
+    assert res.json["hits"]["total"] == 2
 
 
 def test_create(client, superuser, admin, moderator, submitter, user):

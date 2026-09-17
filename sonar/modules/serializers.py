@@ -49,6 +49,9 @@ class JSONSerializer(_JSONSerializer):
     def serialize_search(self, pid_fetcher, search_result, links=None, item_links_factory=None, **kwargs):
         """Serialize a search result.
 
+        The total is unwrapped from the search engine shape here, so that the
+        rest of the application keeps reading the engine response as is.
+
         :param pid_fetcher: Persistent identifier fetcher.
         :param search_result: Elasticsearch search result.
         :param links: Dictionary of links to add to response.
@@ -64,7 +67,7 @@ class JSONSerializer(_JSONSerializer):
                     )
                     for hit in search_result["hits"]["hits"]
                 ],
-                "total": search_result["hits"]["total"],
+                "total": search_result["hits"]["total"]["value"],
             },
             "links": links or {},
             "aggregations": search_result.get("aggregations", {}),
