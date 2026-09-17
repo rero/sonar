@@ -30,55 +30,55 @@ def test_list(
     # Not logged: public, global scope, no view required.
     res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 2
+    assert res.json["hits"]["total"] == 2
 
     # Not logged but permission checks disabled
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=True)
     res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 2
+    assert res.json["hits"]["total"] == 2
     app.config.update(SONAR_APP_DISABLE_PERMISSION_CHECKS=False)
 
     # Logged as user: same public, global scope as anonymous.
     login_user_via_session(client, email=user["email"])
     res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 2
+    assert res.json["hits"]["total"] == 2
 
     # Logged as submitter: same public, global scope as anonymous.
     login_user_via_session(client, email=submitter["email"])
     res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 2
+    assert res.json["hits"]["total"] == 2
 
     # Logged as moderator
     login_user_via_session(client, email=moderator["email"])
     res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
 
     # Logged as admin
     login_user_via_session(client, email=admin["email"])
     res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
 
     # Logged as superuser
     login_user_via_session(client, email=superuser["email"])
     res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 2
+    assert res.json["hits"]["total"] == 2
 
     # Public search
     res = client.get(url_for("invenio_records_rest.doc_list", view="global"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 2
+    assert res.json["hits"]["total"] == 2
 
     # Public search for organisation
     res = client.get(url_for("invenio_records_rest.doc_list", view="org"))
     assert res.status_code == 200
     data = res.json["hits"]["hits"][0]["metadata"]
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
     assert data["identifiers"]
     ark_identifier = next(r for r in data["identifiedBy"] if r.get("type") == "ark")
     from sonar.modules.ark.api import Ark

@@ -21,7 +21,7 @@ def test_collection_query(db, client, document, collection, search_clear):
         )
     )
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
 
 
 def test_identifiers_query(client, document, search_clear):
@@ -34,7 +34,7 @@ def test_identifiers_query(client, document, search_clear):
         )
     )
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
 
 
 def test_masked_document(db, client, organisation, document, search_clear):
@@ -42,7 +42,7 @@ def test_masked_document(db, client, organisation, document, search_clear):
     # Not masked (property not exists)
     res = client.get(url_for("invenio_records_rest.doc_list", view="global"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
 
     # Not masked
     document["masked"] = "not_masked"
@@ -51,7 +51,7 @@ def test_masked_document(db, client, organisation, document, search_clear):
     db.session.commit()
     res = client.get(url_for("invenio_records_rest.doc_list", view="global"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
 
     # Masked for all
     document["masked"] = "masked_for_all"
@@ -60,7 +60,7 @@ def test_masked_document(db, client, organisation, document, search_clear):
     db.session.commit()
     res = client.get(url_for("invenio_records_rest.doc_list", view="global"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 0
+    assert res.json["hits"]["total"] == 0
 
     # Masked for external IPs, IP is not allowed
     document["masked"] = "masked_for_external_ips"
@@ -69,7 +69,7 @@ def test_masked_document(db, client, organisation, document, search_clear):
     db.session.commit()
     res = client.get(url_for("invenio_records_rest.doc_list", view="global"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 0
+    assert res.json["hits"]["total"] == 0
 
     # Masked for external IPs, IP is allowed
     organisation["allowedIps"] = "127.0.0.1/32"
@@ -79,7 +79,7 @@ def test_masked_document(db, client, organisation, document, search_clear):
     document.reindex()
     res = client.get(url_for("invenio_records_rest.doc_list", view="global"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
 
     # Masked for external IPs, IP is allowed
     organisation["allowedIps"] = "127.0.0.*"
@@ -89,7 +89,7 @@ def test_masked_document(db, client, organisation, document, search_clear):
     document.reindex()
     res = client.get(url_for("invenio_records_rest.doc_list", view="global"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
 
     # Masked for external IPs, IP is allowed
     organisation["allowedIps"] = "127.0.0.1"
@@ -99,7 +99,7 @@ def test_masked_document(db, client, organisation, document, search_clear):
     document.reindex()
     res = client.get(url_for("invenio_records_rest.doc_list", view="global"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
 
     # Masked for external IPs, IP is not allowed
     organisation["allowedIps"] = "192.168.1.1"
@@ -109,7 +109,7 @@ def test_masked_document(db, client, organisation, document, search_clear):
     document.reindex()
     res = client.get(url_for("invenio_records_rest.doc_list", view="global"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 0
+    assert res.json["hits"]["total"] == 0
 
 
 def test_anonymous_document_list_without_view(db, client, organisation, document, search_clear):
@@ -117,7 +117,7 @@ def test_anonymous_document_list_without_view(db, client, organisation, document
     # No view: behaves like the global view for anonymous users.
     res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
 
     # Masked documents are excluded, with or without a view.
     document["masked"] = "masked_for_all"
@@ -126,7 +126,7 @@ def test_anonymous_document_list_without_view(db, client, organisation, document
     db.session.commit()
     res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 0
+    assert res.json["hits"]["total"] == 0
 
     # Masked for external IPs, IP is not allowed.
     document["masked"] = "masked_for_external_ips"
@@ -135,7 +135,7 @@ def test_anonymous_document_list_without_view(db, client, organisation, document
     db.session.commit()
     res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 0
+    assert res.json["hits"]["total"] == 0
 
     # Masked for external IPs, IP is allowed.
     organisation["allowedIps"] = "127.0.0.1/32"
@@ -145,13 +145,13 @@ def test_anonymous_document_list_without_view(db, client, organisation, document
     document.reindex()
     res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
 
     # Org-scoped view still filters by organisation for anonymous users.
     res = client.get(url_for("invenio_records_rest.doc_list", view="org"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
 
     res = client.get(url_for("invenio_records_rest.doc_list", view="org2"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 0
+    assert res.json["hits"]["total"] == 0
