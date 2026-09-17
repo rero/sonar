@@ -33,28 +33,28 @@ def test_api_query(client, document_with_file, document_json, make_document, sup
     # get records without query string
     response = client.get(url_for("invenio_records_rest.doc_list"), headers=headers)
     assert response.status_code == 200
-    assert response.json["hits"]["total"]["value"] == 1
+    assert response.json["hits"]["total"] == 1
 
     # with explanation
     response = client.get(url_for("invenio_records_rest.doc_list", debug=1), headers=headers)
     assert response.status_code == 200
-    assert response.json["hits"]["total"]["value"] == 1
+    assert response.json["hits"]["total"] == 1
     assert "explanation" in response.json["hits"]["hits"][0]
 
     # query string = 'title'
     response = client.get(url_for("invenio_records_rest.doc_list", q="title"), headers=headers)
     assert response.status_code == 200
-    assert response.json["hits"]["total"]["value"] == 1
+    assert response.json["hits"]["total"] == 1
 
     # query string = 'titlé', record found with word "Title"
     response = client.get(url_for("invenio_records_rest.doc_list", q="titlé"), headers=headers)
     assert response.status_code == 200
-    assert response.json["hits"]["total"]["value"] == 1
+    assert response.json["hits"]["total"] == 1
 
     # query string = 'resume', record found with word "Résumé"
     response = client.get(url_for("invenio_records_rest.doc_list", q="resume"), headers=headers)
     assert response.status_code == 200
-    assert response.json["hits"]["total"]["value"] == 1
+    assert response.json["hits"]["total"] == 1
 
     # Multiple words in query string = 'resume title' and operator AND
     response = client.get(
@@ -62,7 +62,7 @@ def test_api_query(client, document_with_file, document_json, make_document, sup
         headers=headers,
     )
     assert response.status_code == 200
-    assert response.json["hits"]["total"]["value"] == 1
+    assert response.json["hits"]["total"] == 1
 
     # Multiple words in query string = 'resume title' and operator AND, but
     # one word not found
@@ -71,7 +71,7 @@ def test_api_query(client, document_with_file, document_json, make_document, sup
         headers=headers,
     )
     assert response.status_code == 200
-    assert response.json["hits"]["total"]["value"] == 0
+    assert response.json["hits"]["total"] == 0
 
     # Multiple words in query string = 'resume title' and operator OR
     response = client.get(
@@ -79,7 +79,7 @@ def test_api_query(client, document_with_file, document_json, make_document, sup
         headers=headers,
     )
     assert response.status_code == 200
-    assert response.json["hits"]["total"]["value"] == 1
+    assert response.json["hits"]["total"] == 1
 
     # Multiple words in query string = 'resume title' and operator OR and one
     # word not found
@@ -88,7 +88,7 @@ def test_api_query(client, document_with_file, document_json, make_document, sup
         headers=headers,
     )
     assert response.status_code == 200
-    assert response.json["hits"]["total"]["value"] == 1
+    assert response.json["hits"]["total"] == 1
 
     # Test search in fulltext: enabled with the `fulltext` query argument
     response = client.get(
@@ -101,7 +101,7 @@ def test_api_query(client, document_with_file, document_json, make_document, sup
         headers=headers,
     )
     assert response.status_code == 200
-    assert response.json["hits"]["total"]["value"] == 1
+    assert response.json["hits"]["total"] == 1
     assert response.json["hits"]["hits"][0]["explanation"]["details"]
 
     # Without the `fulltext` argument the fulltext field is not searched
@@ -114,7 +114,7 @@ def test_api_query(client, document_with_file, document_json, make_document, sup
         headers=headers,
     )
     assert response.status_code == 200
-    assert response.json["hits"]["total"]["value"] == 0
+    assert response.json["hits"]["total"] == 0
 
     # Not allowed operator
     with pytest.raises(Exception) as exception:
@@ -144,4 +144,4 @@ def test_api_query(client, document_with_file, document_json, make_document, sup
         headers=headers,
     )
     assert response.status_code == 200
-    assert response.json["hits"]["total"]["value"] == 1
+    assert response.json["hits"]["total"] == 1
