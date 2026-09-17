@@ -19,7 +19,7 @@ def test_get(client, document_with_file):
     """Get REST methods."""
     res = client.get(url_for("invenio_records_rest.doc_list", view="global"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
 
     # created, updated
     for hit in res.json["hits"]["hits"]:
