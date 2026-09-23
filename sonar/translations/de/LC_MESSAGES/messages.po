@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: SONAR 1.11.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
 "POT-Creation-Date: 2026-09-08 06:59+0000\n"
-"PO-Revision-Date: 2026-08-15 08:51+0000\n"
+"PO-Revision-Date: 2026-09-24 10:51+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "de/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.9.dev0\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: sonar/jsonschemas/common/masked-v1.0.0.json:9
@@ -1422,7 +1422,7 @@ msgstr "Open Access Status"
 
 #: sonar/jsonschemas/common/oa-status-v1.0.0.json:2
 msgid "Open access status"
-msgstr "Open Access Status"
+msgstr "Open-Access-Status"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:99
 #: sonar/modules/collections/jsonschemas/collections/collection-v1.0.0.json:105
@@ -1811,7 +1811,7 @@ msgstr "Rollen"
 
 #: sonar/theme/templates/sonar/manage.html:8
 msgid "SONAR administration"
-msgstr "SONAR Administration"
+msgstr "SONAR-Administration"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:4
 msgid "SONAR deposit v1.0.0"
@@ -2021,7 +2021,7 @@ msgstr "Staat Wallis, Dienststelle für Hochschulwesen"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:965
 msgid "State of Valais, other services"
-msgstr "Staat Wallis, andere Dienstelle"
+msgstr "Staat Wallis, andere Dienststellen"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:969
 msgid "State of Valais, parastatal institution"
@@ -2688,7 +2688,7 @@ msgstr "Religion, Theologie"
 
 #: sonar/jsonschemas/common/classification-v1.0.0.json:335
 msgid "classification_294/299"
-msgstr "Orientalism"
+msgstr "Orientalistik"
 
 #: sonar/jsonschemas/common/classification-v1.0.0.json:341
 msgid "classification_3"
@@ -2784,7 +2784,7 @@ msgstr "Erdwissenschaften"
 
 #: sonar/jsonschemas/common/classification-v1.0.0.json:276
 msgid "classification_551"
-msgstr "Meteorolige, Klimatologie"
+msgstr "Meteorologie, Klimatologie"
 
 #: sonar/jsonschemas/common/classification-v1.0.0.json:280
 msgid "classification_556"
@@ -2884,7 +2884,7 @@ msgstr "Elektrotechnik"
 
 #: sonar/jsonschemas/common/classification-v1.0.0.json:151
 msgid "classification_621.38"
-msgstr "Electronik"
+msgstr "Elektronik"
 
 #: sonar/jsonschemas/common/classification-v1.0.0.json:155
 msgid "classification_621.39"
@@ -3115,7 +3115,7 @@ msgstr "Dokumenttyp"
 
 #: sonar/jsonschemas/common/type-v1.0.0.json:301
 msgid "document_type_advanced_studies_thesis"
-msgstr "Advanced studies thesis"
+msgstr "Abschlussarbeit (Weiterbildung)"
 
 #: sonar/jsonschemas/common/type-v1.0.0.json:106
 msgid "document_type_coar:R60J-J5BD"
@@ -3299,11 +3299,11 @@ msgstr "Tagungsband"
 
 #: sonar/jsonschemas/common/type-v1.0.0.json:296
 msgid "document_type_habilitation_thesis"
-msgstr "Habilitation thesis"
+msgstr "Habilitationsschrift"
 
 #: sonar/jsonschemas/common/type-v1.0.0.json:155
 msgid "document_type_non_textual_object"
-msgstr "Non-textual object"
+msgstr "Nicht-textuelles Objekt"
 
 #: sonar/jsonschemas/common/type-v1.0.0.json:306
 msgid "document_type_other_thesis"
@@ -3961,7 +3961,7 @@ msgstr "Fulfulde"
 
 #: sonar/jsonschemas/common/language-v1.0.0.json:1088
 msgid "lang_fur"
-msgstr "Friulian"
+msgstr "Friaulisch"
 
 #: sonar/jsonschemas/common/language-v1.0.0.json:1092
 msgid "lang_gaa"
@@ -4447,7 +4447,7 @@ msgstr "Magadhi"
 
 #: sonar/jsonschemas/common/language-v1.0.0.json:1564
 msgid "lang_mah"
-msgstr "Marschallesisch"
+msgstr "Marshallesisch"
 
 #: sonar/jsonschemas/common/language-v1.0.0.json:1568
 msgid "lang_mai"
@@ -5421,7 +5421,7 @@ msgstr "Status"
 
 #: sonar/translations/manual_translations.txt:14
 msgid "statusHep"
-msgstr "HEP Status"
+msgstr "PH-Status"
 
 #: sonar/modules/organisations/jsonschemas/organisations/organisation-v1.0.0.json:447
 msgid "subdivision"
