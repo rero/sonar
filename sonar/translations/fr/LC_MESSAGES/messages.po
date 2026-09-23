@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: SONAR 1.11.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
 "POT-Creation-Date: 2026-09-08 06:59+0000\n"
-"PO-Revision-Date: 2026-08-15 08:51+0000\n"
+"PO-Revision-Date: 2026-09-24 10:51+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "fr/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2026.9.dev0\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: sonar/jsonschemas/common/masked-v1.0.0.json:9
@@ -1681,7 +1681,7 @@ msgstr "Psychologue"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:791
 msgid "Psychomotrician"
-msgstr "Pychomotricien·ne"
+msgstr "Psychomotricien·ne"
 
 #: sonar/jsonschemas/common/masked-v1.0.0.json:19
 msgid "Public"
@@ -3737,7 +3737,7 @@ msgstr "cheyenne"
 
 #: sonar/jsonschemas/common/language-v1.0.0.json:872
 msgid "lang_cmc"
-msgstr "chamic"
+msgstr "chames, langues"
 
 #: sonar/jsonschemas/common/language-v1.0.0.json:876
 msgid "lang_cnr"
@@ -3926,7 +3926,7 @@ msgstr "finnois"
 
 #: sonar/jsonschemas/common/language-v1.0.0.json:1056
 msgid "lang_fiu"
-msgstr "finno-ougriennnes, autres langues"
+msgstr "finno-ougriennes, autres langues"
 
 #: sonar/jsonschemas/common/language-v1.0.0.json:1060
 msgid "lang_fon"
