@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+# SPDX-FileCopyrightText: Fondation RERO+
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+"""Check that the identity provider certificates are still valid and published."""
+
+import base64
+import ssl
+import subprocess
+import sys
+import urllib.request
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+CERTIFICATES_DIR = Path(__file__).resolve().parent.parent / "data" / "idp_certificates"
+MIN_VALIDITY_DAYS = 90
+SWITCHAAI_METADATA = "https://metadata.aai.switch.ch/metadata.switchaai.xml"
+SWITCHAAI_TEST_METADATA = "https://metadata.aai.switch.ch/metadata.aaitest.xml"
+IDENTITY_PROVIDERS = {
+    "eduid": ("https://eduid.ch/idp/shibboleth", SWITCHAAI_METADATA),
+    "eduidtest": ("https://test.eduid.ch/idp/shibboleth", SWITCHAAI_TEST_METADATA),
+}
+NS = {"md": "urn:oasis:names:tc:SAML:2.0:metadata", "ds": "http://www.w3.org/2000/09/xmldsig#"}
+
+
+def openssl(path, *args):
+    """Run an openssl x509 command on a PEM certificate."""
+    return subprocess.run(["openssl", "x509", "-in", path, "-noout", *args], capture_output=True, check=False)
+
+
+def published_certificates(entity_id, metadata_url):
+    """Return the DER signing certificates published in the federation metadata for an IdP."""
+    with urllib.request.urlopen(metadata_url, timeout=120) as response:
+        root = ET.parse(response).getroot()
+    certificates = set()
+    for entity in root.iterfind("md:EntityDescriptor", NS):
+        if entity.get("entityID") != entity_id:
+            continue
+        for key in entity.iterfind("md:IDPSSODescriptor/md:KeyDescriptor", NS):
+            if key.get("use", "signing") == "signing":
+                for certificate in key.iterfind(".//ds:X509Certificate", NS):
+                    certificates.add(base64.b64decode(certificate.text))
+    return certificates
+
+
+def check(name, entity_id, metadata_url):
+    """Return the list of problems found for an identity provider certificate."""
+    path = CERTIFICATES_DIR / f"{name}.crt"
+    if not path.exists():
+        return [f"{path} is missing"]
+    end_date = openssl(path, "-enddate").stdout.decode().strip().removeprefix("notAfter=")
+    sys.stdout.write(f"{name}: expires on {end_date}\n")
+    problems = []
+    if openssl(path, "-checkend", str(MIN_VALIDITY_DAYS * 86400)).returncode:
+        problems.append(f"{name}: expires in less than {MIN_VALIDITY_DAYS} days ({end_date})")
+    if ssl.PEM_cert_to_DER_cert(path.read_text()) not in published_certificates(entity_id, metadata_url):
+        problems.append(f"{name}: not published for {entity_id} in {metadata_url}")
+    return problems
+
+
+def main():
+    """Check all identity provider certificates."""
+    problems = [problem for name, idp in IDENTITY_PROVIDERS.items() for problem in check(name, *idp)]
+    for problem in problems:
+        sys.stderr.write(f"ERROR {problem}\n")
+    return 1 if problems else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
