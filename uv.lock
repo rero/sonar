@@ -3829,7 +3829,7 @@ requires-dist = [
     { name = "invenio-previewer", specifier = ">=3.0.0" },
     { name = "invenio-records", specifier = ">=4.0.0" },
     { name = "invenio-records-files", specifier = ">=1.2.1" },
-    { name = "invenio-records-resources" },
+    { name = "invenio-records-resources", specifier = "<11.1.0" },
     { name = "invenio-records-rest", extras = ["dublincore"], specifier = ">=3.0.0" },
     { name = "invenio-records-ui", specifier = ">=2.0.0" },
     { name = "invenio-rest", specifier = ">=3.0.0" },
