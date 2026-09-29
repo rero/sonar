@@ -136,7 +136,7 @@ class ProjectServiceSchemaWrapper(ServiceSchemaWrapper):
     def _set_schema(self, data):
         if organisation_pid := self._get_organisation_pid(data):
             with contextlib.suppress(ImportError):
-                self.schema = obj_or_import_string(f"sonar.dedicated.{organisation_pid}.projects.schema:RecordSchema")
+                self.schema = obj_or_import_string(f"sonar.dedicated.{organisation_pid}.projects.schema:RecordSchema")()
 
     def load(self, data, schema_args=None, context=None, raise_errors=True):
         """Load data with dynamic schema_args + context + raise or not."""
@@ -156,7 +156,12 @@ class ProjectsRecordService(RecordService):
 
     @property
     def schema(self):
-        """Returns the data schema instance."""
+        """Returns the data schema instance.
+
+        A new wrapper is built on each call because it switches to the
+        dedicated schema of the organisation found in the data, so it must
+        not be cached.
+        """
         schema = obj_or_import_string("sonar.resources.projects.schema:RecordSchema")
 
         return ProjectServiceSchemaWrapper(self, schema=schema)
