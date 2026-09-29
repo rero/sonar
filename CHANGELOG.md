@@ -2,6 +2,27 @@
 
 <!-- version list -->
 
+## v1.13.1 (2026-09-29)
+
+### Bug Fixes
+
+- **certificates**: Generate development certificates instead of versioning them
+  ([`f55da6f`](https://github.com/rero/sonar/commit/f55da6f4f483b7d3c8e18c79650034953b8a44fa))
+
+- **shibboleth**: Update SWITCH edu-ID identity provider certificates
+  ([`bf2d530`](https://github.com/rero/sonar/commit/bf2d530c7a2eac1777da984b174e52b6001e6661))
+
+### Build System
+
+- Pin invenio-records-resources below 11.1
+  ([`c1f139c`](https://github.com/rero/sonar/commit/c1f139cc478094c2a13b218b7214f6fb8961dbec))
+
+### Continuous Integration
+
+- Check the IdP certificates against the SWITCHaai metadata
+  ([`122c20c`](https://github.com/rero/sonar/commit/122c20c29a5b9a84caa696670d57241581b5a91d))
+
+
 ## v1.13.0 (2026-09-16)
 
 ### Bug Fixes
