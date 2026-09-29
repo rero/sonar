@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: SONAR 1.11.0\n"
 "Report-Msgid-Bugs-To: software@rero.ch\n"
 "POT-Creation-Date: 2026-09-08 06:59+0000\n"
-"PO-Revision-Date: 2026-09-24 10:51+0000\n"
+"PO-Revision-Date: 2026-09-29 09:51+0000\n"
 "Last-Translator: Pascal Repond <pascal.repond@rero.ch>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/rero_plus/sonar/"
 "fr/>\n"
@@ -79,7 +79,7 @@ msgstr "Action"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:664
 msgid "Actor"
-msgstr "Acteurs·trices"
+msgstr "Acteur·trice"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:659
 msgid "Actor involved"
@@ -176,7 +176,7 @@ msgstr "Retour à SONAR"
 
 #: sonar/modules/documents/templates/documents/_citation.html:47
 msgid "Be sure to check the citation before using it"
-msgstr "Vérifiez la référence avant de l'utiliser"
+msgstr "Vérifier la référence avant de l'utiliser"
 
 #: sonar/templates/security/email/reset_instructions.html:15
 #: sonar/templates/security/email/reset_notice.html:10
@@ -451,7 +451,7 @@ msgstr "Date"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:43
 msgid "Date in yyyy-mm-dd format, ex: 1970-01-01"
-msgstr "Date selon le format YYYY-MM-JJ, ex : 1970-01-01"
+msgstr "Date selon le format AAAA-MM-JJ, ex : 1970-01-01"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:159
 msgid "Date of approval by the Team Leader"
@@ -1227,7 +1227,7 @@ msgstr "Liste des logs."
 
 #: sonar/modules/documents/templates/documents/_citation.html:19
 msgid "Loading…"
-msgstr "Chargement en cours…"
+msgstr "Chargement…"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:973
 msgid "Locality (Valais)"
@@ -1300,7 +1300,7 @@ msgstr "Titre"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:299
 msgid "Main titles"
-msgstr "Titres principaux"
+msgstr "Titres"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:926
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:936
@@ -1333,7 +1333,8 @@ msgstr "Type MIME"
 
 #: sonar/theme/templates/sonar/partial/test_info.html:13
 msgid "More test logins and documentation are available on the"
-msgstr "Plus de logins test et la documentation sont disponibles dans la"
+msgstr ""
+"D'autres identifiants de test et la documentation sont disponibles sur la"
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:392
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:603
@@ -1598,7 +1599,7 @@ msgstr "Position du fichier, le premier de la liste est le fichier principal."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:509
 msgid "Post-doctorate supported by the HEP-VS"
-msgstr "Post doctorat soutenu par la HEP-VS"
+msgstr "Postdoctorat soutenu par la HEP-VS"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:82
 msgid "Postal code"
@@ -1923,11 +1924,11 @@ msgstr "Doit être un format d'URL valide."
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:104
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:191
 msgid "Should be in the following format: 2022-12-31 (YYYY-MM-DD)."
-msgstr "Doit être au format suivant : 2022-12-31 (AAAA-MM-JJ)."
+msgstr "La date doit être au format suivant : 2022-12-31 (AAAA-MM-JJ)."
 
 #: sonar/modules/documents/templates/documents/record.html:114
 msgid "Show more"
-msgstr "Montrer plus"
+msgstr "Afficher plus"
 
 #: sonar/theme/templates/sonar/accounts/forgot_password.html:33
 #: sonar/theme/templates/sonar/accounts/login.html:42
@@ -2219,8 +2220,8 @@ msgid ""
 "identifiers (ARK)."
 msgstr ""
 "Cette propriété ne devrait être modifiée que dans les environnements de "
-"test. Dans la production, il peut avoir des effets indésirables, comme "
-"l'annulation des identifiants persistants existants (ARK)."
+"test. En production, elle peut avoir des effets indésirables, comme "
+"l'invalidation des identifiants pérennes existants (ARK)."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:931
 msgid "This research is linked to a mandate"
@@ -2249,11 +2250,7 @@ msgid ""
 "To be able to deposit publications, you must be registered against a SONAR "
 "institution. For now, your account does not provide additional features, but "
 "in the future you will be able to create document lists and save requests."
-msgstr ""
-"Pour pouvoir déposer des publications, vous devez être inscrit(e) auprès "
-"d'une institution SONAR. Pour l'instant, votre compte ne propose pas de "
-"fonctionnalités supplémentaires, mais à l'avenir vous aurez la possibilité "
-"de créer des listes de documents et de sauvegarder des demandes."
+msgstr "...de créer des listes de documents et de sauvegarder des recherches."
 
 #: sonar/dedicated/hepvs/projects/jsonschemas/hepvs/projects/project-v1.0.0.json:759
 msgid "Trainer"
@@ -2317,7 +2314,7 @@ msgstr "UUID de l’objet ObjectVersion."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:31
 msgid "UUID of the bucket the tile is assigned to."
-msgstr "UUID du bucket à laquelle est assignée la tuile."
+msgstr "UUID du bucket auquel est assignée la tuile."
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1385
 msgid "Usage and access policy"
@@ -2335,7 +2332,7 @@ msgstr "Condition d'usage et d'accès"
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:448
 #: sonar/resources/projects/jsonschemas/projects/project-v1.0.0.json:453
 msgid "User"
-msgstr "utilisateur"
+msgstr "Utilisateur"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:5
 msgid "User Profile"
@@ -2501,11 +2498,11 @@ msgstr "Référence de l'éditeur (documents audio)"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1270
 msgid "bf:ClassificationDdc"
-msgstr "Classification CDD"
+msgstr "Classification décimale de Dewey (CDD)"
 
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:1238
 msgid "bf:ClassificationUdc"
-msgstr "Classification CDU"
+msgstr "Classification décimale universelle (CDU)"
 
 #: sonar/modules/deposits/jsonschemas/deposits/deposit-v1.0.0.json:436
 #: sonar/modules/documents/jsonschemas/documents/document-v1.0.0.json:813
@@ -2998,7 +2995,7 @@ msgstr "Histoire médiévale et moderne"
 
 #: sonar/jsonschemas/common/classification-v1.0.0.json:100
 msgid "classification_root_1"
-msgstr "Médecine, technologie, sciences de l'ingénieur, informatique"
+msgstr "Médecine, technologie, sciences de l'ingénieur"
 
 #: sonar/jsonschemas/common/classification-v1.0.0.json:217
 msgid "classification_root_2"
@@ -3341,7 +3338,7 @@ msgstr "numéro du financement"
 
 #: sonar/translations/manual_translations.txt:24
 msgid "funding_funder_type"
-msgstr "type de financement"
+msgstr "type d'agence de financement"
 
 #: sonar/translations/manual_translations.txt:27
 msgid "funding_fundingReceived"
@@ -3677,7 +3674,7 @@ msgstr "cebuano"
 
 #: sonar/jsonschemas/common/language-v1.0.0.json:812
 msgid "lang_cel"
-msgstr "celtique, autres langues"
+msgstr "celtiques, autres langues"
 
 #: sonar/jsonschemas/common/language-v1.0.0.json:816
 msgid "lang_cha"
@@ -4020,7 +4017,7 @@ msgstr "moyen haut-allemand"
 
 #: sonar/jsonschemas/common/language-v1.0.0.json:1140
 msgid "lang_goh"
-msgstr "ancien haut allemand"
+msgstr "ancien haut-allemand"
 
 #: sonar/jsonschemas/common/language-v1.0.0.json:1144
 msgid "lang_gon"
@@ -4629,7 +4626,7 @@ msgstr "niha"
 
 #: sonar/jsonschemas/common/language-v1.0.0.json:1744
 msgid "lang_nic"
-msgstr "nigéro-congolaises,langues"
+msgstr "nigéro-congolaises, langues"
 
 #: sonar/jsonschemas/common/language-v1.0.0.json:1748
 msgid "lang_niu"
@@ -5383,7 +5380,7 @@ msgstr "lié à un mandat"
 
 #: sonar/translations/manual_translations.txt:35
 msgid "relatedToMandate_name"
-msgstr "nom du mandant"
+msgstr "nom du mandat"
 
 #: sonar/modules/users/jsonschemas/users/user-v1.0.0.json:139
 msgid "role_admin"
