@@ -34,7 +34,7 @@ def test_service(client, make_user):
     service_schema._set_schema(data)
 
     # After setting schema for HEPVS data, the schema should be HEPVS RecordSchema
-    assert service_schema.schema == RecordSchema
+    assert isinstance(service_schema.schema, RecordSchema)
 
 
 def test_api(client, make_user):
