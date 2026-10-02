@@ -11,7 +11,7 @@ def test_ark_query(db, client, organisation, document, search_clear):
     # an empty query: the document should be in the results
     res = client.get(url_for("invenio_records_rest.doc_list", view="global"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
 
     # check the ark fields in the search output
     doc = res.json["hits"]["hits"][0]["metadata"]
@@ -21,12 +21,12 @@ def test_ark_query(db, client, organisation, document, search_clear):
     # the ark identifier field should exists
     ark = document.get_ark()
     res = client.get(url_for("invenio_records_rest.doc_list", view="global", q="_exists_:identifiers.ark"))
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
 
     # search with the field name
     res = client.get(url_for("invenio_records_rest.doc_list", view="global", q=f'identifiers.ark:"{ark}"'))
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
 
     # search everywhere
     res = client.get(url_for("invenio_records_rest.doc_list", view="global", q=f'"{ark}"'))
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1

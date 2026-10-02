@@ -26,7 +26,7 @@ def test_index_record(client, db, document_json, superuser):
 
     res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    total = res.json["hits"]["total"]["value"]
+    total = res.json["hits"]["total"]
     record = DocumentRecord.create(deepcopy(document_json), commit=True)
 
     indexer = DocumentIndexer()
@@ -34,7 +34,7 @@ def test_index_record(client, db, document_json, superuser):
 
     res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == (total + 1)
+    assert res.json["hits"]["total"] == (total + 1)
 
 
 def test_remove_from_index(client, db, document, superuser):
@@ -43,14 +43,14 @@ def test_remove_from_index(client, db, document, superuser):
 
     res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    total = res.json["hits"]["total"]["value"]
+    total = res.json["hits"]["total"]
 
     indexer = DocumentIndexer()
     indexer.delete(document)
 
     res = client.get(url_for("invenio_records_rest.doc_list"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == (total - 1)
+    assert res.json["hits"]["total"] == (total - 1)
 
 
 def test_get_record_class_by_pid_type(app):

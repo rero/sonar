@@ -17,7 +17,7 @@ def test_list(app, db, client, document, subdivision, superuser):
     login_user_via_session(client, email=superuser["email"])
     res = client.get(url_for("invenio_records_rest.doc_list", view="org"))
     assert res.status_code == 200
-    assert res.json["hits"]["total"]["value"] == 1
+    assert res.json["hits"]["total"] == 1
     assert res.json["aggregations"]["subdivision"]["buckets"] == [
         {"key": "2", "doc_count": 1, "name": "Subdivision name"}
     ]
