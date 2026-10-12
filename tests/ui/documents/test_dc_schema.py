@@ -181,7 +181,7 @@ def test_identifiers(minimal_document):
     result = SonarDublinCoreXMLSerializer().transform_record(minimal_document)
     assert set(result["identifiers"]) == {
         "https://n2t.net/ark:/99999/ffk31000",
-        "http://localhost/global/documents/1000",
+        "http://localhost/org/documents/1000",
     }
 
 
@@ -190,7 +190,7 @@ def test_identifiers_with_files(document_with_file):
     result = SonarDublinCoreXMLSerializer().transform_record(document_with_file)
     assert set(result["identifiers"]) == {
         "https://n2t.net/ark:/99999/ffk31",
-        "http://localhost/global/documents/1",
+        "http://localhost/org/documents/1",
         "http://localhost/documents/1/files/test1.pdf",
     }
 

@@ -150,7 +150,7 @@ def test_doi(minimal_document):
 def test_abstract_html_url(minimal_document):
     """Test HTML URL serialization."""
     result = google_scholar_v1.transform_record(minimal_document["pid"], minimal_document)
-    assert '<meta name="citation_abstract_html_url" content="http://localhost/global/documents/1000">' in result
+    assert '<meta name="citation_abstract_html_url" content="http://localhost/org/documents/1000">' in result
 
 
 def test_pages(app, minimal_document):
