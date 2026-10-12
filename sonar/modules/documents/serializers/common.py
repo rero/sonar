@@ -16,9 +16,9 @@ def unwrap_metadata(record):
     Most callers pass the document's own metadata (no "metadata" key), but a
     record can also arrive as an envelope {"metadata": {...}, "pid": ...,
     "permalink": ...} with those two fields as siblings rather than nested
-    inside "metadata" (e.g. an ES search hit's _source). extract_url()
-    needs "pid"/"permalink" to build the permalink, so they are copied into
-    the returned dict when missing there, instead of being silently dropped.
+    inside "metadata". extract_url() needs "pid"/"permalink" to build the
+    permalink, so they are copied into the returned dict when missing there,
+    instead of being silently dropped.
     """
     metadata = record.get("metadata", record)
     if metadata is record:
@@ -179,8 +179,8 @@ def extract_identifiers(metadata):
 def extract_url(metadata):
     """Return the record's permanent link.
 
-    Search hits already carry "permalink" in the ES source; for a single
-    record it is computed from the PID.
+    The permalink is not stored in the ES source: it is computed from the PID
+    unless the metadata already carry one.
     """
     if metadata.get("permalink"):
         return metadata["permalink"]
