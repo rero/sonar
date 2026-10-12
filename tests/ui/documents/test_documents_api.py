@@ -71,6 +71,24 @@ def test_get_documents_by_project(db, project, document):
     assert documents[0]["permalink"] == "https://n2t.net/ark:/99999/ffk32"
 
 
+def test_get_permanent_link(db, organisation, document):
+    """Test the permanent link points to the view of the document's organisation."""
+    pid = document["pid"]
+
+    def update_organisation(data):
+        organisation.update(data)
+        organisation.commit()
+        db.session.commit()
+        return DocumentRecord.get_permanent_link("https://sonar.rero.ch/", pid, ignore_ark=True)
+
+    assert update_organisation({"isShared": True}) == f"https://sonar.rero.ch/org/documents/{pid}"
+    assert update_organisation({"isShared": False}) == f"https://sonar.rero.ch/global/documents/{pid}"
+    assert (
+        update_organisation({"isDedicated": True, "serverName": "org.domain.com"})
+        == f"https://org.domain.com/org/documents/{pid}"
+    )
+
+
 def test_is_open_access(db, document, embargo_date):
     """Test if document is open access."""
     assert not document.is_open_access()
