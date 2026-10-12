@@ -15,11 +15,13 @@ from invenio_stats import current_stats
 
 from sonar.affiliations import AffiliationResolver
 from sonar.modules.documents.minters import id_minter
+from sonar.modules.organisations.api import OrganisationRecord
 from sonar.modules.pdf_extractor.utils import extract_text_from_content
 from sonar.modules.utils import (
     change_filename_extension,
     create_thumbnail_from_file,
     get_current_ip,
+    get_pid_from_ref_or_data,
     is_ip_in_list,
 )
 
@@ -58,21 +60,28 @@ class DocumentRecord(SonarRecord):
     _extensions = [ArkDocumentExtension(), UrnDocumentExtension()]
 
     @staticmethod
-    def get_permanent_link(host, pid, org=None, ignore_ark=False):
+    def get_permanent_link(host, pid, ignore_ark=False):
         """Return the permanent link for the document.
 
+        The link points to the view of the document's organisation, on its
+        own server if the organisation is dedicated.
+
         :param host: Application server host.
-        :param org: Organisation key.
         :param pid: PID of the document.
         :returns: Document's full URL as string.
         """
         doc = DocumentRecord.get_record_by_pid(pid)
         if (ark_url := doc.get_ark_resolver_url()) and not ignore_ark:
             return ark_url
-        if not org:
-            org = current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION")
+        org_code = current_app.config.get("SONAR_APP_DEFAULT_ORGANISATION")
+        if organisations := doc.get("organisation"):
+            org = OrganisationRecord.get_record_by_pid(get_pid_from_ref_or_data(organisations[0]))
+            if org.get("isDedicated") or org.get("isShared"):
+                org_code = org["code"]
+            if org.get("isDedicated") and (server_name := org.get("serverName")):
+                host = f"https://{server_name}/"
 
-        return current_app.config.get("SONAR_DOCUMENTS_PERMALINK").format(host=host, org=org, pid=pid)
+        return current_app.config.get("SONAR_DOCUMENTS_PERMALINK").format(host=host, org=org_code, pid=pid)
 
     @staticmethod
     def get_documents_by_project(project_pid):

@@ -443,8 +443,7 @@
         {% endif %}
 
         <!-- PERMALINK -->
-        {% set link = record.get_permanent_link(request.host_url,
-        record.pid, view_code) %}
+        {% set link = record.get_permanent_link(request.host_url, record.pid) %}
         <dt class="col-lg-3">
           {{ _('Persistent URL') }}
         </dt>
