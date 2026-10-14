@@ -11,6 +11,10 @@
     background-color: darken($primary, 5%);
     @extend .navbar-dark;
 
+    #{$runtime-colors} & {
+      background-color: color-mix(in srgb, var(--sonar-primary), black 5%);
+    }
+
     .nav-link {
       color: $color-white !important;
     }

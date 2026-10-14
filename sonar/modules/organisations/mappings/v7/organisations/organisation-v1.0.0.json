@@ -54,6 +54,10 @@
       "isDedicated": {
         "type": "boolean"
       },
+      "theme": {
+        "type": "object",
+        "enabled": false
+      },
       "serverName": {
         "type": "keyword"
       },
