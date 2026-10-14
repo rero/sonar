@@ -11,7 +11,8 @@ from invenio_records_rest.schemas.fields import (
     PersistentIdentifier,
     SanitizedUnicode,
 )
-from marshmallow import EXCLUDE, fields, pre_dump, pre_load
+from marshmallow import EXCLUDE, ValidationError, fields, pre_dump, pre_load, validate, validates
+from marshmallow_utils.context import context_schema
 
 from sonar.modules.organisations.api import OrganisationRecord, current_organisation
 from sonar.modules.organisations.permissions import (
@@ -23,6 +24,7 @@ from sonar.modules.serializers import schema_from_context
 from sonar.modules.users.api import current_user_record
 
 schema_from_organisation = partial(schema_from_context, schema=OrganisationRecord.schema)
+THEME_COLOR_PATTERN = r"^#[0-9A-Fa-f]{6}$"
 
 
 class FileSchemaV1(StrictKeysMixin):
@@ -84,6 +86,28 @@ class FileSchemaV1(StrictKeysMixin):
         return data
 
 
+class ThemeSchemaV1(StrictKeysMixin):
+    """Organisation theme schema."""
+
+    primaryColor = SanitizedUnicode(validate=validate.Regexp(THEME_COLOR_PATTERN))
+    secondaryColor = SanitizedUnicode(validate=validate.Regexp(THEME_COLOR_PATTERN))
+    css = fields.Str()
+
+    @pre_load
+    def normalize_colors(self, data, **kwargs):
+        """Normalize hexadecimal colors before validation."""
+        for key in ("primaryColor", "secondaryColor"):
+            if isinstance(data.get(key), str):
+                data[key] = data[key].strip().upper()
+        return data
+
+    @validates("css")
+    def validate_css(self, value, **kwargs):
+        """Reject CSS that could close the style tag of the page."""
+        if "</" in value:
+            raise ValidationError("CSS must not contain `</`.")
+
+
 class OrganisationMetadataSchemaV1(StrictKeysMixin):
     """Schema for the organisation metadata."""
 
@@ -94,6 +118,7 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
     footer = fields.List(fields.Dict())
     isShared = fields.Boolean()
     isDedicated = fields.Boolean()
+    theme = fields.Nested(ThemeSchemaV1)
     serverName = fields.Str()
     allowedIps = SanitizedUnicode()
     arkNAAN = SanitizedUnicode()
@@ -164,6 +189,19 @@ class OrganisationMetadataSchemaV1(StrictKeysMixin):
                 data["arkNAAN"] = ark_naan
             else:
                 data.pop("arkNAAN", None)
+        return data
+
+    @pre_load
+    def keep_theme(self, data, **kwargs):
+        """Keep the stored theme.
+
+        The theme is only managed with the CLI, so the posted one is replaced
+        by the one of the record being updated, which the loader puts in the
+        context.
+        """
+        data.pop("theme", None)
+        if (record := context_schema.get().get("record")) and (theme := record.get("theme")):
+            data["theme"] = dict(theme)
         return data
 
 

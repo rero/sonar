@@ -3,7 +3,18 @@
 
 """Test organisations API."""
 
+import pytest
+from jsonschema.exceptions import ValidationError
+
 from sonar.modules.organisations.api import OrganisationRecord, OrganisationSearch
+
+
+def test_theme_css_closing_a_tag_is_rejected(organisation):
+    """Reject a CSS that could close the style tag of the page, whatever saves it."""
+    organisation["theme"] = {"css": ".bg-header { color: red; }\n</style>"}
+
+    with pytest.raises(ValidationError):
+        organisation.commit()
 
 
 def test_get_or_create(organisation, search_clear):

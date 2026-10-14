@@ -168,6 +168,29 @@
         }
       }
     },
+    "theme": {
+      "title": "Theme",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "primaryColor": {
+          "title": "Primary color",
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        },
+        "secondaryColor": {
+          "title": "Secondary color",
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        },
+        "css": {
+          "title": "Custom CSS",
+          "$comment": "Rejects `</`, which would close the style tag of the page.",
+          "type": "string",
+          "pattern": "^(?![\\s\\S]*</)"
+        }
+      }
+    },
     "serverName": {
       "title": "Server name (without http)",
       "description": "Organisation server name for dedicated.",

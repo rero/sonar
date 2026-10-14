@@ -8,7 +8,7 @@
   @import "../common/theme";
 
   .bg-header {
-    background-color: $primary;
+    background-color: var(--sonar-primary);
 
     .nav-link {
       color: $color-gray !important;
@@ -21,7 +21,7 @@
   }
 
   .bg-organisation {
-    background-color: $primary !important;
+    background-color: var(--sonar-primary) !important;
     color: $color-gray !important;
 
     .nav-link {
