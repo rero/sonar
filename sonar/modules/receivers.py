@@ -3,7 +3,7 @@
 
 """Listeners for application."""
 
-import contextlib
+from flask import current_app
 
 from sonar.modules.api import SonarRecord
 
@@ -13,8 +13,10 @@ def file_uploaded_listener(sender, obj):
 
     :param obj: Object version.
     """
-    with contextlib.suppress(Exception):
+    try:
         sync_record_files(obj, False)
+    except Exception:
+        current_app.logger.exception(f"Error during the synchronisation of the uploaded file {obj}")
 
 
 def file_deleted_listener(sender, obj):
@@ -22,8 +24,10 @@ def file_deleted_listener(sender, obj):
 
     :param obj: Object version.
     """
-    with contextlib.suppress(Exception):
+    try:
         sync_record_files(obj, True)
+    except Exception:
+        current_app.logger.exception(f"Error during the synchronisation of the deleted file {obj}")
 
 
 def sync_record_files(file, deleted=False):

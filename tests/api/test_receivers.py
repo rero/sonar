@@ -3,6 +3,8 @@
 
 """Test application recievers."""
 
+from unittest import mock
+
 from invenio_files_rest.models import Bucket, ObjectVersion
 from six import BytesIO
 
@@ -54,3 +56,15 @@ def test_sync_record_files(db, document_with_file, bucket_location):
     db.session.commit()
     sync_record_files(new_file)
     assert len(document_with_file.files) == 4
+
+
+def test_file_listeners_log_errors(app, document_with_file):
+    """Test that a failing synchronisation is logged without being raised."""
+    obj = document_with_file.files["test1.pdf"].obj
+    with (
+        mock.patch("sonar.modules.receivers.sync_record_files", side_effect=Exception("sync error")),
+        mock.patch.object(app.logger, "exception") as log_exception,
+    ):
+        file_uploaded_listener("", obj)
+        file_deleted_listener("", obj)
+    assert log_exception.call_count == 2
