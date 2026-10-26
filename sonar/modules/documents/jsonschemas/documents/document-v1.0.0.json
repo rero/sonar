@@ -200,7 +200,8 @@
           "bucket",
           "file_id",
           "version_id",
-          "key"
+          "key",
+          "type"
         ],
         "propertiesOrder": [
           "label",

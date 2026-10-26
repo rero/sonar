@@ -5,9 +5,11 @@
 
 from copy import deepcopy
 
+import pytest
 from flask import url_for
 from invenio_search import current_search
 from invenio_stats.tasks import aggregate_events, process_events
+from jsonschema.exceptions import ValidationError
 
 from sonar.modules.deposits.api import DepositSearch
 from sonar.modules.documents.api import DocumentRecord
@@ -46,6 +48,13 @@ def test_get_next_file_order(db, document_with_file, document):
 
     # No files
     assert document.get_next_file_order() == 1
+
+
+def test_file_type_required(db, document_with_file):
+    """Test that a document file without type is rejected."""
+    document_with_file["_files"][0].pop("type")
+    with pytest.raises(ValidationError):
+        document_with_file.commit()
 
 
 def test_get_files_list(db, document, pdf_file):
