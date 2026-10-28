@@ -9,9 +9,9 @@
 
 {%- block css %}
   <style>
-    @layer bootstrap, theme, sonar-ui, primeng, utilities;
+    @layer bootstrap, theme, sonar-ui, optimus, utilities;
   </style>
-  <style type="text/css" data-primeng-style-id="layer-order"></style>
+  <style type="text/css" data-optimus-style-id="layer-order"></style>
   {{ angular_assets('@rero/sonar-ui/dist/sonar/browser', 'css') }}
   {{ webpack[get_specific_theme()] }}
 {%- endblock %}
