@@ -2,6 +2,38 @@
 
 <!-- version list -->
 
+## v1.13.2 (2026-10-28)
+
+### Bug Fixes
+
+- **documents**: Point permalinks to the org view
+  ([`38cedee`](https://github.com/rero/sonar/commit/38cedeeacc4299641821809d9e581e3c7321a62b))
+
+- **documents**: Require the type of the files
+  ([`ad27cb8`](https://github.com/rero/sonar/commit/ad27cb8f5c8e045aa17e3d3b2e278f49a84010e3))
+
+- **files**: Log the file synchronisation errors
+  ([`8ad86b4`](https://github.com/rero/sonar/commit/8ad86b43e418c042947e3893996edb856e39cf94))
+
+### Build System
+
+- Bump vulnerable dependencies
+  ([`fdce0d1`](https://github.com/rero/sonar/commit/fdce0d1f822f240c6f89dce912ca65430d73fe0b))
+
+- **deps**: Update vulnerable dependencies
+  ([`f875bd5`](https://github.com/rero/sonar/commit/f875bd5a2f3294c023aa68ff2e832fb46bb56d83))
+
+### Chores
+
+- Bump sonar-ui to v21.1.1
+  ([`e45d2ea`](https://github.com/rero/sonar/commit/e45d2eac3644bdd175c929f44db55d98be852ac7))
+
+### Documentation
+
+- **documents**: Correct the permalink origin
+  ([`a4ca65b`](https://github.com/rero/sonar/commit/a4ca65b9f0c62414593a87fcfc4b0154b9e2d5e2))
+
+
 ## v1.13.1 (2026-09-29)
 
 ### Bug Fixes
