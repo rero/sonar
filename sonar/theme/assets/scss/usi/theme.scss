@@ -3,17 +3,17 @@
 
 @use "../common/fontawesome";
 
-@layer boostrap {
+@layer bootstrap {
   @import "variables";
   @import "../common/theme";
 
   .bg-header {
-    background-color: $primary;
+    background-color: var(--sonar-primary);
     @extend .navbar-dark;
   }
 
   .bg-organisation {
-    background-color: $primary;
+    background-color: var(--sonar-primary);
     @extend .navbar-dark;
   }
 

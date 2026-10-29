@@ -1,0 +1,25 @@
+{# SPDX-FileCopyrightText: Fondation RERO+ #}
+{# SPDX-License-Identifier: AGPL-3.0-or-later #}
+
+{% set organisation_theme = g.organisation.get('theme', {}) %}
+{#- Its id enables the runtime color rules of the compiled theme. #}
+{%- if organisation_theme.primaryColor or organisation_theme.secondaryColor %}
+<style id="organisation-colors">
+  :root {
+    {%- if organisation_theme.primaryColor %}
+    --sonar-primary: {{ organisation_theme.primaryColor }};
+    {%- endif %}
+    {%- if organisation_theme.secondaryColor %}
+    --sonar-secondary: {{ organisation_theme.secondaryColor }};
+    {%- endif %}
+  }
+</style>
+{%- endif %}
+{#- Same layer as the compiled theme, so `!important` overrides Bootstrap. #}
+{%- if organisation_theme.css %}
+<style id="organisation-css">
+  @layer bootstrap {
+    {{ organisation_theme.css | safe }}
+  }
+</style>
+{%- endif %}

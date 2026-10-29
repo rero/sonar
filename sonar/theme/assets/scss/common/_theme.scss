@@ -2,17 +2,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 @import "~bootstrap/scss/bootstrap";
+@import "runtime_colors";
 
 .bg-header {
   background-color: #15334D;
 }
 
 .bg-organisation {
-    background-color: $bg-organisation;
+    background-color: var(--sonar-primary);
 }
 
 .bg-middle-bar {
-  background-color: $secondary !important;
+  background-color: var(--sonar-secondary) !important;
 }
 
 // Avoid dropdown menu to appear under the wiki TOC.

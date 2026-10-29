@@ -8,10 +8,43 @@ from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
-from flask import url_for
+from flask import g, render_template, url_for
 from invenio_accounts.testutils import login_user_via_session, login_user_via_view
 
 from sonar.theme.views import format_date, record_image_url
+
+
+def render_organisation_theme(app, theme):
+    """Render the theme of an organisation in its own application context.
+
+    The context of the module is shared by the other tests, so `g` must not
+    be changed in it.
+    """
+    with app.app_context():
+        g.organisation = {"pid": "usi", "code": "usi", "isDedicated": True, "theme": theme}
+        return render_template("sonar/partial/organisation_theme.html")
+
+
+def test_organisation_theme(app):
+    """Render the colors and the CSS of the organisation theme."""
+    css = ".bg-header > .nav-link { color: red; }"
+
+    html = render_organisation_theme(app, {"primaryColor": "#ABCDEF", "css": css})
+
+    assert 'id="organisation-colors"' in html
+    assert "--sonar-primary: #ABCDEF" in html
+    assert "--sonar-secondary" not in html
+    assert css in html
+    assert html.index("@layer bootstrap") < html.index(css)
+
+
+def test_organisation_theme_without_colors(app):
+    """Render no colors when the theme sets none, so that the compiled ones apply."""
+    assert "<style" not in render_organisation_theme(app, {})
+
+    html = render_organisation_theme(app, {"css": ".bg-header { color: red; }"})
+    assert "organisation-colors" not in html
+    assert "organisation-css" in html
 
 
 def test_index_trailing_slash(client, organisation):
@@ -278,6 +311,7 @@ def test_schema_organisations(client, admin, user, superuser):
     assert "isShared" in res.json["schema"]["propertiesOrder"]
     assert "isDedicated" in res.json["schema"]["propertiesOrder"]
     assert "arkNAAN" in res.json["schema"]["propertiesOrder"]
+    assert "theme" not in res.json["schema"]["propertiesOrder"]
 
 
 def test_schema_projects(client, user):
