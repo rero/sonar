@@ -1,0 +1,51 @@
+name: CI with deps update
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  TERM: xterm-256color
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    - name: Install Libraries
+      run: |
+        sudo apt-get update -y
+        sudo apt-get install -y pkg-config libxml2-dev libxmlsec1-dev libxmlsec1-openssl
+        sudo apt-get install -y libxml2 ghostscript imagemagick xpdf
+        sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
+
+    - name: Setup node
+      uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      with:
+        node-version: '24'
+
+    - name: Docker compose up
+      run: docker compose up -d
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+      with:
+        enable-cache: true
+        cache-dependency-glob: uv.lock
+
+    - name: Set up Python
+      run: uv python install 3.14
+
+    - name: Bootstrap
+      run: |
+        uv run ./scripts/bootstrap --ci
+
+    - name: Run Test
+      run: uv run poe run_tests
