@@ -116,6 +116,7 @@ imports = "sonar.modules.cli.imports:imports"
 fixtures = "sonar.modules.cli.fixtures:fixtures"
 utils = "sonar.modules.cli.utils:utils"
 sitemap = "sonar.modules.sitemap.cli.sitemap:sitemap"
+organisations = "sonar.modules.organisations.cli:organisations"
 
 [project.entry-points."invenio_base.apps"]
 sonar = "sonar.ext:Sonar"

@@ -97,6 +97,9 @@
   </style>
   <style type="text/css" data-primeng-style-id="layer-order"></style>
   {{ webpack[get_specific_theme()] }}
+  {%- if g.organisation and g.organisation.get('isDedicated') %}
+  {% include 'sonar/partial/organisation_theme.html' %}
+  {%- endif %}
   {%- endblock css %}
 
   {%- endblock head %}
