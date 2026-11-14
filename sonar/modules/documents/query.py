@@ -3,10 +3,12 @@
 
 """Query for documents."""
 
+from urllib.parse import urlparse
+
 from elasticsearch_dsl.query import Q
 from flask import current_app, request
 
-from sonar.modules.organisations.api import current_organisation
+from sonar.modules.organisations.api import OrganisationSearch, current_organisation
 from sonar.modules.query import default_search_factory, get_operator_and_query_type
 from sonar.modules.users.api import current_user_record
 from sonar.modules.utils import get_current_ip
@@ -64,6 +66,10 @@ def search_factory(self, search, query_parser=None):
                 },
             ],
         )
+
+        # Dedicated portals only expose the records of their organisation.
+        if dedicated_pid := OrganisationSearch().get_organisation_pid_by_server_name(urlparse(request.url).hostname):
+            search = search.filter("term", organisation__pid=dedicated_pid)
 
         # Filter record by organisation view. No view means the global scope
         # (all organisations).
