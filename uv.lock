@@ -1791,7 +1791,7 @@ wheels = [
 
 [[package]]
 name = "invenio-records-resources"
-version = "11.0.3"
+version = "11.1.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "babel-edtf" },
@@ -1814,9 +1814,9 @@ dependencies = [
     { name = "xmltodict" },
     { name = "zipstream-ng" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ea/b0/8f9668a9462158b682cb7f51a6e5655f38b69093092d54d04c40c9bae03b/invenio_records_resources-11.0.3.tar.gz", hash = "sha256:1d3c62aac71719dfb50344233021444f93c7e697ca6e47be27f46778a6a89826", size = 122328, upload-time = "2026-08-13T09:40:36.051Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/23/9d/25a4fa38b0f94ba12a76c711e87b107bf1babe217d58e9ee23553e8d9777/invenio_records_resources-11.1.2.tar.gz", hash = "sha256:08ae8236141458203d71485df0cd5d48f0d76e4719ea41922b44972809acea37", size = 129709, upload-time = "2026-10-13T09:15:03.098Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/7a/ef/e8c71af6f6e803aebd19e549d70e7bfc3f6857576016a13791d57c220927/invenio_records_resources-11.0.3-py3-none-any.whl", hash = "sha256:a933356c4046a85003dc473a410b19761e59883f6e11820a2740e37f9b804421", size = 261082, upload-time = "2026-08-13T09:40:34.277Z" },
+    { url = "https://files.pythonhosted.org/packages/27/f6/a539f9dc649722ef3e6eaa01837aaf852621dc96797ae058fbc2d41eb637/invenio_records_resources-11.1.2-py3-none-any.whl", hash = "sha256:9d2bed703b1fa8393f9224cfd1c8bf775860bab4659df174b66363da4f2371bb", size = 269212, upload-time = "2026-10-13T09:15:01.424Z" },
 ]
 
 [[package]]
@@ -3831,7 +3831,7 @@ requires-dist = [
     { name = "invenio-previewer", specifier = ">=3.0.0" },
     { name = "invenio-records", specifier = ">=4.0.0" },
     { name = "invenio-records-files", specifier = ">=1.2.1" },
-    { name = "invenio-records-resources", specifier = "<11.1.0" },
+    { name = "invenio-records-resources", specifier = ">=11.1.0" },
     { name = "invenio-records-rest", extras = ["dublincore"], specifier = ">=3.0.0" },
     { name = "invenio-records-ui", specifier = ">=2.0.0" },
     { name = "invenio-rest", specifier = ">=3.0.0" },

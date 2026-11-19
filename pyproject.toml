@@ -55,8 +55,7 @@ dependencies = [
     "invenio-records-ui>=2.0.0",
     "invenio-records>=4.0.0",
     "invenio-stats",
-    # 11.1 instantiates the schema in ServiceSchemaWrapper, which breaks ProjectServiceSchemaWrapper
-    "invenio-records-resources<11.1.0",
+    "invenio-records-resources>=11.1.0",
     "rero-invenio-base>=0.3.1",
     # Files
     "invenio-files-rest>=3.0.0",
