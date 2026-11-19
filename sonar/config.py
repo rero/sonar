@@ -117,6 +117,8 @@ SECURITY_EMAIL_SUBJECT_REGISTER = _(
 )
 #: Redis session storage URL.
 ACCOUNTS_SESSION_REDIS_URL = "redis://localhost:6379/1"
+#: Projects of the monitoring, managed by invenio-records-resources outside `RECORDS_REST_ENDPOINTS`.
+RERO_INVENIO_BASE_MONITORING_ENDPOINTS = {"projects": {"pid_type": "proj", "index": "projects"}}
 #: Enable session/user id request tracing. This feature will add X-Session-ID
 #: and X-User-ID headers to HTTP response. You MUST ensure that NGINX (or other
 #: proxies) removes these headers again before sending the response to the
