@@ -37,9 +37,9 @@ section "Initialize database" "info"
 invenio db drop --yes-i-know
 invenio db create
 
-section "Initialize elasticsearch indexes" "info"
+section "Initialize search indexes" "info"
 invenio index destroy --force --yes-i-know
-invenio utils es-init --force # To take templates into account
+invenio index init --force
 invenio index queue init purge
 
 section "Initialize invenio queues."
