@@ -21,11 +21,10 @@
 # - API application: UWSGI (not exposed)
 # - Worker: Celery (not exposed)
 # - Flower: Monitoring of Celery (exposed port: 5555)
-# - Kibana: Inspect Elasticsearch (exposed port: 5601)
 # - Cache: Redis (exposed port: 6379)
 # - DB: (PostgresSQL/MySQL) (exposed port: 5432 or 3306)
 # - Message queue: RabbitMQ (exposed ports: 5672, 15672)
-# - Elasticsearch (exposed ports: 9200, 9300)
+# - OpenSearch (exposed ports: 9200, 9300)
 #
 services:
   # Load balancer
@@ -61,7 +60,7 @@ services:
       - static_data:/invenio/var/instance/static
     links:
       - cache
-      - es
+      - os
       - mq
       - db
   # API Rest Application
@@ -77,7 +76,7 @@ services:
       - static_data:/invenio/var/instance/static
     links:
       - cache
-      - es
+      - os
       - mq
       - db
   # Worker
@@ -90,7 +89,7 @@ services:
     image: sonar
     links:
       - cache
-      - es
+      - os
       - mq
       - db
   # Monitoring of Celery
@@ -101,14 +100,6 @@ services:
       service: flower
     links:
       - mq
-  # Inspect Elasticsearch indexes
-  # http://127.0.0.1:5601
-  kibana:
-    extends:
-      file: docker-services.yml
-      service: kibana
-    links:
-      - es
   # Base services
   cache:
     extends:
@@ -123,10 +114,10 @@ services:
     extends:
       file: docker-services.yml
       service: mq
-  es:
+  os:
     extends:
       file: docker-services.yml
-      service: es
+      service: os
   grobid:
     extends:
       file: docker-services.yml
