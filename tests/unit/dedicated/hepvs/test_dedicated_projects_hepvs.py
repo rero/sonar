@@ -5,7 +5,6 @@
 
 from invenio_accounts.testutils import login_user_via_view
 
-from sonar.dedicated.hepvs.projects.schema import RecordSchema
 from sonar.dedicated.hepvs.projects.serializers.csv import CSVSerializer
 from sonar.proxies import sonar
 from sonar.resources.projects.api import Record
@@ -22,19 +21,25 @@ def test_json_schema(client, make_user):
     assert result.json["schema"]["properties"]["metadata"]["properties"]["projectSponsor"]
 
 
-def test_service(client, make_user):
-    """Test service wrapper selects HEPVS schema for HEPVS org data."""
-    make_user("admin", "hepvs")
-
-    # The schema wrapper dynamically selects schema based on organisation
+def test_service(app):
+    """Test service wrapper uses the HEPVS schema for HEPVS org data only."""
     service_schema = sonar.resources["projects"].service.schema
-    data = {"metadata": {"name": "Test", "organisation": {"$ref": "https://sonar.ch/api/organisations/hepvs"}}}
+    default_schema = service_schema.schema
+    hepvs_metadata = {
+        "name": "Test",
+        "projectSponsor": "Sponsor",
+        "organisation": {"$ref": "https://sonar.ch/api/organisations/hepvs"},
+        "validation": {"status": "in_progress", "action": "save", "user": {"$ref": "https://sonar.ch/api/users/1"}},
+    }
 
-    # Trigger schema selection
-    service_schema._set_schema(data)
+    data, errors = service_schema.load({"metadata": hepvs_metadata})
+    assert data["metadata"]["projectSponsor"] == "Sponsor"
+    assert not errors
 
-    # After setting schema for HEPVS data, the schema should be HEPVS RecordSchema
-    assert service_schema.schema == RecordSchema
+    # The HEPVS schema does not stick to the wrapper.
+    assert service_schema.schema is default_schema
+    _, errors = service_schema.load({"metadata": {"name": "Test", "projectSponsor": "Sponsor"}}, raise_errors=False)
+    assert errors
 
 
 def test_api(client, make_user):
