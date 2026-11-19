@@ -1,4 +1,4 @@
 # SPDX-FileCopyrightText: Fondation RERO+
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-"""Elasticsearch version 7 mappings."""
+"""OpenSearch 2 mappings."""
