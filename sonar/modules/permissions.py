@@ -23,7 +23,6 @@ submitter_access_permission = Permission(
 )
 
 moderator_access_permission = Permission(RoleNeed("moderator"), RoleNeed("admin"), RoleNeed("superuser"))
-monitoring_access_permission = Permission(RoleNeed("superuser"), RoleNeed("monitoring"))
 wiki_editor_access_permission = Permission(RoleNeed("editor"))
 
 # Allow access without permission check
