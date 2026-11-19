@@ -57,7 +57,8 @@ dependencies = [
     "invenio-stats",
     # 11.1 instantiates the schema in ServiceSchemaWrapper, which breaks ProjectServiceSchemaWrapper
     "invenio-records-resources<11.1.0",
-    "rero-invenio-base>=2.0.0",
+    # "rero-invenio-base>=2.0.0",
+    "rero-invenio-base @ git+https://github.com/rerowep/rero-invenio-base@wep-shared-cli",
     # Files
     "invenio-files-rest>=3.0.0",
     "invenio-previewer>=3.0.0",
