@@ -51,9 +51,9 @@ function section {
 token_create() {
   if [ -z ${3} ]
   then
-      invenio utils token-create -n ${1} -u ${2}
+      invenio rero utils token-create -n ${1} -u ${2}
   else
-      invenio utils token-create -n ${1} -u ${2} -t ${3}
+      invenio rero utils token-create -n ${1} -u ${2} -t ${3}
   fi
 }
 
