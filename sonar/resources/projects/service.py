@@ -125,7 +125,7 @@ class ProjectsRecordServiceConfig(RecordServiceConfig):
 
 
 class ProjectServiceSchemaWrapper(ServiceSchemaWrapper):
-    """Schema wrapper injecting the organisation into project data."""
+    """Schema wrapper using the dedicated schema of the project organisation."""
 
     def _get_organisation_pid(self, data):
         """Get organisation PID from data."""
@@ -133,20 +133,32 @@ class ProjectServiceSchemaWrapper(ServiceSchemaWrapper):
             return get_pid_from_ref_or_data(org)
         return None
 
-    def _set_schema(self, data):
+    @contextlib.contextmanager
+    def _organisation_schema(self, data):
+        """Use the dedicated schema of the organisation, if any, for one call.
+
+        The wrapper serves all the hits of a result list: the default schema
+        is restored afterwards, so that it does not stick to the next hits.
+        """
+        default_schema = self.schema
         if organisation_pid := self._get_organisation_pid(data):
             with contextlib.suppress(ImportError):
-                self.schema = obj_or_import_string(f"sonar.dedicated.{organisation_pid}.projects.schema:RecordSchema")
+                schema_cls = obj_or_import_string(f"sonar.dedicated.{organisation_pid}.projects.schema:RecordSchema")
+                self.schema = schema_cls()
+        try:
+            yield
+        finally:
+            self.schema = default_schema
 
     def load(self, data, schema_args=None, context=None, raise_errors=True):
         """Load data with dynamic schema_args + context + raise or not."""
-        self._set_schema(data)
-        return super().load(data, schema_args, context, raise_errors)
+        with self._organisation_schema(data):
+            return super().load(data, schema_args, context, raise_errors)
 
     def dump(self, data, schema_args=None, context=None):
         """Dump data using wrapped schema and dynamic schema_args + context."""
-        self._set_schema(data)
-        return super().dump(data, schema_args, context)
+        with self._organisation_schema(data):
+            return super().dump(data, schema_args, context)
 
 
 class ProjectsRecordService(RecordService):
