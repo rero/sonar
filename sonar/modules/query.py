@@ -3,8 +3,8 @@
 
 """Query factories for REST API."""
 
-from elasticsearch_dsl.query import Q
 from flask import request
+from invenio_search.engine import dsl
 
 
 def get_operator_and_query_type(qstr=None):
@@ -42,17 +42,17 @@ def default_search_factory(self, search, query_parser=None):
     """
 
     def _default_parser(qstr=None):
-        """Default parser that uses the Q() from elasticsearch_dsl.
+        """Default parser that uses dsl.Q().
 
         :param qstr: Query string.
         :returns: Query object.
         """
         if not qstr:
-            return Q()
+            return dsl.Q()
 
         operator, query_type = get_operator_and_query_type(qstr)
 
-        return Q(query_type, query=qstr, default_operator=operator)
+        return dsl.Q(query_type, query=qstr, default_operator=operator)
 
     from invenio_records_rest.facets import default_facets_factory
     from invenio_records_rest.sorter import default_sorter_factory
@@ -94,8 +94,8 @@ def and_term_filter(field):
 
     def inner(values):
         must = []
-        must.extend(Q("term", **{field: value}) for value in values)
-        return Q("bool", must=must)
+        must.extend(dsl.Q("term", **{field: value}) for value in values)
+        return dsl.Q("bool", must=must)
 
     return inner
 
@@ -108,6 +108,6 @@ def missing_field_filter(field):
     """
 
     def inner(values):
-        return Q("bool", must_not=[Q("exists", field=field)])
+        return dsl.Q("bool", must_not=[dsl.Q("exists", field=field)])
 
     return inner

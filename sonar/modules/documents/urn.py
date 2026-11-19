@@ -208,7 +208,7 @@ class Urn:
 
         :returns: generator of document records.
         """
-        from elasticsearch_dsl import Q
+        from invenio_search.engine import dsl
 
         from sonar.modules.documents.api import DocumentRecord, DocumentSearch
 
@@ -225,10 +225,10 @@ class Urn:
                 .filter(
                     "bool",
                     must_not=[
-                        Q(
+                        dsl.Q(
                             "nested",
                             path="identifiedBy",
-                            query=Q("term", identifiedBy__type="bf:Urn"),
+                            query=dsl.Q("term", identifiedBy__type="bf:Urn"),
                         )
                     ],
                 )

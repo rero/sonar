@@ -24,7 +24,7 @@ requires-python = ">=3.14,<3.15"
 
 dependencies = [
     "invenio-oaiharvester>=1.0.0a4",
-    "invenio-search[elasticsearch7]>=3.0.0",
+    "invenio-search[opensearch2]>=3.0.0",
     # Invenio core modules
     "invenio-app>=3.0.0",
     "invenio-base>=2.0.0",
@@ -57,12 +57,13 @@ dependencies = [
     "invenio-stats",
     # 11.1 instantiates the schema in ServiceSchemaWrapper, which breaks ProjectServiceSchemaWrapper
     "invenio-records-resources<11.1.0",
-    "rero-invenio-base>=0.3.1",
+    # "rero-invenio-base>=2.0.0",
+    "rero-invenio-base @ git+https://github.com/rerowep/rero-invenio-base@wep-monitoring",
     # Files
     "invenio-files-rest>=3.0.0",
     "invenio-previewer>=3.0.0",
     "invenio-records-files>=1.2.1",
-    "rero-invenio-files>=1.2.0",
+    "rero-invenio-files>=3.0.0",
     "python-dotenv>=0.13.0",
     "jsonresolver",
     "flask-wiki>=4.0.0",
@@ -79,9 +80,7 @@ dependencies = [
     "orcid>=1.0.3",
     "python3-saml>=1.16.0",
     "flask-admin>=1.6.1",
-    # needed for elasticsearch 7.13.4
-    "urllib3<2.0.0",
-    # 2.0 pulls numpy 2, which removed np.float_ used by elasticsearch 7.13.4
+    # 2.0 pulls onnxruntime and numpy through pymupdf-layout
     "pymupdf<2.0",
 ]
 
@@ -98,9 +97,7 @@ dev = [
     "pytest-ruff>=0.5",
 ]
 prod = [
-    "uwsgi>=2.0",
-    "uwsgi-tools>=1.1.1",
-    "uwsgitop>=0.11",
+    "granian>=2.8.7",
 ]
 
 [project.entry-points."app.console_scripts"]
@@ -191,7 +188,7 @@ subdivisions = "sonar.modules.subdivisions.mappings"
 stats = "sonar.modules.stats.mappings"
 
 [project.entry-points."invenio_search.templates"]
-base-record = "sonar.es_templates:list_es_templates"
+base-record = "sonar.search_templates:list_search_templates"
 
 [project.entry-points."invenio_pidstore.minters"]
 document_id = "sonar.modules.documents.api:document_pid_minter"

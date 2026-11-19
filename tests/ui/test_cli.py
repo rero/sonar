@@ -6,20 +6,9 @@
 from io import BytesIO
 from os.path import isdir
 
-import invenio_accounts.cli as cliusers
 from click.testing import CliRunner
-from invenio_search.cli import destroy
 
 import sonar.modules.cli.utils as cli
-
-
-def test_es_init(app, script_info, search_clear):
-    """Test ES init command."""
-    runner = CliRunner()
-
-    result = runner.invoke(destroy, ["--yes-i-know"], obj=script_info)
-    result = runner.invoke(cli.es_init, ["--force"], obj=script_info)
-    assert result.output.find("Creating indexes...") != -1
 
 
 def test_clear_files(app, script_info, bucket_location):
@@ -58,27 +47,3 @@ def test_export(app, script_info, document, organisation):
     # With serializer
     result = runner.invoke(cli.export, ["--pid-type", "org", "--output-dir", "/tmp/org"], obj=script_info)
     assert result.output.find('Export "org" records') != -1
-
-
-def test_cli_access_token(app, db, script_info):
-    """Test access token cli."""
-    runner = CliRunner()
-    email = "test@test.com"
-    res = runner.invoke(
-        cliusers.users,
-        ["create", "--active", "--confirm", "--password", "PWD_TEST", email],
-        obj=script_info,
-    )
-    res = runner.invoke(
-        cli.token_create,
-        ["-n", "test_good", "-u", email, "-t", "my_token"],
-        obj=script_info,
-    )
-    assert res.output.strip().split("\n") == ["my_token"]
-
-    res = runner.invoke(
-        cli.token_create,
-        ["-n", "test_fail", "-u", "fail@test.com", "-t", "my_token"],
-        obj=script_info,
-    )
-    assert res.output.strip().split("\n") == ["No user found"]

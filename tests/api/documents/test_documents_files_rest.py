@@ -3,8 +3,8 @@
 
 """Test REST endpoint for documents."""
 
-from elasticsearch_dsl import Search
 from flask import url_for
+from invenio_search.engine import dsl
 from invenio_stats.tasks import process_events
 
 
@@ -170,7 +170,7 @@ def test_stats(app, client, document_with_file, es, event_queues):
     process_events(["file-download"])
 
     es.indices.refresh(index="events-stats-file-download")
-    search = Search(using=es).index("events-stats-file-download")
+    search = dsl.Search(using=es).index("events-stats-file-download")
 
     # should have at least one stats in the index
     assert search.execute().hits.total.value > 0

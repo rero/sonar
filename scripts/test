@@ -58,29 +58,13 @@ fi
 
 pip_audit_exceptions=""
 section "Check vulnerabilities:"
-# urllib3 1.26.20 GHSA-pq67-6m6q-mj2v 2.5.0
-add_exceptions "GHSA-pq67-6m6q-mj2v"
-# urllib3   1.26.20 CVE-2025-50181 2.5.0
-add_exceptions "CVE-2025-50181"
-# urllib3   1.26.20 CVE-2025-66418 2.6.0
-add_exceptions "CVE-2025-66418"
-# urllib3   1.26.20 CVE-2025-66471 2.6.0
-add_exceptions "CVE-2025-66471"
-# urllib3   1.26.20 CVE-2026-21441 2.6.3
-add_exceptions "CVE-2026-21441"
-# urllib3 1.26.20 PYSEC-2026-141 2.7.0
-add_exceptions "PYSEC-2026-141"
-# urllib3 1.26.20 PYSEC-2026-4175 2.8.0
-add_exceptions "PYSEC-2026-4175"
-# urllib3 1.26.20 PYSEC-2026-4177 2.8.0
-add_exceptions "PYSEC-2026-4177"
 # pytest 8.4.2   CVE-2025-71176 9.0.3
 add_exceptions "CVE-2025-71176"
 PIPAPI_PYTHON_LOCATION=$(which python) pip-audit ${pip_audit_exceptions}
 
 
 info_msg "Check license headers:"
-invenio utils check-license
+invenio rero utils check_license -e data/wiki/ -e tests/data/help/
 info_msg "Test formatting:"
 ruff format --check .
 info_msg "Test linting:"

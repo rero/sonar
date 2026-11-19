@@ -15,10 +15,12 @@ services:
       - "INVENIO_CACHE_TYPE=RedisCache"
       - "INVENIO_CELERY_BROKER_URL=amqp://guest:guest@mq:5672/"
       - "INVENIO_CELERY_RESULT_BACKEND=redis://cache:6379/2"
-      - "INVENIO_SEARCH_ELASTIC_HOSTS=['es:9200']"
+      - "INVENIO_SEARCH_HOSTS=['os:9200']"
       - "INVENIO_SECRET_KEY=CHANGE_ME"
       - "INVENIO_SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://sonar:sonar@db/sonar"
-      - "INVENIO_WSGI_PROXIES=2"
+      # HAProxy and nginx: the client address and the HTTPS scheme come from
+      # their X-Forwarded-* headers (Granian speaks HTTP).
+      - "INVENIO_PROXYFIX_CONFIG={'x_for': 2, 'x_proto': 1}"
       - "INVENIO_RATELIMIT_STORAGE_URI=redis://cache:6379/3"
       - "INVENIO_SENTRY_DSN=https://92869499699a4389bf0ffce8039a248d@sentrydev.test.rero.ch:8443/5"
   lb:
@@ -58,13 +60,16 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
-  es:
-    build: ./docker/elasticsearch/
+  os:
+    build: ./docker/opensearch/
+    image: sonar-os
     restart: "unless-stopped"
     environment:
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
       - "discovery.type=single-node"
+      - "plugins.security.disabled=true"
+      - "OPENSEARCH_INITIAL_ADMIN_PASSWORD=Str@wberry_77!"
       - "indices.query.bool.max_clause_count=3000"
       - "path.repo=/var/tmp"
       - "cluster.routing.allocation.disk.threshold_enabled=false"
@@ -81,13 +86,6 @@ services:
       - "9300:9300"
     volumes:
       - /var/tmp
-  kibana:
-    image: docker.elastic.co/kibana/kibana-oss:7.10.2
-    environment:
-      - "ELASTICSEARCH_HOSTS=http://es:9200"
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ports:
-      - "5601:5601"
   flower:
     image: mher/flower
     command: --broker=amqp://guest:guest@mq:5672/ --broker_api=http://guest:guest@mq:15672/api/
