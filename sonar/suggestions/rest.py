@@ -3,8 +3,8 @@
 
 """Suggestions rest views."""
 
-from elasticsearch_dsl.query import Q
 from flask import Blueprint, current_app, jsonify, request
+from invenio_search.engine import dsl
 
 from sonar.modules.organisations.api import current_organisation
 from sonar.modules.permissions import has_superuser_access, is_user_logged_and_submitter
@@ -61,7 +61,7 @@ def completion():
     # records they appear in. Each typed word must be an indexed n-gram of the
     # same value, so partial words match without the term expansion a prefix
     # query would need.
-    matching = Q("terms", **{f"{FIELD}.field": field.split(",")}) & Q(
+    matching = dsl.Q("terms", **{f"{FIELD}.field": field.split(",")}) & dsl.Q(
         "match", **{f"{FIELD}.value": {"query": query, "operator": "and"}}
     )
 

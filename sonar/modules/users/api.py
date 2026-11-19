@@ -5,12 +5,12 @@
 
 from functools import partial
 
-from elasticsearch_dsl.query import Q
 from flask import current_app, has_request_context
 from flask.globals import request_ctx
 from flask_security import current_user
 from flask_security.confirmable import confirm_user
 from flask_security.utils import hash_password
+from invenio_search.engine import dsl
 from werkzeug.local import LocalProxy
 from werkzeug.utils import cached_property
 
@@ -67,18 +67,18 @@ class UserSearch(SonarSearch):
         must = []
 
         if organisation_pid:
-            must.append(Q("term", organisation__pid=organisation_pid))
+            must.append(dsl.Q("term", organisation__pid=organisation_pid))
 
         if not subdivision_pid:
             must.append(
-                Q(
+                dsl.Q(
                     "bool",
                     should=[
-                        Q("term", role=UserRecord.ROLE_ADMIN),
-                        Q(
+                        dsl.Q("term", role=UserRecord.ROLE_ADMIN),
+                        dsl.Q(
                             "bool",
-                            must=Q("term", role=UserRecord.ROLE_MODERATOR),
-                            must_not=Q("exists", field="subdivision"),
+                            must=dsl.Q("term", role=UserRecord.ROLE_MODERATOR),
+                            must_not=dsl.Q("exists", field="subdivision"),
                         ),
                     ],
                 )
@@ -86,22 +86,22 @@ class UserSearch(SonarSearch):
 
         else:
             must.append(
-                Q(
+                dsl.Q(
                     "bool",
                     should=[
-                        Q("term", role=UserRecord.ROLE_ADMIN),
-                        Q(
+                        dsl.Q("term", role=UserRecord.ROLE_ADMIN),
+                        dsl.Q(
                             "bool",
                             must=[
-                                Q("term", role=UserRecord.ROLE_MODERATOR),
-                                Q("term", subdivision__pid=subdivision_pid),
+                                dsl.Q("term", role=UserRecord.ROLE_MODERATOR),
+                                dsl.Q("term", subdivision__pid=subdivision_pid),
                             ],
                         ),
                     ],
                 )
             )
 
-        return self.query("bool", filter=Q("bool", must=must)).source(includes=["pid", "email"]).scan()
+        return self.query("bool", filter=dsl.Q("bool", must=must)).source(includes=["pid", "email"]).scan()
 
 
 class UserRecord(SonarRecord):

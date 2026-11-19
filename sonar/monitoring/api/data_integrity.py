@@ -3,9 +3,9 @@
 
 """Data integrity monitoring."""
 
-from elasticsearch.exceptions import NotFoundError
 from invenio_pidstore.models import PersistentIdentifier, PIDStatus
 from invenio_search import RecordsSearch
+from invenio_search.engine import search
 
 from sonar.proxies import sonar
 
@@ -41,7 +41,7 @@ class DataIntegrityMonitoring:
         """
         try:
             return RecordsSearch(index=index).query().count()
-        except NotFoundError:
+        except search.NotFoundError:
             raise Exception(f'No index found for "{index}"')
 
     def missing_pids(self, rec_type, with_deleted=False):

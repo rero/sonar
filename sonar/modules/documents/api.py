@@ -8,9 +8,9 @@ from datetime import datetime
 from functools import partial
 from io import BytesIO
 
-from elasticsearch.exceptions import NotFoundError
-from elasticsearch_dsl import Q
 from flask import current_app, request
+from invenio_search.engine import dsl
+from invenio_search.engine import search as search_engine
 from invenio_stats import current_stats
 
 from sonar.affiliations import AffiliationResolver
@@ -141,17 +141,17 @@ class DocumentRecord(SonarRecord):
         filters = []
         for identifier in search_identifiers:
             identifier_filters = [
-                Q("term", identifiedBy__value=identifier["value"]),
-                Q("term", identifiedBy__type=identifier["type"]),
+                dsl.Q("term", identifiedBy__value=identifier["value"]),
+                dsl.Q("term", identifiedBy__type=identifier["type"]),
             ]
             if identifier.get("source"):
-                identifier_filters.append(Q("term", identifiedBy__source=identifier["source"]))
+                identifier_filters.append(dsl.Q("term", identifiedBy__source=identifier["source"]))
 
             filters.append(
-                Q(
+                dsl.Q(
                     "nested",
                     path="identifiedBy",
-                    query=Q("bool", filter=identifier_filters),
+                    query=dsl.Q("bool", filter=identifier_filters),
                 )
             )
 
@@ -397,13 +397,13 @@ class DocumentRecord(SonarRecord):
         query = query_cfg.cls(name="record-view", **query_cfg.params)
         try:
             res["record-view"] = int(query.run(pid_type="doc", pid_value=self["pid"])["unique_count"])
-        except NotFoundError:
+        except search_engine.NotFoundError:
             res["record-view"] = 0
         query_cfg = current_stats.queries["file-download"]
         query = query_cfg.cls(name="file-download", **query_cfg.params)
         files = self.get_files_list()
         res["file-download"] = {f["key"]: {"count": 0, "label": f["label"]} for f in files}
-        with contextlib.suppress(NotFoundError):
+        with contextlib.suppress(search_engine.NotFoundError):
             res_query = query.run(bucket_id=self.bucket_id)
             file_keys = res["file-download"].keys()
             for b in res_query["buckets"]:
