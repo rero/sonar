@@ -1,0 +1,286 @@
+// SPDX-FileCopyrightText: Fondation RERO+
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+// Bootstrap 4 compiles $primary and $secondary into fixed colors. The rules
+// below recompute them from these properties, which an organisation theme
+// redefines at runtime. They only apply when the page sets some colors (see
+// sonar/partial/organisation_theme.html), so that the compiled colors stay
+// untouched otherwise. `:where()` keeps the specificity of the Bootstrap
+// selectors.
+:root {
+  --sonar-primary: #{$primary};
+  --sonar-secondary: #{$secondary};
+}
+
+$runtime-colors: ":where(:root:has(#organisation-colors))";
+
+@mixin runtime-theme-variant($name) {
+  $color: var(--sonar-#{$name});
+  $hover: color-mix(in srgb, $color, black 7.5%);
+  $active: color-mix(in srgb, $color, black 10%);
+  $active-border: color-mix(in srgb, $color, black 12.5%);
+  $focus: color-mix(in srgb, $color 50%, transparent);
+  $muted-bg: color-mix(in srgb, $color 20%, white);
+  $light-bg: color-mix(in srgb, $color 28%, white);
+  $light-border: color-mix(in srgb, $color 52%, white);
+  $dark-text: color-mix(in srgb, $color 52%, black);
+
+  // Bootstrap buttons and outline buttons.
+  .btn-#{$name},
+  .btn-#{$name}.disabled,
+  .btn-#{$name}:disabled {
+    background-color: $color;
+    border-color: $color;
+  }
+
+  .btn-#{$name}:hover,
+  .btn-#{$name}:focus,
+  .btn-#{$name}.focus {
+    background-color: $hover;
+    border-color: $active;
+  }
+
+  .btn-#{$name}:focus,
+  .btn-#{$name}.focus,
+  .btn-#{$name}:not(:disabled):not(.disabled):active:focus,
+  .btn-#{$name}:not(:disabled):not(.disabled).active:focus,
+  .show > .btn-#{$name}.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem $focus;
+  }
+
+  .btn-#{$name}:not(:disabled):not(.disabled):active,
+  .btn-#{$name}:not(:disabled):not(.disabled).active,
+  .show > .btn-#{$name}.dropdown-toggle {
+    background-color: $active;
+    border-color: $active-border;
+  }
+
+  .btn-outline-#{$name} {
+    color: $color;
+    border-color: $color;
+  }
+
+  .btn-outline-#{$name}:hover,
+  .btn-outline-#{$name}:not(:disabled):not(.disabled):active,
+  .btn-outline-#{$name}:not(:disabled):not(.disabled).active,
+  .show > .btn-outline-#{$name}.dropdown-toggle {
+    background-color: $color;
+    border-color: $color;
+  }
+
+  .btn-outline-#{$name}:focus,
+  .btn-outline-#{$name}.focus,
+  .btn-outline-#{$name}:not(:disabled):not(.disabled):active:focus,
+  .btn-outline-#{$name}:not(:disabled):not(.disabled).active:focus,
+  .show > .btn-outline-#{$name}.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem $focus;
+  }
+
+  .btn-outline-#{$name}.disabled,
+  .btn-outline-#{$name}:disabled {
+    color: $color;
+    background-color: transparent;
+  }
+
+  // Bootstrap badges and color utilities.
+  .badge-#{$name} {
+    background-color: $color;
+  }
+
+  a.badge-#{$name}:hover,
+  a.badge-#{$name}:focus {
+    background-color: $active;
+  }
+
+  a.badge-#{$name}:focus,
+  a.badge-#{$name}.focus {
+    box-shadow: 0 0 0 0.2rem $focus;
+  }
+
+  .bg-#{$name} {
+    background-color: $color !important;
+  }
+
+  a.bg-#{$name}:hover,
+  a.bg-#{$name}:focus,
+  button.bg-#{$name}:hover,
+  button.bg-#{$name}:focus {
+    background-color: $active !important;
+  }
+
+  .border-#{$name} {
+    border-color: $color !important;
+  }
+
+  .text-#{$name} {
+    color: $color !important;
+  }
+
+  a.text-#{$name}:hover,
+  a.text-#{$name}:focus {
+    color: color-mix(in srgb, $color, black 15%) !important;
+  }
+
+  // Bootstrap contextual alerts.
+  .alert-#{$name} {
+    color: $dark-text;
+    background-color: $muted-bg;
+    border-color: $light-bg;
+  }
+
+  .alert-#{$name} hr {
+    border-top-color: color-mix(in srgb, $light-bg, black 5%);
+  }
+
+  .alert-#{$name} .alert-link {
+    color: color-mix(in srgb, $dark-text, black 10%);
+  }
+
+  // Bootstrap contextual tables.
+  .table-#{$name},
+  .table-#{$name} > th,
+  .table-#{$name} > td {
+    background-color: $light-bg;
+  }
+
+  .table-#{$name} th,
+  .table-#{$name} td,
+  .table-#{$name} thead th,
+  .table-#{$name} tbody + tbody {
+    border-color: $light-border;
+  }
+
+  .table-hover .table-#{$name}:hover,
+  .table-hover .table-#{$name}:hover > td,
+  .table-hover .table-#{$name}:hover > th {
+    background-color: color-mix(in srgb, $light-bg, black 5%);
+  }
+
+  // Bootstrap contextual list groups.
+  .list-group-item-#{$name} {
+    color: $dark-text;
+    background-color: $light-bg;
+  }
+
+  .list-group-item-#{$name}.list-group-item-action:hover,
+  .list-group-item-#{$name}.list-group-item-action:focus {
+    color: $dark-text;
+    background-color: color-mix(in srgb, $light-bg, black 5%);
+  }
+
+  .list-group-item-#{$name}.list-group-item-action.active {
+    background-color: $dark-text;
+    border-color: $dark-text;
+  }
+}
+
+#{$runtime-colors} {
+  // Bootstrap variables derived specifically from $primary.
+  a,
+  .btn-link,
+  .page-link {
+    color: var(--sonar-primary);
+  }
+
+  a:hover,
+  .btn-link:hover,
+  .page-link:hover {
+    color: color-mix(in srgb, var(--sonar-primary), black 15%);
+  }
+
+  .btn-link:focus,
+  .btn-link.focus,
+  .page-link:focus {
+    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--sonar-primary) 25%, transparent);
+  }
+
+  .form-control:focus,
+  .custom-select:focus,
+  .custom-file-input:focus ~ .custom-file-label {
+    border-color: color-mix(in srgb, var(--sonar-primary), white 25%);
+    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--sonar-primary) 25%, transparent);
+  }
+
+  .custom-control-input:checked ~ .custom-control-label::before,
+  .custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::before {
+    background-color: var(--sonar-primary);
+    border-color: var(--sonar-primary);
+  }
+
+  .custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--sonar-primary) 25%, transparent);
+  }
+
+  .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+    border-color: color-mix(in srgb, var(--sonar-primary), white 25%);
+  }
+
+  .custom-control-input:not(:disabled):active ~ .custom-control-label::before {
+    background-color: color-mix(in srgb, var(--sonar-primary), white 35%);
+    border-color: color-mix(in srgb, var(--sonar-primary), white 35%);
+  }
+
+  .custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before,
+  .custom-checkbox .custom-control-input:disabled:indeterminate ~ .custom-control-label::before {
+    background-color: color-mix(in srgb, var(--sonar-primary) 50%, transparent);
+  }
+
+  .custom-radio .custom-control-input:disabled:checked ~ .custom-control-label::before,
+  .custom-switch .custom-control-input:disabled:checked ~ .custom-control-label::before {
+    background-color: color-mix(in srgb, var(--sonar-primary) 50%, transparent);
+  }
+
+  .custom-range::-webkit-slider-thumb {
+    background-color: var(--sonar-primary);
+  }
+
+  .custom-range::-moz-range-thumb {
+    background-color: var(--sonar-primary);
+  }
+
+  .custom-range::-ms-thumb {
+    background-color: var(--sonar-primary);
+  }
+
+  .custom-range::-webkit-slider-thumb:active {
+    background-color: color-mix(in srgb, var(--sonar-primary), white 35%);
+  }
+
+  .custom-range::-moz-range-thumb:active {
+    background-color: color-mix(in srgb, var(--sonar-primary), white 35%);
+  }
+
+  .custom-range::-ms-thumb:active {
+    background-color: color-mix(in srgb, var(--sonar-primary), white 35%);
+  }
+
+  .custom-range:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem color-mix(in srgb, var(--sonar-primary) 25%, transparent);
+  }
+
+  .custom-range:focus::-moz-range-thumb {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem color-mix(in srgb, var(--sonar-primary) 25%, transparent);
+  }
+
+  .custom-range:focus::-ms-thumb {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem color-mix(in srgb, var(--sonar-primary) 25%, transparent);
+  }
+
+  .nav-pills .nav-link.active,
+  .nav-pills .show > .nav-link,
+  .dropdown-item.active,
+  .dropdown-item:active,
+  .page-item.active .page-link,
+  .progress-bar,
+  .list-group-item.active {
+    background-color: var(--sonar-primary);
+  }
+
+  .page-item.active .page-link,
+  .list-group-item.active {
+    border-color: var(--sonar-primary);
+  }
+
+  @include runtime-theme-variant("primary");
+  @include runtime-theme-variant("secondary");
+}
