@@ -3,8 +3,8 @@
 
 """Query for documents."""
 
-from elasticsearch_dsl.query import Q
 from flask import current_app, request
+from invenio_search.engine import dsl
 
 from sonar.modules.organisations.api import current_organisation
 from sonar.modules.query import default_search_factory, get_operator_and_query_type
@@ -15,7 +15,7 @@ from sonar.modules.utils import get_current_ip
 def documents_query_parser(qstr=None):
     """Custom query parser for documents."""
     if not qstr:
-        return Q()
+        return dsl.Q()
     fields = current_app.config.get("SONAR_DOCUMENT_QUERY_BOOSTING", ["*"]).copy()
 
     # The fulltext field is searched only when the `fulltext` query argument is
@@ -25,7 +25,7 @@ def documents_query_parser(qstr=None):
 
     operator, query_type = get_operator_and_query_type(qstr)
 
-    return Q(query_type, query=qstr, default_operator=operator, fields=fields, lenient=True)
+    return dsl.Q(query_type, query=qstr, default_operator=operator, fields=fields, lenient=True)
     # lenient property is necessary to make it wildcards working, see
     # https://github.com/elastic/elasticsearch/issues/39577#issuecomment-468751713
     # for more details.

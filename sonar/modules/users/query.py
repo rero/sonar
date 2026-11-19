@@ -3,8 +3,8 @@
 
 """Query for users."""
 
-from elasticsearch_dsl.query import Q
 from flask import current_app
+from invenio_search.engine import dsl
 
 from sonar.modules.organisations.api import current_organisation
 from sonar.modules.query import default_search_factory
@@ -35,8 +35,8 @@ def search_factory(self, search, query_parser=None):
     # For admins, records are filtererd by user's organisation and they cannot
     # get superuser records.
     if current_user_record.is_admin:
-        first_filter = Q("term", organisation__pid=current_organisation["pid"])
-        second_filter = Q("bool", must_not={"exists": {"field": "organisation"}})
+        first_filter = dsl.Q("term", organisation__pid=current_organisation["pid"])
+        second_filter = dsl.Q("bool", must_not={"exists": {"field": "organisation"}})
         search = search.filter("bool", filter=first_filter | second_filter).filter(
             "bool", must_not={"term": {"role": "superuser"}}
         )

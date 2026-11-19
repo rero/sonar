@@ -1,11 +1,11 @@
 # SPDX-FileCopyrightText: Fondation RERO+
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-"""Test elasticsearch query."""
+"""Test search query."""
 
 import pytest
-from elasticsearch_dsl import Search
 from invenio_search import current_search_client
+from invenio_search.engine import dsl
 
 from sonar.modules.query import and_term_filter, get_operator_and_query_type
 
@@ -37,7 +37,7 @@ def test_get_operator_and_query_type(app):
 def test_open_access_filter(app, document, embargo_date):
     """Test open access filter."""
     # No filter
-    search = Search(index="documents", using=current_search_client)
+    search = dsl.Search(index="documents", using=current_search_client)
     assert len(search.execute()) == 1
 
     # No files associated with document --> not open access.

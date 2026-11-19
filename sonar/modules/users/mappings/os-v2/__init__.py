@@ -1,4 +1,4 @@
 # SPDX-FileCopyrightText: CERN
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-"""Mappings for Elasticsearch."""
+"""OpenSearch 2 mappings."""

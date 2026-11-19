@@ -1,4 +1,4 @@
 # SPDX-FileCopyrightText: Fondation RERO+
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-"""Mappings for Elasticsearch 5.x."""
+"""Records Templates search index."""

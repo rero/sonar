@@ -3,7 +3,6 @@
 
 """Projects permission policy."""
 
-from elasticsearch_dsl.query import Q
 from flask import request
 from flask_principal import ActionNeed
 from invenio_access.permissions import any_user
@@ -11,6 +10,7 @@ from invenio_records_permissions import (
     RecordPermissionPolicy as BaseRecordPermissionPolicy,
 )
 from invenio_records_permissions.generators import AdminAction, SystemProcess
+from invenio_search.engine import dsl
 
 from sonar.modules.api import SonarRecord
 from sonar.modules.documents.api import DocumentRecord
@@ -25,35 +25,35 @@ class Read(AdminAction):
     def query_filter(self, **kwargs):
         """Search filters."""
         if current_user_record.is_superuser:
-            return Q("match_all")
+            return dsl.Q("match_all")
 
         # For admin and moderator, only records that belongs to his
         # organisation. The same rule is applied when searching project in
         # typeahead input.
         # TODO: Find a better way for handling typeahead calls..
         if current_user_record.is_moderator or (request.args.get("q") and ".suggest" in request.args["q"]):
-            must = [Q("term", metadata__organisation__pid=current_organisation["pid"])]
+            must = [dsl.Q("term", metadata__organisation__pid=current_organisation["pid"])]
 
             # In suggestions, show all projects without validation field (orgs without workflow)
             # or only validated projects (orgs with validation workflow).
             if request.args.get("q") and ".suggest" in request.args["q"]:
                 must.append(
-                    Q(
+                    dsl.Q(
                         "bool",
                         should=[
-                            Q("bool", must_not=[Q("exists", field="metadata.validation.status")]),
-                            Q("term", metadata__validation__status=Status.VALIDATED),
+                            dsl.Q("bool", must_not=[dsl.Q("exists", field="metadata.validation.status")]),
+                            dsl.Q("term", metadata__validation__status=Status.VALIDATED),
                         ],
                     )
                 )
 
-            return Q("bool", must=must)
+            return dsl.Q("bool", must=must)
 
         # For user, only records that belongs to him.
         if current_user_record.is_submitter:
-            return Q("term", metadata__user__pid=current_user_record["pid"])
+            return dsl.Q("term", metadata__user__pid=current_user_record["pid"])
 
-        return Q("match_all")
+        return dsl.Q("match_all")
 
 
 class Update(AdminAction):
