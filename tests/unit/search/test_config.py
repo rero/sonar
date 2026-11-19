@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: Fondation RERO+
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-"""Test Elasticsearch configuration."""
+"""Test search configuration."""
 
 from types import SimpleNamespace
 

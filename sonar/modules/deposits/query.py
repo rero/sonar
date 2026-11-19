@@ -3,8 +3,8 @@
 
 """Query for deposits."""
 
-from elasticsearch_dsl import Q
 from flask import current_app
+from invenio_search.engine import dsl
 
 from sonar.modules.organisations.api import current_organisation
 from sonar.modules.query import default_search_factory
@@ -40,8 +40,8 @@ def search_factory(self, search, query_parser=None):
             search = search.filter(
                 "bool",
                 should=[
-                    Q("term", user__subdivision__pid=user["subdivision"]["pid"]),
-                    Q("term", user__pid=user["pid"]),
+                    dsl.Q("term", user__subdivision__pid=user["subdivision"]["pid"]),
+                    dsl.Q("term", user__pid=user["pid"]),
                 ],
             )
 

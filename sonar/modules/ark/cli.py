@@ -4,9 +4,9 @@
 """ARK CLI commands."""
 
 import click
-from elasticsearch_dsl import Q
 from flask.cli import with_appcontext
 from invenio_db import db
+from invenio_search.engine import dsl
 
 from sonar.modules.documents.api import DocumentRecord, DocumentSearch
 from sonar.modules.organisations.api import OrganisationRecord
@@ -48,12 +48,12 @@ def create_missing(organisation_pid):
         .filter(
             "bool",
             must_not=[
-                Q(
+                dsl.Q(
                     "nested",
                     path="identifiedBy",
-                    query=Q("term", identifiedBy__type="ark"),
+                    query=dsl.Q("term", identifiedBy__type="ark"),
                 ),
-                Q("term", harvested=True),
+                dsl.Q("term", harvested=True),
             ],
         )
         .filter("term", organisation__pid=organisation_pid)
