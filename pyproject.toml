@@ -96,9 +96,7 @@ dev = [
     "pytest-ruff>=0.5",
 ]
 prod = [
-    "uwsgi>=2.0",
-    "uwsgi-tools>=1.1.1",
-    "uwsgitop>=0.11",
+    "granian>=2.8.7",
 ]
 
 [project.entry-points."app.console_scripts"]
