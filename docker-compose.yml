@@ -1,38 +1,103 @@
 # SPDX-FileCopyrightText: Fondation RERO+
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#
-# Backend services for needed for development.
-#
-# Usage::
-#
-#   $ docker compose up -d
-#   $ ./docker/wait-for-services.sh
-#
-# Following services are included:
-# - Cache: Redis (exposed port: 6379)
-# - DB: (PostgresSQL/MySQL) (exposed port: 5432 or 3306)
-# - Message queue: RabbitMQ (exposed ports: 5672, 15672)
-# - OpenSearch (exposed ports: 9200, 9300)
-#
+# The healthchecks order `gate`, so that `docker compose up -d` waits for the stack.
 services:
   cache:
-    extends:
-      file: docker-services.yml
-      service: cache
+    image: redis
+    restart: "unless-stopped"
+    read_only: true
+    command: redis-server --save ""
+    ports:
+      - "${CACHE_PORT:-6379}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
   db:
-    extends:
-      file: docker-services.yml
-      service: db
+    image: postgres:17
+    restart: "unless-stopped"
+    environment:
+      - "POSTGRES_USER=sonar"
+      - "POSTGRES_PASSWORD=sonar"
+      - "POSTGRES_DB=sonar"
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "sonar"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
   mq:
-    extends:
-      file: docker-services.yml
-      service: mq
+    image: rabbitmq:4.2-management
+    restart: "unless-stopped"
+    ports:
+      - "${MQ_ADMIN_PORT:-15672}:15672"
+      - "${MQ_PORT:-5672}:5672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 30s
   os:
-    extends:
-      file: docker-services.yml
-      service: os
+    build: ./docker/opensearch/
+    image: sonar-os
+    restart: "unless-stopped"
+    environment:
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.type=single-node"
+      - "indices.query.bool.max_clause_count=3000"
+      - "path.repo=/var/tmp"
+      - "cluster.routing.allocation.disk.threshold_enabled=false"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    mem_limit: 3g
+    ports:
+      - "${OS_PORT:-9200}:9200"
+      - "${OS_TRANSPORT_PORT:-9300}:9300"
+    volumes:
+      - /var/tmp
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:9200/_cluster/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+  # The tests call it: PDFExtractor checks that it is alive.
   grobid:
-    extends:
-      file: docker-services.yml
-      service: grobid
+    image: grobid/grobid:0.9.0-crf
+    restart: "unless-stopped"
+    environment:
+      - JAVA_TOOL_OPTIONS=-XX:-UseContainerSupport
+    ports:
+      - "${GROBID_PORT:-8070}:8070"
+      - "${GROBID_ADMIN_PORT:-8071}:8071"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8070/api/isalive"]
+      interval: 5s
+      timeout: 5s
+      retries: 24
+      start_period: 20s
+  # Makes `up -d` wait for the healthchecks.
+  gate:
+    image: curlimages/curl
+    entrypoint: ["true"]
+    depends_on:
+      cache:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+      mq:
+        condition: service_healthy
+      os:
+        condition: service_healthy
+      grobid:
+        condition: service_healthy
