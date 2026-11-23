@@ -14,8 +14,9 @@ docker-compose-dev.yml
 
 Procfile*
 
-celerybeat-schedule
+celerybeat-schedule*
 
 .venv/
 
 .certs/
+coverage.xml
