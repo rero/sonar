@@ -27,25 +27,3 @@ check_ready "Redis" _redis_check
 
 _rabbit_check(){ docker compose exec mq bash -c "rabbitmqctl status" &>/dev/null; }
 check_ready "RabbitMQ" _rabbit_check
-
-_web_server_check_css(){
-    string="Content-Type: text/css"
-    OUT=$(wget --spider -S -r -l 1 --page-requisites --no-check-certificate https://localhost 2>&1)
-    if echo $OUT | grep -q "$string"
-    then
-        return 0
-    else
-        return 1
-    fi
-}
-
-if [ "$1" == "--full" ]
-then
-    check_ready "CSS" _web_server_check_css
-
-    _web_server_check_http(){ curl --output /dev/null --silent --head --fail http://localhost:80 &>/dev/null; }
-    check_ready "Web Server HTTP" _web_server_check_http
-
-    _web_server_check_https(){ curl --output /dev/null --silent --head --fail -k https://localhost:443 &>/dev/null; }
-    check_ready "Web Server HTTPS" _web_server_check_https
-fi

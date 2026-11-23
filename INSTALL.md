@@ -127,22 +127,3 @@ uv run poe run_tests
 ```
 
 By default, end-to-end tests are skipped.
-
-## Production environment
-
-You can simulate a full production environment using `docker-compose.full.yml`:
-
-```console
-./docker/build-images.sh
-docker compose -f docker-compose.full.yml up -d
-./docker/wait-for-services.sh --full
-```
-
-In addition to the normal `docker-compose.yml`, this one will start:
-
-- HAProxy (load balancer)
-- Nginx (web frontend)
-- Granian (application servers: UI, and REST API under `/api`)
-- Celery (background task worker)
-- Celery (background task beat)
-- Flower (Celery monitoring)
