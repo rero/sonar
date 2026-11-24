@@ -1,107 +1,16 @@
 # SPDX-FileCopyrightText: Fondation RERO+
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-"""Monitoring views."""
+"""REST API of the SONAR monitoring, beside the shared monitoring of rero-invenio-base."""
 
-from functools import wraps
-
-from flask import Blueprint, current_app, jsonify, request
-from flask_security import current_user
+from flask import Blueprint, jsonify, request
 from invenio_pidstore.models import PIDStatus
-from invenio_search import current_search_client
-from redis import Redis
+from rero_invenio_base.modules.monitoring.views import check_permission
 
 from sonar.modules.documents.urn import Urn
-from sonar.modules.permissions import monitoring_access_permission
-from sonar.monitoring.api.data_integrity import DataIntegrityMonitoring
-from sonar.monitoring.api.database import DatabaseMonitoring
 
-api_blueprint = Blueprint("monitoring_api", __name__, url_prefix="/monitoring")
-
-
-def is_monitoring_user(func):
-    """Decorator checking if a user is logged and has `monitoring` rights."""
-
-    @wraps(func)
-    def decorated_view(*args, **kwargs):
-        if not current_user.is_authenticated:
-            return jsonify({"error": "Unauthorized"}), 401
-        if not monitoring_access_permission.require().can():
-            return jsonify({"error": "Forbidden"}), 403
-        return func(*args, **kwargs)
-
-    return decorated_view
-
-
-@api_blueprint.before_request
-@is_monitoring_user
-def check_for_monitoring_user():
-    """Check if user is superuser or monitoring before each request."""
-
-
-@api_blueprint.route("/db_connection_counts")
-def db_connection_count():
-    """Information about current database connections."""
-    try:
-        db_monitoring = DatabaseMonitoring()
-        return jsonify({"data": db_monitoring.count_connections()})
-    except Exception as exception:
-        return jsonify({"error": str(exception)}), 500
-
-
-@api_blueprint.route("/db_connections")
-def db_activity():
-    """Current database activity."""
-    try:
-        db_monitoring = DatabaseMonitoring()
-        return jsonify({"data": db_monitoring.activity()})
-    except Exception as exception:
-        return jsonify({"error": str(exception)}), 500
-
-
-@api_blueprint.route("/es_db_status")
-def data_status():
-    """Status of data integrity."""
-    try:
-        data_monitoring = DataIntegrityMonitoring()
-        return jsonify({"data": {"status": "red" if data_monitoring.has_error() else "green"}})
-    except Exception as exception:
-        return jsonify({"error": str(exception)}), 500
-
-
-@api_blueprint.route("/es_db_counts")
-def data_info():
-    """Info of data integrity."""
-    try:
-        data_monitoring = DataIntegrityMonitoring()
-        return jsonify({"data": data_monitoring.info(with_detail=("detail" in request.args))})
-    except Exception as exception:
-        return jsonify({"error": str(exception)}), 500
-
-
-@api_blueprint.route("/redis")
-def redis():
-    """Displays redis info.
-
-    :return: jsonified redis info.
-    """
-    url = current_app.config.get("ACCOUNTS_SESSION_REDIS_URL", "redis://localhost:6379")
-    redis = Redis.from_url(url)
-    info = redis.info()
-    return jsonify({"data": info})
-
-
-@api_blueprint.route("/es")
-def elastic_search():
-    """Displays elastic search cluster info.
-
-    :return: jsonified elastic search cluster info.
-    """
-    try:
-        info = current_search_client.cluster.health()
-        return jsonify({"data": info})
-    except Exception as exception:
-        return jsonify({"error": str(exception)}), 500
+api_blueprint = Blueprint("sonar_monitoring", __name__, url_prefix="/monitoring")
+api_blueprint.before_request(check_permission)
 
 
 @api_blueprint.route("/urn")
@@ -120,14 +29,3 @@ def urn():
         return jsonify({"data": data})
     except Exception as exception:
         return jsonify({"error": str(exception)}), 500
-
-
-@api_blueprint.route("/es_indices")
-def elastic_search_indices():
-    """Displays Elasticsearch indices info.
-
-    :return: jsonified Elasticsearch indices info.
-    """
-    info = current_search_client.cat.indices(bytes="b", format="json", s="index")
-    info = {data["index"]: data for data in info}
-    return jsonify({"data": info})
