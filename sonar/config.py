@@ -133,6 +133,8 @@ BROKER_URL = "amqp://guest:guest@localhost:5672/"
 CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672/"
 #: URL of backend for result storage (default is Redis).
 CELERY_RESULT_BACKEND = "redis://localhost:6379/2"
+#: Scheduler keeping the tasks in the database, switched on and off with `invenio rero scheduler`.
+CELERY_BEAT_SCHEDULER = "rero_invenio_base.modules.scheduler.DatabaseScheduler"
 #: Scheduled tasks configuration (aka cronjobs).
 CELERY_BEAT_SCHEDULE = {
     "indexer": {
