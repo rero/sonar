@@ -56,7 +56,8 @@ dependencies = [
     "invenio-records>=4.0.0",
     "invenio-stats",
     "invenio-records-resources>=11.1.0",
-    "rero-invenio-base>=2.0.0",
+    # "rero-invenio-base>=2.0.0",
+    "rero-invenio-base @ git+https://github.com/rerowep/rero-invenio-base@wep-scheduler",
     # Files
     "invenio-files-rest>=3.0.0",
     "invenio-previewer>=3.0.0",
